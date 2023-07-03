@@ -1,0 +1,88 @@
+.Title{
+    font-weight: 500;
+font-size: 24px;
+font-family: 'PlayFairNormal' !important;
+}
+.Main{
+    display: flex;
+
+}
+.Number{
+    font-weight: 400;
+font-size: 16px;
+margin-left: 10px;
+color: #757C81;
+font-family: 'gilroyNormal' !important;
+line-height: 30px;
+
+}
+.SubText{
+    display: flex;
+    font-weight: 400;
+font-size: 14px;
+font-family: 'gilroyNormal' !important;
+
+}
+.Home{
+    color: #00464D;
+    font-weight: 400;
+font-size: 14px;
+font-family: 'gilroyNormal' !important;
+cursor: pointer;
+
+}
+.NewArrival{
+    color: #01B3C5;
+    font-weight: 400;
+font-size: 14px;
+font-family: 'gilroyNormal' !important;
+
+}
+.Filtered{
+    display: flex;
+}
+.FilterBy{
+    font-weight: 400;
+font-size: 13px;
+font-family: 'gilroyNormal' !important;
+}
+.Filter{
+    background: #F7F6F2;
+border-radius: 16px;
+margin: -5px 10px 10px 10px;
+padding: 5px 8px 5px 8px;
+font-size: 13px;
+}
+.filterSort{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #E8E8E8;
+   
+}
+.SortDrop{
+    display: flex;
+    
+    
+}
+.Sort{
+    font-weight: 400;
+    font-size: 13px;
+    font-family: 'gilroyNormal' !important;
+}
+.SortDrop select{
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: -18px;
+
+}
+
+.SortDrop select::selection{
+    border: none;
+}
+@media screen and (max-width:767px) {
+    .Filter{
+      padding: 0;
+    }
+}

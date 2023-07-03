@@ -1,0 +1,151 @@
+.ProductName{
+    font-weight: 600;
+font-size: 18px;
+color: #0D1217;
+font-family: 'gilroyNormal' !important;
+}
+.OutBox{
+    cursor: pointer;
+    border: 0.5px solid #E6E6E6;
+    /* box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.05); */
+    background: #E2E2E2;
+
+    border-radius: 4px;
+    margin: 0 50px 20px 50px;
+}
+.ProductDetails{
+    display: flex;
+    justify-content: space-between;
+}
+.PriceDetails{
+    display: flex;
+    margin-top: 20px;
+   
+}
+.Align{
+    display: flex;
+    justify-content: space-between;
+}
+.RupeeIcon{
+    margin-top: 5px;
+}
+.ProductImage{
+    width: 100%;
+    padding: 20px;
+}
+.ProductProperty{
+    font-weight: 400;
+font-size: 14px;
+color: #757C81;
+font-family: 'gilroyNormal' !important;
+
+}
+.Price{
+    font-weight: 700;
+font-size: 16px;
+color: #0D1217;
+text-align: right;
+}
+.prodctDetBtn{
+    width: 150px;
+    font-family: 'gilroyNormal' !important;
+font-size: 14px;
+height: 45px;
+padding-top: 13px;
+font-weight: 500;
+border-radius: 5px;
+line-height: 17px;
+letter-spacing: 0em;
+text-align: center;
+color: #FFFFFF;
+background: #978958
+
+}
+.promo{
+    font-family: 'gilroyNormal' !important;
+font-size: 14px;
+line-height: 16px;
+letter-spacing: 0em;
+text-align: right;
+color: #939393;
+
+
+
+
+}
+
+.Star{
+    margin-left: 5px;
+}
+.TopText{
+height: 50px;
+
+}
+.RateAndReview{
+    margin-left: 10px;
+}
+.Rating{
+   
+  text-align: right;
+    font-weight: 600;
+font-size: 13px;
+color: #0997E7;
+
+}
+.ProductDetailsText{
+    margin-top: 15px;
+}
+.OrderId{
+    color: #757C81;
+    font-size: 11px;
+    font-weight: 400;
+    font-family: 'gilroyNormal' !important;
+    margin: 10px;
+    padding-top: 10px;
+}
+.OrderedTime{
+    color: #757C81;
+    font-size: 11px;
+    font-weight: 400;
+    font-family: 'gilroyNormal' !important;
+    margin: 10px;
+}
+.Delivered{
+    color: #37b344;
+    font-size: 11px;
+    font-weight: 600;
+    font-family: 'gilroyNormal' !important;
+    line-height: .1;
+    margin-left: 10px;
+}
+.Flex{
+    display: flex;
+    margin-top: 15px;
+    justify-content: flex-end;
+}
+.Promo{
+    color: #757C81;
+    font-size: 11px;
+    font-weight: 400;
+    font-family: 'gilroyNormal' !important;
+    line-height: .1;
+    margin-right: -10px;
+}
+.Amount{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    margin-top: -10px;
+    color: #0D1217;
+    font-weight: 700;
+    font-size: 13px;
+
+}
+.Rupee{
+    margin-top: 5px;
+}
+.Background{
+   background:  #ffffff;
+   border-radius: 4px;
+   padding: 25px;
+}

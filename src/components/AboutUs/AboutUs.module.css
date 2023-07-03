@@ -1,0 +1,62 @@
+.Title{
+    font-weight: 500;
+font-size: 24px;
+font-family: 'PlayFairNormal' !important;
+}
+.Main{
+    display: flex;
+    margin-top: 30px;
+
+}
+.SubText{
+    display: flex;
+    font-weight: 400;
+font-size: 14px;
+font-family: 'gilroyNormal' !important;
+border-bottom: 0.5px solid #E8E9EA;
+padding-bottom: 30px;
+
+}
+.Home{
+    color: #00464D;
+    font-weight: 400;
+font-size: 14px;
+font-family: 'gilroyNormal' !important;
+
+}
+.PrivacyPolicy{
+    color: #01B3C5;
+    font-weight: 400;
+font-size: 14px;
+font-family: 'gilroyNormal' !important;
+
+}
+.Description p{
+    font-weight: 400;
+font-size: 14px;
+line-height: 32px;
+color: #757C81;
+margin-top: 25px;
+font-family: 'gilroyNormal' !important;
+}
+.Description2{
+    font-weight: 600;
+    margin-bottom: 80px;
+}
+.Content{
+    padding: 30px 0px;
+}
+.subHeading{
+    color: #006E7F;
+    font-weight: 600;
+font-size: 15px;
+font-family: 'gilroyNormal' !important;
+}
+@media screen and (max-width:500px) {
+    .Content{
+        padding: 10px;
+    }
+    .SubText{
+        padding-bottom: 10px;
+    }
+}

@@ -1,0 +1,40 @@
+.TopDemanded {
+    margin-top: 50px;
+}
+
+.MainText {
+    font-weight: 500;
+    font-size: 38px;
+    text-align: center;
+    color: #0D1217;
+    font-family: 'PlayFairNormal' !important;
+
+
+}
+.TopDemnd{
+    display: flex;
+    justify-content: space-between;
+}
+
+.SubText {
+    font-weight: 200;
+    font-size: 18px;
+    color: #757C81;
+    text-align: center;
+    line-height: .2;
+    font-family: 'gilroyNormal' !important;
+
+}
+.Products{
+    display: flex;
+    align-items: center;
+}
+.seeAll{
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'gilroyNormal' !important;
+    color: #007481;
+    cursor: pointer;
+    margin-top: 70px;
+
+}

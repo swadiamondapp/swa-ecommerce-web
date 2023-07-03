@@ -1,0 +1,75 @@
+.Logo{
+    margin-top: 40px;
+ }
+ .Footer{
+     height: 100%;
+     background: #007481;
+     margin-top: 60px;
+     width: 100%;
+ }
+ .LogoText{
+     font-weight: 200;
+     margin-top: 25px;
+ font-size: 14px;
+ font-family: 'gilroyNormal' !important;
+ color: #FFFFFF;
+ 
+ }
+ .Title{
+     margin-bottom: 30px;
+     margin-top: 30px;
+     font-weight: 600;
+     font-family: 'gilroyNormal' !important;
+ font-size: 18px;
+ color: #FFFFFF;
+ }
+ .Links{
+     color: #FFFFFF;
+     font-weight: 200;
+ font-size: 15px;
+ font-family: 'gilroyNormal' !important;
+ margin-bottom: 9px !important;
+ }
+ .Link{
+     margin-top: 80px;
+ }
+ .Icons{
+     margin-top: -25px;
+     margin-bottom: 80px;
+ }
+ .Icons img{
+     margin: 7px;
+ }
+ .FooterDown{
+     background: #005D67;
+     /* height: 100%; */
+ }
+ .FooterIcons{
+     margin: 20px 5px 10px 5px;
+     width: 20px;
+     height: 20px;
+ }
+ .Address{
+     display: flex;
+ }
+ .AddressText{
+     margin-left: 15px;
+    
+ }
+ .FooterDownText{
+     color: #FFFFFF;
+     font-family: 'gilroyNormal' !important;
+     margin:20px 0px 10px 0px;
+     font-size: 10px;
+ 
+ }
+ @media screen and (max-width:767px) {
+     .Icons img{
+         width: 25px;
+     }
+ }
+ @media screen and (max-width:1200px){
+  .Icons img{
+         width: 23px;
+     }
+ }

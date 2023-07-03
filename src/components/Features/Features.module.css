@@ -1,0 +1,90 @@
+.FeaturesBg {
+    background-color: #FCFBF6;
+}
+
+.FeaturesDetails {
+    padding: 30px;
+    border-right: 1px solid #F0EBD1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.Security {
+    border: none;
+}
+
+.FeaturesMainText {
+    font-weight: 400;
+    font-size: 16px;
+    font-family: 'gilroyNormal' !important;
+    text-align: center;
+}
+
+.FeaturesSubText {
+    font-weight: 400;
+    font-size: 13px;
+    color: #86898B;
+    font-family: 'gilroyNormal' !important;
+    text-align: center;
+}
+
+.MarginFeatures {
+    padding: 20px;
+    margin: 0 70px 0 70px;
+}
+
+@media (max-width:640px) {
+    .MarginFeatures {
+        padding: 10px;
+        margin: 0 30px 0 30px;
+    }
+
+    .FeaturesmainText {
+        font-size: 12px;
+        text-align: center;
+    }
+
+    .FeaturesSubText {
+        font-size: 8px;
+        height: 30px;
+    }
+
+    .image {
+        width: 2px;
+    }
+
+    .FeaturesDetails img {
+        width: 60px;
+
+    }
+
+    .MoneyBack {
+        border-right: none;
+        border-top: none !important;
+    }
+
+    .FeaturesDetails {
+        padding: 5px;
+        border: none;
+    }
+
+    .Shipping {
+        border: none;
+    }
+}
+
+@media (min-width:200px) and (max-width:320px) {
+    .FeaturesDetails {
+        border: none;
+
+    }
+
+    .FeaturesSubText {
+        font-size: 7px;
+        height: 10px;
+        text-align: center;
+    }
+}

@@ -1,0 +1,41 @@
+.Image{
+    width: 100%;
+}
+.Video{
+    width: 100%;
+    
+}
+.Certificates{
+    margin-top: 20px;
+}
+.YTVideo{
+    width: 100%;
+    height: 375px;
+}
+@media screen and (max-width:1200px){
+    .Certificates{
+        margin-top: 10px;
+    }
+    .YTVideo{
+        height: 269px;
+    }
+}
+@media screen and (max-width:991px){
+    .Certificates{
+        margin-top: 15px;
+    }
+    .YTVideo{
+        height: 196px;
+    }
+    
+}
+@media screen and (max-width:767px) {
+    .Certificates{
+    margin-top: 30px;
+    
+}
+.YTVideo{
+    margin-top: 25px;
+    height: 292px;
+}
+}

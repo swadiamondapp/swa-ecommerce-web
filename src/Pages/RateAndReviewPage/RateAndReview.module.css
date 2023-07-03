@@ -1,0 +1,16 @@
+.BgColour{
+    background: #EEEEEE;
+}
+.Products{
+    background-color: #FEFEFE;
+    border-radius: 8px;
+    margin-top: 15px;
+    padding: 46px 24px 46px 24px;
+}
+.Features{
+    margin-bottom: -60px !important;
+    margin-top: 80px;
+}
+.Margin{
+    margin-top: 30px;
+}

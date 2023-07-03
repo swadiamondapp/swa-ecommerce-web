@@ -1,0 +1,154 @@
+.ProductName {
+    font-weight: 400;
+    font-size: 20px;
+    color: #0D1217;
+    text-align: center;
+    font-family: 'gilroyNormal' !important;
+}
+.Discount{
+    position: absolute;
+    top: 3%;
+    left: 70%;
+    padding: 7px;
+    height: 35px;
+}
+.Number{
+    background: #189E02;
+    color: #FFFFFF;
+    padding: 5px;
+    font-size: 12px;
+}
+.ProductId {
+    font-weight: 400;
+    font-size: 16px;
+    text-align: center;
+    color: #757C81;
+    line-height: .3;
+}
+
+.Price {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 25px 0 25px;
+}
+
+.PriceNew {
+    font-weight: 700;
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.PriceOld {
+    text-decoration: line-through;
+    font-weight: 400;
+    font-size: 18px;
+    color: #B0B0B0;
+
+}
+
+.AddToCart {
+    background: #19242D;
+    border-radius: 4px;
+    width:70%;;
+    height: 48px;
+    text-align: center;
+    color: #FFFFFF;
+    border: none;
+    font-weight: 500;
+    font-size: 12px;
+    font-family: 'InterNormal' !important;
+
+}
+
+.Heart {
+    background: #007481;
+    border-radius: 4px;
+    width: 20%;
+    height: 48px;
+    cursor: pointer;
+    padding: 13px;
+    margin-left: 5px;
+}
+.None{
+    display: none;
+}
+.HeartOnClick{
+    border-radius: 4px;
+    width: 48px;
+    height: 48px;
+    padding: 13px;
+    margin-left: 5px;
+    background: #FFFFFF;
+    border: 1px solid #006E7F;
+}
+.Buttons{
+    display: none;
+   
+    /* justify-content: center; */
+}
+.ProductImage{
+    width: 200px ;
+    height: 200px;
+    
+}
+.NewArrivals{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+}
+.NewArrivals:hover .Buttons{
+    display: block;
+    transition: 0.8s;
+}
+.NewArrivalCard{
+    height: 470px;
+    width: 100%;
+    position: relative;
+}
+
+@media (max-width:1200px){
+    .ProductName{
+        font-size: 15px;
+    }
+    .Price{
+        padding: 0 15px 0 15px ;
+    }
+    .NewArrivals .Buttons{
+        display: block;
+    }
+ 
+    .Heart {
+        width: 25%;
+        height: 40px;
+    }
+    .AddToCart{
+        height: 40px;
+    }
+    .HeartOnClick{
+        height: 40px;
+    }
+}
+@media screen and (max-width:1165px) {
+    .Number{
+        background: #189E02;
+        color: #FFFFFF;
+        padding: 5px;
+        font-size: 10px;
+    }
+}
+@media screen and (max-width:767px) {
+ 
+    .NewArrivals .Buttons{
+        display: block;
+    }
+    .HeartOnClick{
+        height: 40px;
+    }
+    .Price{
+        padding: 0 70px 0 70px;
+    }
+   
+}

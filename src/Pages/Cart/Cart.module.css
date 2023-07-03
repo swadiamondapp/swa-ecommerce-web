@@ -1,0 +1,45 @@
+.Background{
+    background: #EEEEEE;
+}
+.Features{
+    margin-bottom: -60px !important;
+}
+.cartEmpty{
+    display: flex;
+    justify-content: center;
+}
+.cartListHead{
+    font-weight: 600;
+    font-size: 30px;
+    color: #041A25;
+    padding-top: 30px;
+    text-align: center;
+    font-family: 'gilroyNormal';
+
+}
+.cartEmpty img{
+    width: 200px;
+    height: 200px;
+}
+.cartEmpty{
+    display: flex;
+    justify-content: center;
+}
+.cartPara{
+    font-weight: 400;
+    font-size: 18px;
+    color: #041A25;
+    padding-top: 10px;
+    text-align: center;
+    margin: 0px 60px;
+    font-family: 'gilroyNormal';
+
+}
+@media screen and (max-width:565px) {
+.cartListHead{
+    font-size: 25px;
+}
+.cartPara{
+    font-size: 15px;
+}
+}

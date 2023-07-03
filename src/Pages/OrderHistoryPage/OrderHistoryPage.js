@@ -1,0 +1,100 @@
+import React, { useState, useEffect } from "react";
+import Header from "../../components/Header/Header";
+import Features from "../../components/Features/Features";
+import Footer from "../../components/Footer/Footer";
+import Classes from "./OrderHistoryPage.module.css";
+import OrderHistory from "../../components/OrderHistory/OrderHistory";
+import OrderHiistoryCard from "../../components/OrderHistory/OrderHistoryCard/OrderHistoryCard";
+import ProductImage from "../../Assets/pandant chain 1.png";
+import Orders from "../../components/OrderHistory/OrderHistoryCard/Orders/Orders";
+import axios from "axios";
+import * as Urls from "../../Urls";
+import { FadeLoader } from "react-spinners";
+import { useHistory } from "react-router-dom";
+
+const OrderHistoryPage = () => {
+  const [orderList, setOrderList] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [cartCount, setCartCount] = useState("");
+  const history = useHistory();
+  const token = localStorage.getItem("swaToken");
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    setLoading(true);
+    axios
+      .get(Urls.myOrder, { headers: { Authorization: "Token 	" + token } })
+      .then((response1) => {
+        setLoading(false);
+        setOrderList(response1.data.results.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    axios
+      .get(Urls.cart, { headers: { Authorization: "Token " + token } })
+      .then((response1) => {
+        if (response1.data.results.message === "cart is empty") {
+          setCartCount("");
+        } else {
+          setCartCount(response1.data.results.count);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+  const productViewHandler = (id) => {
+    history.push({ pathname: "/track_order", state: { data: id } });
+  };
+  let orderLists;
+  if (loading) {
+    orderLists = (
+      <div className="d-flex justify-content-center align-items-center loader">
+        {" "}
+        <FadeLoader color="#00464d" />
+      </div>
+    );
+  } else if (orderList.length === 0) {
+    orderLists = (
+      <div className=" justify-content-center align-items-center loader">
+        <h3 className={Classes.wishListHead}>No Orders Yet</h3>
+      </div>
+    );
+  } else {
+    orderLists = orderList.map((item, index) => {
+      return (
+        <OrderHiistoryCard
+          OrderId="SWA4R46RF46R356F45"
+          OrderedTime="Ordered on 12th auguest 2021"
+          key={index}
+        >
+          <Orders
+            Image={ProductImage}
+            orderId={item.order_code}
+            // textAdres={'hello text'}
+            promCond={item.promocode === null ? "Not Applied" : "Applied"}
+            address={item.address_name}
+            ProductDate={item.status}
+            Price={item.grand_total}
+            Qty="4"
+            clicked={() => productViewHandler(item.id)}
+          />
+        </OrderHiistoryCard>
+      );
+    });
+  }
+  return (
+    <div>
+      <div className={Classes.Background}>
+        <Header countCartItems={cartCount} />
+        <OrderHistory>{orderLists}</OrderHistory>
+        <div className={Classes.Features}>
+          <Features />
+        </div>
+      </div>
+      <Footer />
+    </div>
+  );
+};
+
+export default OrderHistoryPage;

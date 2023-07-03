@@ -1,0 +1,51 @@
+.ImageText1 {
+    font-weight: 700;
+    font-size: 24px;
+    color: #ffffff;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 251px;
+    align-items: flex-end;
+    margin-bottom: 40px;
+    font-family: 'gilroyNormal' !important;
+    font-weight: 700;
+    font-size: 24px;
+    text-align: center;
+    padding-top: 170px;
+    line-height: .5;
+
+
+}
+
+.ImageText2 {
+    text-align: center;
+    font-weight: 400;
+    font-size: 18px;
+    color: #14C8DC;
+    font-family: 'gilroyNormal' !important;
+
+}
+
+.ShopOnBudgetImage {
+    border-radius: 4px;
+}
+@media screen and (max-width:400px) {
+.ImageText1 {
+    font-weight: 700;
+    font-size: 24px;
+    color: #ffffff;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 251px;
+    align-items: flex-end;
+    margin-bottom: 40px;
+    font-family: 'gilroyNormal' !important;
+    font-weight: 700;
+    font-size: 22px;
+    text-align: center;
+    padding-top: 100px;
+    line-height: 30px;
+
+
+}
+}

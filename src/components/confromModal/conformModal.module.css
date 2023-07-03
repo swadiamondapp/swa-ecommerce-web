@@ -1,0 +1,60 @@
+.ModalHeader{
+    background-color: #0D2641 !important;
+    border-radius: 4px 4px 0px 0px !important;
+    color: #FFFFFF !important;
+   
+    font-family: 'gilroyMed';
+
+}
+.ModalCreateHeader{
+    background-color: #EDEDED !important;
+    border-radius: 4px 4px 0px 0px !important;
+    color: #0D2641 !important;
+   
+    font-family: 'gilroyMed';
+
+}
+.contnt{
+    margin-left: 20px;
+}
+.contnt p{
+    font-size: 16px;
+    line-height: 23px;
+    color: #757C81;
+    font-family: 'gilroyNormal';
+    font-weight: 400;
+    margin-top: 15px;
+}
+.title{
+    color: #0D1217;
+    font-size: 22px;
+    font-family: 'gilroyNormal';
+    font-weight: 600;
+}
+.remv{
+    width: 100%;
+    border-radius: 4px;
+    height: 40px;
+    color: #19242D;
+    border: 1px solid #19242D;
+    font-size: 12px;
+    text-align: center ;
+    padding-top: 10px;
+    background-color: #FFFFFF;;
+    font-family: 'gilroyNormal';
+    cursor: pointer;
+}
+.movWish{
+    width: 100%;
+    border-radius: 4px;
+    height: 40px;
+    color: #FFFFFF;
+    border: 1px solid #19242D;
+    background-color: #19242D;;
+    font-size: 12px;
+    text-align: center ;
+    padding-top: 10px;
+    cursor: pointer;
+    font-family: 'gilroyNormal';
+
+}

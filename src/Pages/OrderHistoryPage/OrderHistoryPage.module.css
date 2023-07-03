@@ -1,0 +1,16 @@
+.Background{
+    background: #EEEEEE;
+}
+.Features{
+    margin-bottom: -60px !important;
+    margin-top: 20px;
+}
+.wishListHead{
+    font-weight: 600;
+    font-size: 30px;
+    color: #041A25;
+    padding-top: 30px;
+    text-align: center;
+    font-family: 'gilroyNormal';
+
+}

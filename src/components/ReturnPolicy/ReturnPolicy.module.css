@@ -1,0 +1,47 @@
+.Title{
+    font-weight: 500;
+font-size: 24px;
+font-family: 'PlayFairNormal' !important;
+}
+.Main{
+    display: flex;
+    margin-top: 30px;
+
+}
+.SubText{
+    display: flex;
+    font-weight: 400;
+font-size: 14px;
+font-family: 'gilroyNormal' !important;
+border-bottom: 0.5px solid #E8E9EA;
+
+}
+.Home{
+    color: #00464D;
+    font-weight: 400;
+font-size: 14px;
+font-family: 'gilroyNormal' !important;
+
+}
+.ReturnPolicy{
+    color: #01B3C5;
+    font-weight: 400;
+font-size: 14px;
+font-family: 'gilroyNormal' !important;
+
+}
+.Description{
+    font-weight: 400;
+font-size: 14px;
+line-height: 32px;
+color: #757C81;
+margin-top: 25px;
+font-family: 'gilroyNormal' !important;
+}
+.Description2{
+    font-weight: 600;
+    margin-bottom: 80px;
+}
+.Content{
+    padding: 30px;
+}

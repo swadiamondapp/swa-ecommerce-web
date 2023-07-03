@@ -1,0 +1,32 @@
+.Successful{
+    position: relative;
+    height: 400px;
+}
+.Image{
+    margin: 0;
+  top: 50%;
+  left: 50%;
+  width: 70%;
+  height: 80%;
+}
+.OrderSuccessful{
+    color: #0D1217;
+    font-weight: 700;
+    font-family: 'gilroyNormal' !important;
+    text-align: center;
+    font-size: 35px;
+    margin-top: 25px;
+}
+.SuccessText{
+    margin-top: 50px;
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
