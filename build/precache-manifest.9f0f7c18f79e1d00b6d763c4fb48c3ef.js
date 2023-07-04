@@ -1,23 +1,23 @@
 self.__precacheManifest = [
   {
-    "revision": "37ca87cef6710c52200d",
-    "url": "/static/css/main.f5fe0a51.chunk.css"
+    "revision": "a9a7b1422b223f6fc7bd",
+    "url": "/static/css/main.b4fa91a9.chunk.css"
   },
   {
-    "revision": "37ca87cef6710c52200d",
-    "url": "/static/js/main.37ca87ce.chunk.js"
+    "revision": "a9a7b1422b223f6fc7bd",
+    "url": "/static/js/main.a9a7b142.chunk.js"
   },
   {
     "revision": "cd7ff292829eaab06baa",
     "url": "/static/js/1.cd7ff292.chunk.js"
   },
   {
-    "revision": "2f53f7f458aac6d3502d",
-    "url": "/static/css/2.7016bcb5.chunk.css"
+    "revision": "fc9762b034dd85537dea",
+    "url": "/static/css/2.a369338b.chunk.css"
   },
   {
-    "revision": "2f53f7f458aac6d3502d",
-    "url": "/static/js/2.2f53f7f4.chunk.js"
+    "revision": "fc9762b034dd85537dea",
+    "url": "/static/js/2.fc9762b0.chunk.js"
   },
   {
     "revision": "eac076b455d6af7b71ae",
@@ -60,20 +60,20 @@ self.__precacheManifest = [
     "url": "/static/media/cartempty.b8cc3851.png"
   },
   {
-    "revision": "5d08cc9fffd565a2b9d9baae3846cb65",
-    "url": "/static/media/Gilroy-MediumItalic.5d08cc9f.ttf"
-  },
-  {
-    "revision": "a96ecd13655587d30a21265c547cd8aa",
-    "url": "/static/media/PlayfairDisplay-Regular.a96ecd13.ttf"
+    "revision": "079af0e2936ccb99b391ddc0bbb73dcb",
+    "url": "/static/media/Inter-Regular.079af0e2.ttf"
   },
   {
     "revision": "31ff7c1a62a300dbbf9656b4ba14a0d5",
     "url": "/static/media/Gilroy-Regular.31ff7c1a.ttf"
   },
   {
-    "revision": "079af0e2936ccb99b391ddc0bbb73dcb",
-    "url": "/static/media/Inter-Regular.079af0e2.ttf"
+    "revision": "5d08cc9fffd565a2b9d9baae3846cb65",
+    "url": "/static/media/Gilroy-MediumItalic.5d08cc9f.ttf"
+  },
+  {
+    "revision": "a96ecd13655587d30a21265c547cd8aa",
+    "url": "/static/media/PlayfairDisplay-Regular.a96ecd13.ttf"
   },
   {
     "revision": "054918ba053e5beaad163573e98316b6",
@@ -96,7 +96,7 @@ self.__precacheManifest = [
     "url": "/static/media/RingRotate.2530d38f.png"
   },
   {
-    "revision": "b86cdbdd0f7ca01e8ebb37db1e45bec8",
+    "revision": "6a8481bf37764a7ff03d78a36b6e53e4",
     "url": "/index.html"
   }
 ];
