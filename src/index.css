@@ -18,6 +18,11 @@
   src: url(./Font/Gilroy-MediumItalic.ttf);
 }
 
+@font-face {
+  font-family: 'GilroyRegular';
+  src: url(./Font/Gilroy-Regular.ttf);
+}
+
 .padLeft {
   padding-left: 0px !important;
 }

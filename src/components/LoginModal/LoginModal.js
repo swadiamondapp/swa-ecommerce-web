@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
-import { BsPerson } from "react-icons/bs";
+import { BsPerson, BsEye, BsEyeSlash } from "react-icons/bs";
 import Classes from "../Header/Header.module.css";
 import BlueLogo from "../../Assets/SwaBlue.png";
 import * as urls from "../../Urls";
@@ -176,6 +176,7 @@ const LoginModal = (props) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/; // regex to match password criteria
   const validatePassword = () => {
     if (!passwordRegex.test(password)) {
@@ -453,8 +454,9 @@ const LoginModal = (props) => {
             <div className={Classes.NumFlex}>
               <input
                 type="text"
-                className={Classes.Input}
+                className={`${Classes.Input} ${Classes.Password}`}
                 value={phoneNumber}
+                placeholder="Enter phone number"
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 onBlur={(e) => validatePhoneNumber(e.target.value)}
               ></input>
@@ -464,12 +466,44 @@ const LoginModal = (props) => {
             )}
             <p className={Classes.ContactDetails}>Password</p>
             <input
-              type="password"
-              className={Classes.Input}
+              // type="password"
+              type={showPassword ? 'text' : 'password'}
+              className={`${Classes.Input} ${Classes.Password}`}
+              style={{
+                position: 'relative'
+              }}
               value={loginPassword}
+              placeholder="Enter password"
               onChange={(e) => setLoginPassword(e.target.value)}
               onBlur={validateLoginPassword}
             ></input>
+            {showPassword ? (
+              <BsEyeSlash
+                style={{
+                  position: 'absolute',
+                  width: '20px',
+                  height: '20px',
+                  color: '#9D9D9D',
+                  right: '10%',
+                  fill: '#A49667',
+                  cursor: 'pointer',
+                }}
+                onClick={() => setShowPassword(false)}
+              />
+            ) : (
+              <BsEye
+                style={{
+                  position: 'absolute',
+                  width: '20px',
+                  height: '20px',
+                  color: '#9D9D9D',
+                  right: '10%',
+                  fill: '#A49667',
+                  cursor: 'pointer',
+                }}
+                onClick={() => setShowPassword(true)}
+              />
+            )}
             {loginPasswordError && (
               <p className={Classes.Validation}>{loginPasswordError}</p>
             )}
@@ -656,7 +690,7 @@ const LoginModal = (props) => {
                   selectedSize={14}
                   fullWidth={false}
                   onSelect={(code) => setSelected(code)}
-                  onChange={(code) => {}}
+                  onChange={(code) => { }}
                   className={Classes.InputPhone}
                 />
                 <input

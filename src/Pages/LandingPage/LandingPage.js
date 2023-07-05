@@ -297,7 +297,7 @@ const LandingPage = () => {
           />
         </ShopOnBudget>
         <NewArrivals>{newArriv}</NewArrivals>
-        {/* <BringTheParty img1={add[0].Ad_image} img2={add[1].Ad_image} img3={add[2].Ad_image}/> */}
+        <BringTheParty img1={add[0].Ad_image} img2={add[1].Ad_image} img3={add[2].Ad_image}/>
         <TopDemanded>{topDemnd}</TopDemanded>
 
         <Certificate video={"https://www.youtube.com/embed/s3PrxdvAihI"} />
