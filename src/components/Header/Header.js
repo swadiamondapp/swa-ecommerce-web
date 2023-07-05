@@ -213,7 +213,7 @@ const Header = (props) => {
                 className={Classes.Icon}
                 color="#FFFFFF"
                 size={25}
-                onClick={Notification}
+                // onClick={Notification}
               />
 
               <LoginModal
