@@ -466,8 +466,7 @@ const LoginModal = (props) => {
             )}
             <p className={Classes.ContactDetails}>Password</p>
             <input
-              // type="password"
-              type={showPassword ? 'text' : 'password'}
+              type={showPassword ? 'password' : 'text'}
               className={`${Classes.Input} ${Classes.Password}`}
               style={{
                 position: 'relative'
