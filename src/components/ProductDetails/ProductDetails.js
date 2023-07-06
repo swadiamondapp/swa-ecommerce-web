@@ -3,11 +3,12 @@ import Ring from "../../Assets/new4.png";
 import RingFlip from "../../Assets/Ringflip.png";
 import RingRotate from "../../Assets/RingRotate.png";
 import { useHistory } from "react-router-dom";
+import { BsWhatsapp } from "react-icons/bs";
 import Classes from "./ProductDetails.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { BiRupee } from "react-icons/bi";
-import { IoIosStar } from "react-icons/io";
+import { IoIosStar, IoLogoWhatsapp } from "react-icons/io";
 import BIS from "../../Assets/BIS.png";
 import IGI from "../../Assets/IGI.png";
 import Stroke from "../../Assets/Stroke.png";
@@ -24,7 +25,7 @@ const ProductDetails = (props) => {
   const [wishId, setWishId] = useState("");
   const [pinCode, setPinCode] = useState("");
   const [pinCodeError, setPinCodeError] = useState("");
-  const [active,setActive] = useState(null)
+  const [active, setActive] = useState(null)
   const history = useHistory();
   const token = localStorage.getItem("swaToken");
 
@@ -69,15 +70,15 @@ const ProductDetails = (props) => {
   };
   const availbilityCheck = () => {
     if (pinCode !== "") {
-     
+
       axios
-        .get(Urls.pincodeCheck+pinCode)
+        .get(Urls.pincodeCheck + pinCode)
         .then((response1) => {
-        
-            setActive(response1.data.IsSuccess)
-       
-         
-        
+
+          setActive(response1.data.IsSuccess)
+
+
+
         })
         .catch((error) => {
           console.log(error);
@@ -130,6 +131,19 @@ const ProductDetails = (props) => {
   const sizeChangeHandler = (e) => {
     props.sizeChange(e.target.value);
   };
+  const ProductData = [
+    {
+      manufacturer: "Swa Diamonds MIDC MAROL ANDHERI EAST, MUMBAI, 400093",
+      country: "India",
+      tollFreeNumber: "1800 257 8600",
+      chatNumber: "+91 95677 77722"
+    }
+  ];
+
+  const whatsappIconStyle = {
+    fill: 'linear-gradient(0deg, #1FAF38 -9900%, #60D669 100%)',
+  };
+
   return (
     <div>
       <div className="container">
@@ -315,18 +329,18 @@ const ProductDetails = (props) => {
                 <p className={Classes.StrokeText}>Standard delivery between </p>
                 <p className={Classes.DeliveryDate}>24 Oct & 28 oct 2022</p>
               </div> */}
-             
-               
-                {active === true?<> 
-                  <div className={Classes.Flex}><img className={Classes.Stroke} src={Stroke} alt="" /><p className={Classes.StrokeText}>
+
+
+              {active === true ? <>
+                <div className={Classes.Flex}><img className={Classes.Stroke} src={Stroke} alt="" /><p className={Classes.StrokeText}>
                   Cash / Card delivery option available
                 </p> </div>
                 <div className={Classes.Flex}>
-                <img className={Classes.Stroke} src={Stroke} alt="" /><p className={Classes.StrokeText}>
-                Standard delivery  available
-              </p></div></>:null}
-              {active === false?<p className="errrMsg">Standard delivery not available</p>:null}
-             
+                  <img className={Classes.Stroke} src={Stroke} alt="" /><p className={Classes.StrokeText}>
+                    Standard delivery  available
+                  </p></div></> : null}
+              {active === false ? <p className="errrMsg">Standard delivery not available</p> : null}
+
             </div>
             <div className={Classes.BorderBottom}>
               <p className={Classes.AvailableColours}>Certification</p>
@@ -359,6 +373,41 @@ const ProductDetails = (props) => {
                   <p className={Classes.Right}>{props.gw}</p>
                   <p className={Classes.Right}>{props.diamond}</p>
                   <p className={Classes.Right}>{props.oSw}</p>
+                </div>
+              </div>
+            </div>
+            <div className={Classes.BorderBottom}>
+              <p className={Classes.AvailableColours}>Product discription</p>
+              <div className={Classes.ProductDiscription}>
+                Lorem ipsum dolor sit amet consectetur.
+                Varius integer mollis ut morbi amet varius cursus.
+                Pellentesque morbi mauris maecenas interdum.
+                Sem netus sed dui libero. Orci massa pretium ac velit quis risus at porttitor.
+                Duis eget vitae porttitor non. Enim molestie sapien sit imperdiet.
+              </div>
+            </div>
+            <div className={Classes.BorderBottom}>
+              <div className={`row ${Classes.SellerInfo}`}>
+                <div className="col-md-4">
+                  <p className={Classes.Left}>Manufacturer      :</p>
+                  <p className={Classes.Left}>Country of Origin :</p>
+                  <p className={Classes.Left}>Toll-Free Number  :</p>
+                  <p className={Classes.Left}>Chat Number       :</p>
+                </div>
+                <div className="col-md-8">
+                  {ProductData.map((item, index) => (
+                    <div key={index}>
+                      <p className={Classes.Right}>{item.manufacturer}</p>
+                      <p className={Classes.Right}>{item.country}</p>
+                      <p className={Classes.Right}>{item.tollFreeNumber}</p>
+                      <div className={`${Classes.Right} ${Classes.ChatNo_WhatsIcon}`}>
+                        <IoLogoWhatsapp className={`${Classes.WhatsappIcon}`} />
+                        <p style={{
+                          marginBottom: '0px'
+                        }}>{item.chatNumber}</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>

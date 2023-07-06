@@ -409,3 +409,26 @@ margin-bottom: 10px;
         display: block;
     }
 }
+.ProductDiscription{
+    width: 403.25px;
+    margin-bottom: 20px;
+    font-weight: 400;
+    font-size: 14px;
+    font-family: 'gilroyNormal' !important;
+    color: #7A8288;
+}
+.SellerInfo{
+    margin-top: 20px;
+}
+
+.ChatNo_WhatsIcon{
+    display: flex;
+    gap: 3px;
+    align-items: center;
+}
+
+.WhatsappIcon {
+    color: #22AD2C;
+    height: 24px;
+    width: 24px;
+}
