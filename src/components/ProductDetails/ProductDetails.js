@@ -140,10 +140,6 @@ const ProductDetails = (props) => {
     }
   ];
 
-  const whatsappIconStyle = {
-    fill: 'linear-gradient(0deg, #1FAF38 -9900%, #60D669 100%)',
-  };
-
   return (
     <div>
       <div className="container">
@@ -384,6 +380,7 @@ const ProductDetails = (props) => {
                 Pellentesque morbi mauris maecenas interdum.
                 Sem netus sed dui libero. Orci massa pretium ac velit quis risus at porttitor.
                 Duis eget vitae porttitor non. Enim molestie sapien sit imperdiet.
+                {props.description}
               </div>
             </div>
             <div className={Classes.BorderBottom}>

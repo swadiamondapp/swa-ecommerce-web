@@ -121,7 +121,8 @@ const Header = (props) => {
               "/products/" +
               setItem.id +
               "/" +
-              response1.data.results.data.color_id,
+              response1.data.results.data.color_id+
+              "/"+response1.data.results.data.product_name,
             state: { data: selData },
           });
         })
