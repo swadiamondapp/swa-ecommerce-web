@@ -26,7 +26,7 @@ function Footer() {
 
   useEffect(() => {
     axios
-      .get(Urls.filter)
+      .get(Urls.filter+'?category=&tag=')
       .then((response1) => {
         setCatgSet(response1.data.results.data.category);
         setOccation(response1.data.results.data.tags);
@@ -182,7 +182,7 @@ function Footer() {
                 2022 SWA Diamonds | All rights reserved
               </p>
             </div>
-            <div className="col-md-4">
+            <div className={`${"col-md-4"} ${Classes.FootIconImg}`}>
               <img className={Classes.FooterIcons} src={Image1} alt="" />
               <img className={Classes.FooterIcons} src={Image2} alt="" />
               <img className={Classes.FooterIcons} src={Image3} alt="" />
@@ -192,8 +192,8 @@ function Footer() {
             </div>
             <div className="col-md-4">
               <p
-                className={Classes.FooterDownText}
-                style={{ textAlign: "right" }}
+                className={Classes.FooterDownTextR}
+                
               >
                 Site Designed & developed by zinfog codelabs
               </p>

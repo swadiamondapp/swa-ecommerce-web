@@ -43,13 +43,16 @@
     }
 
     .FeaturesmainText {
-        font-size: 12px;
+        font-size: 10px;
         text-align: center;
+        margin-bottom: 10px !important;
     }
 
     .FeaturesSubText {
         font-size: 8px;
         height: 30px;
+        text-align:center;
+        margin-bottom: 0px !important;
     }
 
     .image {
@@ -86,5 +89,6 @@
         font-size: 7px;
         height: 10px;
         text-align: center;
+      
     }
 }

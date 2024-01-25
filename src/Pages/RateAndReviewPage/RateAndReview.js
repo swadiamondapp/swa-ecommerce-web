@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react'
-import Header from '../../components/Header/Header'
+import Header from "../../components/HeaderNew/Header";
 import Features from '../../components/Features/Features'
 import Footer from '../../components/Footer/Footer'
 import Rating from '../../components/Rating/Rating'

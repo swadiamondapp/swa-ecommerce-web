@@ -63,9 +63,27 @@
      font-size: 10px;
  
  }
+ .FooterDownTextR{
+    color: #FFFFFF;
+    font-family: 'gilroyNormal' !important;
+    margin:20px 0px 10px 0px;
+    font-size: 10px;
+    text-align: right;
+
+ }
  @media screen and (max-width:767px) {
      .Icons img{
          width: 25px;
+     }
+     .FooterDownText{
+        text-align: center;
+     }
+     .FooterDownTextR{
+        text-align: center;
+     }
+     .FootIconImg{
+        display: flex;
+        justify-content: center;
      }
  }
  @media screen and (max-width:1200px){

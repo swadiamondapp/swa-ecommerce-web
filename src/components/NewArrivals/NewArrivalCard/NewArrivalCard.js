@@ -73,7 +73,7 @@ const NewArrivalCard = (props) => {
   return (
     <React.Fragment>
       <div
-        className={`${"col-md-3"} ${"col-sm-6"} ${"col-lg-3"} ${"col-12"} ${
+        className={`${"col-md-4"} ${"col-sm-6"} ${"col-lg-3"} ${"col-6"} ${
           Classes.NewArrivals
         }`}
       >
@@ -95,12 +95,12 @@ const NewArrivalCard = (props) => {
             {/* <p className={Classes.ProductId}>{props.ProductId}</p> */}
             <div className={Classes.Price}>
               <p className={Classes.PriceNew}>
-                <BiRupee size={20} />
+                <BiRupee className={Classes.Rupee} />
                 {props.PriceNew}
               </p>
               <p className={Classes.PriceOld}>
                 {props.PriceOld !== null && (
-                  <BiRupee size={20} color="#B0B0B0" />
+                  <BiRupee  color="#B0B0B0" className={Classes.Rupee}/>
                 )}
                 {props.PriceOld !== null && props.PriceOld}
               </p>

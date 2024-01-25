@@ -27,7 +27,7 @@ export const cart = server + 'ecom/cartitems/'
 //promo code
 export const promoCode = server + 'ecom/applypromo/'
 //ADDRESS
-export const address =  'ecom/addresses/all/'
+export const address =  server+ 'ecom/addresses/all/'
 //add addresss
 export const addAdress = server + 'ecom/addresses/'
 //place order

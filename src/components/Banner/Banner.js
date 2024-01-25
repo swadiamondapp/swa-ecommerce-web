@@ -1,23 +1,72 @@
 import React from 'react'
-import SlideData from '../../Assets/Banner.png'
 import Classes from './Banner.module.css'
-import Carousel from 'react-bootstrap/Carousel';
+import { Carousel } from 'antd';
+import { useHistory } from 'react-router-dom';
 
- const IndividualIntervalsExample = (props) =>{
+ const Banner = (props) =>{
+  const history = useHistory()
+
+ 
+  const carouselHandler = (selItem) =>{
+    console.log(selItem);
+   
+    if(selItem.is_category === true){
+     
+      history.push({ pathname: "/new_arrivel", state: { data: selItem.type_id } });
+    
+   }
+    else{
+     
+      history.push({ pathname: "/new_arrivel", state: { octnId: selItem.type_id,data:'occation' } });
+
+    }
+   
+  }
+
+  
   return (
-    <Carousel>
-      {props.banners.map((item,index)=>{
+    <React.Fragment>
+      <div className={Classes.web}>
+      <Carousel autoplay>
+          {props.banners.map((item,index)=>{
         return(
-          <Carousel.Item interval={2000} key={index}>
-              <img
-                className={Classes.SlideImage}
-                src={item.corousal_image}
-                alt={item.corousal_name}
-              />
-           </Carousel.Item>
-          )})}
-     </Carousel>
+              <div onClick={()=>carouselHandler(item)} key={index}>
+                <img
+                          className={Classes.SlideImage}
+                          src={item.corousal_image}
+                          alt={item.corousal_name}
+                        />
+              </div>
+        )})}
+          </Carousel>
+
+      </div>
+      <div className={Classes.mob}>
+      <Carousel autoplay>
+          {props.mob.map((item,index)=>{
+        return(
+              <div onClick={()=>carouselHandler(item)} key={index}>
+                <img
+                          className={Classes.SlideImage}
+                          src={item.corousal_image}
+                          alt={item.corousal_name}
+                        />
+              </div>
+        )})}
+          </Carousel>
+
+      </div>
+    
+        
+    
+    </React.Fragment>
+    
+   
+    
+
+  
+   
   );
 }
 
-export default IndividualIntervalsExample;
+export default Banner;

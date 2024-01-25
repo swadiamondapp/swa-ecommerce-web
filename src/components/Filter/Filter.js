@@ -26,6 +26,7 @@ const Filter = (props) => {
       });
   };
   useEffect(() => {
+    console.log(props.location.state.data);
     filterSet();
   }, []);
   const catSelHandler = (catSel) => {
@@ -190,7 +191,7 @@ const Filter = (props) => {
         <Accordion.Item eventKey="7">
           <Accordion.Header>
             {" "}
-            <div className={Classes.MainText}>Occation</div>
+            <div className={Classes.MainText}>More Filter</div>
           </Accordion.Header>
           <Accordion.Body>
             <div className={Classes.BorderBottom}>

@@ -38,3 +38,13 @@
     margin-top: 70px;
 
 }
+@media screen and (max-width:500px) {
+    .MainText {
+        font-size: 25px;
+    }
+    .seeAll{
+       
+        margin-top: 57px;
+    
+    }
+}

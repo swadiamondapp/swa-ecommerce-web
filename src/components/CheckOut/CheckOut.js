@@ -78,8 +78,10 @@ function CheckOut(props) {
         .then((response1) => {
           if (mode === "P") {
             var options = {
-              key: "rzp_test_hbBeCNBjrqDq6P",
-              key_secret: "HwgmIdicOPlAeLkBdOJIMXiu",
+              // key: "rzp_test_hbBeCNBjrqDq6P", // test Key
+              // key_secret: "HwgmIdicOPlAeLkBdOJIMXiu",
+              key: "rzp_live_rKLs1hbpVT5npK",
+              key_secret: "td3G02g20iPqQzfz4b2NFSFN",
               amount: amountPay * 100,
               order_id: response1.data.results.data.razorpay_order_id,
               currency: "INR",
@@ -136,8 +138,11 @@ function CheckOut(props) {
         .then((response1) => {
           if (mode === "P") {
             var options = {
-              key: "rzp_test_hbBeCNBjrqDq6P",
-              key_secret: "HwgmIdicOPlAeLkBdOJIMXiu",
+              //test_secret
+              // key: "rzp_test_hbBeCNBjrqDq6P",
+              // key_secret: "HwgmIdicOPlAeLkBdOJIMXiu",
+              key: "rzp_live_rKLs1hbpVT5npK",
+              key_secret: "td3G02g20iPqQzfz4b2NFSFN",
               amount: amountPay * 100,
               order_id: response1.data.results.data.razorpay_order_id,
               currency: "INR",

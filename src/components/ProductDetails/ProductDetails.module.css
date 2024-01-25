@@ -1,411 +1,464 @@
-.Heart{
-    position: absolute;
-    top: 3%;
-    left: 90%;
-    cursor: pointer;
+.Heart {
+  position: absolute;
+  top: 3%;
+  left: 90%;
+  cursor: pointer;
+}
+
+.my_scroll_div {
+  overflow-y: auto;
+  max-height: 700px;
+}
+
+.my_scroll_div::-webkit-scrollbar {
+  display: none;
+}
+
+.my_scroll_div {
+  overflow-y: auto;
+  max-height: 700px;
+}
+
+.my_scroll_div::-webkit-scrollbar {
+  display: none;
+}
+
+.StickyDisplay {
+  position: sticky;
+  top: 0; /* Adjust this value according to your layout */
+  z-index: 100; /* Add z-index to ensure proper layering */
 }
 
 .ImageSmall {
-    width: 100%;
-    border: 0.7px solid #E6E6E6;
-    border-radius: 4px;
-    margin: 0 10px 20px 0;
-    cursor: pointer;
+  width: 100%;
+  border: 0.7px solid #e6e6e6;
+  border-radius: 4px;
+  margin: 0 10px 20px 0;
+  cursor: pointer;
 }
 
 .LargeImage {
-    width: 100%;
-    padding: 60px;
-   
-    position: relative;
+  width: 100%;
+  padding: 60px;
+
+  position: relative;
 }
 
 .NewArrivals {
-    font-weight: 500;
-    font-size: 32px;
-    font-family: 'PlayFairNormal' !important;
+  font-weight: 500;
+  font-size: 32px;
+  font-family: "PlayFairNormal" !important;
 }
 
 .SubText {
-    color: #5E666C;
-    font-weight: 400;
-    font-size: 16px;
-    font-family: 'gilroyNormal' !important;
-    
+  color: #5e666c;
+  font-weight: 400;
+  font-size: 16px;
+  font-family: "gilroyNormal" !important;
 }
-.Description{
-    
-    margin-top: 0 !important;
+.Description {
+  margin-top: 0 !important;
 }
 
 .Code {
-    font-weight: 400;
-    font-size: 16px;
-    color: #757C81;
+  font-weight: 400;
+  font-size: 16px;
+  color: #757c81;
 }
 
 .HurrayText {
-    color: #30933A;
-    font-size: 13px;
-    font-weight: 600;
-    font-family: 'gilroyNormal' !important;
+  color: #30933a;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: "gilroyNormal" !important;
 }
 
 .AvailableColours {
-    font-weight: 600;
-    font-size: 16px;
-    color: #000000;
-    font-family: 'gilroyNormal' !important;
-    margin-top: 20px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #000000;
+  font-family: "gilroyNormal" !important;
+  margin-top: 20px;
 }
 
 .Flex {
-    display: flex;
-    margin-left: -5px;
-
+  display: flex;
+  margin-left: -5px;
 }
 
 .C1 {
-    background: #FFD7D7;
-    border-radius: 4px;
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
+  background: #ffd7d7;
+  border-radius: 4px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
 }
 
 .C2 {
-    border-radius: 4px;
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
-    background: #FED672;
-    justify-content: center;
+  border-radius: 4px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  background: #fed672;
+  justify-content: center;
 }
 
 .C3 {
-    border-radius: 4px;
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
-    background: #EEE9E9;
-    justify-content: center;
+  border-radius: 4px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  background: #eee9e9;
+  justify-content: center;
 }
 
 .C4 {
-    border-radius: 4px;
-    width: 50px;
-    height: 50px;
-    background: #DEDEDE0D;
-    cursor: pointer;
-    border: 1px solid #006E7F;
-    justify-content: center;
+  border-radius: 4px;
+  width: 50px;
+  height: 50px;
+  background: #dedede0d;
+  cursor: pointer;
+  border: 1px solid #006e7f;
+  justify-content: center;
 }
 
 .Options {
-    margin: 0 5px 0 5px;
+  margin: 0 5px 0 5px;
 }
 
 .Options p {
-    font-weight: 400;
-    font-size: 10px;
-    color: #605D5D;
-    text-align: center;
+  font-weight: 400;
+  font-size: 10px;
+  color: #605d5d;
+  text-align: center;
 }
 
 .AddtoCart {
-    font-weight: 600;
-    font-size: 16px;
-    color: #19242D;
-    border: 1px solid #19242D;
-    border-radius: 4px;
-    background: #ffffff;
-    width: 45%;
-    padding: 8px 0 8px 0;
+  font-weight: 600;
+  font-size: 16px;
+  color: #19242d;
+  border: 1px solid #19242d;
+  border-radius: 4px;
+  background: #ffffff;
+  width: 45%;
+  padding: 8px 0 8px 0;
 }
 
 .BuyNow {
-    background: #19242D;
-    border-radius: 4px;
-    color: #FFFFFF;
-    font-weight: 600;
-    font-size: 16px;
-    width: 45%;
-    padding: 8px 0 8px;
-    margin-left: 8px;
+  background: #19242d;
+  border-radius: 4px;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 16px;
+  width: 45%;
+  padding: 8px 0 8px;
+  margin-left: 8px;
 }
 
 .NewPrice {
-    font-weight: 700;
-    font-size: 22px;
-    color: #0D1217;
-    margin-top: -5px;
-    font-family: 'gilroyNormal' !important;
-    margin-right: 10px;
+  font-weight: 700;
+  font-size: 22px;
+  color: #0d1217;
+  margin-top: -5px;
+  font-family: "gilroyNormal" !important;
 }
 
 .OldPrice {
-    font-weight: 400;
-    font-size: 21px;
-    text-decoration-line: line-through;
-    margin-top: -4px;
-    font-family: 'gilroyNormal' !important;
+  font-weight: 400;
+  font-size: 21px;
+  text-decoration-line: line-through;
+  margin-top: -4px;
+  font-family: "gilroyNormal" !important;
 
-    color: #B0B0B0;
+  color: #b0b0b0;
 }
 
 .Purity1 {
-    background: #006E7F;
-    border-radius: 50px;
-    width: 50px;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 14px;
-    color: #ffffff;
-    font-family: 'gilroyNormal' !important;
-    cursor: pointer;
+  background: #006e7f;
+  border-radius: 50px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  color: #ffffff;
+  font-family: "gilroyNormal" !important;
+  cursor: pointer;
 }
-.ImageWishList{
-    position: relative;
+.ImageWishList {
+  position: relative;
 }
-.SubTexts{
-    color: #5E666C;
-    font-weight: 400;
-    font-size: 16px;
-    font-family: 'gilroyNormal' !important;
-    margin-left: 10px;
-    margin-top: 40px;
-    display: flex;
+.SubTexts {
+  color: #5e666c;
+  font-weight: 400;
+  font-size: 16px;
+  font-family: "gilroyNormal" !important;
+  margin-left: 10px;
+  margin-top: 40px;
+  display: flex;
 }
 .Purity2 {
-    background: #ffffff;
-    border-radius: 50px;
-    width: 50px;
-    border: 1px solid #B8B8B8;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 14px;
-    color: #B8B8B8;
-    font-family: 'gilroyNormal' !important;
-    cursor: pointer;
+  background: #ffffff;
+  border-radius: 50px;
+  width: 50px;
+  border: 1px solid #b8b8b8;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  color: #b8b8b8;
+  font-family: "gilroyNormal" !important;
+  cursor: pointer;
 }
 
 .Grams {
-    font-weight: 400;
-    font-size: 11px;
-    line-height: .1;
-    color: #605D5D;
-    font-family: 'gilroyNormal' !important;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 0.1;
+  color: #605d5d;
+  font-family: "gilroyNormal" !important;
 }
 
 .MarginLeft {
-    margin-right: 30px;
+  margin-right: 30px;
 }
 
 .PinCode {
-    background: #F9F9F9;
-    border: 1px solid #E8E9EA;
-    border-radius: 4px;
-    width: 35%;
-    height: 40px;
-    margin-right: 10px;
+  background: #f9f9f9;
+  border: 1px solid #e8e9ea;
+  border-radius: 4px;
+  width: 35%;
+  height: 40px;
+  margin-right: 10px;
 }
 
 .CheckButton {
-    color: #ffffff;
-    font-weight: 500;
-    font-size: 12px;
-    background: linear-gradient(180deg, #978958 0%, #AEA174 82.81%);
-    border-radius: 2px;
-    border: none;
-    padding: 12px 0 11px 0;
-    width: 20%;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 12px;
+  background: linear-gradient(180deg, #978958 0%, #aea174 82.81%);
+  border-radius: 2px;
+  border: none;
+  padding: 12px 0 11px 0;
+  width: 20%;
 }
 
 .Stroke {
-    height: 15px;
-    width: 15px;
-    margin-top: 10px;
-    margin-right: 5px;
+  height: 15px;
+  width: 15px;
+  margin-top: 10px;
+  margin-right: 5px;
 }
 
 .BorderBottom {
-    border-bottom: 0.75px solid #E6E5E5;
+  border-bottom: 0.75px solid #e6e5e5;
 }
 
 .StrokeText {
-    color: #757C81;
-    font-weight: 400;
-    font-size: 16px;
-    margin-top: 8px;
+  color: #757c81;
+  font-weight: 400;
+  font-size: 16px;
+  margin-top: 8px;
 }
 
 .DeliveryDate {
-    font-weight: 500;
-    font-size: 16px;
-    margin-top: 8px;
-    margin-left: 5px;
+  font-weight: 500;
+  font-size: 16px;
+  margin-top: 8px;
+  margin-left: 5px;
 }
 
 .BIS {
-    margin-right: 30px;
+  margin-right: 30px;
 }
 
 .CertificateText {
-    font-weight: 500;
-    font-size: 12px;
-    font-family: 'gilroyNormal' !important;
-    line-height: 3;
-    
+  font-weight: 500;
+  font-size: 12px;
+  font-family: "gilroyNormal" !important;
+  line-height: 3;
 }
-.CertificateSubText{
-    color: #7A8288;
-    font-weight: 400;
-    line-height: .1;
-font-size: 10px;
-font-family: 'gilroyNormal' !important;
-margin-top: -15px !important;
+.CertificateSubText {
+  color: #7a8288;
+  font-weight: 400;
+  line-height: 0.1;
+  font-size: 10px;
+  font-family: "gilroyNormal" !important;
+  margin-top: -15px !important;
 }
-.Left{
-    font-weight: 400;
-font-size: 14px;
-font-family: 'gilroyNormal' !important;
-color: #7A8288;
+.Left {
+  font-weight: 400;
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
+  color: #7a8288;
 }
-.Right{
-    font-weight: 500;
-font-size: 14px;
-font-family: 'gilroyNormal' !important;
-color: #303A42;
+.Right {
+  font-weight: 500;
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
+  color: #303a42;
 }
-.RatingNum{
-    font-weight: 400;
-font-size: 14px;
-color: #757C81;
-margin-top: -20px;
-margin-bottom: 30px;
+.RatingNum {
+  font-weight: 400;
+  font-size: 14px;
+  color: #757c81;
+  margin-top: -20px;
+  margin-bottom: 30px;
 }
-.RatingFlex{
-    display: flex;
-    /* border-bottom: 0.75px solid #E6E5E5; */
-    justify-content: space-between;
+.RatingFlex {
+  display: flex;
+  /* border-bottom: 0.75px solid #E6E5E5; */
+  justify-content: space-between;
 }
-.StarFlex{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
+.StarFlex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-
-.Rating{
-    font-weight: 600;
-font-size: 27px;
-margin-top: 12px;
-margin-right: 5px;
-
+.Rating {
+  font-weight: 600;
+  font-size: 27px;
+  margin-top: 12px;
+  margin-right: 5px;
 }
-.StarRating{
-    display: flex;
-    background: #006E7F;
-border-radius: 4px;
-height: 17px;
-padding:0 6px 0 6px;
-color: #ffffff;
-font-weight: 400;
-font-size: 10px;
-margin-top: 10px;
+.StarRating {
+  display: flex;
+  background: #006e7f;
+  border-radius: 4px;
+  height: 17px;
+  padding: 0 6px 0 6px;
+  color: #ffffff;
+  font-weight: 400;
+  font-size: 10px;
+  margin-top: 10px;
 }
-.Reviews{
-    display: flex;
-    border-bottom: 0.75px solid #E6E5E5;
-    padding: 15px 0 15px 15px;
+.Reviews {
+  display: flex;
+  border-bottom: 0.75px solid #e6e5e5;
+  padding: 15px 0 15px 15px;
 }
-.Star{
-    margin-top: 2px;
+.Star {
+  margin-top: 2px;
 }
-.Comments{
-    margin-left: 10px;
-    margin-top: 8px;
+.Comments {
+  margin-left: 10px;
+  margin-top: 8px;
 }
-.Comment{
-    font-weight: 500;
-font-size: 15px;
-color: #303A42;
-font-family: 'gilroyNormal' !important;
+.Comment {
+  font-weight: 500;
+  font-size: 15px;
+  color: #303a42;
+  font-family: "gilroyNormal" !important;
 }
-.Name{
-    font-weight: 500;
-font-size: 13px;
-margin-top: -18px;
-font-family: 'gilroyNormal' !important;
-color: #757C81;
-
+.Name {
+  font-weight: 500;
+  font-size: 13px;
+  margin-top: -18px;
+  font-family: "gilroyNormal" !important;
+  color: #757c81;
 }
-.Remark{
-    font-weight: 400;
-font-size: 12px;
-color: #000000;
-font-family: 'gilroyNormal' !important;
-width: 50%;
+.Remark {
+  font-weight: 400;
+  font-size: 12px;
+  color: #000000;
+  font-family: "gilroyNormal" !important;
+  width: 50%;
 }
-.CommentFlex{
-    display: flex;
-    justify-content: space-between;
-    cursor: pointer;
+.CommentFlex {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
 }
-.ArrowIcon{
-    margin-top: 20px;
+.ArrowIcon {
+  margin-top: 20px;
 }
 
 .SubText {
-    display: flex;
-    font-size: 14px;
-    font-family: 'gilroyNormal' !important;
-
+  display: flex;
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
 }
 .NewArrival {
-    color: #01B3C5;
-    font-size: 14px;
-    font-family: 'gilroyNormal' !important;
-    font-weight: 500;
+  color: #01b3c5;
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
+  font-weight: 500;
 }
 .Home {
-    color: #00464D;
-    font-size: 14px;
-    font-family: 'gilroyNormal' !important;
-    font-weight: 500;
-    cursor: pointer;
-
+  color: #00464d;
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
+  font-weight: 500;
+  cursor: pointer;
 }
-.SizeSelect{
-    background: rgba(0, 110, 127, 0.05);
-opacity: 0.8;
-background: transparent;
--webkit-appearance: none;
+.SizeSelect {
+  background: rgba(0, 110, 127, 0.05);
+  opacity: 0.8;
+  background: transparent;
+  -webkit-appearance: none;
 
-font-size: 11px;
-width: 120px;
-background: transparent url("../../Assets/arrow.png") no-repeat 90px center;
-border: 1px solid #006E7F;
-border-radius: 8px;
-padding: 13px 23px 13px 23px;
-margin-bottom: 10px;
-
+  font-size: 11px;
+  width: 120px;
+  background: transparent url("../../Assets/arrow.png") no-repeat 90px center;
+  border: 1px solid #006e7f;
+  border-radius: 8px;
+  padding: 13px 23px 13px 23px;
+  margin-bottom: 10px;
 }
-.Slider{
+.Slider {
+  display: none;
+}
+@media screen and (max-width: 767px) {
+  .Display {
     display: none;
+  }
+  .Slider {
+    display: block;
+  }
 }
-@media screen and (max-width:767px) {
-    .Display{
-        display: none;
-    }
-    .Slider{
-        display: block;
-    }
+.ProductDiscription {
+  width: 403.25px;
+  margin-bottom: 20px;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
+  color: #7a8288;
+}
+.SellerInfo {
+  margin-top: 20px;
+}
+
+.ChatNo_WhatsIcon {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+}
+
+.manufacture {
+  display: grid;
+  grid-template-columns: 0.3fr 1fr;
+  margin-bottom: 1rem;
+}
+.manufacture span {
+  padding-left: 33px;
+}
+.manpara {
+  padding-left: 4px;
+}
+
+@media (min-width: 300px) and (max-width: 567px) {
+  .ProductDiscription {
+    width: 350px;
+  }
+  .manpara {
+    padding-left: 8px;
+  }
+  .SlideImage {
+    max-width: 350px;
+  }
 }

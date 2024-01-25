@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import Header from "../../components/Header/Header";
+import Header from "../../components/HeaderNew/Header";
 import Footer from "../../components/Footer/Footer";
 import RecentSearch from "../../components/RecentSearch/RecentSearch";
 import Features from "../../components/Features/Features";
@@ -25,6 +25,7 @@ const ProductDetailsPage = (props) => {
   const [clrId, setClrId] = useState("");
   const [cartCount, setCartCount] = useState("");
   const [error, setError] = useState("");
+  const [description, setDescription] = useState("");
 
   const [logAct, setLogAct] = useState(false);
   const token = localStorage.getItem("swaToken");
@@ -32,28 +33,34 @@ const ProductDetailsPage = (props) => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    console.log(props)
     // setClrId(props.location.state.data.thumbnail_colour_id);
     setClrId(props.match.params.color);
+    // setProduct_Id(props.match.params.id);
+    
 
-    if (localStorage.getItem("swaToken") === null) {
+    if (((localStorage.getItem("swaToken")) === null) && (props.match.path === '/products/:id/:color/:name')) {
+      console.log(JSON.parse(localStorage.getItem("recent")));
       let proArray = JSON.parse(localStorage.getItem("recent"));
       const newProd = props.location.state.data;
-      if (proArray !== null) {
-        const found = proArray.find((element) => {
-          return element.product_id === newProd.product_id;
-        });
-        if (!found) {
-          proArray.push(newProd);
-          let filterArray = proArray.slice(-4);
-          localStorage.setItem("recent", JSON.stringify(filterArray));
-        }
-      } else {
-        const newProd = props.location.state.data;
-        let newArray = [];
-        newArray.push(newProd);
-        localStorage.setItem("recent", JSON.stringify(newArray.slice(0, 5)));
-      }
-    } else {
+            if (proArray !== null) {
+                      const found = proArray.find((element) => {
+                        return element.product_id === newProd.product_id;
+                      });
+                      if (!found) {
+                        proArray.push(newProd);
+                        let filterArray = proArray.slice(-4);
+                        localStorage.setItem("recent", JSON.stringify(filterArray));
+                      }
+            }
+            else {
+              const newProd = props.location.state.data;
+              let newArray = [];
+              newArray.push(newProd);
+              localStorage.setItem("recent", JSON.stringify(newArray.slice(0, 5)));
+            }
+    }
+    else {
       const body = {
         product_id: props.match.params.id,
       };
@@ -214,9 +221,11 @@ const ProductDetailsPage = (props) => {
 
   return (
     <div>
+      
       <Header
         countCartItems={cartCount}
         lognAct={logAct}
+        catBuyclose={()=>setLogAct(false)}
         loginHandler={loginActHandler}
       />
 
@@ -235,13 +244,21 @@ const ProductDetailsPage = (props) => {
         }
         discount={prodDet.is_on_discount}
         name={prodDet.product_name}
+        description={prodDet.description}
         sizeChart={sizeChart}
         size={"small"}
         sizeChange={sizeChangeHandler}
         wishAct={prodDet.wishlist_id}
         gw={prodDet.gross_weight}
-        diamond={prodDet.diamond_weight}
+        diamondTypw={prodDet.diamond_clarity}
+        otherStoneW={prodDet.other_stone_weight}
+        otherStoneC={prodDet.other_stone_count}
+        diamondWeight={prodDet.diamond_weight}
+        diamondCount={prodDet.diamond_count}
         oSw={prodDet.other_stone_weight}
+        length={prodDet.length}
+        width={prodDet.width}
+        height={prodDet.height}
         colors={colorChart}
         thumbImg={thumImg}
         id={props.match.params.id}

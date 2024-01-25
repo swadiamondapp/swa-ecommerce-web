@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Header from "../../components/Header/Header";
+import Header from "../../components/HeaderNew/Header";
 import Features from "../../components/Features/Features";
 import Footer from "../../components/Footer/Footer";
 import Classes from "./CheckOutPage.module.css";
@@ -18,7 +18,7 @@ const CheckOutPage = (props) => {
   const token = localStorage.getItem("swaToken");
   useEffect(() => {
     // console.log(props.location.state.data);
-    setLoading(true);
+    setLoading(true); 
     setTotal(props.location.state.data.total);
     axios
       .get(Urls.address, { headers: { Authorization: "Token " + token } })

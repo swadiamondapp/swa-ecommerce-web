@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Header from "../../components/Header/Header";
+import Header from "../../components/HeaderNew/Header";
 import Footer from "../../components/Footer/Footer";
 import Features from "../../components/Features/Features";
 import OrderHistory from "../../components/OrderHistory/OrderHistory";
@@ -65,7 +65,7 @@ const OrderHistorypage2 = (props) => {
         setOrderDet(response1.data.results.data.order.shipment);
         setPayMode(response1.data.results.data.order.payment_mode);
         setDoctNum(response1.data.results.data.order.shipment[0].docket_number);
-        console.log(response1.data.results.data.order.shipment[0].docket_number);
+        
       })
       .catch((error) => {
         console.log(error);

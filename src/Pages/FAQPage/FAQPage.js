@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import FAQ from '../../components/FAQ/FAQ'
-import Header from '../../components/Header/Header'
+import Header from "../../components/HeaderNew/Header";
 import Footer from '../../components/Footer/Footer'
 import axios from 'axios';
 import * as Urls from '../../Urls' 

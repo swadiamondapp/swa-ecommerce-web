@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
-import { BsPerson } from "react-icons/bs";
+import { BsPerson, BsEye, BsEyeSlash } from "react-icons/bs";
 import Classes from "../Header/Header.module.css";
 import BlueLogo from "../../Assets/SwaBlue.png";
 import * as urls from "../../Urls";
@@ -46,6 +46,11 @@ const LoginModal = (props) => {
       .then((response) => {
         if (response.data.results.status_code === 200) {
           localStorage.setItem("swaToken", response.data.results.token);
+          localStorage.setItem("userName", response.data.results.data.name);
+          localStorage.setItem(
+            "phoneNumber",
+            response.data.results.data.phone_number
+          );
 
           props.logAct(response.data.results.token);
           handleClose();
@@ -80,6 +85,24 @@ const LoginModal = (props) => {
       .then((response1) => {
         if (response1.data.results.status_code === 200) {
           setError("");
+          const bodyLog = {
+            username: regPhoneNumber,
+            password: password,
+          };
+          axios
+            .post(urls.Login, bodyLog)
+            .then((response) => {
+              if (response.data.results.status_code === 200) {
+                localStorage.setItem("swaToken", response.data.results.token);
+                props.logAct(response.data.results.token);
+                handleClose();
+              } else if (response.data.results.status_code === 401) {
+                setLoginError("Incorrect username or password!");
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+            });
           handleClose();
         } else console.log("registration failed");
       })
@@ -176,6 +199,7 @@ const LoginModal = (props) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
+  const [showPassword, setShowPassword] = useState(true);
   const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/; // regex to match password criteria
   const validatePassword = () => {
     if (!passwordRegex.test(password)) {
@@ -234,6 +258,7 @@ const LoginModal = (props) => {
   };
   const handleClose = () => {
     props.close(false);
+    // props.cartClose();
     setLogin(false);
     setRegister(false);
     setVerifyOtp(false);
@@ -419,6 +444,11 @@ const LoginModal = (props) => {
         });
     }
   };
+
+  const userName = localStorage.getItem("userName");
+  const phone = localStorage.getItem("phoneNumber");
+  console.log(userName);
+  console.log(phone);
   return (
     <>
       <div className={Classes.LogList}>
@@ -429,12 +459,18 @@ const LoginModal = (props) => {
           className={Classes.LogListCont}
           style={{ display: logCond ? "block" : "none" }}
         >
-          <p className={Classes.LogItem} onClick={myOrderHandler}>
-            My Order
-          </p>
-          <p className={Classes.LogItem} onClick={logoutHandler}>
-            Logout
-          </p>
+          <div className={Classes.info_container}>
+            <p className={Classes.user_info_name}>{userName}</p>
+            <p className={Classes.user_info_phone}>{phone}</p>
+          </div>
+          <div className={Classes.detail_container}>
+            <p className={Classes.LogItem} onClick={myOrderHandler}>
+              My Order
+            </p>
+            <p className={Classes.LogItem} onClick={logoutHandler}>
+              Logout
+            </p>
+          </div>
         </div>
       </div>
 
@@ -453,8 +489,9 @@ const LoginModal = (props) => {
             <div className={Classes.NumFlex}>
               <input
                 type="text"
-                className={Classes.Input}
+                className={`${Classes.Input} ${Classes.Password}`}
                 value={phoneNumber}
+                placeholder="Enter phone number"
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 onBlur={(e) => validatePhoneNumber(e.target.value)}
               ></input>
@@ -464,12 +501,43 @@ const LoginModal = (props) => {
             )}
             <p className={Classes.ContactDetails}>Password</p>
             <input
-              type="password"
-              className={Classes.Input}
+              type={showPassword ? "password" : "text"}
+              className={`${Classes.Input} ${Classes.Password}`}
+              style={{
+                position: "relative",
+              }}
               value={loginPassword}
+              placeholder="Enter password"
               onChange={(e) => setLoginPassword(e.target.value)}
               onBlur={validateLoginPassword}
             ></input>
+            {showPassword ? (
+              <BsEyeSlash
+                style={{
+                  position: "absolute",
+                  width: "20px",
+                  height: "20px",
+                  color: "#9D9D9D",
+                  right: "10%",
+                  fill: "#A49667",
+                  cursor: "pointer",
+                }}
+                onClick={() => setShowPassword(false)}
+              />
+            ) : (
+              <BsEye
+                style={{
+                  position: "absolute",
+                  width: "20px",
+                  height: "20px",
+                  color: "#9D9D9D",
+                  right: "10%",
+                  fill: "#A49667",
+                  cursor: "pointer",
+                }}
+                onClick={() => setShowPassword(true)}
+              />
+            )}
             {loginPasswordError && (
               <p className={Classes.Validation}>{loginPasswordError}</p>
             )}

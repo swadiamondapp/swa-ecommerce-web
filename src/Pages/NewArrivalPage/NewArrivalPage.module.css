@@ -1,13 +1,23 @@
-.Products{
-    background-color: #FEFEFE;
-    border-radius: 8px;
-    margin-top: 15px;
-    padding: 46px 24px 46px 24px;
-    min-height: 800px;
+.Products {
+  background-color: #fefefe;
+  border-radius: 8px;
+  margin-top: 15px;
+  padding: 46px 24px 46px 24px;
+  min-height: 800px;
 }
-.Page{
-background: #EEEEEE;
+.Page {
+  background: #eeeeee;
+}
+.PageAlign {
+  justify-content: start !important;
 }
 /* .DownloadOurAppImage{
     margin-top: 0px !important;
 } */
+
+@media (min-width: 300px) and (max-width: 567px) {
+  .pageout {
+    padding-top: 20px;
+    padding-right: 0px !important;
+  }
+}

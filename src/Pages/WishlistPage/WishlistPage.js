@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Header from "../../components/Header/Header";
+import Header from "../../components/HeaderNew/Header";
 import Footer from "../../components/Footer/Footer";
 import NewArrivalCard from "../../components/NewArrivals/NewArrivalCard/NewArrivalCard";
 import Wishlist from "../../components/Wishlist/Wishlist";

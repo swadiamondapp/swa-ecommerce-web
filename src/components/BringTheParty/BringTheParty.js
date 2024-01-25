@@ -1,7 +1,31 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import Classes from "./BringTheParty.module.css";
+import { useHistory } from "react-router-dom";
 
 const BringTheParty = (props) => {
+  const history = useHistory()
+  const [adds,setAdds] = useState([
+    { Ad_image: "",type_id:"",is_category:false},
+    { Ad_image: "",type_id:"",is_category:false },
+    { Ad_image: "",type_id:"",is_category:false },
+  ])
+  useEffect(()=>{
+    
+    setAdds(props.add)
+
+  },[props])
+  const advClicked =(selAdv)=>{
+    if(selAdv.is_category === true){
+      history.push({ pathname: "/new_arrivel", state: { data: selAdv.type_id } });
+   }
+    else{
+     
+      history.push({ pathname: "/new_arrivel", state: { octnId: selAdv.type_id,data:'occation' } });
+
+    }
+   
+
+  }
   return (
     <div>
       <div className={Classes.BringThePartyWhole}>
@@ -21,21 +45,23 @@ const BringTheParty = (props) => {
                   <div className="col-md-6">
                     <img
                       className={Classes.Image1}
-                      src={props.img1}
+                      src={adds[0].Ad_image}
                       alt="ad1"
+                      onClick={()=>advClicked(adds[0])}
                     />
                   </div>
                   <div className="col-md-6">
                     <img
                       className={Classes.Image2}
-                      src={props.img2}
+                      src={adds[1].Ad_image}
                       alt="ad2"
+                      onClick={()=>advClicked(adds[1])}
                     />
                   </div>
                 </div>
               </div>
               <div className={Classes.Image3}>
-                <img className={Classes.Image3} src={props.img3} alt="ad3" />
+                <img className={Classes.Image3} src={adds[2].Ad_image} alt="ad3" onClick={()=>advClicked(adds[2])} />
               </div>
             </div>
           </div>

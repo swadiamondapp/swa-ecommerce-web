@@ -15,6 +15,9 @@ import OrderHistorypage2 from "./Pages/OrderHistoryPage2/OrderHistorypage2";
 import OrderSuccessfulPage from "./Pages/OrderSuccessful/OrderSuccessfulPage";
 import AboutUsPage from "./Pages/AboutUsPage/AboutUsPage";
 import RateAndReview from "./Pages/RateAndReviewPage/RateAndReview";
+import CategorySearch from "./Pages/NewArrivalPage/CategorySearch";
+import TagSearch from "./Pages/NewArrivalPage/Tagsearch";
+import New from './components/HeaderNew/Header'
 function App() {
   return (
    <Router>
@@ -26,6 +29,8 @@ function App() {
         <Route path="/wish_list" component={ WhishlistPage } exact/>
         <Route  path="/cart"  component={ Cart } exact/>
         <Route path="/new_arrivel" component={ NewArrivalPage } exact/>
+        <Route path='/category_search/:id'  component={CategorySearch}/>
+        <Route path='/tag_search/:id'  component={TagSearch}/>
       
         <Route path="/terms_condition" component={ TermsAndConditionsPage } exact/>
         <Route path="/Return_policy_page" component={ ReturnPolicyPage } exact/>
@@ -46,3 +51,4 @@ function App() {
 }
 
 export default App;
+

@@ -1,45 +1,50 @@
-.Background{
-    background: #EEEEEE;
+.Background {
+  background: #eeeeee;
 }
-.Features{
-    margin-bottom: -60px !important;
+.Features {
+  margin-bottom: -60px !important;
 }
-.cartEmpty{
-    display: flex;
-    justify-content: center;
+.cartEmpty {
+  display: flex;
+  justify-content: center;
 }
-.cartListHead{
-    font-weight: 600;
-    font-size: 30px;
-    color: #041A25;
-    padding-top: 30px;
-    text-align: center;
-    font-family: 'gilroyNormal';
-
+.cartListHead {
+  font-weight: 600;
+  font-size: 30px;
+  color: #041a25;
+  padding-top: 30px;
+  text-align: center;
+  font-family: "gilroyNormal";
 }
-.cartEmpty img{
-    width: 200px;
-    height: 200px;
+.cartEmpty img {
+  width: 200px;
+  height: 200px;
 }
-.cartEmpty{
-    display: flex;
-    justify-content: center;
+.cartEmpty {
+  display: flex;
+  justify-content: center;
 }
-.cartPara{
-    font-weight: 400;
-    font-size: 18px;
-    color: #041A25;
-    padding-top: 10px;
-    text-align: center;
-    margin: 0px 60px;
-    font-family: 'gilroyNormal';
-
+.cartPara {
+  font-weight: 400;
+  font-size: 18px;
+  color: #041a25;
+  padding-top: 10px;
+  text-align: center;
+  margin: 0px 60px;
+  font-family: "gilroyNormal";
 }
-@media screen and (max-width:565px) {
-.cartListHead{
+@media screen and (max-width: 565px) {
+  .cartListHead {
     font-size: 25px;
-}
-.cartPara{
+  }
+  .cartPara {
     font-size: 15px;
+  }
 }
+
+@media (min-width: 300px) and (max-width: 567px) {
+  .pageout {
+    padding-top: 20px;
+    padding-right: 0px !important;
+  }
 }

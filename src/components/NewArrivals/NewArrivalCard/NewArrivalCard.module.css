@@ -25,6 +25,9 @@
     color: #757C81;
     line-height: .3;
 }
+.Rupee{
+    font-size: 20px;
+}
 
 .Price {
     display: flex;
@@ -87,8 +90,9 @@
     /* justify-content: center; */
 }
 .ProductImage{
-    width: 200px ;
-    height: 200px;
+    width: 100%;
+  
+    padding: 20px;
     
 }
 .NewArrivals{
@@ -104,9 +108,12 @@
     transition: 0.8s;
 }
 .NewArrivalCard{
-    height: 470px;
     width: 100%;
     position: relative;
+}
+.NewArrivalCard img{
+    display: flex;
+    justify-content: center;
 }
 
 @media (max-width:1200px){
@@ -148,7 +155,35 @@
         height: 40px;
     }
     .Price{
-        padding: 0 70px 0 70px;
+       display: flex;
+       justify-content: space-between;
+       padding: 0px 5px;
+    }
+    .PriceNew {
+        font-size: 14px;
+    }
+    .ProductImage{
+        width: 100%;
+        height: 170px;
+        padding: 0px;
+        
+    }
+    .Rupee{
+        font-size: 16px;
+    }
+    
+    .PriceOld{
+        font-size: 14px;
     }
    
+}
+@media screen and (max-width:379px) {
+    .AddToCart {
+        width: 60%;
+        font-size: 10px;
+    }
+    .Heart {
+        width: 30%;
+    }
+
 }

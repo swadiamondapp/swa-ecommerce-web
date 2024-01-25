@@ -29,7 +29,10 @@ const NewArrivalPage = (props) => {
         >
           HOME /
         </p>
-        <p className={Classes.NewArrival}>{props.head}</p>
+        <p className={Classes.NewArrival}>{props.categoryName || "Products"}</p>
+      </div>
+      <div className={Classes.Found}>
+        {props.count}&nbsp;&nbsp;products found
       </div>
 
       <div className="row">
