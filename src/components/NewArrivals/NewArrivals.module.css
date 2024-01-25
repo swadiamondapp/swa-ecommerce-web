@@ -1,49 +1,58 @@
 .NewArrivalsMainText {
-    font-weight: 500;
-    font-size: 38px;
-    color: #0D1217;
-    font-family: 'PlayFairNormal' !important;
-
+  font-weight: 500;
+  font-size: 38px;
+  color: #0d1217;
+  font-family: "PlayFairNormal" !important;
 }
-.setItems{
-    display: flex;
-    justify-content: space-between;
+.setItems {
+  /* display: flex;
+    justify-content: space-between; */
+}
+.NewArrivals {
+  margin-top: 15px;
 }
 
 .NewArrivalsSubText {
-    font-weight: 400;
-font-size: 18px;
+  font-weight: 400;
+  font-size: 18px;
 
-color: #757C81;
-margin-top: 20px;
-font-family: 'gilroyNormal' !important;
+  color: #757c81;
+  margin-top: 20px;
+  font-family: "gilroyNormal" !important;
 }
-.seeAll{
+.seeAll {
+  font-size: 16px;
+  font-weight: 600;
+  font-family: "gilroyNormal" !important;
+  color: #007481;
+  cursor: pointer;
+}
+@media screen and (max-width: 767px) {
+  .NewArrivalsMainText {
+    font-size: 28px;
+  }
+
+  .NewArrivalsSubText {
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .NewArrivalsMainText {
+    font-size: 25px;
+  }
+}
+@media (min-width: 300px) and (max-width: 575px) {
+  .NewArrivalsSubText {
+    text-align: center;
     font-size: 16px;
-    font-weight: 600;
-    font-family: 'gilroyNormal' !important;
-    color: #007481;
-    cursor: pointer;
-    margin-top: 67px;
-
-}
-@media screen and (max-width:767px) {
-    .NewArrivalsMainText {
-        font-size: 28px;
-    }
-    .seeAll{
-        font-size: 15px;
-        margin-top: 53px;
-    }
-    .NewArrivalsSubText{
-        font-size: 14px;
-    }
-}
-@media screen and (max-width:500px) {
-    .NewArrivalsMainText {
-        font-size: 25px;
-    }
-    .seeAll{
-        font-size: 13px;
-    }
+    margin: 15px 0px;
+  }
+  .NewArrivalsMainText {
+    text-align: center;
+  }
+  .seeAll {
+    margin: 10px 0px;
+    text-align: center;
+    font-size: 16px;
+  }
 }

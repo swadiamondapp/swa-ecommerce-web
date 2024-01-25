@@ -13,13 +13,8 @@ function NewArrivals(props) {
         <div className={Classes.setItems}>
           <div>
             <h1 className={Classes.NewArrivalsMainText}>New Arrivals</h1>
-            <p className={Classes.NewArrivalsSubText}>
-              Be the First to Shine: Shop Our Stunning New Jewellery Pieces!
-            </p>
+            <p className={Classes.NewArrivalsSubText}>234 New item added</p>
           </div>
-          <p className={Classes.seeAll} onClick={() => seeAllHandler("new")}>
-            See all
-          </p>
         </div>
       </div>
       <div className={Classes.NewArrivalImages}>
@@ -27,6 +22,9 @@ function NewArrivals(props) {
           <div className="row">{props.children}</div>
         </div>
       </div>
+      <p className={Classes.seeAll} onClick={() => seeAllHandler("new")}>
+        See all
+      </p>
     </div>
   );
 }

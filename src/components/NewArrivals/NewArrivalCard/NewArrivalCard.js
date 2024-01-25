@@ -79,7 +79,7 @@ const NewArrivalCard = (props) => {
       >
         <ToastContainer />
         <div className={Classes.NewArrivalCard}>
-          <div onClick={props.clicked}>
+          <div onClick={props.clicked} className={Classes.NewArrivalPics}>
             {props.Discount !== null ? (
               <div className={Classes.Discount}>
                 <p className={Classes.Number}>{props.Discount}</p>
@@ -100,13 +100,14 @@ const NewArrivalCard = (props) => {
               </p>
               <p className={Classes.PriceOld}>
                 {props.PriceOld !== null && (
-                  <BiRupee  color="#B0B0B0" className={Classes.Rupee}/>
+                  <BiRupee color="#B0B0B0" className={Classes.Rupee} />
                 )}
                 {props.PriceOld !== null && props.PriceOld}
               </p>
             </div>
           </div>
-          <div className={onadd ? [Classes.Buttons] : [Classes.None]}>
+          {/* discover and heart */}
+          {/* <div className={onadd ? [Classes.Buttons] : [Classes.None]}>
             <button className={Classes.AddToCart} onClick={props.clicked}>
               Discover
             </button>
@@ -123,7 +124,9 @@ const NewArrivalCard = (props) => {
                 onClick={Added}
               />
             )}
-          </div>
+          </div> */}
+          {/* discover and heart */}
+
           {/* <div className={onadd ?[Classes.None] :[Classes.Buttons]}>
                         <button className={Classes.AddToCart} onClick={addToCart}>GO TO CART</button>
                         {addToWishList ? <FaHeart color='#ffffff' className={Classes.Heart} onClick={Remove} /> : <CgHeart color='#ffffff' className={Classes.Heart} onClick={Added}/>}

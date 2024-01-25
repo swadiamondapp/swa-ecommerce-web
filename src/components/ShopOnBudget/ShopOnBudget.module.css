@@ -1,26 +1,29 @@
-.ShopOnBudgetMainText{
-    color:#0D1217;
-    font-weight: 600;
-font-size: 38px;
-font-family: 'PlayFairNormal' !important;
+.ShopOnBudgetMainText {
+  color: #0d1217;
+  font-weight: 600;
+  font-size: 38px;
+  font-family: "PlayFairNormal" !important;
+}
+.ShopOnBudgetText {
+  text-align: center;
+  padding-top: 48px;
+  padding-bottom: 20px;
+}
+.ShopOnBudgetSubText {
+  font-family: "gilroyNormal" !important;
+  font-weight: 400;
+  font-size: 18px;
+  color: #757c81;
+  line-height: 10px;
+}
+@media (max-width: 640px) {
+  .ShopOnBudgetSubText {
+    font-size: 14px;
+  }
+}
 
-
-}
-.ShopOnBudgetText{
-    text-align: center;
-    padding-top: 48px;
-    padding-bottom: 20px;
-}
-.ShopOnBudgetSubText{
-    font-family: 'gilroyNormal' !important;
-    font-weight: 400;
-font-size: 18px;
-color: #757C81;
-line-height: 10px;
-}
-@media  (max-width:640px){
-    .ShopOnBudgetSubText{
-        font-size: 10px;
-    }
-    
+@media (min-width: 300px) and (max-width: 575px) {
+  .ShopOnBudgetMainText h1 {
+    margin-bottom: 15px;
+  }
 }
