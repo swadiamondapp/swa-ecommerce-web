@@ -110,6 +110,10 @@
 .NewArrivalCard {
   width: 100%;
   position: relative;
+  margin-bottom: 20px;
+}
+.NewArrivalCard:hover {
+  background: #fcfbf6;
 }
 .NewArrivalCard img {
   display: flex;

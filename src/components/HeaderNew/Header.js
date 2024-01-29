@@ -11,8 +11,6 @@ import LoginModal from "../LoginModal/LoginModal";
 import axios from "axios";
 import * as Urls from "../../Urls";
 import { Carousel } from "antd";
-// import { Carousel } from "react-responsive-carousel";
-// import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const Header = (props) => {
   const [show, setShow] = useState(false);
@@ -275,7 +273,26 @@ const Header = (props) => {
         <div className="container">
           <div className={Classes.Web}>
             <div className="">
-              <Carousel>
+              <Carousel
+                autoplay
+                slidesToShow={8}
+                dots={false}
+                className={Classes.ResponsiveCarousel}
+                responsive={[
+                  {
+                    breakpoint: 1200,
+                    settings: {
+                      slidesToShow: 4, // Set the number of slides to display on tablets
+                    },
+                  },
+                  {
+                    breakpoint: 768,
+                    settings: {
+                      slidesToShow: 3, // Set the number of slides to display on mobile devices
+                    },
+                  },
+                ]}
+              >
                 {catgSet.map((item, index) => {
                   return (
                     <div
@@ -312,8 +329,6 @@ const Header = (props) => {
                   );
                 })}
               </Carousel>
-
-              <div></div>
             </div>
           </div>
           {/* dummy carousel */}

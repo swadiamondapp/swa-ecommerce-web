@@ -1,6 +1,6 @@
 .NewArrivalsMainText {
   font-weight: 500;
-  font-size: 38px;
+  font-size: 36px;
   color: #0d1217;
   font-family: "PlayFairNormal" !important;
 }
@@ -9,7 +9,7 @@
     justify-content: space-between; */
 }
 .NewArrivals {
-  margin-top: 15px;
+  margin-top: 20px;
 }
 
 .NewArrivalsSubText {
@@ -17,7 +17,8 @@
   font-size: 18px;
 
   color: #757c81;
-  margin-top: 20px;
+  margin-top: 15px;
+  margin-bottom: 10px !important;
   font-family: "gilroyNormal" !important;
 }
 .seeAll {
@@ -26,6 +27,7 @@
   font-family: "gilroyNormal" !important;
   color: #007481;
   cursor: pointer;
+  text-align: center;
 }
 @media screen and (max-width: 767px) {
   .NewArrivalsMainText {

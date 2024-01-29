@@ -38,11 +38,11 @@ const LandingPage = () => {
   const [topDeamd, setTopDemand] = useState([]);
   const [video, setVideo] = useState("");
   const [serachList, setSearcList] = useState([]);
-  const [mobBanner,setMobBanner] = useState([])
+  const [mobBanner, setMobBanner] = useState([]);
   const [cartCount, setCartCount] = useState("");
   const [loading, setLoading] = useState(false);
   const [logToken, setLogToken] = useState("");
-  const [tags,setTags] = useState([])
+  const [tags, setTags] = useState([]);
 
   const history = useHistory();
   const token = localStorage.getItem("swaToken");
@@ -60,8 +60,8 @@ const LandingPage = () => {
                 response1.data.results.data.corosals[i].corousal_image,
               corousal_name:
                 response1.data.results.data.corosals[i].corousal_name,
-                type_id:response1.data.results.data.corosals[i].type_id,
-                is_category:response1.data.results.data.corosals[i].is_category
+              type_id: response1.data.results.data.corosals[i].type_id,
+              is_category: response1.data.results.data.corosals[i].is_category,
             });
           }
         }
@@ -105,7 +105,7 @@ const LandingPage = () => {
         .then((response1) => {
           setLoading(false);
           let bannerArray = [];
-          let banMob = []
+          let banMob = [];
           for (
             let i = 0;
             i < response1.data.results.data.corosals.length;
@@ -117,24 +117,24 @@ const LandingPage = () => {
                   response1.data.results.data.corosals[i].corousal_image,
                 corousal_name:
                   response1.data.results.data.corosals[i].corousal_name,
-                  is_category: response1.data.results.data.corosals[i].is_category,
-                  type_id:response1.data.results.data.corosals[i].type_id
+                is_category:
+                  response1.data.results.data.corosals[i].is_category,
+                type_id: response1.data.results.data.corosals[i].type_id,
               });
-            }
-            else{
+            } else {
               banMob.push({
                 corousal_image:
-                response1.data.results.data.corosals[i].corousal_image,
-              corousal_name:
-                response1.data.results.data.corosals[i].corousal_name,
-                is_category: response1.data.results.data.corosals[i].is_category,
-                type_id:response1.data.results.data.corosals[i].type_id
-              })
-
+                  response1.data.results.data.corosals[i].corousal_image,
+                corousal_name:
+                  response1.data.results.data.corosals[i].corousal_name,
+                is_category:
+                  response1.data.results.data.corosals[i].is_category,
+                type_id: response1.data.results.data.corosals[i].type_id,
+              });
             }
           }
           setBanner(bannerArray);
-          setMobBanner(banMob)
+          setMobBanner(banMob);
           setNewArrivel(response1.data.results.data.new_arrival.slice(0, 8));
           setBudjet(response1.data.results.data.product_budget);
           setAdd(response1.data.results.data.banners);
@@ -178,7 +178,6 @@ const LandingPage = () => {
     );
   } else {
     newArriv = newArrival.map((item, index) => {
-    
       return (
         <NewArrivalCard
           ProductImage={item.thumbnail_image}
@@ -194,7 +193,7 @@ const LandingPage = () => {
           key={index}
           Discount={
             item.discount_percentage !== null
-              ? (item.discount_percentage + "% OFF")
+              ? item.discount_percentage + "% OFF"
               : null
           }
           prodet={item}
@@ -288,8 +287,8 @@ const LandingPage = () => {
   return (
     <div>
       <Header countCartItems={cartCount} loginHandler={loginActHandler} />
-      <Banner banners={banner} tags={tags} mob={mobBanner}/>
-      <Features />
+      <Banner banners={banner} tags={tags} mob={mobBanner} />
+
       <div className="container">
         <ShopOnBudget>
           <BudgetCard
@@ -318,10 +317,11 @@ const LandingPage = () => {
           />
         </ShopOnBudget>
         <NewArrivals>{newArriv}</NewArrivals>
-        <BringTheParty  add={add}/>
+        <BringTheParty add={add} />
         <TopDemanded>{topDemnd}</TopDemanded>
 
         <Certificate video={"https://www.youtube.com/embed/s3PrxdvAihI"} />
+        <Features />
 
         {searchList}
         <DownloadOurAppImage />

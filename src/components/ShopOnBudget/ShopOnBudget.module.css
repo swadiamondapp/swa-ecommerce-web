@@ -4,17 +4,21 @@
   font-size: 38px;
   font-family: "PlayFairNormal" !important;
 }
+.ShopOnBudgetMainText h1 {
+  color: #0d1217;
+  font-size: 36px;
+  margin-bottom: 15px;
+}
 .ShopOnBudgetText {
   text-align: center;
   padding-top: 48px;
-  padding-bottom: 20px;
+  padding-bottom: 30px;
 }
 .ShopOnBudgetSubText {
-  font-family: "gilroyNormal" !important;
+  font-family: "GilroyRegular";
   font-weight: 400;
   font-size: 18px;
   color: #757c81;
-  line-height: 10px;
 }
 @media (max-width: 640px) {
   .ShopOnBudgetSubText {

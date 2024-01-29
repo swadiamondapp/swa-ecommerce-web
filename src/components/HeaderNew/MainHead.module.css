@@ -105,17 +105,21 @@ header {
 }
 
 .Offers {
-  padding: 20px 22px 10px 20px;
+  padding: 5px 5px 5px 5px;
   cursor: pointer;
+  border-radius: 4px;
+  background: #f7f6f2;
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.05);
+  display: flex !important;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
 }
 .Offers p {
-  color: #000000;
-  font-size: 14px;
-  line-height: 16.48px;
+  color: #10212f;
+  font-family: "Lato", sans-serif;
   font-weight: 400;
-  text-align: center;
-  font-family: "gilroyNormal";
-  padding-top: 9px;
+  font-size: 14px;
 }
 .Offers p:hover {
   color: #02c3c6;
@@ -199,6 +203,7 @@ header {
   left: 5%;
   pointer-events: none;
   cursor: pointer !important;
+  width: 18px;
 }
 .searchList::placeholder {
   font-weight: 400;
@@ -846,6 +851,7 @@ a {
     padding: 5px;
     display: flex;
     justify-content: right;
+    display: none;
   }
 
   .SearchIcons {
@@ -948,6 +954,17 @@ a {
     display: none;
   }
 }
+
+/* MainHead.module.css */
+
+/* Add any other styles you need */
+/* MainHead.module.css */
+
+/* Add any other styles you need */
+/* MainHead.module.css */
+
+/* Add any other styles you need */
+/* MainHead.module.css */
 
 @media (min-width: 300px) and (max-width: 575px) {
   .headerNav {
