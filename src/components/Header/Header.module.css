@@ -45,18 +45,9 @@
   display: none;
 } */
 .searchbar {
-  width: 435px;
-  height: 46px;
-  /* left: 25px; */
-
-  border: 1px solid #1f6cab;
   border-radius: 32px;
   position: relative;
   background: #f4f4f4;
-  padding-left: 15px;
-
-  padding-bottom: 3px;
-  position: relative;
 }
 .searchList {
   position: relative;
@@ -263,14 +254,12 @@ a {
   display: flex;
   justify-content: space-between;
 }
-.PersonIcon {
-  margin-top: 15px;
-}
+
 .SearchIcons {
-  margin: 0 5px 0 5px;
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 15px;
 }
 
 .Icon {

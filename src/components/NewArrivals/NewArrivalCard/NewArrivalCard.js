@@ -91,6 +91,7 @@ const NewArrivalCard = (props) => {
               className={Classes.ProductImage}
               alt=""
             />
+
             {/* <p className={Classes.ProductName}>{props.ProductName}</p> */}
             {/* <p className={Classes.ProductId}>{props.ProductId}</p> */}
             <div className={Classes.Price}>
@@ -106,6 +107,17 @@ const NewArrivalCard = (props) => {
               </p>
             </div>
           </div>
+
+          {/* heart */}
+          <div className={Classes.parentHeart}>
+            {addToWishList ? (
+              <FaHeart className={Classes.Heart} onClick={Remove} />
+            ) : (
+              <CgHeart className={Classes.Heart} onClick={Added} />
+            )}
+          </div>
+          {/* heart */}
+
           {/* discover and heart */}
           {/* <div className={onadd ? [Classes.Buttons] : [Classes.None]}>
             <button className={Classes.AddToCart} onClick={props.clicked}>

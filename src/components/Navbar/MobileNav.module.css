@@ -1,16 +1,8 @@
-header {
-  height: 100px;
-  padding: 10px 30px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 .Navbar {
   display: none;
   /* font-family: "Playfair Display"; */
 }
-@media (min-width: 300px) and (max-width: 992px) {
+@media (min-width: 300px) and (max-width: 575px) {
   .Navbar {
     display: flex;
     align-items: center;
@@ -87,7 +79,7 @@ header {
   .socialtext {
     gap: 10px;
   }
- 
+
   .LoginContainer .line {
     display: grid;
     grid-template-columns: 1fr 0.2fr 1fr;
@@ -288,7 +280,6 @@ header {
     flex-direction: column;
   }
   .signupContainer {
-
   }
   .signuptitletext {
     color: #0d1217;
@@ -324,5 +315,8 @@ header {
     align-items: center;
     margin: 12px 0px;
     width: 100%;
+  }
+  .mobileLogo {
+    max-width: 59px;
   }
 }

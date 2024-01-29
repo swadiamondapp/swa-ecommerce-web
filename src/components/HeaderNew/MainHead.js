@@ -16,7 +16,7 @@ const MainHead = (props) => {
     <div>
       <MobileNavbar />
       <header className={Classes.headerNav}>
-        <div className="container nopadmar">
+        <div className={`${"container"} ${Classes.ParentHeader}`}>
           <div className={Classes.SwaHead}>
             <div
               id="brand"

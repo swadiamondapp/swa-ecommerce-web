@@ -10,6 +10,9 @@ import { IoCartOutline } from "react-icons/io5";
 import LoginModal from "../LoginModal/LoginModal";
 import axios from "axios";
 import * as Urls from "../../Urls";
+import { Carousel } from "antd";
+// import { Carousel } from "react-responsive-carousel";
+// import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const Header = (props) => {
   const [show, setShow] = useState(false);
@@ -218,10 +221,12 @@ const Header = (props) => {
           />
 
           <LoginModal
+            className={Classes.loginUser}
             isLog={show}
             logAct={props.loginHandler}
             cartClose={cateclose}
             close={closeHanlder}
+            style={{ marginTop: "0px" }}
           />
           <CgHeart
             className={Classes.Icon}
@@ -237,6 +242,11 @@ const Header = (props) => {
               onClick={moveTocart}
             />
             <div className={Classes.ItemsNum}>{props.countCartItems}</div>
+          </div>
+          <div className={Classes.LoginSignup}>
+            <div className={Classes.dLogin}>Login</div>
+            <div className={Classes.LineArrow}></div>
+            <div className={Classes.DSignup}>Sign up</div>
           </div>
         </div>
       </MainHead>
@@ -263,38 +273,59 @@ const Header = (props) => {
 
       <div className={Classes.CatList}>
         <div className="container">
-          <div className={Classes.Slider}>
-            <div className="d-flex">
-              {catgSet.map((item, index) => {
-                return (
-                  <div
-                    className={Classes.Offers}
-                    key={index}
-                    onClick={() => catSelHandler(item)}
-                  >
-                    <img src={item.thumbnail} alt="catg" />
+          <div className={Classes.Web}>
+            <div className="">
+              <Carousel>
+                {catgSet.map((item, index) => {
+                  return (
+                    <div
+                      className={Classes.Offers}
+                      key={index}
+                      onClick={() => catSelHandler(item)}
+                    >
+                      <img
+                        className={Classes.SlideImage}
+                        src={item.thumbnail}
+                        alt="catg"
+                      />
 
-                    <p>{item.name}</p>
-                  </div>
-                );
-              })}
-              {tags.map((item, index) => {
-                return (
-                  <div
-                    className={Classes.Offers}
-                    key={index}
-                    onClick={() => tagSelHandler(item)}
-                  >
-                    <img src={item.thumbnail} alt="tag" />
+                      <p>{item.name}</p>
+                    </div>
+                  );
+                })}
 
-                    <p>{item.name}</p>
-                  </div>
-                );
-              })}
+                {tags.map((item, index) => {
+                  return (
+                    <div
+                      className={Classes.Offers}
+                      key={index}
+                      onClick={() => tagSelHandler(item)}
+                    >
+                      <img
+                        // className={Classes.SlideImage}
+                        src={item.thumbnail}
+                        alt="tag"
+                      />
+
+                      <p>{item.name}</p>
+                    </div>
+                  );
+                })}
+              </Carousel>
 
               <div></div>
             </div>
           </div>
+          {/* dummy carousel */}
+          {/* <div className={Classes.Web}>
+            <p>anasmk</p>
+            <Carousel autoplay>
+              <div className={Classes.carouselWeb}>
+                <img />
+              </div>
+            </Carousel>
+          </div> */}
+          {/* dummy carousel */}
         </div>
       </div>
     </div>
