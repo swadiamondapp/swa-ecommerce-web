@@ -1,50 +1,49 @@
 .TopDemanded {
-    margin-top: 50px;
+  margin-top: 50px;
 }
 
 .MainText {
-    font-weight: 500;
-    font-size: 38px;
-    text-align: center;
-    color: #0D1217;
-    font-family: 'PlayFairNormal' !important;
-
-
+  font-weight: 500;
+  font-size: 32px;
+  text-align: center;
+  color: #0d1217;
+  font-family: "PlayFairNormal" !important;
 }
-.TopDemnd{
-    display: flex;
-    justify-content: space-between;
+.NewArrivalsSubText {
+  font-weight: 400;
+  font-size: 16px;
+  text-align: center;
+  color: #757c81;
+  margin-top: 10px;
+  margin-bottom: 10px !important;
+  font-family: "gilroyNormal" !important;
 }
-
 .SubText {
-    font-weight: 200;
-    font-size: 18px;
-    color: #757C81;
-    text-align: center;
-    line-height: .2;
-    font-family: 'gilroyNormal' !important;
-
+  font-weight: 200;
+  font-size: 18px;
+  color: #757c81;
+  text-align: center;
+  line-height: 0.2;
+  font-family: "gilroyNormal" !important;
 }
-.Products{
-    display: flex;
-    align-items: center;
+.Products {
+  display: flex;
+  align-items: center;
 }
-.seeAll{
-    font-size: 16px;
-    font-weight: 600;
-    font-family: 'gilroyNormal' !important;
-    color: #007481;
-    cursor: pointer;
-    margin-top: 70px;
-
+.seeAllTopDemand {
+  font-size: 16px;
+  font-weight: 600;
+  font-family: "gilroyNormal" !important;
+  color: #007481;
+  cursor: pointer;
+  margin-top: 20px;
+  text-align: center;
 }
-@media screen and (max-width:500px) {
-    .MainText {
-        font-size: 25px;
-    }
-    .seeAll{
-       
-        margin-top: 57px;
-    
-    }
+@media screen and (max-width: 500px) {
+  .MainText {
+    font-size: 25px;
+  }
+  .seeAll {
+    margin-top: 57px;
+  }
 }

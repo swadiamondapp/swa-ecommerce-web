@@ -74,6 +74,19 @@ header {
 }
 .searchbar::placeholder {
   color: #9c9c9c;
+  font-family: "GilroyRegular";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+}
+.SlideImage {
+  width: calc(100% - 10px); /* Adjust the width and margin as needed */
+  margin-right: 10px;
+}
+
+/* Add a margin to the last slide to create a gap */
+.Offers:last-child .SlideImage {
+  margin-right: 0;
 }
 .searchList {
   position: relative;

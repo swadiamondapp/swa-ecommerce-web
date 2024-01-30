@@ -275,8 +275,10 @@ const Header = (props) => {
             <div className="">
               <Carousel
                 autoplay
-                slidesToShow={8}
+                slidesToShow={10}
                 dots={false}
+                centerMode={true}
+                centerPadding="10px"
                 className={Classes.ResponsiveCarousel}
                 responsive={[
                   {
@@ -306,7 +308,7 @@ const Header = (props) => {
                         alt="catg"
                       />
 
-                      <p>{item.name}</p>
+                      <p>{item.name.slice(0, 10)}</p>
                     </div>
                   );
                 })}
@@ -324,7 +326,7 @@ const Header = (props) => {
                         alt="tag"
                       />
 
-                      <p>{item.name}</p>
+                      <p>{item.name.slice(0, 10)}</p>
                     </div>
                   );
                 })}

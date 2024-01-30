@@ -7,8 +7,8 @@
 }
 .parentHeart {
   position: absolute;
-  top: 0%;
-  right: 0%;
+  top: 4%;
+  right: 7%;
 }
 .Discount {
   position: absolute;
@@ -42,10 +42,26 @@
 
 .PriceNew {
   font-weight: 700;
-  font-size: 18px;
+  font-size: 16px;
   margin-right: 10px;
+  margin-bottom: 15px !important;
 }
+.addToCartCard {
+  background: #19242d;
+  color: #fff;
+  text-align: center;
+  border-radius: 3px;
 
+  padding: 10px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.ParentAddToCartCard {
+  display: none;
+}
 .PriceOld {
   text-decoration: line-through;
   font-weight: 400;
@@ -111,13 +127,20 @@
   width: 100%;
   position: relative;
   margin-bottom: 20px;
+  padding: 20px;
+  height: 326px;
 }
 .NewArrivalCard:hover {
-  background: #fcfbf6;
+  background: #fff;
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+}
+.NewArrivalCard:hover .ParentAddToCartCard {
+  display: block;
 }
 .NewArrivalCard img {
   display: flex;
   justify-content: center;
+  max-width: 200px;
 }
 
 @media (max-width: 1200px) {
@@ -188,8 +211,8 @@
   }
   .parentHeart {
     position: absolute;
-    top: 0%;
-    right: 0%;
+    top: 4%;
+    right: 7%;
   }
   .NewArrivals {
     cursor: pointer;

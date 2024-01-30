@@ -9,6 +9,7 @@ import { useState } from "react";
 import { BiRupee } from "react-icons/bi";
 import axios from "axios";
 import * as Urls from "../../../Urls";
+import { IoCartOutline } from "react-icons/io5";
 import { useEffect } from "react";
 const NewArrivalCard = (props) => {
   const history = useHistory();
@@ -82,7 +83,7 @@ const NewArrivalCard = (props) => {
           <div onClick={props.clicked} className={Classes.NewArrivalPics}>
             {props.Discount !== null ? (
               <div className={Classes.Discount}>
-                <p className={Classes.Number}>{props.Discount}</p>
+                {/* <p className={Classes.Number}>{props.Discount}</p> */}
               </div>
             ) : null}
 
@@ -117,6 +118,11 @@ const NewArrivalCard = (props) => {
             )}
           </div>
           {/* heart */}
+          <div className={Classes.ParentAddToCartCard}>
+            <div className={Classes.addToCartCard}>
+              ADD TO CART <IoCartOutline color="#fff" size={20} />
+            </div>
+          </div>
 
           {/* discover and heart */}
           {/* <div className={onadd ? [Classes.Buttons] : [Classes.None]}>

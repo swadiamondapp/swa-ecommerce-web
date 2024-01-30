@@ -1,93 +1,97 @@
-.Logo{
-    margin-top: 40px;
- }
- .Footer{
-     height: 100%;
-     background: #007481;
-     margin-top: 60px;
-     width: 100%;
- }
- .LogoText{
-     font-weight: 200;
-     margin-top: 25px;
- font-size: 14px;
- font-family: 'gilroyNormal' !important;
- color: #FFFFFF;
- 
- }
- .Title{
-     margin-bottom: 30px;
-     margin-top: 30px;
-     font-weight: 600;
-     font-family: 'gilroyNormal' !important;
- font-size: 18px;
- color: #FFFFFF;
- }
- .Links{
-     color: #FFFFFF;
-     font-weight: 200;
- font-size: 15px;
- font-family: 'gilroyNormal' !important;
- margin-bottom: 9px !important;
- }
- .Link{
-     margin-top: 80px;
- }
- .Icons{
-     margin-top: -25px;
-     margin-bottom: 80px;
- }
- .Icons img{
-     margin: 7px;
- }
- .FooterDown{
-     background: #005D67;
-     /* height: 100%; */
- }
- .FooterIcons{
-     margin: 20px 5px 10px 5px;
-     width: 20px;
-     height: 20px;
- }
- .Address{
-     display: flex;
- }
- .AddressText{
-     margin-left: 15px;
-    
- }
- .FooterDownText{
-     color: #FFFFFF;
-     font-family: 'gilroyNormal' !important;
-     margin:20px 0px 10px 0px;
-     font-size: 10px;
- 
- }
- .FooterDownTextR{
-    color: #FFFFFF;
-    font-family: 'gilroyNormal' !important;
-    margin:20px 0px 10px 0px;
-    font-size: 10px;
-    text-align: right;
+.Logo {
+  margin-top: 30px;
+}
+.Footer {
+  height: 100%;
+  background: #007481;
+  margin-top: 60px;
+  width: 100%;
+  padding: 40px 40px 70px 40px;
+}
+.FootIconImg {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  justify-content: center;
+}
+.LogoText {
+  font-weight: 400;
+  margin-top: 25px;
+  font-size: 15px;
+  font-family: "GilroyRegular" !important;
+  color: #ffffff;
+  text-align: justify;
+}
+.Title {
+  margin-bottom: 30px !important;
+  margin-top: 30px;
+  font-weight: 600;
+  font-family: "gilroyNormal" !important;
+  font-size: 18px;
+  color: #ffffff;
+}
+.Links {
+  color: #ffffff;
+  font-weight: 200;
+  font-size: 15px;
+  font-family: "gilroyNormal" !important;
+  margin-bottom: 9px !important;
+}
+.Link {
+  margin-top: 80px;
+}
+.Icons {
+  margin-top: -25px;
+}
+.Icons img {
+  margin: 7px;
+  max-width: 42px;
+  cursor: pointer;
+}
+.FooterDown {
+  background: #005d67;
+  /* height: 100%; */
+  padding: 15px;
+}
+.FooterIcons {
+  max-width: 56px;
+}
+.Address {
+  display: flex;
+}
+.AddressText {
+  margin-left: 15px;
+}
+.FooterDownText {
+  color: #ffffff;
+  font-family: "gilroyNormal" !important;
 
- }
- @media screen and (max-width:767px) {
-     .Icons img{
-         width: 25px;
-     }
-     .FooterDownText{
-        text-align: center;
-     }
-     .FooterDownTextR{
-        text-align: center;
-     }
-     .FootIconImg{
-        display: flex;
-        justify-content: center;
-     }
- }
- @media screen and (max-width:1200px){
-  .Icons img{
-         width: 23px;
-     }
- }
+  font-size: 14px;
+}
+.FooterDownTextR {
+  color: #ffffff;
+  font-family: "gilroyNormal" !important;
+
+  font-size: 14px;
+  text-align: right;
+}
+@media screen and (max-width: 767px) {
+  .Icons img {
+    width: 25px;
+  }
+  .FooterDownText {
+    text-align: center;
+  }
+  .FooterDownTextR {
+    text-align: center;
+  }
+  .FootIconImg {
+    display: flex;
+    justify-content: center;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .Icons img {
+    width: 23px;
+  }
+}

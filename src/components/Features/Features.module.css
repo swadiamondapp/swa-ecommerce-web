@@ -10,10 +10,18 @@
   justify-content: center;
   align-items: center;
 }
-
+.FeaturesmainText {
+  color: #0d1217;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  font-family: "GilroyRegular";
+  margin-bottom: 10px !important;
+}
 .Security {
   border: none;
-  border-left: 1px solid #f0ebd1 !important;
+  /* border-left: 1px solid #f0ebd1 !important; */
 }
 
 .FeaturesMainText {
@@ -25,7 +33,7 @@
 
 .FeaturesSubText {
   font-weight: 400;
-  font-size: 13px;
+  font-size: 14px;
   color: #86898b;
   font-family: "gilroyNormal" !important;
   text-align: center;
@@ -33,7 +41,7 @@
 
 .MarginFeatures {
   padding: 20px;
-  margin: 0 70px 0 70px;
+  /* margin: 0 70px 0 70px; */
 }
 
 @media (max-width: 640px) {

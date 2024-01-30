@@ -8,6 +8,10 @@ import ShopOnBudget1 from "../../Assets/ShopOnBudget1.png";
 import ShopOnBudget2 from "../../Assets/ShopOnBudget2.png";
 import ShopOnBudget3 from "../../Assets/ShopOnBudget3.png";
 import ShopOnBudget4 from "../../Assets/ShopOnBudget4.png";
+import shop1 from "../../Assets/shop1.png";
+import shop2 from "../../Assets/shop2.png";
+import shop3 from "../../Assets/shop3.png";
+import shop4 from "../../Assets/shop4.png";
 import NewArrivals from "../../components/NewArrivals/NewArrivals";
 import NewArrivalCard from "../../components/NewArrivals/NewArrivalCard/NewArrivalCard";
 import BringTheParty from "../../components/BringTheParty/BringTheParty";
@@ -294,25 +298,25 @@ const LandingPage = () => {
           <BudgetCard
             head={"Under  " + budjet[0].budget}
             sub={budjet[0].count + " styles"}
-            backgroundImage={ShopOnBudget1}
+            backgroundImage={shop1}
             clicked={() => productMinHandler(budjet[0].budget)}
           />
           <BudgetCard
             head={"Under  " + budjet[1].budget}
             sub={budjet[1].count + " styles"}
-            backgroundImage={ShopOnBudget2}
+            backgroundImage={shop2}
             clicked={() => productMinHandler(budjet[1].budget)}
           />
           <BudgetCard
             head={"Under  " + budjet[2].budget}
             sub={budjet[2].count + " styles"}
-            backgroundImage={ShopOnBudget3}
+            backgroundImage={shop3}
             clicked={() => productMinHandler(budjet[2].budget)}
           />
           <BudgetCard
             head={"Under  " + budjet[3].budget}
             sub={budjet[3].count + " styles"}
-            backgroundImage={ShopOnBudget4}
+            backgroundImage={shop4}
             clicked={() => productMinHandler(budjet[3].budget)}
           />
         </ShopOnBudget>
