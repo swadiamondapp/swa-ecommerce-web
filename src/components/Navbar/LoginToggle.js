@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import FB from "../../Assets/fb.png";
 import GOOGLE from "../../Assets/google.png";
+import APPLE from "../../Assets/apple.png";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
@@ -12,11 +13,18 @@ const LoginToggle = () => {
   const [open, setOpen] = React.useState(false);
   const [signUpModal, setSignupModal] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
+  const [getOtpModal, setGetOtpModal] = useState(false);
 
   const handleSignupModalOpen = () => {
     setSignupModal(true);
     setIsSignup(true);
   };
+  const handleGetOtp = () => {
+    setGetOtpModal(true);
+  };
+  const handleOtpModalOpen = () => setGetOtpModal(true);
+  const handleOtpModalClose = () => setGetOtpModal(false);
+
   const handleSignupModalClose = () => setSignupModal(false);
 
   const handleOpen = () => setOpen(true);
@@ -28,13 +36,20 @@ const LoginToggle = () => {
   };
   const style = {
     position: "absolute",
-    bottom: "20%",
+    bottom: "0%",
     width: "100%",
     bgcolor: "background.paper",
-    border: "2px solid #000",
+    border: "1px solid #000",
     boxShadow: 24,
-
     p: 2,
+  };
+  const customTabOtpModalStyle = {
+    position: "relative",
+    // bottom: "20%",
+    bgcolor: "background.paper",
+    border: "1px solid #000",
+    boxShadow: 24,
+    p: 0,
   };
 
   const customTabOne = {
@@ -44,7 +59,7 @@ const LoginToggle = () => {
     backgroundColor: activeTab === "tab2" ? "#fff" : "#F0F0F2",
   };
   return (
-    <div>
+    <div style={{ paddingTop: "15px" }}>
       <div className={Classes.Wrapper}>
         {isSignup ? (
           <>
@@ -52,35 +67,43 @@ const LoginToggle = () => {
               <div className={Classes.signupContainer}>
                 <div
                   className={Classes.headerTitle}
-                  style={{ marginBottom: "2rem" }}
+                  // style={{ marginBottom: "1rem" }}
                 >
-                  <p className={Classes.signuptitletext}>Sign up</p>
-                  <p className={Classes.signupsecondtitle}>
-                    Create your Account
-                  </p>
+                  <div>
+                    <p className={Classes.signuptitletext}>Sign up</p>
+                  </div>
+                  <div>
+                    <p className={Classes.signupsecondtitle}>
+                      Create your Account
+                    </p>
+                  </div>
                 </div>
                 <div
-                  className={Classes.SocialButtons}
-                  style={{ marginBottom: "1rem" }}
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
                 >
-                  <div className={Classes.googleButton}>
-                    {/* <SocialButton
-                      onClick={handleCLick}
-                      text="Login with Google"
-                      img={FB}
-                    /> */}
-                    <button>
-                      <img src={FB} /> Login with Google
-                    </button>
+                  <div
+                    className={Classes.SocialButtons}
+                    style={{ marginBottom: "1rem" }}
+                  >
+                    <div className={Classes.googleButton}>
+                      <button className={Classes.buttonSocial}>
+                        <img src={GOOGLE} /> Login with Google
+                      </button>
+                    </div>
+                    <div className={Classes.facebookButton}>
+                      <button className={Classes.buttonSocial}>
+                        <img src={FB} /> Login with facebook
+                      </button>
+                    </div>
                   </div>
-                  <div className={Classes.facebookButton}>
-                    {/* <SocialButton
-                      onClick={handleCLick}
-                      text="Login with facebook"
-                      img={GOOGLE}
-                    /> */}
-                    <button>
-                      <img src={GOOGLE} /> Login with facebook
+                  <div style={{ display: "flex" }}>
+                    <button className={Classes.buttonSocial}>
+                      <img src={APPLE} /> Login with Apple
                     </button>
                   </div>
                 </div>
@@ -92,7 +115,9 @@ const LoginToggle = () => {
                         opacity: "0.3",
                       }}
                     ></div>
-                    <div style={{ fontSize: "12px" }}>or</div>
+                    <div style={{ fontSize: "12px", textAlign: "center" }}>
+                      or
+                    </div>
                     <div
                       style={{
                         borderBottom: "1px solid #585F67",
@@ -102,43 +127,57 @@ const LoginToggle = () => {
                   </div>
                 </div>
                 <div>
-                  <form
-                    style={{
-                      // display: "flex",
-                      // flexDirection: "column",
-                      // textAlign: "start",
-                      // width: "21.59375rem",
-                      padding: "10px",
-                    }}
-                    className={Classes.formInputFields}
-                  >
-                    <label className={Classes.labelStyle}>Name</label>
-                    <input
-                      placeholder="Name"
-                      className={Classes.allInputTextStyle}
-                    />
-                    <label className={Classes.labelStyle}>Mobile Number</label>
-                    <input
-                      placeholder="Mobile Number"
-                      className={Classes.allInputTextStyle}
-                    />
-                    <label className={Classes.labelStyle}>Email</label>
-                    <input
-                      placeholder="Email"
-                      className={Classes.allInputTextStyle}
-                    />
+                  <form>
+                    <div>
+                      <label className={Classes.labelStyle}>Name</label>
+                      <input
+                        placeholder="Your Name"
+                        className={Classes.allInputTextStyle}
+                      />
+                    </div>
+                    <div>
+                      <label className={Classes.labelStyle}>
+                        Mobile Number
+                      </label>
+                      <input
+                        placeholder="Enter Number"
+                        className={Classes.allInputTextStyle}
+                      />
+                    </div>
+                    <div>
+                      <label className={Classes.labelStyle}>Email</label>
+                      <input
+                        placeholder="Email Address"
+                        className={Classes.allInputTextStyle}
+                      />
+                    </div>
                   </form>
                 </div>
-                <div>
+                <div style={{ textAlign: "center" }}>
                   <Button
                     className={Classes.accept}
                     style={{ marginTop: "2rem" }}
                     onClick={handleOpen}
                   >
-                    SIGN UP
+                    SIGNUP
                   </Button>
-                  <p>already have an account?</p>
-                  <a style={{ color: "#1877F2" }}>PrivacyPolicy</a>
+                </div>
+                <div className={Classes.Signup}>
+                  <div>
+                    <p className={Classes.bottomText}>
+                      Already have an account?
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      <button
+                        className={Classes.signupAnchor}
+                        onClick={handleSignupModalOpen}
+                      >
+                        Login
+                      </button>
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -148,31 +187,37 @@ const LoginToggle = () => {
             <div className={Classes.SlideButton}>
               <div className={Classes.LoginContainer}>
                 <div className={Classes.title}>
-                  <h3>Welcome back Login here</h3>
-                  <p>
-                    Please enter your phone number or email We will send you the
-                    OTP.
-                  </p>
-                </div>
-                <div className={Classes.SocialButtons}>
-                  <div className={Classes.googleButton}>
-                    {/* <SocialButton
-                      onClick={handleCLick}
-                      text="Login with Google"
-                      img={FB}
-                    /> */}
-                    <button>
-                      <img src={FB} /> Login with Google
-                    </button>
+                  <div t>
+                    <h3 className={Classes.titleh}>Welcome back Login here</h3>
                   </div>
-                  <div className={Classes.facebookButton}>
-                    {/* <SocialButton
-                      onClick={handleCLick}
-                      text="Login with facebook"
-                      img={GOOGLE}
-                    /> */}
-                    <button>
-                      <img src={GOOGLE} /> Login with facebook
+                  <div className={Classes.signupTitleText}>
+                    <p className={Classes.titlep}>
+                      Please enter your phone number or email
+                      <br /> We will send you the OTP.
+                    </p>
+                  </div>
+                </div>
+                <div
+               className={Classes.flex}
+                >
+                  <div
+                    className={Classes.SocialButtons}
+                    style={{ marginBottom: "1rem" }}
+                  >
+                    <div className={Classes.googleButton}>
+                      <button className={Classes.buttonSocial}>
+                        <img src={GOOGLE} /> Login with Google
+                      </button>
+                    </div>
+                    <div className={Classes.facebookButton}>
+                      <button className={Classes.buttonSocial}>
+                        <img src={FB} /> Login with facebook
+                      </button>
+                    </div>
+                  </div>
+                  <div style={{ display: "flex" }}>
+                    <button className={Classes.buttonSocial}>
+                      <img src={APPLE} /> Login with Apple
                     </button>
                   </div>
                 </div>
@@ -183,7 +228,9 @@ const LoginToggle = () => {
                       opacity: "0.3",
                     }}
                   ></div>
-                  <div style={{ fontSize: "12px" }}>or</div>
+                  <div className={Classes.orText}>
+                    or
+                  </div>
                   <div
                     style={{
                       borderBottom: "1px solid #585F67",
@@ -200,18 +247,14 @@ const LoginToggle = () => {
                         onClick={() => handleTabClick("tab1")}
                       >
                         {activeTab === "tab1" ? (
-                          <div
-                            className={Classes.phone}
-                            style={{ width: "7.77419rem" }}
-                          >
-                            Phone Number
+                          <div className={Classes.tabTitleOne}>
+                            <span style={{ fontWeight: "600" }}>
+                              Phone Number
+                            </span>
                           </div>
                         ) : (
-                          <div
-                            className={Classes.Email}
-                            style={{ width: "7.77419rem" }}
-                          >
-                            Phone Number
+                          <div className={Classes.tabTitleOne}>
+                            <span>Phone Number</span>
                           </div>
                         )}
                       </div>
@@ -223,9 +266,13 @@ const LoginToggle = () => {
                         onClick={() => handleTabClick("tab2")}
                       >
                         {activeTab === "tab1" ? (
-                          <div style={{ width: "7.77419rem" }}>Email</div>
+                          <div className={Classes.tabTitleTwo}>
+                            <span>Email</span>
+                          </div>
                         ) : (
-                          <div style={{ width: "7.77419rem" }}>Email</div>
+                          <div className={Classes.tabTitleTwo}>
+                            <span style={{ fontWeight: "600" }}>Email</span>
+                          </div>
                         )}
                       </div>
                     </div>
@@ -234,34 +281,12 @@ const LoginToggle = () => {
                 <div className={Classes.tabContent}>
                   {activeTab === "tab1" && (
                     <div>
-                      <div>
-                        <form
-                          style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            textAlign: "start",
-                            width: "21.59375rem",
-                          }}
-                        >
+                      <div className={Classes.loginFormInput}>
+                        <form style={{}}>
                           <label className={Classes.labelStyle}>Phone</label>
                           <input
                             placeholder="Phone Number"
-                            style={{
-                              fill: "#FFF",
-                              height: "2.25rem",
-                              width: "21.59375rem",
-                              strokeWidth: "1px",
-                              stroke: "#C1CBCD",
-                              color: "#C1CBCD",
-
-                              fontFamily: "Lato",
-                              fontSize: "0.875rem",
-                              fontStyle: "normal",
-                              fontWeight: "400",
-                              lineHeight: "normal",
-                              boxShadow:
-                                "0px 1px 5px 0px rgba(25, 36, 45, 0.04) inset",
-                            }}
+                            className={Classes.allInputTextStyle}
                           />
                         </form>
                       </div>
@@ -270,34 +295,11 @@ const LoginToggle = () => {
                   {activeTab === "tab2" && (
                     <div>
                       <div>
-                        <form
-                          style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            textAlign: "start",
-                            width: "21.59375rem",
-                          }}
-                        >
+                        <form>
                           <label className={Classes.labelStyle}>Email</label>
                           <input
                             placeholder="Email"
-                            style={{
-                              fill: "#FFF",
-                              height: "2.25rem",
-
-                              width: "21.59375rem",
-                              strokeWidth: "1px",
-                              stroke: "#C1CBCD",
-                              color: "#C1CBCD",
-                              boxShadow:
-                                "0px 1px 5px 0px rgba(25, 36, 45, 0.04) inset",
-
-                              fontFamily: "Lato",
-                              fontSize: "0.875rem",
-                              fontStyle: "normal",
-                              fontWeight: "400",
-                              lineHeight: "normal",
-                            }}
+                            className={Classes.allInputTextStyle}
                           />
                         </form>
                       </div>
@@ -307,14 +309,30 @@ const LoginToggle = () => {
                 </div>
               </div>
               <div>
-                <Button className={Classes.LoginButton} onClick={handleOpen}>
-                  LOGIN
-                </Button>
+                {activeTab === "tab1" ? (
+                  <>
+                    <Button
+                      className={Classes.LoginButton}
+                      onClick={handleOtpModalOpen}
+                    >
+                      LOGIN
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Button
+                      className={Classes.LoginButton}
+                      onClick={handleOpen}
+                    >
+                      LOGIN
+                    </Button>
+                  </>
+                )}
               </div>
             </div>
             <div className={Classes.Signup}>
               <div>
-                <p className={Classes.signupText}>Don’t have an account?</p>
+                <p className={Classes.bottomText}>Don’t have an account?</p>
               </div>
               <div>
                 <p>
@@ -327,42 +345,109 @@ const LoginToggle = () => {
                 </p>
               </div>
             </div>
-            <div className={Classes.SlideTop}>
-              <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-              >
-                <Box sx={style}>
-                  {/* <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography> */}
-                  <Typography
-                    id="modal-modal-description"
-                    sx={{ mt: 0 }}
-                    style={{ textAlign: "center", paddingBottom: "5px" }}
+            <div className={Classes.SlideTp}>
+              {getOtpModal ? (
+                <>
+                  <Modal
+                    open={getOtpModal}
+                    onClose={handleOtpModalClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
                   >
-                    <div style={{ textAlign: "center", fontSize: "1rem" }}>
-                      By login you are agreed to all privacy policy and tearms
-                      and conditions
-                    </div>
-                  </Typography>
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      paddingTop: "10px",
-                      gap: "rem",
-                    }}
+                    <Box sx={customTabOtpModalStyle}>
+                      <div className={Classes.otpContainer}>
+                        <div style={{ textAlign: "center" }}>
+                          <div>
+                            <h3 className={Classes.titleh}>OTP</h3>
+                          </div>
+                          <div>
+                            <p
+                              className={Classes.titlep}
+                              style={{ fontSize: "12px" }}
+                            >
+                              Please enter 6 digit OTP that send to your
+                              <br />
+                              +91 9879453467
+                            </p>
+                          </div>
+                        </div>
+                        <div>
+                          <label className={Classes.labelStyle}>OTP</label>
+                          <input
+                            placeholder="6897"
+                            className={Classes.allInputTextStyle}
+                          />
+                        </div>
+
+                        <div>
+                          <Button className={Classes.accept}>Continue</Button>
+                        </div>
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
+                        >
+                          <div className={Classes.Signup}>
+                            <div>
+                              <p className={Classes.bottomText}>
+                                Don’t recived the code?
+                              </p>
+                            </div>
+                            <div>
+                              <p>
+                                <button
+                                  className={Classes.signupAnchor}
+                                  onClick={handleSignupModalOpen}
+                                >
+                                  resend
+                                </button>
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </Box>
+                  </Modal>
+                </>
+              ) : (
+                <>
+                  <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
                   >
-                    <Button className={Classes.accept} onClick={handleOpen}>
-                      Agree & login
-                    </Button>
-                  </div>
-                </Box>
-              </Modal>
+                    <Box sx={style}>
+                      {/* <Typography id="modal-modal-title" variant="h6" component="h2">
+          Text in a modal
+        </Typography> */}
+                      <Typography
+                        id="modal-modal-description"
+                        sx={{ mt: 0 }}
+                        style={{ textAlign: "center", paddingBottom: "5px" }}
+                      >
+                        <div style={{ textAlign: "center", fontSize: "1rem" }}>
+                          By login you are agreed to all privacy policy and
+                          tearms and conditions
+                        </div>
+                      </Typography>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Button className={Classes.accept} onClick={handleOpen}>
+                          Agree & login
+                        </Button>
+                      </div>
+                    </Box>
+                  </Modal>
+                </>
+              )}
             </div>
           </>
         )}

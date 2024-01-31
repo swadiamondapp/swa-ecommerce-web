@@ -163,7 +163,7 @@ const Header = (props) => {
 
   return (
     <div>
-      <TopHeader />
+      {/* <TopHeader /> */}
       <MainHead>
         <div className={Classes.SearchIcons}>
           <div className={Classes.searchList}>

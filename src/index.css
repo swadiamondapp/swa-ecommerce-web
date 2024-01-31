@@ -1,4 +1,8 @@
 @font-face {
+  font-family:"Poppins";
+  src: url(./Font/Poppins-Light.ttf);
+}
+@font-face {
   font-family: "gilroyNormal";
   src: url(./Font/Gilroy-Regular.ttf);
 }

@@ -734,3 +734,9 @@ a {
   line-height: 28px;
   color: #9d9d9d;
 }
+
+@media (min-width: 300px) and (max-width: 992px) {
+  .Header_top {
+    display: none;
+  }
+}

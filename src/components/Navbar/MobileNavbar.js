@@ -9,7 +9,7 @@ import Classes from "./MobileNav.module.css";
 const MobileNavbar = () => {
   const [isHamOpen, setIsHamOpen] = useState(false);
   return (
-    <div>
+    <div className={Classes.NavContainer}>
       <div className={Classes.Navbar}>
         <header>
           <div className={Classes.NavElements}>
@@ -51,7 +51,7 @@ const MobileNavbar = () => {
         {isHamOpen ? (
           <>
             <div
-              style={{ marginBottom: "5rem" }}
+              style={{ marginBottom: "1rem" }}
               className={Classes.SlideButton}
             >
               <LoginToggle />
