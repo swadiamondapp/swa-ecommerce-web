@@ -1,7 +1,7 @@
 .ShopOnBudgetMainText {
   color: #0d1217;
   font-weight: 600;
-  font-size: 38px;
+  font-size: 32px;
   font-family: "PlayFairNormal" !important;
 }
 .ShopOnBudgetMainText h1 {
@@ -26,8 +26,14 @@
   }
 }
 
+@media (min-width: 768px) and (max-width: 991px) {
+  .ShopOnBudgetMainText h1 {
+    font-size: 26px;
+  }
+}
 @media (min-width: 300px) and (max-width: 575px) {
   .ShopOnBudgetMainText h1 {
-    margin-bottom: 15px;
+    margin-bottom: 12px;
+    font-size: 22px;
   }
 }

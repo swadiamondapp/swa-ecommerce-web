@@ -43,17 +43,24 @@
     font-size: 25px;
   }
 }
+@media (min-width: 768px) and (max-width: 991px) {
+  .NewArrivalsMainText {
+    font-size: 26px;
+    margin-bottom: 0px !important;
+  }
+}
 @media (min-width: 300px) and (max-width: 575px) {
   .NewArrivalsSubText {
     text-align: center;
-    font-size: 16px;
-    margin: 15px 0px;
+    font-size: 15px;
+    margin: 13px 0px;
   }
   .NewArrivalsMainText {
     text-align: center;
+    font-size: 22px;
   }
   .seeAll {
-    margin: 10px 0px;
+    margin: 0px 0px;
     text-align: center;
     font-size: 16px;
   }

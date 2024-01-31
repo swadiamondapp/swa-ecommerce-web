@@ -92,6 +92,41 @@
 }
 @media screen and (max-width: 1200px) {
   .Icons img {
-    width: 23px;
+    width: 35px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .FooterIcons {
+    max-width: 42px;
+  }
+  .FooterDownTextR {
+    font-size: 13px;
+    text-align: right;
+  }
+  .FootIconImg {
+    gap: 10px;
+  }
+  .FooterDownText {
+    font-size: 13px;
+    text-align: left;
+  }
+  .Links {
+    font-size: 14px;
+  }
+  .LogoText {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 575px) {
+  .Footer {
+    padding: 40px 40px 50px 20px;
+  }
+  .Link {
+    margin-top: 0px;
+  }
+  .Title {
+    padding-left: 0px !important;
   }
 }

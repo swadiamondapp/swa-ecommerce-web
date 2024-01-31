@@ -9,6 +9,7 @@
   position: absolute;
   top: 4%;
   right: 7%;
+  color: #b1c2d3;
 }
 .Discount {
   position: absolute;
@@ -131,8 +132,14 @@
   height: 326px;
 }
 .NewArrivalCard:hover {
-  background: #fff;
+  /* background: #fff; */
   box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+  border-radius: 2px;
+  background: #fcfbf6;
+  /* box-shadow: 0px 14px 30px 0px rgba(0, 0, 0, 0.05),
+    0px 54px 54px 0px rgba(0, 0, 0, 0.05),
+    0px 122px 73px 0px rgba(0, 0, 0, 0.03),
+    0px 217px 87px 0px rgba(0, 0, 0, 0.01), 0px 339px 95px 0px rgba(0, 0, 0, 0); */
 }
 .NewArrivalCard:hover .ParentAddToCartCard {
   display: block;
@@ -204,6 +211,21 @@
   }
 }
 
+@media (min-width: 1025px) and (max-width: 1199px) {
+  .NewArrivalCard {
+    height: 290px;
+  }
+}
+@media (min-width: 992px) and (max-width: 1023px) {
+  .NewArrivalCard {
+    height: 290px;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .NewArrivalCard {
+    height: 288px;
+  }
+}
 @media (min-width: 300px) and (max-width: 575px) {
   .NewArrivalCard .Heart {
     color: #b1c2d3;
@@ -219,5 +241,18 @@
     padding: 5px;
     padding-bottom: 20px;
     padding-top: 0px;
+  }
+  .ProductImage {
+    height: 130px;
+  }
+  .NewArrivalCard {
+    height: 205px;
+  }
+  .NewArrivalPics {
+    display: flex;
+    gap: 15px;
+  }
+  .addToCartCard {
+    display: none;
   }
 }

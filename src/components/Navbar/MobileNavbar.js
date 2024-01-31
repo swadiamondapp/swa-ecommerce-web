@@ -17,6 +17,7 @@ const MobileNavbar = () => {
               <Hamburger
                 className={Classes.hamIcon}
                 color="#fff"
+                size={24}
                 toggled={isHamOpen}
                 toggle={setIsHamOpen}
                 onToggle={(toggled) => {

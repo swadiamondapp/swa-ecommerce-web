@@ -2,7 +2,7 @@
   display: none;
   /* font-family: "Playfair Display"; */
 }
-@media (min-width: 300px) and (max-width: 575px) {
+@media (min-width: 300px) and (max-width: 768px) {
   .Navbar {
     display: flex;
     align-items: center;
@@ -14,7 +14,7 @@
   }
   .NavElements {
     display: flex;
-    gap: 2rem;
+    gap: 1rem;
     justify-content: center;
     align-items: center;
   }

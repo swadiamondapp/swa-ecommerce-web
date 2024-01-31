@@ -21,7 +21,7 @@
 }
 .Security {
   border: none;
-  /* border-left: 1px solid #f0ebd1 !important; */
+  border-left: 1px solid #f0ebd1 !important;
 }
 
 .FeaturesMainText {
@@ -87,14 +87,8 @@
   }
 }
 
-@media (min-width: 200px) and (max-width: 320px) {
+@media (min-width: 768px) and (max-width: 991px) {
   .FeaturesDetails {
-    border: none;
-  }
-
-  .FeaturesSubText {
-    font-size: 7px;
-    height: 10px;
-    text-align: center;
+    padding: 10px;
   }
 }

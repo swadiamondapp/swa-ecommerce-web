@@ -284,11 +284,17 @@ const Header = (props) => {
                   {
                     breakpoint: 1200,
                     settings: {
-                      slidesToShow: 4, // Set the number of slides to display on tablets
+                      slidesToShow: 8, // Set the number of slides to display on tablets
                     },
                   },
                   {
-                    breakpoint: 768,
+                    breakpoint: 991,
+                    settings: {
+                      slidesToShow: 5, // Set the number of slides to display on tablets
+                    },
+                  },
+                  {
+                    breakpoint: 767,
                     settings: {
                       slidesToShow: 3, // Set the number of slides to display on mobile devices
                     },

@@ -9,12 +9,13 @@
 }
 .ImageContainerMob {
   position: relative;
-  background-image: url(../../Assets/downBgMob.png);
+  background-image: url(../../Assets/mobile_foot.png);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  min-height: 300px;
-  margin-top: 35px;
+  min-height: 612px;
+  margin-top: 0px;
+  padding: 20px;
 }
 
 .Image {
@@ -146,5 +147,49 @@
   }
   .AppLink {
     padding-left: 5%;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1023px) {
+  .ImageContainer {
+    min-height: 240px;
+    background-size: cover;
+  }
+  .Head {
+    padding-top: 3%;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .ImageContainer {
+    min-height: 220px;
+    background-size: cover;
+  }
+  .Head {
+    padding-top: 6%;
+    font-size: 22px;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 575px) {
+  .Head {
+    font-size: 20px;
+    padding-left: 6%;
+    padding-top: 15%;
+    text-align: center;
+  }
+  .ImageContainerMob p {
+    padding-left: 0px;
+    font-size: 15px;
+    text-align: center;
+  }
+  .AppLink {
+    padding-left: 0px;
+    position: absolute;
+    bottom: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    left: 24%;
   }
 }

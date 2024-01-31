@@ -88,3 +88,17 @@
     line-height: 21px;
   }
 }
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .BringThePartyWhole {
+    margin-top: 35px;
+  }
+}
+@media (min-width: 300px) and (max-width: 575px) {
+  .BringThePartyWhole {
+    margin-top: 35px;
+  }
+  .Image1 {
+    margin-bottom: 0px;
+  }
+}
