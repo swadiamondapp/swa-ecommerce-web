@@ -38,6 +38,11 @@
     font-size: 16px;
   }
 }
+@media (min-width: 576px) and (max-width: 767px) {
+  .ShopOnBudgetImage {
+    margin-bottom: 10px;
+  }
+}
 @media (min-width: 300px) and (max-width: 575px) {
   .ShopOnBudgetImage {
     margin-bottom: 10px;

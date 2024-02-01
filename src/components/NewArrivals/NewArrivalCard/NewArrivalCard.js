@@ -83,7 +83,7 @@ const NewArrivalCard = (props) => {
           <div onClick={props.clicked} className={Classes.NewArrivalPics}>
             {props.Discount !== null ? (
               <div className={Classes.Discount}>
-                {/* <p className={Classes.Number}>{props.Discount}</p> */}
+                <p className={Classes.Number}>{props.Discount}</p>
               </div>
             ) : null}
 

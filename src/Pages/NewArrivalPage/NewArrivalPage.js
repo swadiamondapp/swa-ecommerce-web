@@ -345,7 +345,7 @@ const NewArrivalPage = (props) => {
         <Header countCartItems={cartCount} />
         <div className="container">
           <div className="row">
-            <div className="col-lg-2 col-sm-4">
+            <div className="col-lg-3 col-sm-4">
               <Filter
                 filterCatg={filterCatHandler}
                 filterColr={filtColorHandler}
@@ -354,7 +354,7 @@ const NewArrivalPage = (props) => {
                 filterSearch={props.location.state}
               />
             </div>
-            <div className="col-lg-10 col-sm-8">
+            <div className="col-lg-9 col-sm-8">
               <div className={Classes.Products}>
                 <NewArrivalDesign
                   head={head}
@@ -364,7 +364,7 @@ const NewArrivalPage = (props) => {
                   count={count}
                   categoryName={productCategory}
                 >
-                  <ReactPaginate
+                  {/* <ReactPaginate
                     breakLabel="..."
                     nextLabel="Next >"
                     onPageChange={handlePageClick}
@@ -386,7 +386,7 @@ const NewArrivalPage = (props) => {
                     breakClassName={"page-item"}
                     breakLinkClassName={"page-link"}
                     activeClassName={"active"}
-                  />
+                  /> */}
 
                   {products}
                 </NewArrivalDesign>

@@ -11,6 +11,11 @@
     font-size: 26px;
   }
 }
+@media (min-width: 576px) and (max-width: 767px) {
+  .RecentSearch h1 {
+    font-size: 26px;
+  }
+}
 @media (min-width: 300px) and (max-width: 575px) {
   .RecentSearch h1 {
     font-size: 22px;

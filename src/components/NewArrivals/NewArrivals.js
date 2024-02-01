@@ -17,6 +17,7 @@ function NewArrivals(props) {
           </div>
         </div>
       </div>
+
       <div className={Classes.NewArrivalImages}>
         <div className="container">
           <div className="row">{props.children}</div>

@@ -25,6 +25,7 @@ const BringTheParty = (props) => {
       });
     }
   };
+  console.log("adds", adds);
   return (
     <div>
       <div className={Classes.BringThePartyWhole}>
@@ -59,7 +60,7 @@ const BringTheParty = (props) => {
                   </div>
                   <div className="col-md-12">
                     <img
-                      className={Classes.Image3}
+                      className={Classes.Image2}
                       src={adds[2].Ad_image}
                       alt="ad3"
                       onClick={() => advClicked(adds[2])}

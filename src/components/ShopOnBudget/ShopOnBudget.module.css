@@ -31,6 +31,11 @@
     font-size: 26px;
   }
 }
+@media (min-width: 576px) and (max-width: 767px) {
+  .ShopOnBudgetMainText h1 {
+    font-size: 26px;
+  }
+}
 @media (min-width: 300px) and (max-width: 575px) {
   .ShopOnBudgetMainText h1 {
     margin-bottom: 12px;

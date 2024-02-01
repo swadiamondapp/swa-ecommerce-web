@@ -141,7 +141,7 @@ const LandingPage = () => {
           setMobBanner(banMob);
           setNewArrivel(response1.data.results.data.new_arrival.slice(0, 8));
           setBudjet(response1.data.results.data.product_budget);
-          setAdd(response1.data.results.data.banners);
+          setAdd(response1.data.results.data.banners.slice(3, 7));
           setTopDemand(response1.data.results.data.top_demand.slice(0, 8));
           setVideo(response1.data.results.data.Video);
         })
@@ -287,6 +287,7 @@ const LandingPage = () => {
       </RecentSearch>
     );
   }
+  console.log("add", add);
 
   return (
     <div>

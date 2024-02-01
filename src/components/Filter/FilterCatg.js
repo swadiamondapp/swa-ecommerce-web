@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Classes from "./Filter.module.css";
-import {Accordion} from "react-bootstrap";
+import { Accordion } from "react-bootstrap";
 import axios from "axios";
 import * as Urls from "../../Urls";
 const FilterCatgs = (props) => {
@@ -14,7 +14,7 @@ const FilterCatgs = (props) => {
   const [occation, setOccation] = useState([]);
   const filterSet = (params) => {
     axios
-      .get(Urls.filter+params) 
+      .get(Urls.filter + params)
       .then((response1) => {
         setCatgSet(response1.data.results.data.category);
         setColorSet(response1.data.results.data.colour);
@@ -27,19 +27,16 @@ const FilterCatgs = (props) => {
   };
   useEffect(() => {
     console.log(props.filterSearch);
-    if(props.filterSearch.data === 'occation'){
-      filterSet('?tag='+props.filterSearch.octnId)
+    if (props.filterSearch.data === "occation") {
+      filterSet("?tag=" + props.filterSearch.octnId);
+    } else if (
+      props.filterSearch.data === "new" ||
+      props.filterSearch.data === "top"
+    ) {
+      filterSet("?category=&tag=");
+    } else {
+      filterSet("?category=" + props.filterSearch.data);
     }
-    else if((props.filterSearch.data === 'new' || props.filterSearch.data === 'top')){
-      filterSet('?category=&tag=')
-
-    }
-    else{
-      filterSet('?category='+props.filterSearch.data)
-
-    }
-   
-     
   }, []);
   const catSelHandler = (catSel) => {
     let newArray = [...catFiltArray];
@@ -116,15 +113,15 @@ const FilterCatgs = (props) => {
   const clearHandler = () => {};
   return (
     <div className={Classes.Filter}>
-      <Accordion defaultActiveKey={[""]} alwaysOpen>
+      {/*  warnning warnning not remove */}
+      {/* <Accordion defaultActiveKey={[""]} alwaysOpen>
         <Accordion.Item eventKey="0">
           <div className={Classes.FilterText}>
             <div className="clear">
               <div>Filter</div>
-              {/* <div className={Classes.Clear} onClick={clearHandler}>Clear All</div> */}
+             
             </div>
           </div>
-         
         </Accordion.Item>
         <Accordion.Item eventKey="1">
           <Accordion.Header>
@@ -203,7 +200,156 @@ const FilterCatgs = (props) => {
             </div>
           </Accordion.Body>
         </Accordion.Item>
-      </Accordion>
+      </Accordion> */}
+      {/*  warnning warnning not remove */}
+      {/* new category */}
+      <div className={Classes.ParentFilter}>
+        <div className={Classes.FilterHead}>
+          <p>Filtter</p>
+        </div>
+        <div className={Classes.ParentNewArrival}>
+          <div className={Classes.CategoryMainHead}>
+            <div className={Classes.CategoryHead}>
+              <p>Categories</p>
+            </div>
+            <div className={Classes.CategoryListMain}>
+              <div className={Classes.CategoryList}>
+                <input type="checkbox" />
+                <label>Earrings</label>
+              </div>
+              <div className={Classes.CategoryListAmount}>
+                <label>2345</label>
+              </div>
+            </div>
+            <div className={Classes.CategoryListMain}>
+              <div className={Classes.CategoryList}>
+                <input type="checkbox" />
+                <label>Earrings</label>
+              </div>
+              <div className={Classes.CategoryListAmount}>
+                <label>2345</label>
+              </div>
+            </div>
+            <div className={Classes.CategoryListMain}>
+              <div className={Classes.CategoryList}>
+                <input type="checkbox" />
+                <label>Earrings</label>
+              </div>
+              <div className={Classes.CategoryListAmount}>
+                <label>2345</label>
+              </div>
+            </div>
+          </div>
+          <div className={Classes.CategoryMainHead}>
+            <div className={Classes.CategoryHead}>
+              <p>Metel</p>
+            </div>
+            {/* {colorSet.map((item, index) => {
+            return (
+              <div className={Classes.CategoryListMain} key={index}>
+                <div className={Classes.CategoryList}>
+                  <input
+                    type="checkbox"
+                    value={item.id}
+                    onClick={() => colrSelHandler(item)}
+                  />
+                  <label>{item.colour}</label>
+                </div>
+                <div className={Classes.CategoryListAmount}>
+                  <label>{item.count}</label>
+                </div>
+              </div>
+            );
+          })} */}
+
+            <div className={Classes.CategoryListMain}>
+              <div className={Classes.CategoryList}>
+                <input type="checkbox" />
+                <label>Gold</label>
+              </div>
+              <div className={Classes.CategoryListAmount}>
+                <label>2345</label>
+              </div>
+            </div>
+            <div className={Classes.CategoryListMain}>
+              <div className={Classes.CategoryList}>
+                <input type="checkbox" />
+                <label>white gold</label>
+              </div>
+              <div className={Classes.CategoryListAmount}>
+                <label>2365</label>
+              </div>
+            </div>
+            <div className={Classes.CategoryListMain}>
+              <div className={Classes.CategoryList}>
+                <input type="checkbox" />
+                <label>rose gold</label>
+              </div>
+              <div className={Classes.CategoryListAmount}>
+                <label>3365</label>
+              </div>
+            </div>
+            <div className={Classes.CategoryListMain}>
+              <div className={Classes.CategoryList}>
+                <input type="checkbox" />
+                <label>platinum</label>
+              </div>
+              <div className={Classes.CategoryListAmount}>
+                <label>2365</label>
+              </div>
+            </div>
+          </div>
+
+          {/* occation */}
+          <div
+            className={Classes.CategoryMainHead}
+            style={{ borderBottom: "0px" }}
+          >
+            <div className={Classes.CategoryHead}>
+              <p>Occaction</p>
+            </div>
+
+            <div className={Classes.CategoryListMain}>
+              <div className={Classes.CategoryList}>
+                <input type="checkbox" />
+                <label>party</label>
+              </div>
+              <div className={Classes.CategoryListAmount}>
+                <label>2345</label>
+              </div>
+            </div>
+            <div className={Classes.CategoryListMain}>
+              <div className={Classes.CategoryList}>
+                <input type="checkbox" />
+                <label>wedding</label>
+              </div>
+              <div className={Classes.CategoryListAmount}>
+                <label>2365</label>
+              </div>
+            </div>
+            <div className={Classes.CategoryListMain}>
+              <div className={Classes.CategoryList}>
+                <input type="checkbox" />
+                <label>birthday</label>
+              </div>
+              <div className={Classes.CategoryListAmount}>
+                <label>3365</label>
+              </div>
+            </div>
+            <div className={Classes.CategoryListMain}>
+              <div className={Classes.CategoryList}>
+                <input type="checkbox" />
+                <label>engament</label>
+              </div>
+              <div className={Classes.CategoryListAmount}>
+                <label>2365</label>
+              </div>
+            </div>
+          </div>
+          {/* occation */}
+        </div>
+      </div>
+      {/* new category */}
     </div>
   );
 };

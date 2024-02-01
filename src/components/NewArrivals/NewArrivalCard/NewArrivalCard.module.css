@@ -226,6 +226,11 @@
     height: 288px;
   }
 }
+@media (min-width: 576px) and (max-width: 767px) {
+  .NewArrivalCard {
+    height: 287px;
+  }
+}
 @media (min-width: 300px) and (max-width: 575px) {
   .NewArrivalCard .Heart {
     color: #b1c2d3;

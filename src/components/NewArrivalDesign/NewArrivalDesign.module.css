@@ -5,6 +5,8 @@
 }
 .Main {
   display: flex;
+  align-items: center;
+  gap: 15px;
 }
 .Number {
   font-weight: 400;
@@ -60,19 +62,27 @@
   padding-bottom: 25px;
   border-bottom: 1px solid #e8e8e8;
 }
-.SortDrop {
+.ParentMain {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.SortDrop {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  border: 1px solid #ededed;
+  padding: 10px;
+  border-radius: 5px;
 }
 .Sort {
   font-weight: 400;
-  font-size: 13px;
+  font-size: 16px;
   font-family: "gilroyNormal" !important;
 }
 .SortDrop select {
   border: none;
   font-size: 16px;
-  font-weight: 500;
-  margin-top: -18px;
 }
 
 .SortDrop select::selection {
@@ -84,8 +94,24 @@
   }
 }
 
+@media (min-width: 576px) and (max-width: 767px) {
+  .ParentMain {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 15px;
+  }
+}
 @media (min-width: 300px) and (max-width: 567px) {
   .Found {
     margin-bottom: 15px;
+  }
+  .ParentMain {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 15px;
   }
 }

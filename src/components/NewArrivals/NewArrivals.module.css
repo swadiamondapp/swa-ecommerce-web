@@ -49,6 +49,11 @@
     margin-bottom: 0px !important;
   }
 }
+@media (min-width: 576px) and (max-width: 767px) {
+  .NewArrivalsMainText {
+    font-size: 26px;
+  }
+}
 @media (min-width: 300px) and (max-width: 575px) {
   .NewArrivalsSubText {
     text-align: center;

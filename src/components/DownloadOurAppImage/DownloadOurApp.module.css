@@ -2,9 +2,9 @@
   position: relative;
   background-image: url(../../Assets/downBg.png);
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   background-position: center;
-  min-height: 350px;
+  height: 289px;
   margin-top: 0px;
 }
 .ImageContainerMob {
@@ -47,7 +47,7 @@
   /* line-height: 53px; */
   color: #041a25;
   padding-left: 18%;
-  padding-top: 6%;
+  padding-top: 4%;
   padding-bottom: 4px;
 }
 /* .AppStore {
@@ -169,12 +169,28 @@
     font-size: 22px;
   }
 }
-
+@media (min-width: 576px) and (max-width: 767px) {
+  .ImageContainerMob {
+    min-height: 770px;
+  }
+  .AppLink {
+    padding-left: 0px;
+    position: absolute;
+    bottom: 15%;
+    left: 22%;
+  }
+  .Head {
+    font-size: 26px;
+    padding-left: 0%;
+    text-align: center;
+    padding-top: 5%;
+  }
+}
 @media (min-width: 300px) and (max-width: 575px) {
   .Head {
     font-size: 20px;
     padding-left: 6%;
-    padding-top: 15%;
+    padding-top: 10%;
     text-align: center;
   }
   .ImageContainerMob p {

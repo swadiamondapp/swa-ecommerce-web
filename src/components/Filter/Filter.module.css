@@ -1,90 +1,138 @@
 .DropDown {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .Filter {
-    width: 100% !important;
-    margin-top: 15px;
+  width: 100% !important;
+  margin-top: 15px;
 }
-
+.CategoryListMain {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #a3a7ab;
+  margin-bottom: 8px;
+}
 .Flex {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
-.Clear{
-    cursor: pointer;
-    color: #00464d;
+.Clear {
+  cursor: pointer;
+  color: #00464d;
 }
 .MainText {
-    color: #0D1217;
-    font-weight: 600;
-    font-size: 16px;
-    font-family: 'gilroyNormal' !important;
+  color: #0d1217;
+  font-weight: 600;
+  font-size: 16px;
+  font-family: "gilroyNormal" !important;
 }
 
 .FilterText {
-    border-bottom: 1px solid #E8E8E8;
-    padding: 15px;
-    font-weight: 600;
-    font-size: 16px;
-    font-family: 'gilroyNormal' !important;
+  border-bottom: 1px solid #e8e8e8;
+  padding: 15px;
+  font-weight: 600;
+  font-size: 16px;
+  font-family: "gilroyNormal" !important;
 }
-
+.CategoryMainHead {
+  border-bottom: 1px solid #e8e8e8;
+}
 .Flex label {
-    color: #A3A7AB !important;
-    font-weight: 600 !important;
-    font-size: 14px !important;
-    font-family: 'gilroyNormal' !important;
-    user-select: none !important;
-    margin-left: 10px;
-    padding-bottom: 0;
-    
+  color: #a3a7ab !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  font-family: "gilroyNormal" !important;
+  user-select: none !important;
+  margin-left: 10px;
+  padding-bottom: 0;
 }
 
 .Flex {
-    color: #A3A7AB !important;
+  color: #a3a7ab !important;
+  font-weight: 400 !important;
+  font-size: 14px !important;
+  font-family: "gilroyNormal" !important;
+}
+
+input[type="checkbox"] {
+  accent-color: #006e7f !important;
+}
+
+input:checked + label {
+  font-weight: bold !important;
+  color: #475057 !important;
+}
+
+input:checked + label + .number {
+  font-weight: bold !important;
+  color: #475057 !important;
+}
+.accordion-button:focus {
+  box-shadow: none !important;
+  border: none !important;
+  background: transparent !important;
+}
+.number {
+  margin-bottom: -3px;
+}
+.ParentFilter {
+  background: #fff;
+  border-radius: 5px;
+  padding: 15px;
+  font-family: "gilroyNormal" !important;
+  padding-right: 0px;
+}
+.FilterHead p {
+  color: #0d1217;
+  font-family: "gilroyNormal" !important;
+  font-size: 16px;
+  font-weight: 600;
+}
+.FilterHead {
+  border-bottom: 1px solid #e8e8e8;
+  padding-bottom: 15px;
+}
+.CategoryHead {
+  margin: 15px 0px;
+}
+.CategoryHead p {
+  color: #0d1217;
+  font-family: "gilroyNormal" !important;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.CategoryList {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+input:checked + .CategoryListAmount + label {
+  font-weight: 600 !important;
+  /* color: #475057 !important; */
+  color: red !important;
+}
+.ParentNewArrival {
+  overflow-y: scroll;
+  height: 400px;
+  padding-right: 15px;
+}
+
+@media screen and (max-width: 1400px) {
+  .Flex label {
+    color: #a3a7ab !important;
     font-weight: 400 !important;
-    font-size: 14px !important;
-    font-family: 'gilroyNormal' !important;
-
-}
-
-input[type=checkbox] {
-    accent-color: #006E7F !important;
-}
-
-input:checked+label {
-    font-weight: bold !important;
-    color: #475057 !important;
-}
-
-input:checked+label+.number {
-    font-weight: bold !important;
-    color: #475057 !important;
-}
-.accordion-button:focus{
-box-shadow: none !important;
-border: none !important;
-background: transparent !important;
-}
-.number{
+    font-size: 10px !important;
+    font-family: "gilroyNormal" !important;
+    user-select: none !important;
+    margin-left: 10px;
+    padding-bottom: 0;
+  }
+  .number {
     margin-bottom: -3px;
-}
-@media screen and (max-width:1400px) {
-    .Flex label {
-        color: #A3A7AB !important;
-        font-weight: 400 !important;
-        font-size: 10px !important;
-        font-family: 'gilroyNormal' !important;
-        user-select: none !important;
-        margin-left: 10px;
-        padding-bottom: 0;
-        
-    }
-    .number{
-        margin-bottom: -3px;
-        font-size: 12px !important;
-    }
+    font-size: 12px !important;
+  }
 }

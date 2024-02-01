@@ -118,7 +118,11 @@
     font-size: 14px;
   }
 }
-
+@media (min-width: 576px) and (max-width: 767px) {
+  .Title {
+    padding-left: 0px !important;
+  }
+}
 @media (min-width: 300px) and (max-width: 575px) {
   .Footer {
     padding: 40px 40px 50px 20px;

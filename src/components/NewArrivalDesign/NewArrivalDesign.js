@@ -19,45 +19,35 @@ const NewArrivalPage = (props) => {
   const lawtohigh = () => {};
   return (
     <div>
-      <div className={Classes.Main}>
-        <h1 className={Classes.Title}>{props.head}</h1>
-      </div>
-      <div className={Classes.SubText}>
-        <p
-          className={`${Classes.Home} ${Classes.HomeNew}`}
-          onClick={homePageHandler}
-        >
-          HOME /
-        </p>
-        <p className={Classes.NewArrival}>{props.categoryName || "Products"}</p>
-      </div>
-      <div className={Classes.Found}>
-        {props.count}&nbsp;&nbsp;products found
-      </div>
-
-      <div className="row">
-        <div className="col-md-9">
-          {/* <div className={Classes.Filtered}>
-                                <Stack direction="row" spacing={2}>
-                                    {props.labArry.map((item,index)=>{
-                                        return(
-                                        <Chip
-                                            key={index}
-                                            label={item}
-                                            onClick={handleClick}
-                                            onDelete={()=>handleDelete(index)}
-                                        
-                                        />
-                                    )
-                                    })}
-                                    
-                                </Stack>
-                        </div> */}
+      <div className={Classes.ParentMain}>
+        <div className={Classes.child1Main}>
+          <div className={Classes.Main}>
+            <h1 className={Classes.Title}>{props.head}</h1>
+            <div className={Classes.Found}>
+              {props.count}&nbsp;&nbsp;products found
+            </div>
+          </div>
+          <div className={Classes.SubText}>
+            <p
+              className={`${Classes.Home} ${Classes.HomeNew}`}
+              onClick={homePageHandler}
+            >
+              HOME /
+            </p>
+            <p className={Classes.NewArrival}>
+              {props.categoryName || "Products"}
+            </p>
+          </div>
         </div>
-        <div className="col-md-3">
+
+        <div className={Classes.child2Main}>
           <div className={Classes.SortDrop}>
-            <p className={Classes.Sort}>Sort by:</p>
-            <select className={Classes.SortValue} onChange={props.sortHandler}>
+            <p className={Classes.Sort}>Sort by :</p>
+            <select
+              className={Classes.SortValue}
+              onChange={props.sortHandler}
+              style={{ outline: "none" }}
+            >
               <option>Choose Price</option>
               <option value="LtoH">Low to high</option>
               <option value="HtoL">High to Low</option>
