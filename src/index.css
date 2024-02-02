@@ -1,5 +1,5 @@
 @font-face {
-  font-family:"Poppins";
+  font-family: "Poppins";
   src: url(./Font/Poppins-Light.ttf);
 }
 @font-face {
@@ -171,6 +171,38 @@ p {
 .modal-content {
   top: 50px !important;
   width: 96% !important;
+}
+:where(.css-dev-only-do-not-override-12czi4v).ant-modal .ant-modal-footer {
+  display: none !important;
+}
+:where(.css-dev-only-do-not-override-4fj727).ant-modal .ant-modal-footer {
+  display: none !important;
+}
+:where(.css-dev-only-do-not-override-12czi4v).ant-modal {
+  position: absolute !important;
+  bottom: 0% !important;
+}
+:where(.css-dev-only-do-not-override-4fj727).ant-modal {
+  position: absolute !important;
+  bottom: 0% !important;
+}
+:where(.css-dev-only-do-not-override-12czi4v).ant-modal .ant-modal-content {
+  position: absolute !important;
+  bottom: 0% !important;
+  width: 100% !important;
+}
+:where(.css-dev-only-do-not-override-4fj727).ant-modal .ant-modal-content {
+  position: absolute !important;
+  bottom: 0% !important;
+  width: 100% !important;
+}
+:where(.css-dev-only-do-not-override-12czi4v).ant-modal {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+:where(.css-dev-only-do-not-override-4fj727).ant-modal {
+  width: 100% !important;
+  max-width: 100% !important;
 }
 .ReactFlagsSelect-module_selectBtn__19wW7 {
   border: none !important;

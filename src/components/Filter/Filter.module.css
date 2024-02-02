@@ -167,4 +167,26 @@ input:checked + .CategoryListAmount + label {
   .PriceModal {
     background: red;
   }
+  .PriceTgs {
+    font-family: "gilroyNormal" !important;
+    border-bottom: 1px solid #e8e9ea;
+    padding-bottom: 15px;
+  }
+  .PriceTags1 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+  }
+  .PriceBtns button {
+    background: linear-gradient(to right, #978958 0%, #aea174 100%);
+    border: none;
+    outline: none;
+    padding: 10px 15px;
+    width: 100%;
+    border-radius: 20px;
+    color: #fff;
+    font-family: "gilroyNormal" !important;
+    margin-top: 15px;
+  }
 }
