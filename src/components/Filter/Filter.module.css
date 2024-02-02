@@ -7,6 +7,9 @@
   width: 100% !important;
   margin-top: 15px;
 }
+.FilterMobiles {
+  display: none;
+}
 .CategoryListMain {
   display: flex;
   align-items: center;
@@ -134,5 +137,34 @@ input:checked + .CategoryListAmount + label {
   .number {
     margin-bottom: -3px;
     font-size: 12px !important;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 575px) {
+  .FilterMobiles {
+    display: block;
+    padding-top: 20px;
+    border-top: 1px solid #e8e9ea;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .FilterMobiles button {
+    color: #006e7f;
+    background: transparent;
+    border: none;
+    padding: 0px;
+    font-family: "gilroyNormal" !important;
+  }
+  .arrow1 {
+    width: 1px;
+    height: 24px;
+    background: #d1d3d5;
+  }
+  .ParentFilter {
+    display: none;
+  }
+  .PriceModal {
+    background: red;
   }
 }

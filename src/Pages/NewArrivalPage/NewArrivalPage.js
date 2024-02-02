@@ -11,6 +11,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import { FadeLoader } from "react-spinners";
 import ReactPaginate from "react-paginate";
 import Header from "../../components/HeaderNew/Header";
+import FilterMobile from "../../components/Filter/FilterMobile";
 
 const NewArrivalPage = (props) => {
   const [product, setProduct] = useState([]);
@@ -411,7 +412,9 @@ const NewArrivalPage = (props) => {
                   breakLinkClassName={"page-link"}
                   activeClassName={"active"}
                 />
+                <FilterMobile />
               </div>
+
               <div className={Classes.DownloadOurAppImage}>
                 <DownloadOurAppImage />
               </div>
