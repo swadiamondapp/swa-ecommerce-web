@@ -188,5 +188,34 @@ input:checked + .CategoryListAmount + label {
     color: #fff;
     font-family: "gilroyNormal" !important;
     margin-top: 15px;
+    /* margin-bottom: 90px; */
+  }
+  .PriceBtns2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  .ResetBtn {
+    color: #475057;
+    border: none;
+    outline: none;
+    padding: 10px 15px;
+    width: 100%;
+    border-radius: 20px;
+    font-family: "gilroyNormal" !important;
+    background: transparent;
+    /* margin-bottom: 90px; */
+  }
+  .ApplyBtn {
+    background: linear-gradient(to right, #978958 0%, #aea174 100%);
+    border: none;
+    outline: none;
+    padding: 10px 15px;
+    width: 100%;
+    border-radius: 20px;
+    color: #fff;
+    font-family: "gilroyNormal" !important;
+    /* margin-bottom: 90px; */
   }
 }
