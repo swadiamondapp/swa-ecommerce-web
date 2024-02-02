@@ -1,4 +1,3 @@
-
 header {
   height: 100px;
   padding: 10px 30px;
@@ -11,7 +10,6 @@ header {
   display: none;
 }
 @media (min-width: 300px) and (max-width: 575px) {
-
   .Navbar {
     display: flex;
     align-items: center;
@@ -58,19 +56,20 @@ header {
     color: #0d1217;
     text-align: center;
     font-family: "PlayFairNormal";
-    /* font-size: 1.5rem; */
+    font-size: 26px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
   }
   .titlep {
-    color: #0D1217;
+    color: #0d1217;
     text-align: center;
     font-family: "gilroyNormal";
     font-style: normal;
     font-weight: 400;
     line-height: 1.625rem;
     opacity: 0.7;
+    font-size: 14px;
   }
   .SocialButtons {
     display: flex;
@@ -112,20 +111,22 @@ header {
     border-radius: 0.5rem;
     margin-bottom: 1rem;
     margin-top: 0.5rem;
+    padding: 2px 2px;
   }
   .tabHeader {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-
+    display: flex;
     width: 100%;
+    justify-content: space-between;
+    /* grid-template-columns: 1fr 1fr; */
+    /* width: 100%; */
 
     place-items: center;
   }
-  .tabItems {
+  /* .tabItems {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+  } */
   .active {
     border-radius: 0.25rem;
 
@@ -137,7 +138,7 @@ header {
   .LoginButton {
     background-color: #00464d;
     width: 100%;
-    height: 3rem;
+    height: 2.45456rem;
     color: #fff;
     margin-bottom: 1.5rem;
   }
@@ -181,14 +182,13 @@ header {
     align-items: center;
     justify-content: center;
     background-color: #00464d;
-    width:100%;
+    width: 100%;
     height: 2.45456rem;
     color: #fff;
     margin-bottom: 1rem;
-    margin-top:1.5rem;
+    margin-top: 1.5rem;
   }
-  .modal {
-  }
+
 
   /* Signup styles start here */
 
@@ -228,7 +228,7 @@ header {
   }
   .flex {
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
   }
@@ -247,24 +247,25 @@ header {
     border: 1px solid #ccc;
     font-size: 0.875rem;
     background-color: transparent;
-    padding: 5px 9px;
+    padding: 5px 6px;
     color: #2c3035;
     /* text-align: center; */
     font-family: "Poppins";
-    font-size: 11px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
     border-radius: 6px;
+    /* width: 100%; */
   }
   .buttonSocial > img {
-    margin-right: 9px;
-    max-width: 15px;
+    margin-right: 5px;
+    max-width: 13px;
   }
   .tabTitleOne {
     /* padding: 9px 20px; */
-    padding: 7px 41px;
-    font-size: 10px;
+    padding: 10px 31px;
+    font-size: 14px;
     color: #111212;
     text-align: center;
     font-family: "gilroyNormal";
@@ -274,9 +275,9 @@ header {
     line-height: 1.25rem;
   }
   .tabTitleTwo {
-    padding: 7px 67px;
+    padding: 10px 61px;
     text-align: center;
-    font-size: 10px;
+    font-size: 14px;
     color: #111212;
     text-align: center;
     font-family: "gilroyNormal";
@@ -292,24 +293,25 @@ header {
   .labelStyle {
     color: black;
     font-family: "gilroyNormal";
-    font-size: 12px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 500;
     line-height: 1.25rem;
   }
   .allInputTextStyle {
     width: 100%;
-    border:1px solid lightgray;
+    border: 1px solid lightgray;
     font-family: "Poppins";
     font-size: 14px;
 
     font-weight: 400;
     outline: none;
     border-radius: 5px;
-    padding: 8px 10px;
+    padding: 10px 10px;
   }
-  .allInputTextStyle placeholder{
+  .allInputTextStyle ::placeholder {
     opacity: 0.5;
+    font-size: 1rem;
   }
   .inputformContainer {
     display: grid;
@@ -321,36 +323,37 @@ header {
   }
   .signupTitleText > p {
     text-align: center;
-    font-size: 13px;
+    font-size: 14px;
   }
   .otpContainer {
-    padding:5px 15px;
-    margin:10px 10px
+    padding: 5px 15px;
+    margin: 10px 10px;
   }
 }
-@media (min-width:767px) and (max-width:1200px) {
-  .NavContainer{
+@media (min-width: 767px) and (max-width: 1200px) {
+  .NavContainer {
     display: none;
   }
 }
 
-@media (min-width:575px) and (max-width:767px) {
+@media (min-width: 575px) and (max-width: 767px) {
   .Navbar {
     display: block;
-   
-  } 
+  }
   .NavElements {
     display: flex;
     gap: 2rem;
     justify-content: center;
     align-items: center;
-
   }
   .rightIcons {
     display: flex;
     gap: 2rem;
   }
-  
+  .SlideButton {
+    background-color: #fff;
+  }
+
   .LoginButton {
     background-color: #00464d;
     width: 100%;
@@ -358,7 +361,7 @@ header {
     color: #fff;
     margin-bottom: 1.5rem;
   }
-  
+
   .title {
     display: flex;
     align-items: center;
@@ -374,7 +377,7 @@ header {
     font-size: 2rem;
   }
   .titlep {
-    color: #0D1217;
+    color: #0d1217;
     text-align: center;
     font-family: "gilroyNormal";
     font-style: normal;
@@ -384,7 +387,7 @@ header {
   }
   .flex {
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     margin: 1.5rem 0rem;
@@ -401,7 +404,7 @@ header {
     border: 1px solid #ccc;
     font-size: 0.875rem;
     background-color: transparent;
-    padding: 5px 9px;
+    padding: 9px 15px;
     color: #2c3035;
     /* text-align: center; */
     font-family: "Poppins";
@@ -412,22 +415,22 @@ header {
     border-radius: 6px;
   }
   .buttonSocial > img {
-    margin-right: 9px;
+    margin-right: 25px;
     max-width: 21px;
   }
   .TabButton {
     background-color: #f0f0f2;
     border-radius: 0.5rem;
-    margin: 2rem;
+    margin: 2rem 0rem;
     margin-top: 0.5rem;
   }
   .tabHeader {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
 
     width: 100%;
 
     place-items: center;
+    margin-top: 2rem;
   }
   .active {
     border-radius: 0.25rem;
@@ -435,19 +438,28 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
   }
 
   .LoginContainer .line {
     display: grid;
     grid-template-columns: 1fr 0.2fr 1fr;
     align-items: center;
-    margin: 12px 0px;
+    margin: 1rem 0rem;
     width: 100%;
   }
   .orText {
     font-size: 18px;
     text-align: center;
     /* line-height: 10px; */
+  }
+  .line2 {
+    /* display:flex */
+    display: grid;
+    grid-template-columns: 1fr 0.2fr 1fr;
+    align-items: center;
+    margin: 1rem 0px;
+    width: 100%;
   }
   /* .loginFormInput {
     width: 100%;
@@ -464,21 +476,23 @@ header {
   }
   .allInputTextStyle {
     width: 100%;
-    border:1px solid lightgray;
+    border: 1px solid lightgray;
     font-family: "Poppins";
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 400;
     outline: none;
     border-radius: 5px;
-    padding: 8px 10px;
+    padding: 10px 12px;
+    line-height: 1.5rem;
   }
   .tabContent {
     /* padding: 0px 15px; */
+    margin: 1rem 0rem;
   }
   .tabTitleOne {
     /* padding: 9px 20px; */
-    padding: 12px 41px;
-    font-size: 12px;
+    padding: 15px 59px;
+    font-size: 15px;
     color: #111212;
     text-align: center;
     font-family: "gilroyNormal";
@@ -488,9 +502,9 @@ header {
     line-height: 1.25rem;
   }
   .tabTitleTwo {
-    padding: 12px 67px;
+    padding: 15px 50px;
     text-align: center;
-    font-size: 12px;
+    font-size: 15px;
     color: #111212;
     text-align: center;
     font-family: "gilroyNormal";
@@ -499,12 +513,132 @@ header {
     font-weight: 400;
     line-height: 1.25rem;
   }
+  .LoginButton {
+    background-color: #00464d;
+    width: 100%;
+    height: 3rem;
+    color: #fff;
+    margin: 0.5rem 0rem;
+    font-size: 16px;
+  }
+  .Signup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+  .signupAnchor {
+    color: #006e7f;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.25rem;
+    border: none;
+    font-family: "gilroyNormal";
+    background-color: transparent;
+  }
+  .bottomText {
+    color: #585f67;
+    text-align: center;
+    font-family: "gilroyNormal";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.25rem;
+  }
+  .otpContainer {
+    padding: 5px 15px;
+    margin: 1rem 1rem;
+  }
+  .titleh {
+    color: #0d1217;
+    text-align: center;
+    font-family: "PlayFairNormal";
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+  .titlep {
+    color: #0d1217;
+    text-align: center;
+    font-family: "gilroyNormal";
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.625rem;
+    opacity: 0.7;
+    font-size: 16;
+  }
 
-
-
- 
- 
+  .accept {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #00464d;
+    width: 100%;
+    height: 3rem;
+    color: #fff;
+    margin-bottom: 2.5rem;
+    margin-top: 2.5rem;
+    font-size: 16px;
+  }
+  .signuptitletext {
+    color: #0d1217;
+    /* text-align: center; */
+    font-family: "Playfair Display";
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+  .signupsecondtitle {
+    color: #0d1217;
+    text-align: center;
+    font-family: "gilroyNormal";
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1rem;
+    opacity: 0.7;
+  }
+  .headerTitle {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+  }
+  .flex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .formInputFields {
+    place-items: center;
+  }
+  .line2 {
+    /* display:flex */
+    display: grid;
+    grid-template-columns: 1fr 0.2fr 1fr;
+    align-items: center;
+    margin: 12px 0px;
+    width: 100%;
+  }
+  .SignupWrapper {
+    padding: 4px;
+  }
+  .SocialButtons {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-around;
+    text-align: center;
+  }
+  .signupInputFields{
+    margin-bottom: 2rem;
+  }
 
   
 }
-

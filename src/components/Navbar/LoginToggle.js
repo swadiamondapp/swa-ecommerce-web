@@ -59,7 +59,7 @@ const LoginToggle = () => {
     backgroundColor: activeTab === "tab2" ? "#fff" : "#F0F0F2",
   };
   return (
-    <div style={{ paddingTop: "15px" }}>
+    <div style={{ padding: "16px" }}>
       <div className={Classes.Wrapper}>
         {isSignup ? (
           <>
@@ -107,7 +107,7 @@ const LoginToggle = () => {
                     </button>
                   </div>
                 </div>
-                <div style={{ display: "flex" }}>
+                <div style={{ display: "flex",margin:'0.5rem 0rem' }}>
                   <div className={Classes.line2}>
                     <div
                       style={{
@@ -115,7 +115,7 @@ const LoginToggle = () => {
                         opacity: "0.3",
                       }}
                     ></div>
-                    <div style={{ fontSize: "12px", textAlign: "center" }}>
+                    <div className={Classes.orText}>
                       or
                     </div>
                     <div
@@ -126,8 +126,8 @@ const LoginToggle = () => {
                     ></div>
                   </div>
                 </div>
-                <div>
-                  <form>
+                <div className={Classes.signupInputFields}>
+                  <form style={{gap:'1rem'}}>
                     <div>
                       <label className={Classes.labelStyle}>Name</label>
                       <input
@@ -363,7 +363,7 @@ const LoginToggle = () => {
                           <div>
                             <p
                               className={Classes.titlep}
-                              style={{ fontSize: "12px" }}
+                             
                             >
                               Please enter 6 digit OTP that send to your
                               <br />
