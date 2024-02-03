@@ -12,6 +12,7 @@ const FilterCatgs = (props) => {
   const [octnFiltArray, setOcctnFilterArray] = useState([]);
   const [metalTypeArray, setMetalTypeArray] = useState([]);
   const [occation, setOccation] = useState([]);
+  const [isSticky, setIsSticky] = useState(false);
   const filterSet = (params) => {
     axios
       .get(Urls.filter + params)
@@ -111,8 +112,23 @@ const FilterCatgs = (props) => {
     props.filterMetal(newArray);
   };
   const clearHandler = () => {};
+  const handleScroll = () => {
+    if (window.scrollY > 100) {
+      setIsSticky(true);
+    } else {
+      setIsSticky(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <div className={Classes.Filter}>
+    <div className={`${Classes.Filter} ${isSticky ? Classes.Sticky : ""}`}>
       {/*  warnning warnning not remove */}
       {/* <Accordion defaultActiveKey={[""]} alwaysOpen>
         <Accordion.Item eventKey="0">

@@ -114,4 +114,7 @@
     flex-direction: column;
     gap: 15px;
   }
+  .Title {
+    font-size: 22px;
+  }
 }

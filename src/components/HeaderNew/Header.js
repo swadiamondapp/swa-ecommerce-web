@@ -11,6 +11,7 @@ import LoginModal from "../LoginModal/LoginModal";
 import axios from "axios";
 import * as Urls from "../../Urls";
 import { Carousel } from "antd";
+import { Link } from "react-router-dom";
 
 const Header = (props) => {
   const [show, setShow] = useState(false);
@@ -20,6 +21,7 @@ const Header = (props) => {
   const [searchShow, setSearchShow] = useState(false);
   const [suggestionList, setSuggesionList] = useState([]);
   const [searchKey, setSearchKey] = useState("");
+  const [isSticky, setIsSticky] = useState(false);
 
   const history = useHistory();
   useEffect(() => {
@@ -161,6 +163,20 @@ const Header = (props) => {
   };
   const closeHanlder = () => {};
 
+  const handleScroll = () => {
+    if (window.scrollY > 100) {
+      setIsSticky(true);
+    } else {
+      setIsSticky(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   return (
     <div>
       {/* <TopHeader /> */}
@@ -248,6 +264,69 @@ const Header = (props) => {
           </div>
         </div>
       </MainHead>
+
+      <div
+        className={Classes.SubHeadNav}
+        style={{
+          position: isSticky ? "fixed" : "static",
+          top: 0,
+          zIndex: 1000,
+          width: "100%",
+        }}
+      >
+        <div className="container" style={{ padding: "0px" }}>
+          <div className={Classes.NavLinksDesk}>
+            <Link to="/privacy_policy">
+              <p>OFFERS</p>
+            </Link>
+            <Link to="">
+              <p>EARRINGS</p>
+            </Link>
+            <Link to="">
+              <p>DEVOTIONAL</p>
+            </Link>
+            <Link to="">
+              <p>BANGLE</p>
+            </Link>
+            <Link to="">
+              <p>BRACELET</p>
+            </Link>
+            <Link to="">
+              <p>PLATINUM</p>
+            </Link>
+            <Link to="">
+              <p>SOLITAIRE</p>
+            </Link>
+            <Link to="">
+              <p>PENDANT</p>
+            </Link>
+            <Link to="">
+              <p>RINGS</p>
+            </Link>
+            <Link to="">
+              <p>NOSE PIN</p>
+            </Link>
+            <Link to="">
+              <p>COUPLE BAND</p>
+            </Link>
+            <Link to="">
+              <p>NECKLACE</p>
+            </Link>
+            <Link to="">
+              <p>NAVARATNA</p>
+            </Link>
+            <Link to="">
+              <p>CLIP BANGLE</p>
+            </Link>
+            <Link to="">
+              <p>PENDANT WITH CHAIN</p>
+            </Link>
+            <Link to="">
+              <p>KIDS</p>
+            </Link>
+          </div>
+        </div>
+      </div>
       <div
         className={Classes.searchListCont}
         style={{ display: searchShow ? "block" : "none" }}

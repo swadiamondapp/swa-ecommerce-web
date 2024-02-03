@@ -5,6 +5,17 @@ header a {
 header {
   background-color: #10212f;
 }
+.SubHeadNav {
+  background: #10212f;
+}
+.NavLinksDesk {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  padding-top: 12px;
+  flex-wrap: wrap;
+}
 .CatList {
   display: none;
 }
@@ -20,6 +31,9 @@ header {
 }
 .ParentHeader {
   padding: 12px 0px;
+}
+.ParentHeader {
+  padding-bottom: 0px;
 }
 /* .DSignup {
   border-left: 1px solid #fff;
@@ -98,6 +112,9 @@ header {
 }
 .CatList {
   background-color: #ffffff;
+}
+.ModalImageShow {
+  padding: 15px;
 }
 /* .Slider {
   max-width: 100%;
@@ -1001,6 +1018,9 @@ a {
   .CatList {
     display: block;
   }
+  .SubHeadNav {
+    display: none;
+  }
 }
 @media (min-width: 300px) and (max-width: 575px) {
   .headerNav {
@@ -1016,6 +1036,9 @@ a {
   }
   .CatList {
     display: block;
+  }
+  .SubHeadNav {
+    display: none;
   }
 }
 /* @media (min-width: 767px) and (max-width: 1200px) {

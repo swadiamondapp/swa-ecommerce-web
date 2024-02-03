@@ -7,6 +7,12 @@
   width: 100% !important;
   margin-top: 15px;
 }
+.Sticky {
+  position: sticky;
+  top: 60px; /* Adjust this value according to your design */
+  z-index: 100; /* Adjust this value if needed */
+  /* Add any other styles you need for sticky behavior */
+}
 .FilterMobiles {
   display: none;
 }
@@ -124,6 +130,13 @@ input:checked + .CategoryListAmount + label {
   padding-right: 15px;
 }
 
+.ParentNewArrival::-webkit-scrollbar-thumb {
+  background-color: transparent; /* Set the default color to transparent */
+}
+
+.ParentNewArrival::-webkit-scrollbar-track {
+  background-color: transparent; /* Set the track color to transparent */
+}
 @media screen and (max-width: 1400px) {
   .Flex label {
     color: #a3a7ab !important;

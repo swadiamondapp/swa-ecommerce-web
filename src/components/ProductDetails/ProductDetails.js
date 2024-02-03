@@ -18,6 +18,8 @@ import Carousel from "react-bootstrap/Carousel";
 import { FaHeart } from "react-icons/fa";
 import axios from "axios";
 import * as Urls from "../../Urls";
+import Profiles from "../../Assets/profileicon.png";
+import ProductImages from "./ProductImages";
 
 const ProductDetails = (props) => {
   const [show, setShow] = useState(false);
@@ -132,11 +134,21 @@ const ProductDetails = (props) => {
       <div className="container">
         <ToastContainer />
         <div className={Classes.SubTexts}>
-          <p className={Classes.Home} onClick={homeHandler}>
-            HOME /
+          <p
+            style={{ color: "#00464D" }}
+            className={Classes.Home}
+            onClick={homeHandler}
+          >
+            HOME /&nbsp;
           </p>
-          <p className={Classes.Home}> New Arrivals/</p>
-          <p className={Classes.NewArrival}>{props.name}</p>
+          <p style={{ color: "#00464D" }} className={Classes.Home}>
+            {" "}
+            NEW ARRAIVALS / &nbsp;
+          </p>
+          <p className={Classes.NewArrival}>
+            {" "}
+            {props.name ? props.name.toUpperCase() : ""}
+          </p>
         </div>
         <div className="row">
           <div className="col-md-6">
@@ -245,12 +257,15 @@ const ProductDetails = (props) => {
                 );
               })}
             </div>
-            <input
+            {/* ADD TO CART */}
+
+            {/* <input
               type="submit"
               className={Classes.AddtoCart}
               value="Add to Cart"
               onClick={addToCartHandler}
-            />
+            /> */}
+            {/* ADD TO CART */}
             <input
               type="submit"
               className={Classes.BuyNow}
@@ -272,7 +287,9 @@ const ProductDetails = (props) => {
                   );
                 })}
               </select>
-              <div className="errrMsg">{props.error}</div>
+              <div style={{ paddingTop: "0px" }} className="errrMsg">
+                {props.error}
+              </div>
             </div>
             {/* <div className={Classes.BorderBottom}>
               <p className={Classes.AvailableColours}>Choose gold purity</p>
@@ -293,19 +310,26 @@ const ProductDetails = (props) => {
             </div> */}
             <div className={Classes.BorderBottom}>
               <p className={Classes.AvailableColours}>Delivery availability</p>
+              <div className={Classes.DeliveryFields}>
+                <input
+                  className={Classes.PinCode}
+                  type="number"
+                  value={pinCode}
+                  onChange={pinCodeChangeHandler}
+                />
+                <button
+                  className={Classes.CheckButton}
+                  onClick={availbilityCheck}
+                >
+                  CHECK
+                </button>
+                {/* <input
+                  className={Classes.CheckButton}
+                  type="submit"
+                  onClick={availbilityCheck}
+                /> */}
+              </div>
 
-              <input
-                className={Classes.PinCode}
-                type="number"
-                value={pinCode}
-                onChange={pinCodeChangeHandler}
-              />
-              <input
-                className={Classes.CheckButton}
-                type="submit"
-                onClick={availbilityCheck}
-              />
-              <br />
               <div className="errrMsg">{pinCodeError}</div>
               {/* <div className={Classes.Flex}>
                 <img className={Classes.Stroke} src={Stroke} alt="" />
@@ -330,26 +354,28 @@ const ProductDetails = (props) => {
                 </>
               ) : null}
               {active === false ? (
-                <p className="errrMsg">Standard delivery not available</p>
+                <p style={{ paddingTop: "0px" }} className="errrMsg">
+                  Standard delivery not available
+                </p>
               ) : null}
             </div>
             <div className={Classes.BorderBottom}>
               <p className={Classes.AvailableColours}>Certification</p>
-              <div className={Classes.Flex}>
+              <div className={Classes.ParentCertificate}>
                 <div className={Classes.BIS}>
                   <img src={BIS} alt="" />
-                  <p className={Classes.CertificateText}>Bis Hallamrk</p>
-                  <p className={Classes.CertificateSubText}>For Gold</p>
+                  <p className={Classes.CertificateHead}>Bis Hallamrk</p>
+                  <p className={Classes.CertificateDesc}>For Gold</p>
                 </div>
                 <div className={Classes.IGI}>
                   <img src={IGI} alt="" />
-                  <p className={Classes.CertificateText}>IGI Crtification</p>
-                  <p className={Classes.CertificateSubText}>For Diamonds</p>
+                  <p className={Classes.CertificateHead}>IGI Crtification</p>
+                  <p className={Classes.CertificateDesc}>For Diamonds</p>
                 </div>
               </div>
             </div>
-            <div className={Classes.BorderBottom}>
-              <p className={Classes.AvailableColours}>Product details</p>
+            <div className={Classes.BorderBottom2}>
+              <p className={Classes.ProductDetailsHead}>Product details</p>
               <div className="row">
                 <div className="col-md-4 col-6">
                   <p className={Classes.Left}>Product ID</p>
@@ -398,38 +424,38 @@ const ProductDetails = (props) => {
                 <div className="col-md-12">
                   <div className={Classes.Left}>
                     <div className={Classes.manufacture}>
-                      <div>
-                        Manufacturer
-                        <span>:</span>
-                      </div>
+                      <div>Manufacturer</div>
+                      <div>:</div>
                       <div className={Classes.manpara}>
                         Swa Diamonds MIDC MAROL ANDHERI EAST, MUMBAI, 400093
                       </div>
                     </div>
+                    <div className={Classes.manufacture}>
+                      <div>Country of origin</div>
+                      <div>:</div>
+                      <div className={Classes.manpara}>India</div>
+                    </div>
+                    <div className={Classes.manufacture}>
+                      <div>Call us (Toll Free)</div>
+                      <div>:</div>
+                      <div className={Classes.manpara}>1800 257 8600</div>
+                    </div>
+                    <div className={Classes.manufacture}>
+                      <div>Chat Number</div>
+                      <div>:</div>
+                      <div className={Classes.manpara}>
+                        {" "}
+                        <IoLogoWhatsapp color="#22AD2C" size={20} />
+                        +91 95677 77722
+                      </div>
+                    </div>
                   </div>
-                  {/* <p className={Classes.Left}>
-                    Manufacturer&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Swa
-                    Diamonds MIDC MAROL ANDHERI EAST, MUMBAI, 400093
-                  </p> */}
-                  <p className={Classes.Left}>
-                    Country of Origin &nbsp;&nbsp;:&nbsp;&nbsp;India
-                  </p>
-                  <p className={Classes.Left}>
-                    Toll-Free Number&nbsp;&nbsp; :&nbsp;&nbsp;1800 257 8600
-                  </p>
-                  <p className={Classes.Left}>
-                    Chat
-                    Number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    : &nbsp;
-                    <IoLogoWhatsapp color="#22AD2C" size={20} />
-                    +91 95677 77722
-                  </p>
                 </div>
               </div>
             </div>
-            <div className={Classes.BorderBottom}>
+            <div className={Classes.BorderBottom2}>
               <div className={Classes.RatingFlex}>
-                <p className={Classes.AvailableColours}>Rating & Review</p>
+                <p className={Classes.ProductDetailsHead}>Rating & Review</p>
                 <div className={Classes.StarFlex}>
                   <p className={Classes.Rating}>{props.avgR}</p>
                   <IoIosStar
@@ -459,6 +485,68 @@ const ProductDetails = (props) => {
                 </div>
               );
             })}
+            <div className={Classes.BorderBottom2}>
+              <div className={Classes.CustomersHeadReview}>
+                <p className={Classes.ProductDetailsHead}>
+                  Customer photos (32)
+                </p>
+                {/* carousel */}
+                <ProductImages />
+                {/* carousel */}
+              </div>
+              <div className={Classes.ReviewImageTexts}>
+                <div className={Classes.Icon_Stars}>
+                  <img src={Profiles} />
+                  <div className={Classes.StarIcons1}>
+                    <p style={{ color: "#fff" }}>5</p>
+                    <IoIosStar
+                      style={{ marginTop: "0px" }}
+                      className={Classes.Star}
+                      size={16}
+                      color="#ffffff"
+                    />
+                  </div>
+                </div>
+                <div className={Classes.RightHeadDesc}>
+                  <p>Jameel Muhammed</p>
+                  <p className={Classes.dateReview}>12 Oct 2024</p>
+                  <div className={Classes.ReviewsDescription}>
+                    <p>
+                      nice collections swa diamonds, irealy loved it and thank
+                      you soo much for your quick delivery
+                    </p>
+                  </div>
+                </div>
+              </div>
+              {/* second dummy */}
+              <div
+                className={Classes.ReviewImageTexts}
+                style={{ borderBottom: "0px" }}
+              >
+                <div className={Classes.Icon_Stars}>
+                  <img src={Profiles} />
+                  <div className={Classes.StarIcons1}>
+                    <p style={{ color: "#fff" }}>5</p>
+                    <IoIosStar
+                      style={{ marginTop: "0px" }}
+                      className={Classes.Star}
+                      size={16}
+                      color="#ffffff"
+                    />
+                  </div>
+                </div>
+                <div className={Classes.RightHeadDesc}>
+                  <p>Jameel Muhammed</p>
+                  <p className={Classes.dateReview}>12 Oct 2024</p>
+                  <div className={Classes.ReviewsDescription}>
+                    <p>
+                      nice collections swa diamonds, irealy loved it and thank
+                      you soo much for your quick delivery
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div className={Classes.CommentFlex} onClick={seAllHandler}>
               <p className={Classes.AvailableColours}>See all {props.count} </p>
               <MdOutlineKeyboardArrowRight
