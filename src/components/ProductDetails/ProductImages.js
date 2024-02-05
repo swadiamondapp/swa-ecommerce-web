@@ -13,9 +13,9 @@ const ProductImages = () => {
   return (
     <div>
       <div className={Classes.CatList1} style={{ width: "100%" }}>
-        <div className="container">
+        <div className="container" style={{ paddingLeft: "0px" }}>
           <div className={Classes.Web}>
-            <div className="">
+            <div className={Classes.CarouselCards}>
               <Carousel
                 autoplay
                 slidesToShow={5}
@@ -27,7 +27,7 @@ const ProductImages = () => {
                   {
                     breakpoint: 1200,
                     settings: {
-                      slidesToShow: 4, // Set the number of slides to display on tablets
+                      slidesToShow: 5, // Set the number of slides to display on tablets
                     },
                   },
                   {

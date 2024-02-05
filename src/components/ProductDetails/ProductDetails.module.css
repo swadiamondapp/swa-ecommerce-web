@@ -18,7 +18,9 @@
   overflow-y: auto;
   max-height: 700px;
 }
-
+.BackgroundBgs {
+  display: none;
+}
 .my_scroll_div::-webkit-scrollbar {
   display: none;
 }
@@ -83,6 +85,12 @@
   font-family: "gilroyNormal" !important;
   margin-top: 12px;
   margin-bottom: 7px !important;
+}
+.AvailableColours3 {
+  font-weight: 600;
+  font-size: 16px;
+  color: #000000;
+  font-family: "gilroyNormal" !important;
 }
 .ParentCertificate {
   display: flex;
@@ -503,10 +511,12 @@
 }
 @media screen and (max-width: 767px) {
   .Display {
-    display: none;
+    /* display: none; */
+    display: block;
   }
   .Slider {
-    display: block;
+    /* display: block; */
+    display: none;
   }
 }
 .ProductDiscription {
@@ -555,5 +565,58 @@
   }
   .SlideImage {
     max-width: 350px;
+  }
+  .MobProductDetails {
+    order: 2;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+    overflow: scroll;
+  }
+  .MobProductDetails2 {
+    order: 1;
+  }
+  .ImageSmall {
+    width: 100px;
+    margin: 0px;
+  }
+  .BIS {
+    margin-right: 0px;
+  }
+  .BuyNow {
+    width: 100%;
+    padding: 12px;
+  }
+  .MobileFixedBtn {
+    position: fixed;
+    bottom: 0%;
+    width: 100%;
+    left: 0%;
+    z-index: 999;
+  }
+  .C1 {
+    border-radius: 50px;
+  }
+  .C2 {
+    border-radius: 50px;
+  }
+  .C4 {
+    border-radius: 50px;
+  }
+  .NewArrivals {
+    font-size: 20px;
+  }
+  .manufacture {
+    grid-template-columns: 1.3fr 0.1fr 2fr;
+  }
+  .BorderBottom {
+    border-bottom: 0px;
+  }
+  .BackgroundBgs {
+    display: block;
+    background: #f8f8f8;
+    height: 25px;
+    border-top: 0.75px solid #e6e5e5;
   }
 }

@@ -22,6 +22,10 @@ const Header = (props) => {
   const [suggestionList, setSuggesionList] = useState([]);
   const [searchKey, setSearchKey] = useState("");
   const [isSticky, setIsSticky] = useState(false);
+  const isHomePage = window.location.pathname === "/";
+  const mobileSearchBarClass = isHomePage
+    ? Classes.MobileSearchBar
+    : Classes.MobileSearchbarOthers;
 
   const history = useHistory();
   useEffect(() => {
@@ -347,79 +351,110 @@ const Header = (props) => {
           <p className={Classes.NoResult}>No Results Found</p>
         )}
       </div>
-
-      <div className={Classes.CatList}>
+      <div
+        className={`${mobileSearchBarClass} ${Classes.MobileSearchbarOthers}`}
+      >
         <div className="container">
-          <div className={Classes.Web}>
-            <div className="">
-              <Carousel
-                autoplay
-                slidesToShow={10}
-                dots={false}
-                centerMode={true}
-                centerPadding="10px"
-                className={Classes.ResponsiveCarousel}
-                responsive={[
-                  {
-                    breakpoint: 1200,
-                    settings: {
-                      slidesToShow: 8, // Set the number of slides to display on tablets
-                    },
-                  },
-                  {
-                    breakpoint: 991,
-                    settings: {
-                      slidesToShow: 5, // Set the number of slides to display on tablets
-                    },
-                  },
-                  {
-                    breakpoint: 767,
-                    settings: {
-                      slidesToShow: 3, // Set the number of slides to display on mobile devices
-                    },
-                  },
-                ]}
-              >
-                {catgSet.map((item, index) => {
-                  return (
-                    <div
-                      className={Classes.Offers}
-                      key={index}
-                      onClick={() => catSelHandler(item)}
-                    >
-                      <img
-                        className={Classes.SlideImage}
-                        src={item.thumbnail}
-                        alt="catg"
-                      />
-
-                      <p>{item.name.slice(0, 10)}</p>
-                    </div>
-                  );
-                })}
-
-                {tags.map((item, index) => {
-                  return (
-                    <div
-                      className={Classes.Offers}
-                      key={index}
-                      onClick={() => tagSelHandler(item)}
-                    >
-                      <img
-                        // className={Classes.SlideImage}
-                        src={item.thumbnail}
-                        alt="tag"
-                      />
-
-                      <p>{item.name.slice(0, 10)}</p>
-                    </div>
-                  );
-                })}
-              </Carousel>
-            </div>
+          <div
+            style={{
+              position: "relative",
+              margin: "15px 0px",
+              marginBottom: "10px",
+            }}
+          >
+            <input
+              style={{ width: "100%" }}
+              type=""
+              className={Classes.searchbar}
+              placeholder="Search for diamonds & more"
+            />
+            <BsSearch
+              size={22}
+              className={Classes.searchIcon}
+              style={{ display: searchShow ? "none" : "block" }}
+            />
           </div>
-          {/* dummy carousel */}
-          {/* <div className={Classes.Web}>
+        </div>
+      </div>
+      {isHomePage && (
+        <div className={Classes.CatList}>
+          <div className="container" style={{ padding: "0px" }}>
+            <div className={Classes.Web}>
+              <div>
+                <Carousel
+                  autoplay
+                  slidesToShow={3}
+                  dots={false}
+                  centerMode={true}
+                  centerPadding="5px"
+                  className={Classes.ResponsiveCarousel}
+                  responsive={[
+                    {
+                      breakpoint: 1200,
+                      settings: {
+                        slidesToShow: 8, // Set the number of slides to display on tablets
+                      },
+                    },
+                    {
+                      breakpoint: 991,
+                      settings: {
+                        slidesToShow: 5, // Set the number of slides to display on tablets
+                      },
+                    },
+                    {
+                      breakpoint: 767,
+                      settings: {
+                        slidesToShow: 3, // Set the number of slides to display on mobile devices
+                      },
+                    },
+                  ]}
+                >
+                  {catgSet.map((item, index) => {
+                    return (
+                      <div
+                        className={Classes.Offers}
+                        key={index}
+                        onClick={() => catSelHandler(item)}
+                      >
+                        <div className={Classes.OffersInner}>
+                          <img
+                            style={{ width: "45px", height: "45px" }}
+                            className={Classes.SlideImage}
+                            src={item.thumbnail}
+                            alt="catg"
+                          />
+
+                          <p>{item.name.slice(0, 10)}</p>
+                        </div>
+                      </div>
+                    );
+                  })}
+
+                  {tags.map((item, index) => {
+                    return (
+                      <div
+                        className={Classes.Offers}
+                        key={index}
+                        onClick={() => tagSelHandler(item)}
+                      >
+                        <div className={Classes.OffersInner}>
+                          <img
+                            style={{ width: "45px", height: "45px" }}
+                            // className={Classes.SlideImage}
+                            src={item.thumbnail}
+                            alt="tag"
+                          />
+
+                          <p>{item.name.slice(0, 10)}</p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </Carousel>
+              </div>
+            </div>
+            {/* dummy carousel */}
+            {/* <div className={Classes.Web}>
             <p>anasmk</p>
             <Carousel autoplay>
               <div className={Classes.carouselWeb}>
@@ -427,9 +462,10 @@ const Header = (props) => {
               </div>
             </Carousel>
           </div> */}
-          {/* dummy carousel */}
+            {/* dummy carousel */}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

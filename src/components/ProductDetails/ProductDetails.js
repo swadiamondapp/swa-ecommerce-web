@@ -11,6 +11,7 @@ import { BiRupee } from "react-icons/bi";
 import { IoIosStar, IoLogoWhatsapp } from "react-icons/io";
 import BIS from "../../Assets/BIS.png";
 import IGI from "../../Assets/IGI.png";
+import GIA from "../../Assets/GIA.png";
 import Stroke from "../../Assets/Stroke.png";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { CgHeart } from "react-icons/cg";
@@ -155,7 +156,7 @@ const ProductDetails = (props) => {
             <div className={`${Classes.Display} ${Classes.StickyDisplay}`}>
               <div className="container">
                 <div className="row">
-                  <div className="col-md-2">
+                  <div className={`col-md-2 ${Classes.MobProductDetails}`}>
                     {props.bagImg.map((item, index) => {
                       return (
                         <div className={Classes.SmallImages} key={index}>
@@ -169,7 +170,7 @@ const ProductDetails = (props) => {
                       );
                     })}
                   </div>
-                  <div className="col-md-10">
+                  <div className={`col-md-10 ${Classes.MobProductDetails2}`}>
                     <div className={Classes.ImageWishList}>
                       <img
                         className={Classes.LargeImage}
@@ -211,86 +212,98 @@ const ProductDetails = (props) => {
               </Carousel>
             </div>
           </div>
-          <div className="col-md-6">
-            <p className={Classes.NewArrivals}>{props.name}</p>
-            <p className={Classes.SubText}>
-              {props.name} In Gold ({props.gw} gram) with Diamonds (
-              {props.diamond} gram)
-            </p>
-            <p className={Classes.Code}>{props.sku}</p>
-            <div className={Classes.Flex}>
-              <BiRupee size={25} />
-              <p className={Classes.NewPrice}>{props.offerPrice}</p>
-              {props.actualPrice !== null ? (
-                <BiRupee size={25} color="#B0B0B0" />
-              ) : null}
-              <p className={Classes.OldPrice}>{props.actualPrice}</p>
-            </div>
-            {props.discount ? (
-              <p className={Classes.HurrayText}>
-                Hurray! You have saved <BiRupee size={15} />
-                {props.discountVal.toFixed(2)}
+          <div className="col-md-6" style={{ padding: "0px" }}>
+            <div className="container">
+              <p className={Classes.NewArrivals}>{props.name}</p>
+              <p className={Classes.SubText}>
+                {props.name} In Gold ({props.gw} gram) with Diamonds (
+                {props.diamond} gram)
               </p>
-            ) : null}
-            <p className={Classes.AvailableColours}>Available Metal Types</p>
-            <div className={Classes.Flex}>
-              {props.colors.map((item, index) => {
-                let clrClas;
-                if (item.colour_name === "rose") {
-                  clrClas = Classes.C1;
-                } else if (item.colour_name === "white") {
-                  clrClas = Classes.C4;
-                } else if (item.colour_name === "yellow") {
-                  clrClas = Classes.C2;
-                } else if (item.colour_name === "pt") {
-                  clrClas = Classes.C3;
-                }
-                return (
-                  <div
-                    className={Classes.Options}
-                    key={index}
-                    onClick={() => colorSelectHandler(item)}
-                  >
-                    <div className={clrClas}></div>
-                    <p>{item.colour_name}</p>
-                  </div>
-                );
-              })}
-            </div>
-            {/* ADD TO CART */}
+              <p className={Classes.Code}>{props.sku}</p>
+              <div className={Classes.Flex}>
+                <BiRupee size={25} />
+                <p className={Classes.NewPrice}>{props.offerPrice}</p>
+                {props.actualPrice !== null ? (
+                  <BiRupee size={25} color="#B0B0B0" />
+                ) : null}
+                <p className={Classes.OldPrice}>{props.actualPrice}</p>
+              </div>
+              {props.discount ? (
+                <p className={Classes.HurrayText}>
+                  Hurray! You have saved <BiRupee size={15} />
+                  {props.discountVal.toFixed(2)}
+                </p>
+              ) : null}
+              <p className={Classes.AvailableColours}>Customize this product</p>
+              <div className={Classes.Flex}>
+                {props.colors.map((item, index) => {
+                  let clrClas;
+                  if (item.colour_name === "rose") {
+                    clrClas = Classes.C1;
+                  } else if (item.colour_name === "white") {
+                    clrClas = Classes.C4;
+                  } else if (item.colour_name === "yellow") {
+                    clrClas = Classes.C2;
+                  } else if (item.colour_name === "pt") {
+                    clrClas = Classes.C3;
+                  }
+                  return (
+                    <div
+                      className={Classes.Options}
+                      key={index}
+                      onClick={() => colorSelectHandler(item)}
+                    >
+                      <div className={clrClas}></div>
+                      <p>{item.colour_name}</p>
+                    </div>
+                  );
+                })}
+              </div>
+              {/* ADD TO CART */}
 
-            {/* <input
+              {/* <input
               type="submit"
               className={Classes.AddtoCart}
               value="Add to Cart"
               onClick={addToCartHandler}
             /> */}
-            {/* ADD TO CART */}
-            <input
+              {/* ADD TO CART */}
+              {/* <input
               type="submit"
               className={Classes.BuyNow}
               value="Buy Now"
               onClick={props.clickedBuy}
-            />
-            <div className={Classes.BorderBottom}>
-              <p className={Classes.AvailableColours}>Select Size</p>
-              <select
-                className={Classes.SizeSelect}
-                onChange={sizeChangeHandler}
-              >
-                <option value=""></option>
-                {props.sizeChart.map((item, index) => {
-                  return (
-                    <option value={item.id} key={index}>
-                      {item.size_name}
-                    </option>
-                  );
-                })}
-              </select>
-              <div style={{ paddingTop: "0px" }} className="errrMsg">
-                {props.error}
+            /> */}
+              <div className={Classes.MobileFixedBtn}>
+                <button
+                  className={Classes.BuyNow}
+                  onClick={props.clickedBuy}
+                  type="submit"
+                >
+                  Buy Now
+                </button>
+              </div>
+              <div className={Classes.BorderBottom}>
+                <p className={Classes.AvailableColours}>Select Size</p>
+                <select
+                  className={Classes.SizeSelect}
+                  onChange={sizeChangeHandler}
+                >
+                  <option value=""></option>
+                  {props.sizeChart.map((item, index) => {
+                    return (
+                      <option value={item.id} key={index}>
+                        {item.size_name}
+                      </option>
+                    );
+                  })}
+                </select>
+                <div style={{ paddingTop: "0px" }} className="errrMsg">
+                  {props.error}
+                </div>
               </div>
             </div>
+            <div className={Classes.BackgroundBgs}></div>
             {/* <div className={Classes.BorderBottom}>
               <p className={Classes.AvailableColours}>Choose gold purity</p>
               <div className={Classes.Flex}>
@@ -309,105 +322,120 @@ const ProductDetails = (props) => {
               </div>
             </div> */}
             <div className={Classes.BorderBottom}>
-              <p className={Classes.AvailableColours}>Delivery availability</p>
-              <div className={Classes.DeliveryFields}>
-                <input
-                  className={Classes.PinCode}
-                  type="number"
-                  value={pinCode}
-                  onChange={pinCodeChangeHandler}
-                />
-                <button
-                  className={Classes.CheckButton}
-                  onClick={availbilityCheck}
-                >
-                  CHECK
-                </button>
-                {/* <input
+              <div className="container">
+                <p className={Classes.AvailableColours}>
+                  Delivery availability
+                </p>
+                <div className={Classes.DeliveryFields}>
+                  <input
+                    className={Classes.PinCode}
+                    type="number"
+                    value={pinCode}
+                    onChange={pinCodeChangeHandler}
+                  />
+                  <button
+                    className={Classes.CheckButton}
+                    onClick={availbilityCheck}
+                  >
+                    CHECK
+                  </button>
+                  {/* <input
                   className={Classes.CheckButton}
                   type="submit"
                   onClick={availbilityCheck}
                 /> */}
-              </div>
+                </div>
 
-              <div className="errrMsg">{pinCodeError}</div>
-              {/* <div className={Classes.Flex}>
+                <div className="errrMsg">{pinCodeError}</div>
+                {/* <div className={Classes.Flex}>
                 <img className={Classes.Stroke} src={Stroke} alt="" />
                 <p className={Classes.StrokeText}>Standard delivery between </p>
                 <p className={Classes.DeliveryDate}>24 Oct & 28 oct 2022</p>
               </div> */}
 
-              {active === true ? (
-                <>
-                  <div className={Classes.Flex}>
-                    <img className={Classes.Stroke} src={Stroke} alt="" />
-                    <p className={Classes.StrokeText}>
-                      Cash / Card delivery option available
-                    </p>{" "}
-                  </div>
-                  <div className={Classes.Flex}>
-                    <img className={Classes.Stroke} src={Stroke} alt="" />
-                    <p className={Classes.StrokeText}>
-                      Standard delivery available
-                    </p>
-                  </div>
-                </>
-              ) : null}
-              {active === false ? (
-                <p style={{ paddingTop: "0px" }} className="errrMsg">
-                  Standard delivery not available
-                </p>
-              ) : null}
+                {active === true ? (
+                  <>
+                    <div className={Classes.Flex}>
+                      <img className={Classes.Stroke} src={Stroke} alt="" />
+                      <p className={Classes.StrokeText}>
+                        Cash / Card delivery option available
+                      </p>{" "}
+                    </div>
+                    <div className={Classes.Flex}>
+                      <img className={Classes.Stroke} src={Stroke} alt="" />
+                      <p className={Classes.StrokeText}>
+                        Standard delivery available
+                      </p>
+                    </div>
+                  </>
+                ) : null}
+                {active === false ? (
+                  <p style={{ paddingTop: "0px" }} className="errrMsg">
+                    Standard delivery not available
+                  </p>
+                ) : null}
+              </div>
             </div>
+            <div className={Classes.BackgroundBgs}></div>
             <div className={Classes.BorderBottom}>
-              <p className={Classes.AvailableColours}>Certification</p>
-              <div className={Classes.ParentCertificate}>
-                <div className={Classes.BIS}>
-                  <img src={BIS} alt="" />
-                  <p className={Classes.CertificateHead}>Bis Hallamrk</p>
-                  <p className={Classes.CertificateDesc}>For Gold</p>
-                </div>
-                <div className={Classes.IGI}>
-                  <img src={IGI} alt="" />
-                  <p className={Classes.CertificateHead}>IGI Crtification</p>
-                  <p className={Classes.CertificateDesc}>For Diamonds</p>
+              <div className="container">
+                <p className={Classes.AvailableColours}>Certification</p>
+                <div className={Classes.ParentCertificate}>
+                  <div className={Classes.BIS}>
+                    <img src={BIS} alt="" />
+                    <p className={Classes.CertificateHead}>Bis Hallamrk</p>
+                    <p className={Classes.CertificateDesc}>For Gold</p>
+                  </div>
+                  <div className={Classes.BIS}>
+                    <img src={IGI} alt="" />
+                    <p className={Classes.CertificateHead}>IGI Crtification</p>
+                    <p className={Classes.CertificateDesc}>For Diamonds</p>
+                  </div>
+                  <div className={Classes.IGI}>
+                    <img src={GIA} alt="" />
+                    <p className={Classes.CertificateHead}>GIA Certification</p>
+                    <p className={Classes.CertificateDesc}>For solitaire</p>
+                  </div>
                 </div>
               </div>
             </div>
+            <div className={Classes.BackgroundBgs}></div>
             <div className={Classes.BorderBottom2}>
-              <p className={Classes.ProductDetailsHead}>Product details</p>
-              <div className="row">
-                <div className="col-md-4 col-6">
-                  <p className={Classes.Left}>Product ID</p>
-                  {/* <p className={Classes.Left}>Size</p> */}
-                  <p className={Classes.Left}>Gross Weight</p>
-                  {props.diamondTypw !== null && (
-                    <p className={Classes.Left}>Diamond Type</p>
-                  )}
-                  <p className={Classes.Left}>Diamond Weight</p>
-                  <p className={Classes.Left}>Diamond Count</p>
-                  <p className={Classes.Left}>Other stone weight</p>
-                  <p className={Classes.Left}>Other Stone Count</p>
-                  <p className={Classes.Left}>Product Lenght</p>
-                  <p className={Classes.Left}>Product Width</p>
-                  <p className={Classes.Left}>Product Height</p>
-                </div>
-                <div className="col-md-8 col-6">
-                  <p className={Classes.Right}>{props.sku}</p>
-                  {/* <p className={Classes.Right}>{props.size}</p> */}
-                  <p className={Classes.Right}>{props.gw + " GM"}</p>
-                  {props.diamondTypw !== null && (
-                    <p className={Classes.Right}>{props.diamondTypw}</p>
-                  )}
-                  <p className={Classes.Right}>
-                    {props.diamondWeight + " Carat"}
-                  </p>
-                  <p className={Classes.Right}>{props.diamondCount}</p>
-                  <p className={Classes.Right}>{props.otherStoneW}</p>
-                  <p className={Classes.Right}>{props.otherStoneC}</p>
-                  <p className={Classes.Right}>{props.length + " mm"}</p>
-                  <p className={Classes.Right}>{props.width + " mm"}</p>
-                  <p className={Classes.Right}>{props.height + " mm"}</p>
+              <div className="container">
+                <p className={Classes.ProductDetailsHead}>Product details</p>
+                <div className="row">
+                  <div className="col-md-4 col-6">
+                    <p className={Classes.Left}>Product ID</p>
+                    {/* <p className={Classes.Left}>Size</p> */}
+                    <p className={Classes.Left}>Gross Weight</p>
+                    {props.diamondTypw !== null && (
+                      <p className={Classes.Left}>Diamond Type</p>
+                    )}
+                    <p className={Classes.Left}>Diamond Weight</p>
+                    <p className={Classes.Left}>Diamond Count</p>
+                    <p className={Classes.Left}>Other stone weight</p>
+                    <p className={Classes.Left}>Other Stone Count</p>
+                    <p className={Classes.Left}>Product Lenght</p>
+                    <p className={Classes.Left}>Product Width</p>
+                    <p className={Classes.Left}>Product Height</p>
+                  </div>
+                  <div className="col-md-8 col-6">
+                    <p className={Classes.Right}>{props.sku}</p>
+                    {/* <p className={Classes.Right}>{props.size}</p> */}
+                    <p className={Classes.Right}>{props.gw + " GM"}</p>
+                    {props.diamondTypw !== null && (
+                      <p className={Classes.Right}>{props.diamondTypw}</p>
+                    )}
+                    <p className={Classes.Right}>
+                      {props.diamondWeight + " Carat"}
+                    </p>
+                    <p className={Classes.Right}>{props.diamondCount}</p>
+                    <p className={Classes.Right}>{props.otherStoneW}</p>
+                    <p className={Classes.Right}>{props.otherStoneC}</p>
+                    <p className={Classes.Right}>{props.length + " mm"}</p>
+                    <p className={Classes.Right}>{props.width + " mm"}</p>
+                    <p className={Classes.Right}>{props.height + " mm"}</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -420,53 +448,59 @@ const ProductDetails = (props) => {
               </div>
             </div>
             <div className={Classes.BorderBottom}>
-              <div className={`row ${Classes.SellerInfo}`}>
-                <div className="col-md-12">
-                  <div className={Classes.Left}>
-                    <div className={Classes.manufacture}>
-                      <div>Manufacturer</div>
-                      <div>:</div>
-                      <div className={Classes.manpara}>
-                        Swa Diamonds MIDC MAROL ANDHERI EAST, MUMBAI, 400093
+              <div className="container">
+                <div className={`row ${Classes.SellerInfo}`}>
+                  <div className="col-md-12" style={{ padding: "0px" }}>
+                    <div className={Classes.Left}>
+                      <div className={Classes.manufacture}>
+                        <div>Manufacturer</div>
+                        <div>:</div>
+                        <div className={Classes.manpara}>
+                          Swa Diamonds MIDC MAROL ANDHERI EAST, MUMBAI, 400093
+                        </div>
                       </div>
-                    </div>
-                    <div className={Classes.manufacture}>
-                      <div>Country of origin</div>
-                      <div>:</div>
-                      <div className={Classes.manpara}>India</div>
-                    </div>
-                    <div className={Classes.manufacture}>
-                      <div>Call us (Toll Free)</div>
-                      <div>:</div>
-                      <div className={Classes.manpara}>1800 257 8600</div>
-                    </div>
-                    <div className={Classes.manufacture}>
-                      <div>Chat Number</div>
-                      <div>:</div>
-                      <div className={Classes.manpara}>
-                        {" "}
-                        <IoLogoWhatsapp color="#22AD2C" size={20} />
-                        +91 95677 77722
+                      <div className={Classes.manufacture}>
+                        <div>Country of origin</div>
+                        <div>:</div>
+                        <div className={Classes.manpara}>India</div>
+                      </div>
+                      <div className={Classes.manufacture}>
+                        <div>Call us (Toll Free)</div>
+                        <div>:</div>
+                        <div className={Classes.manpara}>1800 257 8600</div>
+                      </div>
+                      <div className={Classes.manufacture}>
+                        <div>Chat Number</div>
+                        <div>:</div>
+                        <div className={Classes.manpara}>
+                          {" "}
+                          <IoLogoWhatsapp color="#22AD2C" size={20} />
+                          +91 95677 77722
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+            <div className={Classes.BackgroundBgs}></div>
             <div className={Classes.BorderBottom2}>
-              <div className={Classes.RatingFlex}>
-                <p className={Classes.ProductDetailsHead}>Rating & Review</p>
-                <div className={Classes.StarFlex}>
-                  <p className={Classes.Rating}>{props.avgR}</p>
-                  <IoIosStar
-                    size={25}
-                    color="#F7C514"
-                    className={Classes.star}
-                  />
+              <div className="container">
+                <div className={Classes.RatingFlex}>
+                  <p className={Classes.ProductDetailsHead}>Rating & Review</p>
+                  <div className={Classes.StarFlex}>
+                    <p className={Classes.Rating}>{props.avgR}</p>
+                    <IoIosStar
+                      size={25}
+                      color="#F7C514"
+                      className={Classes.star}
+                    />
+                  </div>
                 </div>
+                <p className={Classes.RatingNum}>{props.count} </p>
               </div>
-              <p className={Classes.RatingNum}>{props.count} </p>
             </div>
+
             {props.review.map((item, index) => {
               return (
                 <div className={Classes.Reviews} key={index}>
@@ -486,73 +520,86 @@ const ProductDetails = (props) => {
               );
             })}
             <div className={Classes.BorderBottom2}>
-              <div className={Classes.CustomersHeadReview}>
-                <p className={Classes.ProductDetailsHead}>
-                  Customer photos (32)
-                </p>
-                {/* carousel */}
-                <ProductImages />
-                {/* carousel */}
-              </div>
-              <div className={Classes.ReviewImageTexts}>
-                <div className={Classes.Icon_Stars}>
-                  <img src={Profiles} />
-                  <div className={Classes.StarIcons1}>
-                    <p style={{ color: "#fff" }}>5</p>
-                    <IoIosStar
-                      style={{ marginTop: "0px" }}
-                      className={Classes.Star}
-                      size={16}
-                      color="#ffffff"
-                    />
+              <div className="container">
+                <div className={Classes.CustomersHeadReview}>
+                  <p className={Classes.ProductDetailsHead}>
+                    Customer photos (32)
+                  </p>
+                  {/* carousel */}
+                  <ProductImages />
+                  {/* carousel */}
+                </div>
+                <div className={Classes.ReviewImageTexts}>
+                  <div className={Classes.Icon_Stars}>
+                    <img src={Profiles} />
+                    <div className={Classes.StarIcons1}>
+                      <p style={{ color: "#fff" }}>5</p>
+                      <IoIosStar
+                        style={{ marginTop: "0px" }}
+                        className={Classes.Star}
+                        size={16}
+                        color="#ffffff"
+                      />
+                    </div>
+                  </div>
+                  <div className={Classes.RightHeadDesc}>
+                    <p>Jameel Muhammed</p>
+                    <p className={Classes.dateReview}>12 Oct 2024</p>
+                    <div className={Classes.ReviewsDescription}>
+                      <p>
+                        nice collections swa diamonds, irealy loved it and thank
+                        you soo much for your quick delivery
+                      </p>
+                    </div>
                   </div>
                 </div>
-                <div className={Classes.RightHeadDesc}>
-                  <p>Jameel Muhammed</p>
-                  <p className={Classes.dateReview}>12 Oct 2024</p>
-                  <div className={Classes.ReviewsDescription}>
-                    <p>
-                      nice collections swa diamonds, irealy loved it and thank
-                      you soo much for your quick delivery
-                    </p>
+                {/* second dummy */}
+                <div
+                  className={Classes.ReviewImageTexts}
+                  style={{ borderBottom: "0px" }}
+                >
+                  <div className={Classes.Icon_Stars}>
+                    <img src={Profiles} />
+                    <div className={Classes.StarIcons1}>
+                      <p style={{ color: "#fff" }}>5</p>
+                      <IoIosStar
+                        style={{ marginTop: "0px" }}
+                        className={Classes.Star}
+                        size={16}
+                        color="#ffffff"
+                      />
+                    </div>
                   </div>
-                </div>
-              </div>
-              {/* second dummy */}
-              <div
-                className={Classes.ReviewImageTexts}
-                style={{ borderBottom: "0px" }}
-              >
-                <div className={Classes.Icon_Stars}>
-                  <img src={Profiles} />
-                  <div className={Classes.StarIcons1}>
-                    <p style={{ color: "#fff" }}>5</p>
-                    <IoIosStar
-                      style={{ marginTop: "0px" }}
-                      className={Classes.Star}
-                      size={16}
-                      color="#ffffff"
-                    />
-                  </div>
-                </div>
-                <div className={Classes.RightHeadDesc}>
-                  <p>Jameel Muhammed</p>
-                  <p className={Classes.dateReview}>12 Oct 2024</p>
-                  <div className={Classes.ReviewsDescription}>
-                    <p>
-                      nice collections swa diamonds, irealy loved it and thank
-                      you soo much for your quick delivery
-                    </p>
+                  <div className={Classes.RightHeadDesc}>
+                    <p>Jameel Muhammed</p>
+                    <p className={Classes.dateReview}>12 Oct 2024</p>
+                    <div className={Classes.ReviewsDescription}>
+                      <p>
+                        nice collections swa diamonds, irealy loved it and thank
+                        you soo much for your quick delivery
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
             <div className={Classes.CommentFlex} onClick={seAllHandler}>
-              <p className={Classes.AvailableColours}>See all {props.count} </p>
-              <MdOutlineKeyboardArrowRight
-                size={30}
-                className={Classes.ArrowIcon}
-              />
+              <div
+                className="container"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
+                <p className={Classes.AvailableColours3}>
+                  See all {props.count}{" "}
+                </p>
+                <MdOutlineKeyboardArrowRight
+                  size={30}
+                  className={Classes.ArrowIcon}
+                />
+              </div>
             </div>
             {show &&
               props.all.map((item, index) => {

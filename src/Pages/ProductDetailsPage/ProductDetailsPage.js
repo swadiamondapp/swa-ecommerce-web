@@ -6,6 +6,7 @@ import Features from "../../components/Features/Features";
 import Classes from "./ProductDetailsPage.module.css";
 import NewArrivalCard from "../../components/NewArrivals/NewArrivalCard/NewArrivalCard";
 import ProductDetails from "../../components/ProductDetails/ProductDetails";
+import SimilerProducts from "../../components/ProductDetails/SililerProducts";
 import axios from "axios";
 import * as Urls from "../../Urls";
 import { useHistory } from "react-router-dom";
@@ -33,34 +34,34 @@ const ProductDetailsPage = (props) => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    console.log(props)
+    console.log(props);
     // setClrId(props.location.state.data.thumbnail_colour_id);
     setClrId(props.match.params.color);
     // setProduct_Id(props.match.params.id);
-    
 
-    if (((localStorage.getItem("swaToken")) === null) && (props.match.path === '/products/:id/:color/:name')) {
+    if (
+      localStorage.getItem("swaToken") === null &&
+      props.match.path === "/products/:id/:color/:name"
+    ) {
       console.log(JSON.parse(localStorage.getItem("recent")));
       let proArray = JSON.parse(localStorage.getItem("recent"));
       const newProd = props.location.state.data;
-            if (proArray !== null) {
-                      const found = proArray.find((element) => {
-                        return element.product_id === newProd.product_id;
-                      });
-                      if (!found) {
-                        proArray.push(newProd);
-                        let filterArray = proArray.slice(-4);
-                        localStorage.setItem("recent", JSON.stringify(filterArray));
-                      }
-            }
-            else {
-              const newProd = props.location.state.data;
-              let newArray = [];
-              newArray.push(newProd);
-              localStorage.setItem("recent", JSON.stringify(newArray.slice(0, 5)));
-            }
-    }
-    else {
+      if (proArray !== null) {
+        const found = proArray.find((element) => {
+          return element.product_id === newProd.product_id;
+        });
+        if (!found) {
+          proArray.push(newProd);
+          let filterArray = proArray.slice(-4);
+          localStorage.setItem("recent", JSON.stringify(filterArray));
+        }
+      } else {
+        const newProd = props.location.state.data;
+        let newArray = [];
+        newArray.push(newProd);
+        localStorage.setItem("recent", JSON.stringify(newArray.slice(0, 5)));
+      }
+    } else {
       const body = {
         product_id: props.match.params.id,
       };
@@ -221,11 +222,10 @@ const ProductDetailsPage = (props) => {
 
   return (
     <div>
-      
       <Header
         countCartItems={cartCount}
         lognAct={logAct}
-        catBuyclose={()=>setLogAct(false)}
+        catBuyclose={() => setLogAct(false)}
         loginHandler={loginActHandler}
       />
 
@@ -274,6 +274,7 @@ const ProductDetailsPage = (props) => {
         clickedBuy={buyProductHandler}
       />
       <div className={Classes.RecentSearch}>
+        <SimilerProducts />
         {/* <RecentSearch>
         <NewArrivalCard ProductImage={New1} ProductName='Diamond ring' ProductId='SKU: 18037' PriceNew='27000' PriceOld='29500' />
           <NewArrivalCard ProductImage={New2} ProductName='Diamond ring' ProductId='SKU: 18037' PriceNew='27000' PriceOld='29500' />

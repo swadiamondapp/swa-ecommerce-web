@@ -47,7 +47,7 @@ const FilterMobile = () => {
   };
   //   filter modal
   return (
-    <div>
+    <div className={Classes.FilterHeads}>
       <div className={Classes.FilterMobiles}>
         <button onClick={showModalPrice}>Price</button>
 
