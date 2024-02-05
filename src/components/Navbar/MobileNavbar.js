@@ -51,10 +51,11 @@ const MobileNavbar = () => {
         {isHamOpen ? (
           <>
             <div
-              style={{ marginBottom: "1rem" }}
-              className={Classes.SlideButton}
+              className={Classes.SlideButto}
             >
               <LoginToggle />
+              
+
             </div>
           </>
         ) : (

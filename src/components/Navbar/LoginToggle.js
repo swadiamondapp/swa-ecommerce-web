@@ -107,7 +107,7 @@ const LoginToggle = () => {
                     </button>
                   </div>
                 </div>
-                <div style={{ display: "flex",margin:'0.5rem 0rem' }}>
+                <div style={{ display: "flex",marginBottom:'0.5rem' }}>
                   <div className={Classes.line2}>
                     <div
                       style={{
@@ -127,7 +127,9 @@ const LoginToggle = () => {
                   </div>
                 </div>
                 <div className={Classes.signupInputFields}>
-                  <form style={{gap:'1rem'}}>
+                  <form>
+                    <div className={Classes.formgap}>
+
                     <div>
                       <label className={Classes.labelStyle}>Name</label>
                       <input
@@ -149,8 +151,9 @@ const LoginToggle = () => {
                       <input
                         placeholder="Email Address"
                         className={Classes.allInputTextStyle}
-                      />
+                        />
                     </div>
+                        </div>
                   </form>
                 </div>
                 <div style={{ textAlign: "center" }}>

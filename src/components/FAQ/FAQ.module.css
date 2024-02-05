@@ -42,20 +42,26 @@
 }
 .accordion-header:focus{
     background: #ffffff !important;
+    
     border: none !important;
     font-family: 'gilroyNormal' !important;
 }
 .Question{
     font-family: 'gilroyNormal' !important;
-    font-weight: 500;
+    font-weight: 600;
 font-size: 16px;
 border: none;
+color: #0D1217;
+
 }
 .Answer{
     color: #757C81;
     font-weight: 400;
 font-size: 14px;
 }
+
+
+
 @media screen and (max-width:500px) {
 .Main {
     margin:20px 10px 0 10px;
@@ -64,4 +70,20 @@ font-size: 14px;
    
     margin-left: 10px;
 }
+}
+
+@media (min-width: 575px) and (max-width: 767px) {
+    
+}
+@media (min-width: 300px) and (max-width: 575px) {
+    .Question{
+        font-family: 'gilroyNormal' !important;
+        font-weight: 600;
+    font-size: 16px;
+    border: none;
+    color: #0D1217;
+    padding-right: 10px;
+    }
+ 
+
 }
