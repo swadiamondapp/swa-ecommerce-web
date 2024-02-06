@@ -12,6 +12,10 @@ import { IoIosStar, IoLogoWhatsapp } from "react-icons/io";
 import BIS from "../../Assets/BIS.png";
 import IGI from "../../Assets/IGI.png";
 import GIA from "../../Assets/GIA.png";
+import PD1 from "../../Assets/PD1.png";
+import PD2 from "../../Assets/PD2.png";
+import PD3 from "../../Assets/PD3.png";
+import PD4 from "../../Assets/PD4.svg";
 import Stroke from "../../Assets/Stroke.png";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { CgHeart } from "react-icons/cg";
@@ -377,6 +381,117 @@ const ProductDetails = (props) => {
               </div>
             </div>
             <div className={Classes.BackgroundBgs}></div>
+            {/* product details mobile view only */}
+            <div className={Classes.ParentMobileProductDetails}>
+              <div className={Classes.ProductMobileHead}>
+                <p className={Classes.PheadB1}>Product details</p>
+                <div className={Classes.ProductCodeMob}>
+                  <p
+                    style={{
+                      color: "#7A8288",
+                      fontFamily: "Lato",
+                    }}
+                  >
+                    Product code :
+                  </p>
+                  <p>029567-2345643</p>
+                </div>
+              </div>
+              <div className={Classes.ProductDetailsMobCard}>
+                <div className={Classes.LeftMobCard1}>
+                  <img src={PD1} />
+                  <p className={Classes.PdH1}>18kt Rose gold</p>
+                  <p style={{ color: "#7A8288" }}>Net weight</p>
+                  <p style={{ color: "#00464d" }}>1.300 GM</p>
+                </div>
+                <div className={Classes.ArrowlineMob}></div>
+                <div className={Classes.RightMobCard1}>
+                  <img src={PD2} />
+                  <p className={Classes.PdH1}>15 SIJJ Diamond</p>
+                  <p style={{ color: "#7A8288" }}>Diamond weight</p>
+                  <p style={{ color: "#00464d" }}>0.456 ct</p>
+                </div>
+              </div>
+              <div className={Classes.ProductDetailsMobCard2}>
+                <div className={Classes.MobCard2Head}>
+                  <img src={PD3} />
+                  <p className={Classes.PdM2}>Product details</p>
+                </div>
+                <div className={Classes.ProductMob3Rows}>
+                  <div className={Classes.MobFirstCard}>
+                    <p style={{ color: "#7A8288", fontSize: "15px" }}>
+                      Product hight
+                    </p>
+                    <p>19 mm</p>
+                  </div>
+                  <div className={Classes.DummyLineArrow}></div>
+                  <div className={Classes.MobFirstCard}>
+                    <p style={{ color: "#7A8288", fontSize: "15px" }}>
+                      Product length
+                    </p>
+                    <p>18 mm</p>
+                  </div>
+                  <div className={Classes.DummyLineArrow}></div>
+                  <div className={Classes.MobFirstCard}>
+                    <p style={{ color: "#7A8288", fontSize: "15px" }}>
+                      Product width
+                    </p>
+                    <p>6.8 mm</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className={Classes.ParentOtherStoneMob}>
+              <div className={Classes.OtherstoneHeadMob}>
+                <img src={PD4} />
+                <p className={Classes.PdM2}>Other stone details</p>
+              </div>
+              <div className={Classes.Otherstone3Cards}>
+                <div className={Classes.FirststoneMob}>
+                  <p
+                    style={{
+                      color: "#7A8288",
+                      fontSize: "15px",
+                      lineHeight: "20px",
+                    }}
+                  >
+                    Other stone name
+                  </p>
+                  <p style={{ color: "#00464D" }}>Ruby</p>
+                </div>
+                <div className={Classes.DummyLineArrow2}></div>
+                <div className={Classes.FirststoneMob}>
+                  <p
+                    style={{
+                      color: "#7A8288",
+                      fontSize: "15px",
+                      lineHeight: "20px",
+                    }}
+                  >
+                    Other Stone Weight
+                  </p>
+                  <p style={{ color: "#00464D" }}>0</p>
+                </div>
+                <div className={Classes.DummyLineArrow2}></div>
+                <div className={Classes.FirststoneMob}>
+                  <p
+                    style={{
+                      color: "#7A8288",
+                      fontSize: "15px",
+                      lineHeight: "20px",
+                    }}
+                  >
+                    Other Stone count
+                  </p>
+                  <p style={{ color: "#00464D" }}>0</p>
+                </div>
+              </div>
+            </div>
+            {/* product details mobile view only */}
+            <div
+              className={Classes.BackgroundBgs}
+              style={{ borderTop: "0px" }}
+            ></div>
             <div className={Classes.BorderBottom}>
               <div className="container">
                 <p className={Classes.AvailableColours}>Certification</p>
@@ -400,7 +515,7 @@ const ProductDetails = (props) => {
               </div>
             </div>
             <div className={Classes.BackgroundBgs}></div>
-            <div className={Classes.BorderBottom2}>
+            <div className={`${Classes.BorderBottom2} ${Classes.MobHideField}`}>
               <div className="container">
                 <p className={Classes.ProductDetailsHead}>Product details</p>
                 <div className="row">
@@ -439,7 +554,7 @@ const ProductDetails = (props) => {
                 </div>
               </div>
             </div>
-            <div className="col-md-12">
+            <div className={`col-md-12 ${Classes.MobHideField}`}>
               <div className={Classes.BorderBottom}>
                 <p className={Classes.AvailableColours}>Product description</p>
                 <div className={Classes.ProductDiscription}>
@@ -487,7 +602,11 @@ const ProductDetails = (props) => {
             <div className={Classes.BorderBottom2}>
               <div className="container">
                 <div className={Classes.RatingFlex}>
-                  <p className={Classes.ProductDetailsHead}>Rating & Review</p>
+                  <p
+                    className={`${Classes.ProductDetailsHead} ${Classes.ProductDetailsHead2}`}
+                  >
+                    Rating & Review
+                  </p>
                   <div className={Classes.StarFlex}>
                     <p className={Classes.Rating}>{props.avgR}</p>
                     <IoIosStar
@@ -590,6 +709,7 @@ const ProductDetails = (props) => {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-between",
+                  margin: "20px 0px",
                 }}
               >
                 <p className={Classes.AvailableColours3}>
@@ -597,7 +717,7 @@ const ProductDetails = (props) => {
                 </p>
                 <MdOutlineKeyboardArrowRight
                   size={30}
-                  className={Classes.ArrowIcon}
+                  className={Classes.ArrowIcon1}
                 />
               </div>
             </div>
