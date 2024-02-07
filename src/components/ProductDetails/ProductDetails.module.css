@@ -13,7 +13,15 @@
 .my_scroll_div::-webkit-scrollbar {
   display: none;
 }
-
+.ParentHeadingD1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.ImgHeartShare {
+  max-width: 22px;
+  cursor: pointer;
+}
 .my_scroll_div {
   overflow-y: auto;
   max-height: 700px;
@@ -24,7 +32,34 @@
 .my_scroll_div::-webkit-scrollbar {
   display: none;
 }
-
+.TryHome {
+  color: #00464d;
+  background: transparent;
+  border: 1px solid #00464d;
+  padding: 10px 15px;
+  border-radius: 4px;
+  font-family: "Lato", sans-serif;
+}
+.FindStores {
+  background: #a79a6c;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-family: "Lato", sans-serif;
+}
+.VideoCall {
+  background: #21cacc;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+}
+.FindStoreParent {
+  display: flex;
+  gap: 10px;
+  margin: 15px 0px;
+  margin-bottom: 20px;
+}
 .StickyDisplay {
   position: sticky;
   top: 100px; /* Adjust this value according to your layout */
@@ -193,7 +228,7 @@
   color: #ffffff;
   font-weight: 600;
   font-size: 16px;
-  width: 50%;
+  width: 60%;
   padding: 10px 10px;
   /* margin-left: 8px; */
   border: none;
@@ -566,6 +601,27 @@
   gap: 5px;
 }
 
+@media (min-width: 568px) and (max-width: 767px) {
+  .MobProductDetails {
+    order: 2;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+    overflow: scroll;
+  }
+  .MobProductDetails2 {
+    order: 1;
+  }
+  .ImageSmall {
+    width: 100px;
+    margin: 0px;
+  }
+  .BuyNow {
+    width: 67%;
+  }
+}
+
 @media (min-width: 300px) and (max-width: 567px) {
   .ProductDiscription {
     width: 350px;
@@ -604,6 +660,10 @@
     width: 100%;
     left: 0%;
     z-index: 999;
+    background: #fff;
+  }
+  .FindStoreParent {
+    justify-content: center;
   }
   .C1 {
     border-radius: 50px;
@@ -657,8 +717,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px 2px;
+    padding: 20px 20px;
     padding-top: 0px;
+    gap: 22px;
   }
   .MobCard2Head {
     text-align: center;

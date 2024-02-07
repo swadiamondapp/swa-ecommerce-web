@@ -16,6 +16,9 @@ import PD1 from "../../Assets/PD1.png";
 import PD2 from "../../Assets/PD2.png";
 import PD3 from "../../Assets/PD3.png";
 import PD4 from "../../Assets/PD4.svg";
+import PH1 from "../../Assets/hearts.png";
+import PS1 from "../../Assets/sharebtn.png";
+import Call from "../../Assets/call.png";
 import Stroke from "../../Assets/Stroke.png";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { CgHeart } from "react-icons/cg";
@@ -181,8 +184,9 @@ const ProductDetails = (props) => {
                         src={props.thumbImg}
                         alt=""
                       />
+                      {/* warning not remove */}
 
-                      {addToWishList ? (
+                      {/* {addToWishList ? (
                         <FaHeart
                           color="#F91919"
                           className={Classes.Heart}
@@ -194,7 +198,8 @@ const ProductDetails = (props) => {
                           className={Classes.Heart}
                           onClick={Added}
                         />
-                      )}
+                      )} */}
+                      {/* warning not remove */}
                     </div>
                   </div>
                 </div>
@@ -218,7 +223,20 @@ const ProductDetails = (props) => {
           </div>
           <div className="col-md-6" style={{ padding: "0px" }}>
             <div className="container">
-              <p className={Classes.NewArrivals}>{props.name}</p>
+              <div className={Classes.ParentHeadingD1}>
+                <p className={Classes.NewArrivals}>{props.name}</p>
+                <p
+                  className={Classes.SubText}
+                  style={{ display: "flex", alignItems: "center", gap: "15px" }}
+                >
+                  <img
+                    onClick={Added}
+                    src={PH1}
+                    className={Classes.ImgHeartShare}
+                  />
+                  <img src={PS1} className={Classes.ImgHeartShare} />
+                </p>
+              </div>
               <p className={Classes.SubText}>
                 {props.name} In Gold ({props.gw} gram) with Diamonds (
                 {props.diamond} gram)
@@ -279,13 +297,25 @@ const ProductDetails = (props) => {
               onClick={props.clickedBuy}
             /> */}
               <div className={Classes.MobileFixedBtn}>
-                <button
-                  className={Classes.BuyNow}
-                  onClick={props.clickedBuy}
-                  type="submit"
-                >
-                  Buy Now
-                </button>
+                <div>
+                  <button
+                    className={Classes.BuyNow}
+                    onClick={props.clickedBuy}
+                    type="submit"
+                  >
+                    Buy Now
+                  </button>
+                  {/* <button type="submit" onClick={addToCartHandler}>
+                    add to cart
+                  </button> */}
+                </div>
+                <div className={Classes.FindStoreParent}>
+                  <button className={Classes.TryHome}>Try @ Home</button>
+                  <button className={Classes.VideoCall}>
+                    <img src={Call} />
+                  </button>
+                  <button className={Classes.FindStores}>Find @ store</button>
+                </div>
               </div>
               <div className={Classes.BorderBottom}>
                 <p className={Classes.AvailableColours}>Select Size</p>

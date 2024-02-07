@@ -384,143 +384,143 @@ function CheckOut(props) {
                 <div className={Classes.AddresLay}>{adres}</div>
               </div>
 
-              {formShow ? (
-                <div className={Classes.Left}>
-                  <p className={Classes.Heading}>Add address</p>
+              <div className={Classes.Left}>
+                <p className={Classes.Heading}>Add address</p>
 
-                  <form autoComplete="off" onSubmit={formik.handleSubmit}>
-                    <input
-                      className={Classes.PlaceInput}
-                      type="text"
-                      placeholder="Full name*"
-                      value={formik.values.namef}
-                      name="namef"
-                      onChange={formik.handleChange}
-                    />
-                    {formik.touched.namef && formik.errors.namef && (
-                      <div className={Classes.ErrorMsg}>
-                        {formik.errors.namef}
-                      </div>
-                    )}
-                    <div className="row">
-                      <div className="col-md-6">
-                        <input
-                          className={Classes.PlaceInput}
-                          type="number"
-                          placeholder="Phone number*"
-                          value={formik.values.mobile}
-                          name="mobile"
-                          onChange={formik.handleChange}
-                        />
-                        {formik.touched.mobile && formik.errors.mobile && (
-                          <div className={Classes.ErrorMsg}>
-                            {formik.errors.mobile}
-                          </div>
-                        )}
-                        <input
-                          className={Classes.PlaceInput}
-                          type="text"
-                          placeholder="house number/ building name*"
-                          value={formik.values.building}
-                          name="building"
-                          onChange={formik.handleChange}
-                        />
-                        {formik.touched.building && formik.errors.building && (
-                          <div className={Classes.ErrorMsg}>
-                            {formik.errors.building}
-                          </div>
-                        )}
-                        <input
-                          className={Classes.PlaceInput}
-                          type="text"
-                          placeholder="City*"
-                          value={formik.values.city}
-                          name="city"
-                          onChange={formik.handleChange}
-                        />
-                        {formik.touched.city && formik.errors.city && (
-                          <div className={Classes.ErrorMsg}>
-                            {formik.errors.city}
-                          </div>
-                        )}
-                      </div>
-                      <div className="col-md-6">
-                        <div>
-                          <input
-                            className={Classes.PlaceInput}
-                            type="text"
-                            placeholder="Pincode*"
-                            value={formik.values.pin}
-                            name="pin"
-                            onChange={formik.handleChange}
-                          />
-                          {formik.touched.pin && formik.errors.pin && (
-                            <div className={Classes.ErrorMsg}>
-                              {formik.errors.pin}
-                            </div>
-                          )}
-                        </div>
-                        <input
-                          className={Classes.PlaceInput}
-                          type="text"
-                          placeholder="road name, area colony*"
-                          value={formik.values.colony}
-                          name="colony"
-                          onChange={formik.handleChange}
-                        />
-                        {formik.touched.colony && formik.errors.colony && (
-                          <div className={Classes.ErrorMsg}>
-                            {formik.errors.colony}
-                          </div>
-                        )}
-
-                        <select
-                          className={Classes.PlaceInputDrop}
-                          value={formik.values.state}
-                          name="state"
-                          onChange={formik.handleChange}
-                        >
-                          <option value="none" disabled hidden>
-                            State*
-                          </option>
-                          <option value={"kerala"}>Kerala</option>
-                          <option value={"Karnataka"}>Karnataka</option>
-                          <option value={"TamilNadu"}>TamilNadu</option>
-                        </select>
-                      </div>
+                <form autoComplete="off" onSubmit={formik.handleSubmit}>
+                  <input
+                    className={Classes.PlaceInput}
+                    type="text"
+                    placeholder="Full name*"
+                    value={formik.values.namef}
+                    name="namef"
+                    onChange={formik.handleChange}
+                  />
+                  {formik.touched.namef && formik.errors.namef && (
+                    <div className={Classes.ErrorMsg}>
+                      {formik.errors.namef}
                     </div>
-                    <input
-                      className={Classes.PlaceInput}
-                      type="text"
-                      placeholder="Landmark"
-                      value={formik.values.landMark}
-                      name="landMark"
-                      onChange={formik.handleChange}
-                    />
-                    {formik.touched.landMark && formik.errors.landMark && (
-                      <div className={Classes.ErrorMsg}>
-                        {formik.errors.landMark}
+                  )}
+                  <div className="row">
+                    <div className="col-md-6">
+                      <input
+                        className={Classes.PlaceInput}
+                        type="number"
+                        placeholder="Phone number*"
+                        value={formik.values.mobile}
+                        name="mobile"
+                        onChange={formik.handleChange}
+                      />
+                      {formik.touched.mobile && formik.errors.mobile && (
+                        <div className={Classes.ErrorMsg}>
+                          {formik.errors.mobile}
+                        </div>
+                      )}
+                      <input
+                        className={Classes.PlaceInput}
+                        type="text"
+                        placeholder="house number/ building name*"
+                        value={formik.values.building}
+                        name="building"
+                        onChange={formik.handleChange}
+                      />
+                      {formik.touched.building && formik.errors.building && (
+                        <div className={Classes.ErrorMsg}>
+                          {formik.errors.building}
+                        </div>
+                      )}
+                      <input
+                        className={Classes.PlaceInput}
+                        type="text"
+                        placeholder="City*"
+                        value={formik.values.city}
+                        name="city"
+                        onChange={formik.handleChange}
+                      />
+                      {formik.touched.city && formik.errors.city && (
+                        <div className={Classes.ErrorMsg}>
+                          {formik.errors.city}
+                        </div>
+                      )}
+                    </div>
+                    <div className="col-md-6">
+                      <div>
+                        <input
+                          className={Classes.PlaceInput}
+                          type="text"
+                          placeholder="Pincode*"
+                          value={formik.values.pin}
+                          name="pin"
+                          onChange={formik.handleChange}
+                        />
+                        {formik.touched.pin && formik.errors.pin && (
+                          <div className={Classes.ErrorMsg}>
+                            {formik.errors.pin}
+                          </div>
+                        )}
                       </div>
-                    )}
-                    {/* <div className={Classes.Flex}>
+                      <input
+                        className={Classes.PlaceInput}
+                        type="text"
+                        placeholder="road name, area colony*"
+                        value={formik.values.colony}
+                        name="colony"
+                        onChange={formik.handleChange}
+                      />
+                      {formik.touched.colony && formik.errors.colony && (
+                        <div className={Classes.ErrorMsg}>
+                          {formik.errors.colony}
+                        </div>
+                      )}
+
+                      <select
+                        className={Classes.PlaceInputDrop}
+                        value={formik.values.state}
+                        name="state"
+                        onChange={formik.handleChange}
+                      >
+                        <option value="none" disabled hidden>
+                          State*
+                        </option>
+                        <option value={"kerala"}>Kerala</option>
+                        <option value={"Karnataka"}>Karnataka</option>
+                        <option value={"TamilNadu"}>TamilNadu</option>
+                      </select>
+                    </div>
+                  </div>
+                  <input
+                    className={Classes.PlaceInput}
+                    type="text"
+                    placeholder="Landmark"
+                    value={formik.values.landMark}
+                    name="landMark"
+                    onChange={formik.handleChange}
+                  />
+                  {formik.touched.landMark && formik.errors.landMark && (
+                    <div className={Classes.ErrorMsg}>
+                      {formik.errors.landMark}
+                    </div>
+                  )}
+                  {/* <div className={Classes.Flex}>
                                     <input className={Classes.CheckBox} type="checkbox" id="ship" value='Address' />
                                     <label className={Classes.CheckBoxLabel} for="ship">Make this address as shipping address </label>
                                     
                                 </div> */}
-                    <div className={Classes.Save}>
-                      <div
-                        type="submit"
-                        className={Classes.Submit}
-                        onClick={formik.handleSubmit}
-                      >
-                        Save address
-                      </div>
+                  <div className={Classes.Save}>
+                    <div
+                      type="submit"
+                      className={Classes.Submit}
+                      onClick={formik.handleSubmit}
+                    >
+                      Save address
                     </div>
-                  </form>
-                </div>
-              ) : null}
+                  </div>
+                </form>
+              </div>
 
-              <div className={Classes.Method}>
+              {/* payment method old design */}
+
+              {/* <div className={Classes.Method}>
                 <h3>Payment Method</h3>
                 <div className={Classes.MethodPad}>
                   <Radio.Group onChange={methodChange} value={mode}>
@@ -535,7 +535,8 @@ function CheckOut(props) {
                     </Space>
                   </Radio.Group>
                 </div>
-              </div>
+              </div> */}
+              {/* payment method old design */}
             </div>
             <div className="col-md-4">
               <div className={Classes.Right}>
