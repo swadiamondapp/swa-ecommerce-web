@@ -1,9 +1,10 @@
 import React from "react";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { TbTruckDelivery } from "react-icons/tb";
-import WishListTag from "../../../Assets/WishListTag.png";
+import WishListTag from "../../../Assets/whishlist.svg";
 import { BiRupee } from "react-icons/bi";
 import Classes from "../CartDesign.module.css";
+import { IoCheckmarkCircleSharp } from "react-icons/io5";
 
 function CartProducts(props) {
   return (
@@ -22,21 +23,22 @@ function CartProducts(props) {
             </div>
             <div className={`${"col-md-12"} ${"col-lg-8"}`}>
               <div className={Classes.ProductDetails}>
-                <p>{props.ProductName}</p>
+                {/* <p>{props.ProductName}</p> */}
+                <p>{"Diamod ring"}</p>
               </div>
               <div className={Classes.Price}>
-                <p className={Classes.PriceNew}>
-                  <BiRupee className={Classes.BiRupee} size={25} />
-                  {props.NewPrice}
+                <p className={Classes.PriceNew} style={{ marginBottom: "0px" }}>
+                  {/* <BiRupee className={Classes.BiRupee} size={25} /> */}
+                  &#8377; {props.NewPrice}
                 </p>
-                {props.discound ? (
+                {props ? (
                   <p className={Classes.PriceOld}>
-                    <BiRupee className={Classes.BiRupee} size={25} />
-                    {props.OldPrice}
+                    {/* <BiRupee className={Classes.BiRupee} size={25} /> */}
+                    &#8377; {props.OldPrice}
                   </p>
                 ) : null}
               </div>
-              {props.discound ? (
+              {props ? (
                 <p className={Classes.SavedMoney}>
                   Hurray! You have saved{" "}
                   <BiRupee
@@ -44,13 +46,20 @@ function CartProducts(props) {
                     size={15}
                     color="#30933A"
                   />
-                  {props.disPrice.toFixed(2)}
+                  {"2500"}
                 </p>
               ) : null}
               <p className={Classes.ProductProperty}>
-                {props.Property} | {props.DiamondProperty}
+                {props.Property} &nbsp;&nbsp; | &nbsp;&nbsp;
+                {props.DiamondProperty}
               </p>
-              <p className={Classes.Quantity}>Quantity : {props.quanty}</p>
+              {/* <p className={Classes.Quantity}>Quantity : {props.quanty}</p> */}
+              <div className={Classes.OverView}>
+                <p className={Classes.OverViewKey}>Size</p>
+                <p className={Classes.OverViewValue}>15 MM</p>
+                <p className={Classes.OverViewKey}>Colour</p>
+                <p className={Classes.OverViewValue}>Rose Gold</p>
+              </div>
             </div>
           </div>
         </div>
@@ -58,14 +67,14 @@ function CartProducts(props) {
           <TbTruckDelivery size={20} color="#30933A" />
           <p className={Classes.DeliveryExpected}>{props.DeliveryDate}</p>
         </div>
-        <div className={Classes.RemoveMove}>
-          <div className={Classes.Remove}>
-            <RiDeleteBin5Line
-              size={20}
-              onClick={props.remove}
-              style={{ cursor: "pointer" }}
-            />
-          </div>
+      </div>
+      <div className={Classes.RemoveMove}>
+        <div className={Classes.Remove}>
+          <RiDeleteBin5Line
+            size={20}
+            onClick={props.remove}
+            style={{ cursor: "pointer" }}
+          />
           <p
             className={Classes.Delete}
             onClick={props.remove}
@@ -73,6 +82,25 @@ function CartProducts(props) {
           >
             Remove
           </p>
+        </div>
+        <div
+          className={Classes.Remove}
+          style={{ borderLeft: "0.5px solid #E8E8E8" }}
+        >
+          <img src={WishListTag} style={{ width: "13px" }} />
+          <p
+            className={Classes.Delete}
+            onClick={props.remove}
+            style={{ cursor: "pointer" }}
+          >
+            Move to wishList
+          </p>
+        </div>
+        <div className={Classes.DummyWrap}>
+          <IoCheckmarkCircleSharp fill="#005D67" />
+          <p className={Classes.DummyGreen}>30 day money back</p>
+          <IoCheckmarkCircleSharp fill="#005D67" />
+          <p className={Classes.DummyGreen}>Lifetime exchange & buy back</p>
         </div>
       </div>
     </div>

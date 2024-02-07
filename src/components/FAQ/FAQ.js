@@ -20,7 +20,7 @@ function FAQ() {
           <div className={Classes.DropDown}>
             <Accordion defaultActiveKey={[""]} alwaysOpen>
               <Accordion.Item eventKey="0">
-                <Accordion.Header>
+                <Accordion.Header >
                   <div>
                     <p className={Classes.Question}>
                       Login and Account Related Information

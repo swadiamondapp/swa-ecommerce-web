@@ -46,6 +46,9 @@ const LoginToggle = () => {
   const customTabOtpModalStyle = {
     position: "relative",
     // bottom: "20%",
+    left:'50%',
+    top:"50%",
+    transform:"translate(-50%,-50%)",
     bgcolor: "background.paper",
     border: "1px solid #000",
     boxShadow: 24,
@@ -59,7 +62,7 @@ const LoginToggle = () => {
     backgroundColor: activeTab === "tab2" ? "#fff" : "#F0F0F2",
   };
   return (
-    <div style={{ paddingTop: "15px" }}>
+    <div style={{ padding: "16px" }}>
       <div className={Classes.Wrapper}>
         {isSignup ? (
           <>
@@ -107,7 +110,7 @@ const LoginToggle = () => {
                     </button>
                   </div>
                 </div>
-                <div style={{ display: "flex" }}>
+                <div style={{ display: "flex", marginBottom: "0.5rem" }}>
                   <div className={Classes.line2}>
                     <div
                       style={{
@@ -115,9 +118,7 @@ const LoginToggle = () => {
                         opacity: "0.3",
                       }}
                     ></div>
-                    <div style={{ fontSize: "12px", textAlign: "center" }}>
-                      or
-                    </div>
+                    <div className={Classes.orText}>or</div>
                     <div
                       style={{
                         borderBottom: "1px solid #585F67",
@@ -126,30 +127,32 @@ const LoginToggle = () => {
                     ></div>
                   </div>
                 </div>
-                <div>
+                <div className={Classes.signupInputFields}>
                   <form>
-                    <div>
-                      <label className={Classes.labelStyle}>Name</label>
-                      <input
-                        placeholder="Your Name"
-                        className={Classes.allInputTextStyle}
-                      />
-                    </div>
-                    <div>
-                      <label className={Classes.labelStyle}>
-                        Mobile Number
-                      </label>
-                      <input
-                        placeholder="Enter Number"
-                        className={Classes.allInputTextStyle}
-                      />
-                    </div>
-                    <div>
-                      <label className={Classes.labelStyle}>Email</label>
-                      <input
-                        placeholder="Email Address"
-                        className={Classes.allInputTextStyle}
-                      />
+                    <div className={Classes.formgap}>
+                      <div>
+                        <label className={Classes.labelStyle}>Name</label>
+                        <input
+                          placeholder="Your Name"
+                          className={Classes.allInputTextStyle}
+                        />
+                      </div>
+                      <div>
+                        <label className={Classes.labelStyle}>
+                          Mobile Number
+                        </label>
+                        <input
+                          placeholder="Enter Number"
+                          className={Classes.allInputTextStyle}
+                        />
+                      </div>
+                      <div>
+                        <label className={Classes.labelStyle}>Email</label>
+                        <input
+                          placeholder="Email Address"
+                          className={Classes.allInputTextStyle}
+                        />
+                      </div>
                     </div>
                   </form>
                 </div>
@@ -165,6 +168,7 @@ const LoginToggle = () => {
                 <div className={Classes.Signup}>
                   <div>
                     <p className={Classes.bottomText}>
+                      {" "}
                       Already have an account?
                     </p>
                   </div>
@@ -187,7 +191,7 @@ const LoginToggle = () => {
             <div className={Classes.SlideButton}>
               <div className={Classes.LoginContainer}>
                 <div className={Classes.title}>
-                  <div t>
+                  <div>
                     <h3 className={Classes.titleh}>Welcome back Login here</h3>
                   </div>
                   <div className={Classes.signupTitleText}>
@@ -197,9 +201,7 @@ const LoginToggle = () => {
                     </p>
                   </div>
                 </div>
-                <div
-               className={Classes.flex}
-                >
+                <div className={Classes.flex}>
                   <div
                     className={Classes.SocialButtons}
                     style={{ marginBottom: "1rem" }}
@@ -228,9 +230,7 @@ const LoginToggle = () => {
                       opacity: "0.3",
                     }}
                   ></div>
-                  <div className={Classes.orText}>
-                    or
-                  </div>
+                  <div className={Classes.orText}>or</div>
                   <div
                     style={{
                       borderBottom: "1px solid #585F67",
@@ -361,10 +361,7 @@ const LoginToggle = () => {
                             <h3 className={Classes.titleh}>OTP</h3>
                           </div>
                           <div>
-                            <p
-                              className={Classes.titlep}
-                              style={{ fontSize: "12px" }}
-                            >
+                            <p className={Classes.titlep}>
                               Please enter 6 digit OTP that send to your
                               <br />
                               +91 9879453467
@@ -392,7 +389,8 @@ const LoginToggle = () => {
                           <div className={Classes.Signup}>
                             <div>
                               <p className={Classes.bottomText}>
-                                Don’t recived the code?
+                                {" "}
+                                Dont't recived the code ?
                               </p>
                             </div>
                             <div>
