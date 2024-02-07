@@ -400,7 +400,7 @@ header {
 }
 
 a {
-  color: #ffffff;
+  color: #ffffff !important;
   font-family: "gilroyNormal" !important;
   font-weight: 400 !important;
   font-size: 12px !important;
