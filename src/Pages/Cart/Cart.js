@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Header from "../../components/HeaderNew/Header";
+import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import CartProducts from "../../components/CartDesign/CartProducts/CartProducts";
 import CartDesign from "../../components/CartDesign/CartDesign";
@@ -201,7 +201,7 @@ const Cart = () => {
               />
             );
           })}
-          <ReactPaginate
+          {/* <ReactPaginate
             breakLabel="..."
             nextLabel="next >"
             onPageChange={handlePageClick}
@@ -220,7 +220,7 @@ const Cart = () => {
             breakClassName={"page-item"}
             breakLinkClassName={"page-link"}
             activeClassName={"active"}
-          />
+          /> */}
         </CartDesign>
       </>
     );

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Header from "../../components/HeaderNew/Header";
+import Header from "../../components/Header/Header";
 import Banner from "../../components/Banner/Banner";
 import Features from "../../components/Features/Features";
 import ShopOnBudget from "../../components/ShopOnBudget/ShopOnBudget";
@@ -8,10 +8,6 @@ import ShopOnBudget1 from "../../Assets/ShopOnBudget1.png";
 import ShopOnBudget2 from "../../Assets/ShopOnBudget2.png";
 import ShopOnBudget3 from "../../Assets/ShopOnBudget3.png";
 import ShopOnBudget4 from "../../Assets/ShopOnBudget4.png";
-import shop1 from "../../Assets/shop1.png";
-import shop2 from "../../Assets/shop2.png";
-import shop3 from "../../Assets/shop3.png";
-import shop4 from "../../Assets/shop4.png";
 import NewArrivals from "../../components/NewArrivals/NewArrivals";
 import NewArrivalCard from "../../components/NewArrivals/NewArrivalCard/NewArrivalCard";
 import BringTheParty from "../../components/BringTheParty/BringTheParty";
@@ -42,11 +38,9 @@ const LandingPage = () => {
   const [topDeamd, setTopDemand] = useState([]);
   const [video, setVideo] = useState("");
   const [serachList, setSearcList] = useState([]);
-  const [mobBanner, setMobBanner] = useState([]);
   const [cartCount, setCartCount] = useState("");
   const [loading, setLoading] = useState(false);
   const [logToken, setLogToken] = useState("");
-  const [tags, setTags] = useState([]);
 
   const history = useHistory();
   const token = localStorage.getItem("swaToken");
@@ -64,12 +58,9 @@ const LandingPage = () => {
                 response1.data.results.data.corosals[i].corousal_image,
               corousal_name:
                 response1.data.results.data.corosals[i].corousal_name,
-              type_id: response1.data.results.data.corosals[i].type_id,
-              is_category: response1.data.results.data.corosals[i].is_category,
             });
           }
         }
-
         setBanner(bannerArray);
         setNewArrivel(response1.data.results.data.new_arrival.slice(0, 8));
         setBudjet(response1.data.results.data.product_budget);
@@ -109,7 +100,6 @@ const LandingPage = () => {
         .then((response1) => {
           setLoading(false);
           let bannerArray = [];
-          let banMob = [];
           for (
             let i = 0;
             i < response1.data.results.data.corosals.length;
@@ -121,27 +111,13 @@ const LandingPage = () => {
                   response1.data.results.data.corosals[i].corousal_image,
                 corousal_name:
                   response1.data.results.data.corosals[i].corousal_name,
-                is_category:
-                  response1.data.results.data.corosals[i].is_category,
-                type_id: response1.data.results.data.corosals[i].type_id,
-              });
-            } else {
-              banMob.push({
-                corousal_image:
-                  response1.data.results.data.corosals[i].corousal_image,
-                corousal_name:
-                  response1.data.results.data.corosals[i].corousal_name,
-                is_category:
-                  response1.data.results.data.corosals[i].is_category,
-                type_id: response1.data.results.data.corosals[i].type_id,
               });
             }
           }
           setBanner(bannerArray);
-          setMobBanner(banMob);
           setNewArrivel(response1.data.results.data.new_arrival.slice(0, 8));
           setBudjet(response1.data.results.data.product_budget);
-          setAdd(response1.data.results.data.banners.slice(3, 7));
+          setAdd(response1.data.results.data.banners);
           setTopDemand(response1.data.results.data.top_demand.slice(0, 8));
           setVideo(response1.data.results.data.Video);
         })
@@ -273,7 +249,7 @@ const LandingPage = () => {
                 }
                 PriceOld={item.is_on_discount ? item.total_price_final : null}
                 Discount={
-                  item.discount_percentage !== null && undefined
+                  item.discount_percentage !== null
                     ? item.discount_percentage + "% OFF"
                     : null
                 }
@@ -287,46 +263,44 @@ const LandingPage = () => {
       </RecentSearch>
     );
   }
-  console.log("add", add);
 
   return (
     <div>
       <Header countCartItems={cartCount} loginHandler={loginActHandler} />
-      <Banner banners={banner} tags={tags} mob={mobBanner} />
-
+      <Banner banners={banner} />
+      <Features />
       <div className="container">
         <ShopOnBudget>
           <BudgetCard
             head={"Under  " + budjet[0].budget}
-            sub={budjet[0].count + " styles"}
-            backgroundImage={shop1}
+            sub={budjet[0].count + " syles"}
+            backgroundImage={ShopOnBudget1}
             clicked={() => productMinHandler(budjet[0].budget)}
           />
           <BudgetCard
             head={"Under  " + budjet[1].budget}
-            sub={budjet[1].count + " styles"}
-            backgroundImage={shop2}
+            sub={budjet[1].count + " syles"}
+            backgroundImage={ShopOnBudget2}
             clicked={() => productMinHandler(budjet[1].budget)}
           />
           <BudgetCard
             head={"Under  " + budjet[2].budget}
-            sub={budjet[2].count + " styles"}
-            backgroundImage={shop3}
+            sub={budjet[2].count + " syles"}
+            backgroundImage={ShopOnBudget3}
             clicked={() => productMinHandler(budjet[2].budget)}
           />
           <BudgetCard
             head={"Under  " + budjet[3].budget}
-            sub={budjet[3].count + " styles"}
-            backgroundImage={shop4}
+            sub={budjet[3].count + " syles"}
+            backgroundImage={ShopOnBudget4}
             clicked={() => productMinHandler(budjet[3].budget)}
           />
         </ShopOnBudget>
         <NewArrivals>{newArriv}</NewArrivals>
-        <BringTheParty add={add} />
+        {/* <BringTheParty img1={add[0].Ad_image} img2={add[1].Ad_image} img3={add[2].Ad_image}/> */}
         <TopDemanded>{topDemnd}</TopDemanded>
 
         <Certificate video={"https://www.youtube.com/embed/s3PrxdvAihI"} />
-        <Features />
 
         {searchList}
         <DownloadOurAppImage />

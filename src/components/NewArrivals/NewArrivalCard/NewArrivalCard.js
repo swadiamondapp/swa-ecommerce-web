@@ -9,7 +9,6 @@ import { useState } from "react";
 import { BiRupee } from "react-icons/bi";
 import axios from "axios";
 import * as Urls from "../../../Urls";
-import { IoCartOutline } from "react-icons/io5";
 import { useEffect } from "react";
 const NewArrivalCard = (props) => {
   const history = useHistory();
@@ -74,13 +73,13 @@ const NewArrivalCard = (props) => {
   return (
     <React.Fragment>
       <div
-        className={`${"col-md-4"} ${"col-sm-6"} ${"col-lg-3"} ${"col-6"} ${
+        className={`${"col-md-3"} ${"col-sm-6"} ${"col-lg-3"} ${"col-12"} ${
           Classes.NewArrivals
         }`}
       >
         <ToastContainer />
         <div className={Classes.NewArrivalCard}>
-          <div onClick={props.clicked} className={Classes.NewArrivalPics}>
+          <div onClick={props.clicked}>
             {props.Discount !== null ? (
               <div className={Classes.Discount}>
                 <p className={Classes.Number}>{props.Discount}</p>
@@ -92,40 +91,22 @@ const NewArrivalCard = (props) => {
               className={Classes.ProductImage}
               alt=""
             />
-
             {/* <p className={Classes.ProductName}>{props.ProductName}</p> */}
             {/* <p className={Classes.ProductId}>{props.ProductId}</p> */}
             <div className={Classes.Price}>
               <p className={Classes.PriceNew}>
-                <BiRupee className={Classes.Rupee} />
+                <BiRupee size={20} />
                 {props.PriceNew}
               </p>
               <p className={Classes.PriceOld}>
                 {props.PriceOld !== null && (
-                  <BiRupee color="#B0B0B0" className={Classes.Rupee} />
+                  <BiRupee size={20} color="#B0B0B0" />
                 )}
                 {props.PriceOld !== null && props.PriceOld}
               </p>
             </div>
           </div>
-
-          {/* heart */}
-          <div className={Classes.parentHeart}>
-            {addToWishList ? (
-              <FaHeart className={Classes.Heart} onClick={Remove} />
-            ) : (
-              <CgHeart className={Classes.Heart} onClick={Added} />
-            )}
-          </div>
-          {/* heart */}
-          <div className={Classes.ParentAddToCartCard}>
-            <div className={Classes.addToCartCard}>
-              ADD TO CART <IoCartOutline color="#fff" size={20} />
-            </div>
-          </div>
-
-          {/* discover and heart */}
-          {/* <div className={onadd ? [Classes.Buttons] : [Classes.None]}>
+          <div className={onadd ? [Classes.Buttons] : [Classes.None]}>
             <button className={Classes.AddToCart} onClick={props.clicked}>
               Discover
             </button>
@@ -142,9 +123,7 @@ const NewArrivalCard = (props) => {
                 onClick={Added}
               />
             )}
-          </div> */}
-          {/* discover and heart */}
-
+          </div>
           {/* <div className={onadd ?[Classes.None] :[Classes.Buttons]}>
                         <button className={Classes.AddToCart} onClick={addToCart}>GO TO CART</button>
                         {addToWishList ? <FaHeart color='#ffffff' className={Classes.Heart} onClick={Remove} /> : <CgHeart color='#ffffff' className={Classes.Heart} onClick={Added}/>}

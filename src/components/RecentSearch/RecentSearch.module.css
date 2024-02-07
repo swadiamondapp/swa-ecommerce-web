@@ -1,24 +1,5 @@
-.RecentSearch h1 {
-  font-weight: 500;
-  font-size: 30px;
-  margin: 50px 0 10px 20px;
-  color: #0d1217;
-  font-family: "PlayFairNormal";
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  .RecentSearch h1 {
-    font-size: 26px;
-  }
-}
-@media (min-width: 576px) and (max-width: 767px) {
-  .RecentSearch h1 {
-    font-size: 26px;
-  }
-}
-@media (min-width: 300px) and (max-width: 575px) {
-  .RecentSearch h1 {
-    font-size: 22px;
-    margin: 40px 0 10px 20px;
-  }
+.RecentSearch h1{
+    font-weight: 600;
+font-size: 30px;
+margin: 50px 0 10px 20px;
 }

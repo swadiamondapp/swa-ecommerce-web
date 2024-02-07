@@ -1,8 +1,4 @@
 @font-face {
-  font-family: "Poppins";
-  src: url(./Font/Poppins-Light.ttf);
-}
-@font-face {
   font-family: "gilroyNormal";
   src: url(./Font/Gilroy-Regular.ttf);
 }
@@ -23,39 +19,8 @@
 }
 
 @font-face {
-  font-family: "GilroyRegular";
-  src: url(./Font/Gilroy-Regular.ttf);
-}
-
-.page-link {
-  font-weight: 800 !important;
-  font-size: 16px !important;
-}
-.pagination {
-  --bs-pagination-padding-x: 1rem !important;
-  --bs-pagination-padding-y: 0.4rem !important;
-  --bs-pagination-font-size: 1rem;
-  --bs-pagination-color: #000000 !important;
-  --bs-pagination-bg: #fff;
-  --bs-pagination-border-width: 0px !important;
-  --bs-pagination-border-color: #dee2e6;
-
-  --bs-pagination-border-radius: 0.5rem !important;
-  --bs-pagination-hover-color: #fff !important;
-  --bs-pagination-hover-bg: #000000 !important;
-  --bs-pagination-hover-border-color: #000000 !important;
-  --bs-pagination-focus-color: #fff !important;
-  --bs-pagination-focus-bg: #000000 !important;
-  --bs-pagination-focus-box-shadow: none !important;
-  --bs-pagination-active-color: #fff;
-  --bs-pagination-active-bg: #000000 !important;
-  --bs-pagination-active-border-color: #000000 !important;
-  --bs-pagination-disabled-color: #6c757d;
-  --bs-pagination-disabled-bg: #fff;
-  --bs-pagination-disabled-border-color: #dee2e6;
-  display: flex;
-  padding-left: 0;
-  list-style: none;
+  font-family: "LatoNormal";
+  src: url(./Font/Lato-Regular.ttf);
 }
 
 .padLeft {
@@ -77,9 +42,6 @@ input::placeholder {
   border-radius: 8px;
   margin-top: 30px;
   margin-bottom: 30px;
-}
-p {
-  margin-bottom: 0px !important;
 }
 /* 
 .ant-steps-item-finish>.ant-steps-item-container>.ant-steps-item-tail::after{
@@ -138,7 +100,6 @@ p {
 .modal-body {
   padding: 0 50px 25px 50px !important;
 }
-
 .ant-steps
   .ant-steps-item-finish
   > .ant-steps-item-container
@@ -172,38 +133,6 @@ p {
   top: 50px !important;
   width: 96% !important;
 }
-:where(.css-dev-only-do-not-override-12czi4v).ant-modal .ant-modal-footer {
-  display: none !important;
-}
-:where(.css-dev-only-do-not-override-4fj727).ant-modal .ant-modal-footer {
-  display: none !important;
-}
-:where(.css-dev-only-do-not-override-12czi4v).ant-modal {
-  position: absolute !important;
-  bottom: 0% !important;
-}
-:where(.css-dev-only-do-not-override-4fj727).ant-modal {
-  position: absolute !important;
-  bottom: 0% !important;
-}
-:where(.css-dev-only-do-not-override-12czi4v).ant-modal .ant-modal-content {
-  position: absolute !important;
-  bottom: 0% !important;
-  width: 100% !important;
-}
-:where(.css-dev-only-do-not-override-4fj727).ant-modal .ant-modal-content {
-  position: absolute !important;
-  bottom: 0% !important;
-  width: 100% !important;
-}
-:where(.css-dev-only-do-not-override-12czi4v).ant-modal {
-  width: 100% !important;
-  max-width: 100% !important;
-}
-:where(.css-dev-only-do-not-override-4fj727).ant-modal {
-  width: 100% !important;
-  max-width: 100% !important;
-}
 .ReactFlagsSelect-module_selectBtn__19wW7 {
   border: none !important;
   border-bottom: 1px solid #e2e4e5 !important;
@@ -230,20 +159,5 @@ input[type="number"] {
   .loader {
     padding-top: 45px;
     padding-bottom: 45px;
-  }
-}
-
-@media (min-width: 300px) and (max-width: 567px) {
-  .pageout {
-    padding-top: 20px;
-    padding-right: 0px !important;
-  }
-  .nopadmar {
-    padding-left: 0px !important;
-    padding-right: 0px !important;
-  }
-  .page-link {
-    font-weight: 800 !important;
-    font-size: 12px !important;
   }
 }

@@ -1,117 +1,88 @@
-.Title {
-  font-weight: 500;
-  font-size: 24px;
-  font-family: "PlayFairNormal" !important;
+.Title{
+    font-weight: 500;
+font-size: 24px;
+font-family: 'PlayFairNormal' !important;
 }
-.Main {
-  display: flex;
-  align-items: center;
-  gap: 15px;
+.Main{
+    display: flex;
+
 }
-.Number {
-  font-weight: 400;
-  font-size: 16px;
-  margin-left: 10px;
-  color: #757c81;
-  font-family: "gilroyNormal" !important;
-  line-height: 30px;
+.Number{
+    font-weight: 400;
+font-size: 16px;
+margin-left: 10px;
+color: #757C81;
+font-family: 'gilroyNormal' !important;
+line-height: 30px;
+
 }
-.Found {
-  color: #757c81;
-  font-size: 16px;
-  line-height: 18px;
-  font-family: "gilroyNormal" !important;
+.SubText{
+    display: flex;
+    font-weight: 400;
+font-size: 14px;
+font-family: 'gilroyNormal' !important;
+
 }
-.SubText {
-  display: flex;
-  font-weight: 400;
-  font-size: 14px;
-  font-family: "gilroyNormal" !important;
+.Home{
+    color: #00464D;
+    font-weight: 400;
+font-size: 14px;
+font-family: 'gilroyNormal' !important;
+cursor: pointer;
+
 }
-.Home {
-  color: #00464d;
-  font-weight: 400;
-  font-size: 14px;
-  font-family: "gilroyNormal" !important;
-  cursor: pointer;
+.NewArrival{
+    color: #01B3C5;
+    font-weight: 400;
+font-size: 14px;
+font-family: 'gilroyNormal' !important;
+
 }
-.NewArrival {
-  color: #01b3c5;
-  font-weight: 400;
-  font-size: 14px;
-  font-family: "gilroyNormal" !important;
+.Filtered{
+    display: flex;
 }
-.Filtered {
-  display: flex;
+.FilterBy{
+    font-weight: 400;
+font-size: 13px;
+font-family: 'gilroyNormal' !important;
 }
-.FilterBy {
-  font-weight: 400;
-  font-size: 13px;
-  font-family: "gilroyNormal" !important;
+.Filter{
+    background: #F7F6F2;
+border-radius: 16px;
+margin: -5px 10px 10px 10px;
+padding: 5px 8px 5px 8px;
+font-size: 13px;
 }
-.Filter {
-  background: #f7f6f2;
-  border-radius: 16px;
-  margin: -5px 10px 10px 10px;
-  padding: 5px 8px 5px 8px;
-  font-size: 13px;
+.filterSort{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #E8E8E8;
+   
 }
-.filterSort {
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 25px;
-  border-bottom: 1px solid #e8e8e8;
+.SortDrop{
+    display: flex;
+    
+    
 }
-.ParentMain {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.Sort{
+    font-weight: 400;
+    font-size: 13px;
+    font-family: 'gilroyNormal' !important;
 }
-.SortDrop {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  border: 1px solid #ededed;
-  padding: 10px;
-  border-radius: 5px;
-}
-.Sort {
-  font-weight: 400;
-  font-size: 16px;
-  font-family: "gilroyNormal" !important;
-}
-.SortDrop select {
-  border: none;
-  font-size: 16px;
+.SortDrop select{
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: -18px;
+
 }
 
-.SortDrop select::selection {
-  border: none;
+.SortDrop select::selection{
+    border: none;
 }
-@media screen and (max-width: 767px) {
-  .Filter {
-    padding: 0;
-  }
-}
-
-@media (min-width: 576px) and (max-width: 767px) {
-  .ParentMain {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    flex-direction: column;
-    gap: 15px;
-  }
-}
-@media (min-width: 300px) and (max-width: 567px) {
-  .Found {
-    margin-bottom: 15px;
-  }
-  .ParentMain {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    flex-direction: column;
-    gap: 15px;
-  }
+@media screen and (max-width:767px) {
+    .Filter{
+      padding: 0;
+    }
 }

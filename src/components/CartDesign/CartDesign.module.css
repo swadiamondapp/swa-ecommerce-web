@@ -1,351 +1,382 @@
 .Title {
-    font-weight: 500;
-    font-size: 24px;
-    font-family: 'PlayFairNormal' !important;
+  font-weight: 500;
+  font-size: 24px;
+  font-family: "PlayFairNormal" !important;
 }
 
 .Main {
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-    margin-left: 20px;
-
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  margin-left: 20px;
 }
 
 .Number {
-    font-weight: 400;
-    font-size: 16px;
-    margin-left: 10px;
-    color: #757C81;
-    font-family: 'gilroyNormal' !important;
-    line-height: 30px;
-
+  font-weight: 400;
+  font-size: 16px;
+  margin-left: 10px;
+  color: #757c81;
+  font-family: "gilroyNormal" !important;
+  line-height: 30px;
 }
 
 .SubText {
-    display: flex;
+  display: flex;
 
-    font-size: 14px;
-    font-family: 'gilroyNormal' !important;
-
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
 }
 
 .Home {
-    color: #00464D;
-    font-size: 14px;
-    font-family: 'gilroyNormal' !important;
-    font-weight: 500;
-
+  color: #00464d;
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
+  font-weight: 500;
 }
 
 .NewArrival {
-    color: #01B3C5;
-    font-size: 14px;
-    font-family: 'gilroyNormal' !important;
-    font-weight: 500;
+  color: #01b3c5;
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
+  font-weight: 500;
 }
 
 .CartItems {
-    margin: 20px;
-    border: 1px solid black;
-    padding: 14px;
-    background: #FFFFFF;
-    border: 0.5px solid #E8E8E8;
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.05);
-    border-radius: 4px;
+  /* margin: 20px; */
+  border: 1px solid black;
+  padding: 14px;
+  background: #ffffff;
+  border: 0.5px solid #e8e8e8;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
 }
 
 .Total {
-    border: 1px solid black;
-    height: 480px;
+  border: 1px solid black;
+  height: 480px;
 }
-.Products{
-    border: 1px solid #E4E4E4;
-    border-radius: 2px;
-    margin-top: 22px;
+.Products {
+  border-radius: 2px;
+  /* margin-top: 22px; */
 }
 
 .ProductImage {
-    padding: 16px 16px 16px 0;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: auto;
+  /* padding: 16px 16px 16px 0; */
+  display: flex;
+  justify-content: center;
+  width: 90%;
+  height: auto;
 }
 
 .ProductDetails {
-    font-weight: 600;
-    font-size: 18px;
-    margin-top: 45px;
-    color: #0D1217;
-    font-family: 'gilroyNormal' !important;
+  font-weight: 600;
+  font-size: 18px;
+  margin-top: 20px;
+  color: #0d1217;
+  font-family: "gilroyNormal" !important;
+}
+
+.ProductDetails p {
+  margin-bottom: 3px;
 }
 
 .Price {
-    display: flex;
-    font-size: 14px;
+  display: flex;
+  font-size: 14px;
 }
 
 .PriceNew {
-    font-weight: 700;
-    margin-right: 5px;
-    font-size: 16px;
+  font-weight: 700;
+  margin-right: 5px;
+  font-size: 16px;
 }
 
 .PriceOld {
-    text-decoration: line-through;
-    margin-left: 5px;
-    font-weight: 300;
-    font-size: 16px;
-    color: #B0B0B0;
+  text-decoration: line-through;
+  margin-left: 5px;
+  font-weight: 300;
+  font-size: 16px;
+  color: #b0b0b0;
+  margin-bottom: 0px;
 }
 
 .SizeQty {
-    display: flex;
-    /* margin-top: 20px; */
+  display: flex;
+  /* margin-top: 20px; */
 }
 
 .SizeText {
-    font-weight: 400;
-    font-size: 14px;
-    color: #757C81;
-    font-family: 'gilroyNormal' !important;
-    margin-top: 18px;
+  font-weight: 400;
+  font-size: 14px;
+  color: #757c81;
+  font-family: "gilroyNormal" !important;
+  margin-top: 18px;
 }
 
 .SizeNum {
-    font-weight: 600;
-    font-size: 14px;
-    font-family: 'gilroyNormal' !important;
-    padding: 2px 5px 0 5px;
-    margin-top: 16px;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
+  padding: 2px 5px 0 5px;
+  margin-top: 16px;
 }
 
 .DropDown {
-    margin-left: 15px;
-margin-top: 10px;
+  margin-left: 15px;
+  margin-top: 10px;
 }
 
-
-.Quantity option{
-    border: 1px solid #00464D;
-    border-radius: 10px;
+.Quantity option {
+  border: 1px solid #00464d;
+  border-radius: 10px;
 }
 .SavedMoney {
-    font-weight: 600;
-    font-size: 14px;
-    color: #30933A;
-    font-family: 'gilroyNormal' !important;
-
+  font-weight: 600;
+  font-size: 14px;
+  margin-top: 3px;
+  color: #30933a;
+  font-family: "gilroyNormal" !important;
 }
-.Rupee{
-    margin-bottom: 5px;
+.Rupee {
+  margin-bottom: 5px;
 }
-.Quantity{
-    font-size: 14px;
-    color: #303A42;
-    line-height: 16.48px;
-    font-weight: 400;
+.Quantity {
+  font-size: 14px;
+  color: #303a42;
+  line-height: 16.48px;
+  font-weight: 400;
 }
 
 .ProductProperty {
-    font-weight: 400;
-    font-size: 14px;
-    color: #757C81;
-    line-height: 16.5px;
-    font-family: 'gilroyNormal' !important;
+  font-weight: 400;
+  font-size: 14px;
+  color: #757c81;
+  line-height: 16.5px;
+  font-family: "gilroyNormal" !important;
 }
-.Apply{
-    color: #0997E7;
-    font-size: 15px;
-    font-family: 'gilroyNormal' !important;
-    font-weight: 600;
-    cursor: pointer;
+.Apply {
+  color: #0997e7;
+  font-size: 15px;
+  font-family: "gilroyNormal" !important;
+  font-weight: 600;
+  cursor: pointer;
 }
-.Voucher{
-    display: flex;
-    justify-content: space-between;
-    padding-top: 20px;
+.Voucher {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
 }
 .Delivery {
-    display: flex;
-    border-bottom: 0.5px solid #E8E9EA;
-    margin-left: 12px;
-    margin-top: 15px;
+  display: flex;
+  /* border-bottom: 0.5px solid #e8e9ea; */
+  margin-left: 12px;
+  /* margin-top: 15px; */
 }
 
-
 .DeliveryExpected {
-    font-weight: 400;
-    font-size: 12px;
-    color: #454647;
-    font-family: 'gilroyNormal' !important;
-    margin-left: 10px;
-
+  font-weight: 400;
+  font-size: 12px;
+  color: #454647;
+  font-family: "gilroyNormal" !important;
+  margin-left: 10px;
 }
 
 .RemoveMove {
-    display: flex;
-
+  background: #ffffff;
+  display: grid;
+  margin-bottom: 20px;
+  grid-template-columns: 0.4fr 0.6fr 1.1fr;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
 }
 
 .Remove {
-    padding: 0;
-    color: #5E666C;
-    margin: 5px;
-    margin-left: 10px;
-
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0;
+  color: #5e666c;
+  padding-left: 20px;
+  margin: 0px;
 }
 
 .Delete {
-    font-weight: 400;
-    font-family: 'gilroyNormal' !important;
-    font-size: 14px;
-    margin-top: 10px;
+  font-weight: 400;
+  font-family: "gilroyNormal" !important;
+  font-size: 14px;
+  margin-bottom: 0px;
+  padding: 20px 0px;
 }
 
 .Right {
-    background: #FFFFFF;
-    border: 0.5px solid #E8E8E8;
-    box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.08);
-    border-radius: 4px;
-    margin-top: 20px;
-    padding: 20px;
+  background: #ffffff;
+  border: 0.5px solid #e8e8e8;
+  box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+  /* margin-top: 20px; */
+  padding: 20px;
 }
 
 .TotalText {
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px dashed #E8E9EA;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dashed #e8e9ea;
 }
 
 .OrderSummery {
-    font-weight: 600;
-    font-size: 14px;
-    color: #5E666C;
-    padding-top: 20px;
-    font-family: 'gilroyNormal' !important;
-
+  font-weight: 600;
+  font-size: 14px;
+  color: #5e666c;
+  padding-top: 20px;
+  font-family: "gilroyNormal" !important;
 }
 
 .NumOfItem {
-    font-weight: 400;
-    font-size: 14px;
-    color: #5E666C;
-    font-family: 'gilroyNormal' !important;
-    
+  font-weight: 400;
+  font-size: 14px;
+  color: #5e666c;
+  font-family: "gilroyNormal" !important;
 }
-.TotalSmall{
-    font-weight: 600;
-font-size: 14px;
-font-family: 'gilroyNormal' !important;
+.TotalSmall {
+  font-weight: 600;
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
 }
-.Amount{
-    font-weight: 600;
-font-size: 14px;
-margin-top:  15px;
-font-family: 'gilroyNormal' !important;
+.Amount {
+  font-weight: 600;
+  font-size: 14px;
+  margin-top: 15px;
+  font-family: "gilroyNormal" !important;
 }
-.TotalItem{
-    display: flex;
-    justify-content: space-between;
-   margin-top: 15px;
+.TotalItem {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
 }
-.TotalItemBorder{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-    border-bottom: 0.5px solid #E8E9EA;
+.TotalItemBorder {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  border-bottom: 0.5px solid #e8e9ea;
 }
 
-.TotalItems{
-    display: flex;
-    
+.TotalItems {
+  display: flex;
 }
-.TotalPayable{
-    font-weight: 600;
-font-size: 17px;
-letter-spacing: 0.03em;
-color: #303A42;
-font-family: 'gilroyNormal' !important;
+.TotalPayable {
+  font-weight: 600;
+  font-size: 17px;
+  letter-spacing: 0.03em;
+  color: #303a42;
+  font-family: "gilroyNormal" !important;
 }
-.HurrayText{
-    color: #30933A;
-    font-weight: 600;
-font-size: 14px;
-margin-top: 10px;
-
+.HurrayText {
+  color: #30933a;
+  font-weight: 600;
+  font-size: 14px;
+  margin-top: 10px;
 }
-.AmountPayable{
-    font-weight: 700;
-font-size: 17px;
-color: #303A42;
+.AmountPayable {
+  font-weight: 700;
+  font-size: 17px;
+  color: #303a42;
 }
-.Input{
-    background: #F9F9F9;
-border: 1px solid #E8E9EA;
-border-radius: 4px;
-font-weight: 400;
-font-size: 16px;
-color: #1E1E1E;
-font-family: 'gilroyNormal' !important;
-width: 60%;
-height: 50px;
-/* margin-right: 5px;*/
+.Input {
+  background: #f9f9f9;
+  border: 1px solid #e8e9ea;
+  border-radius: 4px;
+  font-weight: 400;
+  font-size: 16px;
+  color: #1e1e1e;
+  font-family: "gilroyNormal" !important;
+  width: 60%;
+  height: 50px;
+  /* margin-right: 5px;*/
 }
-.ApplyButton{
-    
-background: linear-gradient(180deg, #978958 0%, #AEA174 82.81%);
-border-radius: 2px;
-padding: 12px 35px;
-border: none;
-border-radius: 2px;
-color: #FFFFFF;
-margin-left: 5px;
+.ApplyButton {
+  background: linear-gradient(180deg, #978958 0%, #aea174 82.81%);
+  border-radius: 2px;
+  padding: 12px 35px;
+  border: none;
+  border-radius: 2px;
+  color: #ffffff;
+  margin-left: 5px;
 }
-.Rupee{
-    margin-top: 4px;
-    
+.Rupee {
+  margin-top: 4px;
 }
-.BiRupee{
-    padding-top: 1px;
-    padding-bottom: 2px;
+.BiRupee {
+  padding-top: 1px;
+  padding-bottom: 2px;
 }
-.PlaceOrderButton{
-    background: #19242D;
-border-radius: 4px;
-padding: 10px 0 10px 0;
-font-weight: 600;
-width: 100%;
-font-size: 14px;
-color: #FFFFFF;
-margin-top: 15px;
+.PlaceOrderButton {
+  background: #19242d;
+  border-radius: 4px;
+  padding: 10px 0 10px 0;
+  font-weight: 600;
+  width: 100%;
+  font-size: 14px;
+  color: #ffffff;
+  margin-top: 15px;
 }
-.ValidationText{
-    font-weight: 400;
-font-size: 12px;
-color: #EB4925;
-margin-left: 5px;
-margin-top: -3px;
+.ValidationText {
+  font-weight: 400;
+  font-size: 12px;
+  color: #eb4925;
+  margin-left: 5px;
+  margin-top: -3px;
 }
-.Warning{
-    height: 15px;
+.Warning {
+  height: 15px;
 }
-.Validation{
-    display: flex;
-    margin-top: 10px;
+.Validation {
+  display: flex;
+  margin-top: 10px;
 }
-@media screen and (max-width:758px) {
-    .Right {
-        margin-bottom: 20px;
-    }
+.OverView {
+  display: flex;
+  gap: 15px;
 }
-@media screen and (max-width:575px) {
-.CartItems {
+.OverView p {
+  margin-bottom: 0px;
+}
+.OverViewKey {
+  font-weight: 600;
+  font-size: 14px;
+  color: #232323;
+  font-family: "gilroyNormal" !important;
+}
+.OverViewValue {
+  font-weight: 400;
+  font-size: 14px;
+  color: #757c81;
+  font-family: "gilroyNormal" !important;
+}
+.DummyWrap {
+  display: flex;
+  align-items: center;
+  background: #fcfbf6;
+  gap: 10px;
+  padding-left: 20px;
+}
+.DummyGreen {
+  font-size: 14px;
+  font-weight: 400;
+  color: #005d67;
+  font-family: "LatoNormal" !important;
+  margin-bottom: 0px;
+}
+@media screen and (max-width: 758px) {
+  .Right {
+    margin-bottom: 20px;
+  }
+}
+@media screen and (max-width: 575px) {
+  .CartItems {
     margin: 0px;
-}
-.Main {
+  }
+  .Main {
     margin-left: 0px;
-}
-
+  }
 }

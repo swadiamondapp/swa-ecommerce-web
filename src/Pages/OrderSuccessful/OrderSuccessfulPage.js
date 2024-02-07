@@ -1,6 +1,6 @@
 import Footer from '../../components/Footer/Footer'
 import React from 'react'
-import Header from "../../components/HeaderNew/Header";
+import Header from '../../components/Header/Header'
 import success from '../../Assets/sucesLarge.png'
 import Classes from './OrderSuccessful.module.css'
 import {BsFillCheckCircleFill} from 'react-icons/bs'

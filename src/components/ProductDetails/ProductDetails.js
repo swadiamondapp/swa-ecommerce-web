@@ -3,12 +3,11 @@ import Ring from "../../Assets/new4.png";
 import RingFlip from "../../Assets/Ringflip.png";
 import RingRotate from "../../Assets/RingRotate.png";
 import { useHistory } from "react-router-dom";
-import { BsWhatsapp } from "react-icons/bs";
 import Classes from "./ProductDetails.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { BiRupee } from "react-icons/bi";
-import { IoIosStar, IoLogoWhatsapp } from "react-icons/io";
+import { IoIosStar } from "react-icons/io";
 import BIS from "../../Assets/BIS.png";
 import IGI from "../../Assets/IGI.png";
 import Stroke from "../../Assets/Stroke.png";
@@ -25,7 +24,7 @@ const ProductDetails = (props) => {
   const [wishId, setWishId] = useState("");
   const [pinCode, setPinCode] = useState("");
   const [pinCodeError, setPinCodeError] = useState("");
-  const [active, setActive] = useState(null);
+  const [active,setActive] = useState(null)
   const history = useHistory();
   const token = localStorage.getItem("swaToken");
 
@@ -70,10 +69,15 @@ const ProductDetails = (props) => {
   };
   const availbilityCheck = () => {
     if (pinCode !== "") {
+     
       axios
-        .get(Urls.pincodeCheck + pinCode)
+        .get(Urls.pincodeCheck+pinCode)
         .then((response1) => {
-          setActive(response1.data.IsSuccess);
+        
+            setActive(response1.data.IsSuccess)
+       
+         
+        
         })
         .catch((error) => {
           console.log(error);
@@ -126,7 +130,6 @@ const ProductDetails = (props) => {
   const sizeChangeHandler = (e) => {
     props.sizeChange(e.target.value);
   };
-
   return (
     <div>
       <div className="container">
@@ -135,12 +138,12 @@ const ProductDetails = (props) => {
           <p className={Classes.Home} onClick={homeHandler}>
             HOME /
           </p>
-          <p className={Classes.Home}> New Arrivals/</p>
+          <p className={Classes.Home}>NEW ARRAIVALS /</p>
           <p className={Classes.NewArrival}>{props.name}</p>
         </div>
         <div className="row">
           <div className="col-md-6">
-            <div className={`${Classes.Display} ${Classes.StickyDisplay}`}>
+            <div className={Classes.Display}>
               <div className="container">
                 <div className="row">
                   <div className="col-md-2">
@@ -200,7 +203,7 @@ const ProductDetails = (props) => {
             </div>
           </div>
           <div className="col-md-6">
-            <p className={Classes.NewArrivals}>{props.name}</p>
+            <p className={Classes.NewArrivals}>New Arrivals</p>
             <p className={Classes.SubText}>
               {props.name} In Gold ({props.gw} gram) with Diamonds (
               {props.diamond} gram)
@@ -220,7 +223,7 @@ const ProductDetails = (props) => {
                 {props.discountVal.toFixed(2)}
               </p>
             ) : null}
-            <p className={Classes.AvailableColours}>Available Metal Types</p>
+            <p className={Classes.AvailableColours}>Available  Metal Types</p>
             <div className={Classes.Flex}>
               {props.colors.map((item, index) => {
                 let clrClas;
@@ -312,26 +315,18 @@ const ProductDetails = (props) => {
                 <p className={Classes.StrokeText}>Standard delivery between </p>
                 <p className={Classes.DeliveryDate}>24 Oct & 28 oct 2022</p>
               </div> */}
-
-              {active === true ? (
-                <>
-                  <div className={Classes.Flex}>
-                    <img className={Classes.Stroke} src={Stroke} alt="" />
-                    <p className={Classes.StrokeText}>
-                      Cash / Card delivery option available
-                    </p>{" "}
-                  </div>
-                  <div className={Classes.Flex}>
-                    <img className={Classes.Stroke} src={Stroke} alt="" />
-                    <p className={Classes.StrokeText}>
-                      Standard delivery available
-                    </p>
-                  </div>
-                </>
-              ) : null}
-              {active === false ? (
-                <p className="errrMsg">Standard delivery not available</p>
-              ) : null}
+             
+               
+                {active === true?<> 
+                  <div className={Classes.Flex}><img className={Classes.Stroke} src={Stroke} alt="" /><p className={Classes.StrokeText}>
+                  Cash / Card delivery option available
+                </p> </div>
+                <div className={Classes.Flex}>
+                <img className={Classes.Stroke} src={Stroke} alt="" /><p className={Classes.StrokeText}>
+                Standard delivery  available
+              </p></div></>:null}
+              {active === false?<p className="errrMsg">Standard delivery not available</p>:null}
+             
             </div>
             <div className={Classes.BorderBottom}>
               <p className={Classes.AvailableColours}>Certification</p>
@@ -351,79 +346,19 @@ const ProductDetails = (props) => {
             <div className={Classes.BorderBottom}>
               <p className={Classes.AvailableColours}>Product details</p>
               <div className="row">
-                <div className="col-md-4 col-6">
+                <div className="col-md-4">
                   <p className={Classes.Left}>Product ID</p>
                   {/* <p className={Classes.Left}>Size</p> */}
-                  <p className={Classes.Left}>Gross Weight</p>
-                  {props.diamondTypw !== null && (
-                    <p className={Classes.Left}>Diamond Type</p>
-                  )}
-                  <p className={Classes.Left}>Diamond Weight</p>
-                  <p className={Classes.Left}>Diamond Count</p>
+                  <p className={Classes.Left}>Gold Weight</p>
+                  <p className={Classes.Left}>Diamond</p>
                   <p className={Classes.Left}>Other stone weight</p>
-                  <p className={Classes.Left}>Other Stone Count</p>
-                  <p className={Classes.Left}>Product Lenght</p>
-                  <p className={Classes.Left}>Product Width</p>
-                  <p className={Classes.Left}>Product Height</p>
                 </div>
-                <div className="col-md-8 col-6">
+                <div className="col-md-8">
                   <p className={Classes.Right}>{props.sku}</p>
                   {/* <p className={Classes.Right}>{props.size}</p> */}
-                  <p className={Classes.Right}>{props.gw + " GM"}</p>
-                  {props.diamondTypw !== null && (
-                    <p className={Classes.Right}>{props.diamondTypw}</p>
-                  )}
-                  <p className={Classes.Right}>
-                    {props.diamondWeight + " Carat"}
-                  </p>
-                  <p className={Classes.Right}>{props.diamondCount}</p>
-                  <p className={Classes.Right}>{props.otherStoneW}</p>
-                  <p className={Classes.Right}>{props.otherStoneC}</p>
-                  <p className={Classes.Right}>{props.length + " mm"}</p>
-                  <p className={Classes.Right}>{props.width + " mm"}</p>
-                  <p className={Classes.Right}>{props.height + " mm"}</p>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-12">
-              <div className={Classes.BorderBottom}>
-                <p className={Classes.AvailableColours}>Product description</p>
-                <div className={Classes.ProductDiscription}>
-                  {props.description}
-                </div>
-              </div>
-            </div>
-            <div className={Classes.BorderBottom}>
-              <div className={`row ${Classes.SellerInfo}`}>
-                <div className="col-md-12">
-                  <div className={Classes.Left}>
-                    <div className={Classes.manufacture}>
-                      <div>
-                        Manufacturer
-                        <span>:</span>
-                      </div>
-                      <div className={Classes.manpara}>
-                        Swa Diamonds MIDC MAROL ANDHERI EAST, MUMBAI, 400093
-                      </div>
-                    </div>
-                  </div>
-                  {/* <p className={Classes.Left}>
-                    Manufacturer&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;Swa
-                    Diamonds MIDC MAROL ANDHERI EAST, MUMBAI, 400093
-                  </p> */}
-                  <p className={Classes.Left}>
-                    Country of Origin &nbsp;&nbsp;:&nbsp;&nbsp;India
-                  </p>
-                  <p className={Classes.Left}>
-                    Toll-Free Number&nbsp;&nbsp; :&nbsp;&nbsp;1800 257 8600
-                  </p>
-                  <p className={Classes.Left}>
-                    Chat
-                    Number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    : &nbsp;
-                    <IoLogoWhatsapp color="#22AD2C" size={20} />
-                    +91 95677 77722
-                  </p>
+                  <p className={Classes.Right}>{props.gw}</p>
+                  <p className={Classes.Right}>{props.diamond}</p>
+                  <p className={Classes.Right}>{props.oSw}</p>
                 </div>
               </div>
             </div>

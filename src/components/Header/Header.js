@@ -50,11 +50,9 @@ const Header = (props) => {
     }
   };
   const catSelHandler = (id) => {
-   
-   
-      window.open("http://localhost:3000/category_search/"+id, "_self");
-      console.log('testk');
-   
+    if (history.location.pathname !== "/new_arrivel") {
+      history.push({ pathname: "/new_arrivel", state: { data: id } });
+    }
   };
   const moveToOrderHistory = () => {
     history.push("/track_order");
@@ -101,17 +99,9 @@ const Header = (props) => {
   const closeHanlder = () => {};
 
   const searchTitleHandler = (setItem) => {
-    console.log(history.location.pathname)
     if (setItem.type === "category") {
-      if(history.location.pathname.slice(0,12) === '/new_arrivel'){
-        window.location.href = "http://localhost:3000/category_search/"+setItem.id
-        console.log('testk');
-      }else{
-        history.push({ pathname: "/new_arrivel", state: { data: setItem.id } });
-
-      }
+      history.push({ pathname: "/new_arrivel", state: { data: setItem.id } });
     } else if (setItem.type === "product") {
-     
       axios
         .get(Urls.productDet + setItem.id)
         .then((response1) => {
@@ -126,29 +116,19 @@ const Header = (props) => {
             discounted_final_price: response1.data.results.data.discount_price,
             wishlist_id: response1.data.results.data.wishlist_id,
           };
-          if(history.location.pathname.slice(0,10) === '/products/'){
-            console.log('test')
-            window.location.href = "https://swaecommerce.zinfog.com/products/" +setItem.id +
-            "/" +
-            response1.data.results.data.color_id+
-            "/"+response1.data.results.data.product_name;
-          }
-          else{
           history.push({
             pathname:
               "/products/" +
               setItem.id +
               "/" +
-              response1.data.results.data.color_id+
-              "/"+response1.data.results.data.product_name,
+              response1.data.results.data.color_id,
             state: { data: selData },
-          })}
+          });
         })
         .catch((error) => {
           console.log(error);
         });
     }
-  
   };
   return (
     <div>
@@ -187,7 +167,13 @@ const Header = (props) => {
               onClick={setHomepageHandler}
             />
             <div className={Classes.SearchIcons}>
-             
+              {/* <AiOutlineSearch className={Classes.SearchIcon}  size={30} />
+              <input
+                className={Classes.Searchbar}
+                type="text"
+                placeholder="Search for diamonds & more"
+              />
+             */}
               <div className={Classes.searchList}>
                 <input
                   className={Classes.searchbar}
@@ -227,7 +213,7 @@ const Header = (props) => {
                 className={Classes.Icon}
                 color="#FFFFFF"
                 size={25}
-                // onClick={Notification}
+                onClick={Notification}
               />
 
               <LoginModal
@@ -283,14 +269,14 @@ const Header = (props) => {
 
             {catgSet.slice(0, 15).map((item, index) => {
               return (
-                <div
+                <p
                   className={Classes.Catogaries}
                   onClick={() => catSelHandler(item.id)}
                   style={{ color: "#ffff", cursor: "pointer" }}
                   key={index}
                 >
                   {item.category}{" "}
-                </div>
+                </p>
               );
             })}
 

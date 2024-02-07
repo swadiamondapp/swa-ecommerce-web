@@ -26,7 +26,7 @@ function Footer() {
 
   useEffect(() => {
     axios
-      .get(Urls.filter + "?category=&tag=")
+      .get(Urls.filter)
       .then((response1) => {
         setCatgSet(response1.data.results.data.category);
         setOccation(response1.data.results.data.tags);
@@ -66,7 +66,7 @@ function Footer() {
                 diamond jewellery to their stock due to certain factors
               </p>
             </div>
-            <div className="col-md-5">
+            <div className="col-md-6">
               <div className="container">
                 <div className="row">
                   <div className="col-md-4">
@@ -112,7 +112,7 @@ function Footer() {
                   </div>
                   <div className="col-md-4">
                     <div className={Classes.Link}>
-                      {occation.slice(0, 8).map((item, index) => {
+                      {occation.map((item, index) => {
                         return (
                           <p
                             className={Classes.Links}
@@ -130,11 +130,11 @@ function Footer() {
               </div>
               <p></p>
             </div>
-            <div className="col-md-4">
+            <div className="col-md-3">
               <p className={Classes.Title}>Swa contact info</p>
               <div className={Classes.Address}>
                 <SiMinutemailer
-                  size={28}
+                  size={35}
                   color="#99C7CD"
                   className={Classes.AddressText}
                 />
@@ -145,7 +145,7 @@ function Footer() {
               <div className={Classes.Address}>
                 <FaPhoneAlt
                   color="#99C7CD"
-                  size={15}
+                  size={18}
                   className={Classes.AddressText}
                 />
                 <p className={`${Classes.Links} ${Classes.AddressText}`}>
@@ -162,10 +162,7 @@ function Footer() {
                   info@swadiamonds.com
                 </p>
               </div>
-              <p
-                style={{ paddingLeft: "20px" }}
-                className={`${Classes.Title} ${Classes.FollowUs}`}
-              >
+              <p className={`${Classes.Title} ${Classes.FollowUs}`}>
                 Follow us on
               </p>
               <div className={Classes.Icons}>
@@ -182,10 +179,10 @@ function Footer() {
           <div className="row">
             <div className="col-md-4" style={{ paddingLeft: "0px" }}>
               <p className={Classes.FooterDownText}>
-                2024 SWA Diamonds | All rights reserved
+                2022 SWA Diamonds | All rights reserved
               </p>
             </div>
-            <div className={`${"col-md-4"} ${Classes.FootIconImg}`}>
+            <div className="col-md-4">
               <img className={Classes.FooterIcons} src={Image1} alt="" />
               <img className={Classes.FooterIcons} src={Image2} alt="" />
               <img className={Classes.FooterIcons} src={Image3} alt="" />
@@ -194,8 +191,11 @@ function Footer() {
               <img className={Classes.FooterIcons} src={Image6} alt="" />
             </div>
             <div className="col-md-4">
-              <p className={Classes.FooterDownTextR}>
-                Designed & developed by zinfog codelabs
+              <p
+                className={Classes.FooterDownText}
+                style={{ textAlign: "right" }}
+              >
+                Site Designed & developed by zinfog codelabs
               </p>
             </div>
           </div>

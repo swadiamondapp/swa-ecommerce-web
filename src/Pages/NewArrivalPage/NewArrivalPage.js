@@ -3,15 +3,14 @@ import NewArrivalCard from "../../components/NewArrivals/NewArrivalCard/NewArriv
 import Footer from "../../components/Footer/Footer";
 import NewArrivalDesign from "../../components/NewArrivalDesign/NewArrivalDesign";
 import DownloadOurAppImage from "../../components/DownloadOurAppImage/DownloadOurAppImage";
-import Filter from "../../components/Filter/FilterCatg";
+import Filter from "../../components/Filter/Filter";
 import Classes from "./NewArrivalPage.module.css";
 import * as Urls from "../../Urls";
 import axios from "axios";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { FadeLoader } from "react-spinners";
 import ReactPaginate from "react-paginate";
-import Header from "../../components/HeaderNew/Header";
-import FilterMobile from "../../components/Filter/FilterMobile";
+import HeaderFilter from "../../components/Header/HeaderFilter";
 
 const NewArrivalPage = (props) => {
   const [product, setProduct] = useState([]);
@@ -25,13 +24,8 @@ const NewArrivalPage = (props) => {
   const [sort, setSort] = useState("");
   const [cartCount, setCartCount] = useState("");
   const [labelSet, setLabelSet] = useState([]);
-  const [num, setNum] = useState("");
-  const [count, setCount] = useState("");
   const history = useHistory();
-  const location = useLocation();
   const token = localStorage.getItem("swaToken");
-  const productCategory = props.location.state.product_category;
-  // const categoryName = props.location.state.categoryName
   const filter = (newArrive, currentPage) => {
     setLoading(true);
     axios
@@ -41,8 +35,7 @@ const NewArrivalPage = (props) => {
         // const productList = [...response1.data.results.data]
         // const sortedProducts = [...productList].sort((a, b) => a.total_price_final - b.total_price_final);
         setProduct(response1.data.results.data);
-        setCount(response1.data.results.count);
-        setPageCount(Math.ceil(response1.data.results.count / 20));
+        setPageCount(response1.data.results.count / 20);
       })
       .catch((error) => {
         console.log(error);
@@ -50,19 +43,14 @@ const NewArrivalPage = (props) => {
   };
 
   const prodDetHandler = (prodItem) => {
+    console.log(prodItem);
     history.push({
       pathname:
-        "/products/" +
-        prodItem.product_id +
-        "/" +
-        prodItem.thumbnail_colour_id +
-        "/" +
-        prodItem.product_name,
+        "/products/" + prodItem.product_id + "/" + prodItem.thumbnail_colour_id+'/'+prodItem.product_name,
       state: { data: prodItem },
     });
   };
   const handlePageClick = (data) => {
-    setNum(data.selected);
     window.scrollTo(0, 0);
 
     if (
@@ -112,7 +100,6 @@ const NewArrivalPage = (props) => {
   useEffect(() => {
     window.scrollTo(0, 0);
     console.log(props.location.state.data);
-
     if (props.location.state.data === "new") {
       filter('?filter_type="new', 1);
       setHead("New Arrivals");
@@ -272,30 +259,17 @@ const NewArrivalPage = (props) => {
   };
   const sortsHHandler = (e) => {
     setSort(e.target.value);
-    filter(
-      "?occasion_tag_ids=" +
-        occn +
-        "&color_ids=" +
-        color +
-        "&category_ids=" +
-        catgSet +
-        "&metal_type=" +
-        metal +
-        "&sort=" +
-        e.target.value,
-      1
-    );
-    // setLoading(true);
-    // axios
-    //   .get(Urls.productList + "?sort=" + e.target.value)
-    //   .then((response1) => {
-    //     setLoading(false);
-    //     setProduct(response1.data.results.data);
-    //     setPageCount(Math.ceil(response1.data.results.count / 20));
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+    setLoading(true);
+    axios
+      .get(Urls.productList + "?sort=" + e.target.value)
+      .then((response1) => {
+        setLoading(false);
+        setProduct(response1.data.results.data);
+        setPageCount(response1.data.results.count / 2);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   let products;
@@ -343,63 +317,35 @@ const NewArrivalPage = (props) => {
   return (
     <div>
       <div className={Classes.Page}>
-        <Header countCartItems={cartCount} />
+        <HeaderFilter countCartItems={cartCount} />
         <div className="container">
           <div className="row">
-            <div className="col-lg-3 col-sm-4">
+            <div className="col-lg-2 col-sm-4">
               <Filter
                 filterCatg={filterCatHandler}
                 filterColr={filtColorHandler}
                 filterOctn={filtOcctnHandler}
                 filterMetal={filterMetalHanlder}
-                filterSearch={props.location.state}
               />
             </div>
-            <div className="col-lg-9 col-sm-8">
+            <div className="col-lg-10 col-sm-8">
               <div className={Classes.Products}>
                 <NewArrivalDesign
                   head={head}
                   labArry={labelSet}
                   deltLabel={deltLbel}
                   sortHandler={sortsHHandler}
-                  count={count}
-                  categoryName={productCategory}
                 >
-                  {/* <ReactPaginate
-                    breakLabel="..."
-                    nextLabel="Next >"
-                    onPageChange={handlePageClick}
-                    marginPagesDisplayed={1}
-                    pageRangeDisplayed={2}
-                    forcePage={num}
-                    pageCount={pageCount}
-                    previousLabel="<  Prev"
-                    renderOnZeroPageCount={null}
-                    containerClassName={
-                      "pagination justify-content-start pageout"
-                    }
-                    pageClassName={"page-item"}
-                    pageLinkClassName={"page-link"}
-                    previousClassName={"page-item"}
-                    previousLinkClassName={"page-link"}
-                    nextClassName={"page-item"}
-                    nextLinkClassName={"page-link"}
-                    breakClassName={"page-item"}
-                    breakLinkClassName={"page-link"}
-                    activeClassName={"active"}
-                  /> */}
-
                   {products}
                 </NewArrivalDesign>
                 <ReactPaginate
                   breakLabel="..."
-                  nextLabel="Next >"
+                  nextLabel="next >"
                   onPageChange={handlePageClick}
                   marginPagesDisplayed={1}
                   pageRangeDisplayed={2}
-                  forcePage={num}
                   pageCount={pageCount}
-                  previousLabel="<  Prev"
+                  previousLabel="< prev"
                   renderOnZeroPageCount={null}
                   containerClassName={"pagination justify-content-end pageout"}
                   pageClassName={"page-item"}
@@ -412,9 +358,7 @@ const NewArrivalPage = (props) => {
                   breakLinkClassName={"page-link"}
                   activeClassName={"active"}
                 />
-                <FilterMobile />
               </div>
-
               <div className={Classes.DownloadOurAppImage}>
                 <DownloadOurAppImage />
               </div>

@@ -13,7 +13,6 @@ import { Link } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
 import { CgClose } from "react-icons/cg";
 import { HiShoppingBag } from "react-icons/hi";
-import { BsSearch } from "react-icons/bs";
 import ProductImage from "../../Assets/new1.png";
 import LoginModal from "../LoginModal/LoginModal";
 import axios from "axios";
@@ -21,9 +20,6 @@ import * as Urls from "../../Urls";
 const HeaderFilter = (props) => {
   const [show, setShow] = useState(false);
   const token = localStorage.getItem("swaToken");
-  const [searchKey, setSearchKey] = useState("");
-  const [searchShow, setSearchShow] = useState(false);
-  const [suggestionList, setSuggesionList] = useState([]);
   const history = useHistory();
   useEffect(() => {
     if (props.lognAct) {
@@ -36,23 +32,6 @@ const HeaderFilter = (props) => {
       history.push("/wish_list");
     } else {
       setShow(true);
-    }
-  };
-  const searchKeyHanlder = (e) => {
-    setSearchKey(e.target.value);
-    if (e.target.value.length !== 0) {
-      setSearchShow(true);
-
-      axios
-        .get(Urls.suggestion + e.target.value)
-        .then((response1) => {
-          setSuggesionList(response1.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } else {
-      setSearchShow(false);
     }
   };
   const catSelHandler = (id) => {
@@ -82,50 +61,6 @@ const HeaderFilter = (props) => {
 
   const Notification = () => {
     setOpenNotification(!openNotification);
-  };
-  const searchTitleHandler = (setItem) => {
-    console.log(history.location.pathname)
-    if (setItem.type === "category") {
-      if(history.location.pathname.slice(0,12) === '/new_arrivel'){
-        window.location.href = "http://localhost:3000/category_search/"+setItem.id
-        console.log('testk');
-      }else{
-        history.push({ pathname: "/new_arrivel", state: { data: setItem.id } });
-
-      }
-     
-    } else if (setItem.type === "product") {
-     
-      axios
-        .get(Urls.productDet + setItem.id)
-        .then((response1) => {
-          const selData = {
-            product_id: setItem.id,
-            colour_id: response1.data.results.data.color_id,
-            is_on_discount: response1.data.results.data.is_on_discount,
-            product_name: response1.data.results.data.product_name,
-            sku: response1.data.results.data.sku,
-            thumbnail_image: response1.data.results.data.thumbnail_image,
-            total_price_final: response1.data.results.data.total_price_final,
-            discounted_final_price: response1.data.results.data.discount_price,
-            wishlist_id: response1.data.results.data.wishlist_id,
-          };
-         
-          history.push({
-            pathname:
-              "/products/" +
-              setItem.id +
-              "/" +
-              response1.data.results.data.color_id+
-              "/"+response1.data.results.data.product_name,
-            state: { data: selData },
-          })
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      }
-  
   };
   return (
     <div>
@@ -164,42 +99,13 @@ const HeaderFilter = (props) => {
               onClick={setHomepageHandler}
             />
             <div className={Classes.SearchIcons}>
-            <div className={Classes.searchList}>
-                <input
-                  className={Classes.searchbar}
-                  type="text"
-                  value={searchKey}
-                  onChange={searchKeyHanlder}
-                  placeholder="Search for diamonds & more"
-                />
-                <BsSearch
-                  size={22}
-                  className={Classes.searchIcon}
-                  style={{ display: searchShow ? "none" : "block" }}
-                />
-                {/* <AiOutlineClose size={22}  className={Classes.searchIcon} style={{display:searchShow?'block':'none',cursor:'pointer'}} /> */}
-                <div
-                  className={Classes.searchListCont}
-                  style={{ display: searchShow ? "block" : "none" }}
-                >
-                  {suggestionList.length !== 0 ? (
-                    suggestionList.map((item, index) => {
-                      return (
-                        <p
-                          className={Classes.SearchItem}
-                          key={index}
-                          onClick={() => searchTitleHandler(item)}
-                        >
-                          {item.name}
-                        </p>
-                      );
-                    })
-                  ) : (
-                    <p className={Classes.NoResult}>No Results Found</p>
-                  )}
-                </div>
-              </div>
-            
+              {/* <input
+                className={Classes.Searchbar}
+                type="text"
+               
+                placeholder="Search for diamonds & more"
+              /> */}
+              {/* <AiOutlineSearch className={Classes.SearchIcon} color='#ffffff' size={20} /> */}
               <FiBell
                 className={Classes.Icon}
                 color="#FFFFFF"
