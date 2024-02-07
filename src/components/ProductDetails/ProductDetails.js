@@ -186,7 +186,7 @@ const ProductDetails = (props) => {
                       />
                       {/* warning not remove */}
 
-                      {/* {addToWishList ? (
+                      {addToWishList ? (
                         <FaHeart
                           color="#F91919"
                           className={Classes.Heart}
@@ -198,7 +198,7 @@ const ProductDetails = (props) => {
                           className={Classes.Heart}
                           onClick={Added}
                         />
-                      )} */}
+                      )}
                       {/* warning not remove */}
                     </div>
                   </div>
