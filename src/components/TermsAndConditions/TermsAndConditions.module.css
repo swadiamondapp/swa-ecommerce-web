@@ -51,3 +51,47 @@
     color: #007481;
     font-family: 'gilroyNormal' !important;
 }
+
+
+@media (min-width: 300px) and (max-width: 575px) {
+.Main {
+    display: flex;
+    margin-top:20px
+}
+.Title {
+    font-weight: 500;
+    font-size: 20px;
+    font-family: 'PlayFairNormal' !important;
+}
+.Home {
+    color: #00464D;
+    font-weight: 400;
+    font-size: 14px;
+    font-family: 'gilroyNormal' !important;
+
+}
+.PrivacyPolicy {
+    color: #01B3C5;
+    font-weight: 400;
+    font-size: 14px;
+    font-family: 'gilroyNormal' !important;
+
+}
+.temsContainer {
+    padding:0px 0px
+}
+.Description {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 28px;
+    color: #757C81;
+    margin-top: 25px;
+    font-family: 'gilroyNormal' !important;
+}
+.SubHeading {
+    font-weight: 600;
+    font-size: 16px;
+    color: #007481;
+    font-family: 'gilroyNormal' !important;
+}
+}

@@ -7,7 +7,7 @@ function TermsAndConditions() {
     
       },[])
     return (
-        <div>
+        <div className={Classes.temsContainer}>
             <div className='container'>
                 <div className={Classes.Main} >
                     <h1 className={Classes.Title}>
