@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Collapse } from "antd";
 import Logo from "../../Assets/swaLogo.png";
 import Classes from "./Footer.module.css";
 import Facebook from "../../Assets/Facebook.png";
@@ -23,6 +24,31 @@ function Footer() {
   const [occation, setOccation] = useState([]);
   const token = localStorage.getItem("swaToken");
   const history = useHistory();
+
+  const { Panel } = Collapse;
+  const text = `
+    A dog is a type of domesticated animal.
+    Known for its loyalty and faithfulness,
+    it can be found as a welcome guest in many households across the world.
+  `;
+
+  const panels = [
+    {
+      key: "1",
+      header: "This is panel header 1",
+      content: <p>{text}</p>,
+    },
+    {
+      key: "2",
+      header: "This is panel header 2",
+      content: <p>{text}</p>,
+    },
+    {
+      key: "3",
+      header: "This is panel header 3",
+      content: <p>{text}</p>,
+    },
+  ];
 
   useEffect(() => {
     axios
@@ -177,6 +203,22 @@ function Footer() {
           </div>
         </div>
       </div>
+      {/* mobile footer */}
+      <div className={Classes.Footer}>
+        <div className={Classes.LogoMobScreen}>
+          <img className={Classes.Logo} src={Logo} alt="" />
+        </div>
+        <div className={Classes.ParentCollaps}>
+          <Collapse accordion>
+            {panels.map((panel) => (
+              <Panel header={panel.header} key={panel.key}>
+                {panel.content}
+              </Panel>
+            ))}
+          </Collapse>
+        </div>
+      </div>
+      {/* mobile footer */}
       <div className={Classes.FooterDown}>
         <div className="container">
           <div className="row">

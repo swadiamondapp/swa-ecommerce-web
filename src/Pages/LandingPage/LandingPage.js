@@ -48,6 +48,8 @@ const LandingPage = () => {
   const [logToken, setLogToken] = useState("");
   const [tags, setTags] = useState([]);
 
+  console.log("mobBanner..01", mobBanner);
+
   const history = useHistory();
   const token = localStorage.getItem("swaToken");
   const home = () => {
@@ -326,11 +328,11 @@ const LandingPage = () => {
         <TopDemanded>{topDemnd}</TopDemanded>
 
         <Certificate video={"https://www.youtube.com/embed/s3PrxdvAihI"} />
-        <Features />
 
         {searchList}
         <DownloadOurAppImage />
       </div>
+      <Features />
       <Footer />
     </div>
   );

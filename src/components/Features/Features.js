@@ -29,8 +29,10 @@ function Features() {
               } ${Classes.MoneyBack}`}
             >
               <img src={PS2} className={Classes.Images} alt="" />
-              <p className={Classes.FeaturesmainText}>Moneyback</p>
-              <p className={Classes.FeaturesSubText}>Moneyback guarantee ...</p>
+              <p className={Classes.FeaturesmainText}>100% Refund</p>
+              <p className={Classes.FeaturesSubText}>
+                Return with 30 days of delivery
+              </p>
             </div>
             <div
               className={`${"col-sm-6"} ${"col-6"}  ${"col-md-3"} ${
@@ -38,10 +40,10 @@ function Features() {
               } ${Classes.SupportBack}`}
             >
               <img src={PS3} className={Classes.Images} alt="" />
-              <p className={Classes.FeaturesmainText}>24/7 Support</p>
-              <p className={Classes.FeaturesSubText}>
-                Online consultations ...
+              <p className={Classes.FeaturesmainText}>
+                100% Certified jewellery
               </p>
+              <p className={Classes.FeaturesSubText}>BIS Hallmark, IGI, GIA</p>
             </div>
             <div
               className={`${"col-sm-6"} ${"col-6"}  ${"col-md-3"} ${
@@ -49,9 +51,11 @@ function Features() {
               } ${Classes.Security}`}
             >
               <img src={PS4} className={Classes.Images} alt="" />
-              <p className={Classes.FeaturesmainText}>Secure payment</p>
+              <p className={Classes.FeaturesmainText}>
+                LifetimeExchange & Buyback
+              </p>
               <p className={Classes.FeaturesSubText}>
-                Safe shopping guarantee ...
+                Exchange for current value or get cash
               </p>
             </div>
           </div>

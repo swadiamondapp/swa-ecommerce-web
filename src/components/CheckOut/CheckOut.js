@@ -370,7 +370,7 @@ function CheckOut(props) {
       <div className="container">
         <div className="container">
           <div className={Classes.Main}>
-            <h1 className={Classes.Title}>Checkout</h1>
+            <h1 className={Classes.Title}>Your details</h1>
             <div className={Classes.SubText}>
               <p className={`${Classes.Home} ${Classes.HomeNew}`}>HOME /</p>
               <p className={`${Classes.Home} ${Classes.HomeNew}`}>CART /</p>
@@ -429,7 +429,7 @@ function CheckOut(props) {
 
                     <div className={Classes.ParentF1}>
                       <div>
-                        <labe>Mobile Number</labe>
+                        <label>Mobile Number</label>
                         <input
                           className={Classes.PlaceInput}
                           type="number"
@@ -445,6 +445,7 @@ function CheckOut(props) {
                         )}
                       </div>
                       <div>
+                        <label>Pincode</label>
                         <input
                           className={Classes.PlaceInput}
                           type="text"
@@ -460,6 +461,7 @@ function CheckOut(props) {
                         )}
                       </div>
                       <div>
+                        <label>City</label>
                         <input
                           className={Classes.PlaceInput}
                           type="text"
@@ -479,7 +481,7 @@ function CheckOut(props) {
                     <div>
                       <label>State</label>
                       <select
-                        className={Classes.PlaceInputDrop}
+                        className={Classes.PlaceInput}
                         value={formik.values.state}
                         name="state"
                         onChange={formik.handleChange}
@@ -495,6 +497,7 @@ function CheckOut(props) {
 
                     <div className={Classes.ParentStreetColony}>
                       <div className={Classes.House1NN}>
+                        <label>House number / building name</label>
                         <input
                           className={Classes.PlaceInput}
                           type="text"
@@ -510,6 +513,7 @@ function CheckOut(props) {
                         )}
                       </div>
                       <div className={Classes.ColonyForm}>
+                        <label>Street colony name</label>
                         <input
                           className={Classes.PlaceInput}
                           type="text"
@@ -526,6 +530,7 @@ function CheckOut(props) {
                       </div>
                     </div>
                     <div>
+                      <label>Land mark ( optional )</label>
                       <input
                         className={Classes.PlaceInput}
                         type="text"
@@ -547,13 +552,13 @@ function CheckOut(props) {
                                     
                                 </div> */}
                     <div className={Classes.Save}>
-                      <div
+                      {/* <div
                         type="submit"
                         className={Classes.Submit}
                         onClick={formik.handleSubmit}
                       >
                         Save address
-                      </div>
+                      </div> */}
                     </div>
                   </form>
                 </div>

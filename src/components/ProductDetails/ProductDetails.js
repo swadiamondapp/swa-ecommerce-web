@@ -186,7 +186,7 @@ const ProductDetails = (props) => {
                       />
                       {/* warning not remove */}
 
-                      {addToWishList ? (
+                      {/* {addToWishList ? (
                         <FaHeart
                           color="#F91919"
                           className={Classes.Heart}
@@ -198,7 +198,7 @@ const ProductDetails = (props) => {
                           className={Classes.Heart}
                           onClick={Added}
                         />
-                      )}
+                      )} */}
                       {/* warning not remove */}
                     </div>
                   </div>
@@ -229,11 +229,27 @@ const ProductDetails = (props) => {
                   className={Classes.SubText}
                   style={{ display: "flex", alignItems: "center", gap: "15px" }}
                 >
-                  <img
+                  {/* <img
                     onClick={Added}
                     src={PH1}
                     className={Classes.ImgHeartShare}
-                  />
+                  /> */}
+                  <p>
+                    {addToWishList ? (
+                      <FaHeart
+                        style={{ fontSize: "25px", color: "#F91919" }}
+                        // color="#F91919"
+                        className={Classes.Heart1}
+                        onClick={Remove}
+                      />
+                    ) : (
+                      <CgHeart
+                        style={{ fontSize: "25px", color: "#B1C2D3" }}
+                        className={Classes.Heart1}
+                        onClick={Added}
+                      />
+                    )}
+                  </p>
                   <img src={PS1} className={Classes.ImgHeartShare} />
                 </p>
               </div>
