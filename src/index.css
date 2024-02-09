@@ -186,6 +186,38 @@ p {
   bottom: 0% !important;
   width: 100% !important;
 }
+:where(.css-dev-only-do-not-override-16aepep).ant-collapse
+  > .ant-collapse-item
+  > .ant-collapse-header
+  .ant-collapse-expand-icon {
+  position: absolute !important;
+  right: 0% !important;
+  color: #fff !important;
+}
+svg.p-icon {
+  pointer-events: auto;
+  position: absolute !important;
+  right: 2% !important;
+}
+.p-accordion-tab {
+  padding: 10px 0px !important;
+  border-bottom: 0.5px solid #e8e9ea5e !important;
+  padding-top: 20px !important;
+}
+.p-accordion-header-text {
+  font-size: 16px;
+}
+.MobAbout {
+  margin: 20px 0px;
+  color: #fff;
+}
+.p-accordion-content {
+  margin: 20px 0px;
+  padding-right: 10px;
+}
+.activeTabHeaderText {
+  background-color: red; /* Set your desired background color */
+}
 /* :where(.css-dev-only-do-not-override-12czi4v).ant-modal .ant-modal-footer {
   display: none !important;
 }

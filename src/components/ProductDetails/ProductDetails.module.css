@@ -4,7 +4,12 @@
   left: 90%;
   cursor: pointer;
 }
-
+.MobProductDetails {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  gap: 15px;
+  margin-top: 15px;
+}
 .my_scroll_div {
   overflow-y: auto;
   max-height: 700px;
@@ -62,7 +67,7 @@
 }
 .StickyDisplay {
   position: sticky;
-  top: 100px; /* Adjust this value according to your layout */
+  top: 90px; /* Adjust this value according to your layout */
   z-index: 100; /* Add z-index to ensure proper layering */
 }
 

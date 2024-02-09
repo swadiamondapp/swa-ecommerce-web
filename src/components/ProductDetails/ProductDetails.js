@@ -139,9 +139,9 @@ const ProductDetails = (props) => {
 
   return (
     <div>
-      <div className="container">
+      <div className="container" style={{ marginTop: "40px" }}>
         <ToastContainer />
-        <div className={Classes.SubTexts}>
+        {/* <div className={Classes.SubTexts}>
           <p
             style={{ color: "#00464D" }}
             className={Classes.Home}
@@ -157,26 +157,12 @@ const ProductDetails = (props) => {
             {" "}
             {props.name ? props.name.toUpperCase() : ""}
           </p>
-        </div>
+        </div> */}
         <div className="row">
           <div className="col-md-6">
             <div className={`${Classes.Display} ${Classes.StickyDisplay}`}>
               <div className="container">
                 <div className="row">
-                  <div className={`col-md-2 ${Classes.MobProductDetails}`}>
-                    {props.bagImg.map((item, index) => {
-                      return (
-                        <div className={Classes.SmallImages} key={index}>
-                          <img
-                            className={Classes.ImageSmall}
-                            src={item}
-                            alt=""
-                            onClick={() => bagImgHandler(item)}
-                          />
-                        </div>
-                      );
-                    })}
-                  </div>
                   <div className={`col-md-10 ${Classes.MobProductDetails2}`}>
                     <div className={Classes.ImageWishList}>
                       <img
@@ -204,6 +190,26 @@ const ProductDetails = (props) => {
                   </div>
                 </div>
               </div>
+              {/* inner images */}
+              <div className="container">
+                <div>
+                  <div className={Classes.MobProductDetails}>
+                    {props.bagImg.map((item, index) => {
+                      return (
+                        <div className={Classes.SmallImages} key={index}>
+                          <img
+                            className={Classes.ImageSmall}
+                            src={item}
+                            alt=""
+                            onClick={() => bagImgHandler(item)}
+                          />
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+              {/* inner images */}
             </div>
             <div className={Classes.Slider}>
               <Carousel>
@@ -601,10 +607,14 @@ const ProductDetails = (props) => {
               </div>
             </div>
             <div className={`col-md-12 ${Classes.MobHideField}`}>
-              <div className={Classes.BorderBottom}>
-                <p className={Classes.AvailableColours}>Product description</p>
-                <div className={Classes.ProductDiscription}>
-                  {props.description}
+              <div className="container">
+                <div className={Classes.BorderBottom}>
+                  <p className={Classes.AvailableColours}>
+                    Product description
+                  </p>
+                  <div className={Classes.ProductDiscription}>
+                    {props.description}
+                  </div>
                 </div>
               </div>
             </div>

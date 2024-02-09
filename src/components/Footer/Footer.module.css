@@ -8,12 +8,26 @@
   width: 100%;
   padding: 40px 40px 70px 40px;
 }
+.FooterMob {
+  height: 100%;
+  background: #007481;
+
+  width: 100%;
+  padding: 40px 40px 70px 40px;
+}
+.FooterMob {
+  display: none;
+}
+.FooterDownMob {
+  display: none;
+}
 .FootIconImg {
   display: flex;
   align-items: center;
   gap: 15px;
   justify-content: center;
 }
+
 .LogoText {
   font-weight: 400;
   margin-top: 25px;
@@ -21,6 +35,12 @@
   font-family: "GilroyRegular" !important;
   color: #ffffff;
   text-align: justify;
+}
+.ParentCollaps {
+  margin-top: 20px;
+}
+.MobQuicklinks {
+  margin-top: 12px;
 }
 .Title {
   margin-bottom: 30px !important;
@@ -49,6 +69,11 @@
   cursor: pointer;
 }
 .FooterDown {
+  background: #005d67;
+  /* height: 100%; */
+  padding: 15px;
+}
+.FooterDownMob {
   background: #005d67;
   /* height: 100%; */
   padding: 15px;
@@ -122,15 +147,73 @@
   .Title {
     padding-left: 0px !important;
   }
+  .Link {
+    margin-top: 0px;
+  }
 }
 @media (min-width: 300px) and (max-width: 575px) {
+  .FooterMob {
+    display: block;
+  }
+  .FooterDownMob {
+    display: block;
+  }
   .Footer {
     padding: 40px 40px 50px 20px;
+  }
+  .FooterMob {
+    padding: 40px 20px 50px 20px;
   }
   .Link {
     margin-top: 0px;
   }
   .Title {
     padding-left: 0px !important;
+    margin-bottom: 15px !important;
+  }
+  .FooterDown {
+    display: none;
+  }
+  .Footer {
+    display: none;
+  }
+  .SwaParentInfoMob {
+    margin-top: 25px;
+  }
+  .Address {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .AddressText {
+    margin-left: 0px;
+  }
+  .Icons {
+    margin: 0px;
+    margin-top: 0px;
+    display: flex;
+    align-items: center;
+  }
+  .Icons {
+    margin: 0px !important;
+  }
+  .FooterIcons {
+    max-width: 65px;
+  }
+  .FootIconImg {
+    flex-direction: column;
+    margin-bottom: 15px;
+  }
+  .FooterIconimg1 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .FooterDownText {
+    margin-bottom: 10px !important;
+  }
+  .FooterMob {
+    padding: 15px 20px 20px 20px;
   }
 }
