@@ -1,0 +1,59 @@
+.Container {
+    width: 100%;
+
+}
+.planContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap:20px
+   
+  
+}
+.titles {
+    padding:5px
+}
+.SubDetails{
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+    width: 100%;
+}
+.subDetialstexts {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align:center;
+}
+.labelText {
+    opacity: 0.6;
+    font-size: 14px;
+}
+.textAmount {
+    font-size: 14px;
+}
+.greenColor {
+    color:rgba(48, 147, 58, 1);
+    font-size: 14px;
+}
+.line {
+    border-bottom:1px solid #585f67;
+    opacity: 0.2;
+    width:100%
+}
+.buttonllb {
+    background-color: rgba(0, 70, 77, 1);
+    color:#fff;
+    border-radius: 4px;
+    width:100%;
+    border: none;
+    font-size: 14px;
+    font-weight: 400;
+    padding:8px 05px
+}
+.note {
+
+}
+.noteContent {
+    opacity: 0.8;
+    font-size: 14px;
+}
