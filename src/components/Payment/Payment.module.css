@@ -35,6 +35,7 @@
   display: grid;
   grid-template-columns: 1.5fr 1fr;
   margin-left: 50px;
+  padding-bottom: 100px;
   gap: 25px;
 }
 .PaymentCards h4 {
@@ -49,6 +50,7 @@
   border: 0.5px solid #e8e8e8;
   padding: 20px;
   background: linear-gradient(0deg, #ffffff, #ffffff);
+  box-shadow: 0px 2px 2px 0px #0000000d;
 }
 
 .PaymentMethod p {
@@ -72,6 +74,7 @@
   border: 0.5px solid #e8e8e8;
   padding: 20px;
   background: linear-gradient(0deg, #ffffff, #ffffff);
+  box-shadow: 0px 2px 2px 0px #0000000d;
 }
 
 .DeliverCardHeader {
@@ -88,6 +91,7 @@
   background: #006e7f0d;
 }
 .TotalCard {
+  box-shadow: 0px 2px 2px 0px #0000000d;
   background: linear-gradient(0deg, #ffffff, #ffffff);
 }
 .AmountSaved {
@@ -210,4 +214,35 @@
   margin: 18px 10px;
   font-family: "InterNormal";
   text-align: center;
+}
+@media (min-width: 300px) and (max-width: 575px) {
+  .Wrapper {
+    padding: 0px;
+  }
+  .PaymentCards {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .SubText {
+    display: none;
+  }
+  .Main {
+    gap: 0px;
+    justify-content: space-between;
+    margin: 17px 20px 0px 20px;
+  }
+  .PaymentCards {
+    margin: 0px;
+  }
+  .Title {
+    font-size: 17px;
+    font-weight: 600;
+  }
+  .Step h1 {
+    font-family: "LatoRegular" !important;
+    font-size: 16px;
+  }
+  .PaymentCards {
+    padding-bottom: 0px;
+  }
 }

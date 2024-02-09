@@ -2,6 +2,7 @@ import React from "react";
 import { IoIosStar } from "react-icons/io";
 import Classes from "../OrderHistoryCard.module.css";
 import { useHistory } from "react-router-dom";
+import { TbTruckDelivery } from "react-icons/tb";
 import { BiRupee } from "react-icons/bi";
 import { BsCircleFill } from "react-icons/bs";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
@@ -9,10 +10,10 @@ import { Button, Tooltip } from "antd";
 function Orders(props) {
   const history = useHistory();
   // color="#069D0D"
-
+  console.log("props--.>", props);
   return (
     <div>
-      <div className={Classes.Align}>
+      {/* <div className={Classes.Align}>
         <div>
           <div className={Classes.ProductDetails}>
             <div className={Classes.ProductDetailsText}>
@@ -23,13 +24,11 @@ function Orders(props) {
                 />
                 &nbsp;&nbsp;&nbsp;{props.ProductDate}
               </p>
-              {/* <Tooltip placement="bottomLeft" title={props.textAdres}> */}
               <p className={Classes.ProductProperty}>
                 SHIPPED TO
                 <span style={{ color: "#006E7F" }}>&nbsp;{props.address}</span>
                 <MdOutlineKeyboardArrowDown size={25} />
               </p>
-              {/* </Tooltip> */}
             </div>
           </div>
         </div>
@@ -50,6 +49,25 @@ function Orders(props) {
           <div className={Classes.prodctDetBtn} onClick={props.clicked}>
             View Order Details
           </div>
+        </div>
+      </div> */}
+      <div className={Classes.ProductName}>
+        <p>Order ID : {props.orderId}</p>
+      </div>
+      <div className={Classes.BottomContainer}>
+        <div className={Classes.ImageContent}>
+          <img src={props.Image} />
+          <div className={Classes.TextWrapper}>
+            <h3>Diamond Ring</h3>
+            <p className={Classes.DeliveryText}>
+              <TbTruckDelivery color="#30933A" size={20} /> Delivered on{" "}
+              <span>26 may 2023</span>
+            </p>
+            <p className={Classes.Expected}>Expected Delivery by 30 may 2023</p>
+          </div>
+        </div>
+        <div>
+          <button>View Order details</button>
         </div>
       </div>
     </div>

@@ -6,7 +6,7 @@ import mastercard from "../../Assets/mastercard.svg";
 const Payment = (props) => {
   return (
     <div>
-      <div className="container">
+      <div className={`${Classes.Wrapper} container`}>
         <div>
           <div className={Classes.Main}>
             <div>
@@ -17,7 +17,7 @@ const Payment = (props) => {
                 <p className={Classes.NewArrival}>CHECKOUT</p>
               </div>
             </div>
-            <div>
+            <div className={Classes.Step}>
               <h1 className={Classes.Title}>STEP 3 /3</h1>
             </div>
           </div>

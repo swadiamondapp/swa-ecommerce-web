@@ -83,6 +83,7 @@ const OrderHistoryPage = () => {
       );
     });
   }
+  console.log("orderList--->", orderList);
   return (
     <div>
       <div className={Classes.Background}>
