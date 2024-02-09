@@ -79,7 +79,7 @@ const NewArrivalCard = (props) => {
       >
         <ToastContainer />
         <div className={Classes.NewArrivalCard}>
-          <div onClick={props.clicked}>
+          <div onClick={props.clicked} className={Classes.NewArrivalCardSub}>
             {props.Discount !== null ? (
               <div className={Classes.Discount}>
                 <p className={Classes.Number}>{props.Discount}</p>
@@ -93,22 +93,34 @@ const NewArrivalCard = (props) => {
             />
             {/* <p className={Classes.ProductName}>{props.ProductName}</p> */}
             {/* <p className={Classes.ProductId}>{props.ProductId}</p> */}
-            <div className={Classes.Price}>
-              <p className={Classes.PriceNew}>
-                <BiRupee className={Classes.Rupee} />
-                {props.PriceNew}
-              </p>
-              <p className={Classes.PriceOld}>
-                {props.PriceOld !== null && (
-                  <BiRupee  color="#B0B0B0" className={Classes.Rupee}/>
-                )}
-                {props.PriceOld !== null && props.PriceOld}
-              </p>
+            <div className={Classes.HoverContainer}>
+              <div className={Classes.HoverButton}>
+                <div className={Classes.HButton}>
+                  <div className={Classes.ButtonContainer}>
+                    <button className={Classes.tryAtHome}>Try@ Home</button>
+                    <button className={Classes.buyNow}>Buy Now</button>
+                  </div>
+                </div>
+              </div>
+
+
+                <div className={Classes.Price}>
+                  <p className={Classes.PriceNew}>
+                    <BiRupee className={Classes.Rupee} />
+                    {props.PriceNew}
+                  </p>
+                  <p className={Classes.PriceOld}>
+                    {props.PriceOld !== null && (
+                      <BiRupee color="#B0B0B0" className={Classes.Rupee} />
+                    )}
+                    {props.PriceOld !== null && props.PriceOld}
+                  </p>
+                </div>
             </div>
           </div>
-          <div className={onadd ? [Classes.Buttons] : [Classes.None]}>
+          {/* <div className={onadd ? [Classes.Buttons] : [Classes.None]}>
             <button className={Classes.AddToCart} onClick={props.clicked}>
-              Discover
+              try@home
             </button>
             {addToWishList ? (
               <FaHeart
@@ -123,7 +135,7 @@ const NewArrivalCard = (props) => {
                 onClick={Added}
               />
             )}
-          </div>
+          </div> */}
           {/* <div className={onadd ?[Classes.None] :[Classes.Buttons]}>
                         <button className={Classes.AddToCart} onClick={addToCart}>GO TO CART</button>
                         {addToWishList ? <FaHeart color='#ffffff' className={Classes.Heart} onClick={Remove} /> : <CgHeart color='#ffffff' className={Classes.Heart} onClick={Added}/>}
