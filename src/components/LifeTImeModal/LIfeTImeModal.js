@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import classes from "./LIfeTimeModal.module.css";
 
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import SuccessTick from '../../Assets/successTick.png'
 
 const style = {
   position: "absolute",
@@ -18,103 +19,201 @@ const style = {
   p: 4,
 };
 
+const mobileStyle = {
+  position: "absolute",
+  bottom: 0,
+  transition: "transform 0.3s ease-in-out",
+  bgcolor: "background.paper",
+  border: "none",
+  boxShadow: 24,
+  borderRadius: "4px",
+  p: 2,
+  overflow: "auto",
+  maxHeight: "85%",
+  width: "100%",
+};
+const successM = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  bgcolor: "background.paper",
+  border: "none",
+  boxShadow: 24,
+  borderRadius: "4px",
+  p: 4,
+
+}
+
 const LIfeTImeModal = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [successModalOpen, setSuccessModalOpen] = useState(false);
+  const [isMobileView, setIsMobileView] = useState(
+    window.innerWidth >= 300 && window.innerWidth <= 575
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileView(window.innerWidth >= 300 && window.innerWidth <= 575);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup function to remove event listener when component unmounts
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [isMobileView]);
+
+  const handleSuccessModal = () => {
+    setSuccessModalOpen(true);
+    // You can close the success modal after a certain duration if needed
+    setTimeout(() => {
+      setSuccessModalOpen(false);
+    }, 1000); // Close the success modal after 3 seconds (3000 milliseconds)
+  };
+  const handleCloseSuccessModal = () => {
+    setSuccessModalOpen(false);
+  };
+
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography>
-            <div className={classes.Container}>
-              <div className={classes.planContainer}>
-                <div>
-                  <div className={classes.titles}>
-                    <p>
-                      Lifetime Exchange
-                      <br /> ( approximate . estimate)
-                    </p>
-                  </div>
-                  <div className={classes.SubDetails}>
-                    <div className={classes.subDetialstexts}>
-                      <p className={classes.labelText}>Purchase Amount </p>
-
-                      <p className={classes.textAmount}>$678</p>
-                    </div>
-                    <div className={classes.line}></div>
-                    <div className={classes.subDetialstexts}>
-                      <p className={classes.labelText}>Discounted </p>
-
-                      <p className={classes.textAmount}>$34</p>
-                    </div>
-                    <div className={classes.line}></div>
-                    <div className={classes.subDetialstexts}>
-                      <p className={classes.labelText}>Totel LBB Value </p>
-
-                      <p className={classes.greenColor}>$712</p>
-                    </div>
-                    <div className={classes.line}></div>
-                  </div>
-                  <button className={classes.buttonllb}>
-                    PROCEED WITH LBB
-                  </button>
+      {successModalOpen ? (
+        <>
+          <Modal open={successModalOpen} onClose={handleCloseSuccessModal}>
+            <Box sx={successM} style={isMobileView ? { width: '90%' } : { width: "30%",height:'30%' }}>
+              <Typography className={classes.successModalContainer} >
+                <div >
+                  <img src={SuccessTick}/>
                 </div>
-
-
-
-
-                <div>
-                  <div className={classes.titles}>
-                    <p>
-                    Life time buy-back<br/>
-( approximate . estimate)
-                    </p>
-                  </div>
-                  <div className={classes.SubDetails}>
-                    <div className={classes.subDetialstexts}>
-                      <p className={classes.labelText}>Purchase Amount </p>
-
-                      <p className={classes.textAmount}>$678</p>
-                    </div>
-                    <div className={classes.line}></div>
-                    <div className={classes.subDetialstexts}>
-                      <p className={classes.labelText}>Discounted </p>
-
-                      <p className={classes.textAmount}>$34</p>
-                    </div>
-                    <div className={classes.line}></div>
-                    <div className={classes.subDetialstexts}>
-                      <p className={classes.labelText}>Totel LBB Value </p>
-
-                      <p className={classes.greenColor}>$712</p>
-                    </div>
-                    <div className={classes.line}></div>
-                  </div>
-                    <button className={classes.buttonllb}>
-                      PROCEED WITH LTE
-                    </button>
+                <div style={{textAlign:'center'}}>
+                  <span className={classes.titlesuccesModal}>Thank you very much your<br/> review has been saved</span>
                 </div>
-              </div>
-            </div>
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          <div className={classes.noteTitle}>
-                <p>Note:</p>
-                <span className={classes.noteContent}>1. buyback with 15 days of delivery will be 100% of your money will be refunded<br/></span>
-                <span className={classes.noteContent}>2  buyback after 15 days of delivery will be 10% of your money will be dedected<br/></span>
-                <span className={classes.noteContent}>3. Lorem ipsum dolor sit amet consectetur. Felis faucibus cras enim pretium semper.<br/></span>
-                <span className={classes.noteContent}>4. Lorem ipsum dolor sit amet consectetur. Felis faucibus cras enim pretium semper. Aliquam pellentesque aliquam magna mauris nulla.<br/></span>
-              </div>
-          </Typography>
-        </Box>
-      </Modal>
+              </Typography>
+             
+            </Box>
+          </Modal>
+        </>
+      ) : (
+        <>
+          <Button onClick={handleOpen}>Open modal</Button>
+          <Modal open={open} onClose={handleClose}>
+            <Box sx={isMobileView ? mobileStyle : style}>
+              <Typography>
+                <div className={classes.Container}>
+                  <div className={classes.planContainer}>
+                    <div>
+                      <div className={classes.titles}>
+                        <p className={classes.planSubTitle}>
+                          Lifetime Exchange
+                          <br /> ( approximate . estimate)
+                        </p>
+                      </div>
+                      <div className={classes.SubDetails}>
+                        <div className={classes.subDetialstexts}>
+                          <span className={classes.labelText}>
+                            Purchase Amount{" "}
+                          </span>
+
+                          <span className={classes.textAmount}>$678</span>
+                        </div>
+                        <div className={classes.line}></div>
+                        <div className={classes.subDetialstexts}>
+                          <span className={classes.labelText}>Discounted </span>
+
+                          <span className={classes.textAmount}>$34</span>
+                        </div>
+                        <div className={classes.line}></div>
+                        <div className={classes.subDetialstexts}>
+                          <span className={classes.labelText}>
+                            Totel LBB Value{" "}
+                          </span>
+
+                          <span className={classes.greenColor}>$712</span>
+                        </div>
+                        <div className={classes.line}></div>
+                      </div>
+                      <div>
+                        <button
+                          className={classes.buttonllb}
+                          onClick={handleSuccessModal}
+                        >
+                          PROCEED WITH LBB
+                        </button>
+                      </div>
+                    </div>
+
+                    <div>
+                      <div className={classes.titles}>
+                        <p className={classes.planSubTitle}>
+                          Life time buy-back
+                          <br />( approximate . estimate)
+                        </p>
+                      </div>
+                      <div className={classes.SubDetails}>
+                        <div className={classes.subDetialstexts}>
+                          <span className={classes.labelText}>
+                            Purchase Amount{" "}
+                          </span>
+
+                          <span className={classes.textAmount}>$678</span>
+                        </div>
+                        <div className={classes.line}></div>
+                        <div className={classes.subDetialstexts}>
+                          <span className={classes.labelText}>Discounted </span>
+
+                          <span className={classes.textAmount}>$34</span>
+                        </div>
+                        <div className={classes.line}></div>
+                        <div className={classes.subDetialstexts}>
+                          <span className={classes.labelText}>
+                            Totel LBB Value{" "}
+                          </span>
+
+                          <span className={classes.greenColor}>$712</span>
+                        </div>
+                        <div className={classes.line}></div>
+                      </div>
+                      <div>
+                        <button
+                          className={classes.buttonllb}
+                          onClick={handleSuccessModal}
+                        >
+                          PROCEED WITH LTE
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Typography>
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                <div className={classes.noteTitle}>
+                  <span>Note:</span>
+                  <span className={classes.noteContent}>
+                    1. buyback with 15 days of delivery will be 100% of your
+                    money will be refunded
+                  </span>
+                  <span className={classes.noteContent}>
+                    2 buyback after 15 days of delivery will be 10% of your
+                    money will be dedected
+                  </span>
+                  <span className={classes.noteContent}>
+                    3. Lorem ipsum dolor sit amet consectetur. Felis faucibus
+                    cras enim pretium semper.
+                  </span>
+                  <span className={classes.noteContent}>
+                    4. Lorem ipsum dolor sit amet consectetur. Felis faucibus
+                    cras enim pretium semper. Aliquam pellentesque aliquam magna
+                    mauris nulla.
+                  </span>
+                </div>
+              </Typography>
+            </Box>
+          </Modal>
+        </>
+      )}
     </div>
   );
 };

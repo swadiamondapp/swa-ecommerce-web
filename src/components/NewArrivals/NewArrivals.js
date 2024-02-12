@@ -2,6 +2,7 @@ import React from "react";
 import Classes from "./NewArrivals.module.css";
 import { useHistory } from "react-router-dom";
 import LIfeTImeModal from "../LifeTImeModal/LIfeTImeModal";
+import BuyBackRequiest from "../BuyBackRequiest/BuyBackRequiest";
 
 function NewArrivals(props) {
   const history = useHistory();
@@ -13,6 +14,7 @@ function NewArrivals(props) {
   return (
     <div>
       <LIfeTImeModal/>
+      <BuyBackRequiest/>
       {/* <div className={Classes.NewArrivals}>
         <div className={Classes.setItems}>
           <div>
