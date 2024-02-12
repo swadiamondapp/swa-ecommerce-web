@@ -9,6 +9,7 @@ import * as Urls from "../../Urls";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { FadeLoader } from "react-spinners";
+import Features from "../../components/Features/Features";
 
 const whishlistPage = () => {
   const history = useHistory();
@@ -61,7 +62,9 @@ const whishlistPage = () => {
         "/products/" +
         prodId.product_id +
         "/" +
-        prodId.product.thumbnail_colour_id+'/'+prodId.product.product_name,
+        prodId.product.thumbnail_colour_id +
+        "/" +
+        prodId.product.product_name,
       state: { data: prodId },
     });
     // history.push({pathname:'/product_det',state:{data:prodId,path:'wish'}})
@@ -100,7 +103,9 @@ const whishlistPage = () => {
               ? item.product.discounted_final_price
               : item.product.total_price_final
           }
-          PriceOld={item.product.is_on_discount ? item.product.total_price_final : null}
+          PriceOld={
+            item.product.is_on_discount ? item.product.total_price_final : null
+          }
           key={index}
           Discount={
             item.product.discount_percentage !== null
@@ -125,6 +130,9 @@ const whishlistPage = () => {
           <div className={Classes.Products}>
             <Wishlist> {wishlists} </Wishlist>
           </div>
+        </div>
+        <div style={{ marginTop: "50px" }}>
+          <Features />
         </div>
         <Footer />
       </div>

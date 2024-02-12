@@ -17,12 +17,14 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import * as Urls from "../../Urls";
+import { Accordion, AccordionTab } from "primereact/accordion";
 
 function Footer() {
   const [catgSet, setCatgSet] = useState([]);
   const [occation, setOccation] = useState([]);
   const token = localStorage.getItem("swaToken");
   const history = useHistory();
+  const [activeIndex, setActiveIndex] = useState();
 
   useEffect(() => {
     axios
@@ -177,6 +179,158 @@ function Footer() {
           </div>
         </div>
       </div>
+      {/* mobile footer */}
+      <div className={Classes.FooterMob}>
+        <div className={Classes.LogoMobScreen}>
+          <img className={Classes.Logo} src={Logo} alt="" />
+        </div>
+        <div className={Classes.ParentCollaps}>
+          <Accordion
+            multiple
+            activeIndex={activeIndex}
+            onTabChange={(e) => setActiveIndex(e.index)}
+          >
+            <AccordionTab header="About us">
+              <p
+                style={{
+                  color: "#fff",
+
+                  textAlign: "justify",
+                  fontSize: "15px",
+                }}
+              >
+                Concept of SWA Diamonds came into being from CAPESTONE Ventures
+                Pvt Ltd, a leading name in wholesale diamond jewellers market,
+                that does business with prominent retail jewellers. Many retail
+                jewellers who deal only in gold jewellery are reluctant to add
+                diamond jewellery to their stock due to certain factors
+              </p>
+            </AccordionTab>
+
+            <AccordionTab header="Policies">
+              <p className="m-0"></p>
+            </AccordionTab>
+            <AccordionTab header="franchise enquiry">
+              <p className="m-0"></p>
+            </AccordionTab>
+            <AccordionTab header="Outlets">
+              <p className="m-0"></p>
+            </AccordionTab>
+            <AccordionTab header="Quick links">
+              <p className="m-0">
+                <div className={Classes.MobQuicklinks}>
+                  <div>
+                    {catgSet.slice(0, 15).map((item, index) => {
+                      return (
+                        <p
+                          className={Classes.Links}
+                          onClick={() => catSelHandler(item.id)}
+                          style={{ color: "#ffff", cursor: "pointer" }}
+                          key={index}
+                        >
+                          {item.category}{" "}
+                        </p>
+                      );
+                    })}
+                  </div>
+                  <div>
+                    {occation.slice(0, 8).map((item, index) => {
+                      return (
+                        <p
+                          className={Classes.Links}
+                          style={{ color: "#ffff", cursor: "pointer" }}
+                          key={index}
+                          onClick={() => occationSelHandler(item.id)}
+                        >
+                          {item.tag}
+                        </p>
+                      );
+                    })}
+                  </div>
+                </div>
+              </p>
+            </AccordionTab>
+          </Accordion>
+        </div>
+        <div className={Classes.SwaParentInfoMob}>
+          <p className={Classes.Title}>Swa contact info</p>
+          <div className={Classes.SwaAddresMob}>
+            <div className={Classes.Address}>
+              <SiMinutemailer
+                size={28}
+                color="#99C7CD"
+                className={Classes.AddressText}
+              />
+              <p className={`${Classes.Links} ${Classes.AddressText}`}>
+                Ground Floor, 7/688E, Al Wahad, Chenguvetty, Kerala, 676501
+              </p>
+            </div>
+            <div className={Classes.Address}>
+              <FaPhoneAlt
+                color="#99C7CD"
+                size={15}
+                className={Classes.AddressText}
+              />
+              <p className={`${Classes.Links} ${Classes.AddressText}`}>
+                Toll Free Number : 1800 257 8600
+              </p>
+            </div>
+            <div className={Classes.Address}>
+              <HiOutlineMail
+                color="#99C7CD"
+                size={20}
+                className={Classes.AddressText}
+              />
+              <p className={`${Classes.Links} ${Classes.AddressText}`}>
+                info@swadiamonds.com
+              </p>
+            </div>
+          </div>
+          <div className={Classes.FollowUsMOB}>
+            <p
+              style={{ paddingLeft: "20px" }}
+              className={`${Classes.Title} ${Classes.FollowUs}`}
+            >
+              Follow us on
+            </p>
+            <div className={Classes.Icons}>
+              <img src={Facebook} alt="" />
+              <img src={LinkedIn} alt="" />
+              <img src={Instagram} alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className={Classes.FooterDownMob}>
+        <div className="">
+          <div className="">
+            <div className={`${""} ${Classes.FootIconImg}`}>
+              <div className={Classes.FooterIconimg1}>
+                <img className={Classes.FooterIcons} src={Image1} alt="" />
+                <img className={Classes.FooterIcons} src={Image2} alt="" />
+                <img className={Classes.FooterIcons} src={Image3} alt="" />
+              </div>
+              <div className={Classes.FooterIconimg1}>
+                <img className={Classes.FooterIcons} src={Image4} alt="" />
+                <img className={Classes.FooterIcons} src={Image5} alt="" />
+                <img className={Classes.FooterIcons} src={Image6} alt="" />
+              </div>
+            </div>
+            <div className="" style={{ paddingLeft: "0px" }}>
+              <p className={Classes.FooterDownText}>
+                2024 SWA Diamonds | All rights reserved
+              </p>
+            </div>
+
+            <div className="">
+              <p className={Classes.FooterDownTextR}>
+                Designed & developed by zinfog codelabs
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* mobile footer */}
       <div className={Classes.FooterDown}>
         <div className="container">
           <div className="row">

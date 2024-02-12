@@ -26,6 +26,8 @@ const Header = (props) => {
   const mobileSearchBarClass = isHomePage
     ? Classes.MobileSearchBar
     : Classes.MobileSearchbarOthers;
+  const isCheckoutPage = window.location.pathname === "/checkout";
+  const isCartPage = window.location.pathname === "/cart";
 
   const history = useHistory();
   useEffect(() => {
@@ -351,31 +353,33 @@ const Header = (props) => {
           <p className={Classes.NoResult}>No Results Found</p>
         )}
       </div>
-      <div
-        className={`${mobileSearchBarClass} ${Classes.MobileSearchbarOthers}`}
-      >
-        <div className="container">
-          <div
-            style={{
-              position: "relative",
-              margin: "15px 0px",
-              marginBottom: "10px",
-            }}
-          >
-            <input
-              style={{ width: "100%" }}
-              type=""
-              className={Classes.searchbar}
-              placeholder="Search for diamonds & more"
-            />
-            <BsSearch
-              size={22}
-              className={Classes.searchIcon}
-              style={{ display: searchShow ? "none" : "block" }}
-            />
+      {!isCheckoutPage && !isCartPage && (
+        <div
+          className={`${mobileSearchBarClass} ${Classes.MobileSearchbarOthers}`}
+        >
+          <div className="container">
+            <div
+              style={{
+                position: "relative",
+                margin: "15px 0px",
+                marginBottom: "10px",
+              }}
+            >
+              <input
+                style={{ width: "100%" }}
+                type=""
+                className={Classes.searchbar}
+                placeholder="Search for diamonds & more"
+              />
+              <BsSearch
+                size={22}
+                className={Classes.searchIcon}
+                style={{ display: searchShow ? "none" : "block" }}
+              />
+            </div>
           </div>
         </div>
-      </div>
+      )}
       {isHomePage && (
         <div className={Classes.CatList}>
           <div className="container" style={{ padding: "0px" }}>

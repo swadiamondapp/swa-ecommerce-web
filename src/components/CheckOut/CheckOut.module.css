@@ -1,697 +1,717 @@
 .Title {
-    font-weight: 500;
-    font-size: 24px;
-    font-family: 'PlayFairNormal' !important;
+  font-weight: 500;
+  font-size: 24px;
+  font-family: "PlayFairNormal" !important;
 }
 
 .Main {
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-    margin:30px 0px 0 50px;
-
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  margin: 30px 0px 0 50px;
 }
 .Home {
-    color: #00464D;
-    font-size: 14px;
-    font-family: 'gilroyNormal' !important;
-    font-weight: 500;
+  color: #00464d;
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
+  font-weight: 500;
 }
 .NewArrival {
-    color: #01B3C5;
-    font-size: 14px;
-    font-family: 'gilroyNormal' !important;
-    font-weight: 500;
+  color: #01b3c5;
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
+  font-weight: 500;
 }
 .SubText {
-    display: flex;
+  display: flex;
 
-    font-size: 14px;
-    font-family: 'gilroyNormal' !important;
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
+}
+.Left {
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  margin-left: 50px;
 
+  box-shadow: 0px 2px 2px 0px #0000000d;
 }
-.Left{
-    background-color: #F9F9F9;
-    padding: 20px;
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.05);
-border-radius: 4px;
-margin-left: 50px;
-margin-top: 10px;
+.Heading {
+  font-weight: 600;
+  font-size: 18px;
+  font-family: "gilroyNormal" !important;
+  color: #0d1217;
+  margin-bottom: 15px !important;
+  margin-top: 10px;
 }
-.Heading{
-    font-weight: 600;
-font-size: 18px;
-font-family: 'gilroyNormal' !important;
-color: #0D1217;
+.SubHeading {
+  font-weight: 400;
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
+  color: #8c9296;
+  /* margin-top: -10px; */
 }
-.SubHeading{
-    font-weight: 400;
-font-size: 14px;
-font-family: 'gilroyNormal' !important;
-color: #8C9296;
-/* margin-top: -10px; */
+.Address {
+  padding-left: 10px;
 }
-.Address{
-    padding-left: 10px;
-}
-.ErrorMsg{
-    color: rgba(255,0,0);
-    text-align: left;
-    font-size: 14px;
-}
-
-.Save{
-    display: flex;
-    justify-content: end;
-}
-.Submit{
-    width: 200px;
-    height: 48px;
-   margin-top: 10px;
-    background: #AEA174;
-border-radius: 4px;
-text-align: center;
-padding-top: 13px;
-color: #FFFFFF;
-font-size: 14px;
-font-weight: 600;
-}
-.addAdres{
-    width: 100%;
-    height: 55px;
-    background: #FFFFFF;
-    border: 1px solid #EFEFEF;
-    border-radius: 4px;
-    color: #0D1217;
-    text-align: center;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    padding-top: 16px;
-}
-.PlaceInput{
-    width: 100%;
-    height: 40px;
-    cursor: pointer;
-    background: #FFFFFF;
-border: 1px solid #E8E9EA;
-border-radius: 4px;
-padding-left: 10px;
-margin:15px 0 5px 0;
-color: #A3A7AB;
-}
-.PlaceInputDrop{
-    width: 100%;
-    height: 40px;
- 
-border: 1px solid #E8E9EA;
-border-radius: 4px;
-background: #FFFFFF !important; 
-padding-left: 10px;
-margin:15px 0 15px 0;
-background: transparent;
--webkit-appearance: none;
-background: transparent url("../../Assets/ArrowDown.png") no-repeat 96% center;
-color: #A3A7AB;
+.ErrorMsg {
+  color: rgba(255, 0, 0);
+  text-align: left;
+  font-size: 14px;
 }
 
-.None{
-    display: none;
+.Save {
+  display: flex;
+  justify-content: end;
 }
-.Apply{
-    color: #0997E7;
-    font-family: 'gilroyNormal' !important;
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    user-select: none;
+.Submit {
+  width: 200px;
+  height: 48px;
+  margin-top: 10px;
+  background: #aea174;
+  border-radius: 4px;
+  text-align: center;
+  padding-top: 13px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
 }
-.BorderBottom{
-    border-bottom:0.5px solid #E8E9EA;
-    margin-bottom: 20px;
+label {
+  color: #585f67;
+  font-family: "Lato", sans-serif;
+  margin-bottom: 5px;
+  font-size: 15px;
 }
-.ValidationText{
-    color: #EB4925;
-    font-weight: 400;
-font-size: 12px;
-margin-top: -10px;
-margin-bottom: 2px !important;
-font-family: 'gilroyNormal' !important;
+.EmailMobileNew {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
 }
-.Flex{
-    display: flex;
-    margin-bottom: -10px;
+.ParentStreetColony {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
 }
-.Flexx{
-    display: flex;
-    justify-content: space-between;
+.ParentF1 {
+  display: grid;
+  grid-template-columns: 1fr 0.5fr 0.5fr;
+  align-items: center;
+  gap: 20px;
 }
-.WarningIcon{
-   height: 18px;
-   width: 15px;
-   margin-right: 10px;
-   margin-top: -10px !important;
+.addAdres {
+  width: 100%;
+  height: 55px;
+  background: #ffffff;
+  border: 1px solid #efefef;
+  border-radius: 4px;
+  color: #0d1217;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  padding-top: 16px;
 }
-.Right{
-    background-color: #FFFFFF;
-    padding: 20px;
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.05);
-border-radius: 4px;
-margin-right: 50px;
-margin-top: 10px;
+.PlaceInput {
+  width: 100%;
+  cursor: pointer;
+  background: #f9f9f9;
+  border: 1px solid #e8e9ea;
+  border-radius: 4px;
+  color: #a3a7ab;
+  padding: 8px 15px;
+  margin-bottom: 15px;
+  outline: none;
 }
-.CheckBox{
-    border: 0.5px solid #A3A7AB;
-border-radius: 2px;
-margin-right: 10px;
+.PlaceInput::placeholder {
+  color: #a3a7ab;
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
 }
-.CheckBoxLabel{
-    color: #008EEC;
-    font-weight: 400;
-font-size: 14px;
-font-family: 'gilroyNormal' !important;
+.PlaceInputDrop {
+  width: 100%;
+
+  border: 1px solid #e8e9ea;
+  border-radius: 4px;
+  background: #ffffff !important;
+
+  background: transparent;
+  -webkit-appearance: none;
+  background: transparent url("../../Assets/ArrowDown.png") no-repeat 96% center;
+  color: #a3a7ab;
 }
-.Payment{
-    color: #292929;
-    font-weight: 400;
-font-size: 14px;
-font-family: 'gilroyNormal' !important;
-margin: 0 0 10px 5px;
+
+.None {
+  display: none;
 }
-.PayLogo{
-    margin-left: 10px;
+.Apply {
+  color: #0997e7;
+  font-family: "gilroyNormal" !important;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+}
+.BorderBottom {
+  border-bottom: 0.5px solid #e8e9ea;
+  margin-bottom: 20px;
+}
+.ValidationText {
+  color: #eb4925;
+  font-weight: 400;
+  font-size: 12px;
+  margin-top: -10px;
+  margin-bottom: 2px !important;
+  font-family: "gilroyNormal" !important;
+}
+.Flex {
+  display: flex;
+  margin-bottom: -10px;
+}
+.PlaceInput:focus {
+  box-shadow: 1px 4px 4px 0px #00464d1a inset;
+  border: 1px solid #026f7f;
+}
+.Flexx {
+  display: flex;
+  justify-content: space-between;
+}
+.WarningIcon {
+  height: 18px;
+  width: 15px;
+  margin-right: 10px;
+  margin-top: -10px !important;
+}
+.Right {
+  background-color: #ffffff;
+  padding: 20px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  margin-right: 50px;
+  margin-top: 10px;
+}
+.CheckBox {
+  border: 0.5px solid #a3a7ab;
+  border-radius: 2px;
+  margin-right: 10px;
+}
+.CheckBoxLabel {
+  color: #008eec;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
+}
+.Payment {
+  color: #292929;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
+  margin: 0 0 10px 5px;
+}
+.PayLogo {
+  margin-left: 10px;
 }
 .OrderSummery {
-    font-weight: 600;
-    font-size: 14px;
-    color: #5E666C;
-    padding-top: 20px;
-    font-family: 'gilroyNormal' !important;
-
+  font-weight: 600;
+  font-size: 14px;
+  color: #5e666c;
+  padding-top: 5px;
+  font-family: "gilroyNormal" !important;
 }
 
-.NumOfItem {
-    font-weight: 400;
-    font-size: 14px;
-    color: #5E666C;
-    font-family: 'gilroyNormal' !important;
-    margin-left: 10px;
+.TotalSmall {
+  font-weight: 600;
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
 }
-.TotalSmall{
-    font-weight: 600;
-font-size: 14px;
-font-family: 'gilroyNormal' !important;
+.Amount {
+  font-weight: 600;
+  font-size: 14px;
+  margin-top: 15px;
+  font-family: "gilroyNormal" !important;
 }
-.Amount{
-    font-weight: 600;
-font-size: 14px;
-margin-top:  15px;
-font-family: 'gilroyNormal' !important;
-}
-.TotalItem{
-    display: flex;
-    justify-content: space-between;
-   margin-top: 15px;
-}
-.TotalItemBorder{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-    border-bottom: 0.5px solid #E8E9EA;
+.TotalItem {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
 }
 
-.TotalItems{
-    display: flex;
-    
+.TotalItems {
+  display: flex;
 }
-.Method{
-    width: 50%;
-    height: 200px;
-    background: #FFFFFF;
-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.05);
-border-radius: 4px;
-margin: 30px 0px 0 50px;
+.Method {
+  width: 50%;
+  height: 200px;
+  background: #ffffff;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  margin: 30px 0px 0 50px;
 }
-.TotalPayable{
-    font-weight: 600;
-font-size: 17px;
-letter-spacing: 0.03em;
-color: #303A42;
-font-family: 'gilroyNormal' !important;
+.TotalPayable {
+  font-weight: 600;
+  font-size: 17px;
+  letter-spacing: 0.03em;
+  color: #303a42;
+  font-family: "gilroyNormal" !important;
 }
-.HurrayText{
-    color: #30933A;
-    font-weight: 600;
-font-size: 14px;
-margin-top: 10px;
-
+.HurrayText {
+  color: #30933a;
+  font-weight: 600;
+  font-size: 14px;
+  margin-top: 10px;
 }
-.AmountPayable{
-    font-weight: 700;
-font-size: 17px;
-color: #303A42;
+.AmountPayable {
+  font-weight: 700;
+  font-size: 17px;
+  color: #303a42;
 }
-.InputCode{
-    background: #F9F9F9;
-border: 1px solid #E8E9EA;
-border-radius: 4px;
-font-weight: 400;
-font-size: 16px;
-color: #1E1E1E;
-font-family: 'gilroyNormal' !important;
-width: 60%;
-height: 35px;
-/* margin-right: 5px;*/
+.InputCode {
+  background: #f9f9f9;
+  border: 1px solid #e8e9ea;
+  border-radius: 4px;
+  font-weight: 400;
+  font-size: 16px;
+  color: #1e1e1e;
+  font-family: "gilroyNormal" !important;
+  width: 60%;
+  height: 35px;
+  /* margin-right: 5px;*/
 }
-.ApplyButton{
-    
-background: linear-gradient(180deg, #978958 0%, #AEA174 82.81%);
-border-radius: 2px;
-padding: 5px 35px 5px 35px;
-border: none;
-margin-left: 5px;
+.ApplyButton {
+  background: linear-gradient(180deg, #978958 0%, #aea174 82.81%);
+  border-radius: 2px;
+  padding: 5px 35px 5px 35px;
+  border: none;
+  margin-left: 5px;
 }
-.Rupee{
-    margin-top: 4px;
+.Rupee {
+  margin-top: 4px;
 }
-.PlaceOrderButton{
-    background: #19242D;
-border-radius: 4px;
-cursor: pointer;
-padding: 12px 0 10px 0;
-font-weight: 600;
-width: 100%;
-height: 47px;
-text-align: center;
-font-size: 14px;
-color: #FFFFFF;
-margin-top: 15px;
+.PlaceOrderButton {
+  background: #00464d;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 12px 0 10px 0;
+  font-weight: 600;
+  width: 100%;
+  height: 47px;
+  text-align: center;
+  font-size: 14px;
+  color: #ffffff;
+  margin-top: 15px;
 }
-.ValidationTextCode{
-    font-weight: 400;
-font-size: 12px;
-color: #EB4925;
-margin-left: 5px;
+.ValidationTextCode {
+  font-weight: 400;
+  font-size: 12px;
+  color: #eb4925;
+  margin-left: 5px;
 }
-.Warning{
-    height: 20px;
+.Warning {
+  height: 20px;
 }
 .Title {
-    font-weight: 500;
-    font-size: 24px;
-    font-family: 'PlayFairNormal' !important;
+  font-weight: 500;
+  font-size: 24px;
+  font-family: "PlayFairNormal" !important;
 }
 
 .Main {
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-  
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
 }
-.Name{
-    color: #475057;
-    font-family: 'gilroyNormal';
-font-size: 16px;
-font-weight: 600;
-line-height: 19px;
-letter-spacing: 0em;
-text-align: left;
-
+.Name {
+  color: #475057;
+  font-family: "gilroyNormal";
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: left;
 }
-.AddresLay{
-    width: 100%;
-    min-height: 250px;
-    background-color: #FFFFFF;
-    padding: 20px;
-    border-radius: 4px;
-    
+.AddresLay {
+  width: 100%;
+  min-height: 250px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 4px;
 }
-.AddresCont{
-    /* border-bottom: 0.5px solid #EAEAEA; */
-    width: 100% !important;
-    padding-bottom: 15px;
-
+.AddresCont {
+  /* border-bottom: 0.5px solid #EAEAEA; */
+  width: 100% !important;
+  padding-bottom: 15px;
 }
-.AddreInner{
-    color: #8C9296;
-    font-family: 'gilroyNormal';
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 27px;
-    letter-spacing: 0em;
-    text-align: left;
-    margin-bottom: 5px !important;
+.AddreInner {
+  color: #8c9296;
+  font-family: "gilroyNormal";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 27px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin-bottom: 5px !important;
 }
-.Mobile{
-    color: #000000;
-    font-family: 'gilroyNormal';
-    font-size: 15px;
-    font-weight: 400;
-    line-height: 20px;
-    letter-spacing: 0em;
-    text-align: left;
-  
-
+.Mobile {
+  color: #000000;
+  font-family: "gilroyNormal";
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: left;
 }
 .Number {
-    font-weight: 400;
-    font-size: 16px;
-    margin-left: 10px;
-    color: #757C81;
-    font-family: 'gilroyNormal' !important;
-    line-height: 30px;
-
+  font-weight: 400;
+  font-size: 16px;
+  margin-left: 10px;
+  color: #757c81;
+  font-family: "gilroyNormal" !important;
+  line-height: 30px;
 }
 
 .SubText {
-    display: flex;
+  display: flex;
 
-    font-size: 14px;
-    font-family: 'gilroyNormal' !important;
-
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
 }
 
 .Home {
-    color: #00464D;
-    font-size: 14px;
-    font-family: 'gilroyNormal' !important;
-    font-weight: 500;
-
+  color: #00464d;
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
+  font-weight: 500;
 }
 
 .NewArrival {
-    color: #01B3C5;
-    font-size: 14px;
-    font-family: 'gilroyNormal' !important;
-    font-weight: 500;
+  color: #01b3c5;
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
+  font-weight: 500;
 }
 
 .CartItems {
-    margin: 20px;
-    border: 1px solid black;
-    padding: 14px;
-    background: #FFFFFF;
-    border: 0.5px solid #E8E8E8;
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.05);
-    border-radius: 4px;
+  margin: 20px;
+  border: 1px solid black;
+  padding: 14px;
+  background: #ffffff;
+  border: 0.5px solid #e8e8e8;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
 }
 
 .Total {
-    border: 1px solid black;
-    height: 480px;
+  border: 1px solid black;
+  height: 480px;
 }
-.Products{
-    border: 1px solid #E4E4E4;
-    border-radius: 2px;
-    margin-top: 22px;
+.Products {
+  border: 1px solid #e4e4e4;
+  border-radius: 2px;
+  margin-top: 22px;
 }
 
 .ProductImage {
-    padding: 16px 16px 16px 0;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: auto;
+  padding: 16px 16px 16px 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: auto;
 }
 
 .ProductDetails {
-    font-weight: 600;
-    font-size: 18px;
-    margin-top: 45px;
-    color: #0D1217;
-    font-family: 'gilroyNormal' !important;
+  font-weight: 600;
+  font-size: 18px;
+  margin-top: 45px;
+  color: #0d1217;
+  font-family: "gilroyNormal" !important;
 }
 
 .Price {
-    display: flex;
-    font-size: 14px;
+  display: flex;
+  font-size: 14px;
 }
 
 .PriceNew {
-    font-weight: 700;
-    margin-right: 5px;
-    font-size: 16px;
+  font-weight: 700;
+  margin-right: 5px;
+  font-size: 16px;
 }
 
 .PriceOld {
-    text-decoration: line-through;
-    margin-left: 5px;
-    font-weight: 300;
-    font-size: 16px;
-    color: #B0B0B0;
+  text-decoration: line-through;
+  margin-left: 5px;
+  font-weight: 300;
+  font-size: 16px;
+  color: #b0b0b0;
 }
 
 .SizeQty {
-    display: flex;
-    /* margin-top: 20px; */
+  display: flex;
+  /* margin-top: 20px; */
 }
 
 .SizeText {
-    font-weight: 400;
-    font-size: 14px;
-    color: #757C81;
-    font-family: 'gilroyNormal' !important;
-    margin-top: 18px;
+  font-weight: 400;
+  font-size: 14px;
+  color: #757c81;
+  font-family: "gilroyNormal" !important;
+  margin-top: 18px;
 }
 
 .SizeNum {
-    font-weight: 600;
-    font-size: 14px;
-    font-family: 'gilroyNormal' !important;
-    padding: 2px 5px 0 5px;
-    margin-top: 16px;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
+  padding: 2px 5px 0 5px;
+  margin-top: 16px;
 }
 
 .DropDown {
-    margin-left: 15px;
-margin-top: 10px;
+  margin-left: 15px;
+  margin-top: 10px;
 }
 
-
-.Quantity option{
-    border: 1px solid #00464D;
-    border-radius: 10px;
+.Quantity option {
+  border: 1px solid #00464d;
+  border-radius: 10px;
 }
 .SavedMoney {
-    font-weight: 600;
-    font-size: 14px;
-    color: #30933A;
-    font-family: 'gilroyNormal' !important;
-
+  font-weight: 600;
+  font-size: 14px;
+  color: #30933a;
+  font-family: "gilroyNormal" !important;
 }
-.Rupee{
-    margin-bottom: 5px;
+.Rupee {
+  margin-bottom: 5px;
 }
-.Quantity{
-    font-size: 14px;
-    color: #303A42;
-    line-height: 16.48px;
-    font-weight: 400;
+.Quantity {
+  font-size: 14px;
+  color: #303a42;
+  line-height: 16.48px;
+  font-weight: 400;
 }
 
 .ProductProperty {
-    font-weight: 400;
-    font-size: 14px;
-    color: #757C81;
-    line-height: 16.5px;
-    font-family: 'gilroyNormal' !important;
+  font-weight: 400;
+  font-size: 14px;
+  color: #757c81;
+  line-height: 16.5px;
+  font-family: "gilroyNormal" !important;
 }
-.Apply{
-    color: #0997E7;
-    font-size: 15px;
-    font-family: 'gilroyNormal' !important;
-    font-weight: 600;
-    cursor: pointer;
+.Apply {
+  color: #0997e7;
+  font-size: 15px;
+  font-family: "gilroyNormal" !important;
+  font-weight: 600;
+  cursor: pointer;
 }
-.Voucher{
-    display: flex;
-    justify-content: space-between;
-    padding-top: 20px;
+.Voucher {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 15px;
 }
 .Delivery {
-    display: flex;
-    border-bottom: 0.5px solid #E8E9EA;
-    margin-left: 12px;
-    margin-top: 15px;
+  display: flex;
+  border-bottom: 0.5px solid #e8e9ea;
+  margin-left: 12px;
+  margin-top: 15px;
 }
 
-
 .DeliveryExpected {
-    font-weight: 400;
-    font-size: 12px;
-    color: #454647;
-    font-family: 'gilroyNormal' !important;
-    margin-left: 10px;
-
+  font-weight: 400;
+  font-size: 12px;
+  color: #454647;
+  font-family: "gilroyNormal" !important;
+  margin-left: 10px;
 }
 
 .RemoveMove {
-    display: flex;
-
+  display: flex;
 }
 
 .Remove {
-    padding: 0;
-    color: #5E666C;
-    margin: 5px;
-    margin-left: 10px;
-
+  padding: 0;
+  color: #5e666c;
+  margin: 5px;
+  margin-left: 10px;
 }
 
 .Delete {
-    font-weight: 400;
-    font-family: 'gilroyNormal' !important;
-    font-size: 14px;
-    margin-top: 10px;
+  font-weight: 400;
+  font-family: "gilroyNormal" !important;
+  font-size: 14px;
+  margin-top: 10px;
 }
 
 .Right {
-    background: #FFFFFF;
-    border: 0.5px solid #E8E8E8;
-    box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.08);
-    border-radius: 4px;
-    margin-top: 20px;
-    padding: 20px;
+  background: #ffffff;
+  border: 0.5px solid #e8e8e8;
+  box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+  margin-top: 20px;
+  padding: 20px;
 }
 
 .TotalText {
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px dashed #E8E9EA;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dashed #e8e9ea;
+  padding-bottom: 10px;
 }
 
 .OrderSummery {
-    font-weight: 600;
-    font-size: 14px;
-    color: #5E666C;
-    padding-top: 20px;
-    font-family: 'gilroyNormal' !important;
-
+  font-weight: 600;
+  font-size: 14px;
+  color: #5e666c;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-family: "gilroyNormal" !important;
 }
 
 .NumOfItem {
-    font-weight: 400;
-    font-size: 14px;
-    color: #5E666C;
-    font-family: 'gilroyNormal' !important;
-    
+  font-weight: 400;
+  font-size: 14px;
+  color: #5e666c;
+  font-family: "gilroyNormal" !important;
+  margin-left: 0px !important;
 }
-.TotalSmall{
-    font-weight: 600;
-font-size: 14px;
-font-family: 'gilroyNormal' !important;
+.TotalSmall {
+  font-weight: 600;
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
 }
-.Amount{
-    font-weight: 600;
-font-size: 14px;
-margin-top:  15px;
-font-family: 'gilroyNormal' !important;
+.Amount {
+  font-weight: 600;
+  font-size: 14px;
+  margin-top: 15px;
+  font-family: "gilroyNormal" !important;
 }
-.TotalItem{
-    display: flex;
-    justify-content: space-between;
-   margin-top: 15px;
+.TotalItem {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
 }
-.TotalItemBorder{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-    border-bottom: 0.5px solid #E8E9EA;
-}
-
-.TotalItems{
-    display: flex;
-    
-}
-.TotalPayable{
-    font-weight: 600;
-font-size: 17px;
-letter-spacing: 0.03em;
-color: #303A42;
-font-family: 'gilroyNormal' !important;
-}
-.HurrayText{
-    color: #30933A;
-    font-weight: 600;
-font-size: 14px;
-margin-top: 10px;
-
-}
-.AmountPayable{
-    font-weight: 700;
-font-size: 17px;
-color: #303A42;
-}
-.Input{
-    background: #F9F9F9;
-border: 1px solid #E8E9EA;
-border-radius: 4px;
-font-weight: 400;
-font-size: 16px;
-color: #1E1E1E;
-font-family: 'gilroyNormal' !important;
-width: 60%;
-height: 50px;
-/* margin-right: 5px;*/
-}
-.ApplyButton{
-    
-background: linear-gradient(180deg, #978958 0%, #AEA174 82.81%);
-border-radius: 2px;
-padding: 12px 35px;
-border: none;
-border-radius: 2px;
-color: #FFFFFF;
-margin-left: 5px;
-}
-.Method h3{
-    color: #0D1217;
-    font-weight: 600;
-font-size: 18px;
-line-height: 21px;
-font-family: 'gilroyNormal' !important;
-padding: 15px;
-}
-.MethodPad{
-    padding: 15px;
-}
-.Rupee{
-    margin-top: 4px;
-    
-}
-.BiRupee{
-    padding-top: 1px;
-    padding-bottom: 2px;
+.TotalItemBorder {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  border-bottom: 0.5px solid #e8e9ea;
+  padding-bottom: 8px;
 }
 
-.ValidationText{
-    font-weight: 400;
-font-size: 12px;
-color: #EB4925;
-margin-left: 5px;
-margin-top: -3px;
+.TotalItems {
+  display: flex;
 }
-.Warning{
-    height: 15px;
+.TotalPayable {
+  font-weight: 600;
+  font-size: 17px;
+  letter-spacing: 0.03em;
+  color: #303a42;
+  font-family: "gilroyNormal" !important;
 }
-.Validation{
-    display: flex;
-    margin-top: 10px;
+.HurrayText {
+  color: #30933a;
+  font-weight: 600;
+  font-size: 14px;
+  margin-top: 10px;
 }
-@media screen and (max-width:767px) {
-    .Right{
-        margin-right: 0;
-      
-    }
-    .Main {
-        margin:30px 0px 0 0px;
-    }
-    .Method{
-        width: 100%;
-        height: 200px;
-        background: #FFFFFF;
+.AmountPayable {
+  font-weight: 700;
+  font-size: 17px;
+  color: #303a42;
+}
+.Input {
+  background: #f9f9f9;
+  border: 1px solid #e8e9ea;
+  border-radius: 4px;
+  font-weight: 400;
+  font-size: 16px;
+  color: #1e1e1e;
+  font-family: "gilroyNormal" !important;
+  width: 60%;
+  height: 50px;
+  /* margin-right: 5px;*/
+}
+.ApplyButton {
+  background: linear-gradient(180deg, #978958 0%, #aea174 82.81%);
+  border-radius: 2px;
+  padding: 12px 35px;
+  border: none;
+  border-radius: 2px;
+  color: #ffffff;
+  margin-left: 5px;
+}
+.Method h3 {
+  color: #0d1217;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 21px;
+  font-family: "gilroyNormal" !important;
+  padding: 15px;
+}
+.MethodPad {
+  padding: 15px;
+}
+.Rupee {
+  margin-top: 4px;
+}
+.BiRupee {
+  padding-top: 1px;
+  padding-bottom: 2px;
+}
+
+.ValidationText {
+  font-weight: 400;
+  font-size: 12px;
+  color: #eb4925;
+  margin-left: 5px;
+  margin-top: -3px;
+}
+.Warning {
+  height: 15px;
+}
+.Validation {
+  display: flex;
+  margin-top: 10px;
+}
+@media screen and (max-width: 767px) {
+  .Right {
+    margin-right: 0;
+  }
+  .Main {
+    margin: 30px 0px 0 0px;
+  }
+  .Method {
+    width: 100%;
+    height: 200px;
+    background: #ffffff;
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.05);
     border-radius: 4px;
     margin: 30px 0px 0 0px;
-    }
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+  .Left {
+    margin-left: 0px;
+  }
+}
+@media (min-width: 300px) and (max-width: 575px) {
+  .Left {
+    margin-left: 0px;
+  }
+  .EmailMobileNew {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 20px;
+    gap: 0px;
+  }
+  .ParentF1 {
+    grid-template-columns: 1fr;
+    gap: 0px;
+  }
+  .ParentStreetColony {
+    grid-template-columns: 1fr;
+    gap: 0px;
+  }
 }
