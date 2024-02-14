@@ -13,7 +13,133 @@
   font-size: 24px;
   font-family: "PlayFairNormal" !important;
 }
+.orderidh3 {
+  color: #000000;
+  font-size: 24px;
+  font-family: "Lato", sans-serif;
+}
+.DeliveryDetails {
+  margin-bottom: 20px;
+}
+.DeliveryDetails p {
+  font-size: 19px;
+  font-weight: 400;
+  font-family: "Lato", sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.DeliveryDetails img {
+  margin-right: 5px;
+}
+.DeliveryDetails p span {
+  color: #30933a;
+}
+.ParentShipmentDetails {
+  background: #fff;
+}
+.ParentShipmentDetails .p-accordion-header-text {
+  color: #000 !important;
+}
+.nameShipment {
+  color: #475057;
+  font-family: "Lato", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 5px !important;
+}
+.AddressShipping p {
+  color: #475057;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+}
+.phoneSh {
+  margin-top: 15px;
+}
+.ProductDetailsParent1 {
+  display: flex;
+  justify-content: space-between;
+}
+.LftProductDetail {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.PDiamond1 {
+  color: #0d1217;
+  font-family: "Lato", sans-serif;
+  font-weight: 600;
+  margin-bottom: 10px !important;
+}
+.crtn1 {
+  margin-top: 20px;
+  padding: 8px 2px;
+  border-radius: 5px;
+  border-top: 1px solid #0000000d;
+}
+.parentPaymentItems {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  justify-content: end;
+}
+.dotstatusline {
+  background: #0eb533;
+  width: 3px;
+  height: 60px;
+}
+.dotstatus {
+  width: 15px;
+  height: 15px;
+  background: #0eb533;
+  border-radius: 50px;
+}
+.dotstatusline1 {
+  background: #d9d9d9;
+  width: 3px;
+  height: 60px;
+}
+.ParentStatus {
+  display: flex;
+  gap: 20px;
+}
+.dotstatus1 {
+  width: 15px;
+  height: 15px;
+  background: transparent;
+  border-radius: 50px;
+  border: 2px solid #d9d9d9;
+}
+.RsHead {
+  color: #0d1217;
+  font-family: "Lato", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+}
+.RightStausshow {
+  margin-bottom: 15px;
+}
+.RightStausshow2 {
+  margin-top: 22px;
+}
+.RightStausshow3 {
+  margin-top: 45px;
+}
+.leftStatus2 {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
 
+.PaymentItems {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 200px 150px;
+  color: #475057;
+}
+.PaymentItems p:nth-child(2) {
+  text-align: end;
+}
 .Main {
   display: flex;
   flex-direction: column;
