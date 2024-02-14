@@ -46,9 +46,9 @@ const LoginToggle = () => {
   const customTabOtpModalStyle = {
     position: "relative",
     // bottom: "20%",
-    left:'50%',
-    top:"50%",
-    transform:"translate(-50%,-50%)",
+    left: "50%",
+    top: "50%",
+    transform: "translate(-50%,-50%)",
     bgcolor: "background.paper",
     border: "1px solid #000",
     boxShadow: 24,
@@ -62,7 +62,7 @@ const LoginToggle = () => {
     backgroundColor: activeTab === "tab2" ? "#fff" : "#F0F0F2",
   };
   return (
-    <div style={{ padding: "16px" }}>
+    <div style={{ padding: "15px" }}>
       <div className={Classes.Wrapper}>
         {isSignup ? (
           <>
@@ -72,22 +72,17 @@ const LoginToggle = () => {
                   className={Classes.headerTitle}
                   // style={{ marginBottom: "1rem" }}
                 >
-                  <div>
+                
                     <p className={Classes.signuptitletext}>Sign up</p>
-                  </div>
-                  <div>
-                    <p className={Classes.signupsecondtitle}>
+               
+                 
+                    <p className={Classes.titlep}>
                       Create your Account
                     </p>
-                  </div>
+                 
                 </div>
                 <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
+                 className={Classes.flex}
                 >
                   <div
                     className={Classes.SocialButtons}
@@ -166,23 +161,14 @@ const LoginToggle = () => {
                   </Button>
                 </div>
                 <div className={Classes.Signup}>
-                  <div>
-                    <p className={Classes.bottomText}>
-                      {" "}
-                      Already have an account?
-                    </p>
-                  </div>
-                  <div>
-                    <p>
-                      <button
-                        className={Classes.signupAnchor}
-                        onClick={handleSignupModalOpen}
-                      >
-                        Login
-                      </button>
-                    </p>
-                  </div>
-                </div>
+                <span className={Classes.bottomText}>Already have account?</span>
+                  <span
+                    className={Classes.signupAnchor}
+                    onClick={handleSignupModalOpen}
+                  >
+                    Login
+                  </span>
+            </div>
               </div>
             </div>
           </>
@@ -191,7 +177,7 @@ const LoginToggle = () => {
             <div className={Classes.SlideButton}>
               <div className={Classes.LoginContainer}>
                 <div className={Classes.title}>
-                  <div>
+                  <div style={{paddingBottom:'10px'}}>
                     <h3 className={Classes.titleh}>Welcome back Login here</h3>
                   </div>
                   <div className={Classes.signupTitleText}>
@@ -331,19 +317,13 @@ const LoginToggle = () => {
               </div>
             </div>
             <div className={Classes.Signup}>
-              <div>
-                <p className={Classes.bottomText}>Don’t have an account?</p>
-              </div>
-              <div>
-                <p>
-                  <button
-                    className={Classes.signupAnchor}
-                    onClick={handleSignupModalOpen}
-                  >
-                    Signup
-                  </button>
-                </p>
-              </div>
+              <span className={Classes.bottomText}>Don’t have an account?</span>
+              <span
+                className={Classes.signupAnchor}
+                onClick={handleSignupModalOpen}
+              >
+                Signup
+              </span>
             </div>
             <div className={Classes.SlideTp}>
               {getOtpModal ? (
@@ -387,22 +367,15 @@ const LoginToggle = () => {
                           }}
                         >
                           <div className={Classes.Signup}>
-                            <div>
-                              <p className={Classes.bottomText}>
-                                {" "}
-                                Dont't recived the code ?
-                              </p>
-                            </div>
-                            <div>
-                              <p>
-                                <button
-                                  className={Classes.signupAnchor}
-                                  onClick={handleSignupModalOpen}
-                                >
-                                  resend
-                                </button>
-                              </p>
-                            </div>
+                            <span className={Classes.bottomText}>
+                              Don’t recived the code?
+                            </span>
+                            <span
+                              className={Classes.signupAnchor}
+                              onClick={handleSignupModalOpen}
+                            >
+                              Resend
+                            </span>
                           </div>
                         </div>
                       </div>

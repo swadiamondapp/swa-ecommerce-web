@@ -49,14 +49,14 @@ header {
     /* justify-items: center; */
     align-items: center;
     flex-direction: column;
-    padding-bottom: 10px;
+    padding:15px 0px;
     /* padding-top: 5px; */
   }
   .titleh {
     color: #0d1217;
     text-align: center;
     font-family: "PlayFairNormal";
-    font-size: 26px;
+    font-size: 23px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
@@ -67,7 +67,7 @@ header {
     font-family: "gilroyNormal";
     font-style: normal;
     font-weight: 400;
-    line-height: 1.625rem;
+    /* line-height: 1.625rem; */
     opacity: 0.7;
     font-size: 14px;
   }
@@ -103,7 +103,7 @@ header {
     width: 100%;
   }
   .orText {
-    font-size: 12px;
+    font-size: 16px;
     text-align: center;
   }
   .TabButton {
@@ -157,6 +157,7 @@ header {
     border: none;
     font-family: "gilroyNormal";
     background-color: transparent;
+    padding:0px 2px;
   }
   .bottomText {
     color: #585f67;
@@ -219,16 +220,19 @@ header {
     line-height: 1.4375rem;
   } */
   .headerTitle {
-    display: grid;
-    grid-template-rows: 1fr 1fr;
+    display: flex;
     justify-items: center;
     align-items: center;
+    flex-direction: column;
+    margin-bottom: 15px;
+
   }
   .flex {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding-bottom: 10px;
   }
   .formInputFields {
     place-items: center;
@@ -260,7 +264,7 @@ header {
     /* width: 100%; */
   }
   .buttonSocial > img {
-    margin-right: 5px;
+  
     max-width: 13px;
   }
   .tabTitleOne {
@@ -542,8 +546,11 @@ header {
     font-weight: 600;
     line-height: 1.25rem;
     border: none;
+    padding: 0px;
+    margin: 0px;
     font-family: "gilroyNormal";
     background-color: transparent;
+    padding:0px 4px;
   }
   .bottomText {
     color: #585f67;
@@ -553,6 +560,7 @@ header {
     font-style: normal;
     font-weight: 400;
     line-height: 1.25rem;
+  
   }
   .otpContainer {
     padding: 5px 15px;
