@@ -152,7 +152,7 @@
   font-size: 14px;
   font-weight: 400;
 }
-.TextWrapper span {
+.GreenText {
   font-family: "LatoRegular";
   color: #30933a;
   font-size: 14px;
@@ -180,4 +180,64 @@
   color: #454647;
   font-size: 14px;
   font-weight: 400;
+}
+.ViewButton {
+  display: flex;
+  background-color: #19242d;
+  align-items: center;
+  padding: 10px;
+  border-radius: 4px;
+}
+.ViewButton button {
+  border: none;
+  color: #ffffff;
+  text-align: center;
+  background-color: #19242d;
+  font-family: "LatoRegular";
+  font-weight: 500;
+  font-size: 14px;
+}
+.RighSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.RatingContainer {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+.RatingContainer p {
+  margin-bottom: 0px;
+  color: #0997e7;
+  font-family: "LatoRegular";
+  font-size: 18px;
+  font-weight: 400;
+}
+.OverLined {
+  text-decoration: line-through;
+}
+.RightArrow {
+  color: #ffffff;
+}
+@media (min-width: 300px) and (max-width: 575px) {
+  .OutBox {
+    margin: 0px 0px 10px;
+  }
+  .ViewButton {
+    background-color: #ffffff;
+  }
+  .ViewButton button {
+    display: none;
+  }
+  .RightArrow {
+    color: #30933a;
+  }
+  .BottomContainer {
+    flex-direction: column;
+  }
+  .ImageContent img {
+    max-width: 100px;
+  }
 }

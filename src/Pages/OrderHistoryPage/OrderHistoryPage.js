@@ -5,7 +5,7 @@ import Footer from "../../components/Footer/Footer";
 import Classes from "./OrderHistoryPage.module.css";
 import OrderHistory from "../../components/OrderHistory/OrderHistory";
 import OrderHiistoryCard from "../../components/OrderHistory/OrderHistoryCard/OrderHistoryCard";
-import ProductImage from "../../Assets/pandant chain 1.png";
+import ProductImage from "../../Assets/earrings.png";
 import Orders from "../../components/OrderHistory/OrderHistoryCard/Orders/Orders";
 import axios from "axios";
 import * as Urls from "../../Urls";

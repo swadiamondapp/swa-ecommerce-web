@@ -270,7 +270,6 @@ const Header = (props) => {
           </div>
         </div>
       </MainHead>
-
       <div
         className={Classes.SubHeadNav}
         style={{

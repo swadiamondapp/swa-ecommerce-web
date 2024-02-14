@@ -649,7 +649,13 @@ function CheckOut(props) {
                   </form>
                 ) : null}
 
-                <div className={Classes.PlaceOrderButton} onClick={placeOrder}>
+                <div
+                  className={Classes.PlaceOrderButton}
+                  // onClick={placeOrder}
+                  onClick={() => {
+                    history.push("/payment");
+                  }}
+                >
                   Place Order
                 </div>
                 {total !== amountPay ? (

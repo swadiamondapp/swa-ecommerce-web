@@ -322,7 +322,8 @@ const ProductDetails = (props) => {
                 <div>
                   <button
                     className={Classes.BuyNow}
-                    onClick={props.clickedBuy}
+                    // onClick={props.clickedBuy}
+                    onClick={addToCartHandler}
                     type="submit"
                   >
                     Buy Now

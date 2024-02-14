@@ -8,8 +8,8 @@ const OrderHistory = (props) => {
   };
   return (
     <div>
-      <div className="container">
-        <div className="container">
+      <div className={`${Classes.abcd} container`}>
+        <div className={`${Classes.abcd} container`}>
           <div className={Classes.Main}>
             <h1 className={Classes.Title}>My Orders</h1>
             <div className={Classes.SubText}>

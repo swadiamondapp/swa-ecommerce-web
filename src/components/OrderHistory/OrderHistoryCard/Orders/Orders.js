@@ -1,5 +1,7 @@
 import React from "react";
 import { IoIosStar } from "react-icons/io";
+import ReactStarRating from "react-star-ratings-component";
+import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import Classes from "../OrderHistoryCard.module.css";
 import { useHistory } from "react-router-dom";
 import { TbTruckDelivery } from "react-icons/tb";
@@ -12,7 +14,7 @@ function Orders(props) {
   // color="#069D0D"
   console.log("props--.>", props);
   return (
-    <div>
+    <div style={{ padding: "15px 5px 25px" }}>
       {/* <div className={Classes.Align}>
         <div>
           <div className={Classes.ProductDetails}>
@@ -61,13 +63,32 @@ function Orders(props) {
             <h3>Diamond Ring</h3>
             <p className={Classes.DeliveryText}>
               <TbTruckDelivery color="#30933A" size={20} /> Delivered on{" "}
-              <span>26 may 2023</span>
+              <span className={Classes.GreenText}>26 may 2023</span>
             </p>
-            <p className={Classes.Expected}>Expected Delivery by 30 may 2023</p>
+            <p className={Classes.Expected}>
+              Expected Delivery by{" "}
+              <span className={Classes.OverLined}>30 may 2023</span>
+            </p>
           </div>
         </div>
-        <div>
-          <button>View Order details</button>
+        <div className={Classes.RighSection}>
+          <div className={Classes.ViewButton}>
+            <button>View Order details</button>
+            <MdOutlineKeyboardArrowRight className={Classes.RightArrow} />
+          </div>
+          <div className={Classes.RatingContainer}>
+            <ReactStarRating
+              numberOfStar={5}
+              // numberOfSelectedStar={rate}
+              colorFilledStar="#F6C514"
+              colorEmptyStar="#D1D3D5"
+              starSize="30px"
+              spaceBetweenStar="10px"
+              disableOnSelect={false}
+              // onSelectStar={rateChangeHandler}
+            />
+            <p>Rate & Review</p>
+          </div>
         </div>
       </div>
     </div>

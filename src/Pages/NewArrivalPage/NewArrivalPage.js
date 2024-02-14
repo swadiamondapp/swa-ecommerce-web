@@ -391,7 +391,7 @@ const NewArrivalPage = (props) => {
 
                   {products}
                 </NewArrivalDesign>
-                <ReactPaginate
+                {/* <ReactPaginate
                   breakLabel="..."
                   nextLabel="Next >"
                   onPageChange={handlePageClick}
@@ -411,7 +411,7 @@ const NewArrivalPage = (props) => {
                   breakClassName={"page-item"}
                   breakLinkClassName={"page-link"}
                   activeClassName={"active"}
-                />
+                /> */}
                 <FilterMobile />
               </div>
 

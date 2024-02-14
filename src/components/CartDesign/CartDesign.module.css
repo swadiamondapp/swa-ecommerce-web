@@ -66,7 +66,7 @@
   /* padding: 16px 16px 16px 0; */
   display: flex;
   justify-content: center;
-  width: 90%;
+  width: 80%;
   height: auto;
 }
 
@@ -155,6 +155,7 @@
   color: #757c81;
   line-height: 16.5px;
   font-family: "gilroyNormal" !important;
+  margin-top: 12px;
 }
 .Apply {
   color: #0997e7;
@@ -167,6 +168,7 @@
   display: flex;
   justify-content: space-between;
   padding-top: 20px;
+  margin-bottom: 10px;
 }
 .Delivery {
   display: flex;
@@ -222,6 +224,7 @@
   display: flex;
   justify-content: space-between;
   border-bottom: 1px dashed #e8e9ea;
+  padding: 10px 0px;
 }
 
 .OrderSummery {
@@ -337,6 +340,7 @@
 .OverView {
   display: flex;
   gap: 15px;
+  margin-top: 15px;
 }
 .OverView p {
   margin-bottom: 0px;

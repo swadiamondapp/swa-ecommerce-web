@@ -201,7 +201,7 @@ const Cart = () => {
               />
             );
           })}
-          <ReactPaginate
+          {/* <ReactPaginate
             breakLabel="..."
             nextLabel="next >"
             onPageChange={handlePageClick}
@@ -220,7 +220,7 @@ const Cart = () => {
             breakClassName={"page-item"}
             breakLinkClassName={"page-link"}
             activeClassName={"active"}
-          />
+          /> */}
         </CartDesign>
       </>
     );

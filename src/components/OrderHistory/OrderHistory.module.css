@@ -1,64 +1,73 @@
 .Title {
-    font-weight: 500;
-    font-size: 24px;
-    font-family: 'PlayFairNormal' !important;
+  font-weight: 500;
+  font-size: 24px;
+  font-family: "PlayFairNormal" !important;
 }
 
 .Main {
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-    margin:30px 50px 0 50px;
-
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  margin: 30px 50px 15px 50px;
 }
 .Home {
-    color: #00464D;
-    font-size: 14px;
-    font-family: 'gilroyNormal' !important;
-    font-weight: 500;
+  color: #00464d;
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
+  font-weight: 500;
+}
+.SearchOrder {
+  margin: 15px 0 20px 50px;
+}
+.SearchOrder input::placeholder {
+  padding-left: 40px !important;
+}
+.SearchBar {
+  width: 45%;
+  background-image: url(../../Assets/searchIcon.png);
+  background-repeat: no-repeat;
+  background-position: 20px;
+  background-size: 15px;
+  border: none;
+  height: 40px;
+  border: 1px solid #e8e9ea;
+  border-radius: 4px;
 
+  font-family: "gilroyNormal" !important;
 }
-.SearchOrder{
-    margin: 15px 0 20px 50px;
-}
-.SearchOrder input::placeholder{
-    padding-left: 40px !important;
-}
-.SearchBar{
-    width: 45%;
-    background-image: url(../../Assets/searchIcon.png);
-    background-repeat: no-repeat;
-    background-position: 20px;
-    background-size: 15px;
-    border: none;
-    height: 40px;
-border: 1px solid #E8E9EA;
-border-radius: 4px;
-
-font-family: 'gilroyNormal' !important;
-}
-.SearchButton{
-    background: linear-gradient(180deg, #978958 0%, #AEA174 82.81%);
-border-radius: 2px;
-border: none;
-color: #ffffff;
-font-family: 'gilroyNormal' !important;
-padding: 10px 11px 10px 11px;
-font-weight: 500;
-font-size: 13px;
-margin-left: 10px;
+.SearchButton {
+  background: linear-gradient(180deg, #978958 0%, #aea174 82.81%);
+  border-radius: 2px;
+  border: none;
+  color: #ffffff;
+  font-family: "gilroyNormal" !important;
+  padding: 10px 11px 10px 11px;
+  font-weight: 500;
+  font-size: 13px;
+  margin-left: 10px;
 }
 
 .NewArrival {
-    color: #01B3C5;
-    font-size: 14px;
-    font-family: 'gilroyNormal' !important;
-    font-weight: 500;
+  color: #01b3c5;
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
+  font-weight: 500;
 }
 .SubText {
-    display: flex;
+  display: flex;
 
-    font-size: 14px;
-    font-family: 'gilroyNormal' !important;
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
+}
 
+@media (min-width: 300px) and (max-width: 575px) {
+  .SubText {
+    display: none;
+  }
+  .Main {
+    padding: 0px;
+  }
+  .abcd {
+    padding: 0px !important;
+  }
 }

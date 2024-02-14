@@ -130,7 +130,7 @@ function CartDesign(props) {
                     You totaly saved {total - amountPay}. hurray!..
                   </p>
                 ) : null}
-                <div className={Classes.Voucher} style={{ paddingTop: "0px" }}>
+                <div className={Classes.Voucher}>
                   <p className={Classes.NumOfItem}>Do you have Voucher code</p>
                 </div>
                 <form onSubmit={handleSubmit} autoComplete="off">
