@@ -35,7 +35,7 @@ export default function ConformModal(props) {
         </div>
       </Modal.Body>
 
-      <Modal.Footer></Modal.Footer>
+      {/* <Modal.Footer></Modal.Footer> */}
     </Modal>
   );
 }

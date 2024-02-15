@@ -1,0 +1,50 @@
+.WalletContainer h3 {
+  font-family: "LatoRegular";
+  font-weight: 500;
+  font-size: 20px;
+  color: #0d1217;
+}
+.ContentLines {
+  display: flex;
+  justify-content: space-between;
+}
+.Content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.Word {
+  font-family: "LatoRegular";
+  font-weight: 400;
+  font-size: 16px;
+}
+.Amount {
+  font-family: "LatoRegular";
+  font-weight: 700;
+  font-size: 18px;
+}
+.ButtonContainer {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+.Cancel {
+  text-align: center;
+  font-family: "InterNormal";
+  color: #19242d;
+  border: 1px solid #19242d;
+  font-weight: 500;
+  font-size: 12px;
+  border-radius: 4px;
+  padding: 10px 15px;
+}
+.Apply {
+  text-align: center;
+  background: #19242d;
+  color: #ffffff;
+  font-family: "InterNormal";
+  font-weight: 500;
+  font-size: 12px;
+  border-radius: 4px;
+  padding: 10px 25px;
+}
