@@ -18,8 +18,8 @@ const CheckOutPage = (props) => {
   const token = localStorage.getItem("swaToken");
   useEffect(() => {
     // console.log(props.location.state.data);
-    setLoading(true); 
-    setTotal(props.location.state.data.total);
+    setLoading(true);
+    // setTotal(props.location.state.data.total);
     axios
       .get(Urls.address, { headers: { Authorization: "Token " + token } })
       .then((response1) => {
@@ -60,7 +60,7 @@ const CheckOutPage = (props) => {
       <div className={Classes.Background}>
         <Header countCartItems={cartCount} />
         <CheckOut
-          total={props.location.state.data.total}
+          // total={props.location.state.data.total}
           isLoad={loading}
           addressArray={address}
           address={addressId}

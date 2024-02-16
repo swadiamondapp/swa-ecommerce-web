@@ -12,6 +12,8 @@ import TrackOrder from "../../components/OrderHistory/TrackOrder/TrackOrder";
 import Classes from "./OrderHistoryPage2.module.css";
 import { useHistory } from "react-router-dom";
 import { TbMinusVertical } from "react-icons/tb";
+import { IoMdDownload } from "react-icons/io";
+import { Accordion, AccordionTab } from "primereact/accordion";
 import moment from "moment";
 import axios from "axios";
 import * as Urls from "../../Urls";
@@ -53,6 +55,7 @@ const OrderHistorypage2 = (props) => {
   const [orderPlaced, setOrderPlaced] = useState("");
   const token = localStorage.getItem("swaToken");
   const { Panel } = Collapse;
+  const [activeIndex, setActiveIndex] = useState();
 
   const onChange = (key) => {
     console.log(key);
@@ -119,8 +122,8 @@ const OrderHistorypage2 = (props) => {
         <Header countCartItems={cartCount} />
 
         <div>
-          <div className="container">
-            <div className="container">
+          <div className={`container ${Classes.OrderMobCont}`}>
+            <div className={`container ${Classes.OrderMobCont2}`}>
               <div className={Classes.Main}>
                 {/* <h1 className={Classes.Title}>Shipment Details</h1> */}
                 <h3 className={Classes.orderidh3}>
@@ -172,184 +175,160 @@ const OrderHistorypage2 = (props) => {
                 </div> */}
               </div>
               {/* new design */}
-              <div className="item_collapse" style={{ margin: "10px 50px" }}>
-                <Collapse
-                  onChange={onChange}
-                  style={{ ["--header-border"]: "" }}
-                >
-                  {/* Panel 1: Shipping Address */}
-                  <Panel
-                    header="Shipping Address"
-                    key="shipping"
-                    style={{
-                      color: "#0D1217",
-                      fontSize: "16px",
-                      fontFamily: "Lato",
-                      fontWeight: 400,
-                    }}
-                  >
-                    <div className={Classes.ShippingDetialHead}>
-                      <p className={Classes.nameShipment}>Mohammed Inshad</p>
-                      <div className={Classes.AddressShipping}>
-                        <p>
-                          Kottakunnan ( house ) morayur 673642 <br /> opposit
-                          family health center <br /> malappuram district <br />{" "}
-                          kerala 673643
-                        </p>
-                        <p className={Classes.phoneSh}>
-                          Phone number : 9995200745
-                        </p>
-                      </div>
-                    </div>
-                  </Panel>
-
-                  {/* Panel 2: Payment Method */}
-                  <Panel
-                    header="Product Details"
-                    key="payment"
-                    style={{
-                      color: "#0D1217",
-                      fontSize: "16px",
-                      fontFamily: "Lato",
-                      fontWeight: 500,
-                    }}
-                  >
-                    <div className={Classes.ProductDetailsParent1}>
-                      <div className={Classes.LftProductDetail}>
-                        <img src={imgproduct} />
-                        <div>
-                          <p className={Classes.PDiamond1}>Diamond ring</p>
-                          <p style={{ color: "#757C81" }}>
-                            18 KT yellow gold 12.460 GM
+              <div className={Classes.parentCollaps5}>
+                <div style={{ background: "#fff", borderRadius: "8px" }}>
+                  <div className={`shipment ${Classes.dmm}`}>
+                    <Accordion
+                      multiple
+                      activeIndex={activeIndex}
+                      onTabChange={(e) => setActiveIndex(e.index)}
+                    >
+                      <AccordionTab header="Shipping Address">
+                        <div className={Classes.ShippingDetialHead}>
+                          <p className={Classes.nameShipment}>
+                            Mohammed Inshad
                           </p>
-                          <p style={{ color: "#757C81" }}>
-                            Diamond 0.680 Carat SIIJ
-                          </p>
-                          <p style={{ color: "#303A42" }}>SKU 1245</p>
+                          <div className={Classes.AddressShipping}>
+                            <p>
+                              Kottakunnan ( house ) morayur 673642 <br />{" "}
+                              opposit family health center <br /> malappuram
+                              district <br /> kerala 673643
+                            </p>
+                            <p className={Classes.phoneSh}>
+                              Phone number : 9995200745
+                            </p>
+                          </div>
                         </div>
-                      </div>
-                      <div className={Classes.rgtProductDetails}>
-                        <p>Qty 1</p>
-                      </div>
-                    </div>
-                    <div className={Classes.crtn1}>
-                      <p>
-                        Certification No :{" "}
-                        <span style={{ color: "#0997E7" }}>SGLJMH6786532E</span>
-                      </p>
-                    </div>
-                  </Panel>
-
-                  {/* Panel 3: Order Summary */}
-                  <Panel
-                    header="Payment Details"
-                    key="summary"
-                    style={{
-                      color: "#0D1217",
-                      fontSize: "16px",
-                      fontFamily: "Lato",
-                      fontWeight: 400,
-                    }}
-                  >
-                    <div className={Classes.parentPaymentItems}>
-                      <div className={Classes.PaymentItems}>
-                        <p>Item Subtotal</p>
-                        <p>27000</p>
-                      </div>
-                      <div className={Classes.PaymentItems}>
-                        <p>Shipping</p>
-                        <p>0.00</p>
-                      </div>
-                      <div className={Classes.PaymentItems}>
-                        <p>Total</p>
-                        <p>27000</p>
-                      </div>
-                      <div className={Classes.PaymentItems}>
-                        <p>Promo code</p>
-                        <p style={{ color: "#000000" }}>
-                          PAYDAY{" "}
-                          <span style={{ color: "#30933A" }}>Applied</span>
-                        </p>
-                      </div>
-                      <div className={Classes.PaymentItems}>
-                        <p>Coupon Discount</p>
-                        <p style={{ color: "#000000" }}>2500</p>
-                      </div>
-                      <div className={Classes.PaymentItems}>
-                        <p style={{ color: "#000000" }}>Payable</p>
-                        <p style={{ color: "#000000" }}>24500</p>
-                      </div>
-                    </div>
-                  </Panel>
-                  <Panel
-                    header="Track order"
-                    key="track"
-                    style={{
-                      color: "#0D1217",
-                      fontSize: "16px",
-                      fontFamily: "Lato",
-                      fontWeight: 400,
-                    }}
-                  >
-                    <div className={Classes.ParentStatus}>
-                      <div className={Classes.leftStatus1}>
-                        <div className={Classes.leftStatus2}>
-                          <div className={Classes.dotstatus}></div>
-                          <div className={Classes.dotstatusline}></div>
+                      </AccordionTab>
+                      <AccordionTab header="Product Details">
+                        <div className={Classes.ProductDetailsParent1}>
+                          <div className={Classes.LftProductDetail}>
+                            <img src={imgproduct} />
+                            <div>
+                              <p className={Classes.PDiamond1}>Diamond ring</p>
+                              <p style={{ color: "#757C81" }}>
+                                18 KT yellow gold 12.460 GM
+                              </p>
+                              <p style={{ color: "#757C81" }}>
+                                Diamond 0.680 Carat SIIJ
+                              </p>
+                              <p style={{ color: "#303A42" }}>SKU 1245</p>
+                            </div>
+                          </div>
+                          <div className={Classes.rgtProductDetails}>
+                            <p>Qty 1</p>
+                          </div>
                         </div>
-                        <div className={Classes.leftStatus2}>
-                          <div className={Classes.dotstatus1}></div>
-                          <div className={Classes.dotstatusline1}></div>
-                        </div>
-                        <div className={Classes.leftStatus2}>
-                          <div className={Classes.dotstatus1}></div>
-                          <div className={Classes.dotstatusline1}></div>
-                        </div>
-                        <div className={Classes.leftStatus2}>
-                          <div className={Classes.dotstatus1}></div>
-                          <div className={Classes.dotstatusline1}></div>
-                        </div>
-                      </div>
-                      <div className={Classes.rightStatus1}>
-                        <div className={Classes.RightStausshow}>
-                          <p className={Classes.RsHead}>Order confirmed</p>
-                          <p style={{ color: "#A3A7AB" }}>
-                            Tues 18 oct’2022 , 4:45 PM
+                        <div className={Classes.crtn1}>
+                          <p>
+                            Certification No :{" "}
+                            <span style={{ color: "#0997E7" }}>
+                              SGLJMH6786532E
+                            </span>
                           </p>
                         </div>
-                        <div className={Classes.RightStausshow}>
-                          <p
-                            style={{ color: "#A3A7AB" }}
-                            className={Classes.RsHead}
-                          >
-                            Shipped
-                          </p>
-                          <p style={{ color: "#A3A7AB" }}>
-                            Expected by Friday 19th Oct
-                          </p>
+                      </AccordionTab>
+                      <AccordionTab header="Payment Details">
+                        <div className={Classes.parentPaymentItems}>
+                          <div className={Classes.PaymentItems}>
+                            <p>Item Subtotal</p>
+                            <p>27000</p>
+                          </div>
+                          <div className={Classes.PaymentItems}>
+                            <p>Shipping</p>
+                            <p>0.00</p>
+                          </div>
+                          <div className={Classes.PaymentItems}>
+                            <p>Total</p>
+                            <p>27000</p>
+                          </div>
+                          <div className={Classes.PaymentItems}>
+                            <p>Promo code</p>
+                            <p style={{ color: "#000000" }}>
+                              PAYDAY{" "}
+                              <span style={{ color: "#30933A" }}>Applied</span>
+                            </p>
+                          </div>
+                          <div className={Classes.PaymentItems}>
+                            <p>Coupon Discount</p>
+                            <p style={{ color: "#000000" }}>2500</p>
+                          </div>
+                          <div className={Classes.PaymentItems}>
+                            <p style={{ color: "#000000" }}>Payable</p>
+                            <p style={{ color: "#000000" }}>24500</p>
+                          </div>
                         </div>
-                        <div className={Classes.RightStausshow2}>
-                          <p
-                            style={{ color: "#A3A7AB" }}
-                            className={Classes.RsHead}
-                          >
-                            Out of delivery
-                          </p>
-                          <p style={{ color: "#A3A7AB" }}></p>
+                      </AccordionTab>
+                      <AccordionTab header="Track shipping">
+                        <div className={Classes.ParentStatus}>
+                          <div className={Classes.leftStatus1}>
+                            <div className={Classes.leftStatus2}>
+                              <div className={Classes.dotstatus}></div>
+                              <div className={Classes.dotstatusline}></div>
+                            </div>
+                            <div className={Classes.leftStatus2}>
+                              <div className={Classes.dotstatus1}></div>
+                              <div className={Classes.dotstatusline1}></div>
+                            </div>
+                            <div className={Classes.leftStatus2}>
+                              <div className={Classes.dotstatus1}></div>
+                              <div className={Classes.dotstatusline1}></div>
+                            </div>
+                            <div className={Classes.leftStatus2}>
+                              <div className={Classes.dotstatus1}></div>
+                              <div className={Classes.dotstatusline1}></div>
+                            </div>
+                          </div>
+                          <div className={Classes.rightStatus1}>
+                            <div className={Classes.RightStausshow}>
+                              <p className={Classes.RsHead}>Order confirmed</p>
+                              <p style={{ color: "#A3A7AB" }}>
+                                Tues 18 oct’2022 , 4:45 PM
+                              </p>
+                            </div>
+                            <div className={Classes.RightStausshow}>
+                              <p
+                                style={{ color: "#A3A7AB" }}
+                                className={Classes.RsHead}
+                              >
+                                Shipped
+                              </p>
+                              <p style={{ color: "#A3A7AB" }}>
+                                Expected by Friday 19th Oct
+                              </p>
+                            </div>
+                            <div className={Classes.RightStausshow2}>
+                              <p
+                                style={{ color: "#A3A7AB" }}
+                                className={Classes.RsHead}
+                              >
+                                Out of delivery
+                              </p>
+                              <p style={{ color: "#A3A7AB" }}></p>
+                            </div>
+                            <div className={Classes.RightStausshow3}>
+                              <p
+                                style={{ color: "#A3A7AB" }}
+                                className={Classes.RsHead}
+                              >
+                                Delivery
+                              </p>
+                              <p style={{ color: "#A3A7AB" }}></p>
+                            </div>
+                          </div>
                         </div>
-                        <div className={Classes.RightStausshow3}>
-                          <p
-                            style={{ color: "#A3A7AB" }}
-                            className={Classes.RsHead}
-                          >
-                            Delivery
-                          </p>
-                          <p style={{ color: "#A3A7AB" }}></p>
-                        </div>
-                      </div>
-                    </div>
-                  </Panel>
-                </Collapse>
+                      </AccordionTab>
+                    </Accordion>
+                  </div>
+                  <div className={Classes.TrackButtons}>
+                    <button className={Classes.REButton}>
+                      Return / Exchange
+                    </button>
+                    <button className={Classes.REButton2}>
+                      <IoMdDownload /> Download invoice
+                    </button>
+                  </div>
+                </div>
               </div>
 
               {/* new design */}

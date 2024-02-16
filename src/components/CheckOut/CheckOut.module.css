@@ -176,6 +176,103 @@ label {
   display: flex;
   justify-content: space-between;
 }
+.parentLocations {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  padding-left: 50px;
+  padding-top: 25px;
+  padding-bottom: 30px;
+}
+.AddressBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.ADDAnotherBtn {
+  text-align: end;
+}
+.ADDAnotherBtn button {
+  background: #00464d;
+  color: #fff;
+  font-family: "Lato";
+  padding: 8px 15px;
+  border: none;
+  border-radius: 3px;
+  outline: none;
+}
+.ParentAddressForm {
+  margin-top: 20px;
+}
+.Parentfsmall {
+  display: flex;
+  gap: 15px;
+}
+.ParentF3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.Headh31 {
+  color: #475057;
+  font-family: "gilroyNormal";
+  font-weight: 600;
+}
+.Para31 {
+  color: #8c9296;
+  font-family: "lato";
+}
+.FirstLocationHead1 {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.LocationHead {
+  display: flex;
+  align-items: baseline;
+  grid-gap: 10px;
+  gap: 10px;
+  padding: 20px 0px;
+  border-bottom: 1px solid #eaeaea;
+}
+.AddNewAddress1 button {
+  border: 1px solid #eaeaea;
+  background: transparent;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 16px;
+  font-family: "lato";
+  padding: 10px;
+  border-radius: 3px;
+  font-weight: 600;
+  outline: none;
+}
+.AddressBar p {
+  font-family: "PlayFairNormal";
+  color: #0d1217;
+  font-weight: 600;
+}
+.Donebtn button {
+  background: #00464d;
+  color: #fff;
+  border: none;
+  outline: none;
+  padding: 10px 30px;
+  border-radius: 3px;
+}
+.Donebtn {
+  text-align: end;
+  margin-top: 15px;
+}
+.leftAddres11 {
+  box-shadow: 0px 2px 2px 0px #0000000d;
+  background: #fff;
+  border-radius: 3px;
+  padding: 20px;
+}
 .WarningIcon {
   height: 18px;
   width: 15px;
@@ -711,6 +808,23 @@ label {
     gap: 0px;
   }
   .ParentStreetColony {
+    grid-template-columns: 1fr;
+    gap: 0px;
+  }
+  .parentLocations {
+    grid-template-columns: 1fr;
+    padding-left: 0px;
+  }
+  .AddresMobCont {
+    padding: 0px !important;
+  }
+  .Main {
+    margin: 30px 0px 0px 20px;
+  }
+  .SubText {
+    display: none;
+  }
+  .ParentF3 {
     grid-template-columns: 1fr;
     gap: 0px;
   }

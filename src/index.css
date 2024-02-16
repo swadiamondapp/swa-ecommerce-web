@@ -204,6 +204,9 @@ svg.p-icon {
   position: absolute !important;
   right: 2% !important;
 }
+.shipment svg.p-icon {
+  color: #006e7f !important;
+}
 .p-accordion-tab {
   padding: 10px 0px !important;
   border-bottom: 0.5px solid #e8e9ea5e !important;
@@ -211,6 +214,15 @@ svg.p-icon {
 }
 .p-accordion-header-text {
   font-size: 16px;
+}
+.shipment .p-accordion-tab {
+  padding: 20px 15px !important;
+}
+.shipment .p-accordion-header-text {
+  color: #0d1217 !important;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: "lato";
 }
 .MobAbout {
   margin: 20px 0px;
@@ -270,15 +282,6 @@ svg.p-icon {
   background: #fff !important;
   box-shadow: 0px 2px 2px 0px #0000000d !important;
   border: none !important;
-}
-:where(.css-dev-only-do-not-override-15u6b4u).ant-collapse
-  > .ant-collapse-item {
-  background: var(--header-background, #fff);
-}
-:where(.css-dev-only-do-not-override-16aepep).ant-collapse {
-  /* background: #fff !important;
-  box-shadow: 0px 2px 2px 0px #0000000d !important;
-  border: none !important; */
 }
 
 /* :where(.css-dev-only-do-not-override-12czi4v).ant-modal .ant-modal-footer {
