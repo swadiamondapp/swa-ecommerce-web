@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import LIfeTImeModal from "../LifeTImeModal/LIfeTImeModal";
 import BuyBackRequiest from "../BuyBackRequiest/BuyBackRequiest";
 import SuccessPage from "../SuccessPage/SuccessPage.js";
-import RefundInitiated from '../RefundInitiated/RefundInitiated.js'
+import RefundInitiated from "../RefundInitiated/RefundInitiated.js";
 import SuccessModal from "../SuccessMessageModal/SuccessModal.js";
 
 function NewArrivals(props) {
@@ -13,15 +13,14 @@ function NewArrivals(props) {
     history.push({ pathname: "/new_arrivel", state: { data: type } });
   };
 
-
   return (
     <div>
-      <LIfeTImeModal/>
-      <BuyBackRequiest/>
-      <SuccessPage/>
-      <RefundInitiated/>
-      <SuccessModal/>
-      {/* <div className={Classes.NewArrivals}>
+      <LIfeTImeModal />
+      <BuyBackRequiest />
+      <SuccessPage />
+      <RefundInitiated />
+      <SuccessModal />
+      <div className={Classes.NewArrivals}>
         <div className={Classes.setItems}>
           <div>
             <h1 className={Classes.NewArrivalsMainText}>New Arrivals</h1>
