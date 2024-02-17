@@ -316,6 +316,9 @@ svg.p-icon {
   width: 100% !important;
   max-width: 100% !important;
 } */
+.p-dropdown-panel {
+  z-index: 99999999999 !important;
+}
 .ReactFlagsSelect-module_selectBtn__19wW7 {
   border: none !important;
   border-bottom: 1px solid #e2e4e5 !important;
