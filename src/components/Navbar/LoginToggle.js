@@ -7,6 +7,10 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { Button } from "antd";
 import Classes from "./MobileNav.module.css";
+import { LoginSocialGoogle } from "reactjs-social-login";
+import { signInWithPopup } from "firebase/auth";
+// import { Auth, GoogleAuthProvider } from "firebase/auth";
+import { auth, googleAuthProvider } from "../../firebase";
 
 const LoginToggle = () => {
   const [activeTab, setActiveTab] = useState("tab1");
@@ -61,6 +65,15 @@ const LoginToggle = () => {
   const customTabtwo = {
     backgroundColor: activeTab === "tab2" ? "#fff" : "#F0F0F2",
   };
+
+  const handleSignInWithGoogle = async () => {
+    try {
+      const response = await signInWithPopup(auth, googleAuthProvider);
+      console.log("responsegoogle", response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div style={{ padding: "15px" }}>
       <div className={Classes.Wrapper}>
@@ -72,23 +85,19 @@ const LoginToggle = () => {
                   className={Classes.headerTitle}
                   // style={{ marginBottom: "1rem" }}
                 >
-                
-                    <p className={Classes.signuptitletext}>Sign up</p>
-               
-                 
-                    <p className={Classes.titlep}>
-                      Create your Account
-                    </p>
-                 
+                  <p className={Classes.signuptitletext}>Sign up</p>
+
+                  <p className={Classes.titlep}>Create your Account</p>
                 </div>
-                <div
-                 className={Classes.flex}
-                >
+                <div className={Classes.flex}>
                   <div
                     className={Classes.SocialButtons}
                     style={{ marginBottom: "1rem" }}
                   >
-                    <div className={Classes.googleButton}>
+                    <div
+                      className={Classes.googleButton}
+                      onClick={handleSignInWithGoogle}
+                    >
                       <button className={Classes.buttonSocial}>
                         <img src={GOOGLE} /> Login with Google
                       </button>
@@ -161,14 +170,16 @@ const LoginToggle = () => {
                   </Button>
                 </div>
                 <div className={Classes.Signup}>
-                <span className={Classes.bottomText}>Already have account?</span>
+                  <span className={Classes.bottomText}>
+                    Already have account?
+                  </span>
                   <span
                     className={Classes.signupAnchor}
                     onClick={handleSignupModalOpen}
                   >
                     Login
                   </span>
-            </div>
+                </div>
               </div>
             </div>
           </>
@@ -177,7 +188,7 @@ const LoginToggle = () => {
             <div className={Classes.SlideButton}>
               <div className={Classes.LoginContainer}>
                 <div className={Classes.title}>
-                  <div style={{paddingBottom:'10px'}}>
+                  <div style={{ paddingBottom: "10px" }}>
                     <h3 className={Classes.titleh}>Welcome back Login here</h3>
                   </div>
                   <div className={Classes.signupTitleText}>
