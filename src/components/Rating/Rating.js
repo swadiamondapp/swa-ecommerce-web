@@ -47,25 +47,32 @@ function Rating(props) {
     setReview(e.target.value);
   };
   return (
-    <div className="container">
-      <div className={Classes.Main}>
-        <h1 className={Classes.Title}>Rate & review</h1>
-      </div>
-      <div className={Classes.SubText}>
-        <p className={Classes.Home}>HOME /</p>
-        <p className={Classes.Wishlist}>ORDER HISTORY / RATE & REVIEW</p>
+    <div className={`container ${Classes.MobReview1}`}>
+      <div className={Classes.HeadMainMob2}>
+        <div className={Classes.Main}>
+          <h1 className={Classes.Title}>Rate & review</h1>
+        </div>
+        <div className={Classes.SubText}>
+          <p className={Classes.Home}> HOME / MY ORDER / </p>
+          <p className={Classes.Wishlist}> RATE & REVIEW</p>
+        </div>
       </div>
 
-      <div className={Classes.ReviewProduct}>
-        <img className={Classes.ProductImage} src={New1} alt="" />
-        <p className={Classes.ProductName}>Diamond Ring</p>
+      <div className={Classes.ParentCardImageText}>
+        <div className={Classes.ReviewProduct}>
+          <img className={Classes.ProductImage} src={New1} alt="" />
+        </div>
+        <div>
+          <p className={Classes.ProductName}>Diamond Ring</p>
+          <p style={{ color: "#757C81" }}>18 KT yellow gold 12.460 GM</p>
+          <p style={{ color: "#757C81" }}>Diamond 0.680 Carat SIIJ</p>
+          <p style={{ color: "#757C81" }}>SKU 1245</p>
+        </div>
       </div>
       <div className={Classes.ReviewPart}>
-        <div className="d-flex">
-          <p className={Classes.ReviewText} style={{ marginTop: "20px" }}>
-            Rate this products
-          </p>
-          <div style={{ marginTop: "7px" }}>
+        <div className={Classes.ReviewB1}>
+          <p className={Classes.ReviewText}>Rate this products</p>
+          <div>
             <ReactStarRating
               numberOfStar={5}
               numberOfSelectedStar={rate}
@@ -80,7 +87,7 @@ function Rating(props) {
         </div>
 
         <div className={Classes.Review}>
-          <p className={Classes.ReviewText}>Review this products</p>
+          <p className={Classes.ReviewText1}>Review this products</p>
 
           <textarea
             className={Classes.Input}

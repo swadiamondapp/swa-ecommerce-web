@@ -204,6 +204,9 @@ svg.p-icon {
   position: absolute !important;
   right: 2% !important;
 }
+.shipment svg.p-icon {
+  color: #006e7f !important;
+}
 .p-accordion-tab {
   padding: 10px 0px !important;
   border-bottom: 0.5px solid #e8e9ea5e !important;
@@ -211,6 +214,15 @@ svg.p-icon {
 }
 .p-accordion-header-text {
   font-size: 16px;
+}
+.shipment .p-accordion-tab {
+  padding: 20px 15px !important;
+}
+.shipment .p-accordion-header-text {
+  color: #0d1217 !important;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: "lato";
 }
 .MobAbout {
   margin: 20px 0px;
@@ -223,6 +235,55 @@ svg.p-icon {
 .activeTabHeaderText {
   background-color: red; /* Set your desired background color */
 }
+.ParentShipmentDetails .p-accordion-header-text {
+  color: #000 !important;
+}
+:where(.css-dev-only-do-not-override-i56vxb).ant-collapse
+  > .ant-collapse-item
+  > .ant-collapse-header
+  .ant-collapse-arrow
+  svg {
+  transition: transform 0.3s;
+  position: absolute !important;
+  right: 2% !important;
+}
+:where(.css-dev-only-do-not-override-12czi4v).ant-collapse
+  > .ant-collapse-item
+  > .ant-collapse-header
+  .ant-collapse-expand-icon {
+  position: absolute !important;
+  right: 2% !important;
+}
+:where(.css-dev-only-do-not-override-4fj727).ant-collapse
+  > .ant-collapse-item
+  > .ant-collapse-header
+  .ant-collapse-expand-icon {
+  position: absolute !important;
+  right: 2% !important;
+}
+:where(.css-dev-only-do-not-override-f2v0nq).ant-collapse
+  > .ant-collapse-item
+  > .ant-collapse-header
+  .ant-collapse-expand-icon {
+  position: absolute !important;
+  right: 2% !important;
+}
+:where(.css-dev-only-do-not-override-12czi4v).ant-collapse {
+  background: #fff !important;
+  box-shadow: 0px 2px 2px 0px #0000000d !important;
+  border: none !important;
+}
+:where(.css-dev-only-do-not-override-4fj727).ant-collapse {
+  background: #fff !important;
+  box-shadow: 0px 2px 2px 0px #0000000d !important;
+  border: none !important;
+}
+:where(.css-dev-only-do-not-override-f2v0nq).ant-collapse {
+  background: #fff !important;
+  box-shadow: 0px 2px 2px 0px #0000000d !important;
+  border: none !important;
+}
+
 /* :where(.css-dev-only-do-not-override-12czi4v).ant-modal .ant-modal-footer {
   display: none !important;
 }

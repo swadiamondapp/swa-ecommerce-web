@@ -19,6 +19,9 @@ import CategorySearch from "./Pages/NewArrivalPage/CategorySearch";
 import TagSearch from "./Pages/NewArrivalPage/Tagsearch";
 import New from "./components/HeaderNew/Header";
 import PaymentPage from "./Pages/PaymentPage/PaymentPage";
+import AddAddress from "./components/CheckOut/AddAddress";
+import AddAddressPage from "./Pages/CheckOutPage/AddAddressPage";
+import RateAndReviewMain from "./Pages/RateAndReviewPage/RateAndReviewMain";
 function App() {
   return (
     <Router>
@@ -39,12 +42,14 @@ function App() {
         <Route path="/Return_policy_page" component={ReturnPolicyPage} exact />
         <Route path="/privacy_policy" component={PrivacyPolicyPage} exact />
         <Route path="/checkout" component={CheckOutPage} exact />
+        <Route path="/addaddress" component={AddAddressPage} exact />
         <Route path="/place_order" component={CheckOutPage} exact />
         <Route path="/my_orders" component={OrderHistoryPage} exact />
         <Route path="/track_order" component={OrderHistorypage2} exact />
         <Route path="/about_us" component={AboutUsPage} exact />
         <Route path="/order_successful" component={OrderSuccessfulPage} exact />
         <Route path="/rate_review" component={RateAndReview} exact />
+        <Route path="/rate&review" component={RateAndReviewMain} exact />
         <Route
           path="/products/:id/:color/:name"
           component={ProductDetailsPage}
