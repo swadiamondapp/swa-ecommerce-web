@@ -3,6 +3,7 @@ import Classes from "./Rating.module.css";
 import productimg from "../../Assets/diamonds.png";
 import deliveryimg from "../../Assets/delivery.png";
 import ReactStarRating from "react-star-ratings-component";
+import { Link } from "react-router-dom";
 
 const RateReviewMain = () => {
   const [rate, setRate] = useState(2);
@@ -57,7 +58,9 @@ const RateReviewMain = () => {
                       onSelectStar={rateChangeHandler}
                     />{" "}
                   </div>
-                  <p className={Classes.RateReviewText}> Rate & review</p>
+                  <Link to="/rate_review">
+                    <p className={Classes.RateReviewText}> Rate & review</p>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -95,7 +98,9 @@ const RateReviewMain = () => {
                       onSelectStar={rateChangeHandler}
                     />{" "}
                   </div>
-                  <p className={Classes.RateReviewText}> Rate & review</p>
+                  <Link to="/rate_review">
+                    <p className={Classes.RateReviewText}> Rate & review</p>
+                  </Link>
                 </div>
               </div>
             </div>
