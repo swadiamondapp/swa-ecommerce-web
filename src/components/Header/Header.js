@@ -14,11 +14,12 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { CgClose } from "react-icons/cg";
 import { HiShoppingBag } from "react-icons/hi";
 import ProductImage from "../../Assets/new1.png";
-import LoginModal from "../LoginModal/LoginModal";
+// import LoginModal from "../LoginModal/LoginModal";
 import { BsSearch } from "react-icons/bs";
 import { AiOutlineClose } from "react-icons/ai";
 import axios from "axios";
 import * as Urls from "../../Urls";
+import NewLoginModal from "../NewLoginModal/NewLoginModal";
 const Header = (props) => {
   const [show, setShow] = useState(false);
   const [catgSet, setCatgSet] = useState([]);
@@ -230,7 +231,7 @@ const Header = (props) => {
                 // onClick={Notification}
               />
 
-              <LoginModal
+              <NewLoginModal
                 isLog={show}
                 logAct={props.loginHandler}
                 close={closeHanlder}

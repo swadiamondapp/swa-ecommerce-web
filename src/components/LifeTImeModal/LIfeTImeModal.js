@@ -80,25 +80,8 @@ const LIfeTImeModal = () => {
 
   return (
     <div>
-      {successModalOpen ? (
-        <>
-          <Modal open={successModalOpen} onClose={handleCloseSuccessModal}>
-            <Box sx={successM} style={isMobileView ? { width: '90%' } : { width: "30%",height:'30%' }}>
-              <Typography className={classes.successModalContainer} >
-                <div >
-                  <img src={SuccessTick}/>
-                </div>
-                <div style={{textAlign:'center'}}>
-                  <span className={classes.titlesuccesModal}>Thank you very much your<br/> review has been saved</span>
-                </div>
-              </Typography>
-             
-            </Box>
-          </Modal>
-        </>
-      ) : (
-        <>
-          <Button onClick={handleOpen}>Open modal</Button>
+   
+          <Button onClick={handleOpen}>return or exchange  of a delivered product</Button>
           <Modal open={open} onClose={handleClose}>
             <Box sx={isMobileView ? mobileStyle : style}>
               <Typography>
@@ -212,8 +195,6 @@ const LIfeTImeModal = () => {
               </Typography>
             </Box>
           </Modal>
-        </>
-      )}
     </div>
   );
 };

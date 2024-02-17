@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Classes from "./BuyBackRequiest.module.css";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -7,32 +7,38 @@ import Modal from "@mui/material/Modal";
 import { Dropdown } from "primereact/dropdown";
 import CloseButton from "../../Assets/closeModal.png";
 import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
+import Autocomplete, { autocompleteClasses } from "@mui/material/Autocomplete";
+import ArrowUp from "../../Assets/ArrowUp.png";
+import ArrowDown from "../../Assets/ArrowDown.png";
+import FormControl from "@mui/material/FormControl";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: "60%",
-  height: "85%",
+  width: "40%",
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
   border: "none",
+  borderRadius: "6px",
   p: 2,
 };
 
 const BuyBackRequiest = () => {
   const [open, setOpen] = React.useState(false);
+  const [isFocused, setIsFocused] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
   const [selectedCity, setSelectedCity] = useState(null);
   const [isMobileView, setIsMobileView] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
   );
 
-
+  // const isDesktop = useMediaQuery('(min-width:700px)') && !useMediaQuery('(max-width:1200px)');
   const cities = [
     { name: "New York", code: "NY" },
     { name: "Rome", code: "RM" },
@@ -52,7 +58,7 @@ const BuyBackRequiest = () => {
     overflow: "auto",
     maxHeight: "auto",
     width: "100%",
-    height:'100%'
+    height: "100%",
   };
 
   useEffect(() => {
@@ -68,6 +74,14 @@ const BuyBackRequiest = () => {
     };
   }, [isMobileView]);
 
+  const handleFocus = () => {
+    setIsFocused(true);
+  };
+
+  const handleBlur = () => {
+    setIsFocused(false);
+  };
+
 
   return (
     <div>
@@ -78,7 +92,7 @@ const BuyBackRequiest = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={isMobileView? mobileStyle : style}>
+        <Box sx={isMobileView ? mobileStyle : style}>
           <Typography>
             <div>
               <Button
@@ -87,104 +101,169 @@ const BuyBackRequiest = () => {
               >
                 <img src={CloseButton} />
               </Button>
-              <div className={Classes.BuyBackContainer}>
-                <span className={Classes.Title}>
-                  Return / lifetime exchange/
-                  <br /> lifetime buyback this product
-                </span>
+              <form >
+                <div className={Classes.BuyBackContainer}>
+                  <span className={Classes.Title}>
+                    Return / lifetime exchange/
+                    <br /> lifetime buyback this product
+                  </span>
 
-                <div>
-                  <label className={Classes.labelStyle}>Mobile Number</label>
-                  <input
-                    placeholder="98909499999"
-                    className={Classes.alllInputFeilds}
-                  />
-                </div>
-                <div className={Classes.Pin}>
-                  <div className={Classes.quatorInput}>
-                    <label className={Classes.labelStyle}>Pincode</label>
+                  <div className={Classes.inputContainer}>
+                    <label className={Classes.labelStyle}>Mobile Number</label>
                     <input
-                      placeholder="674602"
+                      placeholder="98909499999"
                       className={Classes.alllInputFeilds}
                     />
                   </div>
-                  <div className={Classes.quatorInput}>
-                    <label className={Classes.labelStyle}>City</label>
-                    <input
-                      placeholder="Calicut"
-                      className={Classes.alllInputFeilds}
-                    />
+
+                  <div className={Classes.Pin}>
+                    <div
+                      style={{ display: "flex", gap: "10px", width: "100%" }}
+                    >
+                      <div className={Classes.quatorInput}>
+                        <label className={Classes.labelStyle}>Pincode</label>
+
+                        <input
+                          placeholder="674602"
+                          className={Classes.alllInputFeilds}
+                        />
+                      </div>
+
+                      <div className={Classes.quatorInput}>
+                        <label className={Classes.labelStyle}>City</label>
+                        <input
+                          placeholder="Calicut"
+                          className={Classes.alllInputFeilds}
+                        />
+                      </div>
+                    </div>
+                    <div className={Classes.dropDown}>
+                      <Autocomplete
+                        id="country-select-demo"
+                        options={cities}
+                        className={Classes.auto}
+                        autoHighlight
+                        getOptionLabel={(option) => option.label}
+                        renderOption={(props, option) => (
+                          <Box
+                            component="li"
+                            sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
+                            {...props}
+                          >
+                            <img
+                              loading="lazy"
+                              width="20"
+                              srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
+                              src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
+                              alt=""
+                            />
+                            {option.label} ({option.code}) +{option.phone}
+                          </Box>
+                        )}
+                        renderInput={(params) => (
+                          <FormControl
+                            variant="outlined"
+                            focused={isFocused}
+                            sx={{ width: "100%" }}
+                          >
+                            <label className={Classes.labelStyle}>State</label>
+                            <TextField
+                              {...params}
+                              label={isFocused ? "" : "Kerala"}
+                              onFocus={handleFocus}
+                              onBlur={handleBlur}
+                              className={Classes.textField}
+                              sx={{
+                                padding: "0px 0px", // Your padding here
+                                "& input": {
+                                  padding: 0,
+                                  margin: 0, // Remove internal padding of the input
+                                },
+
+                                "& .MuiOutlinedInput-root": {
+                                  width: "100%", // Set the width to 100%
+                                  // backgroundColor: "rgba(232, 233, 234, 1)",
+                                  padding: "12px 0px 12px 0px",
+                                  borderColor:
+                                    "1px solid rgba(232, 233, 234, 1)",
+                                  paddingRight: "15px",
+                                  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                                    borderColor: "green", // Change border color when focused
+                                  },
+                                },
+                                "& .MuiAutocomplete-input": {
+                                  padding: "4px 4px 4px 5px !important",
+                                },
+                              }}
+                              InputProps={{
+                                endAdornment: (
+                                  <img
+                                    src={isFocused ? ArrowDown : ArrowDown}
+                                    style={{
+                                      transform: isFocused
+                                        ? "rotate(180deg)"
+                                        : "none",
+                                    }}
+                                  />
+                                ),
+                                sx: { padding: "7px" }, // Change the padding here
+                              }}
+                              InputLabelProps={{
+                                shrink: null, // Prevent placeholder from moving up
+                                style: {
+                                  textAlign: "center",
+                                  lineHeight: "1.5",
+                                  fontSize: "12px",
+                                  opacity: "0.8",
+                                }, // Center placeholder vertically
+                              }}
+                            />
+                          </FormControl>
+                        )}
+                      />
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <div className={Classes.dropDown}>
-                    <Autocomplete
-                      id="country-select-demo"
-                      options={cities}
-                      autoHighlight
-                      getOptionLabel={(option) => option.label}
-                      renderOption={(props, option) => (
-                        <Box
-                          component="li"
-                          sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
-                          {...props}
-                        >
-                          <img
-                            loading="lazy"
-                            width="20"
-                            srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
-                            src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
-                            alt=""
-                          />
-                          {option.label} ({option.code}) +{option.phone}
-                        </Box>
-                      )}
-                      renderInput={(params) => (
-                        <TextField {...params} label="Kerala" />
-                      )}
-                    />
+                  <div></div>
+                  <div className={Classes.Location}>
+                    <div className={Classes.halfInput}>
+                      <label className={Classes.labelStyle}>
+                        House number / building name
+                      </label>
+                      <input
+                        placeholder="Skyline"
+                        className={Classes.alllInputFeilds}
+                      />
+                    </div>
+                    <div className={Classes.halfInput}>
+                      <label className={Classes.labelStyle}>
+                        Street colony name
+                      </label>
+                      <input
+                        placeholder="Palazhi"
+                        className={Classes.alllInputFeilds}
+                      />
+                    </div>
                   </div>
-                </div>
-                <div className={Classes.Location}>
-                  <div className={Classes.halfInput}>
+                  <div>
                     <label className={Classes.labelStyle}>
-                      House number / building name
+                      Land mark ( optional )
                     </label>
                     <input
-                      placeholder="Skyline"
+                      placeholder="Near edu city"
                       className={Classes.alllInputFeilds}
                     />
                   </div>
-                  <div className={Classes.halfInput}>
-                    <label className={Classes.labelStyle}>
-                      Street colony name
-                    </label>
-                    <input
-                      placeholder="Palazhi"
-                      className={Classes.alllInputFeilds}
-                    />
+                  <div className={Classes.confirmButtonContianer}>
+                    <div className={Classes.buttonsWIdth}>
+                      <button type="button" className={Classes.confirmButton}>
+                        CONFIRM BUY REQUEST
+                      </button>
+                    </div>
                   </div>
                 </div>
-                <div>
-                  <label className={Classes.labelStyle}>
-                    Land mark ( optional )
-                  </label>
-                  <input
-                    placeholder="Near edu city"
-                    className={Classes.alllInputFeilds}
-                  />
-                </div>
-                <div className={Classes.confirmButtonContianer}>
-                  <div className={Classes.buttonsWIdth} >
-                    <button className={Classes.confirmButton}>
-                      CONFIRM BUY REQUEST
-                    </button>
-                  </div>
-                </div>
-              </div>
+              </form>
             </div>
           </Typography>
-          <Typography></Typography>
         </Box>
       </Modal>
     </div>

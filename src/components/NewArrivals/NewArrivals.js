@@ -3,6 +3,9 @@ import Classes from "./NewArrivals.module.css";
 import { useHistory } from "react-router-dom";
 import LIfeTImeModal from "../LifeTImeModal/LIfeTImeModal";
 import BuyBackRequiest from "../BuyBackRequiest/BuyBackRequiest";
+import SuccessPage from "../SuccessPage/SuccessPage.js";
+import RefundInitiated from '../RefundInitiated/RefundInitiated.js'
+import SuccessModal from "../SuccessMessageModal/SuccessModal.js";
 
 function NewArrivals(props) {
   const history = useHistory();
@@ -15,6 +18,9 @@ function NewArrivals(props) {
     <div>
       <LIfeTImeModal/>
       <BuyBackRequiest/>
+      <SuccessPage/>
+      <RefundInitiated/>
+      <SuccessModal/>
       {/* <div className={Classes.NewArrivals}>
         <div className={Classes.setItems}>
           <div>

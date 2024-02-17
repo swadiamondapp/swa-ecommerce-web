@@ -1,19 +1,36 @@
 .BuyBackContainer {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 8px;
 }
 .Pin {
   display: flex;
-  gap:5px;
-
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
 }
-.Location{
-    display: flex;
-   
-    gap:5px;
+.dropDown {
+  width: 100%;
+}
 
-  }
+/* .dropDown .MuiAutocomplete-input {
+  padding:2px 2px !important
+}
+.dropDown .MuiOutlinedInput-root {
+  width: 100%;
+  background-color:rgba(232, 233, 234, 1) ;
+  padding:4px 5px;
+  border: none;
+}
+.dropDown .Mui-focused .MuiOutlinedInput-notchedOutline {
+  background-color: green;
+} */
+
+.Location {
+  display: flex;
+
+  gap: 1.5rem;
+}
 
 .Title {
   font-size: 16px;
@@ -37,108 +54,134 @@
   font-family: "gilroyNormal";
   font-size: 14px;
   border-radius: 4px;
-  padding:6px 5px;
+  padding: 14px 5px;
+  background-color: #e8e9ea;
+  border: 2px solid #e8e9ea;
+
+  
 }
 .alllInputFeilds ::placeholder {
-    opacity: 0.9;
-    font-size: 14px;
-
-    
+  opacity: 0.9;
+  font-size: 14px;
 }
+.alllInputFeilds:focus-visible {
+  border: 2px solid green;
+  /* Green border color for focus-visible state */
+  outline: none; /* Optionally, remove the default outline */
+}
+
+/* .textField .MuiOutlinedInput-root {
+  width: 100%;
+  background-color:rgba(232, 233, 234, 1) ;
+  padding:12px 0px 12px 0px;
+  border:none;
+  padding-right:15px;
+
+}
+.textField .Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: green;
+}
+.textField .MuiAutocomplete-input {
+  padding:4px 4px 4px 5px;
+} */
+
 .halfInput {
-    width: 50%;
+  width: 50%;
 }
 .quatorInput {
-    width: 25%;
+  width: 50%;
 }
 .confirmButtonContianer {
-    display: flex;
-    justify-content: flex-end;
-
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 4px;
 }
 .confirmButton {
-    border: none;
-    border-radius: 4px;
-    color:#fff;
-    background-color: rgba(0, 70, 77, 1);
-    padding:8px 15px;
-    margin:5px 0px;
-    font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  background-color: rgba(0, 70, 77, 1);
+  padding: 14px 20px;
+  margin: 5px 0px;
+  font-size: 14px;
 }
 .dropDown .css-1h51icj-MuiAutocomplete-root .MuiOutlinedInput-root {
-    padding: 7px !important;
+  padding: 7px !important;
+}
+
+.autocompleteInput {
+  padding: 4px 4px 4px 5px;
 }
 @media (min-width: 300px) and (max-width: 575px) {
-    .Pin {
-        display: flex;
-       
-        gap:10px;
-      
-      }
-      .Location{
-        display: flex;
-        flex-direction: column;
-        gap:5px;
-
-      }
-    .quatorInput {
-        width: 50%;
-    } 
-    .halfInput {
-        width: 100%;
-    }
-    .confirmButtonContianer {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 10px;
-      
-  
-    }
-    .buttonsWIdth {
-        width: 100%;
-    }
-    .confirmButton {
-        width: 100%;
-        border: none;
-        border-radius: 4px;
-        color:#fff;
-        background-color: rgba(0, 70, 77, 1);
-        padding:12px 15px;
-        /* margin:10px 0px; */
-        font-size: 14px;
-    }
-    .labelStyle {
-        color: black;
-        font-family: "gilroyNormal";
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 1.25rem;
-        opacity: 0.9;
-        margin-bottom: 5px;
-      }
-      .alllInputFeilds {
-        width: 100%;
-        border: 1px solid lightgray;
-        font-family: "gilroyNormal";
-        font-size: 14px;
-        border-radius: 4px;
-        padding:14px 5px;
-      }
-      .dropDown .css-1h51icj-MuiAutocomplete-root .MuiOutlinedInput-root {
-        padding: 7px !important;
-    }
+  .BuyBackContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .Pin {
+    display: flex;
+    gap: 4px;
+    flex-direction: column;
+  }
+  .Title {
+    margin: 5px 0px;
+  }
+  .Location {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .quatorInput {
+    width: 50%;
+  }
+  .halfInput {
+    width: 100%;
+  }
+  .confirmButtonContianer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+  }
+  .buttonsWIdth {
+    width: 100%;
+  }
+  .confirmButton {
+    width: 100%;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    background-color: rgba(0, 70, 77, 1);
+    padding: 12px 15px;
+    /* margin:10px 0px; */
+    font-size: 14px;
+  }
+  .labelStyle {
+    color: black;
+    font-family: "gilroyNormal";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.25rem;
+    opacity: 0.9;
+    margin-bottom: 5px;
+  }
+  .alllInputFeilds {
+    width: 100%;
+    border: 1px solid lightgray;
+    font-family: "gilroyNormal";
+    font-size: 14px;
+    border-radius: 4px;
+    padding: 12px 5px;
+    background-color: #e8e9ea;
+    border: 2px solid #e8e9ea;
+  }
+  .alllInputFeilds:focus-visible {
+    border: 2px solid green;
+    /* Green border color for focus-visible state */
+    outline: none; /* Optionally, remove the default outline */
+  }
+  .dropDown .css-1h51icj-MuiAutocomplete-root .MuiOutlinedInput-root {
+    padding: 7px !important;
+  }
 }
-
-
-
-
-
-
-
-
-
-
-
-
