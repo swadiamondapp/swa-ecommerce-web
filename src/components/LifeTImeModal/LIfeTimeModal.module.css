@@ -1,0 +1,162 @@
+.Container {
+    width: 100%;
+
+}
+.planContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap:20px
+   
+  
+}
+.titles {
+    padding:5px
+}
+.SubDetails{
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+    width: 100%;
+}
+.subDetialstexts {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align:center;
+}
+.labelText {
+    opacity: 0.6;
+    font-size: 14px;
+    font-weight: 400;
+}
+.textAmount {
+    font-size: 14px;
+}
+.greenColor {
+    color:rgba(48, 147, 58, 1);
+    font-size: 14px;
+}
+.line {
+    border-bottom:1px solid #585f67;
+    opacity: 0.2;
+    width:100%
+}
+.buttonllb {
+    background-color: rgba(0, 70, 77, 1);
+    color:#fff;
+    border-radius: 4px;
+    width:100%;
+    border: none;
+    font-size: 14px;
+    font-weight: 400;
+    padding:8px 05px
+}
+.note {
+
+}
+.noteTitle {
+    display: flex;
+    flex-direction: column;
+
+}
+.noteContent {
+    opacity: 0.8;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 10px;
+}
+.planSubTitle{
+    padding-bottom:5px;
+}
+
+/*SUCCESS MODAL START FROM HERE  */
+
+
+.successModalContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap:15px
+   
+}
+.titlesuccesModal {
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+
+}
+
+@media (min-width: 300px) and (max-width: 575px) {
+    .planContainer {
+        display: flex;
+        flex-direction: column;
+        /* gap:20px */
+    }
+    .titles {
+        padding:0px
+    }
+    .SubDetails{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap:15px
+    }
+
+    .subDetialstexts {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align:center;
+    }
+    .labelText {
+        opacity: 0.6;
+        font-size: 14px;
+    }
+    .textAmount {
+        font-size: 14px;
+    }
+    .greenColor {
+        color:rgba(48, 147, 58, 1);
+        font-size: 14px;
+    }
+    .line {
+        border-bottom:1px solid #585f67;
+        opacity: 0.2;
+        width:100%
+    }
+    .buttonllb {
+        background-color: rgba(0, 70, 77, 1);
+        color:#fff;
+        border-radius: 4px;
+        width:100%;
+        border: none;
+        font-size: 14px;
+        font-weight: 400;
+
+        /* padding:8px 05px */
+    }
+    .noteTitle {
+        display: flex;
+        flex-direction: column;
+    
+    }
+    .noteContent {
+        opacity: 0.8;
+        font-size: 14px;
+        font-weight: 400;
+        padding: 10px;
+    }
+    .planSubTitle{
+        padding-bottom:5px;
+    }
+
+}
+
+
+
+
+
+@media (min-width: 575px) and (max-width: 767px) {
+    
+}

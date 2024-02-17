@@ -14,10 +14,16 @@ import { auth, googleAuthProvider } from "../../firebase";
 
 const LoginToggle = () => {
   const [activeTab, setActiveTab] = useState("tab1");
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const [signUpModal, setSignupModal] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
   const [getOtpModal, setGetOtpModal] = useState(false);
+
+  const [isMobile, setIsMobile] = useState(
+    window.innerWidth <= 1300 && window.innerWidth >= 768
+  );
+
+  const [centered, setCentered] = useState(isMobile);
 
   const handleSignupModalOpen = () => {
     setSignupModal(true);
@@ -40,16 +46,22 @@ const LoginToggle = () => {
   };
   const style = {
     position: "absolute",
-    bottom: "0%",
-    width: "100%",
+    bottom: centered ? "none" : "0",
+    left: centered ? "50%" : "none",
+    top: centered ? "50%" : "none",
+    width: centered ? "30%" : "100%",
+    height: centered ? "30%" : "none",
     bgcolor: "background.paper",
     border: "1px solid #000",
     boxShadow: 24,
+    transform: centered ? "translate(-50%, -50%)" : "none",
     p: 2,
   };
   const customTabOtpModalStyle = {
     position: "relative",
     // bottom: "20%",
+    width: centered ? "30%" : "",
+    height: centered ? "auto" : "",
     left: "50%",
     top: "50%",
     transform: "translate(-50%,-50%)",
@@ -75,7 +87,7 @@ const LoginToggle = () => {
     }
   };
   return (
-    <div style={{ padding: "15px" }}>
+    <div className={Classes.loginToffle}>
       <div className={Classes.Wrapper}>
         {isSignup ? (
           <>
@@ -169,16 +181,59 @@ const LoginToggle = () => {
                     SIGNUP
                   </Button>
                 </div>
-                <div className={Classes.Signup}>
-                  <span className={Classes.bottomText}>
-                    Already have account?
-                  </span>
-                  <span
-                    className={Classes.signupAnchor}
-                    onClick={handleSignupModalOpen}
+                <div className={Classes.SignupTextWrapper}>
+                  <div className={Classes.Signup}>
+                    <span className={Classes.bottomText}>
+                      Already have account?
+                    </span>
+                    <span
+                      className={Classes.signupAnchor}
+                      onClick={handleSignupModalOpen}
+                    >
+                      Login
+                    </span>
+                  </div>
+                </div>
+
+                <div style={{ display: "flex", marginBottom: "0.5rem" }}>
+                  <div className={Classes.line2}>
+                    <div
+                      style={{
+                        borderBottom: "1px solid #585F67",
+                        opacity: "0.3",
+                      }}
+                    ></div>
+                    <div className={Classes.orText}>or</div>
+                    <div
+                      style={{
+                        borderBottom: "1px solid #585F67",
+                        opacity: "0.3",
+                      }}
+                    ></div>
+                  </div>
+                </div>
+
+                <div className={Classes.flex}>
+                  <div
+                    className={Classes.SocialButtons}
+                    style={{ marginBottom: "1rem" }}
                   >
-                    Login
-                  </span>
+                    <div className={Classes.googleButton}>
+                      <button className={Classes.buttonSocial}>
+                        <img src={GOOGLE} /> Login with Google
+                      </button>
+                    </div>
+                    <div className={Classes.facebookButton}>
+                      <button className={Classes.buttonSocial}>
+                        <img src={FB} /> Login with facebook
+                      </button>
+                    </div>
+                  </div>
+                  <div style={{ display: "flex" }}>
+                    <button className={Classes.buttonSocial}>
+                      <img src={APPLE} /> Login with Apple
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -406,26 +461,37 @@ const LoginToggle = () => {
           Text in a modal
         </Typography> */}
                       <Typography
-                        id="modal-modal-description"
-                        sx={{ mt: 0 }}
-                        style={{ textAlign: "center", paddingBottom: "5px" }}
+                        sx={{ p: 2 }}
+                        style={{ textAlign: "center", padding: "5px" }}
                       >
                         <div style={{ textAlign: "center", fontSize: "1rem" }}>
                           By login you are agreed to all privacy policy and
                           tearms and conditions
                         </div>
+                        <div
+                          style={{
+                            textAlign: "center",
+                            color: "blue",
+                            padding: "5px 0px",
+                          }}
+                        >
+                          <a>privacy & policy</a>
+                        </div>
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
+                        >
+                          <Button
+                            className={Classes.accept}
+                            onClick={handleOpen}
+                          >
+                            Agree & login
+                          </Button>
+                        </div>
                       </Typography>
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                        }}
-                      >
-                        <Button className={Classes.accept} onClick={handleOpen}>
-                          Agree & login
-                        </Button>
-                      </div>
                     </Box>
                   </Modal>
                 </>

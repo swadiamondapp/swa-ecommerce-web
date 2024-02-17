@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Modal from "react-bootstrap/Modal";
+// import Modal from "react-bootstrap/Modal";
 import { BsPerson, BsEye, BsEyeSlash } from "react-icons/bs";
 import Classes from "../Header/Header.module.css";
 import BlueLogo from "../../Assets/SwaBlue.png";
@@ -9,6 +9,31 @@ import * as country from "../../countryList";
 import ReactFlagsSelect from "react-flags-select";
 import { useHistory } from "react-router-dom";
 import Success from "../../Assets/sucesLarge.png";
+import LoginToggle from "../Navbar/LoginToggle.js"
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  height:500,
+  bgcolor: 'background.paper',
+  border: 'none',
+  boxShadow: 24,
+  borderRadius:'4px',
+  overflowY: 'auto',
+
+  p: 2,
+};
+
+
+
 const LoginModal = (props) => {
   const [show, setShow] = useState(false);
   const [register, setRegister] = useState(false);
@@ -33,6 +58,7 @@ const LoginModal = (props) => {
   const [forgotToken, setForgotToken] = useState("");
   const [forgotError, setForfotError] = useState("");
   const [createError, setCreateError] = useState("");
+
 
   const [error, setError] = useState("");
   const history = useHistory();
@@ -449,6 +475,7 @@ const LoginModal = (props) => {
   const phone = localStorage.getItem("phoneNumber");
   console.log(userName);
   console.log(phone);
+
   return (
     <>
       <div className={Classes.LogList}>
@@ -474,388 +501,22 @@ const LoginModal = (props) => {
         </div>
       </div>
 
-      <Modal show={show} onHide={handleClose} animation={false}>
-        <Modal.Header closeButton></Modal.Header>
-        <Modal.Body>
-          {/* login */}
-          <div className={login ? [Classes.Block] : [Classes.None]}>
-            <div className={Classes.LoginLogo}>
-              <img src={BlueLogo} alt="" />
-            </div>
-            <p className={Classes.TextReg}>Login</p>
 
-            {loginError && <p className={Classes.Validation}>{loginError}</p>}
-            <p className={Classes.ContactDetails}>Phone Number</p>
-            <div className={Classes.NumFlex}>
-              <input
-                type="text"
-                className={`${Classes.Input} ${Classes.Password}`}
-                value={phoneNumber}
-                placeholder="Enter phone number"
-                onChange={(e) => setPhoneNumber(e.target.value)}
-                onBlur={(e) => validatePhoneNumber(e.target.value)}
-              ></input>
-            </div>
-            {phoneNumberError && (
-              <p className={Classes.Validation}>{phoneNumberError}</p>
-            )}
-            <p className={Classes.ContactDetails}>Password</p>
-            <input
-              type={showPassword ? "password" : "text"}
-              className={`${Classes.Input} ${Classes.Password}`}
-              style={{
-                position: "relative",
-              }}
-              value={loginPassword}
-              placeholder="Enter password"
-              onChange={(e) => setLoginPassword(e.target.value)}
-              onBlur={validateLoginPassword}
-            ></input>
-            {showPassword ? (
-              <BsEyeSlash
-                style={{
-                  position: "absolute",
-                  width: "20px",
-                  height: "20px",
-                  color: "#9D9D9D",
-                  right: "10%",
-                  fill: "#A49667",
-                  cursor: "pointer",
-                }}
-                onClick={() => setShowPassword(false)}
-              />
-            ) : (
-              <BsEye
-                style={{
-                  position: "absolute",
-                  width: "20px",
-                  height: "20px",
-                  color: "#9D9D9D",
-                  right: "10%",
-                  fill: "#A49667",
-                  cursor: "pointer",
-                }}
-                onClick={() => setShowPassword(true)}
-              />
-            )}
-            {loginPasswordError && (
-              <p className={Classes.Validation}>{loginPasswordError}</p>
-            )}
-
-            <div className={Classes.Flex}>
-              <div>
-                <input className={Classes.CheckBox} type="checkbox" value="" />
-                <label className={Classes.CheckBoxLabel} htmlFor="ship">
-                  Keep me signed in{" "}
-                </label>
-              </div>
-              <p className={Classes.CheckBoxLabel} onClick={forgotHandlerShow}>
-                Forgot password?
-              </p>
-            </div>
-            <input
-              className={Classes.LoginButton}
-              type="submit"
-              onClick={loginHandler}
-              value="LOGIN"
-            />
-            <div className={Classes.Flexmid}>
-              <p className={Classes.CheckBoxLabel}>not a member?</p>
-              <p className={Classes.Join} onClick={handleRegister}>
-                {" "}
-                Register now{" "}
-              </p>
-            </div>
-          </div>
-          {/* forgot password */}
-          <div className={forgot ? [Classes.Block] : [Classes.None]}>
-            <div className={Classes.LoginLogo}>
-              <img src={BlueLogo} alt="" />
-            </div>
-            <p className={Classes.TextReg}>Forgot Password</p>
-
-            {forgotError && <p className={Classes.Validation}>{forgotError}</p>}
-            <p className={Classes.ContactDetails}>Phone Number</p>
-            <div className={Classes.NumFlex}>
-              <input
-                type="text"
-                className={Classes.Input}
-                value={forgotPhoneNumber}
-                onChange={(e) => setForgotPhoneNumber(e.target.value)}
-                onBlur={(e) => validatePhoneNumber(e.target.value)}
-              ></input>
-            </div>
-            {phoneNumberError && (
-              <p className={Classes.Validation}>{phoneNumberError}</p>
-            )}
-
-            <input
-              className={Classes.LoginButton}
-              type="submit"
-              onClick={forgotHandler}
-              value="NEXT"
-            />
-            <div className={Classes.Flexmid}>
-              <p className={Classes.CheckBoxLabel}>not a member?</p>
-              <p className={Classes.Join} onClick={handleRegister}>
-                {" "}
-                Register now{" "}
-              </p>
-            </div>
-          </div>
-          {/* forgot otp verificatio */}
-          <div className={verifyForgotOtp ? [Classes.Block] : [Classes.None]}>
-            <div className={Classes.LoginLogo}>
-              <img src={BlueLogo} alt="" />
-            </div>
-            <div>
-              <p className={Classes.TextReg}>Forgot Password</p>
-              <div
-                className="errrMsg"
-                style={{ textAlign: "center", marginTop: "-20px" }}
-              >
-                {error}
-              </div>
-              <p className={Classes.ContactDetails}>OTP</p>
-              <input
-                type="text"
-                className={Classes.Input}
-                value={forgotOtp}
-                onChange={(e) => setForgotOtp(e.target.value)}
-              ></input>
-              {forgotOtpError && (
-                <p className={Classes.Validation}>{forgotOtpError}</p>
-              )}
-
-              <input
-                className={Classes.LoginButton}
-                type="submit"
-                value="verify"
-                onClick={fotOtpVerify}
-              />
-              <div className={Classes.Flexmid}>
-                <p className={Classes.CheckBoxLabel}>Not get OTP </p>
-                <p className={Classes.Join} onClick={forgotHandler}>
-                  Resend now{" "}
-                </p>
-              </div>
-            </div>
-          </div>
-          {/* change password */}
-          <div className={changePas ? [Classes.Block] : [Classes.None]}>
-            <div className={Classes.LoginLogo}>
-              <img src={BlueLogo} alt="" />
-            </div>
-            <p className={Classes.TextReg}>Change Password</p>
-
-            {chagePasError && (
-              <p className={Classes.Validation}>{chagePasError}</p>
-            )}
-            <p className={Classes.ContactDetails}>New Password</p>
-            <div className={Classes.NumFlex}>
-              <input
-                type="password"
-                className={Classes.Input}
-                value={newChangePas}
-                onChange={(e) => setNewChangPas(e.target.value)}
-              ></input>
-            </div>
-
-            <p className={Classes.ContactDetails}>Confirm Password</p>
-            <input
-              type="password"
-              className={Classes.Input}
-              value={confirMNewPas}
-              onChange={(e) => setConfNewPas(e.target.value)}
-            ></input>
-
-            <input
-              className={Classes.LoginButton}
-              type="submit"
-              onClick={changepasswordHandler}
-              value="SUBMIT"
-            />
-          </div>
-          {/* reset success */}
-          <div className={changeSuc ? [Classes.Block] : [Classes.None]}>
-            <div className={Classes.LoginLogo}>
-              <img src={BlueLogo} alt="" />
-            </div>
-            <p className={Classes.TextReg}>Change Password</p>
-            <div className="d-flex justify-content-center align-items-center">
-              <img src={Success} alt="success" width={130} height={130} />
-            </div>
-            <p
-              style={{
-                textAlign: "center",
-                paddingTop: "20px",
-                paddingBottom: "20px",
-              }}
-            >
-              Your Password Has Been Updated Successfully
-            </p>
-            <input
-              className={Classes.LoginButton}
-              type="submit"
-              onClick={handleModal}
-              value="LOGIN"
-            />
-          </div>
-          {/* register phone number */}
-          <div className={register ? [Classes.Block] : [Classes.None]}>
-            <div className={Classes.LoginLogo}>
-              <img src={BlueLogo} alt="" />
-            </div>
-            <div>
-              <p className={Classes.TextReg}>Register</p>
-              <div
-                className="errrMsg"
-                style={{ textAlign: "center", marginTop: "-20px" }}
-              >
-                {createError}
-              </div>
-              <p className={Classes.ContactDetails}>Phone Number</p>
-
-              <div className={Classes.FlexPhone}>
-                <ReactFlagsSelect
-                  selected={selected}
-                  countries={country.countryList}
-                  customLabels={country.countryCode}
-                  selectedSize={14}
-                  fullWidth={false}
-                  onSelect={(code) => setSelected(code)}
-                  onChange={(code) => {}}
-                  className={Classes.InputPhone}
-                />
-                <input
-                  type="text"
-                  className={Classes.regPhoneNumber}
-                  value={regPhoneNumber}
-                  onChange={(e) => setRegPhoneNumber(e.target.value)}
-                ></input>
-              </div>
-              {regPhoneNumberError && (
-                <p className={Classes.Validation}>{regPhoneNumberError}</p>
-              )}
-
-              {/* <p className={Classes.Validation}> Phone number already exist</p> */}
-              <input
-                className={Classes.LoginButton}
-                type="submit"
-                value="Get OTP"
-                onClick={validateRegPhoneNumber}
-              />
-              <div className={Classes.Flexmid}>
-                <p className={Classes.CheckBoxLabel}>Already have account? </p>
-                <p className={Classes.Join} onClick={handleModal}>
-                  {" "}
-                  Login
-                </p>
-              </div>
-            </div>
-          </div>
-          {/* otp verification */}
-          <div className={verifyOtp ? [Classes.Block] : [Classes.None]}>
-            <div className={Classes.LoginLogo}>
-              <img src={BlueLogo} alt="" />
-            </div>
-            <div>
-              <p className={Classes.TextReg}>Register</p>
-              <div
-                className="errrMsg"
-                style={{ textAlign: "center", marginTop: "-20px" }}
-              >
-                {error}
-              </div>
-              <p className={Classes.ContactDetails}>OTP</p>
-              <input
-                type="text"
-                className={Classes.Input}
-                value={otp}
-                onChange={(e) => setOtp(e.target.value)}
-              ></input>
-              {otpError && <p className={Classes.Validation}>{otpError}</p>}
-
-              <input
-                className={Classes.LoginButton}
-                type="submit"
-                value="verify"
-                onClick={validateOtp}
-              />
-              <div className={Classes.Flexmid}>
-                <p className={Classes.CheckBoxLabel}>Not get OTP </p>
-                <p className={Classes.Join} onClick={handleRegister}>
-                  Resend now{" "}
-                </p>
-              </div>
-            </div>
-          </div>
-          {/* set new account */}
-          <div className={newPassword ? [Classes.Block] : [Classes.None]}>
-            <div className={Classes.LoginLogo}>
-              <img src={BlueLogo} alt="" />
-            </div>
-            <div>
-              <p className={Classes.TextReg}>Register</p>
-              <div
-                className="errrMsg"
-                style={{ textAlign: "center", marginTop: "-10px" }}
-              >
-                {error}
-              </div>
-              <p className={Classes.ContactDetails}>Name</p>
-              <input
-                type="text"
-                className={Classes.Input}
-                onChange={(e) => setName(e.target.value)}
-                onBlur={validateName}
-              ></input>
-              {nameError && <p className={Classes.Validation}>{nameError}</p>}
-
-              <p className={Classes.ContactDetails}>Password</p>
-              <input
-                type="password"
-                className={Classes.Input}
-                onChange={(e) => setPassword(e.target.value)}
-                onBlur={validatePassword}
-              />
-              {passwordError && (
-                <p className={Classes.Validation}>{passwordError}</p>
-              )}
-
-              <p className={Classes.ContactDetails}>Confirm Password</p>
-              <input
-                type="password"
-                className={Classes.Input}
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                onBlur={validateConfirmPassword}
-              />
-              {confirmPasswordError && (
-                <p className={Classes.Validation}>{confirmPasswordError}</p>
-              )}
-
-              <div>
-                <input className={Classes.CheckBox} type="checkbox" value="" />
-                <label className={Classes.CheckBoxLabel} htmlFor="ship">
-                  Keep me signed in{" "}
-                </label>
-              </div>
-              <input
-                className={Classes.LoginButton}
-                type="submit"
-                value="Register"
-                onClick={registerHandler}
-              />
-              <div className={Classes.Flexmid}>
-                <p className={Classes.CheckBoxLabel}>Already have account? </p>
-                <p className={Classes.Join} onClick={handleModal}>
-                  Login{" "}
-                </p>
-              </div>
-            </div>
-          </div>
-        </Modal.Body>
+      <Modal
+      open = {show}
+        onClose={handleClose}
+        animation={false}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          
+          <Typography>
+          <div  >
+          <LoginToggle/>
+         </div>
+          </Typography>
+        </Box>
       </Modal>
     </>
   );
