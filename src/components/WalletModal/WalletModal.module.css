@@ -71,3 +71,8 @@
   height: 20px;
   color: #0464d5;
 }
+.CancelModalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
