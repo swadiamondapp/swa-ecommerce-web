@@ -54,11 +54,9 @@
   font-family: "gilroyNormal";
   font-size: 14px;
   border-radius: 4px;
-  padding: 14px 5px;
+  padding: 10px;
   background-color: #e8e9ea;
   border: 2px solid #e8e9ea;
-
-  
 }
 .alllInputFeilds ::placeholder {
   opacity: 0.9;
@@ -172,7 +170,7 @@
     font-family: "gilroyNormal";
     font-size: 14px;
     border-radius: 4px;
-    padding: 12px 5px;
+    padding: 10px;
     background-color: #e8e9ea;
     border: 2px solid #e8e9ea;
   }

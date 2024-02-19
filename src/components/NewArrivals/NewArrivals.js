@@ -6,6 +6,7 @@ import BuyBackRequiest from "../BuyBackRequiest/BuyBackRequiest";
 import SuccessPage from "../SuccessPage/SuccessPage.js";
 import RefundInitiated from "../RefundInitiated/RefundInitiated.js";
 import SuccessModal from "../SuccessMessageModal/SuccessModal.js";
+import AddBank from "../LifeTImeModal/AddBank";
 
 function NewArrivals(props) {
   const history = useHistory();
@@ -20,6 +21,7 @@ function NewArrivals(props) {
       <SuccessPage />
       <RefundInitiated />
       <SuccessModal />
+      <AddBank />
       <div className={Classes.NewArrivals}>
         <div className={Classes.setItems}>
           <div>

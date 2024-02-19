@@ -12,6 +12,7 @@ import { FadeLoader } from "react-spinners";
 import ReactPaginate from "react-paginate";
 import Header from "../../components/HeaderNew/Header";
 import FilterMobile from "../../components/Filter/FilterMobile";
+import Features from "../../components/Features/Features";
 
 const NewArrivalPage = (props) => {
   const [product, setProduct] = useState([]);
@@ -421,6 +422,7 @@ const NewArrivalPage = (props) => {
             </div>
           </div>
         </div>
+        <Features />
         <Footer />
       </div>
     </div>

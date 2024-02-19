@@ -9,6 +9,7 @@ import { BiRupee } from "react-icons/bi";
 import { BsCircleFill } from "react-icons/bs";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { Button, Tooltip } from "antd";
+import { Link } from "react-router-dom";
 function Orders(props) {
   const history = useHistory();
   // color="#069D0D"
@@ -87,7 +88,9 @@ function Orders(props) {
               disableOnSelect={false}
               // onSelectStar={rateChangeHandler}
             />
-            <p>Rate & Review</p>
+            <Link to="/rate&review">
+              <p>Rate & Review</p>
+            </Link>
           </div>
         </div>
       </div>
