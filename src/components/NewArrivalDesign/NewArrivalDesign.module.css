@@ -69,7 +69,7 @@
 }
 .SortDrop {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 65px 130px;
   align-items: center;
   border: 1px solid #ededed;
   padding: 10px;
@@ -83,6 +83,28 @@
 .SortDrop select {
   border: none;
   font-size: 16px;
+}
+.CustomSelect {
+  position: relative;
+  display: inline-block;
+}
+
+.CustomSelect select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 30px; /* Adjust the padding to fit your image */
+  cursor: pointer;
+}
+
+.CustomSelectArrow {
+  position: absolute;
+  top: 45%;
+  right: 10px; /* Adjust the right offset to position your image */
+  transform: translateY(-50%);
+}
+.CustomSelectArrow img {
+  max-width: 18px;
 }
 
 .SortDrop select::selection {

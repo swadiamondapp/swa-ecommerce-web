@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import { useState } from "react";
+import imgarrow from "../../Assets/arrow.png";
 
 const NewArrivalPage = (props) => {
   const history = useHistory();
@@ -35,7 +36,7 @@ const NewArrivalPage = (props) => {
               HOME /
             </p>
             <p className={Classes.NewArrival}>
-              {props.categoryName || "Products"}
+              {props.categoryName || "NEW ARRAIVALS"}
             </p>
           </div>
         </div>
@@ -43,15 +44,21 @@ const NewArrivalPage = (props) => {
         <div className={Classes.child2Main}>
           <div className={Classes.SortDrop}>
             <p className={Classes.Sort}>Sort by :</p>
-            <select
-              className={Classes.SortValue}
-              onChange={props.sortHandler}
-              style={{ outline: "none" }}
-            >
-              <option>Choose Price</option>
-              <option value="LtoH">Low to high</option>
-              <option value="HtoL">High to Low</option>
-            </select>
+            <div className={Classes.CustomSelect}>
+              <select
+                className={Classes.SortValue}
+                onChange={props.sortHandler}
+                style={{ outline: "none" }}
+              >
+                <option>Choose Price</option>
+                <option value="LtoH">Low to high</option>
+                <option value="HtoL">High to Low</option>
+              </select>
+              <div className={Classes.CustomSelectArrow}>
+                {/* Add your custom down arrow image here */}
+                <img src={imgarrow} alt="Down Arrow" />
+              </div>
+            </div>
           </div>
         </div>
       </div>

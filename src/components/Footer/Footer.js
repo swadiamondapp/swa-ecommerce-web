@@ -72,7 +72,7 @@ function Footer() {
               <div className="container">
                 <div className="row">
                   <div className="col-md-4">
-                    <h1 className={Classes.Title}>Genral info</h1>
+                    <h1 className={Classes.Title}>General info</h1>
                     <div className={Classes.Links}>
                       <Link to="/faq">
                         <p className={Classes.Links}>FAQ</p>
@@ -344,8 +344,8 @@ function Footer() {
               <img className={Classes.FooterIcons} src={Image2} alt="" />
               <img className={Classes.FooterIcons} src={Image3} alt="" />
               <img className={Classes.FooterIcons} src={Image4} alt="" />
-              <img className={Classes.FooterIcons} src={Image5} alt="" />
               <img className={Classes.FooterIcons} src={Image6} alt="" />
+              <img className={Classes.FooterIcons} src={Image5} alt="" />
             </div>
             <div className="col-md-4">
               <p className={Classes.FooterDownTextR}>

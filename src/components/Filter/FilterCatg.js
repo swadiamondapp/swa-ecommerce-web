@@ -221,7 +221,7 @@ const FilterCatgs = (props) => {
       {/* new category */}
       <div className={Classes.ParentFilter}>
         <div className={Classes.FilterHead}>
-          <p>Filtter</p>
+          <p>Filter</p>
         </div>
         <div className={Classes.ParentNewArrival}>
           <div className={Classes.CategoryMainHead}>
@@ -258,7 +258,7 @@ const FilterCatgs = (props) => {
           </div>
           <div className={Classes.CategoryMainHead}>
             <div className={Classes.CategoryHead}>
-              <p>Metel</p>
+              <p>Metal</p>
             </div>
             {/* {colorSet.map((item, index) => {
             return (
@@ -322,7 +322,7 @@ const FilterCatgs = (props) => {
             style={{ borderBottom: "0px" }}
           >
             <div className={Classes.CategoryHead}>
-              <p>Occaction</p>
+              <p>Occasion</p>
             </div>
 
             <div className={Classes.CategoryListMain}>
@@ -355,7 +355,7 @@ const FilterCatgs = (props) => {
             <div className={Classes.CategoryListMain}>
               <div className={Classes.CategoryList}>
                 <input type="checkbox" />
-                <label>engament</label>
+                <label>engagement</label>
               </div>
               <div className={Classes.CategoryListAmount}>
                 <label>2365</label>

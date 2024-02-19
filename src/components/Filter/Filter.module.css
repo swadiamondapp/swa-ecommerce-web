@@ -11,6 +11,7 @@
   position: sticky;
   top: 60px; /* Adjust this value according to your design */
   z-index: 100; /* Adjust this value if needed */
+  margin-bottom: 40px;
   /* Add any other styles you need for sticky behavior */
 }
 .FilterMobiles {

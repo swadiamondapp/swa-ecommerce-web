@@ -331,6 +331,7 @@ const LandingPage = () => {
 
         {searchList}
         <DownloadOurAppImage />
+        {/* <RecentSearch /> */}
       </div>
       <Features />
       <Footer />
