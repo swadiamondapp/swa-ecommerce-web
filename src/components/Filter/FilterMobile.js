@@ -107,7 +107,7 @@ const FilterMobile = () => {
       {/* sort modal */}
       <div className={Classes.PriceModal}>
         <Modal
-          title="Price"
+          title="Sort by"
           open={isModalOpenSort}
           onOk={handleOkSort}
           onCancel={handleCancelSort}
@@ -207,7 +207,10 @@ const FilterMobile = () => {
                           eventKey={key}
                           style={{
                             background: "transparent",
-                            color: key === activeTab ? "#006E7F" : "#475057",
+                            color:
+                              key === activeTab
+                                ? "#006E7F !important"
+                                : "#475057 !important",
                           }}
                           onClick={() => setActiveTab(key)}
                         >

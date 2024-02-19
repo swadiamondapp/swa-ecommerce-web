@@ -578,7 +578,7 @@
 }
 .SellerInfo {
   /* margin-top: 20px; */
-  margin: 20px 0px;
+  margin: 20px 0px !important;
 }
 
 .ChatNo_WhatsIcon {
@@ -820,5 +820,9 @@
   }
   .ProductDetailsHead2 {
     margin-bottom: 0px !important;
+  }
+  .MobBtnView {
+    margin: 0px 24px;
+    margin-top: 20px;
   }
 }

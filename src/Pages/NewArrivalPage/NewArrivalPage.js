@@ -417,7 +417,9 @@ const NewArrivalPage = (props) => {
               </div>
 
               <div className={Classes.DownloadOurAppImage}>
-                <DownloadOurAppImage />
+                <div className={Classes.NewArrivalsPage}>
+                  <DownloadOurAppImage />
+                </div>
               </div>
             </div>
           </div>

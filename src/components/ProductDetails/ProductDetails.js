@@ -319,7 +319,7 @@ const ProductDetails = (props) => {
               onClick={props.clickedBuy}
             /> */}
               <div className={Classes.MobileFixedBtn}>
-                <div>
+                <div className={Classes.MobBtnView}>
                   <button
                     className={Classes.BuyNow}
                     // onClick={props.clickedBuy}
@@ -622,7 +622,7 @@ const ProductDetails = (props) => {
             <div className={Classes.BorderBottom}>
               <div className="container">
                 <div className={`row ${Classes.SellerInfo}`}>
-                  <div className="col-md-12" style={{ padding: "0px" }}>
+                  <div className="col-md-12">
                     <div className={Classes.Left}>
                       <div className={Classes.manufacture}>
                         <div>Manufacturer</div>
