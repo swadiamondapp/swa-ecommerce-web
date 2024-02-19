@@ -30,6 +30,7 @@ const style = {
 const BuyBackRequiest = () => {
   const [open, setOpen] = React.useState(false);
   const [isFocused, setIsFocused] = useState(false);
+  const [selectedState, setSelectedState] = useState(null);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -75,8 +76,8 @@ const BuyBackRequiest = () => {
     { name: "Daman and Diu" },
     { name: "Delhi" },
     { name: "Lakshadweep" },
-    { name: "Puducherry" }
-];
+    { name: "Puducherry" },
+  ];
   const mobileStyle = {
     position: "absolute",
     bottom: 0,
@@ -96,8 +97,6 @@ const BuyBackRequiest = () => {
     const handleResize = () => {
       setIsMobileView(window.innerWidth >= 300 && window.innerWidth <= 575);
     };
-    const used = process.memoryUsage();
-console.log(`Memory usage: ${JSON.stringify(used)}`);
 
     window.addEventListener("resize", handleResize);
 
@@ -171,27 +170,24 @@ console.log(`Memory usage: ${JSON.stringify(used)}`);
                     </div>
                     <div className={Classes.dropDown}>
                       <Autocomplete
-                       disablePortal
-                       id="combo-box-demo"
+                        disablePortal
+                        id="combo-box-demo"
                         options={states}
                         className={Classes.auto}
                         autoHighlight
-                        getOptionLabel={(op) => op.name}
-                        renderOption={(props, op) => (
+                        getOptionLabel={(option) => option.name}
+                        value={selectedState} // Set the value of Autocomplete
+                      onChange={(event, newValue) => {
+                        setSelectedState(newValue); // Update selected state
+                      }}
+                        renderOption={(props, option) => (
                           <Box
-                          component="li"
-                          sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
-                          {...props}
-                        >
-                          <img
-                            loading="lazy"
-                            width="20"
-                            srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
-                            src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
-                            alt=""
-                          />
-                          {option.label} ({option.code}) +{option.phone}
-                        </Box>
+                            component="li"
+                            sx={{ mr: 2, flexShrink: 0 }}
+                            {...props}
+                          >
+                            <p>{option.name}</p>
+                          </Box>
                         )}
                         renderInput={(params) => (
                           <FormControl
@@ -202,7 +198,7 @@ console.log(`Memory usage: ${JSON.stringify(used)}`);
                             <label className={Classes.labelStyle}>State</label>
                             <TextField
                               {...params}
-                              label={isFocused ? "" : "Kerala"}
+                              label={selectedState ? null :isFocused? null : "Kerala"}
                               onFocus={handleFocus}
                               onBlur={handleBlur}
                               className={Classes.textField}
@@ -232,6 +228,7 @@ console.log(`Memory usage: ${JSON.stringify(used)}`);
                                 },
                               }}
                               InputProps={{
+                                ...params.InputProps,
                                 endAdornment: (
                                   <img
                                     src={isFocused ? ArrowDown : ArrowDown}
@@ -252,6 +249,10 @@ console.log(`Memory usage: ${JSON.stringify(used)}`);
                                   fontSize: "11px",
                                   opacity: "0.8",
                                 }, // Center placeholder vertically
+                              }}
+                              inputProps={{
+                                ...params.inputProps,
+                                autoComplete: "new-password", // disable autocomplete and autofill
                               }}
                             />
                           </FormControl>
