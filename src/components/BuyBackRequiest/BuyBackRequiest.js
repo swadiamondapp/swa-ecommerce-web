@@ -39,13 +39,44 @@ const BuyBackRequiest = () => {
   );
 
   // const isDesktop = useMediaQuery('(min-width:700px)') && !useMediaQuery('(max-width:1200px)');
-  const cities = [
-    { name: "New York", code: "NY" },
-    { name: "Rome", code: "RM" },
-    { name: "London", code: "LDN" },
-    { name: "Istanbul", code: "IST" },
-    { name: "Paris", code: "PRS" },
-  ];
+  const states = [
+    { name: "Andhra Pradesh" },
+    { name: "Arunachal Pradesh" },
+    { name: "Assam" },
+    { name: "Bihar" },
+    { name: "Chhattisgarh" },
+    { name: "Goa" },
+    { name: "Gujarat" },
+    { name: "Haryana" },
+    { name: "Himachal Pradesh" },
+    { name: "Jammu and Kashmir" },
+    { name: "Jharkhand" },
+    { name: "Karnataka" },
+    { name: "Kerala" },
+    { name: "Madhya Pradesh" },
+    { name: "Maharashtra" },
+    { name: "Manipur" },
+    { name: "Meghalaya" },
+    { name: "Mizoram" },
+    { name: "Nagaland" },
+    { name: "Odisha" },
+    { name: "Punjab" },
+    { name: "Rajasthan" },
+    { name: "Sikkim" },
+    { name: "Tamil Nadu" },
+    { name: "Telangana" },
+    { name: "Tripura" },
+    { name: "Uttarakhand" },
+    { name: "Uttar Pradesh" },
+    { name: "West Bengal" },
+    { name: "Andaman and Nicobar Islands" },
+    { name: "Chandigarh" },
+    { name: "Dadra and Nagar Haveli" },
+    { name: "Daman and Diu" },
+    { name: "Delhi" },
+    { name: "Lakshadweep" },
+    { name: "Puducherry" }
+];
   const mobileStyle = {
     position: "absolute",
     bottom: 0,
@@ -54,7 +85,7 @@ const BuyBackRequiest = () => {
     border: "none",
     boxShadow: 24,
     borderRadius: "0px",
-    p: 2,
+    p: 3,
     overflow: "auto",
     maxHeight: "auto",
     width: "100%",
@@ -65,6 +96,8 @@ const BuyBackRequiest = () => {
     const handleResize = () => {
       setIsMobileView(window.innerWidth >= 300 && window.innerWidth <= 575);
     };
+    const used = process.memoryUsage();
+console.log(`Memory usage: ${JSON.stringify(used)}`);
 
     window.addEventListener("resize", handleResize);
 
@@ -82,7 +115,6 @@ const BuyBackRequiest = () => {
     setIsFocused(false);
   };
 
-
   return (
     <div>
       <Button onClick={handleOpen}>BuyBackRequiest</Button>
@@ -97,11 +129,11 @@ const BuyBackRequiest = () => {
             <div>
               <Button
                 onClick={handleClose}
-                style={{ position: "absolute", top: "10px", right: 0 }}
+                style={{ position: "absolute", top: "15px", right: 0 }}
               >
                 <img src={CloseButton} />
               </Button>
-              <form >
+              <form>
                 <div className={Classes.BuyBackContainer}>
                   <span className={Classes.Title}>
                     Return / lifetime exchange/
@@ -139,26 +171,27 @@ const BuyBackRequiest = () => {
                     </div>
                     <div className={Classes.dropDown}>
                       <Autocomplete
-                        id="country-select-demo"
-                        options={cities}
+                       disablePortal
+                       id="combo-box-demo"
+                        options={states}
                         className={Classes.auto}
                         autoHighlight
-                        getOptionLabel={(option) => option.label}
-                        renderOption={(props, option) => (
+                        getOptionLabel={(op) => op.name}
+                        renderOption={(props, op) => (
                           <Box
-                            component="li"
-                            sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
-                            {...props}
-                          >
-                            <img
-                              loading="lazy"
-                              width="20"
-                              srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
-                              src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
-                              alt=""
-                            />
-                            {option.label} ({option.code}) +{option.phone}
-                          </Box>
+                          component="li"
+                          sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
+                          {...props}
+                        >
+                          <img
+                            loading="lazy"
+                            width="20"
+                            srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
+                            src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
+                            alt=""
+                          />
+                          {option.label} ({option.code}) +{option.phone}
+                        </Box>
                         )}
                         renderInput={(params) => (
                           <FormControl
@@ -183,7 +216,7 @@ const BuyBackRequiest = () => {
                                 "& .MuiOutlinedInput-root": {
                                   width: "100%", // Set the width to 100%
                                   // backgroundColor: "rgba(232, 233, 234, 1)",
-                                  padding: "12px 0px 12px 0px",
+                                  padding: "5px 0px 5px 0px !important",
                                   borderColor:
                                     "1px solid rgba(232, 233, 234, 1)",
                                   paddingRight: "15px",
@@ -192,7 +225,10 @@ const BuyBackRequiest = () => {
                                   },
                                 },
                                 "& .MuiAutocomplete-input": {
-                                  padding: "4px 4px 4px 5px !important",
+                                  padding: "4px 8px 4px 8px !important",
+                                },
+                                ".MuiOutlinedInput-root": {
+                                  paddingRight: "15px !important",
                                 },
                               }}
                               InputProps={{
@@ -212,8 +248,8 @@ const BuyBackRequiest = () => {
                                 shrink: null, // Prevent placeholder from moving up
                                 style: {
                                   textAlign: "center",
-                                  lineHeight: "1.5",
-                                  fontSize: "12px",
+
+                                  fontSize: "11px",
                                   opacity: "0.8",
                                 }, // Center placeholder vertically
                               }}
