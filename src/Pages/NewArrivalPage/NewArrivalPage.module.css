@@ -14,7 +14,9 @@
 /* .DownloadOurAppImage{
     margin-top: 0px !important;
 } */
-
+.NewArrivalsPage {
+  margin-top: 20px;
+}
 @media (min-width: 300px) and (max-width: 567px) {
   .pageout {
     padding-top: 20px;

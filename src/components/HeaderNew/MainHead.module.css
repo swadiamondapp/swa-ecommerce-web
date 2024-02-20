@@ -133,6 +133,8 @@ header {
   font-size: 16px !important;
   font-weight: 600 !important;
   font-family: "GilroyRegular" !important;
+  display: flex;
+  align-items: center;
 }
 .Offers:hover .ParentAddToCartCard2 {
   display: block;

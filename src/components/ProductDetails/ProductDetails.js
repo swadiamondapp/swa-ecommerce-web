@@ -319,7 +319,7 @@ const ProductDetails = (props) => {
               onClick={props.clickedBuy}
             /> */}
               <div className={Classes.MobileFixedBtn}>
-                <div>
+                <div className={Classes.MobBtnView}>
                   <button
                     className={Classes.BuyNow}
                     // onClick={props.clickedBuy}
@@ -622,7 +622,7 @@ const ProductDetails = (props) => {
             <div className={Classes.BorderBottom}>
               <div className="container">
                 <div className={`row ${Classes.SellerInfo}`}>
-                  <div className="col-md-12" style={{ padding: "0px" }}>
+                  <div className="col-md-12">
                     <div className={Classes.Left}>
                       <div className={Classes.manufacture}>
                         <div>Manufacturer</div>
@@ -642,7 +642,7 @@ const ProductDetails = (props) => {
                         <div className={Classes.manpara}>1800 257 8600</div>
                       </div>
                       <div className={Classes.manufacture}>
-                        <div>Chat Number</div>
+                        <div>Chat with us</div>
                         <div>:</div>
                         <div className={Classes.manpara}>
                           {" "}

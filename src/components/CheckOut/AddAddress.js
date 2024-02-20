@@ -53,12 +53,17 @@ function AddAddress(props) {
                   <input type="radio" />
                   <div className={Classes.AddressHead15}>
                     <p className={Classes.Headh31}>Mohammed Inshad</p>
+
                     <p className={Classes.Para31}>
                       Kottakunnan ( house ) morayur , opposit family health
                       center malappuram district kerala 673643{" "}
-                      <span style={{ color: "#000" }}>
+                      <span className={Classes.HeadAddressDesc1}>
                         phone number : 9995200745
                       </span>
+                    </p>
+
+                    <p className={Classes.HeadAddressDesc}>
+                      phone number : 9995200745
                     </p>
                   </div>
                 </div>
@@ -75,9 +80,13 @@ function AddAddress(props) {
                     <p className={Classes.Para31}>
                       Kottakunnan ( house ) morayur , opposit family health
                       center malappuram district kerala 673643{" "}
-                      <span style={{ color: "#000" }}>
+                      <span className={Classes.HeadAddressDesc1}>
                         phone number : 9995200745
                       </span>
+                    </p>
+
+                    <p className={Classes.HeadAddressDesc}>
+                      phone number : 9995200745
                     </p>
                   </div>
                 </div>
@@ -95,9 +104,13 @@ function AddAddress(props) {
                     <p className={Classes.Para31}>
                       Kottakunnan ( house ) morayur , opposit family health
                       center malappuram district kerala 673643{" "}
-                      <span style={{ color: "#000" }}>
+                      <span className={Classes.HeadAddressDesc1}>
                         phone number : 9995200745
                       </span>
+                    </p>
+
+                    <p className={Classes.HeadAddressDesc}>
+                      phone number : 9995200745
                     </p>
                   </div>
                 </div>
