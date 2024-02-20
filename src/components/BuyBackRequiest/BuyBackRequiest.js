@@ -30,6 +30,7 @@ const style = {
 const BuyBackRequiest = (props) => {
   const [isFocused, setIsFocused] = useState(false);
   const [selectedCity, setSelectedCity] = useState(null);
+  const [selectedState,setSelectedState] = useState(null)
   const [isMobileView, setIsMobileView] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
   );
