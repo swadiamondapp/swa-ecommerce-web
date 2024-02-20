@@ -622,7 +622,7 @@ const ProductDetails = (props) => {
             <div className={Classes.BorderBottom}>
               <div className="container">
                 <div className={`row ${Classes.SellerInfo}`}>
-                  <div className="col-md-12">
+                  <div className="" style={{ padding: "0px" }}>
                     <div className={Classes.Left}>
                       <div className={Classes.manufacture}>
                         <div>Manufacturer</div>

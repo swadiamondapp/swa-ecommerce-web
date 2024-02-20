@@ -229,16 +229,17 @@
 }
 
 .BuyNow {
-  background: #19242d;
+  background: #00464d;
   border-radius: 4px;
   color: #ffffff;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 16px;
   width: 60%;
   padding: 10px 10px;
   /* margin-left: 8px; */
   border: none;
   outline: none;
+  font-family: "lato";
 }
 
 .NewPrice {

@@ -295,34 +295,37 @@ const LandingPage = () => {
     <div>
       <Header countCartItems={cartCount} loginHandler={loginActHandler} />
       <Banner banners={banner} tags={tags} mob={mobBanner} />
-
       <div className="container">
-        <ShopOnBudget>
-          <BudgetCard
-            head={"Under  " + budjet[0].budget}
-            sub={budjet[0].count + " styles"}
-            backgroundImage={shop1}
-            clicked={() => productMinHandler(budjet[0].budget)}
-          />
-          <BudgetCard
-            head={"Under  " + budjet[1].budget}
-            sub={budjet[1].count + " styles"}
-            backgroundImage={shop2}
-            clicked={() => productMinHandler(budjet[1].budget)}
-          />
-          <BudgetCard
-            head={"Under  " + budjet[2].budget}
-            sub={budjet[2].count + " styles"}
-            backgroundImage={shop3}
-            clicked={() => productMinHandler(budjet[2].budget)}
-          />
-          <BudgetCard
-            head={"Under  " + budjet[3].budget}
-            sub={budjet[3].count + " styles"}
-            backgroundImage={shop4}
-            clicked={() => productMinHandler(budjet[3].budget)}
-          />
-        </ShopOnBudget>
+        <div className="row mobRow1">
+          <ShopOnBudget>
+            <BudgetCard
+              head={"Under  " + budjet[0].budget}
+              sub={budjet[0].count + " styles"}
+              backgroundImage={shop1}
+              clicked={() => productMinHandler(budjet[0].budget)}
+            />
+            <BudgetCard
+              head={"Under  " + budjet[1].budget}
+              sub={budjet[1].count + " styles"}
+              backgroundImage={shop2}
+              clicked={() => productMinHandler(budjet[1].budget)}
+            />
+            <BudgetCard
+              head={"Under  " + budjet[2].budget}
+              sub={budjet[2].count + " styles"}
+              backgroundImage={shop3}
+              clicked={() => productMinHandler(budjet[2].budget)}
+            />
+            <BudgetCard
+              head={"Under  " + budjet[3].budget}
+              sub={budjet[3].count + " styles"}
+              backgroundImage={shop4}
+              clicked={() => productMinHandler(budjet[3].budget)}
+            />
+          </ShopOnBudget>
+        </div>
+      </div>
+      <div className="container">
         <NewArrivals>{newArriv}</NewArrivals>
         <BringTheParty add={add} />
         <TopDemanded>{topDemnd}</TopDemanded>

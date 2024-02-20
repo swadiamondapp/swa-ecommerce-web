@@ -7,17 +7,23 @@ function BudgetCard(props) {
       <div
         className={`${"col-md-3"} ${"col-sm-6"} ${"col-lg-3"} ${"col-6"} ${"padLeft"}`}
         onClick={props.clicked}
-        style={{ cursor: "pointer", position: "relative" }}
+        style={{
+          cursor: "pointer",
+          position: "relative",
+          paddingRight: "0px",
+        }}
       >
-        <div
-          className={Classes.ShopOnBudgetImage}
-          style={{ backgroundImage: `url(${props.backgroundImage})` }}
-        >
-          <p className={Classes.ImageText1}>
-            {props.head}
+        <div className={Classes.MobScreensParent}>
+          <div
+            className={Classes.ShopOnBudgetImage}
+            style={{ backgroundImage: `url(${props.backgroundImage})` }}
+          >
+            <p className={Classes.ImageText1}>
+              {props.head}
 
-            <span className={Classes.ImageText2}>{props.sub}</span>
-          </p>
+              <span className={Classes.ImageText2}>{props.sub}</span>
+            </p>
+          </div>
         </div>
       </div>
     </React.Fragment>
