@@ -29,7 +29,8 @@ const style = {
 
 const BuyBackRequiest = (props) => {
   const [isFocused, setIsFocused] = useState(false);
-  const [selectedCity, setSelectedCity] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [selectedState, setSelectedState] = useState(null);
   const [isMobileView, setIsMobileView] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
   );
@@ -109,12 +110,22 @@ const BuyBackRequiest = (props) => {
     setIsFocused(false);
   };
 
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <div>
-      {/* <Button onClick={handleOpen}>BuyBackRequiest</Button> */}
+      <Button onClick={handleOpen}>BuyBackRequiest</Button>
       <Modal
-        open={props.open}
-        onClose={props.handleClose}
+        // open={props.open}
+        open={open}
+        // onClose={props.handleClose}
+        onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -122,7 +133,8 @@ const BuyBackRequiest = (props) => {
           <Typography>
             <div>
               <Button
-                onClick={props.handleClose}
+                // onClick={props.handleClose}
+                onClick={handleClose}
                 style={{ position: "absolute", top: "10px", right: 0 }}
               >
                 <img src={CloseButton} />

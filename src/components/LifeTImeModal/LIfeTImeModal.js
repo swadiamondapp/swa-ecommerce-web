@@ -46,6 +46,7 @@ const successM = {
 
 const LIfeTImeModal = (props) => {
   const [successModalOpen, setSuccessModalOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const [isMobileView, setIsMobileView] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
   );
@@ -74,10 +75,25 @@ const LIfeTImeModal = (props) => {
     setSuccessModalOpen(false);
   };
 
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <div>
-      {/* <Button onClick={handleOpen}>return or exchange  of a delivered product</Button> */}
-      <Modal open={props.open} onClose={props.handleClose}>
+      <Button onClick={handleOpen}>
+        return or exchange of a delivered product
+      </Button>
+      <Modal
+        // open={props.open}
+        open={open}
+        // onClose={props.handleClose}
+        onClose={handleClose}
+      >
         <Box sx={isMobileView ? mobileStyle : style}>
           <Typography>
             <div className={classes.Container}>

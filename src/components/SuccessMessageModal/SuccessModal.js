@@ -20,6 +20,7 @@ const successM = {
 };
 
 const SuccessPage = (props) => {
+  const [open, setOpen] = useState(false);
   const [isMobileView, setIsMobileView] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
   );
@@ -36,12 +37,18 @@ const SuccessPage = (props) => {
     };
   }, []);
 
-  // const handleOpen = () => setSuccessModalOpen(true);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <div>
-      {/* <Button onClick={handleOpen}>SUCESS MESSAGE AFTER SUBMIT REVIEW</Button> */}
-      <Modal open={props.successModalOpen} onClose={props.handleClose}>
+      <Button onClick={handleOpen}>SUCESS MESSAGE AFTER SUBMIT REVIEW</Button>
+      <Modal
+        // open={props.successModalOpen}
+        open={open}
+        // onClose={props.handleClose}
+        onClose={handleClose}
+      >
         <Box
           sx={successM}
           style={
