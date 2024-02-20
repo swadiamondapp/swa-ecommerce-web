@@ -283,6 +283,22 @@ svg.p-icon {
   box-shadow: 0px 2px 2px 0px #0000000d !important;
   border: none !important;
 }
+.accordion-button:focus{
+  box-shadow: none!important;
+}
+.accordion-button:not(.collapsed) {
+  background-color: transparent !important;
+  color: inherit !important;
+}
+.accordion-body {
+  padding: 10px 20px !important;
+  
+ 
+}
+.accordion-item  {
+  border-left: none !important;
+  border-right:none !important;
+}
 
 /* :where(.css-dev-only-do-not-override-12czi4v).ant-modal .ant-modal-footer {
   display: none !important;
@@ -377,5 +393,13 @@ input[type="number"] {
   .page-link {
     font-weight: 800 !important;
     font-size: 12px !important;
+  }
+  .accordion-body {
+    padding: 20px 0px !important;
+    
+   
+  }
+  .accordion-button {
+    padding:1rem 0rem !important
   }
 }

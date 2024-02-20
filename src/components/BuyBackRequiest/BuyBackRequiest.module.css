@@ -7,7 +7,7 @@
   display: flex;
   gap: 1.5rem;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
 }
 .dropDown {
   width: 100%;
@@ -54,9 +54,10 @@
   font-family: "gilroyNormal";
   font-size: 14px;
   border-radius: 4px;
-  padding: 10px;
+  padding: 8px 12px;
   background-color: #e8e9ea;
   border: 2px solid #e8e9ea;
+  box-shadow: 1px 4px 4px 0px rgba(0, 70, 77, 0.1) inset;
 }
 .alllInputFeilds ::placeholder {
   opacity: 0.9;
@@ -99,9 +100,10 @@
   border-radius: 4px;
   color: #fff;
   background-color: rgba(0, 70, 77, 1);
-  padding: 14px 20px;
+  padding: 8px 10px;
   margin: 5px 0px;
   font-size: 14px;
+  font-weight: 400;
 }
 .dropDown .css-1h51icj-MuiAutocomplete-root .MuiOutlinedInput-root {
   padding: 7px !important;
@@ -114,7 +116,7 @@
   .BuyBackContainer {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 8px;
   }
   .Pin {
     display: flex;
@@ -127,7 +129,7 @@
   .Location {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 8px;
   }
   .quatorInput {
     width: 50%;
@@ -150,7 +152,7 @@
     border-radius: 4px;
     color: #fff;
     background-color: rgba(0, 70, 77, 1);
-    padding: 12px 15px;
+    padding: 10px 15px;
     /* margin:10px 0px; */
     font-size: 14px;
   }
@@ -170,9 +172,10 @@
     font-family: "gilroyNormal";
     font-size: 14px;
     border-radius: 4px;
-    padding: 10px;
+    padding: 10px 5px;
     background-color: #e8e9ea;
     border: 2px solid #e8e9ea;
+    box-shadow: 1px 4px 4px 0px rgba(0, 70, 77, 0.1) inset;
   }
   .alllInputFeilds:focus-visible {
     border: 2px solid green;

@@ -33,6 +33,7 @@
 }
 .DropDown{
     margin-top: 30px;
+    margin-bottom: 30px;
     margin-left: 40px;
 }
 .accordion-button{
@@ -54,11 +55,19 @@ border: none;
 color: #0D1217;
 
 }
+.faqTextContainer {
+    display: flex;
+    flex-direction: column;
+    gap:15px;
+    padding:20px
+
+}
 .Answer{
     color: #757C81;
     font-weight: 400;
 font-size: 14px;
 }
+
 
 
 
@@ -83,6 +92,18 @@ font-size: 14px;
     border: none;
     color: #0D1217;
     padding-right: 10px;
+    }
+   
+    .DropDown{
+   
+        margin:15px,0px;
+    }
+    .faqTextContainer {
+        display: flex;
+        flex-direction: column;
+        gap:15px;
+        padding:0px
+    
     }
  
 
