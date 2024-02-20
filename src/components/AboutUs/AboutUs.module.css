@@ -1,57 +1,61 @@
-
-.Title{
-    font-weight: 500;
-font-size: 24px;
-font-family: 'PlayFairNormal' !important;
+.Container {
+  background-color: #fff;
 }
-.Main{
-    display: flex;
-    padding-top: 30px;
-
+.Title {
+  font-weight: 500;
+  font-size: 24px;
+  font-family: "PlayFairNormal" !important;
 }
-.SubText{
-    display: flex;
-    font-weight: 400;
-font-size: 14px;
-font-family: 'gilroyNormal' !important;
-border-bottom: 0.5px solid #E8E9EA;
-padding-bottom: 30px;
-
+.Main {
+  display: flex;
+  padding-top: 30px;
+  padding-bottom: 10px;
 }
-.Home{
-    color: #00464D;
-    font-weight: 400;
-font-size: 14px;
-font-family: 'gilroyNormal' !important;
-
+.SubText {
+  display: flex;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
+  border-bottom: 0.5px solid #e8e9ea;
+  padding-bottom: 30px;
 }
-.PrivacyPolicy{
-    color: #01B3C5;
-    font-weight: 400;
-font-size: 14px;
-font-family: 'gilroyNormal' !important;
-
+.Home {
+  color: #00464d;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
 }
-.Description p{
-    font-weight: 400;
-font-size: 14px;
-line-height: 32px;
-color: #757C81;
-margin-top: 25px;
-font-family: 'gilroyNormal' !important;
+.PrivacyPolicy {
+  color: #01b3c5;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
 }
-.Description2{
-    font-weight: 600;
-    margin-bottom: 80px;
+.Description {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
 }
-.Content{
-    padding: 30px 0px;
+.Description p {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 25px;
+  color: #757c81;
+  margin-top: 0px;
+  font-family: "gilroyNormal" !important;
 }
-.subHeading{
-    color: #006E7F;
-    font-weight: 600;
-font-size: 15px;
-font-family: 'gilroyNormal' !important;
+.Description2 {
+  font-weight: 600;
+  margin-bottom: 80px;
+}
+.Content {
+  padding: 30px 0px;
+}
+.subHeading {
+  color: #006e7f;
+  font-weight: 600;
+  font-size: 15px;
+  font-family: "gilroyNormal" !important;
 }
 /* @media screen and (max-width:500px) {
     .Content{
@@ -63,94 +67,92 @@ font-family: 'gilroyNormal' !important;
 } */
 
 @media (min-width: 300px) and (max-width: 575px) {
-    .Title{
-        font-weight: 500;
+  .Container {
+    background-color: #fff;
+  }
+
+  .Title {
+    font-weight: 500;
     font-size: 24px;
-    font-family: 'PlayFairNormal' !important;
-    }
-    .Main{
-        display: flex;
-        padding-top: 30px;
-    
-    }
-    .SubText{
-        display: flex;
-        font-weight: 400;
-    font-size: 14px;
-    font-family: 'gilroyNormal' !important;
-    border-bottom: 0.5px solid #E8E9EA;
+    font-family: "PlayFairNormal" !important;
+  }
+  .Main {
+    display: flex;
+    padding-top: 10px;
     padding-bottom: 10px;
-    
-    }
-    .Home{
-        color: #00464D;
-        font-weight: 400;
+  }
+  .SubText {
+    display: flex;
+    font-weight: 400;
     font-size: 14px;
-    font-family: 'gilroyNormal' !important;
-    
-    }
-    .PrivacyPolicy{
-        color: #01B3C5;
-        font-weight: 400;
+    font-family: "gilroyNormal" !important;
+    border-bottom: 0.5px solid #e8e9ea;
+    padding-bottom: 10px;
+  }
+  .Home {
+    color: #00464d;
+    font-weight: 400;
     font-size: 14px;
-    font-family: 'gilroyNormal' !important;
-    
-    }
-    .Description p{
-        font-weight: 400;
+    font-family: "gilroyNormal" !important;
+  }
+  .PrivacyPolicy {
+    color: #01b3c5;
+    font-weight: 400;
     font-size: 14px;
-    line-height: 32px;
-    color: #757C81;
-    margin-top: 25px;
-    font-family: 'gilroyNormal' !important;
-    }
-    .Description2{
-        font-weight: 600;
-        margin-bottom: 40px;
-    }
-    .Content{
-        padding: 0px 20px;
-    }
-    .subHeading{
-        color: #006E7F;
-        font-weight: 600;
+    font-family: "gilroyNormal" !important;
+  }
+  .Description p {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 25px;
+    color: #757c81;
+    margin-top: 0px;
+    font-family: "gilroyNormal" !important;
+  }
+  .Description2 {
+    font-weight: 600;
+    margin-bottom: 40px;
+  }
+  .Content {
+  
+  }
+  .subHeading {
+    color: #006e7f;
+    font-weight: 600;
     font-size: 15px;
-    font-family: 'gilroyNormal' !important;
-    padding:10px 0px
-    }
-
-
+    font-family: "gilroyNormal" !important;
+    padding: 10px 0px;
+  }
 }
 
 @media (min-width: 575px) and (max-width: 767px) {
-    .Container {
-        background-color: #fff;
-       
-    }
-    .Main{
-        display: flex;
-        padding-top: 30px;
-    
-    }
-    .Content{
-        padding: 10px 0px;
-    }
-    .Description p{
-        font-weight: 400;
-    font-size: 14px;
-    line-height: 32px;
-    color: #757C81;
-    margin-top: 25px;
-    /* padding:0px 30px; */
-    font-family: 'gilroyNormal' !important;
-    }
-    .SubText{
-        display: flex;
-        font-weight: 400;
-    font-size: 14px;
-    font-family: 'gilroyNormal' !important;
-    border-bottom: 0.5px solid #E8E9EA;
+  .Container {
+    background-color: #fff;
+    padding:05px 0px 25px 0px;
+  }
+  .Main {
+    display: flex;
+    padding-top: 30px;
     padding-bottom: 10px;
-    
-    }
+  }
+  .Content {
+   
+  }
+  .Description p {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 25px;
+    color: #757c81;
+    margin-top: 0px;
+    /* padding:0px 30px; */
+    font-family: "gilroyNormal" !important;
+  }
+  .SubText {
+    display: flex;
+    font-weight: 400;
+    font-size: 14px;
+    font-family: "gilroyNormal" !important;
+    border-bottom: 0.5px solid #e8e9ea;
+    padding-bottom: 10px;
+  }
 }
