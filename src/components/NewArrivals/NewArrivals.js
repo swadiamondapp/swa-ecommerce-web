@@ -16,12 +16,12 @@ function NewArrivals(props) {
 
   return (
     <div>
-      <LIfeTImeModal />
+      {/* <LIfeTImeModal />
       <BuyBackRequiest />
       <SuccessPage />
       <RefundInitiated />
       <SuccessModal />
-      <AddBank />
+      <AddBank /> */}
       <div className={Classes.NewArrivals}>
         <div className={Classes.setItems}>
           <div>

@@ -4,8 +4,8 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import SuccessTick from '../../Assets/successTick.png'
-import Classes from './SuccesModal.module.css'
+import SuccessTick from "../../Assets/successTick.png";
+import Classes from "./SuccesModal.module.css";
 
 const successM = {
   position: "absolute",
@@ -19,9 +19,7 @@ const successM = {
   p: 4,
 };
 
-const SuccessPage = () => {
-  const [successModalOpen, setSuccessModalOpen] = useState(false);
-  const [open, setOpen] = useState(false);
+const SuccessPage = (props) => {
   const [isMobileView, setIsMobileView] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
   );
@@ -38,13 +36,12 @@ const SuccessPage = () => {
     };
   }, []);
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  // const handleOpen = () => setSuccessModalOpen(true);
 
   return (
     <div>
-      <Button onClick={handleOpen}>SUCESS MESSAGE AFTER SUBMIT REVIEW</Button>
-      <Modal open={open} onClose={handleClose}>
+      {/* <Button onClick={handleOpen}>SUCESS MESSAGE AFTER SUBMIT REVIEW</Button> */}
+      <Modal open={props.successModalOpen} onClose={props.handleClose}>
         <Box
           sx={successM}
           style={
@@ -55,10 +52,17 @@ const SuccessPage = () => {
             <div>
               <img src={SuccessTick} />
             </div>
-            <div style={{ textAlign: "center", margin:'12px 0px', display:'flex', flexDirection:'column'}}>
-                
-                <span className={Classes.titlesuccesModal}>
-              Thank you very much your<br/> review has been saved
+            <div
+              style={{
+                textAlign: "center",
+                margin: "12px 0px",
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <span className={Classes.titlesuccesModal}>
+                Thank you very much your
+                <br /> review has been saved
               </span>
             </div>
           </Typography>

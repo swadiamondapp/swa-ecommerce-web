@@ -3,7 +3,6 @@ import Modal from "react-bootstrap/Modal";
 import Classes from "./conformModal.module.css";
 import Button from "react-bootstrap/Button";
 import TransferMoneyModal from "../WalletModal/TransferMoneyModal";
-import CancelProductModal from "../WalletModal/CancelProductModal";
 
 export default function ConformModal(props) {
   return (
@@ -12,11 +11,11 @@ export default function ConformModal(props) {
       onHide={props.handleClose}
       dialogClassName="my-modal"
     >
-      {/* <Modal.Header closeButton>
+      <Modal.Header closeButton>
         <Modal.Title></Modal.Title>
-      </Modal.Header> */}
+      </Modal.Header>
       <Modal.Body>
-        {/* <div className="d-flex">
+        <div className="d-flex">
           <img src={props.img} alt="move" width="130px" height="130px" />
           <div className={Classes.contnt}>
             <h5 className={Classes.title}>{props.title}</h5>
@@ -34,8 +33,7 @@ export default function ConformModal(props) {
               MOVE TO WISHLIST
             </div>
           </div>
-        </div> */}
-        <CancelProductModal />
+        </div>
       </Modal.Body>
 
       {/* <Modal.Footer></Modal.Footer> */}

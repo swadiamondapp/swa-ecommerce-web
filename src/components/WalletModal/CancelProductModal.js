@@ -1,19 +1,17 @@
 import React, { useState } from "react";
 import Classes from "./WalletModal.module.css";
 import { Dropdown } from "primereact/dropdown";
-import CloseButton from "../../Assets/closeModal.png";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
+import { IoClose } from "react-icons/io5";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 
-const CancelProductModal = () => {
-  const [open, setOpen] = useState(true);
+const CancelProductModal = (props) => {
   const [selectedCity, setSelectedCity] = useState(null);
 
   const style = {
     position: "absolute",
-    top: "50%",
+    top: "41%",
     left: "50%",
     transform: "translate(-50%, -50%)",
     bgcolor: "background.paper",
@@ -21,6 +19,7 @@ const CancelProductModal = () => {
     border: "none",
     borderRadius: "6px",
     p: 2,
+    width: "650px",
   };
 
   const cities = [
@@ -30,13 +29,12 @@ const CancelProductModal = () => {
     { name: "Istanbul", code: "IST" },
     { name: "Paris", code: "PRS" },
   ];
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+
   return (
     <div>
       <Modal
-        open={open}
-        onClose={handleClose}
+        open={props.open}
+        onClose={props.handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -45,11 +43,12 @@ const CancelProductModal = () => {
             <div>
               <div className={Classes.CancelModalHeader}>
                 <h3>Cancel this product</h3>
-                <Button onClick={handleClose}>
-                  <img src={CloseButton} />
-                </Button>
+                <IoClose
+                  className={Classes.Close}
+                  onClick={props.handleClose}
+                />
               </div>
-              <div>
+              <div className={Classes.DropContainer}>
                 <Dropdown
                   value={selectedCity}
                   onChange={(e) => setSelectedCity(e.value)}
@@ -58,7 +57,14 @@ const CancelProductModal = () => {
                   placeholder="Select a City"
                 />
               </div>
-              <textarea></textarea>
+              <textarea
+                cols={50}
+                rows={8}
+                className={Classes.TextArea}
+              ></textarea>
+              <div className={Classes.CancelButton}>
+                <button>Cancel Product</button>
+              </div>
             </div>
           </Typography>
         </Box>

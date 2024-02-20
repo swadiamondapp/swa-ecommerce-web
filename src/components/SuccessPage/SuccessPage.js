@@ -43,7 +43,9 @@ const SuccessPage = () => {
 
   return (
     <div>
-      <Button onClick={handleOpen}>after Canelation submited if cash on delivery</Button>
+      <Button onClick={handleOpen}>
+        after Canelation submited if cash on delivery
+      </Button>
       <Modal open={open} onClose={handleClose}>
         <Box
           sx={successM}
@@ -55,7 +57,7 @@ const SuccessPage = () => {
             <div className={Classes.imageContianer}>
               <img className={Classes.tick} src={InvertedTick} />
             </div>
-            <div style={{ textAlign: "center",margin:'12px 0px'}}>
+            <div style={{ textAlign: "center", margin: "12px 0px" }}>
               <span className={Classes.titlesuccesModal}>
                 Thank you your cancelation <br />
                 has been approved

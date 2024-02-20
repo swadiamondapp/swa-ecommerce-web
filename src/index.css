@@ -316,8 +316,25 @@ svg.p-icon {
   width: 100% !important;
   max-width: 100% !important;
 } */
+.p-dropdown {
+  width: 100% !important;
+  border: 1px solid #e8e9ea;
+}
+.p-dropdown-items-wrapper {
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.p-placeholder {
+  padding: 10px;
+}
+.p-inputtext {
+  padding: 10px;
+}
 .p-dropdown-panel {
   z-index: 99999999999 !important;
+}
+.p-icon {
+  color: #006e7f;
 }
 .ReactFlagsSelect-module_selectBtn__19wW7 {
   border: none !important;

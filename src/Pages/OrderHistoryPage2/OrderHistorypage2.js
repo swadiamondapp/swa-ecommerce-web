@@ -9,14 +9,20 @@ import deliveryimg from "../../Assets/delivery.png";
 import imgproduct from "../../Assets/diamonds.png";
 import { Steps, Collapse } from "antd";
 import TrackOrder from "../../components/OrderHistory/TrackOrder/TrackOrder";
+import CancelProductModal from "../../components/WalletModal/CancelProductModal";
 import Classes from "./OrderHistoryPage2.module.css";
 import { useHistory } from "react-router-dom";
 import { TbMinusVertical } from "react-icons/tb";
 import { IoMdDownload } from "react-icons/io";
 import { Accordion, AccordionTab } from "primereact/accordion";
+import LIfeTImeModal from "../../components/LifeTImeModal/LIfeTImeModal";
+import BuyBackRequiest from "../../components/BuyBackRequiest/BuyBackRequiest";
+import AddBank from "../../components/LifeTImeModal/AddBank";
 import moment from "moment";
 import axios from "axios";
 import * as Urls from "../../Urls";
+import SuccessPage from "../../components/SuccessMessageModal/SuccessModal";
+
 const OrderHistorypage2 = (props) => {
   const history = useHistory();
   const [orderDet, setOrderDet] = useState([
@@ -56,6 +62,11 @@ const OrderHistorypage2 = (props) => {
   const token = localStorage.getItem("swaToken");
   const { Panel } = Collapse;
   const [activeIndex, setActiveIndex] = useState();
+  const [open, setOpen] = useState(false);
+  const [buyBackOpen, setBuyBackOpen] = useState(false);
+  const [addBankOpen, setAddBankOpen] = useState(false);
+  const [successModalOpen, setSuccessModalOpen] = useState(false);
+  const [cancelProductModal, setCancelProductModal] = useState(false);
 
   const onChange = (key) => {
     console.log(key);
@@ -120,7 +131,20 @@ const OrderHistorypage2 = (props) => {
     <div>
       <div className={Classes.Background}>
         <Header countCartItems={cartCount} />
-
+        <LIfeTImeModal open={open} handleClose={() => setOpen(false)} />
+        <BuyBackRequiest
+          open={buyBackOpen}
+          handleClose={() => setBuyBackOpen(false)}
+        />
+        <AddBank open={addBankOpen} handleClose={() => setAddBankOpen(false)} />
+        <SuccessPage
+          open={successModalOpen}
+          handleClose={() => setSuccessModalOpen(false)}
+        />
+        <CancelProductModal
+          open={cancelProductModal}
+          handleClose={() => setCancelProductModal(false)}
+        />
         <div>
           <div className={`container ${Classes.OrderMobCont}`}>
             <div className={`container ${Classes.OrderMobCont2}`}>
@@ -321,13 +345,26 @@ const OrderHistorypage2 = (props) => {
                     </Accordion>
                   </div>
                   <div className={Classes.TrackButtons}>
-                    <button className={Classes.REButton}>
+                    <button
+                      className={Classes.REButton}
+                      onClick={() => setOpen(true)}
+                    >
                       Return / Exchange
                     </button>
-                    <button className={Classes.REButton2}>
+                    <button
+                      className={Classes.REButton2}
+                      onClick={() => setBuyBackOpen(true)}
+                      // onClick={() => setSuccessModalOpen(true)}
+                    >
                       <IoMdDownload /> Download invoice
                     </button>
                   </div>
+                </div>
+                <div
+                  className={Classes.CancelProductButton}
+                  onClick={() => setCancelProductModal(true)}
+                >
+                  <button>Cancel product</button>
                 </div>
               </div>
 
@@ -427,7 +464,6 @@ const OrderHistorypage2 = (props) => {
             </div>
           </div>
         </div>
-
         <div className={Classes.Features}>
           <Features />
         </div>

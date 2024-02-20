@@ -27,12 +27,8 @@ const style = {
   p: 2,
 };
 
-const BuyBackRequiest = () => {
-  const [open, setOpen] = React.useState(false);
+const BuyBackRequiest = (props) => {
   const [isFocused, setIsFocused] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
   const [selectedCity, setSelectedCity] = useState(null);
   const [isMobileView, setIsMobileView] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
@@ -82,13 +78,12 @@ const BuyBackRequiest = () => {
     setIsFocused(false);
   };
 
-
   return (
     <div>
-      <Button onClick={handleOpen}>BuyBackRequiest</Button>
+      {/* <Button onClick={handleOpen}>BuyBackRequiest</Button> */}
       <Modal
-        open={open}
-        onClose={handleClose}
+        open={props.open}
+        onClose={props.handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -96,12 +91,12 @@ const BuyBackRequiest = () => {
           <Typography>
             <div>
               <Button
-                onClick={handleClose}
+                onClick={props.handleClose}
                 style={{ position: "absolute", top: "10px", right: 0 }}
               >
                 <img src={CloseButton} />
               </Button>
-              <form >
+              <form>
                 <div className={Classes.BuyBackContainer}>
                   <span className={Classes.Title}>
                     Return / lifetime exchange/

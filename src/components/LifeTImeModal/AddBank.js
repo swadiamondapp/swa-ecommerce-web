@@ -44,11 +44,9 @@ const successM = {
   p: 4,
 };
 
-const AddBank = () => {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const [successModalOpen, setSuccessModalOpen] = useState(false);
+const AddBank = (props) => {
+  // const [successModalOpen, setSuccessModalOpen] = useState(false);
+  console.log(props.openSuccessModal);
   const [isMobileView, setIsMobileView] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
   );
@@ -66,21 +64,21 @@ const AddBank = () => {
     };
   }, [isMobileView]);
 
-  const handleSuccessModal = () => {
-    setSuccessModalOpen(true);
-    // You can close the success modal after a certain duration if needed
-    setTimeout(() => {
-      setSuccessModalOpen(false);
-    }, 1000); // Close the success modal after 3 seconds (3000 milliseconds)
-  };
-  const handleCloseSuccessModal = () => {
-    setSuccessModalOpen(false);
-  };
+  // const handleSuccessModal = () => {
+  //   setSuccessModalOpen(true);
+  //   // You can close the success modal after a certain duration if needed
+  //   setTimeout(() => {
+  //     setSuccessModalOpen(false);
+  //   }, 1000); // Close the success modal after 3 seconds (3000 milliseconds)
+  // };
+  // const handleCloseSuccessModal = () => {
+  //   setSuccessModalOpen(false);
+  // };
 
   return (
     <div>
-      <Button onClick={handleOpen}>anas</Button>
-      <Modal open={open} onClose={handleClose}>
+      {/* <Button onClick={handleOpen}>anas</Button> */}
+      <Modal open={props.open} onClose={props.handleClose}>
         <Box sx={isMobileView ? mobileStyle : style}>
           <Typography>
             <div className={classes.Container}>
@@ -88,7 +86,7 @@ const AddBank = () => {
                 <p>Add bank A/C</p>
                 <IoMdClose
                   style={{ cursor: "pointer" }}
-                  onClick={handleClose}
+                  onClick={props.handleClose}
                 />
               </div>
               <div className={classes.FormADDbANK}>
@@ -123,7 +121,10 @@ const AddBank = () => {
                   <label>Account holder Name</label>
                   <input type="text" placeholder="Muhammed Jameel" />
                 </div>
-                <div className={classes.AddBtnACC}>
+                <div
+                  className={classes.AddBtnACC}
+                  onClick={props.openSuccessModal}
+                >
                   <button>Add</button>
                 </div>
               </div>

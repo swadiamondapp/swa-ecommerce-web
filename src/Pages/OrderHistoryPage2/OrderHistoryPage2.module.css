@@ -262,6 +262,22 @@
 .parentCollaps5 {
   margin: 10px 50px;
 }
+.CancelProductButton {
+  display: flex;
+  padding-top: 30px;
+  align-items: center;
+  justify-content: end;
+}
+.CancelProductButton button {
+  color: #00464d;
+  font-family: "Lato", sans-serif;
+  background: #00464d1a;
+  border: 1px solid #00464d;
+  padding: 10px 25px;
+  border-radius: 40px;
+  outline: none;
+  cursor: pointer;
+}
 @media (min-width: 300px) and (max-width: 575px) {
   .Main {
     margin: 30px 20px 0px;

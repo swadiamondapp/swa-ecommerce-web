@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import SuccessTick from '../../Assets/successTick.png'
+import SuccessTick from "../../Assets/successTick.png";
 
 const style = {
   position: "absolute",
@@ -42,13 +42,9 @@ const successM = {
   boxShadow: 24,
   borderRadius: "4px",
   p: 4,
+};
 
-}
-
-const LIfeTImeModal = () => {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+const LIfeTImeModal = (props) => {
   const [successModalOpen, setSuccessModalOpen] = useState(false);
   const [isMobileView, setIsMobileView] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
@@ -80,121 +76,120 @@ const LIfeTImeModal = () => {
 
   return (
     <div>
-   
-          <Button onClick={handleOpen}>return or exchange  of a delivered product</Button>
-          <Modal open={open} onClose={handleClose}>
-            <Box sx={isMobileView ? mobileStyle : style}>
-              <Typography>
-                <div className={classes.Container}>
-                  <div className={classes.planContainer}>
-                    <div>
-                      <div className={classes.titles}>
-                        <p className={classes.planSubTitle}>
-                          Lifetime Exchange
-                          <br /> ( approximate . estimate)
-                        </p>
-                      </div>
-                      <div className={classes.SubDetails}>
-                        <div className={classes.subDetialstexts}>
-                          <span className={classes.labelText}>
-                            Purchase Amount{" "}
-                          </span>
+      {/* <Button onClick={handleOpen}>return or exchange  of a delivered product</Button> */}
+      <Modal open={props.open} onClose={props.handleClose}>
+        <Box sx={isMobileView ? mobileStyle : style}>
+          <Typography>
+            <div className={classes.Container}>
+              <div className={classes.planContainer}>
+                <div>
+                  <div className={classes.titles}>
+                    <p className={classes.planSubTitle}>
+                      Lifetime Exchange
+                      <br /> ( approximate . estimate)
+                    </p>
+                  </div>
+                  <div className={classes.SubDetails}>
+                    <div className={classes.subDetialstexts}>
+                      <span className={classes.labelText}>
+                        Purchase Amount{" "}
+                      </span>
 
-                          <span className={classes.textAmount}>$678</span>
-                        </div>
-                        <div className={classes.line}></div>
-                        <div className={classes.subDetialstexts}>
-                          <span className={classes.labelText}>Discounted </span>
-
-                          <span className={classes.textAmount}>$34</span>
-                        </div>
-                        <div className={classes.line}></div>
-                        <div className={classes.subDetialstexts}>
-                          <span className={classes.labelText}>
-                            Totel LBB Value{" "}
-                          </span>
-
-                          <span className={classes.greenColor}>$712</span>
-                        </div>
-                        <div className={classes.line}></div>
-                      </div>
-                      <div>
-                        <button
-                          className={classes.buttonllb}
-                          onClick={handleSuccessModal}
-                        >
-                          PROCEED WITH LBB
-                        </button>
-                      </div>
+                      <span className={classes.textAmount}>$678</span>
                     </div>
+                    <div className={classes.line}></div>
+                    <div className={classes.subDetialstexts}>
+                      <span className={classes.labelText}>Discounted </span>
 
-                    <div>
-                      <div className={classes.titles}>
-                        <p className={classes.planSubTitle}>
-                          Life time buy-back
-                          <br />( approximate . estimate)
-                        </p>
-                      </div>
-                      <div className={classes.SubDetails}>
-                        <div className={classes.subDetialstexts}>
-                          <span className={classes.labelText}>
-                            Purchase Amount{" "}
-                          </span>
-
-                          <span className={classes.textAmount}>$678</span>
-                        </div>
-                        <div className={classes.line}></div>
-                        <div className={classes.subDetialstexts}>
-                          <span className={classes.labelText}>Discounted </span>
-
-                          <span className={classes.textAmount}>$34</span>
-                        </div>
-                        <div className={classes.line}></div>
-                        <div className={classes.subDetialstexts}>
-                          <span className={classes.labelText}>
-                            Totel LBB Value{" "}
-                          </span>
-
-                          <span className={classes.greenColor}>$712</span>
-                        </div>
-                        <div className={classes.line}></div>
-                      </div>
-                      <div>
-                        <button
-                          className={classes.buttonllb}
-                          onClick={handleSuccessModal}
-                        >
-                          PROCEED WITH LTE
-                        </button>
-                      </div>
+                      <span className={classes.textAmount}>$34</span>
                     </div>
+                    <div className={classes.line}></div>
+                    <div className={classes.subDetialstexts}>
+                      <span className={classes.labelText}>
+                        Totel LBB Value{" "}
+                      </span>
+
+                      <span className={classes.greenColor}>$712</span>
+                    </div>
+                    <div className={classes.line}></div>
+                  </div>
+                  <div>
+                    <button
+                      className={classes.buttonllb}
+                      onClick={handleSuccessModal}
+                    >
+                      PROCEED WITH LBB
+                    </button>
                   </div>
                 </div>
-              </Typography>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                <div className={classes.noteTitle}>
-                  <span>Note:</span>
-                  <span className={classes.noteContent}>
-                    1. buyback with 15 days of delivery will be 100% of your
-                    money will be refunded
-                  </span>
-                  <span className={classes.noteContent}>
-                    2 buyback after 15 days of delivery will be 10% of your
-                    money will be dedected
-                  </span>
-                  <span className={classes.noteContent}>
-                    3. Lorem ipsum dolor sit amet consectetur. Felis faucibus
-                    cras enim pretium semper.
-                  </span>
-                  <span className={classes.noteContent}>
-                    4. Lorem ipsum dolor sit amet consectetur. Felis faucibus
-                    cras enim pretium semper. Aliquam pellentesque aliquam magna
-                    mauris nulla.
-                  </span>
+
+                <div>
+                  <div className={classes.titles}>
+                    <p className={classes.planSubTitle}>
+                      Life time buy-back
+                      <br />( approximate . estimate)
+                    </p>
+                  </div>
+                  <div className={classes.SubDetails}>
+                    <div className={classes.subDetialstexts}>
+                      <span className={classes.labelText}>
+                        Purchase Amount{" "}
+                      </span>
+
+                      <span className={classes.textAmount}>$678</span>
+                    </div>
+                    <div className={classes.line}></div>
+                    <div className={classes.subDetialstexts}>
+                      <span className={classes.labelText}>Discounted </span>
+
+                      <span className={classes.textAmount}>$34</span>
+                    </div>
+                    <div className={classes.line}></div>
+                    <div className={classes.subDetialstexts}>
+                      <span className={classes.labelText}>
+                        Totel LBB Value{" "}
+                      </span>
+
+                      <span className={classes.greenColor}>$712</span>
+                    </div>
+                    <div className={classes.line}></div>
+                  </div>
+                  <div>
+                    <button
+                      className={classes.buttonllb}
+                      onClick={handleSuccessModal}
+                    >
+                      PROCEED WITH LTE
+                    </button>
+                  </div>
                 </div>
-              </Typography>
-            </Box>
-          </Modal>
+              </div>
+            </div>
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            <div className={classes.noteTitle}>
+              <span>Note:</span>
+              <span className={classes.noteContent}>
+                1. buyback with 15 days of delivery will be 100% of your money
+                will be refunded
+              </span>
+              <span className={classes.noteContent}>
+                2 buyback after 15 days of delivery will be 10% of your money
+                will be dedected
+              </span>
+              <span className={classes.noteContent}>
+                3. Lorem ipsum dolor sit amet consectetur. Felis faucibus cras
+                enim pretium semper.
+              </span>
+              <span className={classes.noteContent}>
+                4. Lorem ipsum dolor sit amet consectetur. Felis faucibus cras
+                enim pretium semper. Aliquam pellentesque aliquam magna mauris
+                nulla.
+              </span>
+            </div>
+          </Typography>
+        </Box>
+      </Modal>
     </div>
   );
 };

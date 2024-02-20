@@ -97,6 +97,21 @@ function Footer() {
                       <p className={Classes.Links}>Outlets</p>
                     </div>
                   </div>
+                  {/* <div className="col-md-4">
+                    <h1 className={Classes.Title}>Quick links</h1>
+                    {catgSet.slice(0, 15).map((item, index) => {
+                      return (
+                        <p
+                          className={Classes.Links}
+                          onClick={() => catSelHandler(item.id)}
+                          style={{ color: "#ffff", cursor: "pointer" }}
+                          key={index}
+                        >
+                          {item.category}{" "}
+                        </p>
+                      );
+                    })}
+                  </div> */}
                   <div className="col-md-4">
                     <h1 className={Classes.Title}>Quick links</h1>
                     {catgSet.slice(0, 15).map((item, index) => {
