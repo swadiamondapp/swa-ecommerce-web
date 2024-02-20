@@ -642,7 +642,7 @@ const ProductDetails = (props) => {
                         <div className={Classes.manpara}>1800 257 8600</div>
                       </div>
                       <div className={Classes.manufacture}>
-                        <div>Chat Number</div>
+                        <div>Chat with us</div>
                         <div>:</div>
                         <div className={Classes.manpara}>
                           {" "}

@@ -45,6 +45,7 @@
   margin-bottom: 15px !important;
   margin-top: 10px;
 }
+
 .SubHeading {
   font-weight: 400;
   font-size: 14px;
@@ -118,7 +119,8 @@ label {
   background: #f9f9f9;
   border: 1px solid #e8e9ea;
   border-radius: 4px;
-  color: #a3a7ab;
+  /* color: #a3a7ab; */
+  color: #000;
   padding: 8px 15px;
   margin-bottom: 15px;
   outline: none;
@@ -221,6 +223,18 @@ label {
 .Para31 {
   color: #8c9296;
   font-family: "lato";
+}
+.HeadAddressDesc {
+  color: #000 !important;
+  font-family: "lato";
+  font-weight: 600;
+  display: none;
+}
+.HeadAddressDesc1 {
+  color: #000 !important;
+  font-family: "lato";
+  font-weight: 600;
+  padding-left: 5px;
 }
 .FirstLocationHead1 {
   display: flex;
@@ -827,5 +841,12 @@ label {
   .ParentF3 {
     grid-template-columns: 1fr;
     gap: 0px;
+  }
+  .HeadAddressDesc {
+    display: block;
+    margin-top: 10px;
+  }
+  .HeadAddressDesc1 {
+    display: none;
   }
 }
