@@ -4,13 +4,16 @@
   font-size: 20px;
   color: #0d1217;
   margin-bottom: 0px;
-  border-bottom: 0.5px solid #e5e5e5;
-  padding: 10px;
+  padding: 15px;
 }
 .ContentLines {
   display: flex;
   justify-content: space-between;
-  padding-top: 20px;
+  padding: 0px 15px;
+}
+.Phone {
+  padding: 0px 50px 15px;
+  opacity: 30%;
 }
 .Content {
   display: flex;
@@ -22,9 +25,9 @@
   font-weight: 400;
   font-size: 16px;
 }
-.AmountCheckContainer {
+/* .AmountCheckContainer {
   padding: 0px 10px 10px 10px;
-}
+} */
 .BorderLine {
   border: 0.5px solid #e5e5e5;
 }
@@ -73,14 +76,16 @@
   background: #00464d;
   color: #ffffff;
   padding: 10px 20px;
+  margin: 15px;
+  border-radius: 4px;
   font-family: "LatoRegular";
   font-size: 14px;
   font-weight: 600;
   line-height: 16.8px;
 }
 .Bank {
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   fill: #0464d5;
 }
 .Plus {
@@ -138,4 +143,13 @@
   font-size: 12px;
   padding: 10px 20px;
   border-radius: 4px;
+}
+.Border {
+  border-bottom: 0.5px solid #e5e5e5;
+  padding-top: 25px;
+}
+.Plus {
+  fill: #0464d5;
+  height: 20px;
+  width: 15px;
 }

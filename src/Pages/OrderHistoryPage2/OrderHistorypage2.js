@@ -22,6 +22,7 @@ import moment from "moment";
 import axios from "axios";
 import * as Urls from "../../Urls";
 import SuccessPage from "../../components/SuccessMessageModal/SuccessModal";
+import TransferMoneyModal from "../../components/WalletModal/TransferMoneyModal";
 
 const OrderHistorypage2 = (props) => {
   const history = useHistory();
@@ -67,6 +68,7 @@ const OrderHistorypage2 = (props) => {
   const [addBankOpen, setAddBankOpen] = useState(false);
   const [successModalOpen, setSuccessModalOpen] = useState(false);
   const [cancelProductModal, setCancelProductModal] = useState(false);
+  const [transferModalOpen, setTransferModalOpen] = useState(false);
 
   const onChange = (key) => {
     console.log(key);
@@ -144,6 +146,10 @@ const OrderHistorypage2 = (props) => {
         <CancelProductModal
           open={cancelProductModal}
           handleClose={() => setCancelProductModal(false)}
+        />
+        <TransferMoneyModal
+          open={transferModalOpen}
+          handleClose={() => setTransferModalOpen(false)}
         />
         <div>
           <div className={`container ${Classes.OrderMobCont}`}>
