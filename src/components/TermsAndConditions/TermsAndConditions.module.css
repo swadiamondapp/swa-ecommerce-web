@@ -1,5 +1,5 @@
 .Title {
-    font-weight: 500;
+    font-weight: 600;
     font-size: 24px;
     font-family: 'PlayFairNormal' !important;
 }
@@ -16,8 +16,11 @@
     font-size: 14px;
     font-family: 'gilroyNormal' !important;
     border-bottom: 0.5px solid #E8E9EA;
-    padding-bottom: 30px;
+    padding-bottom: 35px;
 
+}
+.Content {
+ 
 }
 
 .Home {
@@ -37,7 +40,7 @@
 }
 
 .Description {
-    font-weight: 400;
+    font-weight: 600;
     font-size: 14px;
     line-height: 32px;
     color: #757C81;
@@ -50,7 +53,12 @@
     font-size: 18px;
     color: #007481;
     font-family: 'gilroyNormal' !important;
+    padding:10px 0px
+    
 }
+ul ul {
+    list-style-type:disc; /* or any other desired list-style-type */
+  }
 
 
 @media (min-width: 300px) and (max-width: 575px) {
@@ -59,9 +67,10 @@
     margin-top:20px
 }
 .Title {
-    font-weight: 500;
+    font-weight: 600;
     font-size: 20px;
     font-family: 'PlayFairNormal' !important;
+    padding-bottom: 5px;
 }
 .Home {
     color: #00464D;
@@ -69,6 +78,9 @@
     font-size: 14px;
     font-family: 'gilroyNormal' !important;
 
+}
+.ulForDesk {
+  
 }
 .PrivacyPolicy {
     color: #01B3C5;
@@ -83,15 +95,19 @@
 .Description {
     font-weight: 400;
     font-size: 14px;
-    line-height: 28px;
+    line-height: 24px;
     color: #757C81;
-    margin-top: 25px;
+    margin: 14px 0px;
     font-family: 'gilroyNormal' !important;
 }
 .SubHeading {
     font-weight: 600;
-    font-size: 16px;
+    font-size: 14px;
     color: #007481;
     font-family: 'gilroyNormal' !important;
+    padding:10px 0px;
+}
+.SubText {
+    padding-bottom:30px ;
 }
 }
