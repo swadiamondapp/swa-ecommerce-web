@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import FB from "../../Assets/fb.png";
 import GOOGLE from "../../Assets/google.png";
 import APPLE from "../../Assets/apple.png";
@@ -19,14 +19,14 @@ const LoginToggle = () => {
   const [isSignup, setIsSignup] = useState(false);
   const [getOtpModal, setGetOtpModal] = useState(false);
 
-  const [isDesk, setIsDesk] = useState(window.innerWidth >= 300 && window.innerWidth <= 575);
+  const [isDesk, setIsDesk] = useState(
+    window.innerWidth >= 300 && window.innerWidth <= 575
+  );
 
   useEffect(() => {
     const handleResize = () => {
       setIsDesk(window.innerWidth >= 300 && window.innerWidth <= 575);
-  
     };
-
 
     // Add event listener to listen for window resize
     window.addEventListener("resize", handleResize);
@@ -36,9 +36,6 @@ const LoginToggle = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, [isDesk]);
-
-
-
 
   const handleSignupModalOpen = () => {
     setSignupModal(true);
@@ -61,25 +58,25 @@ const LoginToggle = () => {
   };
   const style = {
     position: "absolute",
-    bottom:  0,
-    width:  "100%",
-    height: "auto" ,
+    bottom: 0,
+    width: "100%",
+    height: "auto",
     bgcolor: "background.paper",
     border: "1px solid #000",
     boxShadow: 24,
-    p: 1,
+    p: 2,
   };
   const styleDesk = {
     position: "absolute",
-    top:'50%',
-    left:"50%",
+    top: "50%",
+    left: "50%",
     transform: "translate(-50%,-50%)",
-    width:  "25%",
-    height: "auto" ,
+    width: "25%",
+    height: "auto",
     bgcolor: "background.paper",
     border: "1px solid #000",
     boxShadow: 24,
-    p: 1,
+    p: 2,
   };
   const customTabOtpModalStyle = {
     position: "absolute",
@@ -95,7 +92,7 @@ const LoginToggle = () => {
   };
   const customDestOtpModalStyle = {
     position: "absolute",
-    width: "30%",
+    width: "25%",
     height: "auto",
     left: "50%",
     top: "50%",
@@ -103,9 +100,8 @@ const LoginToggle = () => {
     bgcolor: "background.paper",
     border: "1px solid #000",
     boxShadow: 24,
-    p: 1,
+    p: 2,
   };
-
 
   const customTabOne = {
     backgroundColor: activeTab === "tab1" ? "#fff" : "#F0F0F2",
@@ -239,52 +235,29 @@ const LoginToggle = () => {
               <div className={Classes.LoginContainer}>
                 <div className={Classes.title}>
                   <div style={{ paddingBottom: "10px" }}>
-                    <h3 className={Classes.titleh}>Welcome back Login here</h3>
+                    <h3 className={Classes.titleh}>Welcome back</h3>
                   </div>
                   <div className={Classes.signupTitleText}>
-                    <p className={Classes.titlep}>
-                      Please enter your phone number or email
-                      <br /> We will send you the OTP.
-                    </p>
+                    {activeTab === "tab1" ? (
+                      <>
+                        <p className={Classes.titlep}>
+                          Please enter your Phone Number we will
+                          <br />
+                          send you OTP
+                        </p>
+                      </>
+                    ) : (
+                      <>
+                        <p className={Classes.titlep}>
+                          Please enter your Email we will
+                          <br />
+                          send you OTP
+                        </p>
+                      </>
+                    )}
                   </div>
                 </div>
-                <div className={Classes.flex}>
-                  <div
-                    className={Classes.SocialButtons}
-                    style={{ marginBottom: "1rem" }}
-                  >
-                    <div className={Classes.googleButton}>
-                      <button className={Classes.buttonSocial}>
-                        <img src={GOOGLE} /> Login with Google
-                      </button>
-                    </div>
-                    <div className={Classes.facebookButton}>
-                      <button className={Classes.buttonSocial}>
-                        <img src={FB} /> Login with facebook
-                      </button>
-                    </div>
-                  </div>
-                  <div style={{ display: "flex" }}>
-                    <button className={Classes.buttonSocial}>
-                      <img src={APPLE} /> Login with Apple
-                    </button>
-                  </div>
-                </div>
-                <div className={Classes.line}>
-                  <div
-                    style={{
-                      borderBottom: "1px solid #585F67",
-                      opacity: "0.3",
-                    }}
-                  ></div>
-                  <div className={Classes.orText}>or</div>
-                  <div
-                    style={{
-                      borderBottom: "1px solid #585F67",
-                      opacity: "0.3",
-                    }}
-                  ></div>
-                </div>
+
                 <div className={Classes.TabButton}>
                   <div className={Classes.tabHeader}>
                     <div className={Classes.active} style={customTabOne}>
@@ -332,7 +305,7 @@ const LoginToggle = () => {
                         <form style={{}}>
                           <label className={Classes.labelStyle}>Phone</label>
                           <input
-                            placeholder="Phone Number"
+                            placeholder="Enter Mobile Number"
                             className={Classes.allInputTextStyle}
                           />
                         </form>
@@ -377,6 +350,43 @@ const LoginToggle = () => {
                 )}
               </div>
             </div>
+            <div className={Classes.line}>
+              <div
+                style={{
+                  borderBottom: "1px solid #585F67",
+                  opacity: "0.3",
+                }}
+              ></div>
+              <div className={Classes.orText}>Or login with</div>
+              <div
+                style={{
+                  borderBottom: "1px solid #585F67",
+                  opacity: "0.3",
+                }}
+              ></div>
+            </div>
+            <div className={Classes.flex}>
+              <div
+                className={Classes.SocialButtons}
+                style={{ marginBottom: "1rem" }}
+              >
+                <div className={Classes.googleButton}>
+                  <button className={Classes.buttonSocial}>
+                    <img src={GOOGLE} /> Login with Google
+                  </button>
+                </div>
+                <div className={Classes.facebookButton}>
+                  <button className={Classes.buttonSocial}>
+                    <img src={FB} /> Login with facebook
+                  </button>
+                </div>
+              </div>
+              <div style={{ display: "flex" }}>
+                <button className={Classes.buttonSocial}>
+                  <img src={APPLE} /> Login with Apple
+                </button>
+              </div>
+            </div>
             <div className={Classes.Signup}>
               <span className={Classes.bottomText}>Don’t have an account?</span>
               <span
@@ -395,11 +405,17 @@ const LoginToggle = () => {
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
                   >
-                    <Box sx={isDesk?  customTabOtpModalStyle : customDestOtpModalStyle}>
+                    <Box
+                      sx={
+                        isDesk
+                          ? customTabOtpModalStyle
+                          : customDestOtpModalStyle
+                      }
+                    >
                       <div className={Classes.otpContainer}>
                         <div style={{ textAlign: "center" }}>
                           <div>
-                            <h3 className={Classes.titleh}>OTP</h3>
+                            <h3 className={Classes.titleh} style={{paddingBottom:'10px'}}>OTP</h3>
                           </div>
                           <div>
                             <p className={Classes.titlep}>
@@ -451,7 +467,7 @@ const LoginToggle = () => {
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
                   >
-                    <Box sx={isDesk? style: styleDesk }>
+                    <Box sx={isDesk ? style : styleDesk}>
                       {/* <Typography id="modal-modal-title" variant="h6" component="h2">
           Text in a modal
         </Typography> */}
@@ -466,11 +482,18 @@ const LoginToggle = () => {
                         <div
                           style={{
                             textAlign: "center",
-                       
+
                             padding: "5px 0px",
                           }}
                         >
-                          <p style={{color:'rgba(24, 119, 242, 1)',padding:'10px 0px'}}>privacy & policy</p>
+                          <p
+                            style={{
+                              color: "rgba(24, 119, 242, 1)",
+                              padding: "10px 0px",
+                            }}
+                          >
+                            privacy & policy
+                          </p>
                         </div>
                         <div
                           style={{

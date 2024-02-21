@@ -299,6 +299,9 @@ svg.p-icon {
   border-left: none !important;
   border-right:none !important;
 }
+.css-18tvh28:focus-visible {
+  outline: none !important;
+}
 
 /* :where(.css-dev-only-do-not-override-12czi4v).ant-modal .ant-modal-footer {
   display: none !important;
