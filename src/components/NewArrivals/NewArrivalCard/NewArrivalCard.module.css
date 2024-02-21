@@ -57,6 +57,8 @@
 .PriceNew {
   font-weight: 700;
   font-size: 18px;
+  display: flex;
+  align-items: center;
 }
 .PriceOld {
   text-decoration: line-through;

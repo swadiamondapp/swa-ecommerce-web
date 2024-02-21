@@ -27,6 +27,9 @@
   font-size: 14px;
   font-family: "gilroyNormal" !important;
 }
+.Para13Privacy {
+  margin-bottom: 50px !important;
+}
 .Description p {
   font-weight: 400;
   font-size: 14px;
@@ -63,6 +66,7 @@
   font-size: 15px;
   font-family: "gilroyNormal" !important;
   margin: 15px 0px;
+  margin-top: 25px;
 }
 .Highlighted {
   font-family: "GilroyItalics" !important;
@@ -76,5 +80,11 @@
   }
   .SubText {
     padding-bottom: 10px;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 575px) {
+  .MobS1n {
+    padding-left: 10px;
   }
 }

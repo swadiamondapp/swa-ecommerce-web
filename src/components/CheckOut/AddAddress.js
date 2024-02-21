@@ -17,6 +17,7 @@ import * as Yup from "yup";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { colors } from "@mui/material";
 import { IoMdClose } from "react-icons/io";
+import home1 from "../../Assets/home1.png";
 
 function AddAddress(props) {
   const [showAddAddress, setShowAddAddress] = useState(true);
@@ -122,7 +123,8 @@ function AddAddress(props) {
               {showAddAddress && (
                 <div className={Classes.AddNewAddress1}>
                   <button onClick={handleAddNewAddressClick}>
-                    <AiOutlineHome style={{ color: "#0997E7" }} />
+                    {/* <AiOutlineHome style={{ color: "#0997E7" }} /> */}
+                    <img src={home1} />
                     Add new address
                   </button>
                 </div>

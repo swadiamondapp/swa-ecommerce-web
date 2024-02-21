@@ -8,12 +8,14 @@ function PrivacyPolicy() {
   return (
     <div>
       <div className="container">
-        <div className={Classes.Main}>
-          <h1 className={Classes.Title}>Privacy Policy</h1>
-        </div>
-        <div className={Classes.SubText}>
-          <p className={Classes.Home}>HOME /</p>
-          <div className={Classes.PrivacyPolicy}>Privacy Policy</div>
+        <div className={Classes.MobS1n}>
+          <div className={Classes.Main}>
+            <h1 className={Classes.Title}>Privacy Policy</h1>
+          </div>
+          <div className={Classes.SubText}>
+            <p className={Classes.Home}>HOME /</p>
+            <div className={Classes.PrivacyPolicy}>Privacy Policy</div>
+          </div>
         </div>
         <div className={Classes.Content}>
           <div className={Classes.Description}>
@@ -193,16 +195,16 @@ function PrivacyPolicy() {
               marketing communications. You can unsubscribe from such
               communications anytime you wish to do so.
             </p>
-            <p>
+            <p className={Classes.Para13Privacy}>
               The Website and applications may contain links which may lead you
               to other websites or other mobile applications. Please note that
               once you leave our website or applications you will be subjected
               to the Privacy Policy of the other website, mobile applications
               and this Privacy Policy will no longer apply.
             </p>
-            <div className={Classes.AgreeAccept}>
+            {/* <div className={Classes.AgreeAccept}>
               <button className={Classes.BtnAgreeAccept}>Agree & accept</button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

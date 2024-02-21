@@ -14,6 +14,7 @@ import { FadeLoader } from "react-spinners";
 import * as Urls from "../../Urls";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { Dropdown } from "primereact/dropdown";
 
 function CheckOut(props) {
   const [show, setShow] = useState(false);
@@ -28,6 +29,7 @@ function CheckOut(props) {
   const [voucherInput, setVoucherInput] = useState(false);
   const [promoId, setPromoId] = useState("");
   const [mode, setMode] = useState("P");
+  const [selectedCity, setSelectedCity] = useState(null);
 
   const [formShow, setFormShow] = useState(false);
 
@@ -365,15 +367,27 @@ function CheckOut(props) {
     );
   }
 
+  const cities = [
+    { name: "New York", code: "NY" },
+    { name: "Rome", code: "RM" },
+    { name: "London", code: "LDN" },
+    { name: "Istanbul", code: "IST" },
+    { name: "Paris", code: "PRS" },
+  ];
+
   return (
     <div>
-      <div className="container">
-        <div className="container">
+      <div className={`container ${Classes.MobCheck1}`}>
+        <div className={`container ${Classes.MobCheck1}`}>
           <div className={Classes.Main}>
             <h1 className={Classes.Title}>Your details</h1>
             <div className={Classes.SubText}>
-              <p className={`${Classes.Home} ${Classes.HomeNew}`}>HOME /</p>
-              <p className={`${Classes.Home} ${Classes.HomeNew}`}>CART /</p>
+              <p className={`${Classes.Home} ${Classes.HomeNew}`}>
+                HOME /&nbsp;
+              </p>
+              <p className={`${Classes.Home} ${Classes.HomeNew}`}>
+                CART /&nbsp;
+              </p>
               <p className={Classes.NewArrival}>CHECKOUT</p>
             </div>
           </div>
@@ -478,21 +492,15 @@ function CheckOut(props) {
                       </div>
                     </div>
 
-                    <div>
+                    <div style={{ marginBottom: "15px" }}>
                       <label>State</label>
-                      <select
-                        className={Classes.PlaceInput}
-                        value={formik.values.state}
-                        name="state"
-                        onChange={formik.handleChange}
-                      >
-                        <option value="none" disabled hidden>
-                          State*
-                        </option>
-                        <option value={"kerala"}>Kerala</option>
-                        <option value={"Karnataka"}>Karnataka</option>
-                        <option value={"TamilNadu"}>TamilNadu</option>
-                      </select>
+                      <Dropdown
+                        value={selectedCity}
+                        onChange={(e) => setSelectedCity(e.value)}
+                        options={cities}
+                        optionLabel="name"
+                        placeholder="Select a City"
+                      />
                     </div>
 
                     <div className={Classes.ParentStreetColony}>
@@ -605,7 +613,9 @@ function CheckOut(props) {
                   </div>
                 </div>
                 <div className={Classes.Voucher}>
-                  <p className={Classes.NumOfItem}>Do you have Voucher code</p>
+                  <p className={Classes.NumOfItem}>
+                    Do you have Voucher code ?
+                  </p>
                   <p className={Classes.Apply} onClick={showHandler}>
                     Apply
                   </p>
