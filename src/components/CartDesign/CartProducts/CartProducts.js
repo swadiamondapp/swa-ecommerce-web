@@ -12,7 +12,7 @@ function CartProducts(props) {
       <div className={Classes.CartItems}>
         <div className="container">
           <div className="row">
-            <div className={`${"col-md-12"} ${"col-lg-4"}`}>
+            <div className={`${"col-6 col-md-12"} ${"col-lg-4"}`}>
               <div className={Classes.Products}>
                 <img
                   className={Classes.ProductImage}
@@ -21,7 +21,7 @@ function CartProducts(props) {
                 />
               </div>
             </div>
-            <div className={`${"col-md-12"} ${"col-lg-8"}`}>
+            <div className={`${"col-6 col-md-12"} ${"col-lg-8"}`}>
               <div className={Classes.ProductDetails}>
                 {/* <p>{props.ProductName}</p> */}
                 <p>{"Diamod ring"}</p>

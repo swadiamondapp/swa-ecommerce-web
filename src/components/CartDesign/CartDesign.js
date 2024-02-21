@@ -88,11 +88,12 @@ function CartDesign(props) {
         <div className="container">
           <div className={Classes.Main}>
             <h1 className={Classes.Title}>Cart</h1>
-            <div className={Classes.SubText}>
+            <p>ITEM (2)</p>
+            {/* <div className={Classes.SubText}>
               <p className={`${Classes.Home} ${Classes.HomeNew}`}>HOME /</p>
               <p className={Classes.Home}>NEW ARRIVALS /</p>
               <p className={Classes.NewArrival}>DIAMOND RING</p>
-            </div>
+            </div> */}
           </div>
           <div className="row">
             <div className="col-md-8">
