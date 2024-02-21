@@ -187,6 +187,8 @@
   border-radius: 4px;
   color: #ffffff;
   padding: 10px 25px;
+  border: none;
+  background: #00464d;
 }
 .Submit {
   text-align: end;

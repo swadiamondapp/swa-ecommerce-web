@@ -307,6 +307,9 @@ svg.p-icon {
   outline: none !important;
 }
 
+.p-dropdown {
+  border-radius: 4px;
+}
 /* :where(.css-dev-only-do-not-override-12czi4v).ant-modal .ant-modal-footer {
   display: none !important;
 }
