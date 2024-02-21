@@ -139,4 +139,7 @@
   .Title {
     font-size: 22px;
   }
+  .child2Main {
+    display: none;
+  }
 }

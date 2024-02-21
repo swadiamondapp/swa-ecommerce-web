@@ -65,17 +65,6 @@ const AddBank = (props) => {
     };
   }, [isMobileView]);
 
-  // const handleSuccessModal = () => {
-  //   setSuccessModalOpen(true);
-  //   // You can close the success modal after a certain duration if needed
-  //   setTimeout(() => {
-  //     setSuccessModalOpen(false);
-  //   }, 1000); // Close the success modal after 3 seconds (3000 milliseconds)
-  // };
-  // const handleCloseSuccessModal = () => {
-  //   setSuccessModalOpen(false);
-  // };
-
   const handleOpen = () => {
     setOpen(true);
   };
@@ -86,7 +75,7 @@ const AddBank = (props) => {
 
   return (
     <div>
-      <Button onClick={handleOpen}>anas</Button>
+      <Button onClick={handleOpen}>anas add bank account modal</Button>
       <Modal
         // open={props.open}
         open={open}
