@@ -12,6 +12,7 @@ import { FadeLoader } from "react-spinners";
 import cartEmpty from "../../Assets/cartempty.png";
 
 import ConformModal from "../../components/confromModal/confromModal";
+import WalletModal from "../../components/WalletModal/WalletModal";
 
 const Cart = () => {
   const [cartCount, setCartCount] = useState("");
@@ -24,6 +25,7 @@ const Cart = () => {
   const [productId, setProdctId] = useState("");
   const [loading, setLoading] = useState(false);
   const [amountPay, setAmountPay] = useState("");
+  const [walletOpen, setWalletOpen] = useState(false);
   const token = localStorage.getItem("swaToken");
   useEffect(() => {
     setLoading(true);
@@ -163,7 +165,11 @@ const Cart = () => {
   } else {
     cartLists = (
       <>
-        <CartDesign amount={amountPay} cartProAmnt={selProAmnt}>
+        <CartDesign
+          amount={amountPay}
+          cartProAmnt={selProAmnt}
+          handleOpen={() => setWalletOpen(true)}
+        >
           {cartList.map((item, index) => {
             return (
               <CartProducts
@@ -239,6 +245,10 @@ const Cart = () => {
           body="Are you sure that you want to move 
         this item from the cat?"
           shows={show}
+        />
+        <WalletModal
+          open={walletOpen}
+          handleClose={() => setWalletOpen(false)}
         />
 
         {cartLists}

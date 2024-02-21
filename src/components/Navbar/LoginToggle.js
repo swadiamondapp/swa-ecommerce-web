@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import FB from "../../Assets/fb.png";
 import GOOGLE from "../../Assets/google.png";
 import APPLE from "../../Assets/apple.png";
@@ -19,11 +19,26 @@ const LoginToggle = () => {
   const [isSignup, setIsSignup] = useState(false);
   const [getOtpModal, setGetOtpModal] = useState(false);
 
-  const [isMobile, setIsMobile] = useState(
-    window.innerWidth <= 1300 && window.innerWidth >= 768
-  );
+  const [isDesk, setIsDesk] = useState(window.innerWidth >= 300 && window.innerWidth <= 575);
 
-  const [centered, setCentered] = useState(isMobile);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesk(window.innerWidth >= 300 && window.innerWidth <= 575);
+  
+    };
+
+
+    // Add event listener to listen for window resize
+    window.addEventListener("resize", handleResize);
+
+    // Remove event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [isDesk]);
+
+
+
 
   const handleSignupModalOpen = () => {
     setSignupModal(true);
@@ -46,30 +61,51 @@ const LoginToggle = () => {
   };
   const style = {
     position: "absolute",
-    bottom: centered ? "none" : "0",
-    left: centered ? "50%" : "none",
-    top: centered ? "50%" : "none",
-    width: centered ? "30%" : "100%",
-    height: centered ? "30%" : "none",
+    bottom:  0,
+    width:  "100%",
+    height: "auto" ,
     bgcolor: "background.paper",
     border: "1px solid #000",
     boxShadow: 24,
-    transform: centered ? "translate(-50%, -50%)" : "none",
-    p: 2,
+    p: 1,
+  };
+  const styleDesk = {
+    position: "absolute",
+    top:'50%',
+    left:"50%",
+    transform: "translate(-50%,-50%)",
+    width:  "25%",
+    height: "auto" ,
+    bgcolor: "background.paper",
+    border: "1px solid #000",
+    boxShadow: 24,
+    p: 1,
   };
   const customTabOtpModalStyle = {
-    position: "relative",
-    // bottom: "20%",
-    width: centered ? "30%" : "",
-    height: centered ? "auto" : "",
+    position: "absolute",
+    width: "90%",
+    height: "auto",
     left: "50%",
     top: "50%",
     transform: "translate(-50%,-50%)",
     bgcolor: "background.paper",
     border: "1px solid #000",
     boxShadow: 24,
-    p: 0,
+    p: 1,
   };
+  const customDestOtpModalStyle = {
+    position: "absolute",
+    width: "30%",
+    height: "auto",
+    left: "50%",
+    top: "50%",
+    transform: "translate(-50%,-50%)",
+    bgcolor: "background.paper",
+    border: "1px solid #000",
+    boxShadow: 24,
+    p: 1,
+  };
+
 
   const customTabOne = {
     backgroundColor: activeTab === "tab1" ? "#fff" : "#F0F0F2",
@@ -101,48 +137,7 @@ const LoginToggle = () => {
 
                   <p className={Classes.titlep}>Create your Account</p>
                 </div>
-                <div className={Classes.flex}>
-                  <div
-                    className={Classes.SocialButtons}
-                    style={{ marginBottom: "1rem" }}
-                  >
-                    <div
-                      className={Classes.googleButton}
-                      onClick={handleSignInWithGoogle}
-                    >
-                      <button className={Classes.buttonSocial}>
-                        <img src={GOOGLE} /> Login with Google
-                      </button>
-                    </div>
-                    <div className={Classes.facebookButton}>
-                      <button className={Classes.buttonSocial}>
-                        <img src={FB} /> Login with facebook
-                      </button>
-                    </div>
-                  </div>
-                  <div style={{ display: "flex" }}>
-                    <button className={Classes.buttonSocial}>
-                      <img src={APPLE} /> Login with Apple
-                    </button>
-                  </div>
-                </div>
-                <div style={{ display: "flex", marginBottom: "0.5rem" }}>
-                  <div className={Classes.line2}>
-                    <div
-                      style={{
-                        borderBottom: "1px solid #585F67",
-                        opacity: "0.3",
-                      }}
-                    ></div>
-                    <div className={Classes.orText}>or</div>
-                    <div
-                      style={{
-                        borderBottom: "1px solid #585F67",
-                        opacity: "0.3",
-                      }}
-                    ></div>
-                  </div>
-                </div>
+
                 <div className={Classes.signupInputFields}>
                   <form>
                     <div className={Classes.formgap}>
@@ -400,7 +395,7 @@ const LoginToggle = () => {
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
                   >
-                    <Box sx={customTabOtpModalStyle}>
+                    <Box sx={isDesk?  customTabOtpModalStyle : customDestOtpModalStyle}>
                       <div className={Classes.otpContainer}>
                         <div style={{ textAlign: "center" }}>
                           <div>
@@ -456,7 +451,7 @@ const LoginToggle = () => {
                     aria-labelledby="modal-modal-title"
                     aria-describedby="modal-modal-description"
                   >
-                    <Box sx={style}>
+                    <Box sx={isDesk? style: styleDesk }>
                       {/* <Typography id="modal-modal-title" variant="h6" component="h2">
           Text in a modal
         </Typography> */}
@@ -471,11 +466,11 @@ const LoginToggle = () => {
                         <div
                           style={{
                             textAlign: "center",
-                            color: "blue",
+                       
                             padding: "5px 0px",
                           }}
                         >
-                          <a>privacy & policy</a>
+                          <p style={{color:'rgba(24, 119, 242, 1)',padding:'10px 0px'}}>privacy & policy</p>
                         </div>
                         <div
                           style={{
@@ -485,7 +480,7 @@ const LoginToggle = () => {
                           }}
                         >
                           <Button
-                            className={Classes.accept}
+                            className={Classes.acceptT}
                             onClick={handleOpen}
                           >
                             Agree & login

@@ -13,6 +13,7 @@ import ReactPaginate from "react-paginate";
 import Header from "../../components/HeaderNew/Header";
 import FilterMobile from "../../components/Filter/FilterMobile";
 import Features from "../../components/Features/Features";
+import FilterModal from "../../components/LifeTImeModal/FilterModal";
 
 const NewArrivalPage = (props) => {
   const [product, setProduct] = useState([]);
@@ -413,7 +414,8 @@ const NewArrivalPage = (props) => {
                   breakLinkClassName={"page-link"}
                   activeClassName={"active"}
                 /> */}
-                <FilterMobile />
+                {/* <FilterMobile /> */}
+                <FilterModal />
               </div>
 
               <div className={Classes.DownloadOurAppImage}>

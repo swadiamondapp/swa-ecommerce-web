@@ -300,6 +300,9 @@ svg.p-icon {
 .mobRow1 {
   padding-left: 10px !important;
 }
+.nav-pills .nav-link {
+  color: #006e7f !important;
+}
 /* :where(.css-dev-only-do-not-override-12czi4v).ant-modal .ant-modal-footer {
   display: none !important;
 }

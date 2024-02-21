@@ -28,10 +28,11 @@ function CartDesign(props) {
     event.preventDefault();
   };
   const placeOrder = () => {
-    history.push({
-      pathname: "/place_order",
-      state: { data: { pay: amountPay, total: total }, name: "cart" },
-    });
+    props.handleOpen();
+    // history.push({
+    //   pathname: "/place_order",
+    //   state: { data: { pay: amountPay, total: total }, name: "cart" },
+    // });
   };
 
   const promCodeChngeHandler = (e) => {
