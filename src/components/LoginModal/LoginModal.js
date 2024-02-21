@@ -22,13 +22,12 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 400,
-  height:500,
+  height:'auto',
   bgcolor: 'background.paper',
   border: 'none',
   boxShadow: 24,
   borderRadius:'4px',
   overflowY: 'auto',
-
   p: 2,
 };
 

@@ -303,6 +303,10 @@ svg.p-icon {
 .nav-pills .nav-link {
   color: #006e7f !important;
 }
+.css-18tvh28:focus-visible {
+  outline: none !important;
+}
+
 /* :where(.css-dev-only-do-not-override-12czi4v).ant-modal .ant-modal-footer {
   display: none !important;
 }
