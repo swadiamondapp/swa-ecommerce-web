@@ -122,7 +122,9 @@ function Footer() {
                           style={{ color: "#ffff", cursor: "pointer" }}
                           key={index}
                         >
-                          {item.category}{" "}
+                          {/* {item.category}{" "} */}
+                          {item.category.charAt(0).toUpperCase() +
+                            item.category.slice(1).toLowerCase()}
                         </p>
                       );
                     })}
@@ -130,6 +132,11 @@ function Footer() {
                   <div className="col-md-4">
                     <div className={Classes.Link}>
                       {occation.slice(0, 8).map((item, index) => {
+                        const tag = item.tag || ""; // Set to empty string if tag is null or undefined
+                        const capitalizedTag =
+                          tag.charAt(0).toUpperCase() +
+                          tag.slice(1).toLowerCase();
+
                         return (
                           <p
                             className={Classes.Links}
@@ -137,7 +144,8 @@ function Footer() {
                             key={index}
                             onClick={() => occationSelHandler(item.id)}
                           >
-                            {item.tag}
+                            {/* {item.tag} */}
+                            {capitalizedTag}
                           </p>
                         );
                       })}
