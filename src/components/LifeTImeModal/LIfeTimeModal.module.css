@@ -332,4 +332,17 @@ input:checked + .CategoryListAmount + label {
     font-family: "gilroyNormal" !important;
     /* margin-bottom: 90px; */
   }
+  .b1e {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .b1e label {
+    display: grid;
+    grid-template-columns: 100px 50px;
+    margin-bottom: 0px;
+  }
+  .b1e span {
+    text-align: end;
+  }
 }

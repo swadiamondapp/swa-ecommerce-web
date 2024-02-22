@@ -7,6 +7,22 @@ import { HiBadgeCheck } from "react-icons/hi";
 import Modal from "react-bootstrap/Modal";
 import axios from "axios";
 import * as urls from "../../Urls";
+import { styled } from "@mui/material/styles";
+import Button from "@mui/material/Button";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import { FaRegImage } from "react-icons/fa6";
+
+const VisuallyHiddenInput = styled("input")({
+  clip: "rect(0 0 0 0)",
+  clipPath: "inset(50%)",
+  height: 1,
+  overflow: "hidden",
+  position: "absolute",
+  bottom: 0,
+  left: 0,
+  whiteSpace: "nowrap",
+  width: 1,
+});
 
 function Rating(props) {
   const [show, setShow] = useState(false);
@@ -14,6 +30,7 @@ function Rating(props) {
   const [review, setReview] = useState("");
   const [error, setError] = useState("");
   const token = localStorage.getItem("swaToken");
+
   const handleShow = () => {
     const body = {
       product_id: props.proid,
@@ -96,6 +113,21 @@ function Rating(props) {
             value={review}
           />
           <div className="errrMsg">{error}</div>
+          {/* file upload */}
+          <div>
+            <Button
+              component="label"
+              role={undefined}
+              variant="contained"
+              tabIndex={-1}
+              startIcon={<FaRegImage />}
+            >
+              Add Photo
+              <VisuallyHiddenInput type="file" />
+            </Button>
+          </div>
+          {/* file upload */}
+
           <div className={Classes.Submit}>
             <input
               onClick={handleShow}

@@ -3,7 +3,7 @@ import Classes from "../NewArrivalCard/NewArrivalCard.module.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { CgHeart } from "react-icons/cg";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
 import { useState } from "react";
 import { BiRupee } from "react-icons/bi";
@@ -13,6 +13,7 @@ import { IoCartOutline } from "react-icons/io5";
 import { useEffect } from "react";
 const NewArrivalCard = (props) => {
   const history = useHistory();
+  const location = useLocation();
   const [addToWishList, setAddToWishList] = useState(false);
   const [onadd, setOnAdd] = useState(true);
   const [wishId, setWishId] = useState("");
@@ -74,9 +75,11 @@ const NewArrivalCard = (props) => {
   return (
     <React.Fragment>
       <div
-        className={`${"col-md-4"} ${"col-sm-6"} ${"col-lg-3"} ${"col-6"} ${
-          Classes.NewArrivals
-        }`}
+        className={` ${
+          location.pathname === "/new_arrivel"
+            ? "col-md-4 col-sm-6 col-lg-4 col-6"
+            : "col-md-4 col-sm-6 col-lg-3 col-6"
+        } ${Classes.NewArrivals}`}
       >
         <ToastContainer />
         <div className={Classes.NewArrivalCard}>
@@ -137,6 +140,22 @@ const NewArrivalCard = (props) => {
               />
             )}
           </div> */}
+          <p className={Classes.HeartSymbol}>
+            {addToWishList ? (
+              <FaHeart
+                style={{ fontSize: "25px", color: "#F91919" }}
+                // color="#F91919"
+                className={Classes.Heart1}
+                onClick={Remove}
+              />
+            ) : (
+              <CgHeart
+                style={{ fontSize: "25px", color: "#B1C2D3" }}
+                className={Classes.Heart1}
+                onClick={Added}
+              />
+            )}
+          </p>
           {/* <div className={onadd ?[Classes.None] :[Classes.Buttons]}>
                         <button className={Classes.AddToCart} onClick={addToCart}>GO TO CART</button>
                         {addToWishList ? <FaHeart color='#ffffff' className={Classes.Heart} onClick={Remove} /> : <CgHeart color='#ffffff' className={Classes.Heart} onClick={Added}/>}

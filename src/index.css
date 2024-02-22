@@ -310,6 +310,15 @@ svg.p-icon {
 .p-dropdown {
   border-radius: 4px;
 }
+.css-sghohy-MuiButtonBase-root-MuiButton-root {
+  background: #e5eef7 !important;
+  color: #0464d5 !important;
+  box-shadow: none !important;
+  padding: 10px 15px !important;
+}
+.css-sghohy-MuiButtonBase-root-MuiButton-root:hover {
+  background: #e5eef7 !important;
+}
 /* :where(.css-dev-only-do-not-override-12czi4v).ant-modal .ant-modal-footer {
   display: none !important;
 }

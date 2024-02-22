@@ -252,20 +252,25 @@ const FilterModal = (props) => {
                               {" "}
                               <div className={classes.CategoryListMain}>
                                 <div className={classes.CategoryList}>
-                                  <input type="checkbox" />
-                                  <label>Earrings</label>
+                                  <div className={classes.b1e}>
+                                    <input type="checkbox" />
+                                    <label>
+                                      Earrings <span>43423</span>
+                                    </label>
+                                  </div>
                                 </div>
-                                <div className={classes.CategoryListAmount}>
+                                {/* <div className={classes.CategoryListAmount}>
                                   <label>2345</label>
-                                </div>
+                                </div> */}
                               </div>
                               <div className={classes.CategoryListMain}>
                                 <div className={classes.CategoryList}>
-                                  <input type="checkbox" />
-                                  <label>Earrings</label>
-                                </div>
-                                <div className={classes.CategoryListAmount}>
-                                  <label>2345</label>
+                                  <div className={classes.b1e}>
+                                    <input type="checkbox" />
+                                    <label>
+                                      Earrings <span>43423</span>
+                                    </label>
+                                  </div>
                                 </div>
                               </div>
                             </Tab.Pane>
@@ -273,38 +278,42 @@ const FilterModal = (props) => {
                               {" "}
                               <div className={classes.CategoryListMain}>
                                 <div className={classes.CategoryList}>
-                                  <input type="checkbox" />
-                                  <label>Gold</label>
-                                </div>
-                                <div className={classes.CategoryListAmount}>
-                                  <label>2345</label>
-                                </div>
-                              </div>
-                              <div className={classes.CategoryListMain}>
-                                <div className={classes.CategoryList}>
-                                  <input type="checkbox" />
-                                  <label>white gold</label>
-                                </div>
-                                <div className={classes.CategoryListAmount}>
-                                  <label>2365</label>
+                                  <div className={classes.b1e}>
+                                    <input type="checkbox" />
+                                    <label>
+                                      Gold <span>43423</span>
+                                    </label>
+                                  </div>
                                 </div>
                               </div>
                               <div className={classes.CategoryListMain}>
                                 <div className={classes.CategoryList}>
-                                  <input type="checkbox" />
-                                  <label>rose gold</label>
-                                </div>
-                                <div className={classes.CategoryListAmount}>
-                                  <label>3365</label>
+                                  <div className={classes.b1e}>
+                                    <input type="checkbox" />
+                                    <label>
+                                      white gold <span>2365</span>
+                                    </label>
+                                  </div>
                                 </div>
                               </div>
                               <div className={classes.CategoryListMain}>
                                 <div className={classes.CategoryList}>
-                                  <input type="checkbox" />
-                                  <label>platinum</label>
+                                  <div className={classes.b1e}>
+                                    <input type="checkbox" />
+                                    <label>
+                                      rose gold <span>3365</span>
+                                    </label>
+                                  </div>
                                 </div>
-                                <div className={classes.CategoryListAmount}>
-                                  <label>2365</label>
+                              </div>
+                              <div className={classes.CategoryListMain}>
+                                <div className={classes.CategoryList}>
+                                  <div className={classes.b1e}>
+                                    <input type="checkbox" />
+                                    <label>
+                                      platinum <span>2365</span>
+                                    </label>
+                                  </div>
                                 </div>
                               </div>
                             </Tab.Pane>
@@ -312,38 +321,42 @@ const FilterModal = (props) => {
                               {" "}
                               <div className={classes.CategoryListMain}>
                                 <div className={classes.CategoryList}>
-                                  <input type="checkbox" />
-                                  <label>party</label>
-                                </div>
-                                <div className={classes.CategoryListAmount}>
-                                  <label>2345</label>
-                                </div>
-                              </div>
-                              <div className={classes.CategoryListMain}>
-                                <div className={classes.CategoryList}>
-                                  <input type="checkbox" />
-                                  <label>wedding</label>
-                                </div>
-                                <div className={classes.CategoryListAmount}>
-                                  <label>2365</label>
+                                  <div className={classes.b1e}>
+                                    <input type="checkbox" />
+                                    <label>
+                                      party <span>2365</span>
+                                    </label>
+                                  </div>
                                 </div>
                               </div>
                               <div className={classes.CategoryListMain}>
                                 <div className={classes.CategoryList}>
-                                  <input type="checkbox" />
-                                  <label>birthday</label>
-                                </div>
-                                <div className={classes.CategoryListAmount}>
-                                  <label>3365</label>
+                                  <div className={classes.b1e}>
+                                    <input type="checkbox" />
+                                    <label>
+                                      wedding <span>2365</span>
+                                    </label>
+                                  </div>
                                 </div>
                               </div>
                               <div className={classes.CategoryListMain}>
                                 <div className={classes.CategoryList}>
-                                  <input type="checkbox" />
-                                  <label>engament</label>
+                                  <div className={classes.b1e}>
+                                    <input type="checkbox" />
+                                    <label>
+                                      birthday <span>3365</span>
+                                    </label>
+                                  </div>
                                 </div>
-                                <div className={classes.CategoryListAmount}>
-                                  <label>2365</label>
+                              </div>
+                              <div className={classes.CategoryListMain}>
+                                <div className={classes.CategoryList}>
+                                  <div className={classes.b1e}>
+                                    <input type="checkbox" />
+                                    <label>
+                                      engament <span>2365</span>
+                                    </label>
+                                  </div>
                                 </div>
                               </div>
                             </Tab.Pane>

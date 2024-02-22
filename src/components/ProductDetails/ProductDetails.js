@@ -261,10 +261,10 @@ const ProductDetails = (props) => {
               </div>
               <p className={Classes.SubText}>
                 {props.name} In Gold ({props.gw} gram) with Diamonds (
-                {props.diamond} gram)
+                {props.diamond}gram)
               </p>
               <p className={Classes.Code}>{props.sku}</p>
-              <div className={Classes.Flex}>
+              <div className={`${Classes.Flex} ${Classes.MobDownAR}`}>
                 <BiRupee size={25} />
                 <p className={Classes.NewPrice}>{props.offerPrice}</p>
                 {props.actualPrice !== null ? (
