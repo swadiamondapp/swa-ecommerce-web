@@ -41,7 +41,7 @@
   color: #00464d;
   border-radius: 4px;
   font-size: 14px;
-  padding: 8px 10px;
+  padding: 12px 0px;
   width: 100%;
 }
 .buyNow {
@@ -50,13 +50,15 @@
   color: #fff;
   border-radius: 4px;
   font-size: 14px;
-  padding: 8px 10px;
+  padding: 12px 0px;
   width: 100%;
 }
 
 .Price {
   display: flex;
   justify-content: center;
+  padding:20px 0px;
+  
 }
 
 .PriceNew {
@@ -112,7 +114,6 @@
 .ProductImage {
   width: 100%;
 
-  padding: 20px;
 }
 
 .NewArrivals {
@@ -141,7 +142,7 @@
 
 .HoverButton {
   position: absolute;
-  bottom: 18%;
+  bottom: 17%;
   width: 100%;
   transition: 0.8s ease;
 }
@@ -240,6 +241,7 @@
   .tryAtHome {
     font-weight: 500;
     width: 100%;
+    margin:0px 10px;
   }
   .HButton {
     opacity: 1;
@@ -264,7 +266,7 @@
   .Price {
     display: flex;
     justify-content: center;
-    padding: 0px 18px;
+    padding: 10px 0px;
   }
   .PriceNew {
     font-size: 14px;
