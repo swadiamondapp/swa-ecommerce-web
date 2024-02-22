@@ -189,8 +189,12 @@
   background: #ffffff;
   display: grid;
   margin-bottom: 20px;
-  grid-template-columns: 0.4fr 0.6fr 1.1fr;
+  grid-template-columns: 1fr 1fr;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+}
+.Revove12 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 .Remove {
@@ -371,6 +375,9 @@
   font-family: "LatoNormal" !important;
   margin-bottom: 0px;
 }
+.OverViewMobile {
+  display: none;
+}
 @media screen and (max-width: 758px) {
   .Right {
     margin-bottom: 20px;
@@ -382,5 +389,62 @@
   }
   .Main {
     margin-left: 0px;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 575px) {
+  .Wrapper {
+    padding: 0px !important;
+    overflow-x: hidden;
+  }
+  .SavedMoney {
+    font-size: 10px;
+  }
+  .ProductProperty {
+    margin-right: 47px;
+  }
+  .ProductProperty span {
+    display: none;
+  }
+  .OverView {
+    display: none;
+  }
+  .OverViewMobile {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 0px;
+    border-top: 0.5px solid #e8e9ea;
+    border-bottom: 0.5px solid #e8e9ea;
+    margin-top: 15px;
+  }
+  .ProductDetails {
+    margin-top: 0px;
+  }
+  .Delivery {
+    margin-left: 0px;
+    margin-top: 25px;
+  }
+  .RemoveMove {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .Remove {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0;
+    color: #5e666c;
+    margin: 0px;
+    justify-content: center;
+  }
+  .DummyWrap {
+    padding: 15px 0px 15px 15px;
+  }
+  .DummyGreen {
+    font-size: 12px;
+  }
+  .CartItems {
+    padding: 14px 14px 0px;
   }
 }

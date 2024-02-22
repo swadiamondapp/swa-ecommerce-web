@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Classes from "./WalletModal.module.css";
 import wallet from "../../Assets/wallet.png";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import { Button } from "@mui/material";
 
 const style = {
   position: "absolute",
@@ -19,11 +20,21 @@ const style = {
 };
 
 const WalletModal = (props) => {
+  const [open, setOpen] = useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleOpen = () => {
+    setOpen(true);
+  };
   return (
     <div>
+      <Button onClick={handleOpen}>WalletModal</Button>
       <Modal
-        open={props.open}
-        onClose={props.handleClose}
+        // open={props.open}
+        open={open}
+        // onClose={props.handleClose}
+        onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >

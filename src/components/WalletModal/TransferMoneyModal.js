@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Classes from "./WalletModal.module.css";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -6,6 +6,7 @@ import Modal from "@mui/material/Modal";
 import wallet from "../../Assets/wallet.png";
 import { PiBank } from "react-icons/pi";
 import { FaPlus } from "react-icons/fa6";
+import { Button } from "@mui/material";
 
 const style = {
   position: "absolute",
@@ -22,11 +23,19 @@ const style = {
 };
 
 const TransferMoneyModal = (props) => {
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <div>
+      <Button onClick={() => setOpen(true)}>TransferMoneyModal</Button>
       <Modal
-        open={props.open}
-        onClose={props.handleClose}
+        // open={props.open}
+        // onClose={props.handleClose}
+        open={open}
+        onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >

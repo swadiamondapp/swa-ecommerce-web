@@ -7,6 +7,8 @@ import SuccessPage from "../SuccessPage/SuccessPage.js";
 import RefundInitiated from "../RefundInitiated/RefundInitiated.js";
 import SuccessModal from "../SuccessMessageModal/SuccessModal.js";
 import AddBank from "../LifeTImeModal/AddBank";
+import TransferMoneyModal from "../WalletModal/TransferMoneyModal.js";
+import WalletModal from "../WalletModal/WalletModal.js";
 
 function NewArrivals(props) {
   const history = useHistory();
@@ -22,6 +24,8 @@ function NewArrivals(props) {
       <RefundInitiated />
       <SuccessModal />
       <AddBank />
+      <WalletModal />
+      <TransferMoneyModal />
       <div className={Classes.NewArrivals}>
         <div className={Classes.setItems}>
           <div>

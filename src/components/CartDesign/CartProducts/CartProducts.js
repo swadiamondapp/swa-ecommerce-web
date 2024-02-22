@@ -12,7 +12,11 @@ function CartProducts(props) {
       <div className={Classes.CartItems}>
         <div className="container">
           <div className="row">
-            <div className={`${"col-6 col-md-12"} ${"col-lg-4"}`}>
+            <div
+              className={`${"col-4 col-md-12"} ${"col-lg-4"} ${
+                Classes.Wrapper
+              }`}
+            >
               <div className={Classes.Products}>
                 <img
                   className={Classes.ProductImage}
@@ -21,7 +25,11 @@ function CartProducts(props) {
                 />
               </div>
             </div>
-            <div className={`${"col-6 col-md-12"} ${"col-lg-8"}`}>
+            <div
+              className={`${"col-8 col-md-12"} ${"col-lg-8"} ${
+                Classes.Wrapper
+              }`}
+            >
               <div className={Classes.ProductDetails}>
                 {/* <p>{props.ProductName}</p> */}
                 <p>{"Diamod ring"}</p>
@@ -50,7 +58,7 @@ function CartProducts(props) {
                 </p>
               ) : null}
               <p className={Classes.ProductProperty}>
-                {props.Property} &nbsp;&nbsp; | &nbsp;&nbsp;
+                {props.Property} <span>|</span>
                 {props.DiamondProperty}
               </p>
               {/* <p className={Classes.Quantity}>Quantity : {props.quanty}</p> */}
@@ -67,34 +75,42 @@ function CartProducts(props) {
           <TbTruckDelivery size={20} color="#30933A" />
           <p className={Classes.DeliveryExpected}>{props.DeliveryDate}</p>
         </div>
+        <div className={Classes.OverViewMobile}>
+          <p className={Classes.OverViewKey}>Size</p>
+          <p className={Classes.OverViewValue}>15 MM</p>
+          <p className={Classes.OverViewKey}>Colour</p>
+          <p className={Classes.OverViewValue}>Rose Gold</p>
+        </div>
       </div>
       <div className={Classes.RemoveMove}>
-        <div className={Classes.Remove}>
-          <RiDeleteBin5Line
-            size={20}
-            onClick={props.remove}
-            style={{ cursor: "pointer" }}
-          />
-          <p
-            className={Classes.Delete}
-            onClick={props.remove}
-            style={{ cursor: "pointer" }}
+        <div className={Classes.Revove12}>
+          <div className={Classes.Remove}>
+            <RiDeleteBin5Line
+              size={20}
+              onClick={props.remove}
+              style={{ cursor: "pointer" }}
+            />
+            <p
+              className={Classes.Delete}
+              onClick={props.remove}
+              style={{ cursor: "pointer" }}
+            >
+              Remove
+            </p>
+          </div>
+          <div
+            className={Classes.Remove}
+            style={{ borderLeft: "0.5px solid #E8E8E8" }}
           >
-            Remove
-          </p>
-        </div>
-        <div
-          className={Classes.Remove}
-          style={{ borderLeft: "0.5px solid #E8E8E8" }}
-        >
-          <img src={WishListTag} style={{ width: "13px" }} />
-          <p
-            className={Classes.Delete}
-            onClick={props.remove}
-            style={{ cursor: "pointer" }}
-          >
-            Move to wishList
-          </p>
+            <img src={WishListTag} style={{ width: "13px" }} />
+            <p
+              className={Classes.Delete}
+              onClick={props.remove}
+              style={{ cursor: "pointer" }}
+            >
+              Move to wishList
+            </p>
+          </div>
         </div>
         <div className={Classes.DummyWrap}>
           <IoCheckmarkCircleSharp fill="#005D67" />

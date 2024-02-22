@@ -84,8 +84,8 @@ function CartDesign(props) {
 
   return (
     <div>
-      <div className="container">
-        <div className="container">
+      <div className={`${Classes.Wrapper} container`}>
+        <div className={`${Classes.Wrapper} container`}>
           <div className={Classes.Main}>
             <h1 className={Classes.Title}>Cart</h1>
             <p>ITEM (2)</p>
