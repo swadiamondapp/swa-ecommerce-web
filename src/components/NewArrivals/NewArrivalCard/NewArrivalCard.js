@@ -73,7 +73,7 @@ const NewArrivalCard = (props) => {
 
   return (
     <React.Fragment>
-      <div
+      <div style={{margin:'10px 0px'}}
         className={`${"col-md-4"} ${"col-sm-6"} ${"col-lg-3"} ${"col-6"} ${
           Classes.NewArrivals
         }`}
