@@ -36,7 +36,7 @@
   color: #00464d;
   border-radius: 4px;
   font-size: 14px;
-  padding: 12px 0px;
+  padding: 10px 0px;
   width: 100%;
 }
 .buyNow {
@@ -45,7 +45,7 @@
   color: #fff;
   border-radius: 4px;
   font-size: 14px;
-  padding: 12px 0px;
+  padding: 10px 0px;
   width: 100%;
 }
 
@@ -137,7 +137,7 @@
 
 .HoverButton {
   position: absolute;
-  bottom: 17%;
+  bottom: 20%;
   width: 100%;
   transition: 0.8s ease;
 }
@@ -336,4 +336,56 @@
   .PriceOld {
     font-size: 14px;
   }
+}
+@media (min-width: 768px) and (max-width: 1200px) {
+  .NewArrivals {
+    margin-bottom: 10px;
+  }
+  .buyNow {
+    display: none;
+  }
+  .tryAtHome {
+    font-weight: 500;
+    width: 100%;
+  }
+  .HButton {
+    opacity: 1;
+    display: block;
+    transition: 0.4s ease;
+    padding-bottom: 15px;
+  }
+  .HoverContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column-reverse;
+  }
+  .HoverButton {
+    position: static;
+    transition: 0.8s ease;
+    /* display: flex; */
+  }
+  .NewArrivalCardSub {
+    display: flex;
+    flex-direction: column;
+  }
+  .Price {
+    display: flex;
+    justify-content: center;
+    padding: 0px 18px;
+  }
+  .PriceNew {
+    font-size: 14px;
+  }
+  .ProductImage {
+    width: 100%;
+    height: 170px;
+    padding: 0px;
+  }
+  .Rupee {
+    font-size: 16px;
+  }
+  .PriceOld {
+    font-size: 14px;
+  }
+
 }
