@@ -3,6 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import Classes from "./conformModal.module.css";
 import Button from "react-bootstrap/Button";
 import TransferMoneyModal from "../WalletModal/TransferMoneyModal";
+import { IoHeartOutline } from "react-icons/io5";
 
 export default function ConformModal(props) {
   return (
@@ -30,6 +31,7 @@ export default function ConformModal(props) {
           </div>
           <div className="col-md-6">
             <div className={Classes.movWish} onClick={props.movWish}>
+              <IoHeartOutline />
               MOVE TO WISHLIST
             </div>
           </div>

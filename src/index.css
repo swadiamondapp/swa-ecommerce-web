@@ -368,8 +368,11 @@ svg.p-icon {
 .p-dropdown-panel {
   z-index: 99999999999 !important;
 }
-.p-icon {
-  color: #006e7f;
+.dropContainer {
+  margin-top: 20px;
+}
+.dropContainer svg.p-icon {
+  color: #006e7f !important;
 }
 .ReactFlagsSelect-module_selectBtn__19wW7 {
   border: none !important;

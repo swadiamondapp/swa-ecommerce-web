@@ -176,12 +176,18 @@ function CartDesign(props) {
                     </p>
                   </div>
                 </form>
-                <input
+                {/* <input
                   className={Classes.PlaceOrderButton}
                   type="submit"
                   value="Place order"
                   onClick={placeOrder}
-                />
+                /> */}
+                <button
+                  className={Classes.PlaceOrderButton}
+                  onClick={placeOrder}
+                >
+                  Apply
+                </button>
               </div>
             </div>
           </div>

@@ -1,5 +1,13 @@
 import React, { useEffect } from "react";
 import Classes from "./PrivacyPolicy.module.css";
+import LIfeTImeModal from "../LifeTImeModal/LIfeTImeModal";
+import BuyBackRequiest from "../BuyBackRequiest/BuyBackRequiest";
+import SuccessPage from "../SuccessPage/SuccessPage.js";
+import RefundInitiated from "../RefundInitiated/RefundInitiated.js";
+import SuccessModal from "../SuccessMessageModal/SuccessModal.js";
+import AddBank from "../LifeTImeModal/AddBank";
+import TransferMoneyModal from "../WalletModal/TransferMoneyModal.js";
+import WalletModal from "../WalletModal/WalletModal.js";
 
 function PrivacyPolicy() {
   useEffect(() => {
@@ -207,6 +215,14 @@ function PrivacyPolicy() {
             </div> */}
           </div>
         </div>
+        <LIfeTImeModal />
+        <BuyBackRequiest />
+        <SuccessPage />
+        <RefundInitiated />
+        <SuccessModal />
+        <AddBank />
+        <WalletModal />
+        <TransferMoneyModal />
       </div>
     </div>
   );

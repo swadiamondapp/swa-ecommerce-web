@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Classes from "./WalletModal.module.css";
 import wallet from "../../Assets/wallet.png";
 import Box from "@mui/material/Box";
@@ -19,14 +19,45 @@ const style = {
   // p: 2,
 };
 
+const mobileStyle = {
+  position: "absolute",
+  bottom: 0,
+  transition: "transform 0.3s ease-in-out",
+  bgcolor: "background.paper",
+  border: "none",
+  boxShadow: 24,
+  borderRadius: "4px",
+  // p: 2,
+  overflow: "auto",
+  maxHeight: "85%",
+  width: "100%",
+};
+
 const WalletModal = (props) => {
   const [open, setOpen] = useState(false);
+  const [isMobileView, setIsMobileView] = useState(
+    window.innerWidth >= 300 && window.innerWidth <= 575
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileView(window.innerWidth >= 300 && window.innerWidth <= 575);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup function to remove event listener when component unmounts
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [isMobileView]);
   const handleClose = () => {
     setOpen(false);
   };
   const handleOpen = () => {
     setOpen(true);
   };
+
   return (
     <div>
       <Button onClick={handleOpen}>WalletModal</Button>
@@ -38,7 +69,7 @@ const WalletModal = (props) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={isMobileView ? mobileStyle : style}>
           <Typography>
             <div className={Classes.WalletContainer}>
               <h3>
