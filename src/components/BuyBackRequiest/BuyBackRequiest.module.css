@@ -55,7 +55,17 @@
   font-size: 14px;
   border-radius: 4px;
   padding: 8px 12px;
-  background-color: #e8e9ea;
+  background-color: #F9F9F9;
+  border: 2px solid #e8e9ea;
+}
+.alllInputFeilds:focus {
+  width: 100%;
+  border: 1px solid lightgray;
+  font-family: "gilroyNormal";
+  font-size: 14px;
+  border-radius: 4px;
+  padding: 8px 12px;
+  background-color: #F9F9F9;
   border: 2px solid #e8e9ea;
   box-shadow: 1px 4px 4px 0px rgba(0, 70, 77, 0.1) inset;
 }
@@ -173,9 +183,9 @@
     font-size: 14px;
     border-radius: 4px;
     padding: 10px 5px;
-    background-color: #e8e9ea;
+    background-color: #F9F9F9;
     border: 2px solid #e8e9ea;
-    box-shadow: 1px 4px 4px 0px rgba(0, 70, 77, 0.1) inset;
+    /* box-shadow: 1px 4px 4px 0px rgba(0, 70, 77, 0.1) inset; */
   }
   .alllInputFeilds:focus-visible {
     border: 2px solid green;
