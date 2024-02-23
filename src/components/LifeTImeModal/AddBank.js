@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { IoMdClose } from "react-icons/io";
+import { Dropdown } from "primereact/dropdown";
 
 const style = {
   position: "absolute",
@@ -47,6 +48,7 @@ const successM = {
 const AddBank = (props) => {
   // const [successModalOpen, setSuccessModalOpen] = useState(false);
   const [open, setOpen] = useState(false);
+  const [selectedCity, setSelectedCity] = useState(null);
   console.log(props.openSuccessModal);
   const [isMobileView, setIsMobileView] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
@@ -73,6 +75,13 @@ const AddBank = (props) => {
     setOpen(false);
   };
 
+  const cities = [
+    { name: "New York", code: "NY" },
+    { name: "Rome", code: "RM" },
+    { name: "London", code: "LDN" },
+    { name: "Istanbul", code: "IST" },
+    { name: "Paris", code: "PRS" },
+  ];
   return (
     <div>
       <Button onClick={handleOpen}>anas add bank account modal</Button>
@@ -102,7 +111,7 @@ const AddBank = (props) => {
                   <label>Re Enter Account number</label>
                   <input type="text" placeholder="+91 98975656785" />
                 </div>
-                <div className={classes.AccountLabels}>
+                {/* <div className={classes.AccountLabels}>
                   <label>Bank Name</label>
                   <select name="cars" id="cars">
                     <option value="Axis bank">Axis bank</option>
@@ -110,6 +119,16 @@ const AddBank = (props) => {
                     <option value="mercedes">Mercedes</option>
                     <option value="audi">Audi</option>
                   </select>
+                </div> */}
+                <div className={classes.AccountLabels}>
+                  <label>Bank Name</label>
+                  <Dropdown
+                    value={selectedCity}
+                    onChange={(e) => setSelectedCity(e.value)}
+                    options={cities}
+                    optionLabel="name"
+                    placeholder="Axis bank"
+                  />
                 </div>
                 <div className={classes.BranchIfscParent}>
                   <div className={classes.BranchAcc}>

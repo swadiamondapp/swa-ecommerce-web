@@ -308,13 +308,21 @@
   }
   .REButton {
     padding: 10px 15px;
-    font-size: 15px;
+    font-size: 14px;
   }
   .REButton2 {
-    padding: 10px 16px;
-    font-size: 15px;
+    padding: 10px 15px;
+    font-size: 14px;
   }
   .CancelProductButton {
+    justify-content: center;
+  }
+  .rgtProductDetails {
+    width: 70px;
+  }
+  .TrackButtons {
+    display: flex;
+    align-items: center;
     justify-content: center;
   }
 }
