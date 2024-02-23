@@ -346,7 +346,7 @@ const ProductDetails = (props) => {
                   className={Classes.SizeSelect}
                   onChange={sizeChangeHandler}
                 >
-                  <option value=""></option>
+                  <option value="">Select Size</option>
                   {props.sizeChart.map((item, index) => {
                     return (
                       <option value={item.id} key={index}>
@@ -583,7 +583,7 @@ const ProductDetails = (props) => {
                     <p className={Classes.Left}>Diamond Count</p>
                     <p className={Classes.Left}>Other stone weight</p>
                     <p className={Classes.Left}>Other Stone Count</p>
-                    <p className={Classes.Left}>Product Lenght</p>
+                    <p className={Classes.Left}>Product Length</p>
                     <p className={Classes.Left}>Product Width</p>
                     <p className={Classes.Left}>Product Height</p>
                   </div>

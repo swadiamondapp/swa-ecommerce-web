@@ -245,7 +245,7 @@ input:checked + .CategoryListAmount + label {
     padding-bottom: 5px;
   }
   .BranchIfscParent {
-    grid-template-columns: 165px 165px;
+    grid-template-columns: 1fr 1fr;
   }
   .FilterHeads {
     position: fixed;
@@ -344,5 +344,8 @@ input:checked + .CategoryListAmount + label {
   }
   .b1e span {
     text-align: end;
+  }
+  .BranchAcc input {
+    width: 100%;
   }
 }
