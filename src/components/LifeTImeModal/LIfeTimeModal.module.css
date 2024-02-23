@@ -4,15 +4,15 @@
 .planContainer {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  gap: 40px;
 }
 .titles {
-  padding: 5px;
+  padding-bottom: 15px;
 }
 .SubDetails {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+
   width: 100%;
 }
 .subDetialstexts {
@@ -37,6 +37,7 @@
   border-bottom: 1px solid #585f67;
   opacity: 0.2;
   width: 100%;
+  margin: 6px 0px 10px 0px;
 }
 .buttonllb {
   background-color: rgba(0, 70, 77, 1);
@@ -58,10 +59,12 @@
   opacity: 0.8;
   font-size: 14px;
   font-weight: 400;
-  padding: 10px;
+  padding: 5px;
 }
 .planSubTitle {
   padding-bottom: 5px;
+  font-weight: 600;
+  font-size: 16px;
 }
 .LabelHead {
   display: flex;
@@ -183,19 +186,22 @@ input:checked + .CategoryListAmount + label {
 }
 
 @media (min-width: 300px) and (max-width: 575px) {
+  .titles {
+    padding-bottom: 15px;
+  }
   .planContainer {
     display: flex;
     flex-direction: column;
-    /* gap:20px */
+    gap:30px
   }
   .titles {
-    padding: 0px;
+    padding-bottom: 15px;
   }
   .SubDetails {
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: 15px;
+    gap: 5px;
   }
 
   .subDetialstexts {

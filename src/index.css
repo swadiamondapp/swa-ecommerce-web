@@ -306,12 +306,18 @@ svg.p-icon {
 .css-18tvh28:focus-visible {
   outline: none !important;
 }
-/* .css-1akxbsv:focus-visible {
+.css-1akxbsv:focus-visible {
   outline: none !important;
-} */
-
+}
+.css-1fq2hn8  {
+  outline: none !important;
+}
 .p-dropdown {
   border-radius: 4px;
+}
+:where(.css-dev-only-do-not-override-f2v0nq).ant-btn-default:not(:disabled):hover{
+  color:lightgray !important;
+  border-color:lightgray !important;
 }
 /* :where(.css-dev-only-do-not-override-12czi4v).ant-modal .ant-modal-footer {
   display: none !important;

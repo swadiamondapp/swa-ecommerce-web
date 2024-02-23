@@ -122,7 +122,9 @@
 .autocompleteInput {
   padding: 4px 4px 4px 5px;
 }
+
 @media (min-width: 300px) and (max-width: 575px) {
+  
   .BuyBackContainer {
     display: flex;
     flex-direction: column;
