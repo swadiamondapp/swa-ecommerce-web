@@ -306,7 +306,12 @@ svg.p-icon {
 .css-18tvh28:focus-visible {
   outline: none !important;
 }
-
+.css-1akxbsv:focus-visible {
+  outline: none !important;
+}
+.css-1fq2hn8 {
+  outline: none !important;
+}
 .p-dropdown {
   border-radius: 4px;
 }

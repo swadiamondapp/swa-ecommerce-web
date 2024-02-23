@@ -31,7 +31,7 @@ header {
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 12px 0px 0px 0px
+  padding: 15px 0px 0px 0px
  
 }
 .LoginButton {
@@ -963,7 +963,7 @@ header {
     justify-items: center;
     align-items: center;
     flex-direction: column;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 
   }
   .flex {
@@ -971,7 +971,7 @@ header {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding:10px 0px
+    padding:0px 0px
   }
   .formInputFields {
     place-items: center;
@@ -1009,7 +1009,7 @@ header {
   }
   .tabTitleOne {
     /* padding: 9px 20px; */
-    padding: 10px 37px;
+    padding: 10px 30px;
     font-size: 14px;
     color: #111212;
     text-align: center;

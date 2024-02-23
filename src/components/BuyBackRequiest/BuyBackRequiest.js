@@ -18,7 +18,8 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: "40%",
+  width: '65%',
+  height:'auto',
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -149,7 +150,7 @@ const BuyBackRequiest = (props) => {
                   <div className={Classes.inputContainer}>
                     <label className={Classes.labelStyle}>Mobile Number</label>
                     <input
-                      placeholder="98909499999"
+                      placeholder="+91 9995200657"
                       className={Classes.alllInputFeilds}
                     />
                   </div>
@@ -280,7 +281,7 @@ const BuyBackRequiest = (props) => {
                         House number / building name
                       </label>
                       <input
-                        placeholder="Skyline"
+                        placeholder="Skyline 12B"
                         className={Classes.alllInputFeilds}
                       />
                     </div>
@@ -306,7 +307,7 @@ const BuyBackRequiest = (props) => {
                   <div className={Classes.confirmButtonContianer}>
                     <div className={Classes.buttonsWIdth}>
                       <button type="button" className={Classes.confirmButton}>
-                        CONFIRM BUY REQUEST
+                      CONFIRM BUYBACK REQUEST
                       </button>
                     </div>
                   </div>
