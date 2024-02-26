@@ -18,6 +18,14 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import * as Urls from "../../Urls";
 import { Accordion, AccordionTab } from "primereact/accordion";
+import LIfeTImeModal from "../LifeTImeModal/LIfeTImeModal";
+import BuyBackRequiest from "../BuyBackRequiest/BuyBackRequiest";
+import SuccessPage from "../SuccessPage/SuccessPage.js";
+import RefundInitiated from "../RefundInitiated/RefundInitiated.js";
+import SuccessModal from "../SuccessMessageModal/SuccessModal.js";
+import AddBank from "../LifeTImeModal/AddBank";
+import TransferMoneyModal from "../WalletModal/TransferMoneyModal.js";
+import WalletModal from "../WalletModal/WalletModal.js";
 
 function Footer() {
   const [catgSet, setCatgSet] = useState([]);
@@ -228,6 +236,14 @@ function Footer() {
                 jewellers who deal only in gold jewellery are reluctant to add
                 diamond jewellery to their stock due to certain factors
               </p>
+              <LIfeTImeModal />
+              <BuyBackRequiest />
+              <SuccessPage />
+              <RefundInitiated />
+              <SuccessModal />
+              <AddBank />
+              <WalletModal />
+              <TransferMoneyModal />
             </AccordionTab>
 
             <AccordionTab header="Policies">

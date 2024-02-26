@@ -60,7 +60,9 @@ const WalletModal = (props) => {
 
   return (
     <div>
-      <Button onClick={handleOpen}>WalletModal</Button>
+      <Button onClick={handleOpen} style={{ color: "#ffff" }}>
+        WalletModal
+      </Button>
       <Modal
         // open={props.open}
         open={open}
@@ -79,7 +81,7 @@ const WalletModal = (props) => {
             </div>
             {/* <div className={Classes.BorderLine}></div> */}
             <div className={Classes.AmountCheckContainer}>
-              <div className={Classes.ContentLines}>
+              <div className={Classes.WalletContentLines}>
                 <div className={Classes.Content}>
                   <input type="checkbox" />
                   <img src={wallet} />
@@ -87,7 +89,7 @@ const WalletModal = (props) => {
                 </div>
                 <p className={Classes.Amount}>&#x20B9; 564</p>
               </div>
-              <div className={Classes.ContentLines}>
+              <div className={Classes.WalletContentLines}>
                 <div className={Classes.Content}>
                   <input type="checkbox" />
                   <img src={wallet} />

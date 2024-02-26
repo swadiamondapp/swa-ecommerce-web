@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import SuccessTick from "../../Assets/successTick.png";
-import closeButton from "../../Assets/closeModal.png"
+import closeButton from "../../Assets/closeModal.png";
 
 const style = {
   position: "absolute",
@@ -17,7 +17,7 @@ const style = {
   border: "none",
   boxShadow: 24,
   borderRadius: "4px",
-  p: 3
+  p: 3,
 };
 
 const mobileStyle = {
@@ -86,7 +86,7 @@ const LIfeTImeModal = (props) => {
 
   return (
     <div>
-      <Button onClick={handleOpen}>
+      <Button onClick={handleOpen} style={{ color: "#ffff" }}>
         return or exchange of a delivered product
       </Button>
       <Modal
@@ -96,8 +96,14 @@ const LIfeTImeModal = (props) => {
         onClose={handleClose}
       >
         <Box sx={isMobileView ? mobileStyle : style}>
-        <Button style={{position:'absolute',top: 0, right: 0, margin: '8px'}}  onClick={handleClose} className={classes.bbCLoseButton}><img src={closeButton}/></Button>
-          
+          <Button
+            style={{ position: "absolute", top: 0, right: 0, margin: "8px" }}
+            onClick={handleClose}
+            className={classes.bbCLoseButton}
+          >
+            <img src={closeButton} />
+          </Button>
+
           <Typography>
             <div className={classes.Container}>
               <div className={classes.planContainer}>
@@ -107,7 +113,6 @@ const LIfeTImeModal = (props) => {
                       Lifetime Exchange
                       <br /> ( approximate . estimate)
                     </span>
-                    
                   </div>
                   <div className={classes.SubDetails}>
                     <div className={classes.subDetialstexts}>
@@ -152,15 +157,15 @@ const LIfeTImeModal = (props) => {
                   </div>
                   <div className={classes.SubDetails}>
                     <div className={classes.subDetialstexts}>
-                      <span className={classes.labelText}>
-                        Purchase Value{" "}
-                      </span>
+                      <span className={classes.labelText}>Purchase Value </span>
 
                       <span className={classes.textAmount}>$678</span>
                     </div>
                     <div className={classes.line}></div>
                     <div className={classes.subDetialstexts}>
-                      <span className={classes.labelText}>Deduction Value </span>
+                      <span className={classes.labelText}>
+                        Deduction Value{" "}
+                      </span>
 
                       <span className={classes.textAmount}>$34</span>
                     </div>
@@ -188,7 +193,7 @@ const LIfeTImeModal = (props) => {
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             <div className={classes.noteTitle}>
-              <span style={{fontWeight:'600',fontSize:'14px'}}>Note:</span>
+              <span style={{ fontWeight: "600", fontSize: "14px" }}>Note:</span>
               <span className={classes.noteContent}>
                 1. buyback with 15 days of delivery will be 100% of your money
                 will be refunded

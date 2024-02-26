@@ -5,6 +5,7 @@ import { FiBell } from "react-icons/fi";
 import { IoCartOutline } from "react-icons/io5";
 import LoginToggle from "./LoginToggle";
 import Classes from "./MobileNav.module.css";
+import { loginHandler } from "../LoginModal/LoginModal";
 
 const MobileNavbar = () => {
   const [isHamOpen, setIsHamOpen] = useState(false);
@@ -36,7 +37,12 @@ const MobileNavbar = () => {
           </div>
           <div className={Classes.rightIcons}>
             <div>
-              <FiBell className={Classes.Icon} color="#FFFFFF" size={25} />
+              <FiBell
+                className={Classes.Icon}
+                color="#FFFFFF"
+                size={25}
+                onClick={loginHandler}
+              />
             </div>
             <div>
               <IoCartOutline
@@ -50,12 +56,8 @@ const MobileNavbar = () => {
         </header>
         {isHamOpen ? (
           <>
-            <div
-              className={Classes.SlideButto}
-            >
+            <div className={Classes.SlideButto}>
               <LoginToggle />
-              
-
             </div>
           </>
         ) : (

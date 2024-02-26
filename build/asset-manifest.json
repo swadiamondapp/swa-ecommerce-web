@@ -1,12 +1,12 @@
 {
-  "main.css": "/static/css/main.d3cdc8e9.chunk.css",
-  "main.js": "/static/js/main.668ae1c8.chunk.js",
-  "main.js.map": "/static/js/main.668ae1c8.chunk.js.map",
+  "main.css": "/static/css/main.4a98517a.chunk.css",
+  "main.js": "/static/js/main.dcc35a2b.chunk.js",
+  "main.js.map": "/static/js/main.dcc35a2b.chunk.js.map",
   "static/js/1.a4bf817a.chunk.js": "/static/js/1.a4bf817a.chunk.js",
   "static/js/1.a4bf817a.chunk.js.map": "/static/js/1.a4bf817a.chunk.js.map",
   "static/css/2.da85efcc.chunk.css": "/static/css/2.da85efcc.chunk.css",
-  "static/js/2.bdd003ce.chunk.js": "/static/js/2.bdd003ce.chunk.js",
-  "static/js/2.bdd003ce.chunk.js.map": "/static/js/2.bdd003ce.chunk.js.map",
+  "static/js/2.d1682464.chunk.js": "/static/js/2.d1682464.chunk.js",
+  "static/js/2.d1682464.chunk.js.map": "/static/js/2.d1682464.chunk.js.map",
   "runtime~main.js": "/static/js/runtime~main.1f5ba5b0.js",
   "runtime~main.js.map": "/static/js/runtime~main.1f5ba5b0.js.map",
   "static/media/DownloadOurApp.module.css": "/static/media/downBg.8bc6d350.png",
@@ -34,8 +34,8 @@
   "static/media/ShopOnBudget4.png": "/static/media/ShopOnBudget4.27a1f607.png",
   "static/media/DownloadOurApp.png": "/static/media/DownloadOurApp.aea49ef9.png",
   "static/css/2.da85efcc.chunk.css.map": "/static/css/2.da85efcc.chunk.css.map",
-  "static/css/main.d3cdc8e9.chunk.css.map": "/static/css/main.d3cdc8e9.chunk.css.map",
+  "static/css/main.4a98517a.chunk.css.map": "/static/css/main.4a98517a.chunk.css.map",
   "index.html": "/index.html",
-  "precache-manifest.e11d3c21427f30d5dda6c8dce4bd1594.js": "/precache-manifest.e11d3c21427f30d5dda6c8dce4bd1594.js",
+  "precache-manifest.1035976e5da19f4ca82a96c6b38adde1.js": "/precache-manifest.1035976e5da19f4ca82a96c6b38adde1.js",
   "service-worker.js": "/service-worker.js"
 }

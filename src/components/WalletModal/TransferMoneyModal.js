@@ -31,7 +31,9 @@ const TransferMoneyModal = (props) => {
 
   return (
     <div>
-      <Button onClick={() => setOpen(true)}>TransferMoneyModal</Button>
+      <Button onClick={() => setOpen(true)} style={{ color: "#ffff" }}>
+        TransferMoneyModal
+      </Button>
       <Modal
         // open={props.open}
         // onClose={props.handleClose}
@@ -48,7 +50,7 @@ const TransferMoneyModal = (props) => {
             <div className={Classes.AmountCheckContainer}>
               <div
                 className={Classes.ContentLines}
-                style={{ marginTop: "20px" }}
+                // style={{ marginTop: "20px" }}
               >
                 <div className={Classes.Content}>
                   <PiBank className={Classes.Bank} />

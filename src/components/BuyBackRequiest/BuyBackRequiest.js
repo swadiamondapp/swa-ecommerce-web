@@ -18,8 +18,8 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: '65%',
-  height:'auto',
+  width: "65%",
+  height: "auto",
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -121,7 +121,9 @@ const BuyBackRequiest = (props) => {
 
   return (
     <div>
-      <Button onClick={handleOpen}>BuyBackRequiest</Button>
+      <Button onClick={handleOpen} style={{ color: "#ffff" }}>
+        BuyBackRequiest
+      </Button>
       <Modal
         // open={props.open}
         open={open}
@@ -307,7 +309,7 @@ const BuyBackRequiest = (props) => {
                   <div className={Classes.confirmButtonContianer}>
                     <div className={Classes.buttonsWIdth}>
                       <button type="button" className={Classes.confirmButton}>
-                      CONFIRM BUYBACK REQUEST
+                        CONFIRM BUYBACK REQUEST
                       </button>
                     </div>
                   </div>

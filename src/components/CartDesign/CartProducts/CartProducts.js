@@ -67,6 +67,7 @@ function CartProducts(props) {
                 <p className={Classes.OverViewValue}>15 MM</p>
                 <p className={Classes.OverViewKey}>Colour</p>
                 <p className={Classes.OverViewValue}>Rose Gold</p>
+                <div className={Classes.OverViewColor}></div>
               </div>
             </div>
           </div>
@@ -80,6 +81,7 @@ function CartProducts(props) {
           <p className={Classes.OverViewValue}>15 MM</p>
           <p className={Classes.OverViewKey}>Colour</p>
           <p className={Classes.OverViewValue}>Rose Gold</p>
+          <div className={Classes.OverViewColor}></div>
         </div>
       </div>
       <div className={Classes.RemoveMove}>

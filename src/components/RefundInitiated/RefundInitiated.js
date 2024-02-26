@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import InvertedTick from "../../Assets/invertedTick.png";
-import Classes from './RefundInitiated.module.css'
+import Classes from "./RefundInitiated.module.css";
 
 const successM = {
   position: "absolute",
@@ -43,7 +43,9 @@ const SuccessPage = () => {
 
   return (
     <div>
-      <Button onClick={handleOpen}>open RefundInitiated Modal</Button>
+      <Button onClick={handleOpen} style={{ color: "#ffff" }}>
+        open RefundInitiated Modal
+      </Button>
       <Modal open={open} onClose={handleClose}>
         <Box
           sx={successM}
@@ -55,8 +57,15 @@ const SuccessPage = () => {
             <div>
               <img src={InvertedTick} />
             </div>
-            <div style={{ textAlign: "center", margin:'12px 0px', display:'flex', flexDirection:'column'}}>
-                <span className={Classes.title}>Refund initiated</span>
+            <div
+              style={{
+                textAlign: "center",
+                margin: "12px 0px",
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <span className={Classes.title}>Refund initiated</span>
               <span className={Classes.titlesuccesModal}>
                 Thank you your cancelation <br />
                 has been approved

@@ -101,7 +101,9 @@ const FilterModal = (props) => {
     <div>
       <div className={classes.FilterHeads}>
         <div className={classes.FilterMobiles}>
-          <Button onClick={handleOpen}>Price</Button>
+          <Button onClick={handleOpen} style={{ color: "#ffff" }}>
+            Price
+          </Button>
           <Modal
             // open={props.open}
             open={open}

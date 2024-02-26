@@ -133,7 +133,7 @@ const OrderHistorypage2 = (props) => {
     <div>
       <div className={Classes.Background}>
         <Header countCartItems={cartCount} />
-        <LIfeTImeModal open={open} handleClose={() => setOpen(false)} />
+        {/* <LIfeTImeModal open={open} handleClose={() => setOpen(false)} />
         <BuyBackRequiest
           open={buyBackOpen}
           handleClose={() => setBuyBackOpen(false)}
@@ -150,7 +150,7 @@ const OrderHistorypage2 = (props) => {
         <TransferMoneyModal
           open={transferModalOpen}
           handleClose={() => setTransferModalOpen(false)}
-        />
+        /> */}
         <div>
           <div className={`container ${Classes.OrderMobCont}`}>
             <div className={`container ${Classes.OrderMobCont2}`}>
