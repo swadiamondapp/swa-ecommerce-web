@@ -145,14 +145,14 @@ const OrderHistorypage2 = (props) => {
           open={successModalOpen}
           handleClose={() => setSuccessModalOpen(false)}
         />
+        <TransferMoneyModal
+        open={transferModalOpen}
+        handleClose={() => setTransferModalOpen(false)}
+      /> */}
         <CancelProductModal
           open={cancelProductModal}
           handleClose={() => setCancelProductModal(false)}
         />
-        <TransferMoneyModal
-          open={transferModalOpen}
-          handleClose={() => setTransferModalOpen(false)}
-        /> */}
         <div>
           <div className={`container ${Classes.OrderMobCont}`}>
             <div className={`container ${Classes.OrderMobCont2}`}>

@@ -52,7 +52,7 @@ const Payment = (props) => {
 
                 <p className={Classes.Amount}>
                   {/* <BiRupee /> */}
-                  {"54000"}
+                  &#x20B9; {"54000"}
                 </p>
               </div>
               <div
@@ -68,7 +68,7 @@ const Payment = (props) => {
 
                 <p className={Classes.Amount}>
                   {/* <BiRupee /> */}
-                  {"54000"}
+                  &#x20B9; {"54000"}
                 </p>
               </div>
               <div className={Classes.PayButton}>Pay 54,000</div>
