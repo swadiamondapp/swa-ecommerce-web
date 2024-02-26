@@ -87,18 +87,17 @@ function CartDesign(props) {
       <div className={`${Classes.Wrapper} container`}>
         <div className={`${Classes.Wrapper} container`}>
           <div className={Classes.Main}>
-            <h1 className={Classes.Title}>Cart</h1>
-            <p>ITEM (2)</p>
-            {/* <div className={Classes.SubText}>
-              <p className={`${Classes.Home} ${Classes.HomeNew}`}>HOME /</p>
-              <p className={Classes.Home}>NEW ARRIVALS /</p>
-              <p className={Classes.NewArrival}>DIAMOND RING</p>
-            </div> */}
+            <div>
+              <h1 className={Classes.Title}>Cart</h1>
+              <p>ITEM (2)</p>
+            </div>
+            <div className={Classes.SubText}>STEP 1/ 3</div>
           </div>
-          <div className="row">
+          <div className="row" style={{ paddingTop: "10px" }}>
             <div className="col-md-8">
               <div className={Classes.Left}>{props.children}</div>
             </div>
+            <p className={Classes.OrderSummeryMob}>ORDER SUMMERY</p>
             <div className="col-md-4">
               <div className={Classes.Right}>
                 <p className={Classes.OrderSummery}>ORDER SUMMERY</p>
@@ -136,7 +135,7 @@ function CartDesign(props) {
                   <p className={Classes.NumOfItem}>Do you have Voucher code</p>
                 </div>
                 <form onSubmit={handleSubmit} autoComplete="off">
-                  <div className="d-flex">
+                  <div className={Classes.SubmitContainer}>
                     <input
                       className={Classes.Input}
                       type="text"
@@ -148,6 +147,7 @@ function CartDesign(props) {
                     <input
                       className={Classes.ApplyButton}
                       type="submit"
+                      value="Apply"
                       // onClick={promoCodeHandler}
                     />
                   </div>
@@ -182,6 +182,12 @@ function CartDesign(props) {
                   value="Place order"
                   onClick={placeOrder}
                 />
+                {/* <button
+                  className={Classes.PlaceOrderButton}
+                  onClick={placeOrder}
+                >
+                  Apply
+                </button> */}
               </div>
             </div>
           </div>

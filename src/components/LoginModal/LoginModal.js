@@ -9,29 +9,53 @@ import * as country from "../../countryList";
 import ReactFlagsSelect from "react-flags-select";
 import { useHistory } from "react-router-dom";
 import Success from "../../Assets/sucesLarge.png";
-import LoginToggle from "../Navbar/LoginToggle.js"
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
-
+import LoginToggle from "../Navbar/LoginToggle.js";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
 
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  height:'auto',
-  bgcolor: 'background.paper',
-  border: 'none',
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 375,
+  height: "80%",
+  bgcolor: "background.paper",
+  border: "none",
   boxShadow: 24,
-  borderRadius:'4px',
-  overflowY: 'auto',
+  borderRadius: "4px",
+  overflowY: "auto",
   p: 2,
 };
 
+export const loginHandler = () => {
+  const body = {
+    username: 9946787586,
+    password: "Theja@123",
+  };
+  axios
+    .post(urls.Login, body)
+    .then((response) => {
+      if (response.data.results.status_code === 200) {
+        localStorage.setItem("swaToken", response.data.results.token);
+        localStorage.setItem("userName", response.data.results.data.name);
+        localStorage.setItem(
+          "phoneNumber",
+          response.data.results.data.phone_number
+        );
 
+        // props.logAct(response.data.results.token);
+        // handleClose();
+      } else if (response.data.results.status_code === 401) {
+        // setLoginError("Incorrect username or password!");
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 
 const LoginModal = (props) => {
   const [show, setShow] = useState(false);
@@ -58,35 +82,34 @@ const LoginModal = (props) => {
   const [forgotError, setForfotError] = useState("");
   const [createError, setCreateError] = useState("");
 
-
   const [error, setError] = useState("");
   const history = useHistory();
-  const loginHandler = () => {
-    const body = {
-      username: phoneNumber,
-      password: loginPassword,
-    };
-    axios
-      .post(urls.Login, body)
-      .then((response) => {
-        if (response.data.results.status_code === 200) {
-          localStorage.setItem("swaToken", response.data.results.token);
-          localStorage.setItem("userName", response.data.results.data.name);
-          localStorage.setItem(
-            "phoneNumber",
-            response.data.results.data.phone_number
-          );
+  // export const loginHandler = () => {
+  //   const body = {
+  //     username: phoneNumber,
+  //     password: loginPassword,
+  //   };
+  //   axios
+  //     .post(urls.Login, body)
+  //     .then((response) => {
+  //       if (response.data.results.status_code === 200) {
+  //         localStorage.setItem("swaToken", response.data.results.token);
+  //         localStorage.setItem("userName", response.data.results.data.name);
+  //         localStorage.setItem(
+  //           "phoneNumber",
+  //           response.data.results.data.phone_number
+  //         );
 
-          props.logAct(response.data.results.token);
-          handleClose();
-        } else if (response.data.results.status_code === 401) {
-          setLoginError("Incorrect username or password!");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  //         props.logAct(response.data.results.token);
+  //         handleClose();
+  //       } else if (response.data.results.status_code === 401) {
+  //         setLoginError("Incorrect username or password!");
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
   useEffect(() => {
     if (props.isLog) {
       setShow(true);
@@ -194,7 +217,7 @@ const LoginModal = (props) => {
         }
       });
   };
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("9946787586");
   const [phoneNumberError, setPhoneNumberError] = useState("");
   const validatePhoneNumber = (number) => {
     const phoneRegex = /^\d{10}$/; // regex to match 10-digit phone number
@@ -261,7 +284,7 @@ const LoginModal = (props) => {
     }
   };
 
-  const [loginPassword, setLoginPassword] = useState("");
+  const [loginPassword, setLoginPassword] = useState("Theja@123");
   const [loginPasswordError, setLoginPasswordError] = useState("");
   const validateLoginPassword = () => {
     if (loginPassword.length < 8) {
@@ -500,20 +523,18 @@ const LoginModal = (props) => {
         </div>
       </div>
 
-
       <Modal
-      open = {show}
+        open={show}
         onClose={handleClose}
         animation={false}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          
           <Typography>
-          <div  >
-          <LoginToggle/>
-         </div>
+            <div>
+              <LoginToggle />
+            </div>
           </Typography>
         </Box>
       </Modal>

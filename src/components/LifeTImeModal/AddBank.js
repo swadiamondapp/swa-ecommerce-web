@@ -84,7 +84,9 @@ const AddBank = (props) => {
   ];
   return (
     <div>
-      <Button onClick={handleOpen}>anas add bank account modal</Button>
+      <Button onClick={handleOpen} style={{ color: "#ffff" }}>
+        anas add bank account modal
+      </Button>
       <Modal
         // open={props.open}
         open={open}

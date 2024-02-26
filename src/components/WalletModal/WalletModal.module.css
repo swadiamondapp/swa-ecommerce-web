@@ -5,11 +5,18 @@
   color: #0d1217;
   margin-bottom: 0px;
   padding: 15px;
+  border-bottom: 0.5px solid #e5e5e5;
 }
+
 .ContentLines {
   display: flex;
   justify-content: space-between;
-  padding: 0px 15px;
+  padding: 15px 30px 0px 15px;
+}
+.WalletContentLines {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 30px 15px 15px;
 }
 .Phone {
   padding: 0px 50px 15px;
@@ -42,7 +49,7 @@
   gap: 30px;
   align-items: center;
   justify-content: center;
-  padding: 10px 5px 10px 5px;
+  padding: 15px;
 }
 .Cancel {
   text-align: center;
@@ -76,7 +83,7 @@
   background: #00464d;
   color: #ffffff;
   padding: 10px 20px;
-  margin: 15px;
+  margin: 25px 15px 15px;
   border-radius: 4px;
   font-family: "LatoRegular";
   font-size: 14px;
@@ -114,17 +121,15 @@
   cursor: pointer;
 }
 
-.DropContainer {
-  margin-top: 20px;
-}
-
 .TextArea {
   width: 100%;
   border-radius: 4px;
   margin-top: 10px;
   border: 1px solid #e8e9ea;
-  background: linear-gradient(0deg, #e8e9ea, #e8e9ea),
-    linear-gradient(0deg, #f9f9f9, #f9f9f9);
+  background: #f9f9f9;
+  border: 1px solid #e8e9ea;
+  outline: none;
+  padding: 10px;
 }
 
 .CancelButton {
@@ -159,5 +164,9 @@
   }
   .CancelButton button {
     width: 100%;
+  }
+  .TextArea::placeholder {
+    font-size: 14px;
+    padding-left: 0px;
   }
 }

@@ -315,7 +315,12 @@ svg.p-icon {
 .css-18tvh28:focus-visible {
   outline: none !important;
 }
-
+.css-1akxbsv:focus-visible {
+  outline: none !important;
+}
+.css-1fq2hn8 {
+  outline: none !important;
+}
 .p-dropdown {
   border-radius: 4px;
 }
@@ -393,8 +398,11 @@ svg.p-icon {
 .p-dropdown-panel {
   z-index: 99999999999 !important;
 }
-.p-icon {
-  color: #006e7f;
+.dropContainer {
+  margin-top: 20px;
+}
+.dropContainer svg.p-icon {
+  color: #006e7f !important;
 }
 .ReactFlagsSelect-module_selectBtn__19wW7 {
   border: none !important;

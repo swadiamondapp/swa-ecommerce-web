@@ -92,7 +92,7 @@ const LoginToggle = () => {
   };
   const customDestOtpModalStyle = {
     position: "absolute",
-    width: "25%",
+    width: "30%",
     height: "auto",
     left: "50%",
     top: "50%",
@@ -234,7 +234,7 @@ const LoginToggle = () => {
             <div className={Classes.SlideButton}>
               <div className={Classes.LoginContainer}>
                 <div className={Classes.title}>
-                  <div style={{ paddingBottom: "10px" }}>
+                  <div style={{ }}>
                     <h3 className={Classes.titleh}>Welcome back</h3>
                   </div>
                   <div className={Classes.signupTitleText}>
@@ -257,7 +257,6 @@ const LoginToggle = () => {
                     )}
                   </div>
                 </div>
-
                 <div className={Classes.TabButton}>
                   <div className={Classes.tabHeader}>
                     <div className={Classes.active} style={customTabOne}>
@@ -303,7 +302,7 @@ const LoginToggle = () => {
                     <div>
                       <div className={Classes.loginFormInput}>
                         <form style={{}}>
-                          <label className={Classes.labelStyle}>Phone</label>
+                          <label className={Classes.labelStyle}>Mobile Number</label>
                           <input
                             placeholder="Enter Mobile Number"
                             className={Classes.allInputTextStyle}
@@ -318,7 +317,7 @@ const LoginToggle = () => {
                         <form>
                           <label className={Classes.labelStyle}>Email</label>
                           <input
-                            placeholder="Email"
+                            placeholder="Enter Email address"
                             className={Classes.allInputTextStyle}
                           />
                         </form>
@@ -382,7 +381,7 @@ const LoginToggle = () => {
                 </div>
               </div>
               <div style={{ display: "flex" }}>
-                <button className={Classes.buttonSocial}>
+                <button style={{paddingBottom:'4px'}} className={Classes.buttonSocial}>
                   <img src={APPLE} /> Login with Apple
                 </button>
               </div>

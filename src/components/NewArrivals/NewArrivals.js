@@ -18,14 +18,6 @@ function NewArrivals(props) {
 
   return (
     <div>
-      <LIfeTImeModal />
-      <BuyBackRequiest />
-      <SuccessPage />
-      <RefundInitiated />
-      <SuccessModal />
-      <AddBank />
-      <WalletModal />
-      <TransferMoneyModal />
       <div className={Classes.NewArrivals}>
         <div className={Classes.setItems}>
           <div>

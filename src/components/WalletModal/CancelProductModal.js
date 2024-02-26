@@ -78,16 +78,17 @@ const CancelProductModal = (props) => {
                   onClick={props.handleClose}
                 />
               </div>
-              <div className={Classes.DropContainer}>
+              <div className="dropContainer">
                 <Dropdown
                   value={selectedCity}
                   onChange={(e) => setSelectedCity(e.value)}
                   options={cities}
                   optionLabel="name"
-                  placeholder="Select a City"
+                  placeholder="Select Reason"
                 />
               </div>
               <textarea
+                placeholder="Any think to tell to us"
                 cols={50}
                 rows={8}
                 className={Classes.TextArea}

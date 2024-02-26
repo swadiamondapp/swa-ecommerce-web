@@ -1,14 +1,22 @@
 .Title {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 24px;
+  margin-bottom: 0px;
   font-family: "PlayFairNormal" !important;
 }
 
 .Main {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   margin-top: 20px;
-  margin-left: 20px;
+  align-items: center;
+}
+
+.Main p {
+  color: #01b3c5;
+  font-family: "LatoRegular";
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .Number {
@@ -21,10 +29,10 @@
 }
 
 .SubText {
-  display: flex;
-
-  font-size: 14px;
-  font-family: "gilroyNormal" !important;
+  font-family: "LatoRegular";
+  font-size: 24px;
+  font-weight: 600;
+  color: #0d1217;
 }
 
 .Home {
@@ -43,7 +51,7 @@
 
 .CartItems {
   /* margin: 20px; */
-  border: 1px solid black;
+  /* border: 1px solid black; */
   padding: 14px;
   background: #ffffff;
   border: 0.5px solid #e8e8e8;
@@ -177,6 +185,12 @@
   /* margin-top: 15px; */
 }
 
+.OverViewColor {
+  height: 15px;
+  width: 15px;
+  background-color: #d49da1;
+}
+
 .DeliveryExpected {
   font-weight: 400;
   font-size: 12px;
@@ -297,9 +311,13 @@
   font-size: 16px;
   color: #1e1e1e;
   font-family: "gilroyNormal" !important;
-  width: 60%;
+  width: 100%;
   height: 50px;
   /* margin-right: 5px;*/
+}
+.SubmitContainer {
+  display: flex;
+  gap: 5px;
 }
 .ApplyButton {
   background: linear-gradient(180deg, #978958 0%, #aea174 82.81%);
@@ -318,7 +336,7 @@
   padding-bottom: 2px;
 }
 .PlaceOrderButton {
-  background: #19242d;
+  background: #00464d;
   border-radius: 4px;
   padding: 10px 0 10px 0;
   font-weight: 600;
@@ -343,6 +361,7 @@
 }
 .OverView {
   display: flex;
+  align-items: center;
   gap: 15px;
   margin-top: 15px;
 }
@@ -378,6 +397,9 @@
 .OverViewMobile {
   display: none;
 }
+.OrderSummeryMob {
+  display: none;
+}
 @media screen and (max-width: 758px) {
   .Right {
     margin-bottom: 20px;
@@ -386,9 +408,19 @@
 @media screen and (max-width: 575px) {
   .CartItems {
     margin: 0px;
+    border: none;
   }
   .Main {
-    margin-left: 0px;
+    display: flex;
+    padding: 10px 15px 0px;
+    margin: 0px;
+    justify-content: space-between;
+  }
+  .SubText {
+    font-size: 18px;
+  }
+  .Title {
+    font-size: 20px;
   }
 }
 
@@ -445,6 +477,20 @@
     font-size: 12px;
   }
   .CartItems {
+    border: none;
     padding: 14px 14px 0px;
+  }
+  .OrderSummery {
+    display: none;
+  }
+  .OrderSummeryMob {
+    display: block;
+    font-family: "LatoRegular";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: 0.02em;
+    padding: 0px 20px 17px 25px !important;
+    color: #5e666c;
   }
 }

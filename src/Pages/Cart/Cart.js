@@ -246,10 +246,10 @@ const Cart = () => {
         this item from the cat?"
           shows={show}
         />
-        <WalletModal
+        {/* <WalletModal
           open={walletOpen}
           handleClose={() => setWalletOpen(false)}
-        />
+        /> */}
 
         {cartLists}
 

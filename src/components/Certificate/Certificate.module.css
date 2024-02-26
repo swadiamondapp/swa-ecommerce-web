@@ -9,7 +9,8 @@
 }
 .YTVideo {
   width: 100%;
-  height: 323px;
+  /* height: 100%; */
+  height: 378px;
 }
 @media screen and (max-width: 1200px) {
   .Certificates {
