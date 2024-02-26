@@ -57,6 +57,10 @@
   font-family: "gilroyNormal" !important;
   margin-bottom: 9px !important;
 }
+.PolicyLinks {
+
+}
+
 .Link {
   margin-top: 80px;
 }
@@ -168,6 +172,10 @@
   .Link {
     margin-top: 0px;
   }
+  .PolicyLinks {
+   
+  }
+ 
   .Title {
     padding-left: 0px !important;
     margin-bottom: 15px !important;

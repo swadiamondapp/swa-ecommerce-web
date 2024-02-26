@@ -97,15 +97,15 @@ ul ul {
     font-size: 14px;
     line-height: 24px;
     color: #757C81;
-    margin: 14px 0px;
+    margin: 8px 0px;
     font-family: 'gilroyNormal' !important;
 }
 .SubHeading {
     font-weight: 600;
-    font-size: 14px;
+    font-size: 13px;
     color: #007481;
     font-family: 'gilroyNormal' !important;
-    padding:10px 0px;
+    padding:0px 0px;
 }
 .SubText {
     padding-bottom:30px ;

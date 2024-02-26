@@ -18,6 +18,7 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import * as Urls from "../../Urls";
 import { Accordion, AccordionTab } from "primereact/accordion";
+import { Class } from "@mui/icons-material";
 
 function Footer() {
   const [catgSet, setCatgSet] = useState([]);
@@ -223,7 +224,20 @@ function Footer() {
             </AccordionTab>
 
             <AccordionTab header="Policies">
-              <p className="m-0"></p>
+             <div className={Classes.PolicyLinks}>
+
+
+              <Link to="/privacy_policy">
+                <p className={Classes.Links}>Privacy policy</p>
+              </Link>
+              <Link to="/Return_policy_page">
+                <p className={Classes.Links}>Return policy</p>
+              </Link>
+              <Link to="/terms_condition">
+                <p className={Classes.Links}>Terms & conditions</p>
+              </Link>
+             
+             </div>
             </AccordionTab>
             <AccordionTab header="franchise enquiry">
               <p className="m-0"></p>
