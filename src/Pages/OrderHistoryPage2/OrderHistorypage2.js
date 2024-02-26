@@ -23,6 +23,8 @@ import axios from "axios";
 import * as Urls from "../../Urls";
 import SuccessPage from "../../components/SuccessMessageModal/SuccessModal";
 import TransferMoneyModal from "../../components/WalletModal/TransferMoneyModal";
+import { TbLocationFilled } from "react-icons/tb";
+import { IoCall } from "react-icons/io5";
 
 const OrderHistorypage2 = (props) => {
   const history = useHistory();
@@ -219,12 +221,16 @@ const OrderHistorypage2 = (props) => {
                             Mohammed Inshad
                           </p>
                           <div className={Classes.AddressShipping}>
-                            <p>
+                            <p className={Classes.AddressSh1}>
+                              <TbLocationFilled
+                                className={Classes.AddressIcons}
+                              />
                               Kottakunnan ( house ) morayur 673642 <br />{" "}
                               opposit family health center <br /> malappuram
                               district <br /> kerala 673643
                             </p>
                             <p className={Classes.phoneSh}>
+                              <IoCall className={Classes.phoneicons} />
                               Phone number : 9995200745
                             </p>
                           </div>
@@ -289,7 +295,7 @@ const OrderHistorypage2 = (props) => {
                           </div>
                         </div>
                       </AccordionTab>
-                      <AccordionTab header="Track shipping">
+                      <AccordionTab header="Track Order">
                         <div className={Classes.ParentStatus}>
                           <div className={Classes.leftStatus1}>
                             <div className={Classes.leftStatus2}>

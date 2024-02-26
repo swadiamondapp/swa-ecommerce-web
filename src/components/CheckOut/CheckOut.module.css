@@ -340,6 +340,8 @@ label {
   font-size: 14px;
   margin-top: 15px;
   font-family: "gilroyNormal" !important;
+  display: flex;
+  align-items: center;
 }
 .TotalItem {
   display: flex;
