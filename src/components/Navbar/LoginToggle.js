@@ -184,6 +184,23 @@ const LoginToggle = () => {
                       Login
                     </span>
                   </div>
+                  <div
+                    style={{
+                      textAlign: "center",
+                      padding: "5px 0px",
+                  
+                    }}
+                  >
+                    <p
+                      style={{
+                        color: "rgba(24, 119, 242, 1)",
+                        padding: "5px 0px",
+                        fontSize:'14px',
+                      }}
+                    >
+                      Privacy & policy
+                    </p>
+                  </div>
                 </div>
 
                 <div style={{ display: "flex", marginBottom: "0.5rem" }}>
@@ -194,7 +211,7 @@ const LoginToggle = () => {
                         opacity: "0.3",
                       }}
                     ></div>
-                    <div className={Classes.orText}>or</div>
+                    <div className={Classes.orText}>Or</div>
                     <div
                       style={{
                         borderBottom: "1px solid #585F67",
@@ -234,7 +251,7 @@ const LoginToggle = () => {
             <div className={Classes.SlideButton}>
               <div className={Classes.LoginContainer}>
                 <div className={Classes.title}>
-                  <div style={{ }}>
+                  <div style={{}}>
                     <h3 className={Classes.titleh}>Welcome back</h3>
                   </div>
                   <div className={Classes.signupTitleText}>
@@ -302,7 +319,9 @@ const LoginToggle = () => {
                     <div>
                       <div className={Classes.loginFormInput}>
                         <form style={{}}>
-                          <label className={Classes.labelStyle}>Mobile Number</label>
+                          <label className={Classes.labelStyle}>
+                            Mobile Number
+                          </label>
                           <input
                             placeholder="Enter Mobile Number"
                             className={Classes.allInputTextStyle}
@@ -381,7 +400,10 @@ const LoginToggle = () => {
                 </div>
               </div>
               <div style={{ display: "flex" }}>
-                <button style={{paddingBottom:'4px'}} className={Classes.buttonSocial}>
+                <button
+                  style={{ paddingBottom: "4px" }}
+                  className={Classes.buttonSocial}
+                >
                   <img src={APPLE} /> Login with Apple
                 </button>
               </div>
@@ -414,7 +436,12 @@ const LoginToggle = () => {
                       <div className={Classes.otpContainer}>
                         <div style={{ textAlign: "center" }}>
                           <div>
-                            <h3 className={Classes.titleh} style={{paddingBottom:'10px'}}>OTP</h3>
+                            <h3
+                              className={Classes.titleh}
+                              style={{ paddingBottom: "10px" }}
+                            >
+                              OTP
+                            </h3>
                           </div>
                           <div>
                             <p className={Classes.titlep}>
@@ -489,9 +516,10 @@ const LoginToggle = () => {
                             style={{
                               color: "rgba(24, 119, 242, 1)",
                               padding: "10px 0px",
+                              fontSize:'14px'
                             }}
                           >
-                            privacy & policy
+                            Privacy & policy
                           </p>
                         </div>
                         <div
