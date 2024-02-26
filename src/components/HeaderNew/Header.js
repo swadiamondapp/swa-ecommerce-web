@@ -281,7 +281,7 @@ const Header = (props) => {
       >
         <div className="container" style={{ padding: "0px" }}>
           <div className={Classes.NavLinksDesk}>
-            <Link to="/privacy_policy">
+            <Link to="">
               <p>OFFERS</p>
             </Link>
             <Link to="">

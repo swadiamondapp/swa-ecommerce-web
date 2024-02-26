@@ -203,6 +203,7 @@ svg.p-icon {
   pointer-events: auto;
   position: absolute !important;
   right: 2% !important;
+  color: #006e7f;
 }
 .shipment svg.p-icon {
   color: #006e7f !important;

@@ -208,6 +208,9 @@
     flex-direction: column;
     align-items: center;
     gap: 25px;
-    left: 24%;
+    left: 30%;
+  }
+  .Gplay {
+    margin-left: 0px;
   }
 }

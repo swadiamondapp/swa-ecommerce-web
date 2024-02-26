@@ -2,7 +2,8 @@
   color: #0d1217;
   font-weight: 600;
   font-size: 32px;
-  font-family: "PlayFairNormal" !important;
+  /* font-family: "PlayFairNormal" !important; */
+  font-family: "Playfair Display", serif !important;
 }
 .ShopOnBudgetMainText h1 {
   color: #0d1217;

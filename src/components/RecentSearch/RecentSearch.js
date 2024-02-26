@@ -6,7 +6,7 @@ function RecentSearch(props) {
     <div>
       <div className="container">
         <div className={Classes.RecentSearch}>
-          <h1>Recent Searched</h1>
+          <h1>Recent Search</h1>
         </div>
         <div className={Classes.Products}>
           <div className="container">
