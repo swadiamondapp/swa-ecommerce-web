@@ -288,4 +288,10 @@
     padding-top: 0px;
     padding-left: 0px;
   }
+  .SubText {
+    display: none;
+  }
+  .Review {
+    padding-bottom: 0px;
+  }
 }

@@ -198,7 +198,7 @@ label {
   background: #00464d;
   color: #fff;
   font-family: "Lato";
-  padding: 8px 15px;
+  padding: 8px 25px;
   border: none;
   border-radius: 3px;
   outline: none;
@@ -858,5 +858,22 @@ label {
   .Title {
     font-size: 22px;
     padding-left: 20px;
+  }
+  .ADDAnotherBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .ADDAnotherBtn button {
+    width: 100%;
+    padding: 10px 20px;
+  }
+  .Donebtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .Donebtn button {
+    width: 100%;
   }
 }
