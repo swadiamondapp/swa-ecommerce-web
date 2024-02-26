@@ -233,8 +233,9 @@ const BuyBackRequiest = (props) => {
                                     "1px solid rgba(232, 233, 234, 1)",
                                   paddingRight: "15px",
                                   "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                                    borderColor: "green", // Change border color when focused
+                                    border: "1px solid #026F7F", // Change border color when focused
                                   },
+                                
                                 },
                                 "& .MuiAutocomplete-input": {
                                   padding: "4px 8px 4px 8px !important",
