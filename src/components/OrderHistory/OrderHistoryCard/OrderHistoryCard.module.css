@@ -240,4 +240,7 @@
   .ImageContent img {
     max-width: 100px;
   }
+  .RighSection {
+    align-items: center;
+  }
 }
