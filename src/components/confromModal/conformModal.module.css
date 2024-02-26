@@ -1,60 +1,70 @@
-.ModalHeader{
-    background-color: #0D2641 !important;
-    border-radius: 4px 4px 0px 0px !important;
-    color: #FFFFFF !important;
-   
-    font-family: 'gilroyMed';
+.ModalHeader {
+  background-color: #0d2641 !important;
+  border-radius: 4px 4px 0px 0px !important;
+  color: #ffffff !important;
 
+  font-family: "gilroyMed";
 }
-.ModalCreateHeader{
-    background-color: #EDEDED !important;
-    border-radius: 4px 4px 0px 0px !important;
-    color: #0D2641 !important;
-   
-    font-family: 'gilroyMed';
+.ModalCreateHeader {
+  background-color: #ededed !important;
+  border-radius: 4px 4px 0px 0px !important;
+  color: #0d2641 !important;
 
+  font-family: "gilroyMed";
 }
-.contnt{
-    margin-left: 20px;
+.contnt {
+  margin-left: 20px;
 }
-.contnt p{
-    font-size: 16px;
-    line-height: 23px;
-    color: #757C81;
-    font-family: 'gilroyNormal';
-    font-weight: 400;
-    margin-top: 15px;
+.contnt p {
+  font-size: 16px;
+  line-height: 23px;
+  color: #757c81;
+  font-family: "gilroyNormal";
+  font-weight: 400;
+  margin-top: 15px;
 }
-.title{
-    color: #0D1217;
-    font-size: 22px;
-    font-family: 'gilroyNormal';
-    font-weight: 600;
+.title {
+  color: #0d1217;
+  font-size: 22px;
+  font-family: "gilroyNormal";
+  font-weight: 600;
 }
-.remv{
-    width: 100%;
-    border-radius: 4px;
-    height: 40px;
-    color: #19242D;
-    border: 1px solid #19242D;
-    font-size: 12px;
-    text-align: center ;
-    padding-top: 10px;
-    background-color: #FFFFFF;;
-    font-family: 'gilroyNormal';
-    cursor: pointer;
+.remv {
+  width: 100%;
+  border-radius: 4px;
+  height: 40px;
+  color: #19242d;
+  border: 1px solid #19242d;
+  font-size: 12px;
+  text-align: center;
+  padding-top: 10px;
+  background-color: #ffffff;
+  font-family: "gilroyNormal";
+  cursor: pointer;
 }
-.movWish{
-    width: 100%;
-    border-radius: 4px;
-    height: 40px;
-    color: #FFFFFF;
-    border: 1px solid #19242D;
-    background-color: #19242D;;
-    font-size: 12px;
-    text-align: center ;
-    padding-top: 10px;
-    cursor: pointer;
-    font-family: 'gilroyNormal';
-
+.RmvWishbtnContainer {
+  display: flex;
+  padding-top: 15px;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.ModalBtns {
+  width: 100%;
+}
+.movWish {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 100%;
+  border-radius: 4px;
+  height: 40px;
+  color: #ffffff;
+  border: 1px solid #19242d;
+  background-color: #19242d;
+  font-size: 12px;
+  text-align: center;
+  cursor: pointer;
+  font-family: "gilroyNormal";
 }
