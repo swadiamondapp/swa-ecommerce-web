@@ -602,7 +602,7 @@ function CheckOut(props) {
 
                   <p className={Classes.Amount}>
                     <BiRupee />
-                    {total}
+                    {total} 1200
                   </p>
                 </div>
                 <div className={Classes.TotalItemBorder}>

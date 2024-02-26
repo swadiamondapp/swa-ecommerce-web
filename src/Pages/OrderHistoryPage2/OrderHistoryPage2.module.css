@@ -8,6 +8,9 @@
 .detPad {
   padding-top: 25px;
 }
+.phoneicons {
+  display: none;
+}
 .Title {
   font-weight: 600;
   font-size: 24px;
@@ -35,6 +38,14 @@
 .DeliveryDetails p span {
   color: #30933a;
 }
+.AddressSh1 {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.AddressIcons {
+  display: none;
+}
 .ParentShipmentDetails {
   background: #fff;
 }
@@ -55,6 +66,9 @@
 }
 .phoneSh {
   margin-top: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 .ProductDetailsParent1 {
   display: flex;
@@ -167,6 +181,7 @@
   align-items: center;
   grid-template-columns: 200px 150px;
   color: #475057;
+  margin-bottom: 5px;
 }
 .PaymentItems p:nth-child(2) {
   text-align: end;
@@ -304,7 +319,8 @@
     padding-right: 0px;
   }
   .PaymentItems {
-    grid-template-columns: 185px 150px;
+    /* grid-template-columns: 185px 150px; */
+    grid-template-columns: 168px 150px;
   }
   .REButton {
     padding: 10px 15px;
@@ -324,5 +340,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+  .AddressIcons {
+    position: relative;
+    top: 2px;
+    color: #007481;
+    display: block;
+  }
+  .phoneicons {
+    display: block;
+    color: #007481;
   }
 }

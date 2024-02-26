@@ -216,13 +216,21 @@ svg.p-icon {
   font-size: 16px;
 }
 .shipment .p-accordion-tab {
+  /* padding: 20px 15px !important; */
+  padding: 0px !important;
+}
+.shipment .p-accordion-header {
   padding: 20px 15px !important;
 }
 .shipment .p-accordion-header-text {
   color: #0d1217 !important;
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 500;
   font-family: "lato";
+}
+.shipment .p-accordion-content {
+  padding: 20px 15px !important;
+  margin: 0px !important;
 }
 .MobAbout {
   margin: 20px 0px;
@@ -231,6 +239,7 @@ svg.p-icon {
 .p-accordion-content {
   margin: 20px 0px;
   padding-right: 10px;
+  margin-bottom: 0px;
 }
 .activeTabHeaderText {
   background-color: red; /* Set your desired background color */
@@ -323,6 +332,22 @@ svg.p-icon {
 }
 .css-sghohy-MuiButtonBase-root-MuiButton-root:hover {
   background: #e5eef7 !important;
+}
+.shipment .p-accordion-tab .p-acordion-tab-header-active {
+  background-color: red !important; /* Set the desired background color */
+  color: #fff; /* Set the text color for better visibility */
+}
+.shipment .p-highlight {
+  background: #fcfbf6 !important;
+  border-bottom: 0.5px solid #e5e5e5 !important;
+  border-top-left-radius: 3px !important;
+  border-top-right-radius: 3px !important;
+}
+.css-1hw9j7s {
+  background-color: #e5eef7 !important;
+  box-shadow: none !important;
+  color: #0464d5 !important;
+  padding: 10px 20px !important;
 }
 /* :where(.css-dev-only-do-not-override-12czi4v).ant-modal .ant-modal-footer {
   display: none !important;
@@ -426,5 +451,23 @@ input[type="number"] {
   }
   .accordion-button {
     padding: 1rem 0rem !important;
+  }
+  .css-1hw9j7s {
+    display: flex !important;
+    align-items: center !important;
+    margin-bottom: 20px !important;
+  }
+  .css-sghohy-MuiButtonBase-root-MuiButton-root {
+    background: #e5eef7 !important;
+    color: #0464d5 !important;
+    box-shadow: none !important;
+    padding: 10px 15px !important;
+    display: flex !important;
+    align-items: center !important;
+    margin-bottom: 20px !important;
+  }
+  .css-sghohy-MuiButtonBase-root-MuiButton-root {
+    display: flex !important;
+    align-items: center !important;
   }
 }
