@@ -295,7 +295,10 @@ const OrderHistorypage2 = (props) => {
                           </div>
                         </div>
                       </AccordionTab>
-                      <AccordionTab header="Track Order">
+                      <AccordionTab
+                        header="Track Order"
+                        style={{ fontFamily: "lato", fontWeight: "500" }}
+                      >
                         <div className={Classes.ParentStatus}>
                           <div className={Classes.leftStatus1}>
                             <div className={Classes.leftStatus2}>
@@ -312,7 +315,6 @@ const OrderHistorypage2 = (props) => {
                             </div>
                             <div className={Classes.leftStatus2}>
                               <div className={Classes.dotstatus1}></div>
-                              <div className={Classes.dotstatusline1}></div>
                             </div>
                           </div>
                           <div className={Classes.rightStatus1}>

@@ -192,7 +192,7 @@ input:checked + .CategoryListAmount + label {
   .planContainer {
     display: flex;
     flex-direction: column;
-    gap:30px
+    gap: 30px;
   }
   .titles {
     padding-bottom: 15px;
@@ -270,7 +270,7 @@ input:checked + .CategoryListAmount + label {
     justify-content: space-between;
   }
   .FilterMobiles button {
-    color: #006e7f;
+    color: #006e7f !important;
     background: transparent;
     border: none;
     padding: 0px;

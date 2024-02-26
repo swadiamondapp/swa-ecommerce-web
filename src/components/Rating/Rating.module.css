@@ -294,4 +294,18 @@
   .Review {
     padding-bottom: 0px;
   }
+  .ParentCardImageText {
+    margin-bottom: 0px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+  .ReviewPart {
+    padding-top: 8px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border: none;
+  }
+  .ReviewB1 {
+    border-top: 0.5px solid #e8e9ea;
+  }
 }
