@@ -11,6 +11,7 @@ import { LoginSocialGoogle } from "reactjs-social-login";
 import { signInWithPopup } from "firebase/auth";
 // import { Auth, GoogleAuthProvider } from "firebase/auth";
 import { auth, googleAuthProvider } from "../../firebase";
+import { Link } from "react-router-dom";
 
 const LoginToggle = () => {
   const [activeTab, setActiveTab] = useState("tab1");
@@ -184,6 +185,7 @@ const LoginToggle = () => {
                       Login
                     </span>
                   </div>
+                  <Link to="/privacy_policy">
                   <div
                     style={{
                       textAlign: "center",
@@ -201,6 +203,7 @@ const LoginToggle = () => {
                       Privacy & policy
                     </p>
                   </div>
+                    </Link>
                 </div>
 
                 <div style={{ display: "flex", marginBottom: "0.5rem" }}>
@@ -505,6 +508,7 @@ const LoginToggle = () => {
                           By login you are agreed to all privacy policy and
                           tearms and conditions
                         </div>
+                        <Link to="/privacy_policy">
                         <div
                           style={{
                             textAlign: "center",
@@ -521,7 +525,9 @@ const LoginToggle = () => {
                           >
                             Privacy & policy
                           </p>
+                      
                         </div>
+                      </Link>
                         <div
                           style={{
                             display: "flex",
