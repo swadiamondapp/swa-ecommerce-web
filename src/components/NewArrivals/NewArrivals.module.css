@@ -2,11 +2,13 @@
   font-weight: 500;
   font-size: 32px;
   color: #0d1217;
-  font-family: "PlayFairNormal" !important;
+  /* font-family: "PlayFairNormal" !important; */
+  font-family: "Playfair Display", serif !important;
 }
 .setItems {
   /* display: flex;
     justify-content: space-between; */
+  padding-left: 10px;
 }
 .NewArrivals {
   margin-top: 20px;
@@ -18,7 +20,7 @@
 
   color: #757c81;
   margin-top: 15px;
-  margin-bottom: 10px !important;
+  margin-bottom: 20px !important;
   font-family: "gilroyNormal" !important;
 }
 .seeAll {

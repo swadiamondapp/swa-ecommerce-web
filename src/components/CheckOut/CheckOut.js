@@ -379,16 +379,21 @@ function CheckOut(props) {
     <div>
       <div className={`container ${Classes.MobCheck1}`}>
         <div className={`container ${Classes.MobCheck1}`}>
-          <div className={Classes.Main}>
-            <h1 className={Classes.Title}>Your details</h1>
-            <div className={Classes.SubText}>
-              <p className={`${Classes.Home} ${Classes.HomeNew}`}>
-                HOME /&nbsp;
-              </p>
-              <p className={`${Classes.Home} ${Classes.HomeNew}`}>
-                CART /&nbsp;
-              </p>
-              <p className={Classes.NewArrival}>CHECKOUT</p>
+          <div className={Classes.Main1}>
+            <div>
+              <h1 className={Classes.Title}>Your details</h1>
+              <div className={Classes.SubText}>
+                <p className={`${Classes.Home} ${Classes.HomeNew}`}>
+                  HOME /&nbsp;
+                </p>
+                <p className={`${Classes.Home} ${Classes.HomeNew}`}>
+                  CART /&nbsp;
+                </p>
+                <p className={Classes.NewArrival}>CHECKOUT</p>
+              </div>
+            </div>
+            <div className={Classes.Steps2}>
+              STEP 2 <span style={{ color: "#949494" }}> / 3</span>{" "}
             </div>
           </div>
 
@@ -593,6 +598,7 @@ function CheckOut(props) {
               {/* payment method old design */}
             </div>
             <div className="col-md-4">
+              <p className={Classes.Order1P}>ORDER SUMMERY</p>
               <div className={Classes.Right}>
                 <p className={Classes.OrderSummery}>ORDER SUMMERY</p>
                 <div className={Classes.TotalText}>
@@ -602,7 +608,7 @@ function CheckOut(props) {
 
                   <p className={Classes.Amount}>
                     <BiRupee />
-                    {total} 1200
+                    {total}
                   </p>
                 </div>
                 <div className={Classes.TotalItemBorder}>
@@ -622,7 +628,7 @@ function CheckOut(props) {
                 </div>
                 {show ? (
                   <form onSubmit={handleSubmit} autoComplete="off">
-                    <div className="d-flex">
+                    <div className="d-flex" style={{ marginTop: "10px" }}>
                       <input
                         className={Classes.Input}
                         type="text"
@@ -666,7 +672,7 @@ function CheckOut(props) {
                     history.push("/payment");
                   }}
                 >
-                  Place Order
+                  Proceed to payment
                 </div>
                 {total !== amountPay ? (
                   <p className={Classes.HurrayText}>

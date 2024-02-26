@@ -4,6 +4,7 @@
   margin: 50px 0 10px 20px;
   color: #0d1217;
   font-family: "PlayFairNormal";
+  font-family: "Playfair Display", serif !important;
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
@@ -20,5 +21,6 @@
   .RecentSearch h1 {
     font-size: 22px;
     margin: 40px 0 10px 20px;
+    text-align: center;
   }
 }
