@@ -247,7 +247,17 @@ function Footer() {
             </AccordionTab>
 
             <AccordionTab header="Policies">
-              <p className="m-0"></p>
+              <div className={Classes.PolicyLinks}>
+                <Link to="/privacy_policy">
+                  <p className={Classes.Links}>Privacy policy</p>
+                </Link>
+                <Link to="/Return_policy_page">
+                  <p className={Classes.Links}>Return policy</p>
+                </Link>
+                <Link to="/terms_condition">
+                  <p className={Classes.Links}>Terms & conditions</p>
+                </Link>
+              </div>
             </AccordionTab>
             <AccordionTab header="franchise enquiry">
               <p className="m-0"></p>

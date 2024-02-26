@@ -51,10 +51,16 @@ header {
   color: #fff;
 
 }
+.title {
+
+}
 
 @media (min-width: 300px) and (max-width: 575px) {
   .loginWrapper {
     padding:15px 5px;
+  }
+  .loginToffle {
+    padding:10px 10px;
   }
   .Navbar {
     display: flex;
@@ -306,7 +312,7 @@ header {
     border: 1px solid #ccc;
     font-size: 0.875rem;
     background-color: transparent;
-    padding: 5px 6px;
+    padding: 5px  6px;
     color: #2c3035;
     /* text-align: center; */
     font-family: "Poppins";
@@ -315,11 +321,13 @@ header {
     font-weight: 400;
     line-height: normal;
     border-radius: 6px;
+    text-align: center;
     /* width: 100%; */
   }
   .buttonSocial > img {
   
-    max-width: 13px;
+    max-width: 14px;
+    margin: 0px 6px 2px 2px;
   }
   .tabTitleOne {
     /* padding: 9px 20px; */
@@ -773,7 +781,7 @@ header {
     /* justify-items: center; */
     align-items: center;
     flex-direction: column;
-    padding:5px 0px;
+    padding-bottom:5px;
     /* padding-top: 5px; */
   }
   .titleh {
@@ -1002,6 +1010,7 @@ header {
   .buttonSocial > img {
   
     max-width: 13px;
+    margin: 0px 4px 3px 0px
   }
   .modalContainer:focus-visible {
     border:none;
@@ -1071,8 +1080,7 @@ header {
     font-size: 14px;
   }
   .otpContainer {
-    padding: 5px 15px;
-    margin: 10px 10px;
+    margin: 6px 0px;
   }
   .formgap{
     display: flex;
