@@ -210,9 +210,9 @@ function PrivacyPolicy() {
               to the Privacy Policy of the other website, mobile applications
               and this Privacy Policy will no longer apply.
             </p>
-            {/* <div className={Classes.AgreeAccept}>
+            <div className={Classes.AgreeAccept}>
               <button className={Classes.BtnAgreeAccept}>Agree & accept</button>
-            </div> */}
+            </div>
           </div>
         </div>
         <LIfeTImeModal />
