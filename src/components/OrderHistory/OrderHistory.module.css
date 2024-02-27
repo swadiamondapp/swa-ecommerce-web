@@ -65,7 +65,12 @@
     display: none;
   }
   .Main {
+    margin: 0px;
     padding: 0px;
+  }
+  .Title {
+    margin-bottom: 0px;
+    padding: 15px;
   }
   .abcd {
     padding: 0px !important;

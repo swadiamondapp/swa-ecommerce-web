@@ -221,6 +221,9 @@
 .RightArrow {
   color: #ffffff;
 }
+.RateContainer {
+  padding: 15px 5px 25px;
+}
 @media (min-width: 300px) and (max-width: 575px) {
   .OutBox {
     margin: 0px 0px 10px;
@@ -228,19 +231,54 @@
   .ViewButton {
     background-color: #ffffff;
   }
-  .ViewButton button {
+  .ViewButton {
     display: none;
-  }
-  .RightArrow {
-    color: #30933a;
   }
   .BottomContainer {
     flex-direction: column;
   }
+  .ImageContent {
+    gap: 10px;
+  }
   .ImageContent img {
     max-width: 100px;
+    max-height: 100px;
   }
   .RighSection {
+    display: block;
+  }
+  .TextWrapper {
+    padding-top: 0px;
+  }
+  .RatingContainer {
+    display: flex;
     align-items: center;
+    justify-content: space-between;
+    padding: 5px 0px 5px;
+  }
+  .RatingContainer p {
+    font-size: 16px;
+  }
+  .MobImgContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .ProductName {
+    padding-top: 0px;
+  }
+  .ProductName p {
+    margin-bottom: 0px;
+    padding-bottom: 5px;
+  }
+  .DeliveryText {
+    font-size: 12px;
+    padding-top: 3px;
+  }
+  .Expected {
+    font-size: 12px;
+  }
+  .RateContainer {
+    padding: 15px 5px 0px;
   }
 }

@@ -471,4 +471,7 @@ input[type="number"] {
     display: flex !important;
     align-items: center !important;
   }
+  .star-list .star {
+    margin-left: 4px !important;
+  }
 }

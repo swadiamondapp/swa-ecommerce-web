@@ -20,7 +20,7 @@
 }
 .Phone {
   padding: 0px 50px 15px;
-  opacity: 30%;
+  opacity: 30% !important;
 }
 .Content {
   display: flex;

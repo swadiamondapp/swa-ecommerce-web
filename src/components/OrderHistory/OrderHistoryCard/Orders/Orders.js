@@ -15,7 +15,7 @@ function Orders(props) {
   // color="#069D0D"
   console.log("props--.>", props);
   return (
-    <div style={{ padding: "15px 5px 25px" }}>
+    <div className={Classes.RateContainer}>
       {/* <div className={Classes.Align}>
         <div>
           <div className={Classes.ProductDetails}>
@@ -58,19 +58,22 @@ function Orders(props) {
         <p>Order ID : {props.orderId}</p>
       </div>
       <div className={Classes.BottomContainer}>
-        <div className={Classes.ImageContent}>
-          <img src={props.Image} />
-          <div className={Classes.TextWrapper}>
-            <h3>Diamond Ring</h3>
-            <p className={Classes.DeliveryText}>
-              <TbTruckDelivery color="#30933A" size={20} /> Delivered on{" "}
-              <span className={Classes.GreenText}>26 may 2023</span>
-            </p>
-            <p className={Classes.Expected}>
-              Expected Delivery by{" "}
-              <span className={Classes.OverLined}>30 may 2023</span>
-            </p>
+        <div className={Classes.MobImgContainer}>
+          <div className={Classes.ImageContent}>
+            <img src={props.Image} />
+            <div className={Classes.TextWrapper}>
+              <h3>Diamond Ring</h3>
+              <p className={Classes.DeliveryText}>
+                <TbTruckDelivery color="#30933A" size={20} /> Delivered on{" "}
+                <span className={Classes.GreenText}>26 may 2023</span>
+              </p>
+              <p className={Classes.Expected}>
+                Expected Delivery by{" "}
+                <span className={Classes.OverLined}>30 may 2023</span>
+              </p>
+            </div>
           </div>
+          <MdOutlineKeyboardArrowRight fill="#006E7F" size={25} />
         </div>
         <div className={Classes.RighSection}>
           <div className={Classes.ViewButton}>
@@ -83,7 +86,7 @@ function Orders(props) {
               // numberOfSelectedStar={rate}
               colorFilledStar="#F6C514"
               colorEmptyStar="#D1D3D5"
-              starSize="30px"
+              starSize="25px"
               spaceBetweenStar="10px"
               disableOnSelect={false}
               // onSelectStar={rateChangeHandler}

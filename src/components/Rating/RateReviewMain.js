@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Classes from "./Rating.module.css";
 import productimg from "../../Assets/diamonds.png";
 import deliveryimg from "../../Assets/delivery.png";
@@ -7,10 +7,26 @@ import { Link } from "react-router-dom";
 
 const RateReviewMain = () => {
   const [rate, setRate] = useState(2);
+  const [isMobileView, setIsMobileView] = useState(
+    window.innerWidth >= 300 && window.innerWidth <= 575
+  );
 
   const rateChangeHandler = (value) => {
     setRate(value);
   };
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileView(window.innerWidth >= 300 && window.innerWidth <= 575);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup function to remove event listener when component unmounts
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [isMobileView]);
   return (
     <div>
       <div className={`container ${Classes.MainCont}`}>
@@ -52,7 +68,7 @@ const RateReviewMain = () => {
                       numberOfSelectedStar={rate}
                       colorFilledStar="#F6C514"
                       colorEmptyStar="#D1D3D5"
-                      starSize="30px"
+                      starSize={isMobileView ? "25px" : "30px"}
                       spaceBetweenStar="10px"
                       disableOnSelect={false}
                       onSelectStar={rateChangeHandler}
@@ -92,7 +108,7 @@ const RateReviewMain = () => {
                       numberOfSelectedStar={rate}
                       colorFilledStar="#F6C514"
                       colorEmptyStar="#D1D3D5"
-                      starSize="30px"
+                      starSize={isMobileView ? "25px" : "30px"}
                       spaceBetweenStar="10px"
                       disableOnSelect={false}
                       onSelectStar={rateChangeHandler}
