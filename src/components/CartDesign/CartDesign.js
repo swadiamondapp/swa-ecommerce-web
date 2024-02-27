@@ -91,7 +91,9 @@ function CartDesign(props) {
               <h1 className={Classes.Title}>Cart</h1>
               <p>ITEM (2)</p>
             </div>
-            <div className={Classes.SubText}>STEP 1/ 3</div>
+            <div className={Classes.SubText}>
+              STEP 1 <span>/ 3</span>
+            </div>
           </div>
           <div className="row" style={{ paddingTop: "10px" }}>
             <div className="col-md-8">
@@ -101,36 +103,17 @@ function CartDesign(props) {
             <div className="col-md-4">
               <div className={Classes.Right}>
                 <p className={Classes.OrderSummery}>ORDER SUMMERY</p>
-                <div className={Classes.TotalText}>
+                <div
+                  className={Classes.TotalText}
+                  style={{ paddingTop: "20px" }}
+                >
                   <div className={Classes.TotalItem}>
                     <p className={Classes.TotalSmall}>
                       Total &nbsp;<span>(1 Items)</span>
                     </p>
                   </div>
-
-                  <p className={Classes.Amount}>
-                    <BiRupee />
-                    {total}
-                  </p>
+                  <p className={Classes.Amount}>&#8377; {total}</p>
                 </div>
-                <div
-                  className={Classes.TotalText}
-                  style={{ borderBottom: "1px solid #e8e9ea" }}
-                >
-                  <div className={Classes.TotalItem}>
-                    <p className={Classes.TotalSmall}>TOTAL PAYABLE</p>
-                  </div>
-
-                  <p className={Classes.Amount}>
-                    <BiRupee />
-                    {total}
-                  </p>
-                </div>
-                {total === amountPay ? (
-                  <p className={Classes.HurrayText}>
-                    You totaly saved {total - amountPay}. hurray!..
-                  </p>
-                ) : null}
                 <div className={Classes.Voucher}>
                   <p className={Classes.NumOfItem}>Do you have Voucher code</p>
                 </div>
@@ -176,18 +159,43 @@ function CartDesign(props) {
                     </p>
                   </div>
                 </form>
+                <div
+                  className={Classes.TotalText}
+                  style={{
+                    borderTop: "1px dashed #e8e9ea",
+                    borderBottom: "1px solid rgb(232, 233, 234)",
+                  }}
+                >
+                  <div className={Classes.TotalItem}>
+                    <p className={Classes.TotalSmall}>TOTAL PAYABLE</p>
+                  </div>
+                  <p className={Classes.Amount}>&#x20B9; {total}</p>
+                </div>
                 <input
                   className={Classes.PlaceOrderButton}
                   type="submit"
                   value="Place order"
                   onClick={placeOrder}
                 />
+                {total === amountPay ? (
+                  <p className={Classes.HurrayText}>
+                    You totaly saved {total - amountPay}. hurray!..
+                  </p>
+                ) : null}
                 {/* <button
                   className={Classes.PlaceOrderButton}
                   onClick={placeOrder}
                 >
                   Apply
                 </button> */}
+              </div>
+              <div className={Classes.BtnPlaceOrderMobile}>
+                <input
+                  className={Classes.PlaceOrderButtonMobile}
+                  type="submit"
+                  value="Place order"
+                  onClick={placeOrder}
+                />
               </div>
             </div>
           </div>

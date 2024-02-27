@@ -71,12 +71,13 @@ const Payment = (props) => {
                   &#x20B9; {"54000"}
                 </p>
               </div>
-              <div className={Classes.PayButton}>Pay 54,000</div>
+              <div className={Classes.PayButton}>Pay &#x20B9; 54,000</div>
               <p className={Classes.HurrayText}>
                 You totaly saved {"9888"}. hurray!..
               </p>
             </div>
           </div>
+          <div className={Classes.PayButtonMobile}>Pay &#x20B9; 54,000</div>
           <div className={Classes.DeliverCard}>
             <div className={Classes.DeliverCardHeader}>
               <h4>Deliver to</h4>

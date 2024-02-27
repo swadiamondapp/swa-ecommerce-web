@@ -175,7 +175,7 @@
 .Voucher {
   display: flex;
   justify-content: space-between;
-  padding-top: 20px;
+  padding-top: 10px;
   margin-bottom: 10px;
 }
 .Delivery {
@@ -240,8 +240,8 @@
 
 .TotalText {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  border-bottom: 1px dashed #e8e9ea;
   padding: 10px 0px;
 }
 
@@ -267,13 +267,11 @@
 .Amount {
   font-weight: 600;
   font-size: 14px;
-  margin-top: 15px;
   font-family: "gilroyNormal" !important;
 }
 .TotalItem {
   display: flex;
   justify-content: space-between;
-  margin-top: 15px;
 }
 .TotalItemBorder {
   display: flex;
@@ -297,6 +295,7 @@
   font-weight: 600;
   font-size: 14px;
   margin-top: 10px;
+  text-align: center;
 }
 .AmountPayable {
   font-weight: 700;
@@ -345,6 +344,10 @@
   color: #ffffff;
   margin-top: 15px;
 }
+
+.PlaceOrderButtonMobile {
+  display: none;
+}
 .ValidationText {
   font-weight: 400;
   font-size: 12px;
@@ -391,7 +394,7 @@
   font-size: 14px;
   font-weight: 400;
   color: #005d67;
-  font-family: "LatoNormal" !important;
+  font-family: "LatoRegular" !important;
   margin-bottom: 0px;
 }
 .OverViewMobile {
@@ -400,6 +403,10 @@
 .OrderSummeryMob {
   display: none;
 }
+.SubText span {
+  color: #949494;
+}
+
 @media screen and (max-width: 758px) {
   .Right {
     margin-bottom: 20px;
@@ -471,7 +478,8 @@
     justify-content: center;
   }
   .DummyWrap {
-    padding: 15px 0px 15px 15px;
+    padding: 15px;
+    justify-content: center;
   }
   .DummyGreen {
     font-size: 12px;
@@ -492,5 +500,22 @@
     letter-spacing: 0.02em;
     padding: 0px 20px 17px 25px !important;
     color: #5e666c;
+  }
+  .PlaceOrderButton {
+    display: none;
+  }
+  .PlaceOrderButtonMobile {
+    display: block;
+    background: #00464d;
+    border-radius: 4px;
+    padding: 10px 0 10px 0;
+    font-weight: 600;
+    width: 100%;
+    font-size: 14px;
+    color: #ffffff;
+    margin-top: 15px;
+  }
+  .BtnPlaceOrderMobile {
+    padding: 0px 15px 15px 15px;
   }
 }
