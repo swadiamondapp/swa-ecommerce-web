@@ -10,6 +10,8 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { IoMdClose } from "react-icons/io";
+import sortimg from "../../Assets/sort.png";
+import filtermobimg from "../../Assets/filter.png";
 
 const style = {
   position: "absolute",
@@ -148,7 +150,9 @@ const FilterModal = (props) => {
             </Box>
           </Modal>
           <div className={classes.arrow1}></div>
-          <Button onClick={handleOpenSort}>Sort</Button>
+          <Button onClick={handleOpenSort}>
+            <img src={sortimg} /> Sort
+          </Button>
           <Modal
             // open={props.open}
             open={opensort}
@@ -201,7 +205,9 @@ const FilterModal = (props) => {
             </Box>
           </Modal>
           <div className={classes.arrow1}></div>
-          <Button onClick={handleOpenFilter}>Filter</Button>
+          <Button onClick={handleOpenFilter}>
+            <img src={filtermobimg} /> Filter
+          </Button>
           <Modal
             // open={props.open}
             open={openfilter}

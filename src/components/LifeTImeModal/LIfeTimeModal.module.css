@@ -275,6 +275,9 @@ input:checked + .CategoryListAmount + label {
     border: none;
     padding: 0px;
     font-family: "gilroyNormal" !important;
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
   .arrow1 {
     width: 1px;

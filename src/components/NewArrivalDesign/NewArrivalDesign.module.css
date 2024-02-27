@@ -128,6 +128,7 @@
 @media (min-width: 300px) and (max-width: 567px) {
   .Found {
     margin-bottom: 15px;
+    display: none;
   }
   .ParentMain {
     display: flex;
@@ -140,6 +141,9 @@
     font-size: 22px;
   }
   .child2Main {
+    display: none;
+  }
+  .SubText {
     display: none;
   }
 }
