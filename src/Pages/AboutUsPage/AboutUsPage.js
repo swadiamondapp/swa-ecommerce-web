@@ -34,7 +34,7 @@ function AboutUsPage() {
         <Header countCartItems={cartCount}/>
         <div className={Classes.Features}>
             <AboutUs/>
-          <Features />
+          {/* <Features /> */}
         </div>
         <Footer/>
       
