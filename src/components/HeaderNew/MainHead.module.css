@@ -1095,6 +1095,11 @@ a {
   .SubHeadNav {
     display: none;
   }
+  .MobileSearchbarOthers {
+    display: block;
+    box-shadow: 0px 2px 2px 0px #0000000d;
+    padding-bottom: 5px;
+  }
 }
 @media (min-width: 300px) and (max-width: 575px) {
   .headerNav {
@@ -1123,6 +1128,9 @@ a {
     display: block;
     box-shadow: 0px 2px 2px 0px #0000000d;
     padding-bottom: 5px;
+  }
+  .searchbar {
+    width: 100%;
   }
 }
 /* @media (min-width: 767px) and (max-width: 1200px) {

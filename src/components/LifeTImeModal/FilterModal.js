@@ -159,7 +159,7 @@ const FilterModal = (props) => {
               <Typography>
                 <div className={classes.Container}>
                   <div className={classes.LabelHead}>
-                    <p>Sort</p>
+                    <p>Sort by</p>
                     <IoMdClose
                       style={{ cursor: "pointer" }}
                       // onClick={props.handleClose}
@@ -168,28 +168,28 @@ const FilterModal = (props) => {
                   </div>
                   <div className={classes.PriceTgs}>
                     <div className={classes.PriceTags1}>
-                      <input type="checkbox" />
+                      <input type="radio" />
                       <label>New arraivals</label>
                     </div>
                     <div className={classes.PriceTags1}>
-                      <input type="checkbox" />
+                      <input type="radio" />
                       <label>Low to high</label>
                     </div>
                     <div className={classes.PriceTags1}>
-                      <input type="checkbox" />
+                      <input type="radio" />
                       <label>High to Low</label>
                     </div>
 
                     <div className={classes.PriceTags1}>
-                      <input type="checkbox" />
+                      <input type="radio" />
                       <label>Most popular</label>
                     </div>
                     <div className={classes.PriceTags1}>
-                      <input type="checkbox" />
+                      <input type="radio" />
                       <label>Discounted</label>
                     </div>
                     <div className={classes.PriceTags1}>
-                      <input type="checkbox" />
+                      <input type="radio" />
                       <label>Wedding</label>
                     </div>
                   </div>
