@@ -81,7 +81,6 @@
 
 .LargeImage {
   width: 100%;
-  padding: 60px;
 
   position: relative;
 }
@@ -140,7 +139,8 @@
 .ParentCertificate {
   display: flex;
   align-items: center;
-  gap: 30px;
+  /* gap: 30px; */
+  gap: 25px;
   padding-bottom: 15px;
 }
 .ParentCertificate img {
@@ -248,6 +248,7 @@
   font-size: 22px;
   color: #0d1217;
   margin-top: -5px;
+  padding-left: 5px;
   font-family: "gilroyNormal" !important;
 }
 
@@ -278,6 +279,22 @@
   position: relative;
   border: 1px solid #e6e6e6;
   border-radius: 3px;
+}
+.rateStar8 {
+  background: #fcfbf6;
+  position: absolute;
+  bottom: 5%;
+  padding: 5px 15px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #757c81;
+  font-family: lato;
+  left: 3%;
+}
+.starrate8 {
+  color: #f6c514;
 }
 .SubTexts {
   color: #5e666c;
@@ -648,6 +665,17 @@
     gap: 10px;
     margin-top: 15px;
     overflow: scroll;
+  }
+  .MobProductDetails::-webkit-scrollbar {
+    width: 0.5em; /* Width of the scrollbar */
+  }
+
+  .MobProductDetails::-webkit-scrollbar-thumb {
+    background-color: transparent; /* Color of the thumb */
+  }
+
+  .MobProductDetails::-webkit-scrollbar-track {
+    background-color: transparent; /* Color of the track */
   }
   .MobProductDetails2 {
     order: 1;

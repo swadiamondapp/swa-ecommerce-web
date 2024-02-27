@@ -52,7 +52,8 @@ const SililerProducts = () => {
                         alt={`catg-${index}`}
                       />
                       <p className={Classes.SimilerProductPrices}>
-                        <BiRupee className={Classes.Rupee} /> 27000
+                        {/* <BiRupee className={Classes.Rupee} />  */}
+                        &#x20B9; 27000
                       </p>
                       <div className={Classes.ParentAddToCartCard2}>
                         <div className={Classes.addToCartCard2}>

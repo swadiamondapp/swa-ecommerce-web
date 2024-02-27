@@ -28,6 +28,7 @@ import axios from "axios";
 import * as Urls from "../../Urls";
 import Profiles from "../../Assets/profileicon.png";
 import ProductImages from "./ProductImages";
+import { MdOutlineStarPurple500 } from "react-icons/md";
 
 const ProductDetails = (props) => {
   const [show, setShow] = useState(false);
@@ -186,6 +187,11 @@ const ProductDetails = (props) => {
                         />
                       )} */}
                       {/* warning not remove */}
+                      <div className={Classes.rateStar8}>
+                        5{" "}
+                        <MdOutlineStarPurple500 className={Classes.starrate8} />{" "}
+                        435
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -265,8 +271,9 @@ const ProductDetails = (props) => {
               </p>
               <p className={Classes.Code}>{props.sku}</p>
               <div className={`${Classes.Flex} ${Classes.MobDownAR}`}>
-                <BiRupee size={25} />
-                <p className={Classes.NewPrice}>{props.offerPrice}</p>
+                {/* <BiRupee size={25} /> */}
+
+                <p className={Classes.NewPrice}>&#x20B9; {props.offerPrice}</p>
                 {props.actualPrice !== null ? (
                   <BiRupee size={25} color="#B0B0B0" />
                 ) : null}
@@ -412,13 +419,13 @@ const ProductDetails = (props) => {
 
                 {active === true ? (
                   <>
-                    <div className={Classes.Flex}>
+                    <div className={Classes.Flex} style={{ marginLeft: "0px" }}>
                       <img className={Classes.Stroke} src={Stroke} alt="" />
                       <p className={Classes.StrokeText}>
                         Cash / Card delivery option available
                       </p>{" "}
                     </div>
-                    <div className={Classes.Flex}>
+                    <div className={Classes.Flex} style={{ marginLeft: "0px" }}>
                       <img className={Classes.Stroke} src={Stroke} alt="" />
                       <p className={Classes.StrokeText}>
                         Standard delivery available

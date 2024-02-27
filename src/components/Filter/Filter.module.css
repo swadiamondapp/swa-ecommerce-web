@@ -70,6 +70,9 @@
 input[type="checkbox"] {
   accent-color: #006e7f !important;
 }
+input[type="radio"] {
+  accent-color: #006e7f !important;
+}
 
 input:checked + label {
   font-weight: bold !important;
