@@ -66,7 +66,7 @@ const LoginToggle = () => {
     border: "1px solid #000",
     boxShadow: 24,
     p: 2,
-    outline: "none"
+    outline: "none",
   };
   const styleDesk = {
     position: "absolute",
@@ -79,8 +79,7 @@ const LoginToggle = () => {
     border: "1px solid #000",
     boxShadow: 24,
     p: 2,
-    outline: "none"
-   
+    outline: "none",
   };
   const customTabOtpModalStyle = {
     position: "absolute",
@@ -93,8 +92,7 @@ const LoginToggle = () => {
     border: "1px solid #000",
     boxShadow: 24,
     p: 1,
-    outline: "none"
-   
+    outline: "none",
   };
   const customDestOtpModalStyle = {
     position: "absolute",
@@ -107,8 +105,7 @@ const LoginToggle = () => {
     border: "1px solid #000",
     boxShadow: 24,
     p: 2,
-    outline: "none"
- 
+    outline: "none",
   };
 
   const customTabOne = {
@@ -193,24 +190,23 @@ const LoginToggle = () => {
                     </span>
                   </div>
                   <Link to="/privacy_policy">
-                  <div
-                    style={{
-                      textAlign: "center",
-                      padding: "5px 0px",
-                  
-                    }}
-                  >
-                    <p
+                    <div
                       style={{
-                        color: "rgba(24, 119, 242, 1)",
-                        padding: "0px 0px",
-                        fontSize:'12px',
+                        textAlign: "center",
+                        padding: "5px 0px",
                       }}
                     >
-                      Privacy & policy
-                    </p>
-                  </div>
-                    </Link>
+                      <p
+                        style={{
+                          color: "rgba(24, 119, 242, 1)",
+                          padding: "0px 0px",
+                          fontSize: "12px",
+                        }}
+                      >
+                        Privacy & policy
+                      </p>
+                    </div>
+                  </Link>
                 </div>
 
                 <div style={{ display: "flex", marginBottom: "0.5rem" }}>
@@ -418,7 +414,7 @@ const LoginToggle = () => {
                 </button>
               </div>
             </div>
-            <div className={Classes.Signup} style={{paddingTop:'10px'}}>
+            <div className={Classes.Signup} style={{ paddingTop: "10px" }}>
               <span className={Classes.bottomText}>Don’t have an account?</span>
               <span
                 className={Classes.signupAnchor}
@@ -511,32 +507,39 @@ const LoginToggle = () => {
                         sx={{ p: 2 }}
                         style={{ textAlign: "center", padding: "5px" }}
                       >
-                        <div >
-                          <span style={{ textAlign: "center", fontSize: "14px", }}>
-                          By login you are agreed to all privacy policy and
-                          tearms and conditions
+                        <div>
+                          <span
+                            style={{
+                              textAlign: "center",
+                              fontSize: "14px",
+                              fontWeight: "400",
+                            }}
+                          >
+                            By login you are agreed to all privacy policy and
+                            terms and conditions
                           </span>
                         </div>
                         <Link to="/privacy_policy">
-                        <div
-                          style={{
-                            textAlign: "center",
-
-                            padding: "5px 0px",
-                          }}
-                        >
-                          <p
+                          <div
                             style={{
-                              color: "rgba(24, 119, 242, 1)",
-                              padding: "10px 0px",
-                              fontSize:'12px'
+                              textAlign: "center",
+
+                              padding: "5px 0px",
                             }}
                           >
-                            Privacy & policy
-                          </p>
-                      
-                        </div>
-                      </Link>
+                            <p
+                              style={{
+                                color: "rgba(24, 119, 242, 1)",
+                                padding: "10px 0px",
+                                fontSize: "12px",
+                                textDecoration: "underline",
+                                textUnderlineOffset: "2px",
+                              }}
+                            >
+                              Privacy & policy
+                            </p>
+                          </div>
+                        </Link>
                         <div
                           style={{
                             display: "flex",
