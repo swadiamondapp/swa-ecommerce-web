@@ -21,13 +21,13 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 375,
-  height: "80%",
+  height: "auto",
   bgcolor: "background.paper",
   border: "none",
   boxShadow: 24,
   borderRadius: "4px",
-  overflowY: "auto",
   p: 2,
+  outline: "none"
 };
 
 export const loginHandler = () => {

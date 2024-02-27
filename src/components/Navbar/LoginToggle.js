@@ -66,6 +66,7 @@ const LoginToggle = () => {
     border: "1px solid #000",
     boxShadow: 24,
     p: 2,
+    outline: "none"
   };
   const styleDesk = {
     position: "absolute",
@@ -78,6 +79,8 @@ const LoginToggle = () => {
     border: "1px solid #000",
     boxShadow: 24,
     p: 2,
+    outline: "none"
+   
   };
   const customTabOtpModalStyle = {
     position: "absolute",
@@ -90,6 +93,8 @@ const LoginToggle = () => {
     border: "1px solid #000",
     boxShadow: 24,
     p: 1,
+    outline: "none"
+   
   };
   const customDestOtpModalStyle = {
     position: "absolute",
@@ -102,6 +107,8 @@ const LoginToggle = () => {
     border: "1px solid #000",
     boxShadow: 24,
     p: 2,
+    outline: "none"
+ 
   };
 
   const customTabOne = {
@@ -167,7 +174,7 @@ const LoginToggle = () => {
                 <div style={{ textAlign: "center" }}>
                   <Button
                     className={Classes.accept}
-                    style={{ marginTop: "2rem" }}
+                    style={{ marginTop: "15px" }}
                     onClick={handleOpen}
                   >
                     SIGNUP
@@ -196,8 +203,8 @@ const LoginToggle = () => {
                     <p
                       style={{
                         color: "rgba(24, 119, 242, 1)",
-                        padding: "5px 0px",
-                        fontSize:'14px',
+                        padding: "0px 0px",
+                        fontSize:'12px',
                       }}
                     >
                       Privacy & policy
@@ -411,7 +418,7 @@ const LoginToggle = () => {
                 </button>
               </div>
             </div>
-            <div className={Classes.Signup}>
+            <div className={Classes.Signup} style={{paddingTop:'10px'}}>
               <span className={Classes.bottomText}>Don’t have an account?</span>
               <span
                 className={Classes.signupAnchor}
@@ -504,9 +511,11 @@ const LoginToggle = () => {
                         sx={{ p: 2 }}
                         style={{ textAlign: "center", padding: "5px" }}
                       >
-                        <div style={{ textAlign: "center", fontSize: "1rem" }}>
+                        <div >
+                          <span style={{ textAlign: "center", fontSize: "14px", }}>
                           By login you are agreed to all privacy policy and
                           tearms and conditions
+                          </span>
                         </div>
                         <Link to="/privacy_policy">
                         <div
@@ -520,7 +529,7 @@ const LoginToggle = () => {
                             style={{
                               color: "rgba(24, 119, 242, 1)",
                               padding: "10px 0px",
-                              fontSize:'14px'
+                              fontSize:'12px'
                             }}
                           >
                             Privacy & policy
