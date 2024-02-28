@@ -223,6 +223,12 @@
 .PayButtonMobile {
   display: none;
 }
+.MobileRightArrow {
+  display: none;
+}
+.Title span {
+  color: #949494;
+}
 @media (min-width: 300px) and (max-width: 575px) {
   .Wrapper {
     padding: 0px;
@@ -264,8 +270,11 @@
     font-weight: 500;
     border-radius: 4px;
     padding: 10px;
-    margin: 0px 10px;
+    margin: 0px 10px 10px;
     font-family: "InterNormal";
     text-align: center;
+  }
+  .MobileRightArrow {
+    display: block;
   }
 }

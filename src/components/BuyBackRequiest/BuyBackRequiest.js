@@ -121,9 +121,7 @@ const BuyBackRequiest = (props) => {
 
   return (
     <div>
-      <Button onClick={handleOpen} style={{ color: "#ffff" }}>
-        BuyBackRequiest
-      </Button>
+      <Button onClick={handleOpen}>BuyBackRequiest</Button>
       <Modal
         // open={props.open}
         open={open}
@@ -235,7 +233,6 @@ const BuyBackRequiest = (props) => {
                                   "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
                                     border: "1px solid #026F7F", // Change border color when focused
                                   },
-                                
                                 },
                                 "& .MuiAutocomplete-input": {
                                   padding: "4px 8px 4px 8px !important",

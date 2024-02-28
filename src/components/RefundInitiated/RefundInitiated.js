@@ -43,9 +43,7 @@ const SuccessPage = () => {
 
   return (
     <div>
-      <Button onClick={handleOpen} style={{ color: "#ffff" }}>
-        open RefundInitiated Modal
-      </Button>
+      <Button onClick={handleOpen}>open RefundInitiated Modal</Button>
       <Modal open={open} onClose={handleClose}>
         <Box
           sx={successM}

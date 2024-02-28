@@ -175,7 +175,10 @@ function CartDesign(props) {
                   className={Classes.PlaceOrderButton}
                   type="submit"
                   value="Place order"
-                  onClick={placeOrder}
+                  // onClick={placeOrder}
+                  onClick={() => {
+                    history.push("/checkout");
+                  }}
                 />
                 {total === amountPay ? (
                   <p className={Classes.HurrayText}>
@@ -194,7 +197,10 @@ function CartDesign(props) {
                   className={Classes.PlaceOrderButtonMobile}
                   type="submit"
                   value="Place order"
-                  onClick={placeOrder}
+                  // onClick={placeOrder}
+                  onClick={() => {
+                    history.push("/checkout");
+                  }}
                 />
               </div>
             </div>

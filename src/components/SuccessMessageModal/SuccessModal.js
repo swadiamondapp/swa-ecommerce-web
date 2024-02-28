@@ -42,9 +42,7 @@ const SuccessPage = (props) => {
 
   return (
     <div>
-      <Button onClick={handleOpen} style={{ color: "#ffff" }}>
-        SUCESS MESSAGE AFTER SUBMIT REVIEW
-      </Button>
+      <Button onClick={handleOpen}>SUCESS MESSAGE AFTER SUBMIT REVIEW</Button>
       <Modal
         // open={props.successModalOpen}
         open={open}

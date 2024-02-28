@@ -86,7 +86,7 @@ const LIfeTImeModal = (props) => {
 
   return (
     <div>
-      <Button onClick={handleOpen} style={{ color: "#ffff" }}>
+      <Button onClick={handleOpen}>
         return or exchange of a delivered product
       </Button>
       <Modal

@@ -31,7 +31,7 @@ const TransferMoneyModal = (props) => {
 
   return (
     <div>
-      <Button onClick={() => setOpen(true)} style={{ color: "#ffff" }}>
+      <Button onClick={() => setOpen(true)} style={{ color: "#000" }}>
         TransferMoneyModal
       </Button>
       <Modal

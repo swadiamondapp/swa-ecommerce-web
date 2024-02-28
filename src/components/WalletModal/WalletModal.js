@@ -60,9 +60,7 @@ const WalletModal = (props) => {
 
   return (
     <div>
-      <Button onClick={handleOpen} style={{ color: "#ffff" }}>
-        WalletModal
-      </Button>
+      <Button onClick={handleOpen}>WalletModal</Button>
       <Modal
         // open={props.open}
         open={open}

@@ -43,7 +43,7 @@ const SuccessPage = () => {
 
   return (
     <div>
-      <Button onClick={handleOpen} style={{ color: "#ffff" }}>
+      <Button onClick={handleOpen}>
         after Canelation submited if cash on delivery
       </Button>
       <Modal open={open} onClose={handleClose}>

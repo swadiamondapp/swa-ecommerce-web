@@ -2,8 +2,10 @@ import React from "react";
 import Classes from "./Payment.module.css";
 import phonepay from "../../Assets/phonepay.svg";
 import mastercard from "../../Assets/mastercard.svg";
+import { useHistory } from "react-router-dom/cjs/react-router-dom";
 
 const Payment = (props) => {
+  const history = useHistory();
   return (
     <div>
       <div className={`${Classes.Wrapper} container`}>
@@ -18,7 +20,9 @@ const Payment = (props) => {
               </div>
             </div>
             <div className={Classes.Step}>
-              <h1 className={Classes.Title}>STEP 3 /3</h1>
+              <h1 className={Classes.Title}>
+                STEP 3 <span> /3</span>
+              </h1>
             </div>
           </div>
         </div>
@@ -71,13 +75,19 @@ const Payment = (props) => {
                   &#x20B9; {"54000"}
                 </p>
               </div>
-              <div className={Classes.PayButton}>Pay &#x20B9; 54,000</div>
+              <div
+                className={Classes.PayButton}
+                onClick={() => {
+                  history.push("/addaddress");
+                }}
+              >
+                Pay &#x20B9; 54,000
+              </div>
               <p className={Classes.HurrayText}>
                 You totaly saved {"9888"}. hurray!..
               </p>
             </div>
           </div>
-          <div className={Classes.PayButtonMobile}>Pay &#x20B9; 54,000</div>
           <div className={Classes.DeliverCard}>
             <div className={Classes.DeliverCardHeader}>
               <h4>Deliver to</h4>
@@ -93,6 +103,14 @@ const Payment = (props) => {
             <p className={Classes.SubAddress} style={{ marginTop: "15px" }}>
               Phone number:9995200745
             </p>
+          </div>
+          <div
+            className={Classes.PayButtonMobile}
+            onClick={() => {
+              history.push("/addaddress");
+            }}
+          >
+            Pay &#x20B9; 54,000
           </div>
         </div>
       </div>

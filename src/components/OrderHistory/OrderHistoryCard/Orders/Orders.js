@@ -73,7 +73,11 @@ function Orders(props) {
               </p>
             </div>
           </div>
-          <MdOutlineKeyboardArrowRight fill="#006E7F" size={25} />
+          <MdOutlineKeyboardArrowRight
+            className={Classes.MobileRightArrow}
+            fill="#006E7F"
+            size={25}
+          />
         </div>
         <div className={Classes.RighSection}>
           <div className={Classes.ViewButton}>
