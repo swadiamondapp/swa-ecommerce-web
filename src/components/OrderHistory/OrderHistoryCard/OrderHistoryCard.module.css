@@ -224,6 +224,9 @@
 .RateContainer {
   padding: 15px 5px 25px;
 }
+.MobileRightArrow {
+  display: none;
+}
 @media (min-width: 300px) and (max-width: 575px) {
   .OutBox {
     margin: 0px 0px 10px;
@@ -280,5 +283,8 @@
   }
   .RateContainer {
     padding: 15px 5px 0px;
+  }
+  .MobileRightArrow {
+    display: block;
   }
 }
