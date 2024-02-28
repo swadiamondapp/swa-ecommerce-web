@@ -208,6 +208,9 @@ svg.p-icon {
 .shipment svg.p-icon {
   color: #006e7f !important;
 }
+.shipment1 svg.p-icon {
+  color: #006e7f !important;
+}
 .p-accordion-tab {
   padding: 10px 0px !important;
   border-bottom: 0.5px solid #e8e9ea5e !important;
@@ -232,6 +235,23 @@ svg.p-icon {
 .shipment .p-accordion-content {
   padding: 20px 15px !important;
   margin: 0px !important;
+}
+.shipment1 .p-accordion-tab {
+  /* padding: 20px 15px !important; */
+  padding: 0px !important;
+}
+.shipment1 .p-accordion-header {
+  padding: 20px 15px !important;
+}
+.shipment1 .p-accordion-header-text {
+  color: #0d1217 !important;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: "gilroyNormal" !important;
+}
+.shipment1 .p-accordion-content {
+  margin: 0px !important;
+  padding-right: 0px;
 }
 .MobAbout {
   margin: 20px 0px;
@@ -343,6 +363,10 @@ svg.p-icon {
   border-bottom: 0.5px solid #e5e5e5 !important;
   border-top-left-radius: 3px !important;
   border-top-right-radius: 3px !important;
+}
+.shipment1 .p-highlight {
+  background: #fcfbf6;
+  box-shadow: 0px 2px 2px 0px #0000000d;
 }
 .css-1hw9j7s {
   background-color: #e5eef7 !important;
