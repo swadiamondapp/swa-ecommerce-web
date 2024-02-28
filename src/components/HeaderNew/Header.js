@@ -2,6 +2,8 @@ import TopHeader from "./TopHeader";
 import React, { useState, useEffect } from "react";
 import Classes from "./MainHead.module.css";
 import MainHead from "./MainHead";
+import { BsPerson, BsEye, BsEyeSlash } from "react-icons/bs";
+
 import { BsSearch } from "react-icons/bs";
 import { CgHeart } from "react-icons/cg";
 import { FiBell } from "react-icons/fi";
@@ -247,6 +249,7 @@ const Header = (props) => {
             cartClose={cateclose}
             close={closeHanlder}
             style={{ marginTop: "0px" }}
+            title={<BsPerson className={Classes.PersonIcon} color="#ffffff" size={30} />}
           />
           <CgHeart
             className={Classes.Icon}
@@ -264,9 +267,9 @@ const Header = (props) => {
             <div className={Classes.ItemsNum}>{props.countCartItems}</div>
           </div>
           <div className={Classes.LoginSignup}>
-            <div className={Classes.dLogin}>Login</div>
+            <div className={Classes.dLogin}><LoginModal isLog={show} close={closeHanlder} title="Login"/></div>
             <div className={Classes.LineArrow}></div>
-            <div className={Classes.DSignup}>Sign up</div>
+            <div className={Classes.DSignup}><LoginModal isLog={show} close={closeHanlder} title="Sign up" isSignup={true} /></div>
           </div>
         </div>
       </MainHead>
