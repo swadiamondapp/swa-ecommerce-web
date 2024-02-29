@@ -837,7 +837,7 @@ a {
   }
   .Offers p {
     color: #000000;
-    font-size: 11px;
+    font-size: 12px;
     margin-bottom: 0px !important;
   }
   .SearchMob {
@@ -1131,6 +1131,26 @@ a {
   }
   .searchbar {
     width: 100%;
+  }
+  .MobSliderCards {
+    display: flex;
+    overflow: scroll;
+    align-items: center;
+    gap: 15px;
+    scrollbar-width: thin; /* For Firefox */
+    scrollbar-color: transparent transparent;
+  }
+  .ParentMobSlider1 {
+    padding-left: 15px;
+  }
+  .SlideImage {
+    margin-right: 0px;
+  }
+  .Offers {
+    padding: 0px;
+  }
+  .OffersInner {
+    margin: 0px;
   }
 }
 /* @media (min-width: 767px) and (max-width: 1200px) {

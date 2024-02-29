@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Logo from "../../Assets/swaLogo.png";
+import Logo from "../../Assets/moblogo.png";
 import Hamburger from "hamburger-react";
 import { FiBell } from "react-icons/fi";
 import { IoCartOutline } from "react-icons/io5";
