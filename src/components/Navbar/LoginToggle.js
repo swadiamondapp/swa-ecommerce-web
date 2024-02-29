@@ -43,6 +43,9 @@ const LoginToggle = () => {
     setIsSignup(true);
 
   };
+  const handleLoginModalOpen = () => {
+    setIsSignup(false)
+  }
   const handleGetOtp = () => {
     setGetOtpModal(true);
   };
@@ -185,7 +188,7 @@ const LoginToggle = () => {
                     </span>
                     <span
                       className={Classes.signupAnchor}
-                      onClick={handleSignupModalOpen}
+                      onClick={handleLoginModalOpen}
                     >
                       Login
                     </span>
