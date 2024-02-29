@@ -249,7 +249,13 @@ const Header = (props) => {
             cartClose={cateclose}
             close={closeHanlder}
             style={{ marginTop: "0px" }}
-            title={<BsPerson className={Classes.PersonIcon} color="#ffffff" size={30} />}
+            title={
+              <BsPerson
+                className={Classes.PersonIcon}
+                color="#ffffff"
+                size={30}
+              />
+            }
           />
           <CgHeart
             className={Classes.Icon}
@@ -267,9 +273,18 @@ const Header = (props) => {
             <div className={Classes.ItemsNum}>{props.countCartItems}</div>
           </div>
           <div className={Classes.LoginSignup}>
-            <div className={Classes.dLogin}><LoginModal isLog={show} close={closeHanlder} title="Login"/></div>
+            <div className={Classes.dLogin}>
+              <LoginModal isLog={show} close={closeHanlder} title="Login" />
+            </div>
             <div className={Classes.LineArrow}></div>
-            <div className={Classes.DSignup}><LoginModal isLog={show} close={closeHanlder} title="Sign up" isSignup={true} /></div>
+            <div className={Classes.DSignup}>
+              <LoginModal
+                isLog={show}
+                close={closeHanlder}
+                title="Sign up"
+                isSignup={true}
+              />
+            </div>
           </div>
         </div>
       </MainHead>
@@ -385,11 +400,11 @@ const Header = (props) => {
       {isHomePage && (
         <div className={Classes.CatList}>
           <div className="container" style={{ padding: "0px" }}>
-            <div className={Classes.Web}>
+            {/* <div className={Classes.Web}>
               <div>
                 <Carousel
-                  autoplay
-                  slidesToShow={3}
+                  // autoplay
+                  slidesToShow={4}
                   dots={false}
                   centerMode={true}
                   centerPadding="5px"
@@ -410,7 +425,8 @@ const Header = (props) => {
                     {
                       breakpoint: 767,
                       settings: {
-                        slidesToShow: 3, // Set the number of slides to display on mobile devices
+                        slidesToShow: 4,
+                        // Set the number of slides to display on mobile devices
                       },
                     },
                   ]}
@@ -457,6 +473,51 @@ const Header = (props) => {
                     );
                   })}
                 </Carousel>
+              </div>
+            </div> */}
+            <div className={Classes.ParentMobSlider1}>
+              <div className={Classes.MobSliderCards}>
+                {catgSet.map((item, index) => {
+                  return (
+                    <div
+                      className={Classes.Offers}
+                      key={index}
+                      onClick={() => catSelHandler(item)}
+                    >
+                      <div className={Classes.OffersInner}>
+                        <img
+                          style={{ width: "45px", height: "45px" }}
+                          className={Classes.SlideImage}
+                          src={item.thumbnail}
+                          alt="catg"
+                        />
+
+                        <p>{item.name.slice(0, 10)}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+
+                {tags.map((item, index) => {
+                  return (
+                    <div
+                      className={Classes.Offers}
+                      key={index}
+                      onClick={() => tagSelHandler(item)}
+                    >
+                      <div className={Classes.OffersInner}>
+                        <img
+                          style={{ width: "45px", height: "45px" }}
+                          // className={Classes.SlideImage}
+                          src={item.thumbnail}
+                          alt="tag"
+                        />
+
+                        <p>{item.name.slice(0, 10)}</p>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
             {/* dummy carousel */}

@@ -635,6 +635,7 @@
     gap: 10px;
     margin-top: 15px;
     overflow: scroll;
+    scrollbar-color: transparent transparent;
   }
   .MobProductDetails2 {
     order: 1;
@@ -665,6 +666,7 @@
     gap: 10px;
     margin-top: 15px;
     overflow: scroll;
+    scrollbar-color: transparent transparent;
   }
   .MobProductDetails::-webkit-scrollbar {
     width: 0.5em; /* Width of the scrollbar */
