@@ -99,7 +99,10 @@
     margin-top: 35px;
   }
   .Image1 {
-    margin-bottom: 0px;
+    margin-bottom: 5px;
+  }
+  .Image2 {
+    margin-bottom: 5px;
   }
 }
 @media (min-width: 300px) and (max-width: 575px) {
@@ -107,6 +110,9 @@
     margin-top: 35px;
   }
   .Image1 {
-    margin-bottom: 0px;
+    margin-bottom: 5px;
+  }
+  .Image2 {
+    margin-bottom: 5px;
   }
 }
