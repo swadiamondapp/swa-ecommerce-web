@@ -327,7 +327,11 @@ const LandingPage = () => {
       </div>
       <div className="container">
         <NewArrivals>{newArriv}</NewArrivals>
+      </div>
+      <div className="container bringthepartpage">
         <BringTheParty add={add} />
+      </div>
+      <div className="container">
         <TopDemanded>{topDemnd}</TopDemanded>
 
         <Certificate video={"https://www.youtube.com/embed/s3PrxdvAihI"} />

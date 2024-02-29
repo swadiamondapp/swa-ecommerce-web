@@ -29,7 +29,7 @@ const BringTheParty = (props) => {
   return (
     <div>
       <div className={Classes.BringThePartyWhole}>
-        <div className="container">
+        <div className={`container ${Classes.MobBringtheparty}`}>
           <div className="row">
             {/* <div className={`${"col-md-5"} ${Classes.BringTheParty}`}>
               <p className={Classes.Text1}>REGULAR ESSENTIALS</p>
@@ -39,10 +39,10 @@ const BringTheParty = (props) => {
                 we have dazzling jewelry to complete every holiday party look.
               </p>
             </div> */}
-            <div className="col-md-12">
-              <div className="container">
+            <div className={`col-md-12 ${Classes.MobBringtheparty}`}>
+              <div className={`container ${Classes.MobBringtheparty}`}>
                 <div className="row">
-                  <div className="col-md-12">
+                  <div className={`col-md-12 ${Classes.MobBringtheparty}`}>
                     <img
                       className={Classes.Image1}
                       src={adds[0].Ad_image}
@@ -50,7 +50,7 @@ const BringTheParty = (props) => {
                       onClick={() => advClicked(adds[0])}
                     />
                   </div>
-                  <div className="col-md-12">
+                  <div className={`col-md-12 ${Classes.MobBringtheparty}`}>
                     <img
                       className={Classes.Image2}
                       src={adds[1].Ad_image}
@@ -58,7 +58,7 @@ const BringTheParty = (props) => {
                       onClick={() => advClicked(adds[1])}
                     />
                   </div>
-                  <div className="col-md-12">
+                  <div className={`col-md-12 ${Classes.MobBringtheparty}`}>
                     <img
                       className={Classes.Image2}
                       src={adds[2].Ad_image}
