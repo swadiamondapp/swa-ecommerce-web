@@ -13,7 +13,7 @@ import { signInWithPopup } from "firebase/auth";
 import { auth, googleAuthProvider } from "../../firebase";
 import { Link } from "react-router-dom";
 
-const LoginToggle = (props) => {
+const LoginToggle = () => {
   const [activeTab, setActiveTab] = useState("tab1");
   const [open, setOpen] = useState(false);
   const [signUpModal, setSignupModal] = useState(false);
@@ -127,7 +127,7 @@ const LoginToggle = (props) => {
   return (
     <div className={Classes.loginToffle}>
       <div className={Classes.Wrapper}>
-        {isSignup || props.isSignupState ? (
+        {isSignup? (
           <>
             <div className={Classes.SignupWrapper}>
               <div className={Classes.signupContainer}>
