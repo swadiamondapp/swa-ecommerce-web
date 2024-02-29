@@ -502,8 +502,7 @@ const LoginModal = (props) => {
     <>
       <div className={Classes.LogList}>
         <p variant="primary" onClick={loginClickHandler}>
-
-          {props.title}
+        <BsPerson className={Classes.PersonIcon} color="#ffffff" size={30} />
         </p>
        
 
@@ -536,7 +535,7 @@ const LoginModal = (props) => {
         <Box sx={style}>
           <Typography>
             <div>
-              <LoginToggle isSignupState={props.isSignup} />
+              <LoginToggle  />
             </div>
           </Typography>
         </Box>
