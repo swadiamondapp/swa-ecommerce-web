@@ -498,4 +498,7 @@ input[type="number"] {
   .star-list .star {
     margin-left: 4px !important;
   }
+  .bringthepartpage {
+    padding: 0px !important;
+  }
 }

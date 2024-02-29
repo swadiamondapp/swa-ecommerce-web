@@ -111,8 +111,13 @@
   }
   .Image1 {
     margin-bottom: 5px;
+    max-width: 410px;
   }
   .Image2 {
     margin-bottom: 5px;
+    max-width: 410px;
+  }
+  .MobBringtheparty {
+    padding: 0px !important;
   }
 }
