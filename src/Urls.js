@@ -2,7 +2,6 @@
 // export const server = "https://Swaprdn.zinfog.com/";
 export const server = "https://swaprdnecomnew.zinfog.in/";
 // export const server = "https://swaprdntest.zinfog.com/";
-export const server = "https://swaprdnecomnew.zinfog.in/";
 //home page api
 export const home = server + "ecom/home/";
 //add wishlist
