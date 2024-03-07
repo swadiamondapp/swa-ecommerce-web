@@ -57,6 +57,7 @@ const FilterModal = (props) => {
   const [openfilter, setOpenfilter] = useState(false);
   const [activeTab, setActiveTab] = useState("first");
   const [selectedSort, setSelectedSort] = useState("");
+  const [selectedPopular, setSelectedPopular] = useState("");
   console.log(props.openSuccessModal);
   const [isMobileView, setIsMobileView] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
@@ -192,16 +193,31 @@ const FilterModal = (props) => {
                       <label>Low to high</label>
                     </div>
                     <div className={classes.PriceTags1}>
-                      <input type="radio" />
+                      <input
+                        checked={selectedSort === "HtoL"}
+                        type="radio"
+                        value="HtoL"
+                        onChange={() => setSelectedSort("HtoL")}
+                      />
                       <label>High to Low</label>
                     </div>
 
                     <div className={classes.PriceTags1}>
-                      <input type="radio" />
+                      <input
+                        checked={selectedPopular === "top"}
+                        type="radio"
+                        value="top"
+                        onChange={() => setSelectedPopular("top")}
+                      />
                       <label>Most popular</label>
                     </div>
                     <div className={classes.PriceTags1}>
-                      <input type="radio" />
+                      <input
+                        checked={selectedPopular === "discounted"}
+                        type="radio"
+                        value="discounted"
+                        onChange={() => setSelectedPopular("discounted")}
+                      />
                       <label>Discounted</label>
                     </div>
                     <div className={classes.PriceTags1}>
@@ -210,10 +226,18 @@ const FilterModal = (props) => {
                     </div>
                   </div>
                   <div className={classes.PriceBtns}>
-                    <button onClick={props.sortHandler}>Done</button>
+                    {/* <button onClick={props.sortHandler}>Done</button> */}
                     {/* <button onClick={() => props.sortHandler(selectedSort)}>
                       Done
                     </button> */}
+                    <button
+                      onClick={() => {
+                        console.log("Selected Sort:", selectedSort);
+                        props.sortHandler(selectedSort, selectedPopular);
+                      }}
+                    >
+                      Done
+                    </button>
                   </div>
                 </div>
               </Typography>
