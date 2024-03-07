@@ -415,7 +415,17 @@ const NewArrivalPage = (props) => {
                   activeClassName={"active"}
                 /> */}
                 {/* <FilterMobile /> */}
-                <FilterModal />
+                <FilterModal
+                  head={head}
+                  labArry={labelSet}
+                  deltLabel={deltLbel}
+                  sortHandler={sortsHHandler}
+                  count={count}
+                  categoryName={productCategory}
+                >
+                  {" "}
+                  {products}
+                </FilterModal>
               </div>
 
               <div className={Classes.DownloadOurAppImage}>

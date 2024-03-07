@@ -56,6 +56,7 @@ const FilterModal = (props) => {
   const [opensort, setOpensort] = useState(false);
   const [openfilter, setOpenfilter] = useState(false);
   const [activeTab, setActiveTab] = useState("first");
+  const [selectedSort, setSelectedSort] = useState("");
   console.log(props.openSuccessModal);
   const [isMobileView, setIsMobileView] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
@@ -97,6 +98,12 @@ const FilterModal = (props) => {
   const handleCloseFilter = () => {
     setOpenfilter(false);
   };
+
+  // const sortHandler = (selectedSort) => {
+  //   // Your existing logic for sorting
+  //   console.log("Selected Sort:", selectedSort);
+  //   // Add more logic if needed
+  // };
 
   // new price modal
   return (
@@ -176,7 +183,12 @@ const FilterModal = (props) => {
                       <label>New arraivals</label>
                     </div>
                     <div className={classes.PriceTags1}>
-                      <input type="radio" />
+                      <input
+                        checked={selectedSort === "LtoH"}
+                        type="radio"
+                        value="LtoH"
+                        onChange={() => setSelectedSort("LtoH")}
+                      />
                       <label>Low to high</label>
                     </div>
                     <div className={classes.PriceTags1}>
@@ -198,7 +210,10 @@ const FilterModal = (props) => {
                     </div>
                   </div>
                   <div className={classes.PriceBtns}>
-                    <button>Done</button>
+                    <button onClick={props.sortHandler}>Done</button>
+                    {/* <button onClick={() => props.sortHandler(selectedSort)}>
+                      Done
+                    </button> */}
                   </div>
                 </div>
               </Typography>

@@ -45,7 +45,7 @@ const BringTheParty = (props) => {
                   <div className={`col-md-12 ${Classes.MobBringtheparty}`}>
                     <img
                       className={Classes.Image1}
-                      src={adds[0].Ad_image}
+                      // src={adds[0].Ad_image}
                       alt="ad1"
                       onClick={() => advClicked(adds[0])}
                     />
@@ -53,7 +53,7 @@ const BringTheParty = (props) => {
                   <div className={`col-md-12 ${Classes.MobBringtheparty}`}>
                     <img
                       className={Classes.Image2}
-                      src={adds[1].Ad_image}
+                      // src={adds[1].Ad_image}
                       alt="ad2"
                       onClick={() => advClicked(adds[1])}
                     />
@@ -61,7 +61,7 @@ const BringTheParty = (props) => {
                   <div className={`col-md-12 ${Classes.MobBringtheparty}`}>
                     <img
                       className={Classes.Image2}
-                      src={adds[2].Ad_image}
+                      // src={adds[2].Ad_image}
                       alt="ad3"
                       onClick={() => advClicked(adds[2])}
                     />
