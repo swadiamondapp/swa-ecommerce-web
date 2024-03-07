@@ -507,7 +507,7 @@ const LoginModal = (props) => {
         <Box sx={style}>
           <Typography>
             <div>
-              <LoginToggle />
+              <LoginToggle onClose={handleClose} />
             </div>
           </Typography>
         </Box>

@@ -16,7 +16,7 @@ export const sentOtp = server + "api/send-otp/";
 //verify otp
 export const verifyOTP = server + "api/verify-otp/";
 //login
-export const Login = server + "api/login/";
+export const Login = server + "ecom/ecomm-login/";
 //wishlist
 export const wishlist = server + "ecom/wishlist/";
 //product list

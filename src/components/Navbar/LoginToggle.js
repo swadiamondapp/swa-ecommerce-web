@@ -52,7 +52,7 @@ const signUpSchema = Joi.object({
     }),
 });
 
-const LoginToggle = () => {
+const LoginToggle = (props) => {
   const [activeTab, setActiveTab] = useState("tab1");
   const [open, setOpen] = useState(false);
   const [signUpModal, setSignupModal] = useState(false);
@@ -218,6 +218,24 @@ const LoginToggle = () => {
     }
   };
 
+  const sendOtp = async () => {
+    try {
+      const body = {
+        phone_code: "+91",
+        phone: mobileNumber,
+        createuser: "False",
+        forgotuser: "False",
+      };
+      const response = await axios.post(Urls.sentOtp, body);
+      console.log(response.data);
+      if (response.data[0] === "Otp send Successfully") {
+        handleOtpModalOpen();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const loginHandler = () => {
     const body = {
       username: mobileNumber,
@@ -234,7 +252,7 @@ const LoginToggle = () => {
           );
 
           // props.logAct(response.data.results.token);
-          // handleClose();
+          props.onClose();
         } else if (response.data.results.status_code === 401) {
           // setLoginError("Incorrect username or password!");
           console.log("Incorrect username or password!");
@@ -243,6 +261,22 @@ const LoginToggle = () => {
       .catch((error) => {
         console.log(error);
       });
+  };
+
+  const verifyOtp = async () => {
+    const body = {
+      phone: mobileNumber,
+      phone_code: "+91",
+      otp: otp,
+    };
+    try {
+      const response = await axios.post(Urls.verifyOTP, body);
+      if (response.data.results.status_code === 200) {
+        loginHandler();
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -502,8 +536,8 @@ const LoginToggle = () => {
                   <>
                     <button
                       className={Classes.LoginButton}
-                      // onClick={}
-                      onClick={loginHandler}
+                      // onClick={loginHandler}
+                      onClick={sendOtp}
                     >
                       LOGIN
                     </button>
@@ -615,9 +649,8 @@ const LoginToggle = () => {
                             onChange={(e) => setOtp(e.target.value)}
                           />
                         </div>
-
-                        <div>
-                          <Button className={Classes.accept}>Continue</Button>
+                        <div onClick={verifyOtp}>
+                          <button className={Classes.accept}>Continue</button>
                         </div>
                         <div
                           style={{

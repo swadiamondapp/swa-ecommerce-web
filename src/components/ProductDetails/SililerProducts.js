@@ -1,11 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Classes from "../HeaderNew/MainHead.module.css";
 import productimage from "../../Assets/BringTheParty1.png";
 import { Carousel } from "antd";
 import { BiRupee } from "react-icons/bi";
 import { IoCartOutline } from "react-icons/io5";
+import * as Urls from "../../Urls";
+import axios from "axios";
 
 const SililerProducts = () => {
+  const [similarProducts, setSimilarProducts] = useState([]);
+
+  useEffect(() => {
+    similarProduct();
+  }, []);
+
+  const similarProduct = async () => {
+    const response = await axios.get(
+      "https://swaprdnecomnew.zinfog.in/ecom/products/9/"
+    );
+    if (
+      response &&
+      response.data &&
+      response.data.results &&
+      response.data.results.status_code === 200
+    ) {
+      setSimilarProducts(response.data.results.similar_data);
+    }
+  };
+
   return (
     <div style={{ marginTop: "20px" }}>
       <div className="container">
@@ -43,23 +65,23 @@ const SililerProducts = () => {
                     },
                   ]}
                 >
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((index) => (
+                  {similarProducts.map((item, index) => (
                     <div key={index} className={Classes.Offers}>
                       <img
                         style={{ width: "100%", height: "205px" }}
                         className={Classes.SlideImage}
-                        src={productimage}
+                        src={item.thumbnail_image}
                         alt={`catg-${index}`}
                       />
                       <p className={Classes.SimilerProductPrices}>
                         {/* <BiRupee className={Classes.Rupee} />  */}
-                        &#x20B9; 27000
+                        &#x20B9; {item.total_price_final}
                       </p>
-                      <div className={Classes.ParentAddToCartCard2}>
+                      {/* <div className={Classes.ParentAddToCartCard2}>
                         <div className={Classes.addToCartCard2}>
                           ADD TO CART <IoCartOutline color="#fff" size={20} />
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                   ))}
                 </Carousel>
