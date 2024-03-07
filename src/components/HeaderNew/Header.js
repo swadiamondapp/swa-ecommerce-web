@@ -43,11 +43,13 @@ const Header = (props) => {
       .then((response1) => {
         setCatgSet(response1.data.results.data.categories);
         setTags(response1.data.results.data.tags);
+        console.log("tags...?", response1.data.results.data);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
+
   const moveToWishList = () => {
     if (token !== null) {
       history.push("/wish_list");
@@ -363,7 +365,7 @@ const Header = (props) => {
               style={{
                 position: "relative",
                 margin: "15px 0px",
-                marginBottom: "10px",
+                marginBottom: "5px",
               }}
             >
               <input

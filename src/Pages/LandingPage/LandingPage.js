@@ -49,6 +49,7 @@ const LandingPage = () => {
   const [tags, setTags] = useState([]);
 
   console.log("mobBanner..01", mobBanner);
+  console.log("budjet..02", budjet);
 
   const history = useHistory();
   const token = localStorage.getItem("swaToken");

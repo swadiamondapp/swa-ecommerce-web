@@ -1137,9 +1137,11 @@ a {
     overflow: scroll;
     align-items: center;
     gap: 15px;
-    scrollbar-width: thin; /* For Firefox */
-    scrollbar-color: transparent transparent;
+    scrollbar-width: none; /* For Firefox */
+    scrollbar-color: #fff !important;
+    margin-bottom: 5px;
   }
+
   .ParentMobSlider1 {
     padding-left: 15px;
   }
