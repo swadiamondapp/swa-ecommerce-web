@@ -69,7 +69,7 @@ const Header = (props) => {
   const cattSelHandler = (setItem) => {
     if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
       window.location.href =
-        "https://swaecommerce.zinfog.com/category_search/" + setItem;
+        "https://swaecommerce.zinfog.com/category_search/" + setItem.id;
     } else {
       history.push({
         pathname: "/new_arrivel",
@@ -297,7 +297,7 @@ const Header = (props) => {
             {category.map((category, index) => (
               <div key={index}>
                 <Link
-                  onClick={() => cattSelHandler(category.id)}
+                  onClick={() => cattSelHandler(category)}
                   style={{ color: "#ffff", cursor: "pointer" }}
                 >
                   <p>{category.name}</p>
