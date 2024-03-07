@@ -7,11 +7,50 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { Button } from "antd";
 import Classes from "./MobileNav.module.css";
+import * as Urls from "../../Urls";
 import { LoginSocialGoogle } from "reactjs-social-login";
 import { signInWithPopup } from "firebase/auth";
+import axios from "axios";
+import * as urls from "../../Urls";
 // import { Auth, GoogleAuthProvider } from "firebase/auth";
 import { auth, googleAuthProvider } from "../../firebase";
 import { Link } from "react-router-dom";
+import Joi from "joi";
+
+const signUpSchema = Joi.object({
+  username: Joi.string()
+    .trim()
+    .regex(/^[a-zA-Z]+$/)
+    .required()
+    .messages({
+      "string.base": `"" should be a type of string`,
+      "string.empty": `Name required`,
+      "string.pattern.base": `Should be a albhabet`,
+      "any.required": `"" is a required field`,
+    }),
+  mobile: Joi.string()
+    .trim()
+    .regex(/^[6-9]\d{9}$/)
+    .required()
+    .messages({
+      "string.base": `"" should be a type of string`,
+      "string.empty": `Phone number required`,
+      "string.pattern.base": `"" must be 10 digit number`,
+      "any.required": `"" is a required field`,
+    }),
+  email: Joi.string()
+    .trim()
+    .regex(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    )
+    .required()
+    .messages({
+      "string.base": `"" should be a type of string`,
+      "string.empty": `Email required`,
+      "string.pattern.base": `youremail@gmail.com`,
+      "any.required": `"" is a required field`,
+    }),
+});
 
 const LoginToggle = () => {
   const [activeTab, setActiveTab] = useState("tab1");
@@ -19,7 +58,13 @@ const LoginToggle = () => {
   const [signUpModal, setSignupModal] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
   const [getOtpModal, setGetOtpModal] = useState(false);
-
+  const [signUpData, setSignUpData] = useState({
+    username: "",
+    mobile: "",
+    email: "",
+  });
+  const [mobileNumber, setMobileNumber] = useState("");
+  const [otp, setOtp] = useState("");
   const [isDesk, setIsDesk] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
   );
@@ -28,7 +73,6 @@ const LoginToggle = () => {
     const handleResize = () => {
       setIsDesk(window.innerWidth >= 300 && window.innerWidth <= 575);
     };
-
     // Add event listener to listen for window resize
     window.addEventListener("resize", handleResize);
 
@@ -41,11 +85,10 @@ const LoginToggle = () => {
   const handleSignupModalOpen = () => {
     setSignupModal(true);
     setIsSignup(true);
-
   };
   const handleLoginModalOpen = () => {
-    setIsSignup(false)
-  }
+    setIsSignup(false);
+  };
   const handleGetOtp = () => {
     setGetOtpModal(true);
   };
@@ -119,6 +162,25 @@ const LoginToggle = () => {
     backgroundColor: activeTab === "tab2" ? "#fff" : "#F0F0F2",
   };
 
+  const [validationErrors, setValidationErrors] = useState({});
+  const validateForm = () => {
+    const validation = signUpSchema.validate(signUpData, {
+      abortEarly: false,
+    });
+
+    if (validation.error) {
+      const errors = {};
+      validation.error.details.forEach((error) => {
+        errors[error.path[0]] = error.message;
+      });
+      setValidationErrors(errors);
+      return false;
+    }
+
+    setValidationErrors({});
+    return true;
+  };
+
   const handleSignInWithGoogle = async () => {
     try {
       const response = await signInWithPopup(auth, googleAuthProvider);
@@ -127,10 +189,66 @@ const LoginToggle = () => {
       console.log(error);
     }
   };
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setSignUpData({
+      ...signUpData,
+      [name]: value,
+    });
+  };
+
+  const handleSignUp = async (event) => {
+    event.preventDefault();
+    if (validateForm()) {
+      try {
+        const body = {
+          name: signUpData.username,
+          phone_code: "+91",
+          phone_number: signUpData.mobile,
+          email: signUpData.email,
+          login_type: "NORMAL",
+        };
+        const response = await axios.post(Urls.register, body);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      console.log("Not valid");
+    }
+  };
+
+  const loginHandler = () => {
+    const body = {
+      username: mobileNumber,
+    };
+    axios
+      .post(urls.Login, body)
+      .then((response) => {
+        if (response.data.results.status_code === 200) {
+          localStorage.setItem("swaToken", response.data.results.token);
+          localStorage.setItem("userName", response.data.results.data.name);
+          localStorage.setItem(
+            "phoneNumber",
+            response.data.results.data.phone_number
+          );
+
+          // props.logAct(response.data.results.token);
+          // handleClose();
+        } else if (response.data.results.status_code === 401) {
+          // setLoginError("Incorrect username or password!");
+          console.log("Incorrect username or password!");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div className={Classes.loginToffle}>
       <div className={Classes.Wrapper}>
-        {isSignup? (
+        {isSignup ? (
           <>
             <div className={Classes.SignupWrapper}>
               <div className={Classes.signupContainer}>
@@ -139,10 +257,8 @@ const LoginToggle = () => {
                   // style={{ marginBottom: "1rem" }}
                 >
                   <p className={Classes.signuptitletext}>Sign up</p>
-
                   <p className={Classes.titlep}>Create your Account</p>
                 </div>
-
                 <div className={Classes.signupInputFields}>
                   <form>
                     <div className={Classes.formgap}>
@@ -151,7 +267,14 @@ const LoginToggle = () => {
                         <input
                           placeholder="Your Name"
                           className={Classes.allInputTextStyle}
+                          value={signUpData.username}
+                          name="username"
+                          onChange={handleInputChange}
                         />
+                        <p className={Classes.ErrorText}>
+                          {validationErrors.username &&
+                            validationErrors.username}
+                        </p>
                       </div>
                       <div>
                         <label className={Classes.labelStyle}>
@@ -160,26 +283,39 @@ const LoginToggle = () => {
                         <input
                           placeholder="Enter Number"
                           className={Classes.allInputTextStyle}
+                          value={signUpData.mobile}
+                          name="mobile"
+                          onChange={handleInputChange}
                         />
+                        <p className={Classes.ErrorText}>
+                          {validationErrors.mobile && validationErrors.mobile}
+                        </p>
                       </div>
                       <div>
                         <label className={Classes.labelStyle}>Email</label>
                         <input
                           placeholder="Email Address"
                           className={Classes.allInputTextStyle}
+                          value={signUpData.email}
+                          name="email"
+                          onChange={handleInputChange}
                         />
+                        <p className={Classes.ErrorText}>
+                          {validationErrors.email && validationErrors.email}
+                        </p>
                       </div>
                     </div>
                   </form>
                 </div>
                 <div style={{ textAlign: "center" }}>
-                  <Button
+                  <button
                     className={Classes.accept}
                     style={{ marginTop: "15px" }}
-                    onClick={handleOpen}
+                    onClick={handleSignUp}
+                    type="submit"
                   >
                     SIGNUP
-                  </Button>
+                  </button>
                 </div>
                 <div className={Classes.SignupTextWrapper}>
                   <div className={Classes.Signup}>
@@ -237,7 +373,10 @@ const LoginToggle = () => {
                     style={{ marginBottom: "1rem" }}
                   >
                     <div className={Classes.googleButton}>
-                      <button className={Classes.buttonSocial}>
+                      <button
+                        className={Classes.buttonSocial}
+                        onClick={handleSignInWithGoogle}
+                      >
                         <img src={GOOGLE} /> Login with Google
                       </button>
                     </div>
@@ -335,6 +474,8 @@ const LoginToggle = () => {
                           <input
                             placeholder="Enter Mobile Number"
                             className={Classes.allInputTextStyle}
+                            value={mobileNumber}
+                            onChange={(e) => setMobileNumber(e.target.value)}
                           />
                         </form>
                       </div>
@@ -359,12 +500,13 @@ const LoginToggle = () => {
               <div>
                 {activeTab === "tab1" ? (
                   <>
-                    <Button
+                    <button
                       className={Classes.LoginButton}
-                      onClick={handleOtpModalOpen}
+                      // onClick={}
+                      onClick={loginHandler}
                     >
                       LOGIN
-                    </Button>
+                    </button>
                   </>
                 ) : (
                   <>
@@ -399,7 +541,10 @@ const LoginToggle = () => {
                 style={{ marginBottom: "1rem" }}
               >
                 <div className={Classes.googleButton}>
-                  <button className={Classes.buttonSocial}>
+                  <button
+                    className={Classes.buttonSocial}
+                    onClick={handleSignInWithGoogle}
+                  >
                     <img src={GOOGLE} /> Login with Google
                   </button>
                 </div>
@@ -466,6 +611,8 @@ const LoginToggle = () => {
                           <input
                             placeholder="6897"
                             className={Classes.allInputTextStyle}
+                            value={otp}
+                            onChange={(e) => setOtp(e.target.value)}
                           />
                         </div>
 

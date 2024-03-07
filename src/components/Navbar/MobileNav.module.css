@@ -110,7 +110,43 @@ header {
   height: 2.45456rem;
   color: #fff;
 }
-.title {
+@keyframes shake {
+  0% {
+    margin-left: 0rem;
+  }
+  25% {
+    margin-left: 0.5rem;
+  }
+  75% {
+    margin-left: -0.5rem;
+  }
+  100% {
+    margin-left: 0rem;
+  }
+}
+.Error {
+  animation: shake 0.2s ease-in-out 0s 2;
+  border: 1px solid #ff0000;
+  width: 100%;
+  font-family: "Poppins";
+  font-size: 14px;
+
+  font-weight: 400;
+  outline: none;
+  border-radius: 5px;
+  padding: 8px 10px;
+}
+.Error::placeholder {
+  color: #ff0000;
+}
+
+.ErrorText {
+  margin-bottom: 0px;
+  padding-top: 2px;
+  color: #ff0000;
+  font-family: "Poppins";
+  font-weight: 400;
+  font-size: 14px;
 }
 
 @media (min-width: 300px) and (max-width: 575px) {

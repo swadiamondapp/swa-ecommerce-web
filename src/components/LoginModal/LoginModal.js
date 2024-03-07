@@ -27,34 +27,7 @@ const style = {
   boxShadow: 24,
   borderRadius: "4px",
   p: 2,
-  outline: "none"
-};
-
-export const loginHandler = () => {
-  const body = {
-    username: 9946787586,
-    password: "Theja@123",
-  };
-  axios
-    .post(urls.Login, body)
-    .then((response) => {
-      if (response.data.results.status_code === 200) {
-        localStorage.setItem("swaToken", response.data.results.token);
-        localStorage.setItem("userName", response.data.results.data.name);
-        localStorage.setItem(
-          "phoneNumber",
-          response.data.results.data.phone_number
-        );
-
-        // props.logAct(response.data.results.token);
-        // handleClose();
-      } else if (response.data.results.status_code === 401) {
-        // setLoginError("Incorrect username or password!");
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  outline: "none",
 };
 
 const LoginModal = (props) => {
@@ -84,7 +57,7 @@ const LoginModal = (props) => {
 
   const [error, setError] = useState("");
   const history = useHistory();
-  // export const loginHandler = () => {
+  // const loginHandler = () => {
   //   const body = {
   //     username: phoneNumber,
   //     password: loginPassword,
@@ -502,9 +475,8 @@ const LoginModal = (props) => {
     <>
       <div className={Classes.LogList}>
         <p variant="primary" onClick={loginClickHandler}>
-        <BsPerson className={Classes.PersonIcon} color="#ffffff" size={30} />
+          <BsPerson className={Classes.PersonIcon} color="#ffffff" size={30} />
         </p>
-       
 
         <div
           className={Classes.LogListCont}
@@ -535,7 +507,7 @@ const LoginModal = (props) => {
         <Box sx={style}>
           <Typography>
             <div>
-              <LoginToggle  />
+              <LoginToggle />
             </div>
           </Typography>
         </Box>

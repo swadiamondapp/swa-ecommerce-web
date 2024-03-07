@@ -5,7 +5,7 @@ import { FiBell } from "react-icons/fi";
 import { IoCartOutline } from "react-icons/io5";
 import LoginToggle from "./LoginToggle";
 import Classes from "./MobileNav.module.css";
-import { loginHandler } from "../LoginModal/LoginModal";
+// import { loginHandler } from "../LoginModal/LoginModal";
 import menuimg from "../../Assets/mobmenu.png";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -102,7 +102,7 @@ const MobileNavbar = () => {
                 className={Classes.Icon}
                 color="#FFFFFF"
                 size={25}
-                onClick={loginHandler}
+                // onClick={loginHandler}
               />
             </div>
             <div>
