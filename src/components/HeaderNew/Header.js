@@ -18,6 +18,7 @@ import { Link } from "react-router-dom";
 const Header = (props) => {
   const [show, setShow] = useState(false);
   const [catgSet, setCatgSet] = useState([]);
+  const [category, setCategory] = useState([]);
   const [tags, setTags] = useState([]);
   const token = localStorage.getItem("swaToken");
   const [searchShow, setSearchShow] = useState(false);
@@ -42,6 +43,8 @@ const Header = (props) => {
       .get(Urls.home)
       .then((response1) => {
         setCatgSet(response1.data.results.data.categories);
+        setCategory(response1.data.results.data.categories);
+        console.log("response=======>?",response1.data.results.data.categories)
         setTags(response1.data.results.data.tags);
       })
       .catch((error) => {
@@ -55,10 +58,16 @@ const Header = (props) => {
       setShow(true);
     }
   };
-  const catSelHandler = (setItem) => {
+
+  const catSelHandler = (id) => {
+    if (history.location.pathname !== "/new_arrivel") {
+      history.push({ pathname: "/new_arrivel", state: { data: id } });
+    }
+  };
+  const cattSelHandler = (setItem) => {
     if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
       window.location.href =
-        "https://swaecommerce.zinfog.com/category_search/" + setItem.id;
+        "https://swaecommerce.zinfog.com/category_search/" + setItem;
     } else {
       history.push({
         pathname: "/new_arrivel",
@@ -283,7 +292,17 @@ const Header = (props) => {
       >
         <div className="container" style={{ padding: "0px" }}>
           <div className={Classes.NavLinksDesk}>
-            <Link to="">
+            {category.map((category, index) => (
+              <div key={index}>
+                <Link
+                  onClick={() => cattSelHandler(category.id)}
+                  style={{ color: "#ffff", cursor: "pointer" }}
+                >
+                  <p>{category.name}</p>
+                </Link>
+              </div>
+            ))}
+            {/* <Link to="">
               <p>OFFERS</p>
             </Link>
             <Link to="">
@@ -330,7 +349,7 @@ const Header = (props) => {
             </Link>
             <Link to="">
               <p>KIDS</p>
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>
