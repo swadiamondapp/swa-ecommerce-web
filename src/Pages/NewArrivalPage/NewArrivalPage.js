@@ -285,6 +285,8 @@ const NewArrivalPage = (props) => {
         "&metal_type=" +
         metal +
         "&sort=" +
+        e.target.value +
+        "&filter_type=" +
         e.target.value,
       1
     );
@@ -317,6 +319,24 @@ const NewArrivalPage = (props) => {
         selectedSort +
         "&filter_type=" +
         selectedPopular,
+      1
+    );
+  };
+  // price filter modal
+  const sortsHHandlerPrice = (selectedPriceRange) => {
+    // setSort(selectedSort);
+    filter(
+      "?occasion_tag_ids=" +
+        occn +
+        "&color_ids=" +
+        color +
+        "&category_ids=" +
+        catgSet +
+        "&metal_type=" +
+        metal +
+        "&price_range=" +
+        selectedPriceRange,
+
       1
     );
   };
@@ -441,6 +461,7 @@ const NewArrivalPage = (props) => {
                   labArry={labelSet}
                   deltLabel={deltLbel}
                   sortHandler={sortsHHandler2}
+                  sortHandlerPrice={sortsHHandlerPrice}
                   count={count}
                   categoryName={productCategory}
                 >

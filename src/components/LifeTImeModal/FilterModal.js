@@ -58,6 +58,7 @@ const FilterModal = (props) => {
   const [activeTab, setActiveTab] = useState("first");
   const [selectedSort, setSelectedSort] = useState("");
   const [selectedPopular, setSelectedPopular] = useState("");
+  const [selectedPriceRange, setSelectedPriceRange] = useState("");
   console.log(props.openSuccessModal);
   const [isMobileView, setIsMobileView] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
@@ -133,25 +134,67 @@ const FilterModal = (props) => {
                   </div>
                   <div className={classes.PriceTgs}>
                     <div className={classes.PriceTags1}>
-                      <input type="checkbox" />
+                      <input
+                        checked={selectedPriceRange === "above_50000"}
+                        value="above_50000"
+                        onChange={() => setSelectedPriceRange("above_50000")}
+                        type="checkbox"
+                      />
                       <label>above 50000</label>
                     </div>
                     <div className={classes.PriceTags1}>
-                      <input type="checkbox" />
+                      <input
+                        checked={selectedPriceRange === "btw_30000_to_50000"}
+                        value="btw_30000_to_50000"
+                        onChange={() =>
+                          setSelectedPriceRange("btw_30000_to_50000")
+                        }
+                        type="checkbox"
+                      />
+                      <label>30000 to 50000</label>
+                    </div>
+                    <div className={classes.PriceTags1}>
+                      <input
+                        checked={selectedPriceRange === "btw_20000_to_30000"}
+                        value="btw_20000_to_30000"
+                        onChange={() =>
+                          setSelectedPriceRange("btw_20000_to_30000")
+                        }
+                        type="checkbox"
+                      />
                       <label>20000 to 30000</label>
                     </div>
                     <div className={classes.PriceTags1}>
-                      <input type="checkbox" />
-                      <label>30000 to 50000</label>
+                      <input
+                        checked={selectedPriceRange === "btw_10000_to_20000"}
+                        value="btw_10000_to_20000"
+                        onChange={() =>
+                          setSelectedPriceRange("btw_10000_to_20000")
+                        }
+                        type="checkbox"
+                      />
+                      <label>10000 to 20000</label>
                     </div>
 
                     <div className={classes.PriceTags1}>
-                      <input type="checkbox" />
+                      <input
+                        checked={selectedPriceRange === "below_10000"}
+                        value="below_10000"
+                        onChange={() => setSelectedPriceRange("below_10000")}
+                        type="checkbox"
+                      />
                       <label>less than 10000</label>
                     </div>
                   </div>
                   <div className={classes.PriceBtns}>
-                    <button>Done</button>
+                    <button
+                      onClick={() => {
+                        console.log("selectedPriceRange", selectedPriceRange);
+                        props.sortHandlerPrice(selectedPriceRange);
+                      }}
+                    >
+                      Done
+                    </button>
                   </div>
                 </div>
               </Typography>
@@ -180,7 +223,12 @@ const FilterModal = (props) => {
                   </div>
                   <div className={classes.PriceTgs}>
                     <div className={classes.PriceTags1}>
-                      <input type="radio" />
+                      <input
+                        checked={selectedPopular === "new"}
+                        type="radio"
+                        value="new"
+                        onChange={() => setSelectedPopular("new")}
+                      />
                       <label>New arraivals</label>
                     </div>
                     <div className={classes.PriceTags1}>

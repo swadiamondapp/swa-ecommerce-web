@@ -62,14 +62,18 @@ function Orders(props) {
           <div className={Classes.ImageContent}>
             <img src={props.Image} />
             <div className={Classes.TextWrapper}>
-              <h3>Diamond Ring</h3>
+              <h3>{props.product_name}</h3>
               <p className={Classes.DeliveryText}>
                 <TbTruckDelivery color="#30933A" size={20} /> Delivered on{" "}
-                <span className={Classes.GreenText}>26 may 2023</span>
+                <span className={Classes.GreenText}>
+                  {props.delivered_date}
+                </span>
               </p>
               <p className={Classes.Expected}>
                 Expected Delivery by{" "}
-                <span className={Classes.OverLined}>30 may 2023</span>
+                <span className={Classes.OverLined}>
+                  {props.expected_delivered_date}
+                </span>
               </p>
             </div>
           </div>
@@ -81,7 +85,7 @@ function Orders(props) {
         </div>
         <div className={Classes.RighSection}>
           <div className={Classes.ViewButton}>
-            <button>View Order details</button>
+            <button onClick={props.clicked}>View Order details</button>
             <MdOutlineKeyboardArrowRight className={Classes.RightArrow} />
           </div>
           <div className={Classes.RatingContainer}>
