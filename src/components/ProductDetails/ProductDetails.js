@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import moment from "moment";
 import Ring from "../../Assets/new4.png";
 import RingFlip from "../../Assets/Ringflip.png";
 import RingRotate from "../../Assets/RingRotate.png";
@@ -39,6 +40,8 @@ const ProductDetails = (props) => {
   const [active, setActive] = useState(null);
   const history = useHistory();
   const token = localStorage.getItem("swaToken");
+  const [reviewImages, setReviewImages] = useState([]);
+  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     if (token !== null) {
@@ -59,7 +62,26 @@ const ProductDetails = (props) => {
           console.log(error);
         });
     }
+    customerPhotos();
   }, []);
+
+  const customerPhotos = async () => {
+    const response = await axios.get(
+      "https://swaprdnecomnew.zinfog.in/ecom/products/90/reviews/"
+    );
+    if (response && response.data && response.data.results) {
+      setReviews(response.data.results);
+    }
+    if (
+      response &&
+      response.data &&
+      response.data.results &&
+      response.data.results.status === 200
+    ) {
+      setReviewImages(response.data.results.data);
+    }
+  };
+
   const addToCartHandler = () => {
     props.cartAdd();
   };
@@ -137,6 +159,8 @@ const ProductDetails = (props) => {
   const sizeChangeHandler = (e) => {
     props.sizeChange(e.target.value);
   };
+
+  console.log("reviews==>", reviews);
 
   return (
     <div>
@@ -684,7 +708,7 @@ const ProductDetails = (props) => {
               </div>
             </div>
 
-            {props.review.map((item, index) => {
+            {/* {props.review.map((item, index) => {
               return (
                 <div className={Classes.Reviews} key={index}>
                   <div className={Classes.StarRating}>
@@ -701,18 +725,18 @@ const ProductDetails = (props) => {
                   </div>
                 </div>
               );
-            })}
+            })} */}
             <div className={Classes.BorderBottom2}>
               <div className="container">
                 <div className={Classes.CustomersHeadReview}>
                   <p className={Classes.ProductDetailsHead}>
-                    Customer photos (32)
+                    Customer photos ({reviews.review_image_count})
                   </p>
                   {/* carousel */}
-                  <ProductImages />
+                  <ProductImages reviewImages={reviewImages} />
                   {/* carousel */}
                 </div>
-                <div className={Classes.ReviewImageTexts}>
+                {/* <div className={Classes.ReviewImageTexts}>
                   <div className={Classes.Icon_Stars}>
                     <img src={Profiles} />
                     <div className={Classes.StarIcons1}>
@@ -735,56 +759,64 @@ const ProductDetails = (props) => {
                       </p>
                     </div>
                   </div>
-                </div>
+                </div> */}
                 {/* second dummy */}
+                {reviewImages.map((item, index) => {
+                  const formattedDate = moment(item.updated_at).format(
+                    "DD MMM YYYY"
+                  );
+                  return (
+                    <div
+                      className={Classes.ReviewImageTexts}
+                      style={{ borderBottom: "0px" }}
+                    >
+                      <div className={Classes.Icon_Stars}>
+                        <img src={Profiles} />
+                        <div className={Classes.StarIcons1}>
+                          <p style={{ color: "#fff" }}>{item.rating}</p>
+                          <IoIosStar
+                            style={{ marginTop: "0px" }}
+                            className={Classes.Star}
+                            size={16}
+                            color="#ffffff"
+                          />
+                        </div>
+                      </div>
+                      <div className={Classes.RightHeadDesc}>
+                        <p>{item.user.name}</p>
+                        <p className={Classes.dateReview}>
+                          {formattedDate && formattedDate}
+                        </p>
+                        <div className={Classes.ReviewsDescription}>
+                          <p>{item.review}</p>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            {reviews.count > 3 && (
+              <div className={Classes.CommentFlex} onClick={seAllHandler}>
                 <div
-                  className={Classes.ReviewImageTexts}
-                  style={{ borderBottom: "0px" }}
+                  className="container"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    margin: "20px 0px",
+                  }}
                 >
-                  <div className={Classes.Icon_Stars}>
-                    <img src={Profiles} />
-                    <div className={Classes.StarIcons1}>
-                      <p style={{ color: "#fff" }}>5</p>
-                      <IoIosStar
-                        style={{ marginTop: "0px" }}
-                        className={Classes.Star}
-                        size={16}
-                        color="#ffffff"
-                      />
-                    </div>
-                  </div>
-                  <div className={Classes.RightHeadDesc}>
-                    <p>Jameel Muhammed</p>
-                    <p className={Classes.dateReview}>12 Oct 2024</p>
-                    <div className={Classes.ReviewsDescription}>
-                      <p>
-                        nice collections swa diamonds, irealy loved it and thank
-                        you soo much for your quick delivery
-                      </p>
-                    </div>
-                  </div>
+                  <p className={Classes.AvailableColours3}>
+                    See all {props.count}{" "}
+                  </p>
+                  <MdOutlineKeyboardArrowRight
+                    size={30}
+                    className={Classes.ArrowIcon1}
+                  />
                 </div>
               </div>
-            </div>
-            <div className={Classes.CommentFlex} onClick={seAllHandler}>
-              <div
-                className="container"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  margin: "20px 0px",
-                }}
-              >
-                <p className={Classes.AvailableColours3}>
-                  See all {props.count}{" "}
-                </p>
-                <MdOutlineKeyboardArrowRight
-                  size={30}
-                  className={Classes.ArrowIcon1}
-                />
-              </div>
-            </div>
+            )}
             {show &&
               props.all.map((item, index) => {
                 return (

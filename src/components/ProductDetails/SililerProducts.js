@@ -73,15 +73,20 @@ const SililerProducts = () => {
                         src={item.thumbnail_image}
                         alt={`catg-${index}`}
                       />
-                      <p className={Classes.SimilerProductPrices}>
-                        {/* <BiRupee className={Classes.Rupee} />  */}
-                        &#x20B9; {item.total_price_final}
+                      <p className={Classes.SimilarProductName}>
+                        {item.category.name}
                       </p>
-                      {/* <div className={Classes.ParentAddToCartCard2}>
-                        <div className={Classes.addToCartCard2}>
-                          ADD TO CART <IoCartOutline color="#fff" size={20} />
-                        </div>
-                      </div> */}
+                      <p className={Classes.SimilerProductSku}>
+                        SKU : {item.sku}
+                      </p>
+                      <div className={Classes.PriceContainer}>
+                        <p className={Classes.SimilerProductPrices}>
+                          &#x20B9; {item.total_price_final}
+                        </p>
+                        <p className={Classes.SimilerProductDiscount}>
+                          &#x20B9; {item.total_price_final}
+                        </p>
+                      </div>
                     </div>
                   ))}
                 </Carousel>

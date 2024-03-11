@@ -129,13 +129,41 @@ header {
   border-radius: 5px;
   padding: 10px 20px;
 }
+.PriceContainer {
+  display: flex;
+  gap: 8px !important;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
 .SimilerProductPrices {
-  margin: 18px 0px !important;
   font-size: 16px !important;
   font-weight: 600 !important;
   font-family: "GilroyRegular" !important;
   display: flex;
   align-items: center;
+}
+.SimilerProductDiscount {
+  font-family: "gilroyNormal" !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  text-align: center;
+  color: #b0b0b0 !important;
+  text-decoration: line-through;
+}
+.SimilarProductName {
+  margin-top: 18px !important;
+  font-family: "gilroyNormal" !important;
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  text-align: center;
+}
+.SimilerProductSku {
+  font-family: "LatoRegular" !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  color: #757c81 !important;
+  text-align: center;
 }
 .NavLinksDesk p {
   padding-bottom: 10px;

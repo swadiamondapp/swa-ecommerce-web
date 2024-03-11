@@ -1,35 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Classes from "../HeaderNew/MainHead.module.css";
-import productimage from "../../Assets/BringTheParty1.png";
 import { Carousel, Modal } from "antd";
-import axios from "axios";
 
-const ProductImages = () => {
+const ProductImages = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
-  const [reviewImages, setReviewImages] = useState([]);
-
-  useEffect(() => {
-    customerPhotos();
-  }, []);
 
   const handleImageClick = (image) => {
     setSelectedImage(image);
     setModalVisible(true);
-  };
-
-  const customerPhotos = async () => {
-    const response = await axios.get(
-      "https://swaprdnecomnew.zinfog.in/ecom/products/90/reviews/"
-    );
-    if (
-      response &&
-      response.data &&
-      response.data.results &&
-      response.data.results.status === 200
-    ) {
-      setReviewImages(response.data.results.data);
-    }
   };
 
   return (
@@ -66,7 +45,7 @@ const ProductImages = () => {
                   },
                 ]}
               >
-                {reviewImages.map((item, index) => (
+                {props.reviewImages.map((item, index) => (
                   <div
                     key={index}
                     className={Classes.Offers}

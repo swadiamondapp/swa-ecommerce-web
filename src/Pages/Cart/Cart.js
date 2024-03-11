@@ -33,7 +33,7 @@ const Cart = () => {
       .get(Urls.cart, { headers: { Authorization: "Token " + token } })
       .then((response1) => {
         setLoading(false);
-
+        console.log("response1--->", response1);
         if (response1.data.results.messege === "cart is empty") {
           setCartCount("");
         } else {
@@ -47,6 +47,7 @@ const Cart = () => {
         console.log(error);
       });
   }, []);
+
   const handlePageClick = (data) => {
     setLoading(true);
     let page = data.selected + 1;
