@@ -53,6 +53,9 @@ const NewArrivalPage = (props) => {
                 <option>Choose Price</option>
                 <option value="LtoH">Low to high</option>
                 <option value="HtoL">High to Low</option>
+                <option value="new">New arraivals</option>
+                <option value="top">Most popular</option>
+                <option value="discounted">Discounted</option>
               </select>
               <div className={Classes.CustomSelectArrow}>
                 {/* Add your custom down arrow image here */}
