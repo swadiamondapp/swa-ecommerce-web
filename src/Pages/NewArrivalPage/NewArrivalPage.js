@@ -422,6 +422,7 @@ const NewArrivalPage = (props) => {
                   sortHandler={sortsHHandler}
                   count={count}
                   categoryName={productCategory}
+                  setProduct={setProduct}
                 >
                   {" "}
                   {products}
