@@ -35,6 +35,8 @@ export const addAdress = server + "ecom/addresses/";
 export const checkout = server + "ecom/checkout/";
 //create review
 export const review = server + "ecom/products/review/";
+// show reviews
+export const showreview = server + "ecom/products/";
 //my order
 export const myOrder = server + "ecom/orders/";
 //buy now

@@ -4,9 +4,12 @@ import productimg from "../../Assets/diamonds.png";
 import deliveryimg from "../../Assets/delivery.png";
 import ReactStarRating from "react-star-ratings-component";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import * as Urls from "../../Urls";
 
-const RateReviewMain = () => {
+const RateReviewMain = (props) => {
   const [rate, setRate] = useState(2);
+  const token = localStorage.getItem("swaToken");
   const [isMobileView, setIsMobileView] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
   );
@@ -27,6 +30,35 @@ const RateReviewMain = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, [isMobileView]);
+  const [orderDetails, setOrderDetails] = useState([
+    {
+      product: {
+        thumbnail_image: "",
+        product_name: "",
+        carat: "",
+        gross_weight: "",
+        product_id: "",
+      },
+      color: { size_name: "" },
+      quantity: "",
+    },
+  ]);
+  useEffect(() => {
+    axios
+      .get(Urls.myOrder, {
+        headers: {
+          Authorization: "Token " + token,
+        },
+      })
+      .then((response1) => {
+        setOrderDetails(response1.data.results.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  console.log("orderDet...1", orderDetails);
   return (
     <div>
       <div className={`container ${Classes.MainCont}`}>
@@ -54,7 +86,13 @@ const RateReviewMain = () => {
                     <p className={Classes.productNames3}>Diamond ring</p>
                     <p className={Classes.pDesc3}>
                       <img src={deliveryimg} /> Delivered on{" "}
-                      <span style={{ color: "#30933A" }}>26 may 2023</span>
+                      <span
+                        style={{
+                          color: "#30933A",
+                        }}
+                      >
+                        26 may 2023
+                      </span>
                     </p>
                     <p className={Classes.pDesc4}>
                       Expected Delivery by <span>30 may 2023</span>
@@ -94,7 +132,13 @@ const RateReviewMain = () => {
                     <p className={Classes.productNames3}>Diamond ring</p>
                     <p className={Classes.pDesc3}>
                       <img src={deliveryimg} /> Delivered on{" "}
-                      <span style={{ color: "#30933A" }}>26 may 2023</span>
+                      <span
+                        style={{
+                          color: "#30933A",
+                        }}
+                      >
+                        26 may 2023
+                      </span>
                     </p>
                     <p className={Classes.pDesc4}>
                       Expected Delivery by <span>30 may 2023</span>
