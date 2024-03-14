@@ -21,7 +21,8 @@ import AddBank from "../../components/LifeTImeModal/AddBank";
 import moment from "moment";
 import axios from "axios";
 import * as Urls from "../../Urls";
-import SuccessPage from "../../components/SuccessMessageModal/SuccessModal";
+// import SuccessPage from "../../components/SuccessMessageModal/SuccessModal";
+import SuccessPage from "../../components/SuccessPage/SuccessPage";
 import TransferMoneyModal from "../../components/WalletModal/TransferMoneyModal";
 import { TbLocationFilled } from "react-icons/tb";
 import { IoCall } from "react-icons/io5";
@@ -55,6 +56,7 @@ const OrderHistorypage2 = (props) => {
     type: "",
   });
   const [orderId, setOrderId] = useState("");
+  const [orderid, setOrderid] = useState("");
   const [total, setTotal] = useState("");
   const [subTot, setSubTot] = useState("");
   const [cartCount, setCartCount] = useState("");
@@ -77,44 +79,46 @@ const OrderHistorypage2 = (props) => {
   };
   // warnning
 
-  // useEffect(() => {
-  //   axios
-  //     .get(Urls.myOrder + "/" + props.location.state.data, {
-  //       headers: {
-  //         Authorization: "Token " + token,
-  //       },
-  //     })
-  //     .then((response1) => {
-  //       setAddress(response1.data.results.data.order.address);
-  //       setOrderId(response1.data.results.data.order.order_code);
-  //       setOrderPlaced(response1.data.results.data.order.order_at);
-  //       setTotal(response1.data.results.data.order.grand_total);
-  //       setPromoCode(response1.data.results.data.order.promocode);
-  //       setSubTot(response1.data.results.data.order.orders_total);
-  //       setOrderDet(response1.data.results.data.order.shipment);
-  //       setPayMode(response1.data.results.data.order.payment_mode);
-  //       setDoctNum(response1.data.results.data.order.shipment[0].docket_number);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  //   axios
-  //     .get(Urls.cart, {
-  //       headers: {
-  //         Authorization: "Token " + token,
-  //       },
-  //     })
-  //     .then((response1) => {
-  //       if (response1.data.results.message === "cart is empty") {
-  //         setCartCount("");
-  //       } else {
-  //         setCartCount(response1.data.results.count);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, []);
+  useEffect(() => {
+    axios
+      .get(Urls.myOrder + "/" + props.location.state.data, {
+        headers: {
+          Authorization: "Token " + token,
+        },
+      })
+      .then((response1) => {
+        console.log("response1->", response1);
+        setAddress(response1.data.results.data.order.address);
+        setOrderId(response1.data.results.data.order.order_code);
+        setOrderid(response1.data.results.data.order.id);
+        setOrderPlaced(response1.data.results.data.order.order_at);
+        setTotal(response1.data.results.data.order.grand_total);
+        setPromoCode(response1.data.results.data.order.promocode);
+        setSubTot(response1.data.results.data.order.orders_total);
+        setOrderDet(response1.data.results.data.order.shipment);
+        setPayMode(response1.data.results.data.order.payment_mode);
+        setDoctNum(response1.data.results.data.order.shipment[0].docket_number);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    axios
+      .get(Urls.cart, {
+        headers: {
+          Authorization: "Token " + token,
+        },
+      })
+      .then((response1) => {
+        if (response1.data.results.message === "cart is empty") {
+          setCartCount("");
+        } else {
+          setCartCount(response1.data.results.count);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
   // warnning
 
   const homeHandler = () => {
@@ -135,16 +139,26 @@ const OrderHistorypage2 = (props) => {
     <div>
       <div className={Classes.Background}>
         <Header countCartItems={cartCount} />
-        {/* <LIfeTImeModal open={open} handleClose={() => setOpen(false)} />
+        <LIfeTImeModal
+          open={open}
+          handleClose={() => setOpen(false)}
+          orderid={orderid}
+          payMode={payMode}
+          total={total}
+          shipmentId={orderDet[0].id}
+          productId={orderDet[0].product.product_id}
+          // handleSuccessOpen={() => setSuccessModalOpen(true)}
+        />
         <BuyBackRequiest
           open={buyBackOpen}
           handleClose={() => setBuyBackOpen(false)}
         />
-        <AddBank open={addBankOpen} handleClose={() => setAddBankOpen(false)} />
-        <SuccessPage
+        {/* <SuccessPage
           open={successModalOpen}
           handleClose={() => setSuccessModalOpen(false)}
-        />
+        /> */}
+        {/*
+        <AddBank open={addBankOpen} handleClose={() => setAddBankOpen(false)} />
         <TransferMoneyModal
         open={transferModalOpen}
         handleClose={() => setTransferModalOpen(false)}
@@ -152,15 +166,18 @@ const OrderHistorypage2 = (props) => {
         <CancelProductModal
           open={cancelProductModal}
           handleClose={() => setCancelProductModal(false)}
+          orderId={orderid}
+          orderDet={orderDet}
+          payMode={payMode}
+          total={total}
         />
+
         <div>
           <div className={`container ${Classes.OrderMobCont}`}>
             <div className={`container ${Classes.OrderMobCont2}`}>
               <div className={Classes.Main}>
                 {/* <h1 className={Classes.Title}>Shipment Details</h1> */}
-                <h3 className={Classes.orderidh3}>
-                  Order ID : SWA4R46RF46R356F45
-                </h3>
+                <h3 className={Classes.orderidh3}>Order ID : {orderId}</h3>
                 <div className={Classes.DeliveryDetails}>
                   <p>
                     <img src={deliveryimg} />
@@ -217,21 +234,19 @@ const OrderHistorypage2 = (props) => {
                     >
                       <AccordionTab header="Shipping Address">
                         <div className={Classes.ShippingDetialHead}>
-                          <p className={Classes.nameShipment}>
-                            Mohammed Inshad
-                          </p>
+                          <p className={Classes.nameShipment}>{address.name}</p>
                           <div className={Classes.AddressShipping}>
                             <p className={Classes.AddressSh1}>
                               <TbLocationFilled
                                 className={Classes.AddressIcons}
                               />
-                              Kottakunnan ( house ) morayur 673642 <br />{" "}
-                              opposit family health center <br /> malappuram
-                              district <br /> kerala 673643
+                              {address.house} ( house ) {address.city}{" "}
+                              {address.pincode} <br /> {address.area} <br />{" "}
+                              {address.city} district <br /> {address.state}
                             </p>
                             <p className={Classes.phoneSh}>
                               <IoCall className={Classes.phoneicons} />
-                              Phone number : 9995200745
+                              Phone number : {address.phone_number}
                             </p>
                           </div>
                         </div>
@@ -239,16 +254,23 @@ const OrderHistorypage2 = (props) => {
                       <AccordionTab header="Product Details">
                         <div className={Classes.ProductDetailsParent1}>
                           <div className={Classes.LftProductDetail}>
-                            <img src={imgproduct} />
+                            <img
+                              src={orderDet[0].product.thumbnail_image}
+                              style={{ maxWidth: "121px" }}
+                            />
                             <div>
-                              <p className={Classes.PDiamond1}>Diamond ring</p>
+                              <p className={Classes.PDiamond1}>
+                                {orderDet[0].product.product_name}
+                              </p>
                               <p style={{ color: "#757C81" }}>
                                 18 KT yellow gold 12.460 GM
                               </p>
                               <p style={{ color: "#757C81" }}>
                                 Diamond 0.680 Carat SIIJ
                               </p>
-                              <p style={{ color: "#303A42" }}>SKU 1245</p>
+                              <p style={{ color: "#303A42" }}>
+                                SKU {orderDet[0].product.sku}
+                              </p>
                             </div>
                           </div>
                           <div className={Classes.rgtProductDetails}>
@@ -259,7 +281,7 @@ const OrderHistorypage2 = (props) => {
                           <p>
                             Certification No :{" "}
                             <span style={{ color: "#0997E7" }}>
-                              SGLJMH6786532E
+                              {orderDet[0].docket_number}
                             </span>
                           </p>
                         </div>

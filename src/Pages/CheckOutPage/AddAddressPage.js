@@ -17,38 +17,23 @@ const AddAddressPage = (props) => {
   const [changeId, setChangeId] = useState("");
   const [cartCount, setCartCount] = useState("");
   const token = localStorage.getItem("swaToken");
-  //   useEffect(() => {
-  //     // console.log(props.location.state.data);
-  //     setLoading(true);
-  //     setTotal(props.location.state.data.total);
-  //     axios
-  //       .get(Urls.address, { headers: { Authorization: "Token " + token } })
-  //       .then((response1) => {
-  //         setAddress(response1.data.results.data);
-  //         if (response1.data.results.data.length !== 0) {
-  //           setAddressId(
-  //             response1.data.results.data[response1.data.results.data.length - 1]
-  //               .id
-  //           );
-  //         }
-  //         setLoading(false);
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //     axios
-  //       .get(Urls.cart, { headers: { Authorization: "Token " + token } })
-  //       .then((response1) => {
-  //         if (response1.data.results.message === "cart is empty") {
-  //           setCartCount("");
-  //         } else {
-  //           setCartCount(response1.data.results.count);
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //   }, [changeId]);
+  useEffect(() => {
+    setLoading(true);
+    fetchAddress();
+    // setTotal(props.location.state.data.total);
+    // axios
+    //   .get(Urls.cart, { headers: { Authorization: "Token " + token } })
+    //   .then((response1) => {
+    //     if (response1.data.results.message === "cart is empty") {
+    //       setCartCount("");
+    //     } else {
+    //       setCartCount(response1.data.results.count);
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+  }, [changeId]);
   const adressChangeHanlder = (id) => {
     setChangeId(id);
   };
@@ -56,18 +41,37 @@ const AddAddressPage = (props) => {
     setAddressId(e.target.value);
   };
 
+  const fetchAddress = () => {
+    axios
+      .get(Urls.address, { headers: { Authorization: "Token " + token } })
+      .then((response1) => {
+        setAddress(response1.data.results.data);
+        if (response1.data.results.data.length !== 0) {
+          setAddressId(
+            response1.data.results.data[response1.data.results.data.length - 1]
+              .id
+          );
+        }
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div>
       <div className={Classes.Background}>
         <Header countCartItems={cartCount} />
         <AddAddress
-        //   total={props.location.state.data.total}
-        //   isLoad={loading}
-        // addressArray={address}
-        // address={addressId}
-        // radioChange={radioChangeHandler}
-        // adresChnge={adressChangeHanlder}
-        // proDet={props.location.state}
+          //   total={props.location.state.data.total}
+          //   isLoad={loading}
+          addressArray={address}
+          fetchAddress={fetchAddress}
+          // address={addressId}
+          // radioChange={radioChangeHandler}
+          // adresChnge={adressChangeHanlder}
+          // proDet={props.location.state}
         />
 
         <div className={Classes.Features}>

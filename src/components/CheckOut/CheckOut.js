@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Classes from "./CheckOut.module.css";
 import { useHistory } from "react-router-dom";
 import { BiRupee } from "react-icons/bi";
+import { states } from "../../countryList";
 
 import { useState } from "react";
 import { IoIosArrowUp } from "react-icons/io";
@@ -10,8 +11,8 @@ import Succes from "../../Assets/success.png";
 import { AiOutlineHome } from "react-icons/ai";
 import { Radio, Space } from "antd";
 import axios from "axios";
-import { FadeLoader } from "react-spinners";
 import * as Urls from "../../Urls";
+import { FadeLoader } from "react-spinners";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Dropdown } from "primereact/dropdown";
@@ -30,16 +31,31 @@ function CheckOut(props) {
   const [promoId, setPromoId] = useState("");
   const [mode, setMode] = useState("P");
   const [selectedCity, setSelectedCity] = useState(null);
-
+  const [defaultAddress, setDefaultAddress] = useState([]);
+  const [fromCheckOut, setFromCheckOut] = useState([]);
+  const [addressData, setAddressData] = useState({
+    sEmail: "",
+    sPhone: "",
+    fullName: "",
+    mobile: "",
+    pincode: "",
+    city: "",
+    state: "kerala",
+    hNumber_Bname: "",
+    streetColony: "",
+    landMark: "",
+  });
   const [formShow, setFormShow] = useState(false);
 
   const token = localStorage.getItem("swaToken");
   var alphaExp = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
 
   useEffect(() => {
-    setTotal(props.total);
-    setAmountPay(props.total);
+    getDefaultAddress();
+    setTotal(props.proDet.data.total);
+    setAmountPay(props.proDet.data.total);
   }, []);
+
   const placeOrder = () => {
     let cartBody;
     let buyBody;
@@ -49,28 +65,28 @@ function CheckOut(props) {
         address_id: props.address,
         mode: mode,
       };
-      buyBody = {
-        product_id: props.proDet.data.product_id,
-        color: props.proDet.data.color,
-        size: props.proDet.data.size,
-        promocode: code,
-        address_id: props.address,
-        mode: mode,
-      };
+      // buyBody = {
+      //   product_id: props.proDet.data.product_id,
+      //   color: props.proDet.data.color,
+      //   size: props.proDet.data.size,
+      //   promocode: code,
+      //   address_id: props.address,
+      //   mode: mode,
+      // };
     } else {
       cartBody = {
         promocode_id: 0,
         address_id: props.address,
         mode: mode,
       };
-      buyBody = {
-        product_id: props.proDet.data.product_id,
-        color: props.proDet.data.color,
-        size: props.proDet.data.size,
-        promocode_id: 0,
-        address_id: props.address,
-        mode: mode,
-      };
+      // buyBody = {
+      //   product_id: props.proDet.data.product_id,
+      //   color: props.proDet.data.color,
+      //   size: props.proDet.data.size,
+      //   promocode_id: 0,
+      //   address_id: props.address,
+      //   mode: mode,
+      // };
     }
     if (props.proDet.name === "cart") {
       axios
@@ -80,8 +96,8 @@ function CheckOut(props) {
         .then((response1) => {
           if (mode === "P") {
             var options = {
-              // key: "rzp_test_hbBeCNBjrqDq6P", // test Key
-              // key_secret: "HwgmIdicOPlAeLkBdOJIMXiu",
+              key: "rzp_test_hbBeCNBjrqDq6P", // test Key
+              key_secret: "HwgmIdicOPlAeLkBdOJIMXiu",
               key: "rzp_live_rKLs1hbpVT5npK",
               key_secret: "td3G02g20iPqQzfz4b2NFSFN",
               amount: amountPay * 100,
@@ -254,126 +270,187 @@ function CheckOut(props) {
   const formShowHandler = () => {
     setFormShow(true);
   };
-  const formik = useFormik({
-    initialValues: {
-      namef: "",
-      mobile: "",
-      building: "",
-      city: "",
-      pin: "",
-      colony: "",
-      landMark: "",
-      state: "1",
-    },
-    validationSchema: Yup.object({
-      namef: Yup.string()
-        .required("This field is required")
-        .matches(alphaExp, "Valid name"),
+  // const formik = useFormik({
+  //   initialValues: {
+  //     email: defaultAddress.email,
+  //     phone: "",
+  //     namef: "",
+  //     mobile: defaultAddress.phone_number,
+  //     building: "",
+  //     city: "",
+  //     pin: defaultAddress.pincode,
+  //     colony: "",
+  //     landMark: defaultAddress.landmark,
+  //     state: "1",
+  //   },
+  //   validationSchema: Yup.object({
+  //     namef: Yup.string()
+  //       .required("This field is required")
+  //       .matches(alphaExp, "Valid name"),
 
-      mobile: Yup.string()
-        // .min(6, "Password should be at least 6 characters ")
-        .required("This field is required")
-        .length(10, "Enter valid number"),
-      building: Yup.string().required("This field is required"),
-      city: Yup.string().required("This field is required"),
-      pin: Yup.string()
-        .required("This field is required")
-        .min(5, "Enter valid pincode"),
-      colony: Yup.string().required("This field is required"),
-      landMark: Yup.string().required("This field is required"),
-    }),
-    onSubmit: (values, onSubmitprops) => {
-      //   setIsLoading(true)
+  //     mobile: Yup.string()
+  //       // .min(6, "Password should be at least 6 characters ")
+  //       .required("This field is required")
+  //       .length(10, "Enter valid number"),
+  //     building: Yup.string().required("This field is required"),
+  //     city: Yup.string().required("This field is required"),
+  //     pin: Yup.string()
+  //       .required("This field is required")
+  //       .min(5, "Enter valid pincode"),
+  //     colony: Yup.string().required("This field is required"),
+  //     landMark: Yup.string().required("This field is required"),
+  //   }),
+  //   onSubmit: (values, onSubmitprops) => {
+  //     //   setIsLoading(true)
 
-      const inputs = {
-        name: values.namef,
-        phone_code: "+91",
-        phone_number: values.mobile,
-        alt_code: "",
-        alt_number: "",
-        pincode: values.pin,
-        state: values.state,
-        city: values.city,
-        landmark: values.landMark,
-        house: values.building,
-        area: values.colony,
-        type: "HOME",
-        is_main: false,
-      };
+  //     const inputs = {
+  //       name: values.namef,
+  //       phone_code: "+91",
+  //       phone_number: values.mobile,
+  //       alt_code: "",
+  //       alt_number: "",
+  //       pincode: values.pin,
+  //       state: values.state,
+  //       city: values.city,
+  //       landmark: values.landMark,
+  //       house: values.building,
+  //       area: values.colony,
+  //       type: "HOME",
+  //       is_main: false,
+  //     };
 
-      axios
-        .post(Urls.addAdress, inputs, {
-          headers: { Authorization: "Token " + token },
-        })
-        .then((response) => {
-          onSubmitprops.resetForm();
-          setFormShow(false);
-          props.adresChnge(response.data.data.id);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
-  });
+  //     axios
+  //       .post(Urls.addAdress, inputs, {
+  //         headers: { Authorization: "Token " + token },
+  //       })
+  //       .then((response) => {
+  //         onSubmitprops.resetForm();
+  //         setFormShow(false);
+  //         props.adresChnge(response.data.data.id);
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   },
+  // });
   const methodChange = (e) => {
     setMode(e.target.value);
   };
-  let adres;
-  if (props.isLoad) {
-    adres = (
-      <div className="d-flex justify-content-center align-items-center loader">
-        {" "}
-        <FadeLoader color="#00464d" />
-      </div>
-    );
-  } else {
-    adres = (
-      <>
-        <Radio.Group onChange={props.radioChange} value={props.address}>
-          <Space direction="vertical">
-            {props.addressArray.map((item, index) => {
-              return (
-                <div className={Classes.AddresCont} key={index}>
-                  <Radio value={item.id}>
-                    <div className={Classes.Address}>
-                      <h6 className={Classes.Name}>{item.name}</h6>
-                      <p
-                        className={Classes.AddreInner}
-                        style={{ fontWeight: "400" }}
-                      >
-                        {item.house} ( house ){item.area} , {item.landmark}{" "}
-                        {item.state} {item.pincode}
-                      </p>
-                      <span className={Classes.Mobile}>
-                        phone number : {item.phone_code}
-                        {item.phone_number}
-                      </span>
-                    </div>
-                  </Radio>
-                </div>
-              );
-            })}
-          </Space>
-        </Radio.Group>
-        <div className={Classes.addAdres} onClick={formShowHandler}>
-          <AiOutlineHome
-            color="#0997E7"
-            size={25}
-            style={{ marginTop: "-5px" }}
-          />
-          &nbsp;&nbsp;Add new address
-        </div>
-      </>
-    );
-  }
+  // let adres;
+  // if (props.isLoad) {
+  //   adres = (
+  //     <div className="d-flex justify-content-center align-items-center loader">
+  //       {" "}
+  //       <FadeLoader color="#00464d" />
+  //     </div>
+  //   );
+  // } else {
+  //   adres = (
+  //     <>
+  //       <Radio.Group onChange={props.radioChange} value={props.address}>
+  //         <Space direction="vertical">
+  //           {props.addressArray.map((item, index) => {
+  //             return (
+  //               <div className={Classes.AddresCont} key={index}>
+  //                 <Radio value={item.id}>
+  //                   <div className={Classes.Address}>
+  //                     <h6 className={Classes.Name}>{item.name}</h6>
+  //                     <p
+  //                       className={Classes.AddreInner}
+  //                       style={{ fontWeight: "400" }}
+  //                     >
+  //                       {item.house} ( house ){item.area} , {item.landmark}{" "}
+  //                       {item.state} {item.pincode}
+  //                     </p>
+  //                     <span className={Classes.Mobile}>
+  //                       phone number : {item.phone_code}
+  //                       {item.phone_number}
+  //                     </span>
+  //                   </div>
+  //                 </Radio>
+  //               </div>
+  //             );
+  //           })}
+  //         </Space>
+  //       </Radio.Group>
+  //       <div className={Classes.addAdres} onClick={formShowHandler}>
+  //         <AiOutlineHome
+  //           color="#0997E7"
+  //           size={25}
+  //           style={{ marginTop: "-5px" }}
+  //         />
+  //         &nbsp;&nbsp;Add new address
+  //       </div>
+  //     </>
+  //   );
+  // }
 
-  const cities = [
-    { name: "New York", code: "NY" },
-    { name: "Rome", code: "RM" },
-    { name: "London", code: "LDN" },
-    { name: "Istanbul", code: "IST" },
-    { name: "Paris", code: "PRS" },
-  ];
+  const handleChangeAddress = (event) => {
+    const { name, value } = event.target;
+    setAddressData({
+      ...addressData,
+      [name]: value,
+    });
+  };
+
+  const submitAddress = async () => {
+    try {
+      const body = {
+        name: addressData.fullName,
+        phone_code: "+91",
+        phone_number: addressData.mobile,
+        email: addressData.sEmail,
+        pincode: addressData.pincode,
+        state: addressData.state,
+        city: addressData.city,
+        house: addressData.hNumber_Bname,
+        area: addressData.streetColony,
+        landmark: addressData.landMark,
+        type: "HOME",
+        is_main: false,
+      };
+      const response = await axios.post(Urls.addAdress, body, {
+        headers: { Authorization: "Token " + token },
+      });
+      console.log("response.data.status--->", response);
+      if (response.data && response.data.status === 200) {
+        history.push({
+          pathname: "/payment",
+          state: {
+            data: { pay: amountPay, total: total, addressId: props.address },
+            name: "cart",
+          },
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getDefaultAddress = async () => {
+    try {
+      const response = await axios.get(Urls.defaultAddress, {
+        headers: { Authorization: "Token " + token },
+      });
+      if (response.data.results.status === 200) {
+        setAddressData({
+          ...addressData,
+          sEmail: response.data.results.data.email,
+          sPhone: response.data.results.data.phone_number,
+          fullName: response.data.results.data.name,
+          mobile: response.data.results.data.phone_number,
+          pincode: response.data.results.data.pincode,
+          city: response.data.results.data.city,
+          state: response.data.results.data.state,
+          hNumber_Bname: response.data.results.data.house,
+          streetColony: response.data.results.data.area,
+          landMark: response.data.results.data.landmark,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>
@@ -405,7 +482,7 @@ function CheckOut(props) {
 
               <div className={Classes.Main}>
                 <div className={Classes.Left}>
-                  <form autoComplete="off" onSubmit={formik.handleSubmit}>
+                  <form autoComplete="off" onSubmit={submitAddress}>
                     <div className={Classes.EmailMobileNew}>
                       <div>
                         <label>Email</label>
@@ -413,8 +490,9 @@ function CheckOut(props) {
                           className={Classes.PlaceInput}
                           type="text"
                           placeholder="Sample@gmail.com"
-                          name="email"
-                          onChange={formik.handleChange}
+                          value={addressData.sEmail}
+                          name="sEmail"
+                          onChange={handleChangeAddress}
                         />
                       </div>
                       <div>
@@ -423,8 +501,9 @@ function CheckOut(props) {
                           className={Classes.PlaceInput}
                           type="text"
                           placeholder="+91 98975656785"
-                          name="mobile"
-                          onChange={formik.handleChange}
+                          value={addressData.sPhone}
+                          name="sPhone"
+                          onChange={handleChangeAddress}
                         />
                       </div>
                     </div>
@@ -435,15 +514,11 @@ function CheckOut(props) {
                         className={Classes.PlaceInput}
                         type="text"
                         placeholder="Full name*"
-                        value={formik.values.namef}
-                        name="namef"
-                        onChange={formik.handleChange}
+                        value={addressData.fullName}
+                        name="fullName"
+                        onChange={handleChangeAddress}
                       />
-                      {formik.touched.namef && formik.errors.namef && (
-                        <div className={Classes.ErrorMsg}>
-                          {formik.errors.namef}
-                        </div>
-                      )}
+                      {<div className={Classes.ErrorMsg}></div>}
                     </div>
 
                     <div className={Classes.ParentF1}>
@@ -453,15 +528,10 @@ function CheckOut(props) {
                           className={Classes.PlaceInput}
                           type="number"
                           placeholder="Phone number*"
-                          value={formik.values.mobile}
+                          value={addressData.mobile}
                           name="mobile"
-                          onChange={formik.handleChange}
+                          onChange={handleChangeAddress}
                         />
-                        {formik.touched.mobile && formik.errors.mobile && (
-                          <div className={Classes.ErrorMsg}>
-                            {formik.errors.mobile}
-                          </div>
-                        )}
                       </div>
                       <div>
                         <label>Pincode</label>
@@ -469,15 +539,10 @@ function CheckOut(props) {
                           className={Classes.PlaceInput}
                           type="text"
                           placeholder="Pincode*"
-                          value={formik.values.pin}
-                          name="pin"
-                          onChange={formik.handleChange}
+                          value={addressData.pincode}
+                          name="pincode"
+                          onChange={handleChangeAddress}
                         />
-                        {formik.touched.pin && formik.errors.pin && (
-                          <div className={Classes.ErrorMsg}>
-                            {formik.errors.pin}
-                          </div>
-                        )}
                       </div>
                       <div>
                         <label>City</label>
@@ -485,15 +550,10 @@ function CheckOut(props) {
                           className={Classes.PlaceInput}
                           type="text"
                           placeholder="City*"
-                          value={formik.values.city}
+                          value={addressData.city}
                           name="city"
-                          onChange={formik.handleChange}
+                          onChange={handleChangeAddress}
                         />
-                        {formik.touched.city && formik.errors.city && (
-                          <div className={Classes.ErrorMsg}>
-                            {formik.errors.city}
-                          </div>
-                        )}
                       </div>
                     </div>
 
@@ -502,7 +562,7 @@ function CheckOut(props) {
                       <Dropdown
                         value={selectedCity}
                         onChange={(e) => setSelectedCity(e.value)}
-                        options={cities}
+                        options={states}
                         optionLabel="name"
                         placeholder="Select a City"
                       />
@@ -515,15 +575,10 @@ function CheckOut(props) {
                           className={Classes.PlaceInput}
                           type="text"
                           placeholder="house number/ building name*"
-                          value={formik.values.building}
-                          name="building"
-                          onChange={formik.handleChange}
+                          value={addressData.hNumber_Bname}
+                          name="hNumber_Bname"
+                          onChange={handleChangeAddress}
                         />
-                        {formik.touched.building && formik.errors.building && (
-                          <div className={Classes.ErrorMsg}>
-                            {formik.errors.building}
-                          </div>
-                        )}
                       </div>
                       <div className={Classes.ColonyForm}>
                         <label>Street colony name</label>
@@ -531,15 +586,10 @@ function CheckOut(props) {
                           className={Classes.PlaceInput}
                           type="text"
                           placeholder="road name, area colony*"
-                          value={formik.values.colony}
-                          name="colony"
-                          onChange={formik.handleChange}
+                          value={addressData.streetColony}
+                          name="streetColony"
+                          onChange={handleChangeAddress}
                         />
-                        {formik.touched.colony && formik.errors.colony && (
-                          <div className={Classes.ErrorMsg}>
-                            {formik.errors.colony}
-                          </div>
-                        )}
                       </div>
                     </div>
                     <div>
@@ -548,15 +598,10 @@ function CheckOut(props) {
                         className={Classes.PlaceInput}
                         type="text"
                         placeholder="Landmark"
-                        value={formik.values.landMark}
+                        value={addressData.landMark}
                         name="landMark"
-                        onChange={formik.handleChange}
+                        onChange={handleChangeAddress}
                       />
-                      {formik.touched.landMark && formik.errors.landMark && (
-                        <div className={Classes.ErrorMsg}>
-                          {formik.errors.landMark}
-                        </div>
-                      )}
                     </div>
 
                     {/* <div className={Classes.Flex}>
@@ -618,15 +663,15 @@ function CheckOut(props) {
                     <p className={Classes.AmountPayable}>{amountPay}</p>
                   </div>
                 </div>
-                <div className={Classes.Voucher}>
+                {/* <div className={Classes.Voucher}>
                   <p className={Classes.NumOfItem}>
                     Do you have Voucher code ?
                   </p>
                   <p className={Classes.Apply} onClick={showHandler}>
                     Apply
                   </p>
-                </div>
-                {show ? (
+                </div> */}
+                {/* {show ? (
                   <form onSubmit={handleSubmit} autoComplete="off">
                     <div className="d-flex" style={{ marginTop: "10px" }}>
                       <input
@@ -663,14 +708,12 @@ function CheckOut(props) {
                       </p>
                     </div>
                   </form>
-                ) : null}
+                ) : null} */}
 
                 <div
                   className={Classes.PlaceOrderButton}
                   // onClick={placeOrder}
-                  onClick={() => {
-                    history.push("/payment");
-                  }}
+                  onClick={submitAddress}
                 >
                   Proceed to payment
                 </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import classes from "./LIfeTimeModal.module.css";
-
+import axios from "axios";
+import * as Urls from "../../Urls";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -46,6 +47,7 @@ const successM = {
 };
 
 const AddBank = (props) => {
+  const token = localStorage.getItem("swaToken");
   // const [successModalOpen, setSuccessModalOpen] = useState(false);
   const [open, setOpen] = useState(false);
   const [selectedCity, setSelectedCity] = useState(null);
@@ -53,6 +55,14 @@ const AddBank = (props) => {
   const [isMobileView, setIsMobileView] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
   );
+  const [bankDatas, setBankDatas] = useState({
+    accountNo: "",
+    reAccountNo: "",
+    bankName: "Federal Bank",
+    branch: "",
+    ifsc: "",
+    accountHolderName: "",
+  });
 
   useEffect(() => {
     const handleResize = () => {
@@ -82,6 +92,34 @@ const AddBank = (props) => {
     { name: "Istanbul", code: "IST" },
     { name: "Paris", code: "PRS" },
   ];
+
+  const addBank = async () => {
+    try {
+      const body = {
+        account_number: bankDatas.accountNo,
+        re_enter_account_number: bankDatas.reAccountNo,
+        bank_name: bankDatas.bankName,
+        branch: bankDatas.branch,
+        ifsc: bankDatas.ifsc,
+        account_holder_name: bankDatas.accountHolderName,
+      };
+      const response = await axios.post(Urls.addBankAccount, body, {
+        headers: { Authorization: "Token " + token },
+      });
+      console.log("Bankresponse", response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleChangeAddress = (event) => {
+    const { name, value } = event.target;
+    setBankDatas({
+      ...bankDatas,
+      [name]: value,
+    });
+  };
+
   return (
     <div>
       <Button onClick={handleOpen}>anas add bank account modal</Button>
@@ -105,21 +143,24 @@ const AddBank = (props) => {
               <div className={classes.FormADDbANK}>
                 <div className={classes.AccountLabels}>
                   <label>Enter Account Number</label>
-                  <input type="text" placeholder="Jameel" />
+                  <input
+                    type="text"
+                    placeholder="000153798763"
+                    name="accountNo"
+                    value={bankDatas.accountNo}
+                    onChange={handleChangeAddress}
+                  />
                 </div>
                 <div className={classes.AccountLabels}>
                   <label>Re Enter Account number</label>
-                  <input type="text" placeholder="+91 98975656785" />
+                  <input
+                    type="text"
+                    placeholder="000153798763"
+                    name="reAccountNo"
+                    value={bankDatas.reAccountNo}
+                    onChange={handleChangeAddress}
+                  />
                 </div>
-                {/* <div className={classes.AccountLabels}>
-                  <label>Bank Name</label>
-                  <select name="cars" id="cars">
-                    <option value="Axis bank">Axis bank</option>
-                    <option value="saab">Saab</option>
-                    <option value="mercedes">Mercedes</option>
-                    <option value="audi">Audi</option>
-                  </select>
-                </div> */}
                 <div className={classes.AccountLabels}>
                   <label>Bank Name</label>
                   <Dropdown
@@ -133,22 +174,37 @@ const AddBank = (props) => {
                 <div className={classes.BranchIfscParent}>
                   <div className={classes.BranchAcc}>
                     <label>Branch</label>
-                    <input type="text" placeholder="City*" />
+                    <input
+                      type="text"
+                      placeholder="City*"
+                      name="branch"
+                      value={bankDatas.branch}
+                      onChange={handleChangeAddress}
+                    />
                   </div>
                   <div className={classes.BranchAcc}>
                     <label>IFSC</label>
-                    <input type="text" placeholder="Pincode*" />
+                    <input
+                      type="text"
+                      placeholder="IFSC*"
+                      name="ifsc"
+                      value={bankDatas.ifsc}
+                      onChange={handleChangeAddress}
+                    />
                   </div>
                 </div>
                 <div className={classes.AccountLabels}>
                   <label>Account holder Name</label>
-                  <input type="text" placeholder="Muhammed Jameel" />
+                  <input
+                    type="text"
+                    placeholder="Muhammed Jameel"
+                    name="accountHolderName"
+                    value={bankDatas.accountHolderName}
+                    onChange={handleChangeAddress}
+                  />
                 </div>
-                <div
-                  className={classes.AddBtnACC}
-                  onClick={props.openSuccessModal}
-                >
-                  <button>Add</button>
+                <div className={classes.AddBtnACC}>
+                  <button onClick={addBank}>Add</button>
                 </div>
               </div>
             </div>

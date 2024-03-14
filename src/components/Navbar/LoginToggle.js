@@ -210,8 +210,13 @@ const LoginToggle = (props) => {
           login_type: "NORMAL",
         };
         const response = await axios.post(Urls.register, body);
+        if (response.data.results.status_code === 200) {
+          alert("Successfully Registered");
+          handleLoginModalOpen();
+        } else {
+        }
       } catch (error) {
-        console.log(error);
+        alert(error.response.data.results.message);
       }
     } else {
       console.log("Not valid");

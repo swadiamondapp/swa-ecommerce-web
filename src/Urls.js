@@ -62,3 +62,7 @@ export const pinCode =
 //track order
 export const trackOrder =
   "https://bvcmars.com/RestService/TrackingService.svc/GetDocketTrackingDetails";
+
+export const CancelOrder = server + "ecom/cancel-order";
+export const defaultAddress = server + "ecom/address/";
+export const addBankAccount = server + "ecom/bank/add/";

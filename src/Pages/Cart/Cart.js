@@ -25,7 +25,6 @@ const Cart = () => {
   const [productId, setProdctId] = useState("");
   const [loading, setLoading] = useState(false);
   const [amountPay, setAmountPay] = useState("");
-  const [walletOpen, setWalletOpen] = useState(false);
   const token = localStorage.getItem("swaToken");
   useEffect(() => {
     setLoading(true);
@@ -169,7 +168,7 @@ const Cart = () => {
         <CartDesign
           amount={amountPay}
           cartProAmnt={selProAmnt}
-          handleOpen={() => setWalletOpen(true)}
+          // handleOpen={() => setWalletOpen(true)}
         >
           {cartList.map((item, index) => {
             return (
@@ -192,15 +191,16 @@ const Cart = () => {
                     : null
                 }
                 Property={
-                  item.description.carat +
+                  // item.description.carat +
                   " KT " +
-                  item.description.colour_name +
+                  // item.description.colour_name +
                   " " +
-                  item.description.gross_weight +
+                  // item.description.gross_weight +
                   " GM "
                 }
                 DiamondProperty={
-                  "Diamond " + item.description.diamond_weight_preview + " GM"
+                  "Diamond "
+                  // + item.description.diamond_weight_preview + " GM"
                 }
                 Size=""
                 quanty={item.quantity}
@@ -247,10 +247,6 @@ const Cart = () => {
         this item from the cat?"
           shows={show}
         />
-        {/* <WalletModal
-          open={walletOpen}
-          handleClose={() => setWalletOpen(false)}
-        /> */}
 
         {cartLists}
 

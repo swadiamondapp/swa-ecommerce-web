@@ -468,8 +468,6 @@ const LoginModal = (props) => {
 
   const userName = localStorage.getItem("userName");
   const phone = localStorage.getItem("phoneNumber");
-  console.log(userName);
-  console.log(phone);
 
   return (
     <>
