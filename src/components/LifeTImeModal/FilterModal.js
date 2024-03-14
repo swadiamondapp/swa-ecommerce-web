@@ -191,6 +191,7 @@ const FilterModal = (props) => {
                       onClick={() => {
                         console.log("selectedPriceRange", selectedPriceRange);
                         props.sortHandlerPrice(selectedPriceRange);
+                        handleClose();
                       }}
                     >
                       Done
@@ -282,6 +283,7 @@ const FilterModal = (props) => {
                       onClick={() => {
                         console.log("Selected Sort:", selectedSort);
                         props.sortHandler(selectedSort, selectedPopular);
+                        handleCloseSort();
                       }}
                     >
                       Done
