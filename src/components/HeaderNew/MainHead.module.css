@@ -81,7 +81,7 @@ header {
 .searchbar {
   border-radius: 32px;
   position: relative;
-  background: #f4f4f4;
+  background: #dfe7e7;
   border: none;
   outline: none;
   padding: 10px 20px 10px 50px;
@@ -89,6 +89,20 @@ header {
   font-weight: 600;
   font-family: "GilroyRegular";
   font-size: 14px;
+  box-shadow: 0px 1px 3px 0px #dfe7e7 inset;
+  border: 0.5px solid #dce5e5;
+  border-radius: 8px;
+  box-shadow: 0px 1px 3px 0px #dfe7e7 inset;
+}
+.DiwaliOffers {
+  text-align: center;
+  background: #00464d;
+  color: #fff;
+  font-family: lato;
+  font-weight: 400;
+  padding: 8px;
+  font-size: 14px;
+  letter-spacing: 0.5px;
 }
 .searchbar::placeholder {
   color: #9c9c9c;
@@ -701,6 +715,13 @@ a {
   position: absolute;
   overflow-y: hidden;
 }
+.LogedUser {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  gap: 8px;
+  font-family: "GilroyRegular";
+}
 .NumFlex {
   display: flex;
 }
@@ -724,7 +745,34 @@ a {
   display: block;
   z-index: 1;
 }
-
+.LogedUserDetails {
+  box-shadow: 0px 28px 208px 0px #00000014;
+  background: #fff;
+  position: absolute;
+  right: 9.5%;
+  top: 18%;
+  border-radius: 8px;
+  z-index: 999;
+  overflow: hidden;
+  width: 230px;
+}
+.LogedDetails_list p {
+  color: #0d1217;
+  padding: 10px 20px;
+  font-family: "gilroyNormal" !important;
+}
+.Name_phoneLog {
+  background: #fcfbf6;
+  padding: 15px 20px;
+}
+.Name_phoneLog p {
+  font-family: "gilroyNormal" !important;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+.Name_phoneLoged {
+  font-weight: 500 !important;
+}
 .regPhoneNumber:focus {
   outline: none;
 }

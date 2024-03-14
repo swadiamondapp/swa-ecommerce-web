@@ -17,6 +17,7 @@ import "../../Pages/OrderHistoryPage2/OrderHistoryPage2.module.css";
 import ringimg from "../../Assets/ladiesring.png";
 import ringimg2 from "../../Assets/pendant1.png";
 import { HiPlus } from "react-icons/hi";
+import indiaimg from "../../Assets/india.png";
 
 const MobileNavbar = () => {
   const [isHamOpen, setIsHamOpen] = useState(false);
@@ -90,13 +91,20 @@ const MobileNavbar = () => {
                   }
                 }}
               /> */}
-              <img onClick={handleOpen} src={menuimg} />
+              <img
+                onClick={handleOpen}
+                src={menuimg}
+                className={Classes.hamMenu}
+              />
             </div>
             <div className={Classes.Logo}>
               <img className={Classes.mobileLogo} src={Logo} />
             </div>
           </div>
           <div className={Classes.rightIcons}>
+            <div>
+              <img src={indiaimg} />
+            </div>
             <div>
               <FiBell
                 className={Classes.Icon}
