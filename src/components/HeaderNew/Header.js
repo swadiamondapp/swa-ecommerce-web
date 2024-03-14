@@ -14,6 +14,7 @@ import axios from "axios";
 import * as Urls from "../../Urls";
 import { Carousel } from "antd";
 import { Link } from "react-router-dom";
+import CheckDelivery from "../CheckDelivery/CheckDelivery";
 
 const Header = (props) => {
   const [show, setShow] = useState(false);
@@ -251,6 +252,10 @@ const Header = (props) => {
             color="#FFFFFF"
             size={25}
             // onClick={Notification}
+          />
+          <CheckDelivery
+          islog={show}
+          close={closeHanlder}
           />
 
           <LoginModal

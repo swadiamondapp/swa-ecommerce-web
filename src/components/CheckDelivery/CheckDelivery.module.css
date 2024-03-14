@@ -1,0 +1,12 @@
+.DeliveryPin {
+    display: flex;
+    flex-direction: column;
+}
+.checkDeliveryTitle {
+    color:#fff;
+    font-size: 12px;
+}
+.EnterPinTitle {
+    color:#00E5ED;
+    font-size: 12px;
+}
