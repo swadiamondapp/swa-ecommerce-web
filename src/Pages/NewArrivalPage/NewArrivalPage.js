@@ -464,6 +464,7 @@ const NewArrivalPage = (props) => {
                   sortHandlerPrice={sortsHHandlerPrice}
                   count={count}
                   categoryName={productCategory}
+                  setProduct={setProduct}
                 >
                   {" "}
                   {products}

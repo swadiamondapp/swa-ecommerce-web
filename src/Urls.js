@@ -9,6 +9,9 @@ export const addWishList = server + "ecom/wishlist/";
 //product details
 export const productDet = server + "ecom/products/";
 
+export const productCategoryByMetal = server + "ecom/products/?metal_type=";
+export const filterProductsById = server + "ecom/products/?category_ids="
+
 //register
 export const register = server + "ecom/register/";
 //sent otp
@@ -52,8 +55,23 @@ export const addRecent = server + "ecom/recent/";
 export const updatePas = server + "api/update/";
 //pincode check
 export const pincodeCheck = server + "ecom/pincode_check/?pincode=";
+
 //track
 export const track = server + "ecom/product-tracking/";
+
+//metalType filter
+export const metalType = server+ "ecom/products/?metal_type=3";
+
+//metalCategory
+export const metalCategory = server + "ecom/metal_types/";
+
+//filterCatgories
+export const categoryWise = server + "ecom/categories";
+
+// occationCategories
+export const occationalProdByid = server +"ecom/products/?occasion_tag_ids=";
+export const occationalProducts = server + "ecom/tags";
+
 
 export const pinCodeToken =
   "https://bvcmars.com/RestService/OrderUploadService.svc/GenerateAuthenticationToken";
