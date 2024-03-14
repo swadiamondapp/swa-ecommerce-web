@@ -28,20 +28,32 @@ function Rating(props) {
   const [show, setShow] = useState(false);
   const [rate, setRate] = useState(2);
   const [review, setReview] = useState("");
+  const [imageFile, setImageFile] = useState(null);
   const [error, setError] = useState("");
+  const [fileUploaded, setFileUploaded] = useState(false);
   const token = localStorage.getItem("swaToken");
+  console.log("file....body", imageFile);
 
   const handleShow = () => {
-    const body = {
-      product_id: props.proid,
-      rating: rate,
-      review: review,
-      review_title: "pwoli sadhanam",
-    };
+    // const body = {
+    //   // product_id: props.proid,
+    //   product_id: 45,
+    //   rating: rate,
+    //   review: review,
+    //   review_title: "Good",
+    //   review_image: imageFile,
+    // };
     if (review !== "") {
       setError("");
+      const formData = new FormData();
+      formData.append("product_id", 32);
+      // product_id: props.proid,
+      formData.append("rating", rate);
+      formData.append("review", review);
+      formData.append("review_title", "Good");
+      formData.append("review_image", imageFile);
       axios
-        .post(urls.review, body, {
+        .post(urls.review, formData, {
           headers: { Authorization: "Token " + token },
         })
         .then((response1) => {
@@ -62,6 +74,13 @@ function Rating(props) {
   };
   const reviewChangeHandler = (e) => {
     setReview(e.target.value);
+  };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    setImageFile(file);
+    setFileUploaded(true);
+    console.log("file", file);
   };
   return (
     <div className={`container ${Classes.MobReview1}`}>
@@ -122,8 +141,8 @@ function Rating(props) {
               tabIndex={-1}
               startIcon={<FaRegImage />}
             >
-              Add Photo
-              <VisuallyHiddenInput type="file" />
+              {fileUploaded ? "File Uploaded" : "Add Photo"}
+              <VisuallyHiddenInput type="file" onChange={handleFileChange} />
             </Button>
           </div>
           {/* file upload */}

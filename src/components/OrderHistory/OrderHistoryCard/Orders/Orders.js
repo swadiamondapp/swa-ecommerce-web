@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { IoIosStar } from "react-icons/io";
 import ReactStarRating from "react-star-ratings-component";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
@@ -10,10 +10,30 @@ import { BsCircleFill } from "react-icons/bs";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { Button, Tooltip } from "antd";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import * as Urls from "../../../../Urls";
 function Orders(props) {
+  const [showReview, setShowReview] = useState();
   const history = useHistory();
+  const token = localStorage.getItem("swaToken");
+
+  useEffect(() => {
+    axios
+      .get(Urls.showreview + "90/reviews/", {
+        headers: {
+          Authorization: "Token " + token,
+        },
+      })
+      .then((response1) => {
+        setShowReview(response1.data.results.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
   // color="#069D0D"
-  console.log("props--.>", props);
+  console.log("props--.>", props.orderId);
+  console.log("showReview--.>", showReview);
   return (
     <div className={Classes.RateContainer}>
       {/* <div className={Classes.Align}>
@@ -91,7 +111,7 @@ function Orders(props) {
           <div className={Classes.RatingContainer}>
             <ReactStarRating
               numberOfStar={5}
-              // numberOfSelectedStar={rate}
+              // numberOfSelectedStar={showReview.rating}
               colorFilledStar="#F6C514"
               colorEmptyStar="#D1D3D5"
               starSize="25px"
@@ -99,7 +119,7 @@ function Orders(props) {
               disableOnSelect={false}
               // onSelectStar={rateChangeHandler}
             />
-            <Link to="/rate&review">
+            <Link to="/rate_review">
               <p>Rate & Review</p>
             </Link>
           </div>

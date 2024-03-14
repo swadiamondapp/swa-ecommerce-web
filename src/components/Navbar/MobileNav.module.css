@@ -58,6 +58,9 @@ header {
   padding-top: 0px;
   margin-bottom: 0px;
 }
+.hamMenu {
+  max-width: 30px;
+}
 .ParentCards1 p {
   font-family: "lato";
   font-weight: 400;
@@ -179,7 +182,7 @@ header {
   }
   .rightIcons {
     display: flex;
-    gap: 2rem;
+    gap: 1.5rem;
   }
   .LoginContainer {
     /* padding: 1rem 1rem 1.5rem 1rem; */

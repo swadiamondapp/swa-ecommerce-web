@@ -1,5 +1,5 @@
 import TopHeader from "./TopHeader";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Classes from "./MainHead.module.css";
 import MainHead from "./MainHead";
 import { BsPerson, BsEye, BsEyeSlash } from "react-icons/bs";
@@ -14,6 +14,10 @@ import axios from "axios";
 import * as Urls from "../../Urls";
 import { Carousel } from "antd";
 import { Link } from "react-router-dom";
+import CheckDelivery from "../CheckDelivery/CheckDelivery";
+import indiaimg from "../../Assets/india.png";
+import logedimg from "../../Assets/loged.png";
+import { IoIosArrowDown } from "react-icons/io";
 
 const Header = (props) => {
   const [show, setShow] = useState(false);
@@ -32,6 +36,29 @@ const Header = (props) => {
   const isCheckoutPage = window.location.pathname === "/checkout";
   const isCartPage = window.location.pathname === "/cart";
 
+  const [showUserDetails, setShowUserDetails] = useState(false);
+  const userDetailsRef = useRef(null);
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const handleClickOutside = (event) => {
+    if (
+      userDetailsRef.current &&
+      !userDetailsRef.current.contains(event.target)
+    ) {
+      setShowUserDetails(false);
+    }
+  };
+
+  const handleLogedUserClick = () => {
+    setShowUserDetails(!showUserDetails);
+  };
+
   const history = useHistory();
   useEffect(() => {
     if (props.lognAct) {
@@ -44,7 +71,10 @@ const Header = (props) => {
       .then((response1) => {
         setCatgSet(response1.data.results.data.categories);
         setCategory(response1.data.results.data.categories);
-        console.log("response=======>?",response1.data.results.data.categories)
+        console.log(
+          "response=======>?",
+          response1.data.results.data.categories
+        );
         setTags(response1.data.results.data.tags);
         console.log("tags...?", response1.data.results.data);
       })
@@ -203,6 +233,7 @@ const Header = (props) => {
         <div className={Classes.SearchIcons}>
           <div className={Classes.searchList}>
             <input
+              style={{ background: "#F8F8F8", borderRadius: "32px" }}
               className={Classes.searchbar}
               type="text"
               value={searchKey}
@@ -252,6 +283,8 @@ const Header = (props) => {
             size={25}
             // onClick={Notification}
           />
+          <CheckDelivery islog={show} close={closeHanlder} />
+          <img src={indiaimg} />
 
           <LoginModal
             className={Classes.loginUser}
@@ -281,6 +314,33 @@ const Header = (props) => {
             <div className={Classes.LineArrow}></div>
             <div className={Classes.DSignup}>Sign up</div>
           </div>
+          <div onClick={handleLogedUserClick} className={Classes.LogedUser}>
+            <img src={logedimg} />
+            <p>Mohammed Inshad</p>
+            <IoIosArrowDown />
+          </div>
+          {/* modal */}
+
+          {showUserDetails && (
+            <div ref={userDetailsRef} className={Classes.LogedUserDetails}>
+              <div className={Classes.Name_phoneLog}>
+                <p>Mohammed Inshad</p>
+                <p className={Classes.Name_phoneLoged}>+91 9995200745</p>
+              </div>
+              <div className={Classes.LogedDetails_list}>
+                <p>Account</p>
+                <p>Order history</p>
+                <p>Add Address</p>
+                <p>Track Order</p>
+                <p>Write review</p>
+                <p>Swa wallet</p>
+                <p>Swa exchange</p>
+                <p>Log Out</p>
+              </div>
+            </div>
+          )}
+
+          {/* modal */}
         </div>
       </MainHead>
       <div
@@ -300,7 +360,7 @@ const Header = (props) => {
                   onClick={() => cattSelHandler(category)}
                   style={{ color: "#ffff", cursor: "pointer" }}
                 >
-                  <p>{category.name}</p>
+                  <p>{category.name.toUpperCase()}</p>
                 </Link>
               </div>
             ))}
@@ -379,11 +439,14 @@ const Header = (props) => {
         <div
           className={`${mobileSearchBarClass} ${Classes.MobileSearchbarOthers}`}
         >
+          <div className={Classes.DiwaliOffers}>
+            Diwali offer - 10% on every purchase 🥳
+          </div>
           <div className="container">
             <div
               style={{
                 position: "relative",
-                margin: "15px 0px",
+                margin: "12px 0px",
                 marginBottom: "5px",
               }}
             >

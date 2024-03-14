@@ -1,0 +1,90 @@
+import React, { useState, useEffect } from "react";
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import locationimg from "../../Assets/locationicon.png";
+import timeimg from "../../Assets/time.png";
+import { BsArrowRight } from "react-icons/bs";
+
+import Classes from "../CheckDelivery/CheckDelivery.module.css";
+
+import * as urls from "../../Urls";
+import axios from "axios";
+
+import { useHistory } from "react-router-dom";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 468,
+  height: "auto",
+  bgcolor: "background.paper",
+  border: "none",
+  boxShadow: 24,
+  borderRadius: "4px",
+  p: 2,
+  outline: "none",
+};
+
+const CheckDelivery = (props) => {
+  const [show, setShow] = useState(false);
+  const handleShow = () => {
+    setShow(true);
+  };
+
+  const handleClose = () => {
+    setShow(false);
+  };
+  const loginClickHandler = () => {
+    handleShow();
+  };
+
+  return (
+    <>
+      <div className={Classes.LogList}>
+        <div className={Classes.DeliveryPin} onClick={loginClickHandler}>
+          <span className={Classes.checkDeliveryTitle}>CHECK DELIVERY</span>
+          <span className={Classes.EnterPinTitle}>Enter PinCode</span>
+        </div>
+      </div>
+
+      <Modal
+        open={show}
+        onClose={handleClose}
+        animation={false}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography>
+            <div>
+              <div className={Classes.LocationDetails}>
+                <img src={locationimg} />
+                <p className={Classes.Locationp1}>
+                  Enter your Pincode <br /> to check delivery availability
+                </p>
+                <p className={Classes.Locationp2}>
+                  Get fastest delivery dates possible, check appointment for
+                  trial at home. Find nearby stores & design availability in
+                  stores
+                </p>
+              </div>
+              <div className={Classes.LocationInp}>
+                <input type="text" placeholder="670114" />
+                <BsArrowRight className={Classes.LocationIconarrow} />
+              </div>
+              <div className={Classes.DeliveryBtns}>
+                <button>
+                  <img src={timeimg} /> 24hr Delivery
+                </button>
+              </div>
+            </div>
+          </Typography>
+        </Box>
+      </Modal>
+    </>
+  );
+};
+export default CheckDelivery;

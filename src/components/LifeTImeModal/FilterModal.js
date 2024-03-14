@@ -12,6 +12,8 @@ import Modal from "@mui/material/Modal";
 import { IoMdClose } from "react-icons/io";
 import sortimg from "../../Assets/sort.png";
 import filtermobimg from "../../Assets/filter.png";
+import axios from "axios";
+import * as Urls from "../../Urls";
 
 const style = {
   position: "absolute",
@@ -55,6 +57,16 @@ const FilterModal = (props) => {
   const [open, setOpen] = useState(false);
   const [opensort, setOpensort] = useState(false);
   const [openfilter, setOpenfilter] = useState(false);
+  const [categoryWise, setCategoryWise] = useState([]);
+  const [metalCategory, setMetalCategory] = useState([]);
+  const [metalType, setMetalType] = useState([]);
+  const [occation, setOccation] = useState([]);
+  const [checkedItems, setCheckedItems] = useState({});
+  const [checkedItemId, setCheckedItemId] = useState([]);
+  const [selectedMetelId, setSelectedMetalId] = useState([]);
+  const [selectedCategoryByid, setSelectedCategoryById] = useState([]);
+  const [selectedOccationById, setSelectedOccationById] = useState([]);
+  const [getProductById, setGetProductById] = useState([]);
   const [activeTab, setActiveTab] = useState("first");
   const [selectedSort, setSelectedSort] = useState("");
   const [selectedPopular, setSelectedPopular] = useState("");
@@ -76,6 +88,39 @@ const FilterModal = (props) => {
       window.removeEventListener("resize", handleResize);
     };
   }, [isMobileView]);
+
+  useEffect(() => {
+    axios
+      .get(Urls.metalType)
+      .then((response1) => {
+        console.log("Response from metalType API:", response1);
+        setMetalType(response1.data.results);
+      })
+      .catch((error) => {
+        console.log("Error fetching metalType:", error);
+      });
+
+    axios
+      .get(Urls.metalCategory)
+      .then((response2) => {
+        console.log("Response from metalCategory API:", response2);
+        setMetalCategory(response2.data.results.data);
+        setGetProductById(response2.data.results.data);
+      })
+      .catch((error) => {
+        console.log("Error fetching metalCategory:", error);
+      });
+
+    axios.get(Urls.categoryWise).then((response) => {
+      console.log("respo===>", response);
+      console.log("catwise", response.data.results.data);
+      setCategoryWise(response.data.results.data);
+    });
+    axios.get(Urls.occationalProducts).then((responseOcc) => {
+      setOccation(responseOcc.data.results.data);
+      console.log(responseOcc, "occ");
+    });
+  }, []);
 
   const handleOpen = () => {
     setOpen(true);
@@ -101,6 +146,37 @@ const FilterModal = (props) => {
     setOpenfilter(false);
   };
 
+  const handleCheckboxByMetel = (id) => {
+    if (selectedMetelId.includes(id)) {
+      setSelectedMetalId(selectedMetelId.filter((item) => item !== id)); // Remove ID if already selected
+    } else {
+      setSelectedMetalId([...selectedMetelId, id]); // Add ID if not selected
+    }
+  };
+  const handleCheckboxByCategory = (id) => {
+    if (selectedCategoryByid.includes(id)) {
+      setSelectedCategoryById(
+        selectedCategoryByid.filter((item) => item !== id)
+      ); // Remove ID if already selected
+    } else {
+      setSelectedCategoryById([...selectedCategoryByid, id]); // Add ID if not selected
+    }
+  };
+  const handleCheckboxByOccation = (id) => {
+    if (selectedOccationById.includes(id)) {
+      setSelectedOccationById(
+        selectedOccationById.filter((item) => item !== id)
+      ); // Remove ID if already selected
+    } else {
+      setSelectedOccationById([...selectedOccationById, id]); // Add ID if not selected
+    }
+  };
+  const handleReset = () => {
+    setSelectedMetalId([]);
+    setSelectedCategoryById([]);
+    setSelectedOccationById([]);
+  };
+
   // const sortHandler = (selectedSort) => {
   //   // Your existing logic for sorting
   //   console.log("Selected Sort:", selectedSort);
@@ -108,6 +184,67 @@ const FilterModal = (props) => {
   // };
 
   // new price modal
+  // const handleCheckboxChange = (id) => {
+  //   if (checkedItems.includes(id)) {
+  //     setCheckedItems(checkedItems.filter(item => item !== id)); // Remove ID if already checked
+  //   } else {
+  //     setCheckedItems([...checkedItems, id]); // Add ID if not checked
+  //   }
+  // };
+  // const handleButtonClic = async () => {
+  //   console.log(selectedMetelId);
+  // // Construct the URL with selectedState as part of the query parameters
+  // const url = `${Urls.productCategoryByMetal}${selectedMetelId.join(',')}`;
+
+  // try {
+  //   const response = await axios.get(url);
+  //   props.setProduct(response.data.results.data);
+  // } catch (error) {
+  //   console.error('Error fetching product category by metal:', error);
+  // }
+
+  // };
+
+  const handleButtonClick = async () => {
+    // Construct the URL with selectedState as part of the query parameters
+    let urlF = "";
+    let urlS = "";
+    let urlT = "";
+
+    switch (activeTab) {
+      case "first":
+        urlF = `${Urls.filterProductsById}${selectedCategoryByid.join(",")}`;
+        try {
+          const respons = await axios.get(urlF);
+          props.setProduct(respons.data.results.data);
+        } catch (error) {
+          console.error("Error fetching product category by category:", error);
+        }
+
+        break;
+      case "second":
+        urlS = `${Urls.productCategoryByMetal}${selectedMetelId.join(",")}`;
+        try {
+          const response = await axios.get(urlS);
+          props.setProduct(response.data.results.data);
+        } catch (error) {
+          console.error("Error fetching product category by metal:", error);
+        }
+        break;
+      case "third":
+        urlT = `${Urls.occationalProdByid}${selectedOccationById.join(",")}`;
+        try {
+          const response = await axios.get(urlT);
+          props.setProduct(response.data.results.data);
+        } catch (error) {
+          console.error("Error fetching product category by Occation:", error);
+        }
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <div>
       <div className={classes.FilterHeads}>
@@ -191,6 +328,7 @@ const FilterModal = (props) => {
                       onClick={() => {
                         console.log("selectedPriceRange", selectedPriceRange);
                         props.sortHandlerPrice(selectedPriceRange);
+                        handleClose();
                       }}
                     >
                       Done
@@ -282,6 +420,7 @@ const FilterModal = (props) => {
                       onClick={() => {
                         console.log("Selected Sort:", selectedSort);
                         props.sortHandler(selectedSort, selectedPopular);
+                        handleCloseSort();
                       }}
                     >
                       Done
@@ -345,7 +484,34 @@ const FilterModal = (props) => {
                           <Tab.Content>
                             <Tab.Pane eventKey="first">
                               {" "}
-                              <div className={classes.CategoryListMain}>
+                              {categoryWise.map((item, index) => (
+                                <div
+                                  key={index}
+                                  className={classes.CategoryListMain}
+                                >
+                                  <div className={classes.CategoryList}>
+                                    <div className={classes.b1e}>
+                                      <input
+                                        type="checkbox"
+                                        checked={selectedCategoryByid.includes(
+                                          item.id
+                                        )}
+                                        onChange={() =>
+                                          handleCheckboxByCategory(item.id)
+                                        }
+                                      />
+                                      <label>
+                                        {String(item.name).charAt(0).toUpperCase() + String(item.name).slice(1).toLowerCase()}
+                                        <span>{item.product_count}</span>
+                                      </label>
+                                    </div>
+                                  </div>
+                                  <div className={classes.CategoryListAmount}>
+                                    <label></label>
+                                  </div>
+                                </div>
+                              ))}
+                              {/* <div className={classes.CategoryListMain}>
                                 <div className={classes.CategoryList}>
                                   <div className={classes.b1e}>
                                     <input type="checkbox" />
@@ -354,34 +520,38 @@ const FilterModal = (props) => {
                                     </label>
                                   </div>
                                 </div>
-                                {/* <div className={classes.CategoryListAmount}>
-                                  <label>2345</label>
-                                </div> */}
-                              </div>
-                              <div className={classes.CategoryListMain}>
-                                <div className={classes.CategoryList}>
-                                  <div className={classes.b1e}>
-                                    <input type="checkbox" />
-                                    <label>
-                                      Earrings <span>43423</span>
-                                    </label>
-                                  </div>
-                                </div>
-                              </div>
+                              </div> */}
                             </Tab.Pane>
                             <Tab.Pane eventKey="second">
                               {" "}
-                              <div className={classes.CategoryListMain}>
-                                <div className={classes.CategoryList}>
-                                  <div className={classes.b1e}>
-                                    <input type="checkbox" />
-                                    <label>
-                                      Gold <span>43423</span>
-                                    </label>
+                              {metalCategory.map((item, index) => (
+                                <div
+                                  key={index}
+                                  className={classes.CategoryListMain}
+                                >
+                                  <div
+                                    key={index}
+                                    className={classes.CategoryList}
+                                  >
+                                    <div key={index} className={classes.b1e}>
+                                      <input
+                                        type="checkbox"
+                                        checked={selectedMetelId.includes(
+                                          item.id
+                                        )}
+                                        onChange={() =>
+                                          handleCheckboxByMetel(item.id)
+                                        }
+                                      />
+                                      <label>
+                                      {String(item.metal_type).charAt(0).toUpperCase() + String(item.metal_type).slice(1).toLowerCase()}{" "}
+                                        <span>{item.product_count}</span>
+                                      </label>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                              <div className={classes.CategoryListMain}>
+                              ))}
+                              {/* <div className={classes.CategoryListMain}>
                                 <div className={classes.CategoryList}>
                                   <div className={classes.b1e}>
                                     <input type="checkbox" />
@@ -410,21 +580,34 @@ const FilterModal = (props) => {
                                     </label>
                                   </div>
                                 </div>
-                              </div>
+                              </div> */}
                             </Tab.Pane>
                             <Tab.Pane eventKey="third">
                               {" "}
-                              <div className={classes.CategoryListMain}>
-                                <div className={classes.CategoryList}>
-                                  <div className={classes.b1e}>
-                                    <input type="checkbox" />
-                                    <label>
-                                      party <span>2365</span>
-                                    </label>
+                              {occation.map((item, index) => (
+                                <div
+                                  key={index}
+                                  className={classes.CategoryListMain}
+                                >
+                                  <div className={classes.CategoryList}>
+                                    <div className={classes.b1e}>
+                                      <input
+                                        type="checkbox"
+                                        checked={selectedOccationById.includes(
+                                          item.id
+                                        )}
+                                        onChange={() =>
+                                          handleCheckboxByOccation(item.id)
+                                        }
+                                      />
+                                      <label>
+                                      {String(item.name).charAt(0).toUpperCase() + String(item.name).slice(1).toLowerCase()} <span>{item.product_count}</span>
+                                      </label>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
-                              <div className={classes.CategoryListMain}>
+                              ))}
+                              {/* <div className={classes.CategoryListMain}>
                                 <div className={classes.CategoryList}>
                                   <div className={classes.b1e}>
                                     <input type="checkbox" />
@@ -453,7 +636,7 @@ const FilterModal = (props) => {
                                     </label>
                                   </div>
                                 </div>
-                              </div>
+                              </div> */}
                             </Tab.Pane>
                           </Tab.Content>
                         </Col>
@@ -461,8 +644,15 @@ const FilterModal = (props) => {
                     </Tab.Container>
                   </div>
                   <div className={classes.PriceBtns2}>
-                    <button className={classes.ResetBtn}>RESET</button>
-                    <button className={classes.ApplyBtn}>Apply</button>
+                    <button className={classes.ResetBtn} onClick={handleReset}>
+                      RESET
+                    </button>
+                    <button
+                      className={classes.ApplyBtn}
+                      onClick={handleButtonClick}
+                    >
+                      Apply
+                    </button>
                   </div>
                 </div>
               </Typography>
