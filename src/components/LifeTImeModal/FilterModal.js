@@ -407,7 +407,12 @@ const FilterModal = (props) => {
                       <label>Discounted</label>
                     </div>
                     <div className={classes.PriceTags1}>
-                      <input type="radio" />
+                      <input
+                        checked={selectedSort === "wedding"}
+                        type="radio"
+                        value="wedding"
+                        onChange={() => setSelectedSort("wedding")}
+                      />
                       <label>Wedding</label>
                     </div>
                   </div>
@@ -501,7 +506,12 @@ const FilterModal = (props) => {
                                         }
                                       />
                                       <label>
-                                        {String(item.name).charAt(0).toUpperCase() + String(item.name).slice(1).toLowerCase()}
+                                        {String(item.name)
+                                          .charAt(0)
+                                          .toUpperCase() +
+                                          String(item.name)
+                                            .slice(1)
+                                            .toLowerCase()}
                                         <span>{item.product_count}</span>
                                       </label>
                                     </div>
@@ -544,7 +554,12 @@ const FilterModal = (props) => {
                                         }
                                       />
                                       <label>
-                                      {String(item.metal_type).charAt(0).toUpperCase() + String(item.metal_type).slice(1).toLowerCase()}{" "}
+                                        {String(item.metal_type)
+                                          .charAt(0)
+                                          .toUpperCase() +
+                                          String(item.metal_type)
+                                            .slice(1)
+                                            .toLowerCase()}{" "}
                                         <span>{item.product_count}</span>
                                       </label>
                                     </div>
@@ -601,7 +616,13 @@ const FilterModal = (props) => {
                                         }
                                       />
                                       <label>
-                                      {String(item.name).charAt(0).toUpperCase() + String(item.name).slice(1).toLowerCase()} <span>{item.product_count}</span>
+                                        {String(item.name)
+                                          .charAt(0)
+                                          .toUpperCase() +
+                                          String(item.name)
+                                            .slice(1)
+                                            .toLowerCase()}{" "}
+                                        <span>{item.product_count}</span>
                                       </label>
                                     </div>
                                   </div>
