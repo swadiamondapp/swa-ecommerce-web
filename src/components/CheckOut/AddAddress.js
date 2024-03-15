@@ -20,8 +20,19 @@ import { IoMdClose } from "react-icons/io";
 import home1 from "../../Assets/home1.png";
 
 function AddAddress(props) {
+  const token = localStorage.getItem("swaToken");
   const [showAddAddress, setShowAddAddress] = useState(true);
   const [showNewAddressForm, setShowNewAddressForm] = useState(false);
+  const [addressData, setAddressData] = useState({
+    fullName: "",
+    mobile: "",
+    pincode: "",
+    city: "",
+    state: "kerala",
+    hNumber_Bname: "",
+    streetColony: "",
+    landMark: "",
+  });
 
   const handleAddNewAddressClick = () => {
     setShowAddAddress(false);
@@ -31,6 +42,40 @@ function AddAddress(props) {
   const handleCancelNewAddress = () => {
     setShowAddAddress(true);
     setShowNewAddressForm(false);
+  };
+
+  const addAaddress = async () => {
+    const body = {
+      name: addressData.fullName,
+      phone_code: "+91",
+      phone_number: addressData.mobile,
+      pincode: addressData.pincode,
+      state: addressData.state,
+      city: addressData.city,
+      house: addressData.hNumber_Bname,
+      area: addressData.streetColony,
+      landmark: addressData.landMark,
+      type: "HOME",
+      is_main: false,
+    };
+    try {
+      const response = await axios.post(Urls.addAdress, body, {
+        headers: { Authorization: "Token " + token },
+      });
+      if (response.data.status === 200) {
+        props.fetchAddress();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleChangeAddress = (event) => {
+    const { name, value } = event.target;
+    setAddressData({
+      ...addressData,
+      [name]: value,
+    });
   };
   return (
     <div>
@@ -49,77 +94,31 @@ function AddAddress(props) {
           {/* address location */}
           <div className={Classes.parentLocations}>
             <div className={Classes.leftAddres11}>
-              <div className={Classes.LocationHead}>
-                <div className={Classes.FirstLocationHead1}>
-                  <input type="radio" />
-                  <div className={Classes.AddressHead15}>
-                    <p className={Classes.Headh31}>Mohammed Inshad</p>
+              {props.addressArray.map((item, index) => (
+                <div className={Classes.LocationHead}>
+                  <div className={Classes.FirstLocationHead1}>
+                    <input type="radio" />
+                    <div className={Classes.AddressHead15}>
+                      <p className={Classes.Headh31}>{item.name}</p>
 
-                    <p className={Classes.Para31}>
-                      Kottakunnan ( house ) morayur , opposit family health
-                      center malappuram district kerala 673643{" "}
-                      <span className={Classes.HeadAddressDesc1}>
-                        phone number : 9995200745
-                      </span>
-                    </p>
+                      <p className={Classes.Para31}>
+                        {item.house} ( house ) {item.city} , {item.area},
+                        {item.landmark}, {item.state}, {item.pincode}
+                        <span className={Classes.HeadAddressDesc1}>
+                          phone number : {item.phone_number}
+                        </span>
+                      </p>
 
-                    <p className={Classes.HeadAddressDesc}>
-                      phone number : 9995200745
-                    </p>
+                      <p className={Classes.HeadAddressDesc}>
+                        phone number : {item.phone_number}
+                      </p>
+                    </div>
+                  </div>
+                  <div className={Classes.secondDots}>
+                    <BsThreeDotsVertical />
                   </div>
                 </div>
-                <div className={Classes.secondDots}>
-                  <BsThreeDotsVertical />
-                </div>
-              </div>
-              {/* 2 */}
-              <div className={Classes.LocationHead}>
-                <div className={Classes.FirstLocationHead1}>
-                  <input type="radio" />
-                  <div className={Classes.AddressHead15}>
-                    <p className={Classes.Headh31}>Mohammed Inshad</p>
-                    <p className={Classes.Para31}>
-                      Kottakunnan ( house ) morayur , opposit family health
-                      center malappuram district kerala 673643{" "}
-                      <span className={Classes.HeadAddressDesc1}>
-                        phone number : 9995200745
-                      </span>
-                    </p>
-
-                    <p className={Classes.HeadAddressDesc}>
-                      phone number : 9995200745
-                    </p>
-                  </div>
-                </div>
-                <div className={Classes.secondDots}>
-                  <BsThreeDotsVertical />
-                </div>
-              </div>
-              {/* 2 */}
-              {/* 3 */}
-              <div className={Classes.LocationHead}>
-                <div className={Classes.FirstLocationHead1}>
-                  <input type="radio" />
-                  <div className={Classes.AddressHead15}>
-                    <p className={Classes.Headh31}>Mohammed Inshad</p>
-                    <p className={Classes.Para31}>
-                      Kottakunnan ( house ) morayur , opposit family health
-                      center malappuram district kerala 673643{" "}
-                      <span className={Classes.HeadAddressDesc1}>
-                        phone number : 9995200745
-                      </span>
-                    </p>
-
-                    <p className={Classes.HeadAddressDesc}>
-                      phone number : 9995200745
-                    </p>
-                  </div>
-                </div>
-                <div className={Classes.secondDots}>
-                  <BsThreeDotsVertical />
-                </div>
-              </div>
-              {/* 3 */}
+              ))}
               {showAddAddress && (
                 <div className={Classes.AddNewAddress1}>
                   <button onClick={handleAddNewAddressClick}>
@@ -148,7 +147,9 @@ function AddAddress(props) {
                           className={Classes.PlaceInput}
                           type="text"
                           placeholder="Jameel muhammed"
-                          name="text"
+                          value={addressData.fullName}
+                          name="fullName"
+                          onChange={handleChangeAddress}
                         />
                       </div>
                       <div>
@@ -157,7 +158,9 @@ function AddAddress(props) {
                           className={Classes.PlaceInput}
                           type="text"
                           placeholder="+91 98975656785"
+                          value={addressData.mobile}
                           name="mobile"
+                          onChange={handleChangeAddress}
                         />
                       </div>
                     </div>
@@ -169,7 +172,9 @@ function AddAddress(props) {
                             className={Classes.PlaceInput}
                             type="text"
                             placeholder="Pincode*"
-                            name="pin"
+                            value={addressData.pincode}
+                            name="pincode"
+                            onChange={handleChangeAddress}
                           />
                         </div>
                         <div>
@@ -178,7 +183,9 @@ function AddAddress(props) {
                             className={Classes.PlaceInput}
                             type="text"
                             placeholder="City*"
+                            value={addressData.city}
                             name="city"
+                            onChange={handleChangeAddress}
                           />
                         </div>
                       </div>
@@ -201,7 +208,9 @@ function AddAddress(props) {
                           className={Classes.PlaceInput}
                           type="text"
                           placeholder="house number/ building name*"
-                          name="building"
+                          value={addressData.hNumber_Bname}
+                          name="hNumber_Bname"
+                          onChange={handleChangeAddress}
                         />
                       </div>
                       <div className={Classes.ColonyForm}>
@@ -210,7 +219,9 @@ function AddAddress(props) {
                           className={Classes.PlaceInput}
                           type="text"
                           placeholder="road name, area colony*"
-                          name="colony"
+                          value={addressData.streetColony}
+                          name="streetColony"
+                          onChange={handleChangeAddress}
                         />
                       </div>
                     </div>
@@ -220,11 +231,13 @@ function AddAddress(props) {
                         className={Classes.PlaceInput}
                         type="text"
                         placeholder="Near edu city"
+                        value={addressData.landMark}
                         name="landMark"
+                        onChange={handleChangeAddress}
                       />
                     </div>
                     <div className={Classes.ADDAnotherBtn}>
-                      <button>Add Address</button>
+                      <button onClick={addAaddress}>Add Address</button>
                     </div>
                   </div>
                   {/* ... */}

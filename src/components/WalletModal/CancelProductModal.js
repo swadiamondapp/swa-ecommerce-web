@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Classes from "./WalletModal.module.css";
+import axios from "axios";
+import * as Urls from "../../Urls";
 import { Dropdown } from "primereact/dropdown";
 import Box from "@mui/material/Box";
 import { IoClose } from "react-icons/io5";
@@ -34,6 +36,7 @@ const mobileStyle = {
 };
 
 const CancelProductModal = (props) => {
+  const token = localStorage.getItem("swaToken");
   const [selectedCity, setSelectedCity] = useState(null);
   const [isMobileView, setIsMobileView] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
@@ -59,6 +62,28 @@ const CancelProductModal = (props) => {
     { name: "Istanbul", code: "IST" },
     { name: "Paris", code: "PRS" },
   ];
+
+  const cancelProduct = async () => {
+    try {
+      const body = {
+        product_id: props.orderDet[0].product.product_id,
+        order_id: props.orderId,
+        shipment_id: props.orderDet[0].id,
+        total_amount: props.total,
+        payment_mode: props.payMode,
+      };
+      const response = await axios.post(Urls.CancelOrder, body, {
+        headers: { Authorization: "Token " + token },
+      });
+      if (response.data.results.message === "Admin Approval Pending") {
+        console.log("Modal show ");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  console.log("props.proDet--->", props.orderDet[0]);
 
   return (
     <div>
@@ -94,7 +119,7 @@ const CancelProductModal = (props) => {
                 className={Classes.TextArea}
               ></textarea>
               <div className={Classes.CancelButton}>
-                <button>Cancel Product</button>
+                <button onClick={cancelProduct}>Cancel Product</button>
               </div>
             </div>
           </Typography>

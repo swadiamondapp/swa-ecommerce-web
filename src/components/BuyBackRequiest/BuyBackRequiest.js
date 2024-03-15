@@ -121,7 +121,6 @@ const BuyBackRequiest = (props) => {
 
   return (
     <div>
-      <Button onClick={handleOpen}>BuyBackRequiest</Button>
       <Modal
         // open={props.open}
         open={open}

@@ -48,6 +48,7 @@ const CheckOutPage = (props) => {
         console.log(error);
       });
   }, [changeId]);
+
   const adressChangeHanlder = (id) => {
     setChangeId(id);
   };

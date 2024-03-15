@@ -6,7 +6,9 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import SuccessTick from "../../Assets/successTick.png";
+import * as Urls from "../../Urls";
 import closeButton from "../../Assets/closeModal.png";
+import axios from "axios";
 
 const style = {
   position: "absolute",
@@ -46,6 +48,7 @@ const successM = {
 };
 
 const LIfeTImeModal = (props) => {
+  const token = localStorage.getItem("swaToken");
   const [successModalOpen, setSuccessModalOpen] = useState(false);
   const [open, setOpen] = useState(false);
   const [isMobileView, setIsMobileView] = useState(
@@ -84,21 +87,36 @@ const LIfeTImeModal = (props) => {
     setOpen(false);
   };
 
+  const cancellationProceedWith = async (type) => {
+    try {
+      const body = {
+        order_id: props.orderid,
+        shipment_id: props.shipmentId,
+        product_id: props.productId,
+        total_amount: props.total,
+        payment_mode: props.payMode,
+        refund_type: type,
+      };
+
+      const response = await axios.post(Urls.CancelOrder, body, {
+        headers: { Authorization: "Token 	" + token },
+      });
+      if (response.data.results.status_code === 200) {
+        props.handleClose();
+        props.handleSuccessOpen();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
-      <Button onClick={handleOpen}>
-        return or exchange of a delivered product
-      </Button>
-      <Modal
-        // open={props.open}
-        open={open}
-        // onClose={props.handleClose}
-        onClose={handleClose}
-      >
+      <Modal open={props.open} onClose={props.handleClose}>
         <Box sx={isMobileView ? mobileStyle : style}>
           <Button
             style={{ position: "absolute", top: 0, right: 0, margin: "8px" }}
-            onClick={handleClose}
+            onClick={props.handleClose}
             className={classes.bbCLoseButton}
           >
             <img src={closeButton} />
@@ -141,7 +159,7 @@ const LIfeTImeModal = (props) => {
                   <div>
                     <button
                       className={classes.buttonllb}
-                      onClick={handleSuccessModal}
+                      onClick={() => cancellationProceedWith("lte")}
                     >
                       PROCEED WITH LTE
                     </button>
@@ -182,7 +200,7 @@ const LIfeTImeModal = (props) => {
                   <div>
                     <button
                       className={classes.buttonllb}
-                      onClick={handleSuccessModal}
+                      onClick={() => cancellationProceedWith("lbb")}
                     >
                       PROCEED WITH LBB
                     </button>

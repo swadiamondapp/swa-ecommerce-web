@@ -34,7 +34,6 @@ const mobileStyle = {
 };
 
 const WalletModal = (props) => {
-  const [open, setOpen] = useState(false);
   const [isMobileView, setIsMobileView] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
   );
@@ -51,21 +50,12 @@ const WalletModal = (props) => {
       window.removeEventListener("resize", handleResize);
     };
   }, [isMobileView]);
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const handleOpen = () => {
-    setOpen(true);
-  };
 
   return (
     <div>
-      <Button onClick={handleOpen}>WalletModal</Button>
       <Modal
-        // open={props.open}
-        open={open}
-        // onClose={props.handleClose}
-        onClose={handleClose}
+        open={props.open}
+        onClose={props.handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >

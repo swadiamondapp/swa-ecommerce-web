@@ -6,7 +6,7 @@ import Succes from "../../Assets/success.png";
 import axios from "axios";
 import * as Urls from "../../Urls";
 import { RiErrorWarningFill } from "react-icons/ri";
-
+import WalletModal from "../WalletModal/WalletModal";
 import { useHistory } from "react-router-dom";
 
 function CartDesign(props) {
@@ -18,6 +18,7 @@ function CartDesign(props) {
   const [clr, setClr] = useState("");
   const [promoId, setPromoId] = useState("");
   const [errorImg, setErrorImg] = useState(null);
+  const [walletOpen, setWalletOpen] = useState(false);
   const history = useHistory();
   const token = localStorage.getItem("swaToken");
   useEffect(() => {
@@ -27,12 +28,12 @@ function CartDesign(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
   };
-  const placeOrder = () => {
-    props.handleOpen();
-    // history.push({
-    //   pathname: "/place_order",
-    //   state: { data: { pay: amountPay, total: total }, name: "cart" },
-    // });
+  const step2Handler = () => {
+    // props.handleOpen();
+    history.push({
+      pathname: "/checkout",
+      state: { data: { pay: amountPay, total: total }, name: "cart" },
+    });
   };
 
   const promCodeChngeHandler = (e) => {
@@ -84,6 +85,7 @@ function CartDesign(props) {
 
   return (
     <div>
+      <WalletModal open={walletOpen} handleClose={() => setWalletOpen(false)} />
       <div className={`${Classes.Wrapper} container`}>
         <div className={`${Classes.Wrapper} container`}>
           <div className={Classes.Main}>
@@ -175,10 +177,10 @@ function CartDesign(props) {
                   className={Classes.PlaceOrderButton}
                   type="submit"
                   value="Place order"
-                  // onClick={placeOrder}
-                  onClick={() => {
-                    history.push("/checkout");
-                  }}
+                  onClick={step2Handler}
+                  // onClick={() => {
+                  //   // setWalletOpen(true);
+                  // }}
                 />
                 {total === amountPay ? (
                   <p className={Classes.HurrayText}>
@@ -199,7 +201,8 @@ function CartDesign(props) {
                   value="Place order"
                   // onClick={placeOrder}
                   onClick={() => {
-                    history.push("/checkout");
+                    // history.push("/checkout");
+                    setWalletOpen(true);
                   }}
                 />
               </div>

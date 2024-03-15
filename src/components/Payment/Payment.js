@@ -1,11 +1,179 @@
-import React from "react";
+import React, { useState } from "react";
+import { useHistory, useLocation } from "react-router-dom/cjs/react-router-dom";
 import Classes from "./Payment.module.css";
 import phonepay from "../../Assets/phonepay.svg";
 import mastercard from "../../Assets/mastercard.svg";
-import { useHistory } from "react-router-dom/cjs/react-router-dom";
+import axios from "axios";
+import * as Urls from "../../Urls";
 
-const Payment = (props) => {
+const Payment = () => {
+  const token = localStorage.getItem("swaToken");
   const history = useHistory();
+  const location = useLocation();
+  const [promoId, setPromoId] = useState("");
+  const [mode, setMode] = useState("C");
+  const [amountPay, setAmountPay] = useState(100);
+  const [propsFCheckOut, setpropsFCheckOut] = useState([]);
+  const { data, name } = location.state;
+
+  const placeOrder = () => {
+    let cartBody;
+    let buyBody;
+    if (promoId !== "") {
+      cartBody = {
+        promocode_id: promoId,
+        address_id: data.addressId,
+        mode: mode,
+      };
+      // buyBody = {
+      //   product_id: props.proDet.data.product_id,
+      //   color: props.proDet.data.color,
+      //   size: props.proDet.data.size,
+      //   promocode: code,
+      //   address_id: props.address,
+      //   mode: mode,
+      // };
+    } else {
+      cartBody = {
+        promocode_id: 0,
+        address_id: data.addressId,
+        mode: mode,
+      };
+      // buyBody = {
+      //   product_id: props.proDet.data.product_id,
+      //   color: props.proDet.data.color,
+      //   size: props.proDet.data.size,
+      //   promocode_id: 0,
+      //   address_id: props.address,
+      //   mode: mode,
+      // };
+    }
+    if (name === "cart") {
+      axios
+        .post(Urls.checkout, cartBody, {
+          headers: { Authorization: "Token " + token },
+        })
+        .then((response1) => {
+          if (mode === "P") {
+            var options = {
+              // key: "rzp_test_hbBeCNBjrqDq6P", // test Key
+              // key_secret: "HwgmIdicOPlAeLkBdOJIMXiu",
+              key: "rzp_live_rKLs1hbpVT5npK",
+              key_secret: "td3G02g20iPqQzfz4b2NFSFN",
+              amount: amountPay * 100,
+              order_id: response1.data.results.data.razorpay_order_id,
+              currency: "INR",
+              name: "Swa Diamonds",
+              description: "for testing purpose",
+              handler: function(response) {
+                const bodyPay = {
+                  razorpay_payment_id: response.razorpay_payment_id,
+                  razorpay_order_id: response.razorpay_order_id,
+                  razorpay_signature: response.razorpay_signature,
+                  order_id: response1.data.results.data.order.id,
+                };
+                axios
+                  .post(Urls.paySuces, bodyPay, {
+                    headers: { Authorization: "Token " + token },
+                  })
+                  .then((response2) => {
+                    if (response2.data.success === true) {
+                      history.push("/my_orders");
+                    }
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                  });
+              },
+              prefill: {
+                name: "",
+                email: "",
+                contact: "",
+              },
+              notes: {
+                address: "Razorpay Corporate office",
+              },
+              theme: {
+                color: "#007481",
+              },
+            };
+            var pay = new window.Razorpay(options);
+            pay.open();
+          } else if (mode === "C") {
+            if (response1.data.results.message === "successful") {
+              history.push("/my_orders");
+            }
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else if (name === "buy") {
+      axios
+        .post(Urls.buyNow, buyBody, {
+          headers: { Authorization: "Token " + token },
+        })
+        .then((response1) => {
+          if (mode === "P") {
+            var options = {
+              //test_secret
+              // key: "rzp_test_hbBeCNBjrqDq6P",
+              // key_secret: "HwgmIdicOPlAeLkBdOJIMXiu",
+              key: "rzp_live_rKLs1hbpVT5npK",
+              key_secret: "td3G02g20iPqQzfz4b2NFSFN",
+              amount: amountPay * 100,
+              order_id: response1.data.results.data.razorpay_order_id,
+              currency: "INR",
+              name: "Swa Diamonds",
+              description: "for testing purpose",
+              handler: function(response) {
+                const bodyPay = {
+                  razorpay_payment_id: response.razorpay_payment_id,
+                  razorpay_order_id: response.razorpay_order_id,
+                  razorpay_signature: response.razorpay_signature,
+                  order_id: response1.data.results.data.order.id,
+                };
+
+                axios
+                  .post(Urls.paySuces, bodyPay, {
+                    headers: { Authorization: "Token " + token },
+                  })
+                  .then((response2) => {
+                    if (response2.data.success === true) {
+                      history.push("/my_orders");
+                    }
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                  });
+              },
+              prefill: {
+                name: "",
+                email: "",
+                contact: "",
+              },
+              notes: {
+                address: "Razorpay Corporate office",
+              },
+              theme: {
+                color: "#007481",
+              },
+            };
+            var pay = new window.Razorpay(options);
+            pay.open();
+          } else if (mode === "C") {
+            if (response1.data.results.message === "successful") {
+              history.push("/my_orders");
+            }
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
+  console.log("props.location.state--->", data, name);
   return (
     <div>
       <div className={`${Classes.Wrapper} container`}>
@@ -77,9 +245,10 @@ const Payment = (props) => {
               </div>
               <div
                 className={Classes.PayButton}
-                onClick={() => {
-                  history.push("/addaddress");
-                }}
+                // onClick={() => {
+                //   history.push("/addaddress");
+                // }}
+                onClick={placeOrder}
               >
                 Pay &#x20B9; 54,000
               </div>
@@ -106,9 +275,10 @@ const Payment = (props) => {
           </div>
           <div
             className={Classes.PayButtonMobile}
-            onClick={() => {
-              history.push("/addaddress");
-            }}
+            // onClick={() => {
+            //   history.push("/addaddress");
+            // }}
+            onClick={placeOrder}
           >
             Pay &#x20B9; 54,000
           </div>
