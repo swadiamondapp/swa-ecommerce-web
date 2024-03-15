@@ -94,6 +94,30 @@ header {
   border-radius: 8px;
   box-shadow: 0px 1px 3px 0px #dfe7e7 inset;
 }
+.InputLabels {
+  position: absolute;
+  z-index: 99;
+  top: 23%;
+  left: 16%;
+}
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Define animation for span elements */
+.AnimatedText {
+  display: inline-block;
+  margin-left: 5px;
+  animation: slideIn 0.5s forwards;
+  opacity: 0;
+}
 .DiwaliOffers {
   text-align: center;
   background: #00464d;

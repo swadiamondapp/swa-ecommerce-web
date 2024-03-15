@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Logo from "../../Assets/moblogo.png";
+// import Logo from "../../Assets/moblogo.png";
+import Logo from "../../Assets/moblogo.svg";
 import Hamburger from "hamburger-react";
 import { FiBell } from "react-icons/fi";
 import { IoCartOutline } from "react-icons/io5";
