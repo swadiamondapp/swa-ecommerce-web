@@ -14,6 +14,7 @@ import Header from "../../components/HeaderNew/Header";
 import FilterMobile from "../../components/Filter/FilterMobile";
 import Features from "../../components/Features/Features";
 import FilterModal from "../../components/LifeTImeModal/FilterModal";
+import SliderFeature from "../../components/ProductDetails/SliderFeature";
 
 const NewArrivalPage = (props) => {
   const [product, setProduct] = useState([]);
@@ -479,6 +480,7 @@ const NewArrivalPage = (props) => {
             </div>
           </div>
         </div>
+        <SliderFeature />
         <Features />
         <Footer />
       </div>

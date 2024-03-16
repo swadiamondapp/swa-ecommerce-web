@@ -101,8 +101,9 @@ const NewArrivalCard = (props) => {
             <div className={Classes.HoverContainer}>
               <div className={Classes.HoverButton}>
                 <div className={Classes.HButton}>
+                  <p className={Classes.CheckDelvyDate}>Check delivery date</p>
                   <div className={Classes.ButtonContainer}>
-                    <button className={Classes.tryAtHome}>Try@ Home</button>
+                    <button className={Classes.tryAtHome}>TRY AT HOME</button>
                     <button className={Classes.buyNow}>Buy Now</button>
                   </div>
                 </div>

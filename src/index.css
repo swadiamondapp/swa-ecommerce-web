@@ -143,7 +143,63 @@ p {
 .modal-body {
   padding: 0 50px 25px 50px !important;
 }
+/* rotate text */
+@keyframes rotateText {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  25% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+  50% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+}
 
+.labelWrapper {
+  display: inline-block;
+  /* position: relative; */
+}
+
+.labelWrapper span {
+  position: absolute;
+  top: 9px;
+  left: 132px;
+  opacity: 0;
+  animation: rotateText 8s infinite; /* Adjust timing as needed */
+  color: #9c9c9c;
+  font-family: "GilroyRegular";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  z-index: 1;
+  font-family: "GilroyRegular";
+}
+
+.labelWrapper span:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.labelWrapper span:nth-child(2) {
+  animation-delay: 2s; /* Adjust delay for each span */
+}
+
+.labelWrapper span:nth-child(3) {
+  animation-delay: 4s;
+}
+
+.labelWrapper span:nth-child(4) {
+  animation-delay: 6s;
+}
+
+/* rotate text */
 .ant-steps
   .ant-steps-item-finish
   > .ant-steps-item-container
@@ -499,6 +555,12 @@ input[type="number"] {
     margin-left: 4px !important;
   }
   .bringthepartpage {
+    padding: 0px !important;
+  }
+  .newarrivalContainer {
+    padding: 0px !important;
+  }
+  .mobArrivalContainer {
     padding: 0px !important;
   }
 }

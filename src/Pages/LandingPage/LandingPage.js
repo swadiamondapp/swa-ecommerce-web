@@ -24,6 +24,7 @@ import * as Urls from "../../Urls";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { FadeLoader } from "react-spinners";
+import SliderFeature from "../../components/ProductDetails/SliderFeature";
 
 const LandingPage = () => {
   const [banner, setBanner] = useState([]);
@@ -250,7 +251,7 @@ const LandingPage = () => {
   let searchList;
   if (loading) {
     searchList = (
-      <div className="d-flex justify-content-center align-items-center loader">
+      <div className="d-flex justify-content-center align-items-center loader ">
         {" "}
         <FadeLoader color="#00464d" />
       </div>
@@ -326,21 +327,23 @@ const LandingPage = () => {
           </ShopOnBudget>
         </div>
       </div>
-      <div className="container">
+      <div className="container newarrivalContainer">
         <NewArrivals>{newArriv}</NewArrivals>
       </div>
       <div className="container bringthepartpage">
         <BringTheParty add={add} />
       </div>
-      <div className="container">
+      <div className="container newarrivalContainer">
         <TopDemanded>{topDemnd}</TopDemanded>
 
         <Certificate video={"https://www.youtube.com/embed/s3PrxdvAihI"} />
 
         {searchList}
+
         <DownloadOurAppImage />
         {/* <RecentSearch /> */}
       </div>
+      <SliderFeature />
       <Features />
       <Footer />
     </div>

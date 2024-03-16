@@ -31,4 +31,7 @@
     padding-left: 0px;
     padding-right: 0px;
   }
+  .mobArrivalContainer {
+    padding: 0px !important;
+  }
 }

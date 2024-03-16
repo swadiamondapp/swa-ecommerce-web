@@ -12,6 +12,9 @@
   padding: 7px;
   height: 35px;
 }
+.CheckDelvyDate {
+  display: none;
+}
 .HeartSymbol {
   position: absolute;
   top: 5%;
@@ -239,13 +242,24 @@
   .tryAtHome {
     font-weight: 500;
     width: 100%;
-    margin: 0px 10px;
+  }
+  .NewArrivalCard:hover {
+    box-shadow: none;
+  }
+  .CheckDelvyDate {
+    color: #00464d;
+    font-family: "Lato";
+    font-weight: 400;
+    display: block;
+    padding: 12px 0px;
+    padding-top: 0px;
   }
   .HButton {
     opacity: 1;
     display: block;
     transition: 0.4s ease;
-    padding-bottom: 15px;
+    padding-bottom: 10px;
+    padding-top: 0px;
   }
   .HoverContainer {
     display: flex;
@@ -260,11 +274,15 @@
   .NewArrivalCardSub {
     display: flex;
     flex-direction: column;
+    border: 0.5px solid #e5e5e5;
+    background: #fff;
+    border-radius: 10px;
   }
   .Price {
     display: flex;
-    justify-content: center;
-    padding: 10px 0px;
+    justify-content: left;
+    padding: 10px 10px;
+    gap: 10px;
   }
   .PriceNew {
     font-size: 14px;

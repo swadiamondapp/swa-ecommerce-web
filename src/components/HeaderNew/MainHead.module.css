@@ -20,6 +20,17 @@ header {
 .CatList {
   display: none;
 }
+.SlideLandingimg {
+  max-width: 50px;
+}
+.WebMobSlide {
+  display: none;
+}
+.MobOffersSlide {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-evenly;
+}
 .SearchIcons .loginUser {
   margin-top: 0px !important;
 }
@@ -86,6 +97,30 @@ header {
   border: 0.5px solid #dce5e5;
   border-radius: 8px;
   box-shadow: 0px 1px 3px 0px #dfe7e7 inset;
+}
+.InputLabels {
+  position: absolute;
+  z-index: 99;
+  top: 23%;
+  left: 16%;
+}
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Define animation for span elements */
+.AnimatedText {
+  display: inline-block;
+  margin-left: 5px;
+  animation: slideIn 0.5s forwards;
+  opacity: 0;
 }
 .DiwaliOffers {
   text-align: center;
@@ -340,7 +375,12 @@ header {
   color: #9c9c9c;
   font-family: "gilroyNormal" !important;
 }
-
+.SearchlabelAnimate {
+  position: absolute;
+  z-index: 1;
+  top: 9px;
+  left: 51px;
+}
 .Header_top {
   background-color: #00464d;
   height: 33px;
@@ -1222,6 +1262,12 @@ a {
   }
   .OffersInner {
     margin: 0px;
+  }
+  .WebMobSlide {
+    display: block;
+  }
+  .searchListCont {
+    top: 30%;
   }
 }
 /* @media (min-width: 767px) and (max-width: 1200px) {
