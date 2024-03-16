@@ -13,7 +13,7 @@ import { signInWithPopup } from "firebase/auth";
 import axios from "axios";
 import * as urls from "../../Urls";
 // import { Auth, GoogleAuthProvider } from "firebase/auth";
-import { auth, googleAuthProvider } from "../../firebase";
+import { auth, googleAuthProvider, facebookAuthProvider } from "../../firebase";
 import { Link } from "react-router-dom";
 import Joi from "joi";
 
@@ -185,6 +185,15 @@ const LoginToggle = (props) => {
     try {
       const response = await signInWithPopup(auth, googleAuthProvider);
       console.log("responsegoogle", response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSignInWithFb = async () => {
+    try {
+      const response = await signInWithPopup(auth, facebookAuthProvider);
+      console.log("responsefacebook", response);
     } catch (error) {
       console.log(error);
     }
@@ -420,7 +429,10 @@ const LoginToggle = (props) => {
                       </button>
                     </div>
                     <div className={Classes.facebookButton}>
-                      <button className={Classes.buttonSocial}>
+                      <button
+                        className={Classes.buttonSocial}
+                        onClick={handleSignInWithFb}
+                      >
                         <img src={FB} /> Login with facebook
                       </button>
                     </div>
@@ -588,7 +600,10 @@ const LoginToggle = (props) => {
                   </button>
                 </div>
                 <div className={Classes.facebookButton}>
-                  <button className={Classes.buttonSocial}>
+                  <button
+                    className={Classes.buttonSocial}
+                    onClick={handleSignInWithFb}
+                  >
                     <img src={FB} /> Login with facebook
                   </button>
                 </div>

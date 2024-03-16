@@ -20,13 +20,6 @@ header {
 .CatList {
   display: none;
 }
-.LoginSignup {
-  display: flex;
-  align-items: center;
-  color: #fff;
-  font-family: "gilroyNormal";
-  gap: 15px;
-}
 .SearchIcons .loginUser {
   margin-top: 0px !important;
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 // import Modal from "react-bootstrap/Modal";
 import { BsPerson, BsEye, BsEyeSlash } from "react-icons/bs";
 import Classes from "../Header/Header.module.css";
@@ -14,6 +14,8 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import logedimg from "../../Assets/loged.png";
+import { IoIosArrowDown } from "react-icons/io";
 
 const style = {
   position: "absolute",
@@ -31,6 +33,8 @@ const style = {
 };
 
 const LoginModal = (props) => {
+  const userDetailsRef = useRef(null);
+  const [showUserDetails, setShowUserDetails] = useState(false);
   const [show, setShow] = useState(false);
   const [register, setRegister] = useState(false);
   const [login, setLogin] = useState(false);
@@ -469,9 +473,13 @@ const LoginModal = (props) => {
   const userName = localStorage.getItem("userName");
   const phone = localStorage.getItem("phoneNumber");
 
+  const handleLogedUserClick = () => {
+    setShowUserDetails(!showUserDetails);
+  };
+
   return (
     <>
-      <div className={Classes.LogList}>
+      {/* <div className={Classes.LogList}>
         <p variant="primary" onClick={loginClickHandler}>
           <BsPerson className={Classes.PersonIcon} color="#ffffff" size={30} />
         </p>
@@ -493,7 +501,41 @@ const LoginModal = (props) => {
             </p>
           </div>
         </div>
+      </div> */}
+      <div className={Classes.LoginSignup}>
+        <div className={Classes.dLogin} onClick={props.handleOpenLogin}>
+          Login
+        </div>
+        <div className={Classes.LineArrow}></div>
+        <div className={Classes.DSignup} onClick={props.handleOpenLogin}>
+          Sign up
+        </div>
       </div>
+      <div onClick={handleLogedUserClick} className={Classes.LogedUser}>
+        <img src={logedimg} />
+        <p>Mohammed Inshad</p>
+        <IoIosArrowDown />
+      </div>
+      {/* modal */}
+
+      {showUserDetails && (
+        <div ref={userDetailsRef} className={Classes.LogedUserDetails}>
+          <div className={Classes.Name_phoneLog}>
+            <p>Mohammed Inshad</p>
+            <p className={Classes.Name_phoneLoged}>+91 9995200745</p>
+          </div>
+          <div className={Classes.LogedDetails_list}>
+            <p>Account</p>
+            <p>Order history</p>
+            <p>Add Address</p>
+            <p>Track Order</p>
+            <p>Write review</p>
+            <p>Swa wallet</p>
+            <p>Swa exchange</p>
+            <p>Log Out</p>
+          </div>
+        </div>
+      )}
 
       <Modal
         open={show}

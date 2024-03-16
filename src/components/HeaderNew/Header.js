@@ -277,23 +277,14 @@ const Header = (props) => {
             <BsSearch className={Classes.Icons} color="#FFFFFF" size={18} />
           </div>
 
-          <FiBell
+          {/* <FiBell
             className={Classes.Icon}
             color="#FFFFFF"
             size={25}
             // onClick={Notification}
-          />
+          /> */}
           <CheckDelivery islog={show} close={closeHanlder} />
           <img src={indiaimg} />
-
-          <LoginModal
-            className={Classes.loginUser}
-            isLog={show}
-            logAct={props.loginHandler}
-            cartClose={cateclose}
-            close={closeHanlder}
-            style={{ marginTop: "0px" }}
-          />
           <CgHeart
             className={Classes.Icon}
             color="#FFFFFF"
@@ -309,37 +300,15 @@ const Header = (props) => {
             />
             <div className={Classes.ItemsNum}>{props.countCartItems}</div>
           </div>
-          <div className={Classes.LoginSignup}>
-            <div className={Classes.dLogin}>Login</div>
-            <div className={Classes.LineArrow}></div>
-            <div className={Classes.DSignup}>Sign up</div>
-          </div>
-          <div onClick={handleLogedUserClick} className={Classes.LogedUser}>
-            <img src={logedimg} />
-            <p>Mohammed Inshad</p>
-            <IoIosArrowDown />
-          </div>
-          {/* modal */}
-
-          {showUserDetails && (
-            <div ref={userDetailsRef} className={Classes.LogedUserDetails}>
-              <div className={Classes.Name_phoneLog}>
-                <p>Mohammed Inshad</p>
-                <p className={Classes.Name_phoneLoged}>+91 9995200745</p>
-              </div>
-              <div className={Classes.LogedDetails_list}>
-                <p>Account</p>
-                <p>Order history</p>
-                <p>Add Address</p>
-                <p>Track Order</p>
-                <p>Write review</p>
-                <p>Swa wallet</p>
-                <p>Swa exchange</p>
-                <p>Log Out</p>
-              </div>
-            </div>
-          )}
-
+          <LoginModal
+            className={Classes.loginUser}
+            isLog={show}
+            handleOpenLogin={() => setShow(true)}
+            logAct={props.loginHandler}
+            cartClose={cateclose}
+            close={closeHanlder}
+            style={{ marginTop: "0px" }}
+          />
           {/* modal */}
         </div>
       </MainHead>
