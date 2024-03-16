@@ -92,3 +92,9 @@
     padding: 10px;
   }
 }
+
+@media (min-width: 300px) and (max-width: 576px) {
+  .FeaturesBg {
+    display: none;
+  }
+}

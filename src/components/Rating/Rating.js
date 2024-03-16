@@ -11,6 +11,7 @@ import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { FaRegImage } from "react-icons/fa6";
+import { useLocation } from "react-router-dom";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -34,6 +35,11 @@ function Rating(props) {
   const token = localStorage.getItem("swaToken");
   console.log("file....body", imageFile);
 
+  const location = useLocation();
+  const { product_id, product_rating, product_name } = location.state;
+
+  console.log("id...props", product_id);
+
   const handleShow = () => {
     // const body = {
     //   // product_id: props.proid,
@@ -46,7 +52,7 @@ function Rating(props) {
     if (review !== "") {
       setError("");
       const formData = new FormData();
-      formData.append("product_id", 32);
+      formData.append("product_id", product_id);
       // product_id: props.proid,
       formData.append("rating", rate);
       formData.append("review", review);

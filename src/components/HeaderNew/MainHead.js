@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Classes from "./MainHead.module.css";
-import Logo from "../../Assets/swaLogo.png";
+import Logo from "../../Assets/desklogo.svg";
 import swaMob from "../../Assets/moblogo.png";
 import { useHistory } from "react-router-dom";
 import MobileNavbar from "../Navbar/MobileNavbar";

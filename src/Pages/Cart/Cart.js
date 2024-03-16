@@ -13,6 +13,7 @@ import cartEmpty from "../../Assets/cartempty.png";
 
 import ConformModal from "../../components/confromModal/confromModal";
 import WalletModal from "../../components/WalletModal/WalletModal";
+import SliderFeature from "../../components/ProductDetails/SliderFeature";
 
 const Cart = () => {
   const [cartCount, setCartCount] = useState("");
@@ -251,6 +252,7 @@ const Cart = () => {
         {cartLists}
 
         <div className={Classes.Features}>
+          <SliderFeature />
           <Features />
         </div>
         <Footer />

@@ -20,6 +20,17 @@ header {
 .CatList {
   display: none;
 }
+.SlideLandingimg {
+  max-width: 50px;
+}
+.WebMobSlide {
+  display: none;
+}
+.MobOffersSlide {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-evenly;
+}
 .LoginSignup {
   display: flex;
   align-items: center;
@@ -371,7 +382,12 @@ header {
   color: #9c9c9c;
   font-family: "gilroyNormal" !important;
 }
-
+.SearchlabelAnimate {
+  position: absolute;
+  z-index: 1;
+  top: 9px;
+  left: 51px;
+}
 .Header_top {
   background-color: #00464d;
   height: 33px;
@@ -1253,6 +1269,12 @@ a {
   }
   .OffersInner {
     margin: 0px;
+  }
+  .WebMobSlide {
+    display: block;
+  }
+  .searchListCont {
+    top: 30%;
   }
 }
 /* @media (min-width: 767px) and (max-width: 1200px) {

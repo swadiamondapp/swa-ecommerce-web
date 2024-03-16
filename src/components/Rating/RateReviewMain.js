@@ -43,6 +43,9 @@ const RateReviewMain = (props) => {
       quantity: "",
     },
   ]);
+  const [orderShipments, setOrderShipments] = useState([]);
+  const [productDetails, setProductDetails] = useState([]);
+
   useEffect(() => {
     axios
       .get(Urls.myOrder, {
@@ -52,13 +55,25 @@ const RateReviewMain = (props) => {
       })
       .then((response1) => {
         setOrderDetails(response1.data.results.data);
+        setOrderShipments(response1.data.results.data.shipments);
+        const products = response1.data.results.data.flatMap((order) =>
+          order.shipments.map((shipment) => ({
+            product_id: shipment.product_id,
+            product_rating: shipment.product_rating,
+            product_name: shipment.product_name,
+          }))
+        );
+        setProductDetails(products);
       })
+      // })
       .catch((error) => {
         console.log(error);
       });
   }, []);
 
-  console.log("orderDet...1", orderDetails);
+  console.log("orderDet...1", orderShipments);
+  console.log("orderDet...2", orderDetails);
+  console.log("productDetails...2", productDetails);
   return (
     <div>
       <div className={`container ${Classes.MainCont}`}>
@@ -72,99 +87,75 @@ const RateReviewMain = (props) => {
               <p className={Classes.Wishlist}>&nbsp; RATE & REVIEW</p>
             </div>
           </div>
-          <div className={Classes.ParentMainReview_Rate}>
-            <div className={Classes.RateAndReviewCard}>
-              <div className={Classes.OrderIdReview}>
-                <p>Order ID : SWA4R46RF46R356F45</p>
-              </div>
-              <div className={Classes.CardView1}>
-                <div className={Classes.LeftCardView1}>
-                  <div className={Classes.ProductImgReview}>
-                    <img src={productimg} />
+
+          {orderDetails.map((order) => (
+            <div className={Classes.ParentMainReview_Rate} key={order.order_id}>
+              {order.shipments &&
+                order.shipments.map((shipment, index) => (
+                  <div className={Classes.RateAndReviewCard}>
+                    <div className={Classes.OrderIdReview}>
+                      <p>Order ID : {order.order_code}</p>
+                    </div>
+                    <div className={Classes.CardView1}>
+                      <div className={Classes.LeftCardView1}>
+                        <div className={Classes.ProductImgReview}>
+                          <img src={productimg} />
+                        </div>
+                        <div className={Classes.ProductDetailsReview}>
+                          <p className={Classes.productNames3}>
+                            {shipment.product_name}
+                          </p>
+                          <p className={Classes.pDesc3}>
+                            <img src={deliveryimg} /> Delivered on{" "}
+                            <span
+                              style={{
+                                color: "#30933A",
+                              }}
+                            >
+                              {order.delivered_date}
+                            </span>
+                          </p>
+                          <p className={Classes.pDesc4}>
+                            Expected Delivery by{" "}
+                            <span>{order.expected_delivery_date}</span>
+                          </p>
+                        </div>
+                      </div>
+                      <div className={Classes.RightCardView1}>
+                        <div>
+                          <ReactStarRating
+                            numberOfStar={5}
+                            numberOfSelectedStar={shipment.product_rating}
+                            colorFilledStar="#F6C514"
+                            colorEmptyStar="#D1D3D5"
+                            starSize={isMobileView ? "25px" : "30px"}
+                            spaceBetweenStar="10px"
+                            disableOnSelect={false}
+                            onSelectStar={rateChangeHandler}
+                          />{" "}
+                        </div>
+                        <Link
+                          to={{
+                            pathname: "/rate_review",
+                            state: {
+                              product_id: shipment.product_id,
+                              product_rating: shipment.product_rating,
+                              product_name: shipment.product_name,
+                            },
+                          }}
+                        >
+                          {console.log("....pp", productDetails.product_id)}
+                          <p className={Classes.RateReviewText}>
+                            {" "}
+                            Rate & review
+                          </p>
+                        </Link>
+                      </div>
+                    </div>
                   </div>
-                  <div className={Classes.ProductDetailsReview}>
-                    <p className={Classes.productNames3}>Diamond ring</p>
-                    <p className={Classes.pDesc3}>
-                      <img src={deliveryimg} /> Delivered on{" "}
-                      <span
-                        style={{
-                          color: "#30933A",
-                        }}
-                      >
-                        26 may 2023
-                      </span>
-                    </p>
-                    <p className={Classes.pDesc4}>
-                      Expected Delivery by <span>30 may 2023</span>
-                    </p>
-                  </div>
-                </div>
-                <div className={Classes.RightCardView1}>
-                  <div>
-                    <ReactStarRating
-                      numberOfStar={5}
-                      numberOfSelectedStar={rate}
-                      colorFilledStar="#F6C514"
-                      colorEmptyStar="#D1D3D5"
-                      starSize={isMobileView ? "25px" : "30px"}
-                      spaceBetweenStar="10px"
-                      disableOnSelect={false}
-                      onSelectStar={rateChangeHandler}
-                    />{" "}
-                  </div>
-                  <Link to="/rate_review">
-                    <p className={Classes.RateReviewText}> Rate & review</p>
-                  </Link>
-                </div>
-              </div>
+                ))}
             </div>
-            {/* second */}
-            <div className={Classes.RateAndReviewCard}>
-              <div className={Classes.OrderIdReview}>
-                <p>Order ID : SWA4R46RF46R356F45</p>
-              </div>
-              <div className={Classes.CardView1}>
-                <div className={Classes.LeftCardView1}>
-                  <div className={Classes.ProductImgReview}>
-                    <img src={productimg} />
-                  </div>
-                  <div className={Classes.ProductDetailsReview}>
-                    <p className={Classes.productNames3}>Diamond ring</p>
-                    <p className={Classes.pDesc3}>
-                      <img src={deliveryimg} /> Delivered on{" "}
-                      <span
-                        style={{
-                          color: "#30933A",
-                        }}
-                      >
-                        26 may 2023
-                      </span>
-                    </p>
-                    <p className={Classes.pDesc4}>
-                      Expected Delivery by <span>30 may 2023</span>
-                    </p>
-                  </div>
-                </div>
-                <div className={Classes.RightCardView1}>
-                  <div>
-                    <ReactStarRating
-                      numberOfStar={5}
-                      numberOfSelectedStar={rate}
-                      colorFilledStar="#F6C514"
-                      colorEmptyStar="#D1D3D5"
-                      starSize={isMobileView ? "25px" : "30px"}
-                      spaceBetweenStar="10px"
-                      disableOnSelect={false}
-                      onSelectStar={rateChangeHandler}
-                    />{" "}
-                  </div>
-                  <Link to="/rate_review">
-                    <p className={Classes.RateReviewText}> Rate & review</p>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>

@@ -10,6 +10,7 @@ import SimilerProducts from "../../components/ProductDetails/SililerProducts";
 import axios from "axios";
 import * as Urls from "../../Urls";
 import { useHistory } from "react-router-dom";
+import SliderFeature from "../../components/ProductDetails/SliderFeature";
 
 const ProductDetailsPage = (props) => {
   const [prodDet, setProdDet] = useState([]);
@@ -282,7 +283,9 @@ const ProductDetailsPage = (props) => {
           <NewArrivalCard ProductImage={New4} ProductName='Diamond ring' ProductId='SKU: 18037' PriceNew='27000' PriceOld='29500' />
         </RecentSearch> */}
       </div>
+
       <div className={Classes.Features}>
+        <SliderFeature />
         <Features />
       </div>
       <Footer />

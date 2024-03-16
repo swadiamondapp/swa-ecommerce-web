@@ -10,6 +10,7 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { FadeLoader } from "react-spinners";
 import Features from "../../components/Features/Features";
+import SliderFeature from "../../components/ProductDetails/SliderFeature";
 
 const whishlistPage = () => {
   const history = useHistory();
@@ -132,6 +133,7 @@ const whishlistPage = () => {
           </div>
         </div>
         <div style={{ marginTop: "50px" }}>
+          <SliderFeature />
           <Features />
         </div>
         <Footer />

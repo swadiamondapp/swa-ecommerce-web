@@ -232,13 +232,32 @@ const Header = (props) => {
       <MainHead>
         <div className={Classes.SearchIcons}>
           <div className={Classes.searchList}>
+            {/* <label className={Classes.SearchlabelAnimate}>
+              Search for <span>diamond jewellery</span>
+              <span>gold jewellery</span>
+              <span>platinium jewellery</span>
+              <span>gemstone jewellery</span>
+            </label> */}
+            <div
+              className="labelWrapper"
+              style={{ display: searchKey.length === 0 ? "block" : "none" }}
+            >
+              <span>diamond jewellery</span>
+              <span>gold jewellery</span>
+              <span>platinum jewellery</span>
+              <span>gemstone jewellery</span>
+            </div>
             <input
-              style={{ background: "#F8F8F8", borderRadius: "32px" }}
+              style={{
+                background: "#F8F8F8",
+                borderRadius: "32px",
+                position: "relative",
+              }}
               className={Classes.searchbar}
               type="text"
               value={searchKey}
               onChange={searchKeyHanlder}
-              placeholder="Search for diamonds & more"
+              placeholder="Search for "
             />
             <BsSearch
               size={22}
@@ -450,11 +469,22 @@ const Header = (props) => {
                 marginBottom: "5px",
               }}
             >
+              <div
+                className="labelWrapper"
+                style={{ display: searchKey.length === 0 ? "block" : "none" }}
+              >
+                <span>diamond jewellery</span>
+                <span>gold jewellery</span>
+                <span>platinum jewellery</span>
+                <span>gemstone jewellery</span>
+              </div>
               <input
                 style={{ width: "100%" }}
                 type=""
                 className={Classes.searchbar}
-                placeholder="Search for diamonds & more"
+                placeholder="Search for"
+                value={searchKey}
+                onChange={searchKeyHanlder}
               />
               <BsSearch
                 size={22}

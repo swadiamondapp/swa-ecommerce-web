@@ -24,6 +24,7 @@ import * as Urls from "../../Urls";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { FadeLoader } from "react-spinners";
+import SliderFeature from "../../components/ProductDetails/SliderFeature";
 
 const LandingPage = () => {
   const [banner, setBanner] = useState([]);
@@ -338,9 +339,11 @@ const LandingPage = () => {
         <Certificate video={"https://www.youtube.com/embed/s3PrxdvAihI"} />
 
         {searchList}
+
         <DownloadOurAppImage />
         {/* <RecentSearch /> */}
       </div>
+      <SliderFeature />
       <Features />
       <Footer />
     </div>
