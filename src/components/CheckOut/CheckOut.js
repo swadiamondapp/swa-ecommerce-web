@@ -45,6 +45,19 @@ function CheckOut(props) {
     streetColony: "",
     landMark: "",
   });
+
+  const [isNewaddress, setIsNewAddress] = useState({
+    sEmail: "",
+    sPhone: "",
+    fullName: "",
+    mobile: "",
+    pincode: "",
+    city: "",
+    state: "kerala",
+    hNumber_Bname: "",
+    streetColony: "",
+    landMark: "",
+  });
   const [formShow, setFormShow] = useState(false);
 
   const token = localStorage.getItem("swaToken");
@@ -394,36 +407,64 @@ function CheckOut(props) {
   };
 
   const submitAddress = async () => {
-    try {
-      const body = {
-        name: addressData.fullName,
-        phone_code: "+91",
-        phone_number: addressData.mobile,
-        email: addressData.sEmail,
-        pincode: addressData.pincode,
-        state: addressData.state,
-        city: addressData.city,
-        house: addressData.hNumber_Bname,
-        area: addressData.streetColony,
-        landmark: addressData.landMark,
-        type: "HOME",
-        is_main: false,
-      };
-      const response = await axios.post(Urls.addAdress, body, {
-        headers: { Authorization: "Token " + token },
-      });
-      console.log("response.data.status--->", response);
-      if (response.data && response.data.status === 200) {
-        history.push({
-          pathname: "/payment",
-          state: {
-            data: { pay: amountPay, total: total, addressId: props.address },
-            name: "cart",
-          },
+    if (
+      addressData.fullName !== isNewaddress.fullName ||
+      addressData.city !== isNewaddress.city ||
+      addressData.hNumber_Bname !== isNewaddress.hNumber_Bname ||
+      addressData.landMark !== isNewaddress.landMark ||
+      addressData.mobile !== isNewaddress.mobile ||
+      addressData.pincode !== isNewaddress.pincode ||
+      addressData.state !== isNewaddress.state ||
+      addressData.streetColony !== isNewaddress.streetColony
+    ) {
+      try {
+        const body = {
+          name: addressData.fullName,
+          phone_code: "+91",
+          phone_number: addressData.mobile,
+          email: addressData.sEmail,
+          pincode: addressData.pincode,
+          state: addressData.state,
+          city: addressData.city,
+          house: addressData.hNumber_Bname,
+          area: addressData.streetColony,
+          landmark: addressData.landMark,
+          type: "HOME",
+          // is_main: false,
+        };
+        const response = await axios.post(Urls.addAdress, body, {
+          headers: { Authorization: "Token " + token },
         });
+        if (response.data && response.data.status === 200) {
+          history.push({
+            pathname: "/payment",
+            state: {
+              data: {
+                pay: amountPay,
+                total: total,
+                addressId: props.address,
+                updatedCart: props.proDet.data.updatedCartResponse,
+              },
+              name: "cart",
+            },
+          });
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
+    } else {
+      history.push({
+        pathname: "/payment",
+        state: {
+          data: {
+            pay: amountPay,
+            total: total,
+            addressId: props.address,
+            updatedCart: props.proDet.data.updatedCartResponse,
+          },
+          name: "cart",
+        },
+      });
     }
   };
 
@@ -435,6 +476,19 @@ function CheckOut(props) {
       if (response.data.results.status === 200) {
         setAddressData({
           ...addressData,
+          sEmail: response.data.results.data.email,
+          sPhone: response.data.results.data.phone_number,
+          fullName: response.data.results.data.name,
+          mobile: response.data.results.data.phone_number,
+          pincode: response.data.results.data.pincode,
+          city: response.data.results.data.city,
+          state: response.data.results.data.state,
+          hNumber_Bname: response.data.results.data.house,
+          streetColony: response.data.results.data.area,
+          landMark: response.data.results.data.landmark,
+        });
+        setIsNewAddress({
+          ...isNewaddress,
           sEmail: response.data.results.data.email,
           sPhone: response.data.results.data.phone_number,
           fullName: response.data.results.data.name,

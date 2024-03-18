@@ -19,6 +19,10 @@ function CartDesign(props) {
   const [promoId, setPromoId] = useState("");
   const [errorImg, setErrorImg] = useState(null);
   const [walletOpen, setWalletOpen] = useState(false);
+  const [swaWallet, setSwaWallet] = useState(null);
+  const [isApply, setIsApply] = useState(false);
+  const [swaExchangeWallet, setSwaExchangeWallet] = useState(null);
+  const [updatedCartResponse, setUpdatedCartResponse] = useState([]);
   const history = useHistory();
   const token = localStorage.getItem("swaToken");
   useEffect(() => {
@@ -29,10 +33,16 @@ function CartDesign(props) {
     event.preventDefault();
   };
   const step2Handler = () => {
-    // props.handleOpen();
     history.push({
       pathname: "/checkout",
-      state: { data: { pay: amountPay, total: total }, name: "cart" },
+      state: {
+        data: {
+          pay: amountPay,
+          total: total,
+          updatedCartResponse: updatedCartResponse,
+        },
+        name: "cart",
+      },
     });
   };
 
@@ -83,9 +93,43 @@ function CartDesign(props) {
     }
   };
 
+  const updateCart = async () => {
+    try {
+      const response = await axios.patch(
+        Urls.cart,
+        {
+          exchange_wallet: swaExchangeWallet,
+          swa_wallet: swaWallet,
+        },
+        {
+          headers: { Authorization: "Token " + token },
+        }
+      );
+      if (response.data.results.status_code === 200) {
+        setUpdatedCartResponse(response.data.results);
+        setAmountPay(response.data.results.amount_to_pay);
+        setTotal(response.data.results.total_amount);
+        setWalletOpen(false);
+        setIsApply(true);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
-      <WalletModal open={walletOpen} handleClose={() => setWalletOpen(false)} />
+      <WalletModal
+        open={walletOpen}
+        handleClose={() => setWalletOpen(false)}
+        handleApply={() => updateCart()}
+        swaWallet={swaWallet}
+        setSwaWallet={setSwaWallet}
+        swaExchangeWallet={swaExchangeWallet}
+        setSwaExchangeWallet={setSwaExchangeWallet}
+        step2Handler={step2Handler}
+        setIsApply={setIsApply}
+      />
       <div className={`${Classes.Wrapper} container`}>
         <div className={`${Classes.Wrapper} container`}>
           <div className={Classes.Main}>
@@ -177,10 +221,13 @@ function CartDesign(props) {
                   className={Classes.PlaceOrderButton}
                   type="submit"
                   value="Place order"
-                  onClick={step2Handler}
-                  // onClick={() => {
-                  //   // setWalletOpen(true);
-                  // }}
+                  onClick={() => {
+                    if (isApply) {
+                      step2Handler();
+                    } else {
+                      setWalletOpen(true);
+                    }
+                  }}
                 />
                 {total === amountPay ? (
                   <p className={Classes.HurrayText}>

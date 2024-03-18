@@ -10,7 +10,7 @@ export const addWishList = server + "ecom/wishlist/";
 export const productDet = server + "ecom/products/";
 
 export const productCategoryByMetal = server + "ecom/products/?metal_type=";
-export const filterProductsById = server + "ecom/products/?category_ids="
+export const filterProductsById = server + "ecom/products/?category_ids=";
 
 //register
 export const register = server + "ecom/register/";
@@ -60,7 +60,7 @@ export const pincodeCheck = server + "ecom/pincode_check/?pincode=";
 export const track = server + "ecom/product-tracking/";
 
 //metalType filter
-export const metalType = server+ "ecom/products/?metal_type=3";
+export const metalType = server + "ecom/products/?metal_type=3";
 
 //metalCategory
 export const metalCategory = server + "ecom/metal_types/";
@@ -69,9 +69,8 @@ export const metalCategory = server + "ecom/metal_types/";
 export const categoryWise = server + "ecom/categories";
 
 // occationCategories
-export const occationalProdByid = server +"ecom/products/?occasion_tag_ids=";
+export const occationalProdByid = server + "ecom/products/?occasion_tag_ids=";
 export const occationalProducts = server + "ecom/tags";
-
 
 export const pinCodeToken =
   "https://bvcmars.com/RestService/OrderUploadService.svc/GenerateAuthenticationToken";
@@ -86,3 +85,4 @@ export const trackOrder =
 export const CancelOrder = server + "ecom/cancel-order";
 export const defaultAddress = server + "ecom/address/";
 export const addBankAccount = server + "ecom/bank/add/";
+export const getWalletAmounts = server + "ecom/checkout/";

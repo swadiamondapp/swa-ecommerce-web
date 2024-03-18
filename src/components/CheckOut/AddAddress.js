@@ -23,6 +23,7 @@ function AddAddress(props) {
   const token = localStorage.getItem("swaToken");
   const [showAddAddress, setShowAddAddress] = useState(true);
   const [showNewAddressForm, setShowNewAddressForm] = useState(false);
+  const [selectedAddressId, setSelectedAddressId] = useState(null);
   const [addressData, setAddressData] = useState({
     fullName: "",
     mobile: "",
@@ -33,6 +34,14 @@ function AddAddress(props) {
     streetColony: "",
     landMark: "",
   });
+
+  useEffect(() => {
+    const mainAddress = props.addressArray.find((address) => address.is_main);
+    console.log(mainAddress);
+    if (mainAddress) {
+      setSelectedAddressId(mainAddress.id);
+    }
+  }, [props.addressArray]);
 
   const handleAddNewAddressClick = () => {
     setShowAddAddress(false);
@@ -56,7 +65,6 @@ function AddAddress(props) {
       area: addressData.streetColony,
       landmark: addressData.landMark,
       type: "HOME",
-      is_main: false,
     };
     try {
       const response = await axios.post(Urls.addAdress, body, {
@@ -77,6 +85,25 @@ function AddAddress(props) {
       [name]: value,
     });
   };
+
+  const handleAddressSelection = async (id) => {
+    setSelectedAddressId(id);
+    try {
+      const response = await axios.post(
+        Urls.defaultAddress,
+        {
+          address_id: id,
+          is_main: true,
+        },
+        {
+          headers: { Authorization: "Token " + token },
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
       <div className={`container ${Classes.AddresMobCont}`}>
@@ -95,22 +122,27 @@ function AddAddress(props) {
           <div className={Classes.parentLocations}>
             <div className={Classes.leftAddres11}>
               {props.addressArray.map((item, index) => (
-                <div className={Classes.LocationHead}>
+                <div className={Classes.LocationHead} key={index}>
                   <div className={Classes.FirstLocationHead1}>
-                    <input type="radio" />
+                    <input
+                      type="radio"
+                      name="addressSelection"
+                      checked={selectedAddressId === item.id}
+                      onChange={() => handleAddressSelection(item.id)}
+                    />
                     <div className={Classes.AddressHead15}>
                       <p className={Classes.Headh31}>{item.name}</p>
 
                       <p className={Classes.Para31}>
-                        {item.house} ( house ) {item.city} , {item.area},
+                        {item.house} (house) {item.city}, {item.area},{" "}
                         {item.landmark}, {item.state}, {item.pincode}
                         <span className={Classes.HeadAddressDesc1}>
-                          phone number : {item.phone_number}
+                          phone number: {item.phone_number}
                         </span>
                       </p>
 
                       <p className={Classes.HeadAddressDesc}>
-                        phone number : {item.phone_number}
+                        phone number: {item.phone_number}
                       </p>
                     </div>
                   </div>

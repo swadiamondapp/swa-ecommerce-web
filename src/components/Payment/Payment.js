@@ -11,7 +11,7 @@ const Payment = () => {
   const history = useHistory();
   const location = useLocation();
   const [promoId, setPromoId] = useState("");
-  const [mode, setMode] = useState("C");
+  const [mode, setMode] = useState("");
   const [amountPay, setAmountPay] = useState(100);
   const [propsFCheckOut, setpropsFCheckOut] = useState([]);
   const { data, name } = location.state;
@@ -19,11 +19,18 @@ const Payment = () => {
   const placeOrder = () => {
     let cartBody;
     let buyBody;
+    const p_Method = mode === "cash" ? "C" : "P";
     if (promoId !== "") {
       cartBody = {
         promocode_id: promoId,
         address_id: data.addressId,
-        mode: mode,
+        mode: p_Method,
+        amount_to_pay: data.updatedCart.amount_to_pay,
+        exchange_wallet_balance: data.updatedCart.exchange_wallet_balance,
+        swa_wallet_balance: data.updatedCart.swa_wallet_balance,
+        wallet_amount_used: data.updatedCart.wallet_amount_used,
+        exchange_change: data.updatedCart.exchange_change,
+        swa_change: data.updatedCart.swa_change,
       };
       // buyBody = {
       //   product_id: props.proDet.data.product_id,
@@ -37,7 +44,13 @@ const Payment = () => {
       cartBody = {
         promocode_id: 0,
         address_id: data.addressId,
-        mode: mode,
+        mode: p_Method,
+        amount_to_pay: data.updatedCart.amount_to_pay,
+        exchange_wallet_balance: data.updatedCart.exchange_wallet_balance,
+        swa_wallet_balance: data.updatedCart.swa_wallet_balance,
+        wallet_amount_used: data.updatedCart.wallet_amount_used,
+        exchange_change: data.updatedCart.exchange_change,
+        swa_change: data.updatedCart.swa_change,
       };
       // buyBody = {
       //   product_id: props.proDet.data.product_id,
@@ -173,7 +186,12 @@ const Payment = () => {
     }
   };
 
-  console.log("props.location.state--->", data, name);
+  const handleMethodChange = (event) => {
+    setMode(event.target.value);
+  };
+
+  console.log("data----->", data);
+
   return (
     <div>
       <div className={`${Classes.Wrapper} container`}>
@@ -199,17 +217,32 @@ const Payment = () => {
             <h4>Payment Method</h4>
             <p>Choose your payment method</p>
             <div className={Classes.Pmethod}>
-              <input type="radio" />
-              <img src={mastercard} />
+              <input
+                type="radio"
+                value="credit_card"
+                checked={mode === "credit_card"}
+                onChange={handleMethodChange}
+              />
+              <img src={mastercard} alt="Mastercard" />
               Debit / Credit card
             </div>
             <div className={Classes.Pmethod}>
-              <input type="radio" />
-              <img src={phonepay} />
-              Upi
+              <input
+                type="radio"
+                value="upi"
+                checked={mode === "upi"}
+                onChange={handleMethodChange}
+              />
+              <img src={phonepay} alt="Phonepay" />
+              UPI
             </div>
             <div className={Classes.Pmethod}>
-              <input type="radio" />
+              <input
+                type="radio"
+                value="cash"
+                checked={mode === "cash"}
+                onChange={handleMethodChange}
+              />
               Cash on delivery
             </div>
           </div>
@@ -224,7 +257,7 @@ const Payment = () => {
 
                 <p className={Classes.Amount}>
                   {/* <BiRupee /> */}
-                  &#x20B9; {"54000"}
+                  &#x20B9; {data.total}
                 </p>
               </div>
               <div
@@ -240,7 +273,7 @@ const Payment = () => {
 
                 <p className={Classes.Amount}>
                   {/* <BiRupee /> */}
-                  &#x20B9; {"54000"}
+                  &#x20B9; {data.pay}
                 </p>
               </div>
               <div
@@ -250,7 +283,7 @@ const Payment = () => {
                 // }}
                 onClick={placeOrder}
               >
-                Pay &#x20B9; 54,000
+                Pay &#x20B9; {data.pay}
               </div>
               <p className={Classes.HurrayText}>
                 You totaly saved {"9888"}. hurray!..
@@ -280,7 +313,7 @@ const Payment = () => {
             // }}
             onClick={placeOrder}
           >
-            Pay &#x20B9; 54,000
+            Pay &#x20B9; {data.pay}
           </div>
         </div>
       </div>

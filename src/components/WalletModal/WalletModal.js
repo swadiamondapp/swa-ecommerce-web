@@ -4,6 +4,8 @@ import wallet from "../../Assets/wallet.png";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import axios from "axios";
+import * as Urls from "../../Urls";
 import { Button } from "@mui/material";
 
 const style = {
@@ -34,9 +36,15 @@ const mobileStyle = {
 };
 
 const WalletModal = (props) => {
+  const token = localStorage.getItem("swaToken");
+  const [walletValues, setWalletValues] = useState([]);
   const [isMobileView, setIsMobileView] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
   );
+
+  useEffect(() => {
+    getSwaWalletAmounts();
+  }, [props.open]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -50,6 +58,27 @@ const WalletModal = (props) => {
       window.removeEventListener("resize", handleResize);
     };
   }, [isMobileView]);
+
+  const getSwaWalletAmounts = async () => {
+    try {
+      const response = await axios.get(Urls.getWalletAmounts, {
+        headers: { Authorization: "Token " + token },
+      });
+      setWalletValues(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleWalletCheck = (e) => {
+    const value = e.target.checked ? walletValues.swa_wallet : null;
+    props.setSwaWallet(value);
+  };
+
+  const handleExchangeWalletCheck = (e) => {
+    const value = e.target.checked ? walletValues.exchange_wallet : null;
+    props.setSwaExchangeWallet(value);
+  };
 
   return (
     <div>
@@ -71,26 +100,40 @@ const WalletModal = (props) => {
             <div className={Classes.AmountCheckContainer}>
               <div className={Classes.WalletContentLines}>
                 <div className={Classes.Content}>
-                  <input type="checkbox" />
+                  <input
+                    type="checkbox"
+                    value={walletValues.swa_wallet}
+                    checked={props.swaWallet !== null}
+                    onChange={handleWalletCheck}
+                  />
                   <img src={wallet} />
                   <p className={Classes.Word}>Swa Wallet</p>
                 </div>
-                <p className={Classes.Amount}>&#x20B9; 564</p>
+                <p className={Classes.Amount}>
+                  &#x20B9; {walletValues.swa_wallet}
+                </p>
               </div>
               <div className={Classes.WalletContentLines}>
                 <div className={Classes.Content}>
-                  <input type="checkbox" />
+                  <input
+                    type="checkbox"
+                    value={walletValues.exchange_wallet}
+                    checked={props.swaExchangeWallet !== null}
+                    onChange={handleExchangeWalletCheck}
+                  />
                   <img src={wallet} />
                   <p className={Classes.Word}>Exchange Wallet</p>
                 </div>
-                <p className={Classes.Amount}>&#x20B9; 564</p>
+                <p className={Classes.Amount}>
+                  &#x20B9; {walletValues.exchange_wallet}
+                </p>
               </div>
             </div>
             <div className={Classes.ButtonContainer}>
-              <div className={Classes.Cancel}>
+              <div className={Classes.Cancel} onClick={props.step2Handler}>
                 <p>Cancel & continue</p>
               </div>
-              <div className={Classes.Apply}>
+              <div className={Classes.Apply} onClick={props.handleApply}>
                 <p>Apply</p>
               </div>
             </div>
