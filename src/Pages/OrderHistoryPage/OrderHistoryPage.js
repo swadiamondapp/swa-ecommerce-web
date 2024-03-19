@@ -73,9 +73,9 @@ const OrderHistoryPage = () => {
           key={index}
         >
           <Orders
-            Image={ProductImage}
+            Image={item.shipments[0].bag_image}
             orderId={item.order_code}
-            // textAdres={'hello text'}
+            rating={item.shipments[0].product_rating}
             promCond={item.promocode === null ? "Not Applied" : "Applied"}
             address={item.address_name}
             ProductDate={item.status}

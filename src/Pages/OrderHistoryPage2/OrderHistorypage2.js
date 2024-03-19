@@ -232,6 +232,33 @@ const OrderHistorypage2 = (props) => {
     }
   };
 
+  const cancelProduct = async () => {
+    try {
+      const body = {
+        product_id: orderDet[0].product.product_id,
+        order_id: orderid,
+        shipment_id: orderDet[0].id,
+        total_amount: total,
+        payment_mode: payMode,
+        cancel_type: "final",
+        reason: "aaaaaaaaaaa",
+        notes: "sssssssssssssssssssssssssssssssssssssssssssssssssssssssss",
+      };
+      const response = await axios.post(Urls.CancelOrder, body, {
+        headers: { Authorization: "Token " + token },
+      });
+      if (response.data.results.status_code === 400) {
+        setCancelProductModal(false);
+        setSuccessModalOpen(true);
+        setTimeout(() => {
+          setSuccessModalOpen(false);
+        }, 1500);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   console.log(
     "singleOrderData--->",
     singleOrderData && singleOrderData.order && singleOrderData.order.address
@@ -275,10 +302,7 @@ const OrderHistorypage2 = (props) => {
         <CancelProductModal
           open={cancelProductModal}
           handleClose={() => setCancelProductModal(false)}
-          orderId={orderid}
-          orderDet={orderDet}
-          payMode={payMode}
-          total={total}
+          cancelProduct={cancelProduct}
         />
 
         <div>
@@ -501,6 +525,16 @@ const OrderHistorypage2 = (props) => {
                           Return / Exchange
                         </button>
                       )}
+                    {singleOrderData &&
+                      singleOrderData.order &&
+                      singleOrderData.order.shipment &&
+                      singleOrderData.order.shipment[0].status === 2 && (
+                        <div className={Classes.CancelProductButton}>
+                          <button onClick={() => setCancelProductModal(true)}>
+                            Cancel product
+                          </button>
+                        </div>
+                      )}
                     <button
                       className={Classes.REButton2}
                       onClick={() => setBuyBackOpen(true)}
@@ -509,12 +543,6 @@ const OrderHistorypage2 = (props) => {
                       <IoMdDownload /> Download invoice
                     </button>
                   </div>
-                </div>
-                <div
-                  className={Classes.CancelProductButton}
-                  onClick={() => setCancelProductModal(true)}
-                >
-                  <button>Cancel product</button>
                 </div>
               </div>
 

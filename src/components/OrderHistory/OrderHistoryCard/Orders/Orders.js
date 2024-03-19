@@ -63,7 +63,7 @@ function Orders(props) {
       <div className={Classes.BottomContainer}>
         <div className={Classes.MobImgContainer}>
           <div className={Classes.ImageContent}>
-            <img src={props.Image} />
+            <img src={props.Image} style={{ maxWidth: "150px" }} />
             <div className={Classes.TextWrapper}>
               <h3>{props.product_name}</h3>
               <p className={Classes.DeliveryText}>
@@ -94,7 +94,7 @@ function Orders(props) {
           <div className={Classes.RatingContainer}>
             <ReactStarRating
               numberOfStar={5}
-              // numberOfSelectedStar={showReview.rating}
+              numberOfSelectedStar={props.rating}
               colorFilledStar="#F6C514"
               colorEmptyStar="#D1D3D5"
               starSize="25px"
