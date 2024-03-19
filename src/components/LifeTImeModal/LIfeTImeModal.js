@@ -86,30 +86,7 @@ const LIfeTImeModal = (props) => {
   const handleClose = () => {
     setOpen(false);
   };
-
-  const cancellationProceedWith = async (type) => {
-    try {
-      const body = {
-        order_id: props.orderid,
-        shipment_id: props.shipmentId,
-        product_id: props.productId,
-        total_amount: props.total,
-        payment_mode: props.payMode,
-        refund_type: type,
-      };
-
-      const response = await axios.post(Urls.CancelOrder, body, {
-        headers: { Authorization: "Token 	" + token },
-      });
-      if (response.data.results.status_code === 200) {
-        props.handleClose();
-        props.handleSuccessOpen();
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
+  console.log("lteLbbData===>", props.lteLbbData);
   return (
     <div>
       <Modal open={props.open} onClose={props.handleClose}>
@@ -138,13 +115,19 @@ const LIfeTImeModal = (props) => {
                         Purchase Amount{" "}
                       </span>
 
-                      <span className={classes.textAmount}>$678</span>
+                      <span className={classes.textAmount}>
+                        &#x20B9; {props.lteLbbData.total_amount}
+                      </span>
                     </div>
                     <div className={classes.line}></div>
                     <div className={classes.subDetialstexts}>
-                      <span className={classes.labelText}>Discounted </span>
+                      <span className={classes.labelText}>
+                        Dedection percentage 5%{" "}
+                      </span>
 
-                      <span className={classes.textAmount}>$34</span>
+                      <span className={classes.textAmount}>
+                        &#x20B9; {props.lteLbbData.deducted_amount_lte}
+                      </span>
                     </div>
                     <div className={classes.line}></div>
                     <div className={classes.subDetialstexts}>
@@ -152,14 +135,20 @@ const LIfeTImeModal = (props) => {
                         Totel LTE Value{" "}
                       </span>
 
-                      <span className={classes.greenColor}>$712</span>
+                      <span className={classes.greenColor}>
+                        &#x20B9; {props.lteLbbData.refund_amount_lte}
+                      </span>
                     </div>
                     <div className={classes.line}></div>
                   </div>
                   <div>
                     <button
                       className={classes.buttonllb}
-                      onClick={() => cancellationProceedWith("lte")}
+                      // onClick={() => cancellationProceedWith("lte")}
+                      onClick={() => {
+                        props.setType("lte");
+                        props.handleOpen();
+                      }}
                     >
                       PROCEED WITH LTE
                     </button>
@@ -177,15 +166,19 @@ const LIfeTImeModal = (props) => {
                     <div className={classes.subDetialstexts}>
                       <span className={classes.labelText}>Purchase Value </span>
 
-                      <span className={classes.textAmount}>$678</span>
+                      <span className={classes.textAmount}>
+                        &#x20B9; {props.lteLbbData.total_amount}
+                      </span>
                     </div>
                     <div className={classes.line}></div>
                     <div className={classes.subDetialstexts}>
                       <span className={classes.labelText}>
-                        Deduction Value{" "}
+                        Dedection percentage 10%
                       </span>
 
-                      <span className={classes.textAmount}>$34</span>
+                      <span className={classes.textAmount}>
+                        &#x20B9; {props.lteLbbData.deducted_amount_lbb}
+                      </span>
                     </div>
                     <div className={classes.line}></div>
                     <div className={classes.subDetialstexts}>
@@ -193,14 +186,20 @@ const LIfeTImeModal = (props) => {
                         Totel LBB Value{" "}
                       </span>
 
-                      <span className={classes.greenColor}>$712</span>
+                      <span className={classes.greenColor}>
+                        &#x20B9; {props.lteLbbData.refund_amount_lbb}
+                      </span>
                     </div>
                     <div className={classes.line}></div>
                   </div>
                   <div>
                     <button
                       className={classes.buttonllb}
-                      onClick={() => cancellationProceedWith("lbb")}
+                      // onClick={() => cancellationProceedWith("lbb")}
+                      onClick={() => {
+                        props.setType("lbb");
+                        props.handleOpen();
+                      }}
                     >
                       PROCEED WITH LBB
                     </button>

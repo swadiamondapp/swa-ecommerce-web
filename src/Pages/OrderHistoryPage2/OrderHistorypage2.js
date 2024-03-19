@@ -73,6 +73,21 @@ const OrderHistorypage2 = (props) => {
   const [successModalOpen, setSuccessModalOpen] = useState(false);
   const [cancelProductModal, setCancelProductModal] = useState(false);
   const [transferModalOpen, setTransferModalOpen] = useState(false);
+  const [lteLbbData, setLteLbbData] = useState([]);
+  const [type, setType] = useState("");
+  const [singleOrderData, setSingleOrderData] = useState([]);
+  const [addressData, setAddressData] = useState({
+    sEmail: "",
+    sPhone: "",
+    fullName: "",
+    mobile: "",
+    pincode: "",
+    city: "",
+    state: "kerala",
+    hNumber_Bname: "",
+    streetColony: "",
+    landMark: "",
+  });
 
   const onChange = (key) => {
     console.log(key);
@@ -81,7 +96,7 @@ const OrderHistorypage2 = (props) => {
 
   useEffect(() => {
     axios
-      .get(Urls.myOrder + "/" + props.location.state.data, {
+      .get(Urls.myOrder + "/" + props.location.state.data.productId, {
         headers: {
           Authorization: "Token " + token,
         },
@@ -118,8 +133,31 @@ const OrderHistorypage2 = (props) => {
       .catch((error) => {
         console.log(error);
       });
+    singleOrderDetails();
   }, []);
   // warnning
+
+  const singleOrderDetails = async () => {
+    try {
+      const response = await axios.get(
+        Urls.myOrder +
+          "/" +
+          props.location.state.data.productId +
+          "?shipment_id=" +
+          props.location.state.data.shipmentId,
+        {
+          headers: {
+            Authorization: "Token " + token,
+          },
+        }
+      );
+      if (response.data.results.status_code === 200) {
+        setSingleOrderData(response.data.results.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const homeHandler = () => {
     history.pushState("/");
@@ -135,6 +173,70 @@ const OrderHistorypage2 = (props) => {
     });
   };
 
+  const fetchLteLbbDetails = async () => {
+    try {
+      const body = {
+        order_id: orderid,
+        shipment_id: orderDet[0].id,
+        product_id: orderDet[0].product.product_id,
+        total_amount: total,
+        payment_mode: payMode,
+        cancel_type: "initial",
+      };
+
+      const response = await axios.post(Urls.CancelOrder, body, {
+        headers: { Authorization: "Token 	" + token },
+      });
+      if (response.data.results.status_code === 200) {
+        setLteLbbData(response.data.results);
+        setOpen(true);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const cancellationProceedWith = async () => {
+    try {
+      const body = {
+        order_id: orderid,
+        shipment_id: orderDet[0].id,
+        product_id: orderDet[0].product.product_id,
+        total_amount: total,
+        payment_mode: payMode,
+        refund_type: type,
+        cancel_type: "final",
+        phone_code: "+91",
+        phone_number: addressData.mobile,
+        pincode: addressData.pincode,
+        state: addressData.state,
+        city: addressData.city,
+        landmark: addressData.landMark,
+        house: addressData.hNumber_Bname,
+        street: addressData.streetColony,
+      };
+      console.log(body);
+      const response = await axios.post(Urls.CancelOrder, body, {
+        headers: { Authorization: "Token 	" + token },
+      });
+      if (response.data.results.status_code === 400) {
+        setBuyBackOpen(false);
+        setOpen(false);
+        setSuccessModalOpen(true);
+        setTimeout(() => {
+          setSuccessModalOpen(false);
+        }, 1500);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  console.log(
+    "singleOrderData--->",
+    singleOrderData && singleOrderData.order && singleOrderData.order.address
+  );
+
   return (
     <div>
       <div className={Classes.Background}>
@@ -147,16 +249,23 @@ const OrderHistorypage2 = (props) => {
           total={total}
           shipmentId={orderDet[0].id}
           productId={orderDet[0].product.product_id}
-          // handleSuccessOpen={() => setSuccessModalOpen(true)}
+          lteLbbData={lteLbbData}
+          handleOpen={() => {
+            setBuyBackOpen(true);
+          }}
+          setType={setType}
         />
         <BuyBackRequiest
           open={buyBackOpen}
           handleClose={() => setBuyBackOpen(false)}
+          cancellationProceedWith={cancellationProceedWith}
+          addressData={addressData}
+          setAddressData={setAddressData}
         />
-        {/* <SuccessPage
+        <SuccessPage
           open={successModalOpen}
           handleClose={() => setSuccessModalOpen(false)}
-        /> */}
+        />
         {/*
         <AddBank open={addBankOpen} handleClose={() => setAddBankOpen(false)} />
         <TransferMoneyModal
@@ -381,12 +490,17 @@ const OrderHistorypage2 = (props) => {
                     </Accordion>
                   </div>
                   <div className={Classes.TrackButtons}>
-                    <button
-                      className={Classes.REButton}
-                      onClick={() => setOpen(true)}
-                    >
-                      Return / Exchange
-                    </button>
+                    {singleOrderData &&
+                      singleOrderData.order &&
+                      singleOrderData.order.shipment &&
+                      singleOrderData.order.shipment[0].status === 4 && (
+                        <button
+                          className={Classes.REButton}
+                          onClick={() => fetchLteLbbDetails()}
+                        >
+                          Return / Exchange
+                        </button>
+                      )}
                     <button
                       className={Classes.REButton2}
                       onClick={() => setBuyBackOpen(true)}

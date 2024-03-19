@@ -17,23 +17,6 @@ function Orders(props) {
   const history = useHistory();
   const token = localStorage.getItem("swaToken");
 
-  useEffect(() => {
-    axios
-      .get(Urls.showreview + "90/reviews/", {
-        headers: {
-          Authorization: "Token " + token,
-        },
-      })
-      .then((response1) => {
-        setShowReview(response1.data.results.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-  // color="#069D0D"
-  console.log("props--.>", props.orderId);
-  console.log("showReview--.>", showReview);
   return (
     <div className={Classes.RateContainer}>
       {/* <div className={Classes.Align}>

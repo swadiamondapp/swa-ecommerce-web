@@ -43,8 +43,11 @@ const OrderHistoryPage = () => {
         console.log(error);
       });
   }, []);
-  const productViewHandler = (id) => {
-    history.push({ pathname: "/track_order", state: { data: id } });
+  const productViewHandler = (id, shipmentId) => {
+    history.push({
+      pathname: "/track_order",
+      state: { data: { productId: id, shipmentId: shipmentId } },
+    });
   };
   let orderLists;
   if (loading) {
@@ -62,6 +65,7 @@ const OrderHistoryPage = () => {
     );
   } else {
     orderLists = orderList.map((item, index) => {
+      console.log("item--.>", item);
       return (
         <OrderHiistoryCard
           OrderId="SWA4R46RF46R356F45"
@@ -77,7 +81,9 @@ const OrderHistoryPage = () => {
             ProductDate={item.status}
             Price={item.grand_total}
             Qty="4"
-            clicked={() => productViewHandler(item.id)}
+            clicked={() =>
+              productViewHandler(item.id, item.shipments[0].shipment_id)
+            }
           />
         </OrderHiistoryCard>
       );

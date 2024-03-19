@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
+import * as Urls from "../../Urls";
 import Classes from "./BuyBackRequiest.module.css";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -29,6 +31,7 @@ const style = {
 };
 
 const BuyBackRequiest = (props) => {
+  const token = localStorage.getItem("swaToken");
   const [isFocused, setIsFocused] = useState(false);
   const [open, setOpen] = useState(false);
   const [selectedState, setSelectedState] = useState(null);
@@ -91,6 +94,10 @@ const BuyBackRequiest = (props) => {
   };
 
   useEffect(() => {
+    getDefaultAddress();
+  }, []);
+
+  useEffect(() => {
     const handleResize = () => {
       setIsMobileView(window.innerWidth >= 300 && window.innerWidth <= 575);
     };
@@ -111,21 +118,44 @@ const BuyBackRequiest = (props) => {
     setIsFocused(false);
   };
 
-  const handleOpen = () => {
-    setOpen(true);
+  const handleChangeAddress = (event) => {
+    const { name, value } = event.target;
+    props.setAddressData({
+      ...props.addressData,
+      [name]: value,
+    });
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const getDefaultAddress = async () => {
+    try {
+      const response = await axios.get(Urls.defaultAddress, {
+        headers: { Authorization: "Token " + token },
+      });
+      if (response.data.results.status === 200) {
+        props.setAddressData({
+          ...props.addressData,
+          sEmail: response.data.results.data.email,
+          sPhone: response.data.results.data.phone_number,
+          fullName: response.data.results.data.name,
+          mobile: response.data.results.data.phone_number,
+          pincode: response.data.results.data.pincode,
+          city: response.data.results.data.city,
+          state: response.data.results.data.state,
+          hNumber_Bname: response.data.results.data.house,
+          streetColony: response.data.results.data.area,
+          landMark: response.data.results.data.landmark,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <div>
       <Modal
-        // open={props.open}
-        open={open}
-        // onClose={props.handleClose}
-        onClose={handleClose}
+        open={props.open}
+        onClose={props.handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -133,8 +163,7 @@ const BuyBackRequiest = (props) => {
           <Typography>
             <div>
               <Button
-                // onClick={props.handleClose}
-                onClick={handleClose}
+                onClick={props.handleClose}
                 style={{ position: "absolute", top: "10px", right: 0 }}
               >
                 <img src={CloseButton} />
@@ -151,6 +180,9 @@ const BuyBackRequiest = (props) => {
                     <input
                       placeholder="+91 9995200657"
                       className={Classes.alllInputFeilds}
+                      name="mobile"
+                      value={props.addressData.mobile}
+                      onChange={handleChangeAddress}
                     />
                   </div>
 
@@ -164,6 +196,9 @@ const BuyBackRequiest = (props) => {
                         <input
                           placeholder="674602"
                           className={Classes.alllInputFeilds}
+                          name="pincode"
+                          value={props.addressData.pincode}
+                          onChange={handleChangeAddress}
                         />
                       </div>
 
@@ -172,6 +207,9 @@ const BuyBackRequiest = (props) => {
                         <input
                           placeholder="Calicut"
                           className={Classes.alllInputFeilds}
+                          name="city"
+                          value={props.addressData.city}
+                          onChange={handleChangeAddress}
                         />
                       </div>
                     </div>
@@ -183,9 +221,12 @@ const BuyBackRequiest = (props) => {
                         className={Classes.auto}
                         autoHighlight
                         getOptionLabel={(option) => option.name}
-                        value={selectedState} // Set the value of Autocomplete
+                        value={props.addressData.state} // Set the value of Autocomplete
                         onChange={(event, newValue) => {
-                          setSelectedState(newValue); // Update selected state
+                          props.setAddressData({
+                            ...props.addressData,
+                            state: newValue,
+                          }); // Update selected state
                         }}
                         renderOption={(props, option) => (
                           <Box
@@ -206,7 +247,7 @@ const BuyBackRequiest = (props) => {
                             <TextField
                               {...params}
                               label={
-                                selectedState
+                                props.addressData.state
                                   ? null
                                   : isFocused
                                   ? null
@@ -282,6 +323,9 @@ const BuyBackRequiest = (props) => {
                       <input
                         placeholder="Skyline 12B"
                         className={Classes.alllInputFeilds}
+                        name="hNumber_Bname"
+                        value={props.addressData.hNumber_Bname}
+                        onChange={handleChangeAddress}
                       />
                     </div>
                     <div className={Classes.halfInput}>
@@ -291,6 +335,9 @@ const BuyBackRequiest = (props) => {
                       <input
                         placeholder="Palazhi"
                         className={Classes.alllInputFeilds}
+                        name="streetColony"
+                        value={props.addressData.streetColony}
+                        onChange={handleChangeAddress}
                       />
                     </div>
                   </div>
@@ -301,11 +348,18 @@ const BuyBackRequiest = (props) => {
                     <input
                       placeholder="Near edu city"
                       className={Classes.alllInputFeilds}
+                      name="landMark"
+                      value={props.addressData.landMark}
+                      onChange={handleChangeAddress}
                     />
                   </div>
                   <div className={Classes.confirmButtonContianer}>
                     <div className={Classes.buttonsWIdth}>
-                      <button type="button" className={Classes.confirmButton}>
+                      <button
+                        type="button"
+                        className={Classes.confirmButton}
+                        onClick={props.cancellationProceedWith}
+                      >
                         CONFIRM BUYBACK REQUEST
                       </button>
                     </div>

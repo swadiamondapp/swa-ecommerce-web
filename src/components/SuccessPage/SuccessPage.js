@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Classes from "./SuccesPage.module.css";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import InvertedTick from "../../Assets/invertedTick.png";
-import { Class } from "@mui/icons-material";
 
 const successM = {
   position: "absolute",
@@ -13,15 +11,14 @@ const successM = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   bgcolor: "rgba(48, 147, 58, 1)",
+  outline: "none",
   border: "none",
   boxShadow: 24,
   borderRadius: "4px",
   p: 4,
 };
 
-const SuccessPage = () => {
-  const [successModalOpen, setSuccessModalOpen] = useState(false);
-  const [open, setOpen] = useState(false);
+const SuccessPage = (props) => {
   const [isMobileView, setIsMobileView] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
   );
@@ -38,11 +35,9 @@ const SuccessPage = () => {
     };
   }, []);
 
-  const handleClose = () => setOpen(false);
-
   return (
     <div>
-      <Modal open={open} onClose={handleClose}>
+      <Modal open={props.open} onClose={props.handleClose}>
         <Box
           sx={successM}
           style={
