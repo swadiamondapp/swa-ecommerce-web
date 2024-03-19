@@ -793,6 +793,10 @@ a {
   color: #0d1217;
   padding: 10px 20px;
   font-family: "gilroyNormal" !important;
+  font-size: 16px !important;
+}
+.LogedDetails_list link p {
+  font-size: 16px;
 }
 .Name_phoneLog {
   background: #fcfbf6;

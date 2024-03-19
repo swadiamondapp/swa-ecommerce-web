@@ -18,6 +18,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { colors } from "@mui/material";
 import { IoMdClose } from "react-icons/io";
 import home1 from "../../Assets/home1.png";
+import Joi from "joi";
 
 function AddAddress(props) {
   const token = localStorage.getItem("swaToken");
@@ -33,6 +34,14 @@ function AddAddress(props) {
     hNumber_Bname: "",
     streetColony: "",
     landMark: "",
+  });
+  const [errors, setErrors] = useState({
+    fullName: "",
+    mobile: "",
+    pincode: "",
+    city: "",
+    hNumber_Bname: "",
+    streetColony: "",
   });
 
   useEffect(() => {
@@ -53,7 +62,31 @@ function AddAddress(props) {
     setShowNewAddressForm(false);
   };
 
+  const validateForm = () => {
+    const schema = Joi.object({
+      fullName: Joi.string().required(),
+      mobile: Joi.string().required(),
+      pincode: Joi.string().required(),
+      city: Joi.string().required(),
+      hNumber_Bname: Joi.string().required(),
+      streetColony: Joi.string().required(),
+    });
+
+    const { error } = schema.validate(addressData, { abortEarly: false });
+    if (error) {
+      const newErrors = {};
+      error.details.forEach((item) => {
+        newErrors[item.path[0]] = item.message;
+      });
+      setErrors(newErrors);
+      return false;
+    }
+    return true;
+  };
+
   const addAaddress = async () => {
+    console.log("clicked,,,");
+    if (validateForm()) return;
     const body = {
       name: addressData.fullName,
       phone_code: "+91",
@@ -72,6 +105,9 @@ function AddAddress(props) {
       });
       if (response.data.status === 200) {
         props.fetchAddress();
+      } else {
+        // Handle other response statuses if necessary
+        console.log("API request failed:", response.data);
       }
     } catch (error) {
       console.log(error);
@@ -83,6 +119,11 @@ function AddAddress(props) {
     setAddressData({
       ...addressData,
       [name]: value,
+    });
+    // Clear error when user starts typing
+    setErrors({
+      ...errors,
+      [name]: "",
     });
   };
 
@@ -183,6 +224,11 @@ function AddAddress(props) {
                           name="fullName"
                           onChange={handleChangeAddress}
                         />
+                        {errors.fullName && (
+                          <span className={Classes.Error}>
+                            {errors.fullName}
+                          </span>
+                        )}
                       </div>
                       <div>
                         <label>Mobile number</label>
@@ -194,6 +240,9 @@ function AddAddress(props) {
                           name="mobile"
                           onChange={handleChangeAddress}
                         />
+                        {errors.mobile && (
+                          <span className={Classes.Error}>{errors.mobile}</span>
+                        )}
                       </div>
                     </div>
                     <div className={Classes.ParentF3}>
@@ -208,6 +257,11 @@ function AddAddress(props) {
                             name="pincode"
                             onChange={handleChangeAddress}
                           />
+                          {errors.pincode && (
+                            <span className={Classes.Error}>
+                              {errors.pincode}
+                            </span>
+                          )}
                         </div>
                         <div>
                           <label>City</label>
@@ -219,6 +273,9 @@ function AddAddress(props) {
                             name="city"
                             onChange={handleChangeAddress}
                           />
+                          {errors.city && (
+                            <span className={Classes.Error}>{errors.city}</span>
+                          )}
                         </div>
                       </div>
                       <div>
@@ -244,6 +301,11 @@ function AddAddress(props) {
                           name="hNumber_Bname"
                           onChange={handleChangeAddress}
                         />
+                        {errors.hNumber_Bname && (
+                          <span className={Classes.Error}>
+                            {errors.hNumber_Bname}
+                          </span>
+                        )}
                       </div>
                       <div className={Classes.ColonyForm}>
                         <label>Street colony name</label>
@@ -255,6 +317,11 @@ function AddAddress(props) {
                           name="streetColony"
                           onChange={handleChangeAddress}
                         />
+                        {errors.streetColony && (
+                          <span className={Classes.Error}>
+                            {errors.streetColony}
+                          </span>
+                        )}
                       </div>
                     </div>
                     <div>
