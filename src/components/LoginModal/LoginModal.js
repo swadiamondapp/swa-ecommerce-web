@@ -16,6 +16,7 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import logedimg from "../../Assets/loged.png";
 import { IoIosArrowDown } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -58,6 +59,7 @@ const LoginModal = (props) => {
   const [forgotToken, setForgotToken] = useState("");
   const [forgotError, setForfotError] = useState("");
   const [createError, setCreateError] = useState("");
+  const username = localStorage.getItem("name");
 
   const [error, setError] = useState("");
   const history = useHistory();
@@ -119,6 +121,7 @@ const LoginModal = (props) => {
             .then((response) => {
               if (response.data.results.status_code === 200) {
                 localStorage.setItem("swaToken", response.data.results.token);
+                localStorage.setItem("name", response.data.results.data.name);
                 props.logAct(response.data.results.token);
                 handleClose();
               } else if (response.data.results.status_code === 401) {
@@ -379,6 +382,18 @@ const LoginModal = (props) => {
     history.push("/");
     setLogCond(false);
   };
+  const handleLogOut = () => {
+    // Clear localStorage
+    localStorage.removeItem("swaToken");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("phoneNumber");
+
+    // Hide the LogedUserDetails div
+    setShowUserDetails(false);
+    // Redirect to home page or login page
+    history.push("/"); // Redirect to home page
+    setLogCond(false); // Close user details dropdown
+  };
   const forgotHandlerShow = () => {
     setPhoneNumberError("");
     setForgot(true);
@@ -502,7 +517,24 @@ const LoginModal = (props) => {
           </div>
         </div>
       </div> */}
-      <div className={Classes.LoginSignup}>
+      {userName ? (
+        <div onClick={handleLogedUserClick} className={Classes.LogedUser}>
+          <img src={logedimg} />
+          <p>{userName}</p>
+          <IoIosArrowDown />
+        </div>
+      ) : (
+        <div className={Classes.LoginSignup}>
+          <div className={Classes.dLogin} onClick={props.handleOpenLogin}>
+            Login
+          </div>
+          <div className={Classes.LineArrow}></div>
+          <div className={Classes.DSignup} onClick={props.handleOpenLogin}>
+            Sign up
+          </div>
+        </div>
+      )}
+      {/* <div className={Classes.LoginSignup}>
         <div className={Classes.dLogin} onClick={props.handleOpenLogin}>
           Login
         </div>
@@ -513,26 +545,37 @@ const LoginModal = (props) => {
       </div>
       <div onClick={handleLogedUserClick} className={Classes.LogedUser}>
         <img src={logedimg} />
-        <p>Mohammed Inshad</p>
+        <p>{userName}</p>
         <IoIosArrowDown />
-      </div>
+      </div> */}
       {/* modal */}
 
       {showUserDetails && (
         <div ref={userDetailsRef} className={Classes.LogedUserDetails}>
           <div className={Classes.Name_phoneLog}>
-            <p>Mohammed Inshad</p>
-            <p className={Classes.Name_phoneLoged}>+91 9995200745</p>
+            <p>{userName}</p>
+            <p className={Classes.Name_phoneLoged}>{phone}</p>
           </div>
           <div className={Classes.LogedDetails_list}>
             <p>Account</p>
-            <p>Order history</p>
-            <p>Add Address</p>
-            <p>Track Order</p>
-            <p>Write review</p>
-            <p>Swa wallet</p>
+            <Link to="/my_orders">
+              <p style={{ fontSize: "16px" }}>Order history</p>
+            </Link>
+
+            <Link to="/addaddress">
+              <p style={{ fontSize: "16px" }}>Add Address</p>
+            </Link>
+            <Link to="/track_order">
+              <p style={{ fontSize: "16px" }}>Track Order</p>
+            </Link>
+            <Link to="/rate&review">
+              <p>Write review</p>
+            </Link>
+            <Link to="/addaddress">
+              <p style={{ fontSize: "16px" }}>Swa wallet</p>
+            </Link>
             <p>Swa exchange</p>
-            <p>Log Out</p>
+            <p onClick={handleLogOut}>Log Out</p>
           </div>
         </div>
       )}
