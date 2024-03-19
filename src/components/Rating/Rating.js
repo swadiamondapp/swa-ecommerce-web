@@ -36,9 +36,9 @@ function Rating(props) {
   console.log("file....body", imageFile);
 
   const location = useLocation();
-  const { product_id, product_rating, product_name } = location.state;
+  // const { product_id, product_rating, product_name } = location.state;
 
-  console.log("id...props", product_id);
+  // console.log("id...props", product_id);
 
   const handleShow = () => {
     // const body = {
@@ -52,7 +52,7 @@ function Rating(props) {
     if (review !== "") {
       setError("");
       const formData = new FormData();
-      formData.append("product_id", product_id);
+      // formData.append("product_id", product_id);
       // product_id: props.proid,
       formData.append("rating", rate);
       formData.append("review", review);

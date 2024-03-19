@@ -89,8 +89,9 @@ const Payment = () => {
                   .post(Urls.paySuces, bodyPay, {
                     headers: { Authorization: "Token " + token },
                   })
-                  .then((response2) => {
-                    if (response2.data.success === true) {
+                  .then((response1) => {
+                    console.log(response1);
+                    if (response1.data.results.status_code === 200) {
                       history.push("/my_orders");
                     }
                   })
@@ -113,7 +114,7 @@ const Payment = () => {
             var pay = new window.Razorpay(options);
             pay.open();
           } else if (mode === "C") {
-            if (response1.data.results.message === "successful") {
+            if (response1.data.results.status_code === 200) {
               history.push("/my_orders");
             }
           }
@@ -152,7 +153,7 @@ const Payment = () => {
                     headers: { Authorization: "Token " + token },
                   })
                   .then((response2) => {
-                    if (response2.data.success === true) {
+                    if (response2.data.results.status_code === 200) {
                       history.push("/my_orders");
                     }
                   })
@@ -175,7 +176,8 @@ const Payment = () => {
             var pay = new window.Razorpay(options);
             pay.open();
           } else if (mode === "C") {
-            if (response1.data.results.message === "successful") {
+            console.log(response1);
+            if (response1.data.results.status_code === 200) {
               history.push("/my_orders");
             }
           }
