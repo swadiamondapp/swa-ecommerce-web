@@ -503,6 +503,14 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+.CarouselCards
+  :where(.css-dev-only-do-not-override-16aepep).ant-carousel
+  .slick-slider
+  .slick-track {
+  display: flex !important;
+  margin-bottom: 10px;
+}
+
 /* Firefox */
 input[type="number"] {
   -moz-appearance: textfield;

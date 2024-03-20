@@ -67,7 +67,7 @@ const ProductDetails = (props) => {
 
   const customerPhotos = async () => {
     const response = await axios.get(
-      "https://swaprdnecomnew.zinfog.in/ecom/products/90/reviews/"
+      "https://swaprdnecomnew.zinfog.in/ecom/products/" + props.id + "/reviews/"
     );
     if (response && response.data && response.data.results) {
       setReviews(response.data.results);
@@ -160,7 +160,7 @@ const ProductDetails = (props) => {
     props.sizeChange(e.target.value);
   };
 
-  console.log("reviews==>", reviews);
+  console.log("reviews==>", props);
 
   return (
     <div>

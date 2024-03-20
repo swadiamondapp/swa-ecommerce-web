@@ -51,11 +51,8 @@ const Header = (props) => {
     }
   };
   const catSelHandler = (id) => {
-   
-   
-      window.open("http://localhost:3000/category_search/"+id, "_self");
-      console.log('testk');
-   
+    window.open("http://localhost:3000/category_search/" + id, "_self");
+    console.log("testk");
   };
   const moveToOrderHistory = () => {
     history.push("/track_order");
@@ -102,17 +99,16 @@ const Header = (props) => {
   const closeHanlder = () => {};
 
   const searchTitleHandler = (setItem) => {
-    console.log(history.location.pathname)
+    console.log(history.location.pathname);
     if (setItem.type === "category") {
-      if(history.location.pathname.slice(0,12) === '/new_arrivel'){
-        window.location.href = "http://localhost:3000/category_search/"+setItem.id
-        console.log('testk');
-      }else{
+      if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
+        window.location.href =
+          "http://localhost:3000/category_search/" + setItem.id;
+        console.log("testk");
+      } else {
         history.push({ pathname: "/new_arrivel", state: { data: setItem.id } });
-
       }
     } else if (setItem.type === "product") {
-     
       axios
         .get(Urls.productDet + setItem.id)
         .then((response1) => {
@@ -127,29 +123,32 @@ const Header = (props) => {
             discounted_final_price: response1.data.results.data.discount_price,
             wishlist_id: response1.data.results.data.wishlist_id,
           };
-          if(history.location.pathname.slice(0,10) === '/products/'){
-            console.log('test')
-            window.location.href = "https://swaecommerce.zinfog.com/products/" +setItem.id +
-            "/" +
-            response1.data.results.data.color_id+
-            "/"+response1.data.results.data.product_name;
-          }
-          else{
-          history.push({
-            pathname:
-              "/products/" +
+          if (history.location.pathname.slice(0, 10) === "/products/") {
+            console.log("test");
+            window.location.href =
+              "https://swaecomnew.zinfog.in/products/" +
               setItem.id +
               "/" +
-              response1.data.results.data.color_id+
-              "/"+response1.data.results.data.product_name,
-            state: { data: selData },
-          })}
+              response1.data.results.data.color_id +
+              "/" +
+              response1.data.results.data.product_name;
+          } else {
+            history.push({
+              pathname:
+                "/products/" +
+                setItem.id +
+                "/" +
+                response1.data.results.data.color_id +
+                "/" +
+                response1.data.results.data.product_name,
+              state: { data: selData },
+            });
+          }
         })
         .catch((error) => {
           console.log(error);
         });
     }
-  
   };
   return (
     <div>
@@ -188,7 +187,6 @@ const Header = (props) => {
               onClick={setHomepageHandler}
             />
             <div className={Classes.SearchIcons}>
-             
               <div className={Classes.searchList}>
                 <input
                   className={Classes.searchbar}

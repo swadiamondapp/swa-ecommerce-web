@@ -7,7 +7,7 @@ import { IoCartOutline } from "react-icons/io5";
 import * as Urls from "../../Urls";
 import axios from "axios";
 
-const SililerProducts = () => {
+const SililerProducts = (props) => {
   const [similarProducts, setSimilarProducts] = useState([]);
 
   useEffect(() => {
@@ -16,7 +16,7 @@ const SililerProducts = () => {
 
   const similarProduct = async () => {
     const response = await axios.get(
-      "https://swaprdnecomnew.zinfog.in/ecom/products/9/"
+      "https://swaprdnecomnew.zinfog.in/ecom/products/" + props.productId
     );
     if (
       response &&

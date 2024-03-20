@@ -221,6 +221,8 @@ const ProductDetailsPage = (props) => {
     setLogToken(logToken);
   };
 
+  console.log("prodDet-->", props.match.params.id);
+
   return (
     <div>
       <Header
@@ -275,7 +277,7 @@ const ProductDetailsPage = (props) => {
         clickedBuy={buyProductHandler}
       />
       <div className={Classes.RecentSearch}>
-        <SimilerProducts />
+        <SimilerProducts productId={props.match.params.id} />
         {/* <RecentSearch>
         <NewArrivalCard ProductImage={New1} ProductName='Diamond ring' ProductId='SKU: 18037' PriceNew='27000' PriceOld='29500' />
           <NewArrivalCard ProductImage={New2} ProductName='Diamond ring' ProductId='SKU: 18037' PriceNew='27000' PriceOld='29500' />

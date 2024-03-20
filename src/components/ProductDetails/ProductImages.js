@@ -16,7 +16,7 @@ const ProductImages = (props) => {
       <div className={Classes.CatList1} style={{ width: "100%" }}>
         <div className="container" style={{ paddingLeft: "0px" }}>
           <div className={Classes.Web}>
-            <div className={Classes.CarouselCards}>
+            <div className="CarouselCards">
               <Carousel
                 autoplay
                 slidesToShow={5}
