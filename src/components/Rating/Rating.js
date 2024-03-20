@@ -27,7 +27,9 @@ const VisuallyHiddenInput = styled("input")({
 
 function Rating(props) {
   const [show, setShow] = useState(false);
-  const [rate, setRate] = useState(2);
+  const [rate, setRate] = useState(
+    props && props.productDetails && props.productDetails.product_rating
+  );
   const [review, setReview] = useState("");
   const [imageFile, setImageFile] = useState(null);
   const [error, setError] = useState("");
@@ -35,12 +37,15 @@ function Rating(props) {
   const token = localStorage.getItem("swaToken");
   console.log("file....body", imageFile);
 
-  const location = useLocation();
-  // const { product_id, product_rating, product_name } = location.state;
-
   // console.log("id...props", product_id);
 
   const handleShow = () => {
+    const formData = new FormData();
+    formData.append("product_id", props.productDetails.product_id);
+    formData.append("rating", rate);
+    formData.append("review", review);
+    formData.append("review_title", "Good");
+    formData.append("review_image", imageFile);
     // const body = {
     //   // product_id: props.proid,
     //   product_id: 45,
@@ -51,13 +56,6 @@ function Rating(props) {
     // };
     if (review !== "") {
       setError("");
-      const formData = new FormData();
-      // formData.append("product_id", product_id);
-      // product_id: props.proid,
-      formData.append("rating", rate);
-      formData.append("review", review);
-      formData.append("review_title", "Good");
-      formData.append("review_image", imageFile);
       axios
         .post(urls.review, formData, {
           headers: { Authorization: "Token " + token },
@@ -82,12 +80,14 @@ function Rating(props) {
     setReview(e.target.value);
   };
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    setImageFile(file);
+  const handleFileChange = (e) => {
+    setImageFile(e.target.files[0]);
     setFileUploaded(true);
-    console.log("file", file);
+    console.log(e.target.files[0]);
   };
+
+  console.log(props);
+
   return (
     <div className={`container ${Classes.MobReview1}`}>
       <div className={Classes.HeadMainMob2}>
@@ -102,10 +102,20 @@ function Rating(props) {
 
       <div className={Classes.ParentCardImageText}>
         <div className={Classes.ReviewProduct}>
-          <img className={Classes.ProductImage} src={New1} alt="" />
+          <img
+            className={Classes.ProductImage}
+            src={
+              props &&
+              props.productDetails &&
+              props.productDetails.product_image
+            }
+            alt=""
+          />
         </div>
         <div>
-          <p className={Classes.ProductName}>Diamond Ring</p>
+          <p className={Classes.ProductName}>
+            {props && props.productDetails && props.productDetails.product_name}
+          </p>
           <p style={{ color: "#757C81" }}>18 KT yellow gold 12.460 GM</p>
           <p style={{ color: "#757C81" }}>Diamond 0.680 Carat SIIJ</p>
           <p style={{ color: "#757C81" }}>SKU 1245</p>

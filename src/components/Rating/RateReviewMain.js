@@ -99,7 +99,10 @@ const RateReviewMain = (props) => {
                     <div className={Classes.CardView1}>
                       <div className={Classes.LeftCardView1}>
                         <div className={Classes.ProductImgReview}>
-                          <img src={productimg} />
+                          <img
+                            src={shipment.thumbnail_image}
+                            style={{ maxWidth: "150px" }}
+                          />
                         </div>
                         <div className={Classes.ProductDetailsReview}>
                           <p className={Classes.productNames3}>
@@ -138,13 +141,14 @@ const RateReviewMain = (props) => {
                           to={{
                             pathname: "/rate_review",
                             state: {
+                              product_image: shipment.thumbnail_image,
                               product_id: shipment.product_id,
                               product_rating: shipment.product_rating,
                               product_name: shipment.product_name,
                             },
                           }}
                         >
-                          {console.log("....pp", productDetails.product_id)}
+                          {console.log("....pp", shipment.thumbnail_image)}
                           <p className={Classes.RateReviewText}>
                             {" "}
                             Rate & review

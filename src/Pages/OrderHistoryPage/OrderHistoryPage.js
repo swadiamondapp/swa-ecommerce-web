@@ -74,6 +74,8 @@ const OrderHistoryPage = () => {
         >
           <Orders
             Image={item.shipments[0].bag_image}
+            productId={item.shipments[0].product_id}
+            productName={item.shipments[0].product_name}
             orderId={item.order_code}
             rating={item.shipments[0].product_rating}
             promCond={item.promocode === null ? "Not Applied" : "Applied"}

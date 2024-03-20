@@ -25,13 +25,15 @@ function RateAndReview(props) {
       });
   }, []);
 
+  console.log("props.location.", props.location.state);
+
   return (
     <div>
       <div className={Classes.BgColour}>
         <Header countCartItems={cartCount} />
         <div className={Classes.Margin}>
           {/* <Rating proid={props.location.state.data} /> */}
-          <Rating />
+          <Rating productDetails={props.location.state} />
         </div>
         <div className={Classes.Features}>
           <Features />

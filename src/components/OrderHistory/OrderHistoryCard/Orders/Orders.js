@@ -102,7 +102,17 @@ function Orders(props) {
               disableOnSelect={false}
               // onSelectStar={rateChangeHandler}
             />
-            <Link to="/rate_review">
+            <Link
+              to={{
+                pathname: "/rate_review",
+                state: {
+                  product_image: props.Image,
+                  product_id: props.productId,
+                  product_rating: props.rating,
+                  product_name: props.productName,
+                },
+              }}
+            >
               <p>Rate & Review</p>
             </Link>
           </div>

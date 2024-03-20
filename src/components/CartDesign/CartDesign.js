@@ -57,19 +57,22 @@ function CartDesign(props) {
       setErrorImg(null);
     } else {
       setErrorVald("");
-      let body;
-      if (props.proDet.name === "cart") {
-        body = {
-          promocode: code,
-          original_amount: null,
-        };
-      } else {
-        body = {
-          promocode: code,
-          original_amount: total,
-        };
-      }
-
+      // let body;
+      // if (props.proDet.name === "cart") {
+      //   body = {
+      //     promocode: code,
+      //     original_amount: null,
+      //   };
+      // } else {
+      //   body = {
+      //     promocode: code,
+      //     original_amount: total,
+      //   };
+      // }
+      const body = {
+        promocode: code,
+        original_amount: total,
+      };
       axios
         .post(Urls.promoCode, body, {
           headers: { Authorization: "Token " + token },
@@ -116,7 +119,7 @@ function CartDesign(props) {
       console.log(error);
     }
   };
-
+  console.log("props-->", props);
   return (
     <div>
       <WalletModal
@@ -177,7 +180,7 @@ function CartDesign(props) {
                       className={Classes.ApplyButton}
                       type="submit"
                       value="Apply"
-                      // onClick={promoCodeHandler}
+                      onClick={promoCodeHandler}
                     />
                   </div>
                   <p className="errrMsg" style={{ fontSize: "14px" }}>
