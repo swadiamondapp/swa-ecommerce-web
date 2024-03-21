@@ -13,6 +13,14 @@ const FilterCatgs = (props) => {
   const [metalTypeArray, setMetalTypeArray] = useState([]);
   const [occation, setOccation] = useState([]);
   const [isSticky, setIsSticky] = useState(false);
+  const [categoryWise, setCategoryWise] = useState([]);
+  const [metalCategory, setMetalCategory] = useState([]);
+  const [occations, setOccations] = useState([]);
+  const [getProductById, setGetProductById] = useState([]);
+  const [selectedOccationIds, setSelectedOccationIds] = useState([]);
+  const [selectedMetalIds, setSelectedMetalIds] = useState([]);
+  const [selectedCategoryIds, setSelectedCategoryIds] = useState([]);
+
   const filterSet = (params) => {
     axios
       .get(Urls.filter + params)
@@ -126,6 +134,106 @@ const FilterCatgs = (props) => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+  useEffect(() => {
+    axios
+      .get(Urls.metalCategory)
+      .then((response2) => {
+        console.log("Response from metalCategory API:", response2);
+        setMetalCategory(response2.data.results.data);
+        setGetProductById(response2.data.results.data);
+      })
+      .catch((error) => {
+        console.log("Error fetching metalCategory:", error);
+      });
+
+    axios.get(Urls.categoryWise).then((response) => {
+      console.log("respo===>", response);
+      console.log("catwise", response.data.results.data);
+      setCategoryWise(response.data.results.data);
+    });
+    axios.get(Urls.occationalProducts).then((responseOcc) => {
+      setOccations(responseOcc.data.results.data);
+      console.log(responseOcc, "occ");
+    });
+  }, []);
+
+  const handleCheckboxByOccation = (id) => {
+    const updatedIds = selectedOccationIds.includes(id)
+      ? selectedOccationIds.filter((item) => item !== id)
+      : [...selectedOccationIds, id];
+    setSelectedOccationIds(updatedIds);
+
+    // Call API with updated IDs
+    const url = `${Urls.occationalProdByid}${updatedIds.join(",")}`;
+    axios
+      .get(url)
+      .then((response) => {
+        props.setProduct(response.data.results.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching products by occasion:", error);
+      });
+  };
+
+  const handleCheckboxByMetal = (id) => {
+    const updatedIds = selectedMetalIds.includes(id)
+      ? selectedMetalIds.filter((item) => item !== id)
+      : [...selectedMetalIds, id];
+    setSelectedMetalIds(updatedIds);
+
+    // Call API with updated IDs
+    const url = `${Urls.productCategoryByMetal}${updatedIds.join(",")}`;
+    axios
+      .get(url)
+      .then((response) => {
+        props.setProduct(response.data.results.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching products by metal category:", error);
+      });
+  };
+  const handleCheckboxByCategory = (id) => {
+    const updatedIds = selectedCategoryIds.includes(id)
+      ? selectedCategoryIds.filter((item) => item !== id)
+      : [...selectedCategoryIds, id];
+    setSelectedCategoryIds(updatedIds);
+
+    // Call API with updated IDs
+    const url = `${Urls.filterProductsById}${updatedIds.join(",")}`;
+    axios
+      .get(url)
+      .then((response) => {
+        props.setProduct(response.data.results.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching products by category:", error);
+      });
+  };
+  // const handleCheckboxByMetel = (id) => {
+  //   if (selectedMetelId.includes(id)) {
+  //     setSelectedMetalId(selectedMetelId.filter((item) => item !== id)); // Remove ID if already selected
+  //   } else {
+  //     setSelectedMetalId([...selectedMetelId, id]); // Add ID if not selected
+  //   }
+  // };
+  // const handleCheckboxByCategory = (id) => {
+  //   if (selectedCategoryByid.includes(id)) {
+  //     setSelectedCategoryById(
+  //       selectedCategoryByid.filter((item) => item !== id)
+  //     );
+  //   } else {
+  //     setSelectedCategoryById([...selectedCategoryByid, id]); // Add ID if not selected
+  //   }
+  // };
+  // const handleCheckboxByOccation = (id) => {
+  //   if (selectedOccationById.includes(id)) {
+  //     setSelectedOccationById(
+  //       selectedOccationById.filter((item) => item !== id)
+  //     );
+  //   } else {
+  //     setSelectedOccationById([...selectedOccationById, id]); // Add ID if not selected
+  //   }
+  // };
 
   return (
     <div className={`${Classes.Filter} ${isSticky ? Classes.Sticky : ""}`}>
@@ -228,38 +336,41 @@ const FilterCatgs = (props) => {
             <div className={Classes.CategoryHead}>
               <p>Categories</p>
             </div>
-            <div className={Classes.CategoryListMain}>
-              <div className={Classes.CategoryList}>
-                <input type="checkbox" />
-                <label>Earrings</label>
+            {categoryWise.map((item, index) => (
+              <div className={Classes.CategoryListMain} key={index}>
+                <div className={Classes.CategoryList}>
+                <input
+              type="checkbox"
+              onChange={() => handleCheckboxByMetal(item.id)}
+              checked={selectedMetalIds.includes(item.id)}
+            />
+                  <label>{item.name}</label>
+                </div>
+                <div className={Classes.CategoryListAmount}>
+                  <label>{item.product_count}</label>
+                </div>
               </div>
-              <div className={Classes.CategoryListAmount}>
-                <label>2345</label>
-              </div>
-            </div>
-            <div className={Classes.CategoryListMain}>
-              <div className={Classes.CategoryList}>
-                <input type="checkbox" />
-                <label>Earrings</label>
-              </div>
-              <div className={Classes.CategoryListAmount}>
-                <label>2345</label>
-              </div>
-            </div>
-            <div className={Classes.CategoryListMain}>
-              <div className={Classes.CategoryList}>
-                <input type="checkbox" />
-                <label>Earrings</label>
-              </div>
-              <div className={Classes.CategoryListAmount}>
-                <label>2345</label>
-              </div>
-            </div>
+            ))}
           </div>
           <div className={Classes.CategoryMainHead}>
             <div className={Classes.CategoryHead}>
               <p>Metal</p>
             </div>
+            {metalCategory.map((item, index) => (
+              <div className={Classes.CategoryListMain} key={index}>
+                <div className={Classes.CategoryList}>
+                <input
+              type="checkbox"
+              onChange={() => handleCheckboxByCategory(item.id)}
+              checked={selectedCategoryIds.includes(item.id)}
+            />
+                  <label>{item.metal_type}</label>
+                </div>
+                <div className={Classes.CategoryListAmount}>
+                  <label>{item.product_count}</label>
+                </div>
+              </div>
+            ))}
             {/* {colorSet.map((item, index) => {
             return (
               <div className={Classes.CategoryListMain} key={index}>
@@ -278,16 +389,7 @@ const FilterCatgs = (props) => {
             );
           })} */}
 
-            <div className={Classes.CategoryListMain}>
-              <div className={Classes.CategoryList}>
-                <input type="checkbox" />
-                <label>Gold</label>
-              </div>
-              <div className={Classes.CategoryListAmount}>
-                <label>2345</label>
-              </div>
-            </div>
-            <div className={Classes.CategoryListMain}>
+            {/* <div className={Classes.CategoryListMain}>
               <div className={Classes.CategoryList}>
                 <input type="checkbox" />
                 <label>white gold</label>
@@ -295,8 +397,8 @@ const FilterCatgs = (props) => {
               <div className={Classes.CategoryListAmount}>
                 <label>2365</label>
               </div>
-            </div>
-            <div className={Classes.CategoryListMain}>
+            </div> */}
+            {/* <div className={Classes.CategoryListMain}>
               <div className={Classes.CategoryList}>
                 <input type="checkbox" />
                 <label>rose gold</label>
@@ -304,8 +406,8 @@ const FilterCatgs = (props) => {
               <div className={Classes.CategoryListAmount}>
                 <label>3365</label>
               </div>
-            </div>
-            <div className={Classes.CategoryListMain}>
+            </div> */}
+            {/* <div className={Classes.CategoryListMain}>
               <div className={Classes.CategoryList}>
                 <input type="checkbox" />
                 <label>platinum</label>
@@ -313,7 +415,7 @@ const FilterCatgs = (props) => {
               <div className={Classes.CategoryListAmount}>
                 <label>2365</label>
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/* occation */}
@@ -324,17 +426,23 @@ const FilterCatgs = (props) => {
             <div className={Classes.CategoryHead}>
               <p>Occasion</p>
             </div>
+            {occations.map((item, index) => (
+              <div className={Classes.CategoryListMain}>
+                <div className={Classes.CategoryList}>
+                <input
+              type="checkbox"
+              onChange={() => handleCheckboxByOccation(item.id)}
+              checked={selectedOccationIds.includes(item.id)}
+            />
+                  <label>{item.name}</label>
+                </div>
+                <div className={Classes.CategoryListAmount}>
+                  <label>{item.product_count}</label>
+                </div>
+              </div>
+            ))}
 
-            <div className={Classes.CategoryListMain}>
-              <div className={Classes.CategoryList}>
-                <input type="checkbox" />
-                <label>party</label>
-              </div>
-              <div className={Classes.CategoryListAmount}>
-                <label>2345</label>
-              </div>
-            </div>
-            <div className={Classes.CategoryListMain}>
+            {/* <div className={Classes.CategoryListMain}>
               <div className={Classes.CategoryList}>
                 <input type="checkbox" />
                 <label>wedding</label>
@@ -342,8 +450,8 @@ const FilterCatgs = (props) => {
               <div className={Classes.CategoryListAmount}>
                 <label>2365</label>
               </div>
-            </div>
-            <div className={Classes.CategoryListMain}>
+            </div> */}
+            {/* <div className={Classes.CategoryListMain}>
               <div className={Classes.CategoryList}>
                 <input type="checkbox" />
                 <label>birthday</label>
@@ -351,8 +459,8 @@ const FilterCatgs = (props) => {
               <div className={Classes.CategoryListAmount}>
                 <label>3365</label>
               </div>
-            </div>
-            <div className={Classes.CategoryListMain}>
+            </div> */}
+            {/* <div className={Classes.CategoryListMain}>
               <div className={Classes.CategoryList}>
                 <input type="checkbox" />
                 <label>engagement</label>
@@ -360,8 +468,9 @@ const FilterCatgs = (props) => {
               <div className={Classes.CategoryListAmount}>
                 <label>2365</label>
               </div>
-            </div>
+            </div> */}
           </div>
+
           {/* occation */}
         </div>
       </div>
