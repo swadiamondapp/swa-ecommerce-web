@@ -397,6 +397,7 @@ const NewArrivalPage = (props) => {
                 filterOctn={filtOcctnHandler}
                 filterMetal={filterMetalHanlder}
                 filterSearch={props.location.state}
+                setProduct={setProduct}
               />
             </div>
             <div className="col-lg-9 col-sm-8">
