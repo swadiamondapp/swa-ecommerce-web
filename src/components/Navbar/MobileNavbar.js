@@ -21,16 +21,23 @@ import { HiPlus } from "react-icons/hi";
 import indiaimg from "../../Assets/india.png";
 import { IoIosArrowForward } from "react-icons/io";
 import { Link } from "react-router-dom";
+import { CgHeart } from "react-icons/cg";
+import { useHistory } from "react-router-dom";
+import { GoSearch } from "react-icons/go";
+import { BsArrowLeft } from "react-icons/bs";
 
 const MobileNavbar = () => {
   const [isHamOpen, setIsHamOpen] = useState(false);
   const [open, setOpen] = useState(false);
   const [show, setShow] = useState(false);
   const [activeIndex, setActiveIndex] = useState();
+  const token = localStorage.getItem("swaToken");
   const userName = localStorage.getItem("userName");
+  const isHomePage = window.location.pathname === "/";
   const handleOpen = () => {
     setOpen(true);
   };
+  const history = useHistory();
 
   const handleClose = () => {
     setOpen(false);
@@ -99,6 +106,17 @@ const MobileNavbar = () => {
     };
   }, [isMobileView]);
   console.log("isHamOpen===>", isHamOpen);
+  const moveToWishList = () => {
+    if (token !== null) {
+      history.push("/wish_list");
+    } else {
+      setShow(true);
+    }
+  };
+  const [showSearchBar, setShowSearchBar] = useState(false);
+  const toggleSearchBar = () => {
+    setShowSearchBar(!showSearchBar);
+  };
   return (
     <div className={Classes.NavContainer}>
       <div className={Classes.Navbar}>
@@ -131,15 +149,21 @@ const MobileNavbar = () => {
             </div>
           </div>
           <div className={Classes.rightIcons}>
+            {isHomePage ? (
+              <div>
+                <img src={indiaimg} />
+              </div>
+            ) : (
+              <div onClick={toggleSearchBar}>
+                <GoSearch style={{ color: "#fff", fontSize: "25px" }} />
+              </div>
+            )}
             <div>
-              <img src={indiaimg} />
-            </div>
-            <div>
-              <FiBell
+              <CgHeart
                 className={Classes.Icon}
                 color="#FFFFFF"
                 size={25}
-                // onClick={loginHandler}
+                onClick={moveToWishList}
               />
             </div>
             <div>
@@ -151,6 +175,24 @@ const MobileNavbar = () => {
               />
             </div>
           </div>
+          {showSearchBar && (
+            <div className={Classes.ParentSearchBar}>
+              <div>
+                <BsArrowLeft
+                  className={Classes.Arrowline32}
+                  onClick={toggleSearchBar}
+                />
+              </div>
+              <div className={Classes.MobParentSearchBars}>
+                <input placeholder="Search your orders" />
+                <GoSearch className={Classes.Gosearch1} />
+                <IoMdClose
+                  className={Classes.Closesearch1}
+                  onClick={toggleSearchBar}
+                />
+              </div>
+            </div>
+          )}
         </header>
         {/* {isHamOpen ? (
           <>

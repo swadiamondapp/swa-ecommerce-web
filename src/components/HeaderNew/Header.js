@@ -431,36 +431,38 @@ const Header = (props) => {
             Diwali offer - 10% on every purchase 🥳
           </div>
           <div className="container">
-            <div
-              style={{
-                position: "relative",
-                margin: "12px 0px",
-                marginBottom: "5px",
-              }}
-            >
+            {isHomePage && (
               <div
-                className="labelWrapper"
-                style={{ display: searchKey.length === 0 ? "block" : "none" }}
+                style={{
+                  position: "relative",
+                  margin: "12px 0px",
+                  marginBottom: "5px",
+                }}
               >
-                <span>diamond jewellery</span>
-                <span>gold jewellery</span>
-                <span>platinum jewellery</span>
-                <span>gemstone jewellery</span>
+                <div
+                  className="labelWrapper"
+                  style={{ display: searchKey.length === 0 ? "block" : "none" }}
+                >
+                  <span>diamond jewellery</span>
+                  <span>gold jewellery</span>
+                  <span>platinum jewellery</span>
+                  <span>gemstone jewellery</span>
+                </div>
+                <input
+                  style={{ width: "100%" }}
+                  type=""
+                  className={Classes.searchbar}
+                  placeholder="Search for"
+                  value={searchKey}
+                  onChange={searchKeyHanlder}
+                />
+                <BsSearch
+                  size={22}
+                  className={Classes.searchIcon}
+                  style={{ display: searchShow ? "none" : "block" }}
+                />
               </div>
-              <input
-                style={{ width: "100%" }}
-                type=""
-                className={Classes.searchbar}
-                placeholder="Search for"
-                value={searchKey}
-                onChange={searchKeyHanlder}
-              />
-              <BsSearch
-                size={22}
-                className={Classes.searchIcon}
-                style={{ display: searchShow ? "none" : "block" }}
-              />
-            </div>
+            )}
           </div>
         </div>
       )}
