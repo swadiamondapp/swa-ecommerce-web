@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import Classes from "./CheckOut.module.css";
 import { useHistory } from "react-router-dom";
 import { BiRupee } from "react-icons/bi";
@@ -18,6 +19,7 @@ import * as Yup from "yup";
 import { Dropdown } from "primereact/dropdown";
 
 function CheckOut(props) {
+  const location = useLocation();
   const [show, setShow] = useState(false);
   const [code, setCode] = useState("");
   const [error, setError] = useState("");
@@ -31,8 +33,6 @@ function CheckOut(props) {
   const [promoId, setPromoId] = useState("");
   const [mode, setMode] = useState("P");
   const [selectedCity, setSelectedCity] = useState(null);
-  const [defaultAddress, setDefaultAddress] = useState([]);
-  const [fromCheckOut, setFromCheckOut] = useState([]);
   const [addressData, setAddressData] = useState({
     sEmail: "",
     sPhone: "",
@@ -44,6 +44,7 @@ function CheckOut(props) {
     hNumber_Bname: "",
     streetColony: "",
     landMark: "",
+    id: "",
   });
 
   const [isNewaddress, setIsNewAddress] = useState({
@@ -59,15 +60,20 @@ function CheckOut(props) {
     landMark: "",
   });
   const [formShow, setFormShow] = useState(false);
-
-  const token = localStorage.getItem("swaToken");
+  const [token, setToken] = useState(localStorage.getItem("swaToken"));
   var alphaExp = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
 
   useEffect(() => {
     getDefaultAddress();
-    setTotal(props.proDet.data.total);
-    setAmountPay(props.proDet.data.total);
+    if (props && props.proDet && props.proDet.data) {
+      setTotal(props.proDet.data.total);
+      setAmountPay(props.proDet.data.total);
+    }
   }, []);
+
+  useEffect(() => {
+    buyWithoutLogin(location.state.data);
+  }, [location.state.data]);
 
   const placeOrder = () => {
     let cartBody;
@@ -406,7 +412,33 @@ function CheckOut(props) {
     });
   };
 
-  const submitAddress = async () => {
+  const handleSignUp = async () => {
+    if (token) {
+      submitAddress(token);
+    } else {
+      try {
+        const body = {
+          name: addressData.fullName,
+          phone_code: "+91",
+          phone_number: addressData.sPhone,
+          email: addressData.sEmail,
+          login_type: "NORMAL",
+        };
+        const response = await axios.post(Urls.register, body);
+        if (response.data.results.status_code === 200) {
+          setToken(response.data.results.data.token);
+          const _token = response.data.results.data.token;
+          _token && submitAddress(_token);
+        } else {
+          alert("Something went wrong");
+        }
+      } catch (error) {
+        alert(error.response.data.results.message);
+      }
+    }
+  };
+
+  const submitAddress = async (token) => {
     if (
       addressData.fullName !== isNewaddress.fullName ||
       addressData.city !== isNewaddress.city ||
@@ -436,18 +468,35 @@ function CheckOut(props) {
           headers: { Authorization: "Token " + token },
         });
         if (response.data && response.data.status === 200) {
-          history.push({
-            pathname: "/payment",
-            state: {
-              data: {
-                pay: amountPay,
-                total: total,
-                addressId: props.address,
-                updatedCart: props.proDet.data.updatedCartResponse,
+          try {
+            const response1 = await axios.post(
+              Urls.defaultAddress,
+              {
+                address_id: response.data.data.id,
+                is_main: true,
               },
-              name: "cart",
-            },
-          });
+              {
+                headers: { Authorization: "Token " + token },
+              }
+            );
+            console.log(response1);
+            if (response1) {
+              history.push({
+                pathname: "/payment",
+                state: {
+                  data: {
+                    pay: amountPay,
+                    total: total,
+                    addressId: response.data.data.id,
+                    updatedCart: props.proDet.data.updatedCartResponse,
+                  },
+                  name: "cart",
+                },
+              });
+            }
+          } catch (error) {
+            console.log(error);
+          }
         }
       } catch (error) {
         console.log(error);
@@ -459,7 +508,7 @@ function CheckOut(props) {
           data: {
             pay: amountPay,
             total: total,
-            addressId: props.address,
+            addressId: addressData.id,
             updatedCart: props.proDet.data.updatedCartResponse,
           },
           name: "cart",
@@ -486,6 +535,7 @@ function CheckOut(props) {
           hNumber_Bname: response.data.results.data.house,
           streetColony: response.data.results.data.area,
           landMark: response.data.results.data.landmark,
+          id: response.data.results.data.id,
         });
         setIsNewAddress({
           ...isNewaddress,
@@ -505,6 +555,23 @@ function CheckOut(props) {
       console.log(error);
     }
   };
+
+  const buyWithoutLogin = async (productId) => {
+    try {
+      const response = await axios.get(
+        `https://swaprdnecomnew.zinfog.in/ecom/buynow/?product_id=${productId}&promocode=`
+      );
+      if (response && response.data) {
+        console.log("buy-->", response.data);
+      }
+      setTotal(response.data.total);
+      setAmountPay(response.data.payable_amount);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  console.log("token-->", token);
 
   return (
     <div>
@@ -536,7 +603,7 @@ function CheckOut(props) {
 
               <div className={Classes.Main}>
                 <div className={Classes.Left}>
-                  <form autoComplete="off" onSubmit={submitAddress}>
+                  <form autoComplete="off" onSubmit={handleSignUp}>
                     <div className={Classes.EmailMobileNew}>
                       <div>
                         <label>Email</label>
@@ -767,7 +834,7 @@ function CheckOut(props) {
                 <div
                   className={Classes.PlaceOrderButton}
                   // onClick={placeOrder}
-                  onClick={submitAddress}
+                  onClick={handleSignUp}
                 >
                   Proceed to payment
                 </div>

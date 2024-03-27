@@ -11,8 +11,8 @@ import { useHistory } from "react-router-dom";
 import { FadeLoader } from "react-spinners";
 import ReactPaginate from "react-paginate";
 import Header from "../../components/HeaderNew/Header";
-const TagSearch = (props) =>{
-    const [product, setProduct] = useState([]);
+const TagSearch = (props) => {
+  const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(false);
   const [catgSet, setCatSet] = useState("");
   const [color, setColor] = useState("");
@@ -22,21 +22,21 @@ const TagSearch = (props) =>{
   const [metal, setMetal] = useState("");
   const [sort, setSort] = useState("");
   const [cartCount, setCartCount] = useState("");
-  const [count,setCount] = useState('')
+  const [count, setCount] = useState("");
   const [labelSet, setLabelSet] = useState([]);
-  const [num,setNum] = useState('')
+  const [num, setNum] = useState("");
   const history = useHistory();
   const token = localStorage.getItem("swaToken");
   const filter = (newArrive, currentPage) => {
     setLoading(true);
     axios
-      .get(Urls.productList + newArrive + "&page=" + currentPage)
+      .get(Urls.productList + newArrive)
       .then((response1) => {
         setLoading(false);
         // const productList = [...response1.data.results.data]
         // const sortedProducts = [...productList].sort((a, b) => a.total_price_final - b.total_price_final);
         setProduct(response1.data.results.data);
-        setCount(response1.data.results.count)
+        setCount(response1.data.results.count);
         setPageCount(Math.ceil(response1.data.results.count / 20));
       })
       .catch((error) => {
@@ -45,15 +45,19 @@ const TagSearch = (props) =>{
   };
 
   const prodDetHandler = (prodItem) => {
-   
     history.push({
       pathname:
-        "/products/" + prodItem.product_id + "/" + prodItem.thumbnail_colour_id+'/'+prodItem.product_name,
+        "/products/" +
+        prodItem.product_id +
+        "/" +
+        prodItem.thumbnail_colour_id +
+        "/" +
+        prodItem.product_name,
       state: { data: prodItem },
     });
   };
   const handlePageClick = (data) => {
-    setNum(data.selected)
+    setNum(data.selected);
     window.scrollTo(0, 0);
 
     if (
@@ -63,7 +67,6 @@ const TagSearch = (props) =>{
       metal.length !== 0 ||
       sort.length !== 0
     ) {
-      
       filter(
         "?occasion_tag_ids=" +
           occn +
@@ -77,7 +80,7 @@ const TagSearch = (props) =>{
           sort,
         data.selected + 1
       );
-    } 
+    }
   };
   const cartsCount = () => {
     axios
@@ -97,12 +100,8 @@ const TagSearch = (props) =>{
   useEffect(() => {
     window.scrollTo(0, 0);
     filter("?occasion_tag_ids=" + props.match.params.id, 1);
-      setHead("Products");
-      setOccn(props.match.params.id);
-  
-   
-      
-    
+    setHead("Products");
+    setOccn(props.match.params.id);
   }, []);
   const filterCatHandler = (filtSet) => {
     let delimiter = ", ";
@@ -322,7 +321,10 @@ const TagSearch = (props) =>{
                 filterColr={filtColorHandler}
                 filterOctn={filtOcctnHandler}
                 filterMetal={filterMetalHanlder}
-                filterSearch={{data:'occation',octnId:props.match.params.id}}
+                filterSearch={{
+                  data: "occation",
+                  octnId: props.match.params.id,
+                }}
               />
             </div>
             <div className="col-lg-10 col-sm-8">
@@ -334,7 +336,7 @@ const TagSearch = (props) =>{
                   sortHandler={sortsHHandler}
                   count={count}
                 >
-                    <ReactPaginate
+                  {/* <ReactPaginate
                   breakLabel="..."
                   nextLabel="Next >"
                   onPageChange={handlePageClick}
@@ -354,10 +356,10 @@ const TagSearch = (props) =>{
                   breakClassName={"page-item"}
                   breakLinkClassName={"page-link"}
                   activeClassName={"active"}
-                />
+                /> */}
                   {products}
                 </NewArrivalDesign>
-                <ReactPaginate
+                {/* <ReactPaginate
                   breakLabel="..."
                   nextLabel="next >"
                   onPageChange={handlePageClick}
@@ -377,7 +379,7 @@ const TagSearch = (props) =>{
                   breakClassName={"page-item"}
                   breakLinkClassName={"page-link"}
                   activeClassName={"active"}
-                />
+                /> */}
               </div>
               <div className={Classes.DownloadOurAppImage}>
                 <DownloadOurAppImage />
@@ -389,6 +391,5 @@ const TagSearch = (props) =>{
       </div>
     </div>
   );
-  
-}
-export default TagSearch
+};
+export default TagSearch;

@@ -19,6 +19,7 @@ import { colors } from "@mui/material";
 import { IoMdClose } from "react-icons/io";
 import home1 from "../../Assets/home1.png";
 import Joi from "joi";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 function AddAddress(props) {
   const token = localStorage.getItem("swaToken");
@@ -43,6 +44,47 @@ function AddAddress(props) {
     hNumber_Bname: "",
     streetColony: "",
   });
+  // const [showDeleteButtons, setShowDeleteButtons] = useState([]);
+
+  // const handleToggleOptions = (index) => {
+  //   const newShowDeleteButtons = [...showDeleteButtons];
+  //   newShowDeleteButtons[index] = !newShowDeleteButtons[index];
+  //   setShowDeleteButtons(newShowDeleteButtons);
+  // };
+
+  // const handleDeleteAddress = async (id) => {
+  //   try {
+  //     const response = await axios.delete(Urls.addAdress + id + "/", {
+  //       headers: { Authorization: "Token " + token },
+  //     });
+  //     if (response.data.results.status_code === 200) {
+  //       setShowDeleteButtons(false);
+  //       props.fetchAddress();
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  const [openDeleteIndex, setOpenDeleteIndex] = useState(-1);
+
+  const handleToggleOptions = (index) => {
+    setOpenDeleteIndex((prevIndex) => (prevIndex === index ? -1 : index));
+  };
+
+  const handleDeleteAddress = async (id, index) => {
+    try {
+      const response = await axios.delete(Urls.addAdress + id + "/", {
+        headers: { Authorization: "Token " + token },
+      });
+      if (response.data.results.status_code === 200) {
+        setOpenDeleteIndex(-1); // Close the delete button
+        props.fetchAddress(); // Refresh the address list
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     const mainAddress = props.addressArray.find((address) => address.is_main);
@@ -162,6 +204,49 @@ function AddAddress(props) {
           {/* address location */}
           <div className={Classes.parentLocations}>
             <div className={Classes.leftAddres11}>
+              {/* {props.addressArray.map((item, index) => (
+                <div className={Classes.LocationHead} key={index}>
+                  <div className={Classes.FirstLocationHead1}>
+                    <input
+                      type="radio"
+                      name="addressSelection"
+                      checked={selectedAddressId === item.id}
+                      onChange={() => handleAddressSelection(item.id)}
+                    />
+                    <div className={Classes.AddressHead15}>
+                      <p className={Classes.Headh31}>{item.name}</p>
+
+                      <p className={Classes.Para31}>
+                        {item.house} (house) {item.city}, {item.area},{" "}
+                        {item.landmark}, {item.state}, {item.pincode}
+                        <span className={Classes.HeadAddressDesc1}>
+                          phone number: {item.phone_number}
+                        </span>
+                      </p>
+
+                      <p className={Classes.HeadAddressDesc}>
+                        phone number: {item.phone_number}
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    className={Classes.Delete}
+                    style={{
+                      display: showDeleteButtons[index] ? "block" : "none",
+                    }}
+                  >
+                    <FaRegTrashAlt
+                      onClick={() => handleDeleteAddress(item.id)}
+                    />
+                  </div>
+                  <div
+                    className={Classes.secondDots}
+                    onClick={() => handleToggleOptions(index)}
+                  >
+                    <BsThreeDotsVertical />
+                  </div>
+                </div>
+              ))} */}
               {props.addressArray.map((item, index) => (
                 <div className={Classes.LocationHead} key={index}>
                   <div className={Classes.FirstLocationHead1}>
@@ -187,7 +272,20 @@ function AddAddress(props) {
                       </p>
                     </div>
                   </div>
-                  <div className={Classes.secondDots}>
+                  <div
+                    className={Classes.Delete}
+                    style={{
+                      display: openDeleteIndex === index ? "block" : "none",
+                    }}
+                  >
+                    <FaRegTrashAlt
+                      onClick={() => handleDeleteAddress(item.id, index)}
+                    />
+                  </div>
+                  <div
+                    className={Classes.secondDots}
+                    onClick={() => handleToggleOptions(index)}
+                  >
                     <BsThreeDotsVertical />
                   </div>
                 </div>

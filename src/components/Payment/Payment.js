@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom/cjs/react-router-dom";
 import Classes from "./Payment.module.css";
 import phonepay from "../../Assets/phonepay.svg";
@@ -13,8 +13,26 @@ const Payment = () => {
   const [promoId, setPromoId] = useState("");
   const [mode, setMode] = useState("");
   const [amountPay, setAmountPay] = useState(100);
-  const [propsFCheckOut, setpropsFCheckOut] = useState([]);
+  const [addressData, setAddressData] = useState({
+    sEmail: "",
+    sPhone: "",
+    fullName: "",
+    mobile: "",
+    pincode: "",
+    city: "",
+    state: "kerala",
+    hNumber_Bname: "",
+    streetColony: "",
+    landMark: "",
+    id: "",
+  });
   const { data, name } = location.state;
+
+  console.log("data-------------->", data);
+
+  useEffect(() => {
+    getDefaultAddress();
+  }, []);
 
   const placeOrder = () => {
     let cartBody;
@@ -25,7 +43,9 @@ const Payment = () => {
         promocode_id: promoId,
         address_id: data.addressId,
         mode: p_Method,
-        amount_to_pay: data.updatedCart.amount_to_pay,
+        amount_to_pay: data.updatedCart
+          ? data.updatedCart.amount_to_pay
+          : data.pay,
         exchange_wallet_balance: data.updatedCart.exchange_wallet_balance,
         swa_wallet_balance: data.updatedCart.swa_wallet_balance,
         wallet_amount_used: data.updatedCart.wallet_amount_used,
@@ -45,12 +65,22 @@ const Payment = () => {
         promocode_id: 0,
         address_id: data.addressId,
         mode: p_Method,
-        amount_to_pay: data.updatedCart.amount_to_pay,
-        exchange_wallet_balance: data.updatedCart.exchange_wallet_balance,
-        swa_wallet_balance: data.updatedCart.swa_wallet_balance,
-        wallet_amount_used: data.updatedCart.wallet_amount_used,
-        exchange_change: data.updatedCart.exchange_change,
-        swa_change: data.updatedCart.swa_change,
+        amount_to_pay: data.updatedCart
+          ? data.updatedCart.amount_to_pay
+          : data.pay,
+        exchange_wallet_balance: data.updatedCart
+          ? data.updatedCart.exchange_wallet_balance
+          : 0,
+        swa_wallet_balance: data.updatedCart
+          ? data.updatedCart.swa_wallet_balance
+          : 0,
+        wallet_amount_used: data.updatedCart
+          ? data.updatedCart.wallet_amount_used
+          : 0,
+        exchange_change: data.updatedCart
+          ? data.updatedCart.exchange_change
+          : 0,
+        swa_change: data.updatedCart ? data.updatedCart.swa_change : 0,
       };
       // buyBody = {
       //   product_id: props.proDet.data.product_id,
@@ -192,6 +222,32 @@ const Payment = () => {
     setMode(event.target.value);
   };
 
+  const getDefaultAddress = async () => {
+    try {
+      const response = await axios.get(Urls.defaultAddress, {
+        headers: { Authorization: "Token " + token },
+      });
+      if (response.data.results.status === 200) {
+        setAddressData({
+          ...addressData,
+          sEmail: response.data.results.data.email,
+          sPhone: response.data.results.data.phone_number,
+          fullName: response.data.results.data.name,
+          mobile: response.data.results.data.phone_number,
+          pincode: response.data.results.data.pincode,
+          city: response.data.results.data.city,
+          state: response.data.results.data.state,
+          hNumber_Bname: response.data.results.data.house,
+          streetColony: response.data.results.data.area,
+          landMark: response.data.results.data.landmark,
+          id: response.data.results.data.id,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
       <div className={`${Classes.Wrapper} container`}>
@@ -220,6 +276,7 @@ const Payment = () => {
               <input
                 type="radio"
                 value="credit_card"
+                style={{ cursor: "pointer" }}
                 checked={mode === "credit_card"}
                 onChange={handleMethodChange}
               />
@@ -230,6 +287,7 @@ const Payment = () => {
               <input
                 type="radio"
                 value="upi"
+                style={{ cursor: "pointer" }}
                 checked={mode === "upi"}
                 onChange={handleMethodChange}
               />
@@ -240,6 +298,7 @@ const Payment = () => {
               <input
                 type="radio"
                 value="cash"
+                style={{ cursor: "pointer" }}
                 checked={mode === "cash"}
                 onChange={handleMethodChange}
               />
@@ -276,13 +335,7 @@ const Payment = () => {
                   &#x20B9; {data.pay}
                 </p>
               </div>
-              <div
-                className={Classes.PayButton}
-                // onClick={() => {
-                //   history.push("/addaddress");
-                // }}
-                onClick={placeOrder}
-              >
+              <div className={Classes.PayButton} onClick={placeOrder}>
                 Pay &#x20B9; {data.pay}
               </div>
               <p className={Classes.HurrayText}>
@@ -295,15 +348,16 @@ const Payment = () => {
               <h4>Deliver to</h4>
               <div className={Classes.Changebtn}>Change</div>
             </div>
-            <p className={Classes.Name}>Mohammed Inshad</p>
+            <p className={Classes.Name}>{addressData.fullName}</p>
             <p className={Classes.SubAddress}>
-              Kottakunnan (House) Morayur 673642
+              {addressData.hNumber_Bname} (House) {addressData.city}{" "}
+              {addressData.pincode}
             </p>
-            <p className={Classes.SubAddress}>Opposit family health center</p>
-            <p className={Classes.SubAddress}>Malappuram district</p>
-            <p className={Classes.SubAddress}>Kerala 673643</p>
+            <p className={Classes.SubAddress}>{addressData.landMark}</p>
+            <p className={Classes.SubAddress}>{addressData.streetColony}</p>
+            <p className={Classes.SubAddress}>{addressData.state}</p>
             <p className={Classes.SubAddress} style={{ marginTop: "15px" }}>
-              Phone number:9995200745
+              Phone number:{addressData.mobile}
             </p>
           </div>
           <div

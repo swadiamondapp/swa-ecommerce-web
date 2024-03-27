@@ -38,7 +38,7 @@ const NewArrivalPage = (props) => {
   const filter = (newArrive, currentPage) => {
     setLoading(true);
     axios
-      .get(Urls.productList + newArrive + "&page=" + currentPage)
+      .get(Urls.productList + newArrive)
       .then((response1) => {
         setLoading(false);
         // const productList = [...response1.data.results.data]
@@ -130,12 +130,12 @@ const NewArrivalPage = (props) => {
       cartsCount();
     } else if (props.location.state.data === "occation") {
       filter("?occasion_tag_ids=" + props.location.state.octnId, 1);
-      setHead("Products");
+      setHead("ProductList");
       setOccn(props.location.state.octnId);
     } else if (props.location.state.data !== undefined) {
       filter("?category_ids=" + props.location.state.data, 1);
       setCatSet(props.location.state.data);
-      setHead("Products");
+      setHead("ProductList");
     }
   }, []);
   const filterCatHandler = (filtSet) => {

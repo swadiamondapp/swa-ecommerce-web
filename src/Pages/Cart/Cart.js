@@ -52,7 +52,7 @@ const Cart = () => {
     setLoading(true);
     let page = data.selected + 1;
     axios
-      .get(Urls.cart + "?page=" + page, {
+      .get(Urls.cart, {
         headers: { Authorization: "Token " + token },
       })
       .then((response1) => {
@@ -169,6 +169,7 @@ const Cart = () => {
         <CartDesign
           amount={amountPay}
           cartProAmnt={selProAmnt}
+          cartCount={cartList && cartList.length}
           // handleOpen={() => setWalletOpen(true)}
         >
           {cartList.map((item, index) => {

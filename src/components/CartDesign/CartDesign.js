@@ -96,7 +96,7 @@ function CartDesign(props) {
     }
   };
 
-  const updateCart = async () => {
+  const updateCart = async (value) => {
     try {
       const response = await axios.patch(
         Urls.cart,
@@ -114,18 +114,31 @@ function CartDesign(props) {
         setTotal(response.data.results.total_amount);
         setWalletOpen(false);
         setIsApply(true);
+        if (value === true) {
+          history.push({
+            pathname: "/checkout",
+            state: {
+              data: {
+                pay: response.data.results.amount_to_pay,
+                total: response.data.results.total_amount,
+                updatedCartResponse: response.data.results,
+              },
+              name: "cart",
+            },
+          });
+        }
       }
     } catch (error) {
       console.log(error);
     }
   };
-  console.log("props-->", props);
   return (
     <div>
       <WalletModal
         open={walletOpen}
         handleClose={() => setWalletOpen(false)}
-        handleApply={() => updateCart()}
+        handleNext={() => updateCart(true)}
+        handleApply={() => updateCart(false)}
         swaWallet={swaWallet}
         setSwaWallet={setSwaWallet}
         swaExchangeWallet={swaExchangeWallet}
@@ -138,7 +151,7 @@ function CartDesign(props) {
           <div className={Classes.Main}>
             <div>
               <h1 className={Classes.Title}>Cart</h1>
-              <p>ITEM (2)</p>
+              <p>ITEM ({props.cartCount})</p>
             </div>
             <div className={Classes.SubText}>
               STEP 1 <span>/ 3</span>
@@ -158,7 +171,7 @@ function CartDesign(props) {
                 >
                   <div className={Classes.TotalItem}>
                     <p className={Classes.TotalSmall}>
-                      Total &nbsp;<span>(1 Items)</span>
+                      Total &nbsp;<span>({props.cartCount} Items)</span>
                     </p>
                   </div>
                   <p className={Classes.Amount}>&#8377; {total}</p>

@@ -219,7 +219,7 @@ const OrderHistorypage2 = (props) => {
       const response = await axios.post(Urls.CancelOrder, body, {
         headers: { Authorization: "Token 	" + token },
       });
-      if (response.data.results.status_code === 400) {
+      if (response.data.results.status_code === 200) {
         setBuyBackOpen(false);
         setOpen(false);
         setSuccessModalOpen(true);
@@ -247,9 +247,10 @@ const OrderHistorypage2 = (props) => {
       const response = await axios.post(Urls.CancelOrder, body, {
         headers: { Authorization: "Token " + token },
       });
-      if (response.data.results.status_code === 400) {
+      if (response.data.results.status_code === 200) {
         setCancelProductModal(false);
         setSuccessModalOpen(true);
+        singleOrderDetails();
         setTimeout(() => {
           setSuccessModalOpen(false);
         }, 1500);
@@ -528,7 +529,9 @@ const OrderHistorypage2 = (props) => {
                     {singleOrderData &&
                       singleOrderData.order &&
                       singleOrderData.order.shipment &&
-                      singleOrderData.order.shipment[0].status === 2 && (
+                      singleOrderData.order.shipment[0].status === 2 &&
+                      singleOrderData.order.shipment[0].cancel_order !==
+                        "Admin Approval pending" && (
                         <div className={Classes.CancelProductButton}>
                           <button onClick={() => setCancelProductModal(true)}>
                             Cancel product

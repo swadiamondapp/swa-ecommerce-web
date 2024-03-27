@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Classes from "./BringTheParty.module.css";
 import { useHistory } from "react-router-dom";
+import banner1 from "../../Assets/swabanner1.png";
+import banner2 from "../../Assets/swabanner2.png";
+import banner3 from "../../Assets/swabanner3.png";
 
 const BringTheParty = (props) => {
   const history = useHistory();
@@ -42,18 +45,26 @@ const BringTheParty = (props) => {
             <div className={`col-md-12 ${Classes.MobBringtheparty}`}>
               <div className={`container ${Classes.MobBringtheparty}`}>
                 <div className="row">
-                  <div className={`col-md-12 ${Classes.MobBringtheparty}`}>
+                  <div
+                    className={`col-md-12 ${Classes.MobBringtheparty}`}
+                    style={{ paddingBottom: "10px" }}
+                  >
                     <img
                       className={Classes.Image1}
-                      src={adds[0].Ad_image}
+                      src={adds[0] && adds[0].Ad_image}
+                      // src={banner1}
                       alt="ad1"
                       onClick={() => advClicked(adds[0])}
                     />
                   </div>
-                  <div className={`col-md-12 ${Classes.MobBringtheparty}`}>
+                  <div
+                    className={`col-md-12 ${Classes.MobBringtheparty}`}
+                    style={{ paddingBottom: "10px" }}
+                  >
                     <img
                       className={Classes.Image2}
-                      src={adds[1].Ad_image}
+                      src={adds[1] && adds[1].Ad_image}
+                      // src={banner2}
                       alt="ad2"
                       onClick={() => advClicked(adds[1])}
                     />
@@ -61,7 +72,10 @@ const BringTheParty = (props) => {
                   <div className={`col-md-12 ${Classes.MobBringtheparty}`}>
                     <img
                       className={Classes.Image2}
-                      src={adds[2].Ad_image}
+                      src={adds[2] && adds[2].Ad_image}
+                      // src={
+                      //   "https://swaprdnecomnew.zinfog.in/media/product/ads/banner3.png"
+                      // }
                       alt="ad3"
                       onClick={() => advClicked(adds[2])}
                     />

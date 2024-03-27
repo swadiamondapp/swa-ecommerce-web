@@ -89,6 +89,7 @@
   padding: 2px 10px;
   color: #006e7f;
   background: #006e7f0d;
+  cursor: pointer;
 }
 .TotalCard {
   box-shadow: 0px 2px 2px 0px #0000000d;
@@ -214,6 +215,7 @@
   margin: 18px 10px;
   font-family: "InterNormal";
   text-align: center;
+  cursor: pointer;
 }
 .Step .Title {
   font-family: "LatoRegular" !important;

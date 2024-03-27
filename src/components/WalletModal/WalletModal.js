@@ -130,7 +130,7 @@ const WalletModal = (props) => {
               </div>
             </div>
             <div className={Classes.ButtonContainer}>
-              <div className={Classes.Cancel} onClick={props.step2Handler}>
+              <div className={Classes.Cancel} onClick={props.handleNext}>
                 <p>Cancel & continue</p>
               </div>
               <div className={Classes.Apply} onClick={props.handleApply}>

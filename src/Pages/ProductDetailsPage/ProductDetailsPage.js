@@ -208,7 +208,10 @@ const ProductDetailsPage = (props) => {
             console.log(error);
           });
       } else {
-        setLogAct(true);
+        history.push({
+          pathname: "/checkout",
+          state: { data: prodDet.id },
+        });
       }
     } else {
       setError("Select Size");

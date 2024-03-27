@@ -42,6 +42,7 @@ const ProductDetails = (props) => {
   const token = localStorage.getItem("swaToken");
   const [reviewImages, setReviewImages] = useState([]);
   const [reviews, setReviews] = useState([]);
+  const [productDetails, setProductDetails] = useState([]);
 
   useEffect(() => {
     if (token !== null) {
@@ -50,6 +51,7 @@ const ProductDetails = (props) => {
           headers: { Authorization: "Token " + token },
         })
         .then((response1) => {
+          setProductDetails(response1.data.results.data);
           setWishId(response1.data.results.data.wishlist_id);
           if (response1.data.results.data.wishlist_id !== null) {
             setAddToWishList(true);
@@ -160,7 +162,17 @@ const ProductDetails = (props) => {
     props.sizeChange(e.target.value);
   };
 
-  console.log("reviews==>", props);
+  const [showAllReviews, setShowAllReviews] = useState(false);
+
+  const toggleShowAllReviews = () => {
+    setShowAllReviews(!showAllReviews);
+  };
+
+  const renderedReviews = showAllReviews
+    ? reviewImages
+    : reviewImages.slice(0, 3);
+
+  console.log("showAllReviews", showAllReviews);
 
   return (
     <div>
@@ -504,23 +516,23 @@ const ProductDetails = (props) => {
                 <div className={Classes.ProductMob3Rows}>
                   <div className={Classes.MobFirstCard}>
                     <p style={{ color: "#7A8288", fontSize: "15px" }}>
-                      Product hight
+                      Product height
                     </p>
-                    <p>19 mm</p>
+                    <p>{productDetails.height} mm</p>
                   </div>
                   <div className={Classes.DummyLineArrow}></div>
                   <div className={Classes.MobFirstCard}>
                     <p style={{ color: "#7A8288", fontSize: "15px" }}>
                       Product length
                     </p>
-                    <p>18 mm</p>
+                    <p>{productDetails.length} mm</p>
                   </div>
                   <div className={Classes.DummyLineArrow}></div>
                   <div className={Classes.MobFirstCard}>
                     <p style={{ color: "#7A8288", fontSize: "15px" }}>
                       Product width
                     </p>
-                    <p>6.8 mm</p>
+                    <p>{productDetails.width} mm</p>
                   </div>
                 </div>
               </div>
@@ -582,12 +594,12 @@ const ProductDetails = (props) => {
                 <div className={Classes.ParentCertificate}>
                   <div className={Classes.BIS}>
                     <img src={BIS} alt="" />
-                    <p className={Classes.CertificateHead}>Bis Hallamrk</p>
+                    <p className={Classes.CertificateHead}>Bis Hallmark</p>
                     <p className={Classes.CertificateDesc}>For Gold</p>
                   </div>
                   <div className={Classes.BIS}>
                     <img src={IGI} alt="" />
-                    <p className={Classes.CertificateHead}>IGI Crtification</p>
+                    <p className={Classes.CertificateHead}>IGI Certification</p>
                     <p className={Classes.CertificateDesc}>For Diamonds</p>
                   </div>
                   <div className={Classes.IGI}>
@@ -761,7 +773,7 @@ const ProductDetails = (props) => {
                   </div>
                 </div> */}
                 {/* second dummy */}
-                {reviewImages.map((item, index) => {
+                {/* {reviewImages.map((item, index) => {
                   const formattedDate = moment(item.updated_at).format(
                     "DD MMM YYYY"
                   );
@@ -793,11 +805,48 @@ const ProductDetails = (props) => {
                       </div>
                     </div>
                   );
-                })}
+                })} */}
+                <div>
+                  {renderedReviews.map((item, index) => {
+                    const formattedDate = moment(item.updated_at).format(
+                      "DD MMM YYYY"
+                    );
+                    return (
+                      <div
+                        className={Classes.ReviewImageTexts}
+                        style={{ borderBottom: "0px" }}
+                        key={index}
+                      >
+                        <div className={Classes.Icon_Stars}>
+                          <img src={Profiles} alt="Profile" />
+                          <div className={Classes.StarIcons1}>
+                            <p style={{ color: "#fff" }}>{item.rating}</p>
+                            <IoIosStar
+                              style={{ marginTop: "0px" }}
+                              className={Classes.Star}
+                              size={16}
+                              color="#ffffff"
+                            />
+                          </div>
+                        </div>
+                        <div className={Classes.RightHeadDesc}>
+                          <p>{item.user.name}</p>
+                          <p className={Classes.dateReview}>{formattedDate}</p>
+                          <div className={Classes.ReviewsDescription}>
+                            <p>{item.review}</p>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
             {reviews.count > 3 && (
-              <div className={Classes.CommentFlex} onClick={seAllHandler}>
+              <div
+                className={Classes.CommentFlex}
+                onClick={toggleShowAllReviews}
+              >
                 <div
                   className="container"
                   style={{
@@ -808,7 +857,7 @@ const ProductDetails = (props) => {
                   }}
                 >
                   <p className={Classes.AvailableColours3}>
-                    See all {props.count}{" "}
+                    {showAllReviews ? "See less" : "See all " + props.count}
                   </p>
                   <MdOutlineKeyboardArrowRight
                     size={30}
@@ -817,7 +866,7 @@ const ProductDetails = (props) => {
                 </div>
               </div>
             )}
-            {show &&
+            {/* {show &&
               props.all.map((item, index) => {
                 return (
                   <div className={Classes.Reviews} key={index}>
@@ -835,7 +884,7 @@ const ProductDetails = (props) => {
                     </div>
                   </div>
                 );
-              })}
+              })} */}
           </div>
         </div>
       </div>

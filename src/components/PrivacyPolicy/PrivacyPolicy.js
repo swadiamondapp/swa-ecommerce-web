@@ -215,14 +215,6 @@ function PrivacyPolicy() {
             </div>
           </div>
         </div>
-        <LIfeTImeModal />
-        <BuyBackRequiest />
-        <SuccessPage />
-        <RefundInitiated />
-        <SuccessModal />
-        <AddBank />
-        <WalletModal />
-        <TransferMoneyModal />
       </div>
     </div>
   );

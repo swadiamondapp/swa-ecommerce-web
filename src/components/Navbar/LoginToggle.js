@@ -425,7 +425,7 @@ const LoginToggle = (props) => {
                         className={Classes.buttonSocial}
                         onClick={handleSignInWithGoogle}
                       >
-                        <img src={GOOGLE} /> Login with Google
+                        <img src={GOOGLE} /> Sign Up with Google
                       </button>
                     </div>
                     <div className={Classes.facebookButton}>

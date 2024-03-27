@@ -58,6 +58,7 @@ const LandingPage = () => {
     axios
       .get(Urls.home, { headers: { Authorization: "Token " + token } })
       .then((response1) => {
+        console.log("response1=====>", response1);
         setLoading(false);
         setSearcList(response1.data.results.data.recent_search);
         let bannerArray = [];
@@ -145,7 +146,7 @@ const LandingPage = () => {
           setMobBanner(banMob);
           setNewArrivel(response1.data.results.data.new_arrival.slice(0, 8));
           setBudjet(response1.data.results.data.product_budget);
-          setAdd(response1.data.results.data.banners.slice(3, 7));
+          setAdd(response1.data.results.data.banners);
           setTopDemand(response1.data.results.data.top_demand.slice(0, 8));
           setVideo(response1.data.results.data.Video);
         })
