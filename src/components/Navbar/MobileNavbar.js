@@ -45,6 +45,7 @@ const MobileNavbar = () => {
     boxShadow: 24,
     borderRadius: "4px",
     p: 4,
+    outline: "none",
   };
 
   const mobileStyle = {
@@ -58,6 +59,22 @@ const MobileNavbar = () => {
     overflowY: "auto",
     maxHeight: "100vh",
     width: "100%",
+    outline: "none",
+  };
+
+  const mobileStyleLogin = {
+    position: "absolute",
+    top: 100,
+    transition: "transform 0.3s ease-in-out",
+    bgcolor: "background.paper",
+    border: "none",
+    boxShadow: 24,
+    borderRadius: "4px",
+
+    height: "100%",
+
+    width: "100%",
+    outline: "none",
   };
   const [isMobileView, setIsMobileView] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
@@ -139,20 +156,18 @@ const MobileNavbar = () => {
         )} */}
       </div>
       <Modal
+        // open={props.open}
         open={show}
+        // onClose={props.handleClose}
         onClose={() => setShow(false)}
-        animation={false}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={isMobileView && mobileStyleLogin}>
           <Typography>
-            <div>
-              <LoginToggle onClose={handleClose} />
-            </div>
+            <LoginToggle onClose={() => setShow(false)} />
           </Typography>
         </Box>
       </Modal>
+
       <Modal
         // open={props.open}
         open={open}
@@ -166,7 +181,14 @@ const MobileNavbar = () => {
                 <div className={Classes.MobLeftSection}>
                   <img src={userimg} />
                   <div className={Classes.MobLog_Signup}>
-                    <p onClick={() => setShow(true)}>Login</p>
+                    <p
+                      onClick={() => {
+                        setOpen(false);
+                        setShow(true);
+                      }}
+                    >
+                      Login
+                    </p>
                     <p className={Classes.BorderLineMob}></p>
                     <p>Sign up</p>
                   </div>
