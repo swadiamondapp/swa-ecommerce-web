@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import locationimg from "../../Assets/locationicon.png";
 import timeimg from "../../Assets/time.png";
 import { BsArrowRight } from "react-icons/bs";
+import Stroke from "../../Assets/Stroke.png";
 
 import Classes from "../CheckDelivery/CheckDelivery.module.css";
 
@@ -12,6 +13,7 @@ import * as urls from "../../Urls";
 import axios from "axios";
 
 import { useHistory } from "react-router-dom";
+import * as Urls from "../../Urls";
 
 const style = {
   position: "absolute",
@@ -39,6 +41,27 @@ const CheckDelivery = (props) => {
   };
   const loginClickHandler = () => {
     handleShow();
+  };
+
+  const [pinCode, setPinCode] = useState("");
+  const [pinCodeError, setPinCodeError] = useState("");
+  const [active, setActive] = useState(null);
+  const pinCodeChangeHandler = (e) => {
+    setPinCode(e.target.value);
+  };
+  const availbilityCheck = () => {
+    if (pinCode !== "") {
+      axios
+        .get(Urls.pincodeCheck + pinCode)
+        .then((response1) => {
+          setActive(response1.data.IsSuccess);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      setPinCodeError("Enter pin code");
+    }
   };
 
   return (
@@ -72,8 +95,56 @@ const CheckDelivery = (props) => {
                 </p>
               </div>
               <div className={Classes.LocationInp}>
-                <input type="text" placeholder="670114" />
-                <BsArrowRight className={Classes.LocationIconarrow} />
+                <input
+                  type="text"
+                  placeholder="670114"
+                  value={pinCode}
+                  onChange={pinCodeChangeHandler}
+                />
+                <BsArrowRight
+                  className={Classes.LocationIconarrow}
+                  onClick={availbilityCheck}
+                />
+              </div>
+              <div className="">{pinCodeError}</div>
+              <div style={{ marginBottom: "15px" }}>
+                {active === true ? (
+                  <>
+                    <div
+                      className={Classes.Flex}
+                      style={{
+                        marginLeft: "0px",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "10px",
+                      }}
+                    >
+                      <img className={Classes.Stroke} src={Stroke} alt="" />
+                      <p className={Classes.StrokeText}>
+                        Cash / Card delivery option available
+                      </p>{" "}
+                    </div>
+                    <div
+                      className={Classes.Flex}
+                      style={{
+                        marginLeft: "0px",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "10px",
+                      }}
+                    >
+                      <img className={Classes.Stroke} src={Stroke} alt="" />
+                      <p className={Classes.StrokeText}>
+                        Standard delivery available
+                      </p>
+                    </div>
+                  </>
+                ) : null}
+                {active === false ? (
+                  <p style={{ paddingTop: "0px" }} className="errrMsg">
+                    Standard delivery not available
+                  </p>
+                ) : null}
               </div>
               <div className={Classes.DeliveryBtns}>
                 <button>

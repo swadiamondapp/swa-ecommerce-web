@@ -21,18 +21,29 @@ import { HiPlus } from "react-icons/hi";
 import indiaimg from "../../Assets/india.png";
 import { IoIosArrowForward } from "react-icons/io";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const MobileNavbar = () => {
+  const history = useHistory();
   const [isHamOpen, setIsHamOpen] = useState(false);
   const [open, setOpen] = useState(false);
   const [show, setShow] = useState(false);
   const [activeIndex, setActiveIndex] = useState();
+  const token = localStorage.getItem("swaToken");
+  const userName = localStorage.getItem("userName");
+  const isHomePage = window.location.pathname === "/";
   const handleOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
+  };
+  const handleLogOut = () => {
+    // Clear localStorage
+    localStorage.removeItem("swaToken");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("phoneNumber");
   };
 
   const style = {
@@ -92,6 +103,17 @@ const MobileNavbar = () => {
     };
   }, [isMobileView]);
   console.log("isHamOpen===>", isHamOpen);
+  const moveToWishList = () => {
+    if (token !== null) {
+      history.push("/wish_list");
+    } else {
+      setShow(true);
+    }
+  };
+  const [showSearchBar, setShowSearchBar] = useState(false);
+  const toggleSearchBar = () => {
+    setShowSearchBar(!showSearchBar);
+  };
   return (
     <div className={Classes.NavContainer}>
       <div className={Classes.Navbar}>
@@ -119,20 +141,26 @@ const MobileNavbar = () => {
                 className={Classes.hamMenu}
               />
             </div>
-            <div className={Classes.Logo}>
+            <div className={Classes.Logo} onClick={() => history.push("/home")}>
               <img className={Classes.mobileLogo} src={Logo} />
             </div>
           </div>
           <div className={Classes.rightIcons}>
+            {isHomePage ? (
+              <div>
+                <img src={indiaimg} />
+              </div>
+            ) : (
+              <div onClick={toggleSearchBar}>
+                <GoSearch style={{ color: "#fff", fontSize: "25px" }} />
+              </div>
+            )}
             <div>
-              <img src={indiaimg} />
-            </div>
-            <div>
-              <FiBell
+              <CgHeart
                 className={Classes.Icon}
                 color="#FFFFFF"
                 size={25}
-                // onClick={loginHandler}
+                onClick={moveToWishList}
               />
             </div>
             <div>
@@ -144,6 +172,24 @@ const MobileNavbar = () => {
               />
             </div>
           </div>
+          {showSearchBar && (
+            <div className={Classes.ParentSearchBar}>
+              <div>
+                <BsArrowLeft
+                  className={Classes.Arrowline32}
+                  onClick={toggleSearchBar}
+                />
+              </div>
+              <div className={Classes.MobParentSearchBars}>
+                <input placeholder="Search your orders" />
+                <GoSearch className={Classes.Gosearch1} />
+                <IoMdClose
+                  className={Classes.Closesearch1}
+                  onClick={toggleSearchBar}
+                />
+              </div>
+            </div>
+          )}
         </header>
         {/* {isHamOpen ? (
           <>
@@ -180,18 +226,29 @@ const MobileNavbar = () => {
               <div className={Classes.MobMainHead}>
                 <div className={Classes.MobLeftSection}>
                   <img src={userimg} />
-                  <div className={Classes.MobLog_Signup}>
+                  {userName ? (
                     <p
-                      onClick={() => {
-                        setOpen(false);
-                        setShow(true);
+                      style={{
+                        color: "#fff",
+                        fontFamily: "gilroyNormal !important;",
                       }}
                     >
-                      Login
+                      {userName}
                     </p>
-                    <p className={Classes.BorderLineMob}></p>
-                    <p>Sign up</p>
-                  </div>
+                  ) : (
+                    <div className={Classes.MobLog_Signup}>
+                      <p
+                        onClick={() => {
+                          setOpen(false);
+                          setShow(true);
+                        }}
+                      >
+                        Login
+                      </p>
+                      <p className={Classes.BorderLineMob}></p>
+                      <p>Sign up</p>
+                    </div>
+                  )}
                 </div>
                 <div className={Classes.MobRightSection}>
                   <IoMdClose
@@ -264,54 +321,81 @@ const MobileNavbar = () => {
                         <AccordionTab header="Policy">
                           <div className={Classes.ShippingDetialHead}></div>
                         </AccordionTab>
-                        <AccordionTab header="Account">
-                          <div className={Classes.ShippingDetialHead}>
-                            <div className={Classes.LoggedDetailsList}>
-                              <Link to="/my_orders">
+                        {userName && (
+                          <AccordionTab header="Account">
+                            <div className={Classes.ShippingDetialHead}>
+                              <div className={Classes.LoggedDetailsList}>
+                                <Link to="/my_orders">
+                                  <p
+                                    style={{ fontSize: "16px", color: "#000" }}
+                                  >
+                                    My orders
+                                  </p>
+                                </Link>
+                                <IoIosArrowForward
+                                  style={{ color: "#006E7F" }}
+                                />
+                              </div>
+                              <div className={Classes.LoggedDetailsList}>
+                                <Link to="/wish_list">
+                                  <p
+                                    style={{ fontSize: "16px", color: "#000" }}
+                                  >
+                                    Wishlist
+                                  </p>
+                                </Link>
+                                <IoIosArrowForward
+                                  style={{ color: "#006E7F" }}
+                                />
+                              </div>
+                              <div className={Classes.LoggedDetailsList}>
+                                <Link to="/addaddress">
+                                  <p
+                                    style={{ fontSize: "16px", color: "#000" }}
+                                  >
+                                    Add address
+                                  </p>
+                                </Link>
+                                <IoIosArrowForward
+                                  style={{ color: "#006E7F" }}
+                                />
+                              </div>
+                              <div className={Classes.LoggedDetailsList}>
+                                <Link to="/rate&review">
+                                  <p
+                                    style={{ fontSize: "16px", color: "#000" }}
+                                  >
+                                    Write Review
+                                  </p>
+                                </Link>
+                                <IoIosArrowForward
+                                  style={{ color: "#006E7F" }}
+                                />
+                              </div>
+                              <div className={Classes.LoggedDetailsList}>
                                 <p style={{ fontSize: "16px", color: "#000" }}>
-                                  My orders
+                                  SWA Wallet
                                 </p>
-                              </Link>
-                              <IoIosArrowForward style={{ color: "#006E7F" }} />
-                            </div>
-                            <div className={Classes.LoggedDetailsList}>
-                              <Link to="/wish_list">
+                                <IoIosArrowForward
+                                  style={{ color: "#006E7F" }}
+                                />
+                              </div>
+                              <div className={Classes.LoggedDetailsList}>
                                 <p style={{ fontSize: "16px", color: "#000" }}>
-                                  Wishlist
+                                  Exchange Wallet
                                 </p>
-                              </Link>
-                              <IoIosArrowForward style={{ color: "#006E7F" }} />
+                                <IoIosArrowForward
+                                  style={{ color: "#006E7F" }}
+                                />
+                              </div>
                             </div>
-                            <div className={Classes.LoggedDetailsList}>
-                              <Link to="/addaddress">
-                                <p style={{ fontSize: "16px", color: "#000" }}>
-                                  Add address
-                                </p>
-                              </Link>
-                              <IoIosArrowForward style={{ color: "#006E7F" }} />
-                            </div>
-                            <div className={Classes.LoggedDetailsList}>
-                              <Link to="/rate&review">
-                                <p style={{ fontSize: "16px", color: "#000" }}>
-                                  Write Review
-                                </p>
-                              </Link>
-                              <IoIosArrowForward style={{ color: "#006E7F" }} />
-                            </div>
-                            <div className={Classes.LoggedDetailsList}>
-                              <p style={{ fontSize: "16px", color: "#000" }}>
-                                SWA Wallet
-                              </p>
-                              <IoIosArrowForward style={{ color: "#006E7F" }} />
-                            </div>
-                            <div className={Classes.LoggedDetailsList}>
-                              <p style={{ fontSize: "16px", color: "#000" }}>
-                                Exchange Wallet
-                              </p>
-                              <IoIosArrowForward style={{ color: "#006E7F" }} />
-                            </div>
-                          </div>
-                        </AccordionTab>
+                          </AccordionTab>
+                        )}
+
+                        <AccordionTab
+                          header="Log Out"
+                          onClick={handleLogOut}
+                        ></AccordionTab>
                       </Accordion>
                     </div>
                   </div>
