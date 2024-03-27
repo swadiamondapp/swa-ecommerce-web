@@ -9,7 +9,7 @@ import Sh4 from "../../Assets/PS4.png";
 const SliderFeature = () => {
   const similarProducts = [
     {
-      desc: "Free shiping",
+      desc: "Free shipping",
       image: Sh1,
     },
     {

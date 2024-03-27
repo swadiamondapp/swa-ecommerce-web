@@ -236,14 +236,6 @@ function Footer() {
                 jewellers who deal only in gold jewellery are reluctant to add
                 diamond jewellery to their stock due to certain factors
               </p>
-              <LIfeTImeModal />
-              <BuyBackRequiest />
-              <SuccessPage />
-              <RefundInitiated />
-              <SuccessModal />
-              <AddBank />
-              <WalletModal />
-              <TransferMoneyModal />
             </AccordionTab>
 
             <AccordionTab header="Policies">
