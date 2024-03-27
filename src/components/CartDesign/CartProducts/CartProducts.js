@@ -7,6 +7,7 @@ import Classes from "../CartDesign.module.css";
 import { IoCheckmarkCircleSharp } from "react-icons/io5";
 
 function CartProducts(props) {
+  console.log("props--------->", props);
   return (
     <div>
       <div className={Classes.CartItems}>

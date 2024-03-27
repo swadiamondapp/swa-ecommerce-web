@@ -447,9 +447,6 @@ function AddAddress(props) {
                   <IoMdClose />
                 </div>
               </div> */}
-              <div className={Classes.Donebtn}>
-                <button>Done</button>
-              </div>
             </div>
             <div className={Classes.rightAddres11}></div>
           </div>

@@ -205,6 +205,7 @@ const Cart = () => {
                   // + item.description.diamond_weight_preview + " GM"
                 }
                 Size=""
+                color={item.color_id}
                 quanty={item.quantity}
                 DeliveryDate="Delivery by tue oct 18"
               />
