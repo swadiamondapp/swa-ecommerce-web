@@ -61,6 +61,13 @@ header {
 .hamMenu {
   max-width: 30px;
 }
+.LoggedDetailsList {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  font-family: "GilroyRegular";
+}
 .ParentCards1 p {
   font-family: "lato";
   font-weight: 400;

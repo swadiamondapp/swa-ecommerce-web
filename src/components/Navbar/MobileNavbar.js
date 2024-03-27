@@ -19,6 +19,8 @@ import ringimg from "../../Assets/ladiesring.png";
 import ringimg2 from "../../Assets/pendant1.png";
 import { HiPlus } from "react-icons/hi";
 import indiaimg from "../../Assets/india.png";
+import { IoIosArrowForward } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 const MobileNavbar = () => {
   const [isHamOpen, setIsHamOpen] = useState(false);
@@ -224,25 +226,52 @@ const MobileNavbar = () => {
                           <div className={Classes.ShippingDetialHead}></div>
                         </AccordionTab>
                         <AccordionTab header="Account">
-                          <div className={Classes.ShippingDetialHead}></div>
-                        </AccordionTab>
-                        <AccordionTab header="My orders">
-                          <div className={Classes.ShippingDetialHead}></div>
-                        </AccordionTab>
-                        <AccordionTab header="Wishlist">
-                          <div className={Classes.ShippingDetialHead}></div>
-                        </AccordionTab>
-                        <AccordionTab header="Add address">
-                          <div className={Classes.ShippingDetialHead}></div>
-                        </AccordionTab>
-                        <AccordionTab header="Write Review">
-                          <div className={Classes.ShippingDetialHead}></div>
-                        </AccordionTab>
-                        <AccordionTab header="SWA Wallet">
-                          <div className={Classes.ShippingDetialHead}></div>
-                        </AccordionTab>
-                        <AccordionTab header="Exchange Wallet">
-                          <div className={Classes.ShippingDetialHead}></div>
+                          <div className={Classes.ShippingDetialHead}>
+                            <div className={Classes.LoggedDetailsList}>
+                              <Link to="/my_orders">
+                                <p style={{ fontSize: "16px", color: "#000" }}>
+                                  My orders
+                                </p>
+                              </Link>
+                              <IoIosArrowForward style={{ color: "#006E7F" }} />
+                            </div>
+                            <div className={Classes.LoggedDetailsList}>
+                              <Link to="/wish_list">
+                                <p style={{ fontSize: "16px", color: "#000" }}>
+                                  Wishlist
+                                </p>
+                              </Link>
+                              <IoIosArrowForward style={{ color: "#006E7F" }} />
+                            </div>
+                            <div className={Classes.LoggedDetailsList}>
+                              <Link to="/addaddress">
+                                <p style={{ fontSize: "16px", color: "#000" }}>
+                                  Add address
+                                </p>
+                              </Link>
+                              <IoIosArrowForward style={{ color: "#006E7F" }} />
+                            </div>
+                            <div className={Classes.LoggedDetailsList}>
+                              <Link to="/rate&review">
+                                <p style={{ fontSize: "16px", color: "#000" }}>
+                                  Write Review
+                                </p>
+                              </Link>
+                              <IoIosArrowForward style={{ color: "#006E7F" }} />
+                            </div>
+                            <div className={Classes.LoggedDetailsList}>
+                              <p style={{ fontSize: "16px", color: "#000" }}>
+                                SWA Wallet
+                              </p>
+                              <IoIosArrowForward style={{ color: "#006E7F" }} />
+                            </div>
+                            <div className={Classes.LoggedDetailsList}>
+                              <p style={{ fontSize: "16px", color: "#000" }}>
+                                Exchange Wallet
+                              </p>
+                              <IoIosArrowForward style={{ color: "#006E7F" }} />
+                            </div>
+                          </div>
                         </AccordionTab>
                       </Accordion>
                     </div>
