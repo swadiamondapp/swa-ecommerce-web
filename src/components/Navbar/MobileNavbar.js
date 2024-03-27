@@ -27,12 +27,19 @@ const MobileNavbar = () => {
   const [open, setOpen] = useState(false);
   const [show, setShow] = useState(false);
   const [activeIndex, setActiveIndex] = useState();
+  const userName = localStorage.getItem("userName");
   const handleOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
+  };
+  const handleLogOut = () => {
+    // Clear localStorage
+    localStorage.removeItem("swaToken");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("phoneNumber");
   };
 
   const style = {
@@ -180,18 +187,29 @@ const MobileNavbar = () => {
               <div className={Classes.MobMainHead}>
                 <div className={Classes.MobLeftSection}>
                   <img src={userimg} />
-                  <div className={Classes.MobLog_Signup}>
+                  {userName ? (
                     <p
-                      onClick={() => {
-                        setOpen(false);
-                        setShow(true);
+                      style={{
+                        color: "#fff",
+                        fontFamily: "gilroyNormal !important;",
                       }}
                     >
-                      Login
+                      {userName}
                     </p>
-                    <p className={Classes.BorderLineMob}></p>
-                    <p>Sign up</p>
-                  </div>
+                  ) : (
+                    <div className={Classes.MobLog_Signup}>
+                      <p
+                        onClick={() => {
+                          setOpen(false);
+                          setShow(true);
+                        }}
+                      >
+                        Login
+                      </p>
+                      <p className={Classes.BorderLineMob}></p>
+                      <p>Sign up</p>
+                    </div>
+                  )}
                 </div>
                 <div className={Classes.MobRightSection}>
                   <IoMdClose
@@ -264,54 +282,81 @@ const MobileNavbar = () => {
                         <AccordionTab header="Policy">
                           <div className={Classes.ShippingDetialHead}></div>
                         </AccordionTab>
-                        <AccordionTab header="Account">
-                          <div className={Classes.ShippingDetialHead}>
-                            <div className={Classes.LoggedDetailsList}>
-                              <Link to="/my_orders">
+                        {userName && (
+                          <AccordionTab header="Account">
+                            <div className={Classes.ShippingDetialHead}>
+                              <div className={Classes.LoggedDetailsList}>
+                                <Link to="/my_orders">
+                                  <p
+                                    style={{ fontSize: "16px", color: "#000" }}
+                                  >
+                                    My orders
+                                  </p>
+                                </Link>
+                                <IoIosArrowForward
+                                  style={{ color: "#006E7F" }}
+                                />
+                              </div>
+                              <div className={Classes.LoggedDetailsList}>
+                                <Link to="/wish_list">
+                                  <p
+                                    style={{ fontSize: "16px", color: "#000" }}
+                                  >
+                                    Wishlist
+                                  </p>
+                                </Link>
+                                <IoIosArrowForward
+                                  style={{ color: "#006E7F" }}
+                                />
+                              </div>
+                              <div className={Classes.LoggedDetailsList}>
+                                <Link to="/addaddress">
+                                  <p
+                                    style={{ fontSize: "16px", color: "#000" }}
+                                  >
+                                    Add address
+                                  </p>
+                                </Link>
+                                <IoIosArrowForward
+                                  style={{ color: "#006E7F" }}
+                                />
+                              </div>
+                              <div className={Classes.LoggedDetailsList}>
+                                <Link to="/rate&review">
+                                  <p
+                                    style={{ fontSize: "16px", color: "#000" }}
+                                  >
+                                    Write Review
+                                  </p>
+                                </Link>
+                                <IoIosArrowForward
+                                  style={{ color: "#006E7F" }}
+                                />
+                              </div>
+                              <div className={Classes.LoggedDetailsList}>
                                 <p style={{ fontSize: "16px", color: "#000" }}>
-                                  My orders
+                                  SWA Wallet
                                 </p>
-                              </Link>
-                              <IoIosArrowForward style={{ color: "#006E7F" }} />
-                            </div>
-                            <div className={Classes.LoggedDetailsList}>
-                              <Link to="/wish_list">
+                                <IoIosArrowForward
+                                  style={{ color: "#006E7F" }}
+                                />
+                              </div>
+                              <div className={Classes.LoggedDetailsList}>
                                 <p style={{ fontSize: "16px", color: "#000" }}>
-                                  Wishlist
+                                  Exchange Wallet
                                 </p>
-                              </Link>
-                              <IoIosArrowForward style={{ color: "#006E7F" }} />
+                                <IoIosArrowForward
+                                  style={{ color: "#006E7F" }}
+                                />
+                              </div>
                             </div>
-                            <div className={Classes.LoggedDetailsList}>
-                              <Link to="/addaddress">
-                                <p style={{ fontSize: "16px", color: "#000" }}>
-                                  Add address
-                                </p>
-                              </Link>
-                              <IoIosArrowForward style={{ color: "#006E7F" }} />
-                            </div>
-                            <div className={Classes.LoggedDetailsList}>
-                              <Link to="/rate&review">
-                                <p style={{ fontSize: "16px", color: "#000" }}>
-                                  Write Review
-                                </p>
-                              </Link>
-                              <IoIosArrowForward style={{ color: "#006E7F" }} />
-                            </div>
-                            <div className={Classes.LoggedDetailsList}>
-                              <p style={{ fontSize: "16px", color: "#000" }}>
-                                SWA Wallet
-                              </p>
-                              <IoIosArrowForward style={{ color: "#006E7F" }} />
-                            </div>
-                            <div className={Classes.LoggedDetailsList}>
-                              <p style={{ fontSize: "16px", color: "#000" }}>
-                                Exchange Wallet
-                              </p>
-                              <IoIosArrowForward style={{ color: "#006E7F" }} />
-                            </div>
-                          </div>
-                        </AccordionTab>
+                          </AccordionTab>
+                        )}
+
+                        <AccordionTab
+                          header="Log Out"
+                          onClick={handleLogOut}
+                        ></AccordionTab>
                       </Accordion>
                     </div>
                   </div>
