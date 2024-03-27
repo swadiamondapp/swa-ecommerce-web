@@ -575,7 +575,10 @@ const FilterModal = (props) => {
                     </button>
                     <button
                       className={classes.ApplyBtn}
-                      onClick={handleButtonClick}
+                      onClick={() => {
+                        handleButtonClick();
+                        setOpenfilter(false);
+                      }}
                     >
                       Apply
                     </button>

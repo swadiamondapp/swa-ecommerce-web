@@ -341,9 +341,9 @@ const FilterCatgs = (props) => {
                 <div className={Classes.CategoryList}>
                 <input
               type="checkbox"
-              onChange={() => handleCheckboxByMetal(item.id)}
-              checked={selectedMetalIds.includes(item.id)}
-            />
+              onChange={() => handleCheckboxByCategory(item.id)}
+              checked={selectedCategoryIds.includes(item.id)}
+            />C
                   <label>{item.name}</label>
                 </div>
                 <div className={Classes.CategoryListAmount}>
@@ -361,8 +361,8 @@ const FilterCatgs = (props) => {
                 <div className={Classes.CategoryList}>
                 <input
               type="checkbox"
-              onChange={() => handleCheckboxByCategory(item.id)}
-              checked={selectedCategoryIds.includes(item.id)}
+              onChange={() => handleCheckboxByMetal(item.id)}
+              checked={selectedMetalIds.includes(item.id)}
             />
                   <label>{item.metal_type}</label>
                 </div>
