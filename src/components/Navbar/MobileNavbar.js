@@ -25,6 +25,7 @@ import { Link } from "react-router-dom";
 const MobileNavbar = () => {
   const [isHamOpen, setIsHamOpen] = useState(false);
   const [open, setOpen] = useState(false);
+  const [show, setShow] = useState(false);
   const [activeIndex, setActiveIndex] = useState();
   const handleOpen = () => {
     setOpen(true);
@@ -73,6 +74,7 @@ const MobileNavbar = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, [isMobileView]);
+  console.log("isHamOpen===>", isHamOpen);
   return (
     <div className={Classes.NavContainer}>
       <div className={Classes.Navbar}>
@@ -126,16 +128,31 @@ const MobileNavbar = () => {
             </div>
           </div>
         </header>
-        {isHamOpen ? (
+        {/* {isHamOpen ? (
           <>
             <div className={Classes.SlideButto}>
-              <LoginToggle />
+              <LoginModal open={true} />
             </div>
           </>
         ) : (
           <></>
-        )}
+        )} */}
       </div>
+      <Modal
+        open={show}
+        onClose={() => setShow(false)}
+        animation={false}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography>
+            <div>
+              <LoginToggle onClose={handleClose} />
+            </div>
+          </Typography>
+        </Box>
+      </Modal>
       <Modal
         // open={props.open}
         open={open}
@@ -149,7 +166,7 @@ const MobileNavbar = () => {
                 <div className={Classes.MobLeftSection}>
                   <img src={userimg} />
                   <div className={Classes.MobLog_Signup}>
-                    <p>Login</p>
+                    <p onClick={() => setShow(true)}>Login</p>
                     <p className={Classes.BorderLineMob}></p>
                     <p>Sign up</p>
                   </div>
