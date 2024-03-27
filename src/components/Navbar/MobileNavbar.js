@@ -21,8 +21,10 @@ import { HiPlus } from "react-icons/hi";
 import indiaimg from "../../Assets/india.png";
 import { IoIosArrowForward } from "react-icons/io";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const MobileNavbar = () => {
+  const history = useHistory();
   const [isHamOpen, setIsHamOpen] = useState(false);
   const [open, setOpen] = useState(false);
   const [show, setShow] = useState(false);
@@ -126,7 +128,7 @@ const MobileNavbar = () => {
                 className={Classes.hamMenu}
               />
             </div>
-            <div className={Classes.Logo}>
+            <div className={Classes.Logo} onClick={() => history.push("/home")}>
               <img className={Classes.mobileLogo} src={Logo} />
             </div>
           </div>

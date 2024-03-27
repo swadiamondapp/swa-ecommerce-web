@@ -36,7 +36,7 @@ const NewArrivalPage = (props) => {
               HOME /
             </p>
             <p className={Classes.NewArrival}>
-              {props.categoryName || "NEW ARRAIVALS"}
+              {props.categoryName || "NEW ARRIVALS"}
             </p>
           </div>
         </div>
