@@ -173,6 +173,7 @@ const Cart = () => {
           // handleOpen={() => setWalletOpen(true)}
         >
           {cartList.map((item, index) => {
+            console.log("item-->", item);
             return (
               <CartProducts
                 key={index}
@@ -204,8 +205,8 @@ const Cart = () => {
                   "Diamond "
                   // + item.description.diamond_weight_preview + " GM"
                 }
-                Size=""
-                color={item.color_id}
+                Size={item.size}
+                color={item.color}
                 quanty={item.quantity}
                 DeliveryDate="Delivery by tue oct 18"
               />

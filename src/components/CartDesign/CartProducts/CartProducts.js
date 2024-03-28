@@ -7,7 +7,6 @@ import Classes from "../CartDesign.module.css";
 import { IoCheckmarkCircleSharp } from "react-icons/io5";
 
 function CartProducts(props) {
-  console.log("props--------->", props);
   return (
     <div>
       <div className={Classes.CartItems}>
@@ -65,10 +64,24 @@ function CartProducts(props) {
               {/* <p className={Classes.Quantity}>Quantity : {props.quanty}</p> */}
               <div className={Classes.OverView}>
                 <p className={Classes.OverViewKey}>Size</p>
-                <p className={Classes.OverViewValue}>15 MM</p>
+                <p className={Classes.OverViewValue}>
+                  {props.Size} {props.Size !== "N/A" && "MM"}
+                </p>
                 <p className={Classes.OverViewKey}>Colour</p>
-                <p className={Classes.OverViewValue}>Rose Gold</p>
-                <div className={Classes.OverViewColor}></div>
+                <p className={Classes.OverViewValue}>{props.color}</p>
+                <div
+                  className={Classes.OverViewColor}
+                  style={{
+                    backgroundColor:
+                      props.color === "rose"
+                        ? "#ffd7d7"
+                        : props.color === "yellow"
+                        ? "#fed672"
+                        : props.color === "pt"
+                        ? "#eee9e9"
+                        : "#dedede0d",
+                  }}
+                ></div>
               </div>
             </div>
           </div>
