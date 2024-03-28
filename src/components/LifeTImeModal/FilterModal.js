@@ -245,6 +245,15 @@ const FilterModal = (props) => {
     }
   };
 
+  // const sortChange = (value) => {
+  //   setSelectedPopular(value)
+  // }
+  const sortChange = (value) => {
+    setSelectedSort(value);
+    setSelectedPopular(value)
+  };
+ 
+
   return (
     <div>
       <div className={classes.FilterHeads}>
@@ -364,8 +373,8 @@ const FilterModal = (props) => {
                       <input
                         checked={selectedPopular === "new"}
                         type="radio"
-                        value="new"
-                        onChange={() => setSelectedPopular("new")}
+                        name="sort"
+                        onChange={() => sortChange("new")}
                       />
                       <label>New arraivals</label>
                     </div>
@@ -373,8 +382,9 @@ const FilterModal = (props) => {
                       <input
                         checked={selectedSort === "LtoH"}
                         type="radio"
-                        value="LtoH"
-                        onChange={() => setSelectedSort("LtoH")}
+                       
+                        name="sort"
+                        onChange={() => sortChange("LtoH")}
                       />
                       <label>Low to high</label>
                     </div>
@@ -382,8 +392,9 @@ const FilterModal = (props) => {
                       <input
                         checked={selectedSort === "HtoL"}
                         type="radio"
-                        value="HtoL"
-                        onChange={() => setSelectedSort("HtoL")}
+                       
+                        name="sort"
+                        onChange={() => sortChange("HtoL")}
                       />
                       <label>High to Low</label>
                     </div>
@@ -392,8 +403,9 @@ const FilterModal = (props) => {
                       <input
                         checked={selectedPopular === "top"}
                         type="radio"
-                        value="top"
-                        onChange={() => setSelectedPopular("top")}
+                        
+                        name="sort"
+                        onChange={() =>sortChange("top")}
                       />
                       <label>Most popular</label>
                     </div>
@@ -401,8 +413,9 @@ const FilterModal = (props) => {
                       <input
                         checked={selectedPopular === "discounted"}
                         type="radio"
-                        value="discounted"
-                        onChange={() => setSelectedPopular("discounted")}
+                        
+                        name="sort"
+                        onChange={() => sortChange("discounted")}
                       />
                       <label>Discounted</label>
                     </div>
@@ -410,8 +423,9 @@ const FilterModal = (props) => {
                       <input
                         checked={selectedSort === "wedding"}
                         type="radio"
-                        value="wedding"
-                        onChange={() => setSelectedSort("wedding")}
+                       
+                        name="sort"
+                        onChange={() =>sortChange("wedding")}
                       />
                       <label>Wedding</label>
                     </div>
