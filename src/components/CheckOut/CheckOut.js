@@ -413,7 +413,8 @@ function CheckOut(props) {
   };
 
   const handleSignUp = async () => {
-    if (token) {
+    if (token !== null) {
+      console.log("Enterd to", token);
       submitAddress(token);
     } else {
       try {
@@ -555,7 +556,7 @@ function CheckOut(props) {
     }
   };
 
-  console.log("token-->", token);
+  console.log("token-->Props", props);
 
   return (
     <div>

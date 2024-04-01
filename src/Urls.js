@@ -86,3 +86,4 @@ export const CancelOrder = server + "ecom/cancel-order";
 export const defaultAddress = server + "ecom/address/";
 export const addBankAccount = server + "ecom/bank/add/";
 export const getWalletAmounts = server + "ecom/checkout/";
+export const singleReview = server + "ecom/review/";

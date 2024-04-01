@@ -145,7 +145,10 @@ const MobileNavbar = () => {
                 className={Classes.hamMenu}
               />
             </div>
-            <div className={Classes.Logo} onClick={() => history.push("/")}>
+            <div
+              className={Classes.Logo}
+              onClick={() => (window.location.href = "/")}
+            >
               <img className={Classes.mobileLogo} src={Logo} />
             </div>
           </div>

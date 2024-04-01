@@ -318,7 +318,7 @@ const Header = (props) => {
               size={25}
               onClick={moveTocart}
             />
-            {userName && (
+            {userName && props.countCartItems && (
               <div className={Classes.ItemsNum}>{props.countCartItems}</div>
             )}
           </div>

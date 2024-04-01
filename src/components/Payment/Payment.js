@@ -28,15 +28,17 @@ const Payment = () => {
   });
   const { data, name } = location.state;
 
-  console.log("data-------------->", data);
+  console.log("===>", data);
 
   useEffect(() => {
-    getDefaultAddress();
-  }, []);
+    let _token = !data.token ? token : data.token;
+    _token && getDefaultAddress(_token);
+  }, [data]);
 
   const placeOrder = () => {
     let cartBody;
     let buyBody;
+    let _userToken = !data.token ? token : data.token;
     const p_Method = mode === "cash" ? "C" : "P";
     if (promoId !== "") {
       cartBody = {
@@ -94,7 +96,7 @@ const Payment = () => {
     if (name === "cart") {
       axios
         .post(Urls.checkout, cartBody, {
-          headers: { Authorization: "Token " + token },
+          headers: { Authorization: "Token " + _userToken },
         })
         .then((response1) => {
           if (mode === "upi" || mode === "credit_card") {
@@ -155,7 +157,7 @@ const Payment = () => {
     } else if (name === "buy") {
       axios
         .post(Urls.buyNow, buyBody, {
-          headers: { Authorization: "Token " + token },
+          headers: { Authorization: "Token " + _userToken },
         })
         .then((response1) => {
           if (mode === "P") {
@@ -222,10 +224,10 @@ const Payment = () => {
     setMode(event.target.value);
   };
 
-  const getDefaultAddress = async () => {
+  const getDefaultAddress = async (_token) => {
     try {
       const response = await axios.get(Urls.defaultAddress, {
-        headers: { Authorization: "Token " + token },
+        headers: { Authorization: "Token " + _token },
       });
       if (response.data.results.status === 200) {
         setAddressData({
@@ -360,13 +362,7 @@ const Payment = () => {
               Phone number:{addressData.mobile}
             </p>
           </div>
-          <div
-            className={Classes.PayButtonMobile}
-            // onClick={() => {
-            //   history.push("/addaddress");
-            // }}
-            onClick={placeOrder}
-          >
+          <div className={Classes.PayButtonMobile} onClick={placeOrder}>
             Pay &#x20B9; {data.pay}
           </div>
         </div>
