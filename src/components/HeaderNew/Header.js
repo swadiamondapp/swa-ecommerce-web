@@ -35,6 +35,7 @@ const Header = (props) => {
     : Classes.MobileSearchbarOthers;
   const isCheckoutPage = window.location.pathname === "/checkout";
   const isCartPage = window.location.pathname === "/cart";
+  const userName = localStorage.getItem("userName");
 
   const [showUserDetails, setShowUserDetails] = useState(false);
   const userDetailsRef = useRef(null);
@@ -317,7 +318,9 @@ const Header = (props) => {
               size={25}
               onClick={moveTocart}
             />
-            <div className={Classes.ItemsNum}>{props.countCartItems}</div>
+            {userName && (
+              <div className={Classes.ItemsNum}>{props.countCartItems}</div>
+            )}
           </div>
           <LoginModal
             className={Classes.loginUser}
