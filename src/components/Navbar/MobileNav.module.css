@@ -108,7 +108,7 @@ header {
 .searchListCont2 {
   background: white;
   width: 100%;
-  z-index: 99;
+  z-index: 999;
   position: absolute;
   left: 0%;
   top: 12%;
@@ -181,7 +181,7 @@ header {
   color: #fff;
   margin-bottom: 0rem;
   border-radius: 8px;
-  border:none
+  border: none;
 }
 .acceptT {
   display: flex;
@@ -372,7 +372,7 @@ header {
     height: 2.45456rem;
     color: #fff;
     border-radius: 8px;
-    border:none
+    border: none;
   }
   .Signup {
     display: flex;
@@ -429,7 +429,7 @@ header {
     margin-bottom: 1rem;
     margin-top: 1.5rem;
     border-radius: 8px;
-    border:none
+    border: none;
   }
 
   /* Signup styles start here */
@@ -609,7 +609,7 @@ header {
     height: 3rem;
     color: #fff;
     border-radius: 8px;
-    border:none
+    border: none;
   }
 
   .title {
@@ -771,7 +771,7 @@ header {
     margin: 0.5rem 0rem;
     font-size: 16px;
     border-radius: 8px;
-    border:none
+    border: none;
   }
   .Signup {
     display: flex;
@@ -838,7 +838,7 @@ header {
     margin-top: 1rem;
     font-size: 16px;
     border-radius: 8px;
-    border:none
+    border: none;
   }
   .acceptT {
     display: flex;
@@ -1048,7 +1048,7 @@ header {
     height: 2.45456rem;
     color: #fff;
     border-radius: 8px;
-    border:none
+    border: none;
   }
   .SignupTextWrapper {
     display: flex;
@@ -1100,7 +1100,7 @@ header {
     margin-bottom: 5px;
     margin-top: 15px;
     border-radius: 8px;
-    border:none
+    border: none;
   }
   .acceptT {
     display: flex;
@@ -1260,5 +1260,4 @@ header {
     flex-direction: column;
     gap: 5px;
   }
-
 }

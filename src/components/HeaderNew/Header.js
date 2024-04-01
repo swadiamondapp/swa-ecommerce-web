@@ -266,10 +266,7 @@ const Header = (props) => {
               style={{ display: searchShow ? "none" : "block" }}
             />
             {/* <AiOutlineClose size={22}  className={Classes.searchIcon} style={{display:searchShow?'block':'none',cursor:'pointer'}} /> */}
-            <div
-              className={Classes.searchListCont}
-              style={{ display: searchShow ? "block" : "none" }}
-            >
+            <div className={Classes.searchListCont}>
               {suggestionList.length !== 0 ? (
                 suggestionList.map((item, index) => {
                   return (
@@ -325,7 +322,7 @@ const Header = (props) => {
           <LoginModal
             className={Classes.loginUser}
             isLog={show}
-            handleOpenLogin={() => setShow(prevShow => !prevShow)}
+            handleOpenLogin={() => setShow((prevShow) => !prevShow)}
             logAct={props.loginHandler}
             cartClose={cateclose}
             close={closeHanlder}

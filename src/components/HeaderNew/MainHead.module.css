@@ -324,9 +324,6 @@ header {
   max-height: 700px;
   overflow-y: scroll;
 }
-/* .searchList:hover .searchListCont{
-    display: block;
-  } */
 
 .SearchItem {
   color: #505050;
@@ -1274,6 +1271,7 @@ a {
     display: block;
   }
   .searchListCont {
+    display: block;
     top: 30%;
   }
 }
