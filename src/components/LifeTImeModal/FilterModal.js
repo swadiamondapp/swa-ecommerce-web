@@ -217,6 +217,7 @@ const FilterModal = (props) => {
         try {
           const respons = await axios.get(urlF);
           props.setProduct(respons.data.results.data);
+          handleCloseFilter();
         } catch (error) {
           console.error("Error fetching product category by category:", error);
         }
@@ -250,9 +251,8 @@ const FilterModal = (props) => {
   // }
   const sortChange = (value) => {
     setSelectedSort(value);
-    setSelectedPopular(value)
+    setSelectedPopular(value);
   };
- 
 
   return (
     <div>
@@ -382,7 +382,6 @@ const FilterModal = (props) => {
                       <input
                         checked={selectedSort === "LtoH"}
                         type="radio"
-                       
                         name="sort"
                         onChange={() => sortChange("LtoH")}
                       />
@@ -392,7 +391,6 @@ const FilterModal = (props) => {
                       <input
                         checked={selectedSort === "HtoL"}
                         type="radio"
-                       
                         name="sort"
                         onChange={() => sortChange("HtoL")}
                       />
@@ -403,9 +401,8 @@ const FilterModal = (props) => {
                       <input
                         checked={selectedPopular === "top"}
                         type="radio"
-                        
                         name="sort"
-                        onChange={() =>sortChange("top")}
+                        onChange={() => sortChange("top")}
                       />
                       <label>Most popular</label>
                     </div>
@@ -413,7 +410,6 @@ const FilterModal = (props) => {
                       <input
                         checked={selectedPopular === "discounted"}
                         type="radio"
-                        
                         name="sort"
                         onChange={() => sortChange("discounted")}
                       />
@@ -423,9 +419,8 @@ const FilterModal = (props) => {
                       <input
                         checked={selectedSort === "wedding"}
                         type="radio"
-                       
                         name="sort"
-                        onChange={() =>sortChange("wedding")}
+                        onChange={() => sortChange("wedding")}
                       />
                       <label>Wedding</label>
                     </div>

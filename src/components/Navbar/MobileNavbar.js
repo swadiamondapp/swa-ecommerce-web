@@ -43,10 +43,11 @@ const MobileNavbar = () => {
     setOpen(false);
   };
   const handleLogOut = () => {
-    // Clear localStorage
     localStorage.removeItem("swaToken");
     localStorage.removeItem("userName");
     localStorage.removeItem("phoneNumber");
+    handleClose();
+    history.push("/");
   };
 
   const style = {

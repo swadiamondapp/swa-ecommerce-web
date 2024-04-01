@@ -468,35 +468,19 @@ function CheckOut(props) {
           headers: { Authorization: "Token " + token },
         });
         if (response.data && response.data.status === 200) {
-          try {
-            const response1 = await axios.post(
-              Urls.defaultAddress,
-              {
-                address_id: response.data.data.id,
-                is_main: true,
+          history.push({
+            pathname: "/payment",
+            state: {
+              data: {
+                pay: amountPay,
+                total: total,
+                addressId: response.data.data.id,
+                updatedCart: props.proDet.data.updatedCartResponse,
+                token: token,
               },
-              {
-                headers: { Authorization: "Token " + token },
-              }
-            );
-            console.log(response1);
-            if (response1) {
-              history.push({
-                pathname: "/payment",
-                state: {
-                  data: {
-                    pay: amountPay,
-                    total: total,
-                    addressId: response.data.data.id,
-                    updatedCart: props.proDet.data.updatedCartResponse,
-                  },
-                  name: "cart",
-                },
-              });
-            }
-          } catch (error) {
-            console.log(error);
-          }
+              name: "cart",
+            },
+          });
         }
       } catch (error) {
         console.log(error);
