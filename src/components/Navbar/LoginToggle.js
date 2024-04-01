@@ -16,6 +16,7 @@ import * as urls from "../../Urls";
 import { auth, googleAuthProvider, facebookAuthProvider } from "../../firebase";
 import { Link } from "react-router-dom";
 import Joi from "joi";
+import PrivacyModal from "./PrivacyModal";
 
 const signUpSchema = Joi.object({
   username: Joi.string()
@@ -157,9 +158,11 @@ const LoginToggle = (props) => {
 
   const customTabOne = {
     backgroundColor: activeTab === "tab1" ? "#fff" : "#F0F0F2",
+    width:'50%',
   };
   const customTabtwo = {
     backgroundColor: activeTab === "tab2" ? "#fff" : "#F0F0F2",
+    width:"50%"
   };
 
   const [validationErrors, setValidationErrors] = useState({});
@@ -377,24 +380,16 @@ const LoginToggle = (props) => {
                       Login
                     </span>
                   </div>
-                  <Link to="/privacy_policy">
+                 
                     <div
                       style={{
                         textAlign: "center",
-                        padding: "5px 0px",
+                    
                       }}
                     >
-                      <p
-                        style={{
-                          color: "rgba(24, 119, 242, 1)",
-                          padding: "0px 0px",
-                          fontSize: "12px",
-                        }}
-                      >
-                        Privacy & policy
-                      </p>
+                     <PrivacyModal/>
                     </div>
-                  </Link>
+             
                 </div>
 
                 <div style={{ display: "flex", marginBottom: "0.5rem" }}>
@@ -561,12 +556,12 @@ const LoginToggle = (props) => {
                   </>
                 ) : (
                   <>
-                    <Button
+                    <button
                       className={Classes.LoginButton}
                       onClick={handleOpen}
                     >
                       LOGIN
-                    </Button>
+                    </button>
                   </>
                 )}
               </div>
@@ -723,27 +718,7 @@ const LoginToggle = (props) => {
                             terms and conditions
                           </span>
                         </div>
-                        <Link to="/privacy_policy">
-                          <div
-                            style={{
-                              textAlign: "center",
-
-                              padding: "5px 0px",
-                            }}
-                          >
-                            <p
-                              style={{
-                                color: "rgba(24, 119, 242, 1)",
-                                padding: "10px 0px",
-                                fontSize: "12px",
-                                textDecoration: "underline",
-                                textUnderlineOffset: "2px",
-                              }}
-                            >
-                              Privacy & policy
-                            </p>
-                          </div>
-                        </Link>
+                        <PrivacyModal/>
                         <div
                           style={{
                             display: "flex",
@@ -751,12 +726,12 @@ const LoginToggle = (props) => {
                             justifyContent: "center",
                           }}
                         >
-                          <Button
+                          <button
                             className={Classes.acceptT}
                             onClick={handleOpen}
                           >
                             Agree & login
-                          </Button>
+                          </button>
                         </div>
                       </Typography>
                     </Box>
