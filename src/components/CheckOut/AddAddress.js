@@ -108,7 +108,9 @@ function AddAddress(props) {
     const schema = Joi.object({
       fullName: Joi.string().required(),
       mobile: Joi.string().required(),
-      pincode: Joi.string().required(),
+      pincode: Joi.string()
+        .pattern(/^\d{6}$/)
+        .required(),
       city: Joi.string().required(),
       hNumber_Bname: Joi.string().required(),
       streetColony: Joi.string().required(),

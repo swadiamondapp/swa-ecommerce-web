@@ -61,6 +61,17 @@ function Footer() {
       });
     }
   };
+  const redirectToFacebook = () => {
+    window.location.href = "https://www.facebook.com/swadiamonds/";
+  };
+
+  const redirectToLinkedIn = () => {
+    window.location.href = "https://in.linkedin.com/company/swa-diamonds";
+  };
+
+  const redirectToInstagram = () => {
+    window.location.href = "https://www.instagram.com/swadiamonds/";
+  };
   return (
     <div>
       <div className={Classes.Footer}>
@@ -202,9 +213,21 @@ function Footer() {
                 Follow us on
               </p>
               <div className={Classes.Icons}>
-                <img src={Facebook} alt="" />
-                <img src={LinkedIn} alt="" />
-                <img src={Instagram} alt="" />
+                <img
+                  src={Facebook}
+                  alt="Facebook"
+                  onClick={redirectToFacebook}
+                />
+                <img
+                  src={LinkedIn}
+                  alt="LinkedIn"
+                  onClick={redirectToLinkedIn}
+                />
+                <img
+                  src={Instagram}
+                  alt="Instagram"
+                  onClick={redirectToInstagram}
+                />
               </div>
             </div>
           </div>
