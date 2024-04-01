@@ -325,7 +325,7 @@ const Header = (props) => {
           <LoginModal
             className={Classes.loginUser}
             isLog={show}
-            handleOpenLogin={() => setShow(true)}
+            handleOpenLogin={() => setShow(prevShow => !prevShow)}
             logAct={props.loginHandler}
             cartClose={cateclose}
             close={closeHanlder}

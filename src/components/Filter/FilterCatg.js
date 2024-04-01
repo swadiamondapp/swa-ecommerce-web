@@ -339,11 +339,11 @@ const FilterCatgs = (props) => {
             {categoryWise.map((item, index) => (
               <div className={Classes.CategoryListMain} key={index}>
                 <div className={Classes.CategoryList}>
-                <input
-              type="checkbox"
-              onChange={() => handleCheckboxByMetal(item.id)}
-              checked={selectedMetalIds.includes(item.id)}
-            />
+                  <input
+                    type="checkbox"
+                    onChange={() => handleCheckboxByCategory(item.id)}
+                    checked={selectedCategoryIds.includes(item.id)}
+                  />
                   <label>{item.name}</label>
                 </div>
                 <div className={Classes.CategoryListAmount}>
@@ -359,11 +359,11 @@ const FilterCatgs = (props) => {
             {metalCategory.map((item, index) => (
               <div className={Classes.CategoryListMain} key={index}>
                 <div className={Classes.CategoryList}>
-                <input
-              type="checkbox"
-              onChange={() => handleCheckboxByCategory(item.id)}
-              checked={selectedCategoryIds.includes(item.id)}
-            />
+                  <input
+                    onChange={() => handleCheckboxByMetal(item.id)}
+                    checked={selectedMetalIds.includes(item.id)}
+                    type="checkbox"
+                  />
                   <label>{item.metal_type}</label>
                 </div>
                 <div className={Classes.CategoryListAmount}>
@@ -429,11 +429,11 @@ const FilterCatgs = (props) => {
             {occations.map((item, index) => (
               <div className={Classes.CategoryListMain}>
                 <div className={Classes.CategoryList}>
-                <input
-              type="checkbox"
-              onChange={() => handleCheckboxByOccation(item.id)}
-              checked={selectedOccationIds.includes(item.id)}
-            />
+                  <input
+                    type="checkbox"
+                    onChange={() => handleCheckboxByOccation(item.id)}
+                    checked={selectedOccationIds.includes(item.id)}
+                  />
                   <label>{item.name}</label>
                 </div>
                 <div className={Classes.CategoryListAmount}>
