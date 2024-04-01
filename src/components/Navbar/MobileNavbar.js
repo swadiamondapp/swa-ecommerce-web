@@ -25,6 +25,8 @@ import { CgHeart } from "react-icons/cg";
 import { BsArrowLeft } from "react-icons/bs";
 import { GoSearch } from "react-icons/go";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import axios from "axios";
+import * as Urls from "../../Urls";
 
 const MobileNavbar = () => {
   const history = useHistory();
@@ -33,7 +35,10 @@ const MobileNavbar = () => {
   const [show, setShow] = useState(false);
   const [activeIndex, setActiveIndex] = useState();
   const token = localStorage.getItem("swaToken");
+  const [searchShow, setSearchShow] = useState(false);
+  const [suggestionList, setSuggesionList] = useState([]);
   const userName = localStorage.getItem("userName");
+  const [searchKey, setSearchKey] = useState("");
   const isHomePage = window.location.pathname === "/";
   const handleOpen = () => {
     setOpen(true);
@@ -117,6 +122,75 @@ const MobileNavbar = () => {
   const toggleSearchBar = () => {
     setShowSearchBar(!showSearchBar);
   };
+  const searchKeyHanlder = (e) => {
+    setSearchKey(e.target.value);
+    if (e.target.value.length !== 0) {
+      setSearchShow(true);
+
+      axios
+        .get(Urls.suggestion + e.target.value)
+        .then((response1) => {
+          setSuggesionList(response1.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      setSearchShow(false);
+    }
+  };
+  const searchTitleHandler = (setItem) => {
+    if (setItem.type === "category") {
+      if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
+        window.location.href =
+          "https://swaecomnew.zinfog.in/category_search/" + setItem.id;
+      } else {
+        history.push({
+          pathname: "/new_arrivel",
+          state: { data: setItem.id },
+        });
+      }
+    } else if (setItem.type === "product") {
+      axios
+        .get(Urls.productDet + setItem.id)
+        .then((response1) => {
+          const selData = {
+            product_id: setItem.id,
+            colour_id: response1.data.results.data.color_id,
+            is_on_discount: response1.data.results.data.is_on_discount,
+            product_name: response1.data.results.data.product_name,
+            sku: response1.data.results.data.sku,
+            thumbnail_image: response1.data.results.data.thumbnail_image,
+            total_price_final: response1.data.results.data.total_price_final,
+            discounted_final_price: response1.data.results.data.discount_price,
+            wishlist_id: response1.data.results.data.wishlist_id,
+          };
+          if (history.location.pathname.slice(0, 10) === "/products/") {
+            window.location.href =
+              "https://swaecomnew.zinfog.in/products/" +
+              setItem.id +
+              "/" +
+              response1.data.results.data.color_id +
+              "/" +
+              response1.data.results.data.product_name;
+          } else {
+            history.push({
+              pathname:
+                "/products/" +
+                setItem.id +
+                "/" +
+                response1.data.results.data.color_id +
+                "/" +
+                response1.data.results.data.product_name,
+              state: { data: selData },
+            });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
   return (
     <div className={Classes.NavContainer}>
       <div className={Classes.Navbar}>
@@ -155,7 +229,7 @@ const MobileNavbar = () => {
               </div>
             ) : (
               <div onClick={toggleSearchBar}>
-                {/* <GoSearch style={{ color: "#fff", fontSize: "25px" }} /> */}
+                <GoSearch style={{ color: "#fff", fontSize: "25px" }} />
               </div>
             )}
             <div>
@@ -184,15 +258,43 @@ const MobileNavbar = () => {
                 />
               </div>
               <div className={Classes.MobParentSearchBars}>
-                <input placeholder="Search your orders" />
-                <GoSearch className={Classes.Gosearch1} />
-                <IoMdClose
-                  className={Classes.Closesearch1}
-                  onClick={toggleSearchBar}
+                <input
+                  placeholder="Search your orders"
+                  value={searchKey}
+                  onChange={searchKeyHanlder}
                 />
+                {searchKey.length === 0 && (
+                  <>
+                    <GoSearch className={Classes.Gosearch1} />
+                    <IoMdClose
+                      className={Classes.Closesearch1}
+                      onClick={toggleSearchBar}
+                    />
+                  </>
+                )}
               </div>
             </div>
           )}
+          <div
+            className={Classes.searchListCont2}
+            style={{ display: searchShow ? "block" : "none" }}
+          >
+            {suggestionList.length !== 0 ? (
+              suggestionList.map((item, index) => {
+                return (
+                  <p
+                    className={Classes.SearchItem}
+                    key={index}
+                    onClick={() => searchTitleHandler(item)}
+                  >
+                    {item.name}
+                  </p>
+                );
+              })
+            ) : (
+              <p className={Classes.NoResult}>No Results Found</p>
+            )}
+          </div>
         </header>
         {/* {isHamOpen ? (
           <>
