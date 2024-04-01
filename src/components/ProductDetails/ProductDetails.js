@@ -30,6 +30,7 @@ import * as Urls from "../../Urls";
 import Profiles from "../../Assets/profileicon.png";
 import ProductImages from "./ProductImages";
 import { MdOutlineStarPurple500 } from "react-icons/md";
+import { RWebShare } from "react-web-share";
 
 const ProductDetails = (props) => {
   const [show, setShow] = useState(false);
@@ -298,7 +299,16 @@ const ProductDetails = (props) => {
                       />
                     )}
                   </p>
-                  <img src={PS1} className={Classes.ImgHeartShare} />
+                  <RWebShare
+                    data={{
+                      text: "Web Share - GfG",
+                      url: "http://localhost:3000",
+                      title: "Swa Diamonds",
+                    }}
+                    onClick={() => console.log("shared successfully!")}
+                  >
+                    <img src={PS1} className={Classes.ImgHeartShare} />
+                  </RWebShare>
                 </p>
               </div>
               <p className={Classes.SubText}>

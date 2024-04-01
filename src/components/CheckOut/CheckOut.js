@@ -33,6 +33,7 @@ function CheckOut(props) {
   const [promoId, setPromoId] = useState("");
   const [mode, setMode] = useState("P");
   const [selectedCity, setSelectedCity] = useState(null);
+  const [userId, setUserId] = useState("");
   const [addressData, setAddressData] = useState({
     sEmail: "",
     sPhone: "",
@@ -72,8 +73,10 @@ function CheckOut(props) {
   }, []);
 
   useEffect(() => {
-    buyWithoutLogin(location.state.data);
+    buyWithoutLogin(location.state.data.product_id);
   }, [location.state.data]);
+
+  console.log("location.state.data---->", location.state.data);
 
   const placeOrder = () => {
     let cartBody;
@@ -403,7 +406,7 @@ function CheckOut(props) {
   //     </>
   //   );
   // }
-
+  let _userId = "";
   const handleChangeAddress = (event) => {
     const { name, value } = event.target;
     setAddressData({
@@ -414,7 +417,6 @@ function CheckOut(props) {
 
   const handleSignUp = async () => {
     if (token !== null) {
-      console.log("Enterd to", token);
       submitAddress(token);
     } else {
       try {
@@ -428,8 +430,10 @@ function CheckOut(props) {
         const response = await axios.post(Urls.register, body);
         if (response.data.results.status_code === 200) {
           setToken(response.data.results.data.token);
+          setUserId(response.data.results.data.user.id);
           const _token = response.data.results.data.token;
-          _token && submitAddress(_token);
+          _userId = response.data.results.data.user.id;
+          _token && _userId && submitAddress(_token);
         } else {
           alert("Something went wrong");
         }
@@ -478,6 +482,8 @@ function CheckOut(props) {
                 addressId: response.data.data.id,
                 updatedCart: props.proDet.data.updatedCartResponse,
                 token: token,
+                buyBody: location.state.data,
+                userId: _userId,
               },
               name: "cart",
             },
@@ -670,7 +676,7 @@ function CheckOut(props) {
                         onChange={(e) => setSelectedCity(e.value)}
                         options={states}
                         optionLabel="name"
-                        placeholder="Select a City"
+                        placeholder="Select a state"
                       />
                     </div>
 

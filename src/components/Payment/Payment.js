@@ -54,14 +54,17 @@ const Payment = () => {
         exchange_change: data.updatedCart.exchange_change,
         swa_change: data.updatedCart.swa_change,
       };
-      // buyBody = {
-      //   product_id: props.proDet.data.product_id,
-      //   color: props.proDet.data.color,
-      //   size: props.proDet.data.size,
-      //   promocode: code,
-      //   address_id: props.address,
-      //   mode: mode,
-      // };
+      if (data.buyBody) {
+        buyBody = {
+          product_id: data.buyBody.product_id,
+          color: data.buyBody.color,
+          size: data.buyBody.size,
+          promocode: "",
+          address_id: data.addressId,
+          mode: p_Method,
+          user_id: data.userId,
+        };
+      }
     } else {
       cartBody = {
         promocode_id: 0,
@@ -84,16 +87,19 @@ const Payment = () => {
           : 0,
         swa_change: data.updatedCart ? data.updatedCart.swa_change : 0,
       };
-      // buyBody = {
-      //   product_id: props.proDet.data.product_id,
-      //   color: props.proDet.data.color,
-      //   size: props.proDet.data.size,
-      //   promocode_id: 0,
-      //   address_id: props.address,
-      //   mode: mode,
-      // };
+      if (data.buyBody) {
+        buyBody = {
+          product_id: data.buyBody.product_id,
+          color: data.buyBody.color,
+          size: data.buyBody.size,
+          promocode: "",
+          address_id: data.addressId,
+          mode: p_Method,
+          user_id: data.userId,
+        };
+      }
     }
-    if (name === "cart") {
+    if (token) {
       axios
         .post(Urls.checkout, cartBody, {
           headers: { Authorization: "Token " + _userToken },
@@ -154,13 +160,13 @@ const Payment = () => {
         .catch((error) => {
           console.log(error);
         });
-    } else if (name === "buy") {
+    } else {
       axios
         .post(Urls.buyNow, buyBody, {
           headers: { Authorization: "Token " + _userToken },
         })
         .then((response1) => {
-          if (mode === "P") {
+          if (mode === "upi" || mode === "credit_card") {
             var options = {
               //test_secret
               key: "rzp_test_hbBeCNBjrqDq6P",
@@ -207,7 +213,7 @@ const Payment = () => {
             };
             var pay = new window.Razorpay(options);
             pay.open();
-          } else if (mode === "C") {
+          } else if (mode === "cash") {
             console.log(response1);
             if (response1.data.results.status_code === 200) {
               history.push("/my_orders");
