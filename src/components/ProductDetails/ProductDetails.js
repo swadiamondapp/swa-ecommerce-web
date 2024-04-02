@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import moment from "moment";
 import Ring from "../../Assets/new4.png";
 import RingFlip from "../../Assets/Ringflip.png";
@@ -33,6 +34,7 @@ import { MdOutlineStarPurple500 } from "react-icons/md";
 import { RWebShare } from "react-web-share";
 
 const ProductDetails = (props) => {
+  const location = useLocation();
   const [show, setShow] = useState(false);
   const [addToWishList, setAddToWishList] = useState(false);
   const [wishId, setWishId] = useState("");
@@ -173,29 +175,10 @@ const ProductDetails = (props) => {
     ? reviewImages
     : reviewImages.slice(0, 3);
 
-  console.log("showAllReviews", showAllReviews);
-
   return (
     <div>
       <div className="container" style={{ marginTop: "40px" }}>
         <ToastContainer />
-        {/* <div className={Classes.SubTexts}>
-          <p
-            style={{ color: "#00464D" }}
-            className={Classes.Home}
-            onClick={homeHandler}
-          >
-            HOME /&nbsp;
-          </p>
-          <p style={{ color: "#00464D" }} className={Classes.Home}>
-            {" "}
-            NEW ARRAIVALS / &nbsp;
-          </p>
-          <p className={Classes.NewArrival}>
-            {" "}
-            {props.name ? props.name.toUpperCase() : ""}
-          </p>
-        </div> */}
         <div className="row">
           <div className="col-md-6">
             <div className={`${Classes.Display} ${Classes.StickyDisplay}`}>
@@ -208,22 +191,6 @@ const ProductDetails = (props) => {
                         src={props.thumbImg}
                         alt=""
                       />
-                      {/* warning not remove */}
-
-                      {/* {addToWishList ? (
-                        <FaHeart
-                          color="#F91919"
-                          className={Classes.Heart}
-                          onClick={Remove}
-                        />
-                      ) : (
-                        <CgHeart
-                          color="#060000"
-                          className={Classes.Heart}
-                          onClick={Added}
-                        />
-                      )} */}
-                      {/* warning not remove */}
                       <div className={Classes.rateStar8}>
                         5{" "}
                         <MdOutlineStarPurple500 className={Classes.starrate8} />{" "}
@@ -301,8 +268,8 @@ const ProductDetails = (props) => {
                   </p>
                   <RWebShare
                     data={{
-                      text: "Web Share - GfG",
-                      url: "http://localhost:3000",
+                      text: "Swa Diamonds",
+                      url: location.pathname,
                       title: "Swa Diamonds",
                     }}
                     onClick={() => console.log("shared successfully!")}

@@ -158,11 +158,11 @@ const LoginToggle = (props) => {
 
   const customTabOne = {
     backgroundColor: activeTab === "tab1" ? "#fff" : "#F0F0F2",
-    width:'50%',
+    width: "50%",
   };
   const customTabtwo = {
     backgroundColor: activeTab === "tab2" ? "#fff" : "#F0F0F2",
-    width:"50%"
+    width: "50%",
   };
 
   const [validationErrors, setValidationErrors] = useState({});
@@ -186,8 +186,27 @@ const LoginToggle = (props) => {
 
   const handleSignInWithGoogle = async () => {
     try {
-      const response = await signInWithPopup(auth, googleAuthProvider);
-      console.log("responsegoogle", response);
+      const googleResponse = await signInWithPopup(auth, googleAuthProvider);
+      console.log("responsegoogle", googleResponse.user);
+      if (googleResponse.user) {
+        try {
+          const body = {
+            name: googleResponse.user.displayName,
+            phone_code: "+91",
+            phone_number: signUpData.mobile,
+            email: googleResponse.user.email,
+            login_type: "GOOGLE",
+          };
+          const response = await axios.post(Urls.register, body);
+          if (response.data.results.status_code === 200) {
+            alert("Successfully Registered");
+            handleLoginModalOpen();
+          } else {
+          }
+        } catch (error) {
+          alert(error.response.data.results.message);
+        }
+      }
     } catch (error) {
       console.log(error);
     }
@@ -380,16 +399,14 @@ const LoginToggle = (props) => {
                       Login
                     </span>
                   </div>
-                 
-                    <div
-                      style={{
-                        textAlign: "center",
-                    
-                      }}
-                    >
-                     <PrivacyModal/>
-                    </div>
-             
+
+                  <div
+                    style={{
+                      textAlign: "center",
+                    }}
+                  >
+                    <PrivacyModal />
+                  </div>
                 </div>
 
                 <div style={{ display: "flex", marginBottom: "0.5rem" }}>
@@ -718,7 +735,7 @@ const LoginToggle = (props) => {
                             terms and conditions
                           </span>
                         </div>
-                        <PrivacyModal/>
+                        <PrivacyModal />
                         <div
                           style={{
                             display: "flex",

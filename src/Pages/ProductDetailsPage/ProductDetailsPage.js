@@ -123,7 +123,7 @@ const ProductDetailsPage = (props) => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [props.match.params.id]);
   const buyProductHandler = () => {
     if (size !== "") {
       setError("");
