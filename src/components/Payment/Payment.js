@@ -129,7 +129,12 @@ const Payment = () => {
                   })
                   .then((response1) => {
                     console.log(response1);
-                    if (response1.data.results.status_code === 200) {
+                    if (response1.data.results.status_code === 200 && !token) {
+                      localStorage.setItem("swaToken", data.token);
+                      localStorage.setItem("userName", data.name);
+                      localStorage.setItem("phoneNumber", data.number);
+                      history.push("/my_orders");
+                    } else if (response1.data.results.status_code === 200) {
                       history.push("/my_orders");
                     }
                   })
@@ -152,7 +157,12 @@ const Payment = () => {
             var pay = new window.Razorpay(options);
             pay.open();
           } else if (mode === "cash") {
-            if (response1.data.results.status_code === 200) {
+            if (response1.data.results.status_code === 200 && !token) {
+              localStorage.setItem("swaToken", data.token);
+              localStorage.setItem("userName", data.name);
+              localStorage.setItem("phoneNumber", data.number);
+              history.push("/my_orders");
+            } else if (response1.data.results.status_code === 200) {
               history.push("/my_orders");
             }
           }
@@ -191,7 +201,12 @@ const Payment = () => {
                     headers: { Authorization: "Token " + token },
                   })
                   .then((response2) => {
-                    if (response2.data.results.status_code === 200) {
+                    if (response2.data.results.status_code === 200 && !token) {
+                      localStorage.setItem("swaToken", data.token);
+                      localStorage.setItem("userName", data.name);
+                      localStorage.setItem("phoneNumber", data.number);
+                      history.push("/my_orders");
+                    } else if (response2.data.results.status_code === 200) {
                       history.push("/my_orders");
                     }
                   })
@@ -215,7 +230,12 @@ const Payment = () => {
             pay.open();
           } else if (mode === "cash") {
             console.log(response1);
-            if (response1.data.results.status_code === 200) {
+            if (response1.data.results.status_code === 200 && !token) {
+              localStorage.setItem("swaToken", data.token);
+              localStorage.setItem("userName", data.name);
+              localStorage.setItem("phoneNumber", data.number);
+              history.push("/my_orders");
+            } else if (response1.data.results.status_code === 200) {
               history.push("/my_orders");
             }
           }

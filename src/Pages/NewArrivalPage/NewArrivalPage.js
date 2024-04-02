@@ -38,9 +38,12 @@ const NewArrivalPage = (props) => {
   const filter = (newArrive, currentPage) => {
     setLoading(true);
     axios
-      .get(Urls.productList + newArrive, {
-        headers: { Authorization: "Token " + token },
-      })
+      .get(
+        Urls.productList + newArrive,
+        token && {
+          headers: { Authorization: "Token " + token },
+        }
+      )
       .then((response1) => {
         setLoading(false);
         // const productList = [...response1.data.results.data]

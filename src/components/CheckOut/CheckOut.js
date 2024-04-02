@@ -35,6 +35,8 @@ function CheckOut(props) {
   const [mode, setMode] = useState("P");
   const [selectedCity, setSelectedCity] = useState(null);
   const [userId, setUserId] = useState("");
+  const [userMob, setUserMob] = useState("");
+  const [userName, setUserName] = useState("");
   const [errorMessage, setErrorMessage] = useState({});
   const [addressData, setAddressData] = useState({
     sEmail: "",
@@ -519,6 +521,8 @@ function CheckOut(props) {
   //   );
   // }
   let _userId = "";
+  let _userName = "";
+  let _userMob = "";
   const handleChangeAddress = (event) => {
     const { name, value } = event.target;
     setAddressData({
@@ -543,6 +547,8 @@ function CheckOut(props) {
         if (response.data.results.status_code === 200) {
           setToken(response.data.results.data.token);
           setUserId(response.data.results.data.user.id);
+          _userName = response.data.results.data.user.name;
+          _userMob = response.data.results.data.user.phone_number;
           const _token = response.data.results.data.token;
           _userId = response.data.results.data.user.id;
           _token && _userId && submitAddress(_token);
@@ -585,6 +591,7 @@ function CheckOut(props) {
           headers: { Authorization: "Token " + token },
         });
         if (response.data && response.data.status === 200) {
+          console.log("userMob, userMob--->", _userName, _userMob);
           history.push({
             pathname: "/payment",
             state: {
@@ -594,6 +601,8 @@ function CheckOut(props) {
                 addressId: response.data.data.id,
                 updatedCart: props.proDet.data.updatedCartResponse,
                 token: token,
+                name: _userName,
+                number: _userMob,
                 buyBody: location.state.data,
                 userId: _userId,
               },

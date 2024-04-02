@@ -380,7 +380,7 @@ const MobileNavbar = () => {
                         activeIndex={activeIndex}
                         onTabChange={(e) => setActiveIndex(e.index)}
                       >
-                        <AccordionTab header="Catagory">
+                        <AccordionTab header="Category">
                           <div className={Classes.ShippingDetialHead}>
                             <div className={Classes.ParentCards1}>
                               <img src={ringimg} />
