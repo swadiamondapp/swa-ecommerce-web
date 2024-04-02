@@ -938,3 +938,11 @@ label {
     right: 40px;
   }
 }
+.Parant_Relative {
+  /* position: relative; */
+}
+.ErrorMessage  {
+  color:red;
+  font-size: 12px;
+  /* position: absolute; */
+}
