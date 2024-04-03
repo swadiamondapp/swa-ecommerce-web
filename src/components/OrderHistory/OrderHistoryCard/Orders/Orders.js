@@ -84,6 +84,7 @@ function Orders(props) {
             className={Classes.MobileRightArrow}
             fill="#006E7F"
             size={25}
+            onClick={props.clicked}
           />
         </div>
         <div className={Classes.RighSection}>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import Classes from "../HeaderNew/MainHead.module.css";
 import productimage from "../../Assets/BringTheParty1.png";
 import { Carousel } from "antd";
@@ -8,6 +9,7 @@ import * as Urls from "../../Urls";
 import axios from "axios";
 
 const SililerProducts = (props) => {
+  const history = useHistory();
   const [similarProducts, setSimilarProducts] = useState([]);
 
   useEffect(() => {
@@ -26,6 +28,19 @@ const SililerProducts = (props) => {
     ) {
       setSimilarProducts(response.data.results.similar_data);
     }
+  };
+
+  const prodDetHandler = (prodItem) => {
+    history.push({
+      pathname:
+        "/products/" +
+        prodItem.product_id +
+        "/" +
+        prodItem.thumbnail_colour_id +
+        "/" +
+        prodItem.product_name,
+      state: { data: prodItem },
+    });
   };
 
   return (
@@ -66,7 +81,11 @@ const SililerProducts = (props) => {
                   ]}
                 >
                   {similarProducts.map((item, index) => (
-                    <div key={index} className={Classes.Offers}>
+                    <div
+                      key={index}
+                      className={Classes.Offers}
+                      onClick={() => prodDetHandler(item)}
+                    >
                       <img
                         style={{ width: "100%", height: "205px" }}
                         className={Classes.SlideImage}

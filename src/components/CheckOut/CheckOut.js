@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import Classes from "./CheckOut.module.css";
 import { useHistory } from "react-router-dom";
@@ -17,6 +17,7 @@ import { FadeLoader } from "react-spinners";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Dropdown } from "primereact/dropdown";
+import Joi from "joi";
 
 function CheckOut(props) {
   const location = useLocation();
@@ -33,6 +34,10 @@ function CheckOut(props) {
   const [promoId, setPromoId] = useState("");
   const [mode, setMode] = useState("P");
   const [selectedCity, setSelectedCity] = useState(null);
+  const [userId, setUserId] = useState("");
+  const [userMob, setUserMob] = useState("");
+  const [userName, setUserName] = useState("");
+  const [errorMessage, setErrorMessage] = useState({});
   const [addressData, setAddressData] = useState({
     sEmail: "",
     sPhone: "",
@@ -62,6 +67,116 @@ function CheckOut(props) {
   const [formShow, setFormShow] = useState(false);
   const [token, setToken] = useState(localStorage.getItem("swaToken"));
   var alphaExp = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
+  const schema = Joi.object({
+    sEmail: Joi.string()
+      .email({ tlds: { allow: false } })
+      .required()
+      .messages({
+        "string.empty": `Emial cannot be empty`,
+      }),
+    sPhone: Joi.string()
+      .required()
+      .pattern(/^[0-9]{10}$/)
+      .messages({
+        "string.empty": "Phone number is missing",
+        "string.pattern.base": "Phone number must be 10 digits",
+      }),
+    fullName: Joi.string()
+      .required()
+      .messages({
+        "string.empty": `Name cannot be empty`,
+      }),
+    mobile: Joi.string()
+      .required()
+      .pattern(/^[0-9]{10}$/)
+      .messages({
+        "string.empty": "Mobile number is missing",
+        "string.pattern.base": "Mobile number must be 10 digits",
+      }),
+    pincode: Joi.string()
+      .required()
+      .max(6)
+      .min(6)
+      .messages({
+        "string.empty": `cannot be empty`,
+        "string.max": "Pincode cannot exceed 6 digits",
+        "string.min": "Pincode must be at least 6 digits",
+      }),
+    city: Joi.string()
+      .required()
+      .messages({
+        "string.empty": `cannot be empty`,
+      }),
+    state: Joi.string()
+      .required()
+      .messages({
+        "string.empty": `cannot be empty`,
+      }),
+    hNumber_Bname: Joi.string()
+      .required()
+      .messages({
+        "string.empty": `cannot be empty`,
+      }),
+    streetColony: Joi.string()
+      .required()
+      .messages({
+        "string.empty": `cannot be empty`,
+      }),
+    landMark: Joi.string().messages({
+      "string.empty": `cannot be empty`,
+    }),
+  });
+
+  const formRef = useRef(null);
+
+  // const handleSubmit = () => {
+  //   const formData = new FormData(formRef.current);
+  //   const addressData = Object.fromEntries(formData.entries());
+
+  //   const { error } = schema.validate(addressData, { abortEarly: false });
+  //   if (error) {
+  //     // Handle validation errors
+  //     const errorMessage = error.details.map((detail) => detail.message).join(", ");
+  //     console.error("Validation Error: ", errorMessage);
+
+  //     return;
+  //   }
+
+  //   // Proceed with form submission
+  //   // Your logic here...
+
+  //   // Trigger form submission
+  //   formRef.current.submit();
+
+  // };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Validate form data using Joi schema
+    const { error } = schema.validate(addressData, {
+      abortEarly: false,
+      allowUnknown: true,
+    });
+
+    if (error) {
+      // Form is invalid, display validation errors
+      const validationErrors = error.details.reduce((errors, err) => {
+        errors[err.path[0]] = err.message;
+        return errors;
+      }, {});
+      setErrorMessage(validationErrors);
+    } else {
+      // Form is valid, proceed with submission
+      console.log("Form submitted:", addressData);
+      // Clear errors
+      setErrorMessage({});
+      handleSignUp(); // Call handleSignUp when there are no validation errors
+    }
+  };
+
+  useEffect(() => {
+    buyWithoutLogin(location.state.data);
+  }, [location.state.data]);
 
   useEffect(() => {
     getDefaultAddress();
@@ -72,8 +187,10 @@ function CheckOut(props) {
   }, []);
 
   useEffect(() => {
-    buyWithoutLogin(location.state.data);
+    buyWithoutLogin(location.state.data.product_id);
   }, [location.state.data]);
+
+  console.log("location.state.data---->", location.state.data);
 
   const placeOrder = () => {
     let cartBody;
@@ -235,9 +352,9 @@ function CheckOut(props) {
   const showVoucherInput = () => {
     setVoucherInput(!voucherInput);
   };
-  const handleSubmit = (event) => {
-    event.preventDefault();
-  };
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  // };
   const showHandler = () => {
     setShow(true);
   };
@@ -403,7 +520,9 @@ function CheckOut(props) {
   //     </>
   //   );
   // }
-
+  let _userId = "";
+  let _userName = "";
+  let _userMob = "";
   const handleChangeAddress = (event) => {
     const { name, value } = event.target;
     setAddressData({
@@ -413,7 +532,7 @@ function CheckOut(props) {
   };
 
   const handleSignUp = async () => {
-    if (token) {
+    if (token !== null) {
       submitAddress(token);
     } else {
       try {
@@ -427,8 +546,12 @@ function CheckOut(props) {
         const response = await axios.post(Urls.register, body);
         if (response.data.results.status_code === 200) {
           setToken(response.data.results.data.token);
+          setUserId(response.data.results.data.user.id);
+          _userName = response.data.results.data.user.name;
+          _userMob = response.data.results.data.user.phone_number;
           const _token = response.data.results.data.token;
-          _token && submitAddress(_token);
+          _userId = response.data.results.data.user.id;
+          _token && _userId && submitAddress(_token);
         } else {
           alert("Something went wrong");
         }
@@ -468,35 +591,24 @@ function CheckOut(props) {
           headers: { Authorization: "Token " + token },
         });
         if (response.data && response.data.status === 200) {
-          try {
-            const response1 = await axios.post(
-              Urls.defaultAddress,
-              {
-                address_id: response.data.data.id,
-                is_main: true,
+          console.log("userMob, userMob--->", _userName, _userMob);
+          history.push({
+            pathname: "/payment",
+            state: {
+              data: {
+                pay: amountPay,
+                total: total,
+                addressId: response.data.data.id,
+                updatedCart: props.proDet.data.updatedCartResponse,
+                token: token,
+                name: _userName,
+                number: _userMob,
+                buyBody: location.state.data,
+                userId: _userId,
               },
-              {
-                headers: { Authorization: "Token " + token },
-              }
-            );
-            console.log(response1);
-            if (response1) {
-              history.push({
-                pathname: "/payment",
-                state: {
-                  data: {
-                    pay: amountPay,
-                    total: total,
-                    addressId: response.data.data.id,
-                    updatedCart: props.proDet.data.updatedCartResponse,
-                  },
-                  name: "cart",
-                },
-              });
-            }
-          } catch (error) {
-            console.log(error);
-          }
+              name: "cart",
+            },
+          });
         }
       } catch (error) {
         console.log(error);
@@ -525,7 +637,7 @@ function CheckOut(props) {
       if (response.data.results.status === 200) {
         setAddressData({
           ...addressData,
-          sEmail: response.data.results.data.email,
+          sEmail: "nithin@gmail.com",
           sPhone: response.data.results.data.phone_number,
           fullName: response.data.results.data.name,
           mobile: response.data.results.data.phone_number,
@@ -571,7 +683,7 @@ function CheckOut(props) {
     }
   };
 
-  console.log("token-->", token);
+  console.log("token-->Props", props);
 
   return (
     <div>
@@ -603,9 +715,13 @@ function CheckOut(props) {
 
               <div className={Classes.Main}>
                 <div className={Classes.Left}>
-                  <form autoComplete="off" onSubmit={handleSignUp}>
+                  <form
+                    ref={formRef}
+                    autoComplete="off"
+                    onSubmit={(e) => e.preventDefault()}
+                  >
                     <div className={Classes.EmailMobileNew}>
-                      <div>
+                      <div className="Parant_Relative">
                         <label>Email</label>
                         <input
                           className={Classes.PlaceInput}
@@ -615,8 +731,13 @@ function CheckOut(props) {
                           name="sEmail"
                           onChange={handleChangeAddress}
                         />
+                        {errorMessage.sEmail && (
+                          <div className={Classes.ErrorMessage}>
+                            {errorMessage.sEmail}
+                          </div>
+                        )}
                       </div>
-                      <div>
+                      <div className="Parant_Relative">
                         <label>Mobile number</label>
                         <input
                           className={Classes.PlaceInput}
@@ -626,10 +747,15 @@ function CheckOut(props) {
                           name="sPhone"
                           onChange={handleChangeAddress}
                         />
+                        {errorMessage.sPhone && (
+                          <div className={Classes.ErrorMessage}>
+                            {errorMessage.sPhone}
+                          </div>
+                        )}
                       </div>
                     </div>
                     <p className={Classes.Heading}>Delivery Address</p>
-                    <div>
+                    <div className="Parant_Relative">
                       <label>Full Name</label>
                       <input
                         className={Classes.PlaceInput}
@@ -639,11 +765,15 @@ function CheckOut(props) {
                         name="fullName"
                         onChange={handleChangeAddress}
                       />
-                      {<div className={Classes.ErrorMsg}></div>}
+                      {errorMessage.fullName && (
+                        <div className={Classes.ErrorMessage}>
+                          {errorMessage.fullName}
+                        </div>
+                      )}
                     </div>
 
                     <div className={Classes.ParentF1}>
-                      <div>
+                      <div className="Parant_Relative">
                         <label>Mobile Number</label>
                         <input
                           className={Classes.PlaceInput}
@@ -653,8 +783,13 @@ function CheckOut(props) {
                           name="mobile"
                           onChange={handleChangeAddress}
                         />
+                        {errorMessage.mobile && (
+                          <div className={Classes.ErrorMessage}>
+                            {errorMessage.mobile}
+                          </div>
+                        )}
                       </div>
-                      <div>
+                      <div className="Parant_Relative">
                         <label>Pincode</label>
                         <input
                           className={Classes.PlaceInput}
@@ -664,6 +799,11 @@ function CheckOut(props) {
                           name="pincode"
                           onChange={handleChangeAddress}
                         />
+                        {errorMessage.pincode && (
+                          <div className={Classes.ErrorMessage}>
+                            {errorMessage.pincode}
+                          </div>
+                        )}
                       </div>
                       <div>
                         <label>City</label>
@@ -675,6 +815,12 @@ function CheckOut(props) {
                           name="city"
                           onChange={handleChangeAddress}
                         />
+
+                        {errorMessage.city && (
+                          <div className={Classes.ErrorMessage}>
+                            {errorMessage.city}
+                          </div>
+                        )}
                       </div>
                     </div>
 
@@ -685,8 +831,13 @@ function CheckOut(props) {
                         onChange={(e) => setSelectedCity(e.value)}
                         options={states}
                         optionLabel="name"
-                        placeholder="Select a City"
+                        placeholder="Select a state"
                       />
+                      {errorMessage.state && (
+                        <div className={Classes.ErrorMessage}>
+                          {errorMessage.state}
+                        </div>
+                      )}
                     </div>
 
                     <div className={Classes.ParentStreetColony}>
@@ -700,6 +851,11 @@ function CheckOut(props) {
                           name="hNumber_Bname"
                           onChange={handleChangeAddress}
                         />
+                        {errorMessage.hNumber_Bname && (
+                          <div className={Classes.ErrorMessage}>
+                            {errorMessage.hNumber_Bname}
+                          </div>
+                        )}
                       </div>
                       <div className={Classes.ColonyForm}>
                         <label>Street colony name</label>
@@ -711,6 +867,11 @@ function CheckOut(props) {
                           name="streetColony"
                           onChange={handleChangeAddress}
                         />
+                        {errorMessage.streetColony && (
+                          <div className={Classes.ErrorMessage}>
+                            {errorMessage.streetColony}
+                          </div>
+                        )}
                       </div>
                     </div>
                     <div>
@@ -723,6 +884,11 @@ function CheckOut(props) {
                         name="landMark"
                         onChange={handleChangeAddress}
                       />
+                      {errorMessage.landMark && (
+                        <div className={Classes.ErrorMessage}>
+                          {errorMessage.landMark}
+                        </div>
+                      )}
                     </div>
 
                     {/* <div className={Classes.Flex}>
@@ -834,7 +1000,7 @@ function CheckOut(props) {
                 <div
                   className={Classes.PlaceOrderButton}
                   // onClick={placeOrder}
-                  onClick={handleSignUp}
+                  onClick={handleSubmit}
                 >
                   Proceed to payment
                 </div>

@@ -48,10 +48,11 @@ const MobileNavbar = () => {
     setOpen(false);
   };
   const handleLogOut = () => {
-    // Clear localStorage
     localStorage.removeItem("swaToken");
     localStorage.removeItem("userName");
     localStorage.removeItem("phoneNumber");
+    handleClose();
+    history.push("/");
   };
 
   const style = {
@@ -218,7 +219,10 @@ const MobileNavbar = () => {
                 className={Classes.hamMenu}
               />
             </div>
-            <div className={Classes.Logo} onClick={() => history.push("/")}>
+            <div
+              className={Classes.Logo}
+              onClick={() => (window.location.href = "/")}
+            >
               <img className={Classes.mobileLogo} src={Logo} />
             </div>
           </div>
@@ -376,7 +380,7 @@ const MobileNavbar = () => {
                         activeIndex={activeIndex}
                         onTabChange={(e) => setActiveIndex(e.index)}
                       >
-                        <AccordionTab header="Catagory">
+                        <AccordionTab header="Category">
                           <div className={Classes.ShippingDetialHead}>
                             <div className={Classes.ParentCards1}>
                               <img src={ringimg} />

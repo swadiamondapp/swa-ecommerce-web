@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom/cjs/react-router-dom";
 import Classes from "./Rating.module.css";
 import New1 from "../../Assets/new1.png";
 import { IoIosStar } from "react-icons/io";
@@ -11,7 +12,6 @@ import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { FaRegImage } from "react-icons/fa6";
-import { useLocation } from "react-router-dom";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -26,34 +26,40 @@ const VisuallyHiddenInput = styled("input")({
 });
 
 function Rating(props) {
+  const history = useHistory();
   const [show, setShow] = useState(false);
-  const [rate, setRate] = useState(
-    props && props.productDetails && props.productDetails.product_rating
-  );
+  const [starRate, setStarRate] = useState(0);
   const [review, setReview] = useState("");
   const [imageFile, setImageFile] = useState(null);
   const [error, setError] = useState("");
   const [fileUploaded, setFileUploaded] = useState(false);
   const token = localStorage.getItem("swaToken");
-  console.log("file....body", imageFile);
 
-  // console.log("id...props", product_id);
+  useEffect(() => {
+    getSingleReview(props.productDetails.product_id);
+  }, [props && props.productDetails && props.productDetails.product_id]);
+
+  const getSingleReview = async (id) => {
+    try {
+      const response = await axios.get(urls.singleReview + id, {
+        headers: { Authorization: "Token " + token },
+      });
+      if (response.data.results.status === 200) {
+        setReview(response.data.results.data[0].review);
+        setStarRate(response.data.results.data[0].rating);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleShow = () => {
     const formData = new FormData();
     formData.append("product_id", props.productDetails.product_id);
-    formData.append("rating", rate);
+    formData.append("rating", starRate);
     formData.append("review", review);
     formData.append("review_title", "Good");
-    formData.append("review_image", imageFile);
-    // const body = {
-    //   // product_id: props.proid,
-    //   product_id: 45,
-    //   rating: rate,
-    //   review: review,
-    //   review_title: "Good",
-    //   review_image: imageFile,
-    // };
+    imageFile && formData.append("review_image", imageFile);
     if (review !== "") {
       setError("");
       axios
@@ -64,6 +70,7 @@ function Rating(props) {
           setShow(true);
           setTimeout(() => {
             setShow(false);
+            history.push("/my_orders");
           }, 2000);
         })
         .catch((error) => {
@@ -74,7 +81,7 @@ function Rating(props) {
     }
   };
   const rateChangeHandler = (value) => {
-    setRate(value);
+    setStarRate(value);
   };
   const reviewChangeHandler = (e) => {
     setReview(e.target.value);
@@ -85,8 +92,6 @@ function Rating(props) {
     setFileUploaded(true);
     console.log(e.target.files[0]);
   };
-
-  console.log(props);
 
   return (
     <div className={`container ${Classes.MobReview1}`}>
@@ -127,7 +132,7 @@ function Rating(props) {
           <div>
             <ReactStarRating
               numberOfStar={5}
-              numberOfSelectedStar={rate}
+              numberOfSelectedStar={starRate}
               colorFilledStar="#F6C514"
               colorEmptyStar="#D1D3D5"
               starSize="30px"

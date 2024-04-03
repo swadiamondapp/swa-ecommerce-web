@@ -123,7 +123,7 @@ const ProductDetailsPage = (props) => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [props.match.params.id]);
   const buyProductHandler = () => {
     if (size !== "") {
       setError("");
@@ -189,6 +189,13 @@ const ProductDetailsPage = (props) => {
       quantity: 1,
     };
 
+    const selProd = {
+      product_id: prodDet.id,
+      color: clrId,
+      size: size,
+      // total: total,
+    };
+
     if (size !== "") {
       setError("");
       if (token !== null) {
@@ -210,7 +217,7 @@ const ProductDetailsPage = (props) => {
       } else {
         history.push({
           pathname: "/checkout",
-          state: { data: prodDet.id },
+          state: { data: selProd },
         });
       }
     } else {

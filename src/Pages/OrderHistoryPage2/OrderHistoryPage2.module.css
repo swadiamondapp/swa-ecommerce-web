@@ -333,6 +333,7 @@
     font-size: 14px;
   }
   .CancelProductButton {
+    padding-top: 0px;
     justify-content: center;
   }
   .rgtProductDetails {

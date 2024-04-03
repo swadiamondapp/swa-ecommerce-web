@@ -16,6 +16,7 @@ import * as urls from "../../Urls";
 import { auth, googleAuthProvider, facebookAuthProvider } from "../../firebase";
 import { Link } from "react-router-dom";
 import Joi from "joi";
+import PrivacyModal from "./PrivacyModal";
 
 const signUpSchema = Joi.object({
   username: Joi.string()
@@ -158,9 +159,11 @@ const LoginToggle = (props) => {
 
   const customTabOne = {
     backgroundColor: activeTab === "tab1" ? "#fff" : "#F0F0F2",
+    width: "50%",
   };
   const customTabtwo = {
     backgroundColor: activeTab === "tab2" ? "#fff" : "#F0F0F2",
+    width: "50%",
   };
 
   const [validationErrors, setValidationErrors] = useState({});
@@ -184,8 +187,27 @@ const LoginToggle = (props) => {
 
   const handleSignInWithGoogle = async () => {
     try {
-      const response = await signInWithPopup(auth, googleAuthProvider);
-      console.log("responsegoogle", response);
+      const googleResponse = await signInWithPopup(auth, googleAuthProvider);
+      console.log("responsegoogle", googleResponse.user);
+      if (googleResponse.user) {
+        try {
+          const body = {
+            name: googleResponse.user.displayName,
+            phone_code: "+91",
+            phone_number: signUpData.mobile,
+            email: googleResponse.user.email,
+            login_type: "GOOGLE",
+          };
+          const response = await axios.post(Urls.register, body);
+          if (response.data.results.status_code === 200) {
+            alert("Successfully Registered");
+            handleLoginModalOpen();
+          } else {
+          }
+        } catch (error) {
+          alert(error.response.data.results.message);
+        }
+      }
     } catch (error) {
       console.log(error);
     }
@@ -410,24 +432,14 @@ const LoginToggle = (props) => {
                       Login
                     </span>
                   </div>
-                  <Link to="/privacy_policy">
-                    <div
-                      style={{
-                        textAlign: "center",
-                        padding: "5px 0px",
-                      }}
-                    >
-                      <p
-                        style={{
-                          color: "rgba(24, 119, 242, 1)",
-                          padding: "0px 0px",
-                          fontSize: "12px",
-                        }}
-                      >
-                        Privacy & policy
-                      </p>
-                    </div>
-                  </Link>
+
+                  <div
+                    style={{
+                      textAlign: "center",
+                    }}
+                  >
+                    <PrivacyModal />
+                  </div>
                 </div>
 
                 <div
@@ -613,12 +625,12 @@ const LoginToggle = (props) => {
                   </>
                 ) : (
                   <>
-                    <Button
+                    <button
                       className={Classes.LoginButton}
                       onClick={handleOpen}
                     >
                       LOGIN
-                    </Button>
+                    </button>
                   </>
                 )}
               </div>
@@ -716,7 +728,7 @@ const LoginToggle = (props) => {
                             <p className={Classes.titlep}>
                               Please enter 6 digit OTP that send to your
                               <br />
-                              +91 9879453467
+                              +91 {mobileNumber}
                             </p>
                           </div>
                         </div>
@@ -786,27 +798,7 @@ const LoginToggle = (props) => {
                             terms and conditions
                           </span>
                         </div>
-                        <Link to="/privacy_policy">
-                          <div
-                            style={{
-                              textAlign: "center",
-
-                              padding: "5px 0px",
-                            }}
-                          >
-                            <p
-                              style={{
-                                color: "rgba(24, 119, 242, 1)",
-                                padding: "10px 0px",
-                                fontSize: "12px",
-                                textDecoration: "underline",
-                                textUnderlineOffset: "2px",
-                              }}
-                            >
-                              Privacy & policy
-                            </p>
-                          </div>
-                        </Link>
+                        <PrivacyModal />
                         <div
                           style={{
                             display: "flex",

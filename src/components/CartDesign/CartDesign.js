@@ -264,8 +264,11 @@ function CartDesign(props) {
                   value="Place order"
                   // onClick={placeOrder}
                   onClick={() => {
-                    // history.push("/checkout");
-                    setWalletOpen(true);
+                    if (isApply) {
+                      step2Handler();
+                    } else {
+                      setWalletOpen(true);
+                    }
                   }}
                 />
               </div>

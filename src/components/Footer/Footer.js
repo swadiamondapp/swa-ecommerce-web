@@ -358,9 +358,9 @@ function Footer() {
               Follow us on
             </p>
             <div className={Classes.Icons}>
-              <img src={Facebook} alt="" />
-              <img src={LinkedIn} alt="" />
-              <img src={Instagram} alt="" />
+              <img src={Facebook} alt="" onClick={redirectToFacebook} />
+              <img src={LinkedIn} alt="" onClick={redirectToLinkedIn} />
+              <img src={Instagram} alt="" onClick={redirectToInstagram} />
             </div>
           </div>
         </div>

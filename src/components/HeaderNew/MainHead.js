@@ -9,7 +9,7 @@ const MainHead = (props) => {
   const history = useHistory();
 
   const landingPageHandler = () => {
-    history.push("/");
+    window.location.href = "/";
   };
 
   return (

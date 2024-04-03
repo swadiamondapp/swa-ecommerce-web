@@ -8,6 +8,7 @@ import SuccessModal from "../SuccessMessageModal/SuccessModal.js";
 import AddBank from "../LifeTImeModal/AddBank";
 import TransferMoneyModal from "../WalletModal/TransferMoneyModal.js";
 import WalletModal from "../WalletModal/WalletModal.js";
+import { Link } from "react-router-dom/cjs/react-router-dom.min.js";
 
 function PrivacyPolicy() {
   useEffect(() => {
@@ -210,9 +211,13 @@ function PrivacyPolicy() {
               to the Privacy Policy of the other website, mobile applications
               and this Privacy Policy will no longer apply.
             </p>
-            {/* <div className={Classes.AgreeAccept}>
-              <button className={Classes.BtnAgreeAccept}>Agree & accept</button>
-            </div> */}
+            <div className={Classes.AgreeAccept}>
+              <Link to="/">
+                <button className={Classes.BtnAgreeAccept}>
+                  Agree & accept
+                </button>
+              </Link>
+            </div>
           </div>
         </div>
       </div>

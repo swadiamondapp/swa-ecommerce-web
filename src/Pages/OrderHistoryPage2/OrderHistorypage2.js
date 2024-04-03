@@ -540,7 +540,7 @@ const OrderHistorypage2 = (props) => {
                       )}
                     <button
                       className={Classes.REButton2}
-                      onClick={() => setBuyBackOpen(true)}
+                      // onClick={() => setBuyBackOpen(true)}
                       // onClick={() => setSuccessModalOpen(true)}
                     >
                       <IoMdDownload /> Download invoice

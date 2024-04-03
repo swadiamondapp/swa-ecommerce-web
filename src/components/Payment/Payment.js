@@ -28,15 +28,17 @@ const Payment = () => {
   });
   const { data, name } = location.state;
 
-  console.log("data-------------->", data);
+  console.log("===>", data);
 
   useEffect(() => {
-    getDefaultAddress();
-  }, []);
+    let _token = !data.token ? token : data.token;
+    _token && getDefaultAddress(_token);
+  }, [data]);
 
   const placeOrder = () => {
     let cartBody;
     let buyBody;
+    let _userToken = !data.token ? token : data.token;
     const p_Method = mode === "cash" ? "C" : "P";
     if (promoId !== "") {
       cartBody = {
@@ -52,14 +54,17 @@ const Payment = () => {
         exchange_change: data.updatedCart.exchange_change,
         swa_change: data.updatedCart.swa_change,
       };
-      // buyBody = {
-      //   product_id: props.proDet.data.product_id,
-      //   color: props.proDet.data.color,
-      //   size: props.proDet.data.size,
-      //   promocode: code,
-      //   address_id: props.address,
-      //   mode: mode,
-      // };
+      if (data.buyBody) {
+        buyBody = {
+          product_id: data.buyBody.product_id,
+          color: data.buyBody.color,
+          size: data.buyBody.size,
+          promocode: "",
+          address_id: data.addressId,
+          mode: p_Method,
+          user_id: data.userId,
+        };
+      }
     } else {
       cartBody = {
         promocode_id: 0,
@@ -82,19 +87,22 @@ const Payment = () => {
           : 0,
         swa_change: data.updatedCart ? data.updatedCart.swa_change : 0,
       };
-      // buyBody = {
-      //   product_id: props.proDet.data.product_id,
-      //   color: props.proDet.data.color,
-      //   size: props.proDet.data.size,
-      //   promocode_id: 0,
-      //   address_id: props.address,
-      //   mode: mode,
-      // };
+      if (data.buyBody) {
+        buyBody = {
+          product_id: data.buyBody.product_id,
+          color: data.buyBody.color,
+          size: data.buyBody.size,
+          promocode: "",
+          address_id: data.addressId,
+          mode: p_Method,
+          user_id: data.userId,
+        };
+      }
     }
-    if (name === "cart") {
+    if (token) {
       axios
         .post(Urls.checkout, cartBody, {
-          headers: { Authorization: "Token " + token },
+          headers: { Authorization: "Token " + _userToken },
         })
         .then((response1) => {
           if (mode === "upi" || mode === "credit_card") {
@@ -121,7 +129,12 @@ const Payment = () => {
                   })
                   .then((response1) => {
                     console.log(response1);
-                    if (response1.data.results.status_code === 200) {
+                    if (response1.data.results.status_code === 200 && !token) {
+                      localStorage.setItem("swaToken", data.token);
+                      localStorage.setItem("userName", data.name);
+                      localStorage.setItem("phoneNumber", data.number);
+                      history.push("/my_orders");
+                    } else if (response1.data.results.status_code === 200) {
                       history.push("/my_orders");
                     }
                   })
@@ -144,7 +157,12 @@ const Payment = () => {
             var pay = new window.Razorpay(options);
             pay.open();
           } else if (mode === "cash") {
-            if (response1.data.results.status_code === 200) {
+            if (response1.data.results.status_code === 200 && !token) {
+              localStorage.setItem("swaToken", data.token);
+              localStorage.setItem("userName", data.name);
+              localStorage.setItem("phoneNumber", data.number);
+              history.push("/my_orders");
+            } else if (response1.data.results.status_code === 200) {
               history.push("/my_orders");
             }
           }
@@ -152,13 +170,13 @@ const Payment = () => {
         .catch((error) => {
           console.log(error);
         });
-    } else if (name === "buy") {
+    } else {
       axios
         .post(Urls.buyNow, buyBody, {
-          headers: { Authorization: "Token " + token },
+          headers: { Authorization: "Token " + _userToken },
         })
         .then((response1) => {
-          if (mode === "P") {
+          if (mode === "upi" || mode === "credit_card") {
             var options = {
               //test_secret
               key: "rzp_test_hbBeCNBjrqDq6P",
@@ -183,7 +201,12 @@ const Payment = () => {
                     headers: { Authorization: "Token " + token },
                   })
                   .then((response2) => {
-                    if (response2.data.results.status_code === 200) {
+                    if (response2.data.results.status_code === 200 && !token) {
+                      localStorage.setItem("swaToken", data.token);
+                      localStorage.setItem("userName", data.name);
+                      localStorage.setItem("phoneNumber", data.number);
+                      history.push("/my_orders");
+                    } else if (response2.data.results.status_code === 200) {
                       history.push("/my_orders");
                     }
                   })
@@ -205,9 +228,14 @@ const Payment = () => {
             };
             var pay = new window.Razorpay(options);
             pay.open();
-          } else if (mode === "C") {
+          } else if (mode === "cash") {
             console.log(response1);
-            if (response1.data.results.status_code === 200) {
+            if (response1.data.results.status_code === 200 && !token) {
+              localStorage.setItem("swaToken", data.token);
+              localStorage.setItem("userName", data.name);
+              localStorage.setItem("phoneNumber", data.number);
+              history.push("/my_orders");
+            } else if (response1.data.results.status_code === 200) {
               history.push("/my_orders");
             }
           }
@@ -222,10 +250,10 @@ const Payment = () => {
     setMode(event.target.value);
   };
 
-  const getDefaultAddress = async () => {
+  const getDefaultAddress = async (_token) => {
     try {
       const response = await axios.get(Urls.defaultAddress, {
-        headers: { Authorization: "Token " + token },
+        headers: { Authorization: "Token " + _token },
       });
       if (response.data.results.status === 200) {
         setAddressData({
@@ -360,13 +388,7 @@ const Payment = () => {
               Phone number:{addressData.mobile}
             </p>
           </div>
-          <div
-            className={Classes.PayButtonMobile}
-            // onClick={() => {
-            //   history.push("/addaddress");
-            // }}
-            onClick={placeOrder}
-          >
+          <div className={Classes.PayButtonMobile} onClick={placeOrder}>
             Pay &#x20B9; {data.pay}
           </div>
         </div>
