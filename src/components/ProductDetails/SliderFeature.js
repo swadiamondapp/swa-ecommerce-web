@@ -21,7 +21,7 @@ const SliderFeature = () => {
       image: Sh3,
     },
     {
-      desc: "Lifetim Exchange & Buyback",
+      desc: "Lifetime Exchange & Buyback",
       image: Sh4,
     },
   ];

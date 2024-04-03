@@ -231,7 +231,10 @@ function CartDesign(props) {
                   <div className={Classes.TotalItem}>
                     <p className={Classes.TotalSmall}>TOTAL PAYABLE</p>
                   </div>
-                  <p className={Classes.Amount}>&#x20B9; {total}</p>
+                  <p className={Classes.Amount}>
+                    {/* &#x20B9; {total}  */}
+                    &#x20B9; {amountPay}
+                  </p>
                 </div>
                 <input
                   className={Classes.PlaceOrderButton}

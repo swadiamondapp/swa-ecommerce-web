@@ -21,6 +21,7 @@ const ProductDetailsPage = (props) => {
   const [thumImg, setThumbImg] = useState();
   const [newThumpSet, setNewThumpSet] = useState(null);
   const [imgSet, setImgSet] = useState([]);
+  const [video, setVideo] = useState([]);
   const [count, setCount] = useState("");
   const [size, setSize] = useState("");
   const [logToken, setLogToken] = useState("");
@@ -91,6 +92,11 @@ const ProductDetailsPage = (props) => {
           response1.data.results.data.image[
             Object.keys(response1.data.results.data.image)[0]
           ].multiple_images
+        );
+        setVideo(
+          response1.data.results.data.video[
+            Object.keys(response1.data.results.data.video)[0]
+          ].multiple_videos
         );
       })
       .catch((error) => {
@@ -277,6 +283,7 @@ const ProductDetailsPage = (props) => {
         id={props.match.params.id}
         colorSelct={colorHandler}
         bagImg={imgSet}
+        Video={video}
         bagImgSelect={thumpnailSelHanlder}
         count={count + " Reviews"}
         review={review}

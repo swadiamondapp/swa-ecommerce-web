@@ -175,6 +175,8 @@ const ProductDetails = (props) => {
     ? reviewImages
     : reviewImages.slice(0, 3);
 
+  const videoUrl = props.bagImg.filter((item) => item.endsWith(".mp4"));
+
   return (
     <div>
       <div className="container" style={{ marginTop: "40px" }}>
@@ -214,6 +216,16 @@ const ProductDetails = (props) => {
                             onClick={() => bagImgHandler(item)}
                           />
                         </div>
+                      );
+                    })}
+                    {props.Video.map((item, index) => {
+                      return (
+                        <>
+                          <iframe
+                            style={{ width: "73px", height: "73px" }}
+                            src={item}
+                          />
+                        </>
                       );
                     })}
                   </div>
@@ -277,7 +289,7 @@ const ProductDetails = (props) => {
                   <RWebShare
                     data={{
                       text: "Swa Diamonds",
-                      url: location.pathname,
+                      url: "https://swaecomnew.zinfog.in" + location.pathname,
                       title: "Swa Diamonds",
                     }}
                     onClick={() => console.log("shared successfully!")}
