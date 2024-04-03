@@ -524,7 +524,7 @@ const LoginModal = (props) => {
           <IoIosArrowDown />
         </div>
       ) : (
-        <div className={Classes.LoginSignup}>
+        <div className={Classes.LoginSignup} style={{ cursor: "pointer" }}>
           <div className={Classes.dLogin} onClick={props.handleOpenLogin}>
             Login
           </div>

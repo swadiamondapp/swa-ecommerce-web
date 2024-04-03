@@ -285,14 +285,22 @@ const ProductDetails = (props) => {
                   <p>
                     {addToWishList ? (
                       <FaHeart
-                        style={{ fontSize: "25px", color: "#F91919" }}
+                        style={{
+                          fontSize: "25px",
+                          color: "#F91919",
+                          cursor: "pointer",
+                        }}
                         // color="#F91919"
                         className={Classes.Heart1}
                         onClick={Remove}
                       />
                     ) : (
                       <CgHeart
-                        style={{ fontSize: "25px", color: "#B1C2D3" }}
+                        style={{
+                          fontSize: "25px",
+                          color: "#B1C2D3",
+                          cursor: "pointer",
+                        }}
                         className={Classes.Heart1}
                         onClick={Added}
                       />

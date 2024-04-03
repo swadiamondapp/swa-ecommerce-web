@@ -64,6 +64,7 @@ const LoginToggle = (props) => {
     email: "",
   });
   const [mobileNumber, setMobileNumber] = useState("");
+  const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
   const [isDesk, setIsDesk] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
@@ -205,6 +206,38 @@ const LoginToggle = (props) => {
       ...signUpData,
       [name]: value,
     });
+  };
+
+  // Handler to update email state
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+
+  // Handler for the "Agree & Login" button click
+  const handleAgreeAndLogin = async () => {
+    const body = {
+      username: email,
+    };
+    try {
+      // Perform login API call using the entered email
+      const response = await axios.post(urls.Login, body);
+      if (response.data.results.status_code === 200) {
+        // If login successful, store token and user details in localStorage
+        localStorage.setItem("swaToken", response.data.results.token);
+        localStorage.setItem("userName", response.data.results.data.name);
+        localStorage.setItem(
+          "phoneNumber",
+          response.data.results.data.phone_number
+        );
+
+        // Close the modal or perform any other action
+        props.onClose();
+      } else if (response.data.results.status_code === 401) {
+        console.log("Incorrect username or password!"); // Handle incorrect credentials
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleSignUp = async (event) => {
@@ -397,7 +430,12 @@ const LoginToggle = (props) => {
                   </Link>
                 </div>
 
-                <div style={{ display: "flex", marginBottom: "0.5rem" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    marginBottom: "0.5rem",
+                  }}
+                >
                   <div className={Classes.line2}>
                     <div
                       style={{
@@ -418,7 +456,9 @@ const LoginToggle = (props) => {
                 <div className={Classes.flex}>
                   <div
                     className={Classes.SocialButtons}
-                    style={{ marginBottom: "1rem" }}
+                    style={{
+                      marginBottom: "1rem",
+                    }}
                   >
                     <div className={Classes.googleButton}>
                       <button
@@ -484,7 +524,11 @@ const LoginToggle = (props) => {
                       >
                         {activeTab === "tab1" ? (
                           <div className={Classes.tabTitleOne}>
-                            <span style={{ fontWeight: "600" }}>
+                            <span
+                              style={{
+                                fontWeight: "600",
+                              }}
+                            >
                               Phone Number
                             </span>
                           </div>
@@ -507,7 +551,13 @@ const LoginToggle = (props) => {
                           </div>
                         ) : (
                           <div className={Classes.tabTitleTwo}>
-                            <span style={{ fontWeight: "600" }}>Email</span>
+                            <span
+                              style={{
+                                fontWeight: "600",
+                              }}
+                            >
+                              Email
+                            </span>
                           </div>
                         )}
                       </div>
@@ -540,6 +590,8 @@ const LoginToggle = (props) => {
                           <input
                             placeholder="Enter Email address"
                             className={Classes.allInputTextStyle}
+                            value={email}
+                            onChange={handleEmailChange}
                           />
                         </form>
                       </div>
@@ -610,7 +662,9 @@ const LoginToggle = (props) => {
               </div>
               <div style={{ display: "flex" }}>
                 <button
-                  style={{ paddingBottom: "4px" }}
+                  style={{
+                    paddingBottom: "4px",
+                  }}
                   className={Classes.buttonSocial}
                 >
                   <img src={APPLE} /> Login with Apple
@@ -643,11 +697,17 @@ const LoginToggle = (props) => {
                       }
                     >
                       <div className={Classes.otpContainer}>
-                        <div style={{ textAlign: "center" }}>
+                        <div
+                          style={{
+                            textAlign: "center",
+                          }}
+                        >
                           <div>
                             <h3
                               className={Classes.titleh}
-                              style={{ paddingBottom: "10px" }}
+                              style={{
+                                paddingBottom: "10px",
+                              }}
                             >
                               OTP
                             </h3>
@@ -709,7 +769,10 @@ const LoginToggle = (props) => {
         </Typography> */}
                       <Typography
                         sx={{ p: 2 }}
-                        style={{ textAlign: "center", padding: "5px" }}
+                        style={{
+                          textAlign: "center",
+                          padding: "5px",
+                        }}
                       >
                         <div>
                           <span
@@ -752,8 +815,10 @@ const LoginToggle = (props) => {
                           }}
                         >
                           <Button
-                            className={Classes.acceptT}
-                            onClick={handleOpen}
+                            // className={Classes.acceptT}
+                            // onClick={handleOpen}
+                            className={Classes.LoginButton}
+                            onClick={handleAgreeAndLogin}
                           >
                             Agree & login
                           </Button>

@@ -69,7 +69,9 @@ const CheckDelivery = (props) => {
       <div className={Classes.LogList}>
         <div className={Classes.DeliveryPin} onClick={loginClickHandler}>
           <span className={Classes.checkDeliveryTitle}>CHECK DELIVERY</span>
-          <span className={Classes.EnterPinTitle}>Enter PinCode</span>
+          <span className={Classes.EnterPinTitle} style={{ cursor: "pointer" }}>
+            Enter PinCode
+          </span>
         </div>
       </div>
 
