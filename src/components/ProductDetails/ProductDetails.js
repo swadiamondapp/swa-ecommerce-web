@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import moment from "moment";
 import Ring from "../../Assets/new4.png";
@@ -32,6 +32,7 @@ import Profiles from "../../Assets/profileicon.png";
 import ProductImages from "./ProductImages";
 import { MdOutlineStarPurple500 } from "react-icons/md";
 import { RWebShare } from "react-web-share";
+import { Modal } from "@mui/material";
 
 const ProductDetails = (props) => {
   const location = useLocation();
@@ -46,6 +47,14 @@ const ProductDetails = (props) => {
   const [reviewImages, setReviewImages] = useState([]);
   const [reviews, setReviews] = useState([]);
   const [productDetails, setProductDetails] = useState([]);
+  const ratingRef = useRef(null);
+  const [showErrorModal, setShowErrorModal] = useState(false);
+
+  const handleImageClick = () => {
+    if (ratingRef.current) {
+      ratingRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   useEffect(() => {
     if (token !== null) {
@@ -87,9 +96,10 @@ const ProductDetails = (props) => {
     }
   };
 
-  const addToCartHandler = () => {
-    props.cartAdd();
-  };
+  // const addToCartHandler = () => {
+  //   props.cartAdd();
+  // };
+
   const homeHandler = () => {
     history.push("/");
   };
@@ -161,9 +171,9 @@ const ProductDetails = (props) => {
       toast("Please Login!");
     }
   };
-  const sizeChangeHandler = (e) => {
-    props.sizeChange(e.target.value);
-  };
+  // const sizeChangeHandler = (e) => {
+  //   props.sizeChange(e.target.value);
+  // };
 
   const [showAllReviews, setShowAllReviews] = useState(false);
 
@@ -176,6 +186,21 @@ const ProductDetails = (props) => {
     : reviewImages.slice(0, 3);
 
   const videoUrl = props.bagImg.filter((item) => item.endsWith(".mp4"));
+  const addToCartHandler = () => {
+    console.log("....", props.selectedSize);
+    if (!props.Size) {
+      setShowErrorModal(true);
+      setTimeout(() => {
+        setShowErrorModal(false);
+      }, 3000); // Hide modal after 5 seconds
+    } else {
+      // Proceed with adding to cart logic
+      props.cartAdd();
+    }
+  };
+  const sizeChangeHandler = (e) => {
+    props.sizeChange(e.target.value);
+  };
 
   return (
     <div>
@@ -193,10 +218,16 @@ const ProductDetails = (props) => {
                         src={props.thumbImg}
                         alt=""
                       />
-                      <div className={Classes.rateStar8}>
-                        5{" "}
-                        <MdOutlineStarPurple500 className={Classes.starrate8} />{" "}
-                        435
+                      <div
+                        style={{ cursor: "pointer" }}
+                        className={Classes.rateStar8}
+                        onClick={handleImageClick}
+                      >
+                        {props.avgR}
+                        <MdOutlineStarPurple500
+                          className={Classes.starrate8}
+                        />{" "}
+                        {props.count}
                       </div>
                     </div>
                   </div>
@@ -306,7 +337,9 @@ const ProductDetails = (props) => {
               <div className={`${Classes.Flex} ${Classes.MobDownAR}`}>
                 {/* <BiRupee size={25} /> */}
 
-                <p className={Classes.NewPrice}>&#x20B9; {props.offerPrice}</p>
+                <p className={Classes.NewPrice}>
+                  &#x20B9; {parseFloat(props.offerPrice).toFixed(0)}
+                </p>
                 {props.actualPrice !== null ? (
                   <BiRupee size={25} color="#B0B0B0" />
                 ) : null}
@@ -372,6 +405,26 @@ const ProductDetails = (props) => {
                     add to cart
                   </button> */}
                 </div>
+                {/* {showErrorModal && (
+                  <div className={Classes.ErrorModal}>
+                    <p>Select size is required</p>
+                  </div>
+                )} */}
+                <Modal
+                  open={showErrorModal}
+                  onClose={() => setShowErrorModal(false)}
+                  aria-labelledby="modal-title"
+                  aria-describedby="modal-description"
+                >
+                  <div className={Classes.Modalsection}>
+                    <h2 style={{ textAlign: "center" }} id="modal-title">
+                      Select size is required
+                    </h2>
+                    <p style={{ textAlign: "center" }} id="modal-description">
+                      Please select a size before proceeding.
+                    </p>
+                  </div>
+                </Modal>
                 <div className={Classes.FindStoreParent}>
                   <button className={Classes.TryHome}>Try @ Home</button>
                   <button className={Classes.VideoCall}>
@@ -659,7 +712,7 @@ const ProductDetails = (props) => {
                 </div>
               </div>
             </div>
-            <div className={Classes.BorderBottom}>
+            <div className={Classes.BorderBottom} ref={ratingRef}>
               <div className="container">
                 <div className={`row ${Classes.SellerInfo}`}>
                   <div className="" style={{ padding: "0px" }}>

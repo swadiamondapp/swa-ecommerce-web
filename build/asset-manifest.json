@@ -1,12 +1,12 @@
 {
   "main.css": "/static/css/main.00bc7a5d.chunk.css",
-  "main.js": "/static/js/main.284b6279.chunk.js",
-  "main.js.map": "/static/js/main.284b6279.chunk.js.map",
+  "main.js": "/static/js/main.82c317fe.chunk.js",
+  "main.js.map": "/static/js/main.82c317fe.chunk.js.map",
   "static/js/1.bf669458.chunk.js": "/static/js/1.bf669458.chunk.js",
   "static/js/1.bf669458.chunk.js.map": "/static/js/1.bf669458.chunk.js.map",
   "static/css/2.9e545605.chunk.css": "/static/css/2.9e545605.chunk.css",
-  "static/js/2.bb7ac0d7.chunk.js": "/static/js/2.bb7ac0d7.chunk.js",
-  "static/js/2.bb7ac0d7.chunk.js.map": "/static/js/2.bb7ac0d7.chunk.js.map",
+  "static/js/2.8cad1bda.chunk.js": "/static/js/2.8cad1bda.chunk.js",
+  "static/js/2.8cad1bda.chunk.js.map": "/static/js/2.8cad1bda.chunk.js.map",
   "runtime~main.js": "/static/js/runtime~main.2d467014.js",
   "runtime~main.js.map": "/static/js/runtime~main.2d467014.js.map",
   "static/media/DownloadOurApp.module.css": "/static/media/downBg.8bc6d350.png",
@@ -21,7 +21,7 @@
   "static/media/new1.png": "/static/media/new1.79e08694.png",
   "static/media/desklogo.svg": "/static/media/desklogo.127f4b15.svg",
   "static/media/moblogo.svg": "/static/media/moblogo.ca5ba4d8.svg",
-  "static/media/index.css": "/static/media/Inter-Regular.079af0e2.ttf",
+  "static/media/index.css": "/static/media/Lato-Regular.122dd68d.ttf",
   "static/media/shop1.png": "/static/media/shop1.75cb6b34.png",
   "static/media/shop2.png": "/static/media/shop2.41374ad8.png",
   "static/media/shop3.png": "/static/media/shop3.bb001933.png",
@@ -41,6 +41,6 @@
   "static/css/2.9e545605.chunk.css.map": "/static/css/2.9e545605.chunk.css.map",
   "static/css/main.00bc7a5d.chunk.css.map": "/static/css/main.00bc7a5d.chunk.css.map",
   "index.html": "/index.html",
-  "precache-manifest.fd35234533ed3c2cc674471a0744ec0a.js": "/precache-manifest.fd35234533ed3c2cc674471a0744ec0a.js",
+  "precache-manifest.f3c6d1aefdfc91152000fb8e4887f50b.js": "/precache-manifest.f3c6d1aefdfc91152000fb8e4887f50b.js",
   "service-worker.js": "/service-worker.js"
 }

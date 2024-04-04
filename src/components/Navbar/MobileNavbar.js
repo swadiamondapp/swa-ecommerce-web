@@ -120,9 +120,7 @@ const MobileNavbar = () => {
     }
   };
   const [showSearchBar, setShowSearchBar] = useState(false);
-  const toggleSearchBar = () => {
-    setShowSearchBar(!showSearchBar);
-  };
+
   const searchKeyHanlder = (e) => {
     setSearchKey(e.target.value);
     if (e.target.value.length !== 0) {
@@ -232,7 +230,7 @@ const MobileNavbar = () => {
                 <img src={indiaimg} />
               </div>
             ) : (
-              <div onClick={toggleSearchBar}>
+              <div>
                 <GoSearch style={{ color: "#fff", fontSize: "25px" }} />
               </div>
             )}
@@ -252,52 +250,6 @@ const MobileNavbar = () => {
                 // onClick={moveTocart}
               />
             </div>
-          </div>
-          {showSearchBar && (
-            <div className={Classes.ParentSearchBar}>
-              <div>
-                <BsArrowLeft
-                  className={Classes.Arrowline32}
-                  onClick={toggleSearchBar}
-                />
-              </div>
-              <div className={Classes.MobParentSearchBars}>
-                <input
-                  placeholder="Search your orders"
-                  value={searchKey}
-                  onChange={searchKeyHanlder}
-                />
-                {searchKey.length === 0 && (
-                  <>
-                    <GoSearch className={Classes.Gosearch1} />
-                    <IoMdClose
-                      className={Classes.Closesearch1}
-                      onClick={toggleSearchBar}
-                    />
-                  </>
-                )}
-              </div>
-            </div>
-          )}
-          <div
-            className={Classes.searchListCont2}
-            style={{ display: searchShow ? "block" : "none" }}
-          >
-            {suggestionList.length !== 0 ? (
-              suggestionList.map((item, index) => {
-                return (
-                  <p
-                    className={Classes.SearchItem}
-                    key={index}
-                    onClick={() => searchTitleHandler(item)}
-                  >
-                    {item.name}
-                  </p>
-                );
-              })
-            ) : (
-              <p className={Classes.NoResult}>No Results Found</p>
-            )}
           </div>
         </header>
         {/* {isHamOpen ? (
@@ -355,7 +307,14 @@ const MobileNavbar = () => {
                         Login
                       </p>
                       <p className={Classes.BorderLineMob}></p>
-                      <p>Sign up</p>
+                      <p
+                        onClick={() => {
+                          setOpen(false);
+                          setShow(true);
+                        }}
+                      >
+                        Sign up
+                      </p>
                     </div>
                   )}
                 </div>

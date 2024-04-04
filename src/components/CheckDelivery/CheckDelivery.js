@@ -99,7 +99,7 @@ const CheckDelivery = (props) => {
               <div className={Classes.LocationInp}>
                 <input
                   type="text"
-                  placeholder="670114"
+                  placeholder="*****"
                   value={pinCode}
                   onChange={pinCodeChangeHandler}
                 />

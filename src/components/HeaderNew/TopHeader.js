@@ -11,7 +11,7 @@ const TopHeader = (props) => {
   };
   return (
     <div className={Classes.Header_top}>
-      <div className={`${"container"} ${Classes.HeaderTop_Text}`}>
+      {/* <div className={`${"container"} ${Classes.HeaderTop_Text}`}>
         <div className={Classes.Top}>
           <p className={Classes.Phone}>
             <FaPhoneAlt className={Classes.TopIcon} />
@@ -25,6 +25,9 @@ const TopHeader = (props) => {
         <div className={Classes.Time}>
           <p>IST (Mon - Sat) 10:00 AM to 6:00 PM</p>
         </div>
+      </div> */}
+      <div className={Classes.DiwaliOffersdesk}>
+        Diwali offer - 10% on every purchase 🥳
       </div>
     </div>
   );

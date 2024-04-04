@@ -267,6 +267,7 @@ const ProductDetailsPage = (props) => {
         sizeChart={sizeChart}
         size={"small"}
         sizeChange={sizeChangeHandler}
+        Size={size}
         wishAct={prodDet.wishlist_id}
         gw={prodDet.gross_weight}
         diamondTypw={prodDet.diamond_clarity}
