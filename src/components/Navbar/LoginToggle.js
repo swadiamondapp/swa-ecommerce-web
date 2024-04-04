@@ -184,7 +184,35 @@ const LoginToggle = (props) => {
     return true;
   };
 
-  const handleSignInWithGoogle = async () => {
+  const handleLoginWithGoogle = async () => {
+    try {
+      const googleResponse = await signInWithPopup(auth, googleAuthProvider);
+      console.log("responsegoogle", googleResponse.user);
+      if (googleResponse.user) {
+        // try {
+        //   const body = {
+        //     name: googleResponse.user.displayName,
+        //     phone_code: "+91",
+        //     phone_number: "9633272897",
+        //     email: googleResponse.user.email,
+        //     login_type: "GOOGLE",
+        //   };
+        //   const response = await axios.post(Urls.register, body);
+        //   if (response.data.results.status_code === 200) {
+        //     alert("Successfully Registered");
+        //     handleLoginModalOpen();
+        //   } else {
+        //   }
+        // } catch (error) {
+        //   alert(error.response.data.results.message);
+        // }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSignUpWithGoogle = async () => {
     try {
       const googleResponse = await signInWithPopup(auth, googleAuthProvider);
       console.log("responsegoogle", googleResponse.user);
@@ -193,7 +221,7 @@ const LoginToggle = (props) => {
           const body = {
             name: googleResponse.user.displayName,
             phone_code: "+91",
-            phone_number: signUpData.mobile,
+            phone_number: "9633272897",
             email: googleResponse.user.email,
             login_type: "GOOGLE",
           };
@@ -435,7 +463,7 @@ const LoginToggle = (props) => {
                     <div className={Classes.googleButton}>
                       <button
                         className={Classes.buttonSocial}
-                        onClick={handleSignInWithGoogle}
+                        onClick={handleSignUpWithGoogle}
                       >
                         <img src={GOOGLE} /> Sign Up with Google
                       </button>
@@ -606,7 +634,7 @@ const LoginToggle = (props) => {
                 <div className={Classes.googleButton}>
                   <button
                     className={Classes.buttonSocial}
-                    onClick={handleSignInWithGoogle}
+                    onClick={handleLoginWithGoogle}
                   >
                     <img src={GOOGLE} /> Login with Google
                   </button>
