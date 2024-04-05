@@ -70,7 +70,9 @@ const MobileNavbar = () => {
 
   const mobileStyle = {
     position: "absolute",
-    transition: "transform 0.3s ease-in-out",
+    // transition: "transform 0.3s ease-in-out",
+    transition: "transform 15s ease-in-out", // Slow transition
+    transform: open ? "translateX(0)" : "translateX(100%)",
     bgcolor: "background.paper",
     border: "none",
     boxShadow: 24,
@@ -281,7 +283,10 @@ const MobileNavbar = () => {
         // onClose={props.handleClose}
         onClose={handleClose}
       >
-        <Box sx={isMobileView ? mobileStyle : style}>
+        <Box
+          className={`mobile-modal ${open ? "open" : ""}`}
+          sx={isMobileView ? mobileStyle : style}
+        >
           <Typography>
             <div className={Classes.ParentMobSection}>
               <div className={Classes.MobMainHead}>

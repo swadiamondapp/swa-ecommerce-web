@@ -223,7 +223,8 @@ const ProductDetails = (props) => {
                         className={Classes.rateStar8}
                         onClick={handleImageClick}
                       >
-                        {props.avgR}
+                        {/* {props.avgR} */}
+                        {parseFloat(props.avgR).toFixed(0)}
                         <MdOutlineStarPurple500
                           className={Classes.starrate8}
                         />{" "}
@@ -417,7 +418,10 @@ const ProductDetails = (props) => {
                   aria-describedby="modal-description"
                 >
                   <div className={Classes.Modalsection}>
-                    <h2 style={{ textAlign: "center" }} id="modal-title">
+                    <h2
+                      style={{ textAlign: "center", fontSize: "20px" }}
+                      id="modal-title"
+                    >
                       Select size is required
                     </h2>
                     <p style={{ textAlign: "center" }} id="modal-description">
@@ -758,7 +762,10 @@ const ProductDetails = (props) => {
                     Rating & Review
                   </p>
                   <div className={Classes.StarFlex}>
-                    <p className={Classes.Rating}>{props.avgR}</p>
+                    <p className={Classes.Rating}>
+                      {parseFloat(props.avgR).toFixed(0)}
+                      {/* {props.avgR} */}
+                    </p>
                     <IoIosStar
                       size={25}
                       color="#F7C514"
