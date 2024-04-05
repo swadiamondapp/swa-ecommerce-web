@@ -28,7 +28,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import axios from "axios";
 import * as Urls from "../../Urls";
 
-const MobileNavbar = () => {
+const MobileNavbar = (props) => {
   const history = useHistory();
   const [isHamOpen, setIsHamOpen] = useState(false);
   const [open, setOpen] = useState(false);
@@ -39,7 +39,12 @@ const MobileNavbar = () => {
   const [suggestionList, setSuggesionList] = useState([]);
   const userName = localStorage.getItem("userName");
   const [searchKey, setSearchKey] = useState("");
+  const [isSignpuMobileOpen,setIsSignpuMobileOpen] = useState(false)
+
   const isHomePage = window.location.pathname === "/";
+  const mobileSearchBarHide = !isHomePage
+  ? Classes.hideSearchBar
+  : Classes.showSearchBar;
   const handleOpen = () => {
     setOpen(true);
   };
@@ -121,7 +126,8 @@ const MobileNavbar = () => {
   };
   const [showSearchBar, setShowSearchBar] = useState(false);
   const toggleSearchBar = () => {
-    setShowSearchBar(!showSearchBar);
+    // setShowSearchBar(!showSearchBar);
+    props.setIsHome(!props.isHome)
   };
   const searchKeyHanlder = (e) => {
     setSearchKey(e.target.value);
@@ -192,6 +198,13 @@ const MobileNavbar = () => {
         });
     }
   };
+
+  const handleSignupClick = () => {
+    setOpen(false);
+    setShow(true);
+    setIsSignpuMobileOpen(true)
+
+  }
   return (
     <div className={Classes.NavContainer}>
       <div className={Classes.Navbar}>
@@ -253,7 +266,7 @@ const MobileNavbar = () => {
               />
             </div>
           </div>
-          {showSearchBar && (
+          {/* {showSearchBar && (
             <div className={Classes.ParentSearchBar}>
               <div>
                 <BsArrowLeft
@@ -298,7 +311,7 @@ const MobileNavbar = () => {
             ) : (
               <p className={Classes.NoResult}>No Results Found</p>
             )}
-          </div>
+          </div> */}
         </header>
         {/* {isHamOpen ? (
           <>
@@ -310,6 +323,7 @@ const MobileNavbar = () => {
           <></>
         )} */}
       </div>
+      
       <Modal
         // open={props.open}
         open={show}
@@ -318,11 +332,10 @@ const MobileNavbar = () => {
       >
         <Box sx={isMobileView && mobileStyleLogin}>
           <Typography>
-            <LoginToggle onClose={() => setShow(false)} />
+            <LoginToggle onClose={() => setShow(false)} isSignpuMobile={isSignpuMobileOpen} />
           </Typography>
         </Box>
       </Modal>
-
       <Modal
         // open={props.open}
         open={open}
@@ -350,12 +363,18 @@ const MobileNavbar = () => {
                         onClick={() => {
                           setOpen(false);
                           setShow(true);
+                          setIsSignpuMobileOpen(false)
                         }}
                       >
                         Login
                       </p>
                       <p className={Classes.BorderLineMob}></p>
-                      <p>Sign up</p>
+                      <p
+                       
+                        onClick={handleSignupClick}
+                      >
+                        Sign up
+                      </p>
                     </div>
                   )}
                 </div>

@@ -35,6 +35,7 @@ const style = {
 
 const LoginModal = (props) => {
   const userDetailsRef = useRef(null);
+  const nameRef = useRef(null);
   const [showUserDetails, setShowUserDetails] = useState(false);
   const [show, setShow] = useState(false);
   const [register, setRegister] = useState(false);
@@ -59,6 +60,7 @@ const LoginModal = (props) => {
   const [forgotToken, setForgotToken] = useState("");
   const [forgotError, setForfotError] = useState("");
   const [createError, setCreateError] = useState("");
+  const [isSignpuLogin, setIsSignpuLogin] = useState(false);
   const username = localStorage.getItem("name");
 
   const [error, setError] = useState("");
@@ -489,7 +491,35 @@ const LoginModal = (props) => {
   const phone = localStorage.getItem("phoneNumber");
 
   const handleLogedUserClick = () => {
-    setShowUserDetails(!showUserDetails);
+    console.log("Before toggle, showUserDetails:", showUserDetails);
+    setShowUserDetails((prev) => !prev);
+    console.log("After toggle, showUserDetails:", showUserDetails);
+  };
+  useEffect(() => {
+    console.log("useEffect executed with showUserDetails:", showUserDetails);
+
+    const handleClickOutside = (event) => {
+      if (
+        showUserDetails &&
+        userDetailsRef.current &&
+        !userDetailsRef.current.contains(event.target) &&
+        !nameRef.current.contains(event.target)
+      ) {
+        setShowUserDetails(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      console.log("Cleanup useEffect with showUserDetails:", showUserDetails);
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showUserDetails]);
+
+  const handleSignupClick = () => {
+    props.handleOpenLogin();
+    setIsSignpuLogin(true);
   };
 
   return (
@@ -517,23 +547,31 @@ const LoginModal = (props) => {
           </div>
         </div>
       </div> */}
-  {userName ? (
-  <div onClick={handleLogedUserClick} className={Classes.LogedUser}>
-    <img src={logedimg} />
-    <p>{userName}</p>
-    <IoIosArrowDown />
-  </div>
-) : (
-  <div className={Classes.LoginSignup}>
-    <div className={Classes.dLogin} onClick={props.handleOpenLogin}>
-      Login
-    </div>
-    <div className={Classes.LineArrow}></div>
-    <div className={Classes.DSignup} onClick={props.handleOpenLogin}>
-      Sign up
-    </div>
-  </div>
-)}
+      {userName ? (
+        <div className={Classes.LogedUser}>
+          <img src={logedimg} />
+          <p ref={nameRef} onClick={handleLogedUserClick}>
+            {userName}
+          </p>
+          <IoIosArrowDown />
+        </div>
+      ) : (
+        <div className={Classes.LoginSignup}>
+          <div
+            className={Classes.dLogin}
+            onClick={() => {
+              props.handleOpenLogin(); 
+              setIsSignpuLogin(false);
+            }}
+          >
+            Login
+          </div>
+          <div className={Classes.LineArrow}></div>
+          <div className={Classes.DSignup} onClick={handleSignupClick}>
+            Sign up
+          </div>
+        </div>
+      )}
       {/* <div className={Classes.LoginSignup}>
         <div className={Classes.dLogin} onClick={props.handleOpenLogin}>
           Login
@@ -590,7 +628,11 @@ const LoginModal = (props) => {
         <Box sx={style}>
           <Typography>
             <div>
-              <LoginToggle onClose={handleClose} />
+              <LoginToggle
+                onClose={handleClose}
+                signupClick={handleSignupClick}
+                LoginSignupToggle={isSignpuLogin}
+              />
             </div>
           </Typography>
         </Box>

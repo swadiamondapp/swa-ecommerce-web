@@ -172,6 +172,7 @@ function AddAddress(props) {
   };
 
   const handleAddressSelection = async (id) => {
+
     setSelectedAddressId(id);
     try {
       const response = await axios.post(
@@ -188,23 +189,24 @@ function AddAddress(props) {
       console.log(error);
     }
   };
+  
 
   return (
     <div>
-      <div className={`container ${Classes.AddresMobCont}`}>
-        <div className={`container ${Classes.AddresMobCont}`}>
-          <div className={Classes.Main}>
+      <div className={`containe ${Classes.AddresMobCont}`}>
+        <div className={`containe ${Classes.AddresMobCont}`}>
+          {/* <div className={Classes.Main}>
             <h1 className={Classes.Title}>Add Address</h1>
             <div className={Classes.SubText}>
               <p className={`${Classes.Home} ${Classes.HomeNew}`}>HOME /</p>
-              {/* <p className={`${Classes.Home} ${Classes.HomeNew}`}>
+              <p className={`${Classes.Home} ${Classes.HomeNew}`}>
                 ADD ADDRESS
-              </p> */}
+              </p>
               <p className={Classes.NewArrival}>ADD ADDRESS</p>
             </div>
-          </div>
+          </div> */}
           {/* address location */}
-          <div className={Classes.parentLocations}>
+          <div className={props.name === "payment" ? Classes.parentLocationsPayment : Classes.parentLocations}>
             <div className={Classes.leftAddres11}>
               {/* {props.addressArray.map((item, index) => (
                 <div className={Classes.LocationHead} key={index}>
@@ -450,7 +452,7 @@ function AddAddress(props) {
                 </div>
               </div> */}
             </div>
-            <div className={Classes.rightAddres11}></div>
+            {/* <div className={Classes.rightAddres11}></div> */}
           </div>
 
           {/* address location */}

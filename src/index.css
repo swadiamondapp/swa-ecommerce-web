@@ -572,3 +572,9 @@ input[type="number"] {
     padding: 0px !important;
   }
 }
+.hideSearchBar {
+  display: none;
+}
+.showSearchBar {
+  display: block;
+}

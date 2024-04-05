@@ -5,6 +5,7 @@ import phonepay from "../../Assets/phonepay.svg";
 import mastercard from "../../Assets/mastercard.svg";
 import axios from "axios";
 import * as Urls from "../../Urls";
+import AddAddress from "../CheckOut/AddAddress";
 
 const Payment = () => {
   const token = localStorage.getItem("swaToken");
@@ -13,6 +14,13 @@ const Payment = () => {
   const [promoId, setPromoId] = useState("");
   const [mode, setMode] = useState("");
   const [amountPay, setAmountPay] = useState(100);
+  const [showChangeAddress, setShowChangeAddress] = useState(false);
+  const [changeId, setChangeId] = useState("");
+  const [cartCount, setCartCount] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [addressId, setAddressId] = useState(null);
+  const [address, setAddress] = useState([]);
+  const [selectedAddress, setSelectedAddress] = useState(null);
   const [addressData, setAddressData] = useState({
     sEmail: "",
     sPhone: "",
@@ -29,6 +37,34 @@ const Payment = () => {
   const { data, name } = location.state;
 
   console.log("===>", data);
+  const handleChangeAddress = () => {
+    setShowChangeAddress((prevState) => !prevState);
+  };
+
+  useEffect(() => {
+    setLoading(true);
+    fetchAddress();
+    // setTotal(props.location.state.data.total);
+    // axios
+    //   .get(Urls.cart, { headers: { Authorization: "Token " + token } })
+    //   .then((response1) => {
+    //     if (response1.data.results.message === "cart is empty") {
+    //       setCartCount("");
+    //     } else {
+    //       setCartCount(response1.data.results.count);
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+  }, [changeId]);
+
+  const adressChangeHanlder = (id) => {
+    setChangeId(id);
+  };
+  const radioChangeHandler = (e) => {
+    setAddressId(e.target.value);
+  };
 
   useEffect(() => {
     let _token = !data.token ? token : data.token;
@@ -256,6 +292,29 @@ const Payment = () => {
     }
   };
 
+  const fetchAddress = () => {
+    axios
+      .get(Urls.address, { headers: { Authorization: "Token " + token } })
+      .then((response1) => {
+        setAddress(response1.data.results.data);
+        if (response1.data.results.data.length !== 0) {
+          setAddressId(
+            response1.data.results.data[response1.data.results.data.length - 1]
+              .id
+          );
+        }
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const handleDoneButton = () => {
+    getDefaultAddress(token);
+    fetchAddress()
+    
+  };
+
   return (
     <div>
       <div className={`${Classes.Wrapper} container`}>
@@ -353,20 +412,38 @@ const Payment = () => {
           </div>
           <div className={Classes.DeliverCard}>
             <div className={Classes.DeliverCardHeader}>
-              <h4>Deliver to</h4>
-              <div className={Classes.Changebtn}>Change</div>
+              <h4>{!showChangeAddress && "Deliver to"}</h4>
+              <div className={Classes.Changebtn} onClick={handleChangeAddress}>
+                {showChangeAddress ? (
+                  <p onClick={handleDoneButton}>Done</p>
+                ) : (
+                  <p>Change</p>
+                )}
+              </div>
             </div>
-            <p className={Classes.Name}>{addressData.fullName}</p>
-            <p className={Classes.SubAddress}>
-              {addressData.hNumber_Bname} (House) {addressData.city}{" "}
-              {addressData.pincode}
-            </p>
-            <p className={Classes.SubAddress}>{addressData.landMark}</p>
-            <p className={Classes.SubAddress}>{addressData.streetColony}</p>
-            <p className={Classes.SubAddress}>{addressData.state}</p>
-            <p className={Classes.SubAddress} style={{ marginTop: "15px" }}>
-              Phone number:{addressData.mobile}
-            </p>
+            {showChangeAddress ? (
+              <>
+                <AddAddress
+                  addressArray={address}
+                  fetchAddress={fetchAddress}
+                  name={"payment"}
+                />
+              </>
+            ) : (
+              <>
+                <p className={Classes.Name}>{addressData.fullName}</p>
+                <p className={Classes.SubAddress}>
+                  {addressData.hNumber_Bname} (House) {addressData.city}{" "}
+                  {addressData.pincode}
+                </p>
+                <p className={Classes.SubAddress}>{addressData.landMark}</p>
+                <p className={Classes.SubAddress}>{addressData.streetColony}</p>
+                <p className={Classes.SubAddress}>{addressData.state}</p>
+                <p className={Classes.SubAddress} style={{ marginTop: "15px" }}>
+                  Phone number:{addressData.mobile}
+                </p>
+              </>
+            )}
           </div>
           <div className={Classes.PayButtonMobile} onClick={placeOrder}>
             Pay &#x20B9; {data.pay}

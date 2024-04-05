@@ -194,6 +194,7 @@ header {
   border: none;
   border-radius: 8px;
 }
+
 @keyframes shake {
   0% {
     margin-left: 0rem;
@@ -1261,3 +1262,4 @@ header {
     gap: 5px;
   }
 }
+
