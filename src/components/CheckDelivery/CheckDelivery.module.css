@@ -12,6 +12,11 @@
   font-size: 12px;
   font-family: "lato";
 }
+.LocationInp input::placeholder {
+  font-size: 25px;
+  position: relative;
+  top: 10px;
+}
 .LocationDetails {
   display: flex;
   align-items: center;

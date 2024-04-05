@@ -517,23 +517,23 @@ const LoginModal = (props) => {
           </div>
         </div>
       </div> */}
-  {userName ? (
-  <div onClick={handleLogedUserClick} className={Classes.LogedUser}>
-    <img src={logedimg} />
-    <p>{userName}</p>
-    <IoIosArrowDown />
-  </div>
-) : (
-  <div className={Classes.LoginSignup}>
-    <div className={Classes.dLogin} onClick={props.handleOpenLogin}>
-      Login
-    </div>
-    <div className={Classes.LineArrow}></div>
-    <div className={Classes.DSignup} onClick={props.handleOpenLogin}>
-      Sign up
-    </div>
-  </div>
-)}
+      {userName ? (
+        <div onClick={handleLogedUserClick} className={Classes.LogedUser}>
+          <img src={logedimg} />
+          <p>{userName}</p>
+          <IoIosArrowDown />
+        </div>
+      ) : (
+        <div className={Classes.LoginSignup} style={{ cursor: "pointer" }}>
+          <div className={Classes.dLogin} onClick={props.handleOpenLogin}>
+            Login
+          </div>
+          <div className={Classes.LineArrow}></div>
+          <div className={Classes.DSignup} onClick={props.handleOpenLogin}>
+            Sign up
+          </div>
+        </div>
+      )}
       {/* <div className={Classes.LoginSignup}>
         <div className={Classes.dLogin} onClick={props.handleOpenLogin}>
           Login

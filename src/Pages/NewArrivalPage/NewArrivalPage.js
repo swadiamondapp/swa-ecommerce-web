@@ -135,12 +135,12 @@ const NewArrivalPage = (props) => {
       cartsCount();
     } else if (props.location.state.data === "occation") {
       filter("?occasion_tag_ids=" + props.location.state.octnId, 1);
-      setHead("ProductList");
+      setHead("Products");
       setOccn(props.location.state.octnId);
     } else if (props.location.state.data !== undefined) {
       filter("?category_ids=" + props.location.state.data, 1);
       setCatSet(props.location.state.data);
-      setHead("ProductList");
+      setHead("Products");
     }
   }, []);
   const filterCatHandler = (filtSet) => {

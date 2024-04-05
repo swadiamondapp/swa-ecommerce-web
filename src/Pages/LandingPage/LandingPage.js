@@ -299,6 +299,7 @@ const LandingPage = () => {
     <div>
       <Header countCartItems={cartCount} loginHandler={loginActHandler} />
       <Banner banners={banner} tags={tags} mob={mobBanner} />
+      <Features />
       <div className="container">
         <div className="row mobRow1">
           <ShopOnBudget>
@@ -346,7 +347,7 @@ const LandingPage = () => {
         {/* <RecentSearch /> */}
       </div>
       <SliderFeature />
-      <Features />
+
       <Footer />
     </div>
   );

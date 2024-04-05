@@ -206,6 +206,7 @@ const FilterModal = (props) => {
   // };
 
   const handleButtonClick = async () => {
+    window.scrollTo(0, 0);
     // Construct the URL with selectedState as part of the query parameters
     let urlF = "";
     let urlS = "";
@@ -335,6 +336,7 @@ const FilterModal = (props) => {
                   <div className={classes.PriceBtns}>
                     <button
                       onClick={() => {
+                        window.scrollTo(0, 0);
                         console.log("selectedPriceRange", selectedPriceRange);
                         props.sortHandlerPrice(selectedPriceRange);
                         handleClose();
@@ -432,6 +434,7 @@ const FilterModal = (props) => {
                     </button> */}
                     <button
                       onClick={() => {
+                        window.scrollTo(0, 0);
                         console.log("Selected Sort:", selectedSort);
                         props.sortHandler(selectedSort, selectedPopular);
                         handleCloseSort();
