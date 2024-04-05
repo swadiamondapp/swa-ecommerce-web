@@ -186,6 +186,7 @@
   }
   .SwaParentInfoMob {
     margin-top: 25px;
+    text-align: center;
   }
   .Address {
     display: flex;
@@ -201,6 +202,7 @@
     margin-top: 0px;
     display: flex;
     align-items: center;
+    justify-content: center;
   }
   .Icons {
     margin: 0px !important;

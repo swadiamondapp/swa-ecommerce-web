@@ -89,12 +89,12 @@ const LoginModal = (props) => {
   //       console.log(error);
   //     });
   // };
-  useEffect(() => {
-    if (props.isLog) {
-      setShow(true);
-      setLogin(true);
-    }
-  }, [props.isLog]);
+  // useEffect(() => {
+  //   if (props.isLog) {
+  //     setShow(true);
+  //     setLogin(true);
+  //   }
+  // }, [props.isLog]);
 
   const registerHandler = () => {
     let selObj = country.arrayCountryList.find(
@@ -291,7 +291,7 @@ const LoginModal = (props) => {
     setRegister(false);
     setVerifyOtp(false);
     setNewPassword(false);
-    setShow(false);
+    props.handleOpenLogin();
     setChangePas(false);
     setForgot(false);
     setVeifyForgot(false);
@@ -316,7 +316,7 @@ const LoginModal = (props) => {
     setConfNewPas("");
   };
   const handleShow = () => {
-    setShow(true);
+    props.handleOpenLogin();
     setSelected("IN");
     setRegPhoneNumber("");
   };
@@ -581,7 +581,7 @@ const LoginModal = (props) => {
       )}
 
       <Modal
-        open={show}
+        open={props.isLog}
         onClose={handleClose}
         animation={false}
         aria-labelledby="modal-modal-title"

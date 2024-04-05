@@ -6,6 +6,7 @@ import locationimg from "../../Assets/locationicon.png";
 import timeimg from "../../Assets/time.png";
 import { BsArrowRight } from "react-icons/bs";
 import Stroke from "../../Assets/Stroke.png";
+import { FaPen } from "react-icons/fa";
 
 import Classes from "../CheckDelivery/CheckDelivery.module.css";
 
@@ -54,8 +55,14 @@ const CheckDelivery = (props) => {
       axios
         .get(Urls.pincodeCheck + pinCode)
         .then((response1) => {
+          console.log("pincode2", response1.data.PincodeData[0].Area);
           setActive(response1.data.IsSuccess);
+          if (response1.data.IsSuccess === true) {
+            localStorage.setItem("pincode", response1.data.PincodeData[0].Area);
+          }
+          handleClose();
         })
+
         .catch((error) => {
           console.log(error);
         });
@@ -63,15 +70,31 @@ const CheckDelivery = (props) => {
       setPinCodeError("Enter pin code");
     }
   };
+  const pincode = localStorage.getItem("pincode");
+  console.log("pincode1", pincode);
 
   return (
     <>
       <div className={Classes.LogList}>
-        <div className={Classes.DeliveryPin} onClick={loginClickHandler}>
+        <div className={Classes.DeliveryPin}>
           <span className={Classes.checkDeliveryTitle}>CHECK DELIVERY</span>
-          <span className={Classes.EnterPinTitle} style={{ cursor: "pointer" }}>
-            Enter PinCode
-          </span>
+          {pincode ? null : (
+            <span
+              onClick={loginClickHandler}
+              className={Classes.EnterPinTitle}
+              style={{ cursor: "pointer" }}
+            >
+              Enter PinCode
+            </span>
+          )}
+          {pincode && (
+            <span
+              className={Classes.EnterPinTitle}
+              style={{ display: "flex", alignItems: "center", gap: "8px" }}
+            >
+              {pincode} <FaPen onClick={loginClickHandler} />
+            </span>
+          )}
         </div>
       </div>
 

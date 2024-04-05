@@ -48,7 +48,7 @@ const SililerProducts = (props) => {
       <div className="container">
         <div className={Classes.SimilerProductHead}>Similar style</div>
         <div className={Classes.CatList1}>
-          <div className="container">
+          <div className="container similetrSliders">
             <div className={Classes.Web}>
               <div className={Classes.CarouselCards}>
                 <Carousel

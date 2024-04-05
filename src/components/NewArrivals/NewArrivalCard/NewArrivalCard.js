@@ -83,7 +83,7 @@ const NewArrivalCard = (props) => {
       >
         <ToastContainer />
         <div className={Classes.NewArrivalCard}>
-          <div onClick={props.clicked} className={Classes.NewArrivalCardSub}>
+          <div className={Classes.NewArrivalCardSub}>
             {props.Discount !== null ? (
               <div className={Classes.Discount}>
                 <p className={Classes.Number}>{props.Discount}</p>
@@ -91,6 +91,7 @@ const NewArrivalCard = (props) => {
             ) : null}
 
             <img
+              onClick={props.clicked}
               src={props.ProductImage}
               className={Classes.ProductImage}
               alt=""
@@ -102,24 +103,36 @@ const NewArrivalCard = (props) => {
               <div className={Classes.HoverButton}>
                 <div className={Classes.HButton}>
                   <p className={Classes.CheckDelvyDate}>Check delivery date</p>
-                  <div className={Classes.ButtonContainer}>
+                  <div
+                    className={Classes.ButtonContainer}
+                    onClick={props.clicked}
+                  >
                     <button className={Classes.tryAtHome}>TRY AT HOME</button>
                     <button className={Classes.buyNow}>Buy Now</button>
                   </div>
                 </div>
               </div>
 
-              <div className={Classes.Price}>
-                <p className={Classes.PriceNew}>
-                  <BiRupee className={Classes.Rupee} />
-                  {props.PriceNew}
-                </p>
-                <p className={Classes.PriceOld}>
-                  {props.PriceOld !== null && (
-                    <BiRupee color="#B0B0B0" className={Classes.Rupee} />
-                  )}
-                  {props.PriceOld !== null && props.PriceOld}
-                </p>
+              <div>
+                <div className={Classes.ParentCardBoxes}>
+                  <div className={Classes.Price}>
+                    <p className={Classes.PriceNew}>
+                      <BiRupee className={Classes.Rupee} />
+                      {props.PriceNew}
+                    </p>
+                    <p className={Classes.PriceOld}>
+                      {props.PriceOld !== null && (
+                        <BiRupee color="#B0B0B0" className={Classes.Rupee} />
+                      )}
+                      {props.PriceOld !== null && props.PriceOld}
+                    </p>
+                  </div>
+                  <div className={Classes.Checkcards}>
+                    <p className={Classes.CheckdeliveryNewtext}>
+                      Check delivery date
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

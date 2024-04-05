@@ -235,9 +235,9 @@ function Footer() {
       </div>
       {/* mobile footer */}
       <div className={Classes.FooterMob}>
-        <div className={Classes.LogoMobScreen}>
+        {/* <div className={Classes.LogoMobScreen}>
           <img className={Classes.Logo} src={Logo} alt="" />
-        </div>
+        </div> */}
         <div className={Classes.ParentCollaps}>
           <Accordion
             multiple
@@ -314,10 +314,44 @@ function Footer() {
                 </div>
               </p>
             </AccordionTab>
+            <AccordionTab header="Swa contact info">
+              <div className={Classes.SwaAddresMob}>
+                <div className={Classes.Address}>
+                  <SiMinutemailer
+                    size={28}
+                    color="#99C7CD"
+                    className={Classes.AddressText}
+                  />
+                  <p className={`${Classes.Links} ${Classes.AddressText}`}>
+                    Ground Floor, 7/688E, Al Wahad, Chenguvetty, Kerala, 676501
+                  </p>
+                </div>
+                <div className={Classes.Address}>
+                  <FaPhoneAlt
+                    color="#99C7CD"
+                    size={15}
+                    className={Classes.AddressText}
+                  />
+                  <p className={`${Classes.Links} ${Classes.AddressText}`}>
+                    Toll Free Number : 1800 257 8600
+                  </p>
+                </div>
+                <div className={Classes.Address}>
+                  <HiOutlineMail
+                    color="#99C7CD"
+                    size={20}
+                    className={Classes.AddressText}
+                  />
+                  <p className={`${Classes.Links} ${Classes.AddressText}`}>
+                    info@swadiamonds.com
+                  </p>
+                </div>
+              </div>
+            </AccordionTab>
           </Accordion>
         </div>
         <div className={Classes.SwaParentInfoMob}>
-          <p className={Classes.Title}>Swa contact info</p>
+          {/* <p className={Classes.Title}>Swa contact info</p>
           <div className={Classes.SwaAddresMob}>
             <div className={Classes.Address}>
               <SiMinutemailer
@@ -349,7 +383,7 @@ function Footer() {
                 info@swadiamonds.com
               </p>
             </div>
-          </div>
+          </div> */}
           <div className={Classes.FollowUsMOB}>
             <p
               style={{ paddingLeft: "20px" }}

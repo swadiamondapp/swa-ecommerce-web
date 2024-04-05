@@ -10,6 +10,25 @@ header {
 .Navbar {
   display: none;
 }
+.mobile-modal {
+  position: absolute;
+  top: 0;
+  right: -100%; /* Initially positioned outside the viewport */
+  transition: transform 0.3s ease-in-out; /* Add transition effect */
+
+  border: none;
+
+  overflow-y: auto;
+  max-height: 100vh;
+  width: 100%;
+  outline: none;
+  transform: translateX(100%); /* Initially translate it out of the viewport */
+}
+
+/* Apply the above styles to the modal content when it's open */
+.mobile-modal.open {
+  transform: translateX(0); /* Translate it back to the viewport */
+}
 .line {
   display: grid;
   grid-template-columns: 1fr 0.8fr 1fr;
