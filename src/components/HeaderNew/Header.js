@@ -39,6 +39,9 @@ const Header = (props) => {
   const [searchKey, setSearchKey] = useState("");
   const [isSticky, setIsSticky] = useState(false);
   const [openDropDown, setOpenDropDown] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState(null);
+  const dropdownRef = useRef(null);
+  const nameRef = useRef(null);
   const isHomePage = window.location.pathname === "/";
   const mobileSearchBarClass = isHomePage
     ? Classes.MobileSearchBar
@@ -240,6 +243,42 @@ const Header = (props) => {
   const handleOpenDropDown = () => {
     setOpenDropDown((prev) => !prev);
   };
+
+  const countries = [
+    { image: IND, text: 'IND' },
+    { image: SAU, text: 'SAU' },
+    { image: UAE, text: 'UAE' },
+    { image: USA, text: 'USA' }
+  ];
+  const handleCountrySelect = (country) => {
+    setSelectedCountry(country);
+    setOpenDropDown(true);
+
+  };
+ 
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (
+        openDropDown &&
+        !dropdownRef.current.contains(event.target) &&
+        !nameRef.current.contains(event.target)
+      ) {
+        setOpenDropDown(false);
+      }
+      if (
+        userDetailsRef.current &&
+        !userDetailsRef.current.contains(event.target)
+      ) {
+        setShowUserDetails(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [openDropDown]);
+
   return (
     <div>
       <TopHeader />
@@ -314,35 +353,19 @@ const Header = (props) => {
             // onClick={Notification}
           /> */}
           <CheckDelivery islog={show} close={closeHanlder} />
-          <div className={Classes.CountryFlags} onClick={handleOpenDropDown}>
-            <img src={indiaimg} />
+          <div className={Classes.CountryFlags} onClick={handleOpenDropDown} ref={nameRef}>
+          <img src={selectedCountry ? selectedCountry.image : IND} alt="Selected flag" />
             {openDropDown && (
-              <div className={Classes.CountryDropDowns}>
-                <div className={Classes.CountryContainer}>
-                  <div className={Classes.contryelements}>
-                    <img src={IND} />
-                    <span>IND</span>
-                  </div>
-                </div>
-                <div className={Classes.CountryContainer}>
-                  <div className={Classes.contryelements}>
-                    <img src={SAU} />
-                    <span>SAU</span>
-                  </div>
-                </div>
-                <div className={Classes.CountryContainer}>
-                  <div className={Classes.contryelements}>
-                    <img src={UAE} />
-                    <span>UAE</span>
-                  </div>
-                </div>
-                <div className={Classes.CountryContainer}>
-                  <div className={Classes.contryelements}>
-                    <img src={USA} />
-                    <span>USA</span>
-                  </div>
-                </div>
-              </div>
+             <div className={Classes.CountryDropDowns} ref={dropdownRef} >
+             {countries.map((country, index) => (
+               <div className={Classes.CountryContainer} key={index}  >
+                 <div className={Classes.contryelements}onClick={() => handleCountrySelect(country)}>
+                   <img src={country.image} alt={country.text} />
+                   <span>{country.text}</span>
+                 </div>
+               </div>
+             ))}
+           </div>
             )}
           </div>
           <CgHeart

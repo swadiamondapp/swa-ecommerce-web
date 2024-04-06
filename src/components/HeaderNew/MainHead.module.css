@@ -1289,10 +1289,8 @@ a {
 }
 .CountryDropDowns {
   position: absolute;
-  display: flex;
-  flex-direction: column;
   background-color: #FFFFFF89;
-  border-radius: 8px;
+  border-radius: 4px;
   margin-top: 10px;
   z-index: 99999999;
 
@@ -1305,21 +1303,30 @@ a {
   display: flex;
   gap:10px;
   width: 100%;
-  border-radius: 8px;
+
   padding:5px 20px
 
 }
+.contryelements img {
+  border-radius: 35%;
+  font-size: 18px;
+ 
+}
+
 
 .CountryContainer {
 display: flex;
 gap:15px;
 justify-content: flex-start;
-
+}
+.CountryContainer:hover {
+  background: #FFFFFF80;
+  border-radius: 4px;
 
 }
-.CountryContainer :hover {
+/* .CountryContainer :hover {
   background-color: #FFFFFF80;
-}
+} */
 .CountryContainer span {
   color: #000000;
   text-align: left;
