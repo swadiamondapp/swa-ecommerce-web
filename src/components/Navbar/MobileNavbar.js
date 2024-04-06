@@ -246,7 +246,7 @@ const MobileNavbar = (props) => {
                 <img src={indiaimg} />
               </div>
             ) : (
-              <div>
+              <div onClick={() => props.setIsHome(!props.isHome)}>
                 <GoSearch style={{ color: "#fff", fontSize: "25px" }} />
               </div>
             )}
