@@ -72,59 +72,58 @@ function CheckOut(props) {
       .email({ tlds: { allow: false } })
       .required()
       .messages({
-        "string.empty": `Emial cannot be empty`,
+        "string.empty": `Please enter your email address.`,
+        "string.email": `Please enter a valid email address.`,
       }),
     sPhone: Joi.string()
       .required()
       .pattern(/^[0-9]{10}$/)
       .messages({
-        "string.empty": "Phone number is missing",
-        "string.pattern.base": "Phone number must be 10 digits",
+        "string.empty": "Please enter your mobile number.",
+        "string.pattern.base": "Please enter a valid 10-digit mobile number.",
       }),
     fullName: Joi.string()
       .required()
       .messages({
-        "string.empty": `Name cannot be empty`,
+        "string.empty": `Please enter your full name.`,
       }),
     mobile: Joi.string()
       .required()
       .pattern(/^[0-9]{10}$/)
       .messages({
-        "string.empty": "Mobile number is missing",
-        "string.pattern.base": "Mobile number must be 10 digits",
+        "string.empty": "Please enter your mobile number.",
+        "string.pattern.base": "Please enter a valid 10-digit mobile number.",
       }),
     pincode: Joi.string()
       .required()
       .max(6)
       .min(6)
       .messages({
-        "string.empty": `cannot be empty`,
-        "string.max": "Pincode cannot exceed 6 digits",
-        "string.min": "Pincode must be at least 6 digits",
+        "string.empty": `Please enter your pincode.`,
+        "string.max": "Pincode must be exactly 6 digits.",
+        "string.min": "Pincode must be exactly 6 digits.",
       }),
     city: Joi.string()
       .required()
       .messages({
-        "string.empty": `cannot be empty`,
+        "string.empty": `En`,
       }),
     state: Joi.string()
       .required()
       .messages({
-        "string.empty": `cannot be empty`,
+        "string.empty": `State is a required field.`,
       }),
     hNumber_Bname: Joi.string()
       .required()
       .messages({
-        "string.empty": `cannot be empty`,
+        "string.empty": `Please enter your house number/building name.`,
       }),
     streetColony: Joi.string()
       .required()
       .messages({
-        "string.empty": `cannot be empty`,
+        "string.empty": `Please enter your street/colony name.`,
       }),
-    landMark: Joi.string().messages({
-      "string.empty": `cannot be empty`,
-    }),
+    landMark: Joi.string().messages({"string.empty":``}),
   });
 
   const formRef = useRef(null);

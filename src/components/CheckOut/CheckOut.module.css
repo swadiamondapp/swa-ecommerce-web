@@ -195,6 +195,14 @@ label {
   padding-top: 25px;
   padding-bottom: 30px;
 }
+
+.parentLocationsPayment {
+  display: flex;
+  grid-template-columns: 1.5fr 1fr;
+  padding-bottom: 30px;
+  padding:10px 0px;
+  font-size: 14px;
+}
 .AddressBar {
   display: flex;
   align-items: center;

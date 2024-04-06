@@ -75,6 +75,8 @@
   padding: 20px;
   background: linear-gradient(0deg, #ffffff, #ffffff);
   box-shadow: 0px 2px 2px 0px #0000000d;
+    overflow-y: scroll;
+    
 }
 
 .DeliverCardHeader {

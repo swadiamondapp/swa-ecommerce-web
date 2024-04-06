@@ -28,7 +28,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import axios from "axios";
 import * as Urls from "../../Urls";
 
-const MobileNavbar = () => {
+const MobileNavbar = (props) => {
   const history = useHistory();
   const [isHamOpen, setIsHamOpen] = useState(false);
   const [open, setOpen] = useState(false);
@@ -39,7 +39,12 @@ const MobileNavbar = () => {
   const [suggestionList, setSuggesionList] = useState([]);
   const userName = localStorage.getItem("userName");
   const [searchKey, setSearchKey] = useState("");
+  const [isSignpuMobileOpen, setIsSignpuMobileOpen] = useState(false);
+
   const isHomePage = window.location.pathname === "/";
+  const mobileSearchBarHide = !isHomePage
+    ? Classes.hideSearchBar
+    : Classes.showSearchBar;
   const handleOpen = () => {
     setOpen(true);
   };
@@ -122,7 +127,10 @@ const MobileNavbar = () => {
     }
   };
   const [showSearchBar, setShowSearchBar] = useState(false);
-
+  const toggleSearchBar = () => {
+    // setShowSearchBar(!showSearchBar);
+    props.setIsHome(!props.isHome);
+  };
   const searchKeyHanlder = (e) => {
     setSearchKey(e.target.value);
     if (e.target.value.length !== 0) {
@@ -192,6 +200,12 @@ const MobileNavbar = () => {
         });
     }
   };
+
+  const handleSignupClick = () => {
+    setOpen(false);
+    setShow(true);
+    setIsSignpuMobileOpen(true);
+  };
   return (
     <div className={Classes.NavContainer}>
       <div className={Classes.Navbar}>
@@ -253,6 +267,52 @@ const MobileNavbar = () => {
               />
             </div>
           </div>
+          {/* {showSearchBar && (
+            <div className={Classes.ParentSearchBar}>
+              <div>
+                <BsArrowLeft
+                  className={Classes.Arrowline32}
+                  onClick={toggleSearchBar}
+                />
+              </div>
+              <div className={Classes.MobParentSearchBars}>
+                <input
+                  placeholder="Search your orders"
+                  value={searchKey}
+                  onChange={searchKeyHanlder}
+                />
+                {searchKey.length === 0 && (
+                  <>
+                    <GoSearch className={Classes.Gosearch1} />
+                    <IoMdClose
+                      className={Classes.Closesearch1}
+                      onClick={toggleSearchBar}
+                    />
+                  </>
+                )}
+              </div>
+            </div>
+          )}
+          <div
+            className={Classes.searchListCont2}
+            style={{ display: searchShow ? "block" : "none" }}
+          >
+            {suggestionList.length !== 0 ? (
+              suggestionList.map((item, index) => {
+                return (
+                  <p
+                    className={Classes.SearchItem}
+                    key={index}
+                    onClick={() => searchTitleHandler(item)}
+                  >
+                    {item.name}
+                  </p>
+                );
+              })
+            ) : (
+              <p className={Classes.NoResult}>No Results Found</p>
+            )}
+          </div> */}
         </header>
         {/* {isHamOpen ? (
           <>
@@ -264,6 +324,7 @@ const MobileNavbar = () => {
           <></>
         )} */}
       </div>
+
       <Modal
         // open={props.open}
         open={show}
@@ -272,11 +333,13 @@ const MobileNavbar = () => {
       >
         <Box sx={isMobileView && mobileStyleLogin}>
           <Typography>
-            <LoginToggle onClose={() => setShow(false)} />
+            <LoginToggle
+              onClose={() => setShow(false)}
+              isSignpuMobile={isSignpuMobileOpen}
+            />
           </Typography>
         </Box>
       </Modal>
-
       <Modal
         // open={props.open}
         open={open}
@@ -307,19 +370,13 @@ const MobileNavbar = () => {
                         onClick={() => {
                           setOpen(false);
                           setShow(true);
+                          setIsSignpuMobileOpen(false);
                         }}
                       >
                         Login
                       </p>
                       <p className={Classes.BorderLineMob}></p>
-                      <p
-                        onClick={() => {
-                          setOpen(false);
-                          setShow(true);
-                        }}
-                      >
-                        Sign up
-                      </p>
+                      <p onClick={handleSignupClick}>Sign up</p>
                     </div>
                   )}
                 </div>

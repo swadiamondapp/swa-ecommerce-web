@@ -116,7 +116,15 @@ const LoginToggle = (props) => {
   const handleSignupModalOpen = () => {
     setSignupModal(true);
     setIsSignup(true);
+
   };
+  useEffect(() => {
+    // Check if props.LoginSignupToggle is true
+    if (props.LoginSignupToggle || props.isSignpuMobile) {
+      // If true, set isSignup to true
+      setIsSignup(true);
+    }
+  }, [props.LoginSignupToggle]);
   const handleLoginModalOpen = () => {
     setIsSignup(false);
   };
@@ -408,7 +416,7 @@ const LoginToggle = (props) => {
   return (
     <div className={Classes.loginToffle}>
       <div className={Classes.Wrapper}>
-        {isSignup ? (
+        {isSignup ?  (
           <>
             <div className={Classes.SignupWrapper}>
               <div className={Classes.signupContainer}>

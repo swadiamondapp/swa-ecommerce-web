@@ -1,5 +1,6 @@
-import TopHeader from "./TopHeader";
 import React, { useState, useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom/cjs/react-router-dom";
+import TopHeader from "./TopHeader";
 import Classes from "./MainHead.module.css";
 import MainHead from "./MainHead";
 import { BsPerson, BsEye, BsEyeSlash } from "react-icons/bs";
@@ -18,8 +19,16 @@ import CheckDelivery from "../CheckDelivery/CheckDelivery";
 import indiaimg from "../../Assets/india.png";
 import logedimg from "../../Assets/loged.png";
 import { IoIosArrowDown } from "react-icons/io";
+import USA from "../../Assets/flagUsa.svg";
+import SAU from "../../Assets/flagSAU.svg";
+import IND from "../../Assets/flagIND.svg";
+import UAE from "../../Assets/flagUAE.svg";
 
 const Header = (props) => {
+  const location = useLocation();
+  const [isHome, setIsHome] = useState(
+    location.pathname === "/" ? true : false
+  );
   const [show, setShow] = useState(false);
   const [catgSet, setCatgSet] = useState([]);
   const [category, setCategory] = useState([]);
@@ -29,6 +38,10 @@ const Header = (props) => {
   const [suggestionList, setSuggesionList] = useState([]);
   const [searchKey, setSearchKey] = useState("");
   const [isSticky, setIsSticky] = useState(false);
+  const [openDropDown, setOpenDropDown] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState(null);
+  const dropdownRef = useRef(null);
+  const nameRef = useRef(null);
   const isHomePage = window.location.pathname === "/";
   const mobileSearchBarClass = isHomePage
     ? Classes.MobileSearchBar
@@ -227,10 +240,49 @@ const Header = (props) => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+  const handleOpenDropDown = () => {
+    setOpenDropDown((prev) => !prev);
+  };
+
+  const countries = [
+    { image: IND, text: 'IND' },
+    { image: SAU, text: 'SAU' },
+    { image: UAE, text: 'UAE' },
+    { image: USA, text: 'USA' }
+  ];
+  const handleCountrySelect = (country) => {
+    setSelectedCountry(country);
+    setOpenDropDown(true);
+
+  };
+ 
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (
+        openDropDown &&
+        !dropdownRef.current.contains(event.target) &&
+        !nameRef.current.contains(event.target)
+      ) {
+        setOpenDropDown(false);
+      }
+      if (
+        userDetailsRef.current &&
+        !userDetailsRef.current.contains(event.target)
+      ) {
+        setShowUserDetails(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [openDropDown]);
+
   return (
     <div>
       <TopHeader />
-      <MainHead>
+      <MainHead setIsHome={setIsHome} isHome={isHome}>
         <div className={Classes.SearchIcons}>
           <div className={Classes.searchList}>
             {/* <label className={Classes.SearchlabelAnimate}>
@@ -301,7 +353,21 @@ const Header = (props) => {
             // onClick={Notification}
           /> */}
           <CheckDelivery islog={show} close={closeHanlder} />
-          <img src={indiaimg} />
+          <div className={Classes.CountryFlags} onClick={handleOpenDropDown} ref={nameRef}>
+          <img src={selectedCountry ? selectedCountry.image : IND} alt="Selected flag" />
+            {openDropDown && (
+             <div className={Classes.CountryDropDowns} ref={dropdownRef} >
+             {countries.map((country, index) => (
+               <div className={Classes.CountryContainer} key={index}  >
+                 <div className={Classes.contryelements}onClick={() => handleCountrySelect(country)}>
+                   <img src={country.image} alt={country.text} />
+                   <span>{country.text}</span>
+                 </div>
+               </div>
+             ))}
+           </div>
+            )}
+          </div>
           <CgHeart
             className={Classes.Icon}
             color="#FFFFFF"
@@ -430,8 +496,8 @@ const Header = (props) => {
           <div className={Classes.DiwaliOffers}>
             Diwali offer - 10% on every purchase 🥳
           </div>
-          <div className="container">
-            {isHomePage && (
+          {isHome && (
+            <div className="container">
               <div
                 style={{
                   position: "relative",
@@ -462,8 +528,8 @@ const Header = (props) => {
                   style={{ display: searchShow ? "none" : "block" }}
                 />
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       )}
       {isHomePage && (
