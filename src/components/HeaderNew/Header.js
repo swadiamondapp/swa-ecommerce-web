@@ -40,6 +40,7 @@ const Header = (props) => {
   const [isSticky, setIsSticky] = useState(false);
   const [openDropDown, setOpenDropDown] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState(null);
+  const [countryData,setCountryData] = useState([]);
   const dropdownRef = useRef(null);
   const nameRef = useRef(null);
   const isHomePage = window.location.pathname === "/";
@@ -104,6 +105,7 @@ const Header = (props) => {
       setShow(true);
     }
   };
+
 
   const catSelHandler = (id) => {
     if (history.location.pathname !== "/new_arrivel") {
@@ -250,6 +252,20 @@ const Header = (props) => {
     { image: UAE, text: 'UAE' },
     { image: USA, text: 'USA' }
   ];
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(Urls.getCountry);
+        setCountryData(response.results.data.results); // Corrected the typo here
+      } catch (error) {
+        console.error('Error fetching country details:', error);
+      }
+    };
+  
+    fetchData();
+  }, []);
+
   const handleCountrySelect = (country) => {
     setSelectedCountry(country);
     setOpenDropDown(true);
@@ -353,7 +369,7 @@ const Header = (props) => {
             // onClick={Notification}
           /> */}
           <CheckDelivery islog={show} close={closeHanlder} />
-          <div className={Classes.CountryFlags} onClick={handleOpenDropDown} ref={nameRef}>
+          <div className={`${Classes.CountryFlags} ${Classes.headerElement}`} onClick={handleOpenDropDown} ref={nameRef}>
           <img src={selectedCountry ? selectedCountry.image : IND} alt="Selected flag" />
             {openDropDown && (
              <div className={Classes.CountryDropDowns} ref={dropdownRef} >
@@ -369,14 +385,14 @@ const Header = (props) => {
             )}
           </div>
           <CgHeart
-            className={Classes.Icon}
+            className={`${Classes.Icon} ${Classes.headerElement}`}
             color="#FFFFFF"
             size={25}
             onClick={moveToWishList}
           />
           <div className={Classes.CartItemNum}>
             <IoCartOutline
-              className={`${Classes.Icon} ${Classes.AddToCart}`}
+              className={`${Classes.Icon} ${Classes.AddToCart} ${Classes.headerElement}`}
               color="#FFFFFF"
               size={25}
               onClick={moveTocart}

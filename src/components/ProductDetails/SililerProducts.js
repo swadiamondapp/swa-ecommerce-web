@@ -11,6 +11,7 @@ import axios from "axios";
 const SililerProducts = (props) => {
   const history = useHistory();
   const [similarProducts, setSimilarProducts] = useState([]);
+  const [slidesToShow,setSlidesToShow] = useState(5)
 
   useEffect(() => {
     similarProduct();
@@ -42,6 +43,21 @@ const SililerProducts = (props) => {
       state: { data: prodItem },
     });
   };
+  const numberOfProducts = similarProducts.length;
+  const handleAfterChange = (currentSlide) => {
+    console.log(`Slide transition completed. Current slide index: ${currentSlide}`);
+    if (numberOfProducts === 1) {
+      setSlidesToShow(1);
+    } else if (numberOfProducts === 2) {
+      setSlidesToShow(2);
+    } else if (numberOfProducts === 3) {
+      setSlidesToShow(3);
+    } else if (numberOfProducts === 4) {
+      setSlidesToShow(4);
+    } else if (numberOfProducts > 5) {
+      setSlidesToShow(5);
+    }
+  };
 
   return (
     <div style={{ marginTop: "20px" }}>
@@ -50,16 +66,18 @@ const SililerProducts = (props) => {
         <div className={Classes.CatList1}>
           <div className="container">
             <div className={Classes.Web}>
-              <div className={Classes.CarouselCards}>
+              <div className={Classes.CarouselCards} style={{display:'flex',flexDirection:'column'}}>
                 <Carousel
                   autoplay
-                  slidesToShow={5}
+                  slidesToShow={slidesToShow}
                   dots={false}
-                  centerMode={true}
+                  centerMode={false} 
                   draggable={true}
                   centerPadding="5px"
                   className={Classes.ResponsiveCarousel}
+                  beforeChange={handleAfterChange}
                   responsive={[
+                    
                     {
                       breakpoint: 1200,
                       settings: {
@@ -87,7 +105,7 @@ const SililerProducts = (props) => {
                       onClick={() => prodDetHandler(item)}
                     >
                       <img
-                        style={{ width: "100%", height: "205px" }}
+                       style={{ width: similarProducts.length < 3 ? "25%" : "100%", height: "205px" }}
                         className={Classes.SlideImage}
                         src={item.thumbnail_image}
                         alt={`catg-${index}`}
