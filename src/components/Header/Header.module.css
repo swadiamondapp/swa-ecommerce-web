@@ -584,6 +584,10 @@ a {
   background: #fff;
   opacity: 0.3;
 }
+.headerElement:hover {
+  transform: scale(1.0) translateY(-2px); /* Scale up and slightly move upwards */
+  transition: transform 0.3s ease; /* Add smooth transition effect */
+}
 
 @media (max-width: 1200px) {
   .Icon {

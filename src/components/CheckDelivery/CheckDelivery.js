@@ -76,7 +76,10 @@ const CheckDelivery = (props) => {
   return (
     <>
       <div className={Classes.LogList}>
-        <div className={Classes.DeliveryPin}>
+        <div
+          className={`${Classes.DeliveryPin} ${Classes.headerElement}`}
+          onClick={loginClickHandler}
+        >
           <span className={Classes.checkDeliveryTitle}>CHECK DELIVERY</span>
           {pincode ? null : (
             <span

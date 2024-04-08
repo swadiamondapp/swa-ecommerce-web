@@ -68,13 +68,13 @@ function CheckOut(props) {
   const [token, setToken] = useState(localStorage.getItem("swaToken"));
   var alphaExp = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
   const schema = Joi.object({
-    sEmail: Joi.string()
-      .email({ tlds: { allow: false } })
+    sEmail: Joi
+      .string()
       .required()
       .messages({
         "string.empty": `Please enter your email address.`,
         "string.email": `Please enter a valid email address.`,
-      }),
+      }).email({ tlds: { allow: false } }),
     sPhone: Joi.string()
       .required()
       .pattern(/^[0-9]{10}$/)
@@ -106,12 +106,12 @@ function CheckOut(props) {
     city: Joi.string()
       .required()
       .messages({
-        "string.empty": `En`,
+        "string.empty": `Please Provide Necessary Details`,
       }),
     state: Joi.string()
       .required()
       .messages({
-        "string.empty": `State is a required field.`,
+        "string.empty": `State is a required field`,
       }),
     hNumber_Bname: Joi.string()
       .required()
@@ -123,7 +123,7 @@ function CheckOut(props) {
       .messages({
         "string.empty": `Please enter your street/colony name.`,
       }),
-    landMark: Joi.string().messages({"string.empty":``}),
+    landMark: Joi.string().messages({ "string.empty": `` }),
   });
 
   const formRef = useRef(null);

@@ -21,7 +21,7 @@ const MainHead = (props) => {
           <div className={Classes.SwaHead}>
             <div
               id="brand"
-              className={Classes.logo}
+              className={`${Classes.logo} ${Classes.headerElement}`}
               onClick={landingPageHandler}
             >
               <img src={Logo} alt="logo" />

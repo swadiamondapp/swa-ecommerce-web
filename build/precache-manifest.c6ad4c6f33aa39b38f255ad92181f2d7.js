@@ -1,5 +1,6 @@
 self.__precacheManifest = [
   {
+<<<<<<<< HEAD:build/precache-manifest.c6ad4c6f33aa39b38f255ad92181f2d7.js
     "revision": "c66c49e2f37b035571b0",
     "url": "/static/css/main.30c82019.chunk.css"
   },
@@ -26,6 +27,30 @@ self.__precacheManifest = [
   {
     "revision": "e017c7004fe73c4133206daa54d04069",
     "url": "/static/media/mobile_foot.e017c700.png"
+========
+    "revision": "ea598f04e0a0abc48c6e",
+    "url": "/static/css/main.d4147aa2.chunk.css"
+  },
+  {
+    "revision": "ea598f04e0a0abc48c6e",
+    "url": "/static/js/main.ea598f04.chunk.js"
+  },
+  {
+    "revision": "080ee49b55ecacd28995",
+    "url": "/static/js/1.080ee49b.chunk.js"
+  },
+  {
+    "revision": "a8d6af04fbf7e098e353",
+    "url": "/static/css/2.ab9bebad.chunk.css"
+  },
+  {
+    "revision": "a8d6af04fbf7e098e353",
+    "url": "/static/js/2.a8d6af04.chunk.js"
+  },
+  {
+    "revision": "1f34af1e0b9a196b2356",
+    "url": "/static/js/runtime~main.1f34af1e.js"
+>>>>>>>> April_6/Build:build/precache-manifest.00457724fde4fe53701bd824f35d901e.js
   },
   {
     "revision": "8bc6d3508a6694dd7ba68d5bb9a0ce69",
@@ -36,6 +61,7 @@ self.__precacheManifest = [
     "url": "/static/media/flagIND.df34a5d0.svg"
   },
   {
+<<<<<<<< HEAD:build/precache-manifest.c6ad4c6f33aa39b38f255ad92181f2d7.js
     "revision": "127f4b15c2403634c26c975259a705d6",
     "url": "/static/media/desklogo.127f4b15.svg"
   },
@@ -72,6 +98,12 @@ self.__precacheManifest = [
     "url": "/static/media/cartempty.b8cc3851.png"
   },
   {
+========
+    "revision": "b8cc3851f7e18fae66f393a55a4e0d79",
+    "url": "/static/media/cartempty.b8cc3851.png"
+  },
+  {
+>>>>>>>> April_6/Build:build/precache-manifest.00457724fde4fe53701bd824f35d901e.js
     "revision": "37d8213ebce30110ed48cb2b9ce93f1b",
     "url": "/static/media/PD4.37d8213e.svg"
   },
@@ -108,6 +140,41 @@ self.__precacheManifest = [
     "url": "/static/media/new1.79e08694.png"
   },
   {
+<<<<<<<< HEAD:build/precache-manifest.c6ad4c6f33aa39b38f255ad92181f2d7.js
+========
+    "revision": "127f4b15c2403634c26c975259a705d6",
+    "url": "/static/media/desklogo.127f4b15.svg"
+  },
+  {
+    "revision": "ca5ba4d8b5f5a3494423d43b58736d52",
+    "url": "/static/media/moblogo.ca5ba4d8.svg"
+  },
+  {
+    "revision": "a96ecd13655587d30a21265c547cd8aa",
+    "url": "/static/media/PlayfairDisplay-Regular.a96ecd13.ttf"
+  },
+  {
+    "revision": "fcc40ae9a542d001971e53eaed948410",
+    "url": "/static/media/Poppins-Light.fcc40ae9.ttf"
+  },
+  {
+    "revision": "31ff7c1a62a300dbbf9656b4ba14a0d5",
+    "url": "/static/media/Gilroy-Regular.31ff7c1a.ttf"
+  },
+  {
+    "revision": "079af0e2936ccb99b391ddc0bbb73dcb",
+    "url": "/static/media/Inter-Regular.079af0e2.ttf"
+  },
+  {
+    "revision": "122dd68d69fe9587e062d20d9ff5de2a",
+    "url": "/static/media/Lato-Regular.122dd68d.ttf"
+  },
+  {
+    "revision": "5d08cc9fffd565a2b9d9baae3846cb65",
+    "url": "/static/media/Gilroy-MediumItalic.5d08cc9f.ttf"
+  },
+  {
+>>>>>>>> April_6/Build:build/precache-manifest.00457724fde4fe53701bd824f35d901e.js
     "revision": "18f2b8f44872330f4f8b7863209f37a4",
     "url": "/static/media/flagUsa.18f2b8f4.svg"
   },
@@ -180,7 +247,11 @@ self.__precacheManifest = [
     "url": "/static/media/DownloadOurApp.aea49ef9.png"
   },
   {
+<<<<<<<< HEAD:build/precache-manifest.c6ad4c6f33aa39b38f255ad92181f2d7.js
     "revision": "61a811ee7b875204aaec63c8d10822bf",
+========
+    "revision": "7c1bd6fc82f2315137fa91a892c6897a",
+>>>>>>>> April_6/Build:build/precache-manifest.00457724fde4fe53701bd824f35d901e.js
     "url": "/index.html"
   }
 ];

@@ -549,14 +549,14 @@ const LoginModal = (props) => {
       </div> */}
       {userName ? (
         <div className={Classes.LogedUser}>
-          <img src={logedimg} />
-          <p ref={nameRef} onClick={handleLogedUserClick}>
+          <img src={logedimg} className={Classes.headerElement} />
+          <p ref={nameRef} onClick={handleLogedUserClick} className={Classes.headerElement}>
             {userName}
           </p>
-          <IoIosArrowDown />
+          <IoIosArrowDown className={Classes.headerElement}  />
         </div>
       ) : (
-        <div className={Classes.LoginSignup}>
+        <div className={`${Classes.LoginSignup} ${Classes.headerElement}`}>
           <div
             className={Classes.dLogin}
             onClick={() => {

@@ -1333,6 +1333,11 @@ justify-content: flex-start;
   font-size: 14px ;
   font-weight: 500;
 }
+.headerElement:hover {
+  transform: scale(1.1) translateY(-3px);; /* Increase the scale on hover */
+  transition: transform 0.3s ease; /* Add smooth transition effect */
+}
+
 
 /* @media (min-width: 767px) and (max-width: 1200px) {
   .NavContainer {
