@@ -1,13 +1,12 @@
 {
-<<<<<<< HEAD
-  "main.css": "/static/css/main.30c82019.chunk.css",
-  "main.js": "/static/js/main.c66c49e2.chunk.js",
-  "main.js.map": "/static/js/main.c66c49e2.chunk.js.map",
+  "main.css": "/static/css/main.4083b5d7.chunk.css",
+  "main.js": "/static/js/main.8afc297b.chunk.js",
+  "main.js.map": "/static/js/main.8afc297b.chunk.js.map",
   "static/js/1.734a9f04.chunk.js": "/static/js/1.734a9f04.chunk.js",
   "static/js/1.734a9f04.chunk.js.map": "/static/js/1.734a9f04.chunk.js.map",
   "static/css/2.653d89be.chunk.css": "/static/css/2.653d89be.chunk.css",
-  "static/js/2.f4eda6bd.chunk.js": "/static/js/2.f4eda6bd.chunk.js",
-  "static/js/2.f4eda6bd.chunk.js.map": "/static/js/2.f4eda6bd.chunk.js.map",
+  "static/js/2.a5628a02.chunk.js": "/static/js/2.a5628a02.chunk.js",
+  "static/js/2.a5628a02.chunk.js.map": "/static/js/2.a5628a02.chunk.js.map",
   "runtime~main.js": "/static/js/runtime~main.12a60ccd.js",
   "runtime~main.js.map": "/static/js/runtime~main.12a60ccd.js.map",
   "static/media/DownloadOurApp.module.css": "/static/media/downBg.8bc6d350.png",
@@ -15,20 +14,6 @@
   "static/media/desklogo.svg": "/static/media/desklogo.127f4b15.svg",
   "static/media/moblogo.svg": "/static/media/moblogo.ca5ba4d8.svg",
   "static/media/index.css": "/static/media/Lato-Regular.122dd68d.ttf",
-=======
-  "main.css": "/static/css/main.d4147aa2.chunk.css",
-  "main.js": "/static/js/main.ea598f04.chunk.js",
-  "main.js.map": "/static/js/main.ea598f04.chunk.js.map",
-  "static/js/1.080ee49b.chunk.js": "/static/js/1.080ee49b.chunk.js",
-  "static/js/1.080ee49b.chunk.js.map": "/static/js/1.080ee49b.chunk.js.map",
-  "static/css/2.ab9bebad.chunk.css": "/static/css/2.ab9bebad.chunk.css",
-  "static/js/2.a8d6af04.chunk.js": "/static/js/2.a8d6af04.chunk.js",
-  "static/js/2.a8d6af04.chunk.js.map": "/static/js/2.a8d6af04.chunk.js.map",
-  "runtime~main.js": "/static/js/runtime~main.1f34af1e.js",
-  "runtime~main.js.map": "/static/js/runtime~main.1f34af1e.js.map",
-  "static/media/DownloadOurApp.module.css": "/static/media/downBg.8bc6d350.png",
-  "static/media/flagIND.svg": "/static/media/flagIND.df34a5d0.svg",
->>>>>>> April_6/Build
   "static/media/cartempty.png": "/static/media/cartempty.b8cc3851.png",
   "static/media/PD4.svg": "/static/media/PD4.37d8213e.svg",
   "static/media/phonepay.svg": "/static/media/phonepay.8ebb1811.svg",
@@ -39,12 +24,6 @@
   "static/media/RingRotate.png": "/static/media/RingRotate.2530d38f.png",
   "static/media/BringTheParty1.png": "/static/media/BringTheParty1.9a463265.png",
   "static/media/new1.png": "/static/media/new1.79e08694.png",
-<<<<<<< HEAD
-=======
-  "static/media/desklogo.svg": "/static/media/desklogo.127f4b15.svg",
-  "static/media/moblogo.svg": "/static/media/moblogo.ca5ba4d8.svg",
-  "static/media/index.css": "/static/media/Gilroy-MediumItalic.5d08cc9f.ttf",
->>>>>>> April_6/Build
   "static/media/flagUsa.svg": "/static/media/flagUsa.18f2b8f4.svg",
   "static/media/flagSAU.svg": "/static/media/flagSAU.2eed76e0.svg",
   "static/media/flagUAE.svg": "/static/media/flagUAE.c03ae76a.svg",
@@ -63,16 +42,9 @@
   "static/media/swabanner2.png": "/static/media/swabanner2.4698ce1a.png",
   "static/media/swabanner3.png": "/static/media/swabanner3.c83238f7.png",
   "static/media/DownloadOurApp.png": "/static/media/DownloadOurApp.aea49ef9.png",
-<<<<<<< HEAD
+  "static/css/main.4083b5d7.chunk.css.map": "/static/css/main.4083b5d7.chunk.css.map",
   "static/css/2.653d89be.chunk.css.map": "/static/css/2.653d89be.chunk.css.map",
-  "static/css/main.30c82019.chunk.css.map": "/static/css/main.30c82019.chunk.css.map",
   "index.html": "/index.html",
-  "precache-manifest.c6ad4c6f33aa39b38f255ad92181f2d7.js": "/precache-manifest.c6ad4c6f33aa39b38f255ad92181f2d7.js",
-=======
-  "static/css/main.d4147aa2.chunk.css.map": "/static/css/main.d4147aa2.chunk.css.map",
-  "static/css/2.ab9bebad.chunk.css.map": "/static/css/2.ab9bebad.chunk.css.map",
-  "index.html": "/index.html",
-  "precache-manifest.00457724fde4fe53701bd824f35d901e.js": "/precache-manifest.00457724fde4fe53701bd824f35d901e.js",
->>>>>>> April_6/Build
+  "precache-manifest.001222369c51b6857357911a8b00959e.js": "/precache-manifest.001222369c51b6857357911a8b00959e.js",
   "service-worker.js": "/service-worker.js"
 }
