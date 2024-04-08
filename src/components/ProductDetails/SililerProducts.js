@@ -47,15 +47,15 @@ const SililerProducts = (props) => {
   const handleAfterChange = (currentSlide) => {
     console.log(`Slide transition completed. Current slide index: ${currentSlide}`);
     if (numberOfProducts === 1) {
-      setSlidesToShow(1);
-    } else if (numberOfProducts === 2) {
       setSlidesToShow(2);
-    } else if (numberOfProducts === 3) {
+    } else if (numberOfProducts === 2) {
       setSlidesToShow(3);
-    } else if (numberOfProducts === 4) {
+    } else if (numberOfProducts === 3) {
       setSlidesToShow(4);
-    } else if (numberOfProducts > 5) {
+    } else if (numberOfProducts === 4) {
       setSlidesToShow(5);
+    } else if (numberOfProducts > 5) {
+      setSlidesToShow(numberOfProducts);
     }
   };
 
@@ -70,10 +70,9 @@ const SililerProducts = (props) => {
                 <Carousel
                   autoplay
                   slidesToShow={slidesToShow}
-                  dots={false}
-                  centerMode={false} 
-                  draggable={true}
-                  centerPadding="5px"
+                  
+                 
+               
                   className={Classes.ResponsiveCarousel}
                   beforeChange={handleAfterChange}
                   responsive={[
@@ -105,7 +104,7 @@ const SililerProducts = (props) => {
                       onClick={() => prodDetHandler(item)}
                     >
                       <img
-                       style={{ width: similarProducts.length < 3 ? "25%" : "100%", height: "205px" }}
+                       style={{ width: similarProducts.length < 3 ? "auto" : "100%", height: "205px" }}
                         className={Classes.SlideImage}
                         src={item.thumbnail_image}
                         alt={`catg-${index}`}

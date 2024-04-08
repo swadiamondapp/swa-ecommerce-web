@@ -125,7 +125,7 @@ const ProductDetailsPage = (props) => {
       });
   }, []);
   const buyProductHandler = () => {
-    if (size !== "") {
+    if (size === "") {
       setError("");
       let total;
       if (prodDet.is_on_discount) {
