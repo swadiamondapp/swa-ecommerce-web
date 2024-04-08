@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import moment from "moment";
 import Ring from "../../Assets/new4.png";
+import Videoimg from "../../Assets/vedioimg.png";
 import RingFlip from "../../Assets/Ringflip.png";
 import RingRotate from "../../Assets/RingRotate.png";
 import { useHistory } from "react-router-dom";
@@ -49,6 +50,7 @@ const ProductDetails = (props) => {
   const [productDetails, setProductDetails] = useState([]);
   const ratingRef = useRef(null);
   const [showErrorModal, setShowErrorModal] = useState(false);
+  const [videoSection, setVideoSection] = useState("");
 
   const handleImageClick = () => {
     if (ratingRef.current) {
@@ -110,7 +112,8 @@ const ProductDetails = (props) => {
   const colorSelectHandler = (color) => {
     props.colorSelct(color);
   };
-  const bagImgHandler = (imgUrl) => {
+  const bagImgHandler = (imgUrl, item) => {
+    item === "false" ? setVideoSection(false) : setVideoSection(true);
     props.bagImgSelect(imgUrl);
   };
   const pinCodeChangeHandler = (e) => {
@@ -187,12 +190,18 @@ const ProductDetails = (props) => {
 
   const videoUrl = props.bagImg.filter((item) => item.endsWith(".mp4"));
   const addToCartHandler = () => {
-    console.log("....", props.selectedSize);
-    if (!props.Size) {
-      setShowErrorModal(true);
-      setTimeout(() => {
-        setShowErrorModal(false);
-      }, 3000); // Hide modal after 5 seconds
+    console.log("....", props.size);
+    // if (!props.Size) {
+    if (props.sizeChart.length > 0) {
+      if (!props.Size) {
+        setShowErrorModal(true);
+        setTimeout(() => {
+          setShowErrorModal(false);
+        }, 3000);
+      } else {
+        props.cartAdd();
+      }
+      // Hide modal after 5 seconds
     } else {
       // Proceed with adding to cart logic
       props.cartAdd();
@@ -201,6 +210,8 @@ const ProductDetails = (props) => {
   const sizeChangeHandler = (e) => {
     props.sizeChange(e.target.value);
   };
+
+  console.log("props.thumbImg,", props.thumbImg);
 
   return (
     <div>
@@ -212,25 +223,46 @@ const ProductDetails = (props) => {
               <div className="container">
                 <div className="row">
                   <div className={`col-md-10 ${Classes.MobProductDetails2}`}>
-                    <div className={Classes.ImageWishList}>
-                      <img
-                        className={Classes.LargeImage}
-                        src={props.thumbImg}
-                        alt=""
-                      />
-                      <div
-                        style={{ cursor: "pointer" }}
-                        className={Classes.rateStar8}
-                        onClick={handleImageClick}
-                      >
-                        {/* {props.avgR} */}
-                        {parseFloat(props.avgR).toFixed(0)}
-                        <MdOutlineStarPurple500
-                          className={Classes.starrate8}
-                        />{" "}
-                        {props.count}
+                    {!videoSection && (
+                      <div className={Classes.ImageWishList}>
+                        <img
+                          className={Classes.LargeImage}
+                          src={props.thumbImg}
+                          alt=""
+                        />
+
+                        <div
+                          style={{ cursor: "pointer" }}
+                          className={Classes.rateStar8}
+                          onClick={handleImageClick}
+                        >
+                          {/* {props.avgR} */}
+                          {parseFloat(props.avgR).toFixed(0)}
+                          <MdOutlineStarPurple500
+                            className={Classes.starrate8}
+                          />{" "}
+                          {props.count}
+                        </div>
                       </div>
-                    </div>
+                    )}
+                    {/* video play */}
+                    {videoSection && (
+                      <div className={Classes.ImageWishList1}>
+                        {/* <iframe
+                          title="autoplay-video"
+                          style={{ width: "429px", height: "429px" }}
+                          src={props.thumbImg}
+                          autoPlay
+                          loop
+                        ></iframe> */}
+                        <video
+                          style={{ width: "429px", height: "429px" }}
+                          src={props.thumbImg}
+                          autoPlay
+                          loop
+                        />
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -245,19 +277,27 @@ const ProductDetails = (props) => {
                             className={Classes.ImageSmall}
                             src={item}
                             alt=""
-                            onClick={() => bagImgHandler(item)}
+                            onClick={() => bagImgHandler(item, "false")}
                           />
                         </div>
                       );
                     })}
                     {props.Video.map((item, index) => {
                       return (
-                        <>
-                          <iframe
-                            style={{ width: "73px", height: "73px" }}
-                            src={item}
+                        <div
+                          onClick={() => bagImgHandler(item, "true")}
+                          style={{ cursor: "pointer" }}
+                        >
+                          <img
+                            style={{
+                              width: "73px",
+                              height: "73px",
+                              border: "0.5px solid #80808026",
+                              borderRadius: "4px",
+                            }}
+                            src={Videoimg}
                           />
-                        </>
+                        </div>
                       );
                     })}
                   </div>

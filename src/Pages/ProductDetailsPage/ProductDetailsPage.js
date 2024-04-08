@@ -202,33 +202,34 @@ const ProductDetailsPage = (props) => {
       // total: total,
     };
 
-    if (size !== "") {
-      setError("");
-      if (token !== null) {
-        axios
-          .post(Urls.cart, body, {
-            headers: { Authorization: "Token " + token },
-          })
-          .then((response1) => {
-            if (response1.data.results.status_code === 200) {
-              let count = cartCount;
-              count = count + 1;
-              setCartCount(count);
-              history.push("/cart");
-            }
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      } else {
-        history.push({
-          pathname: "/checkout",
-          state: { data: selProd },
+    // if (size !== "") {
+    //   setError("");
+    if (token !== null) {
+      axios
+        .post(Urls.cart, body, {
+          headers: { Authorization: "Token " + token },
+        })
+        .then((response1) => {
+          if (response1.data.results.status_code === 200) {
+            let count = cartCount;
+            count = count + 1;
+            setCartCount(count);
+            history.push("/cart");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
         });
-      }
     } else {
-      setError("Select Size");
+      history.push({
+        pathname: "/checkout",
+        state: { data: selProd },
+      });
     }
+    // }
+    // else {
+    //   setError("Select Size");
+    // }
   };
   const sizeChangeHandler = (size) => {
     setSize(size);

@@ -100,7 +100,7 @@ const TagSearch = (props) => {
   useEffect(() => {
     window.scrollTo(0, 0);
     filter("?occasion_tag_ids=" + props.match.params.id, 1);
-    setHead("Products");
+    setHead("Product List");
     setOccn(props.match.params.id);
   }, []);
   const filterCatHandler = (filtSet) => {

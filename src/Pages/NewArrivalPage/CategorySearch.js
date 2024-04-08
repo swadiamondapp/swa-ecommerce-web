@@ -104,7 +104,7 @@ const CategorySearch = (props) => {
 
     filter("?category_ids=" + props.match.params.id, 1);
     setCatSet(props.match.params.id);
-    setHead("Products");
+    setHead("Product List");
   }, []);
   const filterCatHandler = (filtSet) => {
     let delimiter = ", ";

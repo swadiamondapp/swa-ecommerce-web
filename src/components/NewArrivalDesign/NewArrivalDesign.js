@@ -23,7 +23,10 @@ const NewArrivalPage = (props) => {
       <div className={Classes.ParentMain}>
         <div className={Classes.child1Main}>
           <div className={Classes.Main}>
-            <h1 className={Classes.Title}>{props.head}</h1>
+            <h1 className={Classes.Title}>
+              {props.categoryName || "NEW ARRIVALS"}
+              {/* {props.head} */}
+            </h1>
             <div className={Classes.Found}>
               {props.count}&nbsp;&nbsp;products found
             </div>

@@ -74,6 +74,9 @@ const OrderHistoryPage = () => {
         >
           <Orders
             Image={item.shipments[0] && item.shipments[0].bag_image}
+            ShipmentStatus={
+              item.shipments[0] && item.shipments[0].shipment_status
+            }
             productId={item.shipments[0] && item.shipments[0].product_id}
             productName={item.shipments[0] && item.shipments[0].product_name}
             orderId={item.order_code}

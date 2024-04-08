@@ -60,6 +60,7 @@ function Orders(props) {
       <div className={Classes.ProductName}>
         <p>Order ID : {props.orderId}</p>
       </div>
+      {console.log("shipment__status?", props.ShipmentStatus)}
       <div className={Classes.BottomContainer}>
         <div className={Classes.MobImgContainer}>
           <div className={Classes.ImageContent}>
@@ -92,31 +93,34 @@ function Orders(props) {
             <button onClick={props.clicked}>View Order details</button>
             <MdOutlineKeyboardArrowRight className={Classes.RightArrow} />
           </div>
-          <div className={Classes.RatingContainer}>
-            <ReactStarRating
-              numberOfStar={5}
-              numberOfSelectedStar={props.rating}
-              colorFilledStar="#F6C514"
-              colorEmptyStar="#D1D3D5"
-              starSize="25px"
-              spaceBetweenStar="10px"
-              disableOnSelect={false}
-              // onSelectStar={rateChangeHandler}
-            />
-            <Link
-              to={{
-                pathname: "/rate_review",
-                state: {
-                  product_image: props.Image,
-                  product_id: props.productId,
-                  product_rating: props.rating,
-                  product_name: props.productName,
-                },
-              }}
-            >
-              <p>Rate & Review</p>
-            </Link>
-          </div>
+          {props.ShipmentStatus === "4" && (
+            <div className={Classes.RatingContainer}>
+              <ReactStarRating
+                numberOfStar={5}
+                numberOfSelectedStar={props.rating}
+                colorFilledStar="#F6C514"
+                colorEmptyStar="#D1D3D5"
+                starSize="25px"
+                spaceBetweenStar="10px"
+                disableOnSelect={false}
+                // onSelectStar={rateChangeHandler}
+              />
+              <Link
+                to={{
+                  pathname: "/rate_review",
+                  state: {
+                    product_image: props.Image,
+                    product_id: props.productId,
+                    product_rating: props.rating,
+                    product_name: props.productName,
+                  },
+                }}
+              >
+                <p>Rate & Review</p>
+              </Link>
+              {console.log("shipment status", props.shipmentstatus)}
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -44,7 +44,7 @@ const CheckDelivery = (props) => {
     handleShow();
   };
 
-  const [pinCode, setPinCode] = useState("");
+  const [pinCode, setPinCode] = useState(localStorage.getItem("pincode") || "");
   const [pinCodeError, setPinCodeError] = useState("");
   const [active, setActive] = useState(null);
   const pinCodeChangeHandler = (e) => {
@@ -60,6 +60,7 @@ const CheckDelivery = (props) => {
           if (response1.data.IsSuccess === true) {
             localStorage.setItem("pincode", response1.data.PincodeData[0].Area);
           }
+
           handleClose();
         })
 
