@@ -40,7 +40,7 @@ const Header = (props) => {
   const [isSticky, setIsSticky] = useState(false);
   const [openDropDown, setOpenDropDown] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState(null);
-  const [countryData,setCountryData] = useState([]);
+  const [countryData, setCountryData] = useState([]);
   const dropdownRef = useRef(null);
   const nameRef = useRef(null);
   const isHomePage = window.location.pathname === "/";
@@ -105,7 +105,6 @@ const Header = (props) => {
       setShow(true);
     }
   };
-
 
   const catSelHandler = (id) => {
     if (history.location.pathname !== "/new_arrivel") {
@@ -247,31 +246,34 @@ const Header = (props) => {
   };
 
   const countries = [
-    { image: IND, text: 'IND' },
-    { image: SAU, text: 'SAU' },
-    { image: UAE, text: 'UAE' },
-    { image: USA, text: 'USA' }
+    { image: IND, text: "IND" },
+    { image: SAU, text: "SAU" },
+    { image: UAE, text: "UAE" },
+    { image: USA, text: "USA" },
   ];
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(Urls.getCountry);
-        setCountryData(response.results.data.results); // Corrected the typo here
+        const response = await axios.get(Urls.getCountryFlags);
+
+        setCountryData(response.data.results.data);
       } catch (error) {
-        console.error('Error fetching country details:', error);
+        console.error("Error fetching country details:", error);
       }
     };
-  
+
     fetchData();
   }, []);
+
+  console.log("countryData==>", countryData);
 
   const handleCountrySelect = (country) => {
     setSelectedCountry(country);
     setOpenDropDown(true);
-
+    console.log("flag", countryData);
   };
- 
+
   useEffect(() => {
     const handleOutsideClick = (event) => {
       if (
@@ -369,19 +371,46 @@ const Header = (props) => {
             // onClick={Notification}
           /> */}
           <CheckDelivery islog={show} close={closeHanlder} />
-          <div className={`${Classes.CountryFlags} ${Classes.headerElement}`} onClick={handleOpenDropDown} ref={nameRef}>
-          <img src={selectedCountry ? selectedCountry.image : IND} alt="Selected flag" />
+          <div
+            className={Classes.CountryFlags}
+            onClick={handleOpenDropDown}
+            ref={nameRef}
+          >
+            <div className={Classes.headerElement}>
+              <img
+                src={selectedCountry ? selectedCountry.flag_image : IND}
+                alt="Selected flag"
+                className={Classes.selectedImage}
+              />
+            </div>
             {openDropDown && (
-             <div className={Classes.CountryDropDowns} ref={dropdownRef} >
-             {countries.map((country, index) => (
-               <div className={Classes.CountryContainer} key={index}  >
-                 <div className={Classes.contryelements}onClick={() => handleCountrySelect(country)}>
-                   <img src={country.image} alt={country.text} />
-                   <span>{country.text}</span>
-                 </div>
-               </div>
-             ))}
-           </div>
+              <div className={Classes.CountryDropDowns} ref={dropdownRef}>
+                {countryData.map((country, index) => (
+                  <div className={Classes.CountryContainer} key={index}>
+                    <div
+                      className={Classes.contryelements}
+                      onClick={() => handleCountrySelect(country)}
+                    >
+                      <div>
+                        <img src={country.flag_image} alt={country.id} className={Classes.dropDownImages} />
+                      </div>
+                      <div>
+                        <span>
+                          {country.country_name === "United Arab Emirates"
+                            ? "UAE"
+                            : country.country_name === "Saudi Arabia"
+                            ? "KSA"
+                            : country.country_name === "India"
+                            ? "IND"
+                            : country.country_name === "United States"
+                            ? "USA"
+                            : country.country_name}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             )}
           </div>
           <CgHeart

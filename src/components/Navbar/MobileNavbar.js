@@ -336,12 +336,9 @@ const MobileNavbar = (props) => {
           </Typography>
         </Box>
       </Modal>
-      <Modal
-        // open={props.open}
-        open={open}
-        // onClose={props.handleClose}
-        onClose={handleClose}
-      >
+      <div className={Classes.yto}>
+
+      <Modal open={open} onClose={handleClose} className={open ? Classes.slideRight : ""}>
         <Box sx={isMobileView ? mobileStyle : style}>
           <Typography>
             <div className={Classes.ParentMobSection}>
@@ -533,6 +530,8 @@ const MobileNavbar = (props) => {
           </Typography>
         </Box>
       </Modal>
+      </div>
+
     </div>
   );
 };
