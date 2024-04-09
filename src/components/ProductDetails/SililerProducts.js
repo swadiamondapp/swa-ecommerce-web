@@ -7,6 +7,7 @@ import { BiRupee } from "react-icons/bi";
 import { IoCartOutline } from "react-icons/io5";
 import * as Urls from "../../Urls";
 import axios from "axios";
+import Slider from "react-slick";
 
 const SililerProducts = (props) => {
   const history = useHistory();
@@ -43,6 +44,8 @@ const SililerProducts = (props) => {
       state: { data: prodItem },
     });
   };
+
+  
   const numberOfProducts = similarProducts.length;
   const handleAfterChange = (currentSlide) => {
     console.log(`Slide transition completed. Current slide index: ${currentSlide}`);
@@ -54,9 +57,45 @@ const SililerProducts = (props) => {
       setSlidesToShow(4);
     } else if (numberOfProducts === 4) {
       setSlidesToShow(5);
-    } else if (numberOfProducts > 5) {
-      setSlidesToShow(numberOfProducts);
+    } else if (numberOfProducts >= 5) {
+      setSlidesToShow(6);
     }
+  };
+  var settings = {
+    dots: false,
+    infinite: true,
+    autoplaySpeed: 1500,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    autoplay: true,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          autoplay:true,
+        }
+      }
+    ]
   };
 
   return (
@@ -67,36 +106,7 @@ const SililerProducts = (props) => {
           <div className="container similetrSliders">
             <div className={Classes.Web}>
               <div className={Classes.CarouselCards} style={{display:'flex',flexDirection:'column'}}>
-                <Carousel
-                  autoplay
-                  slidesToShow={slidesToShow}
-                  
-                 
-               
-                  className={Classes.ResponsiveCarousel}
-                  beforeChange={handleAfterChange}
-                  responsive={[
-                    
-                    {
-                      breakpoint: 1200,
-                      settings: {
-                        slidesToShow: 5, // Set the number of slides to display on tablets
-                      },
-                    },
-                    {
-                      breakpoint: 991,
-                      settings: {
-                        slidesToShow: 5, // Set the number of slides to display on tablets
-                      },
-                    },
-                    {
-                      breakpoint: 767,
-                      settings: {
-                        slidesToShow: 1, // Set the number of slides to display on mobile devices
-                      },
-                    },
-                  ]}
-                >
+              <Slider {...settings}>
                   {similarProducts.map((item, index) => (
                     <div
                       key={index}
@@ -125,7 +135,7 @@ const SililerProducts = (props) => {
                       </div>
                     </div>
                   ))}
-                </Carousel>
+                </Slider>
               </div>
             </div>
           </div>

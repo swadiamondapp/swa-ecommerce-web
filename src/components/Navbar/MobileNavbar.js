@@ -340,201 +340,215 @@ const MobileNavbar = (props) => {
           </Typography>
         </Box>
       </Modal>
-      <Modal
-        // open={props.open}
-        open={open}
-        // onClose={props.handleClose}
-        onClose={handleClose}
-      >
-        <Box
-          className={`mobile-modal ${open ? "open" : ""}`}
-          sx={isMobileView ? mobileStyle : style}
+      <div className={Classes.yto}>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          className={open ? Classes.slideRight : ""}
         >
-          <Typography>
-            <div className={Classes.ParentMobSection}>
-              <div className={Classes.MobMainHead}>
-                <div className={Classes.MobLeftSection}>
-                  <img src={userimg} />
-                  {userName ? (
-                    <p
-                      style={{
-                        color: "#fff",
-                        fontFamily: "gilroyNormal !important;",
-                      }}
-                    >
-                      {userName}
-                    </p>
-                  ) : (
-                    <div className={Classes.MobLog_Signup}>
+          <Box sx={isMobileView ? mobileStyle : style}>
+            <Typography>
+              <div className={Classes.ParentMobSection}>
+                <div className={Classes.MobMainHead}>
+                  <div className={Classes.MobLeftSection}>
+                    <img src={userimg} />
+                    {userName ? (
                       <p
-                        onClick={() => {
-                          setOpen(false);
-                          setShow(true);
-                          setIsSignpuMobileOpen(false);
+                        style={{
+                          color: "#fff",
+                          fontFamily: "gilroyNormal !important;",
                         }}
                       >
-                        Login
+                        {userName}
                       </p>
-                      <p className={Classes.BorderLineMob}></p>
-                      <p onClick={handleSignupClick}>Sign up</p>
-                    </div>
-                  )}
+                    ) : (
+                      <div className={Classes.MobLog_Signup}>
+                        <p
+                          onClick={() => {
+                            setOpen(false);
+                            setShow(true);
+                            setIsSignpuMobileOpen(false);
+                          }}
+                        >
+                          Login
+                        </p>
+                        <p className={Classes.BorderLineMob}></p>
+                        <p onClick={handleSignupClick}>Sign up</p>
+                      </div>
+                    )}
+                  </div>
+                  <div className={Classes.MobRightSection}>
+                    <IoMdClose
+                      style={{
+                        cursor: "pointer",
+                        color: "#fff",
+                        fontSize: "22px",
+                      }}
+                      // onClick={props.handleClose}
+                      onClick={handleClose}
+                    />
+                  </div>
                 </div>
-                <div className={Classes.MobRightSection}>
-                  <IoMdClose
-                    style={{
-                      cursor: "pointer",
-                      color: "#fff",
-                      fontSize: "22px",
-                    }}
-                    // onClick={props.handleClose}
-                    onClick={handleClose}
-                  />
-                </div>
-              </div>
-              <div className={Classes.CollapsParent}>
-                <div className={Classes.parentCollaps5}>
-                  <div style={{ background: "#fff", borderRadius: "8px" }}>
-                    <div className={`shipment1 ${Classes.dmm}`}>
-                      <Accordion
-                        multiple
-                        activeIndex={activeIndex}
-                        onTabChange={(e) => setActiveIndex(e.index)}
-                      >
-                        <AccordionTab header="Category">
-                          <div className={Classes.ShippingDetialHead}>
-                            <div className={Classes.ParentCards1}>
-                              <img src={ringimg} />
-                              <p>ladies ring</p>
-                            </div>
-                            <div
-                              className={Classes.ParentCards1}
-                              style={{ borderBottom: "none" }}
-                            >
-                              <img src={ringimg2} />
-                              <p>Pendant</p>
-                            </div>
-                          </div>
-                        </AccordionTab>
-                        <AccordionTab header="Tags">
-                          <div className={Classes.ShippingDetialHead}>
-                            <div className={Classes.ParentCards2}>
-                              <HiPlus />
-                              <p>Birthday</p>
-                            </div>
-                            <div className={Classes.ParentCards2}>
-                              <HiPlus />
-                              <p>Akshayathrithiya</p>
-                            </div>
-                            <div className={Classes.ParentCards2}>
-                              <HiPlus />
-                              <p>little price</p>
-                            </div>
-                            <div className={Classes.ParentCards2}>
-                              <HiPlus />
-                              <p>Men</p>
-                            </div>
-                            <div className={Classes.ParentCards2}>
-                              <HiPlus />
-                              <p>Woman</p>
-                            </div>
-                            <div className={Classes.ParentCards2}>
-                              <HiPlus />
-                              <p>Gifting</p>
-                            </div>
-                            <div className={Classes.ParentCards2}>
-                              <HiPlus />
-                              <p>Anniversary</p>
-                            </div>
-                          </div>
-                        </AccordionTab>
-                        <AccordionTab header="Policy">
-                          <div className={Classes.ShippingDetialHead}></div>
-                        </AccordionTab>
-                        {userName && (
-                          <AccordionTab header="Account">
+                <div className={Classes.CollapsParent}>
+                  <div className={Classes.parentCollaps5}>
+                    <div style={{ background: "#fff", borderRadius: "8px" }}>
+                      <div className={`shipment1 ${Classes.dmm}`}>
+                        <Accordion
+                          multiple
+                          activeIndex={activeIndex}
+                          onTabChange={(e) => setActiveIndex(e.index)}
+                        >
+                          <AccordionTab header="Category">
                             <div className={Classes.ShippingDetialHead}>
-                              <div className={Classes.LoggedDetailsList}>
-                                <Link to="/my_orders">
-                                  <p
-                                    style={{ fontSize: "16px", color: "#000" }}
-                                  >
-                                    My orders
-                                  </p>
-                                </Link>
-                                <IoIosArrowForward
-                                  style={{ color: "#006E7F" }}
-                                />
+                              <div className={Classes.ParentCards1}>
+                                <img src={ringimg} />
+                                <p>ladies ring</p>
                               </div>
-                              <div className={Classes.LoggedDetailsList}>
-                                <Link to="/wish_list">
-                                  <p
-                                    style={{ fontSize: "16px", color: "#000" }}
-                                  >
-                                    Wishlist
-                                  </p>
-                                </Link>
-                                <IoIosArrowForward
-                                  style={{ color: "#006E7F" }}
-                                />
-                              </div>
-                              <div className={Classes.LoggedDetailsList}>
-                                <Link to="/addaddress">
-                                  <p
-                                    style={{ fontSize: "16px", color: "#000" }}
-                                  >
-                                    Add address
-                                  </p>
-                                </Link>
-                                <IoIosArrowForward
-                                  style={{ color: "#006E7F" }}
-                                />
-                              </div>
-                              <div className={Classes.LoggedDetailsList}>
-                                <Link to="/rate&review">
-                                  <p
-                                    style={{ fontSize: "16px", color: "#000" }}
-                                  >
-                                    Write Review
-                                  </p>
-                                </Link>
-                                <IoIosArrowForward
-                                  style={{ color: "#006E7F" }}
-                                />
-                              </div>
-                              <div className={Classes.LoggedDetailsList}>
-                                <p style={{ fontSize: "16px", color: "#000" }}>
-                                  SWA Wallet
-                                </p>
-                                <IoIosArrowForward
-                                  style={{ color: "#006E7F" }}
-                                />
-                              </div>
-                              <div className={Classes.LoggedDetailsList}>
-                                <p style={{ fontSize: "16px", color: "#000" }}>
-                                  Exchange Wallet
-                                </p>
-                                <IoIosArrowForward
-                                  style={{ color: "#006E7F" }}
-                                />
+                              <div
+                                className={Classes.ParentCards1}
+                                style={{ borderBottom: "none" }}
+                              >
+                                <img src={ringimg2} />
+                                <p>Pendant</p>
                               </div>
                             </div>
                           </AccordionTab>
-                        )}
+                          <AccordionTab header="Tags">
+                            <div className={Classes.ShippingDetialHead}>
+                              <div className={Classes.ParentCards2}>
+                                <HiPlus />
+                                <p>Birthday</p>
+                              </div>
+                              <div className={Classes.ParentCards2}>
+                                <HiPlus />
+                                <p>Akshayathrithiya</p>
+                              </div>
+                              <div className={Classes.ParentCards2}>
+                                <HiPlus />
+                                <p>little price</p>
+                              </div>
+                              <div className={Classes.ParentCards2}>
+                                <HiPlus />
+                                <p>Men</p>
+                              </div>
+                              <div className={Classes.ParentCards2}>
+                                <HiPlus />
+                                <p>Woman</p>
+                              </div>
+                              <div className={Classes.ParentCards2}>
+                                <HiPlus />
+                                <p>Gifting</p>
+                              </div>
+                              <div className={Classes.ParentCards2}>
+                                <HiPlus />
+                                <p>Anniversary</p>
+                              </div>
+                            </div>
+                          </AccordionTab>
+                          <AccordionTab header="Policy">
+                            <div className={Classes.ShippingDetialHead}></div>
+                          </AccordionTab>
+                          {userName && (
+                            <AccordionTab header="Account">
+                              <div className={Classes.ShippingDetialHead}>
+                                <div className={Classes.LoggedDetailsList}>
+                                  <Link to="/my_orders">
+                                    <p
+                                      style={{
+                                        fontSize: "16px",
+                                        color: "#000",
+                                      }}
+                                    >
+                                      My orders
+                                    </p>
+                                  </Link>
+                                  <IoIosArrowForward
+                                    style={{ color: "#006E7F" }}
+                                  />
+                                </div>
+                                <div className={Classes.LoggedDetailsList}>
+                                  <Link to="/wish_list">
+                                    <p
+                                      style={{
+                                        fontSize: "16px",
+                                        color: "#000",
+                                      }}
+                                    >
+                                      Wishlist
+                                    </p>
+                                  </Link>
+                                  <IoIosArrowForward
+                                    style={{ color: "#006E7F" }}
+                                  />
+                                </div>
+                                <div className={Classes.LoggedDetailsList}>
+                                  <Link to="/addaddress">
+                                    <p
+                                      style={{
+                                        fontSize: "16px",
+                                        color: "#000",
+                                      }}
+                                    >
+                                      Add address
+                                    </p>
+                                  </Link>
+                                  <IoIosArrowForward
+                                    style={{ color: "#006E7F" }}
+                                  />
+                                </div>
+                                <div className={Classes.LoggedDetailsList}>
+                                  <Link to="/rate&review">
+                                    <p
+                                      style={{
+                                        fontSize: "16px",
+                                        color: "#000",
+                                      }}
+                                    >
+                                      Write Review
+                                    </p>
+                                  </Link>
+                                  <IoIosArrowForward
+                                    style={{ color: "#006E7F" }}
+                                  />
+                                </div>
+                                <div className={Classes.LoggedDetailsList}>
+                                  <p
+                                    style={{ fontSize: "16px", color: "#000" }}
+                                  >
+                                    SWA Wallet
+                                  </p>
+                                  <IoIosArrowForward
+                                    style={{ color: "#006E7F" }}
+                                  />
+                                </div>
+                                <div className={Classes.LoggedDetailsList}>
+                                  <p
+                                    style={{ fontSize: "16px", color: "#000" }}
+                                  >
+                                    Exchange Wallet
+                                  </p>
+                                  <IoIosArrowForward
+                                    style={{ color: "#006E7F" }}
+                                  />
+                                </div>
+                              </div>
+                            </AccordionTab>
+                          )}
 
-                        <AccordionTab
-                          header="Log Out"
-                          onClick={handleLogOut}
-                        ></AccordionTab>
-                      </Accordion>
+                          <AccordionTab
+                            header="Log Out"
+                            onClick={handleLogOut}
+                          ></AccordionTab>
+                        </Accordion>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </Typography>
-        </Box>
-      </Modal>
+            </Typography>
+          </Box>
+        </Modal>
+      </div>
     </div>
   );
 };

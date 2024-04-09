@@ -229,6 +229,25 @@ p {
   .ant-steps-icon-dot {
   background-color: #0eb533 !important;
 }
+.css-17qcpmb {
+  position: absolute;
+  -webkit-transition: -webkit-transform 15s ease-in-out;
+  transition: transform 15s ease-in-out;
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+  -ms-transform: translateX(0);
+  transform: translateX(0);
+  background-color: #fff;
+  border: none;
+  box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2),
+    0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+  overflow-y: auto;
+  max-height: 100vh;
+  width: 100%;
+  outline: none;
+  left: -100px;
+}
 .mobile-modal {
   position: absolute;
   top: 0;
@@ -605,4 +624,20 @@ input[type="number"] {
 }
 .showSearchBar {
   display: block;
+}
+.css-yhzbxk {
+  position: absolute;
+  -webkit-transition: -webkit-transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+  background-color: #fff;
+  border: none;
+  box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2),
+    0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+  overflow-y: auto;
+  max-height: 100vh;
+  width: 100%;
+  outline: none;
+  left: -100px;
+  animation: slideLeftToMiddle 0.3s ease-in-out forwards;
 }

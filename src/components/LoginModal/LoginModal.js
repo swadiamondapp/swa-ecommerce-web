@@ -556,9 +556,9 @@ const LoginModal = (props) => {
           <IoIosArrowDown className={Classes.headerElement}  />
         </div>
       ) : (
-        <div className={`${Classes.LoginSignup} ${Classes.headerElement}`}>
+        <div className={Classes.LoginSignup}>
           <div
-            className={Classes.dLogin}
+            className={`${Classes.dLogin} ${Classes.headerElement}`}
             onClick={() => {
               props.handleOpenLogin();
               setIsSignpuLogin(false);
@@ -567,7 +567,7 @@ const LoginModal = (props) => {
             Login
           </div>
           <div className={Classes.LineArrow}></div>
-          <div className={Classes.DSignup} onClick={handleSignupClick}>
+          <div className={`${Classes.DSignup} ${Classes.headerElement}`} onClick={handleSignupClick}>
             Sign up
           </div>
         </div>

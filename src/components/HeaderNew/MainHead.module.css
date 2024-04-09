@@ -1285,6 +1285,7 @@ a {
 }
 .CountryFlags {
   position: relative;
+  z-index: 999999999;
  
 }
 .CountryDropDowns {
@@ -1293,25 +1294,31 @@ a {
   border-radius: 4px;
   margin-top: 10px;
   z-index: 99999999;
-
-
- 
-
-
 }
 .contryelements {
   display: flex;
   gap:10px;
   width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding:5px 30px 5px 10px
 
-  padding:5px 20px
-
+}
+.dropDownImages {
+  border-radius: 50%;
 }
 .contryelements img {
   border-radius: 35%;
   font-size: 18px;
+  width:30px;
+  height: 30px;
  
 }
+.selectedImage {
+  width:30px !important;
+  border-radius: 50%;
+}
+
 
 
 .CountryContainer {
@@ -1322,6 +1329,7 @@ justify-content: flex-start;
 .CountryContainer:hover {
   background: #FFFFFF80;
   border-radius: 4px;
+  z-index: 999999999;
 
 }
 /* .CountryContainer :hover {
@@ -1329,9 +1337,10 @@ justify-content: flex-start;
 } */
 .CountryContainer span {
   color: #000000;
-  text-align: left;
+  text-align: center;
   font-size: 14px ;
   font-weight: 500;
+
 }
 .headerElement:hover {
   transform: scale(1.1) translateY(-3px);; /* Increase the scale on hover */
