@@ -149,6 +149,19 @@ function AddAddress(props) {
       });
       if (response.data.status === 200) {
         props.fetchAddress();
+        // Reset address data and close the modal
+        setAddressData({
+          fullName: "",
+          mobile: "",
+          pincode: "",
+          city: "",
+          state: "kerala",
+          hNumber_Bname: "",
+          streetColony: "",
+          landMark: "",
+        });
+        setShowAddAddress(true);
+        setShowNewAddressForm(false);
       } else {
         // Handle other response statuses if necessary
         console.log("API request failed:", response.data);

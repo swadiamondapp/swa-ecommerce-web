@@ -15,7 +15,7 @@
   /* background-repeat: no-repeat; */
   /* background-size: cover; */
   /* background-position: center; */
-  min-height: 325px;
+  min-height: 225px;
   margin-top: 0px;
   padding: 20px;
   margin-bottom: 15px;
@@ -193,7 +193,7 @@
   .Head {
     font-size: 20px;
     padding-left: 6%;
-    padding-top: 10%;
+    padding-top: 4%;
     text-align: center;
   }
   .ImageContainerMob p {
