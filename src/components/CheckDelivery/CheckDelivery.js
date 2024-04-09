@@ -78,6 +78,7 @@ const CheckDelivery = (props) => {
     <>
       <div className={Classes.LogList}>
         <div
+          style={{ cursor: "pointer" }}
           className={`${Classes.DeliveryPin} ${Classes.headerElement}`}
           onClick={loginClickHandler}
         >

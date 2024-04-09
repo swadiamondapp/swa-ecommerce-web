@@ -96,7 +96,10 @@ function Footer() {
                       <Link to="/faq">
                         <p className={Classes.Links}>FAQ</p>
                       </Link>
-                      <p className={Classes.Links}> Contact us</p>
+                      <Link to="">
+                        <p className={Classes.Links}> Contact us</p>
+                      </Link>
+
                       <p
                         className={Classes.Links}
                         onClick={AboutUs}
@@ -113,7 +116,9 @@ function Footer() {
                       <Link to="/terms_condition">
                         <p className={Classes.Links}>Terms & conditions</p>
                       </Link>
-                      <p className={Classes.Links}>Outlets</p>
+                      <Link to="">
+                        <p className={Classes.Links}>Outlets</p>
+                      </Link>
                     </div>
                   </div>
                   {/* <div className="col-md-4">
@@ -133,7 +138,7 @@ function Footer() {
                   </div> */}
                   <div className="col-md-4">
                     <h1 className={Classes.Title}>Quick links</h1>
-                    {catgSet.slice(0, 15).map((item, index) => {
+                    {catgSet.slice(0, 8).map((item, index) => {
                       return (
                         <p
                           className={Classes.Links}

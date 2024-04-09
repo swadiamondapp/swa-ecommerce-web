@@ -525,6 +525,33 @@
   font-family: "gilroyNormal" !important;
   color: #757c81;
 }
+.ModalHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.SizeRangesList {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+.SizeListParent {
+  margin-top: 10px;
+}
+.DoneSizeList button {
+  background: #00464d;
+  color: #fff;
+  border: none;
+  width: 100%;
+  padding: 10px;
+  border-radius: 3px;
+  margin-top: 15px;
+  cursor: pointer;
+}
+.CountP {
+  display: hidden;
+}
 .Modalsection {
   position: fixed;
   top: 50%;
@@ -535,6 +562,7 @@
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   font-family: "gilroyNormal" !important;
+  width: 340px;
 }
 .Remark {
   font-weight: 400;

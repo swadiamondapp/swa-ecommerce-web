@@ -34,6 +34,7 @@ import ProductImages from "./ProductImages";
 import { MdOutlineStarPurple500 } from "react-icons/md";
 import { RWebShare } from "react-web-share";
 import { Modal } from "@mui/material";
+import closeimg from "../../Assets/closeModal.png";
 
 const ProductDetails = (props) => {
   const location = useLocation();
@@ -51,6 +52,7 @@ const ProductDetails = (props) => {
   const ratingRef = useRef(null);
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [videoSection, setVideoSection] = useState("");
+  const [selectedSize, setSelectedSize] = useState("");
 
   const handleImageClick = () => {
     if (ratingRef.current) {
@@ -190,14 +192,14 @@ const ProductDetails = (props) => {
 
   const videoUrl = props.bagImg.filter((item) => item.endsWith(".mp4"));
   const addToCartHandler = () => {
-    console.log("....", props.size);
+    console.log("....abc", selectedSize);
     // if (!props.Size) {
     if (props.sizeChart.length > 0) {
-      if (!props.Size) {
+      if (!props.Size && !selectedSize) {
         setShowErrorModal(true);
         setTimeout(() => {
           setShowErrorModal(false);
-        }, 3000);
+        }, 78000);
       } else {
         props.cartAdd();
       }
@@ -209,6 +211,47 @@ const ProductDetails = (props) => {
   };
   const sizeChangeHandler = (e) => {
     props.sizeChange(e.target.value);
+    const selectedId = e.target.value;
+    setSelectedSize(selectedId);
+
+    // Find the corresponding checkbox and check it
+    const checkbox = document.querySelector(
+      `input[type="checkbox"][value="${selectedId}"]`
+    );
+    if (checkbox) {
+      checkbox.checked = true;
+    }
+  };
+  const handleCheckboxChange = (event) => {
+    const selectedId = event.target.value;
+    props.selectedSize(selectedId);
+    setSelectedSize(selectedId);
+
+    // Find the corresponding option in the select box and select it
+    const selectBox = document.querySelector("select");
+    if (selectBox) {
+      selectBox.value = selectedId;
+    }
+  };
+
+  // const handleDoneClick = () => {
+  //   const checkedCheckbox = document.querySelector(
+  //     'input[type="checkbox"]:checked'
+  //   );
+  //   if (checkedCheckbox) {
+  //     const selectedSizeId = checkedCheckbox.value;
+  //     // setSelectedSize(selectedSizeId);
+  //     props.selectedSize(selectedSizeId);
+  //     setShowErrorModal(false); // Close the modal after selecting the size
+  //   } else {
+  //     // Handle case when no checkbox is checked
+  //     console.log("Please select a size before clicking Done");
+  //   }
+  // };
+
+  const handleDoneClick = () => {
+    // Perform any action you want when the "Done" button is clicked
+    setShowErrorModal(false);
   };
 
   console.log("props.thumbImg,", props.thumbImg);
@@ -458,15 +501,34 @@ const ProductDetails = (props) => {
                   aria-describedby="modal-description"
                 >
                   <div className={Classes.Modalsection}>
-                    <h2
-                      style={{ textAlign: "center", fontSize: "20px" }}
-                      id="modal-title"
-                    >
-                      Select size is required
-                    </h2>
-                    <p style={{ textAlign: "center" }} id="modal-description">
-                      Please select a size before proceeding.
-                    </p>
+                    <div className={Classes.ModalHeading}>
+                      <h2 style={{ fontSize: "20px" }}>
+                        Please select your size
+                      </h2>
+                      <img
+                        style={{ cursor: "pointer" }}
+                        src={closeimg}
+                        onClick={() => setShowErrorModal(false)} // Close modal when close button is clicked
+                        alt="Close"
+                      />
+                    </div>
+                    <div className={Classes.SizeListParent}>
+                      {props.sizeChart.map((item, index) => {
+                        return (
+                          <div className={Classes.SizeRangesList}>
+                            <input
+                              type="checkbox"
+                              value={item.id}
+                              onChange={handleCheckboxChange}
+                            />
+                            <p> {item.size_name}</p>
+                          </div>
+                        );
+                      })}
+                    </div>
+                    <div className={Classes.DoneSizeList}>
+                      <button onClick={handleDoneClick}>Done</button>{" "}
+                    </div>
                   </div>
                 </Modal>
                 <div className={Classes.FindStoreParent}>
@@ -482,8 +544,9 @@ const ProductDetails = (props) => {
                 <select
                   className={Classes.SizeSelect}
                   onChange={sizeChangeHandler}
+                  value={selectedSize}
                 >
-                  <option value="">Select Size</option>
+                  <option value="">{}Select Size</option>
                   {props.sizeChart.map((item, index) => {
                     return (
                       <option value={item.id} key={index}>
@@ -712,14 +775,28 @@ const ProductDetails = (props) => {
                   <div className="col-md-4 col-6">
                     <p className={Classes.Left}>Product ID</p>
                     {/* <p className={Classes.Left}>Size</p> */}
-                    <p className={Classes.Left}>Gross Weight</p>
+                    {props.gw > 0 ? (
+                      <p className={Classes.Left}>Gross Weight</p>
+                    ) : null}
+
                     {props.diamondTypw !== null && (
                       <p className={Classes.Left}>Diamond Type</p>
                     )}
-                    <p className={Classes.Left}>Diamond Weight</p>
-                    <p className={Classes.Left}>Diamond Count</p>
-                    <p className={Classes.Left}>Other stone weight</p>
-                    <p className={Classes.Left}>Other Stone Count</p>
+                    {props.diamondWeight > 0 ? (
+                      <p className={Classes.Left}>Diamond Weight</p>
+                    ) : null}
+
+                    {props.diamondCount > 0 ? (
+                      <p className={Classes.Left}>Diamond Count</p>
+                    ) : null}
+                    {props.otherStoneW > 0 ? (
+                      <p className={Classes.Left}>Other stone weight</p>
+                    ) : null}
+
+                    {props.otherStoneC > 0 ? (
+                      <p className={Classes.Left}>Other Stone Count</p>
+                    ) : null}
+
                     <p className={Classes.Left}>Product Length</p>
                     <p className={Classes.Left}>Product Width</p>
                     <p className={Classes.Left}>Product Height</p>
@@ -727,16 +804,32 @@ const ProductDetails = (props) => {
                   <div className="col-md-8 col-6">
                     <p className={Classes.Right}>{props.sku}</p>
                     {/* <p className={Classes.Right}>{props.size}</p> */}
-                    <p className={Classes.Right}>{props.gw + " GM"}</p>
+                    {props.gw > 0 ? (
+                      <p className={Classes.Right}>{props.gw + " GM"}</p>
+                    ) : null}
+
                     {props.diamondTypw !== null && (
                       <p className={Classes.Right}>{props.diamondTypw}</p>
                     )}
-                    <p className={Classes.Right}>
-                      {props.diamondWeight + " Carat"}
-                    </p>
-                    <p className={Classes.Right}>{props.diamondCount}</p>
-                    <p className={Classes.Right}>{props.otherStoneW}</p>
-                    <p className={Classes.Right}>{props.otherStoneC}</p>
+                    {props.diamondWeight > 0 ? (
+                      <p className={Classes.Right}>
+                        {props.diamondWeight + " Carat"}
+                      </p>
+                    ) : null}
+
+                    {/* <p className={Classes.Right}>{props.diamondCount}</p> */}
+
+                    {props.diamondCount > 0 ? (
+                      <p className={Classes.Right}>{props.diamondCount}</p>
+                    ) : null}
+                    {props.otherStoneW > 0 ? (
+                      <p className={Classes.Right}>{props.otherStoneW}</p>
+                    ) : null}
+
+                    {props.otherStoneC > 0 ? (
+                      <p className={Classes.Right}>{props.otherStoneC}</p>
+                    ) : null}
+
                     <p className={Classes.Right}>{props.length + " mm"}</p>
                     <p className={Classes.Right}>{props.width + " mm"}</p>
                     <p className={Classes.Right}>{props.height + " mm"}</p>

@@ -372,6 +372,7 @@ const Header = (props) => {
           /> */}
           <CheckDelivery islog={show} close={closeHanlder} />
           <div
+            style={{ cursor: "pointer" }}
             className={Classes.CountryFlags}
             onClick={handleOpenDropDown}
             ref={nameRef}
@@ -392,7 +393,11 @@ const Header = (props) => {
                       onClick={() => handleCountrySelect(country)}
                     >
                       <div>
-                        <img src={country.flag_image} alt={country.id} className={Classes.dropDownImages} />
+                        <img
+                          src={country.flag_image}
+                          alt={country.id}
+                          className={Classes.dropDownImages}
+                        />
                       </div>
                       <div>
                         <span>

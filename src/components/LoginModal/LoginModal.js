@@ -548,15 +548,19 @@ const LoginModal = (props) => {
         </div>
       </div> */}
       {userName ? (
-        <div className={Classes.LogedUser}>
+        <div className={Classes.LogedUser} style={{ cursor: "pointer" }}>
           <img src={logedimg} className={Classes.headerElement} />
-          <p ref={nameRef} onClick={handleLogedUserClick} className={Classes.headerElement}>
+          <p
+            ref={nameRef}
+            onClick={handleLogedUserClick}
+            className={Classes.headerElement}
+          >
             {userName}
           </p>
-          <IoIosArrowDown className={Classes.headerElement}  />
+          <IoIosArrowDown className={Classes.headerElement} />
         </div>
       ) : (
-        <div className={Classes.LoginSignup}>
+        <div className={Classes.LoginSignup} style={{ cursor: "pointer" }}>
           <div
             className={`${Classes.dLogin} ${Classes.headerElement}`}
             onClick={() => {
@@ -567,7 +571,10 @@ const LoginModal = (props) => {
             Login
           </div>
           <div className={Classes.LineArrow}></div>
-          <div className={`${Classes.DSignup} ${Classes.headerElement}`} onClick={handleSignupClick}>
+          <div
+            className={`${Classes.DSignup} ${Classes.headerElement}`}
+            onClick={handleSignupClick}
+          >
             Sign up
           </div>
         </div>
@@ -595,7 +602,10 @@ const LoginModal = (props) => {
             <p className={Classes.Name_phoneLoged}>{phone}</p>
           </div>
           <div className={Classes.LogedDetails_list}>
-            <p>Account</p>
+            <Link to="">
+              <p style={{ fontSize: "16px" }}>Account</p>
+            </Link>
+
             <Link to="/my_orders">
               <p style={{ fontSize: "16px" }}>Order history</p>
             </Link>
@@ -612,8 +622,13 @@ const LoginModal = (props) => {
             <Link to="">
               <p style={{ fontSize: "16px" }}>Swa wallet</p>
             </Link>
-            <p>Swa exchange</p>
-            <p onClick={handleLogOut}>Log Out</p>
+            <Link to="" style={{ fontSize: "16px" }}>
+              <p style={{ fontSize: "16px" }}>Swa exchange</p>
+            </Link>
+
+            <p style={{ cursor: "pointer" }} onClick={handleLogOut}>
+              Log Out
+            </p>
           </div>
         </div>
       )}

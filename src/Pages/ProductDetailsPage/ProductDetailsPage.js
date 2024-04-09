@@ -234,6 +234,9 @@ const ProductDetailsPage = (props) => {
   const sizeChangeHandler = (size) => {
     setSize(size);
   };
+  const sizechangeModal = (size) => {
+    setSize(size);
+  };
   const loginActHandler = (logToken) => {
     setLogToken(logToken);
   };
@@ -268,6 +271,7 @@ const ProductDetailsPage = (props) => {
         sizeChart={sizeChart}
         size={"small"}
         sizeChange={sizeChangeHandler}
+        selectedSize={sizechangeModal}
         Size={size}
         wishAct={prodDet.wishlist_id}
         gw={prodDet.gross_weight}
