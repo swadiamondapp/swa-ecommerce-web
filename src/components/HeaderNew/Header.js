@@ -39,7 +39,10 @@ const Header = (props) => {
   const [searchKey, setSearchKey] = useState("");
   const [isSticky, setIsSticky] = useState(false);
   const [openDropDown, setOpenDropDown] = useState(false);
-  const [selectedCountry, setSelectedCountry] = useState(null);
+  const [selectedCountry, setSelectedCountry] = useState({
+    id: 38,
+    flag_image: IND,
+  });
   const [countryData, setCountryData] = useState([]);
   const dropdownRef = useRef(null);
   const nameRef = useRef(null);
@@ -80,23 +83,40 @@ const Header = (props) => {
       setShow(true);
     }
   }, [props.lognAct]);
+  // useEffect(() => {
+  //   axios
+  //     .get(`${Urls.home}?country=${country.id}`)
+  //     .then((response1) => {
+  //       setCatgSet(response1.data.results.data.categories);
+  //       setCategory(response1.data.results.data.categories);
+  //       console.log(
+  //         "response=======>?",
+  //         response1.data.results.data.categories
+  //       );
+  //       setTags(response1.data.results.data.tags);
+  //       console.log("tags...?", response1.data.results.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
   useEffect(() => {
-    axios
-      .get(Urls.home)
-      .then((response1) => {
-        setCatgSet(response1.data.results.data.categories);
-        setCategory(response1.data.results.data.categories);
-        console.log(
-          "response=======>?",
-          response1.data.results.data.categories
-        );
-        setTags(response1.data.results.data.tags);
-        console.log("tags...?", response1.data.results.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+    if (selectedCountry) {
+      // Make the API request with the selected country ID as a parameter
+      axios
+        .get(`${Urls.home}?country=${selectedCountry.id}`)
+        .then((response) => {
+          setCatgSet(response.data.results.data.categories);
+          setCategory(response.data.results.data.categories);
+          console.log("Categories:", response.data.results.data.categories);
+          setTags(response.data.results.data.tags);
+          console.log("Tags:", response.data.results.data.tags);
+        })
+        .catch((error) => {
+          console.error("Error fetching home data:", error);
+        });
+    }
+  }, [selectedCountry]);
 
   const moveToWishList = () => {
     if (token !== null) {
@@ -106,9 +126,18 @@ const Header = (props) => {
     }
   };
 
-  const catSelHandler = (id) => {
-    if (history.location.pathname !== "/new_arrivel") {
-      history.push({ pathname: "/new_arrivel", state: { data: id } });
+  const catSelHandler = (setItem) => {
+    // if (history.location.pathname !== "/new_arrivel") {
+    //   history.push({ pathname: "/new_arrivel", state: { data: id } });
+    // }
+    if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
+      window.location.href =
+        "https://swaecomnew.zinfog.in/category_search/" + setItem.id;
+    } else {
+      history.push({
+        pathname: "/new_arrivel",
+        state: { data: setItem.id, product_category: setItem.name },
+      });
     }
   };
   const cattSelHandler = (setItem) => {
@@ -258,6 +287,16 @@ const Header = (props) => {
         const response = await axios.get(Urls.getCountryFlags);
 
         setCountryData(response.data.results.data);
+        const defaultCountryID = localStorage.getItem("id");
+        if (defaultCountryID) {
+          // Find the default country from the data using the ID
+          const defaultCountry = countryData.find(
+            (country) => country.id === parseInt(defaultCountryID)
+          );
+          if (defaultCountry) {
+            setSelectedCountry(defaultCountry);
+          }
+        }
       } catch (error) {
         console.error("Error fetching country details:", error);
       }
@@ -271,7 +310,9 @@ const Header = (props) => {
   const handleCountrySelect = (country) => {
     setSelectedCountry(country);
     setOpenDropDown(true);
-    console.log("flag", countryData);
+
+    localStorage.setItem("id", country.id);
+    console.log("id...?", country.id);
   };
 
   useEffect(() => {
@@ -671,7 +712,7 @@ const Header = (props) => {
                     >
                       <div className={Classes.OffersInner}>
                         <img
-                          style={{ width: "45px", height: "45px" }}
+                          style={{ width: "65px", height: "65px" }}
                           className={Classes.SlideImage}
                           src={item.thumbnail}
                           alt="catg"
@@ -692,7 +733,7 @@ const Header = (props) => {
                     >
                       <div className={Classes.OffersInner}>
                         <img
-                          style={{ width: "45px", height: "45px" }}
+                          style={{ width: "65px", height: "65px" }}
                           // className={Classes.SlideImage}
                           src={item.thumbnail}
                           alt="tag"

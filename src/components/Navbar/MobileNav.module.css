@@ -63,8 +63,8 @@ header {
   align-items: center;
   gap: 15px;
   border-bottom: 0.5px solid #f0ebd1;
-  padding: 20px 0px;
-  margin: 20px;
+  padding: 15px 0px;
+  margin: 15px;
   padding-top: 0px;
   margin-bottom: 0px;
 }
@@ -261,6 +261,59 @@ header {
   .loginToffle {
     padding: 10px 10px;
   }
+  .CountryFlags {
+    position: relative;
+    z-index: 999999999;
+  }
+  .CountryDropDowns {
+    position: absolute;
+    background-color: #d1d1d1;
+    border-radius: 4px;
+    margin-top: 10px;
+    z-index: 99999999;
+  }
+  .contryelements {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 30px 5px 10px;
+  }
+  .dropDownImages {
+    border-radius: 50%;
+  }
+  .contryelements img {
+    border-radius: 35%;
+    font-size: 18px;
+    width: 30px;
+    height: 30px;
+  }
+  .selectedImage {
+    width: 30px !important;
+    border-radius: 50%;
+  }
+
+  .CountryContainer {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-start;
+  }
+  .CountryContainer:hover {
+    background: #ffffff80;
+    border-radius: 4px;
+    z-index: 999999999;
+  }
+  /* .CountryContainer :hover {
+  background-color: #FFFFFF80;
+} */
+  .CountryContainer span {
+    color: #000000;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
   .Navbar {
     display: flex;
     align-items: center;
@@ -1283,36 +1336,30 @@ header {
   }
 }
 
-
 .slideRight {
   position: absolute;
-  left:-150;
-	-webkit-animation: slideRight 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	        animation: slideRight 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  left: -150;
+  -webkit-animation: slideRight 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slideRight 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
-
-
- @-webkit-keyframes slideRight {
+@-webkit-keyframes slideRight {
   0% {
     -webkit-transform: translateX(0);
-            transform: translateX(0);
+    transform: translateX(0);
   }
   100% {
     -webkit-transform: translateX(100px);
-            transform: translateX(100px);
+    transform: translateX(100px);
   }
 }
 @keyframes slideRight {
   0% {
     -webkit-transform: translateX(0);
-            transform: translateX(0);
+    transform: translateX(0);
   }
   100% {
     -webkit-transform: translateX(100px);
-            transform: translateX(100px);
+    transform: translateX(100px);
   }
 }
-
-
-

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 // import Logo from "../../Assets/moblogo.png";
 import Logo from "../../Assets/moblogo.svg";
 import Hamburger from "hamburger-react";
@@ -27,6 +27,10 @@ import { GoSearch } from "react-icons/go";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import axios from "axios";
 import * as Urls from "../../Urls";
+import USA from "../../Assets/flagUsa.svg";
+import SAU from "../../Assets/flagSAU.svg";
+import IND from "../../Assets/flagIND.svg";
+import UAE from "../../Assets/flagUAE.svg";
 
 const MobileNavbar = (props) => {
   const history = useHistory();
@@ -40,6 +44,19 @@ const MobileNavbar = (props) => {
   const userName = localStorage.getItem("userName");
   const [searchKey, setSearchKey] = useState("");
   const [isSignpuMobileOpen, setIsSignpuMobileOpen] = useState(false);
+  const [catgSet, setCatgSet] = useState([]);
+  const [category, setCategory] = useState([]);
+  const [tags, setTags] = useState([]);
+  const [openDropDown, setOpenDropDown] = useState(false);
+  const nameRef = useRef(null);
+  const dropdownRef = useRef(null);
+  const [countryData, setCountryData] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState({
+    id: 38,
+    flag_image: IND,
+  });
+
+  console.log("catgSet", catgSet);
 
   const isHomePage = window.location.pathname === "/";
   const mobileSearchBarHide = !isHomePage
@@ -200,11 +217,116 @@ const MobileNavbar = (props) => {
         });
     }
   };
+  const catSelHandler = (id) => {
+    if (history.location.pathname !== "/new_arrivel") {
+      history.push({ pathname: "/new_arrivel", state: { data: id } });
+    }
+  };
+  const tagSelHandler = (selItem) => {
+    if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
+      window.location.href =
+        "https://swaecomnew.zinfog.in/tag_search/" + selItem.id;
+    } else {
+      history.push({
+        pathname: "/new_arrivel",
+        state: {
+          octnId: selItem.id,
+          data: "occation",
+          product_category: selItem.name,
+        },
+      });
+    }
+  };
+  // useEffect(() => {
+  //   axios
+  //     .get(Urls.home)
+  //     .then((response1) => {
+  //       setCatgSet(response1.data.results.data.categories);
+  //       setCategory(response1.data.results.data.categories);
+
+  //       console.log(
+  //         "response=======>?",
+  //         response1.data.results.data.categories
+  //       );
+  //       setTags(response1.data.results.data.tags);
+  //       console.log("tags...?", response1.data.results.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
+  const countries = [
+    { image: IND, text: "IND" },
+    { image: SAU, text: "SAU" },
+    { image: UAE, text: "UAE" },
+    { image: USA, text: "USA" },
+  ];
+  useEffect(() => {
+    if (selectedCountry) {
+      // Make the API request with the selected country ID as a parameter
+      axios
+        .get(`${Urls.home}?country=${selectedCountry.id}`)
+        .then((response) => {
+          setCatgSet(response.data.results.data.categories);
+          setCategory(response.data.results.data.categories);
+          console.log("Categories:", response.data.results.data.categories);
+          setTags(response.data.results.data.tags);
+          console.log("Tags:", response.data.results.data.tags);
+        })
+        .catch((error) => {
+          console.error("Error fetching home data:", error);
+        });
+    }
+  }, [selectedCountry]);
 
   const handleSignupClick = () => {
     setOpen(false);
     setShow(true);
     setIsSignpuMobileOpen(true);
+  };
+  const cattSelHandler = (setItem) => {
+    if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
+      window.location.href =
+        "https://swaecomnew.zinfog.in/category_search/" + setItem.id;
+    } else {
+      history.push({
+        pathname: "/new_arrivel",
+        state: { data: setItem.id, product_category: setItem.name },
+      });
+    }
+  };
+  const handleOpenDropDown = () => {
+    setOpenDropDown((prev) => !prev);
+  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(Urls.getCountryFlags);
+
+        setCountryData(response.data.results.data);
+        const defaultCountryID = localStorage.getItem("id");
+        if (defaultCountryID) {
+          // Find the default country from the data using the ID
+          const defaultCountry = countryData.find(
+            (country) => country.id === parseInt(defaultCountryID)
+          );
+          if (defaultCountry) {
+            setSelectedCountry(defaultCountry);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching country details:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  const handleCountrySelect = (country) => {
+    setSelectedCountry(country);
+    setOpenDropDown(true);
+
+    localStorage.setItem("id", country.id);
+    console.log("id...?", country.id);
   };
   return (
     <div className={Classes.NavContainer}>
@@ -243,7 +365,54 @@ const MobileNavbar = (props) => {
           <div className={Classes.rightIcons}>
             {isHomePage ? (
               <div>
-                <img src={indiaimg} />
+                {/* <img src={indiaimg} /> */}
+                <div
+                  style={{ cursor: "pointer" }}
+                  className={Classes.CountryFlags}
+                  onClick={handleOpenDropDown}
+                  ref={nameRef}
+                >
+                  <div className={Classes.headerElement}>
+                    <img
+                      src={selectedCountry ? selectedCountry.flag_image : IND}
+                      alt="Selected flag"
+                      className={Classes.selectedImage}
+                    />
+                  </div>
+                  {openDropDown && (
+                    <div className={Classes.CountryDropDowns} ref={dropdownRef}>
+                      {countryData.map((country, index) => (
+                        <div className={Classes.CountryContainer} key={index}>
+                          <div
+                            className={Classes.contryelements}
+                            onClick={() => handleCountrySelect(country)}
+                          >
+                            <div>
+                              <img
+                                src={country.flag_image}
+                                alt={country.id}
+                                className={Classes.dropDownImages}
+                              />
+                            </div>
+                            <div>
+                              <span>
+                                {country.country_name === "United Arab Emirates"
+                                  ? "UAE"
+                                  : country.country_name === "Saudi Arabia"
+                                  ? "KSA"
+                                  : country.country_name === "India"
+                                  ? "IND"
+                                  : country.country_name === "United States"
+                                  ? "USA"
+                                  : country.country_name}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
             ) : (
               <div onClick={() => props.setIsHome(!props.isHome)}>
@@ -400,49 +569,38 @@ const MobileNavbar = (props) => {
                         >
                           <AccordionTab header="Category">
                             <div className={Classes.ShippingDetialHead}>
-                              <div className={Classes.ParentCards1}>
-                                <img src={ringimg} />
-                                <p>ladies ring</p>
-                              </div>
-                              <div
-                                className={Classes.ParentCards1}
-                                style={{ borderBottom: "none" }}
-                              >
-                                <img src={ringimg2} />
-                                <p>Pendant</p>
-                              </div>
+                              {category.map((category, index) => (
+                                <div
+                                  className={Classes.ParentCards1}
+                                  onClick={() => cattSelHandler(category)}
+                                  style={{
+                                    color: "#ffff",
+                                    cursor: "pointer",
+                                  }}
+                                >
+                                  <img
+                                    style={{ maxWidth: "45px" }}
+                                    src={category.thumbnail}
+                                  />
+                                  <p>{category.name.toUpperCase()}</p>
+                                </div>
+                              ))}
                             </div>
                           </AccordionTab>
                           <AccordionTab header="Tags">
                             <div className={Classes.ShippingDetialHead}>
-                              <div className={Classes.ParentCards2}>
-                                <HiPlus />
-                                <p>Birthday</p>
-                              </div>
-                              <div className={Classes.ParentCards2}>
-                                <HiPlus />
-                                <p>Akshayathrithiya</p>
-                              </div>
-                              <div className={Classes.ParentCards2}>
-                                <HiPlus />
-                                <p>little price</p>
-                              </div>
-                              <div className={Classes.ParentCards2}>
-                                <HiPlus />
-                                <p>Men</p>
-                              </div>
-                              <div className={Classes.ParentCards2}>
-                                <HiPlus />
-                                <p>Woman</p>
-                              </div>
-                              <div className={Classes.ParentCards2}>
-                                <HiPlus />
-                                <p>Gifting</p>
-                              </div>
-                              <div className={Classes.ParentCards2}>
-                                <HiPlus />
-                                <p>Anniversary</p>
-                              </div>
+                              {tags.map((item, index) => {
+                                return (
+                                  <div
+                                    className={Classes.ParentCards2}
+                                    key={index}
+                                    onClick={() => tagSelHandler(item)}
+                                  >
+                                    <HiPlus />
+                                    <p>{item.name}</p>
+                                  </div>
+                                );
+                              })}
                             </div>
                           </AccordionTab>
                           <AccordionTab header="Policy">

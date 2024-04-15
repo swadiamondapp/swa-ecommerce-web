@@ -53,10 +53,13 @@ const ProductDetails = (props) => {
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [videoSection, setVideoSection] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
+  const [imageLoading, setImageLoading] = useState(true);
 
   const handleImageClick = () => {
     if (ratingRef.current) {
-      ratingRef.current.scrollIntoView({ behavior: "smooth" });
+      ratingRef.current.scrollIntoView({
+        behavior: "smooth",
+      });
     }
   };
 
@@ -64,7 +67,9 @@ const ProductDetails = (props) => {
     if (token !== null) {
       axios
         .get(Urls.productDet + props.id, {
-          headers: { Authorization: "Token " + token },
+          headers: {
+            Authorization: "Token " + token,
+          },
         })
         .then((response1) => {
           setProductDetails(response1.data.results.data);
@@ -145,7 +150,9 @@ const ProductDetails = (props) => {
       };
       axios
         .post(Urls.wishlist, body, {
-          headers: { Authorization: "Token " + token },
+          headers: {
+            Authorization: "Token " + token,
+          },
         })
         .then((response1) => {
           setAddToWishList(true);
@@ -162,7 +169,9 @@ const ProductDetails = (props) => {
       if (wishId !== "") {
         axios
           .delete(Urls.wishlist + wishId, {
-            headers: { Authorization: "Token " + token },
+            headers: {
+              Authorization: "Token " + token,
+            },
           })
           .then((response1) => {
             setAddToWishList(false);
@@ -253,6 +262,10 @@ const ProductDetails = (props) => {
     // Perform any action you want when the "Done" button is clicked
     setShowErrorModal(false);
   };
+  // Handle image load event
+  const handleImageLoad = () => {
+    setImageLoading(false);
+  };
 
   console.log("props.thumbImg,", props.thumbImg);
 
@@ -267,27 +280,43 @@ const ProductDetails = (props) => {
                 <div className="row">
                   <div className={`col-md-10 ${Classes.MobProductDetails2}`}>
                     {!videoSection && (
-                      <div className={Classes.ImageWishList}>
-                        <img
-                          className={Classes.LargeImage}
-                          src={props.thumbImg}
-                          alt=""
-                        />
+                      <>
+                        <div className={Classes.ImageWishList}>
+                          {/* Conditionally render loading skeleton */}
+                          {imageLoading && !props.thumbImg && (
+                            <div className="card">
+                              <div className="card-image">
+                                <div
+                                  id="image"
+                                  className="skeleton-loader"
+                                ></div>
+                              </div>
+                            </div>
+                          )}
+                          <img
+                            className={Classes.LargeImage}
+                            src={props.thumbImg}
+                            alt=""
+                          />
 
-                        <div
-                          style={{ cursor: "pointer" }}
-                          className={Classes.rateStar8}
-                          onClick={handleImageClick}
-                        >
-                          {/* {props.avgR} */}
-                          {parseFloat(props.avgR).toFixed(0)}
-                          <MdOutlineStarPurple500
-                            className={Classes.starrate8}
-                          />{" "}
-                          {props.count}
+                          <div
+                            style={{
+                              cursor: "pointer",
+                            }}
+                            className={Classes.rateStar8}
+                            onClick={handleImageClick}
+                          >
+                            {/* {props.avgR} */}
+                            {parseFloat(props.avgR).toFixed(0)}
+                            <MdOutlineStarPurple500
+                              className={Classes.starrate8}
+                            />{" "}
+                            {props.count}
+                          </div>
                         </div>
-                      </div>
+                      </>
                     )}
+
                     {/* video play */}
                     {videoSection && (
                       <div className={Classes.ImageWishList1}>
@@ -299,7 +328,10 @@ const ProductDetails = (props) => {
                           loop
                         ></iframe> */}
                         <video
-                          style={{ width: "429px", height: "429px" }}
+                          style={{
+                            width: "429px",
+                            height: "429px",
+                          }}
                           src={props.thumbImg}
                           autoPlay
                           loop
@@ -329,15 +361,16 @@ const ProductDetails = (props) => {
                       return (
                         <div
                           onClick={() => bagImgHandler(item, "true")}
-                          style={{ cursor: "pointer" }}
+                          style={{
+                            cursor: "pointer",
+                          }}
                         >
                           <img
                             style={{
-                              width: "73px",
-                              height: "73px",
                               border: "0.5px solid #80808026",
                               borderRadius: "4px",
                             }}
+                            className={Classes.ImageSmall}
                             src={Videoimg}
                           />
                         </div>
@@ -370,7 +403,11 @@ const ProductDetails = (props) => {
                 <p className={Classes.NewArrivals}>{props.name}</p>
                 <p
                   className={Classes.SubText}
-                  style={{ display: "flex", alignItems: "center", gap: "15px" }}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "15px",
+                  }}
                 >
                   {/* <img
                     onClick={Added}
@@ -502,11 +539,17 @@ const ProductDetails = (props) => {
                 >
                   <div className={Classes.Modalsection}>
                     <div className={Classes.ModalHeading}>
-                      <h2 style={{ fontSize: "20px" }}>
+                      <h2
+                        style={{
+                          fontSize: "20px",
+                        }}
+                      >
                         Please select your size
                       </h2>
                       <img
-                        style={{ cursor: "pointer" }}
+                        style={{
+                          cursor: "pointer",
+                        }}
                         src={closeimg}
                         onClick={() => setShowErrorModal(false)} // Close modal when close button is clicked
                         alt="Close"
@@ -532,33 +575,40 @@ const ProductDetails = (props) => {
                   </div>
                 </Modal>
                 <div className={Classes.FindStoreParent}>
-                  <button className={Classes.TryHome}>Try @ Home</button>
+                  <button className={Classes.TryHome}>Try at Home</button>
                   <button className={Classes.VideoCall}>
                     <img src={Call} />
                   </button>
                   <button className={Classes.FindStores}>Find @ store</button>
                 </div>
               </div>
-              <div className={Classes.BorderBottom}>
-                <p className={Classes.AvailableColours}>Select Size</p>
-                <select
-                  className={Classes.SizeSelect}
-                  onChange={sizeChangeHandler}
-                  value={selectedSize}
-                >
-                  <option value="">{}Select Size</option>
-                  {props.sizeChart.map((item, index) => {
-                    return (
-                      <option value={item.id} key={index}>
-                        {item.size_name}
-                      </option>
-                    );
-                  })}
-                </select>
-                <div style={{ paddingTop: "0px" }} className="errrMsg">
-                  {props.error}
+              {props.sizeChart.length > 0 && (
+                <div className={Classes.BorderBottom}>
+                  <p className={Classes.AvailableColours}>Select Size</p>
+                  <select
+                    className={Classes.SizeSelect}
+                    onChange={sizeChangeHandler}
+                    value={selectedSize}
+                  >
+                    <option value="">{}Select Size</option>
+                    {props.sizeChart.map((item, index) => {
+                      return (
+                        <option value={item.id} key={index}>
+                          {item.size_name}
+                        </option>
+                      );
+                    })}
+                  </select>
+                  <div
+                    style={{
+                      paddingTop: "0px",
+                    }}
+                    className="errrMsg"
+                  >
+                    {props.error}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
             <div className={Classes.BackgroundBgs}></div>
             {/* <div className={Classes.BorderBottom}>
@@ -612,13 +662,23 @@ const ProductDetails = (props) => {
 
                 {active === true ? (
                   <>
-                    <div className={Classes.Flex} style={{ marginLeft: "0px" }}>
+                    <div
+                      className={Classes.Flex}
+                      style={{
+                        marginLeft: "0px",
+                      }}
+                    >
                       <img className={Classes.Stroke} src={Stroke} alt="" />
                       <p className={Classes.StrokeText}>
                         Cash / Card delivery option available
                       </p>{" "}
                     </div>
-                    <div className={Classes.Flex} style={{ marginLeft: "0px" }}>
+                    <div
+                      className={Classes.Flex}
+                      style={{
+                        marginLeft: "0px",
+                      }}
+                    >
                       <img className={Classes.Stroke} src={Stroke} alt="" />
                       <p className={Classes.StrokeText}>
                         Standard delivery available
@@ -627,7 +687,12 @@ const ProductDetails = (props) => {
                   </>
                 ) : null}
                 {active === false ? (
-                  <p style={{ paddingTop: "0px" }} className="errrMsg">
+                  <p
+                    style={{
+                      paddingTop: "0px",
+                    }}
+                    className="errrMsg"
+                  >
                     Standard delivery not available
                   </p>
                 ) : null}
@@ -654,15 +719,39 @@ const ProductDetails = (props) => {
                 <div className={Classes.LeftMobCard1}>
                   <img src={PD1} />
                   <p className={Classes.PdH1}>18kt Rose gold</p>
-                  <p style={{ color: "#7A8288" }}>Net weight</p>
-                  <p style={{ color: "#00464d" }}>1.300 GM</p>
+                  <p
+                    style={{
+                      color: "#7A8288",
+                    }}
+                  >
+                    Net weight
+                  </p>
+                  <p
+                    style={{
+                      color: "#00464d",
+                    }}
+                  >
+                    1.300 GM
+                  </p>
                 </div>
                 <div className={Classes.ArrowlineMob}></div>
                 <div className={Classes.RightMobCard1}>
                   <img src={PD2} />
                   <p className={Classes.PdH1}>15 SIJJ Diamond</p>
-                  <p style={{ color: "#7A8288" }}>Diamond weight</p>
-                  <p style={{ color: "#00464d" }}>0.456 ct</p>
+                  <p
+                    style={{
+                      color: "#7A8288",
+                    }}
+                  >
+                    Diamond weight
+                  </p>
+                  <p
+                    style={{
+                      color: "#00464d",
+                    }}
+                  >
+                    0.456 ct
+                  </p>
                 </div>
               </div>
               <div className={Classes.ProductDetailsMobCard2}>
@@ -672,21 +761,36 @@ const ProductDetails = (props) => {
                 </div>
                 <div className={Classes.ProductMob3Rows}>
                   <div className={Classes.MobFirstCard}>
-                    <p style={{ color: "#7A8288", fontSize: "15px" }}>
+                    <p
+                      style={{
+                        color: "#7A8288",
+                        fontSize: "15px",
+                      }}
+                    >
                       Product height
                     </p>
                     <p>{productDetails.height} mm</p>
                   </div>
                   <div className={Classes.DummyLineArrow}></div>
                   <div className={Classes.MobFirstCard}>
-                    <p style={{ color: "#7A8288", fontSize: "15px" }}>
+                    <p
+                      style={{
+                        color: "#7A8288",
+                        fontSize: "15px",
+                      }}
+                    >
                       Product length
                     </p>
                     <p>{productDetails.length} mm</p>
                   </div>
                   <div className={Classes.DummyLineArrow}></div>
                   <div className={Classes.MobFirstCard}>
-                    <p style={{ color: "#7A8288", fontSize: "15px" }}>
+                    <p
+                      style={{
+                        color: "#7A8288",
+                        fontSize: "15px",
+                      }}
+                    >
                       Product width
                     </p>
                     <p>{productDetails.width} mm</p>
@@ -710,7 +814,13 @@ const ProductDetails = (props) => {
                   >
                     Other stone name
                   </p>
-                  <p style={{ color: "#00464D" }}>Ruby</p>
+                  <p
+                    style={{
+                      color: "#00464D",
+                    }}
+                  >
+                    Ruby
+                  </p>
                 </div>
                 <div className={Classes.DummyLineArrow2}></div>
                 <div className={Classes.FirststoneMob}>
@@ -723,7 +833,13 @@ const ProductDetails = (props) => {
                   >
                     Other Stone Weight
                   </p>
-                  <p style={{ color: "#00464D" }}>0</p>
+                  <p
+                    style={{
+                      color: "#00464D",
+                    }}
+                  >
+                    0
+                  </p>
                 </div>
                 <div className={Classes.DummyLineArrow2}></div>
                 <div className={Classes.FirststoneMob}>
@@ -736,7 +852,13 @@ const ProductDetails = (props) => {
                   >
                     Other Stone count
                   </p>
-                  <p style={{ color: "#00464D" }}>0</p>
+                  <p
+                    style={{
+                      color: "#00464D",
+                    }}
+                  >
+                    0
+                  </p>
                 </div>
               </div>
             </div>
@@ -1004,15 +1126,25 @@ const ProductDetails = (props) => {
                     return (
                       <div
                         className={Classes.ReviewImageTexts}
-                        style={{ borderBottom: "0px" }}
+                        style={{
+                          borderBottom: "0px",
+                        }}
                         key={index}
                       >
                         <div className={Classes.Icon_Stars}>
                           <img src={Profiles} alt="Profile" />
                           <div className={Classes.StarIcons1}>
-                            <p style={{ color: "#fff" }}>{item.rating}</p>
+                            <p
+                              style={{
+                                color: "#fff",
+                              }}
+                            >
+                              {item.rating}
+                            </p>
                             <IoIosStar
-                              style={{ marginTop: "0px" }}
+                              style={{
+                                marginTop: "0px",
+                              }}
                               className={Classes.Star}
                               size={16}
                               color="#ffffff"

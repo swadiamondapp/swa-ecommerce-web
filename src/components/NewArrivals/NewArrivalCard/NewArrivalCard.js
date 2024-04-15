@@ -102,7 +102,7 @@ const NewArrivalCard = (props) => {
             <div className={Classes.HoverContainer}>
               <div className={Classes.HoverButton}>
                 <div className={Classes.HButton}>
-                  <p className={Classes.CheckDelvyDate}>Check delivery date</p>
+                  {/* <p className={Classes.CheckDelvyDate}>Check delivery date</p> */}
                   <div
                     className={Classes.ButtonContainer}
                     onClick={props.clicked}

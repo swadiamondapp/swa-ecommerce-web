@@ -77,6 +77,8 @@
   border-radius: 4px;
   margin: 0 10px 20px 0;
   cursor: pointer;
+  width: 73px;
+  height: 73px;
 }
 
 .LargeImage {
@@ -549,6 +551,7 @@
   margin-top: 15px;
   cursor: pointer;
 }
+
 .CountP {
   display: hidden;
 }
@@ -692,6 +695,9 @@
   .ProductDiscription {
     width: 350px;
   }
+  .ParentHeadingD1 {
+    margin-top: 10px;
+  }
   .manpara {
     padding-left: 8px;
   }
@@ -722,8 +728,9 @@
     order: 1;
   }
   .ImageSmall {
-    width: 100px;
+    width: 80px;
     margin: 0px;
+    height: 80px;
   }
   .BIS {
     margin-right: 0px;

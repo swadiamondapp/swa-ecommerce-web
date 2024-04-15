@@ -257,6 +257,10 @@
   .NewArrivalCard:hover {
     box-shadow: none;
   }
+  .NewArrivalCard {
+    height: 305px;
+    margin-bottom: 20px;
+  }
   .CheckDelvyDate {
     color: #00464d;
     font-family: "Lato";

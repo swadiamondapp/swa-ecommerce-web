@@ -248,6 +248,128 @@ p {
   outline: none;
   left: -100px;
 }
+/* animation */
+
+.card {
+  background-color: #fff;
+  position: absolute;
+  top: 0%;
+  z-index: 99999999;
+  width: 100%;
+  border: none !important;
+}
+
+.card-image {
+  width: 100%;
+  height: 429px;
+}
+
+.card-image > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-image > #image {
+  width: 100%;
+  height: 100%;
+}
+
+.card-body-loading > h3 {
+  width: 300px;
+  height: 40px;
+
+  margin-top: 0.75rem;
+}
+
+.card-body-loading > p:not(#ether) {
+  margin-top: 1rem;
+  height: 25px;
+  width: 300px;
+}
+
+.card-body-loading > p#ether {
+  margin-top: 1rem;
+  height: 35px;
+  width: 100px;
+  border-radius: 0.5rem;
+}
+
+.card-body-loading > #button {
+  height: 50px;
+  width: 300px;
+  margin-top: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.card-body > h3 {
+  font-size: 1.5rem;
+  margin: 0.5rem 0;
+  color: #1a1c1f;
+  font-weight: 700;
+}
+
+.card-body > p {
+  width: 300px;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.card-body-ether {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.card-body-ether > span {
+  font-weight: 600;
+  margin-left: 0.5rem;
+}
+
+.card-body-cta {
+  margin-top: 1rem;
+  cursor: pointer;
+  width: 100%;
+  padding: 1rem 1.5rem;
+  font-weight: 600;
+  color: #fff;
+  background-color: dodgerblue;
+  border: 0;
+  border-radius: 0.5rem;
+  transition: all 0.5s ease-in-out;
+}
+
+.card-body-cta:hover,
+.card-body-cta:focus {
+  background-color: rgb(0, 116, 231);
+}
+
+.skeleton-loader {
+  animation: skeleton-loader 1s steps(1000) infinite;
+  background: linear-gradient(
+    65deg,
+    #eaeaea 0%,
+    #eaeaea 40%,
+    #ffffff 50%,
+    #eaeaea 75%,
+    #eaeaea 100%
+  );
+  background-size: 500px 429px;
+  background-position: 0 0, 0 0, 0 0, 0 0;
+}
+
+@keyframes skeleton-loader {
+  0% {
+    background-position: 0 0, 0 0, 0 0, 0 0;
+  }
+  100% {
+    background-position: -500px 0, -500px -200px, 0 -200px, 500px 0;
+  }
+}
+
+/* animation */
 .mobile-modal {
   position: absolute;
   top: 0;
