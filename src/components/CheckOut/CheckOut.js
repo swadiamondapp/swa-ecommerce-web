@@ -123,7 +123,7 @@ function CheckOut(props) {
       .messages({
         "string.empty": `Please enter your street/colony name.`,
       }),
-    landMark: Joi.string().messages({ "string.empty": `` }),
+    landMark: Joi.string().allow('').messages({ "string.empty": `` }),
   });
 
   const formRef = useRef(null);

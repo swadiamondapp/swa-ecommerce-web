@@ -106,14 +106,32 @@ function AddAddress(props) {
 
   const validateForm = () => {
     const schema = Joi.object({
-      fullName: Joi.string().required(),
-      mobile: Joi.string().required(),
-      pincode: Joi.string()
-        .pattern(/^\d{6}$/)
-        .required(),
-      city: Joi.string().required(),
-      hNumber_Bname: Joi.string().required(),
-      streetColony: Joi.string().required(),
+      fullName: Joi.string().required().messages({
+        'any.required': 'Full name is required',
+        'string.empty': 'please provide the necessary details',
+      }),
+      mobile: Joi.string().required().messages({
+        'any.required': 'Mobile number is required',
+        'string.empty': 'please provide the necessary details',
+        
+      }),
+      pincode: Joi.string().pattern(/^\d{6}$/).required().messages({
+        'any.required': 'Pincode is required',
+        'string.empty': 'Pincode must not be empty',
+        'string.pattern.base': 'Pincode must be 6 digits',
+      }),
+      city: Joi.string().required().messages({
+        'any.required': 'City is required',
+        'string.empty': 'City must not be empty',
+      }),
+      hNumber_Bname: Joi.string().required().messages({
+        'any.required': 'House number / Building name is required',
+        'string.empty': 'House number / Building name must not be empty',
+      }),
+      streetColony: Joi.string().required().messages({
+        'any.required': 'Street / Colony is required',
+        'string.empty': 'Street / please provide the necessary details',
+      }),
     });
 
     const { error } = schema.validate(addressData, { abortEarly: false });
@@ -149,6 +167,19 @@ function AddAddress(props) {
       });
       if (response.data.status === 200) {
         props.fetchAddress();
+        // Reset address data and close the modal
+        setAddressData({
+          fullName: "",
+          mobile: "",
+          pincode: "",
+          city: "",
+          state: "kerala",
+          hNumber_Bname: "",
+          streetColony: "",
+          landMark: "",
+        });
+        setShowAddAddress(true);
+        setShowNewAddressForm(false);
       } else {
         // Handle other response statuses if necessary
         console.log("API request failed:", response.data);

@@ -26,7 +26,7 @@ const signUpSchema = Joi.object({
     .messages({
       "string.base": `"" should be a type of string`,
       "string.empty": `Name required`,
-      "string.pattern.base": `Should be a albhabet`,
+      "string.pattern.base": `Should be an albhabet`,
       "any.required": `"" is a required field`,
     }),
   mobile: Joi.string()
@@ -34,10 +34,10 @@ const signUpSchema = Joi.object({
     .regex(/^[6-9]\d{9}$/)
     .required()
     .messages({
-      "string.base": `"" should be a type of string`,
+      "string.base": `should be a type of string`,
       "string.empty": `Phone number required`,
-      "string.pattern.base": `"" must be 10 digit number`,
-      "any.required": `"" is a required field`,
+      "string.pattern.base": `must be 10 digit number`,
+      "any.required": `is a required field`,
     }),
   email: Joi.string()
     .trim()
@@ -46,10 +46,10 @@ const signUpSchema = Joi.object({
     )
     .required()
     .messages({
-      "string.base": `"" should be a type of string`,
-      "string.empty": `Email required`,
-      "string.pattern.base": `youremail@gmail.com`,
-      "any.required": `"" is a required field`,
+      "string.base": `should be a type of string`,
+      "string.empty": `Email must not be empty`,
+      "string.pattern.base": `Enter youremail@gmail.com`,
+      "any.required": `is a required field`,
     }),
 });
 
@@ -67,6 +67,7 @@ const LoginToggle = (props) => {
   const [mobileNumber, setMobileNumber] = useState("");
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
+  const [emailId, setEmailId] = useState("");
   const [isDesk, setIsDesk] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
   );
@@ -116,7 +117,6 @@ const LoginToggle = (props) => {
   const handleSignupModalOpen = () => {
     setSignupModal(true);
     setIsSignup(true);
-
   };
   useEffect(() => {
     // Check if props.LoginSignupToggle is true
@@ -135,8 +135,44 @@ const LoginToggle = (props) => {
   const handleOtpModalClose = () => setGetOtpModal(false);
 
   const handleSignupModalClose = () => setSignupModal(false);
+  const handleOpen = (event) => {
+    event.preventDefault(); // Prevent default form submission behavior
 
-  const handleOpen = () => setOpen(true);
+    // Get the email value from the state variable
+    const emailValue = emailId;
+
+    // Check if the email value is empty
+    if (!emailValue.trim()) {
+      // If empty, set validation error and return
+      setValidationErrors({
+        ...validationErrors,
+        emailId: "Email must not be empty",
+      });
+      return;
+    }
+
+    // Regular expression for validating email format
+    const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    // Check if the email value matches the email regex
+    if (!emailRegex.test(emailValue)) {
+      // If invalid, set validation error and return
+      setValidationErrors({
+        ...validationErrors,
+        emailId: "Invalid email address",
+      });
+      return;
+    }
+
+    // If the email is valid, clear any existing validation errors
+    setValidationErrors({
+      ...validationErrors,
+      emailId: "",
+    });
+
+    // Open the modal
+    setOpen(true);
+  };
   const handleClose = () => setOpen(false);
 
   function handleCLick() {}
@@ -353,6 +389,17 @@ const LoginToggle = (props) => {
   };
 
   const sendOtp = async () => {
+    const mobileNumberRegex = /^\d{10}$/;
+    if (!mobileNumber) {
+      setValidationErrors({ mobileNumber: "Mobile number is required" });
+      return false;
+    }
+
+    // Check if mobile number matches the regular expression
+    if (!mobileNumberRegex.test(mobileNumber)) {
+      setValidationErrors({ mobileNumber: "Mobile number must be 10 digits" });
+      return false;
+    }
     try {
       const body = {
         phone_code: "+91",
@@ -412,11 +459,29 @@ const LoginToggle = (props) => {
       console.log(error);
     }
   };
+  const handleSubmitButtons = (e) => {
+    e.preventDefault();
+    handleSignUp();
+  };
+  const handelLoginForm = (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
+    if (activeTab === "tab1") {
+      // If active tab is "tab1", perform action for phone number login
+      sendOtp();
+    } else {
+      // If active tab is "tab2", perform action for email login
+      handleOpen();
+    }
+  };
+  const handleOtpForm = (e) => {
+    e.preventDefault();
+    verifyOtp();
+  };
 
   return (
     <div className={Classes.loginToffle}>
       <div className={Classes.Wrapper}>
-        {isSignup ?  (
+        {isSignup ? (
           <>
             <div className={Classes.SignupWrapper}>
               <div className={Classes.signupContainer}>
@@ -427,8 +492,8 @@ const LoginToggle = (props) => {
                   <p className={Classes.signuptitletext}>Sign up</p>
                   <p className={Classes.titlep}>Create your Account</p>
                 </div>
-                <div className={Classes.signupInputFields}>
-                  <form>
+                <form onSubmit={handleSubmitButtons}>
+                  <div className={Classes.signupInputFields}>
                     <div className={Classes.formgap}>
                       <div>
                         <label className={Classes.labelStyle}>Name</label>
@@ -473,18 +538,19 @@ const LoginToggle = (props) => {
                         </p>
                       </div>
                     </div>
-                  </form>
-                </div>
-                <div style={{ textAlign: "center" }}>
-                  <button
-                    className={Classes.accept}
-                    style={{ marginTop: "15px" }}
-                    onClick={handleSignUp}
-                    type="submit"
-                  >
-                    SIGNUP
-                  </button>
-                </div>
+                  </div>
+                  <div style={{ textAlign: "center" }}>
+                    <button
+                      type="submit"
+                      className={Classes.accept}
+                      style={{ marginTop: "15px" }}
+                      onClick={handleSignUp}
+                    >
+                      SIGNUP
+                    </button>
+                  </div>
+                </form>
+
                 <div className={Classes.SignupTextWrapper}>
                   <div className={Classes.Signup}>
                     <span className={Classes.bottomText}>
@@ -565,141 +631,141 @@ const LoginToggle = (props) => {
           </>
         ) : (
           <>
-            <div className={Classes.SlideButton}>
-              <div className={Classes.LoginContainer}>
-                <div className={Classes.title}>
-                  <div style={{}}>
-                    <h3 className={Classes.titleh}>Welcome back</h3>
-                  </div>
-                  <div className={Classes.signupTitleText}>
-                    {activeTab === "tab1" ? (
-                      <>
-                        <p className={Classes.titlep}>
-                          Please enter your Phone Number we will
-                          <br />
-                          send you OTP
-                        </p>
-                      </>
-                    ) : (
-                      <>
-                        <p className={Classes.titlep}>
-                          Please enter your Email we will
-                          <br />
-                          send you OTP
-                        </p>
-                      </>
-                    )}
-                  </div>
-                </div>
-                <div className={Classes.TabButton}>
-                  <div className={Classes.tabHeader}>
-                    <div className={Classes.active} style={customTabOne}>
-                      <div
-                        className={`Classes.tab-item ${activeTab === "tab1" &&
-                          "active"}`}
-                        onClick={() => handleTabClick("tab1")}
-                      >
-                        {activeTab === "tab1" ? (
-                          <div className={Classes.tabTitleOne}>
-                            <span
-                              style={{
-                                fontWeight: "600",
-                              }}
-                            >
-                              Phone Number
-                            </span>
-                          </div>
-                        ) : (
-                          <div className={Classes.tabTitleOne}>
-                            <span>Phone Number</span>
-                          </div>
-                        )}
-                      </div>
+            <form onSubmit={handelLoginForm}>
+              <div className={Classes.SlideButton}>
+                <div className={Classes.LoginContainer}>
+                  <div className={Classes.title}>
+                    <div style={{}}>
+                      <h3 className={Classes.titleh}>Welcome back</h3>
                     </div>
-                    <div className={Classes.active} style={customTabtwo}>
-                      <div
-                        className={`Classes.tab-item ${activeTab === "tab2" &&
-                          "active"}`}
-                        onClick={() => handleTabClick("tab2")}
-                      >
-                        {activeTab === "tab1" ? (
-                          <div className={Classes.tabTitleTwo}>
-                            <span>Email</span>
-                          </div>
-                        ) : (
-                          <div className={Classes.tabTitleTwo}>
-                            <span
-                              style={{
-                                fontWeight: "600",
-                              }}
-                            >
-                              Email
-                            </span>
-                          </div>
-                        )}
+                    <div className={Classes.signupTitleText}>
+                      {activeTab === "tab1" ? (
+                        <>
+                          <p className={Classes.titlep}>
+                            Please enter your Phone Number we will
+                            <br />
+                            send you OTP
+                          </p>
+                        </>
+                      ) : (
+                        <>
+                          <p className={Classes.titlep}>
+                            Please enter your Email we will
+                            <br />
+                            send you OTP
+                          </p>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                  <div className={Classes.TabButton}>
+                    <div className={Classes.tabHeader}>
+                      <div className={Classes.active} style={customTabOne}>
+                        <div
+                          className={`Classes.tab-item ${activeTab === "tab1" &&
+                            "active"}`}
+                          onClick={() => handleTabClick("tab1")}
+                        >
+                          {activeTab === "tab1" ? (
+                            <div className={Classes.tabTitleOne}>
+                              <span style={{ fontWeight: "600" }}>
+                                Phone Number
+                              </span>
+                            </div>
+                          ) : (
+                            <div className={Classes.tabTitleOne}>
+                              <span>Phone Number</span>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      <div className={Classes.active} style={customTabtwo}>
+                        <div
+                          className={`Classes.tab-item ${activeTab === "tab2" &&
+                            "active"}`}
+                          onClick={() => handleTabClick("tab2")}
+                        >
+                          {activeTab === "tab1" ? (
+                            <div className={Classes.tabTitleTwo}>
+                              <span>Email</span>
+                            </div>
+                          ) : (
+                            <div className={Classes.tabTitleTwo}>
+                              <span style={{ fontWeight: "600" }}>Email</span>
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div className={Classes.tabContent}>
-                  {activeTab === "tab1" && (
-                    <div>
-                      <div className={Classes.loginFormInput}>
-                        <form style={{}}>
+                  <div className={Classes.tabContent}>
+                    {activeTab === "tab1" && (
+                      <div>
+                        <div className={Classes.loginFormInput}>
                           <label className={Classes.labelStyle}>
                             Mobile Number
                           </label>
                           <input
+                            type="number"
                             placeholder="Enter Mobile Number"
                             className={Classes.allInputTextStyle}
                             value={mobileNumber}
                             onChange={(e) => setMobileNumber(e.target.value)}
                           />
-                        </form>
+                          <p className={Classes.ErrorText}>
+                            {validationErrors.mobileNumber &&
+                              validationErrors.mobileNumber}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  )}
-                  {activeTab === "tab2" && (
-                    <div>
+                    )}
+                    {activeTab === "tab2" && (
                       <div>
-                        <form>
+                        <div>
                           <label className={Classes.labelStyle}>Email</label>
                           <input
+                            type="email"
                             placeholder="Enter Email address"
                             className={Classes.allInputTextStyle}
-                            value={email}
-                            onChange={handleEmailChange}
+                            value={emailId}
+                            onChange={(e) => setEmailId(e.target.value)}
                           />
-                        </form>
+                          <p className={Classes.ErrorText}>
+                            {validationErrors.emailId &&
+                              validationErrors.emailId}
+                          </p>
+                        </div>
                       </div>
-                    </div>
+                    )}
+                    {/* Add more content for additional tabs */}
+                  </div>
+                </div>
+                <div>
+                  {activeTab === "tab1" ? (
+                    <>
+                      <button
+                        type="submit"
+                        className={Classes.LoginButton}
+                        // onClick={loginHandler}
+                        onClick={sendOtp}
+                      >
+                        LOGIN
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <button
+                        type="submit"
+                        className={Classes.LoginButton}
+                        onClick={handleOpen}
+                      >
+                        LOGIN
+                      </button>
+                    </>
                   )}
-                  {/* Add more content for additional tabs */}
                 </div>
               </div>
-              <div>
-                {activeTab === "tab1" ? (
-                  <>
-                    <button
-                      className={Classes.LoginButton}
-                      // onClick={loginHandler}
-                      onClick={sendOtp}
-                    >
-                      LOGIN
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <button
-                      className={Classes.LoginButton}
-                      onClick={handleOpen}
-                    >
-                      LOGIN
-                    </button>
-                  </>
-                )}
-              </div>
-            </div>
+            </form>
             <div className={Classes.line}>
               <div
                 style={{
@@ -774,41 +840,43 @@ const LoginToggle = (props) => {
                       }
                     >
                       <div className={Classes.otpContainer}>
-                        <div
-                          style={{
-                            textAlign: "center",
-                          }}
-                        >
+                        <form onSubmit={handleOtpForm}>
+                          <div style={{ textAlign: "center" }}>
+                            <div>
+                              <h3
+                                className={Classes.titleh}
+                                style={{ paddingBottom: "10px" }}
+                              >
+                                OTP
+                              </h3>
+                            </div>
+                            <div>
+                              <p className={Classes.titlep}>
+                                Please enter 6 digit OTP that send to your
+                                <br />
+                                +91 9879453467
+                              </p>
+                            </div>
+                          </div>
                           <div>
-                            <h3
-                              className={Classes.titleh}
-                              style={{
-                                paddingBottom: "10px",
-                              }}
+                            <label className={Classes.labelStyle}>OTP</label>
+                            <input
+                              placeholder="6897"
+                              className={Classes.allInputTextStyle}
+                              value={otp}
+                              onChange={(e) => setOtp(e.target.value)}
+                            />
+                          </div>
+                          <div>
+                            <button
+                              type="submit"
+                              onClick={verifyOtp}
+                              className={Classes.accept}
                             >
-                              OTP
-                            </h3>
+                              Continue
+                            </button>
                           </div>
-                          <div>
-                            <p className={Classes.titlep}>
-                              Please enter 6 digit OTP that send to your
-                              <br />
-                              +91 {mobileNumber}
-                            </p>
-                          </div>
-                        </div>
-                        <div>
-                          <label className={Classes.labelStyle}>OTP</label>
-                          <input
-                            placeholder="6897"
-                            className={Classes.allInputTextStyle}
-                            value={otp}
-                            onChange={(e) => setOtp(e.target.value)}
-                          />
-                        </div>
-                        <div onClick={verifyOtp}>
-                          <button className={Classes.accept}>Continue</button>
-                        </div>
+                        </form>
                         <div
                           style={{
                             display: "flex",

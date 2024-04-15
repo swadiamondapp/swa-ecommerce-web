@@ -250,6 +250,7 @@ label {
 }
 .Error {
   color: #ff0000e6;
+  font-size: 13px;
 }
 .HeadAddressDesc1 {
   color: #000 !important;
