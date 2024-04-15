@@ -199,6 +199,14 @@ const MobileNavbar = (props) => {
     }
   };
 
+  const moveTocart = () => {
+    if (token !== null) {
+      // Handle cart click action
+    } else {
+      setShow(true); // Open login modal if user is not logged in
+    }
+  };
+
   const handleSignupClick = () => {
     setOpen(false);
     setShow(true);
@@ -262,7 +270,7 @@ const MobileNavbar = (props) => {
                 className={`${Classes.Icon} ${Classes.AddToCart}`}
                 color="#FFFFFF"
                 size={25}
-                // onClick={moveTocart}
+                onClick={moveTocart}
               />
             </div>
           </div>

@@ -26,7 +26,7 @@ const signUpSchema = Joi.object({
     .messages({
       "string.base": `"" should be a type of string`,
       "string.empty": `Name required`,
-      "string.pattern.base": `Should be a albhabet`,
+      "string.pattern.base": `Should be an albhabet`,
       "any.required": `"" is a required field`,
     }),
   mobile: Joi.string()
@@ -34,10 +34,10 @@ const signUpSchema = Joi.object({
     .regex(/^[6-9]\d{9}$/)
     .required()
     .messages({
-      "string.base": `"" should be a type of string`,
+      "string.base": `should be a type of string`,
       "string.empty": `Phone number required`,
-      "string.pattern.base": `"" must be 10 digit number`,
-      "any.required": `"" is a required field`,
+      "string.pattern.base": `must be 10 digit number`,
+      "any.required": `is a required field`,
     }),
   email: Joi.string()
     .trim()
@@ -46,10 +46,10 @@ const signUpSchema = Joi.object({
     )
     .required()
     .messages({
-      "string.base": `"" should be a type of string`,
-      "string.empty": `Email required`,
-      "string.pattern.base": `youremail@gmail.com`,
-      "any.required": `"" is a required field`,
+      "string.base": `should be a type of string`,
+      "string.empty": `Email must not be empty`,
+      "string.pattern.base": `Enter youremail@gmail.com`,
+      "any.required": `is a required field`,
     }),
 });
 
@@ -66,6 +66,7 @@ const LoginToggle = (props) => {
   });
   const [mobileNumber, setMobileNumber] = useState("");
   const [otp, setOtp] = useState("");
+  const [emailId, setEmailId] = useState("");
   const [isDesk, setIsDesk] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
   );
@@ -104,8 +105,44 @@ const LoginToggle = (props) => {
   const handleOtpModalClose = () => setGetOtpModal(false);
 
   const handleSignupModalClose = () => setSignupModal(false);
+  const handleOpen = (event) => {
+    event.preventDefault(); // Prevent default form submission behavior
 
-  const handleOpen = () => setOpen(true);
+    // Get the email value from the state variable
+    const emailValue = emailId;
+
+    // Check if the email value is empty
+    if (!emailValue.trim()) {
+      // If empty, set validation error and return
+      setValidationErrors({
+        ...validationErrors,
+        emailId: "Email must not be empty",
+      });
+      return;
+    }
+
+    // Regular expression for validating email format
+    const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    // Check if the email value matches the email regex
+    if (!emailRegex.test(emailValue)) {
+      // If invalid, set validation error and return
+      setValidationErrors({
+        ...validationErrors,
+        emailId: "Invalid email address",
+      });
+      return;
+    }
+
+    // If the email is valid, clear any existing validation errors
+    setValidationErrors({
+      ...validationErrors,
+      emailId: "",
+    });
+
+    // Open the modal
+    setOpen(true);
+  };
   const handleClose = () => setOpen(false);
 
   function handleCLick() {}
@@ -243,6 +280,17 @@ const LoginToggle = (props) => {
   };
 
   const sendOtp = async () => {
+    const mobileNumberRegex = /^\d{10}$/;
+    if (!mobileNumber) {
+      setValidationErrors({ mobileNumber: "Mobile number is required" });
+      return false;
+    }
+
+    // Check if mobile number matches the regular expression
+    if (!mobileNumberRegex.test(mobileNumber)) {
+      setValidationErrors({ mobileNumber: "Mobile number must be 10 digits" });
+      return false;
+    }
     try {
       const body = {
         phone_code: "+91",
@@ -542,11 +590,16 @@ const LoginToggle = (props) => {
                             Mobile Number
                           </label>
                           <input
+                            type="number"
                             placeholder="Enter Mobile Number"
                             className={Classes.allInputTextStyle}
                             value={mobileNumber}
                             onChange={(e) => setMobileNumber(e.target.value)}
                           />
+                          <p className={Classes.ErrorText}>
+                            {validationErrors.mobileNumber &&
+                              validationErrors.mobileNumber}
+                          </p>
                         </div>
                       </div>
                     )}
@@ -555,9 +608,16 @@ const LoginToggle = (props) => {
                         <div>
                           <label className={Classes.labelStyle}>Email</label>
                           <input
+                            type="email"
                             placeholder="Enter Email address"
                             className={Classes.allInputTextStyle}
+                            value={emailId}
+                            onChange={(e) => setEmailId(e.target.value)}
                           />
+                          <p className={Classes.ErrorText}>
+                            {validationErrors.emailId &&
+                              validationErrors.emailId}
+                          </p>
                         </div>
                       </div>
                     )}
@@ -662,25 +722,24 @@ const LoginToggle = (props) => {
                       }
                     >
                       <div className={Classes.otpContainer}>
-                      <form onSubmit={handleOtpForm}>
-
-                        <div style={{ textAlign: "center" }}>
-                          <div>
-                            <h3
-                              className={Classes.titleh}
-                              style={{ paddingBottom: "10px" }}
-                            >
-                              OTP
-                            </h3>
+                        <form onSubmit={handleOtpForm}>
+                          <div style={{ textAlign: "center" }}>
+                            <div>
+                              <h3
+                                className={Classes.titleh}
+                                style={{ paddingBottom: "10px" }}
+                              >
+                                OTP
+                              </h3>
+                            </div>
+                            <div>
+                              <p className={Classes.titlep}>
+                                Please enter 6 digit OTP that send to your
+                                <br />
+                                +91 9879453467
+                              </p>
+                            </div>
                           </div>
-                          <div>
-                            <p className={Classes.titlep}>
-                              Please enter 6 digit OTP that send to your
-                              <br />
-                              +91 9879453467
-                            </p>
-                          </div>
-                        </div>
                           <div>
                             <label className={Classes.labelStyle}>OTP</label>
                             <input

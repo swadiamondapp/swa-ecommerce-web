@@ -231,10 +231,14 @@ header {
   color: #ff0000;
   font-family: "Poppins";
   font-weight: 400;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 @media (min-width: 300px) and (max-width: 575px) {
+  .loginToffle {
+    max-height: 475px;
+    overflow-y: scroll !important;
+  }
   .loginWrapper {
     padding: 15px 5px;
   }

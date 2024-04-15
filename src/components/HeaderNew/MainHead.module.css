@@ -321,7 +321,7 @@ header {
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   padding: 12px 16px;
   z-index: 1;
-  max-height: 700px;
+  max-height: 600px;
   overflow-y: scroll;
 }
 
@@ -1276,11 +1276,11 @@ a {
     margin: 0px;
   }
   .WebMobSlide {
-    display: block;
+    display: block; 
   }
   .searchListCont {
     display: block;
-    top: 30%;
+    top: 37%;
   }
 }
 .CountryFlags {
@@ -1346,9 +1346,7 @@ justify-content: flex-start;
   transform: scale(1.1) translateY(-3px);; /* Increase the scale on hover */
   transition: transform 0.3s ease; /* Add smooth transition effect */
 }
-.slick-list {
-  display: flex;
-}
+
 
 
 
