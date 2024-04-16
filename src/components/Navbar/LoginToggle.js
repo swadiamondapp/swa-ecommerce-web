@@ -17,6 +17,7 @@ import { auth, googleAuthProvider, facebookAuthProvider } from "../../firebase";
 import { Link } from "react-router-dom";
 import Joi from "joi";
 import PrivacyModal from "./PrivacyModal";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const signUpSchema = Joi.object({
   username: Joi.string()
@@ -65,41 +66,12 @@ const LoginToggle = (props) => {
     email: "",
   });
   const [mobileNumber, setMobileNumber] = useState("");
-  const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
   const [emailId, setEmailId] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [isDesk, setIsDesk] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
   );
-
-  // const [userData, setUserData] = useState(null);
-
-  // useEffect(() => {
-  //   // Get a reference to the "Users" node in Firebase Realtime Database
-  //   const usersRef = firebase.database().ref("Users");
-
-  //   // Get the currently authenticated user
-  //   const currentUser = firebase.auth().currentUser;
-
-  //   // If there is a logged-in user, get their data from Firebase
-  //   if (currentUser) {
-  //     // Construct the reference to the user's data using their UID
-  //     const userRef = usersRef.child(currentUser.uid);
-
-  //     // Listen for changes to the user's data in Firebase
-  //     userRef.on("value", (snapshot) => {
-  //       // Update the component state with the user's data
-  //       setUserData(snapshot.val());
-  //     });
-  //   }
-
-  //   // Clean up the Firebase listener when the component unmounts
-  //   return () => {
-  //     if (currentUser) {
-  //       usersRef.child(currentUser.uid).off("value");
-  //     }
-  //   };
-  // }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -136,41 +108,41 @@ const LoginToggle = (props) => {
 
   const handleSignupModalClose = () => setSignupModal(false);
   const handleOpen = (event) => {
-    event.preventDefault(); // Prevent default form submission behavior
+    // event.preventDefault(); // Prevent default form submission behavior
 
-    // Get the email value from the state variable
-    const emailValue = emailId;
+    // // Get the email value from the state variable
+    // const emailValue = emailId;
 
-    // Check if the email value is empty
-    if (!emailValue.trim()) {
-      // If empty, set validation error and return
-      setValidationErrors({
-        ...validationErrors,
-        emailId: "Email must not be empty",
-      });
-      return;
-    }
+    // // Check if the email value is empty
+    // if (!emailValue.trim()) {
+    //   // If empty, set validation error and return
+    //   setValidationErrors({
+    //     ...validationErrors,
+    //     emailId: "Email must not be empty",
+    //   });
+    //   return;
+    // }
 
-    // Regular expression for validating email format
-    const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    // // Regular expression for validating email format
+    // const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-    // Check if the email value matches the email regex
-    if (!emailRegex.test(emailValue)) {
-      // If invalid, set validation error and return
-      setValidationErrors({
-        ...validationErrors,
-        emailId: "Invalid email address",
-      });
-      return;
-    }
+    // // Check if the email value matches the email regex
+    // if (!emailRegex.test(emailValue)) {
+    //   // If invalid, set validation error and return
+    //   setValidationErrors({
+    //     ...validationErrors,
+    //     emailId: "Invalid email address",
+    //   });
+    //   return;
+    // }
 
-    // If the email is valid, clear any existing validation errors
-    setValidationErrors({
-      ...validationErrors,
-      emailId: "",
-    });
+    // // If the email is valid, clear any existing validation errors
+    // setValidationErrors({
+    //   ...validationErrors,
+    //   emailId: "",
+    // });
 
-    // Open the modal
+    // // Open the modal
     setOpen(true);
   };
   const handleClose = () => setOpen(false);
@@ -258,57 +230,10 @@ const LoginToggle = (props) => {
     return true;
   };
 
-  const handleLoginWithGoogle = async () => {
+  const handleSignInWithGoogle = async () => {
     try {
-      const googleResponse = await signInWithPopup(auth, googleAuthProvider);
-      console.log("responsegoogle", googleResponse.user);
-      if (googleResponse.user) {
-        // try {
-        //   const body = {
-        //     name: googleResponse.user.displayName,
-        //     phone_code: "+91",
-        //     phone_number: "9633272897",
-        //     email: googleResponse.user.email,
-        //     login_type: "GOOGLE",
-        //   };
-        //   const response = await axios.post(Urls.register, body);
-        //   if (response.data.results.status_code === 200) {
-        //     alert("Successfully Registered");
-        //     handleLoginModalOpen();
-        //   } else {
-        //   }
-        // } catch (error) {
-        //   alert(error.response.data.results.message);
-        // }
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleSignUpWithGoogle = async () => {
-    try {
-      const googleResponse = await signInWithPopup(auth, googleAuthProvider);
-      console.log("responsegoogle", googleResponse.user);
-      if (googleResponse.user) {
-        try {
-          const body = {
-            name: googleResponse.user.displayName,
-            phone_code: "+91",
-            phone_number: "9633272897",
-            email: googleResponse.user.email,
-            login_type: "GOOGLE",
-          };
-          const response = await axios.post(Urls.register, body);
-          if (response.data.results.status_code === 200) {
-            alert("Successfully Registered");
-            handleLoginModalOpen();
-          } else {
-          }
-        } catch (error) {
-          alert(error.response.data.results.message);
-        }
-      }
+      const response = await signInWithPopup(auth, googleAuthProvider);
+      console.log("responsegoogle", response);
     } catch (error) {
       console.log(error);
     }
@@ -329,38 +254,6 @@ const LoginToggle = (props) => {
       ...signUpData,
       [name]: value,
     });
-  };
-
-  // Handler to update email state
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-
-  // Handler for the "Agree & Login" button click
-  const handleAgreeAndLogin = async () => {
-    const body = {
-      username: email,
-    };
-    try {
-      // Perform login API call using the entered email
-      const response = await axios.post(urls.Login, body);
-      if (response.data.results.status_code === 200) {
-        // If login successful, store token and user details in localStorage
-        localStorage.setItem("swaToken", response.data.results.token);
-        localStorage.setItem("userName", response.data.results.data.name);
-        localStorage.setItem(
-          "phoneNumber",
-          response.data.results.data.phone_number
-        );
-
-        // Close the modal or perform any other action
-        props.onClose();
-      } else if (response.data.results.status_code === 401) {
-        console.log("Incorrect username or password!"); // Handle incorrect credentials
-      }
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   const handleSignUp = async (event) => {
@@ -389,24 +282,42 @@ const LoginToggle = (props) => {
   };
 
   const sendOtp = async () => {
+    // let _body = {};
+    const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    // mobileNumber
+    //   ? (_body = {
+    //       phone_code: "+91",
+    //       phone: mobileNumber,
+    //       createuser: "False",
+    //       forgotuser: "False",
+    //     })
+    //   : (_body = {
+    //       phone_code: "",
+    //       phone: "",
+    //       email: emailId,
+    //       createuser: "False",
+    //       forgotuser: "False",
+    //     });
+    const body = {
+      phone_code: "+91",
+      phone: mobileNumber,
+      email: "",
+      createuser: "False",
+      forgotuser: "False",
+    };
+
     const mobileNumberRegex = /^\d{10}$/;
     if (!mobileNumber) {
       setValidationErrors({ mobileNumber: "Mobile number is required" });
       return false;
     }
 
-    // Check if mobile number matches the regular expression
     if (!mobileNumberRegex.test(mobileNumber)) {
       setValidationErrors({ mobileNumber: "Mobile number must be 10 digits" });
       return false;
     }
+    setIsLoading(true)
     try {
-      const body = {
-        phone_code: "+91",
-        phone: mobileNumber,
-        createuser: "False",
-        forgotuser: "False",
-      };
       const response = await axios.post(Urls.sentOtp, body);
       console.log(response.data);
       if (response.data[0] === "Otp send Successfully") {
@@ -415,11 +326,46 @@ const LoginToggle = (props) => {
     } catch (error) {
       console.log(error);
     }
+    setIsLoading(false)
+  };
+
+  const sendOtpEmail = async () => {
+    const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    if (!emailId.trim()) {
+      setValidationErrors({ emailId: "Email must not be empty" });
+      return false;
+    }
+    if (!emailRegex.test(emailId)) {
+      setValidationErrors({ emailId: "Invalid email address" });
+      return false;
+    }
+
+    try {
+      const body = {
+        phone_code: "",
+        phone: "",
+        email: emailId,
+        createuser: "False",
+        forgotuser: "False",
+      };
+      setIsLoading(true);
+      const response = await axios.post(Urls.sentOtp, body);
+      console.log(response.data);
+
+      if (response.data[0] === "Otp send Successfully") {
+        handleOtpModalOpen();
+      }
+    } catch (error) {
+      // Log any errors that occur during the process
+      console.log(error);
+    }
+    setIsLoading(false)
   };
 
   const loginHandler = () => {
     const body = {
-      username: mobileNumber,
+      username: mobileNumber ? mobileNumber : emailId,
     };
     axios
       .post(urls.Login, body)
@@ -459,23 +405,42 @@ const LoginToggle = (props) => {
       console.log(error);
     }
   };
+  const verifyOtpEmail = async () => {
+    const body = {
+      email: emailId,
+      phone: "",
+      phone_code: "",
+      otp: otp,
+    };
+    try {
+      const response = await axios.post(Urls.verifyOTP, body);
+      if (response.data.results.status_code === 200) {
+        loginHandler();
+        
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const handleSubmitButtons = (e) => {
     e.preventDefault();
     handleSignUp();
   };
   const handelLoginForm = (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
+    e.preventDefault();
     if (activeTab === "tab1") {
-      // If active tab is "tab1", perform action for phone number login
       sendOtp();
-    } else {
-      // If active tab is "tab2", perform action for email login
-      handleOpen();
+    } else if (activeTab === "tab2") {
+      sendOtpEmail();
     }
   };
   const handleOtpForm = (e) => {
     e.preventDefault();
-    verifyOtp();
+    if (activeTab === "tab1") {
+      verifyOtp();
+    } else if (activeTab === "tab2") {
+      verifyOtpEmail();
+    }
   };
 
   return (
@@ -573,12 +538,7 @@ const LoginToggle = (props) => {
                   </div>
                 </div>
 
-                <div
-                  style={{
-                    display: "flex",
-                    marginBottom: "0.5rem",
-                  }}
-                >
+                <div style={{ display: "flex", marginBottom: "0.5rem" }}>
                   <div className={Classes.line2}>
                     <div
                       style={{
@@ -599,14 +559,12 @@ const LoginToggle = (props) => {
                 <div className={Classes.flex}>
                   <div
                     className={Classes.SocialButtons}
-                    style={{
-                      marginBottom: "1rem",
-                    }}
+                    style={{ marginBottom: "1rem" }}
                   >
                     <div className={Classes.googleButton}>
                       <button
                         className={Classes.buttonSocial}
-                        onClick={handleSignUpWithGoogle}
+                        onClick={handleSignInWithGoogle}
                       >
                         <img src={GOOGLE} /> Sign Up with Google
                       </button>
@@ -746,20 +704,41 @@ const LoginToggle = (props) => {
                       <button
                         type="submit"
                         className={Classes.LoginButton}
+                        name="phone"
+                        disabled={isLoading}
                         // onClick={loginHandler}
-                        onClick={sendOtp}
+                        // onClick={sendOtp}
                       >
-                        LOGIN
+                        {isLoading ? (
+                          <>
+                            <Box sx={{ display: "flex",justifyContent:'center',alignItems:'center' }}>
+                              <CircularProgress size={20} sx={{ color: '#fff' }}/>
+                            </Box>
+                          </>
+                        ) : (
+                          <>Login</>
+                        )}
                       </button>
                     </>
                   ) : (
                     <>
                       <button
                         type="submit"
+                        name="mail"
                         className={Classes.LoginButton}
-                        onClick={handleOpen}
+                        disabled={isLoading}
+                        // onClick={sendOtp}
                       >
-                        LOGIN
+                         {isLoading ? (
+                          <>
+                            {" "}
+                            <Box sx={{ display: "flex",justifyContent:'center',alignItems:'center' }}>
+                              <CircularProgress size={20} sx={{ color: '#fff' }}/>
+                            </Box>
+                          </>
+                        ) : (
+                          <>Login</>
+                        )}
                       </button>
                     </>
                   )}
@@ -789,7 +768,7 @@ const LoginToggle = (props) => {
                 <div className={Classes.googleButton}>
                   <button
                     className={Classes.buttonSocial}
-                    onClick={handleLoginWithGoogle}
+                    onClick={handleSignInWithGoogle}
                   >
                     <img src={GOOGLE} /> Login with Google
                   </button>
@@ -805,9 +784,7 @@ const LoginToggle = (props) => {
               </div>
               <div style={{ display: "flex" }}>
                 <button
-                  style={{
-                    paddingBottom: "4px",
-                  }}
+                  style={{ paddingBottom: "4px" }}
                   className={Classes.buttonSocial}
                 >
                   <img src={APPLE} /> Login with Apple
@@ -870,7 +847,7 @@ const LoginToggle = (props) => {
                           <div>
                             <button
                               type="submit"
-                              onClick={verifyOtp}
+                              // onClick={verifyOtp}
                               className={Classes.accept}
                             >
                               Continue
@@ -914,10 +891,7 @@ const LoginToggle = (props) => {
         </Typography> */}
                       <Typography
                         sx={{ p: 2 }}
-                        style={{
-                          textAlign: "center",
-                          padding: "5px",
-                        }}
+                        style={{ textAlign: "center", padding: "5px" }}
                       >
                         <div>
                           <span
@@ -939,14 +913,12 @@ const LoginToggle = (props) => {
                             justifyContent: "center",
                           }}
                         >
-                          <Button
-                            // className={Classes.acceptT}
-                            // onClick={handleOpen}
-                            className={Classes.LoginButton}
-                            onClick={handleAgreeAndLogin}
+                          <button
+                            className={Classes.acceptT}
+                            onClick={handleOpen}
                           >
                             Agree & login
-                          </Button>
+                          </button>
                         </div>
                       </Typography>
                     </Box>
