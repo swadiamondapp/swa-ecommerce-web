@@ -444,14 +444,6 @@ header {
     align-items: center;
     justify-content: center;
   }
-  .LoginButton {
-    background-color: #00464d !important;
-    width: 100%;
-    height: 2.45456rem;
-    color: #fff;
-    border-radius: 8px;
-    border: none;
-  }
   .Signup {
     display: flex;
     justify-content: center;

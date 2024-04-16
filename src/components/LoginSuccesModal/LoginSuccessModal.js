@@ -18,7 +18,7 @@ const successM = {
   p: 4,
 };
 
-const SuccessPage = (props) => {
+const LoginSuccessModal = (props) => {
   const [open, setOpen] = useState(false);
   const [isMobileView, setIsMobileView] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
@@ -41,10 +41,10 @@ const SuccessPage = (props) => {
 
   return (
     <div>
-      <Button onClick={handleOpen}>SUCESS MESSAGE AFTER SUBMIT REVIEW</Button>
+      {/* <Button onClick={handleOpen}>SUCESS MESSAGE AFTER SUBMIT REVIEW</Button> */}
       <Modal
         // open={props.successModalOpen}
-        open={open}
+        open={props.LoginSuccessModal}
         // onClose={props.handleClose}
         onClose={handleClose}
       >
@@ -67,8 +67,8 @@ const SuccessPage = (props) => {
               }}
             >
               <span className={Classes.titlesuccesModal}>
-                Thank you very much your
-                <br /> review has been saved
+                You are Successfully 
+                <br /> LoggedIn
               </span>
             </div>
           </Typography>
@@ -78,4 +78,4 @@ const SuccessPage = (props) => {
   );
 };
 
-export default SuccessPage;
+export default LoginSuccessModal;
