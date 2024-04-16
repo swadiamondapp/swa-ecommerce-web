@@ -26,13 +26,14 @@ const CategorySearch = (props) => {
   const [count, setCount] = useState("");
   const [labelSet, setLabelSet] = useState([]);
   const [num, setNum] = useState("");
+  const countryId = localStorage.getItem("id");
 
   const history = useHistory();
   const token = localStorage.getItem("swaToken");
   const filter = (newArrive, currentPage) => {
     setLoading(true);
     axios
-      .get(Urls.productList + newArrive)
+      .get(`${Urls.productList + newArrive}&country=${countryId}`)
       .then((response1) => {
         setLoading(false);
         // const productList = [...response1.data.results.data]

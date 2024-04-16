@@ -25,6 +25,7 @@ import IND from "../../Assets/flagIND.svg";
 import UAE from "../../Assets/flagUAE.svg";
 
 const Header = (props) => {
+  const flag = localStorage.getItem("defaultCountryFlag");
   const location = useLocation();
   const [isHome, setIsHome] = useState(
     location.pathname === "/" ? true : false
@@ -41,7 +42,7 @@ const Header = (props) => {
   const [openDropDown, setOpenDropDown] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState({
     id: 38,
-    flag_image: IND,
+    flag_image: !flag ? IND : flag,
   });
   const [countryData, setCountryData] = useState([]);
   const dropdownRef = useRef(null);
@@ -63,6 +64,7 @@ const Header = (props) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+  console.log("selectedCountry", selectedCountry);
 
   const handleClickOutside = (event) => {
     if (
@@ -118,6 +120,8 @@ const Header = (props) => {
     }
   }, [selectedCountry]);
 
+  console.log("selectedCountry", selectedCountry);
+
   const moveToWishList = () => {
     if (token !== null) {
       history.push("/wish_list");
@@ -130,6 +134,7 @@ const Header = (props) => {
     // if (history.location.pathname !== "/new_arrivel") {
     //   history.push({ pathname: "/new_arrivel", state: { data: id } });
     // }
+
     if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
       window.location.href =
         "https://swaecomnew.zinfog.in/category_search/" + setItem.id;
@@ -280,6 +285,9 @@ const Header = (props) => {
     { image: UAE, text: "UAE" },
     { image: USA, text: "USA" },
   ];
+  const countryFlag = localStorage.getItem("flag_image");
+
+  console.log("countryFlag", countryFlag);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -287,8 +295,13 @@ const Header = (props) => {
         const response = await axios.get(Urls.getCountryFlags);
 
         setCountryData(response.data.results.data);
+        localStorage.setItem(
+          "flag_image",
+          response.data.results.data.flag_image
+        );
         const defaultCountryID = localStorage.getItem("id");
-        if (defaultCountryID) {
+        const defaultCountryFlag = localStorage.getItem("flag_image");
+        if (defaultCountryID && defaultCountryFlag) {
           // Find the default country from the data using the ID
           const defaultCountry = countryData.find(
             (country) => country.id === parseInt(defaultCountryID)
@@ -312,7 +325,7 @@ const Header = (props) => {
     setOpenDropDown(true);
 
     localStorage.setItem("id", country.id);
-    console.log("id...?", country.id);
+    localStorage.setItem("defaultCountryFlag", country.flag_image);
   };
 
   useEffect(() => {

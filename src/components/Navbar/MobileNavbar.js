@@ -611,7 +611,10 @@ const MobileNavbar = (props) => {
                               })}
                             </div>
                           </AccordionTab>
-                          <AccordionTab header="Policy">
+                          <AccordionTab
+                            header="Policy"
+                            onClick={() => history.push("/privacy_policy")}
+                          >
                             <div className={Classes.ShippingDetialHead}></div>
                           </AccordionTab>
                           {userName && (

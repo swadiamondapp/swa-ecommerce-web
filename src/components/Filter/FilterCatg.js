@@ -20,10 +20,11 @@ const FilterCatgs = (props) => {
   const [selectedOccationIds, setSelectedOccationIds] = useState([]);
   const [selectedMetalIds, setSelectedMetalIds] = useState([]);
   const [selectedCategoryIds, setSelectedCategoryIds] = useState([]);
-
+  const countryId = localStorage.getItem("id");
+  console.log("countryId,new", countryId);
   const filterSet = (params) => {
     axios
-      .get(Urls.filter + params)
+      .get(`${Urls.filter + params}&country=${countryId}`)
       .then((response1) => {
         setCatgSet(response1.data.results.data.category);
         setColorSet(response1.data.results.data.colour);

@@ -602,7 +602,7 @@ const LoginModal = (props) => {
             <p className={Classes.Name_phoneLoged}>{phone}</p>
           </div>
           <div className={Classes.LogedDetails_list}>
-            <Link to="">
+            <Link to="" className={Classes.MobProfileLinks}>
               <p style={{ fontSize: "16px" }}>Account</p>
             </Link>
 

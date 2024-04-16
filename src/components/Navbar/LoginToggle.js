@@ -375,10 +375,19 @@ const LoginToggle = (props) => {
           login_type: "NORMAL",
         };
         const response = await axios.post(Urls.register, body);
+        const message = response.data.results.message;
         if (response.data.results.status_code === 200) {
           alert("Successfully Registered");
           handleLoginModalOpen();
+        } else if (
+          message === "user with this email or phone number already exists!!!"
+        ) {
+          // const message = response.data.results.message;
+
+          alert("User already exists. Sending OTP for login...");
+          await sendOtp(signUpData.mobile);
         } else {
+          alert(message);
         }
       } catch (error) {
         alert(error.response.data.results.message);
