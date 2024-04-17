@@ -51,9 +51,13 @@ const MobileNavbar = (props) => {
   const nameRef = useRef(null);
   const dropdownRef = useRef(null);
   const [countryData, setCountryData] = useState([]);
+  const flag = localStorage.getItem("defaultCountryFlag");
+  const CountryIds = localStorage.getItem("id");
   const [selectedCountry, setSelectedCountry] = useState({
-    id: 38,
-    flag_image: IND,
+    // id: 38,
+    // flag_image: IND,
+    id: !CountryIds ? 38 : CountryIds,
+    flag_image: !flag ? IND : flag,
   });
 
   console.log("catgSet", catgSet);
@@ -178,7 +182,7 @@ const MobileNavbar = (props) => {
       }
     } else if (setItem.type === "product") {
       axios
-        .get(Urls.productDet + setItem.id)
+        .get(`${Urls.productDet + setItem.id}&country=${selectedCountry.id}`)
         .then((response1) => {
           const selData = {
             product_id: setItem.id,

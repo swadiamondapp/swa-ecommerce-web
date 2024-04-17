@@ -26,6 +26,7 @@ import UAE from "../../Assets/flagUAE.svg";
 
 const Header = (props) => {
   const flag = localStorage.getItem("defaultCountryFlag");
+  const CountryIds = localStorage.getItem("id");
   const location = useLocation();
   const [isHome, setIsHome] = useState(
     location.pathname === "/" ? true : false
@@ -41,7 +42,7 @@ const Header = (props) => {
   const [isSticky, setIsSticky] = useState(false);
   const [openDropDown, setOpenDropDown] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState({
-    id: 38,
+    id: !CountryIds ? 38 : CountryIds,
     flag_image: !flag ? IND : flag,
   });
   const [countryData, setCountryData] = useState([]);
@@ -57,6 +58,7 @@ const Header = (props) => {
 
   const [showUserDetails, setShowUserDetails] = useState(false);
   const userDetailsRef = useRef(null);
+  console.log("CountryIds", CountryIds);
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -199,7 +201,9 @@ const Header = (props) => {
       setSearchShow(true);
 
       axios
-        .get(Urls.suggestion + e.target.value)
+        .get(
+          `${Urls.suggestion + e.target.value}&country=${selectedCountry.id}`
+        )
         .then((response1) => {
           setSuggesionList(response1.data);
         })
@@ -220,7 +224,7 @@ const Header = (props) => {
       }
     } else if (setItem.type === "product") {
       axios
-        .get(Urls.productDet + setItem.id)
+        .get(`${Urls.productDet + setItem.id}&country=${selectedCountry.id}`)
         .then((response1) => {
           const selData = {
             product_id: setItem.id,

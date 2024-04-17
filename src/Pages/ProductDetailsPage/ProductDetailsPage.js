@@ -30,6 +30,7 @@ const ProductDetailsPage = (props) => {
   const [error, setError] = useState("");
   const [description, setDescription] = useState("");
   const [isRestricted, setIsRestricted] = useState(false);
+  const countryId = localStorage.getItem("id");
 
   const [logAct, setLogAct] = useState(false);
   const token = localStorage.getItem("swaToken");
@@ -79,7 +80,7 @@ const ProductDetailsPage = (props) => {
         });
     }
     axios
-      .get(Urls.productDet + props.match.params.id)
+      .get(`${Urls.productDet + props.match.params.id}?country=${countryId}`)
       .then((response1) => {
         setIsRestricted(response1.data.results.data.is_restricted);
         setProdDet(response1.data.results.data);

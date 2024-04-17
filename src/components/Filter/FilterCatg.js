@@ -183,7 +183,9 @@ const FilterCatgs = (props) => {
     setSelectedMetalIds(updatedIds);
 
     // Call API with updated IDs
-    const url = `${Urls.productCategoryByMetal}${updatedIds.join(",")}`;
+    const url = `${Urls.productCategoryByMetal}${updatedIds.join(
+      ","
+    )}&country=${countryId}`;
     axios
       .get(url)
       .then((response) => {
@@ -200,7 +202,9 @@ const FilterCatgs = (props) => {
     setSelectedCategoryIds(updatedIds);
 
     // Call API with updated IDs
-    const url = `${Urls.filterProductsById}${updatedIds.join(",")}`;
+    const url = `${Urls.filterProductsById}${updatedIds.join(
+      ","
+    )}&country=${countryId}`;
     axios
       .get(url)
       .then((response) => {
