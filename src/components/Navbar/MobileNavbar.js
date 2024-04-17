@@ -51,6 +51,7 @@ const MobileNavbar = (props) => {
   const nameRef = useRef(null);
   const dropdownRef = useRef(null);
   const [countryData, setCountryData] = useState([]);
+  const [text,setText] = useState("");
   const [selectedCountry, setSelectedCountry] = useState({
     id: 38,
     flag_image: IND,
@@ -140,6 +141,7 @@ const MobileNavbar = (props) => {
     if (token !== null) {
       history.push("/wish_list");
     } else {
+
       setShow(true);
     }
   };
@@ -441,6 +443,7 @@ const MobileNavbar = (props) => {
                 color="#FFFFFF"
                 size={25}
                 onClick={moveTocart}
+                
               />
             </div>
           </div>
@@ -511,6 +514,7 @@ const MobileNavbar = (props) => {
         <Box sx={isMobileView && mobileStyleLogin}>
           <Typography>
             <LoginToggle
+            text={text}
               onClose={() => setShow(false)}
               isSignpuMobile={isSignpuMobileOpen}
             />

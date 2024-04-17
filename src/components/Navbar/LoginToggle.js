@@ -18,6 +18,7 @@ import { Link } from "react-router-dom";
 import Joi from "joi";
 import PrivacyModal from "./PrivacyModal";
 import CircularProgress from "@mui/material/CircularProgress";
+import LoginSuccessModal from "../LoginSuccesModal/LoginSuccessModal";
 
 const signUpSchema = Joi.object({
   username: Joi.string()
@@ -69,6 +70,7 @@ const LoginToggle = (props) => {
   const [otp, setOtp] = useState("");
   const [emailId, setEmailId] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [isDesk, setIsDesk] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
   );
@@ -103,6 +105,14 @@ const LoginToggle = (props) => {
   const handleGetOtp = () => {
     setGetOtpModal(true);
   };
+  const openSuccessModal = () => {
+    // setShowSuccessModal(true);
+  };
+
+  const closeSuccessModal = () => {
+    // setShowSuccessModal(false);
+  };
+
   const handleOtpModalOpen = () => setGetOtpModal(true);
   const handleOtpModalClose = () => setGetOtpModal(false);
 
@@ -316,7 +326,7 @@ const LoginToggle = (props) => {
       setValidationErrors({ mobileNumber: "Mobile number must be 10 digits" });
       return false;
     }
-    setIsLoading(true)
+    setIsLoading(true);
     try {
       const response = await axios.post(Urls.sentOtp, body);
       console.log(response.data);
@@ -326,7 +336,7 @@ const LoginToggle = (props) => {
     } catch (error) {
       console.log(error);
     }
-    setIsLoading(false)
+    setIsLoading(false);
   };
 
   const sendOtpEmail = async () => {
@@ -360,7 +370,7 @@ const LoginToggle = (props) => {
       // Log any errors that occur during the process
       console.log(error);
     }
-    setIsLoading(false)
+    setIsLoading(false);
   };
 
   const loginHandler = () => {
@@ -379,7 +389,10 @@ const LoginToggle = (props) => {
           );
 
           // props.logAct(response.data.results.token);
-          props.onClose();
+          setGetOtpModal(false);
+          setTimeout(() => {
+            props.onClose();
+          }, 3000);
         } else if (response.data.results.status_code === 401) {
           // setLoginError("Incorrect username or password!");
           console.log("Incorrect username or password!");
@@ -401,9 +414,15 @@ const LoginToggle = (props) => {
       if (response.data.results.status_code === 200) {
         loginHandler();
       }
+      if (response.data.results.message === "Otp verified successfully!") {
+        setShowSuccessModal(true);
+      }
     } catch (error) {
       console.log(error);
     }
+    setTimeout(() => {
+      setShowSuccessModal(false);
+    }, 3000);
   };
   const verifyOtpEmail = async () => {
     const body = {
@@ -416,7 +435,6 @@ const LoginToggle = (props) => {
       const response = await axios.post(Urls.verifyOTP, body);
       if (response.data.results.status_code === 200) {
         loginHandler();
-        
       }
     } catch (error) {
       console.log(error);
@@ -589,6 +607,12 @@ const LoginToggle = (props) => {
           </>
         ) : (
           <>
+            <LoginSuccessModal
+              openSuccessModal={openSuccessModal}
+              close={closeSuccessModal}
+              state={showSuccessModal}
+            />
+
             <form onSubmit={handelLoginForm}>
               <div className={Classes.SlideButton}>
                 <div className={Classes.LoginContainer}>
@@ -711,8 +735,17 @@ const LoginToggle = (props) => {
                       >
                         {isLoading ? (
                           <>
-                            <Box sx={{ display: "flex",justifyContent:'center',alignItems:'center' }}>
-                              <CircularProgress size={20} sx={{ color: '#fff' }}/>
+                            <Box
+                              sx={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                              }}
+                            >
+                              <CircularProgress
+                                size={20}
+                                sx={{ color: "#fff" }}
+                              />
                             </Box>
                           </>
                         ) : (
@@ -729,11 +762,20 @@ const LoginToggle = (props) => {
                         disabled={isLoading}
                         // onClick={sendOtp}
                       >
-                         {isLoading ? (
+                        {isLoading ? (
                           <>
                             {" "}
-                            <Box sx={{ display: "flex",justifyContent:'center',alignItems:'center' }}>
-                              <CircularProgress size={20} sx={{ color: '#fff' }}/>
+                            <Box
+                              sx={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                              }}
+                            >
+                              <CircularProgress
+                                size={20}
+                                sx={{ color: "#fff" }}
+                              />
                             </Box>
                           </>
                         ) : (
@@ -831,7 +873,7 @@ const LoginToggle = (props) => {
                               <p className={Classes.titlep}>
                                 Please enter 6 digit OTP that send to your
                                 <br />
-                                +91 9879453467
+                                {mobileNumber}
                               </p>
                             </div>
                           </div>

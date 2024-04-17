@@ -71,6 +71,9 @@ const NewArrivalCard = (props) => {
   //     setOnAdd(false)
   //     props.cartSddHandler()
   // }
+let cost= 10000
+let formattedCost = parseFloat(cost).toLocaleString();
+console.log(formattedCost,"formatted===========>")
 
   return (
     <React.Fragment>
@@ -118,7 +121,8 @@ const NewArrivalCard = (props) => {
                   <div className={Classes.Price}>
                     <p className={Classes.PriceNew}>
                       <BiRupee className={Classes.Rupee} />
-                      {props.PriceNew}
+{formattedCost}
+                      {/* {props.PriceNew} */}
                     </p>
                     <p className={Classes.PriceOld}>
                       {props.PriceOld !== null && (

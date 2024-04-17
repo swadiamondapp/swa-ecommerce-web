@@ -267,14 +267,14 @@ header {
   }
   .CountryFlags {
     position: relative;
-    z-index: 999999999;
+    z-index: 1;
   }
   .CountryDropDowns {
     position: absolute;
     background-color: #d1d1d1;
     border-radius: 4px;
     margin-top: 10px;
-    z-index: 99999999;
+    z-index: 1;
   }
   .contryelements {
     display: flex;
