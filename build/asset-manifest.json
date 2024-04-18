@@ -5,8 +5,8 @@
   "static/js/1.bba52302.chunk.js": "/static/js/1.bba52302.chunk.js",
   "static/js/1.bba52302.chunk.js.map": "/static/js/1.bba52302.chunk.js.map",
   "static/css/2.2e12702d.chunk.css": "/static/css/2.2e12702d.chunk.css",
-  "static/js/2.334e4190.chunk.js": "/static/js/2.334e4190.chunk.js",
-  "static/js/2.334e4190.chunk.js.map": "/static/js/2.334e4190.chunk.js.map",
+  "static/js/2.3f8d22a4.chunk.js": "/static/js/2.3f8d22a4.chunk.js",
+  "static/js/2.3f8d22a4.chunk.js.map": "/static/js/2.3f8d22a4.chunk.js.map",
   "runtime~main.js": "/static/js/runtime~main.664ed9c7.js",
   "runtime~main.js.map": "/static/js/runtime~main.664ed9c7.js.map",
   "static/media/DownloadOurApp.module.css": "/static/media/downBg.8bc6d350.png",
@@ -16,7 +16,7 @@
   "static/media/flagUAE.svg": "/static/media/flagUAE.c03ae76a.svg",
   "static/media/desklogo.svg": "/static/media/desklogo.127f4b15.svg",
   "static/media/moblogo.svg": "/static/media/moblogo.ca5ba4d8.svg",
-  "static/media/index.css": "/static/media/Inter-Regular.079af0e2.ttf",
+  "static/media/index.css": "/static/media/Lato-Regular.122dd68d.ttf",
   "static/media/shop1.png": "/static/media/shop1.75cb6b34.png",
   "static/media/shop2.png": "/static/media/shop2.41374ad8.png",
   "static/media/shop3.png": "/static/media/shop3.bb001933.png",
@@ -45,6 +45,6 @@
   "static/css/main.219192e1.chunk.css.map": "/static/css/main.219192e1.chunk.css.map",
   "static/css/2.2e12702d.chunk.css.map": "/static/css/2.2e12702d.chunk.css.map",
   "index.html": "/index.html",
-  "precache-manifest.b5447033960efd7da7a36ed779c0f568.js": "/precache-manifest.b5447033960efd7da7a36ed779c0f568.js",
+  "precache-manifest.f9bf9a8659ef3491d4f4a2066463f10e.js": "/precache-manifest.f9bf9a8659ef3491d4f4a2066463f10e.js",
   "service-worker.js": "/service-worker.js"
 }
