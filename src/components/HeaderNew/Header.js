@@ -41,6 +41,7 @@ const Header = (props) => {
   const [searchKey, setSearchKey] = useState("");
   const [isSticky, setIsSticky] = useState(false);
   const [openDropDown, setOpenDropDown] = useState(false);
+  const [loginText,setLoginText] = useState("")
   const [selectedCountry, setSelectedCountry] = useState({
     id: CountryIds,
     flag_image: flag,
@@ -493,14 +494,14 @@ const Header = (props) => {
             className={`${Classes.Icon} ${Classes.headerElement}`}
             color="#FFFFFF"
             size={25}
-            onClick={moveToWishList}
+            onClick={()=>{moveToWishList();setLoginText("Please Login")}}
           />
           <div className={Classes.CartItemNum}>
             <IoCartOutline
               className={`${Classes.Icon} ${Classes.AddToCart} ${Classes.headerElement}`}
               color="#FFFFFF"
               size={25}
-              onClick={moveTocart}
+              onClick={()=>{moveTocart();setLoginText("Please Login")}}
             />
             {userName && props.countCartItems && (
               <div className={Classes.ItemsNum}>{props.countCartItems}</div>
@@ -514,6 +515,8 @@ const Header = (props) => {
             cartClose={cateclose}
             close={closeHanlder}
             style={{ marginTop: "0px" }}
+            setLoginText={setLoginText}
+            text={loginText}
           />
           {/* modal */}
         </div>

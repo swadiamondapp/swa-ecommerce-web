@@ -300,6 +300,8 @@ const ProductDetails = (props) => {
   };
 
   console.log("props.thumbImg,", props.thumbImg);
+  let cost= props.offerPrice
+let formattedCost = parseFloat(cost).toLocaleString();
 
   return (
     <div>
@@ -491,7 +493,9 @@ const ProductDetails = (props) => {
                 {/* <BiRupee size={25} /> */}
 
                 <p className={Classes.NewPrice}>
-                  &#x20B9; {parseFloat(props.offerPrice).toFixed(0)}
+                  {/* &#x20B9; {parseFloat(formattedCost).toFixed(0)} */}
+                  &#x20B9; {formattedCost}
+
                 </p>
                 {props.actualPrice !== null ? (
                   <BiRupee size={25} color="#B0B0B0" />
@@ -1242,7 +1246,7 @@ const ProductDetails = (props) => {
                           </div>
                         </div>
                         <div className={Classes.RightHeadDesc}>
-                          <p>{item.user.name}</p>
+                          <p>{item && item.user&& item.user.name}</p>
                           <p className={Classes.dateReview}>{formattedDate}</p>
                           <div className={Classes.ReviewsDescription}>
                             <p>{item.review}</p>

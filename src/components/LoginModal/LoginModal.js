@@ -567,6 +567,7 @@ const LoginModal = (props) => {
             onClick={() => {
               props.handleOpenLogin();
               setIsSignpuLogin(false);
+              props.setLoginText("Welcome Back");
             }}
           >
             Login
@@ -603,7 +604,7 @@ const LoginModal = (props) => {
             <p className={Classes.Name_phoneLoged}>{phone}</p>
           </div>
           <div className={Classes.LogedDetails_list}>
-            <Link to="" className={Classes.LogedDetails_Item}>
+            <Link to="" className={Classes.MobProfileLinks}>
               <p style={{ fontSize: "16px" }}>Account</p>
             </Link>
 
@@ -656,6 +657,8 @@ const LoginModal = (props) => {
                 onClose={handleClose}
                 signupClick={handleSignupClick}
                 LoginSignupToggle={isSignpuLogin}
+                text={props.text}
+                loginText={props.loginText}
               />
             </div>
           </Typography>

@@ -632,7 +632,14 @@ const LoginToggle = (props) => {
                 <div className={Classes.LoginContainer}>
                   <div className={Classes.title}>
                     <div style={{}}>
-                      <h3 className={Classes.titleh}>Welcome back</h3>
+                      {!props.text && !props.loginText ? (
+                        <h3 className={Classes.titleh}>Welcome Back</h3>
+                      ) : (
+                        <h3 className={Classes.titleh}>
+                          {props.text}
+                          {props.loginText}
+                        </h3>
+                      )}
                     </div>
                     <div className={Classes.signupTitleText}>
                       {activeTab === "tab1" ? (

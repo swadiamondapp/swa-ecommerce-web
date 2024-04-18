@@ -68,7 +68,7 @@ const LoginSuccessModal = (props) => {
             >
               <span className={Classes.titlesuccesModal}>
                 You are Successfully 
-                <br /> LoggedIn
+                <br /> Logged In
               </span>
             </div>
           </Typography>

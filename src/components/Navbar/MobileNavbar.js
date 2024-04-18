@@ -61,7 +61,7 @@ const MobileNavbar = (props) => {
     flag_image: !flag ? IND : flag,
   });
 
-  console.log("catgSet", catgSet);
+  console.log("catgSet", text);
 
   const isHomePage = window.location.pathname === "/";
   const mobileSearchBarHide = !isHomePage
@@ -437,7 +437,10 @@ const MobileNavbar = (props) => {
                 className={Classes.Icon}
                 color="#FFFFFF"
                 size={25}
-                onClick={moveToWishList}
+                onClick={() => {
+                  moveToWishList();
+                  setText("Please Login");
+                }}
               />
             </div>
             <div>
@@ -445,7 +448,10 @@ const MobileNavbar = (props) => {
                 className={`${Classes.Icon} ${Classes.AddToCart}`}
                 color="#FFFFFF"
                 size={25}
-                onClick={moveTocart}
+                onClick={() => {
+                  moveTocart();
+                  setText("Please Login");
+                }}
               />
             </div>
           </div>
@@ -516,7 +522,7 @@ const MobileNavbar = (props) => {
         <Box sx={isMobileView && mobileStyleLogin}>
           <Typography>
             <LoginToggle
-              text={text}
+              loginText={text}
               onClose={() => setShow(false)}
               isSignpuMobile={isSignpuMobileOpen}
             />
@@ -551,6 +557,7 @@ const MobileNavbar = (props) => {
                             setOpen(false);
                             setShow(true);
                             setIsSignpuMobileOpen(false);
+                            setText("Welcome Back");
                           }}
                         >
                           Login
