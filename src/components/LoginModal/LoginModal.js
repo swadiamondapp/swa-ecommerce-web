@@ -389,6 +389,8 @@ const LoginModal = (props) => {
     localStorage.removeItem("swaToken");
     localStorage.removeItem("userName");
     localStorage.removeItem("phoneNumber");
+    // localStorage.removeItem("defaultCountryFlag");
+    // localStorage.removeItem("id");
 
     // Hide the LogedUserDetails div
     setShowUserDetails(false);
@@ -548,15 +550,14 @@ const LoginModal = (props) => {
         </div>
       </div> */}
       {userName ? (
-        <div className={Classes.LogedUser} style={{ cursor: "pointer" }}>
+        <div
+          className={Classes.LogedUser}
+          style={{ cursor: "pointer" }}
+          ref={nameRef}
+          onClick={handleLogedUserClick}
+        >
           <img src={logedimg} className={Classes.headerElement} />
-          <p
-            ref={nameRef}
-            onClick={handleLogedUserClick}
-            className={Classes.headerElement}
-          >
-            {userName}
-          </p>
+          <p className={Classes.headerElement}>{userName}</p>
           <IoIosArrowDown className={Classes.headerElement} />
         </div>
       ) : (
@@ -602,31 +603,39 @@ const LoginModal = (props) => {
             <p className={Classes.Name_phoneLoged}>{phone}</p>
           </div>
           <div className={Classes.LogedDetails_list}>
-            <Link to="" className={Classes.MobProfileLinks}>
+            <Link to="" className={Classes.LogedDetails_Item}>
               <p style={{ fontSize: "16px" }}>Account</p>
             </Link>
 
-            <Link to="/my_orders">
+            <Link to="/my_orders" className={Classes.LogedDetails_Item}>
               <p style={{ fontSize: "16px" }}>Order history</p>
             </Link>
 
-            <Link to="/addaddress">
+            <Link to="/addaddress" className={Classes.LogedDetails_Item}>
               <p style={{ fontSize: "16px" }}>Add Address</p>
             </Link>
-            <Link>
+            <Link className={Classes.LogedDetails_Item}>
               <p style={{ fontSize: "16px" }}>Track Order</p>
             </Link>
-            <Link to="/rate&review">
+            <Link to="/rate&review" className={Classes.LogedDetails_Item}>
               <p style={{ fontSize: "16px" }}>Write review</p>
             </Link>
-            <Link to="">
+            <Link to="" className={Classes.LogedDetails_Item}>
               <p style={{ fontSize: "16px" }}>Swa wallet</p>
             </Link>
-            <Link to="" style={{ fontSize: "16px" }}>
+            <Link
+              to=""
+              style={{ fontSize: "16px" }}
+              className={Classes.LogedDetails_Item}
+            >
               <p style={{ fontSize: "16px" }}>Swa exchange</p>
             </Link>
 
-            <p style={{ cursor: "pointer" }} onClick={handleLogOut}>
+            <p
+              style={{ cursor: "pointer", width: "100%" }}
+              onClick={handleLogOut}
+              className={Classes.ListPTag}
+            >
               Log Out
             </p>
           </div>

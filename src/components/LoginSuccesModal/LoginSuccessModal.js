@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import SuccessTick from "../../Assets/successTick.png";
-import Classes from "./SuccesModal.module.css";
+import Classes from "../SuccessMessageModal/SuccesModal.module.css";
 
 const successM = {
   position: "absolute",
@@ -44,9 +44,9 @@ const LoginSuccessModal = (props) => {
       {/* <Button onClick={handleOpen}>SUCESS MESSAGE AFTER SUBMIT REVIEW</Button> */}
       <Modal
         // open={props.successModalOpen}
-        open={props.LoginSuccessModal}
+        open={props.state}
         // onClose={props.handleClose}
-        onClose={handleClose}
+        onClose={props.closeSuccesModal}
       >
         <Box
           sx={successM}

@@ -48,6 +48,42 @@
   border: none;
   color: #4e4035;
 }
+.DeliveryBtns {
+  width: 56%;
+}
+.DeliveryBtns button {
+  background: #006e7f1a;
+  border: none;
+  color: #006e7f;
+  font-weight: 400;
+  font-family: "LatoRegular";
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 4px;
+}
+.ParentDeliverySec {
+  margin: 15px 0px;
+}
+.DeliveryMessages {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+.DHeadText {
+  color: #006e7f;
+  font-weight: 700;
+}
+.Dheadtext1 {
+  color: #303a42;
+  font-weight: 400;
+  font-size: 14px;
+}
 .FindStores {
   background: #a79a6c;
   border: none;

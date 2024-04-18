@@ -18,6 +18,7 @@ import { Link } from "react-router-dom";
 import Joi from "joi";
 import PrivacyModal from "./PrivacyModal";
 import CircularProgress from "@mui/material/CircularProgress";
+import LoginSuccessModal from "../LoginSuccesModal/LoginSuccessModal";
 
 const signUpSchema = Joi.object({
   username: Joi.string()
@@ -69,6 +70,7 @@ const LoginToggle = (props) => {
   const [otp, setOtp] = useState("");
   const [emailId, setEmailId] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [isDesk, setIsDesk] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
   );
@@ -103,6 +105,14 @@ const LoginToggle = (props) => {
   const handleGetOtp = () => {
     setGetOtpModal(true);
   };
+  const openSuccessModal = () => {
+    // setShowSuccessModal(true);
+  };
+
+  const closeSuccessModal = () => {
+    // setShowSuccessModal(false);
+  };
+
   const handleOtpModalOpen = () => setGetOtpModal(true);
   const handleOtpModalClose = () => setGetOtpModal(false);
 
@@ -268,23 +278,17 @@ const LoginToggle = (props) => {
           login_type: "NORMAL",
         };
         const response = await axios.post(Urls.register, body);
-        const message = response.data.results.message;
-        console.log("anasresponse", response);
         if (response.data.results.status_code === 200) {
           alert("Successfully Registered");
           handleLoginModalOpen();
-        } else if (
-          message === "user with this email or phone number already exists!!!"
-        ) {
-          // const message = response.data.results.message;
-
-          alert("User already exists. Sending OTP for login...");
-          await sendOtp(signUpData.mobile);
-        } else {
-          alert(message);
         }
       } catch (error) {
-        alert(error.response.data.results.message);
+        if (
+          error.response.data.results.message ===
+          "user with this email or phone number already exists!!!"
+        ) {
+          sendOtp();
+        }
       }
     } else {
       console.log("Not valid");
@@ -310,27 +314,33 @@ const LoginToggle = (props) => {
     //     });
     const body = {
       phone_code: "+91",
-      phone: mobileNumber,
+      phone: mobileNumber ? mobileNumber : signUpData.mobile,
       email: "",
       createuser: "False",
       forgotuser: "False",
     };
-
+    console.log("keri");
+    console.log("signMobile", signUpData.mobile);
     const mobileNumberRegex = /^\d{10}$/;
-    if (!mobileNumber) {
+    if (!mobileNumber && !signUpData.mobile) {
       setValidationErrors({ mobileNumber: "Mobile number is required" });
       return false;
     }
 
-    if (!mobileNumberRegex.test(mobileNumber)) {
+    if (
+      !mobileNumberRegex.test(mobileNumber) &&
+      !mobileNumberRegex.test(signUpData.mobile)
+    ) {
       setValidationErrors({ mobileNumber: "Mobile number must be 10 digits" });
       return false;
     }
     setIsLoading(true);
     try {
+      console.log("Api keri");
       const response = await axios.post(Urls.sentOtp, body);
       console.log(response.data);
       if (response.data[0] === "Otp send Successfully") {
+        setIsSignup(false);
         handleOtpModalOpen();
       }
     } catch (error) {
@@ -375,7 +385,11 @@ const LoginToggle = (props) => {
 
   const loginHandler = () => {
     const body = {
-      username: mobileNumber ? mobileNumber : emailId,
+      username: mobileNumber
+        ? mobileNumber
+        : emailId
+        ? emailId
+        : signUpData.mobile,
     };
     axios
       .post(urls.Login, body)
@@ -389,7 +403,10 @@ const LoginToggle = (props) => {
           );
 
           // props.logAct(response.data.results.token);
-          props.onClose();
+          setGetOtpModal(false);
+          setTimeout(() => {
+            props.onClose();
+          }, 3000);
         } else if (response.data.results.status_code === 401) {
           // setLoginError("Incorrect username or password!");
           console.log("Incorrect username or password!");
@@ -402,7 +419,7 @@ const LoginToggle = (props) => {
 
   const verifyOtp = async () => {
     const body = {
-      phone: mobileNumber,
+      phone: mobileNumber ? mobileNumber : signUpData.mobile,
       phone_code: "+91",
       otp: otp,
     };
@@ -411,9 +428,15 @@ const LoginToggle = (props) => {
       if (response.data.results.status_code === 200) {
         loginHandler();
       }
+      if (response.data.results.message === "Otp verified successfully!") {
+        setShowSuccessModal(true);
+      }
     } catch (error) {
       console.log(error);
     }
+    setTimeout(() => {
+      setShowSuccessModal(false);
+    }, 3000);
   };
   const verifyOtpEmail = async () => {
     const body = {
@@ -598,6 +621,12 @@ const LoginToggle = (props) => {
           </>
         ) : (
           <>
+            <LoginSuccessModal
+              openSuccessModal={openSuccessModal}
+              close={closeSuccessModal}
+              state={showSuccessModal}
+            />
+
             <form onSubmit={handelLoginForm}>
               <div className={Classes.SlideButton}>
                 <div className={Classes.LoginContainer}>
@@ -858,7 +887,7 @@ const LoginToggle = (props) => {
                               <p className={Classes.titlep}>
                                 Please enter 6 digit OTP that send to your
                                 <br />
-                                +91 9879453467
+                                {mobileNumber}
                               </p>
                             </div>
                           </div>

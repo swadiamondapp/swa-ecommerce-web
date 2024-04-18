@@ -25,7 +25,7 @@ import IND from "../../Assets/flagIND.svg";
 import UAE from "../../Assets/flagUAE.svg";
 
 const Header = (props) => {
-  const flag = localStorage.getItem("defaultCountryFlag");
+  const flag = localStorage.getItem("flag_image");
   const CountryIds = localStorage.getItem("id");
   const location = useLocation();
   const [isHome, setIsHome] = useState(
@@ -42,8 +42,8 @@ const Header = (props) => {
   const [isSticky, setIsSticky] = useState(false);
   const [openDropDown, setOpenDropDown] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState({
-    id: !CountryIds ? 38 : CountryIds,
-    flag_image: !flag ? IND : flag,
+    id: CountryIds,
+    flag_image: flag,
   });
   const [countryData, setCountryData] = useState([]);
   const dropdownRef = useRef(null);
@@ -299,10 +299,21 @@ const Header = (props) => {
         const response = await axios.get(Urls.getCountryFlags);
 
         setCountryData(response.data.results.data);
-        localStorage.setItem(
-          "flag_image",
-          response.data.results.data.flag_image
+
+        // Extracting the ID of India
+        const indiaData = response.data.results.data.find(
+          (country) => country.country_name === "India"
         );
+        if (!CountryIds && !flag) {
+          setSelectedCountry({
+            ...selectedCountry,
+            flag_image: indiaData.flag_image,
+            id: indiaData.id,
+          });
+          localStorage.setItem("flag_image", indiaData.flag_image);
+          localStorage.setItem("id", indiaData.id);
+        }
+        console.log("indiaData--->", indiaData);
         const defaultCountryID = localStorage.getItem("id");
         const defaultCountryFlag = localStorage.getItem("flag_image");
         if (defaultCountryID && defaultCountryFlag) {
@@ -329,7 +340,7 @@ const Header = (props) => {
     setOpenDropDown(true);
 
     localStorage.setItem("id", country.id);
-    localStorage.setItem("defaultCountryFlag", country.flag_image);
+    localStorage.setItem("flag_image", country.flag_image);
   };
 
   useEffect(() => {
@@ -354,6 +365,8 @@ const Header = (props) => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, [openDropDown]);
+
+  console.log("selectedCountry-->", selectedCountry);
 
   return (
     <div>
@@ -437,7 +450,7 @@ const Header = (props) => {
           >
             <div className={Classes.headerElement}>
               <img
-                src={selectedCountry ? selectedCountry.flag_image : IND}
+                src={selectedCountry.flag_image}
                 alt="Selected flag"
                 className={Classes.selectedImage}
               />

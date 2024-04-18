@@ -547,6 +547,13 @@ a {
   color: #0d1217;
   padding: 10px 20px;
   font-family: "gilroyNormal" !important;
+  width:100%
+}
+.ListPTag:hover {
+  background-color: #fcfbf6;
+}
+.LogedDetails_Item :hover {
+  background-color: #fcfbf6;
 }
 .Name_phoneLoged {
   font-weight: 500 !important;

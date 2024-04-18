@@ -35,6 +35,9 @@ import { MdOutlineStarPurple500 } from "react-icons/md";
 import { RWebShare } from "react-web-share";
 import { Modal } from "@mui/material";
 import closeimg from "../../Assets/closeModal.png";
+import time from "../../Assets/time.png";
+import d1 from "../../Assets/d1.png";
+import d2 from "../../Assets/d2.png";
 
 const ProductDetails = (props) => {
   const location = useLocation();
@@ -226,10 +229,10 @@ const ProductDetails = (props) => {
 
     if (props.IsRestricted === true) {
       // Show restriction modal for 5 seconds
-      setShowRestrictionModal(true);
-      setTimeout(() => {
-        setShowRestrictionModal(false);
-      }, 5000); // Hide the modal after 5 seconds
+      // setShowRestrictionModal(true);
+      // setTimeout(() => {
+      //   setShowRestrictionModal(false);
+      // }, 5000);
     } else {
       // Handle other conditions and proceed with adding to cart
       if (props.sizeChart.length > 0) {
@@ -713,18 +716,13 @@ const ProductDetails = (props) => {
 
                 {active === true ? (
                   <>
-                    <div
-                      className={Classes.Flex}
-                      style={{
-                        marginLeft: "0px",
-                      }}
-                    >
-                      <img className={Classes.Stroke} src={Stroke} alt="" />
-                      <p className={Classes.StrokeText}>
-                        Cash / Card delivery option available
-                      </p>{" "}
+                    <div className={Classes.DeliveryBtns}>
+                      <button>
+                        <img src={time} />
+                        24hr Delivery
+                      </button>
                     </div>
-                    <div
+                    {/* <div
                       className={Classes.Flex}
                       style={{
                         marginLeft: "0px",
@@ -734,6 +732,47 @@ const ProductDetails = (props) => {
                       <p className={Classes.StrokeText}>
                         Standard delivery available
                       </p>
+                    </div> */}
+                    <div className={Classes.ParentDeliverySec}>
+                      <div className={Classes.DeliveryMessages}>
+                        <div>
+                          <img src={d1} />
+                        </div>
+                        <div>
+                          <p className={Classes.DHeadText}>
+                            Free Delivery by 12th March
+                          </p>
+                          <p className={Classes.Dheadtext1}>
+                            Order in next 4 HRS 23 mins
+                          </p>
+                        </div>
+                      </div>
+                      <div className={Classes.DeliveryMessages}>
+                        <div>
+                          <img src={d1} />
+                        </div>
+                        <div>
+                          <p className={Classes.DHeadText}>
+                            available at hilite mall (1km)
+                          </p>
+                          <p className={Classes.Dheadtext1}>
+                            Also 3 other store Show more
+                          </p>
+                        </div>
+                      </div>
+                      <div className={Classes.DeliveryMessages}>
+                        <div>
+                          <img src={d2} />
+                        </div>
+                        <div>
+                          <p className={Classes.DHeadText}>
+                            Free try at home not available
+                          </p>
+                          <p className={Classes.Dheadtext1}>
+                            Try swa video call option
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </>
                 ) : null}

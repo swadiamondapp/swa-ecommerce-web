@@ -53,6 +53,7 @@ const MobileNavbar = (props) => {
   const [countryData, setCountryData] = useState([]);
   const flag = localStorage.getItem("defaultCountryFlag");
   const CountryIds = localStorage.getItem("id");
+  const [text, setText] = useState("");
   const [selectedCountry, setSelectedCountry] = useState({
     // id: 38,
     // flag_image: IND,
@@ -515,6 +516,7 @@ const MobileNavbar = (props) => {
         <Box sx={isMobileView && mobileStyleLogin}>
           <Typography>
             <LoginToggle
+              text={text}
               onClose={() => setShow(false)}
               isSignpuMobile={isSignpuMobileOpen}
             />
