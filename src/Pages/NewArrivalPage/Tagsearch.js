@@ -27,10 +27,11 @@ const TagSearch = (props) => {
   const [num, setNum] = useState("");
   const history = useHistory();
   const token = localStorage.getItem("swaToken");
+  const countryId = localStorage.getItem("id");
   const filter = (newArrive, currentPage) => {
     setLoading(true);
     axios
-      .get(Urls.productList + newArrive)
+      .get(`${Urls.productList + newArrive}&country=${countryId}`)
       .then((response1) => {
         setLoading(false);
         // const productList = [...response1.data.results.data]

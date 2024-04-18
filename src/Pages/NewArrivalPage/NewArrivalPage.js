@@ -33,13 +33,14 @@ const NewArrivalPage = (props) => {
   const history = useHistory();
   const location = useLocation();
   const token = localStorage.getItem("swaToken");
+  const countryId = localStorage.getItem("id");
   const productCategory = props.location.state.product_category;
   // const categoryName = props.location.state.categoryName
   const filter = (newArrive, currentPage) => {
     setLoading(true);
     axios
       .get(
-        Urls.productList + newArrive,
+        `${Urls.productList + newArrive}&country=${countryId}`,
         token && {
           headers: { Authorization: "Token " + token },
         }

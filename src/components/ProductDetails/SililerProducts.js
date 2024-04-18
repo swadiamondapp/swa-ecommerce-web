@@ -52,7 +52,7 @@ const SililerProducts = (props) => {
     slidesToShow: 5,
     slidesToScroll: 1,
     autoplay: true,
-    initialSlide: 0,
+    initialSlide: 5,
     responsive: [
       {
         breakpoint: 1024,
@@ -89,7 +89,7 @@ const SililerProducts = (props) => {
         <div className={Classes.CatList1}>
           <div className="container similetrSliders">
             <div className={Classes.Web}>
-              {similarProducts.length < 3 ? (
+              {similarProducts.length < 5 ? (
                 <div className={Classes.CarouselNoCard} style={{display:'flex',justifyContent:'flex-start'}}>
                   {similarProducts.map((item, index) => (
                     <div

@@ -29,10 +29,13 @@ const ProductDetailsPage = (props) => {
   const [cartCount, setCartCount] = useState("");
   const [error, setError] = useState("");
   const [description, setDescription] = useState("");
+  const [isRestricted, setIsRestricted] = useState(false);
+  const countryId = localStorage.getItem("id");
 
   const [logAct, setLogAct] = useState(false);
   const token = localStorage.getItem("swaToken");
   const history = useHistory();
+  console.log("isRestricted", isRestricted);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -77,8 +80,9 @@ const ProductDetailsPage = (props) => {
         });
     }
     axios
-      .get(Urls.productDet + props.match.params.id)
+      .get(`${Urls.productDet + props.match.params.id}?country=${countryId}`)
       .then((response1) => {
+        setIsRestricted(response1.data.results.data.is_restricted);
         setProdDet(response1.data.results.data);
         setSizeChart(response1.data.results.data.size_names);
         setColorChart(response1.data.results.data.colors);
@@ -273,6 +277,7 @@ const ProductDetailsPage = (props) => {
         sizeChange={sizeChangeHandler}
         selectedSize={sizechangeModal}
         Size={size}
+        IsRestricted={isRestricted}
         wishAct={prodDet.wishlist_id}
         gw={prodDet.gross_weight}
         diamondTypw={prodDet.diamond_clarity}

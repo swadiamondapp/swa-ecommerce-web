@@ -20,10 +20,11 @@ const FilterCatgs = (props) => {
   const [selectedOccationIds, setSelectedOccationIds] = useState([]);
   const [selectedMetalIds, setSelectedMetalIds] = useState([]);
   const [selectedCategoryIds, setSelectedCategoryIds] = useState([]);
-
+  const countryId = localStorage.getItem("id");
+  console.log("countryId,new", countryId);
   const filterSet = (params) => {
     axios
-      .get(Urls.filter + params)
+      .get(`${Urls.filter + params}&country=${countryId}`)
       .then((response1) => {
         setCatgSet(response1.data.results.data.category);
         setColorSet(response1.data.results.data.colour);
@@ -182,7 +183,9 @@ const FilterCatgs = (props) => {
     setSelectedMetalIds(updatedIds);
 
     // Call API with updated IDs
-    const url = `${Urls.productCategoryByMetal}${updatedIds.join(",")}`;
+    const url = `${Urls.productCategoryByMetal}${updatedIds.join(
+      ","
+    )}&country=${countryId}`;
     axios
       .get(url)
       .then((response) => {
@@ -199,7 +202,9 @@ const FilterCatgs = (props) => {
     setSelectedCategoryIds(updatedIds);
 
     // Call API with updated IDs
-    const url = `${Urls.filterProductsById}${updatedIds.join(",")}`;
+    const url = `${Urls.filterProductsById}${updatedIds.join(
+      ","
+    )}&country=${countryId}`;
     axios
       .get(url)
       .then((response) => {

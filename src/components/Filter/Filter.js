@@ -12,6 +12,8 @@ const Filter = (props) => {
   const [octnFiltArray, setOcctnFilterArray] = useState([]);
   const [metalTypeArray, setMetalTypeArray] = useState([]);
   const [occation, setOccation] = useState([]);
+  const countryId = localStorage.getItem("id");
+  console.log("countryId...anas", props.selectedCountry);
   const filterSet = () => {
     axios
       .get(Urls.filter)

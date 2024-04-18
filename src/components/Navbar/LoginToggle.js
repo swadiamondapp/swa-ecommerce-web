@@ -50,7 +50,7 @@ const signUpSchema = Joi.object({
     .messages({
       "string.base": `should be a type of string`,
       "string.empty": `Email must not be empty`,
-      "string.pattern.base": `Enter youremail@gmail.com`,
+      "string.pattern.base": `Enter your email@gmail.com`,
       "any.required": `is a required field`,
     }),
 });
@@ -278,10 +278,20 @@ const LoginToggle = (props) => {
           login_type: "NORMAL",
         };
         const response = await axios.post(Urls.register, body);
+        const message = response.data.results.message;
+        console.log("anasresponse", response);
         if (response.data.results.status_code === 200) {
           alert("Successfully Registered");
           handleLoginModalOpen();
+        } else if (
+          message === "user with this email or phone number already exists!!!"
+        ) {
+          // const message = response.data.results.message;
+
+          alert("User already exists. Sending OTP for login...");
+          await sendOtp(signUpData.mobile);
         } else {
+          alert(message);
         }
       } catch (error) {
         alert(error.response.data.results.message);
@@ -618,7 +628,14 @@ const LoginToggle = (props) => {
                 <div className={Classes.LoginContainer}>
                   <div className={Classes.title}>
                     <div style={{}}>
-                      <h3 className={Classes.titleh}>Welcome back</h3>
+                      {!props.text && !props.loginText ? (
+                        <h3 className={Classes.titleh}>Welcome Back</h3>
+                      ) : (
+                        <h3 className={Classes.titleh}>
+                          {props.text}
+                          {props.loginText}
+                        </h3>
+                      )}
                     </div>
                     <div className={Classes.signupTitleText}>
                       {activeTab === "tab1" ? (

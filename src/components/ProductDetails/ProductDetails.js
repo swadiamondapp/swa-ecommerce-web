@@ -21,7 +21,7 @@ import PD3 from "../../Assets/PD3.png";
 import PD4 from "../../Assets/PD4.svg";
 import PH1 from "../../Assets/hearts.png";
 import PS1 from "../../Assets/sharebtn.png";
-import Call from "../../Assets/call.png";
+import Call from "../../Assets/video.png";
 import Stroke from "../../Assets/Stroke.png";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { CgHeart } from "react-icons/cg";
@@ -54,6 +54,8 @@ const ProductDetails = (props) => {
   const [videoSection, setVideoSection] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
   const [imageLoading, setImageLoading] = useState(true);
+  const [showRestrictionModal, setShowRestrictionModal] = useState(false);
+  const countryId = localStorage.getItem("id");
 
   const handleImageClick = () => {
     if (ratingRef.current) {
@@ -62,11 +64,12 @@ const ProductDetails = (props) => {
       });
     }
   };
+  console.log("IsRestricted...?", props.IsRestricted);
 
   useEffect(() => {
     if (token !== null) {
       axios
-        .get(Urls.productDet + props.id, {
+        .get(`${Urls.productDet + props.id}?country=${countryId}`, {
           headers: {
             Authorization: "Token " + token,
           },
@@ -200,22 +203,48 @@ const ProductDetails = (props) => {
     : reviewImages.slice(0, 3);
 
   const videoUrl = props.bagImg.filter((item) => item.endsWith(".mp4"));
+  // const addToCartHandler = () => {
+  //   console.log("....abc", selectedSize);
+  //   // if (!props.Size) {
+  //   if (props.sizeChart.length > 0) {
+  //     if (!props.Size && !selectedSize) {
+  //       setShowErrorModal(true);
+  //       setTimeout(() => {
+  //         setShowErrorModal(false);
+  //       }, 78000);
+  //     } else {
+  //       props.cartAdd();
+  //     }
+  //     // Hide modal after 5 seconds
+  //   } else {
+  //     // Proceed with adding to cart logic
+  //     props.cartAdd();
+  //   }
+  // };
   const addToCartHandler = () => {
-    console.log("....abc", selectedSize);
-    // if (!props.Size) {
-    if (props.sizeChart.length > 0) {
-      if (!props.Size && !selectedSize) {
-        setShowErrorModal(true);
-        setTimeout(() => {
-          setShowErrorModal(false);
-        }, 78000);
+    console.log("IsRestricted...?", props.IsRestricted);
+
+    if (props.IsRestricted === true) {
+      // Show restriction modal for 5 seconds
+      setShowRestrictionModal(true);
+      setTimeout(() => {
+        setShowRestrictionModal(false);
+      }, 5000); // Hide the modal after 5 seconds
+    } else {
+      // Handle other conditions and proceed with adding to cart
+      if (props.sizeChart.length > 0) {
+        if (!props.Size && !selectedSize) {
+          setShowErrorModal(true);
+          setTimeout(() => {
+            setShowErrorModal(false);
+          }, 78000);
+        } else {
+          props.cartAdd();
+        }
       } else {
+        // Proceed with adding to cart logic
         props.cartAdd();
       }
-      // Hide modal after 5 seconds
-    } else {
-      // Proceed with adding to cart logic
-      props.cartAdd();
     }
   };
   const sizeChangeHandler = (e) => {
@@ -268,6 +297,8 @@ const ProductDetails = (props) => {
   };
 
   console.log("props.thumbImg,", props.thumbImg);
+  let cost= props.offerPrice
+let formattedCost = parseFloat(cost).toLocaleString();
 
   return (
     <div>
@@ -459,7 +490,9 @@ const ProductDetails = (props) => {
                 {/* <BiRupee size={25} /> */}
 
                 <p className={Classes.NewPrice}>
-                  &#x20B9; {parseFloat(props.offerPrice).toFixed(0)}
+                  {/* &#x20B9; {parseFloat(formattedCost).toFixed(0)} */}
+                  &#x20B9; {formattedCost}
+
                 </p>
                 {props.actualPrice !== null ? (
                   <BiRupee size={25} color="#B0B0B0" />
@@ -531,57 +564,79 @@ const ProductDetails = (props) => {
                     <p>Select size is required</p>
                   </div>
                 )} */}
-                <Modal
-                  open={showErrorModal}
-                  onClose={() => setShowErrorModal(false)}
-                  aria-labelledby="modal-title"
-                  aria-describedby="modal-description"
-                >
-                  <div className={Classes.Modalsection}>
-                    <div className={Classes.ModalHeading}>
-                      <h2
-                        style={{
-                          fontSize: "20px",
-                        }}
-                      >
-                        Please select your size
-                      </h2>
-                      <img
-                        style={{
-                          cursor: "pointer",
-                        }}
-                        src={closeimg}
-                        onClick={() => setShowErrorModal(false)} // Close modal when close button is clicked
-                        alt="Close"
-                      />
-                    </div>
-                    <div className={Classes.SizeListParent}>
-                      {props.sizeChart.map((item, index) => {
-                        return (
-                          <div className={Classes.SizeRangesList}>
-                            <input
-                              type="checkbox"
-                              value={item.id}
-                              onChange={handleCheckboxChange}
-                            />
-                            <p> {item.size_name}</p>
-                          </div>
-                        );
-                      })}
-                    </div>
-                    <div className={Classes.DoneSizeList}>
-                      <button onClick={handleDoneClick}>Done</button>{" "}
-                    </div>
-                  </div>
-                </Modal>
+
                 <div className={Classes.FindStoreParent}>
                   <button className={Classes.TryHome}>Try at Home</button>
                   <button className={Classes.VideoCall}>
-                    <img src={Call} />
+                    <img src={Call} style={{ maxWidth: "44px" }} />
                   </button>
-                  <button className={Classes.FindStores}>Find @ store</button>
+                  <button className={Classes.FindStores}>Find at store</button>
                 </div>
               </div>
+              <Modal
+                open={showErrorModal}
+                onClose={() => setShowErrorModal(false)}
+                aria-labelledby="modal-title"
+                aria-describedby="modal-description"
+              >
+                <div className={Classes.Modalsection}>
+                  <div className={Classes.ModalHeading}>
+                    <h2
+                      style={{
+                        fontSize: "20px",
+                      }}
+                    >
+                      Please select your size
+                    </h2>
+                    <img
+                      style={{
+                        cursor: "pointer",
+                      }}
+                      src={closeimg}
+                      onClick={() => setShowErrorModal(false)} // Close modal when close button is clicked
+                      alt="Close"
+                    />
+                  </div>
+                  <div className={Classes.SizeListParent}>
+                    {props.sizeChart.map((item, index) => {
+                      return (
+                        <div className={Classes.SizeRangesList}>
+                          <input
+                            type="checkbox"
+                            value={item.id}
+                            onChange={handleCheckboxChange}
+                          />
+                          <p> {item.size_name}</p>
+                        </div>
+                      );
+                    })}
+                  </div>
+                  <div className={Classes.DoneSizeList}>
+                    <button onClick={handleDoneClick}>Done</button>{" "}
+                  </div>
+                </div>
+              </Modal>
+              {/* Modal for restricted product */}
+              <Modal
+                open={showRestrictionModal}
+                onClose={() => setShowRestrictionModal(false)}
+                aria-labelledby="modal-title"
+                aria-describedby="modal-description"
+              >
+                <div className={Classes.Modalsection}>
+                  <div className={Classes.ModalHeading}>
+                    <h2 style={{ fontSize: "20px" }}>
+                      You cannot buy this Product
+                    </h2>
+                    <img
+                      style={{ cursor: "pointer" }}
+                      src={closeimg}
+                      onClick={() => setShowRestrictionModal(false)}
+                      alt="Close"
+                    />
+                  </div>
+                </div>
+              </Modal>
               {props.sizeChart.length > 0 && (
                 <div className={Classes.BorderBottom}>
                   <p className={Classes.AvailableColours}>Select Size</p>
@@ -1152,7 +1207,7 @@ const ProductDetails = (props) => {
                           </div>
                         </div>
                         <div className={Classes.RightHeadDesc}>
-                          <p>{item.user.name}</p>
+                          <p>{item && item.user&& item.user.name}</p>
                           <p className={Classes.dateReview}>{formattedDate}</p>
                           <div className={Classes.ReviewsDescription}>
                             <p>{item.review}</p>

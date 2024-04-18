@@ -252,7 +252,7 @@ p {
 
 .card {
   background-color: #fff;
-  position: absolute;
+  position: relative;
   top: 0%;
   z-index: 99999999;
   width: 100%;
@@ -766,4 +766,3 @@ input[type="number"] {
 /* .MainHead_CarouselCards__3NvGV .slick-track {
   width: 50% !important; 
 } */
-

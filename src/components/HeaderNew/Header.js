@@ -25,6 +25,8 @@ import IND from "../../Assets/flagIND.svg";
 import UAE from "../../Assets/flagUAE.svg";
 
 const Header = (props) => {
+  const flag = localStorage.getItem("defaultCountryFlag");
+  const CountryIds = localStorage.getItem("id");
   const location = useLocation();
   const [isHome, setIsHome] = useState(
     location.pathname === "/" ? true : false
@@ -39,9 +41,10 @@ const Header = (props) => {
   const [searchKey, setSearchKey] = useState("");
   const [isSticky, setIsSticky] = useState(false);
   const [openDropDown, setOpenDropDown] = useState(false);
+  const [loginText,setLoginText] = useState("")
   const [selectedCountry, setSelectedCountry] = useState({
-    id: 38,
-    flag_image: IND,
+    id: !CountryIds ? 38 : CountryIds,
+    flag_image: !flag ? IND : flag,
   });
   const [countryData, setCountryData] = useState([]);
   const dropdownRef = useRef(null);
@@ -56,6 +59,7 @@ const Header = (props) => {
 
   const [showUserDetails, setShowUserDetails] = useState(false);
   const userDetailsRef = useRef(null);
+  console.log("CountryIds", CountryIds);
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -63,6 +67,7 @@ const Header = (props) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+  console.log("selectedCountry", selectedCountry);
 
   const handleClickOutside = (event) => {
     if (
@@ -118,6 +123,8 @@ const Header = (props) => {
     }
   }, [selectedCountry]);
 
+  console.log("selectedCountry", selectedCountry);
+
   const moveToWishList = () => {
     if (token !== null) {
       history.push("/wish_list");
@@ -130,6 +137,7 @@ const Header = (props) => {
     // if (history.location.pathname !== "/new_arrivel") {
     //   history.push({ pathname: "/new_arrivel", state: { data: id } });
     // }
+
     if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
       window.location.href =
         "https://swaecomnew.zinfog.in/category_search/" + setItem.id;
@@ -194,7 +202,9 @@ const Header = (props) => {
       setSearchShow(true);
 
       axios
-        .get(Urls.suggestion + e.target.value)
+        .get(
+          `${Urls.suggestion + e.target.value}&country=${selectedCountry.id}`
+        )
         .then((response1) => {
           setSuggesionList(response1.data);
         })
@@ -215,7 +225,7 @@ const Header = (props) => {
       }
     } else if (setItem.type === "product") {
       axios
-        .get(Urls.productDet + setItem.id)
+        .get(`${Urls.productDet + setItem.id}&country=${selectedCountry.id}`)
         .then((response1) => {
           const selData = {
             product_id: setItem.id,
@@ -280,6 +290,9 @@ const Header = (props) => {
     { image: UAE, text: "UAE" },
     { image: USA, text: "USA" },
   ];
+  const countryFlag = localStorage.getItem("flag_image");
+
+  console.log("countryFlag", countryFlag);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -287,8 +300,13 @@ const Header = (props) => {
         const response = await axios.get(Urls.getCountryFlags);
 
         setCountryData(response.data.results.data);
+        localStorage.setItem(
+          "flag_image",
+          response.data.results.data.flag_image
+        );
         const defaultCountryID = localStorage.getItem("id");
-        if (defaultCountryID) {
+        const defaultCountryFlag = localStorage.getItem("flag_image");
+        if (defaultCountryID && defaultCountryFlag) {
           // Find the default country from the data using the ID
           const defaultCountry = countryData.find(
             (country) => country.id === parseInt(defaultCountryID)
@@ -312,7 +330,7 @@ const Header = (props) => {
     setOpenDropDown(true);
 
     localStorage.setItem("id", country.id);
-    console.log("id...?", country.id);
+    localStorage.setItem("defaultCountryFlag", country.flag_image);
   };
 
   useEffect(() => {
@@ -463,14 +481,14 @@ const Header = (props) => {
             className={`${Classes.Icon} ${Classes.headerElement}`}
             color="#FFFFFF"
             size={25}
-            onClick={moveToWishList}
+            onClick={()=>{moveToWishList();setLoginText("Please Login")}}
           />
           <div className={Classes.CartItemNum}>
             <IoCartOutline
               className={`${Classes.Icon} ${Classes.AddToCart} ${Classes.headerElement}`}
               color="#FFFFFF"
               size={25}
-              onClick={moveTocart}
+              onClick={()=>{moveTocart();setLoginText("Please Login")}}
             />
             {userName && props.countCartItems && (
               <div className={Classes.ItemsNum}>{props.countCartItems}</div>
@@ -484,6 +502,8 @@ const Header = (props) => {
             cartClose={cateclose}
             close={closeHanlder}
             style={{ marginTop: "0px" }}
+            setLoginText={setLoginText}
+            text={loginText}
           />
           {/* modal */}
         </div>

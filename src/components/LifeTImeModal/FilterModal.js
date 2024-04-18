@@ -71,6 +71,7 @@ const FilterModal = (props) => {
   const [selectedSort, setSelectedSort] = useState("");
   const [selectedPopular, setSelectedPopular] = useState("");
   const [selectedPriceRange, setSelectedPriceRange] = useState("");
+  const countryId = localStorage.getItem("id");
   console.log(props.openSuccessModal);
   const [isMobileView, setIsMobileView] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
@@ -214,7 +215,9 @@ const FilterModal = (props) => {
 
     switch (activeTab) {
       case "first":
-        urlF = `${Urls.filterProductsById}${selectedCategoryByid.join(",")}`;
+        urlF = `${Urls.filterProductsById}${selectedCategoryByid.join(
+          ","
+        )}&country=${countryId}`;
         try {
           const respons = await axios.get(urlF);
           props.setProduct(respons.data.results.data);
@@ -225,7 +228,9 @@ const FilterModal = (props) => {
 
         break;
       case "second":
-        urlS = `${Urls.productCategoryByMetal}${selectedMetelId.join(",")}`;
+        urlS = `${Urls.productCategoryByMetal}${selectedMetelId.join(
+          ","
+        )}&country=${countryId}`;
         try {
           const response = await axios.get(urlS);
           props.setProduct(response.data.results.data);
@@ -234,7 +239,9 @@ const FilterModal = (props) => {
         }
         break;
       case "third":
-        urlT = `${Urls.occationalProdByid}${selectedOccationById.join(",")}`;
+        urlT = `${Urls.occationalProdByid}${selectedOccationById.join(
+          ","
+        )}&country=${countryId}`;
         try {
           const response = await axios.get(urlT);
           props.setProduct(response.data.results.data);

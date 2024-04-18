@@ -51,13 +51,17 @@ const MobileNavbar = (props) => {
   const nameRef = useRef(null);
   const dropdownRef = useRef(null);
   const [countryData, setCountryData] = useState([]);
-  const [text,setText] = useState("");
+  const flag = localStorage.getItem("defaultCountryFlag");
+  const CountryIds = localStorage.getItem("id");
+  const [text,setText] = useState("")
   const [selectedCountry, setSelectedCountry] = useState({
-    id: 38,
-    flag_image: IND,
+    // id: 38,
+    // flag_image: IND,
+    id: !CountryIds ? 38 : CountryIds,
+    flag_image: !flag ? IND : flag,
   });
 
-  console.log("catgSet", catgSet);
+  console.log("catgSet", text);
 
   const isHomePage = window.location.pathname === "/";
   const mobileSearchBarHide = !isHomePage
@@ -180,7 +184,7 @@ const MobileNavbar = (props) => {
       }
     } else if (setItem.type === "product") {
       axios
-        .get(Urls.productDet + setItem.id)
+        .get(`${Urls.productDet + setItem.id}&country=${selectedCountry.id}`)
         .then((response1) => {
           const selData = {
             product_id: setItem.id,
@@ -434,7 +438,7 @@ const MobileNavbar = (props) => {
                 className={Classes.Icon}
                 color="#FFFFFF"
                 size={25}
-                onClick={moveToWishList}
+                onClick={()=>{moveToWishList();setText("Please Login")}}
               />
             </div>
             <div>
@@ -442,7 +446,10 @@ const MobileNavbar = (props) => {
                 className={`${Classes.Icon} ${Classes.AddToCart}`}
                 color="#FFFFFF"
                 size={25}
-                onClick={moveTocart}
+                onClick={()=>{
+                  moveTocart();
+                  setText("Please Login");
+                }}
                 
               />
             </div>
@@ -514,7 +521,7 @@ const MobileNavbar = (props) => {
         <Box sx={isMobileView && mobileStyleLogin}>
           <Typography>
             <LoginToggle
-            text={text}
+              loginText={text}
               onClose={() => setShow(false)}
               isSignpuMobile={isSignpuMobileOpen}
             />
@@ -549,6 +556,7 @@ const MobileNavbar = (props) => {
                             setOpen(false);
                             setShow(true);
                             setIsSignpuMobileOpen(false);
+                            setText("Welcome Back");
                           }}
                         >
                           Login
@@ -615,7 +623,10 @@ const MobileNavbar = (props) => {
                               })}
                             </div>
                           </AccordionTab>
-                          <AccordionTab header="Policy">
+                          <AccordionTab
+                            header="Policy"
+                            onClick={() => history.push("/privacy_policy")}
+                          >
                             <div className={Classes.ShippingDetialHead}></div>
                           </AccordionTab>
                           {userName && (
