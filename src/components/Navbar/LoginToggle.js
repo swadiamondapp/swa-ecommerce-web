@@ -279,6 +279,7 @@ const LoginToggle = (props) => {
         };
         const response = await axios.post(Urls.register, body);
         if (response.data.results.status_code === 200) {
+          localStorage.setItem("registerMobile", signUpData.mobile);
           alert("Successfully Registered");
           handleLoginModalOpen();
         }
@@ -296,22 +297,7 @@ const LoginToggle = (props) => {
   };
 
   const sendOtp = async () => {
-    // let _body = {};
     const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    // mobileNumber
-    //   ? (_body = {
-    //       phone_code: "+91",
-    //       phone: mobileNumber,
-    //       createuser: "False",
-    //       forgotuser: "False",
-    //     })
-    //   : (_body = {
-    //       phone_code: "",
-    //       phone: "",
-    //       email: emailId,
-    //       createuser: "False",
-    //       forgotuser: "False",
-    //     });
     const body = {
       phone_code: "+91",
       phone: mobileNumber ? mobileNumber : signUpData.mobile,
@@ -319,8 +305,6 @@ const LoginToggle = (props) => {
       createuser: "False",
       forgotuser: "False",
     };
-    console.log("keri");
-    console.log("signMobile", signUpData.mobile);
     const mobileNumberRegex = /^\d{10}$/;
     if (!mobileNumber && !signUpData.mobile) {
       setValidationErrors({ mobileNumber: "Mobile number is required" });

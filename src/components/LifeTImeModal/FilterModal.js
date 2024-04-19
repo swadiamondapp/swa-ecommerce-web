@@ -102,7 +102,7 @@ const FilterModal = (props) => {
       });
 
     axios
-      .get(Urls.metalCategory)
+      .get(`${Urls.metalCategory}?country=${countryId}`)
       .then((response2) => {
         console.log("Response from metalCategory API:", response2);
         setMetalCategory(response2.data.results.data);
@@ -112,15 +112,17 @@ const FilterModal = (props) => {
         console.log("Error fetching metalCategory:", error);
       });
 
-    axios.get(Urls.categoryWise).then((response) => {
+    axios.get(`${Urls.categoryWise}?country=${countryId}`).then((response) => {
       console.log("respo===>", response);
       console.log("catwise", response.data.results.data);
       setCategoryWise(response.data.results.data);
     });
-    axios.get(Urls.occationalProducts).then((responseOcc) => {
-      setOccation(responseOcc.data.results.data);
-      console.log(responseOcc, "occ");
-    });
+    axios
+      .get(`${Urls.occationalProducts}?country=${countryId}`)
+      .then((responseOcc) => {
+        setOccation(responseOcc.data.results.data);
+        console.log(responseOcc, "occ");
+      });
   }, []);
 
   const handleOpen = () => {

@@ -177,6 +177,8 @@ header {
   align-items: center;
   text-align: center;
   justify-content: center;
+  align-items: baseline !important;
+  justify-content: flex-start !important;
 }
 .SimilerProductPrices {
   font-size: 16px !important;
@@ -246,16 +248,61 @@ header {
 }
 
 .Offers {
-  padding: 0px 10px 0px 10px;
+  margin: 0px 10px;
   cursor: pointer;
   border-radius: 4px;
   /* background: #f7f6f2;
   box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.05); */
   display: flex !important;
-  align-items: center;
+
   flex-direction: column;
-  justify-content: center;
+
   outline: none;
+}
+.ParentHoverBtns {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  justify-content: space-between;
+  gap: 12px;
+  gap: 10px;
+  margin: 10px;
+}
+.tryBtn {
+  color: #00464d;
+  border: 1px solid #00464d;
+  background: transparent;
+  padding: 10px 10px;
+  border-radius: 4px;
+  font-family: "lato";
+  font-weight: 500;
+  width: 100%;
+}
+.buynowbtn {
+  background: #00464d;
+  color: #fff;
+  border: none;
+  padding: 10px 10px;
+  font-family: "lato";
+  font-weight: 500;
+  border-radius: 4px;
+  width: 100%;
+}
+.MainBtns {
+  display: none;
+}
+.Offers:hover {
+  transition: 0.4s ease-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 12px 26px 0px #00000014;
+}
+.Offers:hover .MainBtns {
+  display: block;
+}
+.checkDate {
+  color: #00464d !important;
+  font-family: "lato" !important;
+  font-weight: 600 !important;
 }
 .OffersInner {
   background: #f7f6f2;
