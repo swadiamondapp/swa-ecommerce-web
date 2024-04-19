@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "main.css": "/static/css/main.9845b2bb.chunk.css",
   "main.js": "/static/js/main.43b7efcc.chunk.js",
   "main.js.map": "/static/js/main.43b7efcc.chunk.js.map",
@@ -7,6 +8,16 @@
   "static/css/2.2e12702d.chunk.css": "/static/css/2.2e12702d.chunk.css",
   "static/js/2.334e4190.chunk.js": "/static/js/2.334e4190.chunk.js",
   "static/js/2.334e4190.chunk.js.map": "/static/js/2.334e4190.chunk.js.map",
+=======
+  "main.css": "/static/css/main.f4a73ae2.chunk.css",
+  "main.js": "/static/js/main.f373e061.chunk.js",
+  "main.js.map": "/static/js/main.f373e061.chunk.js.map",
+  "static/js/1.bba52302.chunk.js": "/static/js/1.bba52302.chunk.js",
+  "static/js/1.bba52302.chunk.js.map": "/static/js/1.bba52302.chunk.js.map",
+  "static/css/2.f32817e6.chunk.css": "/static/css/2.f32817e6.chunk.css",
+  "static/js/2.49de1b84.chunk.js": "/static/js/2.49de1b84.chunk.js",
+  "static/js/2.49de1b84.chunk.js.map": "/static/js/2.49de1b84.chunk.js.map",
+>>>>>>> 6284af12d4650124614f9405463b64488e542297
   "runtime~main.js": "/static/js/runtime~main.664ed9c7.js",
   "runtime~main.js.map": "/static/js/runtime~main.664ed9c7.js.map",
   "static/media/DownloadOurApp.module.css": "/static/media/downBg.8bc6d350.png",
@@ -16,7 +27,11 @@
   "static/media/flagUAE.svg": "/static/media/flagUAE.c03ae76a.svg",
   "static/media/desklogo.svg": "/static/media/desklogo.127f4b15.svg",
   "static/media/moblogo.svg": "/static/media/moblogo.ca5ba4d8.svg",
+<<<<<<< HEAD
   "static/media/index.css": "/static/media/Inter-Regular.079af0e2.ttf",
+=======
+  "static/media/index.css": "/static/media/Gilroy-MediumItalic.5d08cc9f.ttf",
+>>>>>>> 6284af12d4650124614f9405463b64488e542297
   "static/media/shop1.png": "/static/media/shop1.75cb6b34.png",
   "static/media/shop2.png": "/static/media/shop2.41374ad8.png",
   "static/media/shop3.png": "/static/media/shop3.bb001933.png",
@@ -25,7 +40,7 @@
   "static/media/empwish.png": "/static/media/empwish.02373ad4.png",
   "static/media/whishlist.svg": "/static/media/whishlist.2463fa84.svg",
   "static/media/cartempty.png": "/static/media/cartempty.b8cc3851.png",
-  "static/media/PD4.svg": "/static/media/PD4.299ae7bf.svg",
+  "static/media/PD4.svg": "/static/media/PD4.37d8213e.svg",
   "static/media/phonepay.svg": "/static/media/phonepay.8ebb1811.svg",
   "static/media/mastercard.svg": "/static/media/mastercard.2cb70f71.svg",
   "static/media/earrings.png": "/static/media/earrings.a17c0b4c.png",
@@ -42,9 +57,16 @@
   "static/media/swabanner2.png": "/static/media/swabanner2.4698ce1a.png",
   "static/media/swabanner3.png": "/static/media/swabanner3.c83238f7.png",
   "static/media/DownloadOurApp.png": "/static/media/DownloadOurApp.aea49ef9.png",
+<<<<<<< HEAD
   "static/css/main.9845b2bb.chunk.css.map": "/static/css/main.9845b2bb.chunk.css.map",
   "static/css/2.2e12702d.chunk.css.map": "/static/css/2.2e12702d.chunk.css.map",
   "index.html": "/index.html",
   "precache-manifest.bf39af3d409573a8b78fda0a25e4a42c.js": "/precache-manifest.bf39af3d409573a8b78fda0a25e4a42c.js",
+=======
+  "static/css/2.f32817e6.chunk.css.map": "/static/css/2.f32817e6.chunk.css.map",
+  "static/css/main.f4a73ae2.chunk.css.map": "/static/css/main.f4a73ae2.chunk.css.map",
+  "index.html": "/index.html",
+  "precache-manifest.81a20e1fd4d0742456a1dab4d3b18767.js": "/precache-manifest.81a20e1fd4d0742456a1dab4d3b18767.js",
+>>>>>>> 6284af12d4650124614f9405463b64488e542297
   "service-worker.js": "/service-worker.js"
 }

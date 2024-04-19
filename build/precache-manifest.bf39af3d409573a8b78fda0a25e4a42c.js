@@ -1,23 +1,41 @@
 self.__precacheManifest = [
   {
+<<<<<<<< HEAD:build/precache-manifest.bf39af3d409573a8b78fda0a25e4a42c.js
     "revision": "43b7efccfc91d3a41b64",
     "url": "/static/css/main.9845b2bb.chunk.css"
   },
   {
     "revision": "43b7efccfc91d3a41b64",
     "url": "/static/js/main.43b7efcc.chunk.js"
+========
+    "revision": "f373e061439a8acbabe1",
+    "url": "/static/css/main.f4a73ae2.chunk.css"
+  },
+  {
+    "revision": "f373e061439a8acbabe1",
+    "url": "/static/js/main.f373e061.chunk.js"
+>>>>>>>> 6284af12d4650124614f9405463b64488e542297:build/precache-manifest.81a20e1fd4d0742456a1dab4d3b18767.js
   },
   {
     "revision": "bba52302e5f745f51ea0",
     "url": "/static/js/1.bba52302.chunk.js"
   },
   {
+<<<<<<<< HEAD:build/precache-manifest.bf39af3d409573a8b78fda0a25e4a42c.js
     "revision": "334e4190ddbf3f56a693",
     "url": "/static/css/2.2e12702d.chunk.css"
   },
   {
     "revision": "334e4190ddbf3f56a693",
     "url": "/static/js/2.334e4190.chunk.js"
+========
+    "revision": "49de1b8451a8b1d9bf21",
+    "url": "/static/css/2.f32817e6.chunk.css"
+  },
+  {
+    "revision": "49de1b8451a8b1d9bf21",
+    "url": "/static/js/2.49de1b84.chunk.js"
+>>>>>>>> 6284af12d4650124614f9405463b64488e542297:build/precache-manifest.81a20e1fd4d0742456a1dab4d3b18767.js
   },
   {
     "revision": "664ed9c796a645f1eabc",
@@ -60,14 +78,16 @@ self.__precacheManifest = [
     "url": "/static/media/Poppins-Light.fcc40ae9.ttf"
   },
   {
+    "revision": "31ff7c1a62a300dbbf9656b4ba14a0d5",
+    "url": "/static/media/Gilroy-Regular.31ff7c1a.ttf"
+  },
+  {
     "revision": "a96ecd13655587d30a21265c547cd8aa",
     "url": "/static/media/PlayfairDisplay-Regular.a96ecd13.ttf"
   },
   {
-    "revision": "5d08cc9fffd565a2b9d9baae3846cb65",
-    "url": "/static/media/Gilroy-MediumItalic.5d08cc9f.ttf"
-  },
-  {
+<<<<<<<< HEAD:build/precache-manifest.bf39af3d409573a8b78fda0a25e4a42c.js
+========
     "revision": "122dd68d69fe9587e062d20d9ff5de2a",
     "url": "/static/media/Lato-Regular.122dd68d.ttf"
   },
@@ -76,6 +96,22 @@ self.__precacheManifest = [
     "url": "/static/media/Inter-Regular.079af0e2.ttf"
   },
   {
+>>>>>>>> 6284af12d4650124614f9405463b64488e542297:build/precache-manifest.81a20e1fd4d0742456a1dab4d3b18767.js
+    "revision": "5d08cc9fffd565a2b9d9baae3846cb65",
+    "url": "/static/media/Gilroy-MediumItalic.5d08cc9f.ttf"
+  },
+  {
+<<<<<<<< HEAD:build/precache-manifest.bf39af3d409573a8b78fda0a25e4a42c.js
+    "revision": "122dd68d69fe9587e062d20d9ff5de2a",
+    "url": "/static/media/Lato-Regular.122dd68d.ttf"
+  },
+  {
+    "revision": "079af0e2936ccb99b391ddc0bbb73dcb",
+    "url": "/static/media/Inter-Regular.079af0e2.ttf"
+  },
+  {
+========
+>>>>>>>> 6284af12d4650124614f9405463b64488e542297:build/precache-manifest.81a20e1fd4d0742456a1dab4d3b18767.js
     "revision": "75cb6b349715f104167c6fb953aeb093",
     "url": "/static/media/shop1.75cb6b34.png"
   },
@@ -108,8 +144,8 @@ self.__precacheManifest = [
     "url": "/static/media/cartempty.b8cc3851.png"
   },
   {
-    "revision": "299ae7bfc8948ee4c0efa8fad524d45d",
-    "url": "/static/media/PD4.299ae7bf.svg"
+    "revision": "37d8213ebce30110ed48cb2b9ce93f1b",
+    "url": "/static/media/PD4.37d8213e.svg"
   },
   {
     "revision": "8ebb18111b109516d6541355e5db4107",
@@ -176,7 +212,11 @@ self.__precacheManifest = [
     "url": "/static/media/DownloadOurApp.aea49ef9.png"
   },
   {
+<<<<<<<< HEAD:build/precache-manifest.bf39af3d409573a8b78fda0a25e4a42c.js
     "revision": "2fd6b3154e6e2a2963437aa9d2569362",
+========
+    "revision": "5fc07eebc74bdeb23957619f081e8dbc",
+>>>>>>>> 6284af12d4650124614f9405463b64488e542297:build/precache-manifest.81a20e1fd4d0742456a1dab4d3b18767.js
     "url": "/index.html"
   }
 ];
