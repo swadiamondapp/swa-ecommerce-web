@@ -302,6 +302,14 @@ const ProductDetails = (props) => {
   console.log("props.thumbImg,", props.thumbImg);
   let cost = props.offerPrice;
   let formattedCost = parseFloat(cost).toLocaleString();
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+console.log(cost,"clg===>")
+console.log(formattedCost,"frc====clg===>")
+const result = numberWithCommas(formattedCost)
+console.log(result,"res===>")
+
 
   return (
     <div>
@@ -494,7 +502,7 @@ const ProductDetails = (props) => {
 
                 <p className={Classes.NewPrice}>
                   {/* &#x20B9; {parseFloat(formattedCost).toFixed(0)} */}
-                  &#x20B9; {formattedCost}
+                  &#x20B9; {result}
                 </p>
                 {props.actualPrice !== null ? (
                   <BiRupee size={25} color="#B0B0B0" />

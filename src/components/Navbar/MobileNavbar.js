@@ -582,7 +582,10 @@ const MobileNavbar = (props) => {
                 <div className={Classes.CollapsParent}>
                   <div className={Classes.parentCollaps5}>
                     <div style={{ background: "#fff", borderRadius: "8px" }}>
-                      <div className={`shipment1 ${Classes.dmm}`}>
+                      <div
+                        className={`shipment1 ${Classes.dmm}`}
+                        style={{ marginBottom: "150px" }}
+                      >
                         <Accordion
                           multiple
                           activeIndex={activeIndex}
@@ -716,12 +719,34 @@ const MobileNavbar = (props) => {
                               </div>
                             </AccordionTab>
                           )}
-
-                          <AccordionTab
-                            header="Log Out"
-                            onClick={handleLogOut}
-                          ></AccordionTab>
+                         
                         </Accordion>
+                        <div style={{marginBottom:'100px'}}  onClick={handleLogOut}>
+                        <div className={Classes.LoggedDetailsList}>
+                                  <Link to="/my_orders">
+                                    <p
+                                      style={{
+                                        fontSize: "16px",
+                                        color: "#000",
+                                      }}
+                                    >
+                                      Log out
+                                    </p>
+                                  </Link>
+                                  <IoIosArrowForward
+                                    style={{ color: "#006E7F" }}
+                                  />
+                                </div>
+                            {/* <AccordionTab
+                              header="Log Out"
+                              onClick={handleLogOut}
+                            ></AccordionTab> */}
+                          </div>
+                          <Accordion>
+                          <AccordionTab>
+                         
+                          </AccordionTab>
+                          </Accordion>
                       </div>
                     </div>
                   </div>

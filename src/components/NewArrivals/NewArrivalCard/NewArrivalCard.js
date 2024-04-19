@@ -73,7 +73,10 @@ const NewArrivalCard = (props) => {
   // }
   let cost = props.PriceNew;
   let formattedCost = parseFloat(cost).toLocaleString();
-  console.log(formattedCost, "formatted===========>");
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+  const result = numberWithCommas(formattedCost)
 
   return (
     <React.Fragment>
@@ -121,7 +124,7 @@ const NewArrivalCard = (props) => {
                   <div className={Classes.Price}>
                     <p className={Classes.PriceNew}>
                       <BiRupee className={Classes.Rupee} />
-                      {formattedCost}
+                      {result}
                       {/* {props.PriceNew} */}
                     </p>
                     <p className={Classes.PriceOld}>
