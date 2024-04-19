@@ -44,7 +44,7 @@ const ProductDetails = (props) => {
   const [show, setShow] = useState(false);
   const [addToWishList, setAddToWishList] = useState(false);
   const [wishId, setWishId] = useState("");
-  const [pinCode, setPinCode] = useState("");
+  const [pinCode, setPinCode] = useState(localStorage.getItem("pincode") || "");
   const [pinCodeError, setPinCodeError] = useState("");
   const [active, setActive] = useState(null);
   const history = useHistory();
@@ -300,8 +300,8 @@ const ProductDetails = (props) => {
   };
 
   console.log("props.thumbImg,", props.thumbImg);
-  let cost= props.offerPrice
-let formattedCost = parseFloat(cost).toLocaleString();
+  let cost = props.offerPrice;
+  let formattedCost = parseFloat(cost).toLocaleString();
 
   return (
     <div>
@@ -495,7 +495,6 @@ let formattedCost = parseFloat(cost).toLocaleString();
                 <p className={Classes.NewPrice}>
                   {/* &#x20B9; {parseFloat(formattedCost).toFixed(0)} */}
                   &#x20B9; {formattedCost}
-
                 </p>
                 {props.actualPrice !== null ? (
                   <BiRupee size={25} color="#B0B0B0" />
@@ -806,7 +805,7 @@ let formattedCost = parseFloat(cost).toLocaleString();
                   >
                     Product code :
                   </p>
-                  <p>029567-2345643</p>
+                  <p>{props.sku}</p>
                 </div>
               </div>
               <div className={Classes.ProductDetailsMobCard}>
@@ -1246,7 +1245,7 @@ let formattedCost = parseFloat(cost).toLocaleString();
                           </div>
                         </div>
                         <div className={Classes.RightHeadDesc}>
-                          <p>{item && item.user&& item.user.name}</p>
+                          <p>{item && item.user && item.user.name}</p>
                           <p className={Classes.dateReview}>{formattedDate}</p>
                           <div className={Classes.ReviewsDescription}>
                             <p>{item.review}</p>

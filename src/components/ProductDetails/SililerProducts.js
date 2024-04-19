@@ -90,7 +90,10 @@ const SililerProducts = (props) => {
           <div className="container similetrSliders">
             <div className={Classes.Web}>
               {similarProducts.length < 5 ? (
-                <div className={Classes.CarouselNoCard} style={{display:'flex',justifyContent:'flex-start'}}>
+                <div
+                  className={Classes.CarouselNoCard}
+                  style={{ display: "flex", justifyContent: "flex-start" }}
+                >
                   {similarProducts.map((item, index) => (
                     <div
                       key={index}
@@ -98,17 +101,12 @@ const SililerProducts = (props) => {
                       onClick={() => prodDetHandler(item)}
                     >
                       <img
-                        style={{ width: "300px", height: "205px" }}
+                        style={{ width: "245px", height: "205px" }}
                         className={Classes.SlideImage}
                         src={item.thumbnail_image}
                         alt={`catg-${index}`}
                       />
-                      <p className={Classes.SimilarProductName}>
-                        {item.category.name}
-                      </p>
-                      <p className={Classes.SimilerProductSku}>
-                        SKU : {item.sku}
-                      </p>
+
                       <div className={Classes.PriceContainer}>
                         <p className={Classes.SimilerProductPrices}>
                           &#x20B9; {item.total_price_final}
@@ -116,6 +114,15 @@ const SililerProducts = (props) => {
                         <p className={Classes.SimilerProductDiscount}>
                           &#x20B9; {item.total_price_final}
                         </p>
+                      </div>
+                      <p className={Classes.checkDate}>Check delivery date</p>
+                      <div className={Classes.MainBtns}>
+                        <div className={Classes.ParentHoverBtns}>
+                          <button className={Classes.tryBtn}>
+                            Try at Home
+                          </button>
+                          <button className={Classes.buynowbtn}>Buy now</button>
+                        </div>
                       </div>
                     </div>
                   ))}
@@ -134,12 +141,7 @@ const SililerProducts = (props) => {
                         src={item.thumbnail_image}
                         alt={`catg-${index}`}
                       />
-                      <p className={Classes.SimilarProductName}>
-                        {item.category.name}
-                      </p>
-                      <p className={Classes.SimilerProductSku}>
-                        SKU : {item.sku}
-                      </p>
+
                       <div className={Classes.PriceContainer}>
                         <p className={Classes.SimilerProductPrices}>
                           &#x20B9; {item.total_price_final}
@@ -147,6 +149,15 @@ const SililerProducts = (props) => {
                         <p className={Classes.SimilerProductDiscount}>
                           &#x20B9; {item.total_price_final}
                         </p>
+                      </div>
+                      <p className={Classes.checkDate}>Check delivery date</p>
+                      <div className={Classes.MainBtns}>
+                        <div className={Classes.ParentHoverBtns}>
+                          <button className={Classes.tryBtn}>
+                            Try at Home
+                          </button>
+                          <button className={Classes.buynowbtn}>Buy now</button>
+                        </div>
                       </div>
                     </div>
                   ))}

@@ -106,7 +106,7 @@ function CheckOut(props) {
     city: Joi.string()
       .required()
       .messages({
-        "string.empty": `Please enter your city`,
+        "string.empty": `Please enter your city.`,
       }),
     state: Joi.string()
       .required()
@@ -557,7 +557,13 @@ function CheckOut(props) {
           alert("Something went wrong");
         }
       } catch (error) {
-        alert(error.response.data.results.message);
+        // alert(error.response.data.results.message);
+        if (
+          error.response.data.results.message ===
+          "user with this email or phone number already exists!!!"
+        ) {
+          // props.sendOtp();
+        }
       }
     }
   };
