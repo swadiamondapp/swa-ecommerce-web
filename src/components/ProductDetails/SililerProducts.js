@@ -13,9 +13,20 @@ const SililerProducts = (props) => {
   const history = useHistory();
   const [similarProducts, setSimilarProducts] = useState([]);
   const [slidesToShow, setSlidesToShow] = useState(5);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     similarProduct();
+    // Update windowWidth on resize
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup the event listener when the component unmounts
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   const similarProduct = async () => {
@@ -53,6 +64,8 @@ const SililerProducts = (props) => {
     slidesToScroll: 1,
     autoplay: true,
     initialSlide: 5,
+    centerMode: true,
+    centerPadding: "20px",
     responsive: [
       {
         breakpoint: 1024,
@@ -61,6 +74,8 @@ const SililerProducts = (props) => {
           slidesToScroll: 3,
           infinite: true,
           dots: true,
+          centerMode: true,
+          centerPadding: "20px",
         },
       },
       {
@@ -69,6 +84,8 @@ const SililerProducts = (props) => {
           slidesToShow: 2,
           slidesToScroll: 2,
           initialSlide: 2,
+          centerMode: true,
+          centerPadding: "20px",
         },
       },
       {
@@ -77,6 +94,8 @@ const SililerProducts = (props) => {
           slidesToShow: 1,
           slidesToScroll: 1,
           autoplay: true,
+          centerMode: true,
+          centerPadding: "20px",
         },
       },
     ],
@@ -89,10 +108,13 @@ const SililerProducts = (props) => {
         <div className={Classes.CatList1}>
           <div className="container similetrSliders">
             <div className={Classes.Web}>
-              {similarProducts.length < 5 ? (
+              {similarProducts.length < 5 && windowWidth > 576 ? (
                 <div
                   className={Classes.CarouselNoCard}
-                  style={{ display: "flex", justifyContent: "flex-start" }}
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-start",
+                  }}
                 >
                   {similarProducts.map((item, index) => (
                     <div

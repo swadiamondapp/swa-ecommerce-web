@@ -16,6 +16,7 @@ const CheckOutPage = (props) => {
   const [changeId, setChangeId] = useState("");
   const [cartCount, setCartCount] = useState("");
   const token = localStorage.getItem("swaToken");
+
   useEffect(() => {
     // console.log(props.location.state.data);
     setLoading(true);
