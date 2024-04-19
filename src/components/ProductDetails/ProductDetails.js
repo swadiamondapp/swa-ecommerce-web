@@ -568,11 +568,11 @@ const ProductDetails = (props) => {
                 )} */}
 
                 <div className={Classes.FindStoreParent}>
-                  <button className={Classes.TryHome}>Try at Home</button>
+                  <button className={Classes.TryHome}>Find at store</button>
                   <button className={Classes.VideoCall}>
                     <img src={Call} style={{ maxWidth: "44px" }} />
                   </button>
-                  <button className={Classes.FindStores}>Find at store</button>
+                  <button className={Classes.FindStores}>Try at Home</button>
                 </div>
               </div>
               <Modal

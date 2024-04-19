@@ -33,11 +33,14 @@ function CheckOut(props) {
   const [voucherInput, setVoucherInput] = useState(false);
   const [promoId, setPromoId] = useState("");
   const [mode, setMode] = useState("P");
+  const [isLoading, setIsLoading] = useState(false);
   const [selectedCity, setSelectedCity] = useState(null);
   const [userId, setUserId] = useState("");
   const [userMob, setUserMob] = useState("");
   const [userName, setUserName] = useState("");
   const [errorMessage, setErrorMessage] = useState({});
+  const mobile = localStorage.getItem("registerMobile");
+
   const [addressData, setAddressData] = useState({
     sEmail: "",
     sPhone: "",
@@ -563,9 +566,36 @@ function CheckOut(props) {
           "user with this email or phone number already exists!!!"
         ) {
           // props.sendOtp();
+          sendOtp();
         }
       }
     }
+  };
+
+  const sendOtp = async () => {
+    const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const body = {
+      phone_code: "+91",
+      phone: mobile,
+      email: "",
+      createuser: "False",
+      forgotuser: "False",
+    };
+    const mobileNumberRegex = /^\d{10}$/;
+
+    setIsLoading(true);
+    try {
+      console.log("Api keri");
+      const response = await axios.post(Urls.sentOtp, body);
+      console.log(response.data);
+      if (response.data[0] === "Otp send Successfully") {
+        //  setIsSignup(false);
+        //  handleOtpModalOpen();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    setIsLoading(false);
   };
 
   const submitAddress = async (token) => {

@@ -272,21 +272,23 @@ header {
   color: #00464d;
   border: 1px solid #00464d;
   background: transparent;
-  padding: 10px 10px;
+  padding: 10px 7px;
   border-radius: 4px;
   font-family: "lato";
   font-weight: 500;
   width: 100%;
+  font-size: 14px;
 }
 .buynowbtn {
   background: #00464d;
   color: #fff;
   border: none;
-  padding: 10px 10px;
+  padding: 10px 7px;
   font-family: "lato";
   font-weight: 500;
   border-radius: 4px;
   width: 100%;
+  font-size: 14px;
 }
 .MainBtns {
   display: none;
@@ -1299,6 +1301,9 @@ a {
   .showSearchBar {
     display: block;
   }
+  .MainBtns {
+    display: block;
+  }
 
   .searchbar {
     width: 100%;
@@ -1321,6 +1326,12 @@ a {
   }
   .Offers {
     padding: 0px;
+    border: 0.5px solid #e5e5e5;
+    background: #fff;
+    border-radius: 10px;
+  }
+  .buynowbtn {
+    display: none;
   }
   .OffersInner {
     margin: 0px;
