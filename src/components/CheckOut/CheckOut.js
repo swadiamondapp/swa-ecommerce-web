@@ -437,12 +437,10 @@ function CheckOut(props) {
           alert("Something went wrong");
         }
       } catch (error) {
-        // alert(error.response.data.results.message);
         if (
           error.response.data.results.message ===
           "user with this email or phone number already exists!!!"
         ) {
-          // props.sendOtp();
           sendOtp();
         }
       }
@@ -506,7 +504,6 @@ function CheckOut(props) {
           headers: { Authorization: "Token " + token },
         });
         if (response.data && response.data.status === 200) {
-          console.log("userMob, userMob--->", _userName, _userMob);
           history.push({
             pathname: "/payment",
             state: {
@@ -606,6 +603,7 @@ function CheckOut(props) {
       .post(Urls.Login, body)
       .then((response) => {
         if (response.data.results.status_code === 200) {
+          let __token = response.data.results.token;
           localStorage.setItem("swaToken", response.data.results.token);
           localStorage.setItem("userName", response.data.results.data.name);
           localStorage.setItem(
@@ -613,31 +611,7 @@ function CheckOut(props) {
             response.data.results.data.phone_number
           );
           setGetOtpModal(false);
-          if (response.data.results.status_code === 200) {
-            const response = axios.post(Urls.addAdress, body, {
-              headers: { Authorization: "Token " + token },
-            });
-            if (response.data && response.data.status === 200) {
-              console.log("userMob, userMob--->", _userName, _userMob);
-              history.push({
-                pathname: "/payment",
-                state: {
-                  data: {
-                    pay: amountPay,
-                    total: total,
-                    addressId: response.data.data.id,
-                    updatedCart: props.proDet.data.updatedCartResponse,
-                    token: token,
-                    name: _userName,
-                    number: _userMob,
-                    buyBody: location.state.data,
-                    userId: _userId,
-                  },
-                  name: "cart",
-                },
-              });
-            }
-          }
+          submitAddress(__token);
         } else if (response.data.results.status_code === 401) {
           console.log("Incorrect username or password!");
         }
