@@ -390,6 +390,8 @@ const NewArrivalPage = (props) => {
     });
   }
 
+  console.log("count--->", count)
+
   return (
     <div>
       <div className={Classes.Page}>
@@ -404,6 +406,7 @@ const NewArrivalPage = (props) => {
                 filterMetal={filterMetalHanlder}
                 filterSearch={props.location.state}
                 setProduct={setProduct}
+                setCount={setCount}
               />
             </div>
             <div className="col-lg-9 col-sm-8">

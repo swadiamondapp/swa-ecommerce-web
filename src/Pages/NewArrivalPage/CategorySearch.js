@@ -326,6 +326,7 @@ const CategorySearch = (props) => {
                 filterOctn={filtOcctnHandler}
                 filterMetal={filterMetalHanlder}
                 filterSearch={{ data: props.match.params.id }}
+                setCount={setCount}
               />
             </div>
             <div className="col-lg-10 col-sm-8">
