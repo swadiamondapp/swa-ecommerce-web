@@ -752,8 +752,8 @@ const Header = (props) => {
                       <div className={Classes.OffersInner}>
                         <img
                           style={{
-                            width: "65px",
-                            height: "65px",
+                            width: "70px",
+                            height: "50px",
                             borderTopLeftRadius: "5px",
                             borderTopRightRadius: "5px",
                           }}
@@ -778,8 +778,8 @@ const Header = (props) => {
                       <div className={Classes.OffersInner}>
                         <img
                           style={{
-                            width: "65px",
-                            height: "65px",
+                            width: "70px",
+                            height: "50px",
                             borderTopLeftRadius: "5px",
                             borderTopRightRadius: "5px",
                           }}

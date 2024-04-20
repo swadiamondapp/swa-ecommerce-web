@@ -199,11 +199,7 @@ function CheckOut(props) {
       console.log("Form submitted:", addressData);
       // Clear errors
       setErrorMessage({});
-      if (!token) {
-        sendOtp();
-      } else {
-        handleSignUp();
-      } // Call handleSignUp when there are no validation errors
+      handleSignUp();
     }
   };
 
@@ -457,7 +453,7 @@ function CheckOut(props) {
     const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const body = {
       phone_code: "+91",
-      phone: mobile,
+      phone: addressData.sPhone,
       email: "",
       createuser: "False",
       forgotuser: "False",
@@ -604,7 +600,7 @@ function CheckOut(props) {
 
   const loginHandler = () => {
     const body = {
-      username: mobile,
+      username: addressData.sPhone,
     };
     axios
       .post(Urls.Login, body)
@@ -617,6 +613,31 @@ function CheckOut(props) {
             response.data.results.data.phone_number
           );
           setGetOtpModal(false);
+          if (response.data.results.status_code === 200) {
+            const response = axios.post(Urls.addAdress, body, {
+              headers: { Authorization: "Token " + token },
+            });
+            if (response.data && response.data.status === 200) {
+              console.log("userMob, userMob--->", _userName, _userMob);
+              history.push({
+                pathname: "/payment",
+                state: {
+                  data: {
+                    pay: amountPay,
+                    total: total,
+                    addressId: response.data.data.id,
+                    updatedCart: props.proDet.data.updatedCartResponse,
+                    token: token,
+                    name: _userName,
+                    number: _userMob,
+                    buyBody: location.state.data,
+                    userId: _userId,
+                  },
+                  name: "cart",
+                },
+              });
+            }
+          }
         } else if (response.data.results.status_code === 401) {
           console.log("Incorrect username or password!");
         }
@@ -629,7 +650,7 @@ function CheckOut(props) {
   const verifyOtp = async (e) => {
     e.preventDefault();
     const body = {
-      phone: mobile,
+      phone: addressData.sPhone,
       phone_code: "+91",
       otp: otp,
     };
@@ -654,7 +675,7 @@ function CheckOut(props) {
         isDesk={isDesk}
         customTabOtpModalStyle={customTabOtpModalStyle}
         customDestOtpModalStyle={customDestOtpModalStyle}
-        mobileNumber={mobile}
+        mobileNumber={addressData.sPhone}
         handleOtpForm={verifyOtp}
         setOtp={setOtp}
       />
