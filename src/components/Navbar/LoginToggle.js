@@ -19,6 +19,7 @@ import Joi from "joi";
 import PrivacyModal from "./PrivacyModal";
 import CircularProgress from "@mui/material/CircularProgress";
 import LoginSuccessModal from "../LoginSuccesModal/LoginSuccessModal";
+import OtpModal from "./OtpModal";
 
 const signUpSchema = Joi.object({
   username: Joi.string()
@@ -385,14 +386,11 @@ const LoginToggle = (props) => {
             "phoneNumber",
             response.data.results.data.phone_number
           );
-
-          // props.logAct(response.data.results.token);
           setGetOtpModal(false);
           setTimeout(() => {
             props.onClose();
           }, 3000);
         } else if (response.data.results.status_code === 401) {
-          // setLoginError("Incorrect username or password!");
           console.log("Incorrect username or password!");
         }
       })
@@ -850,7 +848,19 @@ const LoginToggle = (props) => {
             <div className={Classes.SlideTp}>
               {getOtpModal ? (
                 <>
-                  <Modal
+                  <OtpModal
+                    getOtpModal={getOtpModal}
+                    handleOtpModalClose={handleOtpModalClose}
+                    isDesk={isDesk}
+                    customTabOtpModalStyle={customTabOtpModalStyle}
+                    customDestOtpModalStyle={customDestOtpModalStyle}
+                    handleOtpForm={handleOtpForm}
+                    mobileNumber={mobileNumber}
+                    otp={otp}
+                    setOtp={setOtp}
+                    handleSignupModalOpen={handleSignupModalOpen}
+                  />
+                  {/* <Modal
                     open={getOtpModal}
                     onClose={handleOtpModalClose}
                     aria-labelledby="modal-modal-title"
@@ -922,7 +932,7 @@ const LoginToggle = (props) => {
                         </div>
                       </div>
                     </Box>
-                  </Modal>
+                  </Modal> */}
                 </>
               ) : (
                 <>

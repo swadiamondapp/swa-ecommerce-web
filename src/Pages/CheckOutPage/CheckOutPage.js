@@ -4,10 +4,12 @@ import Features from "../../components/Features/Features";
 import Footer from "../../components/Footer/Footer";
 import Classes from "./CheckOutPage.module.css";
 import CheckOut from "../../components/CheckOut/CheckOut";
+import OtpModal from "../../components/Navbar/OtpModal";
 import axios from "axios";
 import * as Urls from "../../Urls";
 
 const CheckOutPage = (props) => {
+  const token = localStorage.getItem("swaToken");
   const [total, setTotal] = useState("");
   const [amountPay, setPayTotal] = useState("");
   const [addressId, setAddressId] = useState(null);
@@ -15,7 +17,6 @@ const CheckOutPage = (props) => {
   const [address, setAddress] = useState([]);
   const [changeId, setChangeId] = useState("");
   const [cartCount, setCartCount] = useState("");
-  const token = localStorage.getItem("swaToken");
 
   useEffect(() => {
     // console.log(props.location.state.data);

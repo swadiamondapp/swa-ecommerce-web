@@ -18,9 +18,12 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Dropdown } from "primereact/dropdown";
 import Joi from "joi";
+import OtpModal from "../Navbar/OtpModal";
 
 function CheckOut(props) {
+  const mobile = localStorage.getItem("registerMobile");
   const location = useLocation();
+  const [token, setToken] = useState(localStorage.getItem("swaToken"));
   const [show, setShow] = useState(false);
   const [code, setCode] = useState("");
   const [error, setError] = useState("");
@@ -39,7 +42,8 @@ function CheckOut(props) {
   const [userMob, setUserMob] = useState("");
   const [userName, setUserName] = useState("");
   const [errorMessage, setErrorMessage] = useState({});
-  const mobile = localStorage.getItem("registerMobile");
+  const [getOtpModal, setGetOtpModal] = useState(false);
+  const [otp, setOtp] = useState(123456);
 
   const [addressData, setAddressData] = useState({
     sEmail: "",
@@ -67,8 +71,37 @@ function CheckOut(props) {
     streetColony: "",
     landMark: "",
   });
+  const [isDesk, setIsDesk] = useState(
+    window.innerWidth >= 300 && window.innerWidth <= 575
+  );
+
+  const customTabOtpModalStyle = {
+    position: "absolute",
+    width: "90%",
+    height: "auto",
+    left: "50%",
+    top: "50%",
+    transform: "translate(-50%,-50%)",
+    bgcolor: "background.paper",
+    border: "1px solid #000",
+    boxShadow: 24,
+    p: 1,
+    outline: "none",
+  };
+  const customDestOtpModalStyle = {
+    position: "absolute",
+    width: "30%",
+    height: "auto",
+    left: "50%",
+    top: "50%",
+    transform: "translate(-50%,-50%)",
+    bgcolor: "background.paper",
+    border: "1px solid #000",
+    boxShadow: 24,
+    p: 2,
+    outline: "none",
+  };
   const [formShow, setFormShow] = useState(false);
-  const [token, setToken] = useState(localStorage.getItem("swaToken"));
   var alphaExp = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
   const schema = Joi.object({
     sEmail: Joi.string()
@@ -133,26 +166,18 @@ function CheckOut(props) {
 
   const formRef = useRef(null);
 
-  // const handleSubmit = () => {
-  //   const formData = new FormData(formRef.current);
-  //   const addressData = Object.fromEntries(formData.entries());
+  useEffect(() => {
+    buyWithoutLogin(location.state.data.product_id);
+  }, [location.state.data]);
 
-  //   const { error } = schema.validate(addressData, { abortEarly: false });
-  //   if (error) {
-  //     // Handle validation errors
-  //     const errorMessage = error.details.map((detail) => detail.message).join(", ");
-  //     console.error("Validation Error: ", errorMessage);
+  useEffect(() => {
+    getDefaultAddress();
+    if (props && props.proDet && props.proDet.data) {
+      setTotal(props.proDet.data.total);
+      setAmountPay(props.proDet.data.total);
+    }
+  }, []);
 
-  //     return;
-  //   }
-
-  //   // Proceed with form submission
-  //   // Your logic here...
-
-  //   // Trigger form submission
-  //   formRef.current.submit();
-
-  // };
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -174,27 +199,13 @@ function CheckOut(props) {
       console.log("Form submitted:", addressData);
       // Clear errors
       setErrorMessage({});
-      handleSignUp(); // Call handleSignUp when there are no validation errors
+      if (!token) {
+        sendOtp();
+      } else {
+        handleSignUp();
+      } // Call handleSignUp when there are no validation errors
     }
   };
-
-  useEffect(() => {
-    buyWithoutLogin(location.state.data);
-  }, [location.state.data]);
-
-  useEffect(() => {
-    getDefaultAddress();
-    if (props && props.proDet && props.proDet.data) {
-      setTotal(props.proDet.data.total);
-      setAmountPay(props.proDet.data.total);
-    }
-  }, []);
-
-  useEffect(() => {
-    buyWithoutLogin(location.state.data.product_id);
-  }, [location.state.data]);
-
-  console.log("location.state.data---->", location.state.data);
 
   const placeOrder = () => {
     let cartBody;
@@ -205,28 +216,12 @@ function CheckOut(props) {
         address_id: props.address,
         mode: mode,
       };
-      // buyBody = {
-      //   product_id: props.proDet.data.product_id,
-      //   color: props.proDet.data.color,
-      //   size: props.proDet.data.size,
-      //   promocode: code,
-      //   address_id: props.address,
-      //   mode: mode,
-      // };
     } else {
       cartBody = {
         promocode_id: 0,
         address_id: props.address,
         mode: mode,
       };
-      // buyBody = {
-      //   product_id: props.proDet.data.product_id,
-      //   color: props.proDet.data.color,
-      //   size: props.proDet.data.size,
-      //   promocode_id: 0,
-      //   address_id: props.address,
-      //   mode: mode,
-      // };
     }
     if (props.proDet.name === "cart") {
       axios
@@ -356,9 +351,6 @@ function CheckOut(props) {
   const showVoucherInput = () => {
     setVoucherInput(!voucherInput);
   };
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  // };
   const showHandler = () => {
     setShow(true);
   };
@@ -410,120 +402,9 @@ function CheckOut(props) {
   const formShowHandler = () => {
     setFormShow(true);
   };
-  // const formik = useFormik({
-  //   initialValues: {
-  //     email: defaultAddress.email,
-  //     phone: "",
-  //     namef: "",
-  //     mobile: defaultAddress.phone_number,
-  //     building: "",
-  //     city: "",
-  //     pin: defaultAddress.pincode,
-  //     colony: "",
-  //     landMark: defaultAddress.landmark,
-  //     state: "1",
-  //   },
-  //   validationSchema: Yup.object({
-  //     namef: Yup.string()
-  //       .required("This field is required")
-  //       .matches(alphaExp, "Valid name"),
-
-  //     mobile: Yup.string()
-  //       // .min(6, "Password should be at least 6 characters ")
-  //       .required("This field is required")
-  //       .length(10, "Enter valid number"),
-  //     building: Yup.string().required("This field is required"),
-  //     city: Yup.string().required("This field is required"),
-  //     pin: Yup.string()
-  //       .required("This field is required")
-  //       .min(5, "Enter valid pincode"),
-  //     colony: Yup.string().required("This field is required"),
-  //     landMark: Yup.string().required("This field is required"),
-  //   }),
-  //   onSubmit: (values, onSubmitprops) => {
-  //     //   setIsLoading(true)
-
-  //     const inputs = {
-  //       name: values.namef,
-  //       phone_code: "+91",
-  //       phone_number: values.mobile,
-  //       alt_code: "",
-  //       alt_number: "",
-  //       pincode: values.pin,
-  //       state: values.state,
-  //       city: values.city,
-  //       landmark: values.landMark,
-  //       house: values.building,
-  //       area: values.colony,
-  //       type: "HOME",
-  //       is_main: false,
-  //     };
-
-  //     axios
-  //       .post(Urls.addAdress, inputs, {
-  //         headers: { Authorization: "Token " + token },
-  //       })
-  //       .then((response) => {
-  //         onSubmitprops.resetForm();
-  //         setFormShow(false);
-  //         props.adresChnge(response.data.data.id);
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //   },
-  // });
   const methodChange = (e) => {
     setMode(e.target.value);
   };
-  // let adres;
-  // if (props.isLoad) {
-  //   adres = (
-  //     <div className="d-flex justify-content-center align-items-center loader">
-  //       {" "}
-  //       <FadeLoader color="#00464d" />
-  //     </div>
-  //   );
-  // } else {
-  //   adres = (
-  //     <>
-  //       <Radio.Group onChange={props.radioChange} value={props.address}>
-  //         <Space direction="vertical">
-  //           {props.addressArray.map((item, index) => {
-  //             return (
-  //               <div className={Classes.AddresCont} key={index}>
-  //                 <Radio value={item.id}>
-  //                   <div className={Classes.Address}>
-  //                     <h6 className={Classes.Name}>{item.name}</h6>
-  //                     <p
-  //                       className={Classes.AddreInner}
-  //                       style={{ fontWeight: "400" }}
-  //                     >
-  //                       {item.house} ( house ){item.area} , {item.landmark}{" "}
-  //                       {item.state} {item.pincode}
-  //                     </p>
-  //                     <span className={Classes.Mobile}>
-  //                       phone number : {item.phone_code}
-  //                       {item.phone_number}
-  //                     </span>
-  //                   </div>
-  //                 </Radio>
-  //               </div>
-  //             );
-  //           })}
-  //         </Space>
-  //       </Radio.Group>
-  //       <div className={Classes.addAdres} onClick={formShowHandler}>
-  //         <AiOutlineHome
-  //           color="#0997E7"
-  //           size={25}
-  //           style={{ marginTop: "-5px" }}
-  //         />
-  //         &nbsp;&nbsp;Add new address
-  //       </div>
-  //     </>
-  //   );
-  // }
   let _userId = "";
   let _userName = "";
   let _userMob = "";
@@ -589,6 +470,7 @@ function CheckOut(props) {
       const response = await axios.post(Urls.sentOtp, body);
       console.log(response.data);
       if (response.data[0] === "Otp send Successfully") {
+        setGetOtpModal(true);
         //  setIsSignup(false);
         //  handleOtpModalOpen();
       }
@@ -720,10 +602,62 @@ function CheckOut(props) {
     }
   };
 
-  console.log("token-->Props", props);
+  const loginHandler = () => {
+    const body = {
+      username: mobile,
+    };
+    axios
+      .post(Urls.Login, body)
+      .then((response) => {
+        if (response.data.results.status_code === 200) {
+          localStorage.setItem("swaToken", response.data.results.token);
+          localStorage.setItem("userName", response.data.results.data.name);
+          localStorage.setItem(
+            "phoneNumber",
+            response.data.results.data.phone_number
+          );
+          setGetOtpModal(false);
+        } else if (response.data.results.status_code === 401) {
+          console.log("Incorrect username or password!");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const verifyOtp = async (e) => {
+    e.preventDefault();
+    const body = {
+      phone: mobile,
+      phone_code: "+91",
+      otp: otp,
+    };
+    try {
+      const response = await axios.post(Urls.verifyOTP, body);
+      if (response.data.results.status_code === 200) {
+        loginHandler();
+      }
+      if (response.data.results.message === "Otp verified successfully!") {
+        console.log("Otp verified successfully!");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>
+      <OtpModal
+        getOtpModal={getOtpModal}
+        handleOtpModalClose={() => setGetOtpModal(false)}
+        isDesk={isDesk}
+        customTabOtpModalStyle={customTabOtpModalStyle}
+        customDestOtpModalStyle={customDestOtpModalStyle}
+        mobileNumber={mobile}
+        handleOtpForm={verifyOtp}
+        setOtp={setOtp}
+      />
       <div className={`container ${Classes.MobCheck1}`}>
         <div className={`container ${Classes.MobCheck1}`}>
           <div className={Classes.Main1}>
@@ -746,10 +680,6 @@ function CheckOut(props) {
 
           <div className="row">
             <div className="col-md-8">
-              {/* <div className={Classes.Main}>
-                <div className={Classes.AddresLay}>{adres}</div>
-              </div> */}
-
               <div className={Classes.Main}>
                 <div className={Classes.Left}>
                   <form
@@ -927,44 +857,10 @@ function CheckOut(props) {
                         </div>
                       )}
                     </div>
-
-                    {/* <div className={Classes.Flex}>
-                                    <input className={Classes.CheckBox} type="checkbox" id="ship" value='Address' />
-                                    <label className={Classes.CheckBoxLabel} for="ship">Make this address as shipping address </label>
-                                    
-                                </div> */}
-                    <div className={Classes.Save}>
-                      {/* <div
-                        type="submit"
-                        className={Classes.Submit}
-                        onClick={formik.handleSubmit}
-                      >
-                        Save address
-                      </div> */}
-                    </div>
+                    <div className={Classes.Save}></div>
                   </form>
                 </div>
               </div>
-
-              {/* payment method old design */}
-
-              {/* <div className={Classes.Method}>
-                <h3>Payment Method</h3>
-                <div className={Classes.MethodPad}>
-                  <Radio.Group onChange={methodChange} value={mode}>
-                    <Space direction="vertical">
-                      <Radio value={"C"}>
-                        <div className={Classes.Address}>Cash on Delivery</div>
-                      </Radio>
-
-                      <Radio value={"P"}>
-                        <div className={Classes.Address}>Online Payment</div>
-                      </Radio>
-                    </Space>
-                  </Radio.Group>
-                </div>
-              </div> */}
-              {/* payment method old design */}
             </div>
             <div className="col-md-4">
               <p className={Classes.Order1P}>ORDER SUMMERY</p>
@@ -974,7 +870,6 @@ function CheckOut(props) {
                   <div className={Classes.TotalItem}>
                     <p className={Classes.TotalSmall}>Total</p>
                   </div>
-
                   <p className={Classes.Amount}>
                     <BiRupee />
                     {total}
@@ -987,52 +882,6 @@ function CheckOut(props) {
                     <p className={Classes.AmountPayable}>{amountPay}</p>
                   </div>
                 </div>
-                {/* <div className={Classes.Voucher}>
-                  <p className={Classes.NumOfItem}>
-                    Do you have Voucher code ?
-                  </p>
-                  <p className={Classes.Apply} onClick={showHandler}>
-                    Apply
-                  </p>
-                </div> */}
-                {/* {show ? (
-                  <form onSubmit={handleSubmit} autoComplete="off">
-                    <div className="d-flex" style={{ marginTop: "10px" }}>
-                      <input
-                        className={Classes.Input}
-                        type="text"
-                        value={code}
-                        onChange={promCodeChngeHandler}
-                        name="name"
-                        placeholder="    SWAFRST"
-                      />
-                      <input
-                        className={Classes.ApplyButton}
-                        type="submit"
-                        onClick={promoCodeHandler}
-                      />
-                    </div>
-                    <p className="errrMsg" style={{ fontSize: "14px" }}>
-                      {errorVald}
-                    </p>
-
-                    <div className={Classes.Validation}>
-                      {errorImg !== null ? (
-                        <img
-                          className={Classes.Warning}
-                          src={errorImg}
-                          alt="Warning"
-                        />
-                      ) : null}
-                      <p
-                        className={Classes.ValidationText}
-                        style={{ color: clr }}
-                      >
-                        {error}
-                      </p>
-                    </div>
-                  </form>
-                ) : null} */}
 
                 <div
                   className={Classes.PlaceOrderButton}
