@@ -124,7 +124,9 @@ const ProductDetails = (props) => {
   };
   const colorSelectHandler = (color) => {
     props.colorSelct(color);
+    console.log("color--->", color);
   };
+
   const bagImgHandler = (imgUrl, item) => {
     item === "false" ? setVideoSection(false) : setVideoSection(true);
     props.bagImgSelect(imgUrl);
@@ -254,6 +256,7 @@ const ProductDetails = (props) => {
     props.sizeChange(e.target.value);
     const selectedId = e.target.value;
     setSelectedSize(selectedId);
+    console.log("selectedId0===>", selectedId);
 
     // Find the corresponding checkbox and check it
     const checkbox = document.querySelector(
@@ -263,10 +266,13 @@ const ProductDetails = (props) => {
       checkbox.checked = true;
     }
   };
+  console.log("selectedSize--->", selectedSize);
   const handleCheckboxChange = (event) => {
+    console.log("event.target.value--->", event.target.value);
     const selectedId = event.target.value;
     props.selectedSize(selectedId);
     setSelectedSize(selectedId);
+    console.log("selectedId", selectedId);
 
     // Find the corresponding option in the select box and select it
     const selectBox = document.querySelector("select");
@@ -305,11 +311,10 @@ const ProductDetails = (props) => {
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
-console.log(cost,"clg===>")
-console.log(formattedCost,"frc====clg===>")
-const result = numberWithCommas(formattedCost)
-console.log(result,"res===>")
-
+  console.log(cost, "clg===>");
+  console.log(formattedCost, "frc====clg===>");
+  const result = numberWithCommas(formattedCost);
+  console.log(result, "res===>");
 
   return (
     <div>
