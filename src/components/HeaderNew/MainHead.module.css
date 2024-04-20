@@ -248,7 +248,7 @@ header {
 }
 
 .Offers {
-  margin: 0px 10px;
+  /* margin: 0px 10px; */
   cursor: pointer;
   border-radius: 4px;
   /* background: #f7f6f2;
@@ -265,14 +265,14 @@ header {
   margin-top: 10px;
   justify-content: space-between;
   gap: 12px;
-  gap: 10px;
+  gap: 8px;
   margin: 10px;
 }
 .tryBtn {
   color: #00464d;
   border: 1px solid #00464d;
   background: transparent;
-  padding: 10px 7px;
+  padding: 10px 5px;
   border-radius: 4px;
   font-family: "lato";
   font-weight: 500;
@@ -283,7 +283,7 @@ header {
   background: #00464d;
   color: #fff;
   border: none;
-  padding: 10px 7px;
+  padding: 10px 5px;
   font-family: "lato";
   font-weight: 500;
   border-radius: 4px;
