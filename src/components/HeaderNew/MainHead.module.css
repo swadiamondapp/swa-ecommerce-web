@@ -248,7 +248,7 @@ header {
 }
 
 .Offers {
-  margin: 0px 10px;
+  /* margin: 0px 10px; */
   cursor: pointer;
   border-radius: 4px;
   /* background: #f7f6f2;
@@ -265,14 +265,14 @@ header {
   margin-top: 10px;
   justify-content: space-between;
   gap: 12px;
-  gap: 10px;
+  gap: 8px;
   margin: 10px;
 }
 .tryBtn {
   color: #00464d;
   border: 1px solid #00464d;
   background: transparent;
-  padding: 10px 7px;
+  padding: 10px 5px;
   border-radius: 4px;
   font-family: "lato";
   font-weight: 500;
@@ -283,7 +283,7 @@ header {
   background: #00464d;
   color: #fff;
   border: none;
-  padding: 10px 7px;
+  padding: 10px 5px;
   font-family: "lato";
   font-weight: 500;
   border-radius: 4px;
@@ -308,6 +308,7 @@ header {
 }
 .OffersInner {
   background: #f7f6f2;
+  background: #f0f0f0;
   margin: 5px 0px;
   box-shadow: 0px 2px 2px 0px #0000000d;
   width: 100%;
@@ -1312,7 +1313,7 @@ a {
     display: flex;
     overflow: scroll;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
     scrollbar-width: none; /* For Firefox */
     scrollbar-color: #fff !important;
     margin-bottom: 5px;

@@ -751,7 +751,12 @@ const Header = (props) => {
                     >
                       <div className={Classes.OffersInner}>
                         <img
-                          style={{ width: "65px", height: "65px" }}
+                          style={{
+                            width: "70px",
+                            height: "50px",
+                            borderTopLeftRadius: "5px",
+                            borderTopRightRadius: "5px",
+                          }}
                           className={Classes.SlideImage}
                           src={item.thumbnail}
                           alt="catg"
@@ -772,7 +777,12 @@ const Header = (props) => {
                     >
                       <div className={Classes.OffersInner}>
                         <img
-                          style={{ width: "65px", height: "65px" }}
+                          style={{
+                            width: "70px",
+                            height: "50px",
+                            borderTopLeftRadius: "5px",
+                            borderTopRightRadius: "5px",
+                          }}
                           // className={Classes.SlideImage}
                           src={item.thumbnail}
                           alt="tag"

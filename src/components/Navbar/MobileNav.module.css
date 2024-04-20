@@ -10,6 +10,7 @@ header {
 .Navbar {
   display: none;
 }
+
 .mobile-modal {
   position: absolute;
   top: 0;
@@ -649,7 +650,6 @@ header {
     flex-direction: column;
     gap: 10px;
   }
-  
 }
 
 @media (min-width: 575px) and (max-width: 767px) {
