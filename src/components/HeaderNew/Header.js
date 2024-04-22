@@ -27,6 +27,7 @@ import UAE from "../../Assets/flagUAE.svg";
 const Header = (props) => {
   const flag = localStorage.getItem("flag_image");
   const CountryIds = localStorage.getItem("id");
+  const Contryname = localStorage.getItem("country_name");
   const location = useLocation();
   const [isHome, setIsHome] = useState(
     location.pathname === "/" ? true : false
@@ -45,6 +46,7 @@ const Header = (props) => {
   const [selectedCountry, setSelectedCountry] = useState({
     id: CountryIds,
     flag_image: flag,
+    country_name: Contryname,
   });
   const [countryData, setCountryData] = useState([]);
   const dropdownRef = useRef(null);
@@ -59,7 +61,8 @@ const Header = (props) => {
 
   const [showUserDetails, setShowUserDetails] = useState(false);
   const userDetailsRef = useRef(null);
-  console.log("CountryIds", CountryIds);
+  console.log("Contryname", Contryname);
+  console.log("Contryname anas", selectedCountry.country_name);
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -310,9 +313,11 @@ const Header = (props) => {
             ...selectedCountry,
             flag_image: indiaData.flag_image,
             id: indiaData.id,
+            country_name: indiaData.country_name,
           });
           localStorage.setItem("flag_image", indiaData.flag_image);
           localStorage.setItem("id", indiaData.id);
+          localStorage.setItem("country_name", indiaData.country_name);
         }
         console.log("indiaData--->", indiaData);
         const defaultCountryID = localStorage.getItem("id");
@@ -342,6 +347,7 @@ const Header = (props) => {
 
     localStorage.setItem("id", country.id);
     localStorage.setItem("flag_image", country.flag_image);
+    localStorage.setItem("country_name", country.country_name);
   };
 
   useEffect(() => {

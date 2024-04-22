@@ -261,11 +261,11 @@ const ProductDetails = (props) => {
     console.log("selectedId0===>", selectedId);
 
     // Find the corresponding checkbox and check it
-    const checkbox = document.querySelector(
-      `input[type="checkbox"][value="${selectedId}"]`
+    const radioButton = document.querySelector(
+      `input[type="radio"][value="${selectedId}"]`
     );
-    if (checkbox) {
-      checkbox.checked = true;
+    if (radioButton) {
+      radioButton.checked = true;
     }
   };
   console.log("selectedSize--->", selectedSize);
@@ -618,11 +618,14 @@ const ProductDetails = (props) => {
                   <div className={Classes.SizeListParent}>
                     {props.sizeChart.map((item, index) => {
                       return (
-                        <div className={Classes.SizeRangesList}>
+                        <div className={Classes.SizeRangesList} key={index}>
                           <input
-                            type="checkbox"
+                            type="radio"
+                            name="sizeRadioGroup"
                             value={item.id}
-                            onChange={handleCheckboxChange}
+                            // onChange={handleCheckboxChange}
+                            onChange={() => setSelectedSize(item.id)}
+                            checked={selectedSize === item.id}
                           />
                           <p> {item.size_name}</p>
                         </div>
