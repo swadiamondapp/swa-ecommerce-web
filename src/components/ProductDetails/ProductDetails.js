@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import moment from "moment";
+import { RadioButton } from "primereact/radiobutton";
 import Ring from "../../Assets/new4.png";
 import Videoimg from "../../Assets/vedioimg.png";
 import RingFlip from "../../Assets/Ringflip.png";
@@ -305,11 +306,10 @@ const ProductDetails = (props) => {
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
-console.log(cost,"clg===>")
-console.log(formattedCost,"frc====clg===>")
-const result = numberWithCommas(formattedCost)
-console.log(result,"res===>")
-
+  console.log(cost, "clg===>");
+  console.log(formattedCost, "frc====clg===>");
+  const result = numberWithCommas(formattedCost);
+  console.log(result, "res===>");
 
   return (
     <div>
@@ -612,9 +612,10 @@ console.log(result,"res===>")
                       return (
                         <div className={Classes.SizeRangesList}>
                           <input
-                            type="checkbox"
+                            type="radio"
                             value={item.id}
-                            onChange={handleCheckboxChange}
+                            checked={selectedSize === item.id}
+                            onChange={() => setSelectedSize(item.id)}
                           />
                           <p> {item.size_name}</p>
                         </div>
