@@ -730,6 +730,7 @@ const MobileNavbar = (props) => {
                                 style={{
                                   fontSize: "16px",
                                   color: "#000",
+                                  marginLeft:'-3px'
                                 }}
                               >
                                 Log out
