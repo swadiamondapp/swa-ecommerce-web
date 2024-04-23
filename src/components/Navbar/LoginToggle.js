@@ -62,6 +62,7 @@ const LoginToggle = (props) => {
   const [signUpModal, setSignupModal] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
   const [getOtpModal, setGetOtpModal] = useState(false);
+  const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [signUpData, setSignUpData] = useState({
     username: "",
     mobile: "",
@@ -327,6 +328,15 @@ const LoginToggle = (props) => {
       if (response.data[0] === "Otp send Successfully") {
         setIsSignup(false);
         handleOtpModalOpen();
+      } else if (
+        response.data.results.message ===
+        "CustomUser matching query does not exist."
+      ) {
+        // Display error message below the input field
+        setValidationErrors({
+          mobileNumber:
+            "You are not a registered user. Please register to login.",
+        });
       }
     } catch (error) {
       console.log(error);
@@ -986,6 +996,24 @@ const LoginToggle = (props) => {
           </>
         )}
       </div>
+      <Modal
+        open={showRegisterModal}
+        onClose={() => setShowRegisterModal(false)}
+      >
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            backgroundColor: "white",
+            padding: "20px",
+            border: "2px solid #000",
+          }}
+        >
+          Please register the form.
+        </div>
+      </Modal>
     </div>
   );
 };

@@ -432,6 +432,10 @@ svg.p-icon {
   right: 2% !important;
   /* color: #006e7f; */
 }
+.Vediosec {
+  width: 429px;
+  height: 429px;
+}
 .shipment svg.p-icon {
   color: #006e7f !important;
 }
@@ -744,6 +748,10 @@ input[type="number"] {
   }
   .mobArrivalContainer {
     padding: 0px !important;
+  }
+  .Vediosec {
+    width: 326px;
+    height: 326px;
   }
 }
 .hideSearchBar {

@@ -26,6 +26,7 @@ import Stroke from "../../Assets/Stroke.png";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { CgHeart } from "react-icons/cg";
 import Carousel from "react-bootstrap/Carousel";
+import abc from "../../Assets/shop2.png";
 import { FaHeart } from "react-icons/fa";
 import axios from "axios";
 import * as Urls from "../../Urls";
@@ -38,6 +39,8 @@ import closeimg from "../../Assets/closeModal.png";
 import time from "../../Assets/time.png";
 import d1 from "../../Assets/d1.png";
 import d2 from "../../Assets/d2.png";
+// import { Carousel } from "primereact/carousel";
+import Slider from "react-slick";
 
 const ProductDetails = (props) => {
   const location = useLocation();
@@ -58,7 +61,7 @@ const ProductDetails = (props) => {
   const [selectedSize, setSelectedSize] = useState("");
   const [imageLoading, setImageLoading] = useState(true);
   const [showRestrictionModal, setShowRestrictionModal] = useState(false);
-  const [selectedColor,setSelectedColor] = useState('')
+  const [selectedColor, setSelectedColor] = useState("");
   const countryId = localStorage.getItem("id");
 
   const handleImageClick = () => {
@@ -125,7 +128,7 @@ const ProductDetails = (props) => {
   };
   const colorSelectHandler = (color) => {
     props.colorSelct(color);
-    setSelectedColor(color)
+    setSelectedColor(color);
     console.log("color--->", color);
   };
 
@@ -318,6 +321,51 @@ const ProductDetails = (props) => {
   const result = numberWithCommas(formattedCost);
   console.log(result, "res===>");
 
+  var settings = {
+    dots: true,
+    infinite: true,
+    autoplaySpeed: 1500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    initialSlide: 1,
+    centerMode: true,
+    centerPadding: "20px",
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+          centerMode: true,
+          centerPadding: "20px",
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+          centerMode: true,
+          centerPadding: "20px",
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          autoplay: true,
+          centerMode: true,
+          centerPadding: "20px",
+        },
+      },
+    ],
+  };
+
   return (
     <div>
       <div className="container" style={{ marginTop: "40px" }}>
@@ -342,6 +390,7 @@ const ProductDetails = (props) => {
                               </div>
                             </div>
                           )}
+
                           <img
                             className={Classes.LargeImage}
                             src={props.thumbImg}
@@ -377,10 +426,7 @@ const ProductDetails = (props) => {
                           loop
                         ></iframe> */}
                         <video
-                          style={{
-                            width: "429px",
-                            height: "429px",
-                          }}
+                          className="Vediosec"
                           src={props.thumbImg}
                           autoPlay
                           loop
@@ -418,6 +464,8 @@ const ProductDetails = (props) => {
                             style={{
                               border: "0.5px solid #80808026",
                               borderRadius: "4px",
+                              maxWidth: "78px",
+                              maxHeight: "79px",
                             }}
                             className={Classes.ImageSmall}
                             src={Videoimg}
@@ -427,6 +475,19 @@ const ProductDetails = (props) => {
                     })}
                   </div>
                 </div>
+              </div>
+
+              <div>
+                <p>anas</p>
+                <Slider {...settings}>
+                  {props.bagImg.map((item, index) => {
+                    return (
+                      <div className={Classes.SmallImages} key={index}>
+                        <img style={{ maxWidth: "100%" }} src={item} alt="" />
+                      </div>
+                    );
+                  })}
+                </Slider>
               </div>
               {/* inner images */}
             </div>
@@ -538,7 +599,9 @@ const ProductDetails = (props) => {
                   const isSelected = item.id === selectedColor.id;
                   return (
                     <div
-                    className={`${Classes.Options}  ${isSelected ? Classes.selectedOptionColor : ''}`}
+                      className={`${Classes.Options}  ${
+                        isSelected ? Classes.selectedOptionColor : ""
+                      }`}
                       key={index}
                       onClick={() => colorSelectHandler(item)}
                     >
