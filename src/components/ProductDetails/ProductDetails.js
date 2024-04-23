@@ -477,7 +477,7 @@ const ProductDetails = (props) => {
                 </div>
               </div>
 
-              <div>
+              {/* <div>
                 <p>anas</p>
                 <Slider {...settings}>
                   {props.bagImg.map((item, index) => {
@@ -488,7 +488,7 @@ const ProductDetails = (props) => {
                     );
                   })}
                 </Slider>
-              </div>
+              </div> */}
               {/* inner images */}
             </div>
             <div className={Classes.Slider}>
