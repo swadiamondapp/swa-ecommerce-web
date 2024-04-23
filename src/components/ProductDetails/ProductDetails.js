@@ -621,7 +621,10 @@ const ProductDetails = (props) => {
                             name="sizeRadioGroup"
                             value={item.id}
                             // onChange={handleCheckboxChange}
-                            onChange={() => setSelectedSize(item.id)}
+                            onChange={() => {
+                              setSelectedSize(item.id);
+                              props.selectedSize(item.id);
+                            }}
                             checked={selectedSize === item.id}
                           />
                           <p> {item.size_name}</p>
