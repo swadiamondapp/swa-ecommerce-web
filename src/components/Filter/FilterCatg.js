@@ -151,6 +151,7 @@ const FilterCatgs = (props) => {
       console.log("respo===>", response);
       console.log("catwise", response.data.results.data);
       setCategoryWise(response.data.results.data);
+    
     });
     axios
       .get(`${Urls.occationalProducts}?country=${countryId}`)
@@ -172,6 +173,7 @@ const FilterCatgs = (props) => {
       .get(url)
       .then((response) => {
         props.setProduct(response.data.results.data);
+        props.setCount(response.data.results.count);
       })
       .catch((error) => {
         console.error("Error fetching products by occasion:", error);
@@ -192,16 +194,19 @@ const FilterCatgs = (props) => {
       .get(url)
       .then((response) => {
         props.setProduct(response.data.results.data);
+        props.setCount(response.data.results.count)
       })
       .catch((error) => {
         console.error("Error fetching products by metal category:", error);
       });
   };
-  const handleCheckboxByCategory = (id) => {
+  const handleCheckboxByCategory = (id, count) => {
     const updatedIds = selectedCategoryIds.includes(id)
       ? selectedCategoryIds.filter((item) => item !== id)
       : [...selectedCategoryIds, id];
     setSelectedCategoryIds(updatedIds);
+
+    // props.setCount(count)
 
     // Call API with updated IDs
     const url = `${Urls.filterProductsById}${updatedIds.join(
@@ -211,6 +216,8 @@ const FilterCatgs = (props) => {
       .get(url)
       .then((response) => {
         props.setProduct(response.data.results.data);
+        props.setCount(response.data.results.count)
+        console.log(response.data.results.count,"resCo====>")
       })
       .catch((error) => {
         console.error("Error fetching products by category:", error);
@@ -241,6 +248,8 @@ const FilterCatgs = (props) => {
   //     setSelectedOccationById([...selectedOccationById, id]); // Add ID if not selected
   //   }
   // };
+
+  console.log("props------->", props)
 
   return (
     <div className={`${Classes.Filter} ${isSticky ? Classes.Sticky : ""}`}>
@@ -348,7 +357,7 @@ const FilterCatgs = (props) => {
                 <div className={Classes.CategoryList}>
                   <input
                     type="checkbox"
-                    onChange={() => handleCheckboxByCategory(item.id)}
+                    onChange={() => handleCheckboxByCategory(item.id, item.product_count)}
                     checked={selectedCategoryIds.includes(item.id)}
                   />
                   <label>{item.name}</label>

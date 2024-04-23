@@ -58,6 +58,7 @@ const ProductDetails = (props) => {
   const [selectedSize, setSelectedSize] = useState("");
   const [imageLoading, setImageLoading] = useState(true);
   const [showRestrictionModal, setShowRestrictionModal] = useState(false);
+  const [selectedColor,setSelectedColor] = useState('')
   const countryId = localStorage.getItem("id");
 
   const handleImageClick = () => {
@@ -124,6 +125,7 @@ const ProductDetails = (props) => {
   };
   const colorSelectHandler = (color) => {
     props.colorSelct(color);
+    setSelectedColor(color)
     console.log("color--->", color);
   };
 
@@ -533,9 +535,10 @@ const ProductDetails = (props) => {
                   } else if (item.colour_name === "pt") {
                     clrClas = Classes.C3;
                   }
+                  const isSelected = item.id === selectedColor.id;
                   return (
                     <div
-                      className={Classes.Options}
+                    className={`${Classes.Options}  ${isSelected ? Classes.selectedOptionColor : ''}`}
                       key={index}
                       onClick={() => colorSelectHandler(item)}
                     >
