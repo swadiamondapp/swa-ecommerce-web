@@ -621,11 +621,11 @@ const LoginModal = (props) => {
             <Link to="/rate&review" className={Classes.LogedDetails_Item}>
               <p style={{ fontSize: "16px" }}>Write review</p>
             </Link>
-            <Link to="" className={Classes.LogedDetails_Item}>
+            <Link to="/swaWallet" className={Classes.LogedDetails_Item}>
               <p style={{ fontSize: "16px" }}>Swa wallet</p>
             </Link>
             <Link
-              to=""
+              to="/swaExchange"
               style={{ fontSize: "16px" }}
               className={Classes.LogedDetails_Item}
             >

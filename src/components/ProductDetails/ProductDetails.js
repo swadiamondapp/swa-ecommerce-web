@@ -58,7 +58,7 @@ const ProductDetails = (props) => {
   const [selectedSize, setSelectedSize] = useState("");
   const [imageLoading, setImageLoading] = useState(true);
   const [showRestrictionModal, setShowRestrictionModal] = useState(false);
-  const [selectedColor,setSelectedColor] = useState('')
+  const [selectedColor, setSelectedColor] = useState("");
   const countryId = localStorage.getItem("id");
 
   const handleImageClick = () => {
@@ -125,7 +125,7 @@ const ProductDetails = (props) => {
   };
   const colorSelectHandler = (color) => {
     props.colorSelct(color);
-    setSelectedColor(color)
+    setSelectedColor(color);
     console.log("color--->", color);
   };
 
@@ -538,7 +538,9 @@ const ProductDetails = (props) => {
                   const isSelected = item.id === selectedColor.id;
                   return (
                     <div
-                    className={`${Classes.Options}  ${isSelected ? Classes.selectedOptionColor : ''}`}
+                      className={`${Classes.Options}  ${
+                        isSelected ? Classes.selectedOptionColor : ""
+                      }`}
                       key={index}
                       onClick={() => colorSelectHandler(item)}
                     >
@@ -623,8 +625,10 @@ const ProductDetails = (props) => {
                             type="radio"
                             name="sizeRadioGroup"
                             value={item.id}
-                            // onChange={handleCheckboxChange}
-                            onChange={() => setSelectedSize(item.id)}
+                            onChange={() => {
+                              setSelectedSize(item.id);
+                              props.selectedSize(item.id);
+                            }}
                             checked={selectedSize === item.id}
                           />
                           <p> {item.size_name}</p>
