@@ -102,7 +102,7 @@ const SililerProducts = (props) => {
   };
 
   return (
-    <div style={{ marginTop: "20px" }}>
+    <div style={{ marginTop: "110px" }}>
       <div className="container">
         <div className={Classes.SimilerProductHead}>Similar style</div>
         <div className={Classes.CatList1}>

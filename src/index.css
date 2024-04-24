@@ -266,6 +266,29 @@ p {
 .slick-slide {
   padding: 0px 5px !important;
 }
+.ParentSlide .slick-slide {
+  padding: 0px !important;
+  /* width: 429px !important; */
+}
+.ParentSlide .slick-dots {
+  bottom: -95px !important;
+  text-align: left !important;
+  width: 429px !important;
+  height: 72px;
+  overflow: scroll !important;
+}
+.ParentSlide .slick-dots::-webkit-scrollbar {
+  width: 2px !important;
+  height: 4px !important; /* Set the width of the scrollbar */
+}
+
+.ParentSlide {
+  /* margin-bottom: 40px; */
+}
+.slick-dots li {
+  width: 60px !important;
+  margin-left: 0px !important;
+}
 .card-image > img {
   width: 100%;
   height: 100%;
@@ -752,6 +775,9 @@ input[type="number"] {
   .Vediosec {
     width: 326px;
     height: 326px;
+  }
+  .ParentSlide .slick-dots {
+    width: 100% !important;
   }
 }
 .hideSearchBar {

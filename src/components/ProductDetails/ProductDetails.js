@@ -218,7 +218,6 @@ const ProductDetails = (props) => {
     ? reviewImages
     : reviewImages.slice(0, 3);
 
-  const videoUrl = props.bagImg.filter((item) => item.endsWith(".mp4"));
   // const addToCartHandler = () => {
   //   console.log("....abc", selectedSize);
   //   // if (!props.Size) {
@@ -327,61 +326,72 @@ const ProductDetails = (props) => {
   const result = numberWithCommas(formattedCost);
   console.log(result, "res===>");
 
+  const handleThumbnailClick = (index) => {
+    setCurrentSlideIndex(index);
+  };
+
+  // List of image and video file extensions
+  const imageExtensions = [".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff"];
+  const videoExtensions = [".mp4", ".avi", ".mov", ".mkv", ".flv", ".wmv"];
+
+  // Arrays to hold image and video URLs
+  const imageUrls = [];
+  const videoUrls = [];
+
+  // Iterate over the array of URLs
+  props.bagImg.forEach((url) => {
+    // Get the file extension, accounting for possible query parameters
+    const parts = url.split("/");
+    const fileName = parts[parts.length - 1];
+    const extension = fileName
+      .split(".")
+      .pop()
+      .toLowerCase(); // get file extension and convert to lowercase
+
+    // Check if the extension is in the image or video list
+    if (imageExtensions.includes(`.${extension}`)) {
+      imageUrls.push(url);
+    } else if (videoExtensions.includes(`.${extension}`)) {
+      videoUrls.push(url);
+    }
+  });
+
   var settings = {
     dots: true,
     infinite: true,
-    autoplaySpeed: 1500,
+    autoplaySpeed: 2500,
     slidesToShow: 1,
     slidesToScroll: 1,
     dotsClass: "slick-dots slick-thumb",
-    // appendDots: (dots) => (
-    //   <div
-    //     style={{
-    //       backgroundColor: "#ddd",
-    //       borderRadius: "10px",
-    //       padding: "10px",
-    //     }}
-    //   >
-    //     <ul style={{ height: "300px", margin: "0px" }}> {dots} </ul>
-    //   </div>
-    // ),
+    appendDots: (dots) => (
+      <div>
+        <ul
+          style={{
+            margin: "0px",
+            padding: "0px",
+            width: "700px",
+          }}
+        >
+          {" "}
+          {dots}{" "}
+        </ul>
+      </div>
+    ),
     customPaging: (i) => (
       <div className={Classes.SmallImages}>
-        <img
-          className={Classes.ImageSmall}
-          src={props.bagImg[i]}
-          alt=""
-          // onClick={() => {
-          //   bagImgHandler(item, "false", index);
-          //   handleThumbnailClick(index);
-          // }}
-        />
+        {console.log("imageUrls[i]", imageUrls[i])}
+        {imageUrls[i] === undefined ? (
+          <img
+            style={{ width: "60px", height: "60px" }}
+            src={Videoimg}
+            alt=""
+          />
+        ) : (
+          <img className={Classes.ImageSmall} src={imageUrls[i]} alt="" />
+        )}
+        {/* // <img className={Classes.ImageSmall} src={imageUrls[i]} alt="" /> */}
       </div>
-      // <div className="custom-dot">
-      //   <img
-      //     src={props.bagImg[i]} // Display the corresponding small image
-      //     style={{
-      //       width: "30px",
-      //       height: "30px",
-      //       borderRadius: "50%",
-      //     }}
-      //   />
-      // </div>
     ),
-    // customPaging: () => (
-    //   <div className="custom-dot">
-    //     {props.bagImg.map((item) => (
-    //       <img
-    //         src={item} // Display the corresponding small image
-    //         style={{
-    //           width: "30px",
-    //           height: "30px",
-    //           borderRadius: "50%",
-    //         }}
-    //       />
-    //     ))}
-    //   </div>
-    // ),
     autoplay: true,
     centerMode: true,
     centerPadding: "20px",
@@ -420,9 +430,7 @@ const ProductDetails = (props) => {
     ],
   };
 
-  const handleThumbnailClick = (index) => {
-    setCurrentSlideIndex(index);
-  };
+  console.log("imageUrls--->", imageUrls);
 
   return (
     <div>
@@ -449,11 +457,37 @@ const ProductDetails = (props) => {
                             </div>
                           )}
 
-                          <img
+                          {/* <img
                             className={Classes.LargeImage}
                             src={props.thumbImg}
                             alt=""
-                          />
+                          /> */}
+                          <div className="ParentSlide">
+                            <Slider {...settings}>
+                              {imageUrls.map((item, index) => {
+                                return (
+                                  <img
+                                    style={{
+                                      maxWidth: "100%",
+                                    }}
+                                    src={item}
+                                    alt={`Slide ${index}`}
+                                  />
+                                );
+                              })}
+                              {videoUrls.map((item) => (
+                                <video
+                                  // className="Vediosec"
+                                  style={{
+                                    maxWidth: "100%",
+                                  }}
+                                  src={item}
+                                  autoPlay
+                                  loop
+                                />
+                              ))}
+                            </Slider>
+                          </div>
 
                           <div
                             style={{
@@ -476,13 +510,6 @@ const ProductDetails = (props) => {
                     {/* video play */}
                     {videoSection && (
                       <div className={Classes.ImageWishList1}>
-                        {/* <iframe
-                          title="autoplay-video"
-                          style={{ width: "429px", height: "429px" }}
-                          src={props.thumbImg}
-                          autoPlay
-                          loop
-                        ></iframe> */}
                         <video
                           className="Vediosec"
                           src={props.thumbImg}
@@ -495,7 +522,7 @@ const ProductDetails = (props) => {
                 </div>
               </div>
               {/* inner images */}
-              <div className="container">
+              {/* <div className="container">
                 <div>
                   <div className={Classes.MobProductDetails}>
                     {props.bagImg.map((item, index) => {
@@ -536,27 +563,8 @@ const ProductDetails = (props) => {
                     })}
                   </div>
                 </div>
-              </div>
+              </div> */}
 
-              <div>
-                <p>anas</p>
-                <Slider {...settings}>
-                  {props.bagImg.map((item, index) => {
-                    console.log("item-->", item);
-                    return (
-                      <div key={index} className={Classes.SmallImages}>
-                        <img
-                          style={{
-                            maxWidth: "100%",
-                          }}
-                          src={item}
-                          alt={`Slide ${index}`}
-                        />
-                      </div>
-                    );
-                  })}
-                </Slider>
-              </div>
               {/* inner images */}
             </div>
             <div className={Classes.Slider}>
