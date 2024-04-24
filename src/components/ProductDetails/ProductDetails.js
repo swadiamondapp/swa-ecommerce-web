@@ -63,6 +63,10 @@ const ProductDetails = (props) => {
   const [showRestrictionModal, setShowRestrictionModal] = useState(false);
   const [selectedColor, setSelectedColor] = useState("");
   const countryId = localStorage.getItem("id");
+  // State to track the current slide index
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(6);
+
+  console.log("index2", currentSlideIndex);
 
   const handleImageClick = () => {
     if (ratingRef.current) {
@@ -132,9 +136,11 @@ const ProductDetails = (props) => {
     console.log("color--->", color);
   };
 
-  const bagImgHandler = (imgUrl, item) => {
+  const bagImgHandler = (imgUrl, item, index) => {
     item === "false" ? setVideoSection(false) : setVideoSection(true);
     props.bagImgSelect(imgUrl);
+    setCurrentSlideIndex(index);
+    console.log("index", index);
   };
   const pinCodeChangeHandler = (e) => {
     setPinCode(e.target.value);
@@ -327,8 +333,56 @@ const ProductDetails = (props) => {
     autoplaySpeed: 1500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    dotsClass: "slick-dots slick-thumb",
+    // appendDots: (dots) => (
+    //   <div
+    //     style={{
+    //       backgroundColor: "#ddd",
+    //       borderRadius: "10px",
+    //       padding: "10px",
+    //     }}
+    //   >
+    //     <ul style={{ height: "300px", margin: "0px" }}> {dots} </ul>
+    //   </div>
+    // ),
+    customPaging: (i) => (
+      <div className={Classes.SmallImages}>
+        <img
+          className={Classes.ImageSmall}
+          src={props.bagImg[i]}
+          alt=""
+          // onClick={() => {
+          //   bagImgHandler(item, "false", index);
+          //   handleThumbnailClick(index);
+          // }}
+        />
+      </div>
+      // <div className="custom-dot">
+      //   <img
+      //     src={props.bagImg[i]} // Display the corresponding small image
+      //     style={{
+      //       width: "30px",
+      //       height: "30px",
+      //       borderRadius: "50%",
+      //     }}
+      //   />
+      // </div>
+    ),
+    // customPaging: () => (
+    //   <div className="custom-dot">
+    //     {props.bagImg.map((item) => (
+    //       <img
+    //         src={item} // Display the corresponding small image
+    //         style={{
+    //           width: "30px",
+    //           height: "30px",
+    //           borderRadius: "50%",
+    //         }}
+    //       />
+    //     ))}
+    //   </div>
+    // ),
     autoplay: true,
-    initialSlide: 1,
     centerMode: true,
     centerPadding: "20px",
     responsive: [
@@ -364,6 +418,10 @@ const ProductDetails = (props) => {
         },
       },
     ],
+  };
+
+  const handleThumbnailClick = (index) => {
+    setCurrentSlideIndex(index);
   };
 
   return (
@@ -447,7 +505,10 @@ const ProductDetails = (props) => {
                             className={Classes.ImageSmall}
                             src={item}
                             alt=""
-                            onClick={() => bagImgHandler(item, "false")}
+                            onClick={() => {
+                              bagImgHandler(item, "false", index);
+                              handleThumbnailClick(index);
+                            }}
                           />
                         </div>
                       );
@@ -477,18 +538,25 @@ const ProductDetails = (props) => {
                 </div>
               </div>
 
-              {/* <div>
+              <div>
                 <p>anas</p>
                 <Slider {...settings}>
                   {props.bagImg.map((item, index) => {
+                    console.log("item-->", item);
                     return (
-                      <div className={Classes.SmallImages} key={index}>
-                        <img style={{ maxWidth: "100%" }} src={item} alt="" />
+                      <div key={index} className={Classes.SmallImages}>
+                        <img
+                          style={{
+                            maxWidth: "100%",
+                          }}
+                          src={item}
+                          alt={`Slide ${index}`}
+                        />
                       </div>
                     );
                   })}
                 </Slider>
-              </div> */}
+              </div>
               {/* inner images */}
             </div>
             <div className={Classes.Slider}>
@@ -649,7 +717,12 @@ const ProductDetails = (props) => {
                 <div className={Classes.FindStoreParent}>
                   <button className={Classes.TryHome}>Find at store</button>
                   <button className={Classes.VideoCall}>
-                    <img src={Call} style={{ maxWidth: "44px" }} />
+                    <img
+                      src={Call}
+                      style={{
+                        maxWidth: "44px",
+                      }}
+                    />
                   </button>
                   <button className={Classes.FindStores}>Try at Home</button>
                 </div>
@@ -712,11 +785,17 @@ const ProductDetails = (props) => {
               >
                 <div className={Classes.Modalsection}>
                   <div className={Classes.ModalHeading}>
-                    <h2 style={{ fontSize: "20px" }}>
+                    <h2
+                      style={{
+                        fontSize: "20px",
+                      }}
+                    >
                       You cannot buy this Product
                     </h2>
                     <img
-                      style={{ cursor: "pointer" }}
+                      style={{
+                        cursor: "pointer",
+                      }}
                       src={closeimg}
                       onClick={() => setShowRestrictionModal(false)}
                       alt="Close"
