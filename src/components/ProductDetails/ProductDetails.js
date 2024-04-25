@@ -26,6 +26,7 @@ import Stroke from "../../Assets/Stroke.png";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { CgHeart } from "react-icons/cg";
 import Carousel from "react-bootstrap/Carousel";
+import abc from "../../Assets/shop2.png";
 import { FaHeart } from "react-icons/fa";
 import axios from "axios";
 import * as Urls from "../../Urls";
@@ -38,6 +39,8 @@ import closeimg from "../../Assets/closeModal.png";
 import time from "../../Assets/time.png";
 import d1 from "../../Assets/d1.png";
 import d2 from "../../Assets/d2.png";
+// import { Carousel } from "primereact/carousel";
+import Slider from "react-slick";
 
 const ProductDetails = (props) => {
   const location = useLocation();
@@ -60,6 +63,10 @@ const ProductDetails = (props) => {
   const [showRestrictionModal, setShowRestrictionModal] = useState(false);
   const [selectedColor, setSelectedColor] = useState("");
   const countryId = localStorage.getItem("id");
+  // State to track the current slide index
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(6);
+
+  console.log("index2", currentSlideIndex);
 
   const handleImageClick = () => {
     if (ratingRef.current) {
@@ -129,9 +136,11 @@ const ProductDetails = (props) => {
     console.log("color--->", color);
   };
 
-  const bagImgHandler = (imgUrl, item) => {
+  const bagImgHandler = (imgUrl, item, index) => {
     item === "false" ? setVideoSection(false) : setVideoSection(true);
     props.bagImgSelect(imgUrl);
+    setCurrentSlideIndex(index);
+    console.log("index", index);
   };
   const pinCodeChangeHandler = (e) => {
     setPinCode(e.target.value);
@@ -209,7 +218,6 @@ const ProductDetails = (props) => {
     ? reviewImages
     : reviewImages.slice(0, 3);
 
-  const videoUrl = props.bagImg.filter((item) => item.endsWith(".mp4"));
   // const addToCartHandler = () => {
   //   console.log("....abc", selectedSize);
   //   // if (!props.Size) {
@@ -318,6 +326,112 @@ const ProductDetails = (props) => {
   const result = numberWithCommas(formattedCost);
   console.log(result, "res===>");
 
+  const handleThumbnailClick = (index) => {
+    setCurrentSlideIndex(index);
+  };
+
+  // List of image and video file extensions
+  const imageExtensions = [".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff"];
+  const videoExtensions = [".mp4", ".avi", ".mov", ".mkv", ".flv", ".wmv"];
+
+  // Arrays to hold image and video URLs
+  const imageUrls = [];
+  const videoUrls = [];
+
+  // Iterate over the array of URLs
+  props.bagImg.forEach((url) => {
+    // Get the file extension, accounting for possible query parameters
+    const parts = url.split("/");
+    const fileName = parts[parts.length - 1];
+    const extension = fileName
+      .split(".")
+      .pop()
+      .toLowerCase(); // get file extension and convert to lowercase
+
+    // Check if the extension is in the image or video list
+    if (imageExtensions.includes(`.${extension}`)) {
+      imageUrls.push(url);
+    } else if (videoExtensions.includes(`.${extension}`)) {
+      videoUrls.push(url);
+    }
+  });
+
+  var settings = {
+    dots: true,
+    infinite: true,
+    autoplaySpeed: 2500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    dotsClass: "slick-dots slick-thumb",
+    appendDots: (dots) => (
+      <div>
+        <ul
+          style={{
+            margin: "0px",
+            padding: "0px",
+            width: "700px",
+          }}
+        >
+          {" "}
+          {dots}{" "}
+        </ul>
+      </div>
+    ),
+    customPaging: (i) => (
+      <div className={Classes.SmallImages}>
+        {console.log("imageUrls[i]", imageUrls[i])}
+        {imageUrls[i] === undefined ? (
+          <img
+            style={{ width: "60px", height: "60px" }}
+            src={Videoimg}
+            alt=""
+          />
+        ) : (
+          <img className={Classes.ImageSmall} src={imageUrls[i]} alt="" />
+        )}
+        {/* // <img className={Classes.ImageSmall} src={imageUrls[i]} alt="" /> */}
+      </div>
+    ),
+    autoplay: true,
+    centerMode: true,
+    centerPadding: "20px",
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+          centerMode: true,
+          centerPadding: "20px",
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+          centerMode: true,
+          centerPadding: "20px",
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          autoplay: true,
+          centerMode: true,
+          centerPadding: "20px",
+        },
+      },
+    ],
+  };
+
+  console.log("imageUrls--->", imageUrls);
+
   return (
     <div>
       <div className="container" style={{ marginTop: "40px" }}>
@@ -342,11 +456,38 @@ const ProductDetails = (props) => {
                               </div>
                             </div>
                           )}
-                          <img
+
+                          {/* <img
                             className={Classes.LargeImage}
                             src={props.thumbImg}
                             alt=""
-                          />
+                          /> */}
+                          <div className="ParentSlide">
+                            <Slider {...settings}>
+                              {imageUrls.map((item, index) => {
+                                return (
+                                  <img
+                                    style={{
+                                      maxWidth: "100%",
+                                    }}
+                                    src={item}
+                                    alt={`Slide ${index}`}
+                                  />
+                                );
+                              })}
+                              {videoUrls.map((item) => (
+                                <video
+                                  // className="Vediosec"
+                                  style={{
+                                    maxWidth: "100%",
+                                  }}
+                                  src={item}
+                                  autoPlay
+                                  loop
+                                />
+                              ))}
+                            </Slider>
+                          </div>
 
                           <div
                             style={{
@@ -369,18 +510,8 @@ const ProductDetails = (props) => {
                     {/* video play */}
                     {videoSection && (
                       <div className={Classes.ImageWishList1}>
-                        {/* <iframe
-                          title="autoplay-video"
-                          style={{ width: "429px", height: "429px" }}
-                          src={props.thumbImg}
-                          autoPlay
-                          loop
-                        ></iframe> */}
                         <video
-                          style={{
-                            width: "429px",
-                            height: "429px",
-                          }}
+                          className="Vediosec"
                           src={props.thumbImg}
                           autoPlay
                           loop
@@ -391,7 +522,7 @@ const ProductDetails = (props) => {
                 </div>
               </div>
               {/* inner images */}
-              <div className="container">
+              {/* <div className="container">
                 <div>
                   <div className={Classes.MobProductDetails}>
                     {props.bagImg.map((item, index) => {
@@ -401,7 +532,10 @@ const ProductDetails = (props) => {
                             className={Classes.ImageSmall}
                             src={item}
                             alt=""
-                            onClick={() => bagImgHandler(item, "false")}
+                            onClick={() => {
+                              bagImgHandler(item, "false", index);
+                              handleThumbnailClick(index);
+                            }}
                           />
                         </div>
                       );
@@ -418,6 +552,8 @@ const ProductDetails = (props) => {
                             style={{
                               border: "0.5px solid #80808026",
                               borderRadius: "4px",
+                              maxWidth: "78px",
+                              maxHeight: "79px",
                             }}
                             className={Classes.ImageSmall}
                             src={Videoimg}
@@ -427,7 +563,8 @@ const ProductDetails = (props) => {
                     })}
                   </div>
                 </div>
-              </div>
+              </div> */}
+
               {/* inner images */}
             </div>
             <div className={Classes.Slider}>
@@ -588,7 +725,12 @@ const ProductDetails = (props) => {
                 <div className={Classes.FindStoreParent}>
                   <button className={Classes.TryHome}>Find at store</button>
                   <button className={Classes.VideoCall}>
-                    <img src={Call} style={{ maxWidth: "44px" }} />
+                    <img
+                      src={Call}
+                      style={{
+                        maxWidth: "44px",
+                      }}
+                    />
                   </button>
                   <button className={Classes.FindStores}>Try at Home</button>
                 </div>
@@ -650,11 +792,17 @@ const ProductDetails = (props) => {
               >
                 <div className={Classes.Modalsection}>
                   <div className={Classes.ModalHeading}>
-                    <h2 style={{ fontSize: "20px" }}>
+                    <h2
+                      style={{
+                        fontSize: "20px",
+                      }}
+                    >
                       You cannot buy this Product
                     </h2>
                     <img
-                      style={{ cursor: "pointer" }}
+                      style={{
+                        cursor: "pointer",
+                      }}
                       src={closeimg}
                       onClick={() => setShowRestrictionModal(false)}
                       alt="Close"

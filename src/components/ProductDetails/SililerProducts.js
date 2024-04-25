@@ -60,10 +60,10 @@ const SililerProducts = (props) => {
     dots: false,
     infinite: true,
     autoplaySpeed: 1500,
-    slidesToShow: 5,
+    slidesToShow: 4,
     slidesToScroll: 1,
     autoplay: true,
-    initialSlide: 5,
+    initialSlide: 4,
     centerMode: true,
     centerPadding: "20px",
     responsive: [
@@ -102,13 +102,13 @@ const SililerProducts = (props) => {
   };
 
   return (
-    <div style={{ marginTop: "20px" }}>
+    <div style={{ marginTop: "110px" }}>
       <div className="container">
         <div className={Classes.SimilerProductHead}>Similar style</div>
         <div className={Classes.CatList1}>
           <div className="container similetrSliders">
             <div className={Classes.Web}>
-              {similarProducts.length < 5 && windowWidth > 576 ? (
+              {similarProducts.length < 4 && windowWidth > 576 ? (
                 <div
                   className={Classes.CarouselNoCard}
                   style={{
