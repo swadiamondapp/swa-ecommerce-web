@@ -392,7 +392,7 @@ const ProductDetails = (props) => {
         {/* // <img className={Classes.ImageSmall} src={imageUrls[i]} alt="" /> */}
       </div>
     ),
-    autoplay: true,
+    // autoplay: true,
     centerMode: true,
     centerPadding: "20px",
     responsive: [
@@ -466,25 +466,29 @@ const ProductDetails = (props) => {
                             <Slider {...settings}>
                               {imageUrls.map((item, index) => {
                                 return (
-                                  <img
+                                  <div>
+                                    <img
+                                      style={{
+                                        maxWidth: "100%",
+                                      }}
+                                      src={item}
+                                      alt={`Slide ${index}`}
+                                    />
+                                  </div>
+                                );
+                              })}
+                              {videoUrls.map((item) => (
+                                <div>
+                                  <video
+                                    // className="Vediosec"
                                     style={{
                                       maxWidth: "100%",
                                     }}
                                     src={item}
-                                    alt={`Slide ${index}`}
+                                    autoPlay
+                                    loop
                                   />
-                                );
-                              })}
-                              {videoUrls.map((item) => (
-                                <video
-                                  // className="Vediosec"
-                                  style={{
-                                    maxWidth: "100%",
-                                  }}
-                                  src={item}
-                                  autoPlay
-                                  loop
-                                />
+                                </div>
                               ))}
                             </Slider>
                           </div>
@@ -767,7 +771,6 @@ const ProductDetails = (props) => {
                             type="radio"
                             name="sizeRadioGroup"
                             value={item.id}
-                            // onChange={handleCheckboxChange}
                             onChange={() => {
                               setSelectedSize(item.id);
                               props.selectedSize(item.id);

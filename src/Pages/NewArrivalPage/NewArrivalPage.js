@@ -143,7 +143,7 @@ const NewArrivalPage = (props) => {
       setCatSet(props.location.state.data);
       setHead("Product List");
     }
-  }, []);
+  }, [props.location.state.data]);
   const filterCatHandler = (filtSet) => {
     let delimiter = ", ";
     let catSet = "";
@@ -390,7 +390,7 @@ const NewArrivalPage = (props) => {
     });
   }
 
-  console.log("count--->", count)
+  console.log("count--->", count);
 
   return (
     <div>

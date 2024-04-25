@@ -6,6 +6,8 @@ import mastercard from "../../Assets/mastercard.svg";
 import axios from "axios";
 import * as Urls from "../../Urls";
 import AddAddress from "../CheckOut/AddAddress";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 
 const Payment = () => {
   const token = localStorage.getItem("swaToken");
@@ -20,6 +22,7 @@ const Payment = () => {
   const [loading, setLoading] = useState(false);
   const [addressId, setAddressId] = useState(null);
   const [address, setAddress] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [addressData, setAddressData] = useState({
     sEmail: "",
@@ -136,6 +139,7 @@ const Payment = () => {
       }
     }
     if (token) {
+      setIsLoading(true);
       axios
         .post(Urls.checkout, cartBody, {
           headers: { Authorization: "Token " + _userToken },
@@ -169,8 +173,10 @@ const Payment = () => {
                       localStorage.setItem("swaToken", data.token);
                       localStorage.setItem("userName", data.name);
                       localStorage.setItem("phoneNumber", data.number);
+                      setIsLoading(false);
                       history.push("/my_orders");
                     } else if (response1.data.results.status_code === 200) {
+                      setIsLoading(false);
                       history.push("/my_orders");
                     }
                   })
@@ -331,8 +337,7 @@ const Payment = () => {
   };
   const handleDoneButton = () => {
     getDefaultAddress(token);
-    fetchAddress()
-    
+    fetchAddress();
   };
 
   return (
@@ -423,8 +428,23 @@ const Payment = () => {
                 </p>
               </div>
               <div className={Classes.PayButton} onClick={placeOrder}>
-                Pay &#x20B9; {data.pay}
+                {isLoading ? (
+                  <>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <CircularProgress size={20} sx={{ color: "#fff" }} />
+                    </Box>
+                  </>
+                ) : (
+                  <>Pay &#x20B9; {data.pay}</>
+                )}
               </div>
+
               <p className={Classes.HurrayText}>
                 You totaly saved {"9888"}. hurray!..
               </p>

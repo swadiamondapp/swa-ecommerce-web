@@ -549,7 +549,7 @@ function CheckOut(props) {
       if (response.data.results.status === 200) {
         setAddressData({
           ...addressData,
-          sEmail: "nithin@gmail.com",
+          sEmail: response.data.results.data.email,
           sPhone: response.data.results.data.phone_number,
           fullName: response.data.results.data.name,
           mobile: response.data.results.data.phone_number,

@@ -4,7 +4,7 @@ import TopHeader from "./TopHeader";
 import Classes from "./MainHead.module.css";
 import MainHead from "./MainHead";
 import { BsPerson, BsEye, BsEyeSlash } from "react-icons/bs";
-
+import LoginSuccessModal from "../LoginSuccesModal/LoginSuccessModal";
 import { BsSearch } from "react-icons/bs";
 import { CgHeart } from "react-icons/cg";
 import { FiBell } from "react-icons/fi";
@@ -33,6 +33,8 @@ const Header = (props) => {
     location.pathname === "/" ? true : false
   );
   const [show, setShow] = useState(false);
+  const [text, setText] = useState("");
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [catgSet, setCatgSet] = useState([]);
   const [category, setCategory] = useState([]);
   const [tags, setTags] = useState([]);
@@ -519,6 +521,12 @@ const Header = (props) => {
               <div className={Classes.ItemsNum}>{props.countCartItems}</div>
             )}
           </div>
+          <LoginSuccessModal
+            openSuccessModal={showSuccessModal}
+            close={() => setShowSuccessModal(false)}
+            state={showSuccessModal}
+            text={text}
+          />
           <LoginModal
             className={Classes.loginUser}
             isLog={show}
@@ -529,6 +537,8 @@ const Header = (props) => {
             style={{ marginTop: "0px" }}
             setLoginText={setLoginText}
             text={loginText}
+            setShowSuccessModal={setShowSuccessModal}
+            setText={setText}
           />
           {/* modal */}
         </div>

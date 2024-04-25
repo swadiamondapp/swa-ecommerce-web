@@ -124,7 +124,7 @@ function CartProducts(props) {
               onClick={props.remove}
               style={{ cursor: "pointer" }}
             >
-              Move to wishList
+              Move to WishList
             </p>
           </div>
         </div>

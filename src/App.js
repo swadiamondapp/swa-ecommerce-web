@@ -22,6 +22,10 @@ import PaymentPage from "./Pages/PaymentPage/PaymentPage";
 import AddAddress from "./components/CheckOut/AddAddress";
 import AddAddressPage from "./Pages/CheckOutPage/AddAddressPage";
 import RateAndReviewMain from "./Pages/RateAndReviewPage/RateAndReviewMain";
+import SwaWallet from "./components/SwaWallet/SwaWalletBalance";
+import SwaWalletBalance from "./components/SwaWallet/SwaWalletBalance";
+import SwaExchangeWallet from "./components/SwaWallet/SwaEchangeWallet";
+import SwaExchangBalance from "./components/SwaWallet/SwaExchangeBalance"
 function App() {
   return (
     <Router>
@@ -43,6 +47,8 @@ function App() {
         <Route path="/privacy_policy" component={PrivacyPolicyPage} exact />
         <Route path="/checkout" component={CheckOutPage} exact />
         <Route path="/addaddress" component={AddAddressPage} exact />
+        <Route path="/swaWallet" component={SwaWalletBalance}/>
+        <Route path="/swaExchange" component={SwaExchangBalance}/>
         <Route path="/place_order" component={CheckOutPage} exact />
         <Route path="/my_orders" component={OrderHistoryPage} exact />
         <Route path="/track_order" component={OrderHistorypage2} exact />
@@ -56,6 +62,7 @@ function App() {
           exact
         />
         <Route path="/payment" component={PaymentPage} />
+        
       </Switch>
     </Router>
   );

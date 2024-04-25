@@ -697,24 +697,34 @@ const MobileNavbar = (props) => {
                                   />
                                 </div>
                                 <div className={Classes.LoggedDetailsList}>
-                                  <p
-                                    style={{ fontSize: "16px", color: "#000" }}
-                                  >
-                                    SWA Wallet
-                                  </p>
-                                  <IoIosArrowForward
-                                    style={{ color: "#006E7F" }}
-                                  />
+                                  <Link to="/swaWallet">
+                                    <p
+                                      style={{
+                                        fontSize: "16px",
+                                        color: "#000",
+                                      }}
+                                    >
+                                      SWA Wallet
+                                    </p>
+                                    </Link>
+                                    <IoIosArrowForward
+                                      style={{ color: "#006E7F" }}
+                                    />
                                 </div>
                                 <div className={Classes.LoggedDetailsList}>
-                                  <p
-                                    style={{ fontSize: "16px", color: "#000" }}
-                                  >
-                                    Exchange Wallet
-                                  </p>
-                                  <IoIosArrowForward
-                                    style={{ color: "#006E7F" }}
-                                  />
+                                  <Link to="/swaExchange">
+                                    <p
+                                      style={{
+                                        fontSize: "16px",
+                                        color: "#000",
+                                      }}
+                                    >
+                                      Exchange Wallet
+                                    </p>
+                                    </Link>
+                                    <IoIosArrowForward
+                                      style={{ color: "#006E7F" }}
+                                    />
                                 </div>
                               </div>
                             </AccordionTab>
@@ -730,7 +740,7 @@ const MobileNavbar = (props) => {
                                 style={{
                                   fontSize: "16px",
                                   color: "#000",
-                                  marginLeft:'-3px'
+                                  marginLeft: "-3px",
                                 }}
                               >
                                 Log out

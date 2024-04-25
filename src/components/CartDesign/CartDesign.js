@@ -164,7 +164,7 @@ function CartDesign(props) {
             <p className={Classes.OrderSummeryMob}>ORDER SUMMERY</p>
             <div className="col-md-4">
               <div className={Classes.Right}>
-                <p className={Classes.OrderSummery}>ORDER SUMMERY</p>
+                <p className={Classes.OrderSummery}>ORDER SUMMARY</p>
                 <div
                   className={Classes.TotalText}
                   style={{ paddingTop: "20px" }}

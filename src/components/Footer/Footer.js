@@ -49,9 +49,11 @@ function Footer() {
     history.push("about_us");
   };
   const catSelHandler = (id) => {
-    if (history.location.pathname !== "/new_arrivel") {
-      history.push({ pathname: "/new_arrivel", state: { data: id } });
-    }
+    history.push({ pathname: "/new_arrivel", state: { data: id } });
+    // if (history.location.pathname !== "/new_arrivel") {
+    //   console.log("id------->", id);
+    //   history.push({ pathname: "/new_arrivel", state: { data: id } });
+    // }
   };
   const occationSelHandler = (id) => {
     if (history.location.pathname !== "/new_arrivel") {

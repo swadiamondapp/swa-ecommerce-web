@@ -24,7 +24,8 @@ import OtpModal from "./OtpModal";
 const signUpSchema = Joi.object({
   username: Joi.string()
     .trim()
-    .regex(/^[a-zA-Z]+$/)
+    // .regex(/^[a-zA-Z]+$/)
+    .regex(/^[a-zA-Z\s]+$/)
     .required()
     .messages({
       "string.base": `"" should be a type of string`,
@@ -72,7 +73,6 @@ const LoginToggle = (props) => {
   const [otp, setOtp] = useState("");
   const [emailId, setEmailId] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [isDesk, setIsDesk] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
   );
@@ -283,7 +283,12 @@ const LoginToggle = (props) => {
         if (response.data.results.status_code === 200) {
           localStorage.setItem("registerMobile", signUpData.mobile);
           alert("Successfully Registered");
+          props.setText("Successfully Registered");
+          props.setShowSuccessModal(true);
           handleLoginModalOpen();
+          setTimeout(() => {
+            props.setShowSuccessModal(false);
+          }, 3000);
         }
       } catch (error) {
         if (
@@ -421,13 +426,14 @@ const LoginToggle = (props) => {
         loginHandler();
       }
       if (response.data.results.message === "Otp verified successfully!") {
-        setShowSuccessModal(true);
+        props.setText("Successfully Logined");
+        props.setShowSuccessModal(true);
       }
     } catch (error) {
       console.log(error);
     }
     setTimeout(() => {
-      setShowSuccessModal(false);
+      props.setShowSuccessModal(false);
     }, 3000);
   };
   const verifyOtpEmail = async () => {
@@ -613,12 +619,6 @@ const LoginToggle = (props) => {
           </>
         ) : (
           <>
-            <LoginSuccessModal
-              openSuccessModal={openSuccessModal}
-              close={closeSuccessModal}
-              state={showSuccessModal}
-            />
-
             <form onSubmit={handelLoginForm}>
               <div className={Classes.SlideButton}>
                 <div className={Classes.LoginContainer}>

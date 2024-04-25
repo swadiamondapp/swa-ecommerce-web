@@ -615,17 +615,17 @@ const LoginModal = (props) => {
             <Link to="/addaddress" className={Classes.LogedDetails_Item}>
               <p style={{ fontSize: "16px" }}>Add Address</p>
             </Link>
-            <Link className={Classes.LogedDetails_Item}>
+            {/* <Link className={Classes.LogedDetails_Item}>
               <p style={{ fontSize: "16px" }}>Track Order</p>
-            </Link>
+            </Link> */}
             <Link to="/rate&review" className={Classes.LogedDetails_Item}>
               <p style={{ fontSize: "16px" }}>Write review</p>
             </Link>
-            <Link to="" className={Classes.LogedDetails_Item}>
+            <Link to="/swaWallet" className={Classes.LogedDetails_Item}>
               <p style={{ fontSize: "16px" }}>Swa wallet</p>
             </Link>
             <Link
-              to=""
+              to="/swaExchange"
               style={{ fontSize: "16px" }}
               className={Classes.LogedDetails_Item}
             >
@@ -659,6 +659,8 @@ const LoginModal = (props) => {
                 LoginSignupToggle={isSignpuLogin}
                 text={props.text}
                 loginText={props.loginText}
+                setShowSuccessModal={props.setShowSuccessModal}
+                setText={props.setText}
               />
             </div>
           </Typography>
