@@ -66,9 +66,12 @@ const ProductDetails = (props) => {
   // State to track the current slide index
   const [currentSlideIndex, setCurrentSlideIndex] = useState(6);
 
+  const largeSliderRef = useRef(null);
+
   console.log("index2", currentSlideIndex);
 
-  const handleImageClick = () => {
+  const handleImageClick = (index) => {
+    largeSliderRef.current.slickGoTo(index);
     if (ratingRef.current) {
       ratingRef.current.scrollIntoView({
         behavior: "smooth",
@@ -356,42 +359,47 @@ const ProductDetails = (props) => {
     }
   });
 
+  console.log("videoUrls", videoUrls);
+  console.log("imageUrls", imageUrls);
+
   var settings = {
-    dots: true,
+    dots: false,
     infinite: true,
-    autoplaySpeed: 2500,
+    arrows: false,
+    autoplaySpeed: 3500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    dotsClass: "slick-dots slick-thumb",
-    appendDots: (dots) => (
-      <div>
-        <ul
-          style={{
-            margin: "0px",
-            padding: "0px",
-            width: "700px",
-          }}
-        >
-          {" "}
-          {dots}{" "}
-        </ul>
-      </div>
-    ),
-    customPaging: (i) => (
-      <div className={Classes.SmallImages}>
-        {console.log("imageUrls[i]", imageUrls[i])}
-        {imageUrls[i] === undefined ? (
-          <img
-            style={{ width: "60px", height: "60px" }}
-            src={Videoimg}
-            alt=""
-          />
-        ) : (
-          <img className={Classes.ImageSmall} src={imageUrls[i]} alt="" />
-        )}
-        {/* // <img className={Classes.ImageSmall} src={imageUrls[i]} alt="" /> */}
-      </div>
-    ),
+
+    // dotsClass: "slick-dots slick-thumb",
+    // appendDots: (dots) => (
+    //   <div>
+    //     <ul
+    //       style={{
+    //         margin: "0px",
+    //         padding: "0px",
+    //         width: "700px",
+    //       }}
+    //     >
+    //       {" "}
+    //       {dots}{" "}
+    //     </ul>
+    //   </div>
+    // ),
+    // customPaging: (i) => (
+    //   <div className={Classes.SmallImages}>
+    //     {console.log("imageUrls[i]", imageUrls[i])}
+    //     {imageUrls[i] === undefined ? (
+    //       <img
+    //         style={{ width: "60px", height: "60px" }}
+    //         src={Videoimg}
+    //         alt=""
+    //       />
+    //     ) : (
+    //       <img className={Classes.ImageSmall} src={imageUrls[i]} alt="" />
+    //     )}
+
+    //   </div>
+    // ),
     // autoplay: true,
     centerMode: true,
     centerPadding: "20px",
@@ -430,7 +438,56 @@ const ProductDetails = (props) => {
     ],
   };
 
+  var settingsSlide = {
+    dots: false,
+    arrows: true,
+    infinite: true,
+    autoplaySpeed: 2500,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+
+    // autoplay: true,
+    centerMode: true,
+    centerPadding: "20px",
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 5,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+          centerMode: true,
+          centerPadding: "20px",
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+          centerMode: true,
+          centerPadding: "20px",
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          autoplay: true,
+          centerMode: true,
+          centerPadding: "20px",
+        },
+      },
+    ],
+  };
+
   console.log("imageUrls--->", imageUrls);
+
+  // slider
+  // slider
 
   return (
     <div>
@@ -463,7 +520,7 @@ const ProductDetails = (props) => {
                             alt=""
                           /> */}
                           <div className="ParentSlide">
-                            <Slider {...settings}>
+                            <Slider {...settings} ref={largeSliderRef}>
                               {imageUrls.map((item, index) => {
                                 return (
                                   <div>
@@ -522,9 +579,45 @@ const ProductDetails = (props) => {
                         />
                       </div>
                     )}
+                    {/* new inner slider */}
+                    {/* inner slide */}
+                    <div className="Innerslide">
+                      <Slider {...settingsSlide}>
+                        {imageUrls.map((item, index) => {
+                          return (
+                            <div onClick={() => handleImageClick(index)}>
+                              <img
+                                style={{
+                                  maxWidth: "100%",
+                                }}
+                                src={item}
+                                alt={`Slide ${index}`}
+                              />
+                            </div>
+                          );
+                        })}
+                        {videoUrls.length === 1 && (
+                          <div
+                            key="video-placeholder"
+                            onClick={() => handleImageClick(imageUrls.length)}
+                          >
+                            {console.log("vediosanas", videoUrls)}{" "}
+                            <img
+                              style={{ width: "69px", height: "69px" }}
+                              src={Videoimg}
+                              alt="Video Placeholder"
+                            />
+                          </div>
+                        )}
+                      </Slider>
+                    </div>
+                    {/* inner slide */}
+
+                    {/* new inner slider */}
                   </div>
                 </div>
               </div>
+
               {/* inner images */}
               {/* <div className="container">
                 <div>

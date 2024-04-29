@@ -270,6 +270,19 @@ p {
   padding: 0px !important;
   /* width: 429px !important; */
 }
+.Innerslide .slick-next:before,
+.slick-prev:before {
+  /* color: #000 !important; */
+  color: #848484 !important;
+  border-radius: 32px;
+  box-shadow: 0px 4px 4px 0px #0000001a;
+}
+.Innerslide {
+  margin-top: 15px;
+}
+.Innerslide .slick-list {
+  padding: 0px 0px !important;
+}
 .ParentSlide .slick-dots {
   bottom: -95px !important;
   text-align: left !important;
