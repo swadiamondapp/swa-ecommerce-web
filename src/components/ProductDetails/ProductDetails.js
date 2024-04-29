@@ -402,7 +402,7 @@ const ProductDetails = (props) => {
     // ),
     autoplay: true,
     centerMode: true,
-    centerPadding: "20px",
+    centerPadding: "0px",
     responsive: [
       {
         breakpoint: 1024,
@@ -412,7 +412,7 @@ const ProductDetails = (props) => {
           infinite: true,
           dots: true,
           centerMode: true,
-          centerPadding: "20px",
+          centerPadding: "0px",
         },
       },
       {
@@ -422,7 +422,7 @@ const ProductDetails = (props) => {
           slidesToScroll: 2,
           initialSlide: 2,
           centerMode: true,
-          centerPadding: "20px",
+          centerPadding: "0px",
         },
       },
       {
@@ -432,7 +432,7 @@ const ProductDetails = (props) => {
           slidesToScroll: 1,
           autoplay: true,
           centerMode: true,
-          centerPadding: "20px",
+          centerPadding: "0px",
         },
       },
     ],

@@ -289,6 +289,7 @@ p {
 
 .ParentSlide .slick-list {
   padding: 0px 0px !important;
+  height: 389px;
 }
 .ParentSlide .slick-dots {
   bottom: -95px !important;
