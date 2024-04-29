@@ -282,8 +282,8 @@ const LoginToggle = (props) => {
         const response = await axios.post(Urls.register, body);
         if (response.data.results.status_code === 200) {
           localStorage.setItem("registerMobile", signUpData.mobile);
-          alert("Successfully Registered");
-          props.setText("Successfully Registered");
+          // alert("Successfully Registered");
+          props.setText("Registered");
           props.setShowSuccessModal(true);
           handleLoginModalOpen();
           setTimeout(() => {
@@ -426,7 +426,7 @@ const LoginToggle = (props) => {
         loginHandler();
       }
       if (response.data.results.message === "Otp verified successfully!") {
-        props.setText("Successfully Logined");
+        props.setText("Logined");
         props.setShowSuccessModal(true);
       }
     } catch (error) {

@@ -269,6 +269,9 @@ p {
 .ParentSlide .slick-slide {
   padding: 0px !important;
   /* width: 429px !important; */
+  /* width: 429px !important;
+  height: 389px !important;
+  overflow: hidden !important; */
 }
 .Innerslide .slick-next:before,
 .slick-prev:before {
@@ -281,6 +284,10 @@ p {
   margin-top: 15px;
 }
 .Innerslide .slick-list {
+  padding: 0px 0px !important;
+}
+
+.ParentSlide .slick-list {
   padding: 0px 0px !important;
 }
 .ParentSlide .slick-dots {
@@ -297,6 +304,8 @@ p {
 
 .ParentSlide {
   /* margin-bottom: 40px; */
+  /* height: 389px;
+  overflow: hidden; */
 }
 .slick-dots li {
   width: 60px !important;

@@ -400,7 +400,7 @@ const ProductDetails = (props) => {
 
     //   </div>
     // ),
-    // autoplay: true,
+    autoplay: true,
     centerMode: true,
     centerPadding: "20px",
     responsive: [
@@ -535,11 +535,21 @@ const ProductDetails = (props) => {
                                 );
                               })}
                               {videoUrls.map((item) => (
-                                <div>
+                                <div
+                                  style={{
+                                    width: "429px",
+                                    position: "relative",
+                                    overflow: "hidden",
+                                    height: "389px",
+                                  }}
+                                >
                                   <video
                                     // className="Vediosec"
                                     style={{
                                       maxWidth: "100%",
+                                      // position: "absolute",
+                                      // top: "0%",
+                                      // width: "429px",
                                     }}
                                     src={item}
                                     autoPlay
@@ -596,7 +606,7 @@ const ProductDetails = (props) => {
                             </div>
                           );
                         })}
-                        {videoUrls.length === 1 && (
+                        {videoUrls.length > 0 && (
                           <div
                             key="video-placeholder"
                             onClick={() => handleImageClick(imageUrls.length)}
