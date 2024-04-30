@@ -73,6 +73,8 @@ const ProductDetails = (props) => {
 
   const handleImageClick = (index) => {
     largeSliderRef.current.slickGoTo(index);
+  };
+  const handleImageClicked = () => {
     if (ratingRef.current) {
       ratingRef.current.scrollIntoView({
         behavior: "smooth",
@@ -465,7 +467,7 @@ const ProductDetails = (props) => {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 4,
           slidesToScroll: 2,
           initialSlide: 2,
           centerMode: false,
@@ -475,9 +477,8 @@ const ProductDetails = (props) => {
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 5,
           slidesToScroll: 1,
-          autoplay: true,
           centerMode: false,
           centerPadding: "20px",
         },
@@ -569,7 +570,7 @@ const ProductDetails = (props) => {
                               cursor: "pointer",
                             }}
                             className={Classes.rateStar8}
-                            onClick={handleImageClick}
+                            onClick={handleImageClicked}
                           >
                             {/* {props.avgR} */}
                             {parseFloat(props.avgR).toFixed(0)}
@@ -634,13 +635,8 @@ const ProductDetails = (props) => {
                               <>
                                 <div style={{ position: "relative" }}>
                                   <video
+                                    className={Classes.smallVideos}
                                     key={index}
-                                    style={{
-                                      position: "relative",
-                                      width: "75px",
-                                      height: "75px",
-                                      borderRadius: "2px",
-                                    }}
                                     onClick={() =>
                                       handleImageClick(imageUrls.length)
                                     }
