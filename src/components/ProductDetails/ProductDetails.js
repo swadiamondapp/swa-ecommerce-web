@@ -41,6 +41,7 @@ import d1 from "../../Assets/d1.png";
 import d2 from "../../Assets/d2.png";
 // import { Carousel } from "primereact/carousel";
 import Slider from "react-slick";
+import { BsFillPlayFill } from "react-icons/bs";
 
 const ProductDetails = (props) => {
   const location = useLocation();
@@ -441,13 +442,13 @@ const ProductDetails = (props) => {
   var settingsSlide = {
     dots: false,
     arrows: true,
-    infinite: true,
+    infinite: false,
     autoplaySpeed: 2500,
     slidesToShow: 5,
     slidesToScroll: 1,
 
     // autoplay: true,
-    centerMode: true,
+    centerMode: false,
     centerPadding: "20px",
     responsive: [
       {
@@ -457,7 +458,7 @@ const ProductDetails = (props) => {
           slidesToScroll: 3,
           infinite: true,
           dots: true,
-          centerMode: true,
+          centerMode: false,
           centerPadding: "20px",
         },
       },
@@ -467,7 +468,7 @@ const ProductDetails = (props) => {
           slidesToShow: 2,
           slidesToScroll: 2,
           initialSlide: 2,
-          centerMode: true,
+          centerMode: false,
           centerPadding: "20px",
         },
       },
@@ -477,14 +478,17 @@ const ProductDetails = (props) => {
           slidesToShow: 1,
           slidesToScroll: 1,
           autoplay: true,
-          centerMode: true,
+          centerMode: false,
           centerPadding: "20px",
         },
       },
     ],
   };
 
-  console.log("imageUrls--->", imageUrls);
+  console.log("imageUrls--->0", props.bagImg);
+  console.log("imageUrls--->1", props.bagImg[1]);
+  console.log("imageUrls--->2", props.bagImg[2]);
+  console.log("imageUrls--->3", props.bagImg[3]);
 
   // slider
   // slider
@@ -593,7 +597,7 @@ const ProductDetails = (props) => {
                     {/* inner slide */}
                     <div className="Innerslide">
                       <Slider {...settingsSlide}>
-                        {imageUrls.map((item, index) => {
+                        {/* {props.bagImg.map((item, index) => {
                           return (
                             <div onClick={() => handleImageClick(index)}>
                               <img
@@ -605,8 +609,57 @@ const ProductDetails = (props) => {
                               />
                             </div>
                           );
+                        })} */}
+                        {/* <video
+                          onClick={() => handleImageClick(imageUrls.length)}
+                          src={props.bagImg[2]}
+                        ></video> */}
+                        {props.bagImg.map((url, index) => {
+                          if (
+                            url.endsWith(".jpg") ||
+                            url.endsWith(".jpeg") ||
+                            url.endsWith(".png")
+                          ) {
+                            return (
+                              <img
+                                onClick={() => handleImageClick(index)}
+                                style={{ width: "69px", height: "69px" }}
+                                key={index}
+                                src={url}
+                                alt={`Media ${index}`}
+                              />
+                            );
+                          } else if (url.endsWith(".mp4")) {
+                            return (
+                              <>
+                                <div style={{ position: "relative" }}>
+                                  <video
+                                    key={index}
+                                    style={{
+                                      position: "relative",
+                                      width: "75px",
+                                      height: "75px",
+                                      borderRadius: "2px",
+                                    }}
+                                    onClick={() =>
+                                      handleImageClick(imageUrls.length)
+                                    }
+                                    // controls
+                                    // className="media-item"
+                                  >
+                                    <source src={url} type="video/mp4" />
+                                    Your browser does not support the video tag.
+                                  </video>
+
+                                  <BsFillPlayFill className={Classes.playbtn} />
+                                </div>
+                              </>
+                            );
+                          } else {
+                            return <p key={index}>Unknown media type</p>;
+                          }
                         })}
-                        {videoUrls.length > 0 && (
+                        {/* {videoUrls.length > 0 && (
                           <div
                             key="video-placeholder"
                             onClick={() => handleImageClick(imageUrls.length)}
@@ -618,7 +671,7 @@ const ProductDetails = (props) => {
                               alt="Video Placeholder"
                             />
                           </div>
-                        )}
+                        )} */}
                       </Slider>
                     </div>
                     {/* inner slide */}
@@ -734,7 +787,8 @@ const ProductDetails = (props) => {
                   <RWebShare
                     data={{
                       text: "Swa Diamonds",
-                      url: "https://swaecomnew.zinfog.in" + location.pathname,
+                      // url: "https://swaecomnew.zinfog.in" + location.pathname,
+                      url: "http://localhost:3000/" + location.pathname,
                       title: "Swa Diamonds",
                     }}
                     onClick={() => console.log("shared successfully!")}

@@ -326,6 +326,13 @@
   font-family: "gilroyNormal" !important;
   cursor: pointer;
 }
+.playbtn {
+  position: absolute;
+  top: 20%;
+  left: 25%;
+  color: #ffffffa8;
+  font-size: 40px;
+}
 .ImageWishList {
   position: relative;
   border: 1px solid #e6e6e6;

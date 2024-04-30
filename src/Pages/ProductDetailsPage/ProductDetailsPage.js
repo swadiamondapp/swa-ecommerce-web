@@ -51,6 +51,8 @@ const ProductDetailsPage = (props) => {
       console.log(JSON.parse(localStorage.getItem("recent")));
       let proArray = JSON.parse(localStorage.getItem("recent"));
       const newProd = props.location.state.data;
+
+      console.log("newProd", newProd);
       if (proArray !== null) {
         const found = proArray.find((element) => {
           return element.product_id === newProd.product_id;
