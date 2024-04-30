@@ -66,6 +66,16 @@ function Footer() {
   const redirectToFacebook = () => {
     window.location.href = "https://www.facebook.com/swadiamonds/";
   };
+  const swaDiamondsClick = () => {
+    window.location.href = "https://oms.mirrordiamonds.com/";
+  };
+  const swaDiamondsClickMirror = () => {
+    window.location.href = "http://franchise.mirrordiamonds.com/";
+  };
+
+  const swaDiamondsClickRepair = () => {
+    window.location.href = "https://swarepairtest.zinfog.com/login/?next=/";
+  };
 
   const redirectToLinkedIn = () => {
     window.location.href = "https://in.linkedin.com/company/swa-diamonds";
@@ -323,7 +333,17 @@ function Footer() {
               </div>
             </AccordionTab>
             <AccordionTab header="franchise enquiry">
-              <p className="m-0"></p>
+              <Link to="/" onClick={swaDiamondsClick}>
+                <p className={Classes.Links}>oms.mirrordiamonds.com</p>
+              </Link>
+              <Link to="/" onClick={swaDiamondsClickMirror}>
+                <p className={Classes.Links}>franchise.mirrordiamonds.com</p>
+              </Link>
+              <Link to="/">
+                <p className={Classes.Links} onClick={swaDiamondsClickRepair}>
+                  swarepairtest.zinfog.com
+                </p>
+              </Link>
             </AccordionTab>
             <AccordionTab header="Outlets">
               <p className="m-0"></p>
