@@ -108,9 +108,9 @@ function Footer() {
                       <Link to="/faq">
                         <p className={Classes.Links}>FAQ</p>
                       </Link>
-                      <Link to="">
+                      {/* <Link to="">
                         <p className={Classes.Links}> Contact us</p>
-                      </Link>
+                      </Link> */}
 
                       <p
                         className={Classes.Links}
