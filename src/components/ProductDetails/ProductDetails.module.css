@@ -49,6 +49,9 @@
   border: none;
   color: #4e4035;
 }
+.TryHome:hover {
+  background: #eeeeed;
+}
 .DeliveryBtns {
   width: 56%;
 }
@@ -94,10 +97,17 @@
   font-family: "Lato", sans-serif;
   background: linear-gradient(360deg, #96865c 0%, #b9b18b 100%);
 }
+.FindStores:hover {
+  background: linear-gradient(360deg, #96865c 0%, #8c866a 100%);
+}
 .VideoCall {
   background: transparent;
   border: none;
   padding: 0px;
+  transition: transform 0.3s ease;
+}
+.VideoCall:hover {
+  transform: translateY(-5px);
 }
 .FindStoreParent {
   display: flex;
@@ -293,7 +303,9 @@
   font-family: "lato";
   background: linear-gradient(360deg, #00353d 0%, #0e4c53 100%);
 }
-
+.BuyNow:hover {
+  background: linear-gradient(360deg, #00353d 0%, #007885 100%);
+}
 .NewPrice {
   font-weight: 700;
   font-size: 22px;

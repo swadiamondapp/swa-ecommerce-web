@@ -426,7 +426,7 @@ const LoginToggle = (props) => {
         loginHandler();
       }
       if (response.data.results.message === "Otp verified successfully!") {
-        props.setText("Logined");
+        props.setText("Logged In");
         props.setShowSuccessModal(true);
       }
     } catch (error) {
@@ -552,6 +552,7 @@ const LoginToggle = (props) => {
                       Already have account?
                     </span>
                     <span
+                      style={{ cursor: "pointer" }}
                       className={Classes.signupAnchor}
                       onClick={handleLoginModalOpen}
                     >

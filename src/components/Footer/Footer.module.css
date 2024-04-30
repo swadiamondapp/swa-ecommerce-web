@@ -8,6 +8,20 @@
   width: 100%;
   padding: 40px 40px 70px 40px;
 }
+.uae {
+  margin: 15px 0px;
+}
+.uae p {
+  color: #fff;
+  font-weight: 600;
+}
+.india {
+  margin-bottom: 15px;
+}
+.india p {
+  color: #fff;
+  font-weight: 600;
+}
 .FooterMob {
   height: 100%;
   background: #007481;
@@ -86,10 +100,14 @@
   max-width: 56px;
 }
 .Address {
-  display: flex;
+  /* display: flex;
+  gap: 15px;
+  margin-bottom: 10px; */
+  display: grid;
+  grid-template-columns: 45px 1fr;
 }
 .AddressText {
-  margin-left: 15px;
+  /* margin-left: 15px; */
 }
 .FooterDownText {
   color: #ffffff;

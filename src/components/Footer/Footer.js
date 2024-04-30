@@ -183,9 +183,13 @@ function Footer() {
             </div>
             <div className="col-md-4">
               <p className={Classes.Title}>Swa contact info</p>
+
+              <div className={Classes.india}>
+                <p>INDIA Contact info</p>
+              </div>
               <div className={Classes.Address}>
                 <SiMinutemailer
-                  size={28}
+                  size={22}
                   color="#99C7CD"
                   className={Classes.AddressText}
                 />
@@ -213,6 +217,43 @@ function Footer() {
                   info@swadiamonds.com
                 </p>
               </div>
+              {/* uae */}
+              <div className={Classes.uae}>
+                <p>UAE Contact info</p>
+              </div>
+              <div className={Classes.Address}>
+                <SiMinutemailer
+                  size={22}
+                  color="#99C7CD"
+                  className={Classes.AddressText}
+                />
+                <p className={`${Classes.Links} ${Classes.AddressText}`}>
+                  Mushrif Mall, First Floor, Unit No: 139, 25th st, Airport
+                  Road, Al Mushrif, Abu Dhabi , PO BOX: 4048, United Arab
+                  Emirates.
+                </p>
+              </div>
+              <div className={Classes.Address}>
+                <FaPhoneAlt
+                  color="#99C7CD"
+                  size={15}
+                  className={Classes.AddressText}
+                />
+                <p className={`${Classes.Links} ${Classes.AddressText}`}>
+                  Toll Free Number : 02565-9545
+                </p>
+              </div>
+              <div className={Classes.Address}>
+                <HiOutlineMail
+                  color="#99C7CD"
+                  size={20}
+                  className={Classes.AddressText}
+                />
+                <p className={`${Classes.Links} ${Classes.AddressText}`}>
+                  info@swadiamonds.com
+                </p>
+              </div>
+              {/* uae */}
               <p
                 style={{ paddingLeft: "20px" }}
                 className={`${Classes.Title} ${Classes.FollowUs}`}
@@ -323,6 +364,9 @@ function Footer() {
             </AccordionTab>
             <AccordionTab header="Swa contact info">
               <div className={Classes.SwaAddresMob}>
+                <div className={Classes.india}>
+                  <p>INDIA Contact info</p>
+                </div>
                 <div className={Classes.Address}>
                   <SiMinutemailer
                     size={28}
@@ -341,6 +385,41 @@ function Footer() {
                   />
                   <p className={`${Classes.Links} ${Classes.AddressText}`}>
                     Toll Free Number : 1800 257 8600
+                  </p>
+                </div>
+                <div className={Classes.Address}>
+                  <HiOutlineMail
+                    color="#99C7CD"
+                    size={20}
+                    className={Classes.AddressText}
+                  />
+                  <p className={`${Classes.Links} ${Classes.AddressText}`}>
+                    info@swadiamonds.com
+                  </p>
+                </div>
+                <div className={Classes.uae}>
+                  <p>UAE Contact info</p>
+                </div>
+                <div className={Classes.Address}>
+                  <SiMinutemailer
+                    size={28}
+                    color="#99C7CD"
+                    className={Classes.AddressText}
+                  />
+                  <p className={`${Classes.Links} ${Classes.AddressText}`}>
+                    Mushrif Mall, First Floor, Unit No: 139, 25th st, Airport
+                    Road, Al Mushrif, Abu Dhabi , PO BOX: 4048, United Arab
+                    Emirates.
+                  </p>
+                </div>
+                <div className={Classes.Address}>
+                  <FaPhoneAlt
+                    color="#99C7CD"
+                    size={15}
+                    className={Classes.AddressText}
+                  />
+                  <p className={`${Classes.Links} ${Classes.AddressText}`}>
+                    Toll Free Number : 02565-9545
                   </p>
                 </div>
                 <div className={Classes.Address}>

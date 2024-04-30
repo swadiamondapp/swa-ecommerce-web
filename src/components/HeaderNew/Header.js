@@ -230,7 +230,7 @@ const Header = (props) => {
       }
     } else if (setItem.type === "product") {
       axios
-        .get(`${Urls.productDet + setItem.id}&country=${selectedCountry.id}`)
+        .get(`${Urls.productDet + setItem.id}?country=${selectedCountry.id}`)
         .then((response1) => {
           const selData = {
             product_id: setItem.id,

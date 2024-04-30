@@ -858,9 +858,9 @@ function CheckOut(props) {
               </div>
             </div>
             <div className="col-md-4">
-              <p className={Classes.Order1P}>ORDER SUMMERY</p>
+              <p className={Classes.Order1P}>ORDER SUMMARY</p>
               <div className={Classes.Right}>
-                <p className={Classes.OrderSummery}>ORDER SUMMERY</p>
+                <p className={Classes.OrderSummery}>ORDER SUMMARY</p>
                 <div className={Classes.TotalText}>
                   <div className={Classes.TotalItem}>
                     <p className={Classes.TotalSmall}>Total</p>
