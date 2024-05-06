@@ -591,6 +591,7 @@ const ProductDetails = (props) => {
                           src={props.thumbImg}
                           autoPlay
                           loop
+                          playsInline
                         />
                       </div>
                     )}
@@ -637,6 +638,7 @@ const ProductDetails = (props) => {
                                   <video
                                     className={Classes.smallVideos}
                                     key={index}
+                                    playsInline
                                     onClick={() =>
                                       handleImageClick(imageUrls.length)
                                     }
