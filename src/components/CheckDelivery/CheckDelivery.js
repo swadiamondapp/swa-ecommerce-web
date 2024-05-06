@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import locationimg from "../../Assets/locationicon.png";
 import timeimg from "../../Assets/time.png";
+import locationsimg from "../../Assets/locations.png";
 import { BsArrowRight } from "react-icons/bs";
 import Stroke from "../../Assets/Stroke.png";
 import { FaPen } from "react-icons/fa";
@@ -178,7 +179,7 @@ const CheckDelivery = (props) => {
               </div>
               <div className={Classes.DeliveryBtns}>
                 <button>
-                  <img src={timeimg} /> 24hr Delivery
+                  <img src={locationsimg} /> Use your current location
                 </button>
               </div>
             </div>

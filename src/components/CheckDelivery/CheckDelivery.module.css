@@ -53,7 +53,7 @@
   position: relative;
 }
 .DeliveryBtns button {
-  background: #006e7f1a;
+  background: transparent;
   border: none;
   width: 100%;
   padding: 10px;

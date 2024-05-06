@@ -250,6 +250,10 @@ p {
 }
 /* animation */
 
+/* .similetrSliders .slick-next:before,
+.slick-prev:before {
+  display: none !important;
+} */
 .card {
   background-color: #fff;
   position: relative;
