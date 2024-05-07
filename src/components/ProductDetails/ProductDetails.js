@@ -559,6 +559,8 @@ const ProductDetails = (props) => {
                                     src={item}
                                     autoPlay
                                     loop
+                                    muted
+                                    playsInline
                                   />
                                 </div>
                               ))}
@@ -591,6 +593,7 @@ const ProductDetails = (props) => {
                           src={props.thumbImg}
                           autoPlay
                           loop
+                          muted
                           playsInline
                         />
                       </div>
@@ -639,6 +642,7 @@ const ProductDetails = (props) => {
                                     className={Classes.smallVideos}
                                     key={index}
                                     playsInline
+                                    muted
                                     onClick={() =>
                                       handleImageClick(imageUrls.length)
                                     }
@@ -831,7 +835,9 @@ const ProductDetails = (props) => {
                   } else if (item.colour_name === "pt") {
                     clrClas = Classes.C3;
                   }
-                  const isSelected = item.id === selectedColor.id;
+                  const isSelected = !selectedColor.id
+                    ? index === 0
+                    : item.id === selectedColor.id;
                   return (
                     <div
                       className={`${Classes.Options}  ${
