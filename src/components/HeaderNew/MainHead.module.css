@@ -132,6 +132,21 @@ header {
   font-size: 14px;
   letter-spacing: 0.5px;
 }
+.DeliveryPin {
+  display: flex;
+  flex-direction: column;
+}
+.checkDeliveryTitle {
+  color: #fff;
+  font-size: 12px;
+  font-family: "lato";
+}
+.EnterPinTitle {
+  color: #00e5ed;
+  font-size: 12px;
+  font-family: "lato";
+}
+
 .searchbar::placeholder {
   color: #9c9c9c;
   font-family: "GilroyRegular";
@@ -1398,7 +1413,7 @@ a {
   font-weight: 500;
 }
 .headerElement:hover {
-  transform: scale(1.1) translateY(-3px); /* Increase the scale on hover */
+  transform: scale(1) translateY(-3px); /* Increase the scale on hover */
   transition: transform 0.3s ease; /* Add smooth transition effect */
 }
 

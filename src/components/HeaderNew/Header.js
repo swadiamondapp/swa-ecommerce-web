@@ -23,6 +23,7 @@ import USA from "../../Assets/flagUsa.svg";
 import SAU from "../../Assets/flagSAU.svg";
 import IND from "../../Assets/flagIND.svg";
 import UAE from "../../Assets/flagUAE.svg";
+import { FaPen } from "react-icons/fa";
 
 const Header = (props) => {
   const flag = localStorage.getItem("flag_image");
@@ -60,11 +61,20 @@ const Header = (props) => {
   const isCheckoutPage = window.location.pathname === "/checkout";
   const isCartPage = window.location.pathname === "/cart";
   const userName = localStorage.getItem("userName");
+  const [showModal, setShowModal] = useState(false);
+  const pincode = localStorage.getItem("pincode");
 
   const [showUserDetails, setShowUserDetails] = useState(false);
   const userDetailsRef = useRef(null);
   console.log("Contryname", Contryname);
   console.log("Contryname anas", selectedCountry.country_name);
+  const handleShowModal = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -450,7 +460,38 @@ const Header = (props) => {
             size={25}
             // onClick={Notification}
           /> */}
-          <CheckDelivery islog={show} close={closeHanlder} />
+          {/* <CheckDelivery islog={show} close={closeHanlder} /> */}
+          <div className={Classes.LogList}>
+            <div
+              style={{ cursor: "pointer" }}
+              className={`${Classes.DeliveryPin} ${Classes.headerElement}`}
+              onClick={handleShowModal}
+            >
+              <span className={Classes.checkDeliveryTitle}>CHECK DELIVERY</span>
+              {pincode ? null : (
+                <span
+                  onClick={handleShowModal}
+                  className={Classes.EnterPinTitle}
+                  style={{ cursor: "pointer" }}
+                >
+                  Enter PinCode
+                </span>
+              )}
+              {pincode && (
+                <span
+                  className={Classes.EnterPinTitle}
+                  style={{ display: "flex", alignItems: "center", gap: "8px" }}
+                >
+                  {pincode} <FaPen onClick={handleShowModal} />
+                </span>
+              )}
+            </div>
+          </div>
+          <CheckDelivery
+            show={showModal}
+            handleClose={handleCloseModal}
+            handleShow={handleShowModal}
+          />
           <div
             style={{ cursor: "pointer" }}
             className={Classes.CountryFlags}

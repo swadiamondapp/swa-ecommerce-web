@@ -32,15 +32,15 @@ const style = {
   outline: "none",
 };
 
-const CheckDelivery = (props) => {
-  const [show, setShow] = useState(false);
-  const handleShow = () => {
-    setShow(true);
-  };
+const CheckDelivery = ({ props, show, handleClose, handleShow }) => {
+  // const [show, setShow] = useState(false);
+  // const handleShow = () => {
+  //   setShow(true);
+  // };
 
-  const handleClose = () => {
-    setShow(false);
-  };
+  // const handleClose = () => {
+  //   setShow(false);
+  // };
   const loginClickHandler = () => {
     handleShow();
   };
@@ -77,16 +77,18 @@ const CheckDelivery = (props) => {
 
   return (
     <>
-      <div className={Classes.LogList}>
+      {/* <div className={Classes.LogList}>
         <div
           style={{ cursor: "pointer" }}
           className={`${Classes.DeliveryPin} ${Classes.headerElement}`}
-          onClick={loginClickHandler}
+          // onClick={loginClickHandler}
+          onClick={handleShow}
         >
           <span className={Classes.checkDeliveryTitle}>CHECK DELIVERY</span>
           {pincode ? null : (
             <span
-              onClick={loginClickHandler}
+              // onClick={loginClickHandler}
+              onClick={handleShow}
               className={Classes.EnterPinTitle}
               style={{ cursor: "pointer" }}
             >
@@ -98,11 +100,11 @@ const CheckDelivery = (props) => {
               className={Classes.EnterPinTitle}
               style={{ display: "flex", alignItems: "center", gap: "8px" }}
             >
-              {pincode} <FaPen onClick={loginClickHandler} />
+              {pincode} <FaPen onClick={handleShow} />
             </span>
           )}
         </div>
-      </div>
+      </div> */}
 
       <Modal
         open={show}
