@@ -29,6 +29,7 @@ const NewArrivalCard = (props) => {
     }
   }, [props.wishAct]);
   const Added = () => {
+    const token = localStorage.getItem("swaToken");
     if (token !== null) {
       const body = {
         product_id: props.prodet.product_id,
