@@ -224,6 +224,7 @@ const ProductDetails = (props) => {
     ? reviewImages
     : reviewImages.slice(0, 3);
 
+  console.log("renderedReviews", renderedReviews);
   // const addToCartHandler = () => {
   //   console.log("....abc", selectedSize);
   //   // if (!props.Size) {
@@ -1581,7 +1582,7 @@ const ProductDetails = (props) => {
                           </div>
                         </div>
                         <div className={Classes.RightHeadDesc}>
-                          <p>{item && item.user && item.user.name}</p>
+                          <p>{item && item.user_name}</p>
                           <p className={Classes.dateReview}>{formattedDate}</p>
                           <div className={Classes.ReviewsDescription}>
                             <p>{item.review}</p>

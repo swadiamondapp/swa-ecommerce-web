@@ -158,7 +158,7 @@ const SililerProducts = (props) => {
                       onClick={() => prodDetHandler(item)}
                     >
                       <img
-                        style={{ width: "100%", height: "205px" }}
+                        style={{ width: "255px", height: "255px" }}
                         className={Classes.SlideImage}
                         src={item.thumbnail_image}
                         alt={`catg-${index}`}

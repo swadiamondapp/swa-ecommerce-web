@@ -49,7 +49,7 @@ const ProductImages = (props) => {
       {
         breakpoint: 767,
         settings: {
-          slidesToShow: 3, // Set the number of slides to display on mobile devices
+          slidesToShow: 4, // Set the number of slides to display on mobile devices
         },
       },
     ],
@@ -59,8 +59,8 @@ const ProductImages = (props) => {
       <div className={Classes.CatList1} style={{ width: "100%" }}>
         <div className="container" style={{ paddingLeft: "0px" }}>
           <div className={Classes.Web}>
-            <div className="CarouselCards">
-              {props.reviewImages.length < 4 && windowWidth > 576 ? (
+            <div className="CarouselCards" style={{ marginBottom: "10px" }}>
+              {props.reviewImages.length < 4 ? (
                 <div style={{ display: "flex" }}>
                   {props.reviewImages.map((item, index) => (
                     <div
