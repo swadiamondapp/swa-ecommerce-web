@@ -119,7 +119,7 @@ const CheckDelivery = ({ props, show, handleClose, handleShow }) => {
               <div className={Classes.LocationDetails}>
                 <img src={locationimg} />
                 <p className={Classes.Locationp1}>
-                  Enter your Pincode <br /> to check delivery availability
+                  Enter your Pincode to browse better
                 </p>
                 <p className={Classes.Locationp2}>
                   Get fastest delivery dates possible, check appointment for
