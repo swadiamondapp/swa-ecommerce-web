@@ -48,15 +48,26 @@ const LandingPage = () => {
   const [loading, setLoading] = useState(false);
   const [logToken, setLogToken] = useState("");
   const [tags, setTags] = useState([]);
+  const countryId = localStorage.getItem("id");
+  const flag = localStorage.getItem("flag_image");
+  const Contryname = localStorage.getItem("country_name");
+  const [selectedCountry, setSelectedCountry] = useState({
+    id: countryId,
+    flag_image: flag,
+    country_name: Contryname,
+  });
 
   console.log("mobBanner..01", mobBanner);
   console.log("budjet..02", budjet);
+  console.log("bannercarousel", banner);
 
   const history = useHistory();
   const token = localStorage.getItem("swaToken");
   const home = () => {
     axios
-      .get(Urls.home, { headers: { Authorization: "Token " + token } })
+      .get(`${Urls.home}?country=${selectedCountry.id}`, {
+        headers: { Authorization: "Token " + token },
+      })
       .then((response1) => {
         console.log("response1=====>", response1);
         setLoading(false);
@@ -110,7 +121,7 @@ const LandingPage = () => {
       }
 
       axios
-        .get(Urls.home)
+        .get(`${Urls.home}?country=${selectedCountry.id}`)
         .then((response1) => {
           setLoading(false);
           let bannerArray = [];
@@ -154,7 +165,7 @@ const LandingPage = () => {
           console.log(error);
         });
     }
-  }, [logToken]);
+  }, [logToken, selectedCountry]);
   const loginActHandler = (logToken) => {
     setLogToken(logToken);
   };
@@ -293,11 +304,16 @@ const LandingPage = () => {
       </RecentSearch>
     );
   }
-  console.log("add", add);
+  console.log("add1111", add);
 
   return (
     <div>
-      <Header countCartItems={cartCount} loginHandler={loginActHandler} />
+      <Header
+        countCartItems={cartCount}
+        loginHandler={loginActHandler}
+        selectedCountry={selectedCountry}
+        setSelectedCountry={setSelectedCountry}
+      />
       <Banner banners={banner} tags={tags} mob={mobBanner} />
       <Features />
       <div className="container">

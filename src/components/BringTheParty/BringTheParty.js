@@ -28,7 +28,7 @@ const BringTheParty = (props) => {
       });
     }
   };
-  console.log("adds", adds);
+  console.log("addsbringparty", adds);
   return (
     <div>
       <div className={Classes.BringThePartyWhole}>

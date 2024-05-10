@@ -46,11 +46,6 @@ const Header = (props) => {
   const [isSticky, setIsSticky] = useState(false);
   const [openDropDown, setOpenDropDown] = useState(false);
   const [loginText, setLoginText] = useState("");
-  const [selectedCountry, setSelectedCountry] = useState({
-    id: CountryIds,
-    flag_image: flag,
-    country_name: Contryname,
-  });
   const [countryData, setCountryData] = useState([]);
   const dropdownRef = useRef(null);
   const nameRef = useRef(null);
@@ -67,7 +62,7 @@ const Header = (props) => {
   const [showUserDetails, setShowUserDetails] = useState(false);
   const userDetailsRef = useRef(null);
   console.log("Contryname", Contryname);
-  console.log("Contryname anas", selectedCountry.country_name);
+
   const handleShowModal = () => {
     setShowModal(true);
   };
@@ -82,7 +77,6 @@ const Header = (props) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-  console.log("selectedCountry", selectedCountry);
 
   const handleClickOutside = (event) => {
     if (
@@ -121,10 +115,10 @@ const Header = (props) => {
   //     });
   // }, []);
   useEffect(() => {
-    if (selectedCountry) {
+    if (props.selectedCountry) {
       // Make the API request with the selected country ID as a parameter
       axios
-        .get(`${Urls.home}?country=${selectedCountry.id}`)
+        .get(`${Urls.home}?country=${props.selectedCountry.id}`)
         .then((response) => {
           setCatgSet(response.data.results.data.categories);
           setCategory(response.data.results.data.categories);
@@ -136,9 +130,7 @@ const Header = (props) => {
           console.error("Error fetching home data:", error);
         });
     }
-  }, [selectedCountry]);
-
-  console.log("selectedCountry", selectedCountry);
+  }, [props.selectedCountry]);
 
   const moveToWishList = () => {
     if (token !== null) {
@@ -218,7 +210,9 @@ const Header = (props) => {
 
       axios
         .get(
-          `${Urls.suggestion + e.target.value}&country=${selectedCountry.id}`
+          `${Urls.suggestion + e.target.value}&country=${
+            props.selectedCountry.id
+          }`
         )
         .then((response1) => {
           setSuggesionList(response1.data);
@@ -240,7 +234,9 @@ const Header = (props) => {
       }
     } else if (setItem.type === "product") {
       axios
-        .get(`${Urls.productDet + setItem.id}?country=${selectedCountry.id}`)
+        .get(
+          `${Urls.productDet + setItem.id}?country=${props.selectedCountry.id}`
+        )
         .then((response1) => {
           const selData = {
             product_id: setItem.id,
@@ -321,8 +317,8 @@ const Header = (props) => {
           (country) => country.country_name === "India"
         );
         if (!CountryIds && !flag) {
-          setSelectedCountry({
-            ...selectedCountry,
+          props.setSelectedCountry({
+            ...props.selectedCountry,
             flag_image: indiaData.flag_image,
             id: indiaData.id,
             country_name: indiaData.country_name,
@@ -340,7 +336,7 @@ const Header = (props) => {
             (country) => country.id === parseInt(defaultCountryID)
           );
           if (defaultCountry) {
-            setSelectedCountry(defaultCountry);
+            props.setSelectedCountry(defaultCountry);
           }
         }
       } catch (error) {
@@ -354,7 +350,7 @@ const Header = (props) => {
   console.log("countryData==>", countryData);
 
   const handleCountrySelect = (country) => {
-    setSelectedCountry(country);
+    props.setSelectedCountry(country);
     setOpenDropDown(true);
 
     localStorage.setItem("id", country.id);
@@ -385,12 +381,15 @@ const Header = (props) => {
     };
   }, [openDropDown]);
 
-  console.log("selectedCountry-->", selectedCountry);
-
   return (
     <div>
       <TopHeader />
-      <MainHead setIsHome={setIsHome} isHome={isHome}>
+      <MainHead
+        setIsHome={setIsHome}
+        isHome={isHome}
+        setSelectedCountry={props.setSelectedCountry}
+        selectedCountry={props.selectedCountry}
+      >
         <div className={Classes.SearchIcons}>
           <div className={Classes.searchList}>
             {/* <label className={Classes.SearchlabelAnimate}>
@@ -500,7 +499,7 @@ const Header = (props) => {
           >
             <div className={Classes.headerElement}>
               <img
-                src={selectedCountry.flag_image}
+                src={props.selectedCountry.flag_image}
                 alt="Selected flag"
                 className={Classes.selectedImage}
               />

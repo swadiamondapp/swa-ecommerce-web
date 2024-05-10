@@ -54,12 +54,6 @@ const MobileNavbar = (props) => {
   const flag = localStorage.getItem("defaultCountryFlag");
   const CountryIds = localStorage.getItem("id");
   const [text, setText] = useState("");
-  const [selectedCountry, setSelectedCountry] = useState({
-    // id: 38,
-    // flag_image: IND,
-    id: !CountryIds ? 38 : CountryIds,
-    flag_image: !flag ? IND : flag,
-  });
 
   console.log("catgSet", text);
 
@@ -183,7 +177,9 @@ const MobileNavbar = (props) => {
       }
     } else if (setItem.type === "product") {
       axios
-        .get(`${Urls.productDet + setItem.id}&country=${selectedCountry.id}`)
+        .get(
+          `${Urls.productDet + setItem.id}&country=${props.selectedCountry.id}`
+        )
         .then((response1) => {
           const selData = {
             product_id: setItem.id,
@@ -267,10 +263,10 @@ const MobileNavbar = (props) => {
     { image: USA, text: "USA" },
   ];
   useEffect(() => {
-    if (selectedCountry) {
+    if (props.selectedCountry) {
       // Make the API request with the selected country ID as a parameter
       axios
-        .get(`${Urls.home}?country=${selectedCountry.id}`)
+        .get(`${Urls.home}?country=${props.selectedCountry.id}`)
         .then((response) => {
           setCatgSet(response.data.results.data.categories);
           setCategory(response.data.results.data.categories);
@@ -282,7 +278,7 @@ const MobileNavbar = (props) => {
           console.error("Error fetching home data:", error);
         });
     }
-  }, [selectedCountry]);
+  }, [props.selectedCountry]);
 
   const moveTocart = () => {
     if (token !== null) {
@@ -324,7 +320,7 @@ const MobileNavbar = (props) => {
             (country) => country.id === parseInt(defaultCountryID)
           );
           if (defaultCountry) {
-            setSelectedCountry(defaultCountry);
+            props.setSelectedCountry(defaultCountry);
           }
         }
       } catch (error) {
@@ -335,7 +331,7 @@ const MobileNavbar = (props) => {
     fetchData();
   }, []);
   const handleCountrySelect = (country) => {
-    setSelectedCountry(country);
+    props.setSelectedCountry(country);
     setOpenDropDown(true);
 
     localStorage.setItem("id", country.id);
@@ -387,7 +383,7 @@ const MobileNavbar = (props) => {
                 >
                   <div className={Classes.headerElement}>
                     <img
-                      src={selectedCountry ? selectedCountry.flag_image : IND}
+                      src={props.selectedCountry.flag_image}
                       alt="Selected flag"
                       className={Classes.selectedImage}
                     />
@@ -706,10 +702,10 @@ const MobileNavbar = (props) => {
                                     >
                                       SWA Wallet
                                     </p>
-                                    </Link>
-                                    <IoIosArrowForward
-                                      style={{ color: "#006E7F" }}
-                                    />
+                                  </Link>
+                                  <IoIosArrowForward
+                                    style={{ color: "#006E7F" }}
+                                  />
                                 </div>
                                 <div className={Classes.LoggedDetailsList}>
                                   <Link to="/swaExchange">
@@ -721,10 +717,10 @@ const MobileNavbar = (props) => {
                                     >
                                       Exchange Wallet
                                     </p>
-                                    </Link>
-                                    <IoIosArrowForward
-                                      style={{ color: "#006E7F" }}
-                                    />
+                                  </Link>
+                                  <IoIosArrowForward
+                                    style={{ color: "#006E7F" }}
+                                  />
                                 </div>
                               </div>
                             </AccordionTab>

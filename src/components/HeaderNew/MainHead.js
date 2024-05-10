@@ -5,7 +5,6 @@ import swaMob from "../../Assets/moblogo.png";
 import { useHistory } from "react-router-dom";
 import MobileNavbar from "../Navbar/MobileNavbar";
 
-
 const MainHead = (props) => {
   const history = useHistory();
 
@@ -15,7 +14,12 @@ const MainHead = (props) => {
 
   return (
     <div>
-      <MobileNavbar setIsHome={props.setIsHome} isHome={props.isHome}/>
+      <MobileNavbar
+        setIsHome={props.setIsHome}
+        isHome={props.isHome}
+        setSelectedCountry={props.setSelectedCountry}
+        selectedCountry={props.selectedCountry}
+      />
       <header className={Classes.headerNav}>
         <div className={`${"container"} ${Classes.ParentHeader}`}>
           <div className={Classes.SwaHead}>
