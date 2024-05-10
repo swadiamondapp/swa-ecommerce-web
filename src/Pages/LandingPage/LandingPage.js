@@ -60,6 +60,7 @@ const LandingPage = () => {
   console.log("mobBanner..01", mobBanner);
   console.log("budjet..02", budjet);
   console.log("bannercarousel", banner);
+  console.log("flag...?", flag);
 
   const history = useHistory();
   const token = localStorage.getItem("swaToken");

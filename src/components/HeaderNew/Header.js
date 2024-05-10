@@ -499,7 +499,11 @@ const Header = (props) => {
           >
             <div className={Classes.headerElement}>
               <img
-                src={props.selectedCountry.flag_image}
+                src={
+                  props &&
+                  props.selectedCountry &&
+                  props.selectedCountry.flag_image
+                }
                 alt="Selected flag"
                 className={Classes.selectedImage}
               />
