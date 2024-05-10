@@ -810,7 +810,7 @@ const ProductDetails = (props) => {
 
                 <p className={Classes.NewPrice}>
                   {/* &#x20B9; {parseFloat(formattedCost).toFixed(0)} */}
-                  &#x20B9; {result}
+                  &#x20B9; {result && result}
                 </p>
                 {props.actualPrice !== null ? (
                   <BiRupee size={25} color="#B0B0B0" />
@@ -1582,10 +1582,20 @@ const ProductDetails = (props) => {
                           </div>
                         </div>
                         <div className={Classes.RightHeadDesc}>
-                          <p>{item && item.user_name}</p>
+                          <p>
+                            {item.user === null
+                              ? item.user_name
+                              : item && item.user && item.user.name}
+                          </p>
                           <p className={Classes.dateReview}>{formattedDate}</p>
                           <div className={Classes.ReviewsDescription}>
                             <p>{item.review}</p>
+                          </div>
+                          <div style={{ marginTop: "8px" }}>
+                            <img
+                              style={{ maxWidth: "60px", borderRadius: "5px" }}
+                              src={item.review_image}
+                            />
                           </div>
                         </div>
                       </div>
