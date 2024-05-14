@@ -74,6 +74,22 @@ const CheckDelivery = ({ props, show, handleClose, handleShow }) => {
   };
   const pincode = localStorage.getItem("pincode");
   console.log("pincode1", pincode);
+  console.log("pinCode", pinCode);
+
+  // location
+
+  const getLocation = async () => {
+    navigator.geolocation.getCurrentPosition(async (pos) => {
+      const { latitude, longitude } = pos.coords;
+      let _url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
+      const response = await axios.get(_url);
+      console.log("response-->", response);
+      setPinCode(response.data.address.postcode);
+      localStorage.setItem("pincode", response.data.address.postcode);
+    });
+  };
+  // location
+  // console.log("add...", add);
 
   return (
     <>
@@ -180,7 +196,7 @@ const CheckDelivery = ({ props, show, handleClose, handleShow }) => {
                 ) : null}
               </div>
               <div className={Classes.DeliveryBtns}>
-                <button>
+                <button onClick={getLocation}>
                   <img src={locationsimg} /> Use your current location
                 </button>
               </div>

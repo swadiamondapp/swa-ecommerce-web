@@ -62,7 +62,7 @@ const SililerProducts = (props) => {
     autoplaySpeed: 1500,
     slidesToShow: 4,
     slidesToScroll: 1,
-    autoplay: true,
+    // autoplay: true,
     initialSlide: 4,
     centerMode: true,
     centerPadding: "20px",

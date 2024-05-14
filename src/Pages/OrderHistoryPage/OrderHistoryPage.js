@@ -95,10 +95,22 @@ const OrderHistoryPage = () => {
     });
   }
   console.log("orderList--->", orderList);
+  const countryId = localStorage.getItem("id");
+  const flag = localStorage.getItem("flag_image");
+  const Contryname = localStorage.getItem("country_name");
+  const [selectedCountry, setSelectedCountry] = useState({
+    id: countryId,
+    flag_image: flag,
+    country_name: Contryname,
+  });
   return (
     <div>
       <div className={Classes.Background}>
-        <Header countCartItems={cartCount} />
+        <Header
+          countCartItems={cartCount}
+          selectedCountry={selectedCountry}
+          setSelectedCountry={setSelectedCountry}
+        />
         <OrderHistory>{orderLists}</OrderHistory>
         <div className={Classes.Features}>
           <Features />

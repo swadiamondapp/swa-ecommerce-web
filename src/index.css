@@ -284,6 +284,13 @@ p {
   border-radius: 32px;
   box-shadow: 0px 4px 4px 0px #0000001a;
 }
+.similetrSliders .slick-next:before,
+.slick-prev:before {
+  color: #848484 !important;
+}
+.Innerslide .slick-next:before {
+  color: #848484 !important;
+}
 .Innerslide {
   margin-top: 15px;
 }

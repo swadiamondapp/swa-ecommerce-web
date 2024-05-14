@@ -507,6 +507,12 @@ const Header = (props) => {
                 alt="Selected flag"
                 className={Classes.selectedImage}
               />
+              {console.log(
+                "countryimage>>>>>>>?",
+                props &&
+                  props.selectedCountry &&
+                  props.selectedCountry.flag_image
+              )}
             </div>
             {openDropDown && (
               <div className={Classes.CountryDropDowns} ref={dropdownRef}>
@@ -816,6 +822,7 @@ const Header = (props) => {
                             height: "50px",
                             borderTopLeftRadius: "5px",
                             borderTopRightRadius: "5px",
+                            marginRight: "0px",
                           }}
                           className={Classes.SlideImage}
                           src={item.thumbnail}

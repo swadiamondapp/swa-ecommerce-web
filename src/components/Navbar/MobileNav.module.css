@@ -974,6 +974,10 @@ header {
   .signupInputFields {
     margin-bottom: 1rem;
   }
+  .selectedImage {
+    width: 30px !important;
+    border-radius: 50%;
+  }
   .formgap {
     display: flex;
     flex-direction: column;

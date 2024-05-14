@@ -7,6 +7,14 @@ import * as Urls from "../../Urls";
 function PrivacyPolicyPage() {
   const [cartCount, setCartCount] = useState("");
   const token = localStorage.getItem("swaToken");
+  const countryId = localStorage.getItem("id");
+  const flag = localStorage.getItem("flag_image");
+  const Contryname = localStorage.getItem("country_name");
+  const [selectedCountry, setSelectedCountry] = useState({
+    id: countryId,
+    flag_image: flag,
+    country_name: Contryname,
+  });
   useEffect(() => {
     if (token !== null) {
       axios
@@ -25,7 +33,11 @@ function PrivacyPolicyPage() {
   }, []);
   return (
     <div>
-      <Header countCartItems={cartCount} />
+      <Header
+        countCartItems={cartCount}
+        selectedCountry={selectedCountry}
+        setSelectedCountry={setSelectedCountry}
+      />
       <PrivacyPolicy />
       <Footer />
     </div>

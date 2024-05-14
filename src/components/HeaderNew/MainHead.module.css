@@ -294,6 +294,10 @@ header {
   width: 100%;
   font-size: 14px;
 }
+.tryBtn:hover {
+  color: #00b4bf;
+  border: 1px solid #00b4bf;
+}
 .buynowbtn {
   background: #00464d;
   color: #fff;
@@ -304,6 +308,10 @@ header {
   border-radius: 4px;
   width: 100%;
   font-size: 14px;
+}
+.buynowbtn:hover {
+  background: #00b4bf;
+  border: 1px solid #00b4bf;
 }
 .MainBtns {
   display: none;
@@ -1282,6 +1290,15 @@ a {
     box-shadow: 0px 2px 2px 0px #0000000d;
     padding-bottom: 5px;
   }
+  .MobSliderCards {
+    display: flex;
+    overflow: scroll;
+    align-items: center;
+    gap: 10px;
+    scrollbar-width: none; /* For Firefox */
+    scrollbar-color: #fff !important;
+    margin-bottom: 5px;
+  }
 }
 @media (min-width: 300px) and (max-width: 575px) {
   .headerNav {
@@ -1391,6 +1408,7 @@ a {
 .selectedImage {
   width: 30px !important;
   border-radius: 50%;
+  height: 30px !important;
 }
 
 .CountryContainer {

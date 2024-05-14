@@ -12,7 +12,9 @@ const TopDemanded = (props) => {
       <div className={Classes.TopDemnd}>
         <div className={Classes.TopDemanded}>
           <p className={Classes.MainText}>Top Demanded Items</p>
-          <p className={Classes.NewArrivalsSubText}>234 New item added</p>
+          <p className={Classes.NewArrivalsSubText}>
+            {props.counts.top_demand_count} New item added
+          </p>
           {/* <p className={Classes.SubText}>234 New item added</p> */}
         </div>
       </div>

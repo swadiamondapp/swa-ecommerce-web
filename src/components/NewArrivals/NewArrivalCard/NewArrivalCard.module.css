@@ -47,6 +47,10 @@
   padding: 10px 0px;
   width: 100%;
 }
+.tryAtHome:hover {
+  color: #00b4bf;
+  border: 1px solid #00b4bf;
+}
 .buyNow {
   background: #00464d;
   border: 1px solid #00464d;
@@ -55,6 +59,10 @@
   font-size: 14px;
   padding: 10px 0px;
   width: 100%;
+}
+.buyNow:hover {
+  background: #00b4bf;
+  border: 1px solid #00b4bf;
 }
 
 .Price {

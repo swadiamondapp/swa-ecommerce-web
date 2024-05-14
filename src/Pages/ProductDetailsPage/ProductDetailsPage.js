@@ -248,11 +248,21 @@ const ProductDetailsPage = (props) => {
   };
 
   console.log("prodDet-->", props.match.params.id);
+  // const countryId = localStorage.getItem("id");
+  const flag = localStorage.getItem("flag_image");
+  const Contryname = localStorage.getItem("country_name");
+  const [selectedCountry, setSelectedCountry] = useState({
+    id: countryId,
+    flag_image: flag,
+    country_name: Contryname,
+  });
 
   return (
     <div>
       <Header
         countCartItems={cartCount}
+        selectedCountry={selectedCountry}
+        setSelectedCountry={setSelectedCountry}
         lognAct={logAct}
         catBuyclose={() => setLogAct(false)}
         loginHandler={loginActHandler}

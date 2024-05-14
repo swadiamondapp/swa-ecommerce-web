@@ -28,6 +28,7 @@ import SliderFeature from "../../components/ProductDetails/SliderFeature";
 
 const LandingPage = () => {
   const [banner, setBanner] = useState([]);
+  const [counts, setCounts] = useState([]);
   const [newArrival, setNewArrivel] = useState([]);
   const [budjet, setBudjet] = useState([
     { budget: "", count: "" },
@@ -61,6 +62,7 @@ const LandingPage = () => {
   console.log("budjet..02", budjet);
   console.log("bannercarousel", banner);
   console.log("flag...?", flag);
+  console.log("counts123", counts);
 
   const history = useHistory();
   const token = localStorage.getItem("swaToken");
@@ -91,6 +93,7 @@ const LandingPage = () => {
         setNewArrivel(response1.data.results.data.new_arrival.slice(0, 8));
         setBudjet(response1.data.results.data.product_budget);
         setAdd(response1.data.results.data.banners);
+        setCounts(response1.data.results.data);
         setTopDemand(response1.data.results.data.top_demand.slice(0, 8));
         setVideo(response1.data.results.data.Video + "?feature=oembed");
       })
@@ -159,6 +162,7 @@ const LandingPage = () => {
           setNewArrivel(response1.data.results.data.new_arrival.slice(0, 8));
           setBudjet(response1.data.results.data.product_budget);
           setAdd(response1.data.results.data.banners);
+          setCounts(response1.data.results.data);
           setTopDemand(response1.data.results.data.top_demand.slice(0, 8));
           setVideo(response1.data.results.data.Video);
         })
@@ -348,13 +352,13 @@ const LandingPage = () => {
         </div>
       </div>
       <div className="container newarrivalContainer">
-        <NewArrivals>{newArriv}</NewArrivals>
+        <NewArrivals counts={counts}>{newArriv}</NewArrivals>
       </div>
       <div className="container bringthepartpage">
         <BringTheParty add={add} />
       </div>
       <div className="container newarrivalContainer">
-        <TopDemanded>{topDemnd}</TopDemanded>
+        <TopDemanded counts={counts}>{topDemnd}</TopDemanded>
 
         <Certificate video={"https://www.youtube.com/embed/s3PrxdvAihI"} />
 

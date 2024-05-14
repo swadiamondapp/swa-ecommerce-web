@@ -17,6 +17,14 @@ const whishlistPage = () => {
   const [wishList, setWishList] = useState([]);
   const [loading, setLoading] = useState(false);
   const token = localStorage.getItem("swaToken");
+  const countryId = localStorage.getItem("id");
+  const flag = localStorage.getItem("flag_image");
+  const Contryname = localStorage.getItem("country_name");
+  const [selectedCountry, setSelectedCountry] = useState({
+    id: countryId,
+    flag_image: flag,
+    country_name: Contryname,
+  });
   const [cartCount, setCartCount] = useState("");
   const wishListing = () => {
     setLoading(true);
@@ -126,7 +134,11 @@ const whishlistPage = () => {
   return (
     <div>
       <div className={Classes.BgColour}>
-        <Header countCartItems={cartCount} />
+        <Header
+          countCartItems={cartCount}
+          selectedCountry={selectedCountry}
+          setSelectedCountry={setSelectedCountry}
+        />
         <div className="container">
           <div className={Classes.Products}>
             <Wishlist> {wishlists} </Wishlist>

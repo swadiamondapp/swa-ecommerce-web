@@ -22,7 +22,9 @@ function NewArrivals(props) {
         <div className={Classes.setItems}>
           <div>
             <h1 className={Classes.NewArrivalsMainText}>New Arrivals</h1>
-            <p className={Classes.NewArrivalsSubText}>234 New item added</p>
+            <p className={Classes.NewArrivalsSubText}>
+              {props.counts.new_arrivals_count} New item added
+            </p>
           </div>
         </div>
       </div>

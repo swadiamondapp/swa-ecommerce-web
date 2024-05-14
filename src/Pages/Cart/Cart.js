@@ -27,6 +27,14 @@ const Cart = () => {
   const [loading, setLoading] = useState(false);
   const [amountPay, setAmountPay] = useState("");
   const token = localStorage.getItem("swaToken");
+  const countryId = localStorage.getItem("id");
+  const flag = localStorage.getItem("flag_image");
+  const Contryname = localStorage.getItem("country_name");
+  const [selectedCountry, setSelectedCountry] = useState({
+    id: countryId,
+    flag_image: flag,
+    country_name: Contryname,
+  });
   useEffect(() => {
     setLoading(true);
     axios
@@ -240,7 +248,11 @@ const Cart = () => {
   return (
     <div>
       <div className={Classes.Background}>
-        <Header countCartItems={cartCount} />
+        <Header
+          countCartItems={cartCount}
+          selectedCountry={selectedCountry}
+          setSelectedCountry={setSelectedCountry}
+        />
         <ConformModal
           handleClose={handleCloseHandler}
           title="Move from bag"

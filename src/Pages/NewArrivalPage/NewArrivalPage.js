@@ -391,11 +391,23 @@ const NewArrivalPage = (props) => {
   }
 
   console.log("count--->", count);
+  // const countryId = localStorage.getItem("id");
+  const flag = localStorage.getItem("flag_image");
+  const Contryname = localStorage.getItem("country_name");
+  const [selectedCountry, setSelectedCountry] = useState({
+    id: countryId,
+    flag_image: flag,
+    country_name: Contryname,
+  });
 
   return (
     <div>
       <div className={Classes.Page}>
-        <Header countCartItems={cartCount} />
+        <Header
+          countCartItems={cartCount}
+          selectedCountry={selectedCountry}
+          setSelectedCountry={setSelectedCountry}
+        />
         <div className="container">
           <div className="row">
             <div className="col-lg-3 col-sm-4">
