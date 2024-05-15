@@ -389,6 +389,7 @@ const Header = (props) => {
         isHome={isHome}
         setSelectedCountry={props.setSelectedCountry}
         selectedCountry={props.selectedCountry}
+        setShowSuccessModal={setShowSuccessModal}
       >
         <div className={Classes.SearchIcons}>
           <div className={Classes.searchList}>

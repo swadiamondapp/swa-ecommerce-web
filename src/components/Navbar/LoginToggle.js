@@ -338,10 +338,11 @@ const LoginToggle = (props) => {
         "CustomUser matching query does not exist."
       ) {
         // Display error message below the input field
-        setValidationErrors({
-          mobileNumber:
-            "You are not a registered user. Please register to login.",
-        });
+        // setValidationErrors({
+        //   mobileNumber:
+        //     "You are not a registered user. Please register to login.",
+        // });
+        handleSignupModalOpen();
       }
     } catch (error) {
       console.log(error);
@@ -428,6 +429,11 @@ const LoginToggle = (props) => {
       if (response.data.results.message === "Otp verified successfully!") {
         props.setText("Logged In");
         props.setShowSuccessModal(true);
+      } else if (response.data.results.message === "Otp verification failed") {
+        // setValidationErrors({
+        //   mobileNumber:
+        //     "You are not a registered user. Please register to login.",
+        // });
       }
     } catch (error) {
       console.log(error);

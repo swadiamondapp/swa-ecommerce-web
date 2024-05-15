@@ -39,9 +39,12 @@ import closeimg from "../../Assets/closeModal.png";
 import time from "../../Assets/time.png";
 import d1 from "../../Assets/d1.png";
 import d2 from "../../Assets/d2.png";
+import locationsimg from "../../Assets/locations.png";
 // import { Carousel } from "primereact/carousel";
 import Slider from "react-slick";
 import { BsFillPlayFill } from "react-icons/bs";
+import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const ProductDetails = (props) => {
   const location = useLocation();
@@ -52,6 +55,7 @@ const ProductDetails = (props) => {
   const [pinCodeError, setPinCodeError] = useState("");
   const [active, setActive] = useState(null);
   const history = useHistory();
+  const [isLoading, setIsLoading] = useState(false);
   const token = localStorage.getItem("swaToken");
   const [reviewImages, setReviewImages] = useState([]);
   const [reviews, setReviews] = useState([]);
@@ -494,6 +498,22 @@ const ProductDetails = (props) => {
 
   // slider
   // slider
+  const getLocation = async () => {
+    setIsLoading(true);
+    navigator.geolocation.getCurrentPosition(async (pos) => {
+      const { latitude, longitude } = pos.coords;
+      let _url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
+      try {
+        const response = await axios.get(_url);
+        setPinCode(response.data.address.postcode);
+        localStorage.setItem("pincode", response.data.address.postcode);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsLoading(false);
+      }
+    });
+  };
 
   return (
     <div>
@@ -801,8 +821,11 @@ const ProductDetails = (props) => {
                 </p>
               </div>
               <p className={Classes.SubText}>
-                {props.name} In Gold ({props.gw} gram) with Diamonds (
-                {props.diamond}gram)
+                {props.name} In Gold ({props.gw} gram)
+                {props.diamondWeight > 0
+                  ? ` with Diamonds ( ${props.diamondWeight} Carat)`
+                  : null}
+                {/* {props.diamondWeight}gram) */}
               </p>
               <p className={Classes.Code}>{props.sku}</p>
               <div className={`${Classes.Flex} ${Classes.MobDownAR}`}>
@@ -1024,9 +1047,24 @@ const ProductDetails = (props) => {
             </div> */}
             <div className={Classes.BorderBottom}>
               <div className="container">
-                <p className={Classes.AvailableColours}>
-                  Delivery availability
-                </p>
+                <div className={Classes.detaillocator}>
+                  <p className={Classes.AvailableColours}>
+                    Delivery availability
+                  </p>
+                  {isLoading ? (
+                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                      <CircularProgress
+                        size={20}
+                        sx={{ color: "#000", ml: 1 }}
+                      />
+                    </Box>
+                  ) : (
+                    <p className={Classes.locatortexts} onClick={getLocation}>
+                      {" "}
+                      <img src={locationsimg} /> Locate me
+                    </p>
+                  )}
+                </div>
                 <div className={Classes.DeliveryFields}>
                   <input
                     className={Classes.PinCode}
@@ -1045,6 +1083,19 @@ const ProductDetails = (props) => {
                   type="submit"
                   onClick={availbilityCheck}
                 /> */}
+                </div>
+                <div>
+                  {pinCode && (
+                    <p
+                      style={{
+                        paddingTop: "12px",
+                        color: "#006e7f",
+                        fontWeight: "600",
+                      }}
+                    >
+                      Delivery by 12th March
+                    </p>
+                  )}{" "}
                 </div>
 
                 <div className="errrMsg">{pinCodeError}</div>

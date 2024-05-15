@@ -19,6 +19,7 @@ const MainHead = (props) => {
         isHome={props.isHome}
         setSelectedCountry={props.setSelectedCountry}
         selectedCountry={props.selectedCountry}
+        setShowSuccessModal={props.setShowSuccessModal}
       />
       <header className={Classes.headerNav}>
         <div className={`${"container"} ${Classes.ParentHeader}`}>

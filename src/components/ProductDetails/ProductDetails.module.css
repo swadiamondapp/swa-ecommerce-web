@@ -614,6 +614,17 @@
   gap: 15px;
   margin-bottom: 10px;
 }
+.detaillocator {
+  display: flex;
+  align-items: center;
+  gap: 70px;
+  margin-bottom: 5px;
+}
+.locatortexts {
+  color: #007481;
+  font-weight: 600;
+  cursor: pointer;
+}
 .SizeListParent {
   margin-top: 10px;
 }

@@ -58,6 +58,7 @@ function CheckOut(props) {
     landMark: "",
     id: "",
   });
+  const pincodes = localStorage.getItem("pincode");
 
   const [isNewaddress, setIsNewAddress] = useState({
     sEmail: "",
@@ -757,10 +758,21 @@ function CheckOut(props) {
                           className={Classes.PlaceInput}
                           type="text"
                           placeholder="Pincode*"
-                          value={addressData.pincode}
+                          value={pincodes ? pincodes : addressData.pincode}
                           name="pincode"
                           onChange={handleChangeAddress}
                         />
+                        {pincodes && (
+                          <p
+                            style={{
+                              color: "#006e7f",
+                              fontWeight: "500",
+                              fontSize: "14px",
+                            }}
+                          >
+                            Delivery by 12th March
+                          </p>
+                        )}
                         {errorMessage.pincode && (
                           <div className={Classes.ErrorMessage}>
                             {errorMessage.pincode}

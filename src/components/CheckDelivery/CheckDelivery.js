@@ -8,6 +8,7 @@ import locationsimg from "../../Assets/locations.png";
 import { BsArrowRight } from "react-icons/bs";
 import Stroke from "../../Assets/Stroke.png";
 import { FaPen } from "react-icons/fa";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import Classes from "../CheckDelivery/CheckDelivery.module.css";
 
@@ -48,6 +49,7 @@ const CheckDelivery = ({ props, show, handleClose, handleShow }) => {
   const [pinCode, setPinCode] = useState(localStorage.getItem("pincode") || "");
   const [pinCodeError, setPinCodeError] = useState("");
   const [active, setActive] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const pinCodeChangeHandler = (e) => {
     setPinCode(e.target.value);
   };
@@ -79,13 +81,19 @@ const CheckDelivery = ({ props, show, handleClose, handleShow }) => {
   // location
 
   const getLocation = async () => {
+    setIsLoading(true);
     navigator.geolocation.getCurrentPosition(async (pos) => {
       const { latitude, longitude } = pos.coords;
       let _url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
-      const response = await axios.get(_url);
-      console.log("response-->", response);
-      setPinCode(response.data.address.postcode);
-      localStorage.setItem("pincode", response.data.address.postcode);
+      try {
+        const response = await axios.get(_url);
+        setPinCode(response.data.address.postcode);
+        localStorage.setItem("pincode", response.data.address.postcode);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsLoading(false);
+      }
     });
   };
   // location
@@ -197,7 +205,27 @@ const CheckDelivery = ({ props, show, handleClose, handleShow }) => {
               </div>
               <div className={Classes.DeliveryBtns}>
                 <button onClick={getLocation}>
-                  <img src={locationsimg} /> Use your current location
+                  {isLoading ? (
+                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                      <CircularProgress
+                        size={20}
+                        sx={{ color: "#000", ml: 1 }}
+                      />
+                    </Box>
+                  ) : (
+                    <>
+                      <img src={locationsimg} /> Use your current location
+                    </>
+                  )}
+                  {/* <img src={locationsimg} /> Use your current location
+                  {isLoading && (
+                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                      <CircularProgress
+                        size={20}
+                        sx={{ color: "#000", ml: 1 }}
+                      />
+                    </Box>
+                  )} */}
                 </button>
               </div>
             </div>

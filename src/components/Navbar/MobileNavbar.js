@@ -282,6 +282,7 @@ const MobileNavbar = (props) => {
 
   const moveTocart = () => {
     if (token !== null) {
+      history.push("/cart");
       // Handle cart click action
     } else {
       setShow(true); // Open login modal if user is not logged in
@@ -521,6 +522,7 @@ const MobileNavbar = (props) => {
               loginText={text}
               onClose={() => setShow(false)}
               isSignpuMobile={isSignpuMobileOpen}
+              setShowSuccessModal={props.setShowSuccessModal}
             />
           </Typography>
         </Box>
