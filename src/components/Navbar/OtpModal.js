@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Classes from "./MobileNav.module.css";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -65,16 +65,28 @@ const OtpModal = (props) => {
                 justifyContent: "center",
               }}
             >
-              <div className={Classes.Signup}>
+              <div className={Classes.Signup} style={{ cursor: "pointer" }}>
                 <span className={Classes.bottomText}>
                   Don’t recived the code?
                 </span>
-                <span
+                {/* <span
                   className={Classes.signupAnchor}
                   onClick={props.handleSignupModalOpen}
                 >
                   Resend
-                </span>
+                </span> */}
+                {props.timer > 0 ? (
+                  <span className={Classes.bottomText}>
+                    &nbsp;{props.timer}s
+                  </span>
+                ) : (
+                  <span
+                    className={Classes.signupAnchor}
+                    onClick={props.handelLoginForm}
+                  >
+                    Resend
+                  </span>
+                )}
               </div>
             </div>
           </div>

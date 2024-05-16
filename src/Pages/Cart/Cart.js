@@ -206,12 +206,11 @@ const Cart = () => {
                   " KT " +
                   // item.description.colour_name +
                   " " +
-                  // item.description.gross_weight +
+                  item.product.gross_weight +
                   " GM "
                 }
                 DiamondProperty={
-                  "Diamond "
-                  // + item.description.diamond_weight_preview + " GM"
+                  " Diamond " + item.product.diamond_weight + " Carat"
                 }
                 Size={item.size}
                 color={item.color}

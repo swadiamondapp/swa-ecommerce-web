@@ -45,6 +45,7 @@ import Slider from "react-slick";
 import { BsFillPlayFill } from "react-icons/bs";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
+import VideocallForm from "./VideocallForm";
 
 const ProductDetails = (props) => {
   const location = useLocation();
@@ -65,6 +66,7 @@ const ProductDetails = (props) => {
   const [videoSection, setVideoSection] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
   const [imageLoading, setImageLoading] = useState(true);
+  const [isModalOpen, setModalOpen] = useState(false);
   const [showRestrictionModal, setShowRestrictionModal] = useState(false);
   const [selectedColor, setSelectedColor] = useState("");
   const countryId = localStorage.getItem("id");
@@ -74,6 +76,13 @@ const ProductDetails = (props) => {
   const largeSliderRef = useRef(null);
 
   console.log("index2", currentSlideIndex);
+  const handleOpenModal = () => {
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
 
   const handleImageClick = (index) => {
     largeSliderRef.current.slickGoTo(index);
@@ -913,7 +922,10 @@ const ProductDetails = (props) => {
 
                 <div className={Classes.FindStoreParent}>
                   <button className={Classes.TryHome}>Find at store</button>
-                  <button className={Classes.VideoCall}>
+                  <button
+                    className={Classes.VideoCall}
+                    onClick={handleOpenModal}
+                  >
                     <img
                       src={Call}
                       style={{
@@ -922,6 +934,10 @@ const ProductDetails = (props) => {
                     />
                   </button>
                   <button className={Classes.FindStores}>Try at Home</button>
+                  <VideocallForm
+                    isOpen={isModalOpen}
+                    handleClose={handleCloseModal}
+                  />
                 </div>
               </div>
               <Modal

@@ -48,8 +48,10 @@
   width: 100%;
 }
 .tryAtHome:hover {
-  color: #00b4bf;
-  border: 1px solid #00b4bf;
+  /* color: #00b4bf; */
+  border: 1px solid #eeeeed;
+  background: #eeeeed;
+  color: #4e4035;
 }
 .buyNow {
   background: #00464d;
@@ -61,8 +63,9 @@
   width: 100%;
 }
 .buyNow:hover {
-  background: #00b4bf;
-  border: 1px solid #00b4bf;
+  /* background: #00b4bf; */
+  background: linear-gradient(360deg, #00353d 0%, #007885 100%);
+  /* border: 1px solid #00b4bf; */
 }
 
 .Price {
@@ -152,7 +155,7 @@
 .NewArrivalCard {
   width: 100%;
   position: relative;
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
   height: 385px;
 }
 .NewArrivalCard img {

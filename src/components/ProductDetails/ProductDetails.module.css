@@ -137,7 +137,84 @@
 
   position: relative;
 }
-
+.vi_head {
+  color: #0d1217;
+  font-family: "lato";
+  text-align: center;
+  font-weight: 700;
+  font-size: 20px;
+}
+.vi_paras {
+  color: #585f67;
+  font-family: "lato";
+  text-align: center;
+  font-weight: 500;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+.contactForms h3 {
+  color: #0d1217;
+  font-family: "Lato";
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+.Mobile_field_vi {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+.Email_field_vi {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+.Prefered_languages {
+  margin-top: 25px;
+}
+.Language_vi {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 15px;
+}
+.vi_submit button {
+  background: #19242d;
+  color: #fff;
+  font-family: "lato";
+  padding: 10px 25px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.vi_submit {
+  text-align: end;
+}
+.vi_message textarea {
+  width: 100%;
+  margin-bottom: 15px;
+}
+.Prefered_languages h3 {
+  color: #0d1217;
+  font-size: 17px;
+  margin-bottom: 15px;
+}
+.Active_language {
+  background: #00464d;
+  color: #fff;
+  font-family: "lato";
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+.unActive_language {
+  background: #d7e2e4;
+  color: #00464d;
+  font-family: "lato";
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+.contactForms {
+  margin-top: 25px;
+}
 .NewArrivals {
   font-size: 26px;
   font-family: "Lato", sans-serif;

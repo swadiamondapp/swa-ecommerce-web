@@ -64,6 +64,7 @@ const LoginToggle = (props) => {
   const [isSignup, setIsSignup] = useState(false);
   const [getOtpModal, setGetOtpModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
+  const [timer, setTimer] = useState(60);
   const [signUpData, setSignUpData] = useState({
     username: "",
     mobile: "",
@@ -333,6 +334,7 @@ const LoginToggle = (props) => {
       if (response.data[0] === "Otp send Successfully") {
         setIsSignup(false);
         handleOtpModalOpen();
+        setTimer(60);
       } else if (
         response.data.results.message ===
         "CustomUser matching query does not exist."
@@ -429,18 +431,20 @@ const LoginToggle = (props) => {
       if (response.data.results.message === "Otp verified successfully!") {
         props.setText("Logged In");
         props.setShowSuccessModal(true);
-      } else if (response.data.results.message === "Otp verification failed") {
+        setTimeout(() => {
+          props.setShowSuccessModal(false);
+        }, 3000);
+      } else {
+        console.log("else entered");
+        alert("tert error");
         // setValidationErrors({
         //   mobileNumber:
         //     "You are not a registered user. Please register to login.",
         // });
       }
     } catch (error) {
-      console.log(error);
+      console.log("anas", error);
     }
-    setTimeout(() => {
-      props.setShowSuccessModal(false);
-    }, 3000);
   };
   const verifyOtpEmail = async () => {
     const body = {
@@ -478,6 +482,22 @@ const LoginToggle = (props) => {
       verifyOtpEmail();
     }
   };
+
+  useEffect(() => {
+    let countdown;
+    if (getOtpModal && timer > 0) {
+      countdown = setTimeout(() => {
+        setTimer(timer - 1);
+      }, 1000);
+    }
+    return () => clearTimeout(countdown);
+  }, [timer, getOtpModal]);
+
+  useEffect(() => {
+    if (getOtpModal) {
+      setTimer(60); // Reset timer to 60 seconds when the modal is opened
+    }
+  }, [getOtpModal]);
 
   return (
     <div className={Classes.loginToffle}>
@@ -872,6 +892,8 @@ const LoginToggle = (props) => {
                     customTabOtpModalStyle={customTabOtpModalStyle}
                     customDestOtpModalStyle={customDestOtpModalStyle}
                     handleOtpForm={handleOtpForm}
+                    handelLoginForm={handelLoginForm}
+                    timer={timer}
                     mobileNumber={mobileNumber}
                     otp={otp}
                     setOtp={setOtp}
