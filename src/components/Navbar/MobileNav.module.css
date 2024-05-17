@@ -297,6 +297,9 @@ header {
   .selectedImage {
     width: 30px !important;
     border-radius: 50%;
+    width: 27px !important;
+    border-radius: 50%;
+    height: 27px !important;
   }
 
   .CountryContainer {
@@ -977,6 +980,9 @@ header {
   .selectedImage {
     width: 30px !important;
     border-radius: 50%;
+    width: 27px !important;
+    border-radius: 50%;
+    height: 27px !important;
   }
   .formgap {
     display: flex;

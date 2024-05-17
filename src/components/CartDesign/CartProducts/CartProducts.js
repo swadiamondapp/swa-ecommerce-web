@@ -46,17 +46,19 @@ function CartProducts(props) {
                   </p>
                 ) : null}
               </div>
-              {props ? (
-                <p className={Classes.SavedMoney}>
-                  Hurray! You have saved{" "}
-                  <BiRupee
-                    className={Classes.Rupee}
-                    size={15}
-                    color="#30933A"
-                  />
-                  {"2500"}
-                </p>
-              ) : null}
+              {props
+                ? props.OldPrice - props.NewPrice !== 0 && (
+                    <p className={Classes.SavedMoney}>
+                      Hurray! You have saved{" "}
+                      <BiRupee
+                        className={Classes.Rupee}
+                        size={15}
+                        color="#30933A"
+                      />
+                      {props.OldPrice - props.NewPrice}
+                    </p>
+                  )
+                : null}
               <p className={Classes.ProductProperty}>
                 {props.Property} <span>|</span>
                 {props.DiamondProperty}

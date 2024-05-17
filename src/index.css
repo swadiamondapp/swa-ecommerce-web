@@ -308,6 +308,7 @@ p {
   width: 429px !important;
   height: 72px;
   overflow: scroll !important;
+  display: none !important;
 }
 .ParentSlide .slick-dots::-webkit-scrollbar {
   width: 2px !important;
@@ -812,6 +813,20 @@ input[type="number"] {
   }
   .ParentSlide .slick-dots {
     width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative;
+    top: -68px;
+  }
+  .Innerslide {
+    display: none;
+  }
+  .ParentSlide .slick-dots li {
+    width: 40px !important;
+  }
+  .ParentSlide .slick-dots li button:before {
+    font-size: 14px;
   }
 }
 .hideSearchBar {

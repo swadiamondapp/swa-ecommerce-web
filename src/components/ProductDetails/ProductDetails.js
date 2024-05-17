@@ -380,7 +380,7 @@ const ProductDetails = (props) => {
   console.log("imageUrls", imageUrls);
 
   var settings = {
-    dots: false,
+    dots: true,
     infinite: true,
     arrows: false,
     autoplaySpeed: 3500,
@@ -417,15 +417,15 @@ const ProductDetails = (props) => {
 
     //   </div>
     // ),
-    autoplay: true,
+    // autoplay: true,
     centerMode: true,
     centerPadding: "0px",
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
+          slidesToShow: 1,
+          slidesToScroll: 1,
           infinite: true,
           dots: true,
           centerMode: true,
@@ -435,9 +435,9 @@ const ProductDetails = (props) => {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 1,
           centerMode: true,
           centerPadding: "0px",
         },
@@ -933,7 +933,12 @@ const ProductDetails = (props) => {
                       }}
                     />
                   </button>
-                  <button className={Classes.FindStores}>Try at Home</button>
+                  <button
+                    className={Classes.FindStores}
+                    onClick={handleOpenModal}
+                  >
+                    Try at Home
+                  </button>
                   <VideocallForm
                     isOpen={isModalOpen}
                     handleClose={handleCloseModal}

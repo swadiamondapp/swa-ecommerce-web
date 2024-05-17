@@ -44,13 +44,14 @@ function CheckOut(props) {
   const [errorMessage, setErrorMessage] = useState({});
   const [getOtpModal, setGetOtpModal] = useState(false);
   const [otp, setOtp] = useState(123456);
+  const pincodes = localStorage.getItem("pincode");
 
   const [addressData, setAddressData] = useState({
     sEmail: "",
     sPhone: "",
     fullName: "",
     mobile: "",
-    pincode: "",
+    pincode: pincodes,
     city: "",
     state: "kerala",
     hNumber_Bname: "",
@@ -58,7 +59,6 @@ function CheckOut(props) {
     landMark: "",
     id: "",
   });
-  const pincodes = localStorage.getItem("pincode");
 
   const [isNewaddress, setIsNewAddress] = useState({
     sEmail: "",
@@ -758,7 +758,7 @@ function CheckOut(props) {
                           className={Classes.PlaceInput}
                           type="text"
                           placeholder="Pincode*"
-                          value={pincodes ? pincodes : addressData.pincode}
+                          value={addressData.pincode}
                           name="pincode"
                           onChange={handleChangeAddress}
                         />

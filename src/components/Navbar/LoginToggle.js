@@ -92,6 +92,11 @@ const LoginToggle = (props) => {
   }, [isDesk]);
 
   const handleSignupModalOpen = () => {
+    setSignUpData({
+      ...signUpData,
+      mobile: mobileNumber && mobileNumber,
+      email: emailId && emailId,
+    });
     setSignupModal(true);
     setIsSignup(true);
   };
@@ -378,6 +383,11 @@ const LoginToggle = (props) => {
 
       if (response.data[0] === "Otp send Successfully") {
         handleOtpModalOpen();
+      } else if (
+        response.data.results.message ===
+        "CustomUser matching query does not exist."
+      ) {
+        handleSignupModalOpen();
       }
     } catch (error) {
       // Log any errors that occur during the process
@@ -498,6 +508,8 @@ const LoginToggle = (props) => {
       setTimer(60); // Reset timer to 60 seconds when the modal is opened
     }
   }, [getOtpModal]);
+
+  console.log("mobileNumber-->", mobileNumber);
 
   return (
     <div className={Classes.loginToffle}>

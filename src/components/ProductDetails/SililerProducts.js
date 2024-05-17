@@ -65,7 +65,7 @@ const SililerProducts = (props) => {
     // autoplay: true,
     initialSlide: 4,
     centerMode: true,
-    centerPadding: "20px",
+    centerPadding: "10px",
     responsive: [
       {
         breakpoint: 1024,
@@ -75,7 +75,7 @@ const SililerProducts = (props) => {
           infinite: true,
           dots: true,
           centerMode: true,
-          centerPadding: "20px",
+          centerPadding: "10px",
         },
       },
       {
@@ -85,7 +85,7 @@ const SililerProducts = (props) => {
           slidesToScroll: 2,
           initialSlide: 2,
           centerMode: true,
-          centerPadding: "20px",
+          centerPadding: "10px",
         },
       },
       {
@@ -95,7 +95,7 @@ const SililerProducts = (props) => {
           slidesToScroll: 1,
           autoplay: true,
           centerMode: true,
-          centerPadding: "20px",
+          centerPadding: "10px",
         },
       },
     ],

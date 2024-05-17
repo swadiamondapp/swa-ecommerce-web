@@ -26,10 +26,11 @@ function AddAddress(props) {
   const [showAddAddress, setShowAddAddress] = useState(true);
   const [showNewAddressForm, setShowNewAddressForm] = useState(false);
   const [selectedAddressId, setSelectedAddressId] = useState(null);
+  const pincodes = localStorage.getItem("pincode");
   const [addressData, setAddressData] = useState({
     fullName: "",
     mobile: "",
-    pincode: "",
+    pincode: pincodes,
     city: "",
     state: "kerala",
     hNumber_Bname: "",
@@ -106,32 +107,44 @@ function AddAddress(props) {
 
   const validateForm = () => {
     const schema = Joi.object({
-      fullName: Joi.string().required().messages({
-        'any.required': 'Full name is required',
-        'string.empty': 'please provide the necessary details',
-      }),
-      mobile: Joi.string().required().messages({
-        'any.required': 'Mobile number is required',
-        'string.empty': 'please provide the necessary details',
-        
-      }),
-      pincode: Joi.string().pattern(/^\d{6}$/).required().messages({
-        'any.required': 'Pincode is required',
-        'string.empty': 'Pincode must not be empty',
-        'string.pattern.base': 'Pincode must be 6 digits',
-      }),
-      city: Joi.string().required().messages({
-        'any.required': 'City is required',
-        'string.empty': 'City must not be empty',
-      }),
-      hNumber_Bname: Joi.string().required().messages({
-        'any.required': 'House number / Building name is required',
-        'string.empty': 'House number / Building name must not be empty',
-      }),
-      streetColony: Joi.string().required().messages({
-        'any.required': 'Street / Colony is required',
-        'string.empty': 'Street / please provide the necessary details',
-      }),
+      fullName: Joi.string()
+        .required()
+        .messages({
+          "any.required": "Full name is required",
+          "string.empty": "please provide the necessary details",
+        }),
+      mobile: Joi.string()
+        .required()
+        .messages({
+          "any.required": "Mobile number is required",
+          "string.empty": "please provide the necessary details",
+        }),
+      pincode: Joi.string()
+        .pattern(/^\d{6}$/)
+        .required()
+        .messages({
+          "any.required": "Pincode is required",
+          "string.empty": "Pincode must not be empty",
+          "string.pattern.base": "Pincode must be 6 digits",
+        }),
+      city: Joi.string()
+        .required()
+        .messages({
+          "any.required": "City is required",
+          "string.empty": "City must not be empty",
+        }),
+      hNumber_Bname: Joi.string()
+        .required()
+        .messages({
+          "any.required": "House number / Building name is required",
+          "string.empty": "House number / Building name must not be empty",
+        }),
+      streetColony: Joi.string()
+        .required()
+        .messages({
+          "any.required": "Street / Colony is required",
+          "string.empty": "Street / please provide the necessary details",
+        }),
     });
 
     const { error } = schema.validate(addressData, { abortEarly: false });
@@ -203,7 +216,6 @@ function AddAddress(props) {
   };
 
   const handleAddressSelection = async (id) => {
-
     setSelectedAddressId(id);
     try {
       const response = await axios.post(
@@ -220,7 +232,6 @@ function AddAddress(props) {
       console.log(error);
     }
   };
-  
 
   return (
     <div>
@@ -237,7 +248,13 @@ function AddAddress(props) {
             </div>
           </div> */}
           {/* address location */}
-          <div className={props.name === "payment" ? Classes.parentLocationsPayment : Classes.parentLocations}>
+          <div
+            className={
+              props.name === "payment"
+                ? Classes.parentLocationsPayment
+                : Classes.parentLocations
+            }
+          >
             <div className={Classes.leftAddres11}>
               {/* {props.addressArray.map((item, index) => (
                 <div className={Classes.LocationHead} key={index}>
@@ -390,6 +407,17 @@ function AddAddress(props) {
                             name="pincode"
                             onChange={handleChangeAddress}
                           />
+                          {pincodes && (
+                            <p
+                              style={{
+                                color: "#006e7f",
+                                fontWeight: "500",
+                                fontSize: "12px",
+                              }}
+                            >
+                              Delivery by 12th March
+                            </p>
+                          )}
                           {errors.pincode && (
                             <span className={Classes.Error}>
                               {errors.pincode}

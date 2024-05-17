@@ -18,17 +18,41 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import * as Urls from "../../Urls";
 
+// const style = {
+//   position: "absolute",
+//   top: "50%",
+//   left: "50%",
+//   transform: "translate(-50%, -50%)",
+//   width: 468,
+//   height: "auto",
+//   bgcolor: "background.paper",
+//   border: "none",
+//   boxShadow: 24,
+//   borderRadius: "4px",
+//   p: 2,
+//   outline: "none",
+// };
 const style = {
   position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 468,
+  bottom: 0,
+  width: "100%",
   height: "auto",
   bgcolor: "background.paper",
   border: "none",
   boxShadow: 24,
-  borderRadius: "4px",
+  p: 2,
+  outline: "none",
+};
+const styleDesk = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%,-50%)",
+  width: "34.4%",
+  height: "auto",
+  bgcolor: "background.paper",
+  border: "none",
+  boxShadow: 24,
   p: 2,
   outline: "none",
 };
@@ -98,6 +122,21 @@ const CheckDelivery = ({ props, show, handleClose, handleShow }) => {
   };
   // location
   // console.log("add...", add);
+  const [isDesk, setIsDesk] = useState(
+    window.innerWidth >= 300 && window.innerWidth <= 575
+  );
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesk(window.innerWidth >= 300 && window.innerWidth <= 575);
+    };
+    // Add event listener to listen for window resize
+    window.addEventListener("resize", handleResize);
+
+    // Remove event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [isDesk]);
 
   return (
     <>
@@ -137,7 +176,7 @@ const CheckDelivery = ({ props, show, handleClose, handleShow }) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={isDesk ? style : styleDesk}>
           <Typography>
             <div>
               <div className={Classes.LocationDetails}>

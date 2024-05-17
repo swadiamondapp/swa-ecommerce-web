@@ -605,7 +605,7 @@ const LoginModal = (props) => {
           </div>
           <div className={Classes.LogedDetails_list}>
             <Link to="" className={Classes.MobProfileLinks}>
-              <p style={{ fontSize: "16px" }}>Account</p>
+              <p style={{ fontSize: "16px" }}>Profile</p>
             </Link>
 
             <Link to="/my_orders" className={Classes.LogedDetails_Item}>

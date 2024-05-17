@@ -156,7 +156,10 @@
   width: 100%;
   position: relative;
   /* margin-bottom: 30px; */
-  height: 385px;
+  /* height: 385px; */
+  height: 372px;
+  padding: 10px 10px 0px 10px;
+  border-radius: 4px;
 }
 .NewArrivalCard img {
   display: flex;
