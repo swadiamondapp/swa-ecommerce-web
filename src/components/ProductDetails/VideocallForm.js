@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Modal, Box } from "@mui/material";
 import Classes from "./ProductDetails.module.css";
 
 const VideocallForm = ({ isOpen, handleClose }) => {
+  const [activeLanguage, setActiveLanguage] = useState("English");
+  const handleLanguageClick = (language) => {
+    setActiveLanguage(language);
+  };
+  const languages = ["English", "Malayalam", "Tamil", "Hindi", "Telugu"];
+
   return (
     <div>
       <Modal
@@ -30,38 +36,42 @@ const VideocallForm = ({ isOpen, handleClose }) => {
               Video call with our consultant and see your Jewles closer
             </p>
             <div className={Classes.contactForms}>
-              <form>
-                <h3>Contact Details</h3>
-                <div className={Classes.Mobile_field_vi}>
-                  <label>Mobile number</label>
-                  <input type="text" />
-                </div>
-                <div className={Classes.Email_field_vi}>
-                  <label>Email</label>
-                  <input type="text" />
-                </div>
-                <div className={Classes.Prefered_languages}>
-                  <h3>Prefered Language</h3>
-                  <div className={Classes.Language_vi}>
-                    <button className={Classes.Active_language}>English</button>
-                    <button className={Classes.unActive_language}>
-                      Malayalam
+              <h3>Contact Details</h3>
+              <div className={Classes.Mobile_field_vi}>
+                <label>Mobile number</label>
+                <input type="text" placeholder="+91 98975656785" />
+              </div>
+              <div className={Classes.Email_field_vi}>
+                <label>Email</label>
+                <input type="text" placeholder="Sample@gmail.com" />
+              </div>
+              <div className={Classes.Prefered_languages}>
+                <h3>Prefered Language</h3>
+                <div className={Classes.Language_vi}>
+                  {languages.map((language) => (
+                    <button
+                      key={language}
+                      className={
+                        activeLanguage === language
+                          ? Classes.Active_language
+                          : Classes.unActive_language
+                      }
+                      onClick={() => handleLanguageClick(language)}
+                    >
+                      {language}
                     </button>
-                    <button>Tamil</button>
-                    <button>Hindi</button>
-                    <button>Telungu</button>
-                  </div>
+                  ))}
                 </div>
-                <div className={Classes.vi_message}>
-                  <textarea
-                    cols={5}
-                    placeholder="Let’s us know  if you have any preference in price, budget "
-                  />
-                </div>
-                <div className={Classes.vi_submit}>
-                  <button>Submit</button>
-                </div>
-              </form>
+              </div>
+              <div className={Classes.vi_message}>
+                <textarea
+                  rows={3}
+                  placeholder="Let’s us know  if you have any preference in price, budget "
+                />
+              </div>
+              <div className={Classes.vi_submit}>
+                <button type="submit">Submit</button>
+              </div>
             </div>
           </div>
         </Box>
