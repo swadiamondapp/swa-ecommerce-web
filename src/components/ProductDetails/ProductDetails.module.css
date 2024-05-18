@@ -460,7 +460,17 @@
   position: relative;
   border: 1px solid #e6e6e6;
   border-radius: 3px;
-  height: 389px;
+  /* height: 389px; */
+}
+.Discount {
+  position: absolute;
+  background: #189e02;
+  margin: 15px 2px;
+}
+.Number {
+  color: #ffffff;
+  padding: 5px;
+  font-size: 12px;
 }
 .rateStar8 {
   background: #fcfbf6;

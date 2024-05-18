@@ -39,7 +39,7 @@ function CartProducts(props) {
                   {/* <BiRupee className={Classes.BiRupee} size={25} /> */}
                   &#8377; {props.NewPrice}
                 </p>
-                {props ? (
+                {props && props.OldPrice !== props.NewPrice ? (
                   <p className={Classes.PriceOld}>
                     {/* <BiRupee className={Classes.BiRupee} size={25} /> */}
                     &#8377; {props.OldPrice}

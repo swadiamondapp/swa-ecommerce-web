@@ -272,6 +272,7 @@ const CategorySearch = (props) => {
   };
 
   let products;
+  let categoryName;
   if (loading) {
     products = (
       <div className="d-flex justify-content-center align-items-center loader">
@@ -287,6 +288,7 @@ const CategorySearch = (props) => {
     );
   } else {
     products = product.map((item, index) => {
+      categoryName = item.category.name;
       return (
         <NewArrivalCard
           ProductImage={item.thumbnail_image}
@@ -350,51 +352,10 @@ const CategorySearch = (props) => {
                   deltLabel={deltLbel}
                   sortHandler={sortsHHandler}
                   count={count}
+                  categoryName={categoryName}
                 >
-                  {/* <ReactPaginate
-                  breakLabel="..."
-                  nextLabel="Next >"
-                  onPageChange={handlePageClick}
-                  marginPagesDisplayed={1}
-                  forcePage={num}
-                  pageRangeDisplayed={2}
-                  pageCount={pageCount}
-                  previousLabel="<  Previous"
-                  renderOnZeroPageCount={null}
-                  containerClassName={"pagination justify-content-start pageout"}
-                  pageClassName={"page-item"}
-                  pageLinkClassName={"page-link"}
-                  previousClassName={"page-item"}
-                  previousLinkClassName={"page-link"}
-                  nextClassName={"page-item"}
-                  nextLinkClassName={"page-link"}
-                  breakClassName={"page-item"}
-                  breakLinkClassName={"page-link"}
-                  activeClassName={"active"}
-                /> */}
                   {products}
                 </NewArrivalDesign>
-                {/* <ReactPaginate
-                  breakLabel="..."
-                  nextLabel="next >"
-                  onPageChange={handlePageClick}
-                  marginPagesDisplayed={1}
-                  forcePage={num}
-                  pageRangeDisplayed={2}
-                  pageCount={pageCount}
-                  previousLabel="< prev"
-                  renderOnZeroPageCount={null}
-                  containerClassName={"pagination justify-content-end pageout"}
-                  pageClassName={"page-item"}
-                  pageLinkClassName={"page-link"}
-                  previousClassName={"page-item"}
-                  previousLinkClassName={"page-link"}
-                  nextClassName={"page-item"}
-                  nextLinkClassName={"page-link"}
-                  breakClassName={"page-item"}
-                  breakLinkClassName={"page-link"}
-                  activeClassName={"active"}
-                /> */}
               </div>
               <div className={Classes.DownloadOurAppImage}>
                 <DownloadOurAppImage />

@@ -72,6 +72,7 @@ const LoginToggle = (props) => {
   });
   const [mobileNumber, setMobileNumber] = useState("");
   const [otp, setOtp] = useState("");
+  const [otpError, setOtpError] = useState("");
   const [emailId, setEmailId] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isDesk, setIsDesk] = useState(
@@ -446,7 +447,7 @@ const LoginToggle = (props) => {
         }, 3000);
       } else {
         console.log("else entered");
-        alert("tert error");
+        setOtpError("Invalid otp");
         // setValidationErrors({
         //   mobileNumber:
         //     "You are not a registered user. Please register to login.",
@@ -467,6 +468,8 @@ const LoginToggle = (props) => {
       const response = await axios.post(Urls.verifyOTP, body);
       if (response.data.results.status_code === 200) {
         loginHandler();
+      } else {
+        setOtpError("Invalid otp");
       }
     } catch (error) {
       console.log(error);
@@ -904,6 +907,7 @@ const LoginToggle = (props) => {
                     customTabOtpModalStyle={customTabOtpModalStyle}
                     customDestOtpModalStyle={customDestOtpModalStyle}
                     handleOtpForm={handleOtpForm}
+                    otpError={otpError}
                     handelLoginForm={handelLoginForm}
                     timer={timer}
                     mobileNumber={mobileNumber}

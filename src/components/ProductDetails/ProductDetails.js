@@ -559,6 +559,15 @@ const ProductDetails = (props) => {
                               {imageUrls.map((item, index) => {
                                 return (
                                   <div>
+                                    {props.discount &&
+                                      props.discountPercentage && (
+                                        <div className={Classes.Discount}>
+                                          <p className={Classes.Number}>
+                                            {props.discountPercentage +
+                                              "% DISCOUNT"}
+                                          </p>
+                                        </div>
+                                      )}
                                     <img
                                       style={{
                                         maxWidth: "100%",
@@ -819,8 +828,8 @@ const ProductDetails = (props) => {
                   <RWebShare
                     data={{
                       text: "Swa Diamonds",
-                      // url: "https://swaecomnew.zinfog.in" + location.pathname,
-                      url: "http://localhost:3000/" + location.pathname,
+                      url: "https://swaecomnew.zinfog.in" + location.pathname,
+                      // url: "http://localhost:3000/" + location.pathname,
                       title: "Swa Diamonds",
                     }}
                     onClick={() => console.log("shared successfully!")}
@@ -844,15 +853,19 @@ const ProductDetails = (props) => {
                   {/* &#x20B9; {parseFloat(formattedCost).toFixed(0)} */}
                   &#x20B9; {result && result}
                 </p>
-                {props.actualPrice !== null ? (
-                  <BiRupee size={25} color="#B0B0B0" />
-                ) : null}
-                <p className={Classes.OldPrice}>{props.actualPrice}</p>
+                {props.actualPrice && (
+                  <>
+                    <BiRupee size={25} color="#B0B0B0" />{" "}
+                    <p className={Classes.OldPrice}>
+                      {parseInt(props.actualPrice).toFixed(0)}
+                    </p>
+                  </>
+                )}
               </div>
               {props.discount ? (
                 <p className={Classes.HurrayText}>
                   Hurray! You have saved <BiRupee size={15} />
-                  {props.discountVal.toFixed(2)}
+                  {props.discountVal.toFixed(0)}
                 </p>
               ) : null}
               <p className={Classes.AvailableColours}>Customize this product</p>

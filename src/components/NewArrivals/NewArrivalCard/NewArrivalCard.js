@@ -108,7 +108,7 @@ const NewArrivalCard = (props) => {
         <ToastContainer />
         <div className={Classes.NewArrivalCard}>
           <div className={Classes.NewArrivalCardSub}>
-            {props.Discount !== null ? (
+            {props.Discount && props.isDiscount ? (
               <div className={Classes.Discount}>
                 <p className={Classes.Number}>{props.Discount}</p>
               </div>

@@ -635,7 +635,7 @@ const MobileNavbar = (props) => {
                             <AccordionTab header="Account">
                               <div className={Classes.ShippingDetialHead}>
                                 <div className={Classes.LoggedDetailsList}>
-                                  <Link to="/my_orders">
+                                  <Link to="/my_orders" onClick={handleClose}>
                                     <p
                                       style={{
                                         fontSize: "16px",
@@ -650,7 +650,7 @@ const MobileNavbar = (props) => {
                                   />
                                 </div>
                                 <div className={Classes.LoggedDetailsList}>
-                                  <Link to="/wish_list">
+                                  <Link to="/wish_list" onClick={handleClose}>
                                     <p
                                       style={{
                                         fontSize: "16px",
@@ -665,7 +665,7 @@ const MobileNavbar = (props) => {
                                   />
                                 </div>
                                 <div className={Classes.LoggedDetailsList}>
-                                  <Link to="/addaddress">
+                                  <Link to="/addaddress" onClick={handleClose}>
                                     <p
                                       style={{
                                         fontSize: "16px",
@@ -680,7 +680,7 @@ const MobileNavbar = (props) => {
                                   />
                                 </div>
                                 <div className={Classes.LoggedDetailsList}>
-                                  <Link to="/rate&review">
+                                  <Link to="/rate&review" onClick={handleClose}>
                                     <p
                                       style={{
                                         fontSize: "16px",
@@ -695,7 +695,7 @@ const MobileNavbar = (props) => {
                                   />
                                 </div>
                                 <div className={Classes.LoggedDetailsList}>
-                                  <Link to="/swaWallet">
+                                  <Link to="/swaWallet" onClick={handleClose}>
                                     <p
                                       style={{
                                         fontSize: "16px",
@@ -710,7 +710,7 @@ const MobileNavbar = (props) => {
                                   />
                                 </div>
                                 <div className={Classes.LoggedDetailsList}>
-                                  <Link to="/swaExchange">
+                                  <Link to="/swaExchange" onClick={handleClose}>
                                     <p
                                       style={{
                                         fontSize: "16px",

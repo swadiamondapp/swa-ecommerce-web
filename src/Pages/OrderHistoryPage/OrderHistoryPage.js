@@ -73,7 +73,7 @@ const OrderHistoryPage = () => {
           key={index}
         >
           <Orders
-            Image={item.shipments[0] && item.shipments[0].bag_image}
+            Image={item.shipments[0] && item.shipments[0].thumbnail_image}
             ShipmentStatus={
               item.shipments[0] && item.shipments[0].shipment_status
             }

@@ -257,6 +257,8 @@ const ProductDetailsPage = (props) => {
     country_name: Contryname,
   });
 
+  console.log("prodDet--->", prodDet);
+
   return (
     <div>
       <Header
@@ -281,6 +283,7 @@ const ProductDetailsPage = (props) => {
             ? prodDet.total_price_final - prodDet.discount_price
             : null
         }
+        discountPercentage={prodDet.discount_percentage}
         discount={prodDet.is_on_discount}
         name={prodDet.product_name}
         description={prodDet.description}

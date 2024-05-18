@@ -45,19 +45,25 @@ const BringTheParty = (props) => {
             <div className={`col-md-12 ${Classes.MobBringtheparty}`}>
               <div className={`container ${Classes.MobBringtheparty}`}>
                 <div className="row">
-                  <div
-                    className={`col-md-12 ${Classes.MobBringtheparty}`}
-                    style={{ paddingBottom: "10px" }}
-                  >
-                    <img
-                      className={Classes.Image1}
-                      src={adds[0] && adds[0].Ad_image}
-                      // src={banner1}
-                      alt="ad1"
-                      onClick={() => advClicked(adds[0])}
-                    />
-                  </div>
-                  <div
+                  {adds.map(
+                    (item, index) =>
+                      item.Ad_image && (
+                        <div
+                          className={`col-md-12 ${Classes.MobBringtheparty}`}
+                          style={{ paddingBottom: "10px" }}
+                        >
+                          <img
+                            className={Classes.Image1}
+                            src={item.Ad_image && item.Ad_image}
+                            // src={banner1}
+                            alt="ad1"
+                            onClick={() => advClicked(adds[0])}
+                          />
+                        </div>
+                      )
+                  )}
+
+                  {/* <div
                     className={`col-md-12 ${Classes.MobBringtheparty}`}
                     style={{ paddingBottom: "10px" }}
                   >
@@ -79,7 +85,7 @@ const BringTheParty = (props) => {
                       alt="ad3"
                       onClick={() => advClicked(adds[2])}
                     />
-                  </div>
+                  </div> */}
                 </div>
               </div>
               {/* <div className={Classes.Image3}>

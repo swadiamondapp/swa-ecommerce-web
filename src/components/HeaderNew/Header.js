@@ -155,16 +155,19 @@ const Header = (props) => {
       });
     }
   };
+  // const cattSelHandler = (setItem) => {
+  //   if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
+  //     window.location.href =
+  //       "http://swaecomnew.zinfog.in/category_search/" + setItem.id;
+  //   } else {
+  //     history.push({
+  //       pathname: "/new_arrivel",
+  //       state: { data: setItem.id, product_category: setItem.name },
+  //     });
+  //   }
+  // };
   const cattSelHandler = (setItem) => {
-    if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
-      window.location.href =
-        "https://swaecomnew.zinfog.in/category_search/" + setItem.id;
-    } else {
-      history.push({
-        pathname: "/new_arrivel",
-        state: { data: setItem.id, product_category: setItem.name },
-      });
-    }
+    window.location.href = "https://swaecomnew.zinfog.in/" + setItem.id;
   };
   const tagSelHandler = (selItem) => {
     if (history.location.pathname.slice(0, 12) === "/new_arrivel") {

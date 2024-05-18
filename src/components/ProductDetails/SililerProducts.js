@@ -166,11 +166,16 @@ const SililerProducts = (props) => {
 
                       <div className={Classes.PriceContainer}>
                         <p className={Classes.SimilerProductPrices}>
-                          &#x20B9; {item.total_price_final}
+                          &#x20B9;{" "}
+                          {item.discount_price
+                            ? item.discount_price
+                            : item.total_price_final}
                         </p>
-                        <p className={Classes.SimilerProductDiscount}>
-                          &#x20B9; {item.total_price_final}
-                        </p>
+                        {item.discount_price && (
+                          <p className={Classes.SimilerProductDiscount}>
+                            &#x20B9; {item.total_price_final}
+                          </p>
+                        )}
                       </div>
                       <p className={Classes.checkDate}>Check delivery date</p>
                       <div className={Classes.MainBtns}>

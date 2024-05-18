@@ -42,12 +42,15 @@ const OtpModal = (props) => {
               <div>
                 <label className={Classes.labelStyle}>OTP</label>
                 <input
-                  placeholder="6897"
+                  placeholder="* * * * *"
                   className={Classes.allInputTextStyle}
                   value={props.otp}
                   onChange={(e) => props.setOtp(e.target.value)}
                 />
               </div>
+              <p className={Classes.ErrorText}>
+                {props.otpError && props.otpError}
+              </p>
               <div>
                 <button
                   type="submit"

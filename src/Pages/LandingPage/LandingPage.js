@@ -204,6 +204,7 @@ const LandingPage = () => {
     );
   } else {
     newArriv = newArrival.map((item, index) => {
+      console.log("item.discount_percentage--->", item.discount_percentage);
       return (
         <NewArrivalCard
           ProductImage={item.thumbnail_image}
@@ -217,8 +218,9 @@ const LandingPage = () => {
           }
           PriceOld={item.is_on_discount ? item.total_price_final : null}
           key={index}
+          isDiscount={item.is_on_discount}
           Discount={
-            item.discount_percentage !== null
+            item.discount_percentage && item.discount_percentage !== 0.0
               ? item.discount_percentage + "% OFF"
               : null
           }
@@ -253,6 +255,7 @@ const LandingPage = () => {
           }
           PriceOld={item.is_on_discount ? item.total_price_final : null}
           key={index}
+          isDiscount={item.is_on_discount}
           Discount={
             item.discount_percentage !== null
               ? item.discount_percentage + "% OFF"
@@ -294,6 +297,7 @@ const LandingPage = () => {
                     : item.total_price_final
                 }
                 PriceOld={item.is_on_discount ? item.total_price_final : null}
+                isDiscount={item.is_on_discount}
                 Discount={
                   item.discount_percentage !== null && undefined
                     ? item.discount_percentage + "% OFF"

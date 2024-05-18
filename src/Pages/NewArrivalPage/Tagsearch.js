@@ -297,10 +297,9 @@ const TagSearch = (props) => {
           }
           PriceOld={item.is_on_discount ? item.total_price_final : null}
           key={index}
+          isDiscount={item.is_on_discount}
           Discount={
-            item.discount_percentage !== null
-              ? item.discount_percentage + "%OFF"
-              : item.discount_percentage
+            item.discount_percentage && item.discount_percentage + "%OFF"
           }
           clicked={() => prodDetHandler(item)}
           wishAct={item.wishlist_id}
