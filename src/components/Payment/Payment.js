@@ -474,7 +474,7 @@ const Payment = () => {
               </div>
               {data.totalSavedAmount ? (
                 <p className={Classes.HurrayText}>
-                  You totaly saved {data.totalSavedAmount}. hurray!..
+                  You totaly saved {data.totalSavedAmount} hurray!..
                 </p>
               ) : null}
             </div>
@@ -514,7 +514,13 @@ const Payment = () => {
               </>
             )}
           </div>
-          <div className={Classes.PayButtonMobile} onClick={placeOrder}>
+          <div
+            className={Classes.PayButtonMobile}
+            onClick={() => {
+              mode ? placeOrder() : alert("Please select a payment method");
+              // setPmethodError("Please select a payment method");
+            }}
+          >
             Pay &#x20B9; {data.pay}
           </div>
         </div>

@@ -252,7 +252,7 @@ function CartDesign(props) {
                 />
                 {props.totalSavedAmount ? (
                   <p className={Classes.HurrayText}>
-                    You totaly saved {props.totalSavedAmount}. hurray!..
+                    You totaly saved {props.totalSavedAmount} hurray!..
                   </p>
                 ) : null}
                 {/* <button

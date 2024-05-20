@@ -901,8 +901,8 @@ function CheckOut(props) {
                 </div>
                 {props.proDet.data.totalSavedAmount ? (
                   <p className={Classes.HurrayText}>
-                    You totoly saved {props.proDet.data.totalSavedAmount}.
-                    hurray!..
+                    You totoly saved {props.proDet.data.totalSavedAmount}
+                    &nbsp;hurray!..
                   </p>
                 ) : null}
               </div>
