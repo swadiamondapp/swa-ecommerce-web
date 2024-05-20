@@ -33,6 +33,19 @@ const style = {
   outline: "none",
 };
 
+const styleDesk = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%,-50%)",
+  width: 375,
+  height: "auto",
+  bgcolor: "background.paper",
+  border: "none",
+  boxShadow: 24,
+  p: 2,
+  outline: "none",
+};
 const LoginModal = (props) => {
   const userDetailsRef = useRef(null);
   const nameRef = useRef(null);
@@ -62,6 +75,9 @@ const LoginModal = (props) => {
   const [createError, setCreateError] = useState("");
   const [isSignpuLogin, setIsSignpuLogin] = useState(false);
   const username = localStorage.getItem("name");
+  const [isDesk, setIsDesk] = useState(
+    window.innerWidth >= 300 && window.innerWidth <= 575
+  );
 
   const [error, setError] = useState("");
   const history = useHistory();
@@ -143,6 +159,18 @@ const LoginModal = (props) => {
       });
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesk(window.innerWidth >= 300 && window.innerWidth <= 575);
+    };
+    // Add event listener to listen for window resize
+    window.addEventListener("resize", handleResize);
+
+    // Remove event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [isDesk]);
   const sentOtpHandler = () => {
     let selObj = country.arrayCountryList.find(
       (item) => item.name === selected
@@ -650,7 +678,7 @@ const LoginModal = (props) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={isDesk ? style : styleDesk}>
           <Typography>
             <div>
               <LoginToggle

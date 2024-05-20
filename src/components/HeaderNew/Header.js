@@ -167,7 +167,8 @@ const Header = (props) => {
   //   }
   // };
   const cattSelHandler = (setItem) => {
-    window.location.href = "https://swaecomnew.zinfog.in/" + setItem.id;
+    window.location.href =
+      "https://swaecomnew.zinfog.in/category_search/" + setItem.id;
   };
   const tagSelHandler = (selItem) => {
     if (history.location.pathname.slice(0, 12) === "/new_arrivel") {

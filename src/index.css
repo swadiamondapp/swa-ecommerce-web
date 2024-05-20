@@ -70,6 +70,9 @@ input::placeholder {
   text-align: left !important;
   padding-left: 0px !important;
 }
+.ProductdetialParentContainer {
+  margin-top: 40px;
+}
 
 .btnPad {
   padding-top: 20px;
@@ -817,13 +820,20 @@ input[type="number"] {
     align-items: center !important;
     justify-content: center !important;
     position: relative;
-    top: -68px;
+    /* top: -68px; */
+    top: -18px;
   }
   .Innerslide {
     display: none;
   }
   .ParentSlide .slick-dots li {
     width: 40px !important;
+  }
+  .ProductdetialParentContainer {
+    margin-top: 0px;
+  }
+  .biggersliderimg {
+    padding: 0px !important;
   }
   .ParentSlide .slick-dots li button:before {
     font-size: 14px;

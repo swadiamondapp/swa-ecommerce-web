@@ -72,6 +72,7 @@ const ProductDetails = (props) => {
   const countryId = localStorage.getItem("id");
   // State to track the current slide index
   const [currentSlideIndex, setCurrentSlideIndex] = useState(6);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   const largeSliderRef = useRef(null);
 
@@ -86,6 +87,7 @@ const ProductDetails = (props) => {
 
   const handleImageClick = (index) => {
     largeSliderRef.current.slickGoTo(index);
+    setActiveIndex(index);
   };
   const handleImageClicked = () => {
     if (ratingRef.current) {
@@ -447,7 +449,7 @@ const ProductDetails = (props) => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          autoplay: true,
+
           centerMode: true,
           centerPadding: "0px",
         },
@@ -526,10 +528,10 @@ const ProductDetails = (props) => {
 
   return (
     <div>
-      <div className="container" style={{ marginTop: "40px" }}>
+      <div className="container ProductdetialParentContainer">
         <ToastContainer />
         <div className="row">
-          <div className="col-md-6">
+          <div className="col-md-6 biggersliderimg">
             <div className={`${Classes.Display} ${Classes.StickyDisplay}`}>
               <div className="container">
                 <div className="row">
@@ -569,9 +571,7 @@ const ProductDetails = (props) => {
                                         </div>
                                       )}
                                     <img
-                                      style={{
-                                        maxWidth: "100%",
-                                      }}
+                                      className={Classes.Mobsliderbig}
                                       src={item}
                                       alt={`Slide ${index}`}
                                     />
@@ -659,6 +659,7 @@ const ProductDetails = (props) => {
                           src={props.bagImg[2]}
                         ></video> */}
                         {props.bagImg.map((url, index) => {
+                          const isActive = activeIndex === index;
                           if (
                             url.endsWith(".jpg") ||
                             url.endsWith(".jpeg") ||
@@ -668,6 +669,9 @@ const ProductDetails = (props) => {
                               <img
                                 onClick={() => handleImageClick(index)}
                                 style={{ width: "69px", height: "69px" }}
+                                className={`${
+                                  isActive ? Classes.selectedOptionColor : ""
+                                }`}
                                 key={index}
                                 src={url}
                                 alt={`Media ${index}`}

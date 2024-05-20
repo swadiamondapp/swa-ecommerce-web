@@ -8,10 +8,11 @@ import banner3 from "../../Assets/swabanner3.png";
 const BringTheParty = (props) => {
   const history = useHistory();
   const [adds, setAdds] = useState([
-    { Ad_image: "", type_id: "", is_category: false },
-    { Ad_image: "", type_id: "", is_category: false },
-    { Ad_image: "", type_id: "", is_category: false },
+    { Ad_image: "", Ad_video: "", type_id: "", is_category: false },
+    { Ad_image: "", Ad_video: "", type_id: "", is_category: false },
+    { Ad_image: "", Ad_video: "", type_id: "", is_category: false },
   ]);
+  console.log("anasadds1", adds);
   useEffect(() => {
     setAdds(props.add);
   }, [props]);
@@ -45,9 +46,9 @@ const BringTheParty = (props) => {
             <div className={`col-md-12 ${Classes.MobBringtheparty}`}>
               <div className={`container ${Classes.MobBringtheparty}`}>
                 <div className="row">
-                  {adds.map(
-                    (item, index) =>
-                      item.Ad_image && (
+                  {adds.map((item, index) => (
+                    <>
+                      {item.Ad_image && (
                         <div
                           className={`col-md-12 ${Classes.MobBringtheparty}`}
                           style={{ paddingBottom: "10px" }}
@@ -60,8 +61,22 @@ const BringTheParty = (props) => {
                             onClick={() => advClicked(adds[0])}
                           />
                         </div>
-                      )
-                  )}
+                      )}
+                      {item.Ad_video && (
+                        <div
+                          className={`col-md-6 ${Classes.MobBringthepartyvideo}`}
+                          style={{ paddingBottom: "10px" }}
+                        >
+                          <video
+                            className={Classes.Video1}
+                            src={item.Ad_video}
+                            controls
+                            onClick={() => advClicked(item)}
+                          />
+                        </div>
+                      )}
+                    </>
+                  ))}
 
                   {/* <div
                     className={`col-md-12 ${Classes.MobBringtheparty}`}

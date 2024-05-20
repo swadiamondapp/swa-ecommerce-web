@@ -93,7 +93,7 @@ const SililerProducts = (props) => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          autoplay: true,
+
           centerMode: true,
           centerPadding: "10px",
         },
@@ -158,8 +158,7 @@ const SililerProducts = (props) => {
                       onClick={() => prodDetHandler(item)}
                     >
                       <img
-                        style={{ width: "255px", height: "255px" }}
-                        className={Classes.SlideImage}
+                        className={Classes.SlideImagedesk}
                         src={item.thumbnail_image}
                         alt={`catg-${index}`}
                       />
