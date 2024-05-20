@@ -37,9 +37,9 @@ const LandingPage = () => {
     { budget: "", count: "" },
   ]);
   const [add, setAdd] = useState([
-    { Ad_image: "" },
-    { Ad_image: "" },
-    { Ad_image: "" },
+    { Ad_image: "", Ad_video: null },
+    { Ad_image: "", Ad_video: null },
+    { Ad_image: "", Ad_video: null },
   ]);
   const [topDeamd, setTopDemand] = useState([]);
   const [video, setVideo] = useState("");

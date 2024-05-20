@@ -258,6 +258,7 @@ header {
 @media (min-width: 300px) and (max-width: 575px) {
   .loginToffle {
     max-height: 475px;
+    max-height: 560px;
     overflow-y: scroll !important;
   }
   .loginWrapper {

@@ -33,6 +33,11 @@
   font-family: "gilroyNormal" !important;
   /* width: 340px; */
 }
+.MobBringthepartyvideo video {
+  width: 100%;
+
+  border-radius: 5px;
+}
 .Image1 {
   width: 100%;
   cursor: pointer;

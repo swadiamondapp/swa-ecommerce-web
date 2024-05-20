@@ -158,6 +158,10 @@ header {
   width: calc(100% - 10px); /* Adjust the width and margin as needed */
   margin-right: 10px;
 }
+.SlideImagedesk {
+  width: 100% !important;
+  height: 255px !important;
+}
 
 /* Add a margin to the last slide to create a gap */
 .Offers:last-child .SlideImage {
@@ -1287,8 +1291,6 @@ a {
   }
   .MobileSearchbarOthers {
     display: block;
-    box-shadow: 0px 2px 2px 0px #0000000d;
-    padding-bottom: 5px;
   }
   .MobSliderCards {
     display: flex;
@@ -1325,8 +1327,6 @@ a {
   }
   .MobileSearchbarOthers {
     display: block;
-    box-shadow: 0px 2px 2px 0px #0000000d;
-    padding-bottom: 5px;
   }
   .hideSearchBar {
     display: none;
@@ -1340,6 +1340,7 @@ a {
 
   .searchbar {
     width: 100%;
+    margin-bottom: 7px;
   }
   .MobSliderCards {
     display: flex;
@@ -1372,6 +1373,7 @@ a {
   .WebMobSlide {
     display: block;
   }
+
   .searchListCont {
     display: block;
     top: 27%;
