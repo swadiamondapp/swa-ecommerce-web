@@ -35,7 +35,8 @@
 }
 .MobBringthepartyvideo video {
   width: 100%;
-
+  object-fit: cover;
+  height: 300px;
   border-radius: 5px;
 }
 .Image1 {
