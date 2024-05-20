@@ -8,12 +8,17 @@ import { IoCartOutline } from "react-icons/io5";
 import * as Urls from "../../Urls";
 import axios from "axios";
 import Slider from "react-slick";
+import CheckDelivery from "../CheckDelivery/CheckDelivery";
 
 const SililerProducts = (props) => {
   const history = useHistory();
   const [similarProducts, setSimilarProducts] = useState([]);
   const [slidesToShow, setSlidesToShow] = useState(5);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [showModal, setShowModal] = useState(false);
+  const [buttonText, setButtonText] = useState("Check delivery date");
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [buttonLabels, setButtonLabels] = useState({});
 
   useEffect(() => {
     similarProduct();
@@ -28,6 +33,24 @@ const SililerProducts = (props) => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  const handleShowModal = (product) => {
+    setSelectedProduct(product);
+    const pincode = localStorage.getItem("pincode");
+    if (pincode) {
+      setButtonLabels((prevLabels) => ({
+        ...prevLabels,
+        [product.product_id]: "Delivery by 10th May",
+      }));
+    } else {
+      setShowModal(true);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedProduct(null);
+  };
 
   const similarProduct = async () => {
     const response = await axios.get(
@@ -137,7 +160,20 @@ const SililerProducts = (props) => {
                           &#x20B9; {item.total_price_final}
                         </p>
                       </div>
-                      <p className={Classes.checkDate}>Check delivery date</p>
+                      <div>
+                        <p
+                          className={Classes.checkDate}
+                          onClick={() => handleShowModal(item)}
+                        >
+                          {buttonLabels[item.product_id] ||
+                            "Check delivery date"}
+                        </p>
+                      </div>
+                      {/* <CheckDelivery
+                        show={showModal}
+                        handleClose={handleCloseModal}
+                        handleShow={handleShowModal}
+                      /> */}
                       <div className={Classes.MainBtns}>
                         <div className={Classes.ParentHoverBtns}>
                           <button className={Classes.tryBtn}>
@@ -146,6 +182,13 @@ const SililerProducts = (props) => {
                           <button className={Classes.buynowbtn}>Buy now</button>
                         </div>
                       </div>
+                      {selectedProduct === item && (
+                        <CheckDelivery
+                          show={showModal}
+                          handleClose={handleCloseModal}
+                          handleShow={() => handleShowModal(item)}
+                        />
+                      )}
                     </div>
                   ))}
                 </div>
@@ -176,15 +219,31 @@ const SililerProducts = (props) => {
                           </p>
                         )}
                       </div>
-                      <p
+                      {/* <p
                         className={Classes.checkDate}
                         onClick={(event) => {
                           event.stopPropagation();
-                          // Add any additional logic for this element if needed
+                         
                         }}
                       >
                         Check delivery date
-                      </p>
+                      </p> */}
+                      <div>
+                        <p
+                          className={Classes.checkDate}
+                          onClick={() => handleShowModal(item)}
+                        >
+                          {buttonLabels[item.product_id] ||
+                            "Check delivery date"}
+                        </p>
+                      </div>
+                      {selectedProduct === item && (
+                        <CheckDelivery
+                          show={showModal}
+                          handleClose={handleCloseModal}
+                          handleShow={() => handleShowModal(item)}
+                        />
+                      )}
                       <div className={Classes.MainBtns}>
                         <div className={Classes.ParentHoverBtns}>
                           <button className={Classes.tryBtn}>
