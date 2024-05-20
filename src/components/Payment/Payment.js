@@ -23,7 +23,7 @@ const Payment = () => {
   const [addressId, setAddressId] = useState(null);
   const [address, setAddress] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedAddress, setSelectedAddress] = useState(null);
+  const [pmethodError, setPmethodError] = useState("");
   const [addressData, setAddressData] = useState({
     sEmail: "",
     sPhone: "",
@@ -139,13 +139,14 @@ const Payment = () => {
       }
     }
     if (token) {
-      setIsLoading(true);
-      axios
-        .post(Urls.checkout, cartBody, {
-          headers: { Authorization: "Token " + _userToken },
-        })
-        .then((response1) => {
-          if (mode === "upi" || mode === "credit_card") {
+      if (mode === "upi" || mode === "credit_card") {
+        setIsLoading(true);
+        axios
+          .post(Urls.checkout, cartBody, {
+            headers: { Authorization: "Token " + _userToken },
+          })
+          .then((response1) => {
+            setIsLoading(false);
             var options = {
               key: "rzp_test_hbBeCNBjrqDq6P", // test Key
               key_secret: "HwgmIdicOPlAeLkBdOJIMXiu",
@@ -198,7 +199,18 @@ const Payment = () => {
             };
             var pay = new window.Razorpay(options);
             pay.open();
-          } else if (mode === "cash") {
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else if (mode === "cash") {
+        setIsLoading(true);
+        axios
+          .post(Urls.checkout, cartBody, {
+            headers: { Authorization: "Token " + _userToken },
+          })
+          .then((response1) => {
+            setIsLoading(false);
             if (response1.data.results.status_code === 200 && !token) {
               localStorage.setItem("swaToken", data.token);
               localStorage.setItem("userName", data.name);
@@ -207,18 +219,17 @@ const Payment = () => {
             } else if (response1.data.results.status_code === 200) {
               history.push("/my_orders");
             }
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+          });
+      }
     } else {
-      axios
-        .post(Urls.buyNow, buyBody, {
-          headers: { Authorization: "Token " + _userToken },
-        })
-        .then((response1) => {
-          if (mode === "upi" || mode === "credit_card") {
+      if (mode === "upi" || mode === "credit_card") {
+        axios
+          .post(Urls.buyNow, buyBody, {
+            headers: {
+              Authorization: "Token " + _userToken,
+            },
+          })
+          .then((response1) => {
             var options = {
               //test_secret
               key: "rzp_test_hbBeCNBjrqDq6P",
@@ -240,7 +251,9 @@ const Payment = () => {
 
                 axios
                   .post(Urls.paySuces, bodyPay, {
-                    headers: { Authorization: "Token " + token },
+                    headers: {
+                      Authorization: "Token " + token,
+                    },
                   })
                   .then((response2) => {
                     if (response2.data.results.status_code === 200 && !token) {
@@ -270,8 +283,18 @@ const Payment = () => {
             };
             var pay = new window.Razorpay(options);
             pay.open();
-          } else if (mode === "cash") {
-            console.log(response1);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else if (mode === "cash") {
+        axios
+          .post(Urls.buyNow, buyBody, {
+            headers: {
+              Authorization: "Token " + _userToken,
+            },
+          })
+          .then((response1) => {
             if (response1.data.results.status_code === 200 && !token) {
               localStorage.setItem("swaToken", data.token);
               localStorage.setItem("userName", data.name);
@@ -280,11 +303,8 @@ const Payment = () => {
             } else if (response1.data.results.status_code === 200) {
               history.push("/my_orders");
             }
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+          });
+      }
     }
   };
 
@@ -339,6 +359,8 @@ const Payment = () => {
     getDefaultAddress(token);
     fetchAddress();
   };
+
+  console.log("mode--->", mode);
 
   return (
     <div>
@@ -427,7 +449,13 @@ const Payment = () => {
                   &#x20B9; {data.pay}
                 </p>
               </div>
-              <div className={Classes.PayButton} onClick={placeOrder}>
+              <div
+                className={Classes.PayButton}
+                onClick={() => {
+                  mode ? placeOrder() : alert("Please select a payment method");
+                  // setPmethodError("Please select a payment method");
+                }}
+              >
                 {isLoading ? (
                   <>
                     <Box
@@ -444,10 +472,11 @@ const Payment = () => {
                   <>Pay &#x20B9; {data.pay}</>
                 )}
               </div>
-
-              <p className={Classes.HurrayText}>
-                You totaly saved {"9888"}. hurray!..
-              </p>
+              {data.totalSavedAmount ? (
+                <p className={Classes.HurrayText}>
+                  You totaly saved {data.totalSavedAmount}. hurray!..
+                </p>
+              ) : null}
             </div>
           </div>
           <div className={Classes.DeliverCard}>

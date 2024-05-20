@@ -167,7 +167,10 @@ const Header = (props) => {
   //   }
   // };
   const cattSelHandler = (setItem) => {
-    window.location.href = "https://swaecomnew.zinfog.in/" + setItem.id;
+    history.push({
+      pathname: "/new_arrivel",
+      state: { data: setItem.id, product_category: setItem.name },
+    });
   };
   const tagSelHandler = (selItem) => {
     if (history.location.pathname.slice(0, 12) === "/new_arrivel") {

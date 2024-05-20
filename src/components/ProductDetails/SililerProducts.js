@@ -177,7 +177,15 @@ const SililerProducts = (props) => {
                           </p>
                         )}
                       </div>
-                      <p className={Classes.checkDate}>Check delivery date</p>
+                      <p
+                        className={Classes.checkDate}
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          // Add any additional logic for this element if needed
+                        }}
+                      >
+                        Check delivery date
+                      </p>
                       <div className={Classes.MainBtns}>
                         <div className={Classes.ParentHoverBtns}>
                           <button className={Classes.tryBtn}>

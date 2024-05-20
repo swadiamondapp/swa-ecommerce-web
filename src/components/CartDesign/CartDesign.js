@@ -40,6 +40,7 @@ function CartDesign(props) {
           pay: amountPay,
           total: total,
           updatedCartResponse: updatedCartResponse,
+          totalSavedAmount: props.totalSavedAmount,
         },
         name: "cart",
       },
@@ -122,6 +123,7 @@ function CartDesign(props) {
                 pay: response.data.results.amount_to_pay,
                 total: response.data.results.total_amount,
                 updatedCartResponse: response.data.results,
+                totalSavedAmount: props.totalSavedAmount,
               },
               name: "cart",
             },
@@ -248,9 +250,9 @@ function CartDesign(props) {
                     }
                   }}
                 />
-                {total === amountPay ? (
+                {props.totalSavedAmount ? (
                   <p className={Classes.HurrayText}>
-                    You totaly saved {total - amountPay}. hurray!..
+                    You totaly saved {props.totalSavedAmount}. hurray!..
                   </p>
                 ) : null}
                 {/* <button

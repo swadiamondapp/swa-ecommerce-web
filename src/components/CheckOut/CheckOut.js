@@ -518,6 +518,7 @@ function CheckOut(props) {
                 number: _userMob,
                 buyBody: location.state.data,
                 userId: _userId,
+                totalSavedAmount: props.proDet.data.totalSavedAmount,
               },
               name: "cart",
             },
@@ -535,6 +536,7 @@ function CheckOut(props) {
             total: total,
             addressId: addressData.id,
             updatedCart: props.proDet.data.updatedCartResponse,
+            totalSavedAmount: props.proDet.data.totalSavedAmount,
           },
           name: "cart",
         },
@@ -897,9 +899,10 @@ function CheckOut(props) {
                 >
                   Proceed to payment
                 </div>
-                {total !== amountPay ? (
+                {props.proDet.data.totalSavedAmount ? (
                   <p className={Classes.HurrayText}>
-                    You totoly saved {total - amountPay}. hurray!..
+                    You totoly saved {props.proDet.data.totalSavedAmount}.
+                    hurray!..
                   </p>
                 ) : null}
               </div>

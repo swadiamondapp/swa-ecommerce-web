@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useParams } from "react-router-dom/cjs/react-router-dom";
 import Header from "../../components/HeaderNew/Header";
 import Footer from "../../components/Footer/Footer";
 import RecentSearch from "../../components/RecentSearch/RecentSearch";
@@ -13,6 +14,7 @@ import { useHistory } from "react-router-dom";
 import SliderFeature from "../../components/ProductDetails/SliderFeature";
 
 const ProductDetailsPage = (props) => {
+  const { id } = useParams();
   const [prodDet, setProdDet] = useState([]);
   const [sizeChart, setSizeChart] = useState([]);
   const [colorChart, setColorChart] = useState([]);
@@ -50,10 +52,13 @@ const ProductDetailsPage = (props) => {
     ) {
       console.log(JSON.parse(localStorage.getItem("recent")));
       let proArray = JSON.parse(localStorage.getItem("recent"));
-      const newProd = props.location.state.data;
-
-      console.log("newProd", newProd);
-      if (proArray !== null) {
+      const newProd =
+        props &&
+        props.location &&
+        props.location.state &&
+        props.location.state.data;
+      if (proArray.some((element) => element)) {
+        console.log("proArray--->", proArray);
         const found = proArray.find((element) => {
           return element.product_id === newProd.product_id;
         });
@@ -63,7 +68,11 @@ const ProductDetailsPage = (props) => {
           localStorage.setItem("recent", JSON.stringify(filterArray));
         }
       } else {
-        const newProd = props.location.state.data;
+        const newProd =
+          props &&
+          props.location &&
+          props.location.state &&
+          props.location.state.data;
         let newArray = [];
         newArray.push(newProd);
         localStorage.setItem("recent", JSON.stringify(newArray.slice(0, 5)));
@@ -256,8 +265,6 @@ const ProductDetailsPage = (props) => {
     flag_image: flag,
     country_name: Contryname,
   });
-
-  console.log("prodDet--->", prodDet);
 
   return (
     <div>
