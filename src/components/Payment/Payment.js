@@ -360,8 +360,6 @@ const Payment = () => {
     fetchAddress();
   };
 
-  console.log("mode--->", mode);
-
   return (
     <div>
       <div className={`${Classes.Wrapper} container`}>
