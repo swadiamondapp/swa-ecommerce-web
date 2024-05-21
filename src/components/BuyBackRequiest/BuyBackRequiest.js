@@ -181,7 +181,7 @@ const BuyBackRequiest = (props) => {
                       placeholder="+91 9995200657"
                       className={Classes.alllInputFeilds}
                       name="mobile"
-                      value={props.addressData.mobile}
+                      value={props.addressData.phone_number}
                       onChange={handleChangeAddress}
                     />
                   </div>

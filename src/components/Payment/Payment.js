@@ -71,7 +71,8 @@ const Payment = () => {
 
   useEffect(() => {
     let _token = !data.token ? token : data.token;
-    _token && getDefaultAddress(_token);
+    // _token && getDefaultAddress(_token);
+    setAddressData(data.addressData);
   }, [data]);
 
   const placeOrder = () => {
@@ -359,8 +360,6 @@ const Payment = () => {
     getDefaultAddress(token);
     fetchAddress();
   };
-
-  console.log("mode--->", mode);
 
   return (
     <div>
