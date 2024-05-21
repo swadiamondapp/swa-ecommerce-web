@@ -4,6 +4,105 @@
   box-shadow: 0px 2px 2px 0px #0000000d;
   padding: 20px;
 }
+.mainContianerProfile {
+  background: #eeeeee;
+  border-radius: 4px;
+  box-shadow: 0px 2px 2px 0px #0000000d;
+  padding: 30px 20px;
+}
+.ProfileCard {
+  box-shadow: 0px 2px 2px 0px #0000000d;
+  background: #fff;
+  margin: 0px 350px;
+  border: 0.5px solid #e8e8e8;
+  padding: 25px;
+  border-radius: 4px;
+  font-family: "lato";
+}
+.ProfileForms label {
+  color: #585f67;
+  font-weight: 500;
+}
+.ProfileForms input {
+  background: #f9f9f9;
+  border: 0.5px solid #e8e9ea;
+  padding: 10px;
+  border-radius: 4px;
+  outline: none;
+  width: 100%;
+}
+.ParentProfileBtn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.ProfileCard h3 {
+  color: #000000;
+  font-weight: 500;
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+.ProfileCard img {
+  margin-bottom: 10px;
+}
+.UploadPhotoProfile {
+  color: #0464d5;
+  font-weight: 500;
+}
+.ProfileNames {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+.ProfileMails {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+.ProfileMobile {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+.VerifyProfilebtn {
+  display: flex;
+  gap: 10px;
+}
+.ProfileForms {
+  margin-top: 15px;
+  margin-bottom: 30px;
+}
+.VerifyProfilebtn button {
+  background: #00464d;
+  color: #fff;
+  border: none;
+  padding: 0px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.ProfileSaveChangeBtn {
+  width: 100%;
+  color: #fff;
+  /* border: 0.5px solid #19242D; */
+  background: #19242d;
+  font-weight: 500;
+  font-family: "Lato";
+  padding: 10px;
+  border-radius: 4px;
+  outline: none;
+}
+.ProfileCancelbtn {
+  width: 100%;
+  color: #19242d;
+  border: 0.5px solid #19242d;
+  background: transparent;
+  font-weight: 500;
+  font-family: "Lato";
+  padding: 10px;
+  border-radius: 4px;
+  outline: none;
+}
 .title {
   padding: 0px 20px 10px 45px;
   font-weight: 600;

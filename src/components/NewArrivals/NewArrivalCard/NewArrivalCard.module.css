@@ -260,6 +260,7 @@
 @media (min-width: 300px) and (max-width: 575px) {
   .NewArrivals {
     margin-bottom: 10px;
+    padding: 0px;
   }
   .buyNow {
     display: none;
@@ -312,9 +313,10 @@
     justify-content: left;
     padding: 10px 10px;
     gap: 10px;
+    align-items: center;
   }
   .PriceNew {
-    font-size: 14px;
+    font-size: 13px;
   }
   .ProductImage {
     width: 100%;
@@ -324,7 +326,7 @@
     font-size: 16px;
   }
   .PriceOld {
-    font-size: 14px;
+    font-size: 12px;
   }
   .Discount {
     position: absolute;

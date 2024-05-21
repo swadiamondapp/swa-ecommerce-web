@@ -70,7 +70,7 @@ const NewArrivalPage = (props) => {
       </div>
 
       <div>
-        <div className="container pad-10">
+        <div className="container newarrivalcardmob">
           <div className="row">{props.children}</div>
         </div>
       </div>

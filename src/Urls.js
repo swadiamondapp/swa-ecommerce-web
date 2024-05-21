@@ -57,7 +57,7 @@ export const updatePas = server + "api/update/";
 export const pincodeCheck = server + "ecom/pincode_check/?pincode=";
 
 // getContrey Details
-export const getCountryFlags = server + "/ecom/country-details/"
+export const getCountryFlags = server + "/ecom/country-details/";
 
 //track
 export const track = server + "ecom/product-tracking/";
@@ -90,3 +90,4 @@ export const defaultAddress = server + "ecom/address/";
 export const addBankAccount = server + "ecom/bank/add/";
 export const getWalletAmounts = server + "ecom/checkout/";
 export const singleReview = server + "ecom/review/";
+export const headeroffer = server + "ecom/header-details/";

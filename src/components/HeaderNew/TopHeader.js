@@ -3,12 +3,28 @@ import Classes from "./TopHeader.module.css";
 import { HiOutlineMail } from "react-icons/hi";
 import { useHistory } from "react-router-dom";
 import { FaPhoneAlt } from "react-icons/fa";
+import axios from "axios";
+import * as Urls from "../../Urls";
 
 const TopHeader = (props) => {
   const history = useHistory();
   const displayJoinHandler = () => {
     history.push("/join");
   };
+  const [headeroffer, setHeaderoffer] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(Urls.headeroffer)
+      .then((response) => {
+        setHeaderoffer(response.data.results.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching home data:", error);
+      });
+  }, []);
+
+  console.log("headeroffer", headeroffer);
   return (
     <div className={Classes.Header_top}>
       {/* <div className={`${"container"} ${Classes.HeaderTop_Text}`}>
@@ -27,7 +43,14 @@ const TopHeader = (props) => {
         </div>
       </div> */}
       <div className={Classes.DiwaliOffersdesk}>
-        Diwali offer - 10% on every purchase 🥳
+        {headeroffer.map((item) => (
+          <>
+            <p style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+              {item.head}
+            </p>
+            🥳
+          </>
+        ))}
       </div>
     </div>
   );

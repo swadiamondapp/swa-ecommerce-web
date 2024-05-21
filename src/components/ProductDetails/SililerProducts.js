@@ -35,6 +35,7 @@ const SililerProducts = (props) => {
   }, []);
 
   const handleShowModal = (product) => {
+    console.log("product--->", product);
     setSelectedProduct(product);
     const pincode = localStorage.getItem("pincode");
     if (pincode) {
@@ -231,7 +232,11 @@ const SililerProducts = (props) => {
                       <div>
                         <p
                           className={Classes.checkDate}
-                          onClick={() => handleShowModal(item)}
+                          onClick={(event) => {
+                            console.log("nithin", item);
+                            event.stopPropagation();
+                            handleShowModal(item);
+                          }}
                         >
                           {buttonLabels[item.product_id] ||
                             "Check delivery date"}
