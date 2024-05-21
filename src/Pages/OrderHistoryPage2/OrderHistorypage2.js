@@ -55,6 +55,7 @@ const OrderHistorypage2 = (props) => {
     area: "",
     type: "",
   });
+  const [productDetails, setProductDetails] = useState([]);
   const [orderId, setOrderId] = useState("");
   const [orderid, setOrderid] = useState("");
   const [total, setTotal] = useState("");
@@ -152,20 +153,22 @@ const OrderHistorypage2 = (props) => {
         }
       );
       if (response.data.results.status_code === 200) {
-        setSingleOrderData(response.data.results);
-        setAddressData({
-          ...addressData,
-          sEmail: response.data.results.data.order.address.email,
-          sPhone: response.data.results.data.order.address.phone_number,
-          fullName: response.data.results.data.order.address.name,
-          mobile: response.data.results.data.order.address.phone_number,
-          pincode: response.data.results.data.order.address.pincode,
-          city: response.data.results.data.order.address.city,
-          state: response.data.results.data.order.address.state,
-          hNumber_Bname: response.data.results.data.order.address.house,
-          streetColony: response.data.results.data.order.address.area,
-          landMark: response.data.results.data.order.address.landmark,
-        });
+        setSingleOrderData(response.data.results.data);
+        response.data.results.data &&
+          response.data.results.data.order &&
+          response.data.results.data.order.address &&
+          setAddress({
+            ...address,
+            name: response.data.results.data.order.address.name,
+            phone_number: response.data.results.data.order.address.phone_number,
+            pincode: response.data.results.data.order.address.pincode,
+            city: response.data.results.data.order.address.city,
+            state: response.data.results.data.order.address.state,
+            house: response.data.results.data.order.address.house,
+            area: response.data.results.data.order.address.area,
+            landmark: response.data.results.data.order.address.landmark,
+          });
+        setProductDetails(response.data.results.data.shipment);
       }
     } catch (error) {
       console.log(error);
@@ -274,8 +277,8 @@ const OrderHistorypage2 = (props) => {
   };
 
   console.log(
-    "singleOrderData--->",
-    singleOrderData && singleOrderData.order && singleOrderData.order.address
+    "singleOrderData--->1233",
+    singleOrderData && singleOrderData.order && singleOrderData.order
   );
 
   const countryId = localStorage.getItem("id");
@@ -287,7 +290,15 @@ const OrderHistorypage2 = (props) => {
     country_name: Contryname,
   });
 
-  console.log("singleOrderData--->", singleOrderData.data);
+  console.log(
+    "singleOrderData--->12",
+    singleOrderData &&
+      singleOrderData.data &&
+      singleOrderData.data.order &&
+      singleOrderData.data.order.address
+  );
+
+  console.log("productDetails--->", productDetails);
 
   return (
     <div>
