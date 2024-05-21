@@ -218,6 +218,9 @@ p {
   > .ant-steps-item-tail::after {
   background-color: #0eb533 !important;
 }
+.newarrivalcardmob {
+  padding: 10px;
+}
 .ant-steps
   .ant-steps-item-process
   .ant-steps-item-icon
@@ -833,6 +836,9 @@ input[type="number"] {
     margin-top: 0px;
   }
   .biggersliderimg {
+    padding: 0px !important;
+  }
+  .newarrivalcardmob {
     padding: 0px !important;
   }
   .ParentSlide .slick-dots li button:before {

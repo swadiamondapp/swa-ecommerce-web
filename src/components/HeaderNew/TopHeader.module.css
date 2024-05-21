@@ -445,6 +445,10 @@ a {
   color: #fff;
   font-size: 15px;
   padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 .CheckBox {
   margin-bottom: 15px;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, Box } from "@mui/material";
 import Classes from "./ProductDetails.module.css";
 import videoimg from "../../../src/Assets/videosucces.png";
@@ -9,6 +9,21 @@ const VideocallForm = ({ isOpen, handleClose }) => {
   const handleLanguageClick = (language) => {
     setActiveLanguage(language);
   };
+  const [isDesk, setIsDesk] = useState(
+    window.innerWidth >= 300 && window.innerWidth <= 575
+  );
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesk(window.innerWidth >= 300 && window.innerWidth <= 575);
+    };
+    // Add event listener to listen for window resize
+    window.addEventListener("resize", handleResize);
+
+    // Remove event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [isDesk]);
   const languages = ["English", "Malayalam", "Tamil", "Hindi", "Telugu"];
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -19,6 +34,29 @@ const VideocallForm = ({ isOpen, handleClose }) => {
     setIsSuccessOpen(false);
     handleClose();
   };
+  const style = {
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
+    height: "auto",
+    bgcolor: "background.paper",
+    boxShadow: 24,
+    p: 2,
+    outline: "none",
+  };
+  const styleDesk = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%,-50%)",
+    width: "400px",
+    height: "auto",
+    bgcolor: "background.paper",
+
+    boxShadow: 24,
+    p: 2,
+    outline: "none",
+  };
 
   return (
     <div>
@@ -28,19 +66,7 @@ const VideocallForm = ({ isOpen, handleClose }) => {
         aria-labelledby="modal-title"
         aria-describedby="modal-description"
       >
-        <Box
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: 400,
-            bgcolor: "background.paper",
-
-            boxShadow: 24,
-            p: 4,
-          }}
-        >
+        <Box sx={isDesk ? style : styleDesk}>
           <div style={{ overflow: "hidden" }}>
             <h3 className={Classes.vi_head}>Sheadule your video call</h3>
             <p className={Classes.vi_paras}>

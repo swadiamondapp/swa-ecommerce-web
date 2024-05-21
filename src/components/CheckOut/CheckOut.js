@@ -45,6 +45,7 @@ function CheckOut(props) {
   const [getOtpModal, setGetOtpModal] = useState(false);
   const [otp, setOtp] = useState(123456);
   const pincodes = localStorage.getItem("pincode");
+  const [timer, setTimer] = useState(60);
 
   const [addressData, setAddressData] = useState({
     sEmail: "",
@@ -466,6 +467,7 @@ function CheckOut(props) {
       console.log(response.data);
       if (response.data[0] === "Otp send Successfully") {
         setGetOtpModal(true);
+        setTimer(60);
         //  setIsSignup(false);
         //  handleOtpModalOpen();
       }
@@ -646,6 +648,22 @@ function CheckOut(props) {
     }
   };
 
+  useEffect(() => {
+    let countdown;
+    if (getOtpModal && timer > 0) {
+      countdown = setTimeout(() => {
+        setTimer(timer - 1);
+      }, 1000);
+    }
+    return () => clearTimeout(countdown);
+  }, [timer, getOtpModal]);
+
+  useEffect(() => {
+    if (getOtpModal) {
+      setTimer(60); // Reset timer to 60 seconds when the modal is opened
+    }
+  }, [getOtpModal]);
+
   return (
     <div>
       <OtpModal
@@ -654,6 +672,8 @@ function CheckOut(props) {
         isDesk={isDesk}
         customTabOtpModalStyle={customTabOtpModalStyle}
         customDestOtpModalStyle={customDestOtpModalStyle}
+        timer={timer}
+        handelLoginForm={handleSubmit}
         mobileNumber={addressData.sPhone}
         handleOtpForm={verifyOtp}
         setOtp={setOtp}

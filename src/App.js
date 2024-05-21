@@ -25,7 +25,9 @@ import RateAndReviewMain from "./Pages/RateAndReviewPage/RateAndReviewMain";
 import SwaWallet from "./components/SwaWallet/SwaWalletBalance";
 import SwaWalletBalance from "./components/SwaWallet/SwaWalletBalance";
 import SwaExchangeWallet from "./components/SwaWallet/SwaEchangeWallet";
-import SwaExchangBalance from "./components/SwaWallet/SwaExchangeBalance"
+import SwaExchangBalance from "./components/SwaWallet/SwaExchangeBalance";
+import ProfilePage from "./components/Profile/ProfilePage";
+import TryAtHomePage from "./components/TRY AT HOME/TryAtHomePage";
 function App() {
   return (
     <Router>
@@ -47,8 +49,8 @@ function App() {
         <Route path="/privacy_policy" component={PrivacyPolicyPage} exact />
         <Route path="/checkout" component={CheckOutPage} exact />
         <Route path="/addaddress" component={AddAddressPage} exact />
-        <Route path="/swaWallet" component={SwaWalletBalance}/>
-        <Route path="/swaExchange" component={SwaExchangBalance}/>
+        <Route path="/swaWallet" component={SwaWalletBalance} />
+        <Route path="/swaExchange" component={SwaExchangBalance} />
         <Route path="/place_order" component={CheckOutPage} exact />
         <Route path="/my_orders" component={OrderHistoryPage} exact />
         <Route path="/track_order" component={OrderHistorypage2} exact />
@@ -62,7 +64,8 @@ function App() {
           exact
         />
         <Route path="/payment" component={PaymentPage} />
-        
+        <Route path="/profile" component={ProfilePage} />
+        <Route path="/tryathome" component={TryAtHomePage} />
       </Switch>
     </Router>
   );
