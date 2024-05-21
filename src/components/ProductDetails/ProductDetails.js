@@ -685,7 +685,12 @@ const ProductDetails = (props) => {
                                     Your browser does not support the video tag.
                                   </video>
 
-                                  <BsFillPlayFill className={Classes.playbtn} />
+                                  <BsFillPlayFill
+                                    className={Classes.playbtn}
+                                    onClick={() =>
+                                      handleImageClick(imageUrls.length)
+                                    }
+                                  />
                                 </div>
                               </>
                             );

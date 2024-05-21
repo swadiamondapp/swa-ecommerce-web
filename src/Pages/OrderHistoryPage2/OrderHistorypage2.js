@@ -168,7 +168,11 @@ const OrderHistorypage2 = (props) => {
             area: response.data.results.data.order.address.area,
             landmark: response.data.results.data.order.address.landmark,
           });
-        setProductDetails(response.data.results.data.shipment);
+        setProductDetails(
+          response.data.results.data &&
+            response.data.results.data.order &&
+            response.data.results.data.order.shipment
+        );
       }
     } catch (error) {
       console.log(error);
