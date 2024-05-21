@@ -27,6 +27,7 @@ import SwaWalletBalance from "./components/SwaWallet/SwaWalletBalance";
 import SwaExchangeWallet from "./components/SwaWallet/SwaEchangeWallet";
 import SwaExchangBalance from "./components/SwaWallet/SwaExchangeBalance";
 import ProfilePage from "./components/Profile/ProfilePage";
+import TryAtHomePage from "./components/TRY AT HOME/TryAtHomePage";
 function App() {
   return (
     <Router>
@@ -64,6 +65,7 @@ function App() {
         />
         <Route path="/payment" component={PaymentPage} />
         <Route path="/profile" component={ProfilePage} />
+        <Route path="/tryathome" component={TryAtHomePage} />
       </Switch>
     </Router>
   );

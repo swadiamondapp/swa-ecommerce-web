@@ -635,7 +635,7 @@ const MobileNavbar = (props) => {
                             <AccordionTab header="Account">
                               <div className={Classes.ShippingDetialHead}>
                                 <div className={Classes.LoggedDetailsList}>
-                                  <Link to="" onClick={handleClose}>
+                                  <Link to="/profile" onClick={handleClose}>
                                     <p
                                       style={{
                                         fontSize: "16px",

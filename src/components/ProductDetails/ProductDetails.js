@@ -950,12 +950,7 @@ const ProductDetails = (props) => {
                       }}
                     />
                   </button>
-                  <button
-                    className={Classes.FindStores}
-                    onClick={handleOpenModal}
-                  >
-                    Try at Home
-                  </button>
+                  <button className={Classes.FindStores}>Try at Home</button>
                   <VideocallForm
                     isOpen={isModalOpen}
                     handleClose={handleCloseModal}
