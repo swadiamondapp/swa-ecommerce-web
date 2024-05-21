@@ -95,44 +95,44 @@ const OrderHistorypage2 = (props) => {
   // warnning
 
   useEffect(() => {
-    axios
-      .get(Urls.myOrder + "/" + props.location.state.data.productId, {
-        headers: {
-          Authorization: "Token " + token,
-        },
-      })
-      .then((response1) => {
-        console.log("response1->", response1);
-        setAddress(response1.data.results.data.order.address);
-        setOrderId(response1.data.results.data.order.order_code);
-        setOrderid(response1.data.results.data.order.id);
-        setOrderPlaced(response1.data.results.data.order.order_at);
-        setTotal(response1.data.results.data.order.grand_total);
-        setPromoCode(response1.data.results.data.order.promocode);
-        setSubTot(response1.data.results.data.order.orders_total);
-        setOrderDet(response1.data.results.data.order.shipment);
-        setPayMode(response1.data.results.data.order.payment_mode);
-        setDoctNum(response1.data.results.data.order.shipment[0].docket_number);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    axios
-      .get(Urls.cart, {
-        headers: {
-          Authorization: "Token " + token,
-        },
-      })
-      .then((response1) => {
-        if (response1.data.results.message === "cart is empty") {
-          setCartCount("");
-        } else {
-          setCartCount(response1.data.results.count);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // axios
+    //   .get(Urls.myOrder + "/" + props.location.state.data.productId, {
+    //     headers: {
+    //       Authorization: "Token " + token,
+    //     },
+    //   })
+    //   .then((response1) => {
+    //     console.log("response1->", response1);
+    //     setAddress(response1.data.results.data.order.address);
+    //     setOrderId(response1.data.results.data.order.order_code);
+    //     setOrderid(response1.data.results.data.order.id);
+    //     setOrderPlaced(response1.data.results.data.order.order_at);
+    //     setTotal(response1.data.results.data.order.grand_total);
+    //     setPromoCode(response1.data.results.data.order.promocode);
+    //     setSubTot(response1.data.results.data.order.orders_total);
+    //     setOrderDet(response1.data.results.data.order.shipment);
+    //     setPayMode(response1.data.results.data.order.payment_mode);
+    //     setDoctNum(response1.data.results.data.order.shipment[0].docket_number);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+    // axios
+    //   .get(Urls.cart, {
+    //     headers: {
+    //       Authorization: "Token " + token,
+    //     },
+    //   })
+    //   .then((response1) => {
+    //     if (response1.data.results.message === "cart is empty") {
+    //       setCartCount("");
+    //     } else {
+    //       setCartCount(response1.data.results.count);
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
     singleOrderDetails();
   }, []);
   // warnning
@@ -152,7 +152,20 @@ const OrderHistorypage2 = (props) => {
         }
       );
       if (response.data.results.status_code === 200) {
-        setSingleOrderData(response.data.results.data);
+        setSingleOrderData(response.data.results);
+        setAddressData({
+          ...addressData,
+          sEmail: response.data.results.data.order.address.email,
+          sPhone: response.data.results.data.order.address.phone_number,
+          fullName: response.data.results.data.order.address.name,
+          mobile: response.data.results.data.order.address.phone_number,
+          pincode: response.data.results.data.order.address.pincode,
+          city: response.data.results.data.order.address.city,
+          state: response.data.results.data.order.address.state,
+          hNumber_Bname: response.data.results.data.order.address.house,
+          streetColony: response.data.results.data.order.address.area,
+          landMark: response.data.results.data.order.address.landmark,
+        });
       }
     } catch (error) {
       console.log(error);
@@ -273,6 +286,8 @@ const OrderHistorypage2 = (props) => {
     flag_image: flag,
     country_name: Contryname,
   });
+
+  console.log("singleOrderData--->", singleOrderData.data);
 
   return (
     <div>

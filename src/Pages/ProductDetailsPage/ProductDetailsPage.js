@@ -58,9 +58,10 @@ const ProductDetailsPage = (props) => {
         props.location.state &&
         props.location.state.data;
       if (proArray && proArray.some((element) => element)) {
-        console.log("proArray--->", proArray);
         const found = proArray.find((element) => {
-          return element.product_id === newProd.product_id;
+          return (
+            element && element.product_id === newProd && newProd.product_id
+          );
         });
         if (!found) {
           proArray.push(newProd);
