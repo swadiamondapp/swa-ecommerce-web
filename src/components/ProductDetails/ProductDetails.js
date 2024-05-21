@@ -353,7 +353,15 @@ const ProductDetails = (props) => {
   };
 
   // List of image and video file extensions
-  const imageExtensions = [".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff"];
+  const imageExtensions = [
+    ".jpg",
+    ".jpeg",
+    ".png",
+    ".gif",
+    ".bmp",
+    ".tiff",
+    ".webp",
+  ];
   const videoExtensions = [".mp4", ".avi", ".mov", ".mkv", ".flv", ".wmv"];
 
   // Arrays to hold image and video URLs
@@ -502,19 +510,14 @@ const ProductDetails = (props) => {
     ],
   };
 
-  console.log("imageUrls--->0", props.bagImg);
-  console.log("imageUrls--->1", props.bagImg[1]);
-  console.log("imageUrls--->2", props.bagImg[2]);
-  console.log("imageUrls--->3", props.bagImg[3]);
-
   // slider
   // slider
   const getLocation = async () => {
-    setIsLoading(true);
     navigator.geolocation.getCurrentPosition(async (pos) => {
       const { latitude, longitude } = pos.coords;
       let _url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
       try {
+        setIsLoading(true);
         const response = await axios.get(_url);
         setPinCode(response.data.address.postcode);
         localStorage.setItem("pincode", response.data.address.postcode);
@@ -525,6 +528,8 @@ const ProductDetails = (props) => {
       }
     });
   };
+
+  console.log("props.bagImg--->", props.bagImg);
 
   return (
     <div>
@@ -641,29 +646,13 @@ const ProductDetails = (props) => {
                     {/* inner slide */}
                     <div className="Innerslide">
                       <Slider {...settingsSlide}>
-                        {/* {props.bagImg.map((item, index) => {
-                          return (
-                            <div onClick={() => handleImageClick(index)}>
-                              <img
-                                style={{
-                                  maxWidth: "100%",
-                                }}
-                                src={item}
-                                alt={`Slide ${index}`}
-                              />
-                            </div>
-                          );
-                        })} */}
-                        {/* <video
-                          onClick={() => handleImageClick(imageUrls.length)}
-                          src={props.bagImg[2]}
-                        ></video> */}
                         {props.bagImg.map((url, index) => {
                           const isActive = activeIndex === index;
                           if (
                             url.endsWith(".jpg") ||
                             url.endsWith(".jpeg") ||
-                            url.endsWith(".png")
+                            url.endsWith(".png") ||
+                            url.endsWith(".webp")
                           ) {
                             return (
                               <img
@@ -704,19 +693,6 @@ const ProductDetails = (props) => {
                             return <p key={index}>Unknown media type</p>;
                           }
                         })}
-                        {/* {videoUrls.length > 0 && (
-                          <div
-                            key="video-placeholder"
-                            onClick={() => handleImageClick(imageUrls.length)}
-                          >
-                            {console.log("vediosanas", videoUrls)}{" "}
-                            <img
-                              style={{ width: "69px", height: "69px" }}
-                              src={Videoimg}
-                              alt="Video Placeholder"
-                            />
-                          </div>
-                        )} */}
                       </Slider>
                     </div>
                     {/* inner slide */}
