@@ -11,6 +11,7 @@ import Box from "@mui/material/Box";
 
 const Payment = () => {
   const token = localStorage.getItem("swaToken");
+  const localAddress = localStorage.getItem("Address");
   const history = useHistory();
   const location = useLocation();
   const [promoId, setPromoId] = useState("");
@@ -75,7 +76,115 @@ const Payment = () => {
     setAddressData(data.addressData);
   }, [data]);
 
-  const placeOrder = () => {
+  const handlePayButton = () => {
+    if (localAddress) {
+      submitAddress();
+    } else {
+      placeOrder();
+    }
+  };
+
+  const submitAddress = async () => {
+    try {
+      const body = {
+        name: addressData.fullName,
+        phone_code: "+91",
+        phone_number: addressData.mobile,
+        email: addressData.sEmail,
+        pincode: addressData.pincode,
+        state: addressData.state,
+        city: addressData.city,
+        house: addressData.hNumber_Bname,
+        area: addressData.streetColony,
+        landmark: addressData.landMark,
+        type: "HOME",
+        // is_main: false,
+      };
+      const response = await axios.post(Urls.addAdress, body, {
+        headers: { Authorization: "Token " + token },
+      });
+      if (
+        response.data &&
+        response.data.status === 200 &&
+        response.data.data &&
+        response.data.data.id
+      ) {
+        placeOrder(response.data.data.id);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    // if (
+    //   addressData.fullName !== isNewaddress.fullName ||
+    //   addressData.city !== isNewaddress.city ||
+    //   addressData.hNumber_Bname !== isNewaddress.hNumber_Bname ||
+    //   addressData.landMark !== isNewaddress.landMark ||
+    //   addressData.mobile !== isNewaddress.mobile ||
+    //   addressData.pincode !== isNewaddress.pincode ||
+    //   addressData.state !== isNewaddress.state ||
+    //   addressData.streetColony !== isNewaddress.streetColony
+    // ) {
+    //   try {
+    //     const body = {
+    //       name: addressData.fullName,
+    //       phone_code: "+91",
+    //       phone_number: addressData.mobile,
+    //       email: addressData.sEmail,
+    //       pincode: addressData.pincode,
+    //       state: addressData.state,
+    //       city: addressData.city,
+    //       house: addressData.hNumber_Bname,
+    //       area: addressData.streetColony,
+    //       landmark: addressData.landMark,
+    //       type: "HOME",
+    //       // is_main: false,
+    //     };
+    //     const response = await axios.post(Urls.addAdress, body, {
+    //       headers: { Authorization: "Token " + token },
+    //     });
+    //     if (response.data && response.data.status === 200) {
+    //       history.push({
+    //         pathname: "/payment",
+    //         state: {
+    //           data: {
+    //             pay: amountPay,
+    //             total: total,
+    //             addressId: response.data.data.id,
+    //             updatedCart: props.proDet.data.updatedCartResponse,
+    //             token: token,
+    //             name: _userName,
+    //             number: _userMob,
+    //             buyBody: location.state.data,
+    //             userId: _userId,
+    //             totalSavedAmount: props.proDet.data.totalSavedAmount,
+    //             addressData: addressData,
+    //           },
+    //           name: "cart",
+    //         },
+    //       });
+    //     }
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // } else {
+    //   history.push({
+    //     pathname: "/payment",
+    //     state: {
+    //       data: {
+    //         pay: amountPay,
+    //         total: total,
+    //         addressId: addressData.id,
+    //         updatedCart: props.proDet.data.updatedCartResponse,
+    //         totalSavedAmount: props.proDet.data.totalSavedAmount,
+    //         addressData: addressData,
+    //       },
+    //       name: "cart",
+    //     },
+    //   });
+    // }
+  };
+
+  const placeOrder = (addressId) => {
     let cartBody;
     let buyBody;
     let _userToken = !data.token ? token : data.token;
@@ -83,7 +192,7 @@ const Payment = () => {
     if (promoId !== "") {
       cartBody = {
         promocode_id: promoId,
-        address_id: data.addressId,
+        address_id: addressId ? addressId : data.addressId,
         mode: p_Method,
         amount_to_pay: data.updatedCart
           ? data.updatedCart.amount_to_pay
@@ -100,7 +209,7 @@ const Payment = () => {
           color: data.buyBody.color,
           size: data.buyBody.size,
           promocode: "",
-          address_id: data.addressId,
+          address_id: addressId ? addressId : data.addressId,
           mode: p_Method,
           user_id: data.userId,
         };
@@ -108,7 +217,7 @@ const Payment = () => {
     } else {
       cartBody = {
         promocode_id: 0,
-        address_id: data.addressId,
+        address_id: addressId ? addressId : data.addressId,
         mode: p_Method,
         amount_to_pay: data.updatedCart
           ? data.updatedCart.amount_to_pay
@@ -133,7 +242,7 @@ const Payment = () => {
           color: data.buyBody.color,
           size: data.buyBody.size,
           promocode: "",
-          address_id: data.addressId,
+          address_id: addressId ? addressId : data.addressId,
           mode: p_Method,
           user_id: data.userId,
         };
@@ -176,9 +285,11 @@ const Payment = () => {
                       localStorage.setItem("userName", data.name);
                       localStorage.setItem("phoneNumber", data.number);
                       setIsLoading(false);
+                      localStorage.removeItem("Address");
                       history.push("/my_orders");
                     } else if (response1.data.results.status_code === 200) {
                       setIsLoading(false);
+                      localStorage.removeItem("Address");
                       history.push("/my_orders");
                     }
                   })
@@ -216,8 +327,10 @@ const Payment = () => {
               localStorage.setItem("swaToken", data.token);
               localStorage.setItem("userName", data.name);
               localStorage.setItem("phoneNumber", data.number);
+              localStorage.removeItem("Address");
               history.push("/my_orders");
             } else if (response1.data.results.status_code === 200) {
+              localStorage.removeItem("Address");
               history.push("/my_orders");
             }
           });
@@ -261,8 +374,10 @@ const Payment = () => {
                       localStorage.setItem("swaToken", data.token);
                       localStorage.setItem("userName", data.name);
                       localStorage.setItem("phoneNumber", data.number);
+                      localStorage.removeItem("Address");
                       history.push("/my_orders");
                     } else if (response2.data.results.status_code === 200) {
+                      localStorage.removeItem("Address");
                       history.push("/my_orders");
                     }
                   })
@@ -300,8 +415,10 @@ const Payment = () => {
               localStorage.setItem("swaToken", data.token);
               localStorage.setItem("userName", data.name);
               localStorage.setItem("phoneNumber", data.number);
+              localStorage.removeItem("Address");
               history.push("/my_orders");
             } else if (response1.data.results.status_code === 200) {
+              localStorage.removeItem("Address");
               history.push("/my_orders");
             }
           });
@@ -451,7 +568,9 @@ const Payment = () => {
               <div
                 className={Classes.PayButton}
                 onClick={() => {
-                  mode ? placeOrder() : alert("Please select a payment method");
+                  mode
+                    ? handlePayButton()
+                    : alert("Please select a payment method");
                   // setPmethodError("Please select a payment method");
                 }}
               >
