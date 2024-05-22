@@ -239,7 +239,7 @@ const ProductDetailsPage = (props) => {
     } else {
       history.push({
         pathname: "/checkout",
-        state: { data: selProd },
+        state: { data: selProd, name: "buybody" },
       });
     }
     // }

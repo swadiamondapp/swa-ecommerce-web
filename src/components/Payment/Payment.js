@@ -39,8 +39,6 @@ const Payment = () => {
     id: "",
   });
   const { data, name } = location.state;
-
-  console.log("===>", data);
   const handleChangeAddress = () => {
     setShowChangeAddress((prevState) => !prevState);
   };
@@ -187,7 +185,6 @@ const Payment = () => {
   const placeOrder = (addressId) => {
     let cartBody;
     let buyBody;
-    let _userToken = !data.token ? token : data.token;
     const p_Method = mode === "cash" ? "C" : "P";
     if (promoId !== "") {
       cartBody = {
@@ -248,182 +245,356 @@ const Payment = () => {
         };
       }
     }
-    if (token) {
-      if (mode === "upi" || mode === "credit_card") {
-        setIsLoading(true);
-        axios
-          .post(Urls.checkout, cartBody, {
-            headers: { Authorization: "Token " + _userToken },
-          })
-          .then((response1) => {
-            setIsLoading(false);
-            var options = {
-              key: "rzp_test_hbBeCNBjrqDq6P", // test Key
-              key_secret: "HwgmIdicOPlAeLkBdOJIMXiu",
-              // key: "rzp_live_rKLs1hbpVT5npK",
-              // key_secret: "td3G02g20iPqQzfz4b2NFSFN",
-              amount: amountPay * 100,
-              order_id: response1.data.results.data.razorpay_order_id,
-              currency: "INR",
-              name: "Swa Diamonds",
-              description: "for testing purpose",
-              handler: function(response) {
-                const bodyPay = {
-                  razorpay_payment_id: response.razorpay_payment_id,
-                  razorpay_order_id: response.razorpay_order_id,
-                  razorpay_signature: response.razorpay_signature,
-                  order_id: response1.data.results.data.order.id,
-                };
-                axios
-                  .post(Urls.paySuces, bodyPay, {
-                    headers: { Authorization: "Token " + token },
-                  })
-                  .then((response1) => {
-                    console.log(response1);
-                    if (response1.data.results.status_code === 200 && !token) {
-                      localStorage.setItem("swaToken", data.token);
-                      localStorage.setItem("userName", data.name);
-                      localStorage.setItem("phoneNumber", data.number);
-                      setIsLoading(false);
-                      localStorage.removeItem("Address");
-                      history.push("/my_orders");
-                    } else if (response1.data.results.status_code === 200) {
-                      setIsLoading(false);
-                      localStorage.removeItem("Address");
-                      history.push("/my_orders");
-                    }
-                  })
-                  .catch((error) => {
-                    console.log(error);
-                  });
-              },
-              prefill: {
-                name: "",
-                email: "",
-                contact: "",
-              },
-              notes: {
-                address: "Razorpay Corporate office",
-              },
-              theme: {
-                color: "#007481",
-              },
-            };
-            var pay = new window.Razorpay(options);
-            pay.open();
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      } else if (mode === "cash") {
-        setIsLoading(true);
-        axios
-          .post(Urls.checkout, cartBody, {
-            headers: { Authorization: "Token " + _userToken },
-          })
-          .then((response1) => {
-            setIsLoading(false);
-            if (response1.data.results.status_code === 200 && !token) {
-              localStorage.setItem("swaToken", data.token);
-              localStorage.setItem("userName", data.name);
-              localStorage.setItem("phoneNumber", data.number);
-              localStorage.removeItem("Address");
-              history.push("/my_orders");
-            } else if (response1.data.results.status_code === 200) {
-              localStorage.removeItem("Address");
-              history.push("/my_orders");
-            }
-          });
-      }
-    } else {
-      if (mode === "upi" || mode === "credit_card") {
-        axios
-          .post(Urls.buyNow, buyBody, {
-            headers: {
-              Authorization: "Token " + _userToken,
-            },
-          })
-          .then((response1) => {
-            var options = {
-              //test_secret
-              key: "rzp_test_hbBeCNBjrqDq6P",
-              key_secret: "HwgmIdicOPlAeLkBdOJIMXiu",
-              // key: "rzp_live_rKLs1hbpVT5npK",
-              // key_secret: "td3G02g20iPqQzfz4b2NFSFN",
-              amount: amountPay * 100,
-              order_id: response1.data.results.data.razorpay_order_id,
-              currency: "INR",
-              name: "Swa Diamonds",
-              description: "for testing purpose",
-              handler: function(response) {
-                const bodyPay = {
-                  razorpay_payment_id: response.razorpay_payment_id,
-                  razorpay_order_id: response.razorpay_order_id,
-                  razorpay_signature: response.razorpay_signature,
-                  order_id: response1.data.results.data.order.id,
-                };
+    if ((mode === "upi" || mode === "credit_card") && name === "buybody") {
+      axios
+        .post(Urls.buyNow, buyBody, {
+          headers: {
+            Authorization: "Token " + token,
+          },
+        })
+        .then((response1) => {
+          var options = {
+            //test_secret
+            key: "rzp_test_hbBeCNBjrqDq6P",
+            key_secret: "HwgmIdicOPlAeLkBdOJIMXiu",
+            // key: "rzp_live_rKLs1hbpVT5npK",
+            // key_secret: "td3G02g20iPqQzfz4b2NFSFN",
+            amount: amountPay * 100,
+            order_id: response1.data.results.data.razorpay_order_id,
+            currency: "INR",
+            name: "Swa Diamonds",
+            description: "for testing purpose",
+            handler: function(response) {
+              const bodyPay = {
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_signature: response.razorpay_signature,
+                order_id: response1.data.results.data.order.id,
+              };
 
-                axios
-                  .post(Urls.paySuces, bodyPay, {
-                    headers: {
-                      Authorization: "Token " + token,
-                    },
-                  })
-                  .then((response2) => {
-                    if (response2.data.results.status_code === 200 && !token) {
-                      localStorage.setItem("swaToken", data.token);
-                      localStorage.setItem("userName", data.name);
-                      localStorage.setItem("phoneNumber", data.number);
-                      localStorage.removeItem("Address");
-                      history.push("/my_orders");
-                    } else if (response2.data.results.status_code === 200) {
-                      localStorage.removeItem("Address");
-                      history.push("/my_orders");
-                    }
-                  })
-                  .catch((error) => {
-                    console.log(error);
-                  });
-              },
-              prefill: {
-                name: "",
-                email: "",
-                contact: "",
-              },
-              notes: {
-                address: "Razorpay Corporate office",
-              },
-              theme: {
-                color: "#007481",
-              },
-            };
-            var pay = new window.Razorpay(options);
-            pay.open();
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      } else if (mode === "cash") {
-        axios
-          .post(Urls.buyNow, buyBody, {
-            headers: {
-              Authorization: "Token " + _userToken,
+              axios
+                .post(Urls.paySuces, bodyPay, {
+                  headers: {
+                    Authorization: "Token " + token,
+                  },
+                })
+                .then((response2) => {
+                  if (response2.data.results.status_code === 200 && !token) {
+                    localStorage.setItem("swaToken", data.token);
+                    localStorage.setItem("userName", data.name);
+                    localStorage.setItem("phoneNumber", data.number);
+                    localStorage.removeItem("Address");
+                    history.push("/my_orders");
+                  } else if (response2.data.results.status_code === 200) {
+                    localStorage.removeItem("Address");
+                    history.push("/my_orders");
+                  }
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
             },
-          })
-          .then((response1) => {
-            if (response1.data.results.status_code === 200 && !token) {
-              localStorage.setItem("swaToken", data.token);
-              localStorage.setItem("userName", data.name);
-              localStorage.setItem("phoneNumber", data.number);
-              localStorage.removeItem("Address");
-              history.push("/my_orders");
-            } else if (response1.data.results.status_code === 200) {
-              localStorage.removeItem("Address");
-              history.push("/my_orders");
-            }
-          });
-      }
+            prefill: {
+              name: "",
+              email: "",
+              contact: "",
+            },
+            notes: {
+              address: "Razorpay Corporate office",
+            },
+            theme: {
+              color: "#007481",
+            },
+          };
+          var pay = new window.Razorpay(options);
+          pay.open();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else if (mode === "cash" && name === "buybody") {
+      axios
+        .post(Urls.buyNow, buyBody, {
+          headers: {
+            Authorization: "Token " + token,
+          },
+        })
+        .then((response1) => {
+          if (response1.data.results.status_code === 200 && !token) {
+            localStorage.setItem("swaToken", data.token);
+            localStorage.setItem("userName", data.name);
+            localStorage.setItem("phoneNumber", data.number);
+            localStorage.removeItem("Address");
+            history.push("/my_orders");
+          } else if (response1.data.results.status_code === 200) {
+            localStorage.removeItem("Address");
+            history.push("/my_orders");
+          }
+        });
+    } else if ((mode === "upi" || mode === "credit_card") && name === "cart") {
+      setIsLoading(true);
+      axios
+        .post(Urls.checkout, cartBody, {
+          headers: { Authorization: "Token " + token },
+        })
+        .then((response1) => {
+          setIsLoading(false);
+          var options = {
+            key: "rzp_test_hbBeCNBjrqDq6P", // test Key
+            key_secret: "HwgmIdicOPlAeLkBdOJIMXiu",
+            // key: "rzp_live_rKLs1hbpVT5npK",
+            // key_secret: "td3G02g20iPqQzfz4b2NFSFN",
+            amount: amountPay * 100,
+            order_id: response1.data.results.data.razorpay_order_id,
+            currency: "INR",
+            name: "Swa Diamonds",
+            description: "for testing purpose",
+            handler: function(response) {
+              const bodyPay = {
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_signature: response.razorpay_signature,
+                order_id: response1.data.results.data.order.id,
+              };
+              axios
+                .post(Urls.paySuces, bodyPay, {
+                  headers: { Authorization: "Token " + token },
+                })
+                .then((response1) => {
+                  console.log(response1);
+                  if (response1.data.results.status_code === 200 && !token) {
+                    localStorage.setItem("swaToken", data.token);
+                    localStorage.setItem("userName", data.name);
+                    localStorage.setItem("phoneNumber", data.number);
+                    setIsLoading(false);
+                    localStorage.removeItem("Address");
+                    history.push("/my_orders");
+                  } else if (response1.data.results.status_code === 200) {
+                    setIsLoading(false);
+                    localStorage.removeItem("Address");
+                    history.push("/my_orders");
+                  }
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
+            },
+            prefill: {
+              name: "",
+              email: "",
+              contact: "",
+            },
+            notes: {
+              address: "Razorpay Corporate office",
+            },
+            theme: {
+              color: "#007481",
+            },
+          };
+          var pay = new window.Razorpay(options);
+          pay.open();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else if (mode === "cash" && name === "cart") {
+      setIsLoading(true);
+      axios
+        .post(Urls.checkout, cartBody, {
+          headers: { Authorization: "Token " + token },
+        })
+        .then((response1) => {
+          setIsLoading(false);
+          if (response1.data.results.status_code === 200 && !token) {
+            localStorage.setItem("swaToken", data.token);
+            localStorage.setItem("userName", data.name);
+            localStorage.setItem("phoneNumber", data.number);
+            localStorage.removeItem("Address");
+            history.push("/my_orders");
+          } else if (response1.data.results.status_code === 200) {
+            localStorage.removeItem("Address");
+            history.push("/my_orders");
+          }
+        });
     }
+    // if (token) {
+    //   if (mode === "upi" || mode === "credit_card") {
+    //     setIsLoading(true);
+    //     axios
+    //       .post(Urls.checkout, cartBody, {
+    //         headers: { Authorization: "Token " + _userToken },
+    //       })
+    //       .then((response1) => {
+    //         setIsLoading(false);
+    //         var options = {
+    //           key: "rzp_test_hbBeCNBjrqDq6P", // test Key
+    //           key_secret: "HwgmIdicOPlAeLkBdOJIMXiu",
+    //           // key: "rzp_live_rKLs1hbpVT5npK",
+    //           // key_secret: "td3G02g20iPqQzfz4b2NFSFN",
+    //           amount: amountPay * 100,
+    //           order_id: response1.data.results.data.razorpay_order_id,
+    //           currency: "INR",
+    //           name: "Swa Diamonds",
+    //           description: "for testing purpose",
+    //           handler: function(response) {
+    //             const bodyPay = {
+    //               razorpay_payment_id: response.razorpay_payment_id,
+    //               razorpay_order_id: response.razorpay_order_id,
+    //               razorpay_signature: response.razorpay_signature,
+    //               order_id: response1.data.results.data.order.id,
+    //             };
+    //             axios
+    //               .post(Urls.paySuces, bodyPay, {
+    //                 headers: { Authorization: "Token " + token },
+    //               })
+    //               .then((response1) => {
+    //                 console.log(response1);
+    //                 if (response1.data.results.status_code === 200 && !token) {
+    //                   localStorage.setItem("swaToken", data.token);
+    //                   localStorage.setItem("userName", data.name);
+    //                   localStorage.setItem("phoneNumber", data.number);
+    //                   setIsLoading(false);
+    //                   localStorage.removeItem("Address");
+    //                   history.push("/my_orders");
+    //                 } else if (response1.data.results.status_code === 200) {
+    //                   setIsLoading(false);
+    //                   localStorage.removeItem("Address");
+    //                   history.push("/my_orders");
+    //                 }
+    //               })
+    //               .catch((error) => {
+    //                 console.log(error);
+    //               });
+    //           },
+    //           prefill: {
+    //             name: "",
+    //             email: "",
+    //             contact: "",
+    //           },
+    //           notes: {
+    //             address: "Razorpay Corporate office",
+    //           },
+    //           theme: {
+    //             color: "#007481",
+    //           },
+    //         };
+    //         var pay = new window.Razorpay(options);
+    //         pay.open();
+    //       })
+    //       .catch((error) => {
+    //         console.log(error);
+    //       });
+    //   } else if (mode === "cash") {
+    //     setIsLoading(true);
+    //     axios
+    //       .post(Urls.checkout, cartBody, {
+    //         headers: { Authorization: "Token " + _userToken },
+    //       })
+    //       .then((response1) => {
+    //         setIsLoading(false);
+    //         if (response1.data.results.status_code === 200 && !token) {
+    //           localStorage.setItem("swaToken", data.token);
+    //           localStorage.setItem("userName", data.name);
+    //           localStorage.setItem("phoneNumber", data.number);
+    //           localStorage.removeItem("Address");
+    //           history.push("/my_orders");
+    //         } else if (response1.data.results.status_code === 200) {
+    //           localStorage.removeItem("Address");
+    //           history.push("/my_orders");
+    //         }
+    //       });
+    //   }
+    // } else {
+    //   if (mode === "upi" || mode === "credit_card") {
+    //     axios
+    //       .post(Urls.buyNow, buyBody, {
+    //         headers: {
+    //           Authorization: "Token " + _userToken,
+    //         },
+    //       })
+    //       .then((response1) => {
+    //         var options = {
+    //           //test_secret
+    //           key: "rzp_test_hbBeCNBjrqDq6P",
+    //           key_secret: "HwgmIdicOPlAeLkBdOJIMXiu",
+    //           // key: "rzp_live_rKLs1hbpVT5npK",
+    //           // key_secret: "td3G02g20iPqQzfz4b2NFSFN",
+    //           amount: amountPay * 100,
+    //           order_id: response1.data.results.data.razorpay_order_id,
+    //           currency: "INR",
+    //           name: "Swa Diamonds",
+    //           description: "for testing purpose",
+    //           handler: function(response) {
+    //             const bodyPay = {
+    //               razorpay_payment_id: response.razorpay_payment_id,
+    //               razorpay_order_id: response.razorpay_order_id,
+    //               razorpay_signature: response.razorpay_signature,
+    //               order_id: response1.data.results.data.order.id,
+    //             };
+
+    //             axios
+    //               .post(Urls.paySuces, bodyPay, {
+    //                 headers: {
+    //                   Authorization: "Token " + token,
+    //                 },
+    //               })
+    //               .then((response2) => {
+    //                 if (response2.data.results.status_code === 200 && !token) {
+    //                   localStorage.setItem("swaToken", data.token);
+    //                   localStorage.setItem("userName", data.name);
+    //                   localStorage.setItem("phoneNumber", data.number);
+    //                   localStorage.removeItem("Address");
+    //                   history.push("/my_orders");
+    //                 } else if (response2.data.results.status_code === 200) {
+    //                   localStorage.removeItem("Address");
+    //                   history.push("/my_orders");
+    //                 }
+    //               })
+    //               .catch((error) => {
+    //                 console.log(error);
+    //               });
+    //           },
+    //           prefill: {
+    //             name: "",
+    //             email: "",
+    //             contact: "",
+    //           },
+    //           notes: {
+    //             address: "Razorpay Corporate office",
+    //           },
+    //           theme: {
+    //             color: "#007481",
+    //           },
+    //         };
+    //         var pay = new window.Razorpay(options);
+    //         pay.open();
+    //       })
+    //       .catch((error) => {
+    //         console.log(error);
+    //       });
+    //   } else if (mode === "cash") {
+    //     axios
+    //       .post(Urls.buyNow, buyBody, {
+    //         headers: {
+    //           Authorization: "Token " + _userToken,
+    //         },
+    //       })
+    //       .then((response1) => {
+    //         if (response1.data.results.status_code === 200 && !token) {
+    //           localStorage.setItem("swaToken", data.token);
+    //           localStorage.setItem("userName", data.name);
+    //           localStorage.setItem("phoneNumber", data.number);
+    //           localStorage.removeItem("Address");
+    //           history.push("/my_orders");
+    //         } else if (response1.data.results.status_code === 200) {
+    //           localStorage.removeItem("Address");
+    //           history.push("/my_orders");
+    //         }
+    //       });
+    //   }
+    // }
+    console.log("buyBody-->", buyBody);
+    console.log("cartBody--->", cartBody);
   };
 
   const handleMethodChange = (event) => {
@@ -477,6 +648,8 @@ const Payment = () => {
     getDefaultAddress(token);
     fetchAddress();
   };
+
+  console.log("data-->", data, "name-->", name);
 
   return (
     <div>

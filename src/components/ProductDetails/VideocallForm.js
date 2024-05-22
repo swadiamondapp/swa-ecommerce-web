@@ -1,13 +1,23 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
+import * as Urls from "../../Urls";
+import Joi from "joi";
 import { Modal, Box } from "@mui/material";
 import Classes from "./ProductDetails.module.css";
 import videoimg from "../../../src/Assets/videosucces.png";
 
-const VideocallForm = ({ isOpen, handleClose }) => {
-  const [activeLanguage, setActiveLanguage] = useState("English");
+const VideocallForm = (props) => {
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
+  const [errors, setErrors] = useState();
+  const [videoData, setVideoData] = useState({
+    productId: props.productId,
+    phone: "",
+    email: "",
+    language: "English",
+    description: "",
+  });
   const handleLanguageClick = (language) => {
-    setActiveLanguage(language);
+    setVideoData({ ...videoData, language: language });
   };
   const [isDesk, setIsDesk] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
@@ -25,14 +35,48 @@ const VideocallForm = ({ isOpen, handleClose }) => {
     };
   }, [isDesk]);
   const languages = ["English", "Malayalam", "Tamil", "Hindi", "Telugu"];
+
+  const schema = Joi.object({
+    phone: Joi.string()
+      .pattern(
+        /^\+91[6-9]\d{9}$|^\+1\d{10}$|^\+971[2-9]\d{7,8}$/,
+        "valid phone number"
+      )
+      .required()
+      .messages({
+        "string.empty": "Mobile number is required",
+        "string.pattern.name":
+          "Mobile number must be a valid format for India, USA, or UAE",
+      }),
+    email: Joi.string()
+      .email({ tlds: { allow: false } })
+      .required()
+      .messages({
+        "string.email": "Email must be a valid email address",
+        "string.empty": "Email is required",
+      }),
+  });
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    setIsSuccessOpen(true);
+    const { phone, email } = videoData;
+    const { error } = schema.validate({ phone, email }, { abortEarly: false });
+
+    if (error) {
+      const errorDetails = error.details.reduce((acc, err) => {
+        acc[err.path[0]] = err.message;
+        return acc;
+      }, {});
+      setErrors(errorDetails);
+    } else {
+      videoCall();
+      setErrors({});
+    }
   };
 
   const handleSuccessClose = () => {
     setIsSuccessOpen(false);
-    handleClose();
+    props.handleClose();
   };
   const style = {
     position: "absolute",
@@ -58,11 +102,54 @@ const VideocallForm = ({ isOpen, handleClose }) => {
     outline: "none",
   };
 
+  const videoCall = async () => {
+    try {
+      const body = {
+        product_id: videoData.productId,
+        phone_code: "+91",
+        phone_number: videoData.phone,
+        email: videoData.email,
+        language: videoData.language,
+        description: videoData.description,
+      };
+
+      const reposnse = await axios.post(Urls.videoCallPost, body);
+      if (reposnse.data.status === 200) {
+        setIsSuccessOpen(true);
+        props.handleClose();
+        setVideoData({
+          productId: "",
+          phone: "",
+          email: "",
+          language: "English",
+          description: "",
+        });
+        setTimeout(() => {
+          setIsSuccessOpen(false);
+        }, 2000);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleChangeVideoData = (event) => {
+    const { name, value } = event.target;
+    setVideoData({
+      ...videoData,
+      [name]: value,
+    });
+    setErrors({
+      ...errors,
+      [name]: "",
+    });
+  };
+
   return (
     <div>
       <Modal
-        open={isOpen}
-        onClose={handleClose}
+        open={props.isOpen}
+        onClose={props.handleClose}
         aria-labelledby="modal-title"
         aria-describedby="modal-description"
       >
@@ -77,12 +164,30 @@ const VideocallForm = ({ isOpen, handleClose }) => {
                 <h3>Contact Details</h3>
                 <div className={Classes.Mobile_field_vi}>
                   <label>Mobile number</label>
-                  <input type="text" placeholder="+91 98975656785" />
+                  <input
+                    type="text"
+                    placeholder="98975656785"
+                    value={videoData.phone}
+                    name="phone"
+                    onChange={handleChangeVideoData}
+                  />
                 </div>
+                {errors && errors.phone && (
+                  <p className={Classes.Error}>{errors.phone}</p>
+                )}
                 <div className={Classes.Email_field_vi}>
                   <label>Email</label>
-                  <input type="text" placeholder="Sample@gmail.com" />
+                  <input
+                    type="text"
+                    placeholder="Sample@gmail.com"
+                    value={videoData.email}
+                    name="email"
+                    onChange={handleChangeVideoData}
+                  />
                 </div>
+                {errors && errors.email && (
+                  <p className={Classes.Error}>{errors.email}</p>
+                )}
                 <div className={Classes.Prefered_languages}>
                   <h3>Prefered Language</h3>
                   <div className={Classes.Language_vi}>
@@ -90,10 +195,11 @@ const VideocallForm = ({ isOpen, handleClose }) => {
                       <button
                         key={language}
                         className={
-                          activeLanguage === language
+                          videoData.language === language
                             ? Classes.Active_language
                             : Classes.unActive_language
                         }
+                        type="button"
                         onClick={() => handleLanguageClick(language)}
                       >
                         {language}
@@ -105,6 +211,9 @@ const VideocallForm = ({ isOpen, handleClose }) => {
                   <textarea
                     rows={3}
                     placeholder="Let’s us know  if you have any preference in price, budget "
+                    value={videoData.description}
+                    name="description"
+                    onChange={handleChangeVideoData}
                   />
                 </div>
                 <div className={Classes.vi_submit}>

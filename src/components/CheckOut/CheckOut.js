@@ -507,7 +507,7 @@ function CheckOut(props) {
             totalSavedAmount: props.proDet.data.totalSavedAmount,
             addressData: addressData,
           },
-          name: "cart",
+          name: location.state.name,
         },
       });
     } else {
@@ -522,11 +522,13 @@ function CheckOut(props) {
             totalSavedAmount: props.proDet.data.totalSavedAmount,
             addressData: addressData,
           },
-          name: "cart",
+          name: location.state.name,
         },
       });
     }
   };
+
+  console.log("location.state.data-->", location.state.name);
 
   const submitAddress = async (token) => {
     if (
@@ -720,9 +722,6 @@ function CheckOut(props) {
       setTimer(60); // Reset timer to 60 seconds when the modal is opened
     }
   }, [getOtpModal]);
-
-  console.log("isNewaddress.fullName--->", isNewaddress.fullName);
-  console.log("addressData.fullName==>", addressData.fullName);
 
   return (
     <div>

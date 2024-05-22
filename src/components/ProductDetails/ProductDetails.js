@@ -529,7 +529,7 @@ const ProductDetails = (props) => {
     });
   };
 
-  console.log("props.bagImg--->", props.bagImg);
+  console.log("props.bagImg--->", props.id);
 
   return (
     <div>
@@ -935,6 +935,7 @@ const ProductDetails = (props) => {
                   <VideocallForm
                     isOpen={isModalOpen}
                     handleClose={handleCloseModal}
+                    productId={props.id}
                   />
                 </div>
               </div>
