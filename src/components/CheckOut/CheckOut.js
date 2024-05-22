@@ -36,6 +36,7 @@ function CheckOut(props) {
   const [voucherInput, setVoucherInput] = useState(false);
   const [promoId, setPromoId] = useState("");
   const [mode, setMode] = useState("P");
+  const [otpError, setOtpError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [selectedCity, setSelectedCity] = useState(null);
   const [userId, setUserId] = useState("");
@@ -642,6 +643,8 @@ function CheckOut(props) {
       }
       if (response.data.results.message === "Otp verified successfully!") {
         console.log("Otp verified successfully!");
+      } else {
+        setOtpError("Invalid otp");
       }
     } catch (error) {
       console.log(error);
@@ -673,6 +676,7 @@ function CheckOut(props) {
         customTabOtpModalStyle={customTabOtpModalStyle}
         customDestOtpModalStyle={customDestOtpModalStyle}
         timer={timer}
+        otpError={otpError}
         handelLoginForm={handleSubmit}
         mobileNumber={addressData.sPhone}
         handleOtpForm={verifyOtp}

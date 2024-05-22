@@ -91,3 +91,4 @@ export const addBankAccount = server + "ecom/bank/add/";
 export const getWalletAmounts = server + "ecom/checkout/";
 export const singleReview = server + "ecom/review/";
 export const headeroffer = server + "ecom/header-details/";
+export const updateuser = server + "ecom/update_user/";

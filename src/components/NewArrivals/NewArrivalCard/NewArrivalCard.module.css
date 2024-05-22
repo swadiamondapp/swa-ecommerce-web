@@ -148,7 +148,7 @@
 .CheckdeliveryNewtext {
   color: rgb(0, 70, 77);
   font-size: 15px;
-  font-family: lato;
+  font-family: "lato";
   font-weight: 600;
   padding-left: 6px;
 }
@@ -334,6 +334,9 @@
     left: 0%;
     padding: 0px;
     height: 35px;
+  }
+  .CheckdeliveryNewtext {
+    font-size: 14px;
   }
 }
 
