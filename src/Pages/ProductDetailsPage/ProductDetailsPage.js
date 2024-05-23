@@ -279,7 +279,7 @@ const ProductDetailsPage = (props) => {
       />
 
       <ProductDetails
-        sku={"SKU " + prodDet.sku}
+        sku={"SKU : " + prodDet.sku}
         offerPrice={
           prodDet.is_on_discount
             ? prodDet.discount_price

@@ -70,7 +70,8 @@ const BringTheParty = (props) => {
                           <video
                             className={Classes.Video1}
                             src={item.Ad_video}
-                            controls
+                            autoPlay
+                            loop
                             onClick={() => advClicked(item)}
                           />
                         </div>

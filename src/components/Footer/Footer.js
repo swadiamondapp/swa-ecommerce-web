@@ -350,6 +350,9 @@ function Footer() {
             </AccordionTab>
             <AccordionTab header="Quick links">
               <p className="m-0">
+                <Link to="/faq">
+                  <p className={Classes.Links}>Faq</p>
+                </Link>
                 <div className={Classes.MobQuicklinks}>
                   <div>
                     {catgSet.slice(0, 15).map((item, index) => {

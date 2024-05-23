@@ -155,9 +155,9 @@ const VideocallForm = (props) => {
       >
         <Box sx={isDesk ? style : styleDesk}>
           <div style={{ overflow: "hidden" }}>
-            <h3 className={Classes.vi_head}>Sheadule your video call</h3>
+            <h3 className={Classes.vi_head}>Schedule your video call</h3>
             <p className={Classes.vi_paras}>
-              Video call with our consultant and see your Jewles closer
+              Video call with our consultant and see your Jewels closer
             </p>
             <div className={Classes.contactForms}>
               <form onSubmit={handleSubmit}>

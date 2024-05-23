@@ -28,6 +28,7 @@ import { CgHeart } from "react-icons/cg";
 import Carousel from "react-bootstrap/Carousel";
 import abc from "../../Assets/shop2.png";
 import { FaHeart } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import * as Urls from "../../Urls";
 import Profiles from "../../Assets/profileicon.png";
@@ -931,7 +932,11 @@ const ProductDetails = (props) => {
                       }}
                     />
                   </button>
-                  <button className={Classes.FindStores}>Try at Home</button>
+                  <Link to="/tryathome">
+                    {" "}
+                    <button className={Classes.FindStores}>Try at Home</button>
+                  </Link>
+
                   <VideocallForm
                     isOpen={isModalOpen}
                     handleClose={handleCloseModal}
