@@ -25,7 +25,6 @@ function CartDesign(props) {
   const [swaExchangeWallet, setSwaExchangeWallet] = useState(null);
   const [updatedCartResponse, setUpdatedCartResponse] = useState([]);
   const history = useHistory();
-  const countryId = localStorage.getItem("id");
   const token = localStorage.getItem("swaToken");
   let diff = 0;
   useEffect(() => {

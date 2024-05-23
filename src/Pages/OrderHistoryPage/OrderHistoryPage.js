@@ -17,7 +17,6 @@ const OrderHistoryPage = () => {
   const [orderList, setOrderList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [cartCount, setCartCount] = useState("");
-  const countryId = localStorage.getItem("id");
   const flag = localStorage.getItem("flag_image");
   const Contryname = localStorage.getItem("country_name");
   const [selectedCountry, setSelectedCountry] = useState({

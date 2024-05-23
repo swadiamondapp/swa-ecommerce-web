@@ -170,9 +170,9 @@ function CheckOut(props) {
 
   const formRef = useRef(null);
 
-  useEffect(() => {
-    buyWithoutLogin(location.state.data.product_id);
-  }, [location.state.data]);
+  // useEffect(() => {
+  //   buyWithoutLogin(location.state.data.product_id);
+  // }, [location.state.data]);
 
   useEffect(() => {
     getDefaultAddress();
@@ -180,7 +180,7 @@ function CheckOut(props) {
       setTotal(props.proDet.data.total);
       setAmountPay(props.proDet.data.pay);
     }
-  }, []);
+  }, [location.state.data]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -723,6 +723,18 @@ function CheckOut(props) {
     }
   }, [getOtpModal]);
 
+  function formatIndianNumber(number) {
+    const numberString = number.toString();
+    const lastThreeDigits = numberString.slice(-3);
+    const otherDigits = numberString.slice(0, -3);
+
+    return (
+      otherDigits.replace(/\B(?=(\d{2})+(?!\d))/g, ",") +
+      (otherDigits ? "," : "") +
+      lastThreeDigits
+    );
+  }
+
   return (
     <div>
       <OtpModal
@@ -965,14 +977,18 @@ function CheckOut(props) {
                   </div>
                   <p className={Classes.Amount}>
                     <BiRupee />
-                    {total}
+                    {formatIndianNumber(total)}
+                    {/* {location.state.data.total} */}
                   </p>
                 </div>
                 <div className={Classes.TotalItemBorder}>
                   <p className={Classes.TotalPayable}>Total Payable</p>
                   <div className={Classes.TotalItems}>
                     <BiRupee className={Classes.Rupee} size={20} />
-                    <p className={Classes.AmountPayable}>{amountPay}</p>
+                    <p className={Classes.AmountPayable}>
+                      {formatIndianNumber(amountPay)}
+                      {/* {location.state.data.pay} */}
+                    </p>
                   </div>
                 </div>
 

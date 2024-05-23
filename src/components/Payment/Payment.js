@@ -10,6 +10,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 
 const Payment = () => {
+  const countryId = localStorage.getItem("id");
   const token = localStorage.getItem("swaToken");
   const localAddress = localStorage.getItem("Address");
   const history = useHistory();
@@ -247,7 +248,7 @@ const Payment = () => {
     }
     if ((mode === "upi" || mode === "credit_card") && name === "buybody") {
       axios
-        .post(Urls.buyNow, buyBody, {
+        .post(`${Urls.buyNow}?country=${countryId}`, buyBody, {
           headers: {
             Authorization: "Token " + token,
           },
@@ -314,7 +315,7 @@ const Payment = () => {
         });
     } else if (mode === "cash" && name === "buybody") {
       axios
-        .post(Urls.buyNow, buyBody, {
+        .post(`${Urls.buyNow}?country=${countryId}`, buyBody, {
           headers: {
             Authorization: "Token " + token,
           },
@@ -334,7 +335,7 @@ const Payment = () => {
     } else if ((mode === "upi" || mode === "credit_card") && name === "cart") {
       setIsLoading(true);
       axios
-        .post(Urls.checkout, cartBody, {
+        .post(`${Urls.checkout}?country=${countryId}`, cartBody, {
           headers: { Authorization: "Token " + token },
         })
         .then((response1) => {
@@ -400,7 +401,7 @@ const Payment = () => {
     } else if (mode === "cash" && name === "cart") {
       setIsLoading(true);
       axios
-        .post(Urls.checkout, cartBody, {
+        .post(`${Urls.checkout}?country=${countryId}`, cartBody, {
           headers: { Authorization: "Token " + token },
         })
         .then((response1) => {
@@ -649,7 +650,17 @@ const Payment = () => {
     fetchAddress();
   };
 
-  console.log("data-->", data, "name-->", name);
+  function formatIndianNumber(number) {
+    const numberString = number.toString();
+    const lastThreeDigits = numberString.slice(-3);
+    const otherDigits = numberString.slice(0, -3);
+
+    return (
+      otherDigits.replace(/\B(?=(\d{2})+(?!\d))/g, ",") +
+      (otherDigits ? "," : "") +
+      lastThreeDigits
+    );
+  }
 
   return (
     <div>
@@ -719,7 +730,7 @@ const Payment = () => {
 
                 <p className={Classes.Amount}>
                   {/* <BiRupee /> */}
-                  &#x20B9; {data.total}
+                  &#x20B9; {formatIndianNumber(data.total)}
                 </p>
               </div>
               <div
@@ -735,7 +746,7 @@ const Payment = () => {
 
                 <p className={Classes.Amount}>
                   {/* <BiRupee /> */}
-                  &#x20B9; {data.pay}
+                  &#x20B9; {formatIndianNumber(data.pay)}
                 </p>
               </div>
               <div
