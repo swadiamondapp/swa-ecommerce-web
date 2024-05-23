@@ -372,12 +372,14 @@ const ProductDetails = (props) => {
   // Iterate over the array of URLs
   props.bagImg.forEach((url) => {
     // Get the file extension, accounting for possible query parameters
-    const parts = url.split("/");
-    const fileName = parts[parts.length - 1];
-    const extension = fileName
-      .split(".")
-      .pop()
-      .toLowerCase(); // get file extension and convert to lowercase
+    const parts = url && url.split("/");
+    const fileName = parts && parts[parts && parts.length - 1];
+    const extension =
+      fileName &&
+      fileName
+        .split(".")
+        .pop()
+        .toLowerCase(); // get file extension and convert to lowercase
 
     // Check if the extension is in the image or video list
     if (imageExtensions.includes(`.${extension}`)) {
@@ -650,10 +652,10 @@ const ProductDetails = (props) => {
                         {props.bagImg.map((url, index) => {
                           const isActive = activeIndex === index;
                           if (
-                            url.endsWith(".jpg") ||
-                            url.endsWith(".jpeg") ||
-                            url.endsWith(".png") ||
-                            url.endsWith(".webp")
+                            (url && url.endsWith(".jpg")) ||
+                            (url && url.endsWith(".jpeg")) ||
+                            (url && url.endsWith(".png")) ||
+                            (url && url.endsWith(".webp"))
                           ) {
                             return (
                               <img
@@ -667,7 +669,7 @@ const ProductDetails = (props) => {
                                 alt={`Media ${index}`}
                               />
                             );
-                          } else if (url.endsWith(".mp4")) {
+                          } else if (url && url.endsWith(".mp4")) {
                             return (
                               <>
                                 <div style={{ position: "relative" }}>

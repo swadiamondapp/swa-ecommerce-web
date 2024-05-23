@@ -38,7 +38,9 @@ const Cart = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(Urls.cart, { headers: { Authorization: "Token " + token } })
+      .get(`${Urls.cart}?country=${countryId}`, {
+        headers: { Authorization: "Token " + token },
+      })
       .then((response1) => {
         setLoading(false);
         console.log("response1--->", response1);
@@ -60,7 +62,7 @@ const Cart = () => {
     setLoading(true);
     let page = data.selected + 1;
     axios
-      .get(Urls.cart, {
+      .get(`${Urls.cart}?country=${countryId}`, {
         headers: { Authorization: "Token " + token },
       })
       .then((response1) => {
@@ -89,7 +91,7 @@ const Cart = () => {
     setShow(false);
     const index = cartList.findIndex((obj) => obj.id === selids);
     axios
-      .delete(Urls.cart + selids + "/", {
+      .delete(`${Urls.cart}${selids}/?country=${countryId}`, {
         headers: { Authorization: "Token " + token },
       })
       .then((response1) => {
@@ -112,7 +114,7 @@ const Cart = () => {
     setLoading(true);
     const index = cartList.findIndex((obj) => obj.id === selids);
     axios
-      .delete(Urls.cart + selids + "/", {
+      .delete(`${Urls.cart}${selids}/?country=${countryId}`, {
         headers: { Authorization: "Token " + token },
       })
       .then((response1) => {
@@ -228,26 +230,6 @@ const Cart = () => {
               />
             );
           })}
-          {/* <ReactPaginate
-            breakLabel="..."
-            nextLabel="next >"
-            onPageChange={handlePageClick}
-            marginPagesDisplayed={1}
-            pageRangeDisplayed={2}
-            pageCount={pageCount}
-            previousLabel="< prev"
-            renderOnZeroPageCount={null}
-            containerClassName={"pagination justify-content-end pageout"}
-            pageClassName={"page-item"}
-            pageLinkClassName={"page-link"}
-            previousClassName={"page-item"}
-            previousLinkClassName={"page-link"}
-            nextClassName={"page-item"}
-            nextLinkClassName={"page-link"}
-            breakClassName={"page-item"}
-            breakLinkClassName={"page-link"}
-            activeClassName={"active"}
-          /> */}
         </CartDesign>
       </>
     );

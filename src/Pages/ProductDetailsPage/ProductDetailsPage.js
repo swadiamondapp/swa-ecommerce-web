@@ -134,7 +134,9 @@ const ProductDetailsPage = (props) => {
         console.log(error);
       });
     axios
-      .get(Urls.cart, { headers: { Authorization: "Token " + token } })
+      .get(`${Urls.cart}?country=${countryId}`, {
+        headers: { Authorization: "Token " + token },
+      })
       .then((response1) => {
         if (response1.data.results.message === "cart is empty") {
           setCartCount("");
@@ -222,7 +224,7 @@ const ProductDetailsPage = (props) => {
     //   setError("");
     if (token !== null) {
       axios
-        .post(Urls.cart, body, {
+        .post(`${Urls.cart}?country=${countryId}`, body, {
           headers: { Authorization: "Token " + token },
         })
         .then((response1) => {

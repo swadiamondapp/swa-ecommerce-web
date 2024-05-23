@@ -77,6 +77,7 @@ const OrderHistorypage2 = (props) => {
   const [lteLbbData, setLteLbbData] = useState([]);
   const [type, setType] = useState("");
   const [singleOrderData, setSingleOrderData] = useState([]);
+  const [paymentDetails, setPaymentDetails] = useState([]);
   const [addressData, setAddressData] = useState({
     sEmail: "",
     sPhone: "",
@@ -172,6 +173,11 @@ const OrderHistorypage2 = (props) => {
           response.data.results.data &&
             response.data.results.data.order &&
             response.data.results.data.order.shipment
+        );
+        setPaymentDetails(
+          response.data.results.data &&
+            response.data.results.data.order &&
+            response.data.results.data.order.payment_data
         );
       }
     } catch (error) {
@@ -302,7 +308,7 @@ const OrderHistorypage2 = (props) => {
       singleOrderData.data.order.address
   );
 
-  console.log("productDetails--->", productDetails);
+  console.log("paymentDetails--->", paymentDetails);
 
   return (
     <div>
@@ -361,44 +367,6 @@ const OrderHistorypage2 = (props) => {
                     Delivered on <span>26 may 2023</span>
                   </p>
                 </div>
-                {/* <div className={Classes.SubText}>
-                  <p
-                    className={`${Classes.Home} ${Classes.HomeNew}`}
-                    onClick={homeHandler}
-                    style={{
-                      cursor: "pointer",
-                    }}
-                  >
-                    HOME /
-                  </p>
-                  <p
-                    className={`${Classes.Home} ${Classes.HomeNew}`}
-                    onClick={orderHistory}
-                    style={{
-                      cursor: "pointer",
-                    }}
-                  >
-                    ORDER HISTORY/
-                  </p>
-                  <p className={Classes.NewArrival}>SHIPMENT DETAILS</p>
-                </div> */}
-                {/* <div
-                  className="d-flex"
-                  style={{
-                    paddingBottom: "20px",
-                  }}
-                >
-                  <div className={Classes.head}>
-                    Order placed on{" "}
-                    <span className={Classes.date}>
-                      {moment(orderPlaced).format("MMMM Do YYYY")}
-                    </span>
-                  </div>
-                  <TbMinusVertical size={30} color="#00000" />
-                  <div className={Classes.head}>
-                    Order ID <span className={Classes.date}>{orderId} </span>
-                  </div>
-                </div> */}
               </div>
               {/* new design */}
               <div className={Classes.parentCollaps5}>
@@ -432,12 +400,16 @@ const OrderHistorypage2 = (props) => {
                         <div className={Classes.ProductDetailsParent1}>
                           <div className={Classes.LftProductDetail}>
                             <img
-                              src={orderDet[0].product.thumbnail_image}
+                              src={
+                                productDetails[0] &&
+                                productDetails[0].product.thumbnail_image
+                              }
                               style={{ maxWidth: "121px" }}
                             />
                             <div>
                               <p className={Classes.PDiamond1}>
-                                {orderDet[0].product.product_name}
+                                {productDetails[0] &&
+                                  productDetails[0].product.product_name}
                               </p>
                               <p style={{ color: "#757C81" }}>
                                 18 KT yellow gold 12.460 GM
@@ -446,7 +418,9 @@ const OrderHistorypage2 = (props) => {
                                 Diamond 0.680 Carat SIIJ
                               </p>
                               <p style={{ color: "#303A42" }}>
-                                SKU {orderDet[0].product.sku}
+                                SKU{" "}
+                                {productDetails[0] &&
+                                  productDetails[0].product.sku}
                               </p>
                             </div>
                           </div>
@@ -467,15 +441,15 @@ const OrderHistorypage2 = (props) => {
                         <div className={Classes.parentPaymentItems}>
                           <div className={Classes.PaymentItems}>
                             <p>Item Subtotal</p>
-                            <p>27000</p>
+                            <p>{paymentDetails.itemsubtotal}</p>
                           </div>
                           <div className={Classes.PaymentItems}>
                             <p>Shipping</p>
-                            <p>0.00</p>
+                            <p>{paymentDetails.shipping}</p>
                           </div>
                           <div className={Classes.PaymentItems}>
                             <p>Total</p>
-                            <p>27000</p>
+                            <p>{paymentDetails.total}</p>
                           </div>
                           <div className={Classes.PaymentItems}>
                             <p>Promo code</p>
@@ -486,11 +460,17 @@ const OrderHistorypage2 = (props) => {
                           </div>
                           <div className={Classes.PaymentItems}>
                             <p>Coupon Discount</p>
-                            <p style={{ color: "#000000" }}>2500</p>
+                            <p style={{ color: "#000000" }}>
+                              {paymentDetails.coupon_discount
+                                ? paymentDetails.coupon_discount
+                                : 0}
+                            </p>
                           </div>
                           <div className={Classes.PaymentItems}>
                             <p style={{ color: "#000000" }}>Payable</p>
-                            <p style={{ color: "#000000" }}>24500</p>
+                            <p style={{ color: "#000000" }}>
+                              {paymentDetails.payable}
+                            </p>
                           </div>
                         </div>
                       </AccordionTab>
@@ -505,8 +485,17 @@ const OrderHistorypage2 = (props) => {
                               <div className={Classes.dotstatusline}></div>
                             </div>
                             <div className={Classes.leftStatus2}>
-                              <div className={Classes.dotstatus1}></div>
-                              <div className={Classes.dotstatusline1}></div>
+                              <div
+                                className={Classes.dotstatus1}
+                                style={{
+                                  background: "#0eb533",
+                                  border: "none",
+                                }}
+                              ></div>
+                              <div
+                                className={Classes.dotstatusline1}
+                                style={{ background: "#0eb533" }}
+                              ></div>
                             </div>
                             <div className={Classes.leftStatus2}>
                               <div className={Classes.dotstatus1}></div>

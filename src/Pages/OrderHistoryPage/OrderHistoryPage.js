@@ -13,6 +13,7 @@ import { FadeLoader } from "react-spinners";
 import { useHistory } from "react-router-dom";
 
 const OrderHistoryPage = () => {
+  const countryId = localStorage.getItem("id");
   const [orderList, setOrderList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [cartCount, setCartCount] = useState("");
@@ -31,7 +32,9 @@ const OrderHistoryPage = () => {
         console.log(error);
       });
     axios
-      .get(Urls.cart, { headers: { Authorization: "Token " + token } })
+      .get(`${Urls.cart}?country=${countryId}`, {
+        headers: { Authorization: "Token " + token },
+      })
       .then((response1) => {
         if (response1.data.results.message === "cart is empty") {
           setCartCount("");
@@ -95,7 +98,6 @@ const OrderHistoryPage = () => {
     });
   }
   console.log("orderList--->", orderList);
-  const countryId = localStorage.getItem("id");
   const flag = localStorage.getItem("flag_image");
   const Contryname = localStorage.getItem("country_name");
   const [selectedCountry, setSelectedCountry] = useState({

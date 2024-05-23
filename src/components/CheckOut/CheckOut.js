@@ -177,7 +177,7 @@ function CheckOut(props) {
     getDefaultAddress();
     if (props && props.proDet && props.proDet.data) {
       setTotal(props.proDet.data.total);
-      setAmountPay(props.proDet.data.total);
+      setAmountPay(props.proDet.data.pay);
     }
   }, []);
 
@@ -465,14 +465,10 @@ function CheckOut(props) {
 
     setIsLoading(true);
     try {
-      console.log("Api keri");
       const response = await axios.post(Urls.sentOtp, body);
-      console.log(response.data);
       if (response.data[0] === "Otp send Successfully") {
         setGetOtpModal(true);
         setTimer(60);
-        //  setIsSignup(false);
-        //  handleOtpModalOpen();
       }
     } catch (error) {
       console.log(error);
@@ -528,8 +524,6 @@ function CheckOut(props) {
       });
     }
   };
-
-  console.log("location.state.data-->", location.state.name);
 
   const submitAddress = async (token) => {
     if (
@@ -676,6 +670,8 @@ function CheckOut(props) {
             "phoneNumber",
             response.data.results.data.phone_number
           );
+          _userId = response.data.results.data.id;
+          setUserId(response.data.results.data.id);
           setGetOtpModal(false);
           // submitAddress(__token);
           locallySetAddress();
