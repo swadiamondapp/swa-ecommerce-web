@@ -16,13 +16,23 @@ const OrderHistoryPage = () => {
   const [orderList, setOrderList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [cartCount, setCartCount] = useState("");
+  const countryId = localStorage.getItem("id");
+  const flag = localStorage.getItem("flag_image");
+  const Contryname = localStorage.getItem("country_name");
+  const [selectedCountry, setSelectedCountry] = useState({
+    id: countryId,
+    flag_image: flag,
+    country_name: Contryname,
+  });
   const history = useHistory();
   const token = localStorage.getItem("swaToken");
   useEffect(() => {
     window.scrollTo(0, 0);
     setLoading(true);
     axios
-      .get(Urls.myOrder, { headers: { Authorization: "Token 	" + token } })
+      .get(`${Urls.myOrder}?country=${countryId}`, {
+        headers: { Authorization: "Token 	" + token },
+      })
       .then((response1) => {
         setLoading(false);
         setOrderList(response1.data.results.data);
@@ -95,14 +105,7 @@ const OrderHistoryPage = () => {
     });
   }
   console.log("orderList--->", orderList);
-  const countryId = localStorage.getItem("id");
-  const flag = localStorage.getItem("flag_image");
-  const Contryname = localStorage.getItem("country_name");
-  const [selectedCountry, setSelectedCountry] = useState({
-    id: countryId,
-    flag_image: flag,
-    country_name: Contryname,
-  });
+
   return (
     <div>
       <div className={Classes.Background}>

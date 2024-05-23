@@ -24,6 +24,7 @@ function CartDesign(props) {
   const [swaExchangeWallet, setSwaExchangeWallet] = useState(null);
   const [updatedCartResponse, setUpdatedCartResponse] = useState([]);
   const history = useHistory();
+  const countryId = localStorage.getItem("id");
   const token = localStorage.getItem("swaToken");
   useEffect(() => {
     setTotal(props.amount - props.cartProAmnt);
@@ -75,7 +76,7 @@ function CartDesign(props) {
         original_amount: total,
       };
       axios
-        .post(Urls.promoCode, body, {
+        .post(`${Urls.promoCode}?country=${countryId}`, body, {
           headers: { Authorization: "Token " + token },
         })
         .then((response1) => {

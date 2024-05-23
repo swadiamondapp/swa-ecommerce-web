@@ -594,6 +594,7 @@ const ProductDetails = (props) => {
                                   }}
                                 >
                                   <video
+                                    className="videoParentslider"
                                     // className="Vediosec"
                                     style={{
                                       maxWidth: "100%",

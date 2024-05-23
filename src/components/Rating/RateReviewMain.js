@@ -13,6 +13,7 @@ const RateReviewMain = (props) => {
   const [isMobileView, setIsMobileView] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
   );
+  const countryId = localStorage.getItem("id");
 
   const rateChangeHandler = (value) => {
     setRate(value);
@@ -48,7 +49,7 @@ const RateReviewMain = (props) => {
 
   useEffect(() => {
     axios
-      .get(Urls.myOrder, {
+      .get(`${Urls.myOrder}?country=${countryId}`, {
         headers: {
           Authorization: "Token " + token,
         },

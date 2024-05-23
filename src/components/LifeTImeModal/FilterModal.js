@@ -131,6 +131,7 @@ const FilterModal = (props) => {
 
   const handleClose = () => {
     setOpen(false);
+    setSelectedPriceRange("");
   };
   //   sort
   const handleOpenSort = () => {
@@ -139,6 +140,7 @@ const FilterModal = (props) => {
 
   const handleCloseSort = () => {
     setOpensort(false);
+    setSelectedSort("");
   };
   //   filter
   const handleOpenFilter = () => {

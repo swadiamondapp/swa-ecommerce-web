@@ -222,7 +222,7 @@ const ProductDetailsPage = (props) => {
     //   setError("");
     if (token !== null) {
       axios
-        .post(Urls.cart, body, {
+        .post(`${Urls.cart}?country=${countryId}`, body, {
           headers: { Authorization: "Token " + token },
         })
         .then((response1) => {

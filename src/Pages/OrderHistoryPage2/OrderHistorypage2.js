@@ -29,6 +29,14 @@ import { IoCall } from "react-icons/io5";
 
 const OrderHistorypage2 = (props) => {
   const history = useHistory();
+  const countryId = localStorage.getItem("id");
+  const flag = localStorage.getItem("flag_image");
+  const Contryname = localStorage.getItem("country_name");
+  const [selectedCountry, setSelectedCountry] = useState({
+    id: countryId,
+    flag_image: flag,
+    country_name: Contryname,
+  });
   const [orderDet, setOrderDet] = useState([
     {
       product: {
@@ -141,7 +149,7 @@ const OrderHistorypage2 = (props) => {
   const singleOrderDetails = async () => {
     try {
       const response = await axios.get(
-        Urls.myOrder +
+        `${Urls.myOrder}?country=${countryId}` +
           "/" +
           props.location.state.data.productId +
           "?shipment_id=" +
@@ -280,15 +288,6 @@ const OrderHistorypage2 = (props) => {
     "singleOrderData--->1233",
     singleOrderData && singleOrderData.order && singleOrderData.order
   );
-
-  const countryId = localStorage.getItem("id");
-  const flag = localStorage.getItem("flag_image");
-  const Contryname = localStorage.getItem("country_name");
-  const [selectedCountry, setSelectedCountry] = useState({
-    id: countryId,
-    flag_image: flag,
-    country_name: Contryname,
-  });
 
   console.log(
     "singleOrderData--->12",

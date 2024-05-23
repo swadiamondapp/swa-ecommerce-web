@@ -43,14 +43,13 @@ const TopHeader = (props) => {
         </div>
       </div> */}
       <div className={Classes.DiwaliOffersdesk}>
-        {headeroffer.map((item) => (
-          <>
-            <p style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-              {item.head}
-            </p>
-            🥳
-          </>
-        ))}
+        <div className="labelWrapper2">
+          {headeroffer.map((item) => (
+            <>
+              <p>{item.head} 🥳</p>
+            </>
+          ))}
+        </div>
       </div>
     </div>
   );

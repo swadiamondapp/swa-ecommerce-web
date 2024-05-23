@@ -47,6 +47,7 @@ function CheckOut(props) {
   const [otp, setOtp] = useState(123456);
   const pincodes = localStorage.getItem("pincode");
   const [timer, setTimer] = useState(60);
+  const countryId = localStorage.getItem("id");
 
   const [addressData, setAddressData] = useState({
     sEmail: "",
@@ -377,7 +378,7 @@ function CheckOut(props) {
       }
 
       axios
-        .post(Urls.promoCode, body, {
+        .post(`${Urls.promoCode}?country=${countryId}`, body, {
           headers: { Authorization: "Token " + token },
         })
         .then((response1) => {
