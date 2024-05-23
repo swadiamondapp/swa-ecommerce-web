@@ -38,6 +38,7 @@ const mobileStyle = {
 const WalletModal = (props) => {
   const token = localStorage.getItem("swaToken");
   const [walletValues, setWalletValues] = useState([]);
+  const countryId = localStorage.getItem("id");
   const [isMobileView, setIsMobileView] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
   );
@@ -61,9 +62,12 @@ const WalletModal = (props) => {
 
   const getSwaWalletAmounts = async () => {
     try {
-      const response = await axios.get(Urls.getWalletAmounts, {
-        headers: { Authorization: "Token " + token },
-      });
+      const response = await axios.get(
+        `${Urls.getWalletAmounts}?country=${countryId}`,
+        {
+          headers: { Authorization: "Token " + token },
+        }
+      );
       setWalletValues(response.data);
     } catch (error) {
       console.log(error);

@@ -126,9 +126,9 @@ header {
   text-align: center;
   background: #00464d;
   color: #fff;
-  font-family: lato;
+  font-family: "lato";
   font-weight: 400;
-  padding: 8px;
+  padding: 6px;
   font-size: 14px;
   letter-spacing: 0.5px;
 }

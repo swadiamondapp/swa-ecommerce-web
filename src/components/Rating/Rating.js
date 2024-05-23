@@ -71,7 +71,7 @@ function Rating(props) {
           setTimeout(() => {
             setShow(false);
             history.push("/my_orders");
-          }, 2000);
+          }, 200000);
         })
         .catch((error) => {
           console.log(error);
@@ -179,18 +179,27 @@ function Rating(props) {
       </div>
 
       <Modal show={show}>
-        <Modal.Header>
-          <Modal.Title>
-            <HiBadgeCheck
-              className={Classes.Check}
-              size={200}
-              color="#30933A"
-            />
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body className={Classes.Thanks}>
-          Thank you very much your review has been saved
-        </Modal.Body>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Modal.Header>
+            <Modal.Title>
+              <HiBadgeCheck
+                className={Classes.Check}
+                size={200}
+                color="#30933A"
+              />
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body className={Classes.Thanks}>
+            Thank you very much your review has been saved
+          </Modal.Body>
+        </div>
       </Modal>
     </div>
   );
