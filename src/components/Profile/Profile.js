@@ -10,6 +10,7 @@ import Modal from "@mui/material/Modal";
 import axios from "axios";
 import * as urls from "../../Urls";
 import SuccessTick from "../../Assets/successTick.png";
+import LoginModal from "../LoginModal/LoginModal";
 
 const successM = {
   position: "absolute",
@@ -23,7 +24,7 @@ const successM = {
   p: 4,
 };
 
-const Profile = () => {
+const Profile = (props) => {
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -34,6 +35,8 @@ const Profile = () => {
   const token = localStorage.getItem("swaToken");
   const [preview, setPreview] = useState(defaultProfile);
   const [open, setOpen] = useState(false);
+  const [loginModalVisible, setLoginModalVisible] = useState(false);
+  const [show, setShow] = useState(false);
   const [isMobileView, setIsMobileView] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
   );
@@ -63,7 +66,7 @@ const Profile = () => {
       .messages({
         "string.base": `"Full Name" should be a type of string`,
         "string.empty": `"Full Name" is required`,
-        "string.pattern.base": `"Full Name" should contain only alphabets and spaces`,
+        "string.pattern.base": `"Full Name" should contain only alphabets`,
         "any.required": `"Full Name" is a required field`,
       }),
     email: Joi.string()
@@ -75,7 +78,7 @@ const Profile = () => {
       .messages({
         "string.base": `"Email" should be a type of string`,
         "string.empty": `"Email" must not be empty`,
-        "string.pattern.base": `"Email" must be a valid email address`,
+        "string.pattern.base": `"Email" must be  valid `,
         "any.required": `"Email" is a required field`,
       }),
     mobile: Joi.string()
@@ -85,7 +88,7 @@ const Profile = () => {
       .messages({
         "string.base": `"Mobile Number" should be a type of string`,
         "string.empty": `"Mobile Number" is required`,
-        "string.pattern.base": `"Mobile Number" must be a 10-digit number starting with 6-9`,
+        "string.pattern.base": `"Mobile Number" must be a 10-digit number`,
         "any.required": `"Mobile Number" is a required field`,
       }),
     photo: Joi.object()
@@ -150,7 +153,16 @@ const Profile = () => {
           console.log("Form data is valid and submitted:", response.data);
           handleOpen();
           // Automatically close the modal after 5 seconds
-          setTimeout(handleClose, 5000);
+          localStorage.removeItem("swaToken");
+          localStorage.removeItem("userName");
+          localStorage.removeItem("phoneNumber");
+          // setTimeout(handleClose, 3000);
+          setTimeout(() => {
+            handleClose();
+            setLoginModalVisible(true);
+            setShow(true);
+          }, 5000);
+
           // Reset form after successful submission
           setFormData({
             fullName: "",
@@ -159,11 +171,18 @@ const Profile = () => {
             photo: null,
           });
           setPreview(defaultProfile);
+          // Show LoginModal if status is 200
+
+          // setLoginModalVisible(true);
         }
       } catch (err) {
         console.error("Error submitting the form:", err);
       }
     }
+  };
+
+  const closeHanlder = () => {
+    setShow(false);
   };
   return (
     <div>
@@ -225,9 +244,6 @@ const Profile = () => {
                 </div>
               </div>
               <div className={Classes.ParentProfileBtn}>
-                <button type="button" className={Classes.ProfileCancelbtn}>
-                  Cancel
-                </button>
                 <button type="submit" className={Classes.ProfileSaveChangeBtn}>
                   Save Changes
                 </button>
@@ -276,6 +292,13 @@ const Profile = () => {
               </Typography>
             </Box>
           </Modal>
+          {loginModalVisible && (
+            <LoginModal
+              isLog={show}
+              close={closeHanlder}
+              handleOpenLogin={"profile"}
+            />
+          )}
         </div>
       </div>
     </div>

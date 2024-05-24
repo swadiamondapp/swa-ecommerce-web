@@ -209,7 +209,7 @@ const LandingPage = () => {
       console.log("item.discount_percentage--->", item.discount_percentage);
       return (
         <NewArrivalCard
-          ProductImage={item.thumbnail_image}
+          ProductImage={item.thumbnail_image && item.thumbnail_image}
           ProductName={item.product_name}
           cartSddHandler={() => prodDetHandler(item)}
           ProductId={"SKU:" + item.sku}
@@ -246,7 +246,7 @@ const LandingPage = () => {
     topDemnd = topDeamd.map((item, index) => {
       return (
         <NewArrivalCard
-          ProductImage={item.thumbnail_image}
+          ProductImage={item.thumbnail_image && item.thumbnail_image}
           ProductName={item.product_name}
           cartSddHandler={() => prodDetHandler(item)}
           ProductId={"SKU:" + item.sku}
@@ -289,25 +289,32 @@ const LandingPage = () => {
             return (
               <NewArrivalCard
                 key={index}
-                ProductImage={item.thumbnail_image}
-                ProductName={item.product_name}
-                ProductId={"SKU:" + item.sku}
+                ProductImage={
+                  item && item.thumbnail_image && item.thumbnail_image
+                }
+                // ProductImage={
+                //   "https://swaordernewtest.zinfog.in//media/product/thumbnail_images/20567_ER_Y_F_uBCBtzu.jpg"
+                // }
+                ProductName={item && item.product_name && item.product_name}
+                // ProductId={"SKU:" + item && item.sku && item.sku}
                 cartSddHandler={() => prodDetHandler(item)}
                 PriceNew={
-                  item.is_on_discount
-                    ? item.country_discount_price
-                    : item.country_total_price
+                  item && item.is_on_discount
+                    ? item && item.country_discount_price
+                    : item && item.country_total_price
                 }
-                PriceOld={item.is_on_discount ? item.country_total_price : null}
-                isDiscount={item.is_on_discount}
+                PriceOld={
+                  item && item.is_on_discount ? item.country_total_price : null
+                }
+                isDiscount={item && item.is_on_discount && item.is_on_discount}
                 Discount={
-                  item.discount_percentage !== null && undefined
+                  item && item.discount_percentage !== null && undefined
                     ? item.discount_percentage + "% OFF"
                     : null
                 }
                 clicked={() => prodDetHandler(item)}
                 Suces={home}
-                wishAct={item.wishlist_id}
+                wishAct={item && item.wishlist_id && item.wishlist_id}
                 prodet={item}
               />
             );

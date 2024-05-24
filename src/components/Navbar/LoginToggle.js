@@ -556,9 +556,9 @@ const LoginToggle = (props) => {
                           name="mobile"
                           onChange={handleInputChange}
                         />
-                        <p className={Classes.ErrorText}>
+                        {/* <p className={Classes.ErrorText}>
                           {validationErrors.mobile && validationErrors.mobile}
-                        </p>
+                        </p> */}
                       </div>
                       <div>
                         <label className={Classes.labelStyle}>Email</label>

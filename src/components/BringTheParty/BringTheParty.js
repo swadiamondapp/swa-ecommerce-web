@@ -72,6 +72,8 @@ const BringTheParty = (props) => {
                             src={item.Ad_video}
                             autoPlay
                             loop
+                            muted
+                            playsInline
                             onClick={() => advClicked(item)}
                           />
                         </div>

@@ -321,7 +321,11 @@ const LoginModal = (props) => {
     setRegister(false);
     setVerifyOtp(false);
     setNewPassword(false);
-    props.handleOpenLogin();
+    if (props.handleOpenLogin === "profile") {
+      return;
+    } else {
+      props.handleOpenLogin();
+    }
     setChangePas(false);
     setForgot(false);
     setVeifyForgot(false);

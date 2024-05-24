@@ -651,14 +651,15 @@ const Payment = () => {
   };
 
   function formatIndianNumber(number) {
-    const numberString = number.toString();
-    const lastThreeDigits = numberString.slice(-3);
-    const otherDigits = numberString.slice(0, -3);
+    const numberString = number && number.toString();
+    const lastThreeDigits = numberString && numberString.slice(-3);
+    const otherDigits = numberString && numberString.slice(0, -3);
 
     return (
+      otherDigits &&
       otherDigits.replace(/\B(?=(\d{2})+(?!\d))/g, ",") +
-      (otherDigits ? "," : "") +
-      lastThreeDigits
+        (otherDigits ? "," : "") +
+        lastThreeDigits
     );
   }
 

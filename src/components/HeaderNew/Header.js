@@ -262,9 +262,8 @@ const Header = (props) => {
             product_name: response1.data.results.data.product_name,
             sku: response1.data.results.data.sku,
             thumbnail_image: response1.data.results.data.thumbnail_image,
-            country_total_price:
-              response1.data.results.data.country_total_price,
-            country_discount_price: response1.data.results.data.discount_price,
+            total_price_final: response1.data.results.data.total_price_final,
+            discounted_final_price: response1.data.results.data.discount_price,
             wishlist_id: response1.data.results.data.wishlist_id,
           };
           if (history.location.pathname.slice(0, 10) === "/products/") {

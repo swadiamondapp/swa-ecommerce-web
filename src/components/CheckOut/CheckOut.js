@@ -447,34 +447,82 @@ function CheckOut(props) {
           error.response.data.results.message ===
           "user with this email or phone number already exists!!!"
         ) {
-          sendOtp();
+          // sendOtp();
+          sendOtpEmail();
         }
       }
     }
   };
 
-  const sendOtp = async () => {
-    const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    const body = {
-      phone_code: "+91",
-      phone: addressData.sPhone,
-      email: "",
-      createuser: "False",
-      forgotuser: "False",
-    };
-    const mobileNumberRegex = /^\d{10}$/;
+  // const sendOtp = async () => {
+  //   const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  //   const body = {
+  //     phone_code: "+91",
+  //     phone: addressData.sPhone,
+  //     email: "",
+  //     createuser: "False",
+  //     forgotuser: "False",
+  //   };
+  //   const mobileNumberRegex = /^\d{10}$/;
 
-    setIsLoading(true);
+  //   setIsLoading(true);
+  //   try {
+  //     const response = await axios.post(Urls.sentOtp, body);
+  //     if (response.data[0] === "Otp send Successfully") {
+  //       setGetOtpModal(true);
+  //       setTimer(60);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  //   setIsLoading(false);
+  // };
+
+  const sendOtpEmail = async () => {
+    const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
     try {
+      const body = {
+        phone_code: "",
+        phone: "",
+        email: addressData.sEmail,
+        createuser: "False",
+        forgotuser: "False",
+      };
+      setIsLoading(true);
       const response = await axios.post(Urls.sentOtp, body);
       if (response.data[0] === "Otp send Successfully") {
         setGetOtpModal(true);
         setTimer(60);
       }
     } catch (error) {
+      // Log any errors that occur during the process
       console.log(error);
     }
     setIsLoading(false);
+  };
+
+  const verifyOtpEmail = async (e) => {
+    e.preventDefault();
+    const body = {
+      email: addressData.sEmail,
+      phone: "",
+      phone_code: "",
+      otp: otp,
+    };
+    try {
+      const response = await axios.post(Urls.verifyOTP, body);
+      if (response.data.results.status_code === 200) {
+        loginHandler();
+      }
+      if (response.data.results.message === "Otp verified successfully!") {
+        console.log("Otp verified successfully!");
+      } else {
+        setOtpError("Invalid otp");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const locallySetAddress = () => {
@@ -658,7 +706,8 @@ function CheckOut(props) {
 
   const loginHandler = () => {
     const body = {
-      username: addressData.sPhone,
+      // username: addressData.sPhone,
+      username: addressData.sEmail,
     };
     axios
       .post(Urls.Login, body)
@@ -685,27 +734,28 @@ function CheckOut(props) {
       });
   };
 
-  const verifyOtp = async (e) => {
-    e.preventDefault();
-    const body = {
-      phone: addressData.sPhone,
-      phone_code: "+91",
-      otp: otp,
-    };
-    try {
-      const response = await axios.post(Urls.verifyOTP, body);
-      if (response.data.results.status_code === 200) {
-        loginHandler();
-      }
-      if (response.data.results.message === "Otp verified successfully!") {
-        console.log("Otp verified successfully!");
-      } else {
-        setOtpError("Invalid otp");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // dont remove
+  // const verifyOtp = async (e) => {
+  //   e.preventDefault();
+  //   const body = {
+  //     phone: addressData.sPhone,
+  //     phone_code: "+91",
+  //     otp: otp,
+  //   };
+  //   try {
+  //     const response = await axios.post(Urls.verifyOTP, body);
+  //     if (response.data.results.status_code === 200) {
+  //       loginHandler();
+  //     }
+  //     if (response.data.results.message === "Otp verified successfully!") {
+  //       console.log("Otp verified successfully!");
+  //     } else {
+  //       setOtpError("Invalid otp");
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   useEffect(() => {
     let countdown;
@@ -748,7 +798,8 @@ function CheckOut(props) {
         otpError={otpError}
         handelLoginForm={handleSubmit}
         mobileNumber={addressData.sPhone}
-        handleOtpForm={verifyOtp}
+        // handleOtpForm={verifyOtp}
+        handleOtpForm={verifyOtpEmail}
         setOtp={setOtp}
       />
       <div className={`container ${Classes.MobCheck1}`}>
