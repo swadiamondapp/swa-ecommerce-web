@@ -179,8 +179,7 @@ function AddAddress(props) {
         headers: { Authorization: "Token " + token },
       });
       if (response.data.status === 200) {
-        props.fetchAddress();
-        // Reset address data and close the modal
+        handleAddressSelection(response.data.data.id);
         setAddressData({
           fullName: "",
           mobile: "",
@@ -228,6 +227,9 @@ function AddAddress(props) {
           headers: { Authorization: "Token " + token },
         }
       );
+      if (response.data.results.status === 200) {
+        props.fetchAddress();
+      }
     } catch (error) {
       console.log(error);
     }

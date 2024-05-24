@@ -10,6 +10,7 @@ import WalletModal from "../WalletModal/WalletModal";
 import { useHistory } from "react-router-dom";
 
 function CartDesign(props) {
+  const countryId = localStorage.getItem("id");
   const [total, setTotal] = useState("");
   const [amountPay, setAmountPay] = useState("");
   const [code, setCode] = useState("");
@@ -24,8 +25,8 @@ function CartDesign(props) {
   const [swaExchangeWallet, setSwaExchangeWallet] = useState(null);
   const [updatedCartResponse, setUpdatedCartResponse] = useState([]);
   const history = useHistory();
-  const countryId = localStorage.getItem("id");
   const token = localStorage.getItem("swaToken");
+  let diff = 0;
   useEffect(() => {
     setTotal(props.amount - props.cartProAmnt);
     setAmountPay(props.amount - props.cartProAmnt);
@@ -41,7 +42,7 @@ function CartDesign(props) {
           pay: amountPay,
           total: total,
           updatedCartResponse: updatedCartResponse,
-          totalSavedAmount: props.totalSavedAmount,
+          totalSavedAmount: totally_saved,
         },
         name: "cart",
       },
@@ -101,7 +102,7 @@ function CartDesign(props) {
   const updateCart = async (value) => {
     try {
       const response = await axios.patch(
-        Urls.cart,
+        `${Urls.cart}?country=${countryId}`,
         {
           exchange_wallet: swaExchangeWallet,
           swa_wallet: swaWallet,
@@ -121,10 +122,13 @@ function CartDesign(props) {
             pathname: "/checkout",
             state: {
               data: {
-                pay: response.data.results.amount_to_pay,
+                pay:
+                  response.data.results.amount_to_pay > totally_saved
+                    ? response.data.results.amount_to_pay - totally_saved
+                    : totally_saved - response.data.results.amount_to_pay,
                 total: response.data.results.total_amount,
                 updatedCartResponse: response.data.results,
-                totalSavedAmount: props.totalSavedAmount,
+                totalSavedAmount: totally_saved,
               },
               name: "cart",
             },
@@ -135,6 +139,13 @@ function CartDesign(props) {
       console.log(error);
     }
   };
+
+  diff = total - amountPay;
+  let totally_saved = props.totalSavedAmount + diff;
+
+  console.log(amountPay, "amountPay");
+  console.log(total, "total");
+
   return (
     <div>
       <WalletModal
@@ -251,9 +262,9 @@ function CartDesign(props) {
                     }
                   }}
                 />
-                {props.totalSavedAmount ? (
+                {props.totalSavedAmount || diff ? (
                   <p className={Classes.HurrayText}>
-                    You totaly saved {props.totalSavedAmount} hurray!..
+                    You totaly saved {totally_saved} hurray!..
                   </p>
                 ) : null}
                 {/* <button

@@ -254,6 +254,12 @@
   font-weight: 700;
 }
 
+.Error {
+  color: #ff0000e6;
+  font-size: 13px;
+  margin-bottom: 0px;
+}
+
 .SubText {
   color: #5e666c;
   font-weight: 400;

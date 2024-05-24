@@ -48,7 +48,7 @@ const NewArrivalPage = (props) => {
       .then((response1) => {
         setLoading(false);
         // const productList = [...response1.data.results.data]
-        // const sortedProducts = [...productList].sort((a, b) => a.total_price_final - b.total_price_final);
+        // const sortedProducts = [...productList].sort((a, b) => a.country_total_price - b.country_total_price);
         setProduct(response1.data.results.data);
         setCount(response1.data.results.count);
         setPageCount(Math.ceil(response1.data.results.count / 20));
@@ -372,10 +372,10 @@ const NewArrivalPage = (props) => {
           cartSddHandler={() => prodDetHandler(item)}
           PriceNew={
             item.is_on_discount
-              ? item.discounted_final_price
-              : item.total_price_final
+              ? item.country_discount_price
+              : item.country_total_price
           }
-          PriceOld={item.is_on_discount ? item.total_price_final : null}
+          PriceOld={item.is_on_discount ? item.country_total_price : null}
           key={index}
           Discount={
             item.discount_percentage !== null

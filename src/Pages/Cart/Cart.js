@@ -62,7 +62,7 @@ const Cart = () => {
     setLoading(true);
     let page = data.selected + 1;
     axios
-      .get(Urls.cart, {
+      .get(`${Urls.cart}?country=${countryId}`, {
         headers: { Authorization: "Token " + token },
       })
       .then((response1) => {
@@ -91,7 +91,7 @@ const Cart = () => {
     setShow(false);
     const index = cartList.findIndex((obj) => obj.id === selids);
     axios
-      .delete(Urls.cart + selids + "/", {
+      .delete(`${Urls.cart}${selids}/?country=${countryId}`, {
         headers: { Authorization: "Token " + token },
       })
       .then((response1) => {
@@ -114,7 +114,7 @@ const Cart = () => {
     setLoading(true);
     const index = cartList.findIndex((obj) => obj.id === selids);
     axios
-      .delete(Urls.cart + selids + "/", {
+      .delete(`${Urls.cart}${selids}/?country=${countryId}`, {
         headers: { Authorization: "Token " + token },
       })
       .then((response1) => {
@@ -151,7 +151,7 @@ const Cart = () => {
     if (item.product.is_on_discount) {
       return (
         total +
-        (item.product.total_price_final - item.product.discounted_final_price)
+        (item.product.country_total_price - item.product.country_discount_price)
       );
     }
     return total;
@@ -201,15 +201,15 @@ const Cart = () => {
                 ProductName={item.product.product_name}
                 NewPrice={
                   item.product.is_on_discount
-                    ? item.product.discounted_final_price
-                    : item.product.total_price_final
+                    ? item.product.country_discount_price
+                    : item.product.country_total_price
                 }
-                OldPrice={item.product.total_price_final}
+                OldPrice={item.product.country_total_price}
                 discound={item.product.is_on_discount}
                 disPrice={
                   item.product.is_on_discount
-                    ? item.product.total_price_final -
-                      item.product.discounted_final_price
+                    ? item.product.country_total_price -
+                      item.product.country_discount_price
                     : null
                 }
                 Property={
@@ -230,26 +230,6 @@ const Cart = () => {
               />
             );
           })}
-          {/* <ReactPaginate
-            breakLabel="..."
-            nextLabel="next >"
-            onPageChange={handlePageClick}
-            marginPagesDisplayed={1}
-            pageRangeDisplayed={2}
-            pageCount={pageCount}
-            previousLabel="< prev"
-            renderOnZeroPageCount={null}
-            containerClassName={"pagination justify-content-end pageout"}
-            pageClassName={"page-item"}
-            pageLinkClassName={"page-link"}
-            previousClassName={"page-item"}
-            previousLinkClassName={"page-link"}
-            nextClassName={"page-item"}
-            nextLinkClassName={"page-link"}
-            breakClassName={"page-item"}
-            breakLinkClassName={"page-link"}
-            activeClassName={"active"}
-          /> */}
         </CartDesign>
       </>
     );

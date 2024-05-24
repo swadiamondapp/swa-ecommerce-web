@@ -21,7 +21,7 @@ import Joi from "joi";
 import OtpModal from "../Navbar/OtpModal";
 
 function CheckOut(props) {
-  const mobile = localStorage.getItem("registerMobile");
+  const localAddress = localStorage.getItem("Address");
   const location = useLocation();
   const [token, setToken] = useState(localStorage.getItem("swaToken"));
   const [show, setShow] = useState(false);
@@ -170,17 +170,17 @@ function CheckOut(props) {
 
   const formRef = useRef(null);
 
-  useEffect(() => {
-    buyWithoutLogin(location.state.data.product_id);
-  }, [location.state.data]);
+  // useEffect(() => {
+  //   buyWithoutLogin(location.state.data.product_id);
+  // }, [location.state.data]);
 
   useEffect(() => {
     getDefaultAddress();
     if (props && props.proDet && props.proDet.data) {
       setTotal(props.proDet.data.total);
-      setAmountPay(props.proDet.data.total);
+      setAmountPay(props.proDet.data.pay);
     }
-  }, []);
+  }, [location.state.data]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -418,7 +418,8 @@ function CheckOut(props) {
 
   const handleSignUp = async () => {
     if (token !== null) {
-      submitAddress(token);
+      // submitAddress(token);
+      locallySetAddress();
     } else {
       try {
         const body = {
@@ -436,7 +437,8 @@ function CheckOut(props) {
           _userMob = response.data.results.data.user.phone_number;
           const _token = response.data.results.data.token;
           _userId = response.data.results.data.user.id;
-          _token && _userId && submitAddress(_token);
+          // _token && _userId && submitAddress(_token);
+          _token && _userId && locallySetAddress();
         } else {
           alert("Something went wrong");
         }
@@ -464,19 +466,64 @@ function CheckOut(props) {
 
     setIsLoading(true);
     try {
-      console.log("Api keri");
       const response = await axios.post(Urls.sentOtp, body);
-      console.log(response.data);
       if (response.data[0] === "Otp send Successfully") {
         setGetOtpModal(true);
         setTimer(60);
-        //  setIsSignup(false);
-        //  handleOtpModalOpen();
       }
     } catch (error) {
       console.log(error);
     }
     setIsLoading(false);
+  };
+
+  const locallySetAddress = () => {
+    if (
+      addressData.fullName !== isNewaddress.fullName ||
+      addressData.city !== isNewaddress.city ||
+      addressData.hNumber_Bname !== isNewaddress.hNumber_Bname ||
+      addressData.landMark !== isNewaddress.landMark ||
+      addressData.mobile !== isNewaddress.mobile ||
+      addressData.pincode !== isNewaddress.pincode ||
+      addressData.state !== isNewaddress.state ||
+      addressData.streetColony !== isNewaddress.streetColony
+    ) {
+      localStorage.setItem("Address", JSON.stringify(addressData));
+      history.push({
+        pathname: "/payment",
+        state: {
+          data: {
+            pay: amountPay,
+            total: total,
+            // addressId: response.data.data.id,
+            updatedCart: props.proDet.data.updatedCartResponse,
+            token: token,
+            name: _userName,
+            number: _userMob,
+            buyBody: location.state.data,
+            userId: _userId,
+            totalSavedAmount: props.proDet.data.totalSavedAmount,
+            addressData: addressData,
+          },
+          name: location.state.name,
+        },
+      });
+    } else {
+      history.push({
+        pathname: "/payment",
+        state: {
+          data: {
+            pay: amountPay,
+            total: total,
+            addressId: addressData.id,
+            updatedCart: props.proDet.data.updatedCartResponse,
+            totalSavedAmount: props.proDet.data.totalSavedAmount,
+            addressData: addressData,
+          },
+          name: location.state.name,
+        },
+      });
+    }
   };
 
   const submitAddress = async (token) => {
@@ -551,41 +598,46 @@ function CheckOut(props) {
   };
 
   const getDefaultAddress = async () => {
-    try {
-      const response = await axios.get(Urls.defaultAddress, {
-        headers: { Authorization: "Token " + token },
-      });
-      if (response.data.results.status === 200) {
-        setAddressData({
-          ...addressData,
-          sEmail: response.data.results.data.email,
-          sPhone: response.data.results.data.phone_number,
-          fullName: response.data.results.data.name,
-          mobile: response.data.results.data.phone_number,
-          pincode: response.data.results.data.pincode,
-          city: response.data.results.data.city,
-          state: response.data.results.data.state,
-          hNumber_Bname: response.data.results.data.house,
-          streetColony: response.data.results.data.area,
-          landMark: response.data.results.data.landmark,
-          id: response.data.results.data.id,
+    if (localAddress) {
+      setAddressData(JSON.parse(localAddress));
+      // setIsNewAddress(JSON.parse(localAddress));
+    } else {
+      try {
+        const response = await axios.get(Urls.defaultAddress, {
+          headers: { Authorization: "Token " + token },
         });
-        setIsNewAddress({
-          ...isNewaddress,
-          sEmail: response.data.results.data.email,
-          sPhone: response.data.results.data.phone_number,
-          fullName: response.data.results.data.name,
-          mobile: response.data.results.data.phone_number,
-          pincode: response.data.results.data.pincode,
-          city: response.data.results.data.city,
-          state: response.data.results.data.state,
-          hNumber_Bname: response.data.results.data.house,
-          streetColony: response.data.results.data.area,
-          landMark: response.data.results.data.landmark,
-        });
+        if (response.data.results.status === 200) {
+          setAddressData({
+            ...addressData,
+            sEmail: response.data.results.data.email,
+            sPhone: response.data.results.data.phone_number,
+            fullName: response.data.results.data.name,
+            mobile: response.data.results.data.phone_number,
+            pincode: response.data.results.data.pincode,
+            city: response.data.results.data.city,
+            state: response.data.results.data.state,
+            hNumber_Bname: response.data.results.data.house,
+            streetColony: response.data.results.data.area,
+            landMark: response.data.results.data.landmark,
+            id: response.data.results.data.id,
+          });
+          setIsNewAddress({
+            ...isNewaddress,
+            sEmail: response.data.results.data.email,
+            sPhone: response.data.results.data.phone_number,
+            fullName: response.data.results.data.name,
+            mobile: response.data.results.data.phone_number,
+            pincode: response.data.results.data.pincode,
+            city: response.data.results.data.city,
+            state: response.data.results.data.state,
+            hNumber_Bname: response.data.results.data.house,
+            streetColony: response.data.results.data.area,
+            landMark: response.data.results.data.landmark,
+          });
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
     }
   };
 
@@ -619,8 +671,11 @@ function CheckOut(props) {
             "phoneNumber",
             response.data.results.data.phone_number
           );
+          _userId = response.data.results.data.id;
+          setUserId(response.data.results.data.id);
           setGetOtpModal(false);
-          submitAddress(__token);
+          // submitAddress(__token);
+          locallySetAddress();
         } else if (response.data.results.status_code === 401) {
           console.log("Incorrect username or password!");
         }
@@ -667,6 +722,19 @@ function CheckOut(props) {
       setTimer(60); // Reset timer to 60 seconds when the modal is opened
     }
   }, [getOtpModal]);
+
+  function formatIndianNumber(number) {
+    const numberString = number && number.toString();
+    const lastThreeDigits = numberString && numberString.slice(-3);
+    const otherDigits = numberString && numberString.slice(0, -3);
+
+    return (
+      otherDigits &&
+      otherDigits.replace(/\B(?=(\d{2})+(?!\d))/g, ",") +
+        (otherDigits ? "," : "") +
+        lastThreeDigits
+    );
+  }
 
   return (
     <div>
@@ -720,6 +788,7 @@ function CheckOut(props) {
                           type="text"
                           placeholder="Sample@gmail.com"
                           value={addressData.sEmail}
+                          readOnly={isNewaddress.sEmail}
                           name="sEmail"
                           onChange={handleChangeAddress}
                         />
@@ -735,6 +804,7 @@ function CheckOut(props) {
                           className={Classes.PlaceInput}
                           type="text"
                           placeholder="+91 98975656785"
+                          readOnly={isNewaddress.sPhone}
                           value={addressData.sPhone}
                           name="sPhone"
                           onChange={handleChangeAddress}
@@ -908,14 +978,18 @@ function CheckOut(props) {
                   </div>
                   <p className={Classes.Amount}>
                     <BiRupee />
-                    {total}
+                    {formatIndianNumber(total)}
+                    {/* {location.state.data.total} */}
                   </p>
                 </div>
                 <div className={Classes.TotalItemBorder}>
                   <p className={Classes.TotalPayable}>Total Payable</p>
                   <div className={Classes.TotalItems}>
                     <BiRupee className={Classes.Rupee} size={20} />
-                    <p className={Classes.AmountPayable}>{amountPay}</p>
+                    <p className={Classes.AmountPayable}>
+                      {formatIndianNumber(amountPay)}
+                      {/* {location.state.data.pay} */}
+                    </p>
                   </div>
                 </div>
 

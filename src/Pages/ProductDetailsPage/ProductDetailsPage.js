@@ -134,7 +134,9 @@ const ProductDetailsPage = (props) => {
         console.log(error);
       });
     axios
-      .get(Urls.cart, { headers: { Authorization: "Token " + token } })
+      .get(`${Urls.cart}?country=${countryId}`, {
+        headers: { Authorization: "Token " + token },
+      })
       .then((response1) => {
         if (response1.data.results.message === "cart is empty") {
           setCartCount("");
@@ -153,7 +155,7 @@ const ProductDetailsPage = (props) => {
       if (prodDet.is_on_discount) {
         total = prodDet.discount_price;
       } else {
-        total = prodDet.total_price_final;
+        total = prodDet.country_total_price;
       }
       const selProd = {
         product_id: prodDet.id,
@@ -239,7 +241,7 @@ const ProductDetailsPage = (props) => {
     } else {
       history.push({
         pathname: "/checkout",
-        state: { data: selProd },
+        state: { data: selProd, name: "buybody" },
       });
     }
     // }
@@ -283,12 +285,14 @@ const ProductDetailsPage = (props) => {
         offerPrice={
           prodDet.is_on_discount
             ? prodDet.discount_price
-            : prodDet.total_price_final
+            : prodDet.country_total_price
         }
-        actualPrice={prodDet.is_on_discount ? prodDet.total_price_final : null}
+        actualPrice={
+          prodDet.is_on_discount ? prodDet.country_total_price : null
+        }
         discountVal={
           prodDet.is_on_discount
-            ? prodDet.total_price_final - prodDet.discount_price
+            ? prodDet.country_total_price - prodDet.discount_price
             : null
         }
         discountPercentage={prodDet.discount_percentage}
