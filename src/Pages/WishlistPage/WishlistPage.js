@@ -109,11 +109,13 @@ const whishlistPage = () => {
           ProductId={"SKU:" + item.product.sku}
           PriceNew={
             item.product.is_on_discount
-              ? item.product.discounted_final_price
-              : item.product.total_price_final
+              ? item.product.country_discount_price
+              : item.product.country_total_price
           }
           PriceOld={
-            item.product.is_on_discount ? item.product.total_price_final : null
+            item.product.is_on_discount
+              ? item.product.country_total_price
+              : null
           }
           key={index}
           Discount={

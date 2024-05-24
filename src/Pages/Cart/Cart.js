@@ -151,7 +151,7 @@ const Cart = () => {
     if (item.product.is_on_discount) {
       return (
         total +
-        (item.product.total_price_final - item.product.discounted_final_price)
+        (item.product.country_total_price - item.product.country_discount_price)
       );
     }
     return total;
@@ -201,15 +201,15 @@ const Cart = () => {
                 ProductName={item.product.product_name}
                 NewPrice={
                   item.product.is_on_discount
-                    ? item.product.discounted_final_price
-                    : item.product.total_price_final
+                    ? item.product.country_discount_price
+                    : item.product.country_total_price
                 }
-                OldPrice={item.product.total_price_final}
+                OldPrice={item.product.country_total_price}
                 discound={item.product.is_on_discount}
                 disPrice={
                   item.product.is_on_discount
-                    ? item.product.total_price_final -
-                      item.product.discounted_final_price
+                    ? item.product.country_total_price -
+                      item.product.country_discount_price
                     : null
                 }
                 Property={

@@ -155,7 +155,7 @@ const ProductDetailsPage = (props) => {
       if (prodDet.is_on_discount) {
         total = prodDet.discount_price;
       } else {
-        total = prodDet.total_price_final;
+        total = prodDet.country_total_price;
       }
       const selProd = {
         product_id: prodDet.id,
@@ -285,12 +285,14 @@ const ProductDetailsPage = (props) => {
         offerPrice={
           prodDet.is_on_discount
             ? prodDet.discount_price
-            : prodDet.total_price_final
+            : prodDet.country_total_price
         }
-        actualPrice={prodDet.is_on_discount ? prodDet.total_price_final : null}
+        actualPrice={
+          prodDet.is_on_discount ? prodDet.country_total_price : null
+        }
         discountVal={
           prodDet.is_on_discount
-            ? prodDet.total_price_final - prodDet.discount_price
+            ? prodDet.country_total_price - prodDet.discount_price
             : null
         }
         discountPercentage={prodDet.discount_percentage}

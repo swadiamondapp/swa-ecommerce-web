@@ -213,10 +213,10 @@ const LandingPage = () => {
           ProductId={"SKU:" + item.sku}
           PriceNew={
             item.is_on_discount
-              ? item.discounted_final_price
-              : item.total_price_final
+              ? item.country_discount_price
+              : item.country_total_price
           }
-          PriceOld={item.is_on_discount ? item.total_price_final : null}
+          PriceOld={item.is_on_discount ? item.country_total_price : null}
           key={index}
           isDiscount={item.is_on_discount}
           Discount={
@@ -250,10 +250,10 @@ const LandingPage = () => {
           ProductId={"SKU:" + item.sku}
           PriceNew={
             item.is_on_discount
-              ? item.discounted_final_price
-              : item.total_price_final
+              ? item.country_discount_price
+              : item.country_total_price
           }
-          PriceOld={item.is_on_discount ? item.total_price_final : null}
+          PriceOld={item.is_on_discount ? item.country_total_price : null}
           key={index}
           isDiscount={item.is_on_discount}
           Discount={
@@ -293,10 +293,10 @@ const LandingPage = () => {
                 cartSddHandler={() => prodDetHandler(item)}
                 PriceNew={
                   item.is_on_discount
-                    ? item.discounted_final_price
-                    : item.total_price_final
+                    ? item.country_discount_price
+                    : item.country_total_price
                 }
-                PriceOld={item.is_on_discount ? item.total_price_final : null}
+                PriceOld={item.is_on_discount ? item.country_total_price : null}
                 isDiscount={item.is_on_discount}
                 Discount={
                   item.discount_percentage !== null && undefined

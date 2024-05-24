@@ -84,18 +84,16 @@ const HeaderFilter = (props) => {
     setOpenNotification(!openNotification);
   };
   const searchTitleHandler = (setItem) => {
-    console.log(history.location.pathname)
+    console.log(history.location.pathname);
     if (setItem.type === "category") {
-      if(history.location.pathname.slice(0,12) === '/new_arrivel'){
-        window.location.href = "http://localhost:3000/category_search/"+setItem.id
-        console.log('testk');
-      }else{
+      if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
+        window.location.href =
+          "http://localhost:3000/category_search/" + setItem.id;
+        console.log("testk");
+      } else {
         history.push({ pathname: "/new_arrivel", state: { data: setItem.id } });
-
       }
-     
     } else if (setItem.type === "product") {
-     
       axios
         .get(Urls.productDet + setItem.id)
         .then((response1) => {
@@ -106,26 +104,27 @@ const HeaderFilter = (props) => {
             product_name: response1.data.results.data.product_name,
             sku: response1.data.results.data.sku,
             thumbnail_image: response1.data.results.data.thumbnail_image,
-            total_price_final: response1.data.results.data.total_price_final,
-            discounted_final_price: response1.data.results.data.discount_price,
+            country_total_price:
+              response1.data.results.data.country_total_price,
+            country_discount_price: response1.data.results.data.discount_price,
             wishlist_id: response1.data.results.data.wishlist_id,
           };
-         
+
           history.push({
             pathname:
               "/products/" +
               setItem.id +
               "/" +
-              response1.data.results.data.color_id+
-              "/"+response1.data.results.data.product_name,
+              response1.data.results.data.color_id +
+              "/" +
+              response1.data.results.data.product_name,
             state: { data: selData },
-          })
+          });
         })
         .catch((error) => {
           console.log(error);
         });
-      }
-  
+    }
   };
   return (
     <div>
@@ -164,7 +163,7 @@ const HeaderFilter = (props) => {
               onClick={setHomepageHandler}
             />
             <div className={Classes.SearchIcons}>
-            <div className={Classes.searchList}>
+              <div className={Classes.searchList}>
                 <input
                   className={Classes.searchbar}
                   type="text"
@@ -199,7 +198,7 @@ const HeaderFilter = (props) => {
                   )}
                 </div>
               </div>
-            
+
               <FiBell
                 className={Classes.Icon}
                 color="#FFFFFF"
