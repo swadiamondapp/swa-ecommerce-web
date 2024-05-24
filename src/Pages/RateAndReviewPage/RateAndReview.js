@@ -10,9 +10,20 @@ import * as Urls from "../../Urls";
 function RateAndReview(props) {
   const [cartCount, setCartCount] = useState("");
   const token = localStorage.getItem("swaToken");
+  console.log("props.location.", props.location.state);
+  const countryId = localStorage.getItem("id");
+  const flag = localStorage.getItem("flag_image");
+  const Contryname = localStorage.getItem("country_name");
+  const [selectedCountry, setSelectedCountry] = useState({
+    id: countryId,
+    flag_image: flag,
+    country_name: Contryname,
+  });
   useEffect(() => {
     axios
-      .get(Urls.cart, { headers: { Authorization: "Token " + token } })
+      .get(`${Urls.cart}?country=${countryId}`, {
+        headers: { Authorization: "Token " + token },
+      })
       .then((response1) => {
         if (response1.data.results.message === "cart is empty") {
           setCartCount("");
@@ -24,16 +35,6 @@ function RateAndReview(props) {
         console.log(error);
       });
   }, []);
-
-  console.log("props.location.", props.location.state);
-  const countryId = localStorage.getItem("id");
-  const flag = localStorage.getItem("flag_image");
-  const Contryname = localStorage.getItem("country_name");
-  const [selectedCountry, setSelectedCountry] = useState({
-    id: countryId,
-    flag_image: flag,
-    country_name: Contryname,
-  });
 
   return (
     <div>

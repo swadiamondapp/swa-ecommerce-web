@@ -19,7 +19,9 @@ function FAQPage() {
   useEffect(() => {
     if (token !== null) {
       axios
-        .get(Urls.cart, { headers: { Authorization: "Token " + token } })
+        .get(`${Urls.cart}?country=${countryId}`, {
+          headers: { Authorization: "Token " + token },
+        })
         .then((response1) => {
           if (response1.data.results.message === "cart is empty") {
             setCartCount("");

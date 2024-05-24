@@ -105,7 +105,9 @@ const NewArrivalPage = (props) => {
   };
   const cartsCount = () => {
     axios
-      .get(Urls.cart, { headers: { Authorization: "Token " + token } })
+      .get(`${Urls.cart}?country=${countryId}`, {
+        headers: { Authorization: "Token " + token },
+      })
       .then((response1) => {
         if (response1.data.results.message === "cart is empty") {
           setCartCount("");
@@ -267,7 +269,9 @@ const NewArrivalPage = (props) => {
     };
 
     axios
-      .post(Urls.cart, body, { headers: { Authorization: "Token " + token } })
+      .post(`${Urls.cart}?country=${countryId}`, body, {
+        headers: { Authorization: "Token " + token },
+      })
       .then((response1) => {
         if (response1.data.results.message === "item added") {
           let count = cartCount;

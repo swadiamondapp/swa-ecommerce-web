@@ -1,10 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import defaultProfile from "../../Assets/userprofile.png";
 import Classes from "../SwaWallet/SwaWallet.module.css";
 import Joi from "joi";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
 import axios from "axios";
 import * as urls from "../../Urls";
+import SuccessTick from "../../Assets/successTick.png";
+
+const successM = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  bgcolor: "background.paper",
+  border: "none",
+  boxShadow: 24,
+  borderRadius: "4px",
+  p: 4,
+};
 
 const Profile = () => {
   const [formData, setFormData] = useState({
@@ -16,6 +33,25 @@ const Profile = () => {
   const [errors, setErrors] = useState({});
   const token = localStorage.getItem("swaToken");
   const [preview, setPreview] = useState(defaultProfile);
+  const [open, setOpen] = useState(false);
+  const [isMobileView, setIsMobileView] = useState(
+    window.innerWidth >= 300 && window.innerWidth <= 575
+  );
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileView(window.innerWidth >= 300 && window.innerWidth <= 575);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup function to remove event listener when component unmounts
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   console.log("photo", formData.photo);
 
@@ -110,6 +146,20 @@ const Profile = () => {
           },
         });
         console.log("Form data is valid and submitted:", response.data);
+        if (response.data.status === 200) {
+          console.log("Form data is valid and submitted:", response.data);
+          handleOpen();
+          // Automatically close the modal after 5 seconds
+          setTimeout(handleClose, 5000);
+          // Reset form after successful submission
+          setFormData({
+            fullName: "",
+            email: "",
+            mobile: "",
+            photo: null,
+          });
+          setPreview(defaultProfile);
+        }
       } catch (err) {
         console.error("Error submitting the form:", err);
       }
@@ -184,6 +234,48 @@ const Profile = () => {
               </div>
             </div>
           </form>
+          <Modal
+            // open={props.successModalOpen}
+            open={open}
+            // onClose={props.handleClose}
+            onClose={handleClose}
+          >
+            <Box
+              sx={successM}
+              style={
+                isMobileView
+                  ? { width: "90%" }
+                  : { width: "30%", height: "auto" }
+              }
+            >
+              <Typography className={Classes.successModalContainer}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flexDirection: "column",
+                  }}
+                >
+                  <div>
+                    <img src={SuccessTick} />
+                  </div>
+                  <div
+                    style={{
+                      textAlign: "center",
+                      margin: "12px 0px",
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <span className={Classes.titlesuccesModal}>
+                      profile updated successfully
+                    </span>
+                  </div>
+                </div>
+              </Typography>
+            </Box>
+          </Modal>
         </div>
       </div>
     </div>
