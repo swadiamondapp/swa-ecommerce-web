@@ -38,7 +38,9 @@ const Cart = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(Urls.cart, { headers: { Authorization: "Token " + token } })
+      .get(`${Urls.cart}?country=${countryId}`, {
+        headers: { Authorization: "Token " + token },
+      })
       .then((response1) => {
         setLoading(false);
         console.log("response1--->", response1);
