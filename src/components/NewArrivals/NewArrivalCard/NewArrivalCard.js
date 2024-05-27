@@ -22,6 +22,8 @@ const NewArrivalCard = (props) => {
   const [showModal, setShowModal] = useState(false);
   const Contryname = localStorage.getItem("country_name");
   const [buttonText, setButtonText] = useState("Check delivery date");
+  const countryId = localStorage.getItem("id");
+  const flag = localStorage.getItem("flag_image");
 
   const token = localStorage.getItem("swaToken");
   useEffect(() => {
@@ -39,7 +41,7 @@ const NewArrivalCard = (props) => {
       };
 
       axios
-        .post(Urls.wishlist, body, {
+        .post(`${Urls.wishlist}?country=${countryId}`, body, {
           headers: { Authorization: "Token " + token },
         })
         .then((response1) => {
@@ -57,7 +59,7 @@ const NewArrivalCard = (props) => {
   const Remove = () => {
     if (token !== null) {
       axios
-        .delete(Urls.wishlist + wishId, {
+        .delete(`${Urls.wishlist + wishId}?country=${countryId}`, {
           headers: { Authorization: "Token " + token },
         })
         .then((response1) => {

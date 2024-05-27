@@ -150,11 +150,11 @@ const OrderHistorypage2 = (props) => {
   const singleOrderDetails = async () => {
     try {
       const response = await axios.get(
-        `${Urls.myOrder}?country=${countryId}` +
+        `${Urls.myOrder +
           "/" +
           props.location.state.data.productId +
           "?shipment_id=" +
-          props.location.state.data.shipmentId,
+          props.location.state.data.shipmentId}?country=${countryId}`,
         {
           headers: {
             Authorization: "Token " + token,

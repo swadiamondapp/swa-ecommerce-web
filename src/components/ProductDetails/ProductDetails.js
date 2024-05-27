@@ -192,7 +192,7 @@ const ProductDetails = (props) => {
         product_id: props.id,
       };
       axios
-        .post(Urls.wishlist, body, {
+        .post(`${Urls.wishlist}?country=${countryId}`, body, {
           headers: {
             Authorization: "Token " + token,
           },
@@ -211,7 +211,7 @@ const ProductDetails = (props) => {
     if (token !== null) {
       if (wishId !== "") {
         axios
-          .delete(Urls.wishlist + wishId, {
+          .delete(`${Urls.wishlist + wishId}?country=${countryId}`, {
             headers: {
               Authorization: "Token " + token,
             },

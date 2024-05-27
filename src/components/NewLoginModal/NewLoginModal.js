@@ -51,6 +51,7 @@ const LoginModal = (props) => {
             "phoneNumber",
             response.data.results.data.phone_number
           );
+          localStorage.setItem("UserEmail", response.data.results.data.email);
 
           props.logAct(response.data.results.token);
           handleClose();
@@ -476,7 +477,7 @@ const LoginModal = (props) => {
 
       <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Header closeButton></Modal.Header>
-        <Modal.Body  className={Classes.modalContainer}>
+        <Modal.Body className={Classes.modalContainer}>
           {/* login */}
           <div className={login ? [Classes.Block] : [Classes.None]}>
             <div className={Classes.LoginLogo}>

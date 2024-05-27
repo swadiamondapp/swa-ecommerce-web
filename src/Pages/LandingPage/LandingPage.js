@@ -52,6 +52,7 @@ const LandingPage = () => {
   const countryId = localStorage.getItem("id");
   const flag = localStorage.getItem("flag_image");
   const Contryname = localStorage.getItem("country_name");
+  const [headeroffer, setHeaderoffer] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState({
     id: countryId,
     flag_image: flag,
@@ -101,10 +102,20 @@ const LandingPage = () => {
         console.log(error);
       });
   };
+
   useEffect(() => {
     setLoading(true);
+    axios
+      .get(`${Urls.headeroffer}?country=${selectedCountry.id}`)
+      .then((response) => {
+        setHeaderoffer(response.data.results.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching home data:", error);
+      });
     if (token !== null) {
       home();
+
       axios
         .get(`${Urls.cart}?country=${countryId}`, {
           headers: { Authorization: "Token " + token },
@@ -331,6 +342,7 @@ const LandingPage = () => {
         loginHandler={loginActHandler}
         selectedCountry={selectedCountry}
         setSelectedCountry={setSelectedCountry}
+        headeroffer={headeroffer}
       />
       <Banner banners={banner} tags={tags} mob={mobBanner} />
       <Features />

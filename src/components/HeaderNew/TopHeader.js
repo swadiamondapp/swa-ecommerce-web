@@ -11,20 +11,10 @@ const TopHeader = (props) => {
   const displayJoinHandler = () => {
     history.push("/join");
   };
-  const [headeroffer, setHeaderoffer] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get(Urls.headeroffer)
-      .then((response) => {
-        setHeaderoffer(response.data.results.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching home data:", error);
-      });
-  }, []);
+  const countryId = localStorage.getItem("id");
 
-  console.log("headeroffer", headeroffer);
+  console.log("headeroffer11111111", props.headeroffer);
   return (
     <div className={Classes.Header_top}>
       {/* <div className={`${"container"} ${Classes.HeaderTop_Text}`}>
@@ -44,7 +34,7 @@ const TopHeader = (props) => {
       </div> */}
       <div className={Classes.DiwaliOffersdesk}>
         <div className="labelWrapper2">
-          {headeroffer.map((item) => (
+          {props.headeroffer.map((item) => (
             <>
               <p>{item.head} 🥳</p>
             </>

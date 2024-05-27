@@ -25,10 +25,13 @@ const successM = {
 };
 
 const Profile = (props) => {
+  const userName = localStorage.getItem("userName");
+  const phone = localStorage.getItem("phoneNumber");
+  const Email = localStorage.getItem("UserEmail");
   const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    mobile: "",
+    fullName: userName,
+    email: Email,
+    mobile: phone,
     photo: null,
   });
   const [errors, setErrors] = useState({});
@@ -37,6 +40,7 @@ const Profile = (props) => {
   const [open, setOpen] = useState(false);
   const [loginModalVisible, setLoginModalVisible] = useState(false);
   const [show, setShow] = useState(false);
+
   const [isMobileView, setIsMobileView] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
   );

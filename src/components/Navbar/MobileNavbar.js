@@ -40,6 +40,7 @@ const MobileNavbar = (props) => {
   const [activeIndex, setActiveIndex] = useState();
   const token = localStorage.getItem("swaToken");
   const [searchShow, setSearchShow] = useState(false);
+  const userDetailsRef = useRef(null);
   const [suggestionList, setSuggesionList] = useState([]);
   const userName = localStorage.getItem("userName");
   const [searchKey, setSearchKey] = useState("");
@@ -49,6 +50,7 @@ const MobileNavbar = (props) => {
   const [tags, setTags] = useState([]);
   const [openDropDown, setOpenDropDown] = useState(false);
   const nameRef = useRef(null);
+  const [showUserDetails, setShowUserDetails] = useState(false);
   const dropdownRef = useRef(null);
   const [countryData, setCountryData] = useState([]);
   const flag = localStorage.getItem("defaultCountryFlag");
@@ -143,6 +145,25 @@ const MobileNavbar = (props) => {
     }
   };
   const [showSearchBar, setShowSearchBar] = useState(false);
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const handleClickOutside = (event) => {
+    if (
+      userDetailsRef.current &&
+      !userDetailsRef.current.contains(event.target)
+    ) {
+      setShowUserDetails(false);
+    }
+  };
+  const handleLogedUserClick = () => {
+    setShowUserDetails(!showUserDetails);
+  };
   const toggleSearchBar = () => {
     // setShowSearchBar(!showSearchBar);
     props.setIsHome(!props.isHome);
@@ -315,8 +336,26 @@ const MobileNavbar = (props) => {
         const response = await axios.get(Urls.getCountryFlags);
 
         setCountryData(response.data.results.data);
+
+        // Extracting the ID of India
+        const indiaData = response.data.results.data.find(
+          (country) => country.country_name === "India"
+        );
+        if (!CountryIds && !flag) {
+          props.setSelectedCountry({
+            ...props.selectedCountry,
+            flag_image: indiaData.flag_image,
+            id: indiaData.id,
+            country_name: indiaData.country_name,
+          });
+          localStorage.setItem("flag_image", indiaData.flag_image);
+          localStorage.setItem("id", indiaData.id);
+          localStorage.setItem("country_name", indiaData.country_name);
+        }
+        console.log("indiaData--->", indiaData);
         const defaultCountryID = localStorage.getItem("id");
-        if (defaultCountryID) {
+        const defaultCountryFlag = localStorage.getItem("flag_image");
+        if (defaultCountryID && defaultCountryFlag) {
           // Find the default country from the data using the ID
           const defaultCountry = countryData.find(
             (country) => country.id === parseInt(defaultCountryID)
@@ -337,8 +376,31 @@ const MobileNavbar = (props) => {
     setOpenDropDown(true);
 
     localStorage.setItem("id", country.id);
-    console.log("id...?", country.id);
+    localStorage.setItem("flag_image", country.flag_image);
+    localStorage.setItem("country_name", country.country_name);
   };
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (
+        openDropDown &&
+        !dropdownRef.current.contains(event.target) &&
+        !nameRef.current.contains(event.target)
+      ) {
+        setOpenDropDown(false);
+      }
+      if (
+        userDetailsRef.current &&
+        !userDetailsRef.current.contains(event.target)
+      ) {
+        setShowUserDetails(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [openDropDown]);
   return (
     <div className={Classes.NavContainer}>
       <div className={Classes.Navbar}>
@@ -385,10 +447,20 @@ const MobileNavbar = (props) => {
                 >
                   <div className={Classes.headerElement}>
                     <img
-                      src={props.selectedCountry.flag_image}
+                      src={
+                        props &&
+                        props.selectedCountry &&
+                        props.selectedCountry.flag_image
+                      }
                       alt="Selected flag"
                       className={Classes.selectedImage}
                     />
+                    {console.log(
+                      "countryimage>>>>>>>?",
+                      props &&
+                        props.selectedCountry &&
+                        props.selectedCountry.flag_image
+                    )}
                   </div>
                   {openDropDown && (
                     <div className={Classes.CountryDropDowns} ref={dropdownRef}>
@@ -635,8 +707,8 @@ const MobileNavbar = (props) => {
                           {userName && (
                             <AccordionTab header="Account">
                               <div className={Classes.ShippingDetialHead}>
-                                <div className={Classes.LoggedDetailsList}>
-                                  <Link to="/profile" onClick={handleClose}>
+                                <Link to="/profile" onClick={handleClose}>
+                                  <div className={Classes.LoggedDetailsList}>
                                     <p
                                       style={{
                                         fontSize: "16px",
@@ -645,13 +717,17 @@ const MobileNavbar = (props) => {
                                     >
                                       Profile
                                     </p>
-                                  </Link>
-                                  <IoIosArrowForward
-                                    style={{ color: "#006E7F" }}
-                                  />
-                                </div>
-                                <div className={Classes.LoggedDetailsList}>
-                                  <Link to="/my_orders" onClick={handleClose}>
+
+                                    <IoIosArrowForward
+                                      style={{
+                                        color: "#006E7F",
+                                        fontSize: "16px",
+                                      }}
+                                    />
+                                  </div>
+                                </Link>
+                                <Link to="/my_orders" onClick={handleClose}>
+                                  <div className={Classes.LoggedDetailsList}>
                                     <p
                                       style={{
                                         fontSize: "16px",
@@ -660,13 +736,17 @@ const MobileNavbar = (props) => {
                                     >
                                       My orders
                                     </p>
-                                  </Link>
-                                  <IoIosArrowForward
-                                    style={{ color: "#006E7F" }}
-                                  />
-                                </div>
-                                <div className={Classes.LoggedDetailsList}>
-                                  <Link to="/wish_list" onClick={handleClose}>
+
+                                    <IoIosArrowForward
+                                      style={{
+                                        color: "#006E7F",
+                                        fontSize: "16px",
+                                      }}
+                                    />
+                                  </div>
+                                </Link>
+                                <Link to="/wish_list" onClick={handleClose}>
+                                  <div className={Classes.LoggedDetailsList}>
                                     <p
                                       style={{
                                         fontSize: "16px",
@@ -675,13 +755,17 @@ const MobileNavbar = (props) => {
                                     >
                                       Wishlist
                                     </p>
-                                  </Link>
-                                  <IoIosArrowForward
-                                    style={{ color: "#006E7F" }}
-                                  />
-                                </div>
-                                <div className={Classes.LoggedDetailsList}>
-                                  <Link to="/addaddress" onClick={handleClose}>
+
+                                    <IoIosArrowForward
+                                      style={{
+                                        color: "#006E7F",
+                                        fontSize: "16px",
+                                      }}
+                                    />
+                                  </div>
+                                </Link>
+                                <Link to="/addaddress" onClick={handleClose}>
+                                  <div className={Classes.LoggedDetailsList}>
                                     <p
                                       style={{
                                         fontSize: "16px",
@@ -690,13 +774,17 @@ const MobileNavbar = (props) => {
                                     >
                                       Add address
                                     </p>
-                                  </Link>
-                                  <IoIosArrowForward
-                                    style={{ color: "#006E7F" }}
-                                  />
-                                </div>
-                                <div className={Classes.LoggedDetailsList}>
-                                  <Link to="/rate&review" onClick={handleClose}>
+
+                                    <IoIosArrowForward
+                                      style={{
+                                        color: "#006E7F",
+                                        fontSize: "16px",
+                                      }}
+                                    />
+                                  </div>
+                                </Link>
+                                <Link to="/rate&review" onClick={handleClose}>
+                                  <div className={Classes.LoggedDetailsList}>
                                     <p
                                       style={{
                                         fontSize: "16px",
@@ -705,13 +793,17 @@ const MobileNavbar = (props) => {
                                     >
                                       Write Review
                                     </p>
-                                  </Link>
-                                  <IoIosArrowForward
-                                    style={{ color: "#006E7F" }}
-                                  />
-                                </div>
-                                <div className={Classes.LoggedDetailsList}>
-                                  <Link to="/swaWallet" onClick={handleClose}>
+
+                                    <IoIosArrowForward
+                                      style={{
+                                        color: "#006E7F",
+                                        fontSize: "16px",
+                                      }}
+                                    />
+                                  </div>
+                                </Link>
+                                <Link to="/swaWallet" onClick={handleClose}>
+                                  <div className={Classes.LoggedDetailsList}>
                                     <p
                                       style={{
                                         fontSize: "16px",
@@ -720,13 +812,17 @@ const MobileNavbar = (props) => {
                                     >
                                       SWA Wallet
                                     </p>
-                                  </Link>
-                                  <IoIosArrowForward
-                                    style={{ color: "#006E7F" }}
-                                  />
-                                </div>
-                                <div className={Classes.LoggedDetailsList}>
-                                  <Link to="/swaExchange" onClick={handleClose}>
+
+                                    <IoIosArrowForward
+                                      style={{
+                                        color: "#006E7F",
+                                        fontSize: "16px",
+                                      }}
+                                    />
+                                  </div>
+                                </Link>
+                                <Link to="/swaExchange" onClick={handleClose}>
+                                  <div className={Classes.LoggedDetailsList}>
                                     <p
                                       style={{
                                         fontSize: "16px",
@@ -735,11 +831,15 @@ const MobileNavbar = (props) => {
                                     >
                                       Exchange Wallet
                                     </p>
-                                  </Link>
-                                  <IoIosArrowForward
-                                    style={{ color: "#006E7F" }}
-                                  />
-                                </div>
+
+                                    <IoIosArrowForward
+                                      style={{
+                                        color: "#006E7F",
+                                        fontSize: "16px",
+                                      }}
+                                    />
+                                  </div>
+                                </Link>
                               </div>
                             </AccordionTab>
                           )}

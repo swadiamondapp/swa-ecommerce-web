@@ -29,7 +29,9 @@ const whishlistPage = () => {
   const wishListing = () => {
     setLoading(true);
     axios
-      .get(Urls.wishlist, { headers: { Authorization: "Token 	" + token } })
+      .get(`${Urls.wishlist}?country=${countryId}`, {
+        headers: { Authorization: "Token 	" + token },
+      })
       .then((response1) => {
         setLoading(false);
         setWishList(response1.data.results.data);
@@ -58,7 +60,9 @@ const whishlistPage = () => {
   const newWishListHandler = () => {
     setLoading(true);
     axios
-      .get(Urls.wishlist, { headers: { Authorization: "Token 	" + token } })
+      .get(`${Urls.wishlist}?country=${countryId}`, {
+        headers: { Authorization: "Token 	" + token },
+      })
       .then((response1) => {
         setLoading(false);
         setWishList(response1.data.results.data);

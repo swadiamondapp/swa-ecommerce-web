@@ -289,6 +289,7 @@ const LoginToggle = (props) => {
         const response = await axios.post(Urls.register, body);
         if (response.data.results.status_code === 200) {
           localStorage.setItem("registerMobile", signUpData.mobile);
+
           // alert("Successfully Registered");
           props.setText("Registered");
           props.setShowSuccessModal(true);
@@ -415,6 +416,7 @@ const LoginToggle = (props) => {
             "phoneNumber",
             response.data.results.data.phone_number
           );
+          localStorage.setItem("UserEmail", response.data.results.data.email);
           setGetOtpModal(false);
           setTimeout(() => {
             props.onClose();

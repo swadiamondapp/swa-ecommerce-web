@@ -58,22 +58,11 @@ const Header = (props) => {
   const userName = localStorage.getItem("userName");
   const [showModal, setShowModal] = useState(false);
   const pincode = localStorage.getItem("pincode");
-  const [headeroffer, setHeaderoffer] = useState([]);
 
   const [showUserDetails, setShowUserDetails] = useState(false);
   const userDetailsRef = useRef(null);
   console.log("Contryname", Contryname);
 
-  useEffect(() => {
-    axios
-      .get(Urls.headeroffer)
-      .then((response) => {
-        setHeaderoffer(response.data.results.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching home data:", error);
-      });
-  }, []);
   const handleShowModal = () => {
     setShowModal(true);
   };
@@ -400,7 +389,7 @@ const Header = (props) => {
 
   return (
     <div>
-      {isHomePage && <TopHeader />}
+      {isHomePage && <TopHeader headeroffer={props.headeroffer} />}
 
       <MainHead
         setIsHome={setIsHome}
@@ -526,12 +515,6 @@ const Header = (props) => {
                 alt="Selected flag"
                 className={Classes.selectedImage}
               />
-              {console.log(
-                "countryimage>>>>>>>?",
-                props &&
-                  props.selectedCountry &&
-                  props.selectedCountry.flag_image
-              )}
             </div>
             {openDropDown && (
               <div className={Classes.CountryDropDowns} ref={dropdownRef}>
@@ -711,11 +694,12 @@ const Header = (props) => {
           {isHomePage && (
             <div className={Classes.DiwaliOffers}>
               <div className="labelWrapper2" style={{ height: "20px" }}>
-                {headeroffer.map((item) => (
-                  <>
-                    <p>{item.head} 🥳</p>
-                  </>
-                ))}
+                {props.headeroffer &&
+                  props.headeroffer.map((item) => (
+                    <>
+                      <p>{item.head} 🥳</p>
+                    </>
+                  ))}
               </div>
             </div>
           )}

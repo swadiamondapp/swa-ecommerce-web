@@ -4,11 +4,14 @@ import SH1 from "../../Assets/SH1.png";
 import PS2 from "../../Assets/PS2.png";
 import PS3 from "../../Assets/PS3.png";
 import PS4 from "../../Assets/PS4.png";
+import { BiRupee } from "react-icons/bi";
+import { CgDollar } from "react-icons/cg";
 import MoneyBack from "../../Assets/MoneyBack.png";
 import Support from "../../Assets/Support.png";
 import Security from "../../Assets/Security.png";
 import Classes from "./Features.module.css";
 function Features() {
+  const Contryname = localStorage.getItem("country_name");
   return (
     <div className={Classes.FeaturesBg}>
       <div className="container">
@@ -21,7 +24,20 @@ function Features() {
             >
               <img src={SH1} className={Classes.Images} alt="" />
               <p className={Classes.FeaturesmainText}>Free shipping</p>
-              <p className={Classes.FeaturesSubText}>On order over ₹2000... </p>
+              <p
+                className={Classes.FeaturesSubText}
+                style={{ display: "flex", alignItems: "center", gap: "3px" }}
+              >
+                On order over{" "}
+                {Contryname === "India" && (
+                  <BiRupee className={Classes.Rupee} />
+                )}
+                {Contryname === "United States" && (
+                  <CgDollar className={Classes.Rupee} />
+                )}
+                {Contryname === "United Arab Emirates" && <span>AED</span>}{" "}
+                2000...{" "}
+              </p>
             </div>
             <div
               className={`${"col-sm-6"} ${"col-6"}  ${"col-md-3"} ${

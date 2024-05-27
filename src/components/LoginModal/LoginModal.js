@@ -16,7 +16,7 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import logedimg from "../../Assets/loged.png";
 import { IoIosArrowDown } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -53,6 +53,7 @@ const LoginModal = (props) => {
   const [show, setShow] = useState(false);
   const [register, setRegister] = useState(false);
   const [login, setLogin] = useState(false);
+  const location = useLocation();
   const [logCond, setLogCond] = useState(null);
   const [forgot, setForgot] = useState(false);
   const [forgotPhoneNumber, setForgotPhoneNumber] = useState("");
@@ -581,38 +582,42 @@ const LoginModal = (props) => {
           </div>
         </div>
       </div> */}
-      {userName ? (
-        <div
-          className={Classes.LogedUser}
-          style={{ cursor: "pointer" }}
-          ref={nameRef}
-          onClick={handleLogedUserClick}
-        >
-          <img src={logedimg} className={Classes.headerElement} />
-          <p className={Classes.headerElement}>{userName}</p>
-          <IoIosArrowDown className={Classes.headerElement} />
-        </div>
-      ) : (
-        <div className={Classes.LoginSignup} style={{ cursor: "pointer" }}>
+
+      <>
+        {userName ? (
           <div
-            className={`${Classes.dLogin} ${Classes.headerElement}`}
-            onClick={() => {
-              props.handleOpenLogin();
-              setIsSignpuLogin(false);
-              props.setLoginText("Welcome Back");
-            }}
+            className={Classes.LogedUser}
+            style={{ cursor: "pointer" }}
+            ref={nameRef}
+            onClick={handleLogedUserClick}
           >
-            Login
+            <img src={logedimg} className={Classes.headerElement} />
+            <p className={Classes.headerElement}>{userName}</p>
+            <IoIosArrowDown className={Classes.headerElement} />
           </div>
-          <div className={Classes.LineArrow}></div>
-          <div
-            className={`${Classes.DSignup} ${Classes.headerElement}`}
-            onClick={handleSignupClick}
-          >
-            Sign up
+        ) : (
+          <div className={Classes.LoginSignup} style={{ cursor: "pointer" }}>
+            <div
+              className={`${Classes.dLogin} ${Classes.headerElement}`}
+              onClick={() => {
+                props.handleOpenLogin();
+                setIsSignpuLogin(false);
+                props.setLoginText("Welcome Back");
+              }}
+            >
+              Login
+            </div>
+            <div className={Classes.LineArrow}></div>
+            <div
+              className={`${Classes.DSignup} ${Classes.headerElement}`}
+              onClick={handleSignupClick}
+            >
+              Sign up
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </>
+
       {/* <div className={Classes.LoginSignup}>
         <div className={Classes.dLogin} onClick={props.handleOpenLogin}>
           Login

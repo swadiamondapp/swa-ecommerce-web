@@ -51,6 +51,8 @@ function CheckOut(props) {
   const [timer, setTimer] = useState(60);
   const countryId = localStorage.getItem("id");
 
+  console.log("total...", total);
+
   const [addressData, setAddressData] = useState({
     sEmail: "",
     sPhone: "",
@@ -722,6 +724,7 @@ function CheckOut(props) {
             "phoneNumber",
             response.data.results.data.phone_number
           );
+          localStorage.setItem("UserEmail", response.data.results.data.email);
           _userId = response.data.results.data.id;
           setUserId(response.data.results.data.id);
           setGetOtpModal(false);

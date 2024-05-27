@@ -125,7 +125,7 @@ const Cart = () => {
         };
 
         axios
-          .post(Urls.wishlist, body, {
+          .post(`${Urls.wishlist}?country=${countryId}`, body, {
             headers: { Authorization: "Token " + token },
           })
           .then((response1) => {
@@ -214,6 +214,7 @@ const Cart = () => {
                 }
                 Property={
                   // item.description.carat +
+                  item.product.metal_type +
                   " KT " +
                   // item.description.colour_name +
                   " " +
