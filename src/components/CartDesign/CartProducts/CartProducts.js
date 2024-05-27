@@ -3,10 +3,12 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 import { TbTruckDelivery } from "react-icons/tb";
 import WishListTag from "../../../Assets/whishlist.svg";
 import { BiRupee } from "react-icons/bi";
+import { CgDollar } from "react-icons/cg";
 import Classes from "../CartDesign.module.css";
 import { IoCheckmarkCircleSharp } from "react-icons/io5";
 
 function CartProducts(props) {
+  const Contryname = localStorage.getItem("country_name");
   return (
     <div>
       <div className={Classes.CartItems}>
@@ -37,12 +39,30 @@ function CartProducts(props) {
               <div className={Classes.Price}>
                 <p className={Classes.PriceNew} style={{ marginBottom: "0px" }}>
                   {/* <BiRupee className={Classes.BiRupee} size={25} /> */}
-                  &#8377; {props.NewPrice}
+                  {Contryname === "India" && (
+                    <BiRupee className={Classes.Rupee} />
+                  )}
+                  {Contryname === "United States" && (
+                    <CgDollar className={Classes.Rupee} />
+                  )}
+                  {Contryname === "United Arab Emirates" && (
+                    <span style={{ paddingRight: "5px" }}>AED</span>
+                  )}{" "}
+                  {props.NewPrice}
                 </p>
                 {props && props.OldPrice !== props.NewPrice ? (
                   <p className={Classes.PriceOld}>
                     {/* <BiRupee className={Classes.BiRupee} size={25} /> */}
-                    &#8377; {props.OldPrice}
+                    {Contryname === "India" && (
+                      <BiRupee className={Classes.Rupee} />
+                    )}
+                    {Contryname === "United States" && (
+                      <CgDollar className={Classes.Rupee} />
+                    )}
+                    {Contryname === "United Arab Emirates" && (
+                      <span style={{ paddingRight: "5px" }}>AED</span>
+                    )}{" "}
+                    {props.OldPrice}
                   </p>
                 ) : null}
               </div>
@@ -50,11 +70,23 @@ function CartProducts(props) {
                 ? props.OldPrice - props.NewPrice !== 0 && (
                     <p className={Classes.SavedMoney}>
                       Hurray! You have saved{" "}
-                      <BiRupee
-                        className={Classes.Rupee}
-                        size={15}
-                        color="#30933A"
-                      />
+                      {Contryname === "India" && (
+                        <BiRupee
+                          className={Classes.Rupee}
+                          size={15}
+                          color="#30933A"
+                        />
+                      )}
+                      {Contryname === "United States" && (
+                        <CgDollar
+                          className={Classes.Rupee}
+                          size={15}
+                          color="#30933A"
+                        />
+                      )}
+                      {Contryname === "United Arab Emirates" && (
+                        <span style={{ paddingRight: "5px" }}>AED</span>
+                      )}
                       {props.OldPrice - props.NewPrice}
                     </p>
                   )

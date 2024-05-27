@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Classes from "./CartDesign.module.css";
 import { BiRupee } from "react-icons/bi";
+import { CgDollar } from "react-icons/cg";
 import Warning from "../../Assets/Warning.png";
 import Succes from "../../Assets/success.png";
 import axios from "axios";
@@ -11,6 +12,7 @@ import { useHistory } from "react-router-dom";
 
 function CartDesign(props) {
   const countryId = localStorage.getItem("id");
+  const Contryname = localStorage.getItem("country_name");
   const [total, setTotal] = useState("");
   const [amountPay, setAmountPay] = useState("");
   const [code, setCode] = useState("");
@@ -188,7 +190,18 @@ function CartDesign(props) {
                       Total &nbsp;<span>({props.cartCount} Items)</span>
                     </p>
                   </div>
-                  <p className={Classes.Amount}>&#8377; {total}</p>
+                  <p className={Classes.Amount}>
+                    {Contryname === "India" && (
+                      <BiRupee className={Classes.Rupee} />
+                    )}
+                    {Contryname === "United States" && (
+                      <CgDollar className={Classes.Rupee} />
+                    )}
+                    {Contryname === "United Arab Emirates" && (
+                      <span style={{ paddingRight: "5px" }}>AED</span>
+                    )}{" "}
+                    {total}
+                  </p>
                 </div>
                 <div className={Classes.Voucher}>
                   <p className={Classes.NumOfItem}>Do you have Voucher code</p>
@@ -247,7 +260,16 @@ function CartDesign(props) {
                   </div>
                   <p className={Classes.Amount}>
                     {/* &#x20B9; {total}  */}
-                    &#x20B9; {amountPay}
+                    {Contryname === "India" && (
+                      <BiRupee className={Classes.Rupee} />
+                    )}
+                    {Contryname === "United States" && (
+                      <CgDollar className={Classes.Rupee} />
+                    )}
+                    {Contryname === "United Arab Emirates" && (
+                      <span style={{ paddingRight: "5px" }}>AED</span>
+                    )}{" "}
+                    {amountPay}
                   </p>
                 </div>
                 <input

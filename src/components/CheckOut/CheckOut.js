@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import Classes from "./CheckOut.module.css";
 import { useHistory } from "react-router-dom";
 import { BiRupee } from "react-icons/bi";
+import { CgDollar } from "react-icons/cg";
 import { states } from "../../countryList";
 
 import { useState } from "react";
@@ -23,6 +24,7 @@ import OtpModal from "../Navbar/OtpModal";
 function CheckOut(props) {
   const localAddress = localStorage.getItem("Address");
   const location = useLocation();
+  const Contryname = localStorage.getItem("country_name");
   const [token, setToken] = useState(localStorage.getItem("swaToken"));
   const [show, setShow] = useState(false);
   const [code, setCode] = useState("");
@@ -1028,7 +1030,15 @@ function CheckOut(props) {
                     <p className={Classes.TotalSmall}>Total</p>
                   </div>
                   <p className={Classes.Amount}>
-                    <BiRupee />
+                    {Contryname === "India" && (
+                      <BiRupee className={Classes.Rupee} />
+                    )}
+                    {Contryname === "United States" && (
+                      <CgDollar className={Classes.Rupee} />
+                    )}
+                    {Contryname === "United Arab Emirates" && (
+                      <span style={{ paddingRight: "5px" }}>AED</span>
+                    )}
                     {formatIndianNumber(total)}
                     {/* {location.state.data.total} */}
                   </p>
@@ -1036,7 +1046,17 @@ function CheckOut(props) {
                 <div className={Classes.TotalItemBorder}>
                   <p className={Classes.TotalPayable}>Total Payable</p>
                   <div className={Classes.TotalItems}>
-                    <BiRupee className={Classes.Rupee} size={20} />
+                    {Contryname === "India" && (
+                      <BiRupee className={Classes.Rupee} size={20} />
+                    )}
+                    {Contryname === "United States" && (
+                      <CgDollar className={Classes.Rupee} size={20} />
+                    )}
+                    {Contryname === "United Arab Emirates" && (
+                      <span style={{ paddingRight: "5px", fontWeight: "600" }}>
+                        AED
+                      </span>
+                    )}
                     <p className={Classes.AmountPayable}>
                       {formatIndianNumber(amountPay)}
                       {/* {location.state.data.pay} */}

@@ -4,6 +4,7 @@ import Classes from "../HeaderNew/MainHead.module.css";
 import productimage from "../../Assets/BringTheParty1.png";
 import { Carousel } from "antd";
 import { BiRupee } from "react-icons/bi";
+import { CgDollar } from "react-icons/cg";
 import { IoCartOutline } from "react-icons/io5";
 import * as Urls from "../../Urls";
 import axios from "axios";
@@ -19,6 +20,7 @@ const SililerProducts = (props) => {
   const [buttonText, setButtonText] = useState("Check delivery date");
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [buttonLabels, setButtonLabels] = useState({});
+  const Contryname = localStorage.getItem("country_name");
 
   useEffect(() => {
     similarProduct();
@@ -155,10 +157,28 @@ const SililerProducts = (props) => {
 
                       <div className={Classes.PriceContainer}>
                         <p className={Classes.SimilerProductPrices}>
-                          &#x20B9; {item.country_total_price}
+                          {Contryname === "India" && (
+                            <BiRupee className={Classes.Rupee} />
+                          )}
+                          {Contryname === "United States" && (
+                            <CgDollar className={Classes.Rupee} />
+                          )}
+                          {Contryname === "United Arab Emirates" && (
+                            <span style={{ paddingRight: "5px" }}>AED</span>
+                          )}{" "}
+                          {item.country_total_price}
                         </p>
                         <p className={Classes.SimilerProductDiscount}>
-                          &#x20B9; {item.country_total_price}
+                          {Contryname === "India" && (
+                            <BiRupee className={Classes.Rupee} />
+                          )}
+                          {Contryname === "United States" && (
+                            <CgDollar className={Classes.Rupee} />
+                          )}
+                          {Contryname === "United Arab Emirates" && (
+                            <span style={{ paddingRight: "5px" }}>AED</span>
+                          )}{" "}
+                          {item.country_total_price}
                         </p>
                       </div>
                       <div>
@@ -209,14 +229,31 @@ const SililerProducts = (props) => {
 
                       <div className={Classes.PriceContainer}>
                         <p className={Classes.SimilerProductPrices}>
-                          &#x20B9;{" "}
+                          {Contryname === "India" && (
+                            <BiRupee className={Classes.Rupee} />
+                          )}
+                          {Contryname === "United States" && (
+                            <CgDollar className={Classes.Rupee} />
+                          )}
+                          {Contryname === "United Arab Emirates" && (
+                            <span style={{ paddingRight: "5px" }}>AED</span>
+                          )}
                           {item.discount_price
                             ? item.discount_price
                             : item.country_total_price}
                         </p>
                         {item.discount_price && (
                           <p className={Classes.SimilerProductDiscount}>
-                            &#x20B9; {item.country_total_price}
+                            {Contryname === "India" && (
+                              <BiRupee className={Classes.Rupee} />
+                            )}
+                            {Contryname === "United States" && (
+                              <CgDollar className={Classes.Rupee} />
+                            )}
+                            {Contryname === "United Arab Emirates" && (
+                              <span style={{ paddingRight: "5px" }}>AED</span>
+                            )}{" "}
+                            {item.country_total_price}
                           </p>
                         )}
                       </div>

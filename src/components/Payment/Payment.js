@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom/cjs/react-router-dom";
 import Classes from "./Payment.module.css";
 import phonepay from "../../Assets/phonepay.svg";
+import { BiRupee } from "react-icons/bi";
+import { CgDollar } from "react-icons/cg";
 import mastercard from "../../Assets/mastercard.svg";
 import axios from "axios";
 import * as Urls from "../../Urls";
@@ -13,6 +15,7 @@ const Payment = () => {
   const countryId = localStorage.getItem("id");
   const token = localStorage.getItem("swaToken");
   const localAddress = localStorage.getItem("Address");
+  const Contryname = localStorage.getItem("country_name");
   const history = useHistory();
   const location = useLocation();
   const [promoId, setPromoId] = useState("");
@@ -730,8 +733,16 @@ const Payment = () => {
                 </div>
 
                 <p className={Classes.Amount}>
-                  {/* <BiRupee /> */}
-                  &#x20B9; {formatIndianNumber(data.total)}
+                  {Contryname === "India" && (
+                    <BiRupee className={Classes.Rupee} />
+                  )}
+                  {Contryname === "United States" && (
+                    <CgDollar className={Classes.Rupee} />
+                  )}
+                  {Contryname === "United Arab Emirates" && (
+                    <span style={{ paddingRight: "5px" }}>AED</span>
+                  )}{" "}
+                  {formatIndianNumber(data.total)}
                 </p>
               </div>
               <div
@@ -746,8 +757,16 @@ const Payment = () => {
                 </div>
 
                 <p className={Classes.Amount}>
-                  {/* <BiRupee /> */}
-                  &#x20B9; {formatIndianNumber(data.pay)}
+                  {Contryname === "India" && (
+                    <BiRupee className={Classes.Rupee} />
+                  )}
+                  {Contryname === "United States" && (
+                    <CgDollar className={Classes.Rupee} />
+                  )}
+                  {Contryname === "United Arab Emirates" && (
+                    <span style={{ paddingRight: "5px" }}>AED</span>
+                  )}{" "}
+                  {formatIndianNumber(data.pay)}
                 </p>
               </div>
               <div
@@ -772,7 +791,19 @@ const Payment = () => {
                     </Box>
                   </>
                 ) : (
-                  <>Pay &#x20B9; {data.pay}</>
+                  <>
+                    Pay{" "}
+                    {Contryname === "India" && (
+                      <BiRupee className={Classes.Rupee} />
+                    )}
+                    {Contryname === "United States" && (
+                      <CgDollar className={Classes.Rupee} />
+                    )}
+                    {Contryname === "United Arab Emirates" && (
+                      <span style={{ paddingRight: "5px" }}>AED</span>
+                    )}{" "}
+                    {data.pay}
+                  </>
                 )}
               </div>
               {data.totalSavedAmount ? (
@@ -824,7 +855,15 @@ const Payment = () => {
               // setPmethodError("Please select a payment method");
             }}
           >
-            Pay &#x20B9; {data.pay}
+            Pay{" "}
+            {Contryname === "India" && <BiRupee className={Classes.Rupee} />}
+            {Contryname === "United States" && (
+              <CgDollar className={Classes.Rupee} />
+            )}
+            {Contryname === "United Arab Emirates" && (
+              <span style={{ paddingRight: "5px" }}>AED</span>
+            )}{" "}
+            {data.pay}
           </div>
         </div>
       </div>

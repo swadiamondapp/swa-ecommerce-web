@@ -7,6 +7,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
 import { useState } from "react";
 import { BiRupee } from "react-icons/bi";
+import { CgDollar } from "react-icons/cg";
 import axios from "axios";
 import * as Urls from "../../../Urls";
 import { IoCartOutline } from "react-icons/io5";
@@ -19,6 +20,7 @@ const NewArrivalCard = (props) => {
   const [onadd, setOnAdd] = useState(true);
   const [wishId, setWishId] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const Contryname = localStorage.getItem("country_name");
   const [buttonText, setButtonText] = useState("Check delivery date");
 
   const token = localStorage.getItem("swaToken");
@@ -141,14 +143,30 @@ const NewArrivalCard = (props) => {
                 <div className={Classes.ParentCardBoxes}>
                   <div className={Classes.Price}>
                     <p className={Classes.PriceNew}>
-                      <BiRupee className={Classes.Rupee} />
+                      {Contryname === "India" && (
+                        <BiRupee className={Classes.Rupee} />
+                      )}
+                      {Contryname === "United States" && (
+                        <CgDollar className={Classes.Rupee} />
+                      )}
+                      {Contryname === "United Arab Emirates" && (
+                        <span style={{ paddingRight: "5px" }}>AED</span>
+                      )}
                       {result}
                       {/* {props.PriceNew} */}
                     </p>
                     <p className={Classes.PriceOld}>
-                      {props.PriceOld !== null && (
+                      {props.PriceOld !== null && Contryname === "India" && (
                         <BiRupee color="#B0B0B0" className={Classes.Rupee} />
                       )}
+                      {props.PriceOld !== null &&
+                        Contryname === "United States" && (
+                          <CgDollar color="#B0B0B0" className={Classes.Rupee} />
+                        )}
+                      {props.PriceOld !== null &&
+                        Contryname === "United Arab Emirates" && (
+                          <span style={{ paddingRight: "5px" }}>AED</span>
+                        )}
                       {props.PriceOld !== null && props.PriceOld}
                     </p>
                   </div>

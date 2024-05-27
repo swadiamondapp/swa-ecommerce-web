@@ -4,6 +4,8 @@ import wallet from "../../Assets/wallet.png";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import { BiRupee } from "react-icons/bi";
+import { CgDollar } from "react-icons/cg";
 import axios from "axios";
 import * as Urls from "../../Urls";
 import { Button } from "@mui/material";
@@ -39,6 +41,7 @@ const WalletModal = (props) => {
   const token = localStorage.getItem("swaToken");
   const [walletValues, setWalletValues] = useState([]);
   const countryId = localStorage.getItem("id");
+  const Contryname = localStorage.getItem("country_name");
   const [isMobileView, setIsMobileView] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
   );
@@ -114,7 +117,16 @@ const WalletModal = (props) => {
                   <p className={Classes.Word}>Swa Wallet</p>
                 </div>
                 <p className={Classes.Amount}>
-                  &#x20B9; {walletValues.swa_wallet}
+                  {Contryname === "India" && (
+                    <BiRupee className={Classes.Rupee} />
+                  )}
+                  {Contryname === "United States" && (
+                    <CgDollar className={Classes.Rupee} />
+                  )}
+                  {Contryname === "United Arab Emirates" && (
+                    <span style={{ paddingRight: "5px" }}>AED</span>
+                  )}{" "}
+                  {walletValues.swa_wallet}
                 </p>
               </div>
               <div className={Classes.WalletContentLines}>
@@ -129,7 +141,16 @@ const WalletModal = (props) => {
                   <p className={Classes.Word}>Exchange Wallet</p>
                 </div>
                 <p className={Classes.Amount}>
-                  &#x20B9; {walletValues.exchange_wallet}
+                  {Contryname === "India" && (
+                    <BiRupee className={Classes.Rupee} />
+                  )}
+                  {Contryname === "United States" && (
+                    <CgDollar className={Classes.Rupee} />
+                  )}
+                  {Contryname === "United Arab Emirates" && (
+                    <span style={{ paddingRight: "5px" }}>AED</span>
+                  )}{" "}
+                  {walletValues.exchange_wallet}
                 </p>
               </div>
             </div>

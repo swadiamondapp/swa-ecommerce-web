@@ -47,6 +47,7 @@ import { BsFillPlayFill } from "react-icons/bs";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import VideocallForm from "./VideocallForm";
+import { CgDollar } from "react-icons/cg";
 
 const ProductDetails = (props) => {
   const location = useLocation();
@@ -74,6 +75,7 @@ const ProductDetails = (props) => {
   // State to track the current slide index
   const [currentSlideIndex, setCurrentSlideIndex] = useState(6);
   const [activeIndex, setActiveIndex] = useState(0);
+  const Contryname = localStorage.getItem("country_name");
 
   const largeSliderRef = useRef(null);
 
@@ -838,13 +840,33 @@ const ProductDetails = (props) => {
               <div className={`${Classes.Flex} ${Classes.MobDownAR}`}>
                 {/* <BiRupee size={25} /> */}
 
-                <p className={Classes.NewPrice}>
+                <p
+                  className={Classes.NewPrice}
+                  style={{ display: "flex", alignItems: "center", gap: "3px" }}
+                >
+                  {Contryname === "India" && (
+                    <BiRupee className={Classes.Rupee} />
+                  )}
+                  {Contryname === "United States" && (
+                    <CgDollar className={Classes.Rupee} />
+                  )}
+                  {Contryname === "United Arab Emirates" && (
+                    <span style={{ paddingRight: "5px" }}>AED</span>
+                  )}
                   {/* &#x20B9; {parseFloat(formattedCost).toFixed(0)} */}
-                  &#x20B9; {result && result}
+                  {result && result}
                 </p>
                 {props.actualPrice && (
                   <>
-                    <BiRupee size={25} color="#B0B0B0" />{" "}
+                    {Contryname === "India" && (
+                      <BiRupee size={25} color="#B0B0B0" />
+                    )}
+                    {Contryname === "United States" && (
+                      <CgDollar size={25} color="#B0B0B0" />
+                    )}
+                    {Contryname === "United Arab Emirates" && (
+                      <span style={{ paddingRight: "5px" }}>AED</span>
+                    )}
                     <p className={Classes.OldPrice}>
                       {parseInt(props.actualPrice).toFixed(0)}
                     </p>
@@ -853,7 +875,12 @@ const ProductDetails = (props) => {
               </div>
               {props.discount ? (
                 <p className={Classes.HurrayText}>
-                  Hurray! You have saved <BiRupee size={15} />
+                  Hurray! You have saved{" "}
+                  {Contryname === "India" && <BiRupee size={15} />}
+                  {Contryname === "United States" && <CgDollar size={15} />}
+                  {Contryname === "United Arab Emirates" && (
+                    <span style={{ paddingRight: "5px" }}>AED</span>
+                  )}{" "}
                   {props.discountVal.toFixed(0)}
                 </p>
               ) : null}

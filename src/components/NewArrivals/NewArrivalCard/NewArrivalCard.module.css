@@ -275,6 +275,7 @@
   .NewArrivalCard {
     height: 305px;
     margin-bottom: 20px;
+    padding: 3px;
   }
   .CheckDelvyDate {
     color: #00464d;

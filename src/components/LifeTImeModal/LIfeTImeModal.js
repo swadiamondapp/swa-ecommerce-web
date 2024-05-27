@@ -4,6 +4,8 @@ import classes from "./LIfeTimeModal.module.css";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { BiRupee } from "react-icons/bi";
+import { CgDollar } from "react-icons/cg";
 import Modal from "@mui/material/Modal";
 import SuccessTick from "../../Assets/successTick.png";
 import * as Urls from "../../Urls";
@@ -49,6 +51,7 @@ const successM = {
 
 const LIfeTImeModal = (props) => {
   const token = localStorage.getItem("swaToken");
+  const Contryname = localStorage.getItem("country_name");
   const [successModalOpen, setSuccessModalOpen] = useState(false);
   const [open, setOpen] = useState(false);
   const [isMobileView, setIsMobileView] = useState(
@@ -116,7 +119,12 @@ const LIfeTImeModal = (props) => {
                       </span>
 
                       <span className={classes.textAmount}>
-                        &#x20B9; {props.lteLbbData.total_amount}
+                        {Contryname === "India" && <BiRupee />}
+                        {Contryname === "United States" && <CgDollar />}
+                        {Contryname === "United Arab Emirates" && (
+                          <span style={{ paddingRight: "5px" }}>AED</span>
+                        )}{" "}
+                        {props.lteLbbData.total_amount}
                       </span>
                     </div>
                     <div className={classes.line}></div>
@@ -126,7 +134,12 @@ const LIfeTImeModal = (props) => {
                       </span>
 
                       <span className={classes.textAmount}>
-                        &#x20B9; {props.lteLbbData.deducted_amount_lte}
+                        {Contryname === "India" && <BiRupee />}
+                        {Contryname === "United States" && <CgDollar />}
+                        {Contryname === "United Arab Emirates" && (
+                          <span style={{ paddingRight: "5px" }}>AED</span>
+                        )}{" "}
+                        {props.lteLbbData.deducted_amount_lte}
                       </span>
                     </div>
                     <div className={classes.line}></div>
@@ -136,7 +149,12 @@ const LIfeTImeModal = (props) => {
                       </span>
 
                       <span className={classes.greenColor}>
-                        &#x20B9; {props.lteLbbData.refund_amount_lte}
+                        {Contryname === "India" && <BiRupee />}
+                        {Contryname === "United States" && <CgDollar />}
+                        {Contryname === "United Arab Emirates" && (
+                          <span style={{ paddingRight: "5px" }}>AED</span>
+                        )}{" "}
+                        {props.lteLbbData.refund_amount_lte}
                       </span>
                     </div>
                     <div className={classes.line}></div>
@@ -167,7 +185,12 @@ const LIfeTImeModal = (props) => {
                       <span className={classes.labelText}>Purchase Value </span>
 
                       <span className={classes.textAmount}>
-                        &#x20B9; {props.lteLbbData.total_amount}
+                        {Contryname === "India" && <BiRupee />}
+                        {Contryname === "United States" && <CgDollar />}
+                        {Contryname === "United Arab Emirates" && (
+                          <span style={{ paddingRight: "5px" }}>AED</span>
+                        )}{" "}
+                        {props.lteLbbData.total_amount}
                       </span>
                     </div>
                     <div className={classes.line}></div>
@@ -177,7 +200,12 @@ const LIfeTImeModal = (props) => {
                       </span>
 
                       <span className={classes.textAmount}>
-                        &#x20B9; {props.lteLbbData.deducted_amount_lbb}
+                        {Contryname === "India" && <BiRupee />}
+                        {Contryname === "United States" && <CgDollar />}
+                        {Contryname === "United Arab Emirates" && (
+                          <span style={{ paddingRight: "5px" }}>AED</span>
+                        )}{" "}
+                        {props.lteLbbData.deducted_amount_lbb}
                       </span>
                     </div>
                     <div className={classes.line}></div>
@@ -187,7 +215,12 @@ const LIfeTImeModal = (props) => {
                       </span>
 
                       <span className={classes.greenColor}>
-                        &#x20B9; {props.lteLbbData.refund_amount_lbb}
+                        {Contryname === "India" && <BiRupee />}
+                        {Contryname === "United States" && <CgDollar />}
+                        {Contryname === "United Arab Emirates" && (
+                          <span style={{ paddingRight: "5px" }}>AED</span>
+                        )}{" "}
+                        {props.lteLbbData.refund_amount_lbb}
                       </span>
                     </div>
                     <div className={classes.line}></div>
