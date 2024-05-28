@@ -27,6 +27,7 @@ const Payment = () => {
   const [loading, setLoading] = useState(false);
   const [addressId, setAddressId] = useState(null);
   const [address, setAddress] = useState([]);
+  const pincodes = localStorage.getItem("pincode");
   const [isLoading, setIsLoading] = useState(false);
   const [pmethodError, setPmethodError] = useState("");
   const [addressData, setAddressData] = useState({
@@ -811,6 +812,11 @@ const Payment = () => {
                   You totaly saved {data.totalSavedAmount} hurray!..
                 </p>
               ) : null}
+              {pincodes && (
+                <div className={Classes.deliverypay}>
+                  Expected Delivery : 23rd April 24
+                </div>
+              )}
             </div>
           </div>
           <div className={Classes.DeliverCard}>
