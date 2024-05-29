@@ -1370,6 +1370,10 @@ a {
   .OffersInner {
     margin: 0px;
   }
+  .SlideImagedesk {
+    width: 100% !important;
+    height: 297px !important;
+  }
   .WebMobSlide {
     display: block;
   }

@@ -11,6 +11,7 @@
   padding: 50px;
   padding-top: 100px;
 }
+
 .Text1 {
   font-weight: 400;
   font-size: 16px;
@@ -38,6 +39,7 @@
   object-fit: cover;
   height: 300px;
   border-radius: 5px;
+  margin-top: 5px;
 }
 .Image1 {
   width: 100%;
@@ -127,5 +129,9 @@
   }
   .MobBringtheparty {
     padding: 0px !important;
+  }
+  .MobBringthepartyvideo video {
+    height: 200px;
+    margin-top: 0px;
   }
 }

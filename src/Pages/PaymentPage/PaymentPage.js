@@ -4,6 +4,7 @@ import Header from "../../components/HeaderNew/Header";
 import Features from "../../components/Features/Features";
 import Footer from "../../components/Footer/Footer";
 import Payment from "../../components/Payment/Payment";
+import SliderFeature from "../../components/ProductDetails/SliderFeature";
 
 const PaymentPage = (props) => {
   const countryId = localStorage.getItem("id");
@@ -23,8 +24,10 @@ const PaymentPage = (props) => {
         />
         <Payment />
         <div className={Classes.Features}>
+          <SliderFeature />
           <Features />
         </div>
+
         <Footer />
       </div>
     </div>

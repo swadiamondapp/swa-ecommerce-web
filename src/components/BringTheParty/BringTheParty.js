@@ -51,7 +51,6 @@ const BringTheParty = (props) => {
                       {item.Ad_image && (
                         <div
                           className={`col-md-12 ${Classes.MobBringtheparty}`}
-                          style={{ paddingBottom: "10px" }}
                         >
                           <img
                             className={Classes.Image1}
@@ -65,7 +64,6 @@ const BringTheParty = (props) => {
                       {item.Ad_video && (
                         <div
                           className={`col-md-6 ${Classes.MobBringthepartyvideo}`}
-                          style={{ paddingBottom: "10px" }}
                         >
                           <video
                             className={Classes.Video1}

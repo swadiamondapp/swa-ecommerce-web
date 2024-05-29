@@ -704,6 +704,7 @@ const MobileNavbar = (props) => {
                           >
                             <div className={Classes.ShippingDetialHead}></div>
                           </AccordionTab>
+
                           {userName && (
                             <AccordionTab header="Account">
                               <div className={Classes.ShippingDetialHead}>
@@ -862,10 +863,6 @@ const MobileNavbar = (props) => {
                             </Link>
                             <IoIosArrowForward style={{ color: "#006E7F" }} />
                           </div>
-                          {/* <AccordionTab
-                              header="Log Out"
-                              onClick={handleLogOut}
-                            ></AccordionTab> */}
                         </div>
                         <Accordion>
                           <AccordionTab className="last-accordion-tab"></AccordionTab>

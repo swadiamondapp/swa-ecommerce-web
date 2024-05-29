@@ -102,6 +102,7 @@ const OrderHistorypage2 = (props) => {
   const onChange = (key) => {
     console.log(key);
   };
+
   // warnning
 
   useEffect(() => {
@@ -154,7 +155,7 @@ const OrderHistorypage2 = (props) => {
           "/" +
           props.location.state.data.productId +
           "?shipment_id=" +
-          props.location.state.data.shipmentId}?country=${countryId}`,
+          props.location.state.data.shipmentId}&country=${countryId}`,
         {
           headers: {
             Authorization: "Token " + token,
@@ -359,7 +360,12 @@ const OrderHistorypage2 = (props) => {
             <div className={`container ${Classes.OrderMobCont2}`}>
               <div className={Classes.Main}>
                 {/* <h1 className={Classes.Title}>Shipment Details</h1> */}
-                <h3 className={Classes.orderidh3}>Order ID : {orderId}</h3>
+                <h3 className={Classes.orderidh3}>
+                  Order ID :{" "}
+                  {singleOrderData &&
+                    singleOrderData.order &&
+                    singleOrderData.order.order_code}
+                </h3>
                 <div className={Classes.DeliveryDetails}>
                   <p>
                     <img src={deliveryimg} />
@@ -411,10 +417,19 @@ const OrderHistorypage2 = (props) => {
                                   productDetails[0].product.product_name}
                               </p>
                               <p style={{ color: "#757C81" }}>
-                                18 KT yellow gold 12.460 GM
+                                {productDetails[0] &&
+                                  productDetails[0].product.carat}{" "}
+                                KT yellow{" "}
+                                {productDetails[0] &&
+                                  productDetails[0].product.gross_weight}{" "}
+                                GM
                               </p>
                               <p style={{ color: "#757C81" }}>
-                                Diamond 0.680 Carat SIIJ
+                                Diamond{" "}
+                                {productDetails[0] &&
+                                  productDetails[0].product
+                                    .diamond_weight_preview}{" "}
+                                Carat SIIJ
                               </p>
                               <p style={{ color: "#303A42" }}>
                                 SKU{" "}

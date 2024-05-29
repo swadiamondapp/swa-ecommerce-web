@@ -57,6 +57,7 @@ function Orders(props) {
           </div>
         </div>
       </div> */}
+      {console.log("props.product_name", props.orderId)}
       <div className={Classes.ProductName}>
         <p>Order ID : {props.orderId}</p>
       </div>
