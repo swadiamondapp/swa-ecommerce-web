@@ -681,8 +681,14 @@ const Payment = () => {
               </div>
             </div>
             <div className={Classes.Step}>
-              <h1 className={Classes.Title}>
-                STEP 3 <span> /3</span>
+              <h1
+                className={Classes.Title}
+                style={{
+                  fontWeight: 600,
+                  fontSize: "16px",
+                }}
+              >
+                STEP 3 <span style={{ color: "#0d1217 !important" }}> / 3</span>
               </h1>
             </div>
           </div>
@@ -803,7 +809,7 @@ const Payment = () => {
                     {Contryname === "United Arab Emirates" && (
                       <span style={{ paddingRight: "5px" }}>AED</span>
                     )}{" "}
-                    {data.pay}
+                    {formatIndianNumber(data.pay)}
                   </>
                 )}
               </div>

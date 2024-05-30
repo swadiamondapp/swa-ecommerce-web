@@ -17,6 +17,9 @@ function Orders(props) {
   const history = useHistory();
   const token = localStorage.getItem("swaToken");
 
+  console.log("props.Image?", props.Image);
+  console.log("props.name?", props.productName);
+
   return (
     <div className={Classes.RateContainer}>
       {/* <div className={Classes.Align}>
@@ -67,7 +70,8 @@ function Orders(props) {
           <div className={Classes.ImageContent}>
             <img src={props.Image} style={{ maxWidth: "150px" }} />
             <div className={Classes.TextWrapper}>
-              <h3>{props.product_name}</h3>
+              {/* <h3>{props.product_name}</h3> */}
+              <h3>{props.productName && props.productName}</h3>
               <p className={Classes.DeliveryText}>
                 <TbTruckDelivery color="#30933A" size={20} /> Delivered on{" "}
                 <span className={Classes.GreenText}>

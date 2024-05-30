@@ -95,11 +95,7 @@ const Profile = (props) => {
         "string.pattern.base": `"Mobile Number" must be a 10-digit number`,
         "any.required": `"Mobile Number" is a required field`,
       }),
-    photo: Joi.object()
-      .required()
-      .messages({
-        "any.required": `"Photo" is a required field`,
-      }),
+    photo: Joi.any().optional(),
   });
 
   const handleChange = (e) => {
@@ -127,7 +123,9 @@ const Profile = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { error } = schema.validate(formData, { abortEarly: false });
+    const validationData = { ...formData };
+    if (!formData.photo) delete validationData.photo;
+    const { error } = schema.validate(validationData, { abortEarly: false });
     if (error) {
       const validationErrors = {};
       error.details.forEach((detail) => {

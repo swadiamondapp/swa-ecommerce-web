@@ -77,6 +77,8 @@ const FilterModal = (props) => {
     window.innerWidth >= 300 && window.innerWidth <= 575
   );
 
+  console.log("count>>>>>>", props.count);
+
   useEffect(() => {
     const handleResize = () => {
       setIsMobileView(window.innerWidth >= 300 && window.innerWidth <= 575);
@@ -268,283 +270,284 @@ const FilterModal = (props) => {
 
   return (
     <div>
-      <div className={classes.FilterHeads}>
-        <div className={classes.FilterMobiles}>
-          <Button onClick={handleOpen} style={{ color: "#ffff" }}>
-            Price
-          </Button>
-          <Modal
-            // open={props.open}
-            open={open}
-            // onClose={props.handleClose}
-            onClose={handleClose}
-          >
-            <Box sx={isMobileView ? mobileStyle : style}>
-              <Typography>
-                <div className={classes.Container}>
-                  <div className={classes.LabelHead}>
-                    <p>Price</p>
-                    <IoMdClose
-                      style={{ cursor: "pointer" }}
-                      // onClick={props.handleClose}
-                      onClick={handleClose}
-                    />
-                  </div>
-                  <div className={classes.PriceTgs}>
-                    <div className={classes.PriceTags1}>
-                      <input
-                        checked={selectedPriceRange === "above_50000"}
-                        value="above_50000"
-                        onChange={() => setSelectedPriceRange("above_50000")}
-                        type="checkbox"
+      {props.count !== 0 && (
+        <div className={classes.FilterHeads}>
+          <div className={classes.FilterMobiles}>
+            <Button onClick={handleOpen} style={{ color: "#ffff" }}>
+              Price
+            </Button>
+            <Modal
+              // open={props.open}
+              open={open}
+              // onClose={props.handleClose}
+              onClose={handleClose}
+            >
+              <Box sx={isMobileView ? mobileStyle : style}>
+                <Typography>
+                  <div className={classes.Container}>
+                    <div className={classes.LabelHead}>
+                      <p>Price</p>
+                      <IoMdClose
+                        style={{ cursor: "pointer" }}
+                        // onClick={props.handleClose}
+                        onClick={handleClose}
                       />
-                      <label>above 50000</label>
                     </div>
-                    <div className={classes.PriceTags1}>
-                      <input
-                        checked={selectedPriceRange === "btw_30000_to_50000"}
-                        value="btw_30000_to_50000"
-                        onChange={() =>
-                          setSelectedPriceRange("btw_30000_to_50000")
-                        }
-                        type="checkbox"
-                      />
-                      <label>30000 to 50000</label>
-                    </div>
-                    <div className={classes.PriceTags1}>
-                      <input
-                        checked={selectedPriceRange === "btw_20000_to_30000"}
-                        value="btw_20000_to_30000"
-                        onChange={() =>
-                          setSelectedPriceRange("btw_20000_to_30000")
-                        }
-                        type="checkbox"
-                      />
-                      <label>20000 to 30000</label>
-                    </div>
-                    <div className={classes.PriceTags1}>
-                      <input
-                        checked={selectedPriceRange === "btw_10000_to_20000"}
-                        value="btw_10000_to_20000"
-                        onChange={() =>
-                          setSelectedPriceRange("btw_10000_to_20000")
-                        }
-                        type="checkbox"
-                      />
-                      <label>10000 to 20000</label>
-                    </div>
+                    <div className={classes.PriceTgs}>
+                      <div className={classes.PriceTags1}>
+                        <input
+                          checked={selectedPriceRange === "above_50000"}
+                          value="above_50000"
+                          onChange={() => setSelectedPriceRange("above_50000")}
+                          type="checkbox"
+                        />
+                        <label>above 50000</label>
+                      </div>
+                      <div className={classes.PriceTags1}>
+                        <input
+                          checked={selectedPriceRange === "btw_30000_to_50000"}
+                          value="btw_30000_to_50000"
+                          onChange={() =>
+                            setSelectedPriceRange("btw_30000_to_50000")
+                          }
+                          type="checkbox"
+                        />
+                        <label>30000 to 50000</label>
+                      </div>
+                      <div className={classes.PriceTags1}>
+                        <input
+                          checked={selectedPriceRange === "btw_20000_to_30000"}
+                          value="btw_20000_to_30000"
+                          onChange={() =>
+                            setSelectedPriceRange("btw_20000_to_30000")
+                          }
+                          type="checkbox"
+                        />
+                        <label>20000 to 30000</label>
+                      </div>
+                      <div className={classes.PriceTags1}>
+                        <input
+                          checked={selectedPriceRange === "btw_10000_to_20000"}
+                          value="btw_10000_to_20000"
+                          onChange={() =>
+                            setSelectedPriceRange("btw_10000_to_20000")
+                          }
+                          type="checkbox"
+                        />
+                        <label>10000 to 20000</label>
+                      </div>
 
-                    <div className={classes.PriceTags1}>
-                      <input
-                        checked={selectedPriceRange === "below_10000"}
-                        value="below_10000"
-                        onChange={() => setSelectedPriceRange("below_10000")}
-                        type="checkbox"
-                      />
-                      <label>less than 10000</label>
+                      <div className={classes.PriceTags1}>
+                        <input
+                          checked={selectedPriceRange === "below_10000"}
+                          value="below_10000"
+                          onChange={() => setSelectedPriceRange("below_10000")}
+                          type="checkbox"
+                        />
+                        <label>less than 10000</label>
+                      </div>
+                    </div>
+                    <div className={classes.PriceBtns}>
+                      <button
+                        onClick={() => {
+                          window.scrollTo(0, 0);
+                          console.log("selectedPriceRange", selectedPriceRange);
+                          props.sortHandlerPrice(selectedPriceRange);
+                          handleClose();
+                        }}
+                      >
+                        Done
+                      </button>
                     </div>
                   </div>
-                  <div className={classes.PriceBtns}>
-                    <button
-                      onClick={() => {
-                        window.scrollTo(0, 0);
-                        console.log("selectedPriceRange", selectedPriceRange);
-                        props.sortHandlerPrice(selectedPriceRange);
-                        handleClose();
-                      }}
-                    >
-                      Done
-                    </button>
-                  </div>
-                </div>
-              </Typography>
-            </Box>
-          </Modal>
-          <div className={classes.arrow1}></div>
-          <Button onClick={handleOpenSort}>
-            <img src={sortimg} /> Sort
-          </Button>
-          <Modal
-            // open={props.open}
-            open={opensort}
-            // onClose={props.handleClose}
-            onClose={handleCloseSort}
-          >
-            <Box sx={isMobileView ? mobileStyle : style}>
-              <Typography>
-                <div className={classes.Container}>
-                  <div className={classes.LabelHead}>
-                    <p>Sort by</p>
-                    <IoMdClose
-                      style={{ cursor: "pointer" }}
-                      // onClick={props.handleClose}
-                      onClick={handleCloseSort}
-                    />
-                  </div>
-                  <div className={classes.PriceTgs}>
-                    <div className={classes.PriceTags1}>
-                      <input
-                        checked={selectedPopular === "new"}
-                        type="radio"
-                        name="sort"
-                        onChange={() => sortChange("new")}
+                </Typography>
+              </Box>
+            </Modal>
+            <div className={classes.arrow1}></div>
+            <Button onClick={handleOpenSort}>
+              <img src={sortimg} /> Sort
+            </Button>
+            <Modal
+              // open={props.open}
+              open={opensort}
+              // onClose={props.handleClose}
+              onClose={handleCloseSort}
+            >
+              <Box sx={isMobileView ? mobileStyle : style}>
+                <Typography>
+                  <div className={classes.Container}>
+                    <div className={classes.LabelHead}>
+                      <p>Sort by</p>
+                      <IoMdClose
+                        style={{ cursor: "pointer" }}
+                        // onClick={props.handleClose}
+                        onClick={handleCloseSort}
                       />
-                      <label>New arraivals</label>
                     </div>
-                    <div className={classes.PriceTags1}>
-                      <input
-                        checked={selectedSort === "LtoH"}
-                        type="radio"
-                        name="sort"
-                        onChange={() => sortChange("LtoH")}
-                      />
-                      <label>Low to high</label>
-                    </div>
-                    <div className={classes.PriceTags1}>
-                      <input
-                        checked={selectedSort === "HtoL"}
-                        type="radio"
-                        name="sort"
-                        onChange={() => sortChange("HtoL")}
-                      />
-                      <label>High to Low</label>
-                    </div>
+                    <div className={classes.PriceTgs}>
+                      <div className={classes.PriceTags1}>
+                        <input
+                          checked={selectedPopular === "new"}
+                          type="radio"
+                          name="sort"
+                          onChange={() => sortChange("new")}
+                        />
+                        <label>New arraivals</label>
+                      </div>
+                      <div className={classes.PriceTags1}>
+                        <input
+                          checked={selectedSort === "LtoH"}
+                          type="radio"
+                          name="sort"
+                          onChange={() => sortChange("LtoH")}
+                        />
+                        <label>Low to high</label>
+                      </div>
+                      <div className={classes.PriceTags1}>
+                        <input
+                          checked={selectedSort === "HtoL"}
+                          type="radio"
+                          name="sort"
+                          onChange={() => sortChange("HtoL")}
+                        />
+                        <label>High to Low</label>
+                      </div>
 
-                    <div className={classes.PriceTags1}>
-                      <input
-                        checked={selectedPopular === "top"}
-                        type="radio"
-                        name="sort"
-                        onChange={() => sortChange("top")}
-                      />
-                      <label>Most popular</label>
+                      <div className={classes.PriceTags1}>
+                        <input
+                          checked={selectedPopular === "top"}
+                          type="radio"
+                          name="sort"
+                          onChange={() => sortChange("top")}
+                        />
+                        <label>Most popular</label>
+                      </div>
+                      <div className={classes.PriceTags1}>
+                        <input
+                          checked={selectedPopular === "discounted"}
+                          type="radio"
+                          name="sort"
+                          onChange={() => sortChange("discounted")}
+                        />
+                        <label>Discounted</label>
+                      </div>
+                      <div className={classes.PriceTags1}>
+                        <input
+                          checked={selectedSort === "wedding"}
+                          type="radio"
+                          name="sort"
+                          onChange={() => sortChange("wedding")}
+                        />
+                        <label>Wedding</label>
+                      </div>
                     </div>
-                    <div className={classes.PriceTags1}>
-                      <input
-                        checked={selectedPopular === "discounted"}
-                        type="radio"
-                        name="sort"
-                        onChange={() => sortChange("discounted")}
-                      />
-                      <label>Discounted</label>
-                    </div>
-                    <div className={classes.PriceTags1}>
-                      <input
-                        checked={selectedSort === "wedding"}
-                        type="radio"
-                        name="sort"
-                        onChange={() => sortChange("wedding")}
-                      />
-                      <label>Wedding</label>
-                    </div>
-                  </div>
-                  <div className={classes.PriceBtns}>
-                    {/* <button onClick={props.sortHandler}>Done</button> */}
-                    {/* <button onClick={() => props.sortHandler(selectedSort)}>
+                    <div className={classes.PriceBtns}>
+                      {/* <button onClick={props.sortHandler}>Done</button> */}
+                      {/* <button onClick={() => props.sortHandler(selectedSort)}>
                       Done
                     </button> */}
-                    <button
-                      onClick={() => {
-                        window.scrollTo(0, 0);
-                        console.log("Selected Sort:", selectedSort);
-                        props.sortHandler(selectedSort, selectedPopular);
-                        handleCloseSort();
-                      }}
-                    >
-                      Done
-                    </button>
+                      <button
+                        onClick={() => {
+                          window.scrollTo(0, 0);
+                          console.log("Selected Sort:", selectedSort);
+                          props.sortHandler(selectedSort, selectedPopular);
+                          handleCloseSort();
+                        }}
+                      >
+                        Done
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </Typography>
-            </Box>
-          </Modal>
-          <div className={classes.arrow1}></div>
-          <Button onClick={handleOpenFilter}>
-            <img src={filtermobimg} /> Filter
-          </Button>
-          <Modal
-            // open={props.open}
-            open={openfilter}
-            // onClose={props.handleClose}
-            onClose={handleCloseFilter}
-          >
-            <Box sx={isMobileView ? mobileStyle : style}>
-              <Typography>
-                <div className={classes.Container}>
-                  <div className={classes.PriceTgs}>
-                    <Tab.Container
-                      id="left-tabs-example"
-                      defaultActiveKey="first"
-                    >
-                      <Row>
-                        <Col
-                          style={{
-                            background: "#F7F6F2",
-                            borderRadius: "5px",
-                            padding: "10px 0px",
-                          }}
-                        >
-                          <Nav variant="pills" className="flex-column">
-                            {["first", "second", "third"].map((key) => (
-                              <Nav.Item key={key}>
-                                <Nav.Link
-                                  eventKey={key}
-                                  style={{
-                                    background: "transparent",
-                                    // color:
-                                    //   key === activeTab
-                                    //     ? "#006E7F"
-                                    //     : "#475057 !important",
-                                  }}
-                                  onClick={() => setActiveTab(key)}
-                                >
-                                  {key === "first"
-                                    ? "Categories"
-                                    : key === "second"
-                                    ? "Metal"
-                                    : "Occasion"}
-                                </Nav.Link>
-                              </Nav.Item>
-                            ))}
-                          </Nav>
-                        </Col>
-                        <Col>
-                          <Tab.Content>
-                            <Tab.Pane eventKey="first">
-                              {" "}
-                              {categoryWise.map((item, index) => (
-                                <div
-                                  key={index}
-                                  className={classes.CategoryListMain}
-                                >
-                                  <div className={classes.CategoryList}>
-                                    <div className={classes.b1e}>
-                                      <input
-                                        type="checkbox"
-                                        checked={selectedCategoryByid.includes(
-                                          item.id
-                                        )}
-                                        onChange={() =>
-                                          handleCheckboxByCategory(item.id)
-                                        }
-                                      />
-                                      <label>
-                                        {String(item.name)
-                                          .charAt(0)
-                                          .toUpperCase() +
-                                          String(item.name)
-                                            .slice(1)
-                                            .toLowerCase()}
-                                        <span>{item.product_count}</span>
-                                      </label>
+                </Typography>
+              </Box>
+            </Modal>
+            <div className={classes.arrow1}></div>
+            <Button onClick={handleOpenFilter}>
+              <img src={filtermobimg} /> Filter
+            </Button>
+            <Modal
+              // open={props.open}
+              open={openfilter}
+              // onClose={props.handleClose}
+              onClose={handleCloseFilter}
+            >
+              <Box sx={isMobileView ? mobileStyle : style}>
+                <Typography>
+                  <div className={classes.Container}>
+                    <div className={classes.PriceTgs}>
+                      <Tab.Container
+                        id="left-tabs-example"
+                        defaultActiveKey="first"
+                      >
+                        <Row>
+                          <Col
+                            style={{
+                              background: "#F7F6F2",
+                              borderRadius: "5px",
+                              padding: "10px 0px",
+                            }}
+                          >
+                            <Nav variant="pills" className="flex-column">
+                              {["first", "second", "third"].map((key) => (
+                                <Nav.Item key={key}>
+                                  <Nav.Link
+                                    eventKey={key}
+                                    style={{
+                                      background: "transparent",
+                                      // color:
+                                      //   key === activeTab
+                                      //     ? "#006E7F"
+                                      //     : "#475057 !important",
+                                    }}
+                                    onClick={() => setActiveTab(key)}
+                                  >
+                                    {key === "first"
+                                      ? "Categories"
+                                      : key === "second"
+                                      ? "Metal"
+                                      : "Occasion"}
+                                  </Nav.Link>
+                                </Nav.Item>
+                              ))}
+                            </Nav>
+                          </Col>
+                          <Col>
+                            <Tab.Content>
+                              <Tab.Pane eventKey="first">
+                                {" "}
+                                {categoryWise.map((item, index) => (
+                                  <div
+                                    key={index}
+                                    className={classes.CategoryListMain}
+                                  >
+                                    <div className={classes.CategoryList}>
+                                      <div className={classes.b1e}>
+                                        <input
+                                          type="checkbox"
+                                          checked={selectedCategoryByid.includes(
+                                            item.id
+                                          )}
+                                          onChange={() =>
+                                            handleCheckboxByCategory(item.id)
+                                          }
+                                        />
+                                        <label>
+                                          {String(item.name)
+                                            .charAt(0)
+                                            .toUpperCase() +
+                                            String(item.name)
+                                              .slice(1)
+                                              .toLowerCase()}
+                                          <span>{item.product_count}</span>
+                                        </label>
+                                      </div>
+                                    </div>
+                                    <div className={classes.CategoryListAmount}>
+                                      <label></label>
                                     </div>
                                   </div>
-                                  <div className={classes.CategoryListAmount}>
-                                    <label></label>
-                                  </div>
-                                </div>
-                              ))}
-                              {/* <div className={classes.CategoryListMain}>
+                                ))}
+                                {/* <div className={classes.CategoryListMain}>
                                 <div className={classes.CategoryList}>
                                   <div className={classes.b1e}>
                                     <input type="checkbox" />
@@ -554,42 +557,42 @@ const FilterModal = (props) => {
                                   </div>
                                 </div>
                               </div> */}
-                            </Tab.Pane>
-                            <Tab.Pane eventKey="second">
-                              {" "}
-                              {metalCategory.map((item, index) => (
-                                <div
-                                  key={index}
-                                  className={classes.CategoryListMain}
-                                >
+                              </Tab.Pane>
+                              <Tab.Pane eventKey="second">
+                                {" "}
+                                {metalCategory.map((item, index) => (
                                   <div
                                     key={index}
-                                    className={classes.CategoryList}
+                                    className={classes.CategoryListMain}
                                   >
-                                    <div key={index} className={classes.b1e}>
-                                      <input
-                                        type="checkbox"
-                                        checked={selectedMetelId.includes(
-                                          item.id
-                                        )}
-                                        onChange={() =>
-                                          handleCheckboxByMetel(item.id)
-                                        }
-                                      />
-                                      <label>
-                                        {String(item.metal_type)
-                                          .charAt(0)
-                                          .toUpperCase() +
-                                          String(item.metal_type)
-                                            .slice(1)
-                                            .toLowerCase()}{" "}
-                                        <span>{item.product_count}</span>
-                                      </label>
+                                    <div
+                                      key={index}
+                                      className={classes.CategoryList}
+                                    >
+                                      <div key={index} className={classes.b1e}>
+                                        <input
+                                          type="checkbox"
+                                          checked={selectedMetelId.includes(
+                                            item.id
+                                          )}
+                                          onChange={() =>
+                                            handleCheckboxByMetel(item.id)
+                                          }
+                                        />
+                                        <label>
+                                          {String(item.metal_type)
+                                            .charAt(0)
+                                            .toUpperCase() +
+                                            String(item.metal_type)
+                                              .slice(1)
+                                              .toLowerCase()}{" "}
+                                          <span>{item.product_count}</span>
+                                        </label>
+                                      </div>
                                     </div>
                                   </div>
-                                </div>
-                              ))}
-                              {/* <div className={classes.CategoryListMain}>
+                                ))}
+                                {/* <div className={classes.CategoryListMain}>
                                 <div className={classes.CategoryList}>
                                   <div className={classes.b1e}>
                                     <input type="checkbox" />
@@ -619,39 +622,39 @@ const FilterModal = (props) => {
                                   </div>
                                 </div>
                               </div> */}
-                            </Tab.Pane>
-                            <Tab.Pane eventKey="third">
-                              {" "}
-                              {occation.map((item, index) => (
-                                <div
-                                  key={index}
-                                  className={classes.CategoryListMain}
-                                >
-                                  <div className={classes.CategoryList}>
-                                    <div className={classes.b1e}>
-                                      <input
-                                        type="checkbox"
-                                        checked={selectedOccationById.includes(
-                                          item.id
-                                        )}
-                                        onChange={() =>
-                                          handleCheckboxByOccation(item.id)
-                                        }
-                                      />
-                                      <label>
-                                        {String(item.name)
-                                          .charAt(0)
-                                          .toUpperCase() +
-                                          String(item.name)
-                                            .slice(1)
-                                            .toLowerCase()}{" "}
-                                        <span>{item.product_count}</span>
-                                      </label>
+                              </Tab.Pane>
+                              <Tab.Pane eventKey="third">
+                                {" "}
+                                {occation.map((item, index) => (
+                                  <div
+                                    key={index}
+                                    className={classes.CategoryListMain}
+                                  >
+                                    <div className={classes.CategoryList}>
+                                      <div className={classes.b1e}>
+                                        <input
+                                          type="checkbox"
+                                          checked={selectedOccationById.includes(
+                                            item.id
+                                          )}
+                                          onChange={() =>
+                                            handleCheckboxByOccation(item.id)
+                                          }
+                                        />
+                                        <label>
+                                          {String(item.name)
+                                            .charAt(0)
+                                            .toUpperCase() +
+                                            String(item.name)
+                                              .slice(1)
+                                              .toLowerCase()}{" "}
+                                          <span>{item.product_count}</span>
+                                        </label>
+                                      </div>
                                     </div>
                                   </div>
-                                </div>
-                              ))}
-                              {/* <div className={classes.CategoryListMain}>
+                                ))}
+                                {/* <div className={classes.CategoryListMain}>
                                 <div className={classes.CategoryList}>
                                   <div className={classes.b1e}>
                                     <input type="checkbox" />
@@ -681,29 +684,33 @@ const FilterModal = (props) => {
                                   </div>
                                 </div>
                               </div> */}
-                            </Tab.Pane>
-                          </Tab.Content>
-                        </Col>
-                      </Row>
-                    </Tab.Container>
+                              </Tab.Pane>
+                            </Tab.Content>
+                          </Col>
+                        </Row>
+                      </Tab.Container>
+                    </div>
+                    <div className={classes.PriceBtns2}>
+                      <button
+                        className={classes.ResetBtn}
+                        onClick={handleReset}
+                      >
+                        RESET
+                      </button>
+                      <button
+                        className={classes.ApplyBtn}
+                        onClick={handleButtonClick}
+                      >
+                        Apply
+                      </button>
+                    </div>
                   </div>
-                  <div className={classes.PriceBtns2}>
-                    <button className={classes.ResetBtn} onClick={handleReset}>
-                      RESET
-                    </button>
-                    <button
-                      className={classes.ApplyBtn}
-                      onClick={handleButtonClick}
-                    >
-                      Apply
-                    </button>
-                  </div>
-                </div>
-              </Typography>
-            </Box>
-          </Modal>
+                </Typography>
+              </Box>
+            </Modal>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

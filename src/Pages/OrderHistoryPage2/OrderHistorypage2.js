@@ -419,7 +419,9 @@ const OrderHistorypage2 = (props) => {
                               <p style={{ color: "#757C81" }}>
                                 {productDetails[0] &&
                                   productDetails[0].product.carat}{" "}
-                                KT yellow{" "}
+                                KT Yellow{" "}
+                                {/* {productDetails[0] &&
+                                  productDetails[0].color.size_name}{" "} */}
                                 {productDetails[0] &&
                                   productDetails[0].product.gross_weight}{" "}
                                 GM

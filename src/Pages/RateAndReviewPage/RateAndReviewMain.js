@@ -5,6 +5,7 @@ import Footer from "../../components/Footer/Footer";
 import Rating from "../../components/Rating/Rating";
 import Classes from "./RateAndReview.module.css";
 import RateReviewMain from "../../components/Rating/RateReviewMain";
+import SliderFeature from "../../components/ProductDetails/SliderFeature";
 
 const RateAndReviewMain = () => {
   const [cartCount, setCartCount] = useState("");
@@ -28,6 +29,7 @@ const RateAndReviewMain = () => {
           <RateReviewMain />
         </div>
         <div className={Classes.Features}>
+          <SliderFeature />
           <Features />
         </div>
       </div>

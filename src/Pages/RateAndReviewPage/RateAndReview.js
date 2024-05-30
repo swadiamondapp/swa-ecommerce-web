@@ -6,6 +6,7 @@ import Rating from "../../components/Rating/Rating";
 import Classes from "./RateAndReview.module.css";
 import axios from "axios";
 import * as Urls from "../../Urls";
+import SliderFeature from "../../components/ProductDetails/SliderFeature";
 
 function RateAndReview(props) {
   const [cartCount, setCartCount] = useState("");
@@ -36,6 +37,8 @@ function RateAndReview(props) {
       });
   }, []);
 
+  console.log("props.location.state", props.location.state);
+
   return (
     <div>
       <div className={Classes.BgColour}>
@@ -49,6 +52,7 @@ function RateAndReview(props) {
           <Rating productDetails={props.location.state} />
         </div>
         <div className={Classes.Features}>
+          <SliderFeature />
           <Features />
         </div>
       </div>

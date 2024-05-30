@@ -4,6 +4,9 @@
 .Video {
   width: 100%;
 }
+.Video iframe {
+  height: 323px !important;
+}
 .Certificates {
   margin-top: 25px;
 }
@@ -41,5 +44,11 @@
 @media (min-width: 768px) and (max-width: 991px) {
   .Certificates {
     margin-top: 30px;
+  }
+}
+
+@media (min-width: 1400px) and (max-width: 3000px) {
+  .Video iframe {
+    height: 378px !important;
   }
 }

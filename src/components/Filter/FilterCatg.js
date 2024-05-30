@@ -151,7 +151,6 @@ const FilterCatgs = (props) => {
       console.log("respo===>", response);
       console.log("catwise", response.data.results.data);
       setCategoryWise(response.data.results.data);
-    
     });
     axios
       .get(`${Urls.occationalProducts}?country=${countryId}`)
@@ -194,7 +193,7 @@ const FilterCatgs = (props) => {
       .get(url)
       .then((response) => {
         props.setProduct(response.data.results.data);
-        props.setCount(response.data.results.count)
+        props.setCount(response.data.results.count);
       })
       .catch((error) => {
         console.error("Error fetching products by metal category:", error);
@@ -216,8 +215,8 @@ const FilterCatgs = (props) => {
       .get(url)
       .then((response) => {
         props.setProduct(response.data.results.data);
-        props.setCount(response.data.results.count)
-        console.log(response.data.results.count,"resCo====>")
+        props.setCount(response.data.results.count);
+        console.log(response.data.results.count, "resCo====>");
       })
       .catch((error) => {
         console.error("Error fetching products by category:", error);
@@ -249,7 +248,7 @@ const FilterCatgs = (props) => {
   //   }
   // };
 
-  console.log("props------->", props)
+  console.log("props------->", props);
 
   return (
     <div className={`${Classes.Filter} ${isSticky ? Classes.Sticky : ""}`}>
@@ -357,10 +356,12 @@ const FilterCatgs = (props) => {
                 <div className={Classes.CategoryList}>
                   <input
                     type="checkbox"
-                    onChange={() => handleCheckboxByCategory(item.id, item.product_count)}
+                    onChange={() =>
+                      handleCheckboxByCategory(item.id, item.product_count)
+                    }
                     checked={selectedCategoryIds.includes(item.id)}
                   />
-                  <label>{item.name}</label>
+                  <label>{item.name.toUpperCase()}</label>
                 </div>
                 <div className={Classes.CategoryListAmount}>
                   <label>{item.product_count}</label>

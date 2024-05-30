@@ -33,8 +33,8 @@ function CartProducts(props) {
               }`}
             >
               <div className={Classes.ProductDetails}>
-                {/* <p>{props.ProductName}</p> */}
-                <p>{"Diamod ring"}</p>
+                <p>{props.ProductName}</p>
+                {/* <p>{"Diamod ring"}</p> */}
               </div>
               <div className={Classes.Price}>
                 <p className={Classes.PriceNew} style={{ marginBottom: "0px" }}>

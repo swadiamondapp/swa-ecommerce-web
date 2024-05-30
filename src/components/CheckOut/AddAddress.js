@@ -130,12 +130,11 @@ function AddAddress(props) {
           "string.pattern.base": "Pincode must be 6 digits",
         }),
       city: Joi.string()
-        .pattern(/^[A-Za-z\s]+$/)
+
         .required()
         .messages({
           "any.required": "City is required",
           "string.empty": "City must not be empty",
-          "string.pattern.base": "City should contain only alphabets",
         }),
       hNumber_Bname: Joi.string()
         .required()
@@ -454,6 +453,16 @@ function AddAddress(props) {
                           <option value={"kerala"}>Kerala</option>
                           <option value={"Karnataka"}>Karnataka</option>
                           <option value={"TamilNadu"}>TamilNadu</option>
+                          <option value={"Delhi"}>Delhi</option>
+                          <option value={"Andhra Pradesh"}>
+                            Andhra Pradesh
+                          </option>
+                          <option value={"Assam"}>Assam</option>
+                          <option value={"Maharashtra"}>Maharashtra</option>
+                          <option value={"Uttar Pradesh"}>Uttar Pradesh</option>
+                          <option value={"Uttarakhand"}>Uttarakhand</option>
+                          <option value={"West Bengal"}>West Bengal</option>
+                          <option value={"Ladakh"}>Ladakh</option>
                         </select>
                       </div>
                     </div>

@@ -10,12 +10,13 @@ const VideocallForm = (props) => {
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
   const [errors, setErrors] = useState();
   const [videoData, setVideoData] = useState({
-    productId: props.productId,
+    productId: props.productId && props.productId,
     phone: "",
     email: "",
     language: "English",
     description: "",
   });
+  console.log("props.productId>>", props.productId);
   const handleLanguageClick = (language) => {
     setVideoData({ ...videoData, language: language });
   };

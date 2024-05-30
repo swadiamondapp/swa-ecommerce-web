@@ -273,8 +273,11 @@
     box-shadow: none;
   }
   .NewArrivalCard {
-    height: 305px;
+    /* height: 305px;
     margin-bottom: 20px;
+    padding: 3px; */
+    height: auto;
+    margin-bottom: 0px;
     padding: 3px;
   }
   .CheckDelvyDate {

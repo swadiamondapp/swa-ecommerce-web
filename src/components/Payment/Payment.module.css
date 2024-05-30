@@ -1,7 +1,8 @@
 .Title {
   font-weight: 600;
   font-size: 24px;
-  font-family: "PlayFairNormal" !important;
+
+  font-family: "Lato", sans-serif !important;
 }
 
 .Main {
@@ -226,6 +227,7 @@
 }
 .Step .Title {
   font-family: "LatoRegular" !important;
+  font-family: "Lato", sans-serif !important;
   font-size: 20px;
   font-weight: 600;
 }
@@ -236,7 +238,7 @@
   display: none;
 }
 .Title span {
-  color: #949494;
+  /* color: #949494; */
 }
 @media (min-width: 300px) and (max-width: 575px) {
   .Wrapper {

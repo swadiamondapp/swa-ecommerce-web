@@ -71,7 +71,7 @@ function Rating(props) {
           setTimeout(() => {
             setShow(false);
             history.push("/my_orders");
-          }, 200000);
+          }, 2000);
         })
         .catch((error) => {
           console.log(error);
