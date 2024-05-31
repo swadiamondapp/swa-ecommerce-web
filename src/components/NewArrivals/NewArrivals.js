@@ -31,7 +31,7 @@ function NewArrivals(props) {
 
       <div className={Classes.NewArrivalImages}>
         <div className="container">
-          <div className="row">{props.children}</div>
+          <div className="row landingrow">{props.children}</div>
         </div>
       </div>
       <p className={Classes.seeAll} onClick={() => seeAllHandler("new")}>

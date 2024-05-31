@@ -91,6 +91,7 @@
   padding: 8px 2px;
   border-radius: 5px;
   border-top: 1px solid #0000000d;
+  padding-bottom: 0px !important;
 }
 .parentPaymentItems {
   display: flex;
@@ -288,7 +289,7 @@
   font-family: "Lato", sans-serif;
   background: #00464d1a;
   border: 1px solid #00464d;
-  padding: 10px 20px;
+  padding: 8px 20px;
   border-radius: 40px;
   outline: none;
   cursor: pointer;

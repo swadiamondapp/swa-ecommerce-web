@@ -1030,7 +1030,10 @@ function CheckOut(props) {
                 <p className={Classes.OrderSummery}>ORDER SUMMARY</p>
                 <div className={Classes.TotalText}>
                   <div className={Classes.TotalItem}>
-                    <p className={Classes.TotalSmall}>Total</p>
+                    <p className={Classes.TotalSmall}>
+                      Total &nbsp;
+                      <span>({props.countCartItems} Items)</span>
+                    </p>
                   </div>
                   <p className={Classes.Amount}>
                     {Contryname === "India" && (

@@ -126,10 +126,24 @@ function CartProducts(props) {
         </div>
         <div className={Classes.OverViewMobile}>
           <p className={Classes.OverViewKey}>Size</p>
-          <p className={Classes.OverViewValue}>15 MM</p>
+          <p className={Classes.OverViewValue}>
+            {props.Size} {props.Size !== "N/A" && "MM"}
+          </p>
           <p className={Classes.OverViewKey}>Colour</p>
-          <p className={Classes.OverViewValue}>Rose Gold</p>
-          <div className={Classes.OverViewColor}></div>
+          <p className={Classes.OverViewValue}>{props.color}</p>
+          <div
+            className={Classes.OverViewColor}
+            style={{
+              backgroundColor:
+                props.color === "rose"
+                  ? "#ffd7d7"
+                  : props.color === "yellow"
+                  ? "#fed672"
+                  : props.color === "pt"
+                  ? "#eee9e9"
+                  : "#dedede0d",
+            }}
+          ></div>
         </div>
       </div>
       <div className={Classes.RemoveMove}>

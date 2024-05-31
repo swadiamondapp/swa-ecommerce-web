@@ -84,6 +84,7 @@ const CheckOutPage = (props) => {
           radioChange={radioChangeHandler}
           adresChnge={adressChangeHanlder}
           proDet={props.location.state}
+          countCartItems={cartCount}
         />
 
         <div className={Classes.Features}>

@@ -50,7 +50,7 @@ const SuccessPage = (props) => {
             </div>
             <div style={{ textAlign: "center", margin: "12px 0px" }}>
               <span className={Classes.titlesuccesModal}>
-                Thank you your cancelation <br />
+                Thank you your cancellation <br />
                 has been approved
               </span>
             </div>

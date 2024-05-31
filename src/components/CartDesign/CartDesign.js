@@ -93,6 +93,10 @@ function CartDesign(props) {
             setClr("#07B018");
             setPromoId(response1.data.results.data.promocode_id);
             setAmountPay(response1.data.results.data.promo_applied_amount);
+          } else if (response1.data.results.message === "Promo code expired") {
+            setError("Promo code expired");
+          } else if (response1.data.results.status_code === 206) {
+            setError("Invalid coupon code");
           }
         })
         .catch((error) => {
@@ -148,6 +152,19 @@ function CartDesign(props) {
   console.log(amountPay, "amountPay");
   console.log(total, "total");
 
+  function formatIndianNumber(number) {
+    const numberString = number && number.toString();
+    const lastThreeDigits = numberString && numberString.slice(-3);
+    const otherDigits = numberString && numberString.slice(0, -3);
+
+    return (
+      otherDigits &&
+      otherDigits.replace(/\B(?=(\d{2})+(?!\d))/g, ",") +
+        (otherDigits ? "," : "") +
+        lastThreeDigits
+    );
+  }
+
   return (
     <div>
       <WalletModal
@@ -200,7 +217,7 @@ function CartDesign(props) {
                     {Contryname === "United Arab Emirates" && (
                       <span style={{ paddingRight: "5px" }}>AED</span>
                     )}{" "}
-                    {total}
+                    {formatIndianNumber(total)}
                   </p>
                 </div>
                 <div className={Classes.Voucher}>
@@ -269,7 +286,7 @@ function CartDesign(props) {
                     {Contryname === "United Arab Emirates" && (
                       <span style={{ paddingRight: "5px" }}>AED</span>
                     )}{" "}
-                    {amountPay}
+                    {formatIndianNumber(amountPay)}
                   </p>
                 </div>
                 <input

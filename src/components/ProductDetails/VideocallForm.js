@@ -172,10 +172,11 @@ const VideocallForm = (props) => {
                     name="phone"
                     onChange={handleChangeVideoData}
                   />
+                  {errors && errors.phone && (
+                    <p className={Classes.Error}>{errors.phone}</p>
+                  )}
                 </div>
-                {errors && errors.phone && (
-                  <p className={Classes.Error}>{errors.phone}</p>
-                )}
+
                 <div className={Classes.Email_field_vi}>
                   <label>Email</label>
                   <input
@@ -185,10 +186,11 @@ const VideocallForm = (props) => {
                     name="email"
                     onChange={handleChangeVideoData}
                   />
+                  {errors && errors.email && (
+                    <p className={Classes.Error}>{errors.email}</p>
+                  )}
                 </div>
-                {errors && errors.email && (
-                  <p className={Classes.Error}>{errors.email}</p>
-                )}
+
                 <div className={Classes.Prefered_languages}>
                   <h3>Prefered Language</h3>
                   <div className={Classes.Language_vi}>

@@ -356,6 +356,9 @@ const Header = (props) => {
   console.log("countryData==>", countryData);
 
   const handleCountrySelect = (country) => {
+    if (!isHomePage) {
+      history.push("/");
+    }
     props.setSelectedCountry(country);
     setOpenDropDown(true);
 
@@ -841,7 +844,7 @@ const Header = (props) => {
                           alt="catg"
                         />
 
-                        <p>{item.name.slice(0, 10)}</p>
+                        <p>{item.name.slice(0, 10).toUpperCase()}</p>
                       </div>
                     </div>
                   );

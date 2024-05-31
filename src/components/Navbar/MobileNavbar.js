@@ -28,9 +28,11 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import axios from "axios";
 import * as Urls from "../../Urls";
 import USA from "../../Assets/flagUsa.svg";
+import { FaPen } from "react-icons/fa";
 import SAU from "../../Assets/flagSAU.svg";
 import IND from "../../Assets/flagIND.svg";
 import UAE from "../../Assets/flagUAE.svg";
+import CheckDelivery from "../CheckDelivery/CheckDelivery";
 
 const MobileNavbar = (props) => {
   const history = useHistory();
@@ -55,7 +57,9 @@ const MobileNavbar = (props) => {
   const [countryData, setCountryData] = useState([]);
   const flag = localStorage.getItem("defaultCountryFlag");
   const CountryIds = localStorage.getItem("id");
+  const [showModal, setShowModal] = useState(false);
   const [text, setText] = useState("");
+  const pincode = localStorage.getItem("pincode");
 
   console.log("catgSet", text);
 
@@ -401,6 +405,13 @@ const MobileNavbar = (props) => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, [openDropDown]);
+
+  const handleShowModal = () => {
+    setShowModal(true);
+  };
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
   return (
     <div className={Classes.NavContainer}>
       <div className={Classes.Navbar}>
@@ -428,12 +439,71 @@ const MobileNavbar = (props) => {
                 className={Classes.hamMenu}
               />
             </div>
-            <div
-              className={Classes.Logo}
-              onClick={() => (window.location.href = "/")}
-            >
-              <img className={Classes.mobileLogo} src={Logo} />
+            {isHomePage && (
+              <div
+                className={Classes.Logo}
+                onClick={() => (window.location.href = "/")}
+              >
+                <img className={Classes.mobileLogo} src={Logo} />
+              </div>
+            )}
+
+            <div>
+              <div
+                style={{
+                  cursor: "pointer",
+                  display: "flex",
+                  flexDirection: "column",
+                  position: "relative",
+                  top: "5px",
+                }}
+                className={`${Classes.DeliveryPin} ${Classes.headerElement}`}
+                onClick={handleShowModal}
+              >
+                <span
+                  style={{ fontSize: "12px", color: "#fff" }}
+                  className={Classes.checkDeliveryTitle}
+                >
+                  CHECK DELIVERY
+                </span>{" "}
+                {pincode ? null : (
+                  <span
+                    onClick={handleShowModal}
+                    className={Classes.EnterPinTitle}
+                    style={{
+                      cursor: "pointer",
+                      color: "#00e5ed",
+                      fontSize: "12px",
+                    }}
+                  >
+                    Enter PinCode
+                  </span>
+                )}
+                {pincode && (
+                  <span
+                    className={Classes.EnterPinTitle}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "8px",
+                      fontSize: "14px",
+                      color: "#00e5ed",
+                    }}
+                  >
+                    {pincode}{" "}
+                    <FaPen
+                      style={{ fontSize: "12px" }}
+                      onClick={handleShowModal}
+                    />
+                  </span>
+                )}
+              </div>
             </div>
+            <CheckDelivery
+              show={showModal}
+              handleClose={handleCloseModal}
+              handleShow={handleShowModal}
+            />
           </div>
           <div className={Classes.rightIcons}>
             {isHomePage ? (

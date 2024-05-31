@@ -242,16 +242,18 @@ function AddAddress(props) {
     <div>
       <div className={`containe ${Classes.AddresMobCont}`}>
         <div className={`containe ${Classes.AddresMobCont}`}>
-          {/* <div className={Classes.Main}>
+          <div className={Classes.Main}>
             <h1 className={Classes.Title}>Add Address</h1>
             <div className={Classes.SubText}>
               <p className={`${Classes.Home} ${Classes.HomeNew}`}>HOME /</p>
-              <p className={`${Classes.Home} ${Classes.HomeNew}`}>
+              <p
+                className={`${Classes.Home} ${Classes.HomeNew}`}
+                style={{ color: "#01B3C5" }}
+              >
                 ADD ADDRESS
               </p>
-              <p className={Classes.NewArrival}>ADD ADDRESS</p>
             </div>
-          </div> */}
+          </div>
           {/* address location */}
           <div
             className={

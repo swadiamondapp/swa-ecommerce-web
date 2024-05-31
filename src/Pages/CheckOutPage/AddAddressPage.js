@@ -7,6 +7,7 @@ import CheckOut from "../../components/CheckOut/CheckOut";
 import axios from "axios";
 import * as Urls from "../../Urls";
 import AddAddress from "../../components/CheckOut/AddAddress";
+import SliderFeature from "../../components/ProductDetails/SliderFeature";
 
 const AddAddressPage = (props) => {
   const [total, setTotal] = useState("");
@@ -87,6 +88,7 @@ const AddAddressPage = (props) => {
         />
 
         <div className={Classes.Features}>
+          <SliderFeature />
           <Features />
         </div>
         <Footer />

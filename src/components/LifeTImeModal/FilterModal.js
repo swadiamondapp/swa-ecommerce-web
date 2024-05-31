@@ -37,7 +37,7 @@ const mobileStyle = {
   borderRadius: "4px",
   p: 2,
   overflow: "auto",
-  maxHeight: "85%",
+  maxHeight: "78%",
   width: "100%",
 };
 const successM = {
@@ -76,6 +76,10 @@ const FilterModal = (props) => {
   const [isMobileView, setIsMobileView] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
   );
+
+  const handleCheckboxChange = (value) => {
+    setSelectedPriceRange((prevState) => (prevState === value ? "" : value));
+  };
 
   console.log("count>>>>>>", props.count);
 
@@ -298,7 +302,7 @@ const FilterModal = (props) => {
                         <input
                           checked={selectedPriceRange === "above_50000"}
                           value="above_50000"
-                          onChange={() => setSelectedPriceRange("above_50000")}
+                          onChange={() => handleCheckboxChange("above_50000")}
                           type="checkbox"
                         />
                         <label>above 50000</label>
@@ -308,7 +312,7 @@ const FilterModal = (props) => {
                           checked={selectedPriceRange === "btw_30000_to_50000"}
                           value="btw_30000_to_50000"
                           onChange={() =>
-                            setSelectedPriceRange("btw_30000_to_50000")
+                            handleCheckboxChange("btw_30000_to_50000")
                           }
                           type="checkbox"
                         />
@@ -319,7 +323,7 @@ const FilterModal = (props) => {
                           checked={selectedPriceRange === "btw_20000_to_30000"}
                           value="btw_20000_to_30000"
                           onChange={() =>
-                            setSelectedPriceRange("btw_20000_to_30000")
+                            handleCheckboxChange("btw_20000_to_30000")
                           }
                           type="checkbox"
                         />
@@ -330,7 +334,7 @@ const FilterModal = (props) => {
                           checked={selectedPriceRange === "btw_10000_to_20000"}
                           value="btw_10000_to_20000"
                           onChange={() =>
-                            setSelectedPriceRange("btw_10000_to_20000")
+                            handleCheckboxChange("btw_10000_to_20000")
                           }
                           type="checkbox"
                         />
@@ -341,7 +345,7 @@ const FilterModal = (props) => {
                         <input
                           checked={selectedPriceRange === "below_10000"}
                           value="below_10000"
-                          onChange={() => setSelectedPriceRange("below_10000")}
+                          onChange={() => handleCheckboxChange("below_10000")}
                           type="checkbox"
                         />
                         <label>less than 10000</label>
@@ -695,7 +699,7 @@ const FilterModal = (props) => {
                         className={classes.ResetBtn}
                         onClick={handleReset}
                       >
-                        RESET
+                        CLEAR ALL
                       </button>
                       <button
                         className={classes.ApplyBtn}

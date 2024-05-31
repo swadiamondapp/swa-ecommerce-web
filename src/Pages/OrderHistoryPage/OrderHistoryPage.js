@@ -11,6 +11,7 @@ import axios from "axios";
 import * as Urls from "../../Urls";
 import { FadeLoader } from "react-spinners";
 import { useHistory } from "react-router-dom";
+import SliderFeature from "../../components/ProductDetails/SliderFeature";
 
 const OrderHistoryPage = () => {
   const countryId = localStorage.getItem("id");
@@ -119,6 +120,7 @@ const OrderHistoryPage = () => {
         />
         <OrderHistory>{orderLists}</OrderHistory>
         <div className={Classes.Features}>
+          <SliderFeature />
           <Features />
         </div>
       </div>

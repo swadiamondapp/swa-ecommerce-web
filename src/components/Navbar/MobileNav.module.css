@@ -204,6 +204,9 @@ header {
   border-radius: 8px;
   border: none;
 }
+.mobileLogo {
+  max-width: 42px;
+}
 .acceptT {
   display: flex;
   align-items: center;
@@ -334,7 +337,7 @@ header {
   }
   .NavElements {
     display: flex;
-    gap: 2rem;
+    gap: 1rem;
     justify-content: center;
     align-items: end;
   }
@@ -346,7 +349,7 @@ header {
   }
   .rightIcons {
     display: flex;
-    gap: 1.5rem;
+    gap: 12px;
   }
   .LoginContainer {
     /* padding: 1rem 1rem 1.5rem 1rem; */

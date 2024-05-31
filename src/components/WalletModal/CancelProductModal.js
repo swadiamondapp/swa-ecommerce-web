@@ -91,7 +91,7 @@ const CancelProductModal = (props) => {
                 />
               </div>
               <textarea
-                placeholder="Any think to tell to us"
+                placeholder="Any thing to tell us"
                 cols={50}
                 rows={8}
                 className={Classes.TextArea}

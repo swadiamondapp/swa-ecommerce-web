@@ -26,6 +26,7 @@ import SuccessPage from "../../components/SuccessPage/SuccessPage";
 import TransferMoneyModal from "../../components/WalletModal/TransferMoneyModal";
 import { TbLocationFilled } from "react-icons/tb";
 import { IoCall } from "react-icons/io5";
+import SliderFeature from "../../components/ProductDetails/SliderFeature";
 
 const OrderHistorypage2 = (props) => {
   const history = useHistory();
@@ -164,6 +165,10 @@ const OrderHistorypage2 = (props) => {
       );
       if (response.data.results.status_code === 200) {
         setSingleOrderData(response.data.results.data);
+        setOrderDet(response.data.results.data.order.shipment);
+        setOrderid(response.data.results.data.order.id);
+        setPayMode(response.data.results.data.order.payment_mode);
+        setTotal(response.data.results.data.order.grand_total);
         response.data.results.data &&
           response.data.results.data.order &&
           response.data.results.data.order.address &&
@@ -219,9 +224,13 @@ const OrderHistorypage2 = (props) => {
         cancel_type: "initial",
       };
 
-      const response = await axios.post(Urls.CancelOrder, body, {
-        headers: { Authorization: "Token 	" + token },
-      });
+      const response = await axios.post(
+        `${Urls.CancelOrder}?country=${countryId}`,
+        body,
+        {
+          headers: { Authorization: "Token 	" + token },
+        }
+      );
       if (response.data.results.status_code === 200) {
         setLteLbbData(response.data.results);
         setOpen(true);
@@ -251,9 +260,13 @@ const OrderHistorypage2 = (props) => {
         street: addressData.streetColony,
       };
       console.log(body);
-      const response = await axios.post(Urls.CancelOrder, body, {
-        headers: { Authorization: "Token 	" + token },
-      });
+      const response = await axios.post(
+        `${Urls.CancelOrder}?country=${countryId}`,
+        body,
+        {
+          headers: { Authorization: "Token 	" + token },
+        }
+      );
       if (response.data.results.status_code === 200) {
         setBuyBackOpen(false);
         setOpen(false);
@@ -279,9 +292,13 @@ const OrderHistorypage2 = (props) => {
         reason: "aaaaaaaaaaa",
         notes: "sssssssssssssssssssssssssssssssssssssssssssssssssssssssss",
       };
-      const response = await axios.post(Urls.CancelOrder, body, {
-        headers: { Authorization: "Token " + token },
-      });
+      const response = await axios.post(
+        `${Urls.CancelOrder}?country=${countryId}`,
+        body,
+        {
+          headers: { Authorization: "Token " + token },
+        }
+      );
       if (response.data.results.status_code === 200) {
         setCancelProductModal(false);
         setSuccessModalOpen(true);
@@ -390,9 +407,9 @@ const OrderHistorypage2 = (props) => {
                               <TbLocationFilled
                                 className={Classes.AddressIcons}
                               />
-                              {address.house} ( house ) {address.city}{" "}
-                              {address.pincode} <br /> {address.area} <br />{" "}
-                              {address.city} district <br /> {address.state}
+                              {address.house} ( house ) <br /> {address.area}{" "}
+                              <br /> {address.city} district <br />{" "}
+                              {address.state} {address.pincode}
                             </p>
                             <p className={Classes.phoneSh}>
                               <IoCall className={Classes.phoneicons} />
@@ -401,7 +418,10 @@ const OrderHistorypage2 = (props) => {
                           </div>
                         </div>
                       </AccordionTab>
-                      <AccordionTab header="Product Details">
+                      <AccordionTab
+                        header="Product Details"
+                        style={{ paddingBottom: "0px!important" }}
+                      >
                         <div className={Classes.ProductDetailsParent1}>
                           <div className={Classes.LftProductDetail}>
                             <img
@@ -694,6 +714,7 @@ const OrderHistorypage2 = (props) => {
           </div>
         </div>
         <div className={Classes.Features}>
+          <SliderFeature />
           <Features />
         </div>
       </div>

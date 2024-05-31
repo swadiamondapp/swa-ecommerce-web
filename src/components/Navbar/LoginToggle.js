@@ -442,6 +442,7 @@ const LoginToggle = (props) => {
         loginHandler();
       }
       if (response.data.results.message === "Otp verified successfully!") {
+        debugger;
         props.setText("Logged In");
         props.setShowSuccessModal(true);
         setTimeout(() => {

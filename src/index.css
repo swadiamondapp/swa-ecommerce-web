@@ -906,6 +906,9 @@ input[type="number"] {
     height: 327px !important;
     object-fit: cover;
   }
+  .landingrow {
+    padding: 0px 10px;
+  }
   .ParentSlide .slick-dots li button:before {
     font-size: 14px;
   }

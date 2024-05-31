@@ -400,7 +400,8 @@ header {
   width: 100%;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   padding: 12px 16px;
-  z-index: 999;
+  /* z-index: 999; */
+  z-index: 1;
   max-height: 600px;
   overflow-y: scroll;
   top: 17%;
