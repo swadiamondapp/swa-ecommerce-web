@@ -82,13 +82,14 @@ const CheckDelivery = ({ props, show, handleClose, handleShow }) => {
       axios
         .get(Urls.pincodeCheck + pinCode)
         .then((response1) => {
-          console.log("pincode2", response1.data.PincodeData[0].Area);
           setActive(response1.data.IsSuccess);
           if (response1.data.IsSuccess === true) {
             localStorage.setItem("pincode", response1.data.PincodeData[0].Area);
+            handleClose();
+            setPinCodeError("");
+          } else {
+            setPinCodeError("Invalid pin code");
           }
-
-          handleClose();
         })
 
         .catch((error) => {
@@ -202,7 +203,9 @@ const CheckDelivery = ({ props, show, handleClose, handleShow }) => {
                   onClick={availbilityCheck}
                 />
               </div>
-              <div className="">{pinCodeError}</div>
+              <div className="" style={{ color: "#ff0000cc" }}>
+                {pinCodeError}
+              </div>
               <div style={{ marginBottom: "15px" }}>
                 {active === true ? (
                   <>

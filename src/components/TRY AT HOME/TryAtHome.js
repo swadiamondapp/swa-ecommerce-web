@@ -3,6 +3,9 @@ import React from "react";
 import Classes from "../SwaWallet/SwaWallet.module.css";
 import certificate from "../../Assets/certificate2.png";
 import tryicon from "../../Assets/tryicon.png";
+import tryimg from "../../Assets/try.png";
+import trycloseimg from "../../Assets/tryclose.png";
+import { Link } from "react-router-dom";
 
 const TryAtHome = () => {
   const Datepickers = [
@@ -55,7 +58,7 @@ const TryAtHome = () => {
                   <div className={Classes.TryHomeDate}>
                     {Datepickers.map((item) => (
                       <div className={Classes.TryDate1}>
-                        <p>{item.day}</p>
+                        <p className={Classes.datetext}>{item.day}</p>
                         <h3>{item.date}</h3>
                         <div className={Classes.TryDesign1}>
                           <p>{item.design}</p>
@@ -69,9 +72,9 @@ const TryAtHome = () => {
                       <button>10:OO AM</button>
                       <button>11:OO AM</button>
                       <button>12:OO PM</button>
-                      <button>1:OO PM</button>
-                      <button>2:OO PM</button>
-                      <button>3:OO PM</button>
+                      <button style={{ padding: "7px 15px" }}>1:OO PM</button>
+                      <button style={{ padding: "7px 15px" }}>2:OO PM</button>
+                      <button style={{ padding: "7px 15px" }}>3:OO PM</button>
                     </div>
                   </div>
                 </div>
@@ -83,25 +86,38 @@ const TryAtHome = () => {
             <div className={Classes.YourTrialCartItems}>
               <div className={Classes.LeftYourTrialCartItems}>
                 <h3>Your trail cart items</h3>
-                <div className={Classes.CardCartItems}>
-                  <img src={tryicon} />
-                  <p>ADD DESIGN</p>
+                <div className={Classes.ParentCardItems}>
+                  <div className={Classes.CardCartItemsUpload}>
+                    <img className={Classes.Tryclosebtns} src={trycloseimg} />
+                    <img style={{ height: "110px" }} src={tryimg} />
+                    <p className={Classes.ProceedAmountT}>
+                      ₹ 27000{" "}
+                      <span style={{ textDecoration: "line-through" }}>
+                        ₹ 29500
+                      </span>
+                    </p>
+                  </div>
+                  <div className={Classes.CardCartItems}>
+                    <img src={tryicon} />
+                    <p>ADD DESIGN</p>
+                  </div>
+                  <div className={Classes.CardCartItems}>
+                    <img src={tryicon} />
+                    <p>ADD DESIGN</p>
+                  </div>
+                  <div className={Classes.CardCartItems}>
+                    <img src={tryicon} />
+                    <p>ADD DESIGN</p>
+                  </div>
+                  <div className={Classes.CardCartItems}>
+                    <img src={tryicon} />
+                    <p>ADD DESIGN</p>
+                  </div>
                 </div>
-                <div className={Classes.CardCartItems}>
-                  <img src={tryicon} />
-                  <p>ADD DESIGN</p>
-                </div>
-                <div className={Classes.CardCartItems}>
-                  <img src={tryicon} />
-                  <p>ADD DESIGN</p>
-                </div>
-                <div className={Classes.CardCartItems}>
-                  <img src={tryicon} />
-                  <p>ADD DESIGN</p>
-                </div>
-                <div className={Classes.CardCartItems}>
-                  <img src={tryicon} />
-                  <p>ADD DESIGN</p>
+                <div className={Classes.Proceedbutns}>
+                  <Link to="/tryathomeform">
+                    <button>PROCEED TO CONFIRM</button>
+                  </Link>
                 </div>
               </div>
               <div className={Classes.RightYourTrialCartItems}></div>
