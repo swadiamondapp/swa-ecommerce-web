@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import Classes from "../SwaWallet/SwaWallet.module.css";
 import edit from "../../Assets/edit.png";
+import { Calendar } from "primereact/calendar";
+import { FaCalendarAlt } from "react-icons/fa";
+import { TimePicker } from "antd";
 
 const TryAtHomeInner = () => {
+  const [date, setDate] = useState(null);
+  const [time, setTime] = useState(null);
+
+  const handleChange = (time, timeString) => {
+    setTime(time);
+  };
   return (
     <div>
       {" "}
@@ -12,16 +21,27 @@ const TryAtHomeInner = () => {
             <div className={Classes.BokkingLeft}>
               <div className={Classes.BookingInformation}>
                 <div className={Classes.BookingHead}>
-                  <h3>Booking Information</h3>
-                  <p>
+                  <h3 className={Classes.TryBookInner}>Booking Information</h3>
+                  <p className={Classes.TryHomeEdits}>
                     <img src={edit} /> Edit
                   </p>
                 </div>
                 <div className={Classes.BookDateTime}>
-                  <div>Date</div>
-                  <div>12:00 PM</div>
+                  <div className={Classes.Datepickes}>
+                    <Calendar value={date} onChange={(e) => setDate(e.value)} />
+                    <FaCalendarAlt className={Classes.CalendarIcon} />
+                  </div>
+                  <div className={Classes.Datepickes}>
+                    <TimePicker
+                      value={time}
+                      onChange={handleChange}
+                      placeholder="Select Time"
+                      use12Hours
+                      format="h:mm a"
+                    />
+                  </div>
                 </div>
-                <p>1 DESIGN</p>
+                <p className={Classes.DesignFormPara}>1 DESIGN</p>
               </div>
               <div className={Classes.BookingForm}>
                 <div className={Classes.BookEmailNumber}>
@@ -34,19 +54,21 @@ const TryAtHomeInner = () => {
                     <input type="" />
                   </div>
                 </div>
-                <h3>Your Address</h3>
+                <h3 className={Classes.TryYourAddress}>Your Address</h3>
                 <div className={Classes.BookingName}>
                   <label>Full Name</label>
                   <input type="" placeholder="Jameel" />
                 </div>
                 <div className={Classes.BookpincodeCity}>
-                  <div className={Classes.BookPincodee}>
-                    <label>Pincode</label>
-                    <input type="" placeholder="673456" />
-                  </div>
-                  <div className={Classes.BookCity}>
-                    <label>City</label>
-                    <input type="" placeholder="Calicut" />
+                  <div className={Classes.PincodeCitys}>
+                    <div className={Classes.BookPincodee}>
+                      <label>Pincode</label>
+                      <input type="" placeholder="673456" />
+                    </div>
+                    <div className={Classes.BookCity}>
+                      <label>City</label>
+                      <input type="" placeholder="Calicut" />
+                    </div>
                   </div>
                   <div className={Classes.BookingState}>
                     <label>City</label>

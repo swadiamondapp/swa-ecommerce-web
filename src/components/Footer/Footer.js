@@ -128,7 +128,7 @@ function Footer() {
                       <Link to="/terms_condition">
                         <p className={Classes.Links}>Terms & conditions</p>
                       </Link>
-                      <Link to="">
+                      <Link to="/outlet">
                         <p className={Classes.Links}>Outlets</p>
                       </Link>
                     </div>

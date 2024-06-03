@@ -62,7 +62,9 @@
   padding-left: 0;
   list-style: none;
 }
-
+.p-datepicker-calendar {
+  background: #fff !important;
+}
 .padLeft {
   padding-left: 0px !important;
 }
@@ -73,7 +75,27 @@ input::placeholder {
 .ProductdetialParentContainer {
   margin-top: 40px;
 }
-
+:where(.css-dev-only-do-not-override-4fj727).ant-picker-focused {
+  box-shadow: none !important;
+}
+:where(.css-dev-only-do-not-override-4fj727).ant-picker {
+  border: none !important;
+  background: transparent !important;
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+:where(.css-dev-only-do-not-override-4fj727).ant-picker .ant-picker-input {
+  width: 65% !important;
+}
+.p-inputtext {
+  padding: 10px;
+  padding: 4px 0px 4px 50px !important;
+  border: none !important;
+  background: transparent !important;
+  outline: none !important;
+}
 .btnPad {
   padding-top: 20px;
 }

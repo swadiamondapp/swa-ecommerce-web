@@ -19,6 +19,7 @@ import CategorySearch from "./Pages/NewArrivalPage/CategorySearch";
 import TagSearch from "./Pages/NewArrivalPage/Tagsearch";
 import New from "./components/HeaderNew/Header";
 import PaymentPage from "./Pages/PaymentPage/PaymentPage";
+import OutletPage from "./Pages/Outlet Page/OutletPage";
 import AddAddress from "./components/CheckOut/AddAddress";
 import AddAddressPage from "./Pages/CheckOutPage/AddAddressPage";
 import RateAndReviewMain from "./Pages/RateAndReviewPage/RateAndReviewMain";
@@ -68,6 +69,7 @@ function App() {
         <Route path="/profile" component={ProfilePage} />
         <Route path="/tryathome" component={TryAtHomePage} />
         <Route path="/tryathomeform" component={TryAtHomeInnerPage} />
+        <Route path="/outlet" component={OutletPage} />
       </Switch>
     </Router>
   );

@@ -153,7 +153,7 @@ function CartDesign(props) {
   console.log(total, "total");
 
   function formatIndianNumber(number) {
-    const numberString = number && number.toString();
+    const numberString = number && number.toString().split(".")[0];
     const lastThreeDigits = numberString && numberString.slice(-3);
     const otherDigits = numberString && numberString.slice(0, -3);
 
