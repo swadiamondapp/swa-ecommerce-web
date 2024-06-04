@@ -12,6 +12,32 @@
   align-items: center;
 }
 
+.Main1 {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  margin-top: 20px;
+  align-items: center;
+}
+
+.Title {
+  font-weight: 600;
+  font-size: 24px;
+  font-family: "PlayFairNormal" !important;
+}
+
+.SubText {
+  display: flex;
+
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
+}
+
+.Steps2 {
+  font-family: "lato";
+  color: #0d1217 !important;
+  font-weight: 600;
+}
+
 .Main p {
   color: #01b3c5;
   font-family: "LatoRegular";
@@ -412,6 +438,10 @@
   .Right {
     margin-bottom: 20px;
   }
+  .Main1 {
+    margin: 15px 0px 15px 23px;
+    grid-template-columns: 3fr 1fr;
+  }
 }
 @media screen and (max-width: 575px) {
   .CartItems {
@@ -433,6 +463,10 @@
 }
 
 @media (min-width: 300px) and (max-width: 575px) {
+  .Main1 {
+    margin: 15px 0px 15px 23px;
+    grid-template-columns: 3fr 1fr;
+  }
   .Wrapper {
     padding: 0px !important;
     overflow-x: hidden;

@@ -181,7 +181,18 @@ function CartDesign(props) {
       />
       <div className={`${Classes.Wrapper} container`}>
         <div className={`${Classes.Wrapper} container`}>
-          <div className={Classes.Main}>
+          <div className={Classes.Main1}>
+            <div>
+              <h1 className={Classes.Title}>Cart</h1>
+              <div className={Classes.SubText}>
+                <p className={Classes.NewArrival}>ITEM ({props.cartCount})</p>
+              </div>
+            </div>
+            <div className={Classes.Steps2}>
+              STEP 1 <span style={{ color: "#949494" }}> / 3</span>{" "}
+            </div>
+          </div>
+          {/* <div className={Classes.Main}>
             <div>
               <h1 className={Classes.Title}>Cart</h1>
               <p>ITEM ({props.cartCount})</p>
@@ -189,7 +200,7 @@ function CartDesign(props) {
             <div className={Classes.SubText}>
               STEP 1 <span>/ 3</span>
             </div>
-          </div>
+          </div> */}
           <div className="row" style={{ paddingTop: "10px" }}>
             <div className="col-md-8">
               <div className={Classes.Left}>{props.children}</div>
