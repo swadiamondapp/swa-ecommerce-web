@@ -138,25 +138,25 @@ function CheckOut(props) {
         "string.empty": "Please enter your mobile number.",
         "string.pattern.base": "Please enter a valid 10-digit mobile number.",
       }),
-    pincode: Joi.string()
-      .required()
-      .max(6)
-      .min(6)
-      .messages({
-        "string.empty": `Please enter your pincode.`,
-        "string.max": "Pincode must be exactly 6 digits.",
-        "string.min": "Pincode must be exactly 6 digits.",
-      }),
+    // pincode: Joi.string()
+    //   .required()
+    //   .max(6)
+    //   .min(6)
+    //   .messages({
+    //     "string.empty": `Please enter your pincode.`,
+    //     "string.max": "Pincode must be exactly 6 digits.",
+    //     "string.min": "Pincode must be exactly 6 digits.",
+    //   }),
     city: Joi.string()
       .required()
       .messages({
         "string.empty": `Please enter your city.`,
       }),
-    state: Joi.string()
-      .required()
-      .messages({
-        "string.empty": `State is a required field`,
-      }),
+    // state: Joi.string()
+    //   .required()
+    //   .messages({
+    //     "string.empty": `State is a required field`,
+    //   }),
     hNumber_Bname: Joi.string()
       .required()
       .messages({
@@ -911,7 +911,7 @@ function CheckOut(props) {
                           </div>
                         )}
                       </div>
-                      <div className="Parant_Relative">
+                      {/* <div className="Parant_Relative">
                         <label>Pincode</label>
                         <input
                           className={Classes.PlaceInput}
@@ -937,7 +937,7 @@ function CheckOut(props) {
                             {errorMessage.pincode}
                           </div>
                         )}
-                      </div>
+                      </div> */}
                       <div>
                         <label>City</label>
                         <input
@@ -957,7 +957,7 @@ function CheckOut(props) {
                       </div>
                     </div>
 
-                    <div style={{ marginBottom: "15px" }}>
+                    {/* <div style={{ marginBottom: "15px" }}>
                       <label>State</label>
                       <Dropdown
                         value={selectedCity}
@@ -971,7 +971,7 @@ function CheckOut(props) {
                           {errorMessage.state}
                         </div>
                       )}
-                    </div>
+                    </div> */}
 
                     <div className={Classes.ParentStreetColony}>
                       <div className={Classes.House1NN}>
