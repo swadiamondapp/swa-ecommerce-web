@@ -58,7 +58,7 @@ const signUpSchema = Joi.object({
 });
 
 const LoginToggle = (props) => {
-  const [activeTab, setActiveTab] = useState("tab1");
+  const [activeTab, setActiveTab] = useState("tab2");
   const [open, setOpen] = useState(false);
   const [signUpModal, setSignupModal] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
@@ -315,8 +315,9 @@ const LoginToggle = (props) => {
     const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const body = {
       phone_code: "+91",
-      phone: mobileNumber ? mobileNumber : signUpData.mobile,
-      email: "",
+      // phone: mobileNumber ? mobileNumber : signUpData.mobile,
+      phone: "",
+      email: signUpData.email,
       createuser: "False",
       forgotuser: "False",
     };
@@ -704,7 +705,7 @@ const LoginToggle = (props) => {
                         <div
                           className={`Classes.tab-item ${activeTab === "tab1" &&
                             "active"}`}
-                          onClick={() => handleTabClick("tab1")}
+                          onClick={() => alert("Not Available this time..!")}
                         >
                           {activeTab === "tab1" ? (
                             <div className={Classes.tabTitleOne}>

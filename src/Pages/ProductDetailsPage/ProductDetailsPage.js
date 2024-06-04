@@ -206,6 +206,12 @@ const ProductDetailsPage = (props) => {
     setThumbImg(thumpImg);
   };
   const cartHandler = () => {
+    let total;
+    if (prodDet.is_on_discount) {
+      total = prodDet.discount_price;
+    } else {
+      total = prodDet.country_total_price;
+    }
     const body = {
       product_id: prodDet.id,
       color_id: clrId,
@@ -217,7 +223,7 @@ const ProductDetailsPage = (props) => {
       product_id: prodDet.id,
       color: clrId,
       size: size,
-      // total: total,
+      total: total,
     };
 
     // if (size !== "") {

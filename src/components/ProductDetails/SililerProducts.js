@@ -288,9 +288,9 @@ const SililerProducts = (props) => {
                       )}
                       <div className={Classes.MainBtns}>
                         <div className={Classes.ParentHoverBtns}>
-                          <button className={Classes.tryBtn}>
+                          {/* <button className={Classes.tryBtn}>
                             Try at Home
-                          </button>
+                          </button> */}
                           <button className={Classes.buynowbtn}>Buy now</button>
                         </div>
                       </div>

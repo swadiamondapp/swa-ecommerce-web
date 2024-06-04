@@ -315,12 +315,15 @@ const Header = (props) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(Urls.getCountryFlags);
-
-        setCountryData(response.data.results.data);
+        console.log("response.data.results.data", response.data.results.data);
+        const filteredData = response.data.results.data.filter(
+          (country) => country.country_name === "United Arab Emirates"
+        );
+        setCountryData(filteredData);
 
         // Extracting the ID of India
         const indiaData = response.data.results.data.find(
-          (country) => country.country_name === "India"
+          (country) => country.country_name === "United Arab Emirates"
         );
         if (!CountryIds && !flag) {
           props.setSelectedCountry({

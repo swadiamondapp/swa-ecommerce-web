@@ -547,6 +547,7 @@ function CheckOut(props) {
           data: {
             pay: amountPay,
             total: total,
+            totalItems: props.countCartItems ? props.countCartItems : 1,
             // addressId: response.data.data.id,
             updatedCart: props.proDet.data.updatedCartResponse,
             token: token,
@@ -567,6 +568,7 @@ function CheckOut(props) {
           data: {
             pay: amountPay,
             total: total,
+            totalItems: props.countCartItems ? props.countCartItems : 1,
             addressId: addressData.id,
             updatedCart: props.proDet.data.updatedCartResponse,
             totalSavedAmount: props.proDet.data.totalSavedAmount,
@@ -791,6 +793,8 @@ function CheckOut(props) {
     );
   }
 
+  console.log("location.state.data----->123", location.state);
+
   return (
     <div>
       <OtpModal
@@ -925,7 +929,7 @@ function CheckOut(props) {
                               fontSize: "14px",
                             }}
                           >
-                            Delivery by 12th March
+                            Delivery in 5-7 Days
                           </p>
                         )}
                         {errorMessage.pincode && (
@@ -1032,7 +1036,10 @@ function CheckOut(props) {
                   <div className={Classes.TotalItem}>
                     <p className={Classes.TotalSmall}>
                       Total &nbsp;
-                      <span>({props.countCartItems} Items)</span>
+                      <span>
+                        ({props.countCartItems ? props.countCartItems : 1}{" "}
+                        Items)
+                      </span>
                     </p>
                   </div>
                   <p className={Classes.Amount}>
@@ -1043,9 +1050,9 @@ function CheckOut(props) {
                       <CgDollar className={Classes.Rupee} />
                     )}
                     {Contryname === "United Arab Emirates" && (
-                      <span style={{ paddingRight: "5px" }}>AED</span>
+                      <span style={{ paddingRight: "5px" }}></span>
                     )}
-                    {formatIndianNumber(total)}
+
                     {/* {location.state.data.total} */}
                   </p>
                 </div>
@@ -1064,7 +1071,7 @@ function CheckOut(props) {
                       </span>
                     )}
                     <p className={Classes.AmountPayable}>
-                      {formatIndianNumber(amountPay)}
+                      {formatIndianNumber(amountPay ? amountPay : total)}
                       {/* {location.state.data.pay} */}
                     </p>
                   </div>

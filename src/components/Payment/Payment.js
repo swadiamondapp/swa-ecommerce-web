@@ -697,7 +697,7 @@ const Payment = () => {
           <div className={Classes.PaymentMethod}>
             <h4>Payment Method</h4>
             <p>Choose your payment method</p>
-            <div className={Classes.Pmethod}>
+            {/* <div className={Classes.Pmethod}>
               <input
                 type="radio"
                 value="credit_card"
@@ -718,7 +718,7 @@ const Payment = () => {
               />
               <img src={phonepay} alt="Phonepay" />
               UPI
-            </div>
+            </div> */}
             <div className={Classes.Pmethod}>
               <input
                 type="radio"
@@ -735,7 +735,7 @@ const Payment = () => {
               <div className={Classes.TotalText}>
                 <div className={Classes.TotalItem}>
                   <p className={Classes.TotalSmall}>
-                    Total &nbsp;<span>(1 Items)</span>
+                    Total &nbsp;<span>{data.totalItems} Items</span>
                   </p>
                 </div>
 
@@ -820,7 +820,7 @@ const Payment = () => {
               ) : null}
               {pincodes && (
                 <div className={Classes.deliverypay}>
-                  Expected Delivery : 23rd April 24
+                  Expected Delivery : Delivery in 5-7 Days
                 </div>
               )}
             </div>

@@ -135,7 +135,7 @@ const NewArrivalCard = (props) => {
                     className={Classes.ButtonContainer}
                     onClick={props.clicked}
                   >
-                    <button className={Classes.tryAtHome}>TRY AT HOME</button>
+                    {/* <button className={Classes.tryAtHome}>TRY AT HOME</button> */}
                     <button className={Classes.buyNow}>Buy Now</button>
                   </div>
                 </div>

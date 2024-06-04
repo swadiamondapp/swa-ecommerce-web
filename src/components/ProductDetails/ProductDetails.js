@@ -949,7 +949,7 @@ const ProductDetails = (props) => {
                   </div>
                 )} */}
 
-                <div className={Classes.FindStoreParent}>
+                {/* <div className={Classes.FindStoreParent}>
                   <button className={Classes.TryHome}>Find at store</button>
                   <button
                     className={Classes.VideoCall}
@@ -972,7 +972,7 @@ const ProductDetails = (props) => {
                     handleClose={handleCloseModal}
                     productId={props.id}
                   />
-                </div>
+                </div> */}
               </div>
               <Modal
                 open={showErrorModal}
@@ -1143,7 +1143,7 @@ const ProductDetails = (props) => {
                         fontWeight: "600",
                       }}
                     >
-                      Delivery by 12th March
+                      Delivery in 5-7 Days
                     </p>
                   )}{" "}
                 </div>
@@ -1181,7 +1181,7 @@ const ProductDetails = (props) => {
                         </div>
                         <div>
                           <p className={Classes.DHeadText}>
-                            Free Delivery by 12th March
+                            Free Delivery in 5-7 Days
                           </p>
                           <p className={Classes.Dheadtext1}>
                             Order in next 4 HRS 23 mins
