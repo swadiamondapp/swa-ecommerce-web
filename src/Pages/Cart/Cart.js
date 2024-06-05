@@ -26,6 +26,7 @@ const Cart = () => {
   const [productId, setProdctId] = useState("");
   const [loading, setLoading] = useState(false);
   const [amountPay, setAmountPay] = useState("");
+  const [cartItemsCount, setCartItemsCount] = useState("");
   const token = localStorage.getItem("swaToken");
   const countryId = localStorage.getItem("id");
   const flag = localStorage.getItem("flag_image");
@@ -52,6 +53,7 @@ const Cart = () => {
         setPageCount(response1.data.results.count / 20);
         setCartList(response1.data.results.data.cart_item);
         setAmountPay(response1.data.results.data.cartmaster.grand_total);
+        setCartItemsCount(response1.data.results.count);
       })
       .catch((error) => {
         console.log(error);
@@ -71,6 +73,7 @@ const Cart = () => {
         setCartCount(response1.data.results.count);
         setPageCount(response1.data.results.count / 20);
         setCartList(response1.data.results.data.cart_item);
+        setCartItemsCount(response1.data.results.count);
       })
       .catch((error) => {
         console.log(error);
@@ -101,9 +104,9 @@ const Cart = () => {
         cartNewArray = [...cartList];
         cartNewArray.splice(index, 1);
         setCartList(cartNewArray);
-        let count = cartCount;
+        let count = cartItemsCount;
         count = count - 1;
-        setCartCount(count);
+        setCartItemsCount(count);
       })
       .catch((error) => {
         console.log(error);
@@ -131,13 +134,14 @@ const Cart = () => {
           .then((response1) => {
             setLoading(false);
             setShow(false);
-            let count = cartCount;
+            let count = cartItemsCount;
             count = count - 1;
-            setCartCount(count);
+            setCartItemsCount(count);
             let cartNewArray = [];
             cartNewArray = [...cartList];
             cartNewArray.splice(index, 1);
             setCartList(cartNewArray);
+            // setCartItemsCount(count);
           })
           .catch((error) => {
             console.log(error);
@@ -188,7 +192,7 @@ const Cart = () => {
         <CartDesign
           amount={amountPay}
           cartProAmnt={selProAmnt}
-          cartCount={cartList && cartList.length}
+          cartCount={cartItemsCount}
           totalSavedAmount={totalSavedAmount}
           // handleOpen={() => setWalletOpen(true)}
         >
@@ -240,7 +244,7 @@ const Cart = () => {
     <div>
       <div className={Classes.Background}>
         <Header
-          countCartItems={cartCount}
+          countCartItems={cartItemsCount}
           selectedCountry={selectedCountry}
           setSelectedCountry={setSelectedCountry}
         />

@@ -451,6 +451,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
   }
   .Signup {
     display: flex;
@@ -468,6 +469,7 @@ header {
     font-family: "gilroyNormal";
     background-color: transparent;
     padding: 0px 2px;
+    cursor: pointer !important;
   }
   .bottomText {
     color: #585f67;
@@ -596,6 +598,7 @@ header {
     font-style: normal;
     font-weight: 400;
     line-height: 1.25rem;
+    cursor: pointer;
   }
   .tabTitleTwo {
     padding: 10px 61px;
@@ -767,6 +770,7 @@ header {
     align-items: center;
     justify-content: center;
     width: 100%;
+    cursor: pointer;
   }
 
   .LoginContainer .line {
@@ -870,6 +874,7 @@ header {
     font-family: "gilroyNormal";
     background-color: transparent;
     padding: 0px 4px;
+    cursor: pointer;
   }
   .bottomText {
     color: #585f67;
@@ -1126,6 +1131,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
   }
   .LoginButton {
     background-color: #00464d;
@@ -1155,6 +1161,7 @@ header {
     font-family: "gilroyNormal";
     background-color: transparent;
     padding: 0px 2px;
+    cursor: pointer;
   }
   .bottomText {
     color: #585f67;

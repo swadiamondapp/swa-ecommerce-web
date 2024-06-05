@@ -512,7 +512,7 @@ const MobileNavbar = (props) => {
                 <div
                   style={{ cursor: "pointer" }}
                   className={Classes.CountryFlags}
-                  onClick={handleOpenDropDown}
+                  // onClick={handleOpenDropDown}
                   ref={nameRef}
                 >
                   <div className={Classes.headerElement}>
@@ -525,14 +525,8 @@ const MobileNavbar = (props) => {
                       alt="Selected flag"
                       className={Classes.selectedImage}
                     />
-                    {console.log(
-                      "countryimage>>>>>>>?",
-                      props &&
-                        props.selectedCountry &&
-                        props.selectedCountry.flag_image
-                    )}
                   </div>
-                  {openDropDown && (
+                  {/* {openDropDown && (
                     <div className={Classes.CountryDropDowns} ref={dropdownRef}>
                       {countryData.map((country, index) => (
                         <div className={Classes.CountryContainer} key={index}>
@@ -564,7 +558,7 @@ const MobileNavbar = (props) => {
                         </div>
                       ))}
                     </div>
-                  )}
+                  )} */}
                 </div>
               </div>
             ) : (
