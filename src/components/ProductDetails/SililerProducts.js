@@ -127,6 +127,10 @@ const SililerProducts = (props) => {
     ],
   };
 
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
   return (
     <div style={{ marginTop: "80px" }}>
       <div className="container">
@@ -239,8 +243,8 @@ const SililerProducts = (props) => {
                             <span style={{ paddingRight: "5px" }}>AED</span>
                           )}
                           {item.discount_price
-                            ? item.discount_price
-                            : item.country_total_price}
+                            ? numberWithCommas(item.discount_price)
+                            : numberWithCommas(item.country_total_price)}
                         </p>
                         {item.discount_price && (
                           <p className={Classes.SimilerProductDiscount}>
@@ -253,7 +257,7 @@ const SililerProducts = (props) => {
                             {Contryname === "United Arab Emirates" && (
                               <span style={{ paddingRight: "5px" }}>AED</span>
                             )}{" "}
-                            {item.country_total_price}
+                            {numberWithCommas(item.country_total_price)}
                           </p>
                         )}
                       </div>

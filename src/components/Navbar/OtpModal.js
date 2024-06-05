@@ -35,7 +35,7 @@ const OtpModal = (props) => {
                   <p className={Classes.titlep}>
                     Please enter 6 digit OTP that send to your
                     <br />
-                    {props.mobileNumber}
+                    {props.mobileNumber ? props.mobileNumber : props.emailId}
                   </p>
                 </div>
               </div>

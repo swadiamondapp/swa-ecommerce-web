@@ -820,7 +820,7 @@ const Payment = () => {
               ) : null}
               {pincodes && (
                 <div className={Classes.deliverypay}>
-                  Expected Delivery : Delivery in 5-7 Days
+                  Expected Delivery : Delivery in 3-5 days
                 </div>
               )}
             </div>

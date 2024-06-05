@@ -929,7 +929,7 @@ function CheckOut(props) {
                               fontSize: "14px",
                             }}
                           >
-                            Delivery in 5-7 Days
+                            Delivery in 3-5 days
                           </p>
                         )}
                         {errorMessage.pincode && (

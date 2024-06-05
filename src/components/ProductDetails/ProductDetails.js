@@ -865,10 +865,12 @@ const ProductDetails = (props) => {
                       <CgDollar size={25} color="#B0B0B0" />
                     )}
                     {Contryname === "United Arab Emirates" && (
-                      <span style={{ paddingRight: "5px" }}>AED</span>
+                      <span style={{ paddingRight: "5px", paddingLeft: "7px" }}>
+                        AED
+                      </span>
                     )}
                     <p className={Classes.OldPrice}>
-                      {parseInt(props.actualPrice).toFixed(0)}
+                      {numberWithCommas(parseInt(props.actualPrice).toFixed(0))}
                     </p>
                   </>
                 )}
@@ -881,7 +883,7 @@ const ProductDetails = (props) => {
                   {Contryname === "United Arab Emirates" && (
                     <span style={{ paddingRight: "5px" }}>AED</span>
                   )}{" "}
-                  {props.discountVal.toFixed(0)}
+                  {numberWithCommas(props.discountVal.toFixed(0))}
                 </p>
               ) : null}
               <p className={Classes.AvailableColours}>Customize this product</p>
@@ -1143,7 +1145,7 @@ const ProductDetails = (props) => {
                         fontWeight: "600",
                       }}
                     >
-                      Delivery in 5-7 Days
+                      Delivery in 3-5 days
                     </p>
                   )}{" "}
                 </div>
@@ -1181,7 +1183,7 @@ const ProductDetails = (props) => {
                         </div>
                         <div>
                           <p className={Classes.DHeadText}>
-                            Free Delivery in 5-7 Days
+                            Free Delivery in 3-5 days
                           </p>
                           <p className={Classes.Dheadtext1}>
                             Order in next 4 HRS 23 mins

@@ -701,25 +701,6 @@ const LoginToggle = (props) => {
                   </div>
                   <div className={Classes.TabButton}>
                     <div className={Classes.tabHeader}>
-                      <div className={Classes.active} style={customTabOne}>
-                        <div
-                          className={`Classes.tab-item ${activeTab === "tab1" &&
-                            "active"}`}
-                          onClick={() => alert("Not Available this time..!")}
-                        >
-                          {activeTab === "tab1" ? (
-                            <div className={Classes.tabTitleOne}>
-                              <span style={{ fontWeight: "600" }}>
-                                Phone Number
-                              </span>
-                            </div>
-                          ) : (
-                            <div className={Classes.tabTitleOne}>
-                              <span>Phone Number</span>
-                            </div>
-                          )}
-                        </div>
-                      </div>
                       <div className={Classes.active} style={customTabtwo}>
                         <div
                           className={`Classes.tab-item ${activeTab === "tab2" &&
@@ -727,12 +708,37 @@ const LoginToggle = (props) => {
                           onClick={() => handleTabClick("tab2")}
                         >
                           {activeTab === "tab1" ? (
-                            <div className={Classes.tabTitleTwo}>
-                              <span>Email</span>
+                            <div className={Classes.tabTitleOne}>
+                              <span style={{ fontWeight: "600" }}>
+                                {/* Phone Number */}
+                                Email
+                              </span>
                             </div>
                           ) : (
-                            <div className={Classes.tabTitleTwo}>
-                              <span style={{ fontWeight: "600" }}>Email</span>
+                            <div className={Classes.tabTitleOne}>
+                              {/* <span>Phone Number</span> */}
+                              <span>Email</span>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      <div className={Classes.active}>
+                        <div
+                          className={`Classes.tab-item ${activeTab === "tab1" &&
+                            "active"}`}
+                          onClick={() => alert("Not Available this time..!")}
+                        >
+                          {activeTab === "tab1" ? (
+                            <div className={Classes.tabTitleOne}>
+                              {/* <span>Email</span> */}
+                              <span>Phone number</span>
+                            </div>
+                          ) : (
+                            <div className={Classes.tabTitleOne}>
+                              {/* <span style={{ fontWeight: "600" }}>Email</span> */}
+                              <span style={{ fontWeight: "600" }}>
+                                Phone number
+                              </span>
                             </div>
                           )}
                         </div>
@@ -915,6 +921,7 @@ const LoginToggle = (props) => {
                     handelLoginForm={handelLoginForm}
                     timer={timer}
                     mobileNumber={mobileNumber}
+                    emailId={emailId}
                     otp={otp}
                     setOtp={setOtp}
                     handleSignupModalOpen={handleSignupModalOpen}

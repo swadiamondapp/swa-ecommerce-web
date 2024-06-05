@@ -169,7 +169,8 @@ const NewArrivalCard = (props) => {
                         Contryname === "United Arab Emirates" && (
                           <span style={{ paddingRight: "5px" }}>AED</span>
                         )}
-                      {props.PriceOld !== null && props.PriceOld}
+                      {props.PriceOld !== null &&
+                        numberWithCommas(props.PriceOld)}
                     </p>
                   </div>
                   <div className={Classes.Checkcards} onClick={handleShowModal}>

@@ -422,7 +422,7 @@ function AddAddress(props) {
                                 fontSize: "12px",
                               }}
                             >
-                              Delivery in 5-7 Days
+                              Delivery in 3-5 days
                             </p>
                           )}
                           {errors.pincode && (
