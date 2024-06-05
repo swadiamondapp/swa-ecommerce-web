@@ -667,6 +667,10 @@ const Payment = () => {
     );
   }
 
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
   return (
     <div>
       <div className={`${Classes.Wrapper} container`}>
@@ -815,7 +819,7 @@ const Payment = () => {
               </div>
               {data.totalSavedAmount ? (
                 <p className={Classes.HurrayText}>
-                  You totaly saved {data.totalSavedAmount} hurray!..
+                  You saved {numberWithCommas(data.totalSavedAmount)} hurray!..
                 </p>
               ) : null}
               {pincodes && (
@@ -875,7 +879,7 @@ const Payment = () => {
             {Contryname === "United Arab Emirates" && (
               <span style={{ paddingRight: "5px" }}>AED</span>
             )}{" "}
-            {data.pay}
+            {formatIndianNumber(data.pay)}
           </div>
         </div>
       </div>

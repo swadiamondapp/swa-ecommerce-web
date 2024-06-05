@@ -165,6 +165,10 @@ function CartDesign(props) {
     );
   }
 
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
   return (
     <div>
       <WalletModal
@@ -314,7 +318,7 @@ function CartDesign(props) {
                 />
                 {props.totalSavedAmount || diff ? (
                   <p className={Classes.HurrayText}>
-                    You totaly saved {totally_saved} hurray!..
+                    You saved {numberWithCommas(totally_saved)} hurray!..
                   </p>
                 ) : null}
                 {/* <button

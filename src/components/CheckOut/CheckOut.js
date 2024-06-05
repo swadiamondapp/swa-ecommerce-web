@@ -793,6 +793,10 @@ function CheckOut(props) {
     );
   }
 
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
   console.log("location.state.data----->123", location.state);
 
   return (
@@ -1050,7 +1054,9 @@ function CheckOut(props) {
                       <CgDollar className={Classes.Rupee} />
                     )}
                     {Contryname === "United Arab Emirates" && (
-                      <span style={{ paddingRight: "5px" }}></span>
+                      <span style={{ paddingRight: "5px" }}>
+                        AED {formatIndianNumber(amountPay ? amountPay : total)}
+                      </span>
                     )}
 
                     {/* {location.state.data.total} */}
@@ -1086,7 +1092,8 @@ function CheckOut(props) {
                 </div>
                 {props.proDet.data.totalSavedAmount ? (
                   <p className={Classes.HurrayText}>
-                    You totoly saved {props.proDet.data.totalSavedAmount}
+                    You saved{" "}
+                    {numberWithCommas(props.proDet.data.totalSavedAmount)}
                     &nbsp;hurray!..
                   </p>
                 ) : null}

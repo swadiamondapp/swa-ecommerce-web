@@ -290,7 +290,7 @@ const ProductDetailsPage = (props) => {
         sku={"SKU : " + prodDet.sku}
         offerPrice={
           prodDet.is_on_discount
-            ? prodDet.discount_price
+            ? prodDet.country_discount_price
             : prodDet.country_total_price
         }
         actualPrice={

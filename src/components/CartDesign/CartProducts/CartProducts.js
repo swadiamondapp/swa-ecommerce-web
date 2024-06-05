@@ -9,6 +9,9 @@ import { IoCheckmarkCircleSharp } from "react-icons/io5";
 
 function CartProducts(props) {
   const Contryname = localStorage.getItem("country_name");
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
   return (
     <div>
       <div className={Classes.CartItems}>
@@ -48,7 +51,7 @@ function CartProducts(props) {
                   {Contryname === "United Arab Emirates" && (
                     <span style={{ paddingRight: "5px" }}>AED</span>
                   )}{" "}
-                  {props.NewPrice}
+                  {numberWithCommas(props.NewPrice)}
                 </p>
                 {props && props.OldPrice !== props.NewPrice ? (
                   <p className={Classes.PriceOld}>
@@ -62,7 +65,7 @@ function CartProducts(props) {
                     {Contryname === "United Arab Emirates" && (
                       <span style={{ paddingRight: "5px" }}>AED</span>
                     )}{" "}
-                    {props.OldPrice}
+                    {numberWithCommas(props.OldPrice)}
                   </p>
                 ) : null}
               </div>
@@ -87,7 +90,7 @@ function CartProducts(props) {
                       {Contryname === "United Arab Emirates" && (
                         <span style={{ paddingRight: "5px" }}>AED</span>
                       )}
-                      {props.OldPrice - props.NewPrice}
+                      {numberWithCommas(props.OldPrice - props.NewPrice)}
                     </p>
                   )
                 : null}
