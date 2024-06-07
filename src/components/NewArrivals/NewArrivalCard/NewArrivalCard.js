@@ -88,9 +88,9 @@ const NewArrivalCard = (props) => {
   const result = numberWithCommas(formattedCost);
 
   const handleShowModal = () => {
-    const pincode = localStorage.getItem("pincode");
+    const pincode = true;
     if (pincode) {
-      setButtonText("Delivery by 10th May");
+      setButtonText("Delivery in 3-5 Days");
     } else {
       setShowModal(true);
     }
