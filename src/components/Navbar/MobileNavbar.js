@@ -466,7 +466,7 @@ const MobileNavbar = (props) => {
                 >
                   {/* CHECK DELIVERY */}
                 </span>{" "}
-                {pincode ? null : (
+                {/* {pincode ? null : (
                   <span
                     onClick={handleShowModal}
                     className={Classes.EnterPinTitle}
@@ -478,7 +478,7 @@ const MobileNavbar = (props) => {
                   >
                     Enter PinCode
                   </span>
-                )}
+                )} */}
                 {/* {pincode && (
                   <span
                     className={Classes.EnterPinTitle}

@@ -4,6 +4,8 @@ import outletimg from "../../Assets/outlet.png";
 import starimg from "../../Assets/Star.png";
 import locationimg from "../../Assets/locationimgs.png";
 import timeimg from "../../Assets/times.png";
+import { BsSearch } from "react-icons/bs";
+import pincodeimg from "../../Assets/locations.png";
 import { RiWhatsappFill } from "react-icons/ri";
 import { IoMdCall } from "react-icons/io";
 
@@ -28,9 +30,15 @@ const Outlet = () => {
         <div className="container">
           <div className={Classes.OutletParent}>
             <div className={Classes.OutletHead}>
-              <h3>Outlet</h3>
-              <input type="" placeholder="Search location" />
-              <p>Use your current location</p>
+              <h3 className={Classes.outleth3}>Outlet</h3>
+              <div className={Classes.OutletSearch}>
+                <input type="" placeholder="Search location" />
+                <BsSearch size={22} className={Classes.Outletsearchicon} />
+              </div>
+
+              <p className={Classes.Outletpincode}>
+                <img src={pincodeimg} /> Use your current location
+              </p>
             </div>
             <div className={Classes.OutletCardParent}>
               {outlets.map((item) => (
@@ -43,7 +51,10 @@ const Outlet = () => {
                       <div className={Classes.OutletDetails}>
                         <h3>{item.name}</h3>
                         <p className={Classes.RatingOutlets}>
-                          <img src={starimg} />{" "}
+                          <img
+                            style={{ position: "relative", top: "-3px" }}
+                            src={starimg}
+                          />{" "}
                           <span>4.9 | 978 Goolge review</span>
                         </p>
                         <p>
@@ -61,18 +72,22 @@ const Outlet = () => {
                   </div>
                   <div className={Classes.OutletFooterCrad}>
                     <div className={Classes.OutletFooter}>
-                      <div>
-                        <RiWhatsappFill />
+                      <div className={Classes.outletWatsapp}>
+                        <RiWhatsappFill size={20} />
                       </div>
-                      <div>
-                        <IoMdCall />
+                      <div className={Classes.outletWatsapp}>
+                        <IoMdCall size={20} />
                       </div>
-                      <div>
+                      <div className={Classes.OutletBookvist}>
                         <button>Book a Vist</button>
                       </div>
                     </div>
-                    <p>
-                      <img src={timeimg} /> WORKING HOURS : 10:00AM TO 10:00PM
+                    <p className={Classes.OutletFooters}>
+                      <img
+                        style={{ position: "relative", top: "-1px" }}
+                        src={timeimg}
+                      />{" "}
+                      WORKING HOURS : 10:00AM TO 10:00PM
                     </p>
                   </div>
                 </div>
