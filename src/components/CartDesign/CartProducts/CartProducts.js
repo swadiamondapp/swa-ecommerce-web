@@ -125,7 +125,8 @@ function CartProducts(props) {
         </div>
         <div className={Classes.Delivery}>
           <TbTruckDelivery size={20} color="#30933A" />
-          <p className={Classes.DeliveryExpected}>{props.DeliveryDate}</p>
+          {/* <p className={Classes.DeliveryExpected}>{props.DeliveryDate}</p> */}
+          <p className={Classes.DeliveryExpected}>Delivery in 3-5 Days</p>
         </div>
         <div className={Classes.OverViewMobile}>
           <p className={Classes.OverViewKey}>Size</p>
