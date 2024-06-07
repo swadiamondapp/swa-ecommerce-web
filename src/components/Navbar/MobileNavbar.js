@@ -458,13 +458,13 @@ const MobileNavbar = (props) => {
                   top: "5px",
                 }}
                 className={`${Classes.DeliveryPin} ${Classes.headerElement}`}
-                onClick={handleShowModal}
+                // onClick={handleShowModal}
               >
                 <span
                   style={{ fontSize: "12px", color: "#fff" }}
                   className={Classes.checkDeliveryTitle}
                 >
-                  CHECK DELIVERY
+                  {/* CHECK DELIVERY */}
                 </span>{" "}
                 {pincode ? null : (
                   <span
@@ -479,7 +479,7 @@ const MobileNavbar = (props) => {
                     Enter PinCode
                   </span>
                 )}
-                {pincode && (
+                {/* {pincode && (
                   <span
                     className={Classes.EnterPinTitle}
                     style={{
@@ -496,7 +496,7 @@ const MobileNavbar = (props) => {
                       onClick={handleShowModal}
                     />
                   </span>
-                )}
+                )} */}
               </div>
             </div>
             <CheckDelivery
