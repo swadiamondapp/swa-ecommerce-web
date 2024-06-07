@@ -54,7 +54,8 @@ const ProductDetails = (props) => {
   const [show, setShow] = useState(false);
   const [addToWishList, setAddToWishList] = useState(false);
   const [wishId, setWishId] = useState("");
-  const [pinCode, setPinCode] = useState(localStorage.getItem("pincode") || "");
+  const [pinCode, setPinCode] = useState("");
+  const [pincodeShow, setPincodeShow] = useState(false);
   const [pinCodeError, setPinCodeError] = useState("");
   const [active, setActive] = useState(null);
   const history = useHistory();
@@ -168,6 +169,7 @@ const ProductDetails = (props) => {
   };
   const pinCodeChangeHandler = (e) => {
     setPinCode(e.target.value);
+    setPincodeShow(false);
   };
   const availbilityCheck = () => {
     if (pinCode !== "") {
@@ -534,7 +536,7 @@ const ProductDetails = (props) => {
     });
   };
 
-  console.log("props.bagImg--->", props.id);
+  console.log("imageUrls", imageUrls);
 
   return (
     <div>
@@ -566,8 +568,8 @@ const ProductDetails = (props) => {
                             src={props.thumbImg}
                             alt=""
                           /> */}
-                          <div className="ParentSlide">
-                            <Slider {...settings} ref={largeSliderRef}>
+                          {imageUrls.length === 1 ? (
+                            <div className="ParentSlide">
                               {imageUrls.map((item, index) => {
                                 return (
                                   <div>
@@ -588,34 +590,59 @@ const ProductDetails = (props) => {
                                   </div>
                                 );
                               })}
-                              {videoUrls.map((item) => (
-                                <div
-                                  style={{
-                                    width: "429px",
-                                    position: "relative",
-                                    overflow: "hidden",
-                                    height: "389px",
-                                  }}
-                                >
-                                  <video
-                                    className="videoParentslider"
-                                    // className="Vediosec"
+                            </div>
+                          ) : (
+                            <div className="ParentSlide">
+                              <Slider {...settings} ref={largeSliderRef}>
+                                {imageUrls.map((item, index) => {
+                                  return (
+                                    <div>
+                                      {props.discount &&
+                                        props.discountPercentage && (
+                                          <div className={Classes.Discount}>
+                                            <p className={Classes.Number}>
+                                              {props.discountPercentage +
+                                                "% DISCOUNT"}
+                                            </p>
+                                          </div>
+                                        )}
+                                      <img
+                                        className={Classes.Mobsliderbig}
+                                        src={item}
+                                        alt={`Slide ${index}`}
+                                      />
+                                    </div>
+                                  );
+                                })}
+                                {videoUrls.map((item) => (
+                                  <div
                                     style={{
-                                      maxWidth: "100%",
-                                      // position: "absolute",
-                                      // top: "0%",
-                                      // width: "429px",
+                                      width: "429px",
+                                      position: "relative",
+                                      overflow: "hidden",
+                                      height: "389px",
                                     }}
-                                    src={item}
-                                    autoPlay
-                                    loop
-                                    muted
-                                    playsInline
-                                  />
-                                </div>
-                              ))}
-                            </Slider>
-                          </div>
+                                  >
+                                    <video
+                                      className="videoParentslider"
+                                      // className="Vediosec"
+                                      style={{
+                                        maxWidth: "100%",
+                                        // position: "absolute",
+                                        // top: "0%",
+                                        // width: "429px",
+                                      }}
+                                      src={item}
+                                      autoPlay
+                                      loop
+                                      muted
+                                      playsInline
+                                    />
+                                  </div>
+                                ))}
+                              </Slider>
+                            </div>
+                          )}
 
                           <div
                             style={{
@@ -1126,7 +1153,8 @@ const ProductDetails = (props) => {
                   />
                   <button
                     className={Classes.CheckButton}
-                    onClick={availbilityCheck}
+                    onClick={() => setPincodeShow(true)}
+                    // onClick={availbilityCheck}
                   >
                     CHECK
                   </button>
@@ -1137,7 +1165,7 @@ const ProductDetails = (props) => {
                 /> */}
                 </div>
                 <div>
-                  {pinCode && (
+                  {pincodeShow && (
                     <p
                       style={{
                         paddingTop: "12px",
@@ -1264,7 +1292,7 @@ const ProductDetails = (props) => {
                       color: "#00464d",
                     }}
                   >
-                    1.300 GM
+                    {props.gw}
                   </p>
                 </div>
                 <div className={Classes.ArrowlineMob}></div>
@@ -1283,7 +1311,7 @@ const ProductDetails = (props) => {
                       color: "#00464d",
                     }}
                   >
-                    0.456 ct
+                    {props.diamondWeight}
                   </p>
                 </div>
               </div>
@@ -1302,7 +1330,10 @@ const ProductDetails = (props) => {
                     >
                       Product height
                     </p>
-                    <p>{productDetails.height} mm</p>
+                    <p>
+                      {productDetails.height}
+                      {props.height + " mm"}
+                    </p>
                   </div>
                   <div className={Classes.DummyLineArrow}></div>
                   <div className={Classes.MobFirstCard}>
@@ -1314,7 +1345,7 @@ const ProductDetails = (props) => {
                     >
                       Product length
                     </p>
-                    <p>{productDetails.length} mm</p>
+                    <p>{props.length + " mm"}</p>
                   </div>
                   <div className={Classes.DummyLineArrow}></div>
                   <div className={Classes.MobFirstCard}>
@@ -1326,7 +1357,7 @@ const ProductDetails = (props) => {
                     >
                       Product width
                     </p>
-                    <p>{productDetails.width} mm</p>
+                    <p>{props.width + " mm"}</p>
                   </div>
                 </div>
               </div>
@@ -1371,7 +1402,7 @@ const ProductDetails = (props) => {
                       color: "#00464D",
                     }}
                   >
-                    0
+                    {props.otherStoneW}
                   </p>
                 </div>
                 <div className={Classes.DummyLineArrow2}></div>
@@ -1390,7 +1421,7 @@ const ProductDetails = (props) => {
                       color: "#00464D",
                     }}
                   >
-                    0
+                    {props.otherStoneC}
                   </p>
                 </div>
               </div>
@@ -1430,27 +1461,32 @@ const ProductDetails = (props) => {
                   <div className="col-md-4 col-6">
                     <p className={Classes.Left}>Product ID</p>
                     {/* <p className={Classes.Left}>Size</p> */}
-                    {props.gw > 0 ? (
+                    {/* {props.gw > 0 ? (
                       <p className={Classes.Left}>Gross Weight</p>
-                    ) : null}
+                    ) : null} */}
+                    <p className={Classes.Left}>Gross Weight</p>
 
                     {props.diamondTypw !== null && (
                       <p className={Classes.Left}>Diamond Type</p>
                     )}
-                    {props.diamondWeight > 0 ? (
+                    {/* {props.diamondWeight > 0 ? (
                       <p className={Classes.Left}>Diamond Weight</p>
-                    ) : null}
+                    ) : null} */}
+                    <p className={Classes.Left}>Diamond Weight</p>
 
-                    {props.diamondCount > 0 ? (
+                    {/* {props.diamondCount > 0 ? (
                       <p className={Classes.Left}>Diamond Count</p>
-                    ) : null}
-                    {props.otherStoneW > 0 ? (
+                    ) : null} */}
+                    <p className={Classes.Left}>Diamond Count</p>
+                    {/* {props.otherStoneW > 0 ? (
                       <p className={Classes.Left}>Other stone weight</p>
-                    ) : null}
+                    ) : null} */}
+                    <p className={Classes.Left}>Other stone weight</p>
 
-                    {props.otherStoneC > 0 ? (
+                    {/* {props.otherStoneC > 0 ? (
                       <p className={Classes.Left}>Other Stone Count</p>
-                    ) : null}
+                    ) : null} */}
+                    <p className={Classes.Left}>Other Stone Count</p>
 
                     <p className={Classes.Left}>Product Length</p>
                     <p className={Classes.Left}>Product Width</p>
@@ -1459,31 +1495,38 @@ const ProductDetails = (props) => {
                   <div className="col-md-8 col-6">
                     <p className={Classes.Right}>{props.sku}</p>
                     {/* <p className={Classes.Right}>{props.size}</p> */}
-                    {props.gw > 0 ? (
+                    {/* {props.gw > 0 ? (
                       <p className={Classes.Right}>{props.gw + " GM"}</p>
-                    ) : null}
+                    ) : null} */}
+                    <p className={Classes.Right}>{props.gw + " GM"}</p>
 
                     {props.diamondTypw !== null && (
                       <p className={Classes.Right}>{props.diamondTypw}</p>
                     )}
-                    {props.diamondWeight > 0 ? (
+                    {/* {props.diamondWeight > 0 ? (
                       <p className={Classes.Right}>
                         {props.diamondWeight + " Carat"}
                       </p>
-                    ) : null}
+                    ) : null} */}
+                    <p className={Classes.Right}>
+                      {props.diamondWeight + " Carat"}
+                    </p>
 
                     {/* <p className={Classes.Right}>{props.diamondCount}</p> */}
 
-                    {props.diamondCount > 0 ? (
+                    {/* {props.diamondCount > 0 ? (
                       <p className={Classes.Right}>{props.diamondCount}</p>
-                    ) : null}
-                    {props.otherStoneW > 0 ? (
+                    ) : null} */}
+                    <p className={Classes.Right}>{props.diamondCount}</p>
+                    {/* {props.otherStoneW > 0 ? (
                       <p className={Classes.Right}>{props.otherStoneW}</p>
-                    ) : null}
+                    ) : null} */}
+                    <p className={Classes.Right}>{props.otherStoneW}</p>
 
-                    {props.otherStoneC > 0 ? (
+                    {/* {props.otherStoneC > 0 ? (
                       <p className={Classes.Right}>{props.otherStoneC}</p>
-                    ) : null}
+                    ) : null} */}
+                    <p className={Classes.Right}>{props.otherStoneC}</p>
 
                     <p className={Classes.Right}>{props.length + " mm"}</p>
                     <p className={Classes.Right}>{props.width + " mm"}</p>

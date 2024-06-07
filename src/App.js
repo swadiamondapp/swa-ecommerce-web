@@ -30,9 +30,11 @@ import SwaExchangBalance from "./components/SwaWallet/SwaExchangeBalance";
 import ProfilePage from "./components/Profile/ProfilePage";
 import TryAtHomePage from "./components/TRY AT HOME/TryAtHomePage";
 import TryAtHomeInnerPage from "./components/TRY AT HOME/TryAtHomeInnerPage";
+import GTM from "./components/GTM/GTM";
 function App() {
   return (
     <Router>
+      <GTM />
       <Switch>
         <Route path="/" component={LandingPage} exact />
         <Route path="/faq" component={FAQPage} exact />

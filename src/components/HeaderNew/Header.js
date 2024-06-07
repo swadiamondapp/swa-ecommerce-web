@@ -474,7 +474,7 @@ const Header = (props) => {
             // onClick={Notification}
           /> */}
           {/* <CheckDelivery islog={show} close={closeHanlder} /> */}
-          <div className={Classes.LogList}>
+          {/* <div className={Classes.LogList}>
             <div
               style={{ cursor: "pointer" }}
               className={`${Classes.DeliveryPin} ${Classes.headerElement}`}
@@ -499,7 +499,7 @@ const Header = (props) => {
                 </span>
               )}
             </div>
-          </div>
+          </div> */}
           <CheckDelivery
             show={showModal}
             handleClose={handleCloseModal}
@@ -613,6 +613,16 @@ const Header = (props) => {
         <div className="container" style={{ padding: "0px" }}>
           <div className={Classes.NavLinksDesk}>
             {category.map((category, index) => (
+              <div key={index}>
+                <Link
+                  onClick={() => cattSelHandler(category)}
+                  style={{ color: "#ffff", cursor: "pointer" }}
+                >
+                  <p>{category.name.toUpperCase()}</p>
+                </Link>
+              </div>
+            ))}
+            {tags.map((category, index) => (
               <div key={index}>
                 <Link
                   onClick={() => cattSelHandler(category)}
