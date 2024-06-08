@@ -40,7 +40,7 @@ function AddAddress(props) {
   const [errors, setErrors] = useState({
     fullName: "",
     mobile: "",
-    pincode: "",
+    // pincode: "",
     city: "",
     hNumber_Bname: "",
     streetColony: "",
@@ -425,11 +425,11 @@ function AddAddress(props) {
                               Delivery in 3-5 days
                             </p>
                           )}
-                          {errors.pincode && (
+                          {/* {errors.pincode && (
                             <span className={Classes.Error}>
                               {errors.pincode}
                             </span>
-                          )}
+                          )} */}
                         </div>
                         <div>
                           <label>City</label>
@@ -449,9 +449,8 @@ function AddAddress(props) {
                       <div>
                         <label>State</label>
                         <select className={Classes.PlaceInput} name="state">
-                          <option value="none" disabled hidden>
-                            State*
-                          </option>
+                          {/* <option value="none" disabled hidden> */}
+                          <option value="none">Select state</option>
                           <option value={"kerala"}>Kerala</option>
                           <option value={"Karnataka"}>Karnataka</option>
                           <option value={"TamilNadu"}>TamilNadu</option>

@@ -98,6 +98,44 @@
   border: 0.5px solid #e8e8e8;
   border-radius: 8px;
 }
+.outleth3 {
+  color: #0d1217;
+  font-family: "Playfair Display";
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.OutletSearch {
+  position: relative;
+  margin-bottom: 10px;
+}
+.Outletsearchicon {
+  position: absolute;
+  top: 25%;
+  left: 6.5%;
+  width: 18px;
+}
+.OutletSearch input {
+  box-shadow: 0px 2px 4px 0px #0000001a inset;
+  border: 0.5px solid #ededed;
+  padding: 12px 0px 12px 50px;
+  width: 330px;
+  border-radius: 32px;
+  outline: none;
+}
+.OutletSearch input::placeholder {
+  color: #9c9c9c;
+  font-family: "lato";
+  font-weight: 500;
+}
+.Outletpincode {
+  color: #007481;
+  font-family: "lato";
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
 .RatingOutlets {
   background: #f4f0dd;
   display: flex;
@@ -110,11 +148,13 @@
   font-size: 13px !important;
   border-radius: 4px;
   margin-bottom: 10px !important;
+  display: inline-block;
 }
 .OutletFooter {
   display: grid;
   grid-template-columns: 1fr 1fr 4fr;
   gap: 10px;
+  margin-bottom: 12px;
 }
 .ParentSubOutlet {
   background-color: rgb(209 209 209 / 40%);
@@ -124,7 +164,8 @@
   border-top-right-radius: 8px;
   display: flex;
   justify-content: space-between;
-  gap: 20px;
+  /* gap: 20px; */
+  gap: 2px;
 }
 .RightOutlet {
   display: flex;
@@ -133,15 +174,16 @@
 .LeftOutlets {
   display: flex;
   gap: 5px;
+  gap: 12px;
 }
 .OutletFooterCrad {
   background: #fff;
-  padding: 10px;
+  padding: 12px;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
 }
 .OutletImage img {
-  max-width: 90px;
+  max-width: 80px;
 }
 .OutletCardParent {
   display: grid;
@@ -156,8 +198,39 @@
   color: #00464d;
   margin-bottom: 5px;
 }
+.OutletBookvist button {
+  background: #19242d;
+  color: #fff;
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  font-weight: 500;
+  border: none;
+  outline: none;
+}
+.OutletFooters {
+  color: #00464d;
+  font-weight: 600;
+  font-family: "Lato";
+  font-size: 13px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.outletWatsapp {
+  border: 2px solid #19242d;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 0px;
+}
 .OutletDetails p {
   font-size: 14px;
+  color: #475057;
+  font-weight: 400;
 }
 .OutletHead {
   display: flex;
