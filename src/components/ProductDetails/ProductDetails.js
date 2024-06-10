@@ -846,7 +846,7 @@ const ProductDetails = (props) => {
                   <RWebShare
                     data={{
                       text: "Swa Diamonds",
-                      url: "https://swaecomnew.zinfog.in" + location.pathname,
+                      url: "https://swa.co" + location.pathname,
                       // url: "http://localhost:3000/" + location.pathname,
                       title: "Swa Diamonds",
                     }}
