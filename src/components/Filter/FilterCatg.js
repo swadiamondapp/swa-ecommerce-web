@@ -361,7 +361,10 @@ const FilterCatgs = (props) => {
                     }
                     checked={selectedCategoryIds.includes(item.id)}
                   />
-                  <label>{item.name.toUpperCase()}</label>
+                  <label>
+                    {item.name.charAt(0).toUpperCase() +
+                      item.name.slice(1).toLowerCase()}
+                  </label>
                 </div>
                 <div className={Classes.CategoryListAmount}>
                   <label>{item.product_count}</label>
@@ -381,7 +384,10 @@ const FilterCatgs = (props) => {
                     checked={selectedMetalIds.includes(item.id)}
                     type="checkbox"
                   />
-                  <label>{item.metal_type}</label>
+                  <label>
+                    {item.metal_type.charAt(0).toUpperCase() +
+                      item.metal_type.slice(1).toLowerCase()}
+                  </label>
                 </div>
                 <div className={Classes.CategoryListAmount}>
                   <label>{item.product_count}</label>
@@ -451,7 +457,10 @@ const FilterCatgs = (props) => {
                     onChange={() => handleCheckboxByOccation(item.id)}
                     checked={selectedOccationIds.includes(item.id)}
                   />
-                  <label>{item.name}</label>
+                  <label>
+                    {item.name.charAt(0).toUpperCase() +
+                      item.name.slice(1).toLowerCase()}
+                  </label>
                 </div>
                 <div className={Classes.CategoryListAmount}>
                   <label>{item.product_count}</label>

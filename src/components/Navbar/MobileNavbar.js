@@ -439,14 +439,20 @@ const MobileNavbar = (props) => {
                 className={Classes.hamMenu}
               />
             </div>
-            {isHomePage && (
+            {/* {isHomePage && (
               <div
                 className={Classes.Logo}
                 onClick={() => (window.location.href = "/")}
               >
                 <img className={Classes.mobileLogo} src={Logo} />
               </div>
-            )}
+            )} */}
+            <div
+              className={Classes.Logo}
+              onClick={() => (window.location.href = "/")}
+            >
+              <img className={Classes.mobileLogo} src={Logo} />
+            </div>
 
             <div>
               <div
