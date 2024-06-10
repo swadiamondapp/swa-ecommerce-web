@@ -24,7 +24,7 @@ const Banner = (props) => {
 
   return (
     <React.Fragment>
-      <div className={Classes.web}>
+      <div className={`${Classes.web} Bannerswa`}>
         <Carousel autoplay>
           {props.banners.map((item, index) => {
             return (

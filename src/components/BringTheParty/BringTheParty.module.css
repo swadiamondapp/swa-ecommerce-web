@@ -11,7 +11,9 @@
   padding: 50px;
   padding-top: 100px;
 }
-
+.MobBringtheparty {
+  padding-bottom: 5px;
+}
 .Text1 {
   font-weight: 400;
   font-size: 16px;
@@ -44,6 +46,7 @@
 .Image1 {
   width: 100%;
   cursor: pointer;
+  border-radius: 4px;
 }
 .Image2 {
   width: 100%;

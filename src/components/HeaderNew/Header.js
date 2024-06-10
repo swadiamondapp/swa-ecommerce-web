@@ -414,7 +414,10 @@ const Header = (props) => {
             </label> */}
             <div
               className="labelWrapper"
-              style={{ display: searchKey.length === 0 ? "block" : "none" }}
+              style={{
+                display: searchKey.length === 0 ? "block" : "none",
+                pointerEvents: "none",
+              }}
             >
               <span>diamond jewellery</span>
               <span>gold jewellery</span>
