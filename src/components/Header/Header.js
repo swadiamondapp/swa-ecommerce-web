@@ -51,7 +51,7 @@ const Header = (props) => {
     }
   };
   const catSelHandler = (id) => {
-    window.open("http://localhost:3000/category_search/" + id, "_self");
+    window.open("https://swa.co/category_search/" + id, "_self");
     console.log("testk");
   };
   const moveToOrderHistory = () => {
@@ -103,7 +103,7 @@ const Header = (props) => {
     if (setItem.type === "category") {
       if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
         window.location.href =
-          "http://localhost:3000/category_search/" + setItem.id;
+          "https://swa.co/category_search/" + setItem.id;
         console.log("testk");
       } else {
         history.push({ pathname: "/new_arrivel", state: { data: setItem.id } });
@@ -127,7 +127,7 @@ const Header = (props) => {
           if (history.location.pathname.slice(0, 10) === "/products/") {
             console.log("test");
             window.location.href =
-              "https://swaecomnew.zinfog.in/products/" +
+              "https://swa.co/products/" +
               setItem.id +
               "/" +
               response1.data.results.data.color_id +
