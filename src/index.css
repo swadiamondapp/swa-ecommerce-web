@@ -190,6 +190,7 @@ p {
 
 .labelWrapper {
   display: inline-block;
+  pointer-events: none;
   /* position: relative; */
 }
 
@@ -206,6 +207,7 @@ p {
   font-weight: 400;
   z-index: 1;
   font-family: "GilroyRegular";
+  pointer-events: none;
 }
 
 .labelWrapper span:nth-child(1) {
@@ -429,7 +431,9 @@ p {
 
   margin-top: 0.75rem;
 }
-
+.Bannerswa .slick-slide {
+  padding: 0px !important;
+}
 .card-body-loading > p:not(#ether) {
   margin-top: 1rem;
   height: 25px;
