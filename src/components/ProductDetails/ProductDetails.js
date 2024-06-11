@@ -318,6 +318,11 @@ const ProductDetails = (props) => {
     }
   };
 
+  const Tryhome = () => {
+    props.TryatHome();
+  };
+  console.log("errormsgtrycart", props.errormsgtrycart);
+
   // const handleDoneClick = () => {
   //   const checkedCheckbox = document.querySelector(
   //     'input[type="checkbox"]:checked'
@@ -978,7 +983,7 @@ const ProductDetails = (props) => {
                   </div>
                 )} */}
 
-                {/* <div className={Classes.FindStoreParent}>
+                <div className={Classes.FindStoreParent}>
                   <button className={Classes.TryHome}>Find at store</button>
                   <button
                     className={Classes.VideoCall}
@@ -990,18 +995,17 @@ const ProductDetails = (props) => {
                         maxWidth: "44px",
                       }}
                     />
+                  </button>{" "}
+                  <button className={Classes.FindStores} onClick={Tryhome}>
+                    Try at Home
                   </button>
-                  <Link to="/tryathome">
-                    {" "}
-                    <button className={Classes.FindStores}>Try at Home</button>
-                  </Link>
-
                   <VideocallForm
                     isOpen={isModalOpen}
                     handleClose={handleCloseModal}
                     productId={props.id}
                   />
-                </div> */}
+                </div>
+                <p style={{ color: "#ff4545" }}>{props.errormsgtrycart}</p>
               </div>
               <Modal
                 open={showErrorModal}
