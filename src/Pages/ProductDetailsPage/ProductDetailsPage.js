@@ -38,6 +38,7 @@ const ProductDetailsPage = (props) => {
   const token = localStorage.getItem("swaToken");
   const history = useHistory();
   console.log("isRestricted", isRestricted);
+  const [errormsgtrycart, setErrormsgtrycart] = useState();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -255,6 +256,29 @@ const ProductDetailsPage = (props) => {
     //   setError("Select Size");
     // }
   };
+  const TryhomeHandler = () => {
+    const body = {
+      product_id: prodDet.id,
+      colour_id: clrId,
+      size_id: size,
+    };
+    axios
+      .post(`${Urls.tryathome}?country=${countryId}`, body, {
+        headers: { Authorization: "Token " + token },
+      })
+      .then((response1) => {
+        if (response1.data.results.status_code === 200) {
+          history.push("/tryathome");
+        } else if (
+          response1.data.results.message === "Item already in try list"
+        ) {
+          setErrormsgtrycart("Item already in try list");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   const sizeChangeHandler = (size) => {
     setSize(size);
   };
@@ -265,7 +289,7 @@ const ProductDetailsPage = (props) => {
     setLogToken(logToken);
   };
 
-  console.log("prodDet-->", props.match.params.id);
+  console.log("errormsgtrycart-->", errormsgtrycart);
   // const countryId = localStorage.getItem("id");
   const flag = localStorage.getItem("flag_image");
   const Contryname = localStorage.getItem("country_name");
@@ -335,6 +359,8 @@ const ProductDetailsPage = (props) => {
         all={allREv}
         avgR={prodDet.avg_rating}
         cartAdd={cartHandler}
+        TryatHome={TryhomeHandler}
+        errormsgtrycart={errormsgtrycart}
         clickedBuy={buyProductHandler}
       />
       <div className={Classes.RecentSearch}>

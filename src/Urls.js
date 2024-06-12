@@ -95,3 +95,9 @@ export const singleReview = server + "ecom/review/";
 export const headeroffer = server + "ecom/header-details/";
 export const videoCallPost = server + "ecom/add_video_call/";
 export const updateuser = server + "ecom/update_user/";
+// try at home
+export const tryathome = server + "ecom/trialcartitems/";
+// try cart
+export const tryatcart = server + "ecom/trialcartitems/";
+// try cart image delete
+export const tryatcartdelete = server + "ecom/trialcartitems";

@@ -3,7 +3,10 @@ import Classes from "../SwaWallet/SwaWallet.module.css";
 import edit from "../../Assets/edit.png";
 import { Calendar } from "primereact/calendar";
 import { FaCalendarAlt } from "react-icons/fa";
+import timeimgs from "../../Assets/times.png";
 import { TimePicker } from "antd";
+import dateimg from "../../Assets/datepicker.png";
+import { Link } from "react-router-dom";
 
 const TryAtHomeInner = () => {
   const [date, setDate] = useState(null);
@@ -23,22 +26,17 @@ const TryAtHomeInner = () => {
                 <div className={Classes.BookingHead}>
                   <h3 className={Classes.TryBookInner}>Booking Information</h3>
                   <p className={Classes.TryHomeEdits}>
-                    <img src={edit} /> Edit
+                    <Link to="/tryathome">
+                      <img src={edit} /> Edit
+                    </Link>
                   </p>
                 </div>
                 <div className={Classes.BookDateTime}>
                   <div className={Classes.Datepickes}>
-                    <Calendar value={date} onChange={(e) => setDate(e.value)} />
-                    <FaCalendarAlt className={Classes.CalendarIcon} />
+                    <img src={dateimg} /> Fri,12th May 2024
                   </div>
                   <div className={Classes.Datepickes}>
-                    <TimePicker
-                      value={time}
-                      onChange={handleChange}
-                      placeholder="Select Time"
-                      use12Hours
-                      format="h:mm a"
-                    />
+                    <img src={timeimgs} /> 12:00 PM
                   </div>
                 </div>
                 <p className={Classes.DesignFormPara}>1 DESIGN</p>
