@@ -44,12 +44,12 @@ const MainHead = (props) => {
             >
               <img src={swaMob} alt="logo" />
             </div>
-            {isCartPage && (
+            {/* {isCartPage && (
               <div>
                 <div style={{ color: "#fff" }}>Shoping cart</div>
                 <div style={{ color: "#fff" }}>Trail Cart </div>
               </div>
-            )}
+            )} */}
             {!isCartPage && props.children}
           </div>
         </div>
