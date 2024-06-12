@@ -6,7 +6,8 @@ import tryicon from "../../Assets/tryicon.png";
 import tryimg from "../../Assets/try.png";
 import trycloseimg from "../../Assets/tryclose.png";
 import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
+
 import adddesignimg from "../../Assets/adddesign.png";
 import axios from "axios";
 import * as Urls from "../../Urls";
@@ -18,9 +19,23 @@ const TryAtHome = () => {
   const countryId = localStorage.getItem("id");
   const token = localStorage.getItem("swaToken");
   const history = useHistory();
+  const location = useLocation();
+  const [dates, setDates] = useState([]);
+  // const dates = location.state;
+  // const dates = (location.state && location.state.dates) || [];
+
+  console.log("dates......0", dates);
 
   useEffect(() => {
     fechTryAtHomeCart();
+    const currentDate = new Date();
+    const tempDates = [currentDate];
+    for (let i = 1; i < 6; i++) {
+      const nextDate = new Date();
+      nextDate.setDate(currentDate.getDate() + i);
+      tempDates.push(nextDate);
+    }
+    setDates(tempDates);
   }, []);
   const fechTryAtHomeCart = () => {
     axios
@@ -37,6 +52,18 @@ const TryAtHome = () => {
       });
   };
 
+  console.log("selectedTimeSlot", selectedTimeSlot);
+  const formatDate = (dateString) => {
+    const options = { weekday: "short", day: "2-digit" };
+    const date = new Date(dateString);
+    const formattedDate = date.toLocaleDateString("en-US", options).split(" ");
+    return [formattedDate[0], formattedDate[1]];
+  };
+
+  const formatSelectedDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toDateString(); // e.g., Fri Jun 14 2024
+  };
   const Datepickers = [
     {
       day: "MON",
@@ -111,29 +138,36 @@ const TryAtHome = () => {
                 <div className={Classes.TryatHomeCard}>
                   <h3 className={Classes.TryatHomeCardh3}>Try at Home</h3>
                   <div className={Classes.TryHomeDate}>
-                    {Datepickers.map((item) => (
-                      <div
-                        key={item.date}
-                        className={
-                          selectedDate === item.date
-                            ? `${Classes.TryDate1} ${Classes.TryDateActive}`
-                            : Classes.TryDate1
-                        }
-                        onClick={() => handleDateClick(item.date)}
-                      >
-                        <p className={Classes.datetext}>{item.day}</p>
-                        <h3>{item.date}</h3>
-                        <div
-                          className={
-                            selectedDate === item.date
-                              ? `${Classes.TryDesign1} ${Classes.TryDesign1Active}`
-                              : Classes.TryDesign1
-                          }
-                        >
-                          <p>{item.design}</p>
-                        </div>
-                      </div>
-                    ))}
+                    {dates.length > 0 ? (
+                      dates.map((dateString, index) => {
+                        const [day, date] = formatDate(dateString);
+                        return (
+                          <div
+                            key={index}
+                            className={
+                              selectedDate === dateString
+                                ? `${Classes.TryDate1} ${Classes.TryDateActive}`
+                                : Classes.TryDate1
+                            }
+                            onClick={() => handleDateClick(dateString)}
+                          >
+                            <p className={Classes.datetext}>{date}</p>
+                            <h3>{day}</h3>
+                            <div
+                              className={
+                                selectedDate === dateString
+                                  ? `${Classes.TryDesign1} ${Classes.TryDesign1Active}`
+                                  : Classes.TryDesign1
+                              }
+                            >
+                              <p>1 Design</p>
+                            </div>
+                          </div>
+                        );
+                      })
+                    ) : (
+                      <p>No dates available</p>
+                    )}
                   </div>
                   <div className={Classes.SelectTimeSlot}>
                     <h3>Select time slot</h3>
@@ -272,7 +306,15 @@ const TryAtHome = () => {
                 </div> */}
 
                 <div className={Classes.Proceedbutns}>
-                  <Link to="/tryathomeform">
+                  <Link
+                    to={{
+                      pathname: "/tryathomeform",
+                      state: {
+                        selectedTimeSlot,
+                        selectedDate: formatSelectedDate(selectedDate),
+                      },
+                    }}
+                  >
                     <button>PROCEED TO CONFIRM</button>
                   </Link>
                 </div>

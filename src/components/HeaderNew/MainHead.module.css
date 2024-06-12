@@ -392,6 +392,12 @@ header {
   display: flex;
   justify-content: space-between;
 }
+.cartPage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  margin-bottom: 15px;
+}
 .searchListCont {
   /* display: none;
   position: absolute;

@@ -101,3 +101,5 @@ export const tryathome = server + "ecom/trialcartitems/";
 export const tryatcart = server + "ecom/trialcartitems/";
 // try cart image delete
 export const tryatcartdelete = server + "ecom/trialcartitems";
+// book appointment
+export const bookappointment = server + "ecom/trialcartitems/";
