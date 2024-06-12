@@ -604,88 +604,44 @@ const Header = (props) => {
           {/* modal */}
         </div>
       </MainHead>
-      <div
-        className={Classes.SubHeadNav}
-        style={{
-          position: isSticky ? "fixed" : "static",
-          top: 0,
-          zIndex: 1000,
-          width: "100%",
-        }}
-      >
-        <div className="container" style={{ padding: "0px" }}>
-          <div className={Classes.NavLinksDesk}>
-            {category.map((category, index) => (
-              <div key={index}>
-                <Link
-                  onClick={() => cattSelHandler(category)}
-                  style={{ color: "#ffff", cursor: "pointer" }}
-                >
-                  <p>{category.name.toUpperCase()}</p>
-                </Link>
-              </div>
-            ))}
-            {tags.map((category, index) => (
-              <div key={index}>
-                <Link
-                  onClick={() => cattSelHandler(category)}
-                  style={{ color: "#ffff", cursor: "pointer" }}
-                >
-                  <p>{category.name.toUpperCase()}</p>
-                </Link>
-              </div>
-            ))}
-            {/* <Link to="">
-              <p>OFFERS</p>
-            </Link>
-            <Link to="">
-              <p>EARRINGS</p>
-            </Link>
-            <Link to="">
-              <p>DEVOTIONAL</p>
-            </Link>
-            <Link to="">
-              <p>BANGLE</p>
-            </Link>
-            <Link to="">
-              <p>BRACELET</p>
-            </Link>
-            <Link to="">
-              <p>PLATINUM</p>
-            </Link>
-            <Link to="">
-              <p>SOLITAIRE</p>
-            </Link>
-            <Link to="">
-              <p>PENDANT</p>
-            </Link>
-            <Link to="">
-              <p>RINGS</p>
-            </Link>
-            <Link to="">
-              <p>NOSE PIN</p>
-            </Link>
-            <Link to="">
-              <p>COUPLE BAND</p>
-            </Link>
-            <Link to="">
-              <p>NECKLACE</p>
-            </Link>
-            <Link to="">
-              <p>NAVARATNA</p>
-            </Link>
-            <Link to="">
-              <p>CLIP BANGLE</p>
-            </Link>
-            <Link to="">
-              <p>PENDANT WITH CHAIN</p>
-            </Link>
-            <Link to="">
-              <p>KIDS</p>
-            </Link> */}
+
+      {!isCartPage && (
+        <div
+          className={Classes.SubHeadNav}
+          style={{
+            position: isSticky ? "fixed" : "static",
+            top: 0,
+            zIndex: 1000,
+            width: "100%",
+          }}
+        >
+          <div className="container" style={{ padding: "0px" }}>
+            <div className={Classes.NavLinksDesk}>
+              {category.map((category, index) => (
+                <div key={index}>
+                  <Link
+                    onClick={() => cattSelHandler(category)}
+                    style={{ color: "#ffff", cursor: "pointer" }}
+                  >
+                    <p>{category.name.toUpperCase()}</p>
+                  </Link>
+                </div>
+              ))}
+              {tags.map((category, index) => (
+                <div key={index}>
+                  <Link
+                    onClick={() => cattSelHandler(category)}
+                    style={{ color: "#ffff", cursor: "pointer" }}
+                  >
+                    <p>{category.name.toUpperCase()}</p>
+                  </Link>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      )}
+
       <div
         className={Classes.searchListCont}
         style={{ display: searchShow ? "block" : "none" }}
