@@ -557,7 +557,7 @@ function Footer() {
             <div className="col-md-4">
               <p className={Classes.FooterDownTextR}>
                 <a
-                  href="https://zinfog.com/"
+                  href=""
                   target="_blank"
                   rel="noopener noreferrer"
                 >
