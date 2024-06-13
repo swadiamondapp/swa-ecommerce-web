@@ -555,15 +555,16 @@ function Footer() {
               <img className={Classes.FooterIcons} src={Image5} alt="" />
             </div>
             <div className="col-md-4">
-              <p className={Classes.FooterDownTextR}>
-               /* <a
+             /* <p className={Classes.FooterDownTextR}>
+                <a
                   href=""
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                    Designed & developed by zinfog codelabs
-                </a> */
+                </a> 
               </p>
+              */
             </div>
           </div>
         </div>
