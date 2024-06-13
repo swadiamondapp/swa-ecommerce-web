@@ -529,11 +529,11 @@ function Footer() {
               </p>
             </div>
 
-            <div className="">
-              /*<p className={Classes.FooterDownTextR}>
-                Designed & developed by zinfog codelabs
-              </p>*/
-            </div>
+            // <div className="">
+            //   <p className={Classes.FooterDownTextR}>
+            //     Designed & developed by zinfog codelabs
+            //   </p>
+            // </div>
           </div>
         </div>
       </div>
