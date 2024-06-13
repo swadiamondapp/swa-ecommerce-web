@@ -13,6 +13,10 @@ const MainHead = (props) => {
     window.location.href = "/";
   };
   const isCartPage = location.pathname === "/cart";
+  const [activeCart, setActiveCart] = useState("shopping");
+  const toggleCart = (cartType) => {
+    setActiveCart(cartType);
+  };
 
   return (
     <div>
@@ -44,12 +48,35 @@ const MainHead = (props) => {
             >
               <img src={swaMob} alt="logo" />
             </div>
-            {/* {isCartPage && (
+            {isCartPage && (
               <div>
-                <div style={{ color: "#fff" }}>Shoping cart</div>
-                <div style={{ color: "#fff" }}>Trail Cart </div>
+                <div className={Classes.Parentcartitems}>
+                  <div
+                    className={
+                      activeCart === "shopping" ? Classes.ActiveCarthead : ""
+                    }
+                    onClick={() => toggleCart("shopping")}
+                  >
+                    Shopping Cart
+                  </div>
+                  <div
+                    className={
+                      activeCart === "trial" ? Classes.ActiveCarthead : ""
+                    }
+                    onClick={() => toggleCart("trial")}
+                  >
+                    Trial Cart
+                  </div>
+                </div>
+                {/* <div className={Classes.CartContent}>
+                  {activeCart === "shopping" ? (
+                    <div>Shopping Cart Content</div>
+                  ) : (
+                    <div>Trial Cart Content</div>
+                  )}
+                </div> */}
               </div>
-            )} */}
+            )}
             {!isCartPage && props.children}
           </div>
         </div>

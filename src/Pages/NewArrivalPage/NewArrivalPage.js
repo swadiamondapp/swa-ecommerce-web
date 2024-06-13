@@ -34,7 +34,7 @@ const NewArrivalPage = (props) => {
   const location = useLocation();
   const token = localStorage.getItem("swaToken");
   const countryId = localStorage.getItem("id");
-  const productCategory = props.location.state.product_category;
+  const productCategory = props.location.state.product_category || "";
   // const categoryName = props.location.state.categoryName
   const filter = (newArrive, currentPage) => {
     setLoading(true);

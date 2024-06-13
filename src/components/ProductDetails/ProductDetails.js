@@ -983,7 +983,7 @@ const ProductDetails = (props) => {
                   </div>
                 )} */}
 
-                {/* <div className={Classes.FindStoreParent}>
+                <div className={Classes.FindStoreParent}>
                   <button className={Classes.TryHome}>Find at store</button>
                   <button
                     className={Classes.VideoCall}
@@ -1004,7 +1004,7 @@ const ProductDetails = (props) => {
                     handleClose={handleCloseModal}
                     productId={props.id}
                   />
-                </div> */}
+                </div>
                 <p style={{ color: "#ff4545" }}>{props.errormsgtrycart}</p>
               </div>
               <Modal
