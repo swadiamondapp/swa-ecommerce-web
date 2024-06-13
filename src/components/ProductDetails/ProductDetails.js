@@ -48,6 +48,7 @@ import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import VideocallForm from "./VideocallForm";
 import { CgDollar } from "react-icons/cg";
+import LoginModal from "../LoginModal/LoginModal";
 
 const ProductDetails = (props) => {
   const location = useLocation();
@@ -77,6 +78,12 @@ const ProductDetails = (props) => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(6);
   const [activeIndex, setActiveIndex] = useState(0);
   const Contryname = localStorage.getItem("country_name");
+  const [loginModalVisible, setLoginModalVisible] = useState(false);
+  const [modalshow, setModalShow] = useState(false);
+
+  const closeHanlder = () => {
+    setModalShow(false);
+  };
 
   const largeSliderRef = useRef(null);
 
@@ -319,7 +326,12 @@ const ProductDetails = (props) => {
   };
 
   const Tryhome = () => {
-    props.TryatHome();
+    if (token) {
+      props.TryatHome();
+    } else {
+      setLoginModalVisible(true);
+      setModalShow(true);
+    }
   };
   console.log("errormsgtrycart", props.errormsgtrycart);
 
@@ -1799,6 +1811,13 @@ const ProductDetails = (props) => {
               })} */}
           </div>
         </div>
+        {loginModalVisible && (
+          <LoginModal
+            isLog={modalshow}
+            close={closeHanlder}
+            handleOpenLogin={"profile"}
+          />
+        )}
       </div>
     </div>
   );

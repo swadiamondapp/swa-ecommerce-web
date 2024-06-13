@@ -40,6 +40,8 @@ const ProductDetailsPage = (props) => {
   console.log("isRestricted", isRestricted);
   const [errormsgtrycart, setErrormsgtrycart] = useState();
 
+  console.log("tokenanasmk", props.token);
+
   useEffect(() => {
     window.scrollTo(0, 0);
     console.log(props);
@@ -257,6 +259,7 @@ const ProductDetailsPage = (props) => {
     // }
   };
   const TryhomeHandler = () => {
+    const token = localStorage.getItem("swaToken");
     const body = {
       product_id: prodDet.id,
       colour_id: clrId,

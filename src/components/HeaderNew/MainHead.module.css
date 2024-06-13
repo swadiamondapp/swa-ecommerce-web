@@ -395,7 +395,7 @@ header {
 .Parentcartitems {
   display: grid;
   grid-template-columns: 150px 150px;
-  width: 309px;
+  width: 306px;
   background: #e2e9e9;
   padding: 3px;
   align-items: center;
