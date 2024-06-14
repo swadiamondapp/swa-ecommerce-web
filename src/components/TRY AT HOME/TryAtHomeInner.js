@@ -11,6 +11,7 @@ import { TimePicker } from "antd";
 import { useLocation } from "react-router-dom";
 import dateimg from "../../Assets/datepicker.png";
 import successtry from "../../Assets/successtry.png";
+import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import * as Urls from "../../Urls";
@@ -31,12 +32,14 @@ const successM = {
 const TryAtHomeInner = () => {
   const [date, setDate] = useState(null);
   const [time, setTime] = useState(null);
+  const history = useHistory();
   const token = localStorage.getItem("swaToken");
   const countryId = localStorage.getItem("id");
   const [appointment, setAppointment] = useState();
   const [appointmentId, setAppointmentId] = useState();
   const location = useLocation();
   const { selectedTimeSlot, selectedDate } = location.state || {};
+
   const [defaultdata, setDefaultdata] = useState();
   const [addressData, setAddressData] = useState({
     fullName: "",
@@ -142,9 +145,11 @@ const TryAtHomeInner = () => {
       );
       if (response.data.results.status_code === 200) {
         setOpenSuccessModal(true);
+
         setTimeout(() => {
           setOpenSuccessModal(false);
         }, 3000);
+        // history.push("/");
       }
 
       // Handle response as needed

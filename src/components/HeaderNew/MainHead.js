@@ -8,14 +8,14 @@ import MobileNavbar from "../Navbar/MobileNavbar";
 const MainHead = (props) => {
   const history = useHistory();
   const location = useLocation();
-
+  console.log("sssssssssss", props.activeCart);
   const landingPageHandler = () => {
     window.location.href = "/";
   };
   const isCartPage = location.pathname === "/cart";
-  const [activeCart, setActiveCart] = useState("shopping");
+
   const toggleCart = (cartType) => {
-    setActiveCart(cartType);
+    props.setActiveCart(cartType);
   };
 
   return (
@@ -53,7 +53,9 @@ const MainHead = (props) => {
                 <div className={Classes.Parentcartitems}>
                   <div
                     className={
-                      activeCart === "shopping" ? Classes.ActiveCarthead : ""
+                      props.activeCart === "shopping"
+                        ? Classes.ActiveCarthead
+                        : ""
                     }
                     onClick={() => toggleCart("shopping")}
                   >
@@ -61,7 +63,7 @@ const MainHead = (props) => {
                   </div>
                   <div
                     className={
-                      activeCart === "trial" ? Classes.ActiveCarthead : ""
+                      props.activeCart === "trial" ? Classes.ActiveCarthead : ""
                     }
                     onClick={() => toggleCart("trial")}
                   >

@@ -6,6 +6,7 @@ import Warning from "../../Assets/Warning.png";
 import Succes from "../../Assets/success.png";
 import axios from "axios";
 import * as Urls from "../../Urls";
+import { Link } from "react-router-dom";
 import { RiErrorWarningFill } from "react-icons/ri";
 import WalletModal from "../WalletModal/WalletModal";
 import { useHistory } from "react-router-dom";
@@ -28,6 +29,7 @@ function CartDesign(props) {
   const [updatedCartResponse, setUpdatedCartResponse] = useState([]);
   const history = useHistory();
   const token = localStorage.getItem("swaToken");
+  console.log("activeCartrishan", props.activeCart);
   let diff = 0;
   useEffect(() => {
     setTotal(props.amount - props.cartProAmnt);
@@ -211,138 +213,212 @@ function CartDesign(props) {
             </div>
             <p className={Classes.OrderSummeryMob}>ORDER SUMMERY</p>
             <div className="col-md-4">
-              <div className={Classes.Right}>
-                <p className={Classes.OrderSummery}>ORDER SUMMARY</p>
-                <div
-                  className={Classes.TotalText}
-                  style={{ paddingTop: "20px" }}
-                >
-                  <div className={Classes.TotalItem}>
-                    <p className={Classes.TotalSmall}>
-                      Total &nbsp;<span>({props.cartCount} Items)</span>
-                    </p>
-                  </div>
-                  <p className={Classes.Amount}>
-                    {Contryname === "India" && (
-                      <BiRupee className={Classes.Rupee} />
-                    )}
-                    {Contryname === "United States" && (
-                      <CgDollar className={Classes.Rupee} />
-                    )}
-                    {Contryname === "United Arab Emirates" && (
-                      <span style={{ paddingRight: "5px" }}>AED</span>
-                    )}{" "}
-                    {formatIndianNumber(total)}
-                  </p>
-                </div>
-                <div className={Classes.Voucher}>
-                  <p className={Classes.NumOfItem}>Do you have Voucher code</p>
-                </div>
-                <form onSubmit={handleSubmit} autoComplete="off">
-                  <div className={Classes.SubmitContainer}>
-                    <input
-                      className={Classes.Input}
-                      type="text"
-                      value={code}
-                      onChange={promCodeChngeHandler}
-                      name="name"
-                      placeholder=" SWAFRST"
-                    />
-                    <input
-                      className={Classes.ApplyButton}
-                      type="submit"
-                      value="Apply"
-                      onClick={promoCodeHandler}
-                    />
-                  </div>
-                  <p className="errrMsg" style={{ fontSize: "14px" }}>
-                    {errorVald && (
-                      <RiErrorWarningFill
-                        style={{ transform: "rotate(180deg)" }}
-                      />
-                    )}
-                    {errorVald}
-                  </p>
-
-                  <div className={Classes.Validation}>
-                    {errorImg !== null ? (
-                      <img
-                        className={Classes.Warning}
-                        src={errorImg}
-                        alt="Warning"
-                      />
-                    ) : null}
-                    <p
-                      className={Classes.ValidationText}
-                      style={{ color: clr }}
+              {/* shoping cart */}
+              {props.activeCart === "shopping" && (
+                <>
+                  <div className={Classes.Right}>
+                    <p className={Classes.OrderSummery}>ORDER SUMMARY</p>
+                    <div
+                      className={Classes.TotalText}
+                      style={{ paddingTop: "20px" }}
                     >
-                      {error}
-                    </p>
-                  </div>
-                </form>
-                <div
-                  className={Classes.TotalText}
-                  style={{
-                    borderTop: "1px dashed #e8e9ea",
-                    borderBottom: "1px solid rgb(232, 233, 234)",
-                  }}
-                >
-                  <div className={Classes.TotalItem}>
-                    <p className={Classes.TotalSmall}>TOTAL PAYABLE</p>
-                  </div>
-                  <p className={Classes.Amount}>
-                    {/* &#x20B9; {total}  */}
-                    {Contryname === "India" && (
-                      <BiRupee className={Classes.Rupee} />
-                    )}
-                    {Contryname === "United States" && (
-                      <CgDollar className={Classes.Rupee} />
-                    )}
-                    {Contryname === "United Arab Emirates" && (
-                      <span style={{ paddingRight: "5px" }}>AED</span>
-                    )}{" "}
-                    {formatIndianNumber(amountPay)}
-                  </p>
-                </div>
-                <input
-                  className={Classes.PlaceOrderButton}
-                  type="submit"
-                  value="Place order"
-                  onClick={() => {
-                    if (isApply) {
-                      step2Handler();
-                    } else {
-                      setWalletOpen(true);
-                    }
-                  }}
-                />
-                {props.totalSavedAmount || diff ? (
-                  <p className={Classes.HurrayText}>
-                    You saved {numberWithCommas(totally_saved)} hurray!..
-                  </p>
-                ) : null}
-                {/* <button
+                      <div className={Classes.TotalItem}>
+                        <p className={Classes.TotalSmall}>
+                          Total &nbsp;<span>({props.cartCount} Items)</span>
+                        </p>
+                      </div>
+                      <p className={Classes.Amount}>
+                        {Contryname === "India" && (
+                          <BiRupee className={Classes.Rupee} />
+                        )}
+                        {Contryname === "United States" && (
+                          <CgDollar className={Classes.Rupee} />
+                        )}
+                        {Contryname === "United Arab Emirates" && (
+                          <span style={{ paddingRight: "5px" }}>AED</span>
+                        )}{" "}
+                        {formatIndianNumber(total)}
+                      </p>
+                    </div>
+                    <div className={Classes.Voucher}>
+                      <p className={Classes.NumOfItem}>
+                        Do you have Voucher code
+                      </p>
+                    </div>
+                    <form onSubmit={handleSubmit} autoComplete="off">
+                      <div className={Classes.SubmitContainer}>
+                        <input
+                          className={Classes.Input}
+                          type="text"
+                          value={code}
+                          onChange={promCodeChngeHandler}
+                          name="name"
+                          placeholder=" SWAFRST"
+                        />
+                        <input
+                          className={Classes.ApplyButton}
+                          type="submit"
+                          value="Apply"
+                          onClick={promoCodeHandler}
+                        />
+                      </div>
+                      <p className="errrMsg" style={{ fontSize: "14px" }}>
+                        {errorVald && (
+                          <RiErrorWarningFill
+                            style={{ transform: "rotate(180deg)" }}
+                          />
+                        )}
+                        {errorVald}
+                      </p>
+
+                      <div className={Classes.Validation}>
+                        {errorImg !== null ? (
+                          <img
+                            className={Classes.Warning}
+                            src={errorImg}
+                            alt="Warning"
+                          />
+                        ) : null}
+                        <p
+                          className={Classes.ValidationText}
+                          style={{ color: clr }}
+                        >
+                          {error}
+                        </p>
+                      </div>
+                    </form>
+                    <div
+                      className={Classes.TotalText}
+                      style={{
+                        borderTop: "1px dashed #e8e9ea",
+                        borderBottom: "1px solid rgb(232, 233, 234)",
+                      }}
+                    >
+                      <div className={Classes.TotalItem}>
+                        <p className={Classes.TotalSmall}>TOTAL PAYABLE</p>
+                      </div>
+                      <p className={Classes.Amount}>
+                        {/* &#x20B9; {total}  */}
+                        {Contryname === "India" && (
+                          <BiRupee className={Classes.Rupee} />
+                        )}
+                        {Contryname === "United States" && (
+                          <CgDollar className={Classes.Rupee} />
+                        )}
+                        {Contryname === "United Arab Emirates" && (
+                          <span style={{ paddingRight: "5px" }}>AED</span>
+                        )}{" "}
+                        {formatIndianNumber(amountPay)}
+                      </p>
+                    </div>
+                    <input
+                      className={Classes.PlaceOrderButton}
+                      type="submit"
+                      value="Place order"
+                      onClick={() => {
+                        if (isApply) {
+                          step2Handler();
+                        } else {
+                          setWalletOpen(true);
+                        }
+                      }}
+                    />
+                    {props.totalSavedAmount || diff ? (
+                      <p className={Classes.HurrayText}>
+                        You saved {numberWithCommas(totally_saved)} hurray!..
+                      </p>
+                    ) : null}
+                    {/* <button
                   className={Classes.PlaceOrderButton}
                   onClick={placeOrder}
                 >
                   Apply
                 </button> */}
-              </div>
-              <div className={Classes.BtnPlaceOrderMobile}>
-                <input
-                  className={Classes.PlaceOrderButtonMobile}
-                  type="submit"
-                  value="Place order"
-                  // onClick={placeOrder}
-                  onClick={() => {
-                    if (isApply) {
-                      step2Handler();
-                    } else {
-                      setWalletOpen(true);
-                    }
-                  }}
-                />
-              </div>
+                  </div>
+                  <div className={Classes.BtnPlaceOrderMobile}>
+                    <input
+                      className={Classes.PlaceOrderButtonMobile}
+                      type="submit"
+                      value="Place order"
+                      // onClick={placeOrder}
+                      onClick={() => {
+                        if (isApply) {
+                          step2Handler();
+                        } else {
+                          setWalletOpen(true);
+                        }
+                      }}
+                    />
+                  </div>
+                </>
+              )}
+
+              {/* shoping cart */}
+              {/* trail cart */}
+              {props.activeCart === "trial" && (
+                <>
+                  <div className={Classes.Right}>
+                    <p className={Classes.OrderSummery}>ORDER SUMMARY</p>
+                    <div
+                      className={Classes.TotalText}
+                      style={{ paddingTop: "20px" }}
+                    >
+                      <div className={Classes.TotalItem}>
+                        <p className={Classes.TotalSmall}>
+                          Total &nbsp;
+                          <span>
+                            (
+                            {props.tryCartcountResults &&
+                              props.tryCartcountResults.item_count}{" "}
+                            Items)
+                          </span>
+                        </p>
+                      </div>
+                      <p className={Classes.Amount}>
+                        {Contryname === "India" && (
+                          <BiRupee className={Classes.Rupee} />
+                        )}
+                        {Contryname === "United States" && (
+                          <CgDollar className={Classes.Rupee} />
+                        )}
+                        {Contryname === "United Arab Emirates" && (
+                          <span style={{ paddingRight: "5px" }}>AED</span>
+                        )}{" "}
+                        0
+                      </p>
+                    </div>
+                    <div className={Classes.ServiceCharge}>
+                      <p className={Classes.TotalSmall}>Service charge</p>
+                      <p style={{ color: "#30933A", fontWeight: "500" }}>
+                        Free
+                      </p>
+                    </div>
+                    <div className={Classes.Trialpayable}>
+                      <p className={Classes.TotalSmall}>TOTAL payable</p>
+                      <p className={Classes.TotalSmall}>
+                        {/* &#x20B9; {total}  */}
+                        {Contryname === "India" && (
+                          <BiRupee className={Classes.Rupee} />
+                        )}
+                        {Contryname === "United States" && (
+                          <CgDollar className={Classes.Rupee} />
+                        )}
+                        {Contryname === "United Arab Emirates" && (
+                          <span style={{ paddingRight: "5px" }}>AED</span>
+                        )}{" "}
+                        0
+                      </p>
+                    </div>
+                    <div className={Classes.BookappointmentTrails}>
+                      <Link to="/tryathome">
+                        {" "}
+                        <button>Book Appoinment</button>
+                      </Link>
+                    </div>
+                  </div>
+                </>
+              )}
+              {/* trail cart */}
             </div>
           </div>
         </div>

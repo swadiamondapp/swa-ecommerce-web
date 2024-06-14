@@ -353,6 +353,32 @@
   color: #ffffff;
   margin-left: 5px;
 }
+.ServiceCharge {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px dashed #e8e9ea;
+  padding-bottom: 12px;
+}
+.BookappointmentTrails button {
+  background: #00464d;
+  color: #fff;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  font-size: 14px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+.Trialpayable {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px 0px;
+  border-bottom: 0.5px solid #e8e9ea8a;
+  padding-bottom: 15px;
+  margin-top: 15px;
+}
 .Rupee {
   margin-top: 4px;
 }

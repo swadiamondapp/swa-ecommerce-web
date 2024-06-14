@@ -12,8 +12,10 @@ function CartProducts(props) {
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
+
   return (
     <div>
+      {/* shoping card design */}
       <div className={Classes.CartItems}>
         <div className="container">
           <div className="row">
@@ -187,6 +189,7 @@ function CartProducts(props) {
           <p className={Classes.DummyGreen}>Lifetime exchange & buy back</p>
         </div>
       </div>
+      {/* shoping card design */}
     </div>
   );
 }

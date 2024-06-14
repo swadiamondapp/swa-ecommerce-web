@@ -119,7 +119,15 @@ const TryAtHome = () => {
     setSelectedDate(date);
   };
   const AddDesigns = () => {
-    history.push("/new_arrivel");
+    // history.push("/new_arrivel");
+    history.push({
+      pathname: "/new_arrivel",
+      state: {
+        octnId: "",
+        data: "",
+        product_category: "",
+      },
+    });
   };
 
   return (

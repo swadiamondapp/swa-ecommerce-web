@@ -403,6 +403,8 @@ const Header = (props) => {
         setSelectedCountry={props.setSelectedCountry}
         selectedCountry={props.selectedCountry}
         setShowSuccessModal={setShowSuccessModal}
+        activeCart={props.activeCart}
+        setActiveCart={props.setActiveCart}
       >
         <div className={Classes.SearchIcons}>
           <div className={Classes.searchList}>
