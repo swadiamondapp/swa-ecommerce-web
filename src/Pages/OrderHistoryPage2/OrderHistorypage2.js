@@ -360,12 +360,12 @@ const OrderHistorypage2 = (props) => {
           open={successModalOpen}
           handleClose={() => setSuccessModalOpen(false)}
         />
-        {/*
+
         <AddBank open={addBankOpen} handleClose={() => setAddBankOpen(false)} />
         <TransferMoneyModal
-        open={transferModalOpen}
-        handleClose={() => setTransferModalOpen(false)}
-      /> */}
+          open={transferModalOpen}
+          handleClose={() => setTransferModalOpen(false)}
+        />
         <CancelProductModal
           open={cancelProductModal}
           handleClose={() => setCancelProductModal(false)}

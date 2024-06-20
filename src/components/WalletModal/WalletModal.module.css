@@ -7,7 +7,65 @@
   padding: 15px;
   border-bottom: 0.5px solid #e5e5e5;
 }
-
+.walletheading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #0d1217;
+  font-family: "lato";
+  font-weight: 500;
+}
+.rightmodal2 button {
+  color: #006e7f;
+  border: 1px solid #006e7f;
+  background-color: rgba(0, 110, 127, 0.05);
+  padding: 6px 15px;
+  border-radius: 32px;
+  font-family: "lato";
+  font-weight: 700;
+}
+.Enteramountwallet input {
+  background: #f9f9f9;
+  border: 0.5px solid #e8e9ea;
+  padding: 10px;
+  border-radius: 4px;
+}
+.Enteramountwallet input::placeholder {
+  font-size: 16px;
+}
+.fullwalletamount {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+.Enteramountwallet {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+.successModalContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+}
+.requestWidrw button {
+  width: 100%;
+  background: #00464d;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.parentbankwallet {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 .ContentLines {
   display: flex;
   justify-content: space-between;

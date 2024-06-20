@@ -846,6 +846,43 @@
 }
 .swaWalletBalanceContainer {
   background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+}
+.ParentTransfer1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 0.5px solid #e5e5e5;
+  padding-bottom: 12px;
+}
+.T1Parent {
+  /* display: flex; */
+  grid-gap: 10px;
+  /* gap: 70px; */
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 300px 400px;
+}
+.T1Rightsec {
+  border-left: 0.5px solid #e5e5e5;
+  padding-left: 40px;
+}
+.walletRight {
+  width: 100%;
+  text-align: end;
+}
+.walletLeft {
+  width: 100%;
+}
+.walletRight button {
+  background: #00464d;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 3px;
+  cursor: pointer;
 }
 .walletTitle {
   padding-left: 30px;

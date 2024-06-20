@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { IoMdClose } from "react-icons/io";
+import SuccessTick from "../../Assets/successTick.png";
 import { Dropdown } from "primereact/dropdown";
 
 const style = {
@@ -48,7 +49,7 @@ const successM = {
 
 const AddBank = (props) => {
   const token = localStorage.getItem("swaToken");
-  // const [successModalOpen, setSuccessModalOpen] = useState(false);
+  const [successModalOpen, setSuccessModalOpen] = useState(false);
   const [open, setOpen] = useState(false);
   const [selectedCity, setSelectedCity] = useState(null);
   console.log(props.openSuccessModal);
@@ -58,7 +59,7 @@ const AddBank = (props) => {
   const [bankDatas, setBankDatas] = useState({
     accountNo: "",
     reAccountNo: "",
-    bankName: "Federal Bank",
+    bankName: "",
     branch: "",
     ifsc: "",
     accountHolderName: "",
@@ -85,14 +86,6 @@ const AddBank = (props) => {
     setOpen(false);
   };
 
-  const cities = [
-    { name: "New York", code: "NY" },
-    { name: "Rome", code: "RM" },
-    { name: "London", code: "LDN" },
-    { name: "Istanbul", code: "IST" },
-    { name: "Paris", code: "PRS" },
-  ];
-
   const addBank = async () => {
     try {
       const body = {
@@ -107,6 +100,25 @@ const AddBank = (props) => {
         headers: { Authorization: "Token " + token },
       });
       console.log("Bankresponse", response);
+      if (response.status === 200) {
+        setSuccessModalOpen(true);
+        setBankDatas({
+          accountNo: "",
+          reAccountNo: "",
+          bankName: "",
+          branch: "",
+          ifsc: "",
+          accountHolderName: "",
+        });
+        props.movetoBank();
+        setTimeout(() => {
+          setSuccessModalOpen(false);
+
+          handleClose();
+          props.handleClose();
+        }, 3000); // Close the success modal after 5 seconds
+        props.fetchBanklist();
+      }
     } catch (error) {
       console.log(error);
     }
@@ -122,12 +134,11 @@ const AddBank = (props) => {
 
   return (
     <div>
-      <Button onClick={handleOpen}>anas add bank account modal</Button>
       <Modal
-        // open={props.open}
-        open={open}
-        // onClose={props.handleClose}
-        onClose={handleClose}
+        open={props.open}
+        // open={open}
+        onClose={props.handleClose}
+        // onClose={handleClose}
       >
         <Box sx={isMobileView ? mobileStyle : style}>
           <Typography>
@@ -163,12 +174,12 @@ const AddBank = (props) => {
                 </div>
                 <div className={classes.AccountLabels}>
                   <label>Bank Name</label>
-                  <Dropdown
-                    value={selectedCity}
-                    onChange={(e) => setSelectedCity(e.value)}
-                    options={cities}
-                    optionLabel="name"
-                    placeholder="Axis bank"
+                  <input
+                    type="text"
+                    placeholder="Axis Bank"
+                    name="bankName"
+                    value={bankDatas.bankName}
+                    onChange={handleChangeAddress}
                   />
                 </div>
                 <div className={classes.BranchIfscParent}>
@@ -211,6 +222,35 @@ const AddBank = (props) => {
           </Typography>
         </Box>
       </Modal>
+      {/* success modal */}
+      <Modal open={successModalOpen} onClose={() => setSuccessModalOpen(false)}>
+        <Box
+          sx={successM}
+          style={
+            isMobileView ? { width: "90%" } : { width: "30%", height: "auto" }
+          }
+        >
+          <Typography className={classes.successModalContainer}>
+            <div>
+              <img src={SuccessTick} />
+            </div>
+            <div
+              style={{
+                textAlign: "center",
+                margin: "12px 0px",
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <span className={classes.titlesuccesModal}>
+                Thank you <br /> your refund will be transfered <br /> to your
+                bank account
+              </span>
+            </div>
+          </Typography>
+        </Box>
+      </Modal>
+      {/* success modal */}
     </div>
   );
 };
