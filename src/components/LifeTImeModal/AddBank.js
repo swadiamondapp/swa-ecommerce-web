@@ -9,6 +9,7 @@ import Modal from "@mui/material/Modal";
 import { IoMdClose } from "react-icons/io";
 import SuccessTick from "../../Assets/successTick.png";
 import { Dropdown } from "primereact/dropdown";
+import Joi from "joi";
 
 const style = {
   position: "absolute",
@@ -52,6 +53,7 @@ const AddBank = (props) => {
   const [successModalOpen, setSuccessModalOpen] = useState(false);
   const [open, setOpen] = useState(false);
   const [selectedCity, setSelectedCity] = useState(null);
+  const [errors, setErrors] = useState({});
   console.log(props.openSuccessModal);
   const [isMobileView, setIsMobileView] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
@@ -65,6 +67,48 @@ const AddBank = (props) => {
     accountHolderName: "",
   });
 
+  const schema = Joi.object({
+    accountNo: Joi.string()
+      .trim()
+      .regex(/^\d+$/)
+      .required()
+      .messages({
+        "string.empty": `Account Number is required`,
+        "string.pattern.base": `"Account Number" must be a valid number`,
+      }),
+    reAccountNo: Joi.string()
+      .trim()
+      .valid(Joi.ref("accountNo"))
+      .required()
+      .messages({
+        "any.only": `Re-enter Account Number must match "Account Number"`,
+        "string.empty": `"Re-enter Account Number" is required`,
+      }),
+    bankName: Joi.string()
+      .trim()
+      .required()
+      .messages({
+        "string.empty": `Bank Name is required`,
+      }),
+    branch: Joi.string()
+      .trim()
+      .required()
+      .messages({
+        "string.empty": `Branch is required`,
+      }),
+    ifsc: Joi.string()
+      .trim()
+      .required()
+      .messages({
+        "string.empty": `IFSC is required`,
+      }),
+    accountHolderName: Joi.string()
+      .trim()
+      .required()
+      .messages({
+        "string.empty": `Account Holder Name is required`,
+      }),
+  });
   useEffect(() => {
     const handleResize = () => {
       setIsMobileView(window.innerWidth >= 300 && window.innerWidth <= 575);
@@ -87,6 +131,17 @@ const AddBank = (props) => {
   };
 
   const addBank = async () => {
+    const validation = schema.validate(bankDatas, { abortEarly: false });
+    if (validation.error) {
+      const validationErrors = {};
+      validation.error.details.forEach((detail) => {
+        validationErrors[detail.path[0]] = detail.message;
+      });
+      setErrors(validationErrors);
+      return;
+    }
+
+    setErrors({});
     try {
       const body = {
         account_number: bankDatas.accountNo,
@@ -148,7 +203,7 @@ const AddBank = (props) => {
                 <IoMdClose
                   style={{ cursor: "pointer" }}
                   // onClick={props.handleClose}
-                  onClick={handleClose}
+                  onClick={props.handleClose}
                 />
               </div>
               <div className={classes.FormADDbANK}>
@@ -161,7 +216,11 @@ const AddBank = (props) => {
                     value={bankDatas.accountNo}
                     onChange={handleChangeAddress}
                   />
+                  {errors.accountNo && (
+                    <p className={classes.error}>{errors.accountNo}</p>
+                  )}
                 </div>
+
                 <div className={classes.AccountLabels}>
                   <label>Re Enter Account number</label>
                   <input
@@ -171,7 +230,11 @@ const AddBank = (props) => {
                     value={bankDatas.reAccountNo}
                     onChange={handleChangeAddress}
                   />
+                  {errors.reAccountNo && (
+                    <p className={classes.error}>{errors.reAccountNo}</p>
+                  )}
                 </div>
+
                 <div className={classes.AccountLabels}>
                   <label>Bank Name</label>
                   <input
@@ -181,7 +244,11 @@ const AddBank = (props) => {
                     value={bankDatas.bankName}
                     onChange={handleChangeAddress}
                   />
+                  {errors.bankName && (
+                    <p className={classes.error}>{errors.bankName}</p>
+                  )}
                 </div>
+
                 <div className={classes.BranchIfscParent}>
                   <div className={classes.BranchAcc}>
                     <label>Branch</label>
@@ -192,6 +259,9 @@ const AddBank = (props) => {
                       value={bankDatas.branch}
                       onChange={handleChangeAddress}
                     />
+                    {errors.branch && (
+                      <p className={classes.error}>{errors.branch}</p>
+                    )}
                   </div>
                   <div className={classes.BranchAcc}>
                     <label>IFSC</label>
@@ -202,6 +272,9 @@ const AddBank = (props) => {
                       value={bankDatas.ifsc}
                       onChange={handleChangeAddress}
                     />
+                    {errors.ifsc && (
+                      <p className={classes.error}>{errors.ifsc}</p>
+                    )}
                   </div>
                 </div>
                 <div className={classes.AccountLabels}>
@@ -213,7 +286,11 @@ const AddBank = (props) => {
                     value={bankDatas.accountHolderName}
                     onChange={handleChangeAddress}
                   />
+                  {errors.accountHolderName && (
+                    <p className={classes.error}>{errors.accountHolderName}</p>
+                  )}
                 </div>
+
                 <div className={classes.AddBtnACC}>
                   <button onClick={addBank}>Add</button>
                 </div>

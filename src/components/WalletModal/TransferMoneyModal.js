@@ -50,7 +50,10 @@ const TransferMoneyModal = (props) => {
   const [successModalOpen, setSuccessModalOpen] = useState(false);
   const [withdrawalAmount, setWithdrawalAmount] = useState("");
   const [selectedBankDetails, setSelectedBankDetails] = useState(null);
+  const [useFullAmount, setUseFullAmount] = useState(false);
   const countryId = localStorage.getItem("id");
+
+  console.log("walletValues```", props.walletAmount);
 
   const [isMobileView, setIsMobileView] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
@@ -95,7 +98,7 @@ const TransferMoneyModal = (props) => {
   const requestWithdraw = () => {
     const body = {
       bank_id: selectedBank,
-      withdrawal_amount: withdrawalAmount,
+      withdrawal_amount: useFullAmount ? props.walletAmount : withdrawalAmount,
     };
 
     axios
@@ -106,6 +109,7 @@ const TransferMoneyModal = (props) => {
         if (response.data) {
           setShowNextModal(false);
           setSuccessModalOpen(true);
+          setWithdrawalAmount("");
           setTimeout(() => {
             setSuccessModalOpen(false);
 
@@ -113,6 +117,7 @@ const TransferMoneyModal = (props) => {
             props.handleClose();
           }, 3000); // Close the success modal after 5 seconds
           props.getSwaWalletAmounts();
+          props.getSwaWalletAmountsDetails();
         } else {
           alert("Failed to submit withdrawal request.");
         }
@@ -239,7 +244,11 @@ const TransferMoneyModal = (props) => {
                   <img src="" /> Full Amount from wallet
                 </div>
                 <div className={Classes.rightamountewallet}>
-                  <input type="checkbox" />
+                  <input
+                    type="checkbox"
+                    checked={useFullAmount}
+                    onChange={(e) => setUseFullAmount(e.target.checked)}
+                  />
                 </div>
               </div>
               <div className={Classes.requestWidrw}>

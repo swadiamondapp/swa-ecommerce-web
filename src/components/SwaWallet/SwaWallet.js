@@ -11,9 +11,11 @@ const SwaWallet = () => {
   const [banklists, setBanklists] = useState([]);
   const countryId = localStorage.getItem("id");
   const [walletValues, setWalletValues] = useState(null);
+  const [walletAmount, setWalletAmount] = useState();
   const [walletDetails, setWalletDetails] = useState([]);
   console.log("walletValues", walletValues);
   console.log("walletDetails", walletDetails);
+  console.log("walletAmount", walletAmount);
   const token = localStorage.getItem("swaToken");
   const movetoBank = () => {
     setTransferModalOpen(true);
@@ -38,6 +40,7 @@ const SwaWallet = () => {
         }
       );
       setWalletValues(response.data);
+      setWalletAmount(response.data.swa_wallet);
     } catch (error) {
       console.log(error);
     }
@@ -75,7 +78,17 @@ const SwaWallet = () => {
               </div>
             </div>
             <div className={Classes.walletRight}>
-              <button onClick={movetoBank}>MOVE TO BANK</button>
+              <button
+                onClick={movetoBank}
+                disabled={!walletValues || walletValues.swa_wallet === 0}
+                className={
+                  !walletValues || walletValues.swa_wallet === 0
+                    ? Classes.disabledButton
+                    : ""
+                }
+              >
+                MOVE TO BANK
+              </button>
             </div>
 
             <TransferMoneyModal
@@ -85,6 +98,8 @@ const SwaWallet = () => {
               handleopens={() => setTransferModalOpen(true)}
               handleClose={() => setTransferModalOpen(false)}
               getSwaWalletAmounts={getSwaWalletAmounts}
+              getSwaWalletAmountsDetails={getSwaWalletAmountsDetails}
+              walletAmount={walletAmount}
             />
           </div>
           <div
@@ -137,7 +152,7 @@ const SwaWallet = () => {
                 </p>
               </div>
               <div className={Classes.T1Rightsec}>
-                <p>WITHDRAW AMOUNT</p>
+                <p style={{ color: "#86898B" }}>WITHDRAW AMOUNT</p>
                 <h3>
                   ₹ {console.log("itemsanas", item)}
                   {item && item.withdrawal_amount}

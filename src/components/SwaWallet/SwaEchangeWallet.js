@@ -1,8 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Classes from "../SwaWallet/SwaWallet.module.css";
 import Wallet from "../../Assets/wallet1.png";
+import axios from "axios";
+import * as Urls from "../../Urls";
 
 const SwaExchangeWallet = () => {
+  const [walletValues, setWalletValues] = useState(null);
+  const token = localStorage.getItem("swaToken");
+  const countryId = localStorage.getItem("id");
+
+  const getSwaWalletAmounts = async () => {
+    try {
+      const response = await axios.get(
+        `${Urls.getWalletAmounts}?country=${countryId}`,
+        {
+          headers: { Authorization: "Token " + token },
+        }
+      );
+      setWalletValues(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getSwaWalletAmounts();
+  }, []);
   return (
     <div className={Classes.mainContianer}>
       <div className="container">
@@ -13,7 +35,9 @@ const SwaExchangeWallet = () => {
             <div className={Classes.head}>
               <img src={Wallet} />
 
-              <span>$796</span>
+              <span>
+                $ {walletValues ? walletValues.exchange_wallet : null}
+              </span>
             </div>
           </div>
           <div

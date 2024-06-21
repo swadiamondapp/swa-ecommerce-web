@@ -15,6 +15,11 @@
 
   width: 100%;
 }
+.error {
+  color: #ff0000b3;
+  font-size: 14px;
+  margin-top: 8px;
+}
 .subDetialstexts {
   display: flex;
   justify-content: space-between;
