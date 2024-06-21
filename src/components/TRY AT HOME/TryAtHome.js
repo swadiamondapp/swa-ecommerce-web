@@ -223,8 +223,6 @@ const TryAtHome = () => {
                       const product =
                         tryCartResults && tryCartResults.cart_item[0];
 
-                      console.log("product", product);
-
                       if (cartItem && cartItem.thumbnail_image) {
                         return (
                           <div
