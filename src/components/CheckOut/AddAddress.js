@@ -353,7 +353,7 @@ function AddAddress(props) {
                 <div className={Classes.AddNewAddress1}>
                   <button onClick={handleAddNewAddressClick}>
                     {/* <AiOutlineHome style={{ color: "#0997E7" }} /> */}
-                    <img src={home1} />
+                    <img src={home1} alt="home1" />
                     Add new address
                   </button>
                 </div>

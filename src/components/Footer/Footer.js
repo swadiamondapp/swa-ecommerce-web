@@ -90,7 +90,7 @@ function Footer() {
         <div className="container">
           <div className="row">
             <div className="col-md-3">
-              <img className={Classes.Logo} src={Logo} alt="" />
+              <img className={Classes.Logo} src={Logo} alt="Logo" />
               <p className={Classes.LogoText}>
                 Concept of SWA Diamonds came into being from CAPESTONE Ventures
                 Pvt Ltd, a leading name in wholesale diamond jewellers market,
@@ -501,9 +501,13 @@ function Footer() {
               Follow us on
             </p>
             <div className={Classes.Icons}>
-              <img src={Facebook} alt="" onClick={redirectToFacebook} />
-              <img src={LinkedIn} alt="" onClick={redirectToLinkedIn} />
-              <img src={Instagram} alt="" onClick={redirectToInstagram} />
+              <img src={Facebook} alt="Facebook" onClick={redirectToFacebook} />
+              <img src={LinkedIn} alt="LinkedIn" onClick={redirectToLinkedIn} />
+              <img
+                src={Instagram}
+                alt="Instagram"
+                onClick={redirectToInstagram}
+              />
             </div>
           </div>
         </div>
@@ -513,14 +517,38 @@ function Footer() {
           <div className="">
             <div className={`${""} ${Classes.FootIconImg}`}>
               <div className={Classes.FooterIconimg1}>
-                <img className={Classes.FooterIcons} src={Image1} alt="" />
-                <img className={Classes.FooterIcons} src={Image2} alt="" />
-                <img className={Classes.FooterIcons} src={Image3} alt="" />
+                <img
+                  className={Classes.FooterIcons}
+                  src={Image1}
+                  alt="Image1"
+                />
+                <img
+                  className={Classes.FooterIcons}
+                  src={Image2}
+                  alt="Image2"
+                />
+                <img
+                  className={Classes.FooterIcons}
+                  src={Image3}
+                  alt="Image3"
+                />
               </div>
               <div className={Classes.FooterIconimg1}>
-                <img className={Classes.FooterIcons} src={Image4} alt="" />
-                <img className={Classes.FooterIcons} src={Image5} alt="" />
-                <img className={Classes.FooterIcons} src={Image6} alt="" />
+                <img
+                  className={Classes.FooterIcons}
+                  src={Image4}
+                  alt="Image4"
+                />
+                <img
+                  className={Classes.FooterIcons}
+                  src={Image5}
+                  alt="Image5"
+                />
+                <img
+                  className={Classes.FooterIcons}
+                  src={Image6}
+                  alt="Image6"
+                />
               </div>
             </div>
             <div className="" style={{ paddingLeft: "0px" }}>
@@ -547,12 +575,12 @@ function Footer() {
               </p>
             </div>
             <div className={`${"col-md-4"} ${Classes.FootIconImg}`}>
-              <img className={Classes.FooterIcons} src={Image1} alt="" />
-              <img className={Classes.FooterIcons} src={Image2} alt="" />
-              <img className={Classes.FooterIcons} src={Image3} alt="" />
-              <img className={Classes.FooterIcons} src={Image4} alt="" />
-              <img className={Classes.FooterIcons} src={Image6} alt="" />
-              <img className={Classes.FooterIcons} src={Image5} alt="" />
+              <img className={Classes.FooterIcons} src={Image1} alt="Image1" />
+              <img className={Classes.FooterIcons} src={Image2} alt="Image2" />
+              <img className={Classes.FooterIcons} src={Image3} alt="Image3" />
+              <img className={Classes.FooterIcons} src={Image4} alt="Image4" />
+              <img className={Classes.FooterIcons} src={Image6} alt="Image6" />
+              <img className={Classes.FooterIcons} src={Image5} alt="Image5" />
             </div>
             <div className="col-md-4">
               <p className={Classes.FooterDownTextR}>

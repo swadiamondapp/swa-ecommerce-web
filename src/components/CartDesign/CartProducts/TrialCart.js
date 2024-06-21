@@ -27,7 +27,7 @@ const TrialCart = (props) => {
                 <img
                   className={Classes.ProductImage}
                   src={props.ProductImage}
-                  alt=" "
+                  alt="ProductImage"
                 />
               </div>
             </div>

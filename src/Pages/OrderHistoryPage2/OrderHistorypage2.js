@@ -385,7 +385,7 @@ const OrderHistorypage2 = (props) => {
                 </h3>
                 <div className={Classes.DeliveryDetails}>
                   <p>
-                    <img src={deliveryimg} />
+                    <img src={deliveryimg} alt="deliveryimg" />
                     Delivered on <span>26 may 2023</span>
                   </p>
                 </div>
@@ -429,6 +429,7 @@ const OrderHistorypage2 = (props) => {
                                 productDetails[0] &&
                                 productDetails[0].product.thumbnail_image
                               }
+                              alt="thumbnail_image"
                               style={{ maxWidth: "121px" }}
                             />
                             <div>

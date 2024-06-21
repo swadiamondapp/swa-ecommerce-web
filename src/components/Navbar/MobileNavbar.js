@@ -436,6 +436,7 @@ const MobileNavbar = (props) => {
               <img
                 onClick={handleOpen}
                 src={menuimg}
+                alt="menuimg"
                 className={Classes.hamMenu}
               />
             </div>
@@ -451,7 +452,7 @@ const MobileNavbar = (props) => {
               className={Classes.Logo}
               onClick={() => (window.location.href = "/")}
             >
-              <img className={Classes.mobileLogo} src={Logo} />
+              <img className={Classes.mobileLogo} src={Logo} alt="Logo" />
             </div>
 
             <div>
@@ -681,7 +682,7 @@ const MobileNavbar = (props) => {
               <div className={Classes.ParentMobSection}>
                 <div className={Classes.MobMainHead}>
                   <div className={Classes.MobLeftSection}>
-                    <img src={userimg} />
+                    <img src={userimg} alt="userimg" />
                     {userName ? (
                       <p
                         style={{
@@ -746,6 +747,7 @@ const MobileNavbar = (props) => {
                                   <img
                                     style={{ maxWidth: "45px" }}
                                     src={category.thumbnail}
+                                    alt="thumbnail"
                                   />
                                   <p>{category.name.toUpperCase()}</p>
                                 </div>

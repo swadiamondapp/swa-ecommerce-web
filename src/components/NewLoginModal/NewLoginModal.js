@@ -481,7 +481,7 @@ const LoginModal = (props) => {
           {/* login */}
           <div className={login ? [Classes.Block] : [Classes.None]}>
             <div className={Classes.LoginLogo}>
-              <img src={BlueLogo} alt="" />
+              <img src={BlueLogo} alt="BlueLogo" />
             </div>
             <p className={Classes.TextReg}>Login</p>
 
@@ -571,7 +571,7 @@ const LoginModal = (props) => {
           {/* forgot password */}
           <div className={forgot ? [Classes.Block] : [Classes.None]}>
             <div className={Classes.LoginLogo}>
-              <img src={BlueLogo} alt="" />
+              <img src={BlueLogo} alt="BlueLogo" />
             </div>
             <p className={Classes.TextReg}>Forgot Password</p>
 
@@ -607,7 +607,7 @@ const LoginModal = (props) => {
           {/* forgot otp verificatio */}
           <div className={verifyForgotOtp ? [Classes.Block] : [Classes.None]}>
             <div className={Classes.LoginLogo}>
-              <img src={BlueLogo} alt="" />
+              <img src={BlueLogo} alt="BlueLogo" />
             </div>
             <div>
               <p className={Classes.TextReg}>Forgot Password</p>
@@ -645,7 +645,7 @@ const LoginModal = (props) => {
           {/* change password */}
           <div className={changePas ? [Classes.Block] : [Classes.None]}>
             <div className={Classes.LoginLogo}>
-              <img src={BlueLogo} alt="" />
+              <img src={BlueLogo} alt="BlueLogo" />
             </div>
             <p className={Classes.TextReg}>Change Password</p>
 
@@ -680,7 +680,7 @@ const LoginModal = (props) => {
           {/* reset success */}
           <div className={changeSuc ? [Classes.Block] : [Classes.None]}>
             <div className={Classes.LoginLogo}>
-              <img src={BlueLogo} alt="" />
+              <img src={BlueLogo} alt="BlueLogo" />
             </div>
             <p className={Classes.TextReg}>Change Password</p>
             <div className="d-flex justify-content-center align-items-center">
@@ -705,7 +705,7 @@ const LoginModal = (props) => {
           {/* register phone number */}
           <div className={register ? [Classes.Block] : [Classes.None]}>
             <div className={Classes.LoginLogo}>
-              <img src={BlueLogo} alt="" />
+              <img src={BlueLogo} alt="BlueLogo" />
             </div>
             <div>
               <p className={Classes.TextReg}>Register</p>
@@ -758,7 +758,7 @@ const LoginModal = (props) => {
           {/* otp verification */}
           <div className={verifyOtp ? [Classes.Block] : [Classes.None]}>
             <div className={Classes.LoginLogo}>
-              <img src={BlueLogo} alt="" />
+              <img src={BlueLogo} alt="BlueLogo" />
             </div>
             <div>
               <p className={Classes.TextReg}>Register</p>
@@ -794,7 +794,7 @@ const LoginModal = (props) => {
           {/* set new account */}
           <div className={newPassword ? [Classes.Block] : [Classes.None]}>
             <div className={Classes.LoginLogo}>
-              <img src={BlueLogo} alt="" />
+              <img src={BlueLogo} alt="BlueLogo" />
             </div>
             <div>
               <p className={Classes.TextReg}>Register</p>

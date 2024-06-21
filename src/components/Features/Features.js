@@ -22,7 +22,7 @@ function Features() {
                 Classes.FeaturesDetails
               } ${Classes.Shipping}`}
             >
-              <img src={SH1} className={Classes.Images} alt="" />
+              <img src={SH1} className={Classes.Images} alt="SH1" />
               <p className={Classes.FeaturesmainText}>Free shipping</p>
               <p
                 className={Classes.FeaturesSubText}
@@ -44,7 +44,7 @@ function Features() {
                 Classes.FeaturesDetails
               } ${Classes.MoneyBack}`}
             >
-              <img src={PS2} className={Classes.Images} alt="" />
+              <img src={PS2} className={Classes.Images} alt="PS2" />
               <p className={Classes.FeaturesmainText}>100% Refund</p>
               <p className={Classes.FeaturesSubText}>
                 Return with 30 days of delivery
@@ -55,7 +55,7 @@ function Features() {
                 Classes.FeaturesDetails
               } ${Classes.SupportBack}`}
             >
-              <img src={PS3} className={Classes.Images} alt="" />
+              <img src={PS3} className={Classes.Images} alt="PS3" />
               <p className={Classes.FeaturesmainText}>
                 100% Certified jewellery
               </p>
@@ -66,7 +66,7 @@ function Features() {
                 Classes.FeaturesDetails
               } ${Classes.Security}`}
             >
-              <img src={PS4} className={Classes.Images} alt="" />
+              <img src={PS4} className={Classes.Images} alt="PS4" />
               <p className={Classes.FeaturesmainText}>
                 LifetimeExchange & Buyback
               </p>

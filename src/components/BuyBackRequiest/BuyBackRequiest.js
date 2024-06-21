@@ -166,7 +166,7 @@ const BuyBackRequiest = (props) => {
                 onClick={props.handleClose}
                 style={{ position: "absolute", top: "10px", right: 0 }}
               >
-                <img src={CloseButton} />
+                <img src={CloseButton} alt="closebutton" />
               </Button>
               <form>
                 <div className={Classes.BuyBackContainer}>
@@ -286,6 +286,7 @@ const BuyBackRequiest = (props) => {
                                 endAdornment: (
                                   <img
                                     src={isFocused ? ArrowDown : ArrowDown}
+                                    alt="ArrowDown"
                                     style={{
                                       transform: isFocused
                                         ? "rotate(180deg)"

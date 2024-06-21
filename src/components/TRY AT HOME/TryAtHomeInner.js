@@ -170,16 +170,17 @@ const TryAtHomeInner = () => {
                   <h3 className={Classes.TryBookInner}>Booking Information</h3>
                   <p className={Classes.TryHomeEdits}>
                     <Link to="/tryathome">
-                      <img src={edit} /> Edit
+                      <img src={edit} alt="edit" /> Edit
                     </Link>
                   </p>
                 </div>
                 <div className={Classes.BookDateTime}>
                   <div className={Classes.Datepickes}>
-                    <img src={dateimg} /> {selectedDate && selectedDate}
+                    <img src={dateimg} alt="dateimg" />{" "}
+                    {selectedDate && selectedDate}
                   </div>
                   <div className={Classes.Datepickes}>
-                    <img src={timeimgs} />{" "}
+                    <img src={timeimgs} alt="timeimgs" />{" "}
                     {selectedTimeSlot && selectedTimeSlot}
                   </div>
                 </div>
@@ -349,7 +350,11 @@ const TryAtHomeInner = () => {
               }}
             >
               <div style={{ marginBottom: "15px" }}>
-                <img className={Classes.tick} src={successtry} />
+                <img
+                  className={Classes.tick}
+                  src={successtry}
+                  alt="successtry"
+                />
               </div>
               <div style={{ textAlign: "center" }}>
                 Thank you <br /> Our Representative will contact you to <br />{" "}

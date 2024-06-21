@@ -68,7 +68,7 @@ function Orders(props) {
       <div className={Classes.BottomContainer}>
         <div className={Classes.MobImgContainer}>
           <div className={Classes.ImageContent}>
-            <img src={props.Image} style={{ maxWidth: "150px" }} />
+            <img src={props.Image} alt="Image" style={{ maxWidth: "150px" }} />
             <div className={Classes.TextWrapper}>
               {/* <h3>{props.product_name}</h3> */}
               <h3>{props.productName && props.productName}</h3>

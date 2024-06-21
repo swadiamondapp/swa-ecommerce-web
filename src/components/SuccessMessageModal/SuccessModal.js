@@ -56,7 +56,7 @@ const SuccessPage = (props) => {
         >
           <Typography className={Classes.successModalContainer}>
             <div>
-              <img src={SuccessTick} />
+              <img src={SuccessTick} alt="SuccessTick" />
             </div>
             <div
               style={{

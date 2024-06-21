@@ -72,7 +72,7 @@ const SwaWallet = () => {
             <div className={Classes.walletLeft}>
               <div className={Classes.walletTitle}>SWA WALLET BALANCE</div>
               <div className={Classes.head}>
-                <img src={Wallet} />
+                <img src={Wallet} alt="Wallet" />
 
                 <span>${walletValues ? walletValues.swa_wallet : null}</span>
               </div>

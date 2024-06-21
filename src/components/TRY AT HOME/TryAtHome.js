@@ -205,7 +205,7 @@ const TryAtHome = () => {
                 </div>
               </div>
               <div className={Classes.TryRightsec}>
-                <img src={certificate} />
+                <img src={certificate} alt="certificate" />
               </div>
             </div>
             <div className={Classes.YourTrialCartItems}>

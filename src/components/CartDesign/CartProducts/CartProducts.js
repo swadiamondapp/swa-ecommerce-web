@@ -28,7 +28,7 @@ function CartProducts(props) {
                 <img
                   className={Classes.ProductImage}
                   src={props.ProductImage}
-                  alt=" "
+                  alt="ProductImage"
                 />
               </div>
             </div>
@@ -172,7 +172,11 @@ function CartProducts(props) {
             className={Classes.Remove}
             style={{ borderLeft: "0.5px solid #E8E8E8" }}
           >
-            <img src={WishListTag} style={{ width: "13px" }} />
+            <img
+              src={WishListTag}
+              alt="WishListTag"
+              style={{ width: "13px" }}
+            />
             <p
               className={Classes.Delete}
               onClick={props.remove}

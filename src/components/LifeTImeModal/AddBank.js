@@ -309,7 +309,7 @@ const AddBank = (props) => {
         >
           <Typography className={classes.successModalContainer}>
             <div>
-              <img src={SuccessTick} />
+              <img src={SuccessTick} alt="SuccessTick" />
             </div>
             <div
               style={{

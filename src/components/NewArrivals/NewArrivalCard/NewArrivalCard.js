@@ -122,7 +122,7 @@ const NewArrivalCard = (props) => {
               onClick={props.clicked}
               src={props.ProductImage}
               className={Classes.ProductImage}
-              alt=""
+              alt="ProductImage"
             />
 
             {/* <p className={Classes.ProductName}>{props.ProductName}</p> */}

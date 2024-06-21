@@ -209,7 +209,11 @@ const TransferMoneyModal = (props) => {
             <div style={{ padding: "20px" }}>
               <div className={Classes.walletheading}>
                 <div>Amount you want to withdraw</div>
-                <img src={walletclose} onClick={handleCloseNextModal} />
+                <img
+                  src={walletclose}
+                  alt="walletclose"
+                  onClick={handleCloseNextModal}
+                />
               </div>
               <div className={Classes.parentbankwallet}>
                 <div className={Classes.leftmodal1}>
@@ -268,7 +272,7 @@ const TransferMoneyModal = (props) => {
         >
           <Typography className={Classes.successModalContainer}>
             <div>
-              <img src={SuccessTick} />
+              <img src={SuccessTick} alt="SuccessTick" />
             </div>
             <div
               style={{

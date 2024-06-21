@@ -642,7 +642,7 @@ const LoginToggle = (props) => {
                         className={Classes.buttonSocial}
                         onClick={handleSignInWithGoogle}
                       >
-                        <img src={GOOGLE} /> Sign Up with Google
+                        <img src={GOOGLE} alt="GOOGLE" /> Sign Up with Google
                       </button>
                     </div>
                     <div className={Classes.facebookButton}>
@@ -650,13 +650,13 @@ const LoginToggle = (props) => {
                         className={Classes.buttonSocial}
                         onClick={handleSignInWithFb}
                       >
-                        <img src={FB} /> Login with facebook
+                        <img src={FB} alt="FB" /> Login with facebook
                       </button>
                     </div>
                   </div>
                   <div style={{ display: "flex" }}>
                     <button className={Classes.buttonSocial}>
-                      <img src={APPLE} /> Login with Apple
+                      <img src={APPLE} alt="APPLE" /> Login with Apple
                     </button>
                   </div>
                 </div>
@@ -877,7 +877,7 @@ const LoginToggle = (props) => {
                     className={Classes.buttonSocial}
                     onClick={handleSignInWithGoogle}
                   >
-                    <img src={GOOGLE} /> Login with Google
+                    <img src={GOOGLE} alt="GOOGLE" /> Login with Google
                   </button>
                 </div>
                 <div className={Classes.facebookButton}>
@@ -885,7 +885,7 @@ const LoginToggle = (props) => {
                     className={Classes.buttonSocial}
                     onClick={handleSignInWithFb}
                   >
-                    <img src={FB} /> Login with facebook
+                    <img src={FB} alt="FB" /> Login with facebook
                   </button>
                 </div>
               </div>
@@ -894,7 +894,7 @@ const LoginToggle = (props) => {
                   style={{ paddingBottom: "4px" }}
                   className={Classes.buttonSocial}
                 >
-                  <img src={APPLE} /> Login with Apple
+                  <img src={APPLE} alt="APPLE" /> Login with Apple
                 </button>
               </div>
             </div>

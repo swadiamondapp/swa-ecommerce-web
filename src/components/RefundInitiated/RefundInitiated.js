@@ -53,7 +53,7 @@ const SuccessPage = () => {
         >
           <Typography className={Classes.successModalContainer}>
             <div>
-              <img src={InvertedTick} />
+              <img src={InvertedTick} alt="InvertedTick" />
             </div>
             <div
               style={{
