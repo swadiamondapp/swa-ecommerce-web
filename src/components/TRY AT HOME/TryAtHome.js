@@ -61,6 +61,7 @@ const TryAtHome = () => {
   };
 
   const formatSelectedDate = (dateString) => {
+    if (!dateString) return "";
     const date = new Date(dateString);
     return date.toDateString(); // e.g., Fri Jun 14 2024
   };
@@ -317,7 +318,10 @@ const TryAtHome = () => {
                       pathname: "/tryathomeform",
                       state: {
                         selectedTimeSlot,
-                        selectedDate: formatSelectedDate(selectedDate),
+                        // selectedDate: formatSelectedDate(selectedDate),
+                        selectedDate: selectedDate
+                          ? formatSelectedDate(selectedDate)
+                          : null,
                       },
                     }}
                   >
