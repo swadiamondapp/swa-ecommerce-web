@@ -21,6 +21,7 @@ const SililerProducts = (props) => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [buttonLabels, setButtonLabels] = useState({});
   const Contryname = localStorage.getItem("country_name");
+  const countryId = localStorage.getItem("id");
 
   useEffect(() => {
     similarProduct();
@@ -57,7 +58,10 @@ const SililerProducts = (props) => {
 
   const similarProduct = async () => {
     const response = await axios.get(
-      "https://swaecommain.swa.co/ecom/products/" + props.productId
+      "https://swaecommain.swa.co/ecom/products/" +
+        props.productId +
+        "?country=" +
+        countryId
     );
     if (
       response &&

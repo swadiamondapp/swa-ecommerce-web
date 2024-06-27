@@ -192,8 +192,7 @@ const MobileNavbar = (props) => {
   const searchTitleHandler = (setItem) => {
     if (setItem.type === "category") {
       if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
-        window.location.href =
-          "https://swa.co/category_search/" + setItem.id;
+        window.location.href = "https://swa.co/category_search/" + setItem.id;
       } else {
         history.push({
           pathname: "/new_arrivel",
@@ -251,8 +250,7 @@ const MobileNavbar = (props) => {
   };
   const tagSelHandler = (selItem) => {
     if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
-      window.location.href =
-        "https://swa.co/tag_search/" + selItem.id;
+      window.location.href = "https://swa.co/tag_search/" + selItem.id;
     } else {
       history.push({
         pathname: "/new_arrivel",
@@ -322,8 +320,7 @@ const MobileNavbar = (props) => {
   };
   const cattSelHandler = (setItem) => {
     if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
-      window.location.href =
-        "https://swa.co/category_search/" + setItem.id;
+      window.location.href = "https://swa.co/category_search/" + setItem.id;
     } else {
       history.push({
         pathname: "/new_arrivel",
@@ -917,25 +914,28 @@ const MobileNavbar = (props) => {
                             </AccordionTab>
                           )}
                         </Accordion>
-                        <div
-                          style={{ marginBottom: "100px" }}
-                          onClick={handleLogOut}
-                        >
-                          <div className={Classes.LoggedDetailsList}>
-                            <Link to="/my_orders">
-                              <p
-                                style={{
-                                  fontSize: "16px",
-                                  color: "#000",
-                                  marginLeft: "-3px",
-                                }}
-                              >
-                                Log out
-                              </p>
-                            </Link>
-                            <IoIosArrowForward style={{ color: "#006E7F" }} />
+                        {userName && (
+                          <div
+                            style={{ marginBottom: "100px" }}
+                            onClick={handleLogOut}
+                          >
+                            <div className={Classes.LoggedDetailsList}>
+                              <Link to="/my_orders">
+                                <p
+                                  style={{
+                                    fontSize: "16px",
+                                    color: "#000",
+                                    marginLeft: "-3px",
+                                  }}
+                                >
+                                  Log out
+                                </p>
+                              </Link>
+                              <IoIosArrowForward style={{ color: "#006E7F" }} />
+                            </div>
                           </div>
-                        </div>
+                        )}
+
                         <Accordion>
                           <AccordionTab className="last-accordion-tab"></AccordionTab>
                         </Accordion>
