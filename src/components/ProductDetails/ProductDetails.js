@@ -136,7 +136,7 @@ const ProductDetails = (props) => {
 
   const customerPhotos = async () => {
     const response = await axios.get(
-      "https://swaprdnecomnew.zinfog.in/ecom/products/" + props.id + "/reviews/"
+      "https://swaecommain.swa.co/ecom/products/" + props.id + "/reviews/"
     );
     if (response && response.data && response.data.results) {
       setReviews(response.data.results);
@@ -863,7 +863,7 @@ const ProductDetails = (props) => {
                   <RWebShare
                     data={{
                       text: "Swa Diamonds",
-                      url: "https://swaecomnew.zinfog.in" + location.pathname,
+                      url: "https://swa.co" + location.pathname,
                       // url: "http://localhost:3000/" + location.pathname,
                       title: "Swa Diamonds",
                     }}
