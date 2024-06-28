@@ -569,6 +569,11 @@
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 10px;
   margin-top: 20px;
+  margin-bottom: 15px;
+}
+.error {
+  color: #ff0000b5;
+  font-size: 14px;
 }
 .CardCartItems {
   background: #f1f5f9;

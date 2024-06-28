@@ -21,12 +21,19 @@ const TryAtHome = () => {
   const history = useHistory();
   const location = useLocation();
   const [dates, setDates] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
   // const dates = location.state;
   // const dates = (location.state && location.state.dates) || [];
 
   console.log("dates......0", dates);
 
   useEffect(() => {
+    const savedTimeSlot = localStorage.getItem("selectedTimeSlot");
+
+    if (savedTimeSlot) {
+      setSelectedTimeSlot(savedTimeSlot);
+    }
+
     fechTryAtHomeCart();
     const currentDate = new Date();
     const tempDates = [currentDate];
@@ -37,6 +44,7 @@ const TryAtHome = () => {
     }
     setDates(tempDates);
   }, []);
+
   const fechTryAtHomeCart = () => {
     axios
       .get(`${Urls.tryathome}?country=${countryId}`, {
@@ -115,9 +123,13 @@ const TryAtHome = () => {
   };
   const handleTimeSlotClick = (timeSlot) => {
     setSelectedTimeSlot(timeSlot);
+    localStorage.setItem("selectedTimeSlot", timeSlot);
+    setErrorMessage("");
   };
   const handleDateClick = (date) => {
     setSelectedDate(date);
+
+    setErrorMessage("");
   };
   const AddDesigns = () => {
     // history.push("/new_arrivel");
@@ -129,6 +141,20 @@ const TryAtHome = () => {
         product_category: "",
       },
     });
+  };
+
+  const handleProceedClick = () => {
+    if (!selectedDate || !selectedTimeSlot) {
+      setErrorMessage("Please select both a date and a time slot.");
+    } else {
+      history.push({
+        pathname: "/tryathomeform",
+        state: {
+          selectedTimeSlot,
+          selectedDate: selectedDate ? formatSelectedDate(selectedDate) : null,
+        },
+      });
+    }
   };
 
   return (
@@ -311,22 +337,35 @@ const TryAtHome = () => {
                       );
                     })}
                 </div> */}
+                {errorMessage && (
+                  <div
+                    style={{
+                      color: "#ff0000c4",
+                    }}
+                    className={Classes.errorMessage}
+                  >
+                    {errorMessage}
+                  </div>
+                )}
 
                 <div className={Classes.Proceedbutns}>
-                  <Link
+                  {/* <Link
                     to={{
                       pathname: "/tryathomeform",
                       state: {
                         selectedTimeSlot,
-                        // selectedDate: formatSelectedDate(selectedDate),
+                        
                         selectedDate: selectedDate
                           ? formatSelectedDate(selectedDate)
                           : null,
                       },
                     }}
-                  >
-                    <button>PROCEED TO CONFIRM</button>
-                  </Link>
+                  > */}
+
+                  <button onClick={handleProceedClick}>
+                    PROCEED TO CONFIRM
+                  </button>
+                  {/* </Link> */}
                 </div>
               </div>
               <div className={Classes.RightYourTrialCartItems}></div>

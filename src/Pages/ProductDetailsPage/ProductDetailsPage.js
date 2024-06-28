@@ -276,6 +276,8 @@ const ProductDetailsPage = (props) => {
           response1.data.results.message === "Item already in try list"
         ) {
           setErrormsgtrycart("Item already in try list");
+        } else if (response1.data.results.message === "size  required") {
+          setErrormsgtrycart("size  required");
         }
       })
       .catch((error) => {
