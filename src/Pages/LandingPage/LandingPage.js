@@ -392,7 +392,9 @@ const LandingPage = () => {
       <div className="container newarrivalContainer">
         <TopDemanded counts={counts}>{topDemnd}</TopDemanded>
 
-        <Certificate video={"https://www.youtube.com/embed/s3PrxdvAihI"} />
+        <Certificate
+          video={"https://www.youtube.com/embed/s3PrxdvAihI?rel=0"}
+        />
 
         {searchList}
 
