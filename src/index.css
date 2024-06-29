@@ -355,7 +355,10 @@ p {
   width: 100%;
   border: none !important;
 }
-
+.imageMagnifiyer {
+  width: 300px;
+  height: 300px;
+}
 .card-image {
   width: 100%;
   height: 429px;
@@ -393,8 +396,8 @@ p {
 
 .ParentSlide .slick-list {
   padding: 0px 0px !important;
-  height: 389px;
-  /* height: 427px; */
+  /* height: 389px; */
+  height: 429px;
 }
 .ParentSlide .slick-dots {
   bottom: -95px !important;
