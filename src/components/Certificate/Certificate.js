@@ -9,7 +9,11 @@ function Certificate(props) {
         <div className="container">
           <div className="row">
             <div className="col-md-6">
-              <img className={Classes.Image} src={Certificates} alt="" />
+              <img
+                className={Classes.Image}
+                src={Certificates}
+                alt="Certificates"
+              />
             </div>
             <div className="col-md-6">
               <div className={Classes.Video}>

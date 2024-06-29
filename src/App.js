@@ -31,6 +31,7 @@ import ProfilePage from "./components/Profile/ProfilePage";
 import TryAtHomePage from "./components/TRY AT HOME/TryAtHomePage";
 import TryAtHomeInnerPage from "./components/TRY AT HOME/TryAtHomeInnerPage";
 import GTM from "./components/GTM/GTM";
+import TrialCart from "./components/CartDesign/CartProducts/TrialCart";
 function App() {
   return (
     <Router>
@@ -40,6 +41,7 @@ function App() {
         <Route path="/faq" component={FAQPage} exact />
         <Route path="/wish_list" component={WhishlistPage} exact />
         <Route path="/cart" component={Cart} exact />
+        <Route path="/trialcart" component={TrialCart} exact />
         <Route path="/new_arrivel" component={NewArrivalPage} exact />
         <Route path="/category_search/:id" component={CategorySearch} />
         <Route path="/tag_search/:id" component={TagSearch} />

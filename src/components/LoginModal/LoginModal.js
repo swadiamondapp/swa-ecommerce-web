@@ -591,7 +591,11 @@ const LoginModal = (props) => {
             ref={nameRef}
             onClick={handleLogedUserClick}
           >
-            <img src={logedimg} className={Classes.headerElement} />
+            <img
+              src={logedimg}
+              alt="logedimg"
+              className={Classes.headerElement}
+            />
             <p className={Classes.headerElement}>{userName}</p>
             <IoIosArrowDown className={Classes.headerElement} />
           </div>

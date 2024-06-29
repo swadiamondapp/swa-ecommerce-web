@@ -392,6 +392,26 @@ header {
   display: flex;
   justify-content: space-between;
 }
+.Parentcartitems {
+  display: grid;
+  grid-template-columns: 150px 150px;
+  width: 306px;
+  background: #e2e9e9;
+  padding: 3px;
+  align-items: center;
+  text-align: center;
+  border-radius: 8px;
+  color: #10212f;
+  font-weight: 500;
+}
+.ActiveCarthead {
+  background: #fff;
+  color: #10212f;
+  text-align: center;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-weight: 600;
+}
 .cartPage {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1053,7 +1073,7 @@ a {
   }
   .Offers p {
     color: #000000;
-    font-size: 12px;
+    font-size: 9px;
     margin-bottom: 0px !important;
   }
   .SearchMob {

@@ -8,11 +8,15 @@ import MobileNavbar from "../Navbar/MobileNavbar";
 const MainHead = (props) => {
   const history = useHistory();
   const location = useLocation();
-
+  console.log("sssssssssss", props.activeCart);
   const landingPageHandler = () => {
     window.location.href = "/";
   };
   const isCartPage = location.pathname === "/cart";
+
+  const toggleCart = (cartType) => {
+    props.setActiveCart(cartType);
+  };
 
   return (
     <div>
@@ -46,8 +50,33 @@ const MainHead = (props) => {
             </div>
             {isCartPage && (
               <div>
-                <div style={{ color: "#fff" }}>Shoping cart</div>
-                <div style={{ color: "#fff" }}>Trail Cart </div>
+                <div className={Classes.Parentcartitems}>
+                  <div
+                    className={
+                      props.activeCart === "shopping"
+                        ? Classes.ActiveCarthead
+                        : ""
+                    }
+                    onClick={() => toggleCart("shopping")}
+                  >
+                    Shopping Cart
+                  </div>
+                  <div
+                    className={
+                      props.activeCart === "trial" ? Classes.ActiveCarthead : ""
+                    }
+                    onClick={() => toggleCart("trial")}
+                  >
+                    Trial Cart
+                  </div>
+                </div>
+                {/* <div className={Classes.CartContent}>
+                  {activeCart === "shopping" ? (
+                    <div>Shopping Cart Content</div>
+                  ) : (
+                    <div>Trial Cart Content</div>
+                  )}
+                </div> */}
               </div>
             )}
             {!isCartPage && props.children}

@@ -193,7 +193,7 @@ const Profile = (props) => {
           <form onSubmit={handleSubmit}>
             <div className={Classes.ProfileCard}>
               <h3>Edit profile</h3>
-              <img src={preview} />
+              <img src={preview} alt="preview" />
               <p
                 className={Classes.UploadPhotoProfile}
                 onClick={() => document.getElementById("photoUpload").click()}
@@ -276,7 +276,7 @@ const Profile = (props) => {
                   }}
                 >
                   <div>
-                    <img src={SuccessTick} />
+                    <img src={SuccessTick} alt="SuccessTick" />
                   </div>
                   <div
                     style={{

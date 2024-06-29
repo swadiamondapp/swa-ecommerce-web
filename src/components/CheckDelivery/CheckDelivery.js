@@ -181,7 +181,7 @@ const CheckDelivery = ({ props, show, handleClose, handleShow }) => {
           <Typography>
             <div>
               <div className={Classes.LocationDetails}>
-                <img src={locationimg} />
+                <img src={locationimg} alt="locationimg" />
                 <p className={Classes.Locationp1}>
                   Enter your Pincode to browse better
                 </p>
@@ -218,7 +218,11 @@ const CheckDelivery = ({ props, show, handleClose, handleShow }) => {
                         gap: "10px",
                       }}
                     >
-                      <img className={Classes.Stroke} src={Stroke} alt="" />
+                      <img
+                        className={Classes.Stroke}
+                        src={Stroke}
+                        alt="Stroke"
+                      />
                       <p className={Classes.StrokeText}>
                         Cash / Card delivery option available
                       </p>{" "}
@@ -232,7 +236,11 @@ const CheckDelivery = ({ props, show, handleClose, handleShow }) => {
                         gap: "10px",
                       }}
                     >
-                      <img className={Classes.Stroke} src={Stroke} alt="" />
+                      <img
+                        className={Classes.Stroke}
+                        src={Stroke}
+                        alt="Stroke"
+                      />
                       <p className={Classes.StrokeText}>
                         Standard delivery available
                       </p>
@@ -256,7 +264,8 @@ const CheckDelivery = ({ props, show, handleClose, handleShow }) => {
                     </Box>
                   ) : (
                     <>
-                      <img src={locationsimg} /> Use your current location
+                      <img src={locationsimg} alt="locationsimg" /> Use your
+                      current location
                     </>
                   )}
                   {/* <img src={locationsimg} /> Use your current location

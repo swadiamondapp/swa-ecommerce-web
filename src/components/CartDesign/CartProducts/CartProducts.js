@@ -12,8 +12,10 @@ function CartProducts(props) {
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
+
   return (
     <div>
+      {/* shoping card design */}
       <div className={Classes.CartItems}>
         <div className="container">
           <div className="row">
@@ -26,7 +28,7 @@ function CartProducts(props) {
                 <img
                   className={Classes.ProductImage}
                   src={props.ProductImage}
-                  alt=" "
+                  alt="ProductImage"
                 />
               </div>
             </div>
@@ -170,7 +172,11 @@ function CartProducts(props) {
             className={Classes.Remove}
             style={{ borderLeft: "0.5px solid #E8E8E8" }}
           >
-            <img src={WishListTag} style={{ width: "13px" }} />
+            <img
+              src={WishListTag}
+              alt="WishListTag"
+              style={{ width: "13px" }}
+            />
             <p
               className={Classes.Delete}
               onClick={props.remove}
@@ -187,6 +193,7 @@ function CartProducts(props) {
           <p className={Classes.DummyGreen}>Lifetime exchange & buy back</p>
         </div>
       </div>
+      {/* shoping card design */}
     </div>
   );
 }

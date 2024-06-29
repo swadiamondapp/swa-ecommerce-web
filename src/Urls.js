@@ -89,7 +89,10 @@ export const trackOrder =
 
 export const CancelOrder = server + "ecom/cancel-order";
 export const defaultAddress = server + "ecom/address/";
-export const addBankAccount = server + "ecom/bank/add/";
+export const addBankAccount = server + "ecom/bank/";
+export const BankLists = server + "ecom/bank/";
+export const withdrawamount = server + "ecom/withdraw_amount/";
+export const withdrawamountDetails = server + "ecom/withdraw_amount/";
 export const getWalletAmounts = server + "ecom/checkout/";
 export const singleReview = server + "ecom/review/";
 export const headeroffer = server + "ecom/header-details/";

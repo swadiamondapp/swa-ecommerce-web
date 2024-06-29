@@ -369,7 +369,7 @@ const FilterModal = (props) => {
             </Modal>
             <div className={classes.arrow1}></div>
             <Button onClick={handleOpenSort}>
-              <img src={sortimg} /> Sort
+              <img src={sortimg} alt="sortimg" /> Sort
             </Button>
             <Modal
               // open={props.open}
@@ -467,7 +467,7 @@ const FilterModal = (props) => {
             </Modal>
             <div className={classes.arrow1}></div>
             <Button onClick={handleOpenFilter}>
-              <img src={filtermobimg} /> Filter
+              <img src={filtermobimg} alt="filtermobimg" /> Filter
             </Button>
             <Modal
               // open={props.open}

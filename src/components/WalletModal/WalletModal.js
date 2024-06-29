@@ -113,7 +113,7 @@ const WalletModal = (props) => {
                     checked={props.swaWallet !== null}
                     onChange={handleWalletCheck}
                   />
-                  <img src={wallet} />
+                  <img src={wallet} alt="wallet" />
                   <p className={Classes.Word}>Swa Wallet</p>
                 </div>
                 <p className={Classes.Amount}>
@@ -137,7 +137,7 @@ const WalletModal = (props) => {
                     checked={props.swaExchangeWallet !== null}
                     onChange={handleExchangeWalletCheck}
                   />
-                  <img src={wallet} />
+                  <img src={wallet} alt="wallet" />
                   <p className={Classes.Word}>Exchange Wallet</p>
                 </div>
                 <p className={Classes.Amount}>

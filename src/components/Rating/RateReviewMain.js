@@ -103,6 +103,7 @@ const RateReviewMain = (props) => {
                           <img
                             src={shipment.thumbnail_image}
                             style={{ maxWidth: "150px" }}
+                            alt="thumbnail_image"
                           />
                         </div>
                         <div className={Classes.ProductDetailsReview}>
@@ -110,7 +111,8 @@ const RateReviewMain = (props) => {
                             {shipment.product_name}
                           </p>
                           <p className={Classes.pDesc3}>
-                            <img src={deliveryimg} /> Delivered on{" "}
+                            <img src={deliveryimg} alt="deliveryimg" />{" "}
+                            Delivered on{" "}
                             <span
                               style={{
                                 color: "#30933A",

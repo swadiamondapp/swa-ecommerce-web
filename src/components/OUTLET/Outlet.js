@@ -93,7 +93,8 @@ const Outlet = () => {
               </div>
 
               <p className={Classes.Outletpincode}>
-                <img src={pincodeimg} /> Use your current location
+                <img src={pincodeimg} alt="pincodeimg" /> Use your current
+                location
               </p>
             </div>
             <div className={Classes.OutletCardParent}>
@@ -102,7 +103,7 @@ const Outlet = () => {
                   <div className={Classes.ParentSubOutlet}>
                     <div className={Classes.LeftOutlets}>
                       <div className={Classes.OutletImage}>
-                        <img src={outletimg} />
+                        <img src={outletimg} alt="outletimg" />
                       </div>
                       <div className={Classes.OutletDetails}>
                         <h3>{item.name}</h3>
@@ -110,6 +111,7 @@ const Outlet = () => {
                           <img
                             style={{ position: "relative", top: "-3px" }}
                             src={starimg}
+                            alt="starimg"
                           />{" "}
                           <span>4.9 | 978 Goolge review</span>
                         </p>
@@ -123,7 +125,7 @@ const Outlet = () => {
                       </div>
                     </div>
                     <div className={Classes.RightOutlet}>
-                      <img src={locationimg} /> 6KM
+                      <img src={locationimg} alt="locationimg" /> 6KM
                     </div>
                   </div>
                   <div className={Classes.OutletFooterCrad}>
@@ -142,6 +144,7 @@ const Outlet = () => {
                       <img
                         style={{ position: "relative", top: "-1px" }}
                         src={timeimg}
+                        alt="timeimg"
                       />{" "}
                       WORKING HOURS : 10:00AM TO 10:00PM
                     </p>
@@ -162,7 +165,7 @@ const Outlet = () => {
                   <Typography>
                     <div className={Classes.OutletModalsParent}>
                       <div className={Classes.OutletModalHeader}>
-                        <img src={outletimg} />
+                        <img src={outletimg} alt="outletimg" />
                         <div>
                           <h3>Hilite mall - Calicut</h3>
                           <p>

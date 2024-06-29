@@ -46,7 +46,11 @@ const SuccessPage = (props) => {
         >
           <Typography className={Classes.successModalContainer}>
             <div className={Classes.imageContianer}>
-              <img className={Classes.tick} src={InvertedTick} />
+              <img
+                className={Classes.tick}
+                src={InvertedTick}
+                alt="InvertedTick"
+              />
             </div>
             <div style={{ textAlign: "center", margin: "12px 0px" }}>
               <span className={Classes.titlesuccesModal}>

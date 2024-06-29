@@ -99,7 +99,7 @@ const LIfeTImeModal = (props) => {
             onClick={props.handleClose}
             className={classes.bbCLoseButton}
           >
-            <img src={closeButton} />
+            <img src={closeButton} alt="closeButton" />
           </Button>
 
           <Typography>

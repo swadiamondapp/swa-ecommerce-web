@@ -247,7 +247,11 @@ const VideocallForm = (props) => {
           }}
         >
           <div style={{ textAlign: "center" }}>
-            <img src={videoimg} style={{ marginBottom: "25px" }} />
+            <img
+              src={videoimg}
+              alt="videoimg"
+              style={{ marginBottom: "25px" }}
+            />
 
             <p
               style={{

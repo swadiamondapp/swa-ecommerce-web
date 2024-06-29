@@ -48,6 +48,7 @@ import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import VideocallForm from "./VideocallForm";
 import { CgDollar } from "react-icons/cg";
+import LoginModal from "../LoginModal/LoginModal";
 
 const ProductDetails = (props) => {
   const location = useLocation();
@@ -77,6 +78,12 @@ const ProductDetails = (props) => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(6);
   const [activeIndex, setActiveIndex] = useState(0);
   const Contryname = localStorage.getItem("country_name");
+  const [loginModalVisible, setLoginModalVisible] = useState(false);
+  const [modalshow, setModalShow] = useState(false);
+
+  const closeHanlder = () => {
+    setModalShow(false);
+  };
 
   const largeSliderRef = useRef(null);
 
@@ -319,7 +326,12 @@ const ProductDetails = (props) => {
   };
 
   const Tryhome = () => {
-    props.TryatHome();
+    if (token) {
+      props.TryatHome();
+    } else {
+      setLoginModalVisible(true);
+      setModalShow(true);
+    }
   };
   console.log("errormsgtrycart", props.errormsgtrycart);
 
@@ -857,7 +869,11 @@ const ProductDetails = (props) => {
                     }}
                     onClick={() => console.log("shared successfully!")}
                   >
-                    <img src={PS1} className={Classes.ImgHeartShare} />
+                    <img
+                      src={PS1}
+                      alt="PS1"
+                      className={Classes.ImgHeartShare}
+                    />
                   </RWebShare>
                 </p>
               </div>
@@ -991,6 +1007,7 @@ const ProductDetails = (props) => {
                   >
                     <img
                       src={Call}
+                      alt="Call"
                       style={{
                         maxWidth: "44px",
                       }}
@@ -1144,7 +1161,7 @@ const ProductDetails = (props) => {
                   ) : (
                     <p className={Classes.locatortexts} onClick={getLocation}>
                       {" "}
-                      <img src={locationsimg} /> Locate me
+                      <img src={locationsimg} alt="locationsimg" /> Locate me
                     </p>
                   )}
                 </div>
@@ -1193,7 +1210,7 @@ const ProductDetails = (props) => {
                   <>
                     <div className={Classes.DeliveryBtns}>
                       <button>
-                        <img src={time} />
+                        <img src={time} alt="time" />
                         24hr Delivery
                       </button>
                     </div>
@@ -1211,7 +1228,7 @@ const ProductDetails = (props) => {
                     <div className={Classes.ParentDeliverySec}>
                       <div className={Classes.DeliveryMessages}>
                         <div>
-                          <img src={d1} />
+                          <img src={d1} alt="d1" />
                         </div>
                         <div>
                           <p className={Classes.DHeadText}>
@@ -1224,7 +1241,7 @@ const ProductDetails = (props) => {
                       </div>
                       <div className={Classes.DeliveryMessages}>
                         <div>
-                          <img src={d1} />
+                          <img src={d1} alt="d1" />
                         </div>
                         <div>
                           <p className={Classes.DHeadText}>
@@ -1237,7 +1254,7 @@ const ProductDetails = (props) => {
                       </div>
                       <div className={Classes.DeliveryMessages}>
                         <div>
-                          <img src={d2} />
+                          <img src={d2} alt="d2" />
                         </div>
                         <div>
                           <p className={Classes.DHeadText}>
@@ -1282,7 +1299,7 @@ const ProductDetails = (props) => {
               </div>
               <div className={Classes.ProductDetailsMobCard}>
                 <div className={Classes.LeftMobCard1}>
-                  <img src={PD1} />
+                  <img src={PD1} alt="PD1" />
                   <p className={Classes.PdH1}>18kt Rose gold</p>
                   <p
                     style={{
@@ -1301,7 +1318,7 @@ const ProductDetails = (props) => {
                 </div>
                 <div className={Classes.ArrowlineMob}></div>
                 <div className={Classes.RightMobCard1}>
-                  <img src={PD2} />
+                  <img src={PD2} alt="PD2" />
                   <p className={Classes.PdH1}>15 SIJJ Diamond</p>
                   <p
                     style={{
@@ -1321,7 +1338,7 @@ const ProductDetails = (props) => {
               </div>
               <div className={Classes.ProductDetailsMobCard2}>
                 <div className={Classes.MobCard2Head}>
-                  <img src={PD3} />
+                  <img src={PD3} alt="PD3" />
                   <p className={Classes.PdM2}>Product details</p>
                 </div>
                 <div className={Classes.ProductMob3Rows}>
@@ -1368,7 +1385,7 @@ const ProductDetails = (props) => {
             </div>
             <div className={Classes.ParentOtherStoneMob}>
               <div className={Classes.OtherstoneHeadMob}>
-                <img src={PD4} />
+                <img src={PD4} alt="PD4" />
                 <p className={Classes.PdM2}>Other stone details</p>
               </div>
               <div className={Classes.Otherstone3Cards}>
@@ -1440,17 +1457,17 @@ const ProductDetails = (props) => {
                 <p className={Classes.AvailableColours}>Certification</p>
                 <div className={Classes.ParentCertificate}>
                   <div className={Classes.BIS}>
-                    <img src={BIS} alt="" />
+                    <img src={BIS} alt="BIS" />
                     <p className={Classes.CertificateHead}>Bis Hallmark</p>
                     <p className={Classes.CertificateDesc}>For Gold</p>
                   </div>
                   <div className={Classes.BIS}>
-                    <img src={IGI} alt="" />
+                    <img src={IGI} alt="IGI" />
                     <p className={Classes.CertificateHead}>IGI Certification</p>
                     <p className={Classes.CertificateDesc}>For Diamonds</p>
                   </div>
                   <div className={Classes.IGI}>
-                    <img src={GIA} alt="" />
+                    <img src={GIA} alt="GIA" />
                     <p className={Classes.CertificateHead}>GIA Certification</p>
                     <p className={Classes.CertificateDesc}>For solitaire</p>
                   </div>
@@ -1745,6 +1762,7 @@ const ProductDetails = (props) => {
                             <img
                               style={{ maxWidth: "60px", borderRadius: "5px" }}
                               src={item.review_image}
+                              alt="review_image"
                             />
                           </div>
                         </div>
@@ -1799,6 +1817,13 @@ const ProductDetails = (props) => {
               })} */}
           </div>
         </div>
+        {loginModalVisible && (
+          <LoginModal
+            isLog={modalshow}
+            close={closeHanlder}
+            handleOpenLogin={"profile"}
+          />
+        )}
       </div>
     </div>
   );

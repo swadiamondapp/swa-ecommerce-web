@@ -61,6 +61,7 @@ const TryAtHome = () => {
   };
 
   const formatSelectedDate = (dateString) => {
+    if (!dateString) return "";
     const date = new Date(dateString);
     return date.toDateString(); // e.g., Fri Jun 14 2024
   };
@@ -119,7 +120,15 @@ const TryAtHome = () => {
     setSelectedDate(date);
   };
   const AddDesigns = () => {
-    history.push("/new_arrivel");
+    // history.push("/new_arrivel");
+    history.push({
+      pathname: "/new_arrivel",
+      state: {
+        octnId: "",
+        data: "",
+        product_category: "",
+      },
+    });
   };
 
   return (
@@ -197,7 +206,7 @@ const TryAtHome = () => {
                 </div>
               </div>
               <div className={Classes.TryRightsec}>
-                <img src={certificate} />
+                <img src={certificate} alt="certificate" />
               </div>
             </div>
             <div className={Classes.YourTrialCartItems}>
@@ -214,8 +223,6 @@ const TryAtHome = () => {
 
                       const product =
                         tryCartResults && tryCartResults.cart_item[0];
-
-                      console.log("product", product);
 
                       if (cartItem && cartItem.thumbnail_image) {
                         return (
@@ -311,7 +318,10 @@ const TryAtHome = () => {
                       pathname: "/tryathomeform",
                       state: {
                         selectedTimeSlot,
-                        selectedDate: formatSelectedDate(selectedDate),
+                        // selectedDate: formatSelectedDate(selectedDate),
+                        selectedDate: selectedDate
+                          ? formatSelectedDate(selectedDate)
+                          : null,
                       },
                     }}
                   >

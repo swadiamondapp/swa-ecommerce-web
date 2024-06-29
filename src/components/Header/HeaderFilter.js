@@ -159,7 +159,7 @@ const HeaderFilter = (props) => {
             <img
               className={Classes.Logo}
               src={Logo}
-              alt=""
+              alt="Logo"
               onClick={setHomepageHandler}
             />
             <div className={Classes.SearchIcons}>
@@ -242,7 +242,7 @@ const HeaderFilter = (props) => {
               <img
                 className={Classes.Logo}
                 src={Logo}
-                alt=""
+                alt="Logo"
                 onClick={setHomepageHandler}
               />
               <CgClose
@@ -295,7 +295,7 @@ const HeaderFilter = (props) => {
             <div className="col-md-2">
               <img
                 src={ProductImage}
-                alt=""
+                alt="ProductImage"
                 className={Classes.NotifictionImage}
               />
             </div>

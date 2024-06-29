@@ -184,7 +184,7 @@ const Header = (props) => {
             <img
               className={Classes.Logo}
               src={Logo}
-              alt=""
+              alt="Logo"
               onClick={setHomepageHandler}
             />
             <div className={Classes.SearchIcons}>
@@ -270,7 +270,7 @@ const Header = (props) => {
               <img
                 className={Classes.Logo}
                 src={Logo}
-                alt=""
+                alt="Logo"
                 onClick={setHomepageHandler}
               />
               <CgClose
@@ -327,7 +327,7 @@ const Header = (props) => {
             <div className="col-md-2">
               <img
                 src={ProductImage}
-                alt=""
+                alt="ProductImage"
                 className={Classes.NotifictionImage}
               />
             </div>

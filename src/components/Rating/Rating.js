@@ -114,7 +114,7 @@ function Rating(props) {
               props.productDetails &&
               props.productDetails.product_image
             }
-            alt=""
+            alt="product_image"
           />
         </div>
         <div>

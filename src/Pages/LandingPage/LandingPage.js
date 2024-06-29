@@ -344,7 +344,14 @@ const LandingPage = () => {
         setSelectedCountry={setSelectedCountry}
         headeroffer={headeroffer}
       />
-      <Banner banners={banner} tags={tags} mob={mobBanner} />
+      {loading ? (
+        <div className="d-flex justify-content-center align-items-center loader">
+          <FadeLoader color="#00464d" />
+        </div>
+      ) : (
+        <Banner banners={banner} tags={tags} mob={mobBanner} />
+      )}
+
       <Features />
       <div className="container">
         <div className="row mobRow1">
@@ -385,7 +392,9 @@ const LandingPage = () => {
       <div className="container newarrivalContainer">
         <TopDemanded counts={counts}>{topDemnd}</TopDemanded>
 
-        <Certificate video={"https://www.youtube.com/embed/s3PrxdvAihI"} />
+        <Certificate
+          video={"https://www.youtube.com/embed/s3PrxdvAihI?rel=0"}
+        />
 
         {searchList}
 

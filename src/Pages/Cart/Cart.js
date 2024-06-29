@@ -14,6 +14,7 @@ import cartEmpty from "../../Assets/cartempty.png";
 import ConformModal from "../../components/confromModal/confromModal";
 import WalletModal from "../../components/WalletModal/WalletModal";
 import SliderFeature from "../../components/ProductDetails/SliderFeature";
+import TrialCart from "../../components/CartDesign/CartProducts/TrialCart";
 
 const Cart = () => {
   const [cartCount, setCartCount] = useState("");
@@ -31,11 +32,15 @@ const Cart = () => {
   const countryId = localStorage.getItem("id");
   const flag = localStorage.getItem("flag_image");
   const Contryname = localStorage.getItem("country_name");
+  const [activeCart, setActiveCart] = useState("shopping");
+  const [tryCartResults, setTryCartResults] = useState();
+  const [tryCartcountResults, setTryCartcountResults] = useState();
   const [selectedCountry, setSelectedCountry] = useState({
     id: countryId,
     flag_image: flag,
     country_name: Contryname,
   });
+  console.log("tryCartResults", tryCartResults);
   useEffect(() => {
     setLoading(true);
     axios
@@ -112,6 +117,43 @@ const Cart = () => {
         console.log(error);
       });
   };
+  // new
+  useEffect(() => {
+    fechTryAtHomeCart();
+  }, []);
+  const fechTryAtHomeCart = () => {
+    axios
+      .get(`${Urls.tryathome}?country=${countryId}`, {
+        headers: { Authorization: "Token " + token },
+      })
+      .then((response1) => {
+        if (response1.data.results.status === 200) {
+          setTryCartResults(response1.data.results.data.cart_item);
+          setTryCartcountResults(response1.data.results.data.cartmaster);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  console.log("tryCartcountResults", tryCartcountResults);
+  const addDesigns = (cartid) => {
+    console.log("idcart", cartid);
+    axios
+      .delete(`${Urls.tryatcartdelete}/${cartid}/?country=${countryId}`, {
+        headers: { Authorization: "Token " + token },
+      })
+      .then((response1) => {
+        if (response1.data.results.status_code === 200) {
+          fechTryAtHomeCart();
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    // history.push("/new_arrivel");
+  };
+  // new
   const movWishList = (selids) => {
     setShow(false);
     setLoading(true);
@@ -194,47 +236,82 @@ const Cart = () => {
           cartProAmnt={selProAmnt}
           cartCount={cartItemsCount}
           totalSavedAmount={totalSavedAmount}
+          activeCart={activeCart}
+          tryCartcountResults={tryCartcountResults}
           // handleOpen={() => setWalletOpen(true)}
         >
-          {cartList.map((item, index) => {
-            return (
-              <CartProducts
-                key={index}
-                remove={() => removeCartHandler(item)}
-                ProductImage={item.thumbnail_image}
-                ProductName={item.product.product_name}
-                NewPrice={
-                  item.product.is_on_discount
-                    ? item.product.country_discount_price
-                    : item.product.country_total_price
-                }
-                OldPrice={item.product.country_total_price}
-                discound={item.product.is_on_discount}
-                disPrice={
-                  item.product.is_on_discount
-                    ? item.product.country_total_price -
-                      item.product.country_discount_price
-                    : null
-                }
-                Property={
-                  // item.description.carat +
-                  item.product.metal_type +
-                  " KT " +
-                  // item.description.colour_name +
-                  " " +
-                  item.product.gross_weight +
-                  " GM "
-                }
-                DiamondProperty={
-                  " Diamond " + item.product.diamond_weight + " Carat"
-                }
-                Size={item.size}
-                color={item.color}
-                quanty={item.quantity}
-                DeliveryDate="Delivery by tue oct 18"
-              />
-            );
-          })}
+          {activeCart === "shopping" && (
+            <>
+              {cartList.map((item, index) => {
+                return (
+                  <CartProducts
+                    key={index}
+                    remove={() => removeCartHandler(item)}
+                    ProductImage={item.thumbnail_image}
+                    ProductName={item.product.product_name}
+                    NewPrice={
+                      item.product.is_on_discount
+                        ? item.product.country_discount_price
+                        : item.product.country_total_price
+                    }
+                    OldPrice={item.product.country_total_price}
+                    discound={item.product.is_on_discount}
+                    disPrice={
+                      item.product.is_on_discount
+                        ? item.product.country_total_price -
+                          item.product.country_discount_price
+                        : null
+                    }
+                    Property={
+                      // item.description.carat +
+                      item.product.metal_type +
+                      " KT " +
+                      // item.description.colour_name +
+                      " " +
+                      item.product.gross_weight +
+                      " GM "
+                    }
+                    DiamondProperty={
+                      " Diamond " + item.product.diamond_weight + " Carat"
+                    }
+                    Size={item.size}
+                    color={item.color}
+                    quanty={item.quantity}
+                    DeliveryDate="Delivery by tue oct 18"
+                  />
+                );
+              })}
+            </>
+          )}
+          {activeCart === "trial" && (
+            <>
+              {tryCartResults &&
+                tryCartResults.map((item, index) => {
+                  return (
+                    <TrialCart
+                      key={index}
+                      // remove={() => removeCartHandler(item)}
+                      remove={() => addDesigns(item.id)}
+                      ProductImage={item.thumbnail_image}
+                      ProductName={item.product.product_name}
+                      NewPrice={
+                        item.product.is_on_discount
+                          ? item.product.country_discount_price
+                          : item.product.country_total_price
+                      }
+                      OldPrice={item.product.country_total_price}
+                      discound={item.product.is_on_discount}
+                      disPrice={
+                        item.product.is_on_discount
+                          ? item.product.country_total_price -
+                            item.product.country_discount_price
+                          : null
+                      }
+                    />
+                  );
+                })}
+            </>
+          )}
         </CartDesign>
       </>
     );
@@ -247,6 +324,8 @@ const Cart = () => {
           countCartItems={cartItemsCount}
           selectedCountry={selectedCountry}
           setSelectedCountry={setSelectedCountry}
+          activeCart={activeCart}
+          setActiveCart={setActiveCart}
         />
         <ConformModal
           handleClose={handleCloseHandler}
