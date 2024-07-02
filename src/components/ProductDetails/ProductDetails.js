@@ -629,7 +629,7 @@ const ProductDetails = (props) => {
                                             </p>
                                           </div>
                                         )}
-                                      {/* <ReactImageMagnify
+                                      <ReactImageMagnify
                                         {...{
                                           smallImage: {
                                             alt: `Slide ${index}`,
@@ -649,12 +649,12 @@ const ProductDetails = (props) => {
                                             top: "0%",
                                           },
                                         }}
-                                      /> */}
-                                      <img
+                                      />
+                                      {/* <img
                                         className={Classes.Mobsliderbig}
                                         src={item}
                                         alt={`Slide ${index}`}
-                                      />
+                                      /> */}
                                     </div>
                                   );
                                 })}

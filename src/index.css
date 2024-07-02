@@ -975,3 +975,9 @@ input[type="number"] {
 /* .MainHead_CarouselCards__3NvGV .slick-track {
   width: 50% !important; 
 } */
+
+@media (min-width: 1400px) and (max-width: 3000px) {
+  .ParentSlide .slick-list {
+    height: 504px;
+  }
+}
