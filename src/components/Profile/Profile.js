@@ -11,7 +11,6 @@ import axios from "axios";
 import * as urls from "../../Urls";
 import SuccessTick from "../../Assets/successTick.png";
 import LoginModal from "../LoginModal/LoginModal";
-import ReactImageMagnify from "react-image-magnify";
 
 const successM = {
   position: "absolute",
@@ -26,8 +25,6 @@ const successM = {
 };
 
 const Profile = (props) => {
-  const imageurls =
-    "https://imgmedia.lbb.in/media/2022/09/632846916e5fb64e9bd02f1a_1663583889764.jpg";
   const userName = localStorage.getItem("userName");
   const phone = localStorage.getItem("phoneNumber");
   const Email = localStorage.getItem("UserEmail");
@@ -305,22 +302,6 @@ const Profile = (props) => {
             />
           )}
         </div>
-      </div>
-      <div className="imageMagnifiyer">
-        <ReactImageMagnify
-          {...{
-            smallImage: {
-              alt: "Wristwatch by Ted Baker London",
-              isFluidWidth: true,
-              src: imageurls,
-            },
-            largeImage: {
-              src: imageurls,
-              width: 500,
-              height: 500,
-            },
-          }}
-        />
       </div>
     </div>
   );
