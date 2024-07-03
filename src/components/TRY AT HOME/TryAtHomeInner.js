@@ -41,6 +41,7 @@ const TryAtHomeInner = () => {
   const location = useLocation();
   const { selectedTimeSlot, selectedDate } = location.state || {};
   const savedTimeSlot = localStorage.getItem("selectedTimeSlot");
+  const saveddate = localStorage.getItem("selectedDate");
 
   const [defaultdata, setDefaultdata] = useState();
   const [addressData, setAddressData] = useState({
@@ -106,7 +107,9 @@ const TryAtHomeInner = () => {
       .messages({
         "string.empty": `"Street colony name" is required`,
       }),
-    landMark: Joi.string().optional(),
+    landMark: Joi.string()
+      .allow("")
+      .optional(),
   });
 
   const handleChange = (event) => {
@@ -215,6 +218,7 @@ const TryAtHomeInner = () => {
         setTimeout(() => {
           setOpenSuccessModal(false);
           localStorage.removeItem("selectedTimeSlot");
+          localStorage.removeItem("selectedDate");
           history.push("/");
         }, 3000);
       }
