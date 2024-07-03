@@ -7,6 +7,8 @@ import tryimg from "../../Assets/try.png";
 import trycloseimg from "../../Assets/tryclose.png";
 import { Link } from "react-router-dom";
 import { useHistory, useLocation } from "react-router-dom";
+import { CgDollar } from "react-icons/cg";
+import { BiRupee } from "react-icons/bi";
 
 import adddesignimg from "../../Assets/adddesign.png";
 import axios from "axios";
@@ -21,12 +23,28 @@ const TryAtHome = () => {
   const history = useHistory();
   const location = useLocation();
   const [dates, setDates] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
+  const Contryname = localStorage.getItem("country_name");
   // const dates = location.state;
   // const dates = (location.state && location.state.dates) || [];
 
   console.log("dates......0", dates);
+  console.log("tryCartResults", tryCartResults);
+
+  const saveddate = localStorage.getItem("selectedDate");
+  console.log("saveddate", saveddate);
 
   useEffect(() => {
+    const savedTimeSlot = localStorage.getItem("selectedTimeSlot");
+    const saveddate = localStorage.getItem("selectedDate");
+
+    if (saveddate) {
+      setSelectedDate(saveddate);
+    }
+    if (savedTimeSlot) {
+      setSelectedTimeSlot(savedTimeSlot);
+    }
+
     fechTryAtHomeCart();
     const currentDate = new Date();
     const tempDates = [currentDate];
@@ -37,6 +55,7 @@ const TryAtHome = () => {
     }
     setDates(tempDates);
   }, []);
+
   const fechTryAtHomeCart = () => {
     axios
       .get(`${Urls.tryathome}?country=${countryId}`, {
@@ -45,6 +64,8 @@ const TryAtHome = () => {
       .then((response1) => {
         if (response1.data.results.status === 200) {
           setTryCartResults(response1.data.results.data);
+        } else if (response1.data.results.message === "cart is empty") {
+          setTryCartResults();
         }
       })
       .catch((error) => {
@@ -61,41 +82,11 @@ const TryAtHome = () => {
   };
 
   const formatSelectedDate = (dateString) => {
+    if (!dateString) return "";
     const date = new Date(dateString);
     return date.toDateString(); // e.g., Fri Jun 14 2024
   };
-  const Datepickers = [
-    {
-      day: "MON",
-      date: "02",
-      design: "1 Design",
-    },
-    {
-      day: "TUE",
-      date: "03",
-      design: "1 Design",
-    },
-    {
-      day: "WED",
-      date: "04",
-      design: "1 Design",
-    },
-    {
-      day: "THU",
-      date: "05",
-      design: "1 Design",
-    },
-    {
-      day: "FRI",
-      date: "06",
-      design: "1 Design",
-    },
-    {
-      day: "SAT",
-      date: "07",
-      design: "1 Design",
-    },
-  ];
+
   const addDesigns = (cartid) => {
     console.log("idcart", cartid);
     axios
@@ -114,9 +105,17 @@ const TryAtHome = () => {
   };
   const handleTimeSlotClick = (timeSlot) => {
     setSelectedTimeSlot(timeSlot);
+    localStorage.setItem("selectedTimeSlot", timeSlot);
+    setErrorMessage("");
   };
   const handleDateClick = (date) => {
-    setSelectedDate(date);
+    // setSelectedDate(date);
+    // localStorage.setItem("selectedDate", date);
+    const formattedDate = date.toISOString().split("T")[0];
+    setSelectedDate(formattedDate);
+    localStorage.setItem("selectedDate", formattedDate);
+
+    setErrorMessage("");
   };
   const AddDesigns = () => {
     // history.push("/new_arrivel");
@@ -130,6 +129,24 @@ const TryAtHome = () => {
     });
   };
 
+  const handleProceedClick = () => {
+    if (!selectedDate || !selectedTimeSlot) {
+      setErrorMessage("Please select both a date and a time slot.");
+      return;
+    }
+    if (!tryCartResults) {
+      setErrorMessage("Please select at least one trial cart item.");
+      return;
+    }
+    history.push({
+      pathname: "/tryathomeform",
+      state: {
+        selectedTimeSlot,
+        selectedDate: selectedDate ? formatSelectedDate(selectedDate) : null,
+      },
+    });
+  };
+
   return (
     <div>
       <div className={Classes.mainContianerProfile}>
@@ -137,7 +154,7 @@ const TryAtHome = () => {
           <div className={Classes.TryAtHomeParent}>
             <h3 className={Classes.TryAtHomeHead}>Try at Home</h3>
             <p className={Classes.TryathomePara}>
-              Our representative will visit your home to show your liked jewles
+              Our representative will visit your home to show your liked jewels
               with your convenient time <br /> and date. so choose your date and
               time
             </p>
@@ -149,11 +166,14 @@ const TryAtHome = () => {
                     {dates.length > 0 ? (
                       dates.map((dateString, index) => {
                         const [day, date] = formatDate(dateString);
+                        const formattedDateString = dateString
+                          .toISOString()
+                          .split("T")[0];
                         return (
                           <div
                             key={index}
                             className={
-                              selectedDate === dateString
+                              selectedDate === formattedDateString
                                 ? `${Classes.TryDate1} ${Classes.TryDateActive}`
                                 : Classes.TryDate1
                             }
@@ -163,7 +183,7 @@ const TryAtHome = () => {
                             <h3>{day}</h3>
                             <div
                               className={
-                                selectedDate === dateString
+                                selectedDate === formattedDateString
                                   ? `${Classes.TryDesign1} ${Classes.TryDesign1Active}`
                                   : Classes.TryDesign1
                               }
@@ -239,19 +259,38 @@ const TryAtHome = () => {
                             />
                             <img
                               style={{ height: "110px" }}
-                              src={cartItem.thumbnail_image}
+                              src={cartItem ? cartItem.thumbnail_image : ""}
                               alt="Cart Item"
                             />
 
                             <p className={Classes.ProceedAmountT}>
-                              ₹{" "}
+                              {Contryname === "India" && (
+                                <BiRupee className={Classes.Rupee} />
+                              )}
+                              {Contryname === "United States" && (
+                                <CgDollar className={Classes.Rupee} />
+                              )}
+                              {Contryname === "United Arab Emirates" && (
+                                <span style={{ paddingRight: "5px" }}>AED</span>
+                              )}
                               {cartItem.product &&
                                 cartItem.product.country_total_price}
                               {cartItem.product.country_discount_price && (
                                 <span
                                   style={{ textDecoration: "line-through" }}
                                 >
-                                  ₹ {cartItem.product.country_discount_price}
+                                  {Contryname === "India" && (
+                                    <BiRupee className={Classes.Rupee} />
+                                  )}
+                                  {Contryname === "United States" && (
+                                    <CgDollar className={Classes.Rupee} />
+                                  )}
+                                  {Contryname === "United Arab Emirates" && (
+                                    <span style={{ paddingRight: "5px" }}>
+                                      AED
+                                    </span>
+                                  )}{" "}
+                                  {cartItem.product.country_discount_price}
                                 </span>
                               )}
                             </p>
@@ -310,19 +349,35 @@ const TryAtHome = () => {
                       );
                     })}
                 </div> */}
+                {errorMessage && (
+                  <div
+                    style={{
+                      color: "#ff0000c4",
+                    }}
+                    className={Classes.errorMessage}
+                  >
+                    {errorMessage}
+                  </div>
+                )}
 
                 <div className={Classes.Proceedbutns}>
-                  <Link
+                  {/* <Link
                     to={{
                       pathname: "/tryathomeform",
                       state: {
                         selectedTimeSlot,
-                        selectedDate: formatSelectedDate(selectedDate),
+                        
+                        selectedDate: selectedDate
+                          ? formatSelectedDate(selectedDate)
+                          : null,
                       },
                     }}
-                  >
-                    <button>PROCEED TO CONFIRM</button>
-                  </Link>
+                  > */}
+
+                  <button onClick={handleProceedClick}>
+                    PROCEED TO CONFIRM
+                  </button>
+                  {/* </Link> */}
                 </div>
               </div>
               <div className={Classes.RightYourTrialCartItems}></div>
