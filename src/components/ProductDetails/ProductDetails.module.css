@@ -833,6 +833,13 @@
 .Slider {
   display: none;
 }
+
+@media (min-width: 1400px) and (max-width: 3000px) {
+  .smallVideos {
+    width: 92px;
+    height: 92px;
+  }
+}
 @media screen and (max-width: 767px) {
   .Display {
     /* display: none; */

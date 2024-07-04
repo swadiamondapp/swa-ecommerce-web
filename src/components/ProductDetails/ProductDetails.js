@@ -49,6 +49,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import VideocallForm from "./VideocallForm";
 import { CgDollar } from "react-icons/cg";
 import LoginModal from "../LoginModal/LoginModal";
+import ReactImageMagnify from "react-image-magnify";
 
 const ProductDetails = (props) => {
   const location = useLocation();
@@ -80,6 +81,8 @@ const ProductDetails = (props) => {
   const Contryname = localStorage.getItem("country_name");
   const [loginModalVisible, setLoginModalVisible] = useState(false);
   const [modalshow, setModalShow] = useState(false);
+  const imageurls =
+    "https://imgmedia.lbb.in/media/2022/09/632846916e5fb64e9bd02f1a_1663583889764.jpg";
 
   const closeHanlder = () => {
     setModalShow(false);
@@ -613,7 +616,10 @@ const ProductDetails = (props) => {
                               <Slider {...settings} ref={largeSliderRef}>
                                 {imageUrls.map((item, index) => {
                                   return (
-                                    <div>
+                                    <div
+                                      className="imageMagnifiyer"
+                                      key={index}
+                                    >
                                       {props.discount &&
                                         props.discountPercentage && (
                                           <div className={Classes.Discount}>
@@ -623,11 +629,32 @@ const ProductDetails = (props) => {
                                             </p>
                                           </div>
                                         )}
-                                      <img
+                                      <ReactImageMagnify
+                                        {...{
+                                          smallImage: {
+                                            alt: `Slide ${index}`,
+                                            isFluidWidth: true,
+                                            src: item,
+                                          },
+                                          largeImage: {
+                                            src: item,
+                                            width: 1129,
+                                            height: 750,
+                                          },
+                                          enlargedImagePosition: "over",
+                                          enlargedImageStyle: {
+                                            position: "relative",
+                                            right: "100px",
+                                            zIndex: "999999",
+                                            top: "0%",
+                                          },
+                                        }}
+                                      />
+                                      {/* <img
                                         className={Classes.Mobsliderbig}
                                         src={item}
                                         alt={`Slide ${index}`}
-                                      />
+                                      /> */}
                                     </div>
                                   );
                                 })}
@@ -751,6 +778,20 @@ const ProductDetails = (props) => {
                       </Slider>
                     </div>
                     {/* inner slide */}
+                    {/* <ReactImageMagnify
+                      {...{
+                        smallImage: {
+                          alt: "Wristwatch by Ted Baker London",
+                          isFluidWidth: true,
+                          src: imageurls,
+                        },
+                        largeImage: {
+                          src: imageurls,
+                          width: 500,
+                          height: 500,
+                        },
+                      }}
+                    /> */}
 
                     {/* new inner slider */}
                   </div>

@@ -7,6 +7,8 @@ import tryimg from "../../Assets/try.png";
 import trycloseimg from "../../Assets/tryclose.png";
 import { Link } from "react-router-dom";
 import { useHistory, useLocation } from "react-router-dom";
+import { BiRupee } from "react-icons/bi";
+import { CgDollar } from "react-icons/cg";
 
 import adddesignimg from "../../Assets/adddesign.png";
 import axios from "axios";
@@ -21,6 +23,7 @@ const TryAtHome = () => {
   const history = useHistory();
   const location = useLocation();
   const [dates, setDates] = useState([]);
+  const Contryname = localStorage.getItem("country_name");
   // const dates = location.state;
   // const dates = (location.state && location.state.dates) || [];
 
@@ -245,14 +248,33 @@ const TryAtHome = () => {
                             />
 
                             <p className={Classes.ProceedAmountT}>
-                              ₹{" "}
+                              {Contryname === "India" && (
+                                <BiRupee className={Classes.Rupee} />
+                              )}
+                              {Contryname === "United States" && (
+                                <CgDollar className={Classes.Rupee} />
+                              )}
+                              {Contryname === "United Arab Emirates" && (
+                                <span style={{ paddingRight: "5px" }}>AED</span>
+                              )}
                               {cartItem.product &&
                                 cartItem.product.country_total_price}
                               {cartItem.product.country_discount_price && (
                                 <span
                                   style={{ textDecoration: "line-through" }}
                                 >
-                                  ₹ {cartItem.product.country_discount_price}
+                                  {Contryname === "India" && (
+                                    <BiRupee className={Classes.Rupee} />
+                                  )}
+                                  {Contryname === "United States" && (
+                                    <CgDollar className={Classes.Rupee} />
+                                  )}
+                                  {Contryname === "United Arab Emirates" && (
+                                    <span style={{ paddingRight: "5px" }}>
+                                      AED
+                                    </span>
+                                  )}{" "}
+                                  {cartItem.product.country_discount_price}
                                 </span>
                               )}
                             </p>
