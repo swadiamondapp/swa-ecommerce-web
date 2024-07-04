@@ -41,6 +41,8 @@ const Cart = () => {
     country_name: Contryname,
   });
   console.log("tryCartResults", tryCartResults);
+  console.log("cartList00000", cartList);
+  console.log("cartItemsCount", cartItemsCount);
   useEffect(() => {
     setLoading(true);
     axios
@@ -55,11 +57,14 @@ const Cart = () => {
         } else {
           setCartCount(response1.data.results.data.cartmaster.item_count);
         }
+
         setPageCount(response1.data.results.count / 20);
         setCartList(response1.data.results.data.cart_item);
         setAmountPay(response1.data.results.data.cartmaster.grand_total);
         setCartItemsCount(response1.data.results.count);
+        console.log("111111,", response1.data.results.count);
       })
+
       .catch((error) => {
         console.log(error);
       });
@@ -112,6 +117,9 @@ const Cart = () => {
         let count = cartItemsCount;
         count = count - 1;
         setCartItemsCount(count);
+        if (count == 0) {
+          setCartList([]);
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -130,6 +138,9 @@ const Cart = () => {
         if (response1.data.results.status === 200) {
           setTryCartResults(response1.data.results.data.cart_item);
           setTryCartcountResults(response1.data.results.data.cartmaster);
+        }
+        if (response1.data.results.message === "cart is empty") {
+          setTryCartResults();
         }
       })
       .catch((error) => {
@@ -210,43 +221,123 @@ const Cart = () => {
         <FadeLoader color="#00464d" />
       </div>
     );
-  } else if (cartList.length === 0) {
-    cartLists = (
-      <div className="container contBg">
-        <div className=" d-flex justify-content-center align-items-center loader">
-          <div className="col-md-6">
-            <div className={Classes.cartEmpty}>
-              <img src={cartEmpty} alt="cartEmpty" />
+  }
+
+  if (activeCart === "Shopping") {
+    console.log("rishanfunda", cartList);
+    if (cartList.length < 1) {
+      cartLists = (
+        <div className="container contBg">
+          <div className=" d-flex justify-content-center align-items-center loader">
+            <div className="col-md-6">
+              <div className={Classes.cartEmpty}>
+                <img src={cartEmpty} alt="cartEmpty" />
+              </div>
+              <h3 className={Classes.cartListHead}>Your Cart page is empty</h3>
+              <p className={Classes.cartPara}>
+                Currently, there are no items in the cart. Have no worries, Keep
+                surfing until you find your favorite ornaments. From wishlist to
+                the cart, We wish you ‘Happy Shopping’.{" "}
+              </p>
             </div>
-            <h3 className={Classes.cartListHead}>Your Cart page is empty</h3>
-            <p className={Classes.cartPara}>
-              Currently, there are no items in the cart. Have no worries, Keep
-              surfing until you find your favorite ornaments. From wishlist to
-              the cart, We wish you ‘Happy Shopping’.{" "}
-            </p>
           </div>
         </div>
-      </div>
-    );
-  } else {
-    cartLists = (
-      <>
-        <CartDesign
-          amount={amountPay}
-          cartProAmnt={selProAmnt}
-          cartCount={cartItemsCount}
-          totalSavedAmount={totalSavedAmount}
-          activeCart={activeCart}
-          tryCartcountResults={tryCartcountResults}
-          // handleOpen={() => setWalletOpen(true)}
-        >
-          {activeCart === "shopping" && (
-            <>
-              {cartList.map((item, index) => {
+      );
+    } else {
+      cartLists = (
+        <>
+          <CartDesign
+            amount={amountPay}
+            cartProAmnt={selProAmnt}
+            cartCount={cartItemsCount}
+            totalSavedAmount={totalSavedAmount}
+            activeCart={activeCart}
+            tryCartcountResults={tryCartcountResults}
+            // handleOpen={() => setWalletOpen(true)}
+          >
+            {cartList.map((item, index) => {
+              return (
+                <CartProducts
+                  key={index}
+                  remove={() => removeCartHandler(item)}
+                  ProductImage={item.thumbnail_image}
+                  ProductName={item.product.product_name}
+                  NewPrice={
+                    item.product.is_on_discount
+                      ? item.product.country_discount_price
+                      : item.product.country_total_price
+                  }
+                  OldPrice={item.product.country_total_price}
+                  discound={item.product.is_on_discount}
+                  disPrice={
+                    item.product.is_on_discount
+                      ? item.product.country_total_price -
+                        item.product.country_discount_price
+                      : null
+                  }
+                  Property={
+                    // item.description.carat +
+                    item.product.metal_type +
+                    " KT " +
+                    // item.description.colour_name +
+                    " " +
+                    item.product.gross_weight +
+                    " GM "
+                  }
+                  DiamondProperty={
+                    " Diamond " + item.product.diamond_weight + " Carat"
+                  }
+                  Size={item.size}
+                  color={item.color}
+                  quanty={item.quantity}
+                  DeliveryDate="Delivery by tue oct 18"
+                />
+              );
+            })}
+          </CartDesign>
+        </>
+      );
+    }
+  }
+
+  if (activeCart === "trial") {
+    if (!tryCartResults) {
+      cartLists = (
+        <div className="container contBg">
+          <div className=" d-flex justify-content-center align-items-center loader">
+            <div className="col-md-6">
+              <div className={Classes.cartEmpty}>
+                <img src={cartEmpty} alt="cartEmpty" />
+              </div>
+              <h3 className={Classes.cartListHead}>Your Cart page is empty</h3>
+              <p className={Classes.cartPara}>
+                Currently, there are no items in the cart. Have no worries, Keep
+                surfing until you find your favorite ornaments. From wishlist to
+                the cart, We wish you ‘Happy Shopping’.{" "}
+              </p>
+            </div>
+          </div>
+        </div>
+      );
+    } else {
+      cartLists = (
+        <>
+          <CartDesign
+            amount={amountPay}
+            cartProAmnt={selProAmnt}
+            cartCount={cartItemsCount}
+            totalSavedAmount={totalSavedAmount}
+            activeCart={activeCart}
+            tryCartcountResults={tryCartcountResults}
+            // handleOpen={() => setWalletOpen(true)}
+          >
+            {tryCartResults &&
+              tryCartResults.map((item, index) => {
                 return (
-                  <CartProducts
+                  <TrialCart
                     key={index}
-                    remove={() => removeCartHandler(item)}
+                    // remove={() => removeCartHandler(item)}
+                    remove={() => addDesigns(item.id)}
                     ProductImage={item.thumbnail_image}
                     ProductName={item.product.product_name}
                     NewPrice={
@@ -262,60 +353,15 @@ const Cart = () => {
                           item.product.country_discount_price
                         : null
                     }
-                    Property={
-                      // item.description.carat +
-                      item.product.metal_type +
-                      " KT " +
-                      // item.description.colour_name +
-                      " " +
-                      item.product.gross_weight +
-                      " GM "
-                    }
-                    DiamondProperty={
-                      " Diamond " + item.product.diamond_weight + " Carat"
-                    }
-                    Size={item.size}
-                    color={item.color}
-                    quanty={item.quantity}
-                    DeliveryDate="Delivery by tue oct 18"
                   />
                 );
               })}
-            </>
-          )}
-          {activeCart === "trial" && (
-            <>
-              {tryCartResults &&
-                tryCartResults.map((item, index) => {
-                  return (
-                    <TrialCart
-                      key={index}
-                      // remove={() => removeCartHandler(item)}
-                      remove={() => addDesigns(item.id)}
-                      ProductImage={item.thumbnail_image}
-                      ProductName={item.product.product_name}
-                      NewPrice={
-                        item.product.is_on_discount
-                          ? item.product.country_discount_price
-                          : item.product.country_total_price
-                      }
-                      OldPrice={item.product.country_total_price}
-                      discound={item.product.is_on_discount}
-                      disPrice={
-                        item.product.is_on_discount
-                          ? item.product.country_total_price -
-                            item.product.country_discount_price
-                          : null
-                      }
-                    />
-                  );
-                })}
-            </>
-          )}
-        </CartDesign>
-      </>
-    );
+          </CartDesign>
+        </>
+      );
+    }
   }
+  console.log("activeCart", activeCart);
 
   return (
     <div>
