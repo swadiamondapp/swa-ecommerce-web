@@ -92,10 +92,13 @@
   font-size: 16px;
   line-height: 20px;
   font-family: "gilroyNormal" !important;
-  border-bottom: 1px solid #c4c4c4;
+  border-bottom: 1px solid #eaeaea;
   padding-bottom: 10px;
   padding-top: 10px;
   cursor: pointer;
+}
+.SearchItem:hover {
+  background-color: rgba(0, 70, 77, 0.05);
 }
 .LogItem {
   color: #505050;
@@ -547,7 +550,7 @@ a {
   color: #0d1217;
   padding: 10px 20px;
   font-family: "gilroyNormal" !important;
-  width:100%
+  width: 100%;
 }
 .ListPTag:hover {
   background-color: #fcfbf6;
@@ -592,7 +595,7 @@ a {
   opacity: 0.3;
 }
 .headerElement:hover {
-  transform: scale(1.0) translateY(-2px); /* Scale up and slightly move upwards */
+  transform: scale(1) translateY(-2px); /* Scale up and slightly move upwards */
   transition: transform 0.3s ease; /* Add smooth transition effect */
 }
 

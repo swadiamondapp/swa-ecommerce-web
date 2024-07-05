@@ -223,8 +223,7 @@ const Cart = () => {
     );
   }
 
-  if (activeCart === "Shopping") {
-    console.log("rishanfunda", cartList);
+  if (activeCart == "shopping") {
     if (cartList.length < 1) {
       cartLists = (
         <div className="container contBg">
