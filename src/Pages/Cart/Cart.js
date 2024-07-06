@@ -300,7 +300,7 @@ const Cart = () => {
   }
 
   if (activeCart === "trial") {
-    if (!tryCartResults) {
+    if (tryCartResults.length < 1) {
       cartLists = (
         <div className="container contBg">
           <div className=" d-flex justify-content-center align-items-center loader">
