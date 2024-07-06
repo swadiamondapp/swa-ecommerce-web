@@ -454,10 +454,13 @@ header {
   font-size: 16px;
   line-height: 20px;
   font-family: "gilroyNormal" !important;
-  border-bottom: 1px solid #c4c4c4;
+  border-bottom: 1px solid #eaeaea;
   padding-bottom: 10px;
   padding-top: 10px;
   cursor: pointer;
+}
+.SearchItem:hover {
+  background-color: rgba(0, 70, 77, 0.05);
 }
 .LogItem {
   color: #505050;

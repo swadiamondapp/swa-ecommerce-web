@@ -16,6 +16,7 @@ const MainHead = (props) => {
 
   const toggleCart = (cartType) => {
     props.setActiveCart(cartType);
+    console.log("cart,,,,.", props.setActiveCart(cartType));
   };
 
   return (
