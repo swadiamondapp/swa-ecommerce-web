@@ -30,6 +30,7 @@
     "react-paginate": "^8.1.5",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^5.2.0",
+    "react-router-sitemap": "^1.2.0",
     "react-scripts": "^2.1.3",
     "react-select": "^5.7.0",
     "react-slick": "^0.30.2",
@@ -47,7 +48,8 @@
     "build": "react-scripts --openssl-legacy-provider build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "proxy": "http://localhost:3000"
+    "proxy": "http://localhost:3000",
+    "generate-sitemap": "sitemap-generator http://localhost:3000/ -o ./public/sitemap.xml"
   },
   "eslintConfig": {
     "extends": [
@@ -66,5 +68,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "sitemap-generator-cli": "^7.5.0"
   }
 }
