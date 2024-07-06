@@ -49,7 +49,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "proxy": "http://localhost:3000",
-    "generate-sitemap": "sitemap-generator http://localhost:3000/ -o ./public/sitemap.xml"
+    "generate-sitemap": "sitemap-generator https://swaecom-seo.vercel.app/ -o ./public/sitemap.xml"
   },
   "eslintConfig": {
     "extends": [
