@@ -15,6 +15,8 @@ import ConformModal from "../../components/confromModal/confromModal";
 import WalletModal from "../../components/WalletModal/WalletModal";
 import SliderFeature from "../../components/ProductDetails/SliderFeature";
 import TrialCart from "../../components/CartDesign/CartProducts/TrialCart";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Cart = () => {
   const [cartCount, setCartCount] = useState("");
@@ -157,7 +159,12 @@ const Cart = () => {
       .then((response1) => {
         if (response1.data.results.status_code === 200) {
           fechTryAtHomeCart();
+        } else if (
+          response1.data.results.message === "Already Processed, Cannot delete"
+        ) {
+          toast("Already Processed, Cannot delete");
         }
+        console.log("...delete>", response1.data.results.message);
       })
       .catch((error) => {
         console.log(error);
@@ -364,6 +371,7 @@ const Cart = () => {
 
   return (
     <div>
+      <ToastContainer />
       <div className={Classes.Background}>
         <Header
           countCartItems={cartItemsCount}

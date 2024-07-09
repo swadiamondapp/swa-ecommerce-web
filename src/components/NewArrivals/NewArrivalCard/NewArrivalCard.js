@@ -117,7 +117,6 @@ const NewArrivalCard = (props) => {
                 <p className={Classes.Number}>{props.Discount}</p>
               </div>
             ) : null}
-
             <img
               onClick={props.clicked}
               src={props.ProductImage}
