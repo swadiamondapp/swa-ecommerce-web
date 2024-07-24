@@ -144,25 +144,27 @@ const TransferMoneyModal = (props) => {
             </div>
             <div className={Classes.AmountCheckContainer}>
               <div>
-                {props.banklists.map((Item) => (
-                  <>
-                    <div
-                      className={Classes.ContentLines}
-                      // style={{ marginTop: "20px" }}
-                    >
-                      <div className={Classes.Content}>
-                        <PiBank className={Classes.Bank} />
-                        <p className={Classes.Word}>{Item.bank_name}</p>
+                {props &&
+                  props.banklists &&
+                  props.banklists.map((Item) => (
+                    <>
+                      <div
+                        className={Classes.ContentLines}
+                        // style={{ marginTop: "20px" }}
+                      >
+                        <div className={Classes.Content}>
+                          <PiBank className={Classes.Bank} />
+                          <p className={Classes.Word}>{Item.bank_name}</p>
+                        </div>
+                        <input
+                          type="radio"
+                          name="bank"
+                          onClick={() => handleRadioChnage(Item)}
+                        />
                       </div>
-                      <input
-                        type="radio"
-                        name="bank"
-                        onClick={() => handleRadioChnage(Item)}
-                      />
-                    </div>
-                    <p className={Classes.Phone}>{Item.account_number}</p>
-                  </>
-                ))}
+                      <p className={Classes.Phone}>{Item.account_number}</p>
+                    </>
+                  ))}
               </div>
               <div className={Classes.ContentLines}>
                 <div
