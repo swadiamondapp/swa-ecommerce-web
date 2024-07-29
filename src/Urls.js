@@ -104,3 +104,6 @@ export const tryatcart = server + "ecom/trialcartitems/";
 export const tryatcartdelete = server + "ecom/trialcartitems";
 // book appointment
 export const bookappointment = server + "ecom/trialcartitems/";
+// check delivery date
+
+export const checkdeliveryDate = server + "ecom/check-delivery-date/";

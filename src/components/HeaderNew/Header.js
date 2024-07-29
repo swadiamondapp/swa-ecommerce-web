@@ -316,14 +316,14 @@ const Header = (props) => {
       try {
         const response = await axios.get(Urls.getCountryFlags);
         console.log("response.data.results.data", response.data.results.data);
-        const filteredData = response.data.results.data.filter(
-          (country) => country.country_name === "United Arab Emirates"
-        );
-        setCountryData(filteredData);
+        // const filteredData = response.data.results.data.filter(
+        //   (country) => country.country_name === "United Arab Emirates"
+        // );
+        setCountryData(response.data.results.data);
 
         // Extracting the ID of India
         const indiaData = response.data.results.data.find(
-          (country) => country.country_name === "United Arab Emirates"
+          (country) => country.country_name === "India"
         );
         if (!CountryIds && !flag) {
           props.setSelectedCountry({
@@ -479,7 +479,7 @@ const Header = (props) => {
             // onClick={Notification}
           /> */}
           {/* <CheckDelivery islog={show} close={closeHanlder} /> */}
-          {/* <div className={Classes.LogList}>
+          <div className={Classes.LogList}>
             <div
               style={{ cursor: "pointer" }}
               className={`${Classes.DeliveryPin} ${Classes.headerElement}`}
@@ -504,7 +504,7 @@ const Header = (props) => {
                 </span>
               )}
             </div>
-          </div> */}
+          </div>
           <CheckDelivery
             show={showModal}
             handleClose={handleCloseModal}

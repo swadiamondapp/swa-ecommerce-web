@@ -33,14 +33,22 @@ const ProductDetailsPage = (props) => {
   const [description, setDescription] = useState("");
   const [isRestricted, setIsRestricted] = useState(false);
   const countryId = localStorage.getItem("id");
+  const [deliveryDate, setDeliveryDate] = useState();
+  const [pincodeShow, setPincodeShow] = useState(false);
+  const [pinCode, setPinCode] = useState("");
 
   const [logAct, setLogAct] = useState(false);
   const token = localStorage.getItem("swaToken");
   const history = useHistory();
   console.log("isRestricted", isRestricted);
+  const [colorError, setColorError] = useState("");
+  const [picodeError, setPicodeError] = useState("");
+  const [sizeError, setSizeError] = useState("");
   const [errormsgtrycart, setErrormsgtrycart] = useState();
 
   console.log("tokenanasmk", props.token);
+  console.log("sizeError", sizeError);
+  console.log("colorError", colorError);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -258,6 +266,49 @@ const ProductDetailsPage = (props) => {
     //   setError("Select Size");
     // }
   };
+  const checkAvailability = () => {
+    let hasError = false;
+
+    if (!clrId) {
+      setColorError("Color ID is required");
+      hasError = true;
+    } else {
+      setColorError("");
+    }
+    if (!pinCode) {
+      setPicodeError("Pincode is required");
+    } else {
+      setPicodeError("");
+    }
+
+    // if (!size) {
+    //   setSizeError("Size is required");
+    //   hasError = true;
+    // } else {
+    //   setSizeError("");
+    // }
+    if (!hasError && pinCode) {
+      const body = {
+        product_id: prodDet.id,
+        color_id: clrId,
+        size_id: size,
+        pincode: pinCode,
+      };
+
+      axios
+        .post(Urls.checkdeliveryDate, body, {
+          headers: { Authorization: "Token " + token },
+        })
+        .then((response1) => {
+          setDeliveryDate(response1.data.results.message);
+          setPincodeShow(true); // Show the message after receiving the response
+          console.log("dateresponse", response1.data.results);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
   const TryhomeHandler = () => {
     const token = localStorage.getItem("swaToken");
     const body = {
@@ -364,6 +415,15 @@ const ProductDetailsPage = (props) => {
         all={allREv}
         avgR={prodDet.avg_rating}
         cartAdd={cartHandler}
+        checkDelivery={checkAvailability}
+        sizeError={sizeError}
+        colorError={colorError}
+        picodeError={picodeError}
+        pincodeShow={pincodeShow}
+        setPincodeShow={setPincodeShow}
+        deliveryDate={deliveryDate}
+        pinCode={pinCode}
+        setPinCode={setPinCode}
         TryatHome={TryhomeHandler}
         errormsgtrycart={errormsgtrycart}
         clickedBuy={buyProductHandler}

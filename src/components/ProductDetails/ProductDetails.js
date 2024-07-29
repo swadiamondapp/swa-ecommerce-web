@@ -55,12 +55,12 @@ const ProductDetails = (props) => {
   const [show, setShow] = useState(false);
   const [addToWishList, setAddToWishList] = useState(false);
   const [wishId, setWishId] = useState("");
-  const [pinCode, setPinCode] = useState("");
-  const [pincodeShow, setPincodeShow] = useState(false);
+
   const [pinCodeError, setPinCodeError] = useState("");
   const [active, setActive] = useState(null);
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
+
   const token = localStorage.getItem("swaToken");
   const [reviewImages, setReviewImages] = useState([]);
   const [reviews, setReviews] = useState([]);
@@ -175,23 +175,24 @@ const ProductDetails = (props) => {
     console.log("index", index);
   };
   const pinCodeChangeHandler = (e) => {
-    setPinCode(e.target.value);
-    setPincodeShow(false);
+    props.setPinCode(e.target.value);
+    props.setPincodeShow(false);
   };
-  const availbilityCheck = () => {
-    if (pinCode !== "") {
-      axios
-        .get(Urls.pincodeCheck + pinCode)
-        .then((response1) => {
-          setActive(response1.data.IsSuccess);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } else {
-      setPinCodeError("Enter pin code");
-    }
-  };
+
+  // const availbilityCheck = () => {
+  //   if (pinCode !== "") {
+  //     axios
+  //       .get(Urls.pincodeCheck + pinCode)
+  //       .then((response1) => {
+  //         setActive(response1.data.IsSuccess);
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   } else {
+  //     setPinCodeError("Enter pin code");
+  //   }
+  // };
   const seAllHandler = () => {
     setShow(!show);
   };
@@ -543,7 +544,7 @@ const ProductDetails = (props) => {
       try {
         setIsLoading(true);
         const response = await axios.get(_url);
-        setPinCode(response.data.address.postcode);
+        props.setPinCode(response.data.address.postcode);
         localStorage.setItem("pincode", response.data.address.postcode);
       } catch (error) {
         console.log(error);
@@ -1169,12 +1170,13 @@ const ProductDetails = (props) => {
                   <input
                     className={Classes.PinCode}
                     type="number"
-                    value={pinCode}
+                    value={props.pinCode}
                     onChange={pinCodeChangeHandler}
                   />
                   <button
                     className={Classes.CheckButton}
-                    onClick={() => setPincodeShow(true)}
+                    // onClick={() => setPincodeShow(true)}
+                    onClick={props.checkDelivery}
                     // onClick={availbilityCheck}
                   >
                     CHECK
@@ -1185,8 +1187,11 @@ const ProductDetails = (props) => {
                   onClick={availbilityCheck}
                 /> */}
                 </div>
+                <div style={{ color: "#ff000094" }}>{props.picodeError}</div>
+                <div style={{ color: "#ff000094" }}>{props.sizeError}</div>
+                <div style={{ color: "#ff000094" }}>{props.colorError}</div>
                 <div>
-                  {pincodeShow && (
+                  {props.pincodeShow && (
                     <p
                       style={{
                         paddingTop: "12px",
@@ -1194,7 +1199,7 @@ const ProductDetails = (props) => {
                         fontWeight: "600",
                       }}
                     >
-                      Delivery in 3-5 days
+                      {props.deliveryDate}
                     </p>
                   )}{" "}
                 </div>

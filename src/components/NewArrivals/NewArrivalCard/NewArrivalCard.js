@@ -19,9 +19,9 @@ const NewArrivalCard = (props) => {
   const [addToWishList, setAddToWishList] = useState(false);
   const [onadd, setOnAdd] = useState(true);
   const [wishId, setWishId] = useState("");
-  const [showModal, setShowModal] = useState(false);
+
   const Contryname = localStorage.getItem("country_name");
-  const [buttonText, setButtonText] = useState("Check delivery date");
+
   const countryId = localStorage.getItem("id");
   const flag = localStorage.getItem("flag_image");
 
@@ -87,18 +87,11 @@ const NewArrivalCard = (props) => {
   }
   const result = numberWithCommas(formattedCost);
 
-  const handleShowModal = () => {
-    const pincode = true;
-    if (pincode) {
-      setButtonText("Delivery in 3-5 Days");
-    } else {
-      setShowModal(true);
-    }
-  };
+  console.log("props.productId", props.productId);
 
-  const handleCloseModal = () => {
-    setShowModal(false);
-  };
+  // const handleCloseModal = () => {
+  //   setShowModal(false);
+  // };
 
   return (
     <React.Fragment>
@@ -172,13 +165,18 @@ const NewArrivalCard = (props) => {
                         numberWithCommas(props.PriceOld)}
                     </p>
                   </div>
-                  <div className={Classes.Checkcards} onClick={handleShowModal}>
-                    <p className={Classes.CheckdeliveryNewtext}>{buttonText}</p>
+                  <div
+                    className={Classes.Checkcards}
+                    onClick={() => props.onClick(props.ProductId)}
+                  >
+                    <p className={Classes.CheckdeliveryNewtext}>
+                      {props.buttonText}
+                    </p>
                   </div>
                   <CheckDelivery
-                    show={showModal}
-                    handleClose={handleCloseModal}
-                    handleShow={handleShowModal}
+                    show={props.showModal}
+                    handleClose={props.onclose}
+                    handleShow={() => props.onClick(props.ProductId)}
                   />
                 </div>
               </div>

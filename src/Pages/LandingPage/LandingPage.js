@@ -53,6 +53,9 @@ const LandingPage = () => {
   const flag = localStorage.getItem("flag_image");
   const Contryname = localStorage.getItem("country_name");
   const [headeroffer, setHeaderoffer] = useState([]);
+  // const [buttonText, setButtonText] = useState("Check delivery date");
+  const [buttonTexts, setButtonTexts] = useState({});
+  const [showModal, setShowModal] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState({
     id: countryId,
     flag_image: flag,
@@ -64,6 +67,10 @@ const LandingPage = () => {
   console.log("bannercarousel", banner);
   console.log("flag...?", flag);
   console.log("counts123", counts);
+  console.log("serachList11", serachList);
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
 
   const history = useHistory();
   const token = localStorage.getItem("swaToken");
@@ -193,6 +200,41 @@ const LandingPage = () => {
       state: { data: "filMin", price: price },
     });
   };
+
+  const handleShowModal = (productId) => {
+    console.log("productIddd", productId);
+    const pincode = localStorage.getItem("pincode");
+    if (pincode) {
+      const body = {
+        product_id: productId,
+        color_id: "",
+        size_id: "",
+        pincode: pincode,
+      };
+
+      axios
+        .post(Urls.checkdeliveryDate, body, {
+          headers: { Authorization: "Token " + token },
+        })
+        .then((response1) => {
+          // setButtonText(response1.data.results.message);
+          setButtonTexts((prevState) => ({
+            ...prevState,
+            [productId]: response1.data.results.message, // Update the specific product's button text
+          }));
+          console.log("dateresponse", response1.data.results);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      setShowModal(true);
+    }
+  };
+  const handleProductClick = (productId) => {
+    console.log("Product ID:", productId);
+    // Add additional logic to handle the product click
+  };
   const prodDetHandler = (prodItem) => {
     console.log("prodItem---->", prodItem);
     history.push({
@@ -217,7 +259,7 @@ const LandingPage = () => {
     );
   } else {
     newArriv = newArrival.map((item, index) => {
-      console.log("item.discount_percentage--->", item.discount_percentage);
+      console.log("item.discount_percentage--->", item);
       return (
         <NewArrivalCard
           ProductImage={item.thumbnail_image && item.thumbnail_image}
@@ -240,7 +282,11 @@ const LandingPage = () => {
           prodet={item}
           wishAct={item.wishlist_id}
           Suces={home}
+          onclose={handleCloseModal}
           clicked={() => prodDetHandler(item)}
+          onClick={() => handleShowModal(item.product_id)}
+          buttonText={buttonTexts[item.product_id] || "Check delivery date"}
+          showModal={showModal}
         />
       );
     });
@@ -278,6 +324,10 @@ const LandingPage = () => {
           wishAct={item.wishlist_id}
           Suces={home}
           prodet={item}
+          onclose={handleCloseModal}
+          onClick={() => handleShowModal(item.product_id)}
+          buttonText={buttonTexts[item.product_id] || "Check delivery date"}
+          showModal={showModal}
         />
       );
     });
