@@ -59,6 +59,7 @@ const NewArrivalPage = (props) => {
   };
 
   const prodDetHandler = (prodItem) => {
+    console.log("prodItem;", prodItem);
     history.push({
       pathname:
         "/products/" +

@@ -168,7 +168,8 @@ const Header = (props) => {
   // };
   const cattSelHandler = (setItem) => {
     history.push({
-      pathname: "/new_arrivel",
+      // pathname: "/new_arrivel",
+      pathname: `/${setItem.name.toLowerCase()}`,
       state: { data: setItem.id, product_category: setItem.name },
     });
   };
@@ -231,12 +232,16 @@ const Header = (props) => {
     }
   };
   const searchTitleHandler = (setItem) => {
+    console.log("setItemll", setItem);
     if (setItem.type === "category") {
       if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
         window.location.href =
           "https://swaecomnew.zinfog.in/category_search/" + setItem.id;
       } else {
-        history.push({ pathname: "/new_arrivel", state: { data: setItem.id } });
+        history.push({
+          pathname: `/${setItem.name.toLowerCase()}`,
+          state: { data: setItem.id },
+        });
       }
     } else if (setItem.type === "product") {
       axios
@@ -448,13 +453,15 @@ const Header = (props) => {
               {suggestionList.length !== 0 ? (
                 suggestionList.map((item, index) => {
                   return (
-                    <p
-                      className={Classes.SearchItem}
-                      key={index}
-                      onClick={() => searchTitleHandler(item)}
-                    >
-                      {item.name}
-                    </p>
+                    <>
+                      <p
+                        className={Classes.SearchItem}
+                        key={index}
+                        onClick={() => searchTitleHandler(item)}
+                      >
+                        {item.name}
+                      </p>
+                    </>
                   );
                 })
               ) : (

@@ -43,7 +43,8 @@ function App() {
         <Route path="/wish_list" component={WhishlistPage} exact />
         <Route path="/cart" component={Cart} exact />
         <Route path="/trialcart" component={TrialCart} exact />
-        <Route path="/new_arrivel" component={NewArrivalPage} exact />
+        {/* <Route path="/new_arrivel" component={NewArrivalPage} exact /> */}
+        <Route path="/:categoryName" component={NewArrivalPage} exact />
         <Route path="/category_search/:id" component={CategorySearch} />
         <Route path="/tag_search/:id" component={TagSearch} />
 
