@@ -68,6 +68,7 @@ const NewArrivalPage = (props) => {
         prodItem.thumbnail_colour_id +
         "/" +
         prodItem.product_name,
+      // pathname: "/products/" + prodItem.product_name,
       state: { data: prodItem },
     });
   };

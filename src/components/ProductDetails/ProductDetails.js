@@ -108,6 +108,7 @@ const ProductDetails = (props) => {
     }
   };
   console.log("IsRestricted...?", props.IsRestricted);
+  console.log("props.id", props.id);
 
   useEffect(() => {
     if (token !== null) {
