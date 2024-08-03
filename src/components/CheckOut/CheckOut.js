@@ -57,6 +57,7 @@ function CheckOut(props) {
     sEmail: "",
     sPhone: "",
     fullName: "",
+    honorific_name: "",
     mobile: "",
     pincode: pincodes,
     city: "",
@@ -170,6 +171,14 @@ function CheckOut(props) {
     landMark: Joi.string()
       .allow("")
       .messages({ "string.empty": `` }),
+    honorific_name: Joi.string()
+      .valid("Mr", "Mrs", "Others")
+      .required()
+      .messages({
+        "any.only": `Honorific name must be one of Mr, Mrs, or Others`,
+        "any.required": `Honorific name is a required field`,
+        "string.empty": `honorific_name is not allowed to be empty`,
+      }),
   });
 
   const formRef = useRef(null);
@@ -428,6 +437,7 @@ function CheckOut(props) {
       try {
         const body = {
           name: addressData.fullName,
+          honorific_name: addressData.honorific_name,
           phone_code: "+91",
           phone_number: addressData.sPhone,
           email: addressData.sEmail,
@@ -897,6 +907,49 @@ function CheckOut(props) {
                         </div>
                       )}
                     </div>
+
+                    {token == null && (
+                      <div>
+                        <div className={Classes.honor}>
+                          <label>
+                            <input
+                              type="radio"
+                              value="Mr"
+                              name="honorific_name"
+                              checked={addressData.honorific_name === "Mr"}
+                              onChange={handleChangeAddress}
+                            />
+                            Mr.
+                          </label>
+                          <label>
+                            <input
+                              type="radio"
+                              value="Mrs"
+                              name="honorific_name"
+                              checked={addressData.honorific_name === "Mrs"}
+                              onChange={handleChangeAddress}
+                            />
+                            Mrs.
+                          </label>
+                          <label>
+                            <input
+                              type="radio"
+                              value="Others"
+                              name="honorific_name"
+                              checked={addressData.honorific_name === "Others"}
+                              onChange={handleChangeAddress}
+                            />
+                            Others
+                          </label>
+                        </div>
+
+                        {errorMessage.honorific_name && (
+                          <div className={Classes.ErrorMessage}>
+                            {errorMessage.honorific_name}
+                          </div>
+                        )}
+                      </div>
+                    )}
 
                     <div className={Classes.ParentF1}>
                       <div className="Parant_Relative">

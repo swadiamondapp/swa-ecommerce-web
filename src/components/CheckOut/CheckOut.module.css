@@ -20,6 +20,16 @@
 .Main1 {
   margin: 30px 0px 0 50px;
 }
+
+.honor {
+  display: flex;
+  gap: 10px;
+}
+.honor label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 .Home {
   color: #00464d;
   font-size: 14px;
