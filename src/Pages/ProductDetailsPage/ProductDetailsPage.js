@@ -41,6 +41,7 @@ const ProductDetailsPage = (props) => {
   const [errormsgtrycart, setErrormsgtrycart] = useState();
 
   console.log("tokenanasmk", props.token);
+  console.log("prodDet", prodDet);
 
   useEffect(() => {
     window.scrollTo(0, 0);

@@ -11,6 +11,15 @@
   color: #0d1217 !important;
   font-weight: 600;
 }
+.honor {
+  display: flex;
+  gap: 10px;
+}
+.honor label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 .Main {
   display: flex;
   flex-direction: column;

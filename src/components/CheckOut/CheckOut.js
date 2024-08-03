@@ -57,6 +57,7 @@ function CheckOut(props) {
     sEmail: "",
     sPhone: "",
     fullName: "",
+    honorific_name: "",
     mobile: "",
     pincode: pincodes,
     city: "",
@@ -64,8 +65,11 @@ function CheckOut(props) {
     hNumber_Bname: "",
     streetColony: "",
     landMark: "",
+    country: "",
     id: "",
   });
+
+  console.log("addressDatall", addressData);
 
   const [isNewaddress, setIsNewAddress] = useState({
     sEmail: "",
@@ -138,6 +142,11 @@ function CheckOut(props) {
         "string.empty": "Please enter your mobile number.",
         "string.pattern.base": "Please enter a valid 10-digit mobile number.",
       }),
+    country: Joi.string()
+      .required()
+      .messages({
+        "string.empty": `Please enter your country.`,
+      }),
     // pincode: Joi.string()
     //   .required()
     //   .max(6)
@@ -170,6 +179,14 @@ function CheckOut(props) {
     landMark: Joi.string()
       .allow("")
       .messages({ "string.empty": `` }),
+    honorific_name: Joi.string()
+      .valid("Mr", "Mrs", "Others")
+      .required()
+      .messages({
+        "any.only": `Honorific name must be one of Mr, Mrs, or Others`,
+        "any.required": `Honorific name is a required field`,
+        "string.empty": `honorific_name is not allowed to be empty`,
+      }),
   });
 
   const formRef = useRef(null);
@@ -428,6 +445,7 @@ function CheckOut(props) {
       try {
         const body = {
           name: addressData.fullName,
+          honorific_name: addressData.honorific_name,
           phone_code: "+91",
           phone_number: addressData.sPhone,
           email: addressData.sEmail,
@@ -604,6 +622,7 @@ function CheckOut(props) {
           area: addressData.streetColony,
           landmark: addressData.landMark,
           type: "HOME",
+          country: addressData.country,
           // is_main: false,
         };
         const response = await axios.post(Urls.addAdress, body, {
@@ -894,6 +913,66 @@ function CheckOut(props) {
                       {errorMessage.fullName && (
                         <div className={Classes.ErrorMessage}>
                           {errorMessage.fullName}
+                        </div>
+                      )}
+                    </div>
+
+                    {token == null && (
+                      <div>
+                        <div className={Classes.honor}>
+                          <label>
+                            <input
+                              type="radio"
+                              value="Mr"
+                              name="honorific_name"
+                              checked={addressData.honorific_name === "Mr"}
+                              onChange={handleChangeAddress}
+                            />
+                            Mr.
+                          </label>
+                          <label>
+                            <input
+                              type="radio"
+                              value="Mrs"
+                              name="honorific_name"
+                              checked={addressData.honorific_name === "Mrs"}
+                              onChange={handleChangeAddress}
+                            />
+                            Mrs.
+                          </label>
+                          <label>
+                            <input
+                              type="radio"
+                              value="Others"
+                              name="honorific_name"
+                              checked={addressData.honorific_name === "Others"}
+                              onChange={handleChangeAddress}
+                            />
+                            Others
+                          </label>
+                        </div>
+
+                        {errorMessage.honorific_name && (
+                          <div className={Classes.ErrorMessage}>
+                            {errorMessage.honorific_name}
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    <div className="Parant_Relative">
+                      <label>Country</label>
+                      <input
+                        className={Classes.PlaceInput}
+                        type="text"
+                        placeholder="country*"
+                        value={addressData.country}
+                        name="country"
+                        onChange={handleChangeAddress}
+                      />
+                      {errorMessage.country && (
+                        <div className={Classes.ErrorMessage}>
+                          {errorMessage.country}
                         </div>
                       )}
                     </div>

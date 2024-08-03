@@ -55,6 +55,13 @@ const signUpSchema = Joi.object({
       "string.pattern.base": `Enter your email@gmail.com`,
       "any.required": `is a required field`,
     }),
+  honorific_name: Joi.string()
+    .valid("Mr", "Mrs", "Others")
+    .required()
+    .messages({
+      "any.only": `Honorific name must be one of Mr, Mrs, or Others`,
+      "any.required": `Honorific name is a required field`,
+    }),
 });
 
 const LoginToggle = (props) => {
@@ -69,7 +76,10 @@ const LoginToggle = (props) => {
     username: "",
     mobile: "",
     email: "",
+    honorific_name: "",
   });
+
+  console.log("signUpData", signUpData.honorific_name);
   const [mobileNumber, setMobileNumber] = useState("");
   const [otp, setOtp] = useState("");
   const [otpError, setOtpError] = useState("");
@@ -285,6 +295,7 @@ const LoginToggle = (props) => {
           phone_number: signUpData.mobile,
           email: signUpData.email,
           login_type: "NORMAL",
+          honorific_name: signUpData.honorific_name,
         };
         const response = await axios.post(Urls.register, body);
         if (response.data.results.status_code === 200) {
@@ -443,7 +454,6 @@ const LoginToggle = (props) => {
         loginHandler();
       }
       if (response.data.results.message === "Otp verified successfully!") {
-        debugger;
         props.setText("Logged In");
         props.setShowSuccessModal(true);
         setTimeout(() => {
@@ -575,6 +585,44 @@ const LoginToggle = (props) => {
                         />
                         <p className={Classes.ErrorText}>
                           {validationErrors.email && validationErrors.email}
+                        </p>
+                      </div>
+                      <div>
+                        <div className={Classes.honor}>
+                          <label>
+                            <input
+                              type="radio"
+                              value="Mr"
+                              name="honorific_name"
+                              checked={signUpData.honorific_name === "Mr"}
+                              onChange={handleInputChange}
+                            />
+                            Mr.
+                          </label>
+                          <label>
+                            <input
+                              type="radio"
+                              value="Mrs"
+                              name="honorific_name"
+                              checked={signUpData.honorific_name === "Mrs"}
+                              onChange={handleInputChange}
+                            />
+                            Mrs.
+                          </label>
+                          <label>
+                            <input
+                              type="radio"
+                              value="Others"
+                              name="honorific_name"
+                              checked={signUpData.honorific_name === "Others"}
+                              onChange={handleInputChange}
+                            />
+                            Others
+                          </label>
+                        </div>
+                        <p className={Classes.ErrorText}>
+                          {validationErrors.honorific_name &&
+                            validationErrors.honorific_name}
                         </p>
                       </div>
                     </div>
