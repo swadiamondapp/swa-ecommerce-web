@@ -101,6 +101,7 @@ const Payment = () => {
         area: addressData.streetColony,
         landmark: addressData.landMark,
         type: "HOME",
+        country: addressData.country,
         // is_main: false,
       };
       const response = await axios.post(Urls.addAdress, body, {

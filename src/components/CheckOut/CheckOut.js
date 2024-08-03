@@ -65,6 +65,7 @@ function CheckOut(props) {
     hNumber_Bname: "",
     streetColony: "",
     landMark: "",
+    country: "",
     id: "",
   });
 
@@ -152,6 +153,11 @@ function CheckOut(props) {
       .required()
       .messages({
         "string.empty": `Please enter your city.`,
+      }),
+    country: Joi.string()
+      .required()
+      .messages({
+        "string.empty": `Please enter your country.`,
       }),
     // state: Joi.string()
     //   .required()
@@ -614,6 +620,7 @@ function CheckOut(props) {
           area: addressData.streetColony,
           landmark: addressData.landMark,
           type: "HOME",
+          country: addressData.country,
           // is_main: false,
         };
         const response = await axios.post(Urls.addAdress, body, {
@@ -821,6 +828,7 @@ function CheckOut(props) {
         otpError={otpError}
         handelLoginForm={handleSubmit}
         mobileNumber={addressData.sPhone}
+        emailId={addressData.sEmail}
         // handleOtpForm={verifyOtp}
         handleOtpForm={verifyOtpEmail}
         setOtp={setOtp}
@@ -950,6 +958,23 @@ function CheckOut(props) {
                         )}
                       </div>
                     )}
+
+                    <div className="Parant_Relative">
+                      <label>Country</label>
+                      <input
+                        className={Classes.PlaceInput}
+                        type="text"
+                        placeholder="country*"
+                        value={addressData.country}
+                        name="country"
+                        onChange={handleChangeAddress}
+                      />
+                      {errorMessage.country && (
+                        <div className={Classes.ErrorMessage}>
+                          {errorMessage.country}
+                        </div>
+                      )}
+                    </div>
 
                     <div className={Classes.ParentF1}>
                       <div className="Parant_Relative">
