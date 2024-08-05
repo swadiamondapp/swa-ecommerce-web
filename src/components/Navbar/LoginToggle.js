@@ -277,6 +277,10 @@ const LoginToggle = (props) => {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
+    // setEmailId(event.target);
+    if (name === "email") {
+      setEmailId(value);
+    }
     setSignUpData({
       ...signUpData,
       [name]: value,
@@ -320,6 +324,7 @@ const LoginToggle = (props) => {
     }
   };
 
+  console.log("emailId...", emailId);
   const sendOtp = async () => {
     const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const body = {
