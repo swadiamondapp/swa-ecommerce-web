@@ -599,6 +599,7 @@ const OrderHistorypage2 = (props) => {
                       singleOrderData.order &&
                       singleOrderData.order.shipment &&
                       singleOrderData.order.shipment[0].status === 2 &&
+                      singleOrderData.order.shipment[0].status === 0 &&
                       singleOrderData.order.shipment[0].cancel_order !==
                         "Admin Approval pending" && (
                         <div className={Classes.CancelProductButton}>
