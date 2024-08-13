@@ -314,7 +314,10 @@ const OrderHistorypage2 = (props) => {
 
   console.log(
     "singleOrderData--->1233",
-    singleOrderData && singleOrderData.order && singleOrderData.order
+    singleOrderData &&
+      singleOrderData.order &&
+      singleOrderData.order.shipment[0] &&
+      singleOrderData.order.shipment[0].status
   );
 
   console.log(
@@ -325,7 +328,12 @@ const OrderHistorypage2 = (props) => {
       singleOrderData.data.order.address
   );
 
-  console.log("paymentDetails--->", paymentDetails);
+  const statusCode =
+    singleOrderData &&
+    singleOrderData.order &&
+    singleOrderData.order.shipment[0] &&
+    singleOrderData.order.shipment[0].status;
+  console.log("statusCode--->", statusCode);
 
   return (
     <div>
@@ -584,30 +592,29 @@ const OrderHistorypage2 = (props) => {
                     </Accordion>
                   </div>
                   <div className={Classes.TrackButtons}>
-                    {singleOrderData &&
-                      singleOrderData.order &&
-                      singleOrderData.order.shipment &&
-                      singleOrderData.order.shipment[0].status === 4 && (
-                        <button
-                          className={Classes.REButton}
-                          onClick={() => fetchLteLbbDetails()}
-                        >
-                          Return / Exchange
-                        </button>
-                      )}
-                    {singleOrderData &&
-                      singleOrderData.order &&
-                      singleOrderData.order.shipment &&
-                      singleOrderData.order.shipment[0].status === 2 &&
-                      singleOrderData.order.shipment[0].status === 0 &&
-                      singleOrderData.order.shipment[0].cancel_order !==
-                        "Admin Approval pending" && (
+                    {// singleOrderData &&
+                    //   singleOrderData.order &&
+                    //   singleOrderData.order.shipment &&
+                    //   singleOrderData.order.shipment[0].status
+                    statusCode == 4 && (
+                      <button
+                        className={Classes.REButton}
+                        onClick={() => fetchLteLbbDetails()}
+                      >
+                        Return / Exchange
+                      </button>
+                    )}
+                    {statusCode == 2 ||
+                      (statusCode == 0 && (
+                        // singleOrderData.order.shipment[0].cancel_order !==
+                        //   "Admin Approval pending"
                         <div className={Classes.CancelProductButton}>
+                          {console.log("statusanasmk", statusCode)}
                           <button onClick={() => setCancelProductModal(true)}>
                             Cancel product
                           </button>
                         </div>
-                      )}
+                      ))}
                     <button
                       className={Classes.REButton2}
                       // onClick={() => setBuyBackOpen(true)}
