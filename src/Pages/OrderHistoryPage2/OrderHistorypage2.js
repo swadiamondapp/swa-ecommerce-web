@@ -604,17 +604,25 @@ const OrderHistorypage2 = (props) => {
                         Return / Exchange
                       </button>
                     )}
-                    {statusCode == 2 ||
+                    {/* {statusCode == 2 ||
                       (statusCode == 0 && (
                         // singleOrderData.order.shipment[0].cancel_order !==
                         //   "Admin Approval pending"
                         <div className={Classes.CancelProductButton}>
-                          {console.log("statusanasmk", statusCode)}
                           <button onClick={() => setCancelProductModal(true)}>
                             Cancel product
                           </button>
                         </div>
-                      ))}
+                      ))} */}
+                    {(statusCode == 0 || statusCode == 2 || statusCode == 9) &&
+                      singleOrderData.order.shipment[0].cancel_order !==
+                        "Admin Approval pending" && (
+                        <div className={Classes.CancelProductButton}>
+                          <button onClick={() => setCancelProductModal(true)}>
+                            Cancel product
+                          </button>
+                        </div>
+                      )}
                     <button
                       className={Classes.REButton2}
                       // onClick={() => setBuyBackOpen(true)}
