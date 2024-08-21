@@ -49,14 +49,14 @@ const LandingPage = () => {
   const [loading, setLoading] = useState(false);
   const [logToken, setLogToken] = useState("");
   const [tags, setTags] = useState([]);
-  const countryId = localStorage.getItem("id");
-  const flag = localStorage.getItem("flag_image");
-  const Contryname = localStorage.getItem("country_name");
+  const countryId = 3;
+  const flag = "https://swaecomordermain.swa.co//media/country/flag/Flag_of_the_United_Arab_Emirates.svg.png";
+  const Contryname = "United Arab Emirates";
   const [headeroffer, setHeaderoffer] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState({
-    id: countryId,
-    flag_image: flag,
-    country_name: Contryname,
+    id: 3,
+    flag_image: "https://swaecomordermain.swa.co//media/country/flag/Flag_of_the_United_Arab_Emirates.svg.png",
+    country_name: "United Arab Emirates",
   });
 
   console.log("mobBanner..01", mobBanner);
