@@ -72,6 +72,13 @@ const Header = (props) => {
   };
 
   useEffect(() => {
+    localStorage.setItem("id", 3);
+    localStorage.setItem("flag_image", "https://swaecomordermain.swa.co//media/country/flag/Flag_of_the_United_Arab_Emirates.svg.png");
+    localStorage.setItem("country_name", "United Arab Emirates");
+  }, []);
+
+
+  useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
