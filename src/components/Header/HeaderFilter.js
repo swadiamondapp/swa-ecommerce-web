@@ -88,7 +88,7 @@ const HeaderFilter = (props) => {
     if (setItem.type === "category") {
       if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
         window.location.href =
-          "http://localhost:3000/category_search/" + setItem.id;
+          "https://swaecomnew.zinfog.in/category_search/" + setItem.id;
         console.log("testk");
       } else {
         history.push({ pathname: "/new_arrivel", state: { data: setItem.id } });

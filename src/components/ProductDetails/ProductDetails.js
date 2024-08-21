@@ -864,7 +864,7 @@ const ProductDetails = (props) => {
                   <RWebShare
                     data={{
                       text: "Swa Diamonds",
-                      url: `http://localhost:3000/jewellery?id=${props.productDetails.id}&color=${props.productDetails.color}&name=${props.productDetails.name}&alias=${props.alias}`,
+                      url: `https://swaecomnew.zinfog.in/jewellery?id=${props.productDetails.id}&color=${props.productDetails.color}&name=${props.productDetails.name}&alias=${props.alias}`,
                       title: "Swa Diamonds",
                     }}
                     onClick={() => console.log("shared successfully!")}

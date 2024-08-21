@@ -51,7 +51,7 @@ const Header = (props) => {
     }
   };
   const catSelHandler = (id) => {
-    window.open("http://localhost:3000/category_search/" + id, "_self");
+    window.open("https://swaecomnew.zinfog.in/category_search/" + id, "_self");
     console.log("testk");
   };
   const moveToOrderHistory = () => {
@@ -103,7 +103,7 @@ const Header = (props) => {
     if (setItem.type === "category") {
       if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
         window.location.href =
-          "http://localhost:3000/category_search/" + setItem.id;
+          "https://swaecomnew.zinfog.in/category_search/" + setItem.id;
         console.log("testk");
       } else {
         history.push({ pathname: "/new_arrivel", state: { data: setItem.id } });
