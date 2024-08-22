@@ -11,6 +11,7 @@ import axios from "axios";
 import * as urls from "../../Urls";
 import SuccessTick from "../../Assets/successTick.png";
 import LoginModal from "../LoginModal/LoginModal";
+import { useHistory } from "react-router-dom";
 
 const successM = {
   position: "absolute",
@@ -25,6 +26,7 @@ const successM = {
 };
 
 const Profile = (props) => {
+  const history = useHistory();
   const userName = localStorage.getItem("userName");
   const phone = localStorage.getItem("phoneNumber");
   const Email = localStorage.getItem("UserEmail");
@@ -34,6 +36,7 @@ const Profile = (props) => {
     mobile: phone,
     photo: null,
   });
+
   const [errors, setErrors] = useState({});
   const token = localStorage.getItem("swaToken");
   const [preview, setPreview] = useState(defaultProfile);
@@ -155,14 +158,24 @@ const Profile = (props) => {
           console.log("Form data is valid and submitted:", response.data);
           handleOpen();
           // Automatically close the modal after 5 seconds
-          localStorage.removeItem("swaToken");
-          localStorage.removeItem("userName");
-          localStorage.removeItem("phoneNumber");
+
+          if (formData.email !== Email || formData.mobile !== phone) {
+            localStorage.removeItem("swaToken");
+            localStorage.removeItem("userName");
+            localStorage.removeItem("phoneNumber");
+           
+          }
+
           // setTimeout(handleClose, 3000);
           setTimeout(() => {
             handleClose();
+
             setLoginModalVisible(true);
+
             setShow(true);
+            history.push({
+              pathname: "/",
+            });
           }, 5000);
 
           // Reset form after successful submission

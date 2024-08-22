@@ -211,7 +211,7 @@ function CartDesign(props) {
             <div className="col-md-8">
               <div className={Classes.Left}>{props.children}</div>
             </div>
-            <p className={Classes.OrderSummeryMob}>ORDER SUMMERY</p>
+            <p className={Classes.OrderSummeryMob}>ORDER SUMMARY</p>
             <div className="col-md-4">
               {/* shoping cart */}
               {props.activeCart === "shopping" && (

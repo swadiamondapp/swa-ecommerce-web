@@ -476,6 +476,11 @@ const LoginToggle = (props) => {
     }
   };
   const verifyOtpEmail = async () => {
+
+    if (!otp) {  // Check if the OTP is empty
+      setOtpError("Please enter OTP");
+      return;  // Exit the function early if OTP is empty
+    }
     const body = {
       email: emailId,
       phone: "",

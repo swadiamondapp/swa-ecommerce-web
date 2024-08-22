@@ -202,6 +202,7 @@ function CheckOut(props) {
   }, [location.state.data]);
 
   const handleSubmit = (e) => {
+  
     e.preventDefault();
 
     // Validate form data using Joi schema
@@ -217,6 +218,8 @@ function CheckOut(props) {
         return errors;
       }, {});
       setErrorMessage(validationErrors);
+      placeOrder ()
+      console.log("paymentClicked")
     } else {
       // Form is valid, proceed with submission
       console.log("Form submitted:", addressData);

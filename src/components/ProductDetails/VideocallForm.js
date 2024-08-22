@@ -260,7 +260,7 @@ const VideocallForm = (props) => {
                 fontWeight: "600",
               }}
             >
-              Thank you! our representative will call you <br /> in 30 imn to
+              Thank you! our representative will call you <br /> in 30 min to
               confirm your appointment
             </p>
           </div>
