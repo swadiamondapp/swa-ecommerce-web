@@ -280,7 +280,7 @@ const OrderHistorypage2 = (props) => {
     }
   };
 
-  const cancelProduct = async () => {
+  const cancelProduct = async (reason, notes) => {
     try {
       const body = {
         product_id: orderDet[0].product.product_id,
@@ -289,8 +289,8 @@ const OrderHistorypage2 = (props) => {
         total_amount: total,
         payment_mode: payMode,
         cancel_type: "final",
-        reason: "aaaaaaaaaaa",
-        notes: "sssssssssssssssssssssssssssssssssssssssssssssssssssssssss",
+        reason: reason ? reason.name : "No reason selected",
+        notes: notes || "No notes provided",
       };
       const response = await axios.post(
         `${Urls.CancelOrder}?country=${countryId}`,
@@ -596,14 +596,16 @@ const OrderHistorypage2 = (props) => {
                     //   singleOrderData.order &&
                     //   singleOrderData.order.shipment &&
                     //   singleOrderData.order.shipment[0].status
-                    statusCode == 4 && (
-                      <button
-                        className={Classes.REButton}
-                        onClick={() => fetchLteLbbDetails()}
-                      >
-                        Return / Exchange
-                      </button>
-                    )}
+                    statusCode == 4 &&
+                      singleOrderData.order.shipment[0].cancel_order !==
+                        "Admin Approval pending" && (
+                        <button
+                          className={Classes.REButton}
+                          onClick={() => fetchLteLbbDetails()}
+                        >
+                          Return / Exchange
+                        </button>
+                      )}
                     {/* {statusCode == 2 ||
                       (statusCode == 0 && (
                         // singleOrderData.order.shipment[0].cancel_order !==
