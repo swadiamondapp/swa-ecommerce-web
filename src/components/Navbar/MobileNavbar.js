@@ -55,8 +55,8 @@ const MobileNavbar = (props) => {
   const [showUserDetails, setShowUserDetails] = useState(false);
   const dropdownRef = useRef(null);
   const [countryData, setCountryData] = useState([]);
-  const flag = localStorage.getItem("defaultCountryFlag");
-  const CountryIds = localStorage.getItem("id");
+  const flag = localStorage.getItem("https://swaecomordermain.swa.co//media/country/flag/Flag_of_the_United_Arab_Emirates.svg.png");
+  const CountryIds = localStorage.getItem(3);
   const [showModal, setShowModal] = useState(false);
   const [text, setText] = useState("");
   const pincode = localStorage.getItem("pincode");
@@ -345,13 +345,13 @@ const MobileNavbar = (props) => {
         if (!CountryIds && !flag) {
           props.setSelectedCountry({
             ...props.selectedCountry,
-            flag_image: indiaData.flag_image,
-            id: indiaData.id,
-            country_name: indiaData.country_name,
+            flag_image: "https://swaecomordermain.swa.co//media/country/flag/Flag_of_the_United_Arab_Emirates.svg.png",
+            id: 3,
+            country_name: "United Arab Emirates",
           });
-          localStorage.setItem("flag_image", indiaData.flag_image);
-          localStorage.setItem("id", indiaData.id);
-          localStorage.setItem("country_name", indiaData.country_name);
+          localStorage.setItem("flag_image", "https://swaecomordermain.swa.co//media/country/flag/Flag_of_the_United_Arab_Emirates.svg.png",);
+          localStorage.setItem("id", 3);
+          localStorage.setItem("country_name", "United Arab Emirates");
         }
         console.log("indiaData--->", indiaData);
         const defaultCountryID = localStorage.getItem("id");

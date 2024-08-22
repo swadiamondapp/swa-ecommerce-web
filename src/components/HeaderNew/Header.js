@@ -26,9 +26,9 @@ import UAE from "../../Assets/flagUAE.svg";
 import { FaPen } from "react-icons/fa";
 
 const Header = (props) => {
-  const flag = localStorage.getItem("flag_image");
-  const CountryIds = localStorage.getItem("id");
-  const Contryname = localStorage.getItem("country_name");
+  const flag = "https://swaecomordermain.swa.co//media/country/flag/Flag_of_the_United_Arab_Emirates.svg.png";
+  const CountryIds = 3;
+  const Contryname = "United Arab Emirates";
   const location = useLocation();
   const [isHome, setIsHome] = useState(
     location.pathname === "/" ? true : false
@@ -71,11 +71,11 @@ const Header = (props) => {
     setShowModal(false);
   };
 
-  useEffect(() => {
-    localStorage.setItem("id", 3);
-    localStorage.setItem("flag_image", "https://swaecomordermain.swa.co//media/country/flag/Flag_of_the_United_Arab_Emirates.svg.png");
-    localStorage.setItem("country_name", "United Arab Emirates");
-  }, []);
+  // useEffect(() => {
+  //   localStorage.setItem("id", 3);
+  //   localStorage.setItem("flag_image", "https://swaecomordermain.swa.co//media/country/flag/Flag_of_the_United_Arab_Emirates.svg.png");
+  //   localStorage.setItem("country_name", "United Arab Emirates");
+  // }, []);
 
 
   useEffect(() => {
@@ -335,17 +335,17 @@ const Header = (props) => {
         if (!CountryIds && !flag) {
           props.setSelectedCountry({
             ...props.selectedCountry,
-            flag_image: indiaData.flag_image,
-            id: indiaData.id,
-            country_name: indiaData.country_name,
+            flag_image: "https://swaecomordermain.swa.co//media/country/flag/Flag_of_the_United_Arab_Emirates.svg.png",
+            id: 3,
+            country_name: "United Arab Emirates",
           });
-          localStorage.setItem("flag_image", indiaData.flag_image);
-          localStorage.setItem("id", indiaData.id);
-          localStorage.setItem("country_name", indiaData.country_name);
+          localStorage.setItem("flag_image", "https://swaecomordermain.swa.co//media/country/flag/Flag_of_the_United_Arab_Emirates.svg.png");
+          localStorage.setItem("id", 3);
+          localStorage.setItem("country_name", "United Arab Emirates");
         }
         console.log("indiaData--->", indiaData);
-        const defaultCountryID = localStorage.getItem("id");
-        const defaultCountryFlag = localStorage.getItem("flag_image");
+        const defaultCountryID = 3;
+        const defaultCountryFlag = "https://swaecomordermain.swa.co//media/country/flag/Flag_of_the_United_Arab_Emirates.svg.png";
         if (defaultCountryID && defaultCountryFlag) {
           // Find the default country from the data using the ID
           const defaultCountry = countryData.find(
