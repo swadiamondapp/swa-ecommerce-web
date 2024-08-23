@@ -280,7 +280,7 @@ const OrderHistorypage2 = (props) => {
     }
   };
 
-  const cancelProduct = async () => {
+  const cancelProduct = async (reason, notes) => {
     try {
       const body = {
         product_id: orderDet[0].product.product_id,
@@ -289,8 +289,8 @@ const OrderHistorypage2 = (props) => {
         total_amount: total,
         payment_mode: payMode,
         cancel_type: "final",
-        reason: "aaaaaaaaaaa",
-        notes: "sssssssssssssssssssssssssssssssssssssssssssssssssssssssss",
+        reason: reason ? reason.name : "No reason selected",
+        notes: notes || "No notes provided",
       };
       const response = await axios.post(
         `${Urls.CancelOrder}?country=${countryId}`,
@@ -314,7 +314,10 @@ const OrderHistorypage2 = (props) => {
 
   console.log(
     "singleOrderData--->1233",
-    singleOrderData && singleOrderData.order && singleOrderData.order
+    singleOrderData &&
+      singleOrderData.order &&
+      singleOrderData.order.shipment[0] &&
+      singleOrderData.order.shipment[0].status
   );
 
   console.log(
@@ -325,7 +328,12 @@ const OrderHistorypage2 = (props) => {
       singleOrderData.data.order.address
   );
 
-  console.log("paymentDetails--->", paymentDetails);
+  const statusCode =
+    singleOrderData &&
+    singleOrderData.order &&
+    singleOrderData.order.shipment[0] &&
+    singleOrderData.order.shipment[0].status;
+  console.log("statusCode--->", statusCode);
 
   return (
     <div>
@@ -584,10 +592,13 @@ const OrderHistorypage2 = (props) => {
                     </Accordion>
                   </div>
                   <div className={Classes.TrackButtons}>
-                    {singleOrderData &&
-                      singleOrderData.order &&
-                      singleOrderData.order.shipment &&
-                      singleOrderData.order.shipment[0].status === 4 && (
+                    {// singleOrderData &&
+                    //   singleOrderData.order &&
+                    //   singleOrderData.order.shipment &&
+                    //   singleOrderData.order.shipment[0].status
+                    statusCode == 4 &&
+                      singleOrderData.order.shipment[0].cancel_order !==
+                        "Admin Approval pending" && (
                         <button
                           className={Classes.REButton}
                           onClick={() => fetchLteLbbDetails()}
@@ -595,10 +606,17 @@ const OrderHistorypage2 = (props) => {
                           Return / Exchange
                         </button>
                       )}
-                    {singleOrderData &&
-                      singleOrderData.order &&
-                      singleOrderData.order.shipment &&
-                      singleOrderData.order.shipment[0].status === 2 &&
+                    {/* {statusCode == 2 ||
+                      (statusCode == 0 && (
+                        // singleOrderData.order.shipment[0].cancel_order !==
+                        //   "Admin Approval pending"
+                        <div className={Classes.CancelProductButton}>
+                          <button onClick={() => setCancelProductModal(true)}>
+                            Cancel product
+                          </button>
+                        </div>
+                      ))} */}
+                    {(statusCode == 0 || statusCode == 2 || statusCode == 9) &&
                       singleOrderData.order.shipment[0].cancel_order !==
                         "Admin Approval pending" && (
                         <div className={Classes.CancelProductButton}>
