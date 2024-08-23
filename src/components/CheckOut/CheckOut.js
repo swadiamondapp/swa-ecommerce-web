@@ -684,9 +684,13 @@ function CheckOut(props) {
           setAddressData({
             ...addressData,
             sEmail: response.data.results.data.email,
-            sPhone: response.data.results.data.phone_number,
+            sPhone:  response.data.results.data.phone_number.startsWith("0")
+            ? response.data.results.data.phone_number.substring(1)
+            : response.data.results.data.phone_number,
             fullName: response.data.results.data.name,
-            mobile: response.data.results.data.phone_number,
+            mobile:  response.data.results.data.phone_number.startsWith("0")
+            ? response.data.results.data.phone_number.substring(1)
+            : response.data.results.data.phone_number,
             pincode: response.data.results.data.pincode,
             city: response.data.results.data.city,
             state: response.data.results.data.state,

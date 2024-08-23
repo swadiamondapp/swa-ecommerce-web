@@ -30,6 +30,7 @@ const Payment = () => {
   const pincodes = localStorage.getItem("pincode");
   const [isLoading, setIsLoading] = useState(false);
   const [pmethodError, setPmethodError] = useState("");
+  const [payButtonErrror,setPayButtonError] = useState("")
   const [addressData, setAddressData] = useState({
     sEmail: "",
     sPhone: "",
@@ -420,6 +421,8 @@ const Payment = () => {
           } else if (response1.data.results.status_code === 200) {
             localStorage.removeItem("Address");
             history.push("/my_orders");
+          } else if (response1.data.results.status === 206) {
+            setPayButtonError("The Pincode You Entered Is Currently Unavailable For Delivery");
           }
         });
     }
@@ -599,9 +602,11 @@ const Payment = () => {
     //       });
     //   }
     // }
+  
     console.log("buyBody-->", buyBody);
     console.log("cartBody--->", cartBody);
   };
+  console.log(payButtonErrror,"payButtonError")
 
   const handleMethodChange = (event) => {
     setMode(event.target.value);
@@ -817,6 +822,7 @@ const Payment = () => {
                     {formatIndianNumber(data.pay)}
                   </>
                 )}
+              
               </div>
               {data.totalSavedAmount ? (
                 <p className={Classes.HurrayText}>
@@ -829,7 +835,9 @@ const Payment = () => {
                 </div>
               )}
             </div>
+            <div className={Classes.ErrorMessage} >{payButtonErrror}</div>
           </div>
+          
           <div className={Classes.DeliverCard}>
             <div className={Classes.DeliverCardHeader}>
               <h4>{!showChangeAddress && "Deliver to"}</h4>
