@@ -15,10 +15,11 @@ const Payment = () => {
   const countryId = localStorage.getItem("id");
   const token = localStorage.getItem("swaToken");
   const localAddress = localStorage.getItem("Address");
+  const PromoCodeID = localStorage.getItem("Promocode")
   const Contryname = localStorage.getItem("country_name");
   const history = useHistory();
   const location = useLocation();
-  const [promoId, setPromoId] = useState("");
+  const [promoId, setPromoId] = useState(PromoCodeID ? PromoCodeID : "");
   const [mode, setMode] = useState("");
   const [amountPay, setAmountPay] = useState(100);
   const [showChangeAddress, setShowChangeAddress] = useState(false);
