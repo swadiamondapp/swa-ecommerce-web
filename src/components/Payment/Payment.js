@@ -417,8 +417,10 @@ const Payment = () => {
             localStorage.setItem("userName", data.name);
             localStorage.setItem("phoneNumber", data.number);
             localStorage.removeItem("Address");
+            localStorage.removeItem("Promocode")
             history.push("/my_orders");
           } else if (response1.data.results.status_code === 200) {
+            localStorage.removeItem("Promocode")
             localStorage.removeItem("Address");
             history.push("/my_orders");
           } else if (response1.data.results.status === 206) {

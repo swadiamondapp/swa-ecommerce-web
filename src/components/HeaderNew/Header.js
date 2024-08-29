@@ -529,35 +529,43 @@ const Header = (props) => {
             </div>
             {openDropDown && (
               <div className={Classes.CountryDropDowns} ref={dropdownRef}>
-                {countryData.map((country, index) => (
-                  <div className={Classes.CountryContainer} key={index}>
-                    <div
-                      className={Classes.contryelements}
-                      onClick={() => handleCountrySelect(country)}
-                    >
-                      <div>
-                        <img
-                          src={country.flag_image}
-                          alt={country.id}
-                          className={Classes.dropDownImages}
-                        />
-                      </div>
-                      <div>
-                        <span>
-                          {country.country_name === "United Arab Emirates"
-                            ? "UAE"
-                            : country.country_name === "Saudi Arabia"
-                            ? "KSA"
-                            : country.country_name === "India"
-                            ? "IND"
-                            : country.country_name === "United States"
-                            ? "USA"
-                            : country.country_name}
-                        </span>
+                {countryData
+                  .sort((a, b) =>
+                    a.country_name === "India"
+                      ? -1
+                      : b.country_name === "India"
+                      ? 1
+                      : 0
+                  ) // Sorts India to the top
+                  .map((country, index) => (
+                    <div className={Classes.CountryContainer} key={index}>
+                      <div
+                        className={Classes.contryelements}
+                        onClick={() => handleCountrySelect(country)}
+                      >
+                        <div>
+                          <img
+                            src={country.flag_image}
+                            alt={country.id}
+                            className={Classes.dropDownImages}
+                          />
+                        </div>
+                        <div>
+                          <span>
+                            {country.country_name === "United Arab Emirates"
+                              ? "UAE"
+                              : country.country_name === "Saudi Arabia"
+                              ? "KSA"
+                              : country.country_name === "India"
+                              ? "IND"
+                              : country.country_name === "United States"
+                              ? "USA"
+                              : country.country_name}
+                          </span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
               </div>
             )}
           </div>

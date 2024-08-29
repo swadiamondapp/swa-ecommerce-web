@@ -22,9 +22,10 @@ import Joi from "joi";
 import OtpModal from "../Navbar/OtpModal";
 
 function CheckOut(props) {
-  const localAddress = localStorage.getItem("Address");
   const location = useLocation();
+  const localAddress = localStorage.getItem("Address");
   const Contryname = localStorage.getItem("country_name");
+  const Promocode_Id  = localStorage.getItem("Promocode")
   const [token, setToken] = useState(localStorage.getItem("swaToken"));
   const [show, setShow] = useState(false);
   const [code, setCode] = useState("");
@@ -51,7 +52,7 @@ function CheckOut(props) {
   const [timer, setTimer] = useState(60);
   const countryId = localStorage.getItem("id");
 
-  console.log("total...", total);
+  console.log("promoIdIII", promoId);
 
   const [addressData, setAddressData] = useState({
     sEmail: "",
@@ -117,6 +118,7 @@ function CheckOut(props) {
     sEmail: Joi.string()
       .required()
       .messages({
+        'string.base': 'cannot be empty',
         "string.empty": `Please enter your email address.`,
         "string.email": `Please enter a valid email address.`,
       })
