@@ -91,7 +91,6 @@ function CartDesign(props) {
             setErrorImg(Warning);
             setClr("#EB4925");
           } else if (response1.data.results.status_code === 200) {
-            localStorage.setItem("Promocode", response1.data.results.data.promocode_id);
             setError("Voucher code applied");
             setErrorImg(Succes);
             setClr("#07B018");
@@ -139,6 +138,7 @@ function CartDesign(props) {
                 total: response.data.results.total_amount,
                 updatedCartResponse: response.data.results,
                 totalSavedAmount: totally_saved,
+                promoCodeIds:promoId,
               },
               name: "cart",
             },
