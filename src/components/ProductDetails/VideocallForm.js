@@ -7,15 +7,17 @@ import Classes from "./ProductDetails.module.css";
 import videoimg from "../../../src/Assets/videosucces.png";
 
 const VideocallForm = (props) => {
+  const CountryName = localStorage.getItem("country_name")
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
   const [errors, setErrors] = useState();
   const [videoData, setVideoData] = useState({
     productId: props.productId && props.productId,
-    phone: "",
+    phone: CountryName === "India" ? "+91" : CountryName === "United Arab Emirates" ? "+971" : CountryName === "United States" ? "+1" :"",
     email: "",
     language: "English",
     description: "",
   });
+
   console.log("props.productId>>", props.productId);
   const handleLanguageClick = (language) => {
     setVideoData({ ...videoData, language: language });
@@ -260,7 +262,7 @@ const VideocallForm = (props) => {
                 fontWeight: "600",
               }}
             >
-              Thank you! our representative will call you <br /> in 30 imn to
+              Thank you! our representative will call you <br /> in 30 min to
               confirm your appointment
             </p>
           </div>

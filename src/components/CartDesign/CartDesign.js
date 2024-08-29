@@ -47,6 +47,7 @@ function CartDesign(props) {
           total: total,
           updatedCartResponse: updatedCartResponse,
           totalSavedAmount: totally_saved,
+          promoCodeIds:promoId
         },
         name: "cart",
       },
@@ -90,6 +91,7 @@ function CartDesign(props) {
             setErrorImg(Warning);
             setClr("#EB4925");
           } else if (response1.data.results.status_code === 200) {
+            localStorage.setItem("Promocode", response1.data.results.data.promocode_id);
             setError("Voucher code applied");
             setErrorImg(Succes);
             setClr("#07B018");
@@ -211,7 +213,7 @@ function CartDesign(props) {
             <div className="col-md-8">
               <div className={Classes.Left}>{props.children}</div>
             </div>
-            <p className={Classes.OrderSummeryMob}>ORDER SUMMERY</p>
+            <p className={Classes.OrderSummeryMob}>ORDER SUMMARY</p>
             <div className="col-md-4">
               {/* shoping cart */}
               {props.activeCart === "shopping" && (

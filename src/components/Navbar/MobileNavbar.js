@@ -917,25 +917,28 @@ const MobileNavbar = (props) => {
                             </AccordionTab>
                           )}
                         </Accordion>
-                        <div
-                          style={{ marginBottom: "100px" }}
-                          onClick={handleLogOut}
-                        >
-                          <div className={Classes.LoggedDetailsList}>
-                            <Link to="/my_orders">
-                              <p
-                                style={{
-                                  fontSize: "16px",
-                                  color: "#000",
-                                  marginLeft: "-3px",
-                                }}
-                              >
-                                Log out
-                              </p>
-                            </Link>
-                            <IoIosArrowForward style={{ color: "#006E7F" }} />
+                        {token && (
+                          <div
+                            style={{ marginBottom: "100px" }}
+                            onClick={handleLogOut}
+                          >
+                            <div className={Classes.LoggedDetailsList}>
+                              <Link to="/my_orders">
+                                <p
+                                  style={{
+                                    fontSize: "16px",
+                                    color: "#000",
+                                    marginLeft: "-3px",
+                                  }}
+                                >
+                                  Log out
+                                </p>
+                              </Link>
+                              <IoIosArrowForward style={{ color: "#006E7F" }} />
+                            </div>
                           </div>
-                        </div>
+                        )}
+
                         <Accordion>
                           <AccordionTab className="last-accordion-tab"></AccordionTab>
                         </Accordion>
