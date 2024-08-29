@@ -23,9 +23,12 @@ import OtpModal from "../Navbar/OtpModal";
 
 function CheckOut(props) {
   const location = useLocation();
+  console.log(location,"locationSTate")
+  const { state } = location;
+  const { data } = state || {};
+  const { promoCodeIds} = data || {};
   const localAddress = localStorage.getItem("Address");
   const Contryname = localStorage.getItem("country_name");
-  const Promocode_Id  = localStorage.getItem("Promocode")
   const [token, setToken] = useState(localStorage.getItem("swaToken"));
   const [show, setShow] = useState(false);
   const [code, setCode] = useState("");
@@ -37,7 +40,7 @@ function CheckOut(props) {
   const [amountPay, setAmountPay] = useState("");
   const [total, setTotal] = useState("");
   const [voucherInput, setVoucherInput] = useState(false);
-  const [promoId, setPromoId] = useState("");
+  const [promoId, setPromoId] = useState(promoCodeIds ? promoCodeIds:"");
   const [mode, setMode] = useState("P");
   const [otpError, setOtpError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -578,6 +581,7 @@ function CheckOut(props) {
             userId: _userId,
             totalSavedAmount: props.proDet.data.totalSavedAmount,
             addressData: addressData,
+            promoCodeIds:promoId,
           },
           name: location.state.name,
         },
@@ -594,6 +598,7 @@ function CheckOut(props) {
             updatedCart: props.proDet.data.updatedCartResponse,
             totalSavedAmount: props.proDet.data.totalSavedAmount,
             addressData: addressData,
+            promoCodeIds:promoId,
           },
           name: location.state.name,
         },
@@ -647,6 +652,7 @@ function CheckOut(props) {
                 userId: _userId,
                 totalSavedAmount: props.proDet.data.totalSavedAmount,
                 addressData: addressData,
+                promoCodeIds:promoId,
               },
               name: "cart",
             },
@@ -666,6 +672,7 @@ function CheckOut(props) {
             updatedCart: props.proDet.data.updatedCartResponse,
             totalSavedAmount: props.proDet.data.totalSavedAmount,
             addressData: addressData,
+            promoCodeIds:promoId,
           },
           name: "cart",
         },
