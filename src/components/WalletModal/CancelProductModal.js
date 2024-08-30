@@ -40,6 +40,7 @@ const CancelProductModal = (props) => {
   const [notes, setNotes] = useState("");
   const token = localStorage.getItem("swaToken");
   const [selectedCity, setSelectedCity] = useState(null);
+  // const [error, setError] = useState("");
   const [isMobileView, setIsMobileView] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
   );
@@ -58,12 +59,20 @@ const CancelProductModal = (props) => {
   }, [isMobileView]);
 
   const reasons = [
-    { name: "Incorrect item", code: "INCORRECT_ITEM" },
-    { name: "Damaged item", code: "DAMAGED_ITEM" },
+    { name: "Ordered by Mistake", code: "ORDERED_BY_MISTAKE" },
+    { name: "Item No Longer Needed", code: "ITEM_NO_LONGER_NEEDED" },
+    { name: "Better Price Available", code: "BETTER_PRICE_AVAILABLE" },
+    { name: "Received as a Gift Elsewhere", code: "RECEIVED_AS_GIFT_ELSEWHERE" },
+    { name: "Changed Mind About Size or Style", code: "CHANGED_MIND_SIZE_OR_STYLE" },
     { name: "Other", code: "OTHER" },
   ];
 
   const handleCancel = () => {
+    if (!selectedReason) {
+      props.setError("Please select a reason for cancellation."); // Set error if reason is not selected
+      return;
+    }
+    props.setError(""); // Clear error if reason is selected
     props.cancelProduct(selectedReason, notes);
   };
 
@@ -102,7 +111,10 @@ const CancelProductModal = (props) => {
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
               ></textarea>
-              <div className={Classes.CancelButton}>
+              <div className={Classes.CancelButton} style={{ justifyContent: props.error ? 'space-between' : 'end' }}>
+                {props.error && (
+                  <div className={Classes.ErrorMessage}>{props.error}</div>
+                )}
                 <button onClick={handleCancel}>Cancel Product</button>
               </div>
             </div>
