@@ -19,6 +19,7 @@ const Payment = () => {
   const history = useHistory();
   const location = useLocation();
   const { data, name } = location.state;
+  console.log(location,"adddressspaymentLoaca")
   const { promoCodeIds } = data || {};
   const [promoId, setPromoId] = useState(promoCodeIds ? promoCodeIds : "");
   const [mode, setMode] = useState("");
@@ -191,7 +192,7 @@ const Payment = () => {
     //   });
     // }
   };
-
+console.log(addressId,data.addressId,"adddressssssID")
   const placeOrder = (addressId) => {
     let cartBody;
     let buyBody;
@@ -427,7 +428,7 @@ const Payment = () => {
             history.push("/my_orders");
           } else if (response1.data.results.status === 206) {
             setPayButtonError(
-              "The Pincode You Entered Is Currently Unavailable For Delivery"
+              response1.data.results.message
             );
           }
         });
@@ -682,7 +683,7 @@ const Payment = () => {
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
-
+console.log(data.pay,"datatoPaymob")
   return (
     <div>
       <div className={`${Classes.Wrapper} container`}>
@@ -781,6 +782,7 @@ const Payment = () => {
 
                 <p className={Classes.Amount}>
                   {Contryname === "India" && (
+                    
                     <BiRupee className={Classes.Rupee} />
                   )}
                   {Contryname === "United States" && (

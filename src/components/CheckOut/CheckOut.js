@@ -551,7 +551,7 @@ function CheckOut(props) {
       console.log(error);
     }
   };
-
+  console.log(addressData, "checkoutAddresssdata");
   const locallySetAddress = () => {
     if (
       addressData.fullName !== isNewaddress.fullName ||
@@ -572,6 +572,7 @@ function CheckOut(props) {
             total: total,
             totalItems: props.countCartItems ? props.countCartItems : 1,
             // addressId: response.data.data.id,
+            addressId: addressData.id,
             updatedCart: props.proDet.data.updatedCartResponse,
             token: token,
             name: _userName,
@@ -604,7 +605,6 @@ function CheckOut(props) {
       });
     }
   };
-
   const submitAddress = async (token) => {
     if (
       addressData.fullName !== isNewaddress.fullName ||
@@ -812,17 +812,31 @@ function CheckOut(props) {
     }
   }, [getOtpModal]);
 
+  // function formatIndianNumber(number) {
+  //   const numberString = number && number.toString();
+  //   const lastThreeDigits = numberString && numberString.slice(-3);
+  //   const otherDigits = numberString && numberString.slice(0, -3);
+
+  //   return (
+  //     otherDigits &&
+  //     otherDigits.replace(/\B(?=(\d{2})+(?!\d))/g, ",") +
+  //       (otherDigits ? "," : "") +
+  //       lastThreeDigits
+  //   );
+  // }
   function formatIndianNumber(number) {
     const numberString = number && number.toString();
     const lastThreeDigits = numberString && numberString.slice(-3);
     const otherDigits = numberString && numberString.slice(0, -3);
-
-    return (
+  
+    const formattedNumber =
       otherDigits &&
       otherDigits.replace(/\B(?=(\d{2})+(?!\d))/g, ",") +
-        (otherDigits ? "," : "") +
-        lastThreeDigits
-    );
+      (otherDigits ? "," : "") +
+      lastThreeDigits;
+  
+    // Check if formattedNumber exists and remove the comma before the decimal if present
+    return formattedNumber && formattedNumber.replace(/,(?=\.\d+)/, "");
   }
 
   function numberWithCommas(x) {
