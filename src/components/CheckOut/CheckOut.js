@@ -826,17 +826,22 @@ function CheckOut(props) {
   // }
   function formatIndianNumber(number) {
     const numberString = number && number.toString();
-    const lastThreeDigits = numberString && numberString.slice(-3);
-    const otherDigits = numberString && numberString.slice(0, -3);
   
+    if (!numberString) return "";
+  
+    // Split the number into integer and decimal parts, discard the decimal part
+    const integerPart = numberString.split(".")[0];
+  
+    const lastThreeDigits = integerPart.slice(-3);
+    const otherDigits = integerPart.slice(0, -3);
+  
+    // Format the integer part in Indian format
     const formattedNumber =
-      otherDigits &&
       otherDigits.replace(/\B(?=(\d{2})+(?!\d))/g, ",") +
       (otherDigits ? "," : "") +
       lastThreeDigits;
   
-    // Check if formattedNumber exists and remove the comma before the decimal if present
-    return formattedNumber && formattedNumber.replace(/,(?=\.\d+)/, "");
+    return formattedNumber;
   }
 
   function numberWithCommas(x) {

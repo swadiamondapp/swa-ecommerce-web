@@ -250,7 +250,7 @@ console.log(addressId,data.addressId,addressData.id,"adddressssssID")
           color: data.buyBody.color,
           size: data.buyBody.size,
           promocode: "",
-          address_id:addressData? addressData.id :  data.addressId,
+          address_id: addressId,
           mode: p_Method,
           user_id: data.userId,
         };
