@@ -192,7 +192,7 @@ const Payment = () => {
     //   });
     // }
   };
-console.log(addressId,data.addressId,"adddressssssID")
+console.log(addressId,data.addressId,addressData.id,"adddressssssID")
   const placeOrder = (addressId) => {
     let cartBody;
     let buyBody;
@@ -200,7 +200,7 @@ console.log(addressId,data.addressId,"adddressssssID")
     if (promoId !== "") {
       cartBody = {
         promocode_id: promoId,
-        address_id: addressId ? addressId : data.addressId,
+        address_id:addressData? addressData.id :  data.addressId,
         mode: p_Method,
         amount_to_pay: data.updatedCart
           ? data.updatedCart.amount_to_pay
@@ -217,7 +217,7 @@ console.log(addressId,data.addressId,"adddressssssID")
           color: data.buyBody.color,
           size: data.buyBody.size,
           promocode: "",
-          address_id: addressId ? addressId : data.addressId,
+          address_id:addressData? addressData.id :  data.addressId,
           mode: p_Method,
           user_id: data.userId,
         };
@@ -225,7 +225,7 @@ console.log(addressId,data.addressId,"adddressssssID")
     } else {
       cartBody = {
         promocode_id: 0,
-        address_id: addressId ? addressId : data.addressId,
+        address_id:addressData? addressData.id :  data.addressId,
         mode: p_Method,
         amount_to_pay: data.updatedCart
           ? data.updatedCart.amount_to_pay
@@ -250,7 +250,7 @@ console.log(addressId,data.addressId,"adddressssssID")
           color: data.buyBody.color,
           size: data.buyBody.size,
           promocode: "",
-          address_id: addressId ? addressId : data.addressId,
+          address_id:addressData? addressData.id :  data.addressId,
           mode: p_Method,
           user_id: data.userId,
         };
@@ -625,6 +625,7 @@ console.log(addressId,data.addressId,"adddressssssID")
         headers: { Authorization: "Token " + _token },
       });
       if (response.data.results.status === 200) {
+        console.log(response.data.results.data,"addreeeeData")
         setAddressData({
           ...addressData,
           sEmail: response.data.results.data.email,
@@ -651,6 +652,7 @@ console.log(addressId,data.addressId,"adddressssssID")
       .then((response1) => {
         setAddress(response1.data.results.data);
         if (response1.data.results.data.length !== 0) {
+          console.log(response1,"responseAdddress===>")
           setAddressId(
             response1.data.results.data[response1.data.results.data.length - 1]
               .id
@@ -667,18 +669,38 @@ console.log(addressId,data.addressId,"adddressssssID")
     fetchAddress();
   };
 
+  // function formatIndianNumber(number) {
+  //   const numberString = number && number.toString();
+  //   const lastThreeDigits = numberString && numberString.slice(-3);
+  //   const otherDigits = numberString && numberString.slice(0, -3);
+
+  //   return (
+  //     otherDigits &&
+  //     otherDigits.replace(/\B(?=(\d{2})+(?!\d))/g, ",") +
+  //       (otherDigits ? "," : "") +
+  //       lastThreeDigits
+  //   );
+  // }
   function formatIndianNumber(number) {
     const numberString = number && number.toString();
-    const lastThreeDigits = numberString && numberString.slice(-3);
-    const otherDigits = numberString && numberString.slice(0, -3);
-
-    return (
-      otherDigits &&
+  
+    if (!numberString) return "";
+  
+    // Split the number into integer and decimal parts, discard decimal part
+    const integerPart = numberString.split(".")[0];
+  
+    const lastThreeDigits = integerPart.slice(-3);
+    const otherDigits = integerPart.slice(0, -3);
+  
+    // Format the integer part in Indian format
+    const formattedIntegerPart =
       otherDigits.replace(/\B(?=(\d{2})+(?!\d))/g, ",") +
-        (otherDigits ? "," : "") +
-        lastThreeDigits
-    );
+      (otherDigits ? "," : "") +
+      lastThreeDigits;
+  
+    return formattedIntegerPart;
   }
+  
 
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
