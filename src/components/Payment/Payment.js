@@ -18,7 +18,9 @@ const Payment = () => {
   const Contryname = localStorage.getItem("country_name");
   const history = useHistory();
   const location = useLocation();
-  const [promoId, setPromoId] = useState("");
+  const { data, name } = location.state;
+  const { promoCodeIds } = data || {};
+  const [promoId, setPromoId] = useState(promoCodeIds ? promoCodeIds : "");
   const [mode, setMode] = useState("");
   const [amountPay, setAmountPay] = useState(100);
   const [showChangeAddress, setShowChangeAddress] = useState(false);
@@ -30,6 +32,7 @@ const Payment = () => {
   const pincodes = localStorage.getItem("pincode");
   const [isLoading, setIsLoading] = useState(false);
   const [pmethodError, setPmethodError] = useState("");
+  const [payButtonErrror, setPayButtonError] = useState("");
   const [addressData, setAddressData] = useState({
     sEmail: "",
     sPhone: "",
@@ -43,7 +46,8 @@ const Payment = () => {
     landMark: "",
     id: "",
   });
-  const { data, name } = location.state;
+
+  console.log(promoCodeIds, "paymentPromoCodIDddd");
   const handleChangeAddress = () => {
     setShowChangeAddress((prevState) => !prevState);
   };
@@ -416,10 +420,15 @@ const Payment = () => {
             localStorage.setItem("userName", data.name);
             localStorage.setItem("phoneNumber", data.number);
             localStorage.removeItem("Address");
+
             history.push("/my_orders");
           } else if (response1.data.results.status_code === 200) {
             localStorage.removeItem("Address");
             history.push("/my_orders");
+          } else if (response1.data.results.status === 206) {
+            setPayButtonError(
+              "The Pincode You Entered Is Currently Unavailable For Delivery"
+            );
           }
         });
     }
@@ -599,9 +608,11 @@ const Payment = () => {
     //       });
     //   }
     // }
+
     console.log("buyBody-->", buyBody);
     console.log("cartBody--->", cartBody);
   };
+  console.log(payButtonErrror, "payButtonError");
 
   const handleMethodChange = (event) => {
     setMode(event.target.value);
@@ -829,7 +840,9 @@ const Payment = () => {
                 </div>
               )}
             </div>
+            <div className={Classes.ErrorMessage}>{payButtonErrror}</div>
           </div>
+
           <div className={Classes.DeliverCard}>
             <div className={Classes.DeliverCardHeader}>
               <h4>{!showChangeAddress && "Deliver to"}</h4>

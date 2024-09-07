@@ -22,8 +22,12 @@ import Joi from "joi";
 import OtpModal from "../Navbar/OtpModal";
 
 function CheckOut(props) {
-  const localAddress = localStorage.getItem("Address");
   const location = useLocation();
+  console.log(location, "locationSTate");
+  const { state } = location;
+  const { data } = state || {};
+  const { promoCodeIds } = data || {};
+  const localAddress = localStorage.getItem("Address");
   const Contryname = localStorage.getItem("country_name");
   const [token, setToken] = useState(localStorage.getItem("swaToken"));
   const [show, setShow] = useState(false);
@@ -36,7 +40,7 @@ function CheckOut(props) {
   const [amountPay, setAmountPay] = useState("");
   const [total, setTotal] = useState("");
   const [voucherInput, setVoucherInput] = useState(false);
-  const [promoId, setPromoId] = useState("");
+  const [promoId, setPromoId] = useState(promoCodeIds ? promoCodeIds : "");
   const [mode, setMode] = useState("P");
   const [otpError, setOtpError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -51,7 +55,7 @@ function CheckOut(props) {
   const [timer, setTimer] = useState(60);
   const countryId = localStorage.getItem("id");
 
-  console.log("total...", total);
+  console.log("promoIdIII", total);
 
   const [addressData, setAddressData] = useState({
     sEmail: "",
@@ -117,6 +121,7 @@ function CheckOut(props) {
     sEmail: Joi.string()
       .required()
       .messages({
+        "string.base": "cannot be empty",
         "string.empty": `Please enter your email address.`,
         "string.email": `Please enter a valid email address.`,
       })
@@ -217,6 +222,8 @@ function CheckOut(props) {
         return errors;
       }, {});
       setErrorMessage(validationErrors);
+      placeOrder();
+      console.log("paymentClicked");
     } else {
       // Form is valid, proceed with submission
       console.log("Form submitted:", addressData);
@@ -573,6 +580,7 @@ function CheckOut(props) {
             userId: _userId,
             totalSavedAmount: props.proDet.data.totalSavedAmount,
             addressData: addressData,
+            promoCodeIds: promoId,
           },
           name: location.state.name,
         },
@@ -589,6 +597,7 @@ function CheckOut(props) {
             updatedCart: props.proDet.data.updatedCartResponse,
             totalSavedAmount: props.proDet.data.totalSavedAmount,
             addressData: addressData,
+            promoCodeIds: promoId,
           },
           name: location.state.name,
         },
@@ -642,6 +651,7 @@ function CheckOut(props) {
                 userId: _userId,
                 totalSavedAmount: props.proDet.data.totalSavedAmount,
                 addressData: addressData,
+                promoCodeIds: promoId,
               },
               name: "cart",
             },
@@ -661,6 +671,7 @@ function CheckOut(props) {
             updatedCart: props.proDet.data.updatedCartResponse,
             totalSavedAmount: props.proDet.data.totalSavedAmount,
             addressData: addressData,
+            promoCodeIds: promoId,
           },
           name: "cart",
         },
@@ -681,9 +692,13 @@ function CheckOut(props) {
           setAddressData({
             ...addressData,
             sEmail: response.data.results.data.email,
-            sPhone: response.data.results.data.phone_number,
+            sPhone: response.data.results.data.phone_number.startsWith("0")
+              ? response.data.results.data.phone_number.substring(1)
+              : response.data.results.data.phone_number,
             fullName: response.data.results.data.name,
-            mobile: response.data.results.data.phone_number,
+            mobile: response.data.results.data.phone_number.startsWith("0")
+              ? response.data.results.data.phone_number.substring(1)
+              : response.data.results.data.phone_number,
             pincode: response.data.results.data.pincode,
             city: response.data.results.data.city,
             state: response.data.results.data.state,
@@ -1124,10 +1139,20 @@ function CheckOut(props) {
                   </div>
                   <p className={Classes.Amount}>
                     {Contryname === "India" && (
-                      <BiRupee className={Classes.Rupee} />
+                      <>
+                        <BiRupee className={Classes.Rupee} />
+                        <span style={{ paddingRight: "5px" }}>
+                          {formatIndianNumber(amountPay ? amountPay : total)}
+                        </span>
+                      </>
                     )}
                     {Contryname === "United States" && (
-                      <CgDollar className={Classes.Rupee} />
+                      <>
+                        <CgDollar className={Classes.Rupee} />
+                        <span style={{ paddingRight: "5px" }}>
+                          {formatIndianNumber(amountPay ? amountPay : total)}
+                        </span>
+                      </>
                     )}
                     {Contryname === "United Arab Emirates" && (
                       <span style={{ paddingRight: "5px" }}>
