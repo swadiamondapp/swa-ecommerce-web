@@ -200,7 +200,7 @@ console.log(addressId,data.addressId,addressData.id,"adddressssssID")
     if (promoId !== "") {
       cartBody = {
         promocode_id: promoId,
-        address_id:addressData? addressData.id :  data.addressId,
+        address_id: addressId,
         mode: p_Method,
         amount_to_pay: data.updatedCart
           ? data.updatedCart.amount_to_pay
@@ -217,7 +217,7 @@ console.log(addressId,data.addressId,addressData.id,"adddressssssID")
           color: data.buyBody.color,
           size: data.buyBody.size,
           promocode: "",
-          address_id:addressData? addressData.id :  data.addressId,
+          address_id:addressData?addressData.id : addressId,
           mode: p_Method,
           user_id: data.userId,
         };
@@ -225,7 +225,7 @@ console.log(addressId,data.addressId,addressData.id,"adddressssssID")
     } else {
       cartBody = {
         promocode_id: 0,
-        address_id:addressData? addressData.id :  data.addressId,
+        address_id:  addressId,
         mode: p_Method,
         amount_to_pay: data.updatedCart
           ? data.updatedCart.amount_to_pay
@@ -908,6 +908,18 @@ console.log(data.pay,"datatoPaymob")
               mode ? placeOrder() : alert("Please select a payment method");
               // setPmethodError("Please select a payment method");
             }}
+            //     onClick={async () => {
+            //   if (data.buyBody) {
+            //     try {
+            //       await submitAddress();
+            //       placeOrder();
+            //     } catch (error) {
+            //       console.error("Error submitting address:", error);
+            //     }
+            //   } else {
+            //     alert("Please select a payment method");
+            //   }
+            // }}
           >
             Pay{" "}
             {Contryname === "India" && <BiRupee className={Classes.Rupee} />}
