@@ -354,7 +354,6 @@ const ProductDetailsPage = (props) => {
     flag_image: flag,
     country_name: Contryname,
   });
-
   return (
     <div>
       <Header
@@ -378,7 +377,9 @@ const ProductDetailsPage = (props) => {
         }
         discountVal={
           prodDet.is_on_discount
-            ? prodDet.country_total_price - prodDet.discount_price
+            ? prodDet.country_total_price > prodDet.discount_price
+              ? prodDet.country_total_price - prodDet.discount_price
+              : prodDet.discount_price - prodDet.country_total_price
             : null
         }
         discountPercentage={prodDet.discount_percentage}

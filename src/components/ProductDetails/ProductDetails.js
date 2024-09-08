@@ -49,6 +49,12 @@ import CircularProgress from "@mui/material/CircularProgress";
 import VideocallForm from "./VideocallForm";
 import { CgDollar } from "react-icons/cg";
 import LoginModal from "../LoginModal/LoginModal";
+import shippingTag from "../../Assets/shiptime.png";
+import freeDelivery3 from "../../Assets/freeDev3.png";
+import freeDelivery4 from "../../Assets/freeDev4.png";
+import freeDelivery5 from "../../Assets/freeDev5.png";
+import shippingTag1 from "../../Assets/shiptruck.png";
+import shippingtag2 from "../../Assets/shiptimetwo.png";
 
 const ProductDetails = (props) => {
   const location = useLocation();
@@ -553,8 +559,45 @@ const ProductDetails = (props) => {
       }
     });
   };
+  const getDeliveryDate = (deliveryDate) => {
+    const today = new Date();
+    const shippingTag24Hrs = "Delivery in 24 hrs";
+    const shippingTagNextDay = "Shipment in next day";
+    const shippingTag5Days = "Shipment in next 5 working days";
+
+    if (deliveryDate === shippingTag24Hrs) {
+      return shippingTag24Hrs; // Return the 24 hrs tag
+    } else if (deliveryDate === shippingTagNextDay) {
+      // Calculate the next day
+      today.setDate(today.getDate() + 1);
+    } else if (deliveryDate === shippingTag5Days) {
+      // Calculate 5 working days (skip weekends)
+      let workingDays = 5;
+      while (workingDays > 0) {
+        today.setDate(today.getDate() + 1);
+        if (today.getDay() !== 6 && today.getDay() !== 0) {
+          // Skip weekends (Saturday and Sunday)
+          workingDays--;
+        }
+      }
+
+      // Extract day and month for custom message
+      const day = today.getDate(); // Get the day of the month
+      const month = today.toLocaleString("default", { month: "long" }); // Get the full month name
+
+      // Return the custom message with the calculated date
+      return `Free delivery by ${day}th ${month}`;
+    } else {
+      return deliveryDate; // For any other delivery date
+    }
+
+    // Format the date for "Shipment in next day" or other cases
+    const options = { month: "short", day: "numeric", year: "numeric" };
+    return today.toLocaleDateString(undefined, options);
+  };
 
   console.log("imageUrls", imageUrls);
+  console.log(props.deliveryDate, "deliveryDate==>==>");
 
   return (
     <div>
@@ -1205,6 +1248,107 @@ const ProductDetails = (props) => {
                 </div>
 
                 <div className="errrMsg">{pinCodeError}</div>
+
+                {props.deliveryDate && (
+                  <div className={Classes.shippingTag_one}>
+                    <div className={Classes.shippingTag_container}>
+                      <img
+                        src={
+                          props.deliveryDate ===
+                          "Shipment in next 5 working days"
+                            ? shippingTag1
+                            : props.deliveryDate === "Delivery in 24 hrs"
+                            ? shippingtag2
+                            : props.deliveryDate === "Shipment in next day"
+                            ? shippingTag
+                            : shippingtag2
+                        }
+                      />
+                      <p className={Classes.shippingTagtext}>
+                        {props.deliveryDate ===
+                        "Shipment in next 5 working days"
+                          ? "7 day shipping"
+                          : props.deliveryDate === "Delivery in 24 hrs"
+                          ? "24hr Delivery"
+                          : props.deliveryDate === "Shipment in next day"
+                          ? "Next day shipping"
+                          : shippingtag2}
+                      </p>
+                    </div>
+                  </div>
+                )}
+                <div className={Classes.deliveryListContainer}>
+                  {props.deliveryDate === "Shipment in next 5 working days" && (
+                    <div className={Classes.deliveryDetailsList}>
+                      <div className={Classes.freedevimageBack}>
+                        <img src={freeDelivery3} />
+                      </div>
+                      <div>
+                        <div>
+                          <p className={Classes.shippingTagtext_head}>
+                            {getDeliveryDate(props.deliveryDate)}
+                          </p>
+                        </div>
+                        <div>
+                          <p className={Classes.shippingTagtext_sub}>
+                            Order in next 4 HRS 23 mins
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  {/* <div className={Classes.deliveryDetailsList}>
+                    <div className={Classes.freedevimageBack}>
+                      <img src={freeDelivery4} />
+                    </div>
+                    <div>
+                      <div>
+                        <p className={Classes.shippingTagtext_head}>
+                          available at hilite mall (1km)
+                        </p>
+                      </div>
+                      <div>
+                        <p className={Classes.shippingTagtext_sub}>
+                          Also 3 other store Show more
+                        </p>
+                      </div>
+                    </div>
+                  </div> */}
+                {props.deliveryDate && <div className={Classes.deliveryDetailsList}>
+                    <div className={Classes.freedevimageBack}>
+                      <img src={freeDelivery5} />
+                    </div>
+                    <div>
+                      {props.deliveryDate === "Delivery in 24 hrs" ? (
+                        <>
+                          <div>
+                            <p className={Classes.shippingTagtext_head}>
+                              Free try at home available
+                            </p>
+                          </div>
+                          <div>
+                            <p className={Classes.shippingTagtext_sub}>
+                              Try swa video call option
+                            </p>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                           <div>
+                        <p className={Classes.shippingTagtext_head}>
+                          Free try at home not available
+                        </p>
+                      </div>
+                      <div>
+                        <p className={Classes.shippingTagtext_sub}>
+                          Try swa video call option
+                        </p>
+                      </div></>
+                      )}
+                      
+                    </div>
+                  </div>}
+                </div>
                 {/* <div className={Classes.Flex}>
                 <img className={Classes.Stroke} src={Stroke} alt="" />
                 <p className={Classes.StrokeText}>Standard delivery between </p>
