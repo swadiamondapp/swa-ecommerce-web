@@ -87,6 +87,7 @@ const OrderHistorypage2 = (props) => {
   const [type, setType] = useState("");
   const [singleOrderData, setSingleOrderData] = useState([]);
   const [paymentDetails, setPaymentDetails] = useState([]);
+  const [error, setError] = useState("");
   const [addressData, setAddressData] = useState({
     sEmail: "",
     sPhone: "",
@@ -376,8 +377,10 @@ const OrderHistorypage2 = (props) => {
         />
         <CancelProductModal
           open={cancelProductModal}
-          handleClose={() => setCancelProductModal(false)}
+          handleClose={() => {setCancelProductModal(false);setError("")}}
           cancelProduct={cancelProduct}
+          error={error}
+          setError={setError}
         />
 
         <div>

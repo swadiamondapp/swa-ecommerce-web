@@ -551,7 +551,7 @@ function CheckOut(props) {
       console.log(error);
     }
   };
-
+  console.log(addressData, "checkoutAddresssdata");
   const locallySetAddress = () => {
     if (
       addressData.fullName !== isNewaddress.fullName ||
@@ -572,6 +572,7 @@ function CheckOut(props) {
             total: total,
             totalItems: props.countCartItems ? props.countCartItems : 1,
             // addressId: response.data.data.id,
+            addressId: addressData.id,
             updatedCart: props.proDet.data.updatedCartResponse,
             token: token,
             name: _userName,
@@ -604,7 +605,7 @@ function CheckOut(props) {
       });
     }
   };
-
+  console.log("checkoutttt===>", props.proDet.data.updatedCartResponse);
   const submitAddress = async (token) => {
     if (
       addressData.fullName !== isNewaddress.fullName ||
@@ -812,17 +813,36 @@ function CheckOut(props) {
     }
   }, [getOtpModal]);
 
+  // function formatIndianNumber(number) {
+  //   const numberString = number && number.toString();
+  //   const lastThreeDigits = numberString && numberString.slice(-3);
+  //   const otherDigits = numberString && numberString.slice(0, -3);
+
+  //   return (
+  //     otherDigits &&
+  //     otherDigits.replace(/\B(?=(\d{2})+(?!\d))/g, ",") +
+  //       (otherDigits ? "," : "") +
+  //       lastThreeDigits
+  //   );
+  // }
   function formatIndianNumber(number) {
     const numberString = number && number.toString();
-    const lastThreeDigits = numberString && numberString.slice(-3);
-    const otherDigits = numberString && numberString.slice(0, -3);
 
-    return (
-      otherDigits &&
+    if (!numberString) return "";
+
+    // Split the number into integer and decimal parts, discard the decimal part
+    const integerPart = numberString.split(".")[0];
+
+    const lastThreeDigits = integerPart.slice(-3);
+    const otherDigits = integerPart.slice(0, -3);
+
+    // Format the integer part in Indian format
+    const formattedNumber =
       otherDigits.replace(/\B(?=(\d{2})+(?!\d))/g, ",") +
-        (otherDigits ? "," : "") +
-        lastThreeDigits
-    );
+      (otherDigits ? "," : "") +
+      lastThreeDigits;
+
+    return formattedNumber;
   }
 
   function numberWithCommas(x) {
@@ -1142,7 +1162,7 @@ function CheckOut(props) {
                       <>
                         <BiRupee className={Classes.Rupee} />
                         <span style={{ paddingRight: "5px" }}>
-                          {formatIndianNumber(amountPay ? amountPay : total)}
+                          {formatIndianNumber(total)}
                         </span>
                       </>
                     )}
@@ -1178,7 +1198,7 @@ function CheckOut(props) {
                       </span>
                     )}
                     <p className={Classes.AmountPayable}>
-                      {formatIndianNumber(amountPay ? amountPay : total)}
+                      {formatIndianNumber(amountPay)}
                       {/* {location.state.data.pay} */}
                     </p>
                   </div>

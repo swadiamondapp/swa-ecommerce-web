@@ -86,6 +86,7 @@ const LoginToggle = (props) => {
   const [isDesk, setIsDesk] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
   );
+  const Contryname = localStorage.getItem("country_name");
 
   useEffect(() => {
     const handleResize = () => {
@@ -132,7 +133,7 @@ const LoginToggle = (props) => {
 
   const handleOtpModalOpen = () => setGetOtpModal(true);
   const handleOtpModalClose = () => setGetOtpModal(false);
-
+console.log(mobileNumber,"mobileNumber==>")
   const handleSignupModalClose = () => setSignupModal(false);
   const handleOpen = (event) => {
     // event.preventDefault(); // Prevent default form submission behavior
@@ -172,11 +173,16 @@ const LoginToggle = (props) => {
     // // Open the modal
     setOpen(true);
   };
+  console.log(activeTab,"activeTab==>")
   const handleClose = () => setOpen(false);
 
   function handleCLick() {}
   const handleTabClick = (tab) => {
-    setActiveTab(tab);
+    if (Contryname === "India") {
+      setActiveTab(tab);
+    }else {
+      alert("Mobile login only available in India");
+    }
   };
   const style = {
     position: "absolute",
@@ -329,8 +335,8 @@ const LoginToggle = (props) => {
     const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const body = {
       phone_code: "+91",
-      // phone: mobileNumber ? mobileNumber : signUpData.mobile,
-      phone: "",
+      phone: mobileNumber ? mobileNumber : signUpData.mobile,
+      // phone: "",
       email: signUpData.email,
       createuser: "False",
       forgotuser: "False",
@@ -352,7 +358,7 @@ const LoginToggle = (props) => {
     try {
       console.log("Api keri");
       const response = await axios.post(Urls.sentOtp, body);
-      console.log(response.data);
+      console.log(response.data,"ressoibse==otop");
       if (response.data[0] === "Otp send Successfully") {
         setIsSignup(false);
         handleOtpModalOpen();
@@ -783,10 +789,10 @@ const LoginToggle = (props) => {
                         <div
                           className={`Classes.tab-item ${activeTab === "tab1" &&
                             "active"}`}
-                          onClick={() => alert("Not Available this time..!")}
+                          onClick={() =>  handleTabClick("tab1")}
                         >
                           {activeTab === "tab1" ? (
-                            <div className={Classes.tabTitleOne}>
+                            <div className={Classes.tabTitleOne} style={{backgroundColor:"#FFF",borderRadius:"4px"}}>
                               {/* <span>Email</span> */}
                               <span>Phone number</span>
                             </div>
