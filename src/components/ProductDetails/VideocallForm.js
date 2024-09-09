@@ -119,14 +119,14 @@ const VideocallForm = (props) => {
       const reposnse = await axios.post(Urls.videoCallPost, body);
       if (reposnse.data.status === 200) {
         setIsSuccessOpen(true);
-        props.handleClose();
         setVideoData({
-          productId: "",
-          phone: "",
+          productId: videoData.productId,
+          phone: "+91",
           email: "",
           language: "English",
           description: "",
         });
+        props.handleClose();
         setTimeout(() => {
           setIsSuccessOpen(false);
         }, 2000);

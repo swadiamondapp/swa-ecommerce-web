@@ -1233,7 +1233,7 @@ const ProductDetails = (props) => {
                 <div style={{ color: "#ff000094" }}>{props.picodeError}</div>
                 <div style={{ color: "#ff000094" }}>{props.sizeError}</div>
                 <div style={{ color: "#ff000094" }}>{props.colorError}</div>
-                <div>
+                {/* <div>
                   {props.pincodeShow && (
                     <p
                       style={{
@@ -1245,7 +1245,7 @@ const ProductDetails = (props) => {
                       {props.deliveryDate}
                     </p>
                   )}{" "}
-                </div>
+                </div> */}
 
                 <div className="errrMsg">{pinCodeError}</div>
 

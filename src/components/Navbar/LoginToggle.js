@@ -72,6 +72,7 @@ const LoginToggle = (props) => {
   const [getOtpModal, setGetOtpModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [timer, setTimer] = useState(60);
+  const [ AlreadyExistText, setAlreadyExistText] = useState("")
   const [signUpData, setSignUpData] = useState({
     username: "",
     mobile: "",
@@ -322,6 +323,10 @@ console.log(mobileNumber,"mobileNumber==>")
           error.response.data.results.message ===
           "user with this email or phone number already exists!!!"
         ) {
+          setAlreadyExistText("UserName already exist")
+          setTimeout(() => {
+            setAlreadyExistText([])
+          }, 3500);
           sendOtp();
         }
       }
@@ -638,6 +643,9 @@ console.log(mobileNumber,"mobileNumber==>")
                         <p className={Classes.ErrorText}>
                           {validationErrors.honorific_name &&
                             validationErrors.honorific_name}
+                        </p>
+                        <p className={Classes.ErrorText}>
+                         {AlreadyExistText && AlreadyExistText}
                         </p>
                       </div>
                     </div>
