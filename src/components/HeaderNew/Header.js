@@ -58,6 +58,10 @@ const Header = (props) => {
   const userName = localStorage.getItem("userName");
   const [showModal, setShowModal] = useState(false);
   const pincode = localStorage.getItem("pincode");
+  const [country, setCountry] = useState();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
 
   const [showUserDetails, setShowUserDetails] = useState(false);
   const userDetailsRef = useRef(null);
@@ -309,38 +313,97 @@ const Header = (props) => {
   ];
   const countryFlag = localStorage.getItem("flag_image");
 
-  console.log("countryFlag", countryFlag);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get(Urls.getCountryFlags);
+  //       console.log("response.data.results.data", response.data.results.data);
+  //       // const filteredData = response.data.results.data.filter(
+  //       //   (country) => country.country_name === "United Arab Emirates"
+  //       // );
+  //       setCountryData(response.data.results.data);
+
+  //       // Extracting the ID of India
+  //       const indiaData = response.data.results.data.find(
+  //         (country) => country.country_name === "India"
+  //       );
+  //       console.log(indiaData,"indiaData---")
+  //       if (!CountryIds && !flag) {
+  //         props.setSelectedCountry({
+  //           ...props.selectedCountry,
+  //           flag_image: indiaData.flag_image,
+  //           id: indiaData.id,
+  //           country_name: indiaData.country_name,
+  //         });
+  //         localStorage.setItem("flag_image", indiaData.flag_image);
+  //         localStorage.setItem("id", indiaData.id);
+  //         localStorage.setItem("country_name", indiaData.country_name);
+  //       }
+  //       console.log("indiaData--->", indiaData);
+  //       const defaultCountryID = localStorage.getItem("id");
+  //       const defaultCountryFlag = localStorage.getItem("flag_image");
+  //       if (defaultCountryID && defaultCountryFlag) {
+  //         // Find the default country from the data using the ID
+  //         const defaultCountry = countryData.find(
+  //             (country) => country.id === parseInt(defaultCountryID)
+  //           );
+  //           if (defaultCountry) {
+  //               props.setSelectedCountry(defaultCountry);
+  //         }
+  //       }
+  //       console.log("filterCountry",filterCountry); 
+  //       } catch (error) {
+  //         console.error("Error fetching country details:", error);
+  //       }
+  //     };
+      
+  //     fetchData();
+  //   }, []);
+   
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(Urls.getCountryFlags);
         console.log("response.data.results.data", response.data.results.data);
-        // const filteredData = response.data.results.data.filter(
-        //   (country) => country.country_name === "United Arab Emirates"
-        // );
         setCountryData(response.data.results.data);
 
-        // Extracting the ID of India
-        const indiaData = response.data.results.data.find(
-          (country) => country.country_name === "India"
-        );
-        if (!CountryIds && !flag) {
-          props.setSelectedCountry({
-            ...props.selectedCountry,
-            flag_image: indiaData.flag_image,
-            id: indiaData.id,
-            country_name: indiaData.country_name,
-          });
-          localStorage.setItem("flag_image", indiaData.flag_image);
-          localStorage.setItem("id", indiaData.id);
-          localStorage.setItem("country_name", indiaData.country_name);
+        const geoResponse = await axios.get(`https://api.ipgeolocation.io/ipgeo?apiKey=61f94c2e11f248ecac2db57308e0ceca`);
+        const userCountryName = geoResponse.data.country_name;
+        // const userCountryName = "Oman";
+        console.log("User Country from IP:", userCountryName);
+        setCountry(userCountryName);
+
+        let selectedCountryData;
+
+        if (userCountryName === "India" || userCountryName === "United Arab Emirates") {
+          selectedCountryData = response.data.results.data.find(
+            (country) => country.country_name === userCountryName
+          );
+        } else {
+          selectedCountryData = response.data.results.data.find(
+            (country) => country.country_name === "United States"
+          );
         }
-        console.log("indiaData--->", indiaData);
+
+        if (selectedCountryData) {
+          console.log("Selected Country Data:", selectedCountryData);
+          if (!CountryIds && !flag) {
+            props.setSelectedCountry({
+              ...props.selectedCountry,
+              flag_image: selectedCountryData.flag_image,
+              id: selectedCountryData.id,
+              country_name: selectedCountryData.country_name,
+            });
+            localStorage.setItem("flag_image", selectedCountryData.flag_image);
+            localStorage.setItem("id", selectedCountryData.id);
+            localStorage.setItem("country_name", selectedCountryData.country_name);
+          }
+        }
+
         const defaultCountryID = localStorage.getItem("id");
         const defaultCountryFlag = localStorage.getItem("flag_image");
         if (defaultCountryID && defaultCountryFlag) {
-          // Find the default country from the data using the ID
           const defaultCountry = countryData.find(
             (country) => country.id === parseInt(defaultCountryID)
           );
@@ -348,17 +411,25 @@ const Header = (props) => {
             props.setSelectedCountry(defaultCountry);
           }
         }
+        
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching country details:", error);
+        setError("Failed to fetch country details");
+        setLoading(false);
       }
     };
 
     fetchData();
   }, []);
 
-  console.log("countryData==>", countryData);
+  // console.log("country==>", country);
+  // console.log("countryData", countryData);
+
+ 
 
   const handleCountrySelect = (country) => {
+    debugger
     if (!isHomePage) {
       history.push("/");
     }
@@ -513,7 +584,7 @@ const Header = (props) => {
           <div
             style={{ cursor: "pointer" }}
             className={Classes.CountryFlags}
-            onClick={handleOpenDropDown}
+            // onClick={handleOpenDropDown}
             ref={nameRef}
           >
             <div className={Classes.headerElement}>
@@ -569,6 +640,7 @@ const Header = (props) => {
               </div>
             )}
           </div>
+          
           <CgHeart
             className={`${Classes.Icon} ${Classes.headerElement}`}
             color="#FFFFFF"
