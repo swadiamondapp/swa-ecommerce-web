@@ -19,7 +19,7 @@ const Payment = () => {
   const history = useHistory();
   const location = useLocation();
   const { data, name } = location.state;
-  console.log(location,"adddressspaymentLoaca")
+  console.log(location, "adddressspaymentLoaca");
   const { promoCodeIds } = data || {};
   const [promoId, setPromoId] = useState(promoCodeIds ? promoCodeIds : "");
   const [mode, setMode] = useState("");
@@ -192,7 +192,7 @@ const Payment = () => {
     //   });
     // }
   };
-console.log(addressId,data.addressId,addressData.id,"adddressssssID")
+  console.log(addressId, data.addressId, addressData.id, "adddressssssID");
   const placeOrder = (addressId) => {
     let cartBody;
     let buyBody;
@@ -217,7 +217,7 @@ console.log(addressId,data.addressId,addressData.id,"adddressssssID")
           color: data.buyBody.color,
           size: data.buyBody.size,
           promocode: "",
-          address_id:addressData?addressData.id : addressId,
+          address_id: addressData ? addressData.id : addressId,
           mode: p_Method,
           user_id: data.userId,
         };
@@ -225,7 +225,7 @@ console.log(addressId,data.addressId,addressData.id,"adddressssssID")
     } else {
       cartBody = {
         promocode_id: 0,
-        address_id:  addressId,
+        address_id: addressId,
         mode: p_Method,
         amount_to_pay: data.updatedCart
           ? data.updatedCart.amount_to_pay
@@ -427,9 +427,7 @@ console.log(addressId,data.addressId,addressData.id,"adddressssssID")
             localStorage.removeItem("Address");
             history.push("/my_orders");
           } else if (response1.data.results.status === 206) {
-            setPayButtonError(
-              response1.data.results.message
-            );
+            setPayButtonError(response1.data.results.message);
           }
         });
     }
@@ -625,7 +623,7 @@ console.log(addressId,data.addressId,addressData.id,"adddressssssID")
         headers: { Authorization: "Token " + _token },
       });
       if (response.data.results.status === 200) {
-        console.log(response.data.results.data,"addreeeeData")
+        console.log(response.data.results.data, "addreeeeData");
         setAddressData({
           ...addressData,
           sEmail: response.data.results.data.email,
@@ -652,7 +650,7 @@ console.log(addressId,data.addressId,addressData.id,"adddressssssID")
       .then((response1) => {
         setAddress(response1.data.results.data);
         if (response1.data.results.data.length !== 0) {
-          console.log(response1,"responseAdddress===>")
+          console.log(response1, "responseAdddress===>");
           setAddressId(
             response1.data.results.data[response1.data.results.data.length - 1]
               .id
@@ -683,29 +681,28 @@ console.log(addressId,data.addressId,addressData.id,"adddressssssID")
   // }
   function formatIndianNumber(number) {
     const numberString = number && number.toString();
-  
+
     if (!numberString) return "";
-  
+
     // Split the number into integer and decimal parts, discard decimal part
     const integerPart = numberString.split(".")[0];
-  
+
     const lastThreeDigits = integerPart.slice(-3);
     const otherDigits = integerPart.slice(0, -3);
-  
+
     // Format the integer part in Indian format
     const formattedIntegerPart =
       otherDigits.replace(/\B(?=(\d{2})+(?!\d))/g, ",") +
       (otherDigits ? "," : "") +
       lastThreeDigits;
-  
+
     return formattedIntegerPart;
   }
-  
 
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
-console.log(data.pay,"datatoPaymob")
+  console.log(data.pay, "datatoPaymob");
   return (
     <div>
       <div className={`${Classes.Wrapper} container`}>
@@ -802,19 +799,33 @@ console.log(data.pay,"datatoPaymob")
                   <p className={Classes.TotalSmall}>TOTAL PAYABLE</p>
                 </div>
 
-                <p className={Classes.Amount}>
-                  {Contryname === "India" && (
-                    
-                    <BiRupee className={Classes.Rupee} />
-                  )}
-                  {Contryname === "United States" && (
-                    <CgDollar className={Classes.Rupee} />
-                  )}
-                  {Contryname === "United Arab Emirates" && (
-                    <span style={{ paddingRight: "5px" }}>AED</span>
-                  )}{" "}
-                  {formatIndianNumber(data.pay)}
-                </p>
+                {location.state.name === "buybody" ? (
+                  <p className={Classes.Amount}>
+                    {Contryname === "India" && (
+                      <BiRupee className={Classes.Rupee} />
+                    )}
+                    {Contryname === "United States" && (
+                      <CgDollar className={Classes.Rupee} />
+                    )}
+                    {Contryname === "United Arab Emirates" && (
+                      <span style={{ paddingRight: "5px" }}>AED</span>
+                    )}{" "}
+                    {formatIndianNumber(data.total)}
+                  </p>
+                ) : (
+                  <p className={Classes.Amount}>
+                    {Contryname === "India" && (
+                      <BiRupee className={Classes.Rupee} />
+                    )}
+                    {Contryname === "United States" && (
+                      <CgDollar className={Classes.Rupee} />
+                    )}
+                    {Contryname === "United Arab Emirates" && (
+                      <span style={{ paddingRight: "5px" }}>AED</span>
+                    )}{" "}
+                    {formatIndianNumber(data.pay)}
+                  </p>
+                )}
               </div>
               <div
                 className={Classes.PayButton}
@@ -839,17 +850,35 @@ console.log(data.pay,"datatoPaymob")
                   </>
                 ) : (
                   <>
-                    Pay{" "}
-                    {Contryname === "India" && (
-                      <BiRupee className={Classes.Rupee} />
+                    {location.state.name === "buybody" ? (
+                      <>
+                        Pay{" "}
+                        {Contryname === "India" && (
+                          <BiRupee className={Classes.Rupee} />
+                        )}
+                        {Contryname === "United States" && (
+                          <CgDollar className={Classes.Rupee} />
+                        )}
+                        {Contryname === "United Arab Emirates" && (
+                          <span style={{ paddingRight: "5px" }}>AED</span>
+                        )}{" "}
+                        {formatIndianNumber(data.total)}
+                      </>
+                    ) : (
+                      <>
+                        Pay{" "}
+                        {Contryname === "India" && (
+                          <BiRupee className={Classes.Rupee} />
+                        )}
+                        {Contryname === "United States" && (
+                          <CgDollar className={Classes.Rupee} />
+                        )}
+                        {Contryname === "United Arab Emirates" && (
+                          <span style={{ paddingRight: "5px" }}>AED</span>
+                        )}{" "}
+                        {formatIndianNumber(data.pay)}
+                      </>
                     )}
-                    {Contryname === "United States" && (
-                      <CgDollar className={Classes.Rupee} />
-                    )}
-                    {Contryname === "United Arab Emirates" && (
-                      <span style={{ paddingRight: "5px" }}>AED</span>
-                    )}{" "}
-                    {formatIndianNumber(data.pay)}
                   </>
                 )}
               </div>
@@ -904,8 +933,14 @@ console.log(data.pay,"datatoPaymob")
           </div>
           <div
             className={Classes.PayButtonMobile}
+            // onClick={() => {
+            //   mode ? placeOrder() : alert("Please select a payment method");
+            //   // setPmethodError("Please select a payment method");
+            // }}
             onClick={() => {
-              mode ? placeOrder() : alert("Please select a payment method");
+              mode
+                ? handlePayButton()
+                : alert("Please select a payment method");
               // setPmethodError("Please select a payment method");
             }}
             //     onClick={async () => {

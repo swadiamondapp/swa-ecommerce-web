@@ -121,7 +121,7 @@ const VideocallForm = (props) => {
         setIsSuccessOpen(true);
         setVideoData({
           productId: videoData.productId,
-          phone: "+91",
+          phone:  CountryName === "India" ? "+91" : CountryName === "United Arab Emirates" ? "+971" : CountryName === "United States" ? "+1" :"",
           email: "",
           language: "English",
           description: "",
