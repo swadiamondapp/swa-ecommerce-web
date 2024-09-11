@@ -394,12 +394,25 @@ const OrderHistorypage2 = (props) => {
                     singleOrderData.order &&
                     singleOrderData.order.order_code}
                 </h3>
-                <div className={Classes.DeliveryDetails}>
-                  <p>
-                    <img src={deliveryimg} alt="deliveryimg" />
-                    Delivered on <span>26 may 2023</span>
-                  </p>
-                </div>
+                {(statusCode == 0 || statusCode == 2 || statusCode == 9) &&
+                      singleOrderData.order.shipment[0].cancel_order !==
+                        "Admin Approval pending" ? (
+                          <div className={Classes.DeliveryDetails}>
+                          <p>
+                            <img src={deliveryimg} alt="deliveryimg" />
+                            Delivered on <span>26 may 2023</span>
+                          </p>
+                        </div>
+                    
+                      ) : (
+                        <div className={Classes.DeliveryDetails}>
+                        <p>
+                          <img src={deliveryimg} alt="deliveryimg" />
+                          <span style={{ color:"red",}}>cancelled</span>
+                        </p>
+                      </div>
+                       
+                      )}
               </div>
               {/* new design */}
               <div className={Classes.parentCollaps5}>

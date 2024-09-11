@@ -1170,13 +1170,13 @@ function CheckOut(props) {
                       <>
                         <CgDollar className={Classes.Rupee} />
                         <span style={{ paddingRight: "5px" }}>
-                          {formatIndianNumber(amountPay ? amountPay : total)}
+                          {formatIndianNumber(total)}
                         </span>
                       </>
                     )}
                     {Contryname === "United Arab Emirates" && (
                       <span style={{ paddingRight: "5px" }}>
-                        AED {formatIndianNumber(amountPay ? amountPay : total)}
+                        AED {formatIndianNumber(total)}
                       </span>
                     )}
 
@@ -1197,10 +1197,17 @@ function CheckOut(props) {
                         AED
                       </span>
                     )}
-                    <p className={Classes.AmountPayable}>
-                      {formatIndianNumber(amountPay)}
-                      {/* {location.state.data.pay} */}
-                    </p>
+                    {state.name === "buybody" ? (
+                      <p className={Classes.AmountPayable}>
+                        {formatIndianNumber(total)}
+                        {/* {location.state.data.pay} */}
+                      </p>
+                    ) : (
+                      <p className={Classes.AmountPayable}>
+                        {formatIndianNumber(amountPay)}
+                        {/* {location.state.data.pay} */}
+                      </p>
+                    )}
                   </div>
                 </div>
 
