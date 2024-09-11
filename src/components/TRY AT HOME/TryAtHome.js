@@ -195,7 +195,7 @@ const TryAtHome = () => {
                                   : Classes.TryDesign1
                               }
                             >
-                              <p>1 Design</p>
+                              <p>{itemCount} Design</p>
                             </div>
                           </div>
                         );
