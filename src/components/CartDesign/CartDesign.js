@@ -369,9 +369,13 @@ function CartDesign(props) {
                         <p className={Classes.TotalSmall}>
                           Total &nbsp;
                           <span>
-                            (
+                            {/* (
                             {props.tryCartcountResults &&
                               props.tryCartcountResults.item_count}{" "}
+                            Items) */}
+                            (
+                            {props.cartCount &&
+                              props.cartCount}{" "}
                             Items)
                           </span>
                         </p>
