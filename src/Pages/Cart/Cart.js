@@ -42,7 +42,7 @@ const Cart = () => {
     flag_image: flag,
     country_name: Contryname,
   });
-  console.log("tryCartResults", tryCartResults);
+  console.log("activeCart", activeCart);
   console.log("cartList00000", cartList);
   console.log("cartItemsCount", cartItemsCount);
   useEffect(() => {
@@ -159,6 +159,7 @@ const Cart = () => {
       .then((response1) => {
         if (response1.data.results.status_code === 200) {
           fechTryAtHomeCart();
+          setShow(false)
         } else if (
           response1.data.results.message === "Already Processed, Cannot delete"
         ) {
@@ -201,6 +202,45 @@ const Cart = () => {
             cartNewArray = [...cartList];
             cartNewArray.splice(index, 1);
             setCartList(cartNewArray);
+            // setCartItemsCount(count);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const movWishListTrial = (selids) => {
+    setShow(false);
+    setLoading(true);
+    const index = tryCartResults.findIndex((obj) => obj.id === selids);
+    axios
+      .delete(`${Urls.cart}${selids}/?country=${countryId}`, {
+        headers: { Authorization: "Token " + token },
+      })
+      .then((response1) => {
+        setLoading(false);
+
+        const body = {
+          product_id: productId,
+        };
+
+        axios
+          .post(`${Urls.wishlist}?country=${countryId}`, body, {
+            headers: { Authorization: "Token " + token },
+          })
+          .then((response1) => {
+            setLoading(false);
+            setShow(false);
+            let count = cartItemsCount;
+            count = count - 1;
+            setCartItemsCount(count);
+            let cartNewArray = [];
+            cartNewArray = [...tryCartResults];
+            cartNewArray.splice(index, 1);
+            setTryCartResults(cartNewArray);
             // setCartItemsCount(count);
           })
           .catch((error) => {
@@ -255,7 +295,7 @@ const Cart = () => {
           <CartDesign
             amount={amountPay}
             cartProAmnt={selProAmnt}
-            cartCount={cartItemsCount}
+            cartCount={cartList.length}
             totalSavedAmount={totalSavedAmount}
             activeCart={activeCart}
             tryCartcountResults={tryCartcountResults}
@@ -331,7 +371,7 @@ const Cart = () => {
           <CartDesign
             amount={amountPay}
             cartProAmnt={selProAmnt}
-            cartCount={cartItemsCount}
+            cartCount={tryCartResults.length}
             totalSavedAmount={totalSavedAmount}
             activeCart={activeCart}
             tryCartcountResults={tryCartcountResults}
@@ -342,8 +382,7 @@ const Cart = () => {
                 return (
                   <TrialCart
                     key={index}
-                    // remove={() => removeCartHandler(item)}
-                    remove={() => addDesigns(item.id)}
+                    remove={() => removeCartHandler(item)}
                     ProductImage={item.thumbnail_image}
                     ProductName={item.product.product_name}
                     NewPrice={
@@ -384,8 +423,8 @@ const Cart = () => {
           handleClose={handleCloseHandler}
           title="Move from bag"
           img={img}
-          movWish={() => movWishList(selId)}
-          remove={() => removeHandler(selId)}
+          movWish={activeCart === "shopping" ? () => movWishList(selId) : ()=>movWishListTrial(selId)}
+          remove={activeCart === "shopping" ? () => removeHandler(selId) : () => addDesigns(selId)}
           body="Are you sure that you want to move 
         this item from the cat?"
           shows={show}
