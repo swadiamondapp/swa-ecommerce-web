@@ -88,7 +88,7 @@ const Payment = () => {
     if (localAddress) {
       submitAddress();
     } else {
-      placeOrder();
+      placeOrder(data.addressId);
     }
   };
 
@@ -956,15 +956,35 @@ const Payment = () => {
             //   }
             // }}
           >
-            Pay{" "}
-            {Contryname === "India" && <BiRupee className={Classes.Rupee} />}
-            {Contryname === "United States" && (
-              <CgDollar className={Classes.Rupee} />
+            {location.state.name === "buybody" ? (
+              <>
+                Pay{" "}
+                {Contryname === "India" && (
+                  <BiRupee className={Classes.Rupee} />
+                )}
+                {Contryname === "United States" && (
+                  <CgDollar className={Classes.Rupee} />
+                )}
+                {Contryname === "United Arab Emirates" && (
+                  <span style={{ paddingRight: "5px" }}>AED</span>
+                )}{" "}
+                {formatIndianNumber(data.total)}
+              </>
+            ) : (
+              <>
+                Pay{" "}
+                {Contryname === "India" && (
+                  <BiRupee className={Classes.Rupee} />
+                )}
+                {Contryname === "United States" && (
+                  <CgDollar className={Classes.Rupee} />
+                )}
+                {Contryname === "United Arab Emirates" && (
+                  <span style={{ paddingRight: "5px" }}>AED</span>
+                )}{" "}
+                {formatIndianNumber(data.pay)}
+              </>
             )}
-            {Contryname === "United Arab Emirates" && (
-              <span style={{ paddingRight: "5px" }}>AED</span>
-            )}{" "}
-            {formatIndianNumber(data.pay)}
           </div>
         </div>
       </div>
