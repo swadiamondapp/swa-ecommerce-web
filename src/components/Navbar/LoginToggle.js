@@ -436,8 +436,10 @@ console.log(mobileNumber,"mobileNumber==>")
       .post(urls.Login, body)
       .then((response) => {
         if (response.data.results.status_code === 200) {
+          console.log(response.data.results.data.image,"userProfile")
           localStorage.setItem("swaToken", response.data.results.token);
           localStorage.setItem("userName", response.data.results.data.name);
+          localStorage.setItem("userProfile", response.data.results.data.image);
           localStorage.setItem(
             "phoneNumber",
             response.data.results.data.phone_number

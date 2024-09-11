@@ -43,6 +43,7 @@ const Profile = (props) => {
   const [open, setOpen] = useState(false);
   const [loginModalVisible, setLoginModalVisible] = useState(false);
   const [show, setShow] = useState(false);
+  const userProfileImage = localStorage.getItem("userProfile")
 
   const [isMobileView, setIsMobileView] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
@@ -206,7 +207,7 @@ const Profile = (props) => {
           <form onSubmit={handleSubmit}>
             <div className={Classes.ProfileCard}>
               <h3>Edit profile</h3>
-              <img src={preview} alt="preview" />
+              <img src={userProfileImage ? userProfileImage :preview} alt="preview" />
               <p
                 className={Classes.UploadPhotoProfile}
                 onClick={() => document.getElementById("photoUpload").click()}
