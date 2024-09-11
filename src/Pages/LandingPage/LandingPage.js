@@ -259,7 +259,6 @@ const LandingPage = () => {
     );
   } else {
     newArriv = newArrival.map((item, index) => {
-      console.log("item.discount_percentage--->", item);
       return (
         <NewArrivalCard
           ProductImage={item.thumbnail_image && item.thumbnail_image}

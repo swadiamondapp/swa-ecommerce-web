@@ -293,6 +293,7 @@ const CategorySearch = (props) => {
   } else {
     products = product.map((item, index) => {
       categoryName = item.category.name;
+      console.log("ringssssssss",product)
       return (
         <NewArrivalCard
           ProductImage={item.thumbnail_image}

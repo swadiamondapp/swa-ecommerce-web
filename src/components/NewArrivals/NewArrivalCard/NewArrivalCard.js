@@ -73,6 +73,29 @@ const NewArrivalCard = (props) => {
       toast("Please Login!");
     }
   };
+console.log(wishId,"wishId")
+console.log(addToWishList,"addToWishList")
+  // const Remove = () => {
+  //   if (token !== null) {
+  //     if (wishId !== "") {
+  //       axios
+  //         .delete(`${Urls.wishlist + wishId}?country=${countryId}`, {
+  //           headers: {
+  //             Authorization: "Token " + token,
+  //           },
+  //         })
+  //         .then((response1) => {
+  //           setAddToWishList(false);
+  //           props.deltWishList();
+  //         })
+  //         .catch((error) => {
+  //           console.log(error);
+  //         });
+  //     }
+  //   } else {
+  //     toast("Please Login!");
+  //   }
+  // };
   // const addToCart = () =>{
   //     history.push('/cart')
   // }
