@@ -128,7 +128,13 @@ const TryAtHome = () => {
       },
     });
   };
-
+  const [itemCount, setItemCount] = useState(0); 
+  useEffect(() => {
+    if (tryCartResults && tryCartResults.cart_item) {
+      setItemCount(tryCartResults.cart_item.length);
+    }
+  }, [tryCartResults]);
+  console.log(itemCount,"itemsTryCOunt")
   const handleProceedClick = () => {
     if (!selectedDate || !selectedTimeSlot) {
       setErrorMessage("Please select both a date and a time slot.");
@@ -143,6 +149,7 @@ const TryAtHome = () => {
       state: {
         selectedTimeSlot,
         selectedDate: selectedDate ? formatSelectedDate(selectedDate) : null,
+        tryAtHomeCount:itemCount
       },
     });
   };
