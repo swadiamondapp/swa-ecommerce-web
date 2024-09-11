@@ -194,7 +194,7 @@ const VideocallForm = (props) => {
                 </div>
 
                 <div className={Classes.Prefered_languages}>
-                  <h3>Prefered Language</h3>
+                  <h3>Preferred Language</h3>
                   <div className={Classes.Language_vi}>
                     {languages.map((language) => (
                       <button
