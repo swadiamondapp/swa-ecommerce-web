@@ -312,6 +312,18 @@ const OrderHistorypage2 = (props) => {
       console.log(error);
     }
   };
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+  
+    const options = {
+      weekday: "short",  // This will show "Mon" instead of "Monday"
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    };
+  
+    return date.toLocaleDateString("en-US", options);
+  }
 
   console.log(
     "singleOrderData--->1233",
@@ -335,6 +347,13 @@ const OrderHistorypage2 = (props) => {
     singleOrderData.order.shipment[0] &&
     singleOrderData.order.shipment[0].status;
   console.log("statusCode--->", statusCode);
+  const orderDate =
+  singleOrderData &&
+  singleOrderData.order && 
+  singleOrderData.order.selected_data &&
+  singleOrderData.order.selected_data.ordered
+  console.log(orderDate,"orderDate")
+
 
   return (
     <div>
@@ -377,7 +396,10 @@ const OrderHistorypage2 = (props) => {
         />
         <CancelProductModal
           open={cancelProductModal}
-          handleClose={() => {setCancelProductModal(false);setError("")}}
+          handleClose={() => {
+            setCancelProductModal(false);
+            setError("");
+          }}
           cancelProduct={cancelProduct}
           error={error}
           setError={setError}
@@ -395,24 +417,22 @@ const OrderHistorypage2 = (props) => {
                     singleOrderData.order.order_code}
                 </h3>
                 {(statusCode == 0 || statusCode == 2 || statusCode == 9) &&
-                      singleOrderData.order.shipment[0].cancel_order !==
-                        "Admin Approval pending" ? (
-                          <div className={Classes.DeliveryDetails}>
-                          <p>
-                            <img src={deliveryimg} alt="deliveryimg" />
-                            Delivered on <span>26 may 2023</span>
-                          </p>
-                        </div>
-                    
-                      ) : (
-                        <div className={Classes.DeliveryDetails}>
-                        <p>
-                          <img src={deliveryimg} alt="deliveryimg" />
-                          <span style={{ color:"red",}}>cancelled</span>
-                        </p>
-                      </div>
-                       
-                      )}
+                singleOrderData.order.shipment[0].cancel_order !==
+                  "Admin Approval pending" ? (
+                  <div className={Classes.DeliveryDetails}>
+                    <p>
+                      <img src={deliveryimg} alt="deliveryimg" />
+                      Delivered on <span>26 may 2023</span>
+                    </p>
+                  </div>
+                ) : (
+                  <div className={Classes.DeliveryDetails}>
+                    <p>
+                      <img src={deliveryimg} alt="deliveryimg" />
+                      <span style={{ color: "red" }}>cancelled</span>
+                    </p>
+                  </div>
+                )}
               </div>
               {/* new design */}
               <div className={Classes.parentCollaps5}>
@@ -542,20 +562,20 @@ const OrderHistorypage2 = (props) => {
                         <div className={Classes.ParentStatus}>
                           <div className={Classes.leftStatus1}>
                             <div className={Classes.leftStatus2}>
-                              <div className={Classes.dotstatus}></div>
+                              <div className={Classes.dotstatus} ></div>
                               <div className={Classes.dotstatusline}></div>
                             </div>
                             <div className={Classes.leftStatus2}>
                               <div
                                 className={Classes.dotstatus1}
                                 style={{
-                                  background: "#0eb533",
+                                  background: orderDate? "#d9d9d9" : "#0eb533",
                                   border: "none",
                                 }}
                               ></div>
                               <div
                                 className={Classes.dotstatusline1}
-                                style={{ background: "#0eb533" }}
+                                style={{ background: orderDate? "#d9d9d9" : "#0eb533" }}
                               ></div>
                             </div>
                             <div className={Classes.leftStatus2}>
@@ -570,7 +590,7 @@ const OrderHistorypage2 = (props) => {
                             <div className={Classes.RightStausshow}>
                               <p className={Classes.RsHead}>Order confirmed</p>
                               <p style={{ color: "#A3A7AB" }}>
-                                Tues 18 oct’2022 , 4:45 PM
+                                {formatDate(orderDate)}
                               </p>
                             </div>
                             <div className={Classes.RightStausshow}>
