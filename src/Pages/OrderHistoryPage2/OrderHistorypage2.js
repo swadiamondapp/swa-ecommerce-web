@@ -106,7 +106,7 @@ const OrderHistorypage2 = (props) => {
   };
 
   // warnning
-
+console.log(paymentDetails,"paymentDetails")
   useEffect(() => {
     // axios
     //   .get(Urls.myOrder + "/" + props.location.state.data.productId, {
@@ -314,14 +314,14 @@ const OrderHistorypage2 = (props) => {
   };
   function formatDate(dateString) {
     const date = new Date(dateString);
-  
+
     const options = {
-      weekday: "short",  // This will show "Mon" instead of "Monday"
+      weekday: "short", // This will show "Mon" instead of "Monday"
       year: "numeric",
       month: "short",
       day: "numeric",
     };
-  
+
     return date.toLocaleDateString("en-US", options);
   }
 
@@ -348,12 +348,13 @@ const OrderHistorypage2 = (props) => {
     singleOrderData.order.shipment[0].status;
   console.log("statusCode--->", statusCode);
   const orderDate =
-  singleOrderData &&
-  singleOrderData.order && 
-  singleOrderData.order.selected_data &&
-  singleOrderData.order.selected_data.ordered
-  console.log(orderDate,"orderDate")
+    singleOrderData &&
+    singleOrderData.order &&
+    singleOrderData.order.selected_data &&
+    singleOrderData.order.selected_data.ordered;
+  console.log(orderDate, "orderDate");
 
+  console.log(productDetails, "productDetails");
 
   return (
     <div>
@@ -483,20 +484,38 @@ const OrderHistorypage2 = (props) => {
                               </p>
                               <p style={{ color: "#757C81" }}>
                                 {productDetails[0] &&
-                                  productDetails[0].product.carat}{" "}
-                                KT Yellow{" "}
+                                  productDetails[0].product.carat}{" "}&nbsp;
+                                {productDetails[0] &&
+                                productDetails[0].color.colour_name
+                                  ? productDetails[0].color.colour_name
+                                      .charAt(0)
+                                      .toUpperCase() +
+                                    productDetails[0].color.colour_name.slice(1)
+                                  : ""}
+                                &nbsp;
                                 {/* {productDetails[0] &&
                                   productDetails[0].color.size_name}{" "} */}
                                 {productDetails[0] &&
-                                  productDetails[0].product.gross_weight}{" "}
+                                  productDetails[0].product.gross_weight}&nbsp;
                                 GM
                               </p>
                               <p style={{ color: "#757C81" }}>
-                                Diamond{" "}
+                                {productDetails[0] &&
+                                productDetails[0].product.product_name
+                                  ? productDetails[0].product.product_name
+                                      .charAt(0)
+                                      .toUpperCase() +
+                                    productDetails[0].product.product_name
+                                      .slice(1)
+                                      .toLowerCase()
+                                  : ""}
+                                
+                                &nbsp;
                                 {productDetails[0] &&
                                   productDetails[0].product
                                     .diamond_weight_preview}{" "}
-                                Carat SIIJ
+                                {productDetails[0] &&
+                                  productDetails[0].product.carat}{" "}
                               </p>
                               <p style={{ color: "#303A42" }}>
                                 SKU{" "}
@@ -562,20 +581,22 @@ const OrderHistorypage2 = (props) => {
                         <div className={Classes.ParentStatus}>
                           <div className={Classes.leftStatus1}>
                             <div className={Classes.leftStatus2}>
-                              <div className={Classes.dotstatus} ></div>
+                              <div className={Classes.dotstatus}></div>
                               <div className={Classes.dotstatusline}></div>
                             </div>
                             <div className={Classes.leftStatus2}>
                               <div
                                 className={Classes.dotstatus1}
                                 style={{
-                                  background: orderDate? "#d9d9d9" : "#0eb533",
+                                  background: orderDate ? "#d9d9d9" : "#0eb533",
                                   border: "none",
                                 }}
                               ></div>
                               <div
                                 className={Classes.dotstatusline1}
-                                style={{ background: orderDate? "#d9d9d9" : "#0eb533" }}
+                                style={{
+                                  background: orderDate ? "#d9d9d9" : "#0eb533",
+                                }}
                               ></div>
                             </div>
                             <div className={Classes.leftStatus2}>

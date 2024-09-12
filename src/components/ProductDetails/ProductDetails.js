@@ -1215,6 +1215,12 @@ const ProductDetails = (props) => {
                     type="number"
                     value={props.pinCode}
                     onChange={pinCodeChangeHandler}
+                    onInput={(e) => {
+                      if (e.target.value.length > 6) {
+                        e.target.value = e.target.value.slice(0, 6); 
+                      }
+                    }}
+                    min="0"  
                   />
                   <button
                     className={Classes.CheckButton}
