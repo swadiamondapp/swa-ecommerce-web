@@ -39,7 +39,7 @@ const TryAtHomeInner = () => {
   const [appointment, setAppointment] = useState();
   const [appointmentId, setAppointmentId] = useState();
   const location = useLocation();
-  const { selectedTimeSlot, selectedDate } = location.state || {};
+  const { selectedTimeSlot, selectedDate,tryAtHomeCount } = location.state || {};
   const savedTimeSlot = localStorage.getItem("selectedTimeSlot");
   const saveddate = localStorage.getItem("selectedDate");
 
@@ -255,7 +255,7 @@ const TryAtHomeInner = () => {
                     {selectedTimeSlot && selectedTimeSlot}
                   </div>
                 </div>
-                <p className={Classes.DesignFormPara}>1 DESIGN</p>
+                <p className={Classes.DesignFormPara}> {tryAtHomeCount} {tryAtHomeCount === 1 ? "DESIGN" : "DESIGNS"}</p>
               </div>
 
               <div className={Classes.BookingForm}>
@@ -417,7 +417,7 @@ const TryAtHomeInner = () => {
                   )}
                 </div>
                 <div className={Classes.BookAppoinmentbtn}>
-                  <button onClick={handleSubmit}>BOOK APPOINMENT</button>
+                  <button onClick={handleSubmit}>BOOK APPOINTMENT</button>
                 </div>
               </div>
             </div>

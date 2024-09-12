@@ -296,6 +296,7 @@ console.log(mobileNumber,"mobileNumber==>")
 
   const handleSignUp = async (event) => {
     event.preventDefault();
+    debugger
     if (validateForm()) {
       try {
         const body = {
@@ -308,8 +309,13 @@ console.log(mobileNumber,"mobileNumber==>")
         };
         const response = await axios.post(Urls.register, body);
         if (response.data.results.status_code === 200) {
+        
+          if (activeTab === "tab1") {
+            setEmailId("")
+          }else if (activeTab === "tab2") {
+            setMobileNumber("")
+          }
           localStorage.setItem("registerMobile", signUpData.mobile);
-
           // alert("Successfully Registered");
           props.setText("Registered");
           props.setShowSuccessModal(true);
