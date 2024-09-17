@@ -106,7 +106,7 @@ const OrderHistorypage2 = (props) => {
   };
 
   // warnning
-
+console.log(paymentDetails,"paymentDetails")
   useEffect(() => {
     // axios
     //   .get(Urls.myOrder + "/" + props.location.state.data.productId, {
@@ -318,7 +318,7 @@ const OrderHistorypage2 = (props) => {
     const date = new Date(dateString);
 
     const options = {
-      weekday: "short",  // This will show "Mon" instead of "Monday"
+weekday: "short",  // This will show "Mon" instead of "Monday"
       year: "numeric",
       month: "short",
       day: "numeric",
@@ -352,12 +352,11 @@ const OrderHistorypage2 = (props) => {
   const orderDate =
     singleOrderData &&
     singleOrderData.order &&
-    singleOrderData.order.promocode &&
+singleOrderData.order.promocode &&
     singleOrderData.order.selected_data.ordered
 
     const moneyDetail = singleOrderData &&  singleOrderData.order && singleOrderData.order.payment_data;
   console.log(moneyDetail, "payMode---")
-
 
   return (
     <div>
@@ -420,8 +419,10 @@ const OrderHistorypage2 = (props) => {
                     singleOrderData.order &&
                     singleOrderData.order.order_code}
                 </h3>
+                {singleOrderData&& singleOrderData.order&& singleOrderData.order.shipment[0].cancel_order && (
+                  <>
                 {(statusCode == 0 || statusCode == 2 || statusCode == 9) &&
-                  singleOrderData.order.shipment[0].cancel_order !==
+singleOrderData.order.shipment[0].cancel_order !==
                   "Admin Approval pending" ? (
                   <div className={Classes.DeliveryDetails}>
                     <p>
@@ -437,6 +438,8 @@ const OrderHistorypage2 = (props) => {
                     </p>
                   </div>
                 )}
+ </>
+              )}
               </div>
               {/* new design */}
               <div className={Classes.parentCollaps5}>
@@ -487,20 +490,38 @@ const OrderHistorypage2 = (props) => {
                               </p>
                               <p style={{ color: "#757C81" }}>
                                 {productDetails[0] &&
-                                  productDetails[0].product.carat}{" "}
-                                KT Yellow{" "}
+                                  productDetails[0].product.carat}{" "}&nbsp;
+                                {productDetails[0] &&
+                                productDetails[0].color.colour_name
+                                  ? productDetails[0].color.colour_name
+                                      .charAt(0)
+                                      .toUpperCase() +
+                                    productDetails[0].color.colour_name.slice(1)
+                                  : ""}
+                                &nbsp;
                                 {/* {productDetails[0] &&
                                   productDetails[0].color.size_name}{" "} */}
                                 {productDetails[0] &&
-                                  productDetails[0].product.gross_weight}{" "}
+                                  productDetails[0].product.gross_weight}&nbsp;
                                 GM
                               </p>
                               <p style={{ color: "#757C81" }}>
-                                Diamond{" "}
+                                {productDetails[0] &&
+                                productDetails[0].product.product_name
+                                  ? productDetails[0].product.product_name
+                                      .charAt(0)
+                                      .toUpperCase() +
+                                    productDetails[0].product.product_name
+                                      .slice(1)
+                                      .toLowerCase()
+                                  : ""}
+                                
+                                &nbsp;
                                 {productDetails[0] &&
                                   productDetails[0].product
                                     .diamond_weight_preview}{" "}
-                                Carat SIIJ
+                                {productDetails[0] &&
+                                  productDetails[0].product.carat}{" "}
                               </p>
                               <p style={{ color: "#303A42" }}>
                                 SKU{" "}
@@ -581,7 +602,7 @@ const OrderHistorypage2 = (props) => {
                               ></div>
                               <div
                                 className={Classes.dotstatusline1}
-                                style={{ background: orderDate ? "#d9d9d9" : "#0eb533" }}
+style={{ background: orderDate ? "#d9d9d9" : "#0eb533" }}
                               ></div>
                             </div>
                             <div className={Classes.leftStatus2}>

@@ -215,7 +215,7 @@ const VideocallForm = (props) => {
                 <div className={Classes.vi_message}>
                   <textarea
                     rows={3}
-                    placeholder="Let’s us know  if you have any preference in price, budget "
+                    placeholder="Let us know  if you have any preference in price, budget "
                     value={videoData.description}
                     name="description"
                     onChange={handleChangeVideoData}

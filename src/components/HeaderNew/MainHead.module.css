@@ -414,7 +414,7 @@ header {
 }
 .cartPage {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1.65fr;
   align-items: center;
   margin-bottom: 15px;
 }
