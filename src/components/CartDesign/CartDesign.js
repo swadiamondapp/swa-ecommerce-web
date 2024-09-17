@@ -35,6 +35,7 @@ function CartDesign(props) {
     setTotal(props.amount - props.cartProAmnt);
     setAmountPay(props.amount - props.cartProAmnt);
   }, []);
+  console.log(total,"amountsoftrialCart")
   const handleSubmit = (event) => {
     event.preventDefault();
   };
@@ -418,7 +419,7 @@ function CartDesign(props) {
                     <div className={Classes.BookappointmentTrails}>
                       <Link to="/tryathome">
                         {" "}
-                        <button>Book Appoinment</button>
+                        <button>Book Appointment</button>
                       </Link>
                     </div>
                   </div>
