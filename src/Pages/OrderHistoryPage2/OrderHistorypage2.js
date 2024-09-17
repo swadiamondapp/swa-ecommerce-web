@@ -420,7 +420,7 @@ console.log(paymentDetails,"paymentDetails")
                 {singleOrderData&& singleOrderData.order&& singleOrderData.order.shipment[0].cancel_order && (
                   <>
                 {(statusCode == 0 || statusCode == 2 || statusCode == 9) &&
-                singleOrderData.order.shipment[0].cancel_order !== 
+singleOrderData.order.shipment[0].cancel_order !==
                   "Admin Approval pending" ? (
                   <div className={Classes.DeliveryDetails}>
                     <p>
@@ -436,7 +436,7 @@ console.log(paymentDetails,"paymentDetails")
                     </p>
                   </div>
                 )}
-                </>
+ </>
               )}
               </div>
               {/* new design */}
