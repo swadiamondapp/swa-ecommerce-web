@@ -119,13 +119,13 @@ function CheckOut(props) {
   var alphaExp = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
   const schema = Joi.object({
     sEmail: Joi.string()
-      .required()
-      .messages({
-        "string.base": "cannot be empty",
-        "string.empty": `Please enter your email address.`,
-        "string.email": `Please enter a valid email address.`,
-      })
-      .email({ tlds: { allow: false } }),
+    .email({ tlds: { allow: false } }) // This allows all TLDs
+    .required()
+    .messages({
+      "string.base": "cannot be empty",
+      "string.empty": "Please enter your email address.",
+      "string.email": "Please enter a valid email address.",
+    }),
     sPhone: Joi.string()
       .required()
       .pattern(/^[0-9]{10}$/)
@@ -232,7 +232,7 @@ function CheckOut(props) {
       handleSignUp();
     }
   };
-
+console.log(props.proDet.name,"props.proDet.name")
   const placeOrder = () => {
     let cartBody;
     let buyBody;
@@ -553,6 +553,7 @@ function CheckOut(props) {
   };
   console.log(addressData, "checkoutAddresssdata");
   const locallySetAddress = () => {
+    debugger
     if (
       addressData.fullName !== isNewaddress.fullName ||
       addressData.city !== isNewaddress.city ||
@@ -653,6 +654,7 @@ function CheckOut(props) {
                 totalSavedAmount: props.proDet.data.totalSavedAmount,
                 addressData: addressData,
                 promoCodeIds: promoId,
+                
               },
               name: "cart",
             },

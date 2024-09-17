@@ -72,7 +72,11 @@ const LoginToggle = (props) => {
   const [getOtpModal, setGetOtpModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [timer, setTimer] = useState(60);
-  const [ AlreadyExistText, setAlreadyExistText] = useState("")
+  const [AlreadyExistText, setAlreadyExistText] = useState("");
+  const [showRegisterSuccessModal, setShowRegisterSuccessModal] = useState(
+    false
+  );
+  const [text, setText] = useState("");
   const [signUpData, setSignUpData] = useState({
     username: "",
     mobile: "",
@@ -134,7 +138,7 @@ const LoginToggle = (props) => {
 
   const handleOtpModalOpen = () => setGetOtpModal(true);
   const handleOtpModalClose = () => setGetOtpModal(false);
-console.log(mobileNumber,"mobileNumber==>")
+  console.log(mobileNumber, "mobileNumber==>");
   const handleSignupModalClose = () => setSignupModal(false);
   const handleOpen = (event) => {
     // event.preventDefault(); // Prevent default form submission behavior
@@ -174,14 +178,14 @@ console.log(mobileNumber,"mobileNumber==>")
     // // Open the modal
     setOpen(true);
   };
-  console.log(activeTab,"activeTab==>")
+  console.log(activeTab, "activeTab==>");
   const handleClose = () => setOpen(false);
 
   function handleCLick() {}
   const handleTabClick = (tab) => {
     if (Contryname === "India") {
       setActiveTab(tab);
-    }else {
+    } else {
       alert("Mobile login only available in India");
     }
   };
@@ -293,9 +297,10 @@ console.log(mobileNumber,"mobileNumber==>")
       [name]: value,
     });
   };
-
+  console.log(props.setText, "setText==>");
   const handleSignUp = async (event) => {
     event.preventDefault();
+
     if (validateForm()) {
       try {
         const body = {
@@ -307,25 +312,41 @@ console.log(mobileNumber,"mobileNumber==>")
           honorific_name: signUpData.honorific_name,
         };
         const response = await axios.post(Urls.register, body);
-        if (response.data.results.status_code === 200) {
+        if (
+          response &&
+          response.data &&
+          response.data.results &&
+          response.data.results.status_code === 200
+        ) {
           localStorage.setItem("registerMobile", signUpData.mobile);
-
+          setText("Registered");
           // alert("Successfully Registered");
           props.setText("Registered");
           props.setShowSuccessModal(true);
-          handleLoginModalOpen();
+          setShowRegisterSuccessModal(true);
           setTimeout(() => {
             props.setShowSuccessModal(false);
+            setShowRegisterSuccessModal(false);
+            handleLoginModalOpen();
           }, 3000);
+
+          if (activeTab === "tab1") {
+            setEmailId("");
+          } else if (activeTab === "tab2") {
+            setMobileNumber("");
+          }
         }
       } catch (error) {
         if (
+          error.response &&
+          error.response.data &&
+          error.response.data.results &&
           error.response.data.results.message ===
-          "user with this email or phone number already exists!!!"
+            "user with this email or phone number already exists!!!"
         ) {
-          setAlreadyExistText("UserName already exist")
+          setAlreadyExistText("UserName already exist");
           setTimeout(() => {
-            setAlreadyExistText([])
+            setAlreadyExistText([]);
           }, 3500);
           sendOtp();
         }
@@ -363,7 +384,7 @@ console.log(mobileNumber,"mobileNumber==>")
     try {
       console.log("Api keri");
       const response = await axios.post(Urls.sentOtp, body);
-      console.log(response.data,"ressoibse==otop");
+      console.log(response.data, "ressoibse==otop");
       if (response.data[0] === "Otp send Successfully") {
         setIsSignup(false);
         handleOtpModalOpen();
@@ -436,7 +457,7 @@ console.log(mobileNumber,"mobileNumber==>")
       .post(urls.Login, body)
       .then((response) => {
         if (response.data.results.status_code === 200) {
-          console.log(response.data.results.data.image,"userProfile")
+          console.log(response.data.results.data.image, "userProfile");
           localStorage.setItem("swaToken", response.data.results.token);
           localStorage.setItem("userName", response.data.results.data.name);
           localStorage.setItem("userProfile", response.data.results.data.image);
@@ -470,7 +491,6 @@ console.log(mobileNumber,"mobileNumber==>")
         loginHandler();
       }
       if (response.data.results.message === "Otp verified successfully!") {
-        debugger;
         props.setText("Logged In");
         props.setShowSuccessModal(true);
         setTimeout(() => {
@@ -489,10 +509,10 @@ console.log(mobileNumber,"mobileNumber==>")
     }
   };
   const verifyOtpEmail = async () => {
-
-    if (!otp) {  // Check if the OTP is empty
+    if (!otp) {
+      // Check if the OTP is empty
       setOtpError("Please enter OTP");
-      return;  // Exit the function early if OTP is empty
+      return; // Exit the function early if OTP is empty
     }
     const body = {
       email: emailId,
@@ -647,7 +667,7 @@ console.log(mobileNumber,"mobileNumber==>")
                             validationErrors.honorific_name}
                         </p>
                         <p className={Classes.ErrorText}>
-                         {AlreadyExistText && AlreadyExistText}
+                          {AlreadyExistText && AlreadyExistText}
                         </p>
                       </div>
                     </div>
@@ -799,10 +819,16 @@ console.log(mobileNumber,"mobileNumber==>")
                         <div
                           className={`Classes.tab-item ${activeTab === "tab1" &&
                             "active"}`}
-                          onClick={() =>  handleTabClick("tab1")}
+                          onClick={() => handleTabClick("tab1")}
                         >
                           {activeTab === "tab1" ? (
-                            <div className={Classes.tabTitleOne} style={{backgroundColor:"#FFF",borderRadius:"4px"}}>
+                            <div
+                              className={Classes.tabTitleOne}
+                              style={{
+                                backgroundColor: "#FFF",
+                                borderRadius: "4px",
+                              }}
+                            >
                               {/* <span>Email</span> */}
                               <span>Phone number</span>
                             </div>
@@ -1143,6 +1169,12 @@ console.log(mobileNumber,"mobileNumber==>")
           Please register the form.
         </div>
       </Modal>
+      <LoginSuccessModal
+        openSuccessModal={showRegisterSuccessModal}
+        close={() => setShowRegisterSuccessModal(false)}
+        state={showRegisterSuccessModal}
+        text={text}
+      />
     </div>
   );
 };

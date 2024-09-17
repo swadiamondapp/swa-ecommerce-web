@@ -65,7 +65,7 @@ const Header = (props) => {
 
   const [showUserDetails, setShowUserDetails] = useState(false);
   const userDetailsRef = useRef(null);
-  console.log("Contryname", Contryname);
+  console.log("countryData", countryData);
 
   const handleShowModal = () => {
     setShowModal(true);
