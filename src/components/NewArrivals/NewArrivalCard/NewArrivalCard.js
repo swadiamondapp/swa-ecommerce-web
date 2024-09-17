@@ -18,7 +18,9 @@ const NewArrivalCard = (props) => {
   const location = useLocation();
   const [addToWishList, setAddToWishList] = useState(false);
   const [onadd, setOnAdd] = useState(true);
-  const [wishId, setWishId] = useState("");
+  const [wishId, setWishId] = useState([]);
+  const likes = props.prodet.wishlist_id
+  console.log("likes",likes)
 
   const Contryname = localStorage.getItem("country_name");
 
@@ -30,8 +32,13 @@ const NewArrivalCard = (props) => {
     if (props.wishAct !== null) {
       setWishId(props.wishAct);
       setAddToWishList(true);
+    } else {
+      setAddToWishList(false);
+      setWishId(""); // Clear wishId if there's no wishlist activity
     }
   }, [props.wishAct]);
+  
+  
   const Added = () => {
     const token = localStorage.getItem("swaToken");
     if (token !== null) {
@@ -57,20 +64,25 @@ const NewArrivalCard = (props) => {
     }
   };
   const Remove = () => {
-    if (token !== null) {
+    if (token !== null && likes) { // Ensure wishId is not empty
       axios
-        .delete(`${Urls.wishlist + wishId}?country=${countryId}`, {
+        .delete(`${Urls.wishlist}${likes}?country=${countryId}`, {
           headers: { Authorization: "Token " + token },
         })
         .then((response1) => {
           setAddToWishList(false);
+          setWishId(""); // Clear wishId on removal
           props.Suces();
         })
         .catch((error) => {
           console.log(error);
         });
     } else {
-      toast("Please Login!");
+      if (!likes) {
+        console.log("No wishId to remove.");
+      } else {
+        toast("Please Login!");
+      }
     }
   };
 console.log(wishId,"wishId")

@@ -86,7 +86,7 @@ const OrderHistorypage2 = (props) => {
   const [lteLbbData, setLteLbbData] = useState([]);
   const [type, setType] = useState("");
   const [singleOrderData, setSingleOrderData] = useState([]);
-  const [paymentDetails, setPaymentDetails] = useState([]);
+  const [paymentDetails, setPaymentDetails] = useState({});
   const [error, setError] = useState("");
   const [addressData, setAddressData] = useState({
     sEmail: "",
@@ -154,10 +154,10 @@ const OrderHistorypage2 = (props) => {
     try {
       const response = await axios.get(
         `${Urls.myOrder +
-          "/" +
-          props.location.state.data.productId +
-          "?shipment_id=" +
-          props.location.state.data.shipmentId}&country=${countryId}`,
+        "/" +
+        props.location.state.data.productId +
+        "?shipment_id=" +
+        props.location.state.data.shipmentId}&country=${countryId}`,
         {
           headers: {
             Authorization: "Token " + token,
@@ -186,13 +186,15 @@ const OrderHistorypage2 = (props) => {
           });
         setProductDetails(
           response.data.results.data &&
-            response.data.results.data.order &&
-            response.data.results.data.order.shipment
+          response.data.results.data.order &&
+          response.data.results.data.order.shipment
+        );
+        setPromoCode(
+          singleOrderData &&
+          singleOrderData.order.promocode
         );
         setPaymentDetails(
-          response.data.results.data &&
-            response.data.results.data.order &&
-            response.data.results.data.order.payment_data
+          singleOrderData &&  singleOrderData.order && singleOrderData.order.payment_data
         );
       }
     } catch (error) {
@@ -314,31 +316,31 @@ const OrderHistorypage2 = (props) => {
   };
   function formatDate(dateString) {
     const date = new Date(dateString);
-  
+
     const options = {
       weekday: "short",  // This will show "Mon" instead of "Monday"
       year: "numeric",
       month: "short",
       day: "numeric",
     };
-  
+
     return date.toLocaleDateString("en-US", options);
   }
 
   console.log(
     "singleOrderData--->1233",
     singleOrderData &&
-      singleOrderData.order &&
-      singleOrderData.order.shipment[0] &&
-      singleOrderData.order.shipment[0].status
+    singleOrderData.order &&
+    singleOrderData.order.shipment[0] &&
+    singleOrderData.order.shipment[0].status
   );
 
   console.log(
     "singleOrderData--->12",
     singleOrderData &&
-      singleOrderData.data &&
-      singleOrderData.data.order &&
-      singleOrderData.data.order.address
+    singleOrderData.data &&
+    singleOrderData.data.order &&
+    singleOrderData.data.order.address
   );
 
   const statusCode =
@@ -348,11 +350,13 @@ const OrderHistorypage2 = (props) => {
     singleOrderData.order.shipment[0].status;
   console.log("statusCode--->", statusCode);
   const orderDate =
-  singleOrderData &&
-  singleOrderData.order && 
-  singleOrderData.order.selected_data &&
-  singleOrderData.order.selected_data.ordered
-  console.log(orderDate,"orderDate")
+    singleOrderData &&
+    singleOrderData.order &&
+    singleOrderData.order.promocode &&
+    singleOrderData.order.selected_data.ordered
+
+    const moneyDetail = singleOrderData &&  singleOrderData.order && singleOrderData.order.payment_data;
+  console.log(moneyDetail, "payMode---")
 
 
   return (
@@ -417,7 +421,7 @@ const OrderHistorypage2 = (props) => {
                     singleOrderData.order.order_code}
                 </h3>
                 {(statusCode == 0 || statusCode == 2 || statusCode == 9) &&
-                singleOrderData.order.shipment[0].cancel_order !==
+                  singleOrderData.order.shipment[0].cancel_order !==
                   "Admin Approval pending" ? (
                   <div className={Classes.DeliveryDetails}>
                     <p>
@@ -522,35 +526,37 @@ const OrderHistorypage2 = (props) => {
                         <div className={Classes.parentPaymentItems}>
                           <div className={Classes.PaymentItems}>
                             <p>Item Subtotal</p>
-                            <p>{paymentDetails.itemsubtotal}</p>
+                            <p>{moneyDetail && moneyDetail.itemsubtotal}</p>
                           </div>
                           <div className={Classes.PaymentItems}>
                             <p>Shipping</p>
-                            <p>{paymentDetails.shipping}</p>
+                            <p>{moneyDetail && moneyDetail.shipping}</p>
                           </div>
                           <div className={Classes.PaymentItems}>
                             <p>Total</p>
-                            <p>{paymentDetails.total}</p>
+                            <p>{moneyDetail && moneyDetail && moneyDetail && moneyDetail.total ? moneyDetail && moneyDetail.total : 0 }</p>
                           </div>
                           <div className={Classes.PaymentItems}>
                             <p>Promo code</p>
                             <p style={{ color: "#000000" }}>
                               PAYDAY{" "}
-                              <span style={{ color: "#30933A" }}>Applied</span>
+                              <span style={{ color: promoCode === null ? "#FF0000"  : "#30933A"}}>
+                              {promoCode === null ? "Not Applied" : "Applied"}
+                               </span>
                             </p>
                           </div>
                           <div className={Classes.PaymentItems}>
                             <p>Coupon Discount</p>
                             <p style={{ color: "#000000" }}>
-                              {paymentDetails.coupon_discount
-                                ? paymentDetails.coupon_discount
+                              {moneyDetail && moneyDetail.coupon_discount
+                                ? moneyDetail && moneyDetail.coupon_discount
                                 : 0}
                             </p>
                           </div>
                           <div className={Classes.PaymentItems}>
                             <p style={{ color: "#000000" }}>Payable</p>
                             <p style={{ color: "#000000" }}>
-                              {paymentDetails.payable}
+                              {moneyDetail && moneyDetail.payable}
                             </p>
                           </div>
                         </div>
@@ -569,13 +575,13 @@ const OrderHistorypage2 = (props) => {
                               <div
                                 className={Classes.dotstatus1}
                                 style={{
-                                  background: orderDate? "#d9d9d9" : "#0eb533",
+                                  background: orderDate ? "#d9d9d9" : "#0eb533",
                                   border: "none",
                                 }}
                               ></div>
                               <div
                                 className={Classes.dotstatusline1}
-                                style={{ background: orderDate? "#d9d9d9" : "#0eb533" }}
+                                style={{ background: orderDate ? "#d9d9d9" : "#0eb533" }}
                               ></div>
                             </div>
                             <div className={Classes.leftStatus2}>
@@ -629,12 +635,12 @@ const OrderHistorypage2 = (props) => {
                   </div>
                   <div className={Classes.TrackButtons}>
                     {// singleOrderData &&
-                    //   singleOrderData.order &&
-                    //   singleOrderData.order.shipment &&
-                    //   singleOrderData.order.shipment[0].status
-                    statusCode == 4 &&
+                      //   singleOrderData.order &&
+                      //   singleOrderData.order.shipment &&
+                      //   singleOrderData.order.shipment[0].status
+                      statusCode == 4 &&
                       singleOrderData.order.shipment[0].cancel_order !==
-                        "Admin Approval pending" && (
+                      "Admin Approval pending" && (
                         <button
                           className={Classes.REButton}
                           onClick={() => fetchLteLbbDetails()}
@@ -654,7 +660,7 @@ const OrderHistorypage2 = (props) => {
                       ))} */}
                     {(statusCode == 0 || statusCode == 2 || statusCode == 9) &&
                       singleOrderData.order.shipment[0].cancel_order !==
-                        "Admin Approval pending" && (
+                      "Admin Approval pending" && (
                         <div className={Classes.CancelProductButton}>
                           <button onClick={() => setCancelProductModal(true)}>
                             Cancel product
@@ -663,8 +669,8 @@ const OrderHistorypage2 = (props) => {
                       )}
                     <button
                       className={Classes.REButton2}
-                      // onClick={() => setBuyBackOpen(true)}
-                      // onClick={() => setSuccessModalOpen(true)}
+                    // onClick={() => setBuyBackOpen(true)}
+                    // onClick={() => setSuccessModalOpen(true)}
                     >
                       <IoMdDownload /> Download invoice
                     </button>

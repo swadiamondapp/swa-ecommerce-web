@@ -57,7 +57,7 @@ export const updatePas = server + "api/update/";
 export const pincodeCheck = server + "ecom/pincode_check/?pincode=";
 
 // getContrey Details
-export const getCountryFlags = server + "/ecom/country-details/";
+export const getCountryFlags = server + "ecom/country-details/";
 
 //track
 export const track = server + "ecom/product-tracking/";
