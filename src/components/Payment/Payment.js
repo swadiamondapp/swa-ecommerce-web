@@ -39,7 +39,7 @@ const Payment = () => {
     sPhone: "",
     fullName: "",
     mobile: "",
-    pincode: "",
+    pincode: pincodes ? pincodes : "",
     city: "",
     state: "kerala",
     hNumber_Bname: "",

@@ -442,6 +442,7 @@ console.log(props.proDet.name,"props.proDet.name")
     });
   };
 
+
   const handleSignUp = async () => {
     if (token !== null) {
       // submitAddress(token);
@@ -458,14 +459,17 @@ console.log(props.proDet.name,"props.proDet.name")
         };
         const response = await axios.post(Urls.register, body);
         if (response.data.results.status_code === 200) {
+          console.log(response.data.results,"registerConstole")
           setToken(response.data.results.data.token);
           setUserId(response.data.results.data.user.id);
           _userName = response.data.results.data.user.name;
           _userMob = response.data.results.data.user.phone_number;
           const _token = response.data.results.data.token;
           _userId = response.data.results.data.user.id;
+          sendOtpEmail();
           // _token && _userId && submitAddress(_token);
-          _token && _userId && locallySetAddress();
+          // _token && _userId && locallySetAddress();
+         
         } else {
           alert("Something went wrong");
         }
