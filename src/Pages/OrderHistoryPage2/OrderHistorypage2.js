@@ -106,7 +106,7 @@ const OrderHistorypage2 = (props) => {
   };
 
   // warnning
-console.log(paymentDetails,"paymentDetails")
+  console.log(paymentDetails, "paymentDetails");
   useEffect(() => {
     // axios
     //   .get(Urls.myOrder + "/" + props.location.state.data.productId, {
@@ -154,10 +154,10 @@ console.log(paymentDetails,"paymentDetails")
     try {
       const response = await axios.get(
         `${Urls.myOrder +
-        "/" +
-        props.location.state.data.productId +
-        "?shipment_id=" +
-        props.location.state.data.shipmentId}&country=${countryId}`,
+          "/" +
+          props.location.state.data.productId +
+          "?shipment_id=" +
+          props.location.state.data.shipmentId}&country=${countryId}`,
         {
           headers: {
             Authorization: "Token " + token,
@@ -186,15 +186,14 @@ console.log(paymentDetails,"paymentDetails")
           });
         setProductDetails(
           response.data.results.data &&
-          response.data.results.data.order &&
-          response.data.results.data.order.shipment
+            response.data.results.data.order &&
+            response.data.results.data.order.shipment
         );
-        setPromoCode(
-          singleOrderData &&
-          singleOrderData.order.promocode
-        );
+        setPromoCode(singleOrderData && singleOrderData.order.promocode);
         setPaymentDetails(
-          singleOrderData &&  singleOrderData.order && singleOrderData.order.payment_data
+          singleOrderData &&
+            singleOrderData.order &&
+            singleOrderData.order.payment_data
         );
       }
     } catch (error) {
@@ -318,7 +317,7 @@ console.log(paymentDetails,"paymentDetails")
     const date = new Date(dateString);
 
     const options = {
-weekday: "short",  // This will show "Mon" instead of "Monday"
+      weekday: "short", // This will show "Mon" instead of "Monday"
       year: "numeric",
       month: "short",
       day: "numeric",
@@ -330,17 +329,17 @@ weekday: "short",  // This will show "Mon" instead of "Monday"
   console.log(
     "singleOrderData--->1233",
     singleOrderData &&
-    singleOrderData.order &&
-    singleOrderData.order.shipment[0] &&
-    singleOrderData.order.shipment[0].status
+      singleOrderData.order &&
+      singleOrderData.order.shipment[0] &&
+      singleOrderData.order.shipment[0].status
   );
 
   console.log(
     "singleOrderData--->12",
     singleOrderData &&
-    singleOrderData.data &&
-    singleOrderData.data.order &&
-    singleOrderData.data.order.address
+      singleOrderData.data &&
+      singleOrderData.data.order &&
+      singleOrderData.data.order.address
   );
 
   const statusCode =
@@ -352,11 +351,31 @@ weekday: "short",  // This will show "Mon" instead of "Monday"
   const orderDate =
     singleOrderData &&
     singleOrderData.order &&
-singleOrderData.order.promocode &&
-    singleOrderData.order.selected_data.ordered
+    singleOrderData.order.selected_data &&
+    singleOrderData.order.selected_data.ordered;
 
-    const moneyDetail = singleOrderData &&  singleOrderData.order && singleOrderData.order.payment_data;
-  console.log(moneyDetail, "payMode---")
+  const shippedDate =
+    singleOrderData &&
+    singleOrderData.order &&
+    singleOrderData.order.selected_data &&
+    singleOrderData.order.selected_data.shipped;
+  console.log(shippedDate, "shippedDatasa==>");
+  const outOfDelivery =
+    singleOrderData &&
+    singleOrderData.order &&
+    singleOrderData.order.selected_data &&
+    singleOrderData.order.selected_data.out_of_delivery;
+  const delivered =
+    singleOrderData &&
+    singleOrderData.order &&
+    singleOrderData.order.selected_data &&
+    singleOrderData.order.selected_data.delivered;
+
+  const moneyDetail =
+    singleOrderData &&
+    singleOrderData.order &&
+    singleOrderData.order.payment_data;
+  console.log(moneyDetail, "payMode---");
 
   return (
     <div>
@@ -419,27 +438,31 @@ singleOrderData.order.promocode &&
                     singleOrderData.order &&
                     singleOrderData.order.order_code}
                 </h3>
-                {singleOrderData&& singleOrderData.order&& singleOrderData.order.shipment[0].cancel_order && (
-                  <>
-                {(statusCode == 0 || statusCode == 2 || statusCode == 9) &&
-singleOrderData.order.shipment[0].cancel_order !==
-                  "Admin Approval pending" ? (
-                  <div className={Classes.DeliveryDetails}>
-                    <p>
-                      <img src={deliveryimg} alt="deliveryimg" />
-                      Delivered on <span>26 may 2023</span>
-                    </p>
-                  </div>
-                ) : (
-                  <div className={Classes.DeliveryDetails}>
-                    <p>
-                      <img src={deliveryimg} alt="deliveryimg" />
-                      <span style={{ color: "red" }}>cancelled</span>
-                    </p>
-                  </div>
-                )}
- </>
-              )}
+                {singleOrderData &&
+                  singleOrderData.order &&
+                  singleOrderData.order.shipment[0].cancel_order && (
+                    <>
+                      {(statusCode == 0 ||
+                        statusCode == 2 ||
+                        statusCode == 9) &&
+                      singleOrderData.order.shipment[0].cancel_order !==
+                        "Admin Approval pending" ? (
+                        <div className={Classes.DeliveryDetails}>
+                          <p>
+                            <img src={deliveryimg} alt="deliveryimg" />
+                            Delivered on <span>26 may 2023</span>
+                          </p>
+                        </div>
+                      ) : (
+                        <div className={Classes.DeliveryDetails}>
+                          <p>
+                            <img src={deliveryimg} alt="deliveryimg" />
+                            <span style={{ color: "red" }}>cancelled</span>
+                          </p>
+                        </div>
+                      )}
+                    </>
+                  )}
               </div>
               {/* new design */}
               <div className={Classes.parentCollaps5}>
@@ -490,7 +513,8 @@ singleOrderData.order.shipment[0].cancel_order !==
                               </p>
                               <p style={{ color: "#757C81" }}>
                                 {productDetails[0] &&
-                                  productDetails[0].product.carat}{" "}&nbsp;
+                                  productDetails[0].product.carat}{" "}
+                                &nbsp;
                                 {productDetails[0] &&
                                 productDetails[0].color.colour_name
                                   ? productDetails[0].color.colour_name
@@ -502,8 +526,8 @@ singleOrderData.order.shipment[0].cancel_order !==
                                 {/* {productDetails[0] &&
                                   productDetails[0].color.size_name}{" "} */}
                                 {productDetails[0] &&
-                                  productDetails[0].product.gross_weight}&nbsp;
-                                GM
+                                  productDetails[0].product.gross_weight}
+                                &nbsp; GM
                               </p>
                               <p style={{ color: "#757C81" }}>
                                 {productDetails[0] &&
@@ -515,7 +539,6 @@ singleOrderData.order.shipment[0].cancel_order !==
                                       .slice(1)
                                       .toLowerCase()
                                   : ""}
-                                
                                 &nbsp;
                                 {productDetails[0] &&
                                   productDetails[0].product
@@ -555,15 +578,27 @@ singleOrderData.order.shipment[0].cancel_order !==
                           </div>
                           <div className={Classes.PaymentItems}>
                             <p>Total</p>
-                            <p>{moneyDetail && moneyDetail && moneyDetail && moneyDetail.total ? moneyDetail && moneyDetail.total : 0 }</p>
+                            <p>
+                              {moneyDetail &&
+                              moneyDetail &&
+                              moneyDetail &&
+                              moneyDetail.total
+                                ? moneyDetail && moneyDetail.total
+                                : 0}
+                            </p>
                           </div>
                           <div className={Classes.PaymentItems}>
                             <p>Promo code</p>
                             <p style={{ color: "#000000" }}>
                               PAYDAY{" "}
-                              <span style={{ color: promoCode === null ? "#FF0000"  : "#30933A"}}>
-                              {promoCode === null ? "Not Applied" : "Applied"}
-                               </span>
+                              <span
+                                style={{
+                                  color:
+                                    promoCode === null ? "#FF0000" : "#30933A",
+                                }}
+                              >
+                                {promoCode === null ? "Not Applied" : "Applied"}
+                              </span>
                             </p>
                           </div>
                           <div className={Classes.PaymentItems}>
@@ -589,28 +624,69 @@ singleOrderData.order.shipment[0].cancel_order !==
                         <div className={Classes.ParentStatus}>
                           <div className={Classes.leftStatus1}>
                             <div className={Classes.leftStatus2}>
-                              <div className={Classes.dotstatus} ></div>
-                              <div className={Classes.dotstatusline}></div>
+                              <div
+                                className={Classes.dotstatus}
+                                style={{
+                                  background: orderDate ? "#0eb533" : "#d9d9d9",
+                                  border: "none",
+                                }}
+                              ></div>
+                              <div
+                                className={Classes.dotstatusline}
+                                style={{
+                                  background: orderDate ? "#0eb533" : "#d9d9d9",
+                                  border: "none",
+                                }}
+                              ></div>
                             </div>
                             <div className={Classes.leftStatus2}>
                               <div
                                 className={Classes.dotstatus1}
                                 style={{
-                                  background: orderDate ? "#d9d9d9" : "#0eb533",
+                                  background: shippedDate
+                                    ? "#0eb533"
+                                    : "#d9d9d9",
                                   border: "none",
                                 }}
                               ></div>
                               <div
                                 className={Classes.dotstatusline1}
-style={{ background: orderDate ? "#d9d9d9" : "#0eb533" }}
+                                style={{
+                                  background: shippedDate
+                                    ? "#0eb533"
+                                    : "#d9d9d9",
+                                  border: "none",
+                                }}
                               ></div>
                             </div>
                             <div className={Classes.leftStatus2}>
-                              <div className={Classes.dotstatus1}></div>
-                              <div className={Classes.dotstatusline1}></div>
+                              <div
+                                className={Classes.dotstatus1}
+                                style={{
+                                  background: outOfDelivery
+                                    ? "#0eb533"
+                                    : "#d9d9d9",
+                                  border: "none",
+                                }}
+                              ></div>
+                              <div
+                                className={Classes.dotstatusline1}
+                                style={{
+                                  background: outOfDelivery
+                                    ? "#0eb533"
+                                    : "#d9d9d9",
+                                  border: "none",
+                                }}
+                              ></div>
                             </div>
                             <div className={Classes.leftStatus2}>
-                              <div className={Classes.dotstatus1}></div>
+                              <div
+                                className={Classes.dotstatus1}
+                                style={{
+                                  background: delivered ? "#0eb533" : "#d9d9d9",
+                                  border: "none",
+                                }}
+                              ></div>
                             </div>
                           </div>
                           <div className={Classes.rightStatus1}>
@@ -656,12 +732,12 @@ style={{ background: orderDate ? "#d9d9d9" : "#0eb533" }}
                   </div>
                   <div className={Classes.TrackButtons}>
                     {// singleOrderData &&
-                      //   singleOrderData.order &&
-                      //   singleOrderData.order.shipment &&
-                      //   singleOrderData.order.shipment[0].status
-                      statusCode == 4 &&
+                    //   singleOrderData.order &&
+                    //   singleOrderData.order.shipment &&
+                    //   singleOrderData.order.shipment[0].status
+                    statusCode == 4 &&
                       singleOrderData.order.shipment[0].cancel_order !==
-                      "Admin Approval pending" && (
+                        "Admin Approval pending" && (
                         <button
                           className={Classes.REButton}
                           onClick={() => fetchLteLbbDetails()}
@@ -681,7 +757,7 @@ style={{ background: orderDate ? "#d9d9d9" : "#0eb533" }}
                       ))} */}
                     {(statusCode == 0 || statusCode == 2 || statusCode == 9) &&
                       singleOrderData.order.shipment[0].cancel_order !==
-                      "Admin Approval pending" && (
+                        "Admin Approval pending" && (
                         <div className={Classes.CancelProductButton}>
                           <button onClick={() => setCancelProductModal(true)}>
                             Cancel product
@@ -690,8 +766,8 @@ style={{ background: orderDate ? "#d9d9d9" : "#0eb533" }}
                       )}
                     <button
                       className={Classes.REButton2}
-                    // onClick={() => setBuyBackOpen(true)}
-                    // onClick={() => setSuccessModalOpen(true)}
+                      // onClick={() => setBuyBackOpen(true)}
+                      // onClick={() => setSuccessModalOpen(true)}
                     >
                       <IoMdDownload /> Download invoice
                     </button>
