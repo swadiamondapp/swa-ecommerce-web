@@ -300,7 +300,6 @@ const LoginToggle = (props) => {
   console.log(props.setText, "setText==>");
   const handleSignUp = async (event) => {
     event.preventDefault();
-
     if (validateForm()) {
       try {
         const body = {
@@ -312,7 +311,7 @@ const LoginToggle = (props) => {
           honorific_name: signUpData.honorific_name,
         };
         const response = await axios.post(Urls.register, body);
-        if (
+if (
           response &&
           response.data &&
           response.data.results &&

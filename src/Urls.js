@@ -1,7 +1,7 @@
 // // t server
 // export const server = "https://Swaprdn.zinfog.com/";
-export const server = "https://swaprdnecomnew.zinfog.in/";
-// export const server = "https://swaprdntest.zinfog.com/";
+//export const server = "https://swaecomindiamain.swa.co/";
+export const server = "https://swaecommain.swa.co/";
 //home page api
 export const home = server + "ecom/home/";
 //add wishlist
@@ -57,7 +57,7 @@ export const updatePas = server + "api/update/";
 export const pincodeCheck = server + "ecom/pincode_check/?pincode=";
 
 // getContrey Details
-export const getCountryFlags = server + "/ecom/country-details/";
+export const getCountryFlags = server + "ecom/country-details/";
 
 //track
 export const track = server + "ecom/product-tracking/";
