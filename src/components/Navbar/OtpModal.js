@@ -46,6 +46,7 @@ const OtpModal = (props) => {
                   className={Classes.allInputTextStyle}
                   value={props.otp}
                   onChange={(e) => props.setOtp(e.target.value)}
+                  maxLength={6}
                 />
               </div>
               <p className={Classes.ErrorText}>
@@ -70,7 +71,7 @@ const OtpModal = (props) => {
             >
               <div className={Classes.Signup} style={{ cursor: "pointer" }}>
                 <span className={Classes.bottomText}>
-                  Don’t recived the code?
+                Didn't receive the code?
                 </span>
                 {/* <span
                   className={Classes.signupAnchor}
