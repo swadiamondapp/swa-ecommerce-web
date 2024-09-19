@@ -34,8 +34,14 @@ const NewArrivalPage = (props) => {
   const location = useLocation();
   const token = localStorage.getItem("swaToken");
   const countryId = localStorage.getItem("id");
-  const productCategory = props.location.state.product_category || "";
+  // const productCategory = props.location.state.product_category || "";
+  const productCategory = (props.location && props.location.state && props.location.state.product_category) || "";
+  const queryParams = new URLSearchParams(location.search);
+  const data = queryParams.get('data');
+  const price = queryParams.get('price');
+  const octnId = queryParams.get('price');
   // const categoryName = props.location.state.categoryName
+  console.log(data,price,location,"newArrivalPathDetails")
   const filter = (newArrive, currentPage) => {
     setLoading(true);
     axios
@@ -122,30 +128,30 @@ const NewArrivalPage = (props) => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    console.log(props.location.state.data);
+    console.log(data);
 
-    if (props.location.state.data === "new") {
+    if (data === "new") {
       filter('?filter_type="new', 1);
       setHead("New Arrivals");
       cartsCount();
-    } else if (props.location.state.data === "top") {
+    } else if (data === "top") {
       filter('?filter_type="top', 1);
       setHead("Top Demanded Items");
       cartsCount();
-    } else if (props.location.state.data === "filMin") {
-      filter("?max_price=" + props.location.state.price, 1);
-      setHead("Under " + props.location.state.price);
+    } else if ( data === "filMin") {
+      filter("?max_price=" +  price, 1);
+      setHead("Under " +  price);
       cartsCount();
-    } else if (props.location.state.data === "occation") {
-      filter("?occasion_tag_ids=" + props.location.state.octnId, 1);
+    } else if (data === "occation") {
+      filter("?occasion_tag_ids=" + octnId, 1);
       setHead("Product List");
-      setOccn(props.location.state.octnId);
-    } else if (props.location.state.data !== undefined) {
-      filter("?category_ids=" + props.location.state.data, 1);
-      setCatSet(props.location.state.data);
+      setOccn(octnId);
+    } else if (data !== undefined) {
+      filter("?category_ids=" + data, 1);
+      setCatSet(data);
       setHead("Product List");
     }
-  }, [props.location.state.data]);
+  }, [data,price]);
   const filterCatHandler = (filtSet) => {
     let delimiter = ", ";
     let catSet = "";

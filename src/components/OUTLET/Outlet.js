@@ -80,6 +80,9 @@ const Outlet = () => {
       name: "Hilite mall - Calicut",
     },
   ];
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div>
       <div className={Classes.mainContianerProfile}>

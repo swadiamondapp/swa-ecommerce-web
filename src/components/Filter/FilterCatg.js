@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Classes from "./Filter.module.css";
+import { useHistory, useLocation } from "react-router-dom";
 import { Accordion } from "react-bootstrap";
 import axios from "axios";
 import * as Urls from "../../Urls";
@@ -21,6 +22,11 @@ const FilterCatgs = (props) => {
   const [selectedMetalIds, setSelectedMetalIds] = useState([]);
   const [selectedCategoryIds, setSelectedCategoryIds] = useState([]);
   const countryId = localStorage.getItem("id");
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const data = queryParams.get('data');
+  const price = queryParams.get('price');
+  const octnId = queryParams.get('price');
   console.log("countryId,new", countryId);
   const filterSet = (params) => {
     axios
@@ -37,15 +43,15 @@ const FilterCatgs = (props) => {
   };
   useEffect(() => {
     console.log(props.filterSearch);
-    if (props.filterSearch.data === "occation") {
-      filterSet("?tag=" + props.filterSearch.octnId);
+    if (data === "occation") {
+      filterSet("?tag=" +octnId);
     } else if (
-      props.filterSearch.data === "new" ||
-      props.filterSearch.data === "top"
+      data === "new" ||
+      data === "top"
     ) {
       filterSet("?category=&tag=");
     } else {
-      filterSet("?category=" + props.filterSearch.data);
+      filterSet("?category=" +data);
     }
   }, []);
   const catSelHandler = (catSel) => {

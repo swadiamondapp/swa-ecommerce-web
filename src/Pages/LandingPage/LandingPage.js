@@ -197,9 +197,13 @@ const LandingPage = () => {
   const productMinHandler = (price) => {
     history.push({
       pathname: "/new_arrivel",
+      search: `?data=filMin&price=${price}`,
       state: { data: "filMin", price: price },
     });
   };
+
+
+  
 
   const handleShowModal = (productId) => {
     console.log("productIddd", productId);
@@ -409,25 +413,30 @@ const LandingPage = () => {
               head={"Under  " + budjet[0].budget}
               sub={budjet[0].count + " styles"}
               backgroundImage={shop1}
-              clicked={() => productMinHandler(budjet[0].budget)}
+              // clicked={() => productMinHandler(budjet[0].budget)}
+              clicked={budjet[0].budget ? () => productMinHandler(budjet[0].budget) : null}
+              
             />
             <BudgetCard
               head={"Under  " + budjet[1].budget}
               sub={budjet[1].count + " styles"}
               backgroundImage={shop2}
-              clicked={() => productMinHandler(budjet[1].budget)}
+              // clicked={() => productMinHandler(budjet[1].budget)}
+              clicked={budjet[1].budget ? () => productMinHandler(budjet[1].budget) : null}
             />
             <BudgetCard
               head={"Under  " + budjet[2].budget}
               sub={budjet[2].count + " styles"}
               backgroundImage={shop3}
-              clicked={() => productMinHandler(budjet[2].budget)}
+              // clicked={() => productMinHandler(budjet[2].budget)}
+              clicked={budjet[2].budget ? () => productMinHandler(budjet[2].budget) : null}
             />
             <BudgetCard
               head={"Under  " + budjet[3].budget}
               sub={budjet[3].count + " styles"}
               backgroundImage={shop4}
-              clicked={() => productMinHandler(budjet[3].budget)}
+              // clicked={() => productMinHandler(budjet[3].budget)}
+              clicked={budjet[3].budget ? () => productMinHandler(budjet[3].budget) : null}
             />
           </ShopOnBudget>
         </div>
