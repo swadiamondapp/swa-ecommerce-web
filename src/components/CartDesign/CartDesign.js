@@ -29,13 +29,19 @@ function CartDesign(props) {
   const [updatedCartResponse, setUpdatedCartResponse] = useState([]);
   const history = useHistory();
   const token = localStorage.getItem("swaToken");
-  console.log("activeCartrishan", props.activeCart);
+
   let diff = 0;
+
   useEffect(() => {
     setTotal(props.amount - props.cartProAmnt);
     setAmountPay(props.amount - props.cartProAmnt);
   }, []);
-  console.log(total,"amountsoftrialCart")
+
+  useEffect(() => {
+    updateCart();
+  }, [props.cartItemsCount]);
+
+  console.log(total, "amountsoftrialCart");
   const handleSubmit = (event) => {
     event.preventDefault();
   };
@@ -48,7 +54,7 @@ function CartDesign(props) {
           total: total,
           updatedCartResponse: updatedCartResponse,
           totalSavedAmount: totally_saved,
-          promoCodeIds:promoId
+          promoCodeIds: promoId,
         },
         name: "cart",
       },
@@ -139,7 +145,7 @@ function CartDesign(props) {
                 total: response.data.results.total_amount,
                 updatedCartResponse: response.data.results,
                 totalSavedAmount: totally_saved,
-                promoCodeIds:promoId,
+                promoCodeIds: promoId,
               },
               name: "cart",
             },
@@ -374,10 +380,7 @@ function CartDesign(props) {
                             {props.tryCartcountResults &&
                               props.tryCartcountResults.item_count}{" "}
                             Items) */}
-                            (
-                            {props.cartCount &&
-                              props.cartCount}{" "}
-                            Items)
+                            ({props.cartCount && props.cartCount} Items)
                           </span>
                         </p>
                       </div>

@@ -42,6 +42,7 @@ const Cart = () => {
     flag_image: flag,
     country_name: Contryname,
   });
+  console.log("selProAmnt",selProAmnt)
   console.log("activeCart", activeCart);
   console.log("cartList00000", cartList);
   console.log("cartItemsCount", cartItemsCount);
@@ -102,6 +103,7 @@ const Cart = () => {
     setShow(true);
   };
   const removeHandler = (selids) => {
+    console.log(selids,"deletedingID==>")
     setLoading(true);
     setShow(false);
     const index = cartList.findIndex((obj) => obj.id === selids);
@@ -299,6 +301,7 @@ const Cart = () => {
             totalSavedAmount={totalSavedAmount}
             activeCart={activeCart}
             tryCartcountResults={tryCartcountResults}
+            cartItemsCount={cartItemsCount}
             // handleOpen={() => setWalletOpen(true)}
           >
             {cartList.map((item, index) => {

@@ -1032,7 +1032,9 @@ const ProductDetails = (props) => {
                   <button
                     className={Classes.BuyNow}
                     // onClick={props.clickedBuy}
-                    onClick={addToCartHandler}
+                    // onClick={addToCartHandler}
+                    onClick={() => props.actualPrice !== null && addToCartHandler()}
+                    // disabled={!props.actualPrice} 
                     type="submit"
                   >
                     Buy Now
