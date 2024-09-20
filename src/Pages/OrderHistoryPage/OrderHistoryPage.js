@@ -60,7 +60,7 @@ const OrderHistoryPage = () => {
   const productViewHandler = (id, shipmentId) => {
     history.push({
       pathname: "/track_order",
-      state: { data: { productId: id, shipmentId: shipmentId } },
+      state: { data: { productId: id, shipmentId: shipmentId} },
     });
   };
   let orderLists;
@@ -86,7 +86,7 @@ const OrderHistoryPage = () => {
           OrderedTime="Ordered on 12th auguest 2021"
           key={index}
         >
-          <Orders
+          {/* <Orders
             Image={item.shipments[0] && item.shipments[0].thumbnail_image}
             ShipmentStatus={
               item.shipments[0] && item.shipments[0].shipment_status
@@ -101,8 +101,29 @@ const OrderHistoryPage = () => {
             Price={item.grand_total}
             Qty="4"
             clicked={() =>
+              productViewHandler(item.id, item.shipments[0].shipment_id, item)
+            }
+            allData={item.shipments[0] && item.shipments}
+          /> */}
+          <Orders
+            Image={item.shipments}
+            ShipmentStatus={
+              item.shipments && item.shipments.shipment_status
+            }
+            productId={item.shipments && item.shipments.product_id}
+            productName={item.shipments && item.shipments.product_name}
+            orderId={item.order_code}
+            rating={item.shipments[0] && item.shipments[0].product_rating}
+            promCond={item.promocode === null ? "Not Applied" : "Applied"}
+            address={item.address_name}
+            ProductDate={item.status}
+            Price={item.grand_total}
+            Qty="4"
+            clicked={() =>
               productViewHandler(item.id, item.shipments[0].shipment_id)
             }
+            currentId={item.id}
+            allData={item}
           />
         </OrderHiistoryCard>
       );

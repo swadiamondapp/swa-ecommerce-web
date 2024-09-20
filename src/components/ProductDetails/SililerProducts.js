@@ -44,7 +44,7 @@ const SililerProducts = (props) => {
     if (pincode) {
       setButtonLabels((prevLabels) => ({
         ...prevLabels,
-        [product.product_id]: "Delivery by 10th May",
+        [product.product_id]: "Shipment in next 5 working days",
       }));
     } else {
       setShowModal(true);
