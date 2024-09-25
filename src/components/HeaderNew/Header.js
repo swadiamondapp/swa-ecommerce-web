@@ -23,6 +23,7 @@ import USA from "../../Assets/flagUsa.svg";
 import SAU from "../../Assets/flagSAU.svg";
 import IND from "../../Assets/flagIND.svg";
 import UAE from "../../Assets/flagUAE.svg";
+import { MdEdit } from "react-icons/md";
 import { FaPen } from "react-icons/fa";
 
 const Header = (props) => {
@@ -61,7 +62,6 @@ const Header = (props) => {
   const [country, setCountry] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
 
   const [showUserDetails, setShowUserDetails] = useState(false);
   const userDetailsRef = useRef(null);
@@ -150,8 +150,7 @@ const Header = (props) => {
     // }
 
     if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
-      window.location.href =
-        "https://www.swa.co/category_search/" + setItem.id;
+      window.location.href = "https://www.swa.co/category_search/" + setItem.id;
     } else {
       history.push({
         pathname: "/new_arrivel",
@@ -178,8 +177,7 @@ const Header = (props) => {
   };
   const tagSelHandler = (selItem) => {
     if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
-      window.location.href =
-        "https://www.swa.co/tag_search/" + selItem.id;
+      window.location.href = "https://www.swa.co/tag_search/" + selItem.id;
     } else {
       history.push({
         pathname: "/new_arrivel",
@@ -351,15 +349,14 @@ const Header = (props) => {
   //               props.setSelectedCountry(defaultCountry);
   //         }
   //       }
-  //       console.log("filterCountry",filterCountry); 
+  //       console.log("filterCountry",filterCountry);
   //       } catch (error) {
   //         console.error("Error fetching country details:", error);
   //       }
   //     };
-      
+
   //     fetchData();
   //   }, []);
-   
 
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -411,7 +408,7 @@ const Header = (props) => {
   //           props.setSelectedCountry(defaultCountry);
   //         }
   //       }
-        
+
   //       setLoading(false);
   //     } catch (error) {
   //       console.error("Error fetching country details:", error);
@@ -423,7 +420,7 @@ const Header = (props) => {
   //   fetchData();
   // }, []);
   const [isLoading, setIsLoading] = useState(false);
-  const [pinCode, setPinCode] = useState('');
+  const [pinCode, setPinCode] = useState("");
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -432,69 +429,79 @@ const Header = (props) => {
         setCountryData(response.data.results.data);
         const getLocation = async () => {
           setIsLoading(true);
-          navigator.geolocation.getCurrentPosition(async (pos) => {
-            const { latitude, longitude } = pos.coords;
-            let _url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
-            try {
-              const geoResponse = await axios.get(_url);
-              const userCountryName = geoResponse.data.address.country;
-              setCountry(userCountryName);
+          navigator.geolocation.getCurrentPosition(
+            async (pos) => {
+              const { latitude, longitude } = pos.coords;
+              let _url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
+              try {
+                const geoResponse = await axios.get(_url);
+                const userCountryName = geoResponse.data.address.country;
+                setCountry(userCountryName);
 
-              let selectedCountryData;
+                let selectedCountryData;
 
-              if (userCountryName === "India" || userCountryName === "United Arab Emirates") {
-                selectedCountryData = response.data.results.data.find(
-                  (country) => country.country_name === userCountryName
-                );
-              } else {
-                selectedCountryData = response.data.results.data.find(
-                  (country) => country.country_name === "United States"
-                );
+                if (
+                  userCountryName === "India" ||
+                  userCountryName === "United Arab Emirates"
+                ) {
+                  selectedCountryData = response.data.results.data.find(
+                    (country) => country.country_name === userCountryName
+                  );
+                } else {
+                  selectedCountryData = response.data.results.data.find(
+                    (country) => country.country_name === "United States"
+                  );
+                }
+
+                // Optionally set additional state or perform other actions with selectedCountryData
+                // setSelectedCountry(selectedCountryData);
+
+                if (selectedCountryData) {
+                  console.log("Selected Country Data:", selectedCountryData);
+                  if (!CountryIds && !flag) {
+                    props.setSelectedCountry({
+                      ...props.selectedCountry,
+                      flag_image: selectedCountryData.flag_image,
+                      id: selectedCountryData.id,
+                      country_name: selectedCountryData.country_name,
+                    });
+                    localStorage.setItem(
+                      "flag_image",
+                      selectedCountryData.flag_image
+                    );
+                    localStorage.setItem("id", selectedCountryData.id);
+                    localStorage.setItem(
+                      "country_name",
+                      selectedCountryData.country_name
+                    );
+                  }
+                }
+
+                const defaultCountryID = localStorage.getItem("id");
+                const defaultCountryFlag = localStorage.getItem("flag_image");
+                if (defaultCountryID && defaultCountryFlag) {
+                  const defaultCountry = countryData.find(
+                    (country) => country.id === parseInt(defaultCountryID)
+                  );
+                  if (defaultCountry) {
+                    props.setSelectedCountry(defaultCountry);
+                  }
+                }
+              } catch (error) {
+                console.log(error);
+              } finally {
+                setIsLoading(false);
               }
-
-              // Optionally set additional state or perform other actions with selectedCountryData
-              // setSelectedCountry(selectedCountryData);
-
-              if (selectedCountryData) {
-                        console.log("Selected Country Data:", selectedCountryData);
-                        if (!CountryIds && !flag) {
-                          props.setSelectedCountry({
-                            ...props.selectedCountry,
-                            flag_image: selectedCountryData.flag_image,
-                            id: selectedCountryData.id,
-                            country_name: selectedCountryData.country_name,
-                          });
-                          localStorage.setItem("flag_image", selectedCountryData.flag_image);
-                          localStorage.setItem("id", selectedCountryData.id);
-                          localStorage.setItem("country_name", selectedCountryData.country_name);
-                        }
-                      }
-              
-                      const defaultCountryID = localStorage.getItem("id");
-                      const defaultCountryFlag = localStorage.getItem("flag_image");
-                      if (defaultCountryID && defaultCountryFlag) {
-                        const defaultCountry = countryData.find(
-                          (country) => country.id === parseInt(defaultCountryID)
-                        );
-                        if (defaultCountry) {
-                          props.setSelectedCountry(defaultCountry);
-                        }
-                      }
-
-            } catch (error) {
-              console.log(error);
-            } finally {
+            },
+            (error) => {
+              console.error("Error getting geolocation:", error);
               setIsLoading(false);
             }
-          }, (error) => {
-            console.error("Error getting geolocation:", error);
-            setIsLoading(false);
-          });
+          );
         };
 
         // Call getLocation to set country based on user's location
         getLocation();
-
       } catch (error) {
         console.error("Error fetching country data:", error);
       }
@@ -503,14 +510,11 @@ const Header = (props) => {
     fetchData();
   }, []);
 
-
   // console.log("country==>", country);
   // console.log("countryData", countryData);
 
- 
-
   const handleCountrySelect = (country) => {
-    debugger
+    debugger;
     if (!isHomePage) {
       history.push("/");
     }
@@ -721,7 +725,7 @@ const Header = (props) => {
               </div>
             )}
           </div>
-          
+
           <CgHeart
             className={`${Classes.Icon} ${Classes.headerElement}`}
             color="#FFFFFF"
@@ -829,7 +833,7 @@ const Header = (props) => {
         <div
           className={`${mobileSearchBarClass} ${Classes.MobileSearchbarOthers}`}
         >
-          {isHomePage && (
+          {/* {isHomePage && (
             <div className={Classes.DiwaliOffers}>
               <div className="labelWrapper2" style={{ height: "20px" }}>
                 {props.headeroffer &&
@@ -840,6 +844,14 @@ const Header = (props) => {
                   ))}
               </div>
             </div>
+          )} */}
+          {isHomePage && (
+            <div className={Classes.mobCheckDelivery} onClick={handleShowModal}>
+              <p>CHECK DELIVERY</p>
+              <p>
+                Enter pincode <MdEdit />
+              </p>
+            </div>
           )}
 
           {isHome && (
@@ -848,7 +860,7 @@ const Header = (props) => {
                 style={{
                   position: "relative",
                   margin: "12px 0px",
-                  marginBottom: "5px",
+                  marginBottom: "0px",
                 }}
               >
                 <div

@@ -916,7 +916,7 @@ input[type="number"] {
     display: none;
   }
   .ParentSlide .slick-dots li {
-    width: 40px !important;
+    width: 14px !important;
   }
   .ProductdetialParentContainer {
     margin-top: 0px;
@@ -929,7 +929,7 @@ input[type="number"] {
   }
   .videoParentslider {
     width: 100% !important;
-    height: 327px !important;
+    height: 373px !important;
     object-fit: cover;
   }
   .landingrow {

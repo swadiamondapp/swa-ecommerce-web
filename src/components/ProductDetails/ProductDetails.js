@@ -40,7 +40,7 @@ import closeimg from "../../Assets/closeModal.png";
 import time from "../../Assets/time.png";
 import d1 from "../../Assets/d1.png";
 import d2 from "../../Assets/d2.png";
-import locationsimg from "../../Assets/locations.png";
+import locationsimg from "../../Assets/locates.svg";
 // import { Carousel } from "primereact/carousel";
 import Slider from "react-slick";
 import { BsFillPlayFill } from "react-icons/bs";
@@ -598,8 +598,7 @@ const ProductDetails = (props) => {
 
   console.log("imageUrls", imageUrls);
   console.log(props.deliveryDate, "deliveryDate==>==>");
-  console.log(props.actualPrice, "props.actualPrice")
-
+  console.log(props.actualPrice, "props.actualPrice");
 
   return (
     <div>
@@ -754,8 +753,9 @@ const ProductDetails = (props) => {
                               <img
                                 onClick={() => handleImageClick(index)}
                                 style={{ width: "69px", height: "69px" }}
-                                className={`${isActive ? Classes.selectedOptionColor : ""
-                                  }`}
+                                className={`${
+                                  isActive ? Classes.selectedOptionColor : ""
+                                }`}
                                 key={index}
                                 src={url}
                                 alt={`Media ${index}`}
@@ -773,8 +773,8 @@ const ProductDetails = (props) => {
                                     onClick={() =>
                                       handleImageClick(imageUrls.length)
                                     }
-                                  // controls
-                                  // className="media-item"
+                                    // controls
+                                    // className="media-item"
                                   >
                                     <source src={url} type="video/mp4" />
                                     Your browser does not support the video tag.
@@ -949,8 +949,9 @@ const ProductDetails = (props) => {
                   {/* &#x20B9; {parseFloat(formattedCost).toFixed(0)} */}
                   {result === null || result === "NaN" ? "" : result}
                 </p>
-                {props.actualPrice && (
-                  props.actualPrice === null || isNaN(Number(props.actualPrice)) ? (
+                {props.actualPrice &&
+                  (props.actualPrice === null ||
+                  isNaN(Number(props.actualPrice)) ? (
                     ""
                   ) : (
                     <>
@@ -961,16 +962,19 @@ const ProductDetails = (props) => {
                         <CgDollar size={25} color="#B0B0B0" />
                       )}
                       {Contryname === "United Arab Emirates" && (
-                        <span style={{ paddingRight: "5px", paddingLeft: "7px" }}>
+                        <span
+                          style={{ paddingRight: "5px", paddingLeft: "7px" }}
+                        >
                           AED
                         </span>
                       )}
                       <p className={Classes.OldPrice}>
-                        {numberWithCommas(parseInt(props.actualPrice, 10).toFixed(0))}
+                        {numberWithCommas(
+                          parseInt(props.actualPrice, 10).toFixed(0)
+                        )}
                       </p>
                     </>
                   ))}
-
               </div>
               {props.discount ? (
                 <p className={Classes.HurrayText}>
@@ -1001,8 +1005,9 @@ const ProductDetails = (props) => {
                     : item.id === selectedColor.id;
                   return (
                     <div
-                      className={`${Classes.Options}  ${isSelected ? Classes.selectedOptionColor : ""
-                        }`}
+                      className={`${Classes.Options}  ${
+                        isSelected ? Classes.selectedOptionColor : ""
+                      }`}
                       key={index}
                       onClick={() => colorSelectHandler(item)}
                     >
@@ -1064,12 +1069,12 @@ const ProductDetails = (props) => {
                   <button className={Classes.FindStores} onClick={Tryhome}>
                     Try at Home
                   </button>
-                  <VideocallForm
-                    isOpen={isModalOpen}
-                    handleClose={handleCloseModal}
-                    productId={props.id}
-                  />
                 </div>
+                <VideocallForm
+                  isOpen={isModalOpen}
+                  handleClose={handleCloseModal}
+                  productId={props.id}
+                />
                 <p style={{ color: "#ff4545" }}>{props.errormsgtrycart}</p>
               </div>
               <Modal
@@ -1155,7 +1160,7 @@ const ProductDetails = (props) => {
                     onChange={sizeChangeHandler}
                     value={selectedSize}
                   >
-                    <option value="">{ }Select Size</option>
+                    <option value="">{}Select Size</option>
                     {props.sizeChart.map((item, index) => {
                       return (
                         <option value={item.id} key={index}>
@@ -1221,16 +1226,16 @@ const ProductDetails = (props) => {
                     onChange={pinCodeChangeHandler}
                     onInput={(e) => {
                       if (e.target.value.length > 6) {
-                        e.target.value = e.target.value.slice(0, 6); 
+                        e.target.value = e.target.value.slice(0, 6);
                       }
                     }}
-                    min="0"  
+                    min="0"
                   />
                   <button
                     className={Classes.CheckButton}
                     // onClick={() => setPincodeShow(true)}
                     onClick={props.checkDelivery}
-                  // onClick={availbilityCheck}
+                    // onClick={availbilityCheck}
                   >
                     CHECK
                   </button>
@@ -1265,24 +1270,24 @@ const ProductDetails = (props) => {
                       <img
                         src={
                           props.deliveryDate ===
-                            "Shipment in next 5 working days"
+                          "Shipment in next 5 working days"
                             ? shippingTag1
                             : props.deliveryDate === "Delivery in 24 hrs"
-                              ? shippingtag2
-                              : props.deliveryDate === "Shipment in next day"
-                                ? shippingTag
-                                : shippingtag2
+                            ? shippingtag2
+                            : props.deliveryDate === "Shipment in next day"
+                            ? shippingTag
+                            : shippingtag2
                         }
                       />
                       <p className={Classes.shippingTagtext}>
                         {props.deliveryDate ===
-                          "Shipment in next 5 working days"
+                        "Shipment in next 5 working days"
                           ? "7 day shipping"
                           : props.deliveryDate === "Delivery in 24 hrs"
-                            ? "24hr Delivery"
-                            : props.deliveryDate === "Shipment in next day"
-                              ? "Next day shipping"
-                              : shippingtag2}
+                          ? "24hr Delivery"
+                          : props.deliveryDate === "Shipment in next day"
+                          ? "Next day shipping"
+                          : shippingtag2}
                       </p>
                     </div>
                   </div>
@@ -1324,40 +1329,42 @@ const ProductDetails = (props) => {
                       </div>
                     </div>
                   </div> */}
-                  {props.deliveryDate && <div className={Classes.deliveryDetailsList}>
-                    <div className={Classes.freedevimageBack}>
-                      <img src={freeDelivery5} />
+                  {props.deliveryDate && (
+                    <div className={Classes.deliveryDetailsList}>
+                      <div className={Classes.freedevimageBack}>
+                        <img src={freeDelivery5} />
+                      </div>
+                      <div>
+                        {props.deliveryDate === "Delivery in 24 hrs" ? (
+                          <>
+                            <div>
+                              <p className={Classes.shippingTagtext_head}>
+                                Free try at home available
+                              </p>
+                            </div>
+                            <div>
+                              <p className={Classes.shippingTagtext_sub}>
+                                Try swa video call option
+                              </p>
+                            </div>
+                          </>
+                        ) : (
+                          <>
+                            <div>
+                              <p className={Classes.shippingTagtext_head}>
+                                Free try at home not available
+                              </p>
+                            </div>
+                            <div>
+                              <p className={Classes.shippingTagtext_sub}>
+                                Try swa video call option
+                              </p>
+                            </div>
+                          </>
+                        )}
+                      </div>
                     </div>
-                    <div>
-                      {props.deliveryDate === "Delivery in 24 hrs" ? (
-                        <>
-                          <div>
-                            <p className={Classes.shippingTagtext_head}>
-                              Free try at home available
-                            </p>
-                          </div>
-                          <div>
-                            <p className={Classes.shippingTagtext_sub}>
-                              Try swa video call option
-                            </p>
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          <div>
-                            <p className={Classes.shippingTagtext_head}>
-                              Free try at home not available
-                            </p>
-                          </div>
-                          <div>
-                            <p className={Classes.shippingTagtext_sub}>
-                              Try swa video call option
-                            </p>
-                          </div></>
-                      )}
-
-                    </div>
-                  </div>}
+                  )}
                 </div>
                 {/* <div className={Classes.Flex}>
                 <img className={Classes.Stroke} src={Stroke} alt="" />

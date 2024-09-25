@@ -19,8 +19,8 @@ const NewArrivalCard = (props) => {
   const [addToWishList, setAddToWishList] = useState(false);
   const [onadd, setOnAdd] = useState(true);
   const [wishId, setWishId] = useState([]);
-  const likes = props.prodet.wishlist_id
-  console.log("likes",likes)
+  const likes = props.prodet.wishlist_id;
+  console.log("likes", likes);
 
   const Contryname = localStorage.getItem("country_name");
 
@@ -37,8 +37,7 @@ const NewArrivalCard = (props) => {
       setWishId(""); // Clear wishId if there's no wishlist activity
     }
   }, [props.wishAct]);
-  
-  
+
   const Added = () => {
     const token = localStorage.getItem("swaToken");
     if (token !== null) {
@@ -64,7 +63,8 @@ const NewArrivalCard = (props) => {
     }
   };
   const Remove = () => {
-    if (token !== null && likes) { // Ensure wishId is not empty
+    if (token !== null && likes) {
+      // Ensure wishId is not empty
       axios
         .delete(`${Urls.wishlist}${likes}?country=${countryId}`, {
           headers: { Authorization: "Token " + token },
@@ -85,8 +85,8 @@ const NewArrivalCard = (props) => {
       }
     }
   };
-console.log(wishId,"wishId")
-console.log(addToWishList,"addToWishList")
+  console.log(wishId, "wishId");
+  console.log(addToWishList, "addToWishList");
   // const Remove = () => {
   //   if (token !== null) {
   //     if (wishId !== "") {
@@ -214,9 +214,13 @@ console.log(addToWishList,"addToWishList")
                     handleShow={() => props.onClick(props.ProductId)}
                   />
                 </div>
+                <div className={Classes.cardTryatHomeBtn}>
+                  <button>TRY AT HOME</button>
+                </div>
               </div>
             </div>
           </div>
+
           {/* <div className={onadd ? [Classes.Buttons] : [Classes.None]}>
             <button className={Classes.AddToCart} onClick={props.clicked}>
               try@home
