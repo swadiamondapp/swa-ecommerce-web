@@ -376,6 +376,12 @@ const LandingPage = () => {
                 Suces={home}
                 wishAct={item && item.wishlist_id && item.wishlist_id}
                 prodet={item}
+                onclose={handleCloseModal}
+                onClick={() => handleShowModal(item.product_id)}
+                buttonText={
+                  buttonTexts[item.product_id] || "Check delivery date"
+                }
+                showModal={showModal}
               />
             );
           })}
@@ -432,6 +438,8 @@ const LandingPage = () => {
           </ShopOnBudget>
         </div>
       </div>
+      <SliderFeature />
+
       <div className="container newarrivalContainer">
         <NewArrivals counts={counts}>{newArriv}</NewArrivals>
       </div>
@@ -448,7 +456,6 @@ const LandingPage = () => {
         <DownloadOurAppImage />
         {/* <RecentSearch /> */}
       </div>
-      <SliderFeature />
 
       <Footer />
     </div>

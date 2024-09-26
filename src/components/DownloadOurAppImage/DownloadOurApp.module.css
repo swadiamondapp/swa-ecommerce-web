@@ -200,6 +200,10 @@
     padding-left: 0px;
     font-size: 15px;
     text-align: center;
+    color: #041a2599;
+    font-family: "LatoRegular";
+    font-weight: 400;
+    padding: 0px 31px;
   }
   .AppLink {
     padding-left: 0px;
