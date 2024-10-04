@@ -935,7 +935,7 @@ const ProductDetails = (props) => {
 
                 <p
                   className={Classes.NewPrice}
-                  style={{ display: "flex", alignItems: "center", gap: "3px" }}
+                  style={{ display: "flex", alignItems: "center", gap: "3px"}}
                 >
                   {Contryname === "India" && (
                     <BiRupee className={Classes.Rupee} />
@@ -1067,7 +1067,7 @@ const ProductDetails = (props) => {
                     />
                   </button>{" "}
                   <button className={Classes.FindStores} onClick={Tryhome}>
-                    Try at Home
+                    Trial at Home
                   </button>
                 </div>
                 <VideocallForm
@@ -1339,7 +1339,7 @@ const ProductDetails = (props) => {
                           <>
                             <div>
                               <p className={Classes.shippingTagtext_head}>
-                                Free try at home available
+                                Free trial at home available
                               </p>
                             </div>
                             <div>
@@ -1352,7 +1352,7 @@ const ProductDetails = (props) => {
                           <>
                             <div>
                               <p className={Classes.shippingTagtext_head}>
-                                Free try at home not available
+                                Free trial at home not available
                               </p>
                             </div>
                             <div>
@@ -1424,7 +1424,7 @@ const ProductDetails = (props) => {
                         </div>
                         <div>
                           <p className={Classes.DHeadText}>
-                            Free try at home not available
+                            Free trial at home not available
                           </p>
                           <p className={Classes.Dheadtext1}>
                             Try swa video call option

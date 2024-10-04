@@ -14,9 +14,9 @@
   color: #0d1217;
   font-size: 16px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 600;
   line-height: normal;
-  font-family: "GilroyRegular";
+  font-family: "lato";
   margin-bottom: 10px !important;
 }
 .Security {
@@ -25,9 +25,9 @@
 }
 
 .FeaturesMainText {
-  font-weight: 400;
+  font-weight: 600;
   font-size: 16px;
-  font-family: "gilroyNormal" !important;
+  font-family: "lato" !important;
   text-align: center;
 }
 
@@ -35,7 +35,7 @@
   font-weight: 400;
   font-size: 14px;
   color: #86898b;
-  font-family: "gilroyNormal" !important;
+  font-family: "lato" !important;
   text-align: center;
 }
 
@@ -95,6 +95,6 @@
 
 @media (min-width: 300px) and (max-width: 576px) {
   .FeaturesBg {
-    display: none;
+    /* display: none; */
   }
 }

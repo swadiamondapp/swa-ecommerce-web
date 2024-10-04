@@ -5,6 +5,8 @@ import AddBank from "../LifeTImeModal/AddBank";
 import TransferMoneyModal from "../WalletModal/TransferMoneyModal";
 import axios from "axios";
 import * as Urls from "../../Urls";
+import { BiRupee } from "react-icons/bi";
+import { CgDollar } from "react-icons/cg";
 
 const SwaWallet = () => {
   const [transferModalOpen, setTransferModalOpen] = useState(false);
@@ -13,6 +15,7 @@ const SwaWallet = () => {
   const [walletValues, setWalletValues] = useState(null);
   const [walletAmount, setWalletAmount] = useState();
   const [walletDetails, setWalletDetails] = useState([]);
+  const Contryname = localStorage.getItem("country_name");
   console.log("walletValues", walletValues);
   console.log("walletDetails", walletDetails);
   console.log("walletAmount", walletAmount);
@@ -74,7 +77,21 @@ const SwaWallet = () => {
               <div className={Classes.head}>
                 <img src={Wallet} alt="Wallet" />
 
-                <span>${walletValues ? walletValues.swa_wallet : null}</span>
+                <span>
+                  {Contryname === "India" && (
+                    <BiRupee size={25}  />
+                  )}
+                  {Contryname === "United States" && (
+                    <CgDollar size={25}  />
+                  )}
+                  {Contryname === "United Arab Emirates" && (
+                    <span
+                      style={{ paddingRight: "5px", paddingLeft: "7px" }}
+                    >
+                      AED
+                    </span>
+                  )}
+                  {walletValues ? walletValues.swa_wallet : null}</span>
               </div>
             </div>
             <div className={Classes.walletRight}>

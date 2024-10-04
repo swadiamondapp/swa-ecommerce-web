@@ -426,7 +426,7 @@ const Cart = () => {
           movWish={activeCart === "shopping" ? () => movWishList(selId) : ()=>movWishListTrial(selId)}
           remove={activeCart === "shopping" ? () => removeHandler(selId) : () => addDesigns(selId)}
           body="Are you sure that you want to move 
-        this item from the cat?"
+        this item from the cart?"
           shows={show}
         />
 

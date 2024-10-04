@@ -770,7 +770,7 @@ const Payment = () => {
             <div className={Classes.Right}>
               <div className={Classes.TotalText}>
                 <div className={Classes.TotalItem}>
-                  <p className={Classes.TotalSmall}>
+                  <p className={Classes.TotalSmall} style={{fontSize:"16px"}}>
                     Total &nbsp;<span>{data.totalItems} Items</span>
                   </p>
                 </div>

@@ -215,7 +215,7 @@ const NewArrivalCard = (props) => {
                   />
                 </div>
                 <div className={Classes.cardTryatHomeBtn}>
-                  <button>TRY AT HOME</button>
+                  <button>TRIAL AT HOME</button>
                 </div>
               </div>
             </div>

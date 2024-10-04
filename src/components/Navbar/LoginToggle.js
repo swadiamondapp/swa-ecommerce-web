@@ -957,7 +957,7 @@ if (
                   opacity: "0.3",
                 }}
               ></div>
-              <div className={Classes.orText}>Or login with</div>
+              <div className={Classes.orText}>OR</div>
               <div
                 style={{
                   borderBottom: "1px solid #585F67",

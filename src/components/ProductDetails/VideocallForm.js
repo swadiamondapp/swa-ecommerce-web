@@ -5,6 +5,7 @@ import Joi from "joi";
 import { Modal, Box } from "@mui/material";
 import Classes from "./ProductDetails.module.css";
 import videoimg from "../../../src/Assets/videosucces.png";
+import closebtn from "../../../src/Assets/closeModal.png";
 
 const VideocallForm = (props) => {
   const CountryName = localStorage.getItem("country_name")
@@ -157,6 +158,9 @@ const VideocallForm = (props) => {
         aria-describedby="modal-description"
       >
         <Box sx={isDesk ? style : styleDesk}>
+          <div style={{display:"flex",alignItems:"end",width:"100%",justifyContent:"end"}}>
+          <img onClick={props.handleClose} src={closebtn} style={{width:"16px",height:"16px"}}/>
+          </div>
           <div style={{ overflow: "hidden" }}>
             <h3 className={Classes.vi_head}>Schedule your video call</h3>
             <p className={Classes.vi_paras}>
