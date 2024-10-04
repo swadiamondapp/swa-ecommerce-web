@@ -169,7 +169,7 @@ const TryAtHome = () => {
       <div className={Classes.mainContianerProfile}>
         <div className="container">
           <div className={Classes.TryAtHomeParent}>
-            <h3 className={Classes.TryAtHomeHead}>Try at Home</h3>
+            <h3 className={Classes.TryAtHomeHead}>Trial at Home</h3>
             <p className={Classes.TryathomePara}>
               Our representative will visit your home to show your liked jewels
               with your convenient time <br /> and date. so choose your date and
@@ -243,7 +243,7 @@ const TryAtHome = () => {
               </div> */}
               <div className={Classes.TryLeftsec}>
                 <div className={Classes.TryatHomeCard}>
-                  <h3 className={Classes.TryatHomeCardh3}>Try at Home</h3>
+                  <h3 className={Classes.TryatHomeCardh3}>Trial at Home</h3>
                   <div className={Classes.TryHomeDate}>
                     {dates.length > 0 ? (
                       dates.map((dateString, index) => {

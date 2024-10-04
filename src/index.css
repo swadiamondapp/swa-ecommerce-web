@@ -964,3 +964,36 @@ input[type="number"] {
 /* .MainHead_CarouselCards__3NvGV .slick-track {
   width: 50% !important; 
 } */
+
+.modal {
+  top: 20% !important;
+}
+/* styles.css or your CSS module */
+.activeTab {
+  background: #F7F6F2 !important;
+  font-weight: 900 !important;
+  color: black !important;
+  padding-left: 20px;
+  position: relative;
+}
+
+.inactiveTab {
+  background: transparent !important;
+  font-weight: 300 !important;
+  color: inherit !important;
+  padding-left: 20px;
+  position: relative;
+}
+
+.dot {
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  content: "•";
+  font-size: 12px;
+  color: black;
+}
+.p-inputtext{
+  padding: 0px !important;
+}

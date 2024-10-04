@@ -17,6 +17,7 @@
   color: #000;
   font-family: "lato";
   font-weight: 700;
+  margin-top: 10px;
 }
 .Home {
   color: #00464d;
@@ -142,13 +143,13 @@
 }
 .TotalSmall {
   font-weight: 600;
-  font-size: 14px;
-  font-family: "gilroyNormal" !important;
+  font-size: 16px;
+  font-family: "lato" !important;
 }
 .Amount {
   font-weight: 600;
-  font-size: 14px;
-  font-family: "gilroyNormal" !important;
+  font-size: 16px;
+  font-family: "lato" !important;
 }
 .TotalItem {
   display: flex;

@@ -288,19 +288,19 @@
 
 .NumOfItem {
   font-weight: 400;
-  font-size: 14px;
-  color: #5e666c;
-  font-family: "gilroyNormal" !important;
+  font-size: 18px;
+  color: black;
+  font-family: "lato" !important;
 }
 .TotalSmall {
   font-weight: 600;
-  font-size: 14px;
-  font-family: "gilroyNormal" !important;
+  font-size: 18px;
+  font-family: "lato" !important;
 }
 .Amount {
   font-weight: 600;
-  font-size: 14px;
-  font-family: "gilroyNormal" !important;
+  font-size: 18px;
+  font-family: "lato" !important;
 }
 .TotalItem {
   display: flex;
@@ -339,10 +339,10 @@
   background: #f9f9f9;
   border: 1px solid #e8e9ea;
   border-radius: 4px;
-  font-weight: 400;
-  font-size: 16px;
-  color: #1e1e1e;
-  font-family: "gilroyNormal" !important;
+  font-weight: 600;
+  font-size: 18px;
+  color: black;
+  font-family: "lato" !important;
   width: 100%;
   height: 50px;
   /* margin-right: 5px;*/

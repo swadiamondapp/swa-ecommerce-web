@@ -284,7 +284,7 @@ export default function PrivacyModal() {
                       Policy will no longer apply.
                     </p>
                     <div
-                      style={{ display: "flex", justifyContent: "flex-end" }}
+                      style={{ display: "flex", justifyContent: "center" }}
                     >
                       <button
                         className={Classes.BtnAgreeAccept}

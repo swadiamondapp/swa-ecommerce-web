@@ -44,7 +44,7 @@
   border: 1px solid #00464d;
   padding: 10px 15px;
   border-radius: 4px;
-  font-family: "Lato", sans-serif;
+  font-family: "lato";
   background: #f6f5f0;
   border: none;
   color: #4e4035;
@@ -427,7 +427,7 @@
   color: #0d1217;
   margin-top: -5px;
   padding-left: 5px;
-  font-family: "gilroyNormal" !important;
+  font-family: "lato" !important;
 }
 
 .OldPrice {
