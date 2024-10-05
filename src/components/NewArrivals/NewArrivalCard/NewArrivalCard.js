@@ -122,7 +122,8 @@ const NewArrivalCard = (props) => {
   }
   const result = numberWithCommas(formattedCost);
 
-  console.log("props.productId", props.productId);
+  console.log("props.productId", props.ProductId);
+  console.log("props.buttonText", props.buttonText);
 
   // const handleCloseModal = () => {
   //   setShowModal(false);
@@ -131,11 +132,10 @@ const NewArrivalCard = (props) => {
   return (
     <React.Fragment>
       <div
-        className={` ${
-          location.pathname === "/new_arrivel"
-            ? "col-md-4 col-sm-6 col-lg-4 col-6"
-            : "col-md-4 col-sm-6 col-lg-3 col-6"
-        } ${Classes.NewArrivals}`}
+        className={` ${location.pathname === "/new_arrivel"
+          ? "col-md-4 col-sm-6 col-lg-4 col-6"
+          : "col-md-4 col-sm-6 col-lg-3 col-6"
+          } ${Classes.NewArrivals}`}
       >
         <ToastContainer />
         <div className={Classes.NewArrivalCard}>
@@ -151,7 +151,7 @@ const NewArrivalCard = (props) => {
               className={Classes.ProductImage}
               alt="ProductImage"
             />
-
+            
             {/* <p className={Classes.ProductName}>{props.ProductName}</p> */}
             {/* <p className={Classes.ProductId}>{props.ProductId}</p> */}
             <div className={Classes.HoverContainer}>
