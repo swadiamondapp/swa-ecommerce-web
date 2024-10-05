@@ -33,8 +33,10 @@ import SAU from "../../Assets/flagSAU.svg";
 import IND from "../../Assets/flagIND.svg";
 import UAE from "../../Assets/flagUAE.svg";
 import CheckDelivery from "../CheckDelivery/CheckDelivery";
+import { useLocation } from "react-router-dom/cjs/react-router-dom";
 
 const MobileNavbar = (props) => {
+  const location = useLocation()
   const history = useHistory();
   const [isHamOpen, setIsHamOpen] = useState(false);
   const [open, setOpen] = useState(false);
@@ -448,63 +450,68 @@ const MobileNavbar = (props) => {
                 <img className={Classes.mobileLogo} src={Logo} />
               </div>
             )} */}
-            <div
-              className={Classes.Logo}
-              onClick={() => (window.location.href = "/")}
-            >
-              <img className={Classes.mobileLogo} src={Logo} alt="Logo" />
-            </div>
+            {location.pathname !== "/new_arrivel" && (
+              <div
+                className={Classes.Logo}
+                onClick={() => (window.location.href = "/")}
+              >
+                <img className={Classes.mobileLogo} src={Logo} alt="Logo" />
+              </div>
+            )}
 
             <div>
-              <div
-                style={{
-                  cursor: "pointer",
-                  display: "flex",
-                  flexDirection: "column",
-                  position: "relative",
-                  top: "5px",
-                }}
-                className={`${Classes.DeliveryPin} ${Classes.headerElement}`}
-                // onClick={handleShowModal}
-              >
-                <span
-                  style={{ fontSize: "12px", color: "#fff" }}
-                  className={Classes.checkDeliveryTitle}
-                >
-                  {/* CHECK DELIVERY */}
-                </span>{" "}
-                {/* {pincode ? null : (
-                  <span
-                    onClick={handleShowModal}
-                    className={Classes.EnterPinTitle}
+              {location.pathname !== "/" &&
+                !location.pathname.startsWith("/products/") && (
+                  <div
                     style={{
                       cursor: "pointer",
-                      color: "#00e5ed",
-                      fontSize: "12px",
-                    }}
-                  >
-                    Enter PinCode
-                  </span>
-                )} */}
-                {/* {pincode && (
-                  <span
-                    className={Classes.EnterPinTitle}
-                    style={{
                       display: "flex",
-                      alignItems: "center",
-                      gap: "8px",
-                      fontSize: "14px",
-                      color: "#00e5ed",
+                      flexDirection: "column",
+                      position: "relative",
+                      top: "5px",
                     }}
+                    className={`${Classes.DeliveryPin} ${Classes.headerElement}`}
                   >
-                    {pincode}{" "}
-                    <FaPen
-                      style={{ fontSize: "12px" }}
-                      onClick={handleShowModal}
-                    />
-                  </span>
-                )} */}
-              </div>
+                    <span
+                      style={{ fontSize: "12px", color: "#fff" }}
+                      className={Classes.checkDeliveryTitle}
+                    >
+                      CHECK DELIVERY
+                    </span>
+                    {pincode ? null : (
+                      <span
+                        onClick={handleShowModal}
+                        className={Classes.EnterPinTitle}
+                        style={{
+                          cursor: "pointer",
+                          color: "#00e5ed",
+                          fontSize: "12px",
+                        }}
+                      >
+                        Enter PinCode
+                      </span>
+                    )}
+                    {pincode && (
+                      <span
+                        className={Classes.EnterPinTitle}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "8px",
+                          fontSize: "14px",
+                          color: "#00e5ed",
+                        }}
+                      >
+                        {pincode}{" "}
+                        <FaPen
+                          style={{ fontSize: "12px" }}
+                          onClick={handleShowModal}
+                        />
+                      </span>
+                    )}
+                  </div>
+                )}
+
             </div>
             <CheckDelivery
               show={showModal}
