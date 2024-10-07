@@ -17,6 +17,7 @@ import SliderFeature from "../../components/ProductDetails/SliderFeature";
 import TrialCart from "../../components/CartDesign/CartProducts/TrialCart";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 const Cart = () => {
   const [cartCount, setCartCount] = useState("");
@@ -351,16 +352,17 @@ const Cart = () => {
       cartLists = (
         <div className="container contBg">
           <div className=" d-flex justify-content-center align-items-center loader">
-            <div className="col-md-6">
+            <div className="col-md-6" style={{display:"flex",flexDirection:"column",alignItems:"center",gap:"10px"}}>
               <div className={Classes.cartEmpty}>
                 <img src={cartEmpty} alt="cartEmpty" />
               </div>
-              <h3 className={Classes.cartListHead}>Your Cart page is empty</h3>
+              <h3 className={Classes.cartListHead}>Your Cart is empty</h3>
               <p className={Classes.cartPara}>
                 Currently, there are no items in the cart. Have no worries, Keep
                 surfing until you find your favorite ornaments. From wishlist to
                 the cart, We wish you ‘Happy Shopping’.{" "}
               </p>
+             <Link to="/"> <button className={Classes.btn_shopnow}>Shop Now</button></Link>
             </div>
           </div>
         </div>

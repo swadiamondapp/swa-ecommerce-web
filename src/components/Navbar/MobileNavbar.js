@@ -32,6 +32,7 @@ import { FaPen } from "react-icons/fa";
 import SAU from "../../Assets/flagSAU.svg";
 import IND from "../../Assets/flagIND.svg";
 import UAE from "../../Assets/flagUAE.svg";
+import backBtn from "../../Assets/backBtn.png";
 import CheckDelivery from "../CheckDelivery/CheckDelivery";
 import { useLocation } from "react-router-dom/cjs/react-router-dom";
 
@@ -62,6 +63,10 @@ const MobileNavbar = (props) => {
   const [showModal, setShowModal] = useState(false);
   const [text, setText] = useState("");
   const pincode = localStorage.getItem("pincode");
+
+  const handleBackClick = () => {
+    history.goBack(); 
+  };
 
   console.log("catgSet", text);
 
@@ -158,6 +163,8 @@ const MobileNavbar = (props) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  const isCartPage = location.pathname === "/cart";
 
   const handleClickOutside = (event) => {
     if (
@@ -414,10 +421,54 @@ const MobileNavbar = (props) => {
   const handleCloseModal = () => {
     setShowModal(false);
   };
+
+  const toggleCart = (cartType) => {
+    props.setActiveCart(cartType);
+    console.log("cart,,,,.", props.setActiveCart(cartType));
+  };
+
+
   return (
     <div className={Classes.NavContainer}>
       <div className={Classes.Navbar}>
         <header>
+          
+        {isCartPage && (
+          <div style={{width:"100%",display:"flex",gap:"34px",alignItems:"center"}}>
+            <img onClick={handleBackClick} style={{width:"20.54px",height:"20px"}} src={backBtn}/>
+              <div>
+                <div className={Classes.Parentcartitems}>
+                  <div
+                    className={
+                      props.activeCart === "shopping"
+                        ? Classes.ActiveCarthead
+                        : ""
+                    }
+                    onClick={() => toggleCart("shopping")}
+                  >
+                    Shopping Cart
+                  </div>
+                  <div
+                    className={
+                      props.activeCart === "trial" ? Classes.ActiveCarthead : ""
+                    }
+                    onClick={() => toggleCart("trial")}
+                  >
+                    Trial Cart
+                  </div>
+                </div>
+                {/* <div className={Classes.CartContent}>
+                  {activeCart === "shopping" ? (
+                    <div>Shopping Cart Content</div>
+                  ) : (
+                    <div>Trial Cart Content</div>
+                  )}
+                </div> */}
+              </div>
+              </div>
+            )}
+          {!isCartPage && (
+            <>
           <div className={Classes.NavElements}>
             <div className={Classes.LeftIcons}>
               {/* <Hamburger
@@ -649,6 +700,8 @@ const MobileNavbar = (props) => {
               <p className={Classes.NoResult}>No Results Found</p>
             )}
           </div> */}
+          </>
+          )}
         </header>
         {/* {isHamOpen ? (
           <>
