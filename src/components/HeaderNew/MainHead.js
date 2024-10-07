@@ -27,6 +27,8 @@ const MainHead = (props) => {
         setSelectedCountry={props.setSelectedCountry}
         selectedCountry={props.selectedCountry}
         setShowSuccessModal={props.setShowSuccessModal}
+        activeCart={props.activeCart}
+        setActiveCart={props.setActiveCart}
       />
       <header className={Classes.headerNav}>
         <div className={`${"container"} ${Classes.ParentHeader}`}>

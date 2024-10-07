@@ -1071,12 +1071,15 @@
     grid-template-columns: 1fr;
   }
 
+  .head {
+    padding-left: 0px;  }
   .head img {
     width: 35px;
   }
   .walletTitle {
     margin-bottom: 5px;
     font-size: 14px;
+    padding-left: 0px;
   }
   .head span {
     color: #000000;
@@ -1087,6 +1090,7 @@
   }
   .texts {
     gap: 10px;
+      padding-left: 0px;
   }
   .ProfileCard {
     margin: 0px 0px;

@@ -20,6 +20,23 @@ const SwaWallet = () => {
   console.log("walletDetails", walletDetails);
   console.log("walletAmount", walletAmount);
   const token = localStorage.getItem("swaToken");
+  const [isMobileView, setIsMobileView] = useState(
+    window.innerWidth >= 300 && window.innerWidth <= 575
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileView(window.innerWidth >= 300 && window.innerWidth <= 575);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup function to remove event listener when component unmounts
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [isMobileView]);
+
   const movetoBank = () => {
     setTransferModalOpen(true);
     axios
@@ -94,6 +111,7 @@ const SwaWallet = () => {
                   {walletValues ? walletValues.swa_wallet : null}</span>
               </div>
             </div>
+            { !isMobileView &&(
             <div className={Classes.walletRight}>
               <button
                 onClick={movetoBank}
@@ -107,6 +125,7 @@ const SwaWallet = () => {
                 MOVE TO BANK
               </button>
             </div>
+            )}
 
             <TransferMoneyModal
               open={transferModalOpen}
@@ -135,6 +154,22 @@ const SwaWallet = () => {
               <br />
             </span>
           </div>
+          { isMobileView &&(
+            <div className={Classes.walletRight} style={{width:"100%"}}>
+              <button
+              style={{width:"100%"}}
+                onClick={movetoBank}
+                disabled={!walletValues || walletValues.swa_wallet === 0}
+                className={
+                  !walletValues || walletValues.swa_wallet === 0
+                    ? Classes.disabledButton
+                    : ""
+                }
+              >
+                MOVE TO BANK
+              </button>
+            </div>
+            )}
         </div>
         {/* transfer bank details */}
         <div className={Classes.container} style={{ marginTop: "20px" }}>

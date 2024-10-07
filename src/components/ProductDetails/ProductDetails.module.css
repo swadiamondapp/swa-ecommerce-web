@@ -1222,4 +1222,12 @@
   .rateStar8 {
     bottom: 0%;
   }
+  .Language_vi {
+    overflow-x: scroll;
+    padding-left: 10px;
+  }
+  .Language_vi::-webkit-scrollbar {
+    display: none; /* Hides the scrollbar */
+  }
+  
 }
