@@ -3,14 +3,18 @@ import NewArrivalCard from "../../components/NewArrivals/NewArrivalCard/NewArriv
 import Footer from "../../components/Footer/Footer";
 import NewArrivalDesign from "../../components/NewArrivalDesign/NewArrivalDesign";
 import DownloadOurAppImage from "../../components/DownloadOurAppImage/DownloadOurAppImage";
-import Filter from "../../components/Filter/Filter";
+import Filter from "../../components/Filter/FilterCatg";
 import Classes from "./NewArrivalPage.module.css";
 import * as Urls from "../../Urls";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { FadeLoader } from "react-spinners";
 import ReactPaginate from "react-paginate";
-import HeaderFilter from "../../components/Header/HeaderFilter";
+import Header from "../../components/HeaderNew/Header";
+import FilterMobile from "../../components/Filter/FilterMobile";
+import Features from "../../components/Features/Features";
+import FilterModal from "../../components/LifeTImeModal/FilterModal";
+import SliderFeature from "../../components/ProductDetails/SliderFeature";
 
 const NewArrivalPage = (props) => {
   const [product, setProduct] = useState([]);
@@ -24,18 +28,32 @@ const NewArrivalPage = (props) => {
   const [sort, setSort] = useState("");
   const [cartCount, setCartCount] = useState("");
   const [labelSet, setLabelSet] = useState([]);
+  const [num, setNum] = useState("");
+  const [count, setCount] = useState("");
   const history = useHistory();
+  const location = useLocation();
   const token = localStorage.getItem("swaToken");
+  const countryId = localStorage.getItem("id");
+  const productCategory = props.location.state.product_category || "";
+  const [buttonTexts, setButtonTexts] = useState({});
+  const [showModal, setShowModal] = useState(false);
+  // const categoryName = props.location.state.categoryName
   const filter = (newArrive, currentPage) => {
     setLoading(true);
     axios
-      .get(Urls.productList + newArrive + "&page=" + currentPage)
+      .get(
+        `${Urls.productList + newArrive}&country=${countryId}`,
+        token && {
+          headers: { Authorization: "Token " + token },
+        }
+      )
       .then((response1) => {
         setLoading(false);
         // const productList = [...response1.data.results.data]
-        // const sortedProducts = [...productList].sort((a, b) => a.total_price_final - b.total_price_final);
+        // const sortedProducts = [...productList].sort((a, b) => a.country_total_price - b.country_total_price);
         setProduct(response1.data.results.data);
-        setPageCount(response1.data.results.count / 20);
+        setCount(response1.data.results.count);
+        setPageCount(Math.ceil(response1.data.results.count / 20));
       })
       .catch((error) => {
         console.log(error);
@@ -43,14 +61,19 @@ const NewArrivalPage = (props) => {
   };
 
   const prodDetHandler = (prodItem) => {
-    console.log(prodItem);
     history.push({
       pathname:
-        "/products/" + prodItem.product_id + "/" + prodItem.thumbnail_colour_id+'/'+prodItem.product_name,
+        "/products/" +
+        prodItem.product_id +
+        "/" +
+        prodItem.thumbnail_colour_id +
+        "/" +
+        prodItem.product_name,
       state: { data: prodItem },
     });
   };
   const handlePageClick = (data) => {
+    setNum(data.selected);
     window.scrollTo(0, 0);
 
     if (
@@ -84,7 +107,9 @@ const NewArrivalPage = (props) => {
   };
   const cartsCount = () => {
     axios
-      .get(Urls.cart, { headers: { Authorization: "Token " + token } })
+      .get(`${Urls.cart}?country=${countryId}`, {
+        headers: { Authorization: "Token " + token },
+      })
       .then((response1) => {
         if (response1.data.results.message === "cart is empty") {
           setCartCount("");
@@ -100,6 +125,7 @@ const NewArrivalPage = (props) => {
   useEffect(() => {
     window.scrollTo(0, 0);
     console.log(props.location.state.data);
+
     if (props.location.state.data === "new") {
       filter('?filter_type="new', 1);
       setHead("New Arrivals");
@@ -114,14 +140,14 @@ const NewArrivalPage = (props) => {
       cartsCount();
     } else if (props.location.state.data === "occation") {
       filter("?occasion_tag_ids=" + props.location.state.octnId, 1);
-      setHead("Products");
+      setHead("Product List");
       setOccn(props.location.state.octnId);
     } else if (props.location.state.data !== undefined) {
       filter("?category_ids=" + props.location.state.data, 1);
       setCatSet(props.location.state.data);
-      setHead("Products");
+      setHead("Product List");
     }
-  }, []);
+  }, [props.location.state.data]);
   const filterCatHandler = (filtSet) => {
     let delimiter = ", ";
     let catSet = "";
@@ -245,7 +271,9 @@ const NewArrivalPage = (props) => {
     };
 
     axios
-      .post(Urls.cart, body, { headers: { Authorization: "Token " + token } })
+      .post(`${Urls.cart}?country=${countryId}`, body, {
+        headers: { Authorization: "Token " + token },
+      })
       .then((response1) => {
         if (response1.data.results.message === "item added") {
           let count = cartCount;
@@ -258,18 +286,72 @@ const NewArrivalPage = (props) => {
       });
   };
   const sortsHHandler = (e) => {
+    // console.log("......?", e.target.value);
     setSort(e.target.value);
-    setLoading(true);
-    axios
-      .get(Urls.productList + "?sort=" + e.target.value)
-      .then((response1) => {
-        setLoading(false);
-        setProduct(response1.data.results.data);
-        setPageCount(response1.data.results.count / 2);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    filter(
+      "?occasion_tag_ids=" +
+        occn +
+        "&color_ids=" +
+        color +
+        "&category_ids=" +
+        catgSet +
+        "&metal_type=" +
+        metal +
+        "&sort=" +
+        e.target.value +
+        "&filter_type=" +
+        e.target.value,
+      1
+    );
+    // setLoading(true);
+    // axios
+    //   .get(Urls.productList + "?sort=" + e.target.value)
+    //   .then((response1) => {
+    //     setLoading(false);
+    //     setProduct(response1.data.results.data);
+    //     setPageCount(Math.ceil(response1.data.results.count / 20));
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+  };
+  // mobile sort
+  const sortsHHandler2 = (selectedSort, selectedPopular) => {
+    console.log("......?", selectedPopular);
+    // setSort(selectedSort);
+    filter(
+      "?occasion_tag_ids=" +
+        occn +
+        "&color_ids=" +
+        color +
+        "&category_ids=" +
+        catgSet +
+        "&metal_type=" +
+        metal +
+        "&sort=" +
+        selectedSort +
+        "&filter_type=" +
+        selectedPopular,
+      1
+    );
+  };
+  // price filter modal
+  const sortsHHandlerPrice = (selectedPriceRange) => {
+    // setSort(selectedSort);
+    filter(
+      "?occasion_tag_ids=" +
+        occn +
+        "&color_ids=" +
+        color +
+        "&category_ids=" +
+        catgSet +
+        "&metal_type=" +
+        metal +
+        "&price_range=" +
+        selectedPriceRange,
+
+      1
+    );
   };
 
   let products;
@@ -287,7 +369,45 @@ const NewArrivalPage = (props) => {
       </div>
     );
   } else {
+    
+    const handleShowModal = (productId) => {
+      console.log("productIddd", productId);
+      const pincode = localStorage.getItem("pincode");
+      if (pincode) {
+        const body = {
+          product_id: productId,
+          color_id: "",
+          size_id: "",
+          pincode: pincode,
+        };
+  
+        axios
+          .post(Urls.checkdeliveryDate, body, {
+            headers: { Authorization: "Token " + token },
+          })
+          .then((response1) => {
+            // setButtonText(response1.data.results.message);
+            setButtonTexts((prevState) => ({
+              ...prevState,
+              [productId]: response1.data.results.message, // Update the specific product's button text
+            }));
+            console.log("dateresponse", response1.data.results);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        setShowModal(true);
+      }
+    };
+
+    const handleCloseModal = () => {
+      setShowModal(false);
+    };
+
     products = product.map((item, index) => {
+
+      console.log(item.sku,"item.sku")
       return (
         <NewArrivalCard
           ProductImage={item.thumbnail_image}
@@ -296,10 +416,10 @@ const NewArrivalPage = (props) => {
           cartSddHandler={() => prodDetHandler(item)}
           PriceNew={
             item.is_on_discount
-              ? item.discounted_final_price
-              : item.total_price_final
+              ? item.country_discount_price
+              : item.country_total_price
           }
-          PriceOld={item.is_on_discount ? item.total_price_final : null}
+          PriceOld={item.is_on_discount ? item.country_total_price : null}
           key={index}
           Discount={
             item.discount_percentage !== null
@@ -309,43 +429,91 @@ const NewArrivalPage = (props) => {
           clicked={() => prodDetHandler(item)}
           wishAct={item.wishlist_id}
           prodet={item}
+          buttonText={buttonTexts[item.product_id] || "Check delivery date"}
+          onClick={() => handleShowModal(item.product_id)}
+          showModal={showModal}
+          onclose={handleCloseModal}
         />
       );
     });
   }
 
+  console.log("count--->", count);
+  // const countryId = localStorage.getItem("id");
+  const flag = localStorage.getItem("flag_image");
+  const Contryname = localStorage.getItem("country_name");
+  const [selectedCountry, setSelectedCountry] = useState({
+    id: countryId,
+    flag_image: flag,
+    country_name: Contryname,
+  });
+
   return (
     <div>
       <div className={Classes.Page}>
-        <HeaderFilter countCartItems={cartCount} />
+        <Header
+          countCartItems={cartCount}
+          selectedCountry={selectedCountry}
+          setSelectedCountry={setSelectedCountry}
+        />
         <div className="container">
           <div className="row">
-            <div className="col-lg-2 col-sm-4">
+            <div className="col-lg-3 col-sm-4">
               <Filter
                 filterCatg={filterCatHandler}
                 filterColr={filtColorHandler}
                 filterOctn={filtOcctnHandler}
                 filterMetal={filterMetalHanlder}
+                filterSearch={props.location.state}
+                setProduct={setProduct}
+                setCount={setCount}
               />
             </div>
-            <div className="col-lg-10 col-sm-8">
+            <div className="col-lg-9 col-sm-8">
               <div className={Classes.Products}>
                 <NewArrivalDesign
                   head={head}
                   labArry={labelSet}
                   deltLabel={deltLbel}
                   sortHandler={sortsHHandler}
+                  count={count}
+                  categoryName={productCategory}
                 >
+                  {/* <ReactPaginate
+                    breakLabel="..."
+                    nextLabel="Next >"
+                    onPageChange={handlePageClick}
+                    marginPagesDisplayed={1}
+                    pageRangeDisplayed={2}
+                    forcePage={num}
+                    pageCount={pageCount}
+                    previousLabel="<  Prev"
+                    renderOnZeroPageCount={null}
+                    containerClassName={
+                      "pagination justify-content-start pageout"
+                    }
+                    pageClassName={"page-item"}
+                    pageLinkClassName={"page-link"}
+                    previousClassName={"page-item"}
+                    previousLinkClassName={"page-link"}
+                    nextClassName={"page-item"}
+                    nextLinkClassName={"page-link"}
+                    breakClassName={"page-item"}
+                    breakLinkClassName={"page-link"}
+                    activeClassName={"active"}
+                  /> */}
+
                   {products}
                 </NewArrivalDesign>
-                <ReactPaginate
+                {/* <ReactPaginate
                   breakLabel="..."
-                  nextLabel="next >"
+                  nextLabel="Next >"
                   onPageChange={handlePageClick}
                   marginPagesDisplayed={1}
                   pageRangeDisplayed={2}
+                  forcePage={num}
                   pageCount={pageCount}
-                  previousLabel="< prev"
+                  previousLabel="<  Prev"
                   renderOnZeroPageCount={null}
                   containerClassName={"pagination justify-content-end pageout"}
                   pageClassName={"page-item"}
@@ -357,14 +525,33 @@ const NewArrivalPage = (props) => {
                   breakClassName={"page-item"}
                   breakLinkClassName={"page-link"}
                   activeClassName={"active"}
-                />
+                /> */}
+                {/* <FilterMobile /> */}
+                <FilterModal
+                  head={head}
+                  labArry={labelSet}
+                  deltLabel={deltLbel}
+                  sortHandler={sortsHHandler2}
+                  sortHandlerPrice={sortsHHandlerPrice}
+                  count={count}
+                  categoryName={productCategory}
+                  setProduct={setProduct}
+                >
+                  {" "}
+                  {products}
+                </FilterModal>
               </div>
+
               <div className={Classes.DownloadOurAppImage}>
-                <DownloadOurAppImage />
+                <div className={Classes.NewArrivalsPage}>
+                  <DownloadOurAppImage />
+                </div>
               </div>
             </div>
           </div>
         </div>
+        <SliderFeature />
+        <Features />
         <Footer />
       </div>
     </div>

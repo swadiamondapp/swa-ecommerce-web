@@ -6,8 +6,10 @@ function AboutUs() {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <div>
+    <div className={Classes.Container}>
       <div className="container">
+     
+
         <div className={Classes.Main}>
           <h1 className={Classes.Title}>About Us</h1>
         </div>
@@ -15,6 +17,7 @@ function AboutUs() {
           <p className={Classes.Home}>HOME /</p>
           <p className={Classes.PrivacyPolicy}>About Us</p>
         </div>
+     
         <div className={Classes.Content}>
           <div className={Classes.Description}>
             <p>

@@ -7,109 +7,121 @@
   display: none;
   /* transition: all 0.3s linear; */
 }
-.NoBorder{
+.NoBorder {
   border: none !important;
 }
 
+.info_container {
+  background: #fcfbf6;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  padding: 10px 40px;
+}
+
+.user_info_name {
+  color: #0d1217;
+  font-family: "gilroyNormal" !important;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-bottom: 0px;
+}
+
+.user_info_phone {
+  color: #0d1217;
+  font-family: "gilroyNormal" !important;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 0px;
+}
+
+.detail_container {
+  padding: 10px 40px;
+}
 /* .SearchIcon {
   display: none;
 } */
 .searchbar {
- 
-  width: 435px;
-  height: 46px;
-  /* left: 25px; */
- 
-  border: 1px solid #1F6CAB;
   border-radius: 32px;
   position: relative;
-  background: #F4F4F4;
-  padding-left: 15px;
-
- 
-  padding-bottom: 3px;
-  position: relative;
- 
+  background: #f4f4f4;
 }
-.searchList{
-  position: relative;
-display: inline-block;
-cursor: pointer;
-
-}
-.LogList{
+.searchList {
   position: relative;
   display: inline-block;
   cursor: pointer;
-
 }
-.LogListCont{
+.LogList {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+.LogListCont {
   display: none;
   position: absolute;
-  background-color: #F4F4F4;
+  background-color: #f4f4f4;
   border-radius: 5px;
-  width: 100px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  /* width: 100px; */
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  /* padding: 12px 16px; */
+  z-index: 1;
+  /* max-height: 700px; */
+}
+.searchListCont {
+  display: none;
+  position: absolute;
+  background-color: #f4f4f4;
+  border-radius: 5px;
+  width: 100%;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   padding: 12px 16px;
   z-index: 1;
   max-height: 700px;
- 
-
-}
-.searchListCont{
-  display: none;
-position: absolute;
-background-color: #F4F4F4;
-border-radius: 5px;
-width: 100%;
-box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-padding: 12px 16px;
-z-index: 1;
-max-height: 700px;
-overflow-y: scroll;
+  overflow-y: scroll;
 }
 /* .searchList:hover .searchListCont{
   display: block;
 } */
 
-
-.SearchItem{
+.SearchItem {
   color: #505050;
   font-weight: 400;
-font-size: 16px;
-line-height: 20px;
-font-family: 'gilroyNormal' !important;
-border-bottom: 1px solid #C4C4C4;
-padding-bottom: 10px;
-padding-top: 10px;
-cursor: pointer;
-
-
+  font-size: 16px;
+  line-height: 20px;
+  font-family: "gilroyNormal" !important;
+  border-bottom: 1px solid #eaeaea;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  cursor: pointer;
 }
-.LogItem{
+.SearchItem:hover {
+  background-color: rgba(0, 70, 77, 0.05);
+}
+.LogItem {
   color: #505050;
   font-weight: 400;
-font-size: 16px;
-line-height: 20px;
-font-family: 'gilroyNormal' !important;
+  font-size: 16px;
+  line-height: 20px;
+  font-family: "gilroyNormal" !important;
 
-padding-bottom: 10px;
-padding-top: 10px;
-cursor: pointer;
-
+  padding-bottom: 10px;
+  padding-top: 10px;
+  cursor: pointer;
 }
-.NoResult{
+.NoResult {
   color: #505050;
   font-weight: 400;
-font-size: 16px;
-line-height: 20px;
-font-family: 'gilroyNormal' !important;
+  font-size: 16px;
+  line-height: 20px;
+  font-family: "gilroyNormal" !important;
 
-padding-bottom: 20px;
-cursor: pointer;
-
+  padding-bottom: 20px;
+  cursor: pointer;
 }
-.searchIcon{
+.searchIcon {
   position: absolute;
   top: 50%;
   right: 10px; /* Adjust this value to position the icon as desired */
@@ -117,15 +129,13 @@ cursor: pointer;
   pointer-events: none;
   cursor: pointer;
   cursor: pointer !important;
- 
 }
-.searchList::placeholder{
+.searchList::placeholder {
   font-weight: 400;
-font-size: 16px;
-line-height: 19px;
-color: #9C9C9C;
-font-family: 'gilroyNormal' !important;
-
+  font-size: 16px;
+  line-height: 19px;
+  color: #9c9c9c;
+  font-family: "gilroyNormal" !important;
 }
 
 .Header_top {
@@ -136,14 +146,13 @@ font-family: 'gilroyNormal' !important;
   width: 100%;
   position: relative;
 }
-.Header_topFilter{
+.Header_topFilter {
   background-color: #00464d;
   height: 33px;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.05);
   text-align: left;
   width: 100%;
   position: relative;
-
 }
 
 .HeaderTop_Text {
@@ -155,8 +164,6 @@ font-family: 'gilroyNormal' !important;
 .Top {
   display: flex;
   margin-top: 5px;
-
-
 }
 
 .Phone {
@@ -164,7 +171,7 @@ font-family: 'gilroyNormal' !important;
   color: #ffffff;
   font-weight: 400;
   font-size: 11px;
-  font-family: 'gilroyNormal' !important;
+  font-family: "gilroyNormal" !important;
 }
 
 .Mail {
@@ -172,14 +179,14 @@ font-family: 'gilroyNormal' !important;
   font-weight: 400;
   font-size: 11px;
   line-height: 14px;
-  font-family: 'gilroyNormal' !important;
+  font-family: "gilroyNormal" !important;
 }
 
 .Time {
   font-weight: 400;
   font-size: 10px;
   color: #ffffff;
-  font-family: 'gilroyNormal' !important;
+  font-family: "gilroyNormal" !important;
   margin-top: 5px;
 }
 
@@ -191,11 +198,10 @@ font-family: 'gilroyNormal' !important;
   align-items: flex-start;
 }
 
-
 .Header_downFilter {
   background-color: #10212f;
   height: 97px;
- 
+
   display: flex;
   align-items: flex-start;
 }
@@ -208,11 +214,10 @@ font-family: 'gilroyNormal' !important;
   margin: 13px 0 13px 0;
 }
 
-
 .AddToCart {
   margin-right: 0px;
 }
-.ItemsNum{
+.ItemsNum {
   position: absolute;
   width: 20px;
   height: 20px;
@@ -223,46 +228,41 @@ font-family: 'gilroyNormal' !important;
   right: -1px;
   text-align: center;
   font-size: 10px;
- /* padding-left: 4px; */
- padding-top: 4px !important;
+  /* padding-left: 4px; */
+  padding-top: 4px !important;
   font-weight: 700;
 }
-.CartItemNum{
+.CartItemNum {
   position: relative;
 }
 
 a {
-  color: #ffffff ;
-  font-family: 'gilroyNormal' !important;
+  color: #ffffff;
+  font-family: "gilroyNormal" !important;
   font-weight: 400 !important;
   font-size: 12px !important;
   text-decoration: none !important;
   /* margin: 0 10px 0 10px; */
 }
 
-
-
 .Searchbar::placeholder {
   /* padding: 10px; */
   font-size: 14px;
   text-align: left !important;
 
- 
-  font-family: 'gilroyNormal' !important;
+  font-family: "gilroyNormal" !important;
 }
 
 .Logo_Search {
   display: flex;
   justify-content: space-between;
 }
-.PersonIcon{
-  margin-top: 15px;
-}
+
 .SearchIcons {
-  margin: 0 5px 0 5px;
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 15px;
 }
 
 .Icon {
@@ -274,10 +274,9 @@ a {
   list-style: none;
   display: flex;
   max-width: 100%;
- 
 
   padding-left: 0;
-  font-family: 'gilroyNormal' !important;
+  font-family: "gilroyNormal" !important;
 }
 
 .DrawerLogin {
@@ -295,18 +294,18 @@ a {
   padding-left: 0;
   height: 100%;
   width: 67%;
-  background: #FCFBF6;
+  background: #fcfbf6;
   transform: translateX(0%);
   display: flex;
   flex-direction: column;
-  color: #0D1217;
+  color: #0d1217;
   align-items: flex-start;
   text-align: center;
   transition: all 1s ease;
   overflow-y: scroll;
   font-weight: 600;
   font-size: 14px;
-  font-family: 'gilroyNormal' !important;
+  font-family: "gilroyNormal" !important;
 }
 
 .DrawerShortCuts {
@@ -335,203 +334,200 @@ a {
   color: #ffffff;
   font-size: 16px;
   font-weight: 600;
-  font-family: 'gilroyNormal' !important;
-  display: none;
-
-
-}
-.NotificationOpen{
-width: 30%;
-background: #FFFFFF;
-box-shadow: 0px 28px 208px rgba(0, 0, 0, 0.08), 0px 8.44118px 62.7059px rgba(0, 0, 0, 0.0521271), 0px 3.50603px 26.0448px rgba(0, 0, 0, 0.04), 0px 1.26806px 9.4199px rgba(0, 0, 0, 0.0278729);
-border-radius: 8px;
-position: absolute;
-right: 5%;
-padding:0 15px 10px 15px;
-
-}
-.NoNotification{
+  font-family: "gilroyNormal" !important;
   display: none;
 }
-.Heading{
+.NotificationOpen {
+  width: 30%;
+  background: #ffffff;
+  box-shadow: 0px 28px 208px rgba(0, 0, 0, 0.08),
+    0px 8.44118px 62.7059px rgba(0, 0, 0, 0.0521271),
+    0px 3.50603px 26.0448px rgba(0, 0, 0, 0.04),
+    0px 1.26806px 9.4199px rgba(0, 0, 0, 0.0278729);
+  border-radius: 8px;
+  position: absolute;
+  right: 5%;
+  padding: 0 15px 10px 15px;
+}
+.NoNotification {
+  display: none;
+}
+.Heading {
   display: flex;
   justify-content: space-between;
   padding: 25px 25px 25px 25px;
 }
-.Notification{
+.Notification {
   font-weight: 500;
-  color: #0D1217;
-  font-family: 'PlayFairNormal' !important;
-font-size: 20px;
+  color: #0d1217;
+  font-family: "PlayFairNormal" !important;
+  font-size: 20px;
 }
-.NotificationTime{
-  color: #757C81;
+.NotificationTime {
+  color: #757c81;
   font-weight: 400;
-font-size: 12px;
-font-family: 'gilroyNormal' !important;
+  font-size: 12px;
+  font-family: "gilroyNormal" !important;
 }
-.MarkReaded{
+.MarkReaded {
   font-weight: 400;
-font-size: 13px;
-color: #01B3C5;
-font-family: 'gilroyNormal' !important;
+  font-size: 13px;
+  color: #01b3c5;
+  font-family: "gilroyNormal" !important;
 }
-.NotificationDetails{
+.NotificationDetails {
   display: flex;
   /* justify-content: space-between; */
-  border-bottom: 1px solid #E7E7E7;
+  border-bottom: 1px solid #e7e7e7;
   margin: 0 20px;
 }
-.NotificationText{
+.NotificationText {
   font-weight: 400;
-font-size: 13px;
-color: #0D1217;
-width: 100%;
-font-family: 'gilroyNormal' !important;
+  font-size: 13px;
+  color: #0d1217;
+  width: 100%;
+  font-family: "gilroyNormal" !important;
 }
-.NotifictionImage{
+.NotifictionImage {
   width: 45px;
   height: 45px;
 }
-.LoginOpen{
-  background: linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 100%);
-border: 1px solid #EEEEEE;
-backdrop-filter: blur(15px);
-border-radius: 16px;
-width: 507px;
-height: 567px;
-position: absolute;
-top: 5%;
-left: 30%;
-padding: 30px;
-display: flex;
-flex-direction: column;
+.LoginOpen {
+  background: linear-gradient(180deg, #ffffff 0%, #ffffff 100%);
+  border: 1px solid #eeeeee;
+  backdrop-filter: blur(15px);
+  border-radius: 16px;
+  width: 507px;
+  height: 567px;
+  position: absolute;
+  top: 5%;
+  left: 30%;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
 }
-.None{
+.None {
   display: none;
 }
-.LoginLogo{
+.LoginLogo {
   display: flex;
   justify-content: center;
 }
-.NoLogin{
+.NoLogin {
   display: none;
 }
-.BackModal{
+.BackModal {
   background-color: #0d1217;
-  opacity: .5;
+  opacity: 0.5;
 }
-.ContactDetails{
-  color: #585F67;
+.ContactDetails {
+  color: #585f67;
   font-weight: 400;
-font-size: 12px;
-margin-bottom: 5px;
-font-family: 'gilroyNormal' !important;
+  font-size: 12px;
+  margin-bottom: 5px;
+  font-family: "gilroyNormal" !important;
 }
-.Input{
-  border-bottom: 1px solid #E2E4E5 !important;
+.Input {
+  border-bottom: 1px solid #e2e4e5 !important;
   border: none;
   margin-bottom: 20px;
   width: 100%;
 }
-.Input:focus{
+.Input:focus {
   outline: none;
 }
-.Flex{
+.Flex {
   display: flex;
   margin: 15px;
   justify-content: space-between;
 }
-.FlexCheck{
+.FlexCheck {
   display: flex;
   justify-content: space-between;
 }
-.TextReg{
+.TextReg {
   text-align: center;
   font-weight: 600;
-font-size: 20px;
-margin: 15px 0 35px 0;
-font-family: 'gilroyNormal' !important;
+  font-size: 20px;
+  margin: 15px 0 35px 0;
+  font-family: "gilroyNormal" !important;
 }
-.CheckBox{
+.CheckBox {
   margin-bottom: 15px;
 }
-.CheckBoxLabel{
+.CheckBoxLabel {
   color: #666666;
   font-weight: 400;
-font-size: 14px;
-margin-left: 15px;
-font-family: 'gilroyNormal' !important;
-cursor: pointer;
-
+  font-size: 14px;
+  margin-left: 15px;
+  font-family: "gilroyNormal" !important;
+  cursor: pointer;
 }
-.LoginButton{
-  background: #A49667;
-border-radius: 42px;
-border: 1px;
-width: 100%;
-padding: 15px 25px 15px 25px;
-color:#FAFAFA;
+.LoginButton {
+  background: #a49667;
+  border-radius: 42px;
+  border: 1px;
+  width: 100%;
+  padding: 15px 25px 15px 25px;
+  color: #fafafa;
 
-font-family: 'gilroyNormal' !important;
-
+  font-family: "gilroyNormal" !important;
 }
 
-.Validation{
-  color: #EB3D25;
-  font-family: 'gilroyNormal' !important;
+.Validation {
+  color: #eb3d25;
+  font-family: "gilroyNormal" !important;
   font-size: 14px;
 }
-.Flexmid{
+.Flexmid {
   display: flex;
   margin-top: 20px;
   justify-content: center;
 }
-.Join{
+.Join {
   text-decoration: underline;
   font-size: 14px;
   cursor: pointer;
   margin-left: 5px;
 }
-.Background{
+.Background {
   background: rgba(0, 0, 0, 0.4);
-width: 100%;
-height: 100%;
-position: absolute;
-overflow-y: hidden;
-
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  overflow-y: hidden;
 }
-.NumFlex{
+.NumFlex {
   display: flex;
 }
-.regPhoneNumber{
-  border-bottom: 1px solid #E2E4E5 !important;
-    border: none;
-    margin-top: 10px;
-    margin-left: 10px;
-    width: 100%;
-    height: 30px;
-    font-size: 14px;
-    padding-bottom: 10px;
-  }
-  .Catogaries {
-    font-size: 12px;
-    color: #FFFFFF !important;
-    text-align: start;
-    font-family: 'gilroyNormal' !important;
-    font-weight: 400;
-    margin-right: 40px;
-   
+.regPhoneNumber {
+  border-bottom: 1px solid #e2e4e5 !important;
+  border: none;
+  margin-top: 10px;
+  margin-left: 10px;
+  width: 100%;
+  height: 30px;
+  font-size: 14px;
+  padding-bottom: 10px;
+}
+.Catogaries {
+  font-size: 12px;
+  color: #ffffff !important;
+  text-align: start;
+  font-family: "gilroyNormal" !important;
+  font-weight: 400;
+  margin-right: 40px;
+  display: block;
+  z-index: 1;
+}
 
-  }
-
-.regPhoneNumber:focus{
+.regPhoneNumber:focus {
   outline: none;
 }
-.FlexPhone{
+.FlexPhone {
   display: flex;
 }
-.InputPhone{
+.InputPhone {
   margin-bottom: 20px;
 }
 
@@ -543,47 +539,102 @@ overflow-y: hidden;
   font-size: 14px;
   color: #333;
 }
+.LoginSignup {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-family: "gilroyNormal";
+  gap: 15px;
+}
+.LogedDetails_list p {
+  color: #0d1217;
+  padding: 10px 20px;
+  font-family: "gilroyNormal" !important;
+  width: 100%;
+}
+.ListPTag:hover {
+  background-color: #fcfbf6;
+}
+.LogedDetails_Item :hover {
+  background-color: #fcfbf6;
+}
+.Name_phoneLoged {
+  font-weight: 500 !important;
+}
+.Name_phoneLog {
+  background: #fcfbf6;
+  padding: 15px 20px;
+}
+.Name_phoneLog p {
+  font-family: "gilroyNormal" !important;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+.LogedUserDetails {
+  box-shadow: 0px 28px 208px 0px #00000014;
+  background: #fff;
+  position: absolute;
+  right: 9.5%;
+  top: 18%;
+  border-radius: 8px;
+  z-index: 999;
+  overflow: hidden;
+  width: 230px;
+}
+.LogedUser {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  gap: 8px;
+  font-family: "GilroyRegular";
+}
+.LineArrow {
+  width: 1px;
+  height: 20px;
+  background: #fff;
+  opacity: 0.3;
+}
+.headerElement:hover {
+  transform: scale(1) translateY(-2px); /* Scale up and slightly move upwards */
+  transition: transform 0.3s ease; /* Add smooth transition effect */
+}
 
-@media (max-width:1200px) {
+@media (max-width: 1200px) {
   .Icon {
     width: 20px !important;
-
   }
-  .PersonIcon{
+  .PersonIcon {
     width: 20px !important;
   }
 
   .Catogaries {
     margin: 10px 5px 5px 10px;
     padding: 20px;
-    border-bottom: 1px solid #F0EBD1;
+    border-bottom: 1px solid #f0ebd1;
     width: 100%;
     font-size: 16px;
-    color: #0D1217 !important;
+    color: #0d1217 !important;
     text-align: start;
-    font-family: 'gilroyNormal' !important;
-
+    font-family: "gilroyNormal" !important;
   }
 
   .DrawerLogin {
-    background: #EEEEEE;
-    ;
+    background: #eeeeee;
     width: 100%;
     display: flex;
     font-weight: 900;
     padding: 25px;
-    color: #0D1217;
-    font-family: 'gilroyNormal' !important;
+    color: #0d1217;
+    font-family: "gilroyNormal" !important;
   }
 
   .DrawerShortCuts {
-   
     width: 100%;
     display: flex;
     font-weight: 900;
     padding: 25px;
-    color: #0D1217;
-    font-family: 'gilroyNormal' !important;
+    color: #0d1217;
+    font-family: "gilroyNormal" !important;
     border-bottom: 1px solid #0d121721;
     margin-top: -5px;
   }
@@ -643,12 +694,12 @@ overflow-y: hidden;
     display: flex;
     align-items: center;
   }
-  .DrawerFooter{
+  .DrawerFooter {
     display: block;
   }
 }
 
-@media screen and (max-width:767px) {
+@media screen and (max-width: 767px) {
   .Navbar {
     display: none !important;
   }
@@ -659,7 +710,6 @@ overflow-y: hidden;
 
   .Searchbar {
     display: none !important;
-
   }
 
   /* .SearchIcon {
@@ -670,10 +720,10 @@ overflow-y: hidden;
   .Icon {
     width: 20px !important;
   }
-  
-.NotificationOpen{
-  width: 80%;
-}
+
+  .NotificationOpen {
+    width: 80%;
+  }
   .Account {
     display: none !important;
   }
@@ -693,18 +743,18 @@ overflow-y: hidden;
   .TopIcon {
     width: 15px !important;
   }
-  .Heading{
+  .Heading {
     flex-direction: column;
   }
-  .MarkReaded{
+  .MarkReaded {
     font-size: 11px;
   }
-  .line{
+  .line {
     width: 15px;
   }
 }
 
-@media screen and (max-width:500px) {
+@media screen and (max-width: 500px) {
   .Top {
     display: none;
   }
@@ -712,10 +762,10 @@ overflow-y: hidden;
   .Time {
     font-size: 6px;
   }
-  .CheckBoxLabel{
-    font-size: 11px;  
+  .CheckBoxLabel {
+    font-size: 11px;
   }
-  .Join{
+  .Join {
     font-size: 11px;
   }
   .Header_top {
@@ -735,7 +785,6 @@ overflow-y: hidden;
   .SearchIcons {
     display: flex;
     align-items: center;
-
   }
 
   .line {
@@ -754,15 +803,28 @@ overflow-y: hidden;
   .Header_down {
     align-items: center;
   }
-  .NotificationDetails{
+  .NotificationDetails {
     flex-direction: column;
   }
-  .NotifictionImage{
+  .NotifictionImage {
     width: 100%;
     height: auto;
     padding: 20px;
   }
-  .Notification{
+  .Notification {
     font-size: 16px;
+  }
+}
+
+.Password::placeholder {
+  font-family: "GilroyRegular";
+  font-size: 16px;
+  line-height: 28px;
+  color: #9d9d9d;
+}
+
+@media (min-width: 300px) and (max-width: 567px) {
+  .Flex {
+    margin: 15px 0px;
   }
 }

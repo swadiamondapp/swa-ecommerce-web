@@ -1,88 +1,152 @@
-.Title{
-    font-weight: 500;
-font-size: 24px;
-font-family: 'PlayFairNormal' !important;
+.Title {
+  font-weight: 600;
+  font-size: 24px;
+  font-family: "PlayFairNormal" !important;
 }
-.Main{
+.Main {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.Number {
+  font-weight: 400;
+  font-size: 16px;
+  margin-left: 10px;
+  color: #757c81;
+  font-family: "gilroyNormal" !important;
+  line-height: 30px;
+}
+.Found {
+  color: #757c81;
+  font-size: 16px;
+  line-height: 18px;
+  font-family: "gilroyNormal" !important;
+}
+.SubText {
+  display: flex;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
+  gap: 5px;
+}
+.Home {
+  color: #00464d;
+  font-weight: 700;
+  font-size: 14px;
+  /* font-family: "gilroyNormal" !important; */
+  font-family: "Lato" !important;
+  cursor: pointer;
+}
+.NewArrival {
+  color: #01b3c5;
+  font-weight: 700;
+  font-size: 14px;
+  font-family: "Lato" !important;
+}
+.Filtered {
+  display: flex;
+}
+.FilterBy {
+  font-weight: 400;
+  font-size: 13px;
+  font-family: "gilroyNormal" !important;
+}
+.Filter {
+  background: #f7f6f2;
+  border-radius: 16px;
+  margin: -5px 10px 10px 10px;
+  padding: 5px 8px 5px 8px;
+  font-size: 13px;
+}
+.filterSort {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 25px;
+  border-bottom: 1px solid #e8e8e8;
+}
+.ParentMain {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.SortDrop {
+  display: grid;
+  grid-template-columns: 65px 130px;
+  align-items: center;
+  border: 1px solid #ededed;
+  padding: 10px;
+  border-radius: 5px;
+}
+.Sort {
+  font-weight: 400;
+  font-size: 16px;
+  font-family: "gilroyNormal" !important;
+}
+.SortDrop select {
+  border: none;
+  font-size: 16px;
+}
+.CustomSelect {
+  position: relative;
+  display: inline-block;
+}
+
+.CustomSelect select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 30px; /* Adjust the padding to fit your image */
+  cursor: pointer;
+}
+
+.CustomSelectArrow {
+  position: absolute;
+  top: 45%;
+  right: 10px; /* Adjust the right offset to position your image */
+  transform: translateY(-50%);
+}
+.CustomSelectArrow img {
+  max-width: 18px;
+}
+
+.SortDrop select::selection {
+  border: none;
+}
+@media screen and (max-width: 767px) {
+  .Filter {
+    padding: 0;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+  .ParentMain {
     display: flex;
-
-}
-.Number{
-    font-weight: 400;
-font-size: 16px;
-margin-left: 10px;
-color: #757C81;
-font-family: 'gilroyNormal' !important;
-line-height: 30px;
-
-}
-.SubText{
-    display: flex;
-    font-weight: 400;
-font-size: 14px;
-font-family: 'gilroyNormal' !important;
-
-}
-.Home{
-    color: #00464D;
-    font-weight: 400;
-font-size: 14px;
-font-family: 'gilroyNormal' !important;
-cursor: pointer;
-
-}
-.NewArrival{
-    color: #01B3C5;
-    font-weight: 400;
-font-size: 14px;
-font-family: 'gilroyNormal' !important;
-
-}
-.Filtered{
-    display: flex;
-}
-.FilterBy{
-    font-weight: 400;
-font-size: 13px;
-font-family: 'gilroyNormal' !important;
-}
-.Filter{
-    background: #F7F6F2;
-border-radius: 16px;
-margin: -5px 10px 10px 10px;
-padding: 5px 8px 5px 8px;
-font-size: 13px;
-}
-.filterSort{
-    display: flex;
+    align-items: baseline;
     justify-content: space-between;
-    padding-bottom: 25px;
-    border-bottom: 1px solid #E8E8E8;
-   
+    flex-direction: column;
+    gap: 15px;
+  }
 }
-.SortDrop{
+@media (min-width: 300px) and (max-width: 567px) {
+  .Found {
+    margin-bottom: 15px;
+    display: none;
+  }
+  .ParentMain {
     display: flex;
-    
-    
-}
-.Sort{
-    font-weight: 400;
-    font-size: 13px;
-    font-family: 'gilroyNormal' !important;
-}
-.SortDrop select{
-    border: none;
-    font-size: 16px;
-    font-weight: 500;
-    margin-top: -18px;
-
-}
-
-.SortDrop select::selection{
-    border: none;
-}
-@media screen and (max-width:767px) {
-    .Filter{
-      padding: 0;
-    }
+    align-items: baseline;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 15px;
+    padding-left: 20px;
+  }
+  .Title {
+    font-size: 22px;
+  }
+  .child2Main {
+    display: none;
+  }
+  .SubText {
+    display: none;
+  }
 }

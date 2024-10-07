@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Header from "../../components/Header/Header";
+import Header from "../../components/HeaderNew/Header";
 import Footer from "../../components/Footer/Footer";
 import CartProducts from "../../components/CartDesign/CartProducts/CartProducts";
 import CartDesign from "../../components/CartDesign/CartDesign";
@@ -12,6 +12,11 @@ import { FadeLoader } from "react-spinners";
 import cartEmpty from "../../Assets/cartempty.png";
 
 import ConformModal from "../../components/confromModal/confromModal";
+import WalletModal from "../../components/WalletModal/WalletModal";
+import SliderFeature from "../../components/ProductDetails/SliderFeature";
+import TrialCart from "../../components/CartDesign/CartProducts/TrialCart";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Cart = () => {
   const [cartCount, setCartCount] = useState("");
@@ -24,32 +29,54 @@ const Cart = () => {
   const [productId, setProdctId] = useState("");
   const [loading, setLoading] = useState(false);
   const [amountPay, setAmountPay] = useState("");
+  const [cartItemsCount, setCartItemsCount] = useState("");
   const token = localStorage.getItem("swaToken");
+  const countryId = localStorage.getItem("id");
+  const flag = localStorage.getItem("flag_image");
+  const Contryname = localStorage.getItem("country_name");
+  const [activeCart, setActiveCart] = useState("shopping");
+  const [tryCartResults, setTryCartResults] = useState();
+  const [tryCartcountResults, setTryCartcountResults] = useState();
+  const [selectedCountry, setSelectedCountry] = useState({
+    id: countryId,
+    flag_image: flag,
+    country_name: Contryname,
+  });
+  console.log("activeCart", activeCart);
+  console.log("cartList00000", cartList);
+  console.log("cartItemsCount", cartItemsCount);
   useEffect(() => {
     setLoading(true);
     axios
-      .get(Urls.cart, { headers: { Authorization: "Token " + token } })
+      .get(`${Urls.cart}?country=${countryId}`, {
+        headers: { Authorization: "Token " + token },
+      })
       .then((response1) => {
         setLoading(false);
-
+        console.log("response1--->", response1);
         if (response1.data.results.messege === "cart is empty") {
           setCartCount("");
         } else {
           setCartCount(response1.data.results.data.cartmaster.item_count);
         }
+
         setPageCount(response1.data.results.count / 20);
         setCartList(response1.data.results.data.cart_item);
         setAmountPay(response1.data.results.data.cartmaster.grand_total);
+        setCartItemsCount(response1.data.results.count);
+        console.log("111111,", response1.data.results.count);
       })
+
       .catch((error) => {
         console.log(error);
       });
   }, []);
+
   const handlePageClick = (data) => {
     setLoading(true);
     let page = data.selected + 1;
     axios
-      .get(Urls.cart + "?page=" + page, {
+      .get(`${Urls.cart}?country=${countryId}`, {
         headers: { Authorization: "Token " + token },
       })
       .then((response1) => {
@@ -58,6 +85,7 @@ const Cart = () => {
         setCartCount(response1.data.results.count);
         setPageCount(response1.data.results.count / 20);
         setCartList(response1.data.results.data.cart_item);
+        setCartItemsCount(response1.data.results.count);
       })
       .catch((error) => {
         console.log(error);
@@ -78,7 +106,7 @@ const Cart = () => {
     setShow(false);
     const index = cartList.findIndex((obj) => obj.id === selids);
     axios
-      .delete(Urls.cart + selids + "/", {
+      .delete(`${Urls.cart}${selids}/?country=${countryId}`, {
         headers: { Authorization: "Token " + token },
       })
       .then((response1) => {
@@ -88,20 +116,69 @@ const Cart = () => {
         cartNewArray = [...cartList];
         cartNewArray.splice(index, 1);
         setCartList(cartNewArray);
-        let count = cartCount;
+        let count = cartItemsCount;
         count = count - 1;
-        setCartCount(count);
+        setCartItemsCount(count);
+        if (count == 0) {
+          setCartList([]);
+        }
       })
       .catch((error) => {
         console.log(error);
       });
   };
+  // new
+  useEffect(() => {
+    fechTryAtHomeCart();
+  }, []);
+  const fechTryAtHomeCart = () => {
+    axios
+      .get(`${Urls.tryathome}?country=${countryId}`, {
+        headers: { Authorization: "Token " + token },
+      })
+      .then((response1) => {
+        if (response1.data.results.status === 200) {
+          setTryCartResults(response1.data.results.data.cart_item);
+          setTryCartcountResults(response1.data.results.data.cartmaster);
+        }
+        if (response1.data.results.message === "cart is empty") {
+          setTryCartResults();
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  console.log("tryCartcountResults", tryCartcountResults);
+  const addDesigns = (cartid) => {
+    console.log("idcart", cartid);
+    axios
+      .delete(`${Urls.tryatcartdelete}/${cartid}/?country=${countryId}`, {
+        headers: { Authorization: "Token " + token },
+      })
+      .then((response1) => {
+        if (response1.data.results.status_code === 200) {
+          fechTryAtHomeCart();
+          setShow(false)
+        } else if (
+          response1.data.results.message === "Already Processed, Cannot delete"
+        ) {
+          toast("Already Processed, Cannot delete");
+        }
+        console.log("...delete>", response1.data.results.message);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    // history.push("/new_arrivel");
+  };
+  // new
   const movWishList = (selids) => {
     setShow(false);
     setLoading(true);
     const index = cartList.findIndex((obj) => obj.id === selids);
     axios
-      .delete(Urls.cart + selids + "/", {
+      .delete(`${Urls.cart}${selids}/?country=${countryId}`, {
         headers: { Authorization: "Token " + token },
       })
       .then((response1) => {
@@ -112,19 +189,20 @@ const Cart = () => {
         };
 
         axios
-          .post(Urls.wishlist, body, {
+          .post(`${Urls.wishlist}?country=${countryId}`, body, {
             headers: { Authorization: "Token " + token },
           })
           .then((response1) => {
             setLoading(false);
             setShow(false);
-            let count = cartCount;
+            let count = cartItemsCount;
             count = count - 1;
-            setCartCount(count);
+            setCartItemsCount(count);
             let cartNewArray = [];
             cartNewArray = [...cartList];
             cartNewArray.splice(index, 1);
             setCartList(cartNewArray);
+            // setCartItemsCount(count);
           })
           .catch((error) => {
             console.log(error);
@@ -134,6 +212,54 @@ const Cart = () => {
         console.log(error);
       });
   };
+  const movWishListTrial = (selids) => {
+    setShow(false);
+    setLoading(true);
+    const index = tryCartResults.findIndex((obj) => obj.id === selids);
+    axios
+      .delete(`${Urls.cart}${selids}/?country=${countryId}`, {
+        headers: { Authorization: "Token " + token },
+      })
+      .then((response1) => {
+        setLoading(false);
+
+        const body = {
+          product_id: productId,
+        };
+
+        axios
+          .post(`${Urls.wishlist}?country=${countryId}`, body, {
+            headers: { Authorization: "Token " + token },
+          })
+          .then((response1) => {
+            setLoading(false);
+            setShow(false);
+            let count = cartItemsCount;
+            count = count - 1;
+            setCartItemsCount(count);
+            let cartNewArray = [];
+            cartNewArray = [...tryCartResults];
+            cartNewArray.splice(index, 1);
+            setTryCartResults(cartNewArray);
+            // setCartItemsCount(count);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const totalSavedAmount = cartList.reduce((total, item) => {
+    if (item.product.is_on_discount) {
+      return (
+        total +
+        (item.product.country_total_price - item.product.country_discount_price)
+      );
+    }
+    return total;
+  }, 0);
   let cartLists;
   if (loading) {
     cartLists = (
@@ -142,108 +268,172 @@ const Cart = () => {
         <FadeLoader color="#00464d" />
       </div>
     );
-  } else if (cartList.length === 0) {
-    cartLists = (
-      <div className="container contBg">
-        <div className=" d-flex justify-content-center align-items-center loader">
-          <div className="col-md-6">
-            <div className={Classes.cartEmpty}>
-              <img src={cartEmpty} alt="cartEmpty" />
+  }
+
+  if (activeCart == "shopping") {
+    if (cartList.length < 1) {
+      cartLists = (
+        <div className="container contBg">
+          <div className=" d-flex justify-content-center align-items-center loader">
+            <div className="col-md-6">
+              <div className={Classes.cartEmpty}>
+                <img src={cartEmpty} alt="cartEmpty" />
+              </div>
+              <h3 className={Classes.cartListHead}>Your Cart page is empty</h3>
+              <p className={Classes.cartPara}>
+                Currently, there are no items in the cart. Have no worries, Keep
+                surfing until you find your favorite ornaments. From wishlist to
+                the cart, We wish you ‘Happy Shopping’.{" "}
+              </p>
             </div>
-            <h3 className={Classes.cartListHead}>Your Cart page is empty</h3>
-            <p className={Classes.cartPara}>
-              Currently, there are no items in the cart. Have no worries, Keep
-              surfing until you find your favorite ornaments. From wishlist to
-              the cart, We wish you ‘Happy Shopping’.{" "}
-            </p>
           </div>
         </div>
-      </div>
-    );
-  } else {
-    cartLists = (
-      <>
-        <CartDesign amount={amountPay} cartProAmnt={selProAmnt}>
-          {cartList.map((item, index) => {
-            return (
-              <CartProducts
-                key={index}
-                remove={() => removeCartHandler(item)}
-                ProductImage={item.thumbnail_image}
-                ProductName={item.product.product_name}
-                NewPrice={
-                  item.product.is_on_discount
-                    ? item.product.discounted_final_price
-                    : item.product.total_price_final
-                }
-                OldPrice={item.product.total_price_final}
-                discound={item.product.is_on_discount}
-                disPrice={
-                  item.product.is_on_discount
-                    ? item.product.total_price_final -
-                      item.product.discounted_final_price
-                    : null
-                }
-                Property={
-                  item.description.carat +
-                  " KT " +
-                  item.description.colour_name +
-                  " " +
-                  item.description.gross_weight +
-                  " GM "
-                }
-                DiamondProperty={
-                  "Diamond " + item.description.diamond_weight_preview + " GM"
-                }
-                Size=""
-                quanty={item.quantity}
-                DeliveryDate="Delivery by tue oct 18"
-              />
-            );
-          })}
-          <ReactPaginate
-            breakLabel="..."
-            nextLabel="next >"
-            onPageChange={handlePageClick}
-            marginPagesDisplayed={1}
-            pageRangeDisplayed={2}
-            pageCount={pageCount}
-            previousLabel="< prev"
-            renderOnZeroPageCount={null}
-            containerClassName={"pagination justify-content-end pageout"}
-            pageClassName={"page-item"}
-            pageLinkClassName={"page-link"}
-            previousClassName={"page-item"}
-            previousLinkClassName={"page-link"}
-            nextClassName={"page-item"}
-            nextLinkClassName={"page-link"}
-            breakClassName={"page-item"}
-            breakLinkClassName={"page-link"}
-            activeClassName={"active"}
-          />
-        </CartDesign>
-      </>
-    );
+      );
+    } else {
+      cartLists = (
+        <>
+          <CartDesign
+            amount={amountPay}
+            cartProAmnt={selProAmnt}
+            cartCount={cartList.length}
+            totalSavedAmount={totalSavedAmount}
+            activeCart={activeCart}
+            tryCartcountResults={tryCartcountResults}
+            // handleOpen={() => setWalletOpen(true)}
+          >
+            {cartList.map((item, index) => {
+              return (
+                <CartProducts
+                  key={index}
+                  remove={() => removeCartHandler(item)}
+                  ProductImage={item.thumbnail_image}
+                  ProductName={item.product.product_name}
+                  NewPrice={
+                    item.product.is_on_discount
+                      ? item.product.country_discount_price
+                      : item.product.country_total_price
+                  }
+                  OldPrice={item.product.country_total_price}
+                  discound={item.product.is_on_discount}
+                  disPrice={
+                    item.product.is_on_discount
+                      ? item.product.country_total_price -
+                        item.product.country_discount_price
+                      : null
+                  }
+                  Property={
+                    // item.description.carat +
+                    item.product.metal_type +
+                    " KT " +
+                    // item.description.colour_name +
+                    " " +
+                    item.product.gross_weight +
+                    " GM "
+                  }
+                  DiamondProperty={
+                    " Diamond " + item.product.diamond_weight + " Carat"
+                  }
+                  Size={item.size}
+                  color={item.color}
+                  quanty={item.quantity}
+                  DeliveryDate="Delivery by tue oct 18"
+                />
+              );
+            })}
+          </CartDesign>
+        </>
+      );
+    }
   }
+
+  if (activeCart === "trial") {
+    if (tryCartResults.length < 1) {
+      cartLists = (
+        <div className="container contBg">
+          <div className=" d-flex justify-content-center align-items-center loader">
+            <div className="col-md-6">
+              <div className={Classes.cartEmpty}>
+                <img src={cartEmpty} alt="cartEmpty" />
+              </div>
+              <h3 className={Classes.cartListHead}>Your Cart page is empty</h3>
+              <p className={Classes.cartPara}>
+                Currently, there are no items in the cart. Have no worries, Keep
+                surfing until you find your favorite ornaments. From wishlist to
+                the cart, We wish you ‘Happy Shopping’.{" "}
+              </p>
+            </div>
+          </div>
+        </div>
+      );
+    } else {
+      cartLists = (
+        <>
+          <CartDesign
+            amount={amountPay}
+            cartProAmnt={selProAmnt}
+            cartCount={tryCartResults.length}
+            totalSavedAmount={totalSavedAmount}
+            activeCart={activeCart}
+            tryCartcountResults={tryCartcountResults}
+            // handleOpen={() => setWalletOpen(true)}
+          >
+            {tryCartResults &&
+              tryCartResults.map((item, index) => {
+                return (
+                  <TrialCart
+                    key={index}
+                    remove={() => removeCartHandler(item)}
+                    ProductImage={item.thumbnail_image}
+                    ProductName={item.product.product_name}
+                    NewPrice={
+                      item.product.is_on_discount
+                        ? item.product.country_discount_price
+                        : item.product.country_total_price
+                    }
+                    OldPrice={item.product.country_total_price}
+                    discound={item.product.is_on_discount}
+                    disPrice={
+                      item.product.is_on_discount
+                        ? item.product.country_total_price -
+                          item.product.country_discount_price
+                        : null
+                    }
+                  />
+                );
+              })}
+          </CartDesign>
+        </>
+      );
+    }
+  }
+  console.log("activeCart", activeCart);
 
   return (
     <div>
+      <ToastContainer />
       <div className={Classes.Background}>
-        <Header countCartItems={cartCount} />
+        <Header
+          countCartItems={cartItemsCount}
+          selectedCountry={selectedCountry}
+          setSelectedCountry={setSelectedCountry}
+          activeCart={activeCart}
+          setActiveCart={setActiveCart}
+        />
         <ConformModal
           handleClose={handleCloseHandler}
           title="Move from bag"
           img={img}
-          movWish={() => movWishList(selId)}
-          remove={() => removeHandler(selId)}
+          movWish={activeCart === "shopping" ? () => movWishList(selId) : ()=>movWishListTrial(selId)}
+          remove={activeCart === "shopping" ? () => removeHandler(selId) : () => addDesigns(selId)}
           body="Are you sure that you want to move 
-        this item from the cat?"
+        this item from the cart?"
           shows={show}
         />
 
         {cartLists}
 
         <div className={Classes.Features}>
+          <SliderFeature />
           <Features />
         </div>
         <Footer />
@@ -253,30 +443,3 @@ const Cart = () => {
 };
 
 export default Cart;
-
-// const { products } = data;
-// const [cartItems, setCartItems] = useState([]);
-// const onAdd = (product) => {
-//   const exist = cartItems.find((x) => x.id === product.id);
-//   if (exist) {
-//     setCartItems(
-//       cartItems.map((x) =>
-//         x.id === product.id ? { ...exist, qty: exist.qty + 1 } : x
-//       )
-//     );
-//   } else {
-//     setCartItems([...cartItems, { ...product, qty: 1 }]);
-//   }
-// };
-// const onRemove = (product) => {
-//   const exist = cartItems.find((x) => x.id === product.id);
-//   if (exist.qty === 1) {
-//     setCartItems(cartItems.filter((x) => x.id !== product.id));
-//   } else {
-//     setCartItems(
-//       cartItems.map((x) =>
-//         x.id === product.id ? { ...exist, qty: exist.qty - 1 } : x
-//       )
-//     );
-//   }
-// }

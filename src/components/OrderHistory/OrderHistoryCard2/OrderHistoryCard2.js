@@ -19,7 +19,7 @@ const OrderHistoryCard2 = (props) => {
                 <img
                   className={Classes.ProductImage}
                   src={props.Image}
-                  alt=""
+                  alt="Image"
                 />
               </div>
               <div className="col-md-4">

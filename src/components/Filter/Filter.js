@@ -12,6 +12,8 @@ const Filter = (props) => {
   const [octnFiltArray, setOcctnFilterArray] = useState([]);
   const [metalTypeArray, setMetalTypeArray] = useState([]);
   const [occation, setOccation] = useState([]);
+  const countryId = localStorage.getItem("id");
+  console.log("countryId...anas", props.selectedCountry);
   const filterSet = () => {
     axios
       .get(Urls.filter)
@@ -26,6 +28,7 @@ const Filter = (props) => {
       });
   };
   useEffect(() => {
+    console.log(props.location.state.data);
     filterSet();
   }, []);
   const catSelHandler = (catSel) => {
@@ -190,7 +193,7 @@ const Filter = (props) => {
         <Accordion.Item eventKey="7">
           <Accordion.Header>
             {" "}
-            <div className={Classes.MainText}>Occation</div>
+            <div className={Classes.MainText}>More Filter</div>
           </Accordion.Header>
           <Accordion.Body>
             <div className={Classes.BorderBottom}>

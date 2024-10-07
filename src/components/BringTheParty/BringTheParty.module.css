@@ -1,77 +1,140 @@
-.BringThePartyWhole{
- margin-top: 80px;
+.BringThePartyWhole {
+  margin-top: 80px;
 }
-.BringTheParty{
-    background: #002E34;
-    border-radius: 4px;
-    line-height: 1.3;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.BringTheParty {
+  background: #002e34;
+  border-radius: 4px;
+  line-height: 1.3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 50px;
+  padding-top: 100px;
+}
+.MobBringtheparty {
+  padding-bottom: 5px;
+}
+.Text1 {
+  font-weight: 400;
+  font-size: 16px;
+  color: #ffffff;
+  letter-spacing: 0.05em;
+  font-family: "gilroyNormal" !important;
+  line-height: 0.1;
+}
+.Text2 {
+  font-weight: 500;
+  font-size: 40px;
+  color: #33909a;
+  font-family: "PlayFairNormal" !important;
+}
+.Text3 {
+  font-weight: 400;
+  font-size: 14px;
+
+  color: #ffffff;
+  font-family: "gilroyNormal" !important;
+  /* width: 340px; */
+}
+.MobBringthepartyvideo video {
+  width: 100%;
+  object-fit: cover;
+  height: 300px;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+.Image1 {
+  width: 100%;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.Image2 {
+  width: 100%;
+  cursor: pointer;
+}
+.Image3 {
+  width: 100%;
+  padding-left: 5px;
+  padding-right: 5px;
+  cursor: pointer;
+}
+@media (max-width: 1200px) {
+  .Text2 {
+    font-size: 30px;
+  }
+  .Text1 {
+    font-size: 10px;
+  }
+  .BringTheParty {
+    padding: 4px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .BringTheParty {
     padding: 50px;
-    padding-top: 100px;
-    
+    margin-bottom: 15px;
+  }
+  .Image1 {
+    margin-bottom: 15px;
+    width: 100%;
+  }
+  .Image2 {
+    width: 100%;
+  }
+  .Image3 {
+    width: 100%;
+  }
 }
-.Text1{
+@media screen and (max-width: 767px) {
+  .BringTheParty {
+    padding: 25px;
+    margin-bottom: 5px;
+  }
+  .Text2 {
+    font-size: 22px;
+  }
+  .Text3 {
     font-weight: 400;
-font-size: 16px;
-color: #ffffff;
-letter-spacing: 0.05em;
-font-family: 'gilroyNormal' !important;
-line-height: .1;
+    font-size: 10px;
+    line-height: 21px;
+  }
 }
-.Text2{
-    font-weight: 500;
-font-size: 40px;
-color: #33909A;
-font-family: 'PlayFairNormal' !important;
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .BringThePartyWhole {
+    margin-top: 35px;
+  }
 }
-.Text3{
-    font-weight: 400;
-font-size: 14px;
-color: #FFFFFF;
-font-family: 'gilroyNormal' !important;
-/* width: 340px; */
+@media (min-width: 576px) and (max-width: 767px) {
+  .BringThePartyWhole {
+    margin-top: 35px;
+    overflow: hidden;
+  }
+  .Image1 {
+    margin-bottom: 5px;
+  }
+  .Image2 {
+    margin-bottom: 5px;
+  }
 }
-.Image1{
-    width: 100%;
-    
-}
-.Image2{
-    width: 100%;
-    padding-bottom: 18px;
-    
-}
-.Image3{
-    width: 100%;
-    padding-left: 5px;
-    padding-right: 5px;
-    
-}
-@media (max-width:1200px){
-    .Text2{
-        font-size: 30px;
-    }
-    .Text1{
-        font-size: 10px;
-    }
-    .BringTheParty{
-        padding: 4px;
-    }
-}
-@media screen and (max-width:767px){
-    .BringTheParty{
-        padding: 50px;
-        margin-bottom: 15px;
-    }
-    .Image1{
-        margin-bottom: 15px;
-        width: 100%;
-    }
-    .Image2{
-        width: 100%;
-    }
-    .Image3{
-        width: 100%;
-    }
+@media (min-width: 300px) and (max-width: 575px) {
+  .BringThePartyWhole {
+    margin-top: 35px;
+    overflow: hidden;
+  }
+  .Image1 {
+    margin-bottom: 5px;
+    /* max-width: 410px; */
+  }
+  .Image2 {
+    margin-bottom: 5px;
+    /* max-width: 410px; */
+  }
+  .MobBringtheparty {
+    padding: 0px !important;
+  }
+  .MobBringthepartyvideo video {
+    height: 200px;
+    margin-top: 0px;
+  }
 }

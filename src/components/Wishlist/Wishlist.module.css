@@ -1,32 +1,27 @@
-.Title{
-    font-weight: 500;
-font-size: 24px;
-font-family: 'PlayFairNormal' !important;
+.Title {
+  font-weight: 600;
+  font-size: 24px;
+  font-family: "PlayFairNormal" !important;
 }
-.Main{
-    display: flex;
-
+.Main {
+  display: flex;
 }
-.SubText{
-    display: flex;
-    font-weight: 400;
-font-size: 14px;
-font-family: 'gilroyNormal' !important;
-border-bottom:  1px solid #E8E8E8;
-
+.SubText {
+  display: flex;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
 }
-.Home{
-    color: #00464D;
-    font-weight: 400;
-    font-size: 14px;
-    font-family: 'gilroyNormal' !important;
-    cursor: pointer;
-
+.Home {
+  color: #00464d;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
+  cursor: pointer;
 }
-.Wishlist{
-    color: #01B3C5;
-    font-weight: 400;
-font-size: 14px;
-font-family: 'gilroyNormal' !important;
-
+.Wishlist {
+  color: #01b3c5;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
 }

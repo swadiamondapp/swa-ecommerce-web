@@ -1,112 +1,364 @@
-.Features{
-    margin-bottom: -60px !important;
-    margin-top: 20px;
+.Features {
+  margin-bottom: 0px !important;
+  margin-top: 20px;
 }
-.Background{
-    background: #EEEEEE;
+.Background {
+  background: #eeeeee;
 }
-.detPad{
-    padding-top: 25px;
-}.Title {
-    font-weight: 500;
-    font-size: 24px;
-    font-family: 'PlayFairNormal' !important;
+.detPad {
+  padding-top: 25px;
 }
-
+.phoneicons {
+  display: none;
+}
+.Title {
+  font-weight: 600;
+  font-size: 24px;
+  font-family: "PlayFairNormal" !important;
+}
+.orderidh3 {
+  color: #000000;
+  font-size: 24px;
+  font-family: "Lato", sans-serif;
+}
+.DeliveryDetails {
+  margin-bottom: 20px;
+}
+.DeliveryDetails p {
+  font-size: 19px;
+  font-weight: 400;
+  font-family: "Lato", sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.DeliveryDetails img {
+  margin-right: 5px;
+}
+.DeliveryDetails p span {
+  color: #30933a;
+}
+.AddressSh1 {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.AddressIcons {
+  display: none;
+}
+.ParentShipmentDetails {
+  background: #fff;
+}
+.ParentShipmentDetails .p-accordion-header-text {
+  color: #000 !important;
+}
+.nameShipment {
+  color: #475057;
+  font-family: "Lato", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 5px !important;
+}
+.AddressShipping p {
+  color: #475057;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+}
+.phoneSh {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.ProductDetailsParent1 {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 15px;
+}
+.LftProductDetail {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.PDiamond1 {
+  color: #0d1217;
+  font-family: "Lato", sans-serif;
+  font-weight: 600;
+  margin-bottom: 10px !important;
+}
+.crtn1 {
+  margin-top: 20px;
+  padding: 8px 2px;
+  border-radius: 5px;
+  border-top: 1px solid #0000000d;
+  padding-bottom: 0px !important;
+}
+.parentPaymentItems {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  justify-content: end;
+  padding-right: 15px;
+}
+.dotstatusline {
+  background: #0eb533;
+  width: 3px;
+  height: 60px;
+}
+.dotstatus {
+  width: 15px;
+  height: 15px;
+  background: #0eb533;
+  border-radius: 50px;
+}
+.dotstatusline1 {
+  background: #d9d9d9;
+  width: 3px;
+  height: 60px;
+}
+.ParentStatus {
+  display: flex;
+  gap: 20px;
+}
+.dotstatus1 {
+  width: 15px;
+  height: 15px;
+  background: transparent;
+  border-radius: 50px;
+  border: 2px solid #d9d9d9;
+}
+.RsHead {
+  color: #0d1217;
+  font-family: "Lato", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+}
+.RightStausshow {
+  margin-bottom: 15px;
+}
+.RightStausshow2 {
+  margin-top: 27px;
+}
+.RightStausshow3 {
+  margin-top: 46px;
+}
+.leftStatus2 {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.TrackButtons {
+  display: flex;
+  align-items: end;
+  justify-content: end;
+  gap: 15px;
+  padding: 20px;
+}
+.REButton {
+  color: #00464d;
+  font-family: "Lato", sans-serif;
+  background: #00464d1a;
+  border: 1px solid #00464d;
+  padding: 10px 25px;
+  border-radius: 40px;
+  outline: none;
+  cursor: pointer;
+}
+.REButton2 {
+  color: #fff;
+  font-family: "Lato", sans-serif;
+  background: #00464d;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 40px;
+  outline: none;
+  cursor: pointer;
+}
+.dmm .p-accordion-header-text {
+  color: #000 !important;
+}
+.PaymentItems {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 200px 150px;
+  color: #475057;
+  margin-bottom: 5px;
+}
+.PaymentItems p:nth-child(2) {
+  text-align: end;
+}
 .Main {
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-    margin:30px 50px 0 50px;
-
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  margin: 30px 50px 0 50px;
 }
 .Home {
-    color: #00464D;
-    font-size: 14px;
-    font-family: 'gilroyNormal' !important;
-    font-weight: 500;
+  color: #00464d;
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
+  font-weight: 500;
+}
+.SearchOrder {
+  margin: 15px 0 20px 50px;
+}
+.SearchBar {
+  width: 45%;
+  background-image: url(../../Assets/searchIcon.png);
+  background-repeat: no-repeat;
+  background-position: 20px;
+  background-size: 15px;
+  border: none;
+  height: 40px;
+  border: 1px solid #e8e9ea;
+  border-radius: 4px;
 
+  font-family: "gilroyNormal" !important;
 }
-.SearchOrder{
-    margin: 15px 0 20px 50px;
+.SearchButton {
+  background: linear-gradient(180deg, #978958 0%, #aea174 82.81%);
+  border-radius: 2px;
+  border: none;
+  color: #ffffff;
+  font-family: "gilroyNormal" !important;
+  padding: 10px 11px 10px 11px;
+  font-weight: 500;
+  font-size: 13px;
+  margin-left: 10px;
 }
-.SearchBar{
-    width: 45%;
-    background-image: url(../../Assets/searchIcon.png);
-    background-repeat: no-repeat;
-    background-position: 20px;
-    background-size: 15px;
-    border: none;
-    height: 40px;
-border: 1px solid #E8E9EA;
-border-radius: 4px;
-
-font-family: 'gilroyNormal' !important;
+.shipMent {
+  min-height: 200px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  margin: 0px 50px 30px 50px;
+  padding: 25px;
 }
-.SearchButton{
-    background: linear-gradient(180deg, #978958 0%, #AEA174 82.81%);
-border-radius: 2px;
-border: none;
-color: #ffffff;
-font-family: 'gilroyNormal' !important;
-padding: 10px 11px 10px 11px;
-font-weight: 500;
-font-size: 13px;
-margin-left: 10px;
+.date {
+  font-family: "gilroyNormal" !important;
+  font-size: 16px !important;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #19242d;
+  font-weight: 200 !important;
 }
-.shipMent{
-  
-    min-height: 200px;
-    background-color: #FFFFFF;
-    border-radius: 4px;
-    margin: 0px 50px 30px 50px;
-    padding: 25px;
-   
+.Adres {
+  padding-top: 10px;
+  font-family: "gilroyNormal" !important;
+  font-size: 16px;
+  line-height: 21px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #475057;
+  margin-bottom: 0px !important;
 }
-.date{
-    font-family: 'gilroyNormal' !important;
-font-size: 16px !important;
-line-height: 19px;
-letter-spacing: 0em;
-text-align: left;
-color: #19242D;
-font-weight: 200 !important;
-
+.Box {
+  display: flex;
+  justify-content: space-between;
 }
-.Adres{
-    padding-top: 10px;
-    font-family: 'gilroyNormal' !important;
-font-size: 16px;
-line-height: 21px;
-letter-spacing: 0em;
-text-align: left;
-color: #475057;
-margin-bottom: 0px !important;
-
-
-}
-.Box{
-    display: flex;
-    justify-content: space-between;
-}
-.head{
-    color:#0D1217;
-    font-size: 18px;
-    font-weight: 600;
-    font-family: 'gilroyNormal' !important;
-
+.head {
+  color: #0d1217;
+  font-size: 18px;
+  font-weight: 600;
+  font-family: "gilroyNormal" !important;
 }
 
 .NewArrival {
-    color: #01B3C5;
-    font-size: 14px;
-    font-family: 'gilroyNormal' !important;
-    font-weight: 500;
+  color: #01b3c5;
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
+  font-weight: 500;
 }
 .SubText {
+  display: flex;
+
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
+}
+.parentCollaps5 {
+  margin: 10px 50px;
+}
+.CancelProductButton {
+  display: flex;
+  padding-top: 30px;
+  align-items: center;
+  justify-content: end;
+}
+.CancelProductButton button {
+  color: #00464d;
+  font-family: "Lato", sans-serif;
+  background: #00464d1a;
+  border: 1px solid #00464d;
+  padding: 8px 20px;
+  border-radius: 40px;
+  outline: none;
+  cursor: pointer;
+}
+@media (min-width: 300px) and (max-width: 575px) {
+  .Main {
+    margin: 30px 20px 0px;
+  }
+  .orderidh3 {
+    font-size: 18px;
+  }
+  .DeliveryDetails p {
+    font-size: 16px;
+  }
+  .parentCollaps5 {
+    margin: 10px 0px;
+  }
+  .OrderMobCont {
+    padding: 0px !important;
+  }
+  .OrderMobCont2 {
+    padding: 0px !important;
+  }
+  .ProductDetailsParent1 {
+    padding-right: 0px;
+  }
+  .parentPaymentItems {
+    padding-right: 0px;
+  }
+  .PaymentItems {
     display: flex;
-
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .REButton {
+    padding: 10px 15px;
     font-size: 14px;
-    font-family: 'gilroyNormal' !important;
-
+  }
+  .REButton2 {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+  .CancelProductButton {
+    padding-top: 0px;
+    justify-content: center;
+  }
+  .rgtProductDetails {
+    width: 70px;
+  }
+  .TrackButtons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .AddressIcons {
+    position: relative;
+    top: 2px;
+    color: #007481;
+    display: block;
+  }
+  .phoneicons {
+    display: block;
+    color: #007481;
+  }
+  .parentPaymentItems {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
 }

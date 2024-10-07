@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Header from "../../components/Header/Header";
+import Header from "../../components/HeaderNew/Header";
 import Footer from "../../components/Footer/Footer";
 import NewArrivalCard from "../../components/NewArrivals/NewArrivalCard/NewArrivalCard";
 import Wishlist from "../../components/Wishlist/Wishlist";
@@ -9,17 +9,29 @@ import * as Urls from "../../Urls";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { FadeLoader } from "react-spinners";
+import Features from "../../components/Features/Features";
+import SliderFeature from "../../components/ProductDetails/SliderFeature";
 
 const whishlistPage = () => {
   const history = useHistory();
   const [wishList, setWishList] = useState([]);
   const [loading, setLoading] = useState(false);
   const token = localStorage.getItem("swaToken");
+  const countryId = localStorage.getItem("id");
+  const flag = localStorage.getItem("flag_image");
+  const Contryname = localStorage.getItem("country_name");
+  const [selectedCountry, setSelectedCountry] = useState({
+    id: countryId,
+    flag_image: flag,
+    country_name: Contryname,
+  });
   const [cartCount, setCartCount] = useState("");
   const wishListing = () => {
     setLoading(true);
     axios
-      .get(Urls.wishlist, { headers: { Authorization: "Token 	" + token } })
+      .get(`${Urls.wishlist}?country=${countryId}`, {
+        headers: { Authorization: "Token 	" + token },
+      })
       .then((response1) => {
         setLoading(false);
         setWishList(response1.data.results.data);
@@ -28,7 +40,9 @@ const whishlistPage = () => {
         console.log(error);
       });
     axios
-      .get(Urls.cart, { headers: { Authorization: "Token " + token } })
+      .get(`${Urls.cart}?country=${countryId}`, {
+        headers: { Authorization: "Token " + token },
+      })
       .then((response1) => {
         if (response1.data.results.message === "cart is empty") {
           setCartCount("");
@@ -46,7 +60,9 @@ const whishlistPage = () => {
   const newWishListHandler = () => {
     setLoading(true);
     axios
-      .get(Urls.wishlist, { headers: { Authorization: "Token 	" + token } })
+      .get(`${Urls.wishlist}?country=${countryId}`, {
+        headers: { Authorization: "Token 	" + token },
+      })
       .then((response1) => {
         setLoading(false);
         setWishList(response1.data.results.data);
@@ -61,7 +77,9 @@ const whishlistPage = () => {
         "/products/" +
         prodId.product_id +
         "/" +
-        prodId.product.thumbnail_colour_id+'/'+prodId.product.product_name,
+        prodId.product.thumbnail_colour_id +
+        "/" +
+        prodId.product.product_name,
       state: { data: prodId },
     });
     // history.push({pathname:'/product_det',state:{data:prodId,path:'wish'}})
@@ -97,10 +115,14 @@ const whishlistPage = () => {
           ProductId={"SKU:" + item.product.sku}
           PriceNew={
             item.product.is_on_discount
-              ? item.product.discounted_final_price
-              : item.product.total_price_final
+              ? item.product.country_discount_price
+              : item.product.country_total_price
           }
-          PriceOld={item.product.is_on_discount ? item.product.total_price_final : null}
+          PriceOld={
+            item.product.is_on_discount
+              ? item.product.country_total_price
+              : null
+          }
           key={index}
           Discount={
             item.product.discount_percentage !== null
@@ -120,11 +142,17 @@ const whishlistPage = () => {
   return (
     <div>
       <div className={Classes.BgColour}>
-        <Header countCartItems={cartCount} />
-        <div className="container">
+        <Header
+          countCartItems={cartCount}
+          selectedCountry={selectedCountry}
+          setSelectedCountry={setSelectedCountry}
+        />
           <div className={Classes.Products}>
             <Wishlist> {wishlists} </Wishlist>
           </div>
+        <div>
+          <SliderFeature />
+          <Features />
         </div>
         <Footer />
       </div>

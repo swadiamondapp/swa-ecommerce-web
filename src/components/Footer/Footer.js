@@ -17,16 +17,26 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import * as Urls from "../../Urls";
+import { Accordion, AccordionTab } from "primereact/accordion";
+import LIfeTImeModal from "../LifeTImeModal/LIfeTImeModal";
+import BuyBackRequiest from "../BuyBackRequiest/BuyBackRequiest";
+import SuccessPage from "../SuccessPage/SuccessPage.js";
+import RefundInitiated from "../RefundInitiated/RefundInitiated.js";
+import SuccessModal from "../SuccessMessageModal/SuccessModal.js";
+import AddBank from "../LifeTImeModal/AddBank";
+import TransferMoneyModal from "../WalletModal/TransferMoneyModal.js";
+import WalletModal from "../WalletModal/WalletModal.js";
 
 function Footer() {
   const [catgSet, setCatgSet] = useState([]);
   const [occation, setOccation] = useState([]);
   const token = localStorage.getItem("swaToken");
   const history = useHistory();
+  const [activeIndex, setActiveIndex] = useState();
 
   useEffect(() => {
     axios
-      .get(Urls.filter)
+      .get(Urls.filter + "?category=&tag=")
       .then((response1) => {
         setCatgSet(response1.data.results.data.category);
         setOccation(response1.data.results.data.tags);
@@ -39,9 +49,11 @@ function Footer() {
     history.push("about_us");
   };
   const catSelHandler = (id) => {
-    if (history.location.pathname !== "/new_arrivel") {
-      history.push({ pathname: "/new_arrivel", state: { data: id } });
-    }
+    history.push({ pathname: "/new_arrivel", state: { data: id } });
+    // if (history.location.pathname !== "/new_arrivel") {
+    //   console.log("id------->", id);
+    //   history.push({ pathname: "/new_arrivel", state: { data: id } });
+    // }
   };
   const occationSelHandler = (id) => {
     if (history.location.pathname !== "/new_arrivel") {
@@ -51,13 +63,34 @@ function Footer() {
       });
     }
   };
+  const redirectToFacebook = () => {
+    window.location.href = "https://www.facebook.com/swadiamonds/";
+  };
+  const swaDiamondsClick = () => {
+    window.location.href = "https://oms.mirrordiamonds.com/";
+  };
+  const swaDiamondsClickMirror = () => {
+    window.location.href = "http://franchise.mirrordiamonds.com/";
+  };
+
+  const swaDiamondsClickRepair = () => {
+    window.location.href = "https://swarepairtest.zinfog.com/login/?next=/";
+  };
+
+  const redirectToLinkedIn = () => {
+    window.location.href = "https://in.linkedin.com/company/swa-diamonds";
+  };
+
+  const redirectToInstagram = () => {
+    window.location.href = "https://www.instagram.com/swadiamonds/";
+  };
   return (
     <div>
       <div className={Classes.Footer}>
         <div className="container">
           <div className="row">
             <div className="col-md-3">
-              <img className={Classes.Logo} src={Logo} alt="" />
+              <img className={Classes.Logo} src={Logo} alt="Logo" />
               <p className={Classes.LogoText}>
                 Concept of SWA Diamonds came into being from CAPESTONE Ventures
                 Pvt Ltd, a leading name in wholesale diamond jewellers market,
@@ -66,16 +99,19 @@ function Footer() {
                 diamond jewellery to their stock due to certain factors
               </p>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-5">
               <div className="container">
                 <div className="row">
                   <div className="col-md-4">
-                    <h1 className={Classes.Title}>Genral info</h1>
+                    <h1 className={Classes.Title}>General info</h1>
                     <div className={Classes.Links}>
                       <Link to="/faq">
                         <p className={Classes.Links}>FAQ</p>
                       </Link>
-                      <p className={Classes.Links}> Contact us</p>
+                      {/* <Link to="">
+                        <p className={Classes.Links}> Contact us</p>
+                      </Link> */}
+
                       <p
                         className={Classes.Links}
                         onClick={AboutUs}
@@ -92,10 +128,12 @@ function Footer() {
                       <Link to="/terms_condition">
                         <p className={Classes.Links}>Terms & conditions</p>
                       </Link>
-                      <p className={Classes.Links}>Outlets</p>
+                      <Link to="/outlet">
+                        <p className={Classes.Links}>Outlets</p>
+                      </Link>
                     </div>
                   </div>
-                  <div className="col-md-4">
+                  {/* <div className="col-md-4">
                     <h1 className={Classes.Title}>Quick links</h1>
                     {catgSet.slice(0, 15).map((item, index) => {
                       return (
@@ -109,10 +147,32 @@ function Footer() {
                         </p>
                       );
                     })}
+                  </div> */}
+                  <div className="col-md-4">
+                    <h1 className={Classes.Title}>Quick links</h1>
+                    {catgSet.slice(0, 8).map((item, index) => {
+                      return (
+                        <p
+                          className={Classes.Links}
+                          onClick={() => catSelHandler(item.id)}
+                          style={{ color: "#ffff", cursor: "pointer" }}
+                          key={index}
+                        >
+                          {/* {item.category}{" "} */}
+                          {item.category.charAt(0).toUpperCase() +
+                            item.category.slice(1).toLowerCase()}
+                        </p>
+                      );
+                    })}
                   </div>
                   <div className="col-md-4">
                     <div className={Classes.Link}>
-                      {occation.map((item, index) => {
+                      {occation.slice(0, 8).map((item, index) => {
+                        const tag = item.tag || ""; // Set to empty string if tag is null or undefined
+                        const capitalizedTag =
+                          tag.charAt(0).toUpperCase() +
+                          tag.slice(1).toLowerCase();
+
                         return (
                           <p
                             className={Classes.Links}
@@ -120,7 +180,8 @@ function Footer() {
                             key={index}
                             onClick={() => occationSelHandler(item.id)}
                           >
-                            {item.tag}
+                            {/* {item.tag} */}
+                            {capitalizedTag}
                           </p>
                         );
                       })}
@@ -130,11 +191,15 @@ function Footer() {
               </div>
               <p></p>
             </div>
-            <div className="col-md-3">
+            <div className="col-md-4">
               <p className={Classes.Title}>Swa contact info</p>
+
+              <div className={Classes.india}>
+                <p>INDIA Contact info</p>
+              </div>
               <div className={Classes.Address}>
                 <SiMinutemailer
-                  size={35}
+                  size={22}
                   color="#99C7CD"
                   className={Classes.AddressText}
                 />
@@ -145,7 +210,7 @@ function Footer() {
               <div className={Classes.Address}>
                 <FaPhoneAlt
                   color="#99C7CD"
-                  size={18}
+                  size={15}
                   className={Classes.AddressText}
                 />
                 <p className={`${Classes.Links} ${Classes.AddressText}`}>
@@ -162,40 +227,370 @@ function Footer() {
                   info@swadiamonds.com
                 </p>
               </div>
-              <p className={`${Classes.Title} ${Classes.FollowUs}`}>
+              {/* uae */}
+              <div className={Classes.uae}>
+                <p>UAE Contact info</p>
+              </div>
+              <div className={Classes.Address}>
+                <SiMinutemailer
+                  size={22}
+                  color="#99C7CD"
+                  className={Classes.AddressText}
+                />
+                <p className={`${Classes.Links} ${Classes.AddressText}`}>
+                  Mushrif Mall, First Floor, Unit No: 139, 25th st, Airport
+                  Road, Al Mushrif, Abu Dhabi , PO BOX: 4048, United Arab
+                  Emirates.
+                </p>
+              </div>
+              <div className={Classes.Address}>
+                <FaPhoneAlt
+                  color="#99C7CD"
+                  size={15}
+                  className={Classes.AddressText}
+                />
+                <p className={`${Classes.Links} ${Classes.AddressText}`}>
+                  Toll Free Number : 02565-9545
+                </p>
+              </div>
+              <div className={Classes.Address}>
+                <HiOutlineMail
+                  color="#99C7CD"
+                  size={20}
+                  className={Classes.AddressText}
+                />
+                <p className={`${Classes.Links} ${Classes.AddressText}`}>
+                  info@swadiamonds.com
+                </p>
+              </div>
+              {/* uae */}
+              <p
+                style={{ paddingLeft: "20px" }}
+                className={`${Classes.Title} ${Classes.FollowUs}`}
+              >
                 Follow us on
               </p>
               <div className={Classes.Icons}>
-                <img src={Facebook} alt="" />
-                <img src={LinkedIn} alt="" />
-                <img src={Instagram} alt="" />
+                <img
+                  src={Facebook}
+                  alt="Facebook"
+                  onClick={redirectToFacebook}
+                />
+                <img
+                  src={LinkedIn}
+                  alt="LinkedIn"
+                  onClick={redirectToLinkedIn}
+                />
+                <img
+                  src={Instagram}
+                  alt="Instagram"
+                  onClick={redirectToInstagram}
+                />
               </div>
             </div>
           </div>
         </div>
       </div>
+      {/* mobile footer */}
+      <div className={Classes.FooterMob}>
+        <div className={Classes.LogoMobScreen}>
+          <img className={Classes.Logo} src={Logo} alt="" />
+        </div>
+        <div className={Classes.ParentCollaps}>
+          <Accordion
+            multiple
+            activeIndex={activeIndex}
+            onTabChange={(e) => setActiveIndex(e.index)}
+          >
+            <AccordionTab header="About us">
+              <p
+                style={{
+                  color: "#fff",
+
+                  textAlign: "justify",
+                  fontSize: "15px",
+                }}
+              >
+                Concept of SWA Diamonds came into being from CAPESTONE Ventures
+                Pvt Ltd, a leading name in wholesale diamond jewellers market,
+                that does business with prominent retail jewellers. Many retail
+                jewellers who deal only in gold jewellery are reluctant to add
+                diamond jewellery to their stock due to certain factors
+              </p>
+            </AccordionTab>
+
+            <AccordionTab header="Policies">
+              <div className={Classes.PolicyLinks}>
+                <Link to="/privacy_policy">
+                  <p className={Classes.Links}>Privacy policy</p>
+                </Link>
+                <Link to="/Return_policy_page">
+                  <p className={Classes.Links}>Return policy</p>
+                </Link>
+                <Link to="/terms_condition">
+                  <p className={Classes.Links}>Terms & conditions</p>
+                </Link>
+              </div>
+            </AccordionTab>
+            <AccordionTab header="franchise enquiry">
+              <Link to="/" onClick={swaDiamondsClick}>
+                <p className={Classes.Links}>oms.mirrordiamonds.com</p>
+              </Link>
+              <Link to="/" onClick={swaDiamondsClickMirror}>
+                <p className={Classes.Links}>franchise.mirrordiamonds.com</p>
+              </Link>
+              <Link to="/">
+                <p className={Classes.Links} onClick={swaDiamondsClickRepair}>
+                  swarepairtest.zinfog.com
+                </p>
+              </Link>
+            </AccordionTab>
+            <AccordionTab header="Outlets">
+              <p className="m-0"></p>
+            </AccordionTab>
+            <AccordionTab header="Quick links">
+              <p className="m-0">
+                <Link to="/faq">
+                  <p className={Classes.Links}>Faq</p>
+                </Link>
+                <div className={Classes.MobQuicklinks}>
+                  <div>
+                    {catgSet.slice(0, 15).map((item, index) => {
+                      return (
+                        <p
+                          className={Classes.Links}
+                          onClick={() => catSelHandler(item.id)}
+                          style={{ color: "#ffff", cursor: "pointer" }}
+                          key={index}
+                        >
+                          {item.category}{" "}
+                        </p>
+                      );
+                    })}
+                  </div>
+                  <div>
+                    {occation.slice(0, 8).map((item, index) => {
+                      return (
+                        <p
+                          className={Classes.Links}
+                          style={{ color: "#ffff", cursor: "pointer" }}
+                          key={index}
+                          onClick={() => occationSelHandler(item.id)}
+                        >
+                          {item.tag}
+                        </p>
+                      );
+                    })}
+                  </div>
+                </div>
+              </p>
+            </AccordionTab>
+            <AccordionTab header="Swa contact info">
+              <div className={Classes.SwaAddresMob}>
+                <div className={Classes.india}>
+                  <p>INDIA Contact info</p>
+                </div>
+                <div className={Classes.Address}>
+                  <SiMinutemailer
+                    size={28}
+                    color="#99C7CD"
+                    className={Classes.AddressText}
+                  />
+                  <p className={`${Classes.Links} ${Classes.AddressText}`}>
+                    Ground Floor, 7/688E, Al Wahad, Chenguvetty, Kerala, 676501
+                  </p>
+                </div>
+                <div className={Classes.Address}>
+                  <FaPhoneAlt
+                    color="#99C7CD"
+                    size={15}
+                    className={Classes.AddressText}
+                  />
+                  <p className={`${Classes.Links} ${Classes.AddressText}`}>
+                    Toll Free Number : 1800 257 8600
+                  </p>
+                </div>
+                <div className={Classes.Address}>
+                  <HiOutlineMail
+                    color="#99C7CD"
+                    size={20}
+                    className={Classes.AddressText}
+                  />
+                  <p className={`${Classes.Links} ${Classes.AddressText}`}>
+                    info@swadiamonds.com
+                  </p>
+                </div>
+                <div className={Classes.uae}>
+                  <p>UAE Contact info</p>
+                </div>
+                <div className={Classes.Address}>
+                  <SiMinutemailer
+                    size={28}
+                    color="#99C7CD"
+                    className={Classes.AddressText}
+                  />
+                  <p className={`${Classes.Links} ${Classes.AddressText}`}>
+                    Mushrif Mall, First Floor, Unit No: 139, 25th st, Airport
+                    Road, Al Mushrif, Abu Dhabi , PO BOX: 4048, United Arab
+                    Emirates.
+                  </p>
+                </div>
+                <div className={Classes.Address}>
+                  <FaPhoneAlt
+                    color="#99C7CD"
+                    size={15}
+                    className={Classes.AddressText}
+                  />
+                  <p className={`${Classes.Links} ${Classes.AddressText}`}>
+                    Toll Free Number : 02565-9545
+                  </p>
+                </div>
+                <div className={Classes.Address}>
+                  <HiOutlineMail
+                    color="#99C7CD"
+                    size={20}
+                    className={Classes.AddressText}
+                  />
+                  <p className={`${Classes.Links} ${Classes.AddressText}`}>
+                    info@swadiamonds.com
+                  </p>
+                </div>
+              </div>
+            </AccordionTab>
+          </Accordion>
+        </div>
+        <div className={Classes.SwaParentInfoMob}>
+          {/* <p className={Classes.Title}>Swa contact info</p>
+          <div className={Classes.SwaAddresMob}>
+            <div className={Classes.Address}>
+              <SiMinutemailer
+                size={28}
+                color="#99C7CD"
+                className={Classes.AddressText}
+              />
+              <p className={`${Classes.Links} ${Classes.AddressText}`}>
+                Ground Floor, 7/688E, Al Wahad, Chenguvetty, Kerala, 676501
+              </p>
+            </div>
+            <div className={Classes.Address}>
+              <FaPhoneAlt
+                color="#99C7CD"
+                size={15}
+                className={Classes.AddressText}
+              />
+              <p className={`${Classes.Links} ${Classes.AddressText}`}>
+                Toll Free Number : 1800 257 8600
+              </p>
+            </div>
+            <div className={Classes.Address}>
+              <HiOutlineMail
+                color="#99C7CD"
+                size={20}
+                className={Classes.AddressText}
+              />
+              <p className={`${Classes.Links} ${Classes.AddressText}`}>
+                info@swadiamonds.com
+              </p>
+            </div>
+          </div> */}
+          <div className={Classes.FollowUsMOB}>
+            <p
+              style={{ paddingLeft: "20px" }}
+              className={`${Classes.Title} ${Classes.FollowUs}`}
+            >
+              Follow us on
+            </p>
+            <div className={Classes.Icons}>
+              <img src={Facebook} alt="Facebook" onClick={redirectToFacebook} />
+              <img src={LinkedIn} alt="LinkedIn" onClick={redirectToLinkedIn} />
+              <img
+                src={Instagram}
+                alt="Instagram"
+                onClick={redirectToInstagram}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className={Classes.FooterDownMob}>
+        <div className="">
+          <div className="">
+            <div className={`${""} ${Classes.FootIconImg}`}>
+              <div className={Classes.FooterIconimg1}>
+                <img
+                  className={Classes.FooterIcons}
+                  src={Image1}
+                  alt="Image1"
+                />
+                <img
+                  className={Classes.FooterIcons}
+                  src={Image2}
+                  alt="Image2"
+                />
+                <img
+                  className={Classes.FooterIcons}
+                  src={Image3}
+                  alt="Image3"
+                />
+              </div>
+              <div className={Classes.FooterIconimg1}>
+                <img
+                  className={Classes.FooterIcons}
+                  src={Image4}
+                  alt="Image4"
+                />
+                <img
+                  className={Classes.FooterIcons}
+                  src={Image5}
+                  alt="Image5"
+                />
+                <img
+                  className={Classes.FooterIcons}
+                  src={Image6}
+                  alt="Image6"
+                />
+              </div>
+            </div>
+            <div className="" style={{ paddingLeft: "0px" }}>
+              <p className={Classes.FooterDownText}>
+                2024 SWA Diamonds | All rights reserved
+              </p>
+            </div>
+
+            <div className="">
+              <p className={Classes.FooterDownTextR}>
+                Designed & developed by zinfog codelabs
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* mobile footer */}
       <div className={Classes.FooterDown}>
         <div className="container">
           <div className="row">
             <div className="col-md-4" style={{ paddingLeft: "0px" }}>
               <p className={Classes.FooterDownText}>
-                2022 SWA Diamonds | All rights reserved
+                2024 SWA Diamonds | All rights reserved
               </p>
             </div>
-            <div className="col-md-4">
-              <img className={Classes.FooterIcons} src={Image1} alt="" />
-              <img className={Classes.FooterIcons} src={Image2} alt="" />
-              <img className={Classes.FooterIcons} src={Image3} alt="" />
-              <img className={Classes.FooterIcons} src={Image4} alt="" />
-              <img className={Classes.FooterIcons} src={Image5} alt="" />
-              <img className={Classes.FooterIcons} src={Image6} alt="" />
+            <div className={`${"col-md-4"} ${Classes.FootIconImg}`}>
+              <img className={Classes.FooterIcons} src={Image1} alt="Image1" />
+              <img className={Classes.FooterIcons} src={Image2} alt="Image2" />
+              <img className={Classes.FooterIcons} src={Image3} alt="Image3" />
+              <img className={Classes.FooterIcons} src={Image4} alt="Image4" />
+              <img className={Classes.FooterIcons} src={Image6} alt="Image6" />
+              <img className={Classes.FooterIcons} src={Image5} alt="Image5" />
             </div>
             <div className="col-md-4">
-              <p
-                className={Classes.FooterDownText}
-                style={{ textAlign: "right" }}
-              >
-                Site Designed & developed by zinfog codelabs
+              <p className={Classes.FooterDownTextR}>
+                <a
+                  href="https://zinfog.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Designed & developed by zinfog codelabs
+                </a>
               </p>
             </div>
           </div>

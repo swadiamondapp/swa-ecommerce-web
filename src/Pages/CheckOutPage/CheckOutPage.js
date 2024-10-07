@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import Header from "../../components/Header/Header";
+import Header from "../../components/HeaderNew/Header";
 import Features from "../../components/Features/Features";
 import Footer from "../../components/Footer/Footer";
 import Classes from "./CheckOutPage.module.css";
 import CheckOut from "../../components/CheckOut/CheckOut";
+import OtpModal from "../../components/Navbar/OtpModal";
 import axios from "axios";
 import * as Urls from "../../Urls";
 
 const CheckOutPage = (props) => {
+  const token = localStorage.getItem("swaToken");
   const [total, setTotal] = useState("");
   const [amountPay, setPayTotal] = useState("");
   const [addressId, setAddressId] = useState(null);
@@ -15,11 +17,11 @@ const CheckOutPage = (props) => {
   const [address, setAddress] = useState([]);
   const [changeId, setChangeId] = useState("");
   const [cartCount, setCartCount] = useState("");
-  const token = localStorage.getItem("swaToken");
+
   useEffect(() => {
     // console.log(props.location.state.data);
     setLoading(true);
-    setTotal(props.location.state.data.total);
+    // setTotal(props.location.state.data.total);
     axios
       .get(Urls.address, { headers: { Authorization: "Token " + token } })
       .then((response1) => {
@@ -36,7 +38,9 @@ const CheckOutPage = (props) => {
         console.log(error);
       });
     axios
-      .get(Urls.cart, { headers: { Authorization: "Token " + token } })
+      .get(`${Urls.cart}?country=${countryId}`, {
+        headers: { Authorization: "Token " + token },
+      })
       .then((response1) => {
         if (response1.data.results.message === "cart is empty") {
           setCartCount("");
@@ -48,25 +52,39 @@ const CheckOutPage = (props) => {
         console.log(error);
       });
   }, [changeId]);
+
   const adressChangeHanlder = (id) => {
     setChangeId(id);
   };
   const radioChangeHandler = (e) => {
     setAddressId(e.target.value);
   };
+  const countryId = localStorage.getItem("id");
+  const flag = localStorage.getItem("flag_image");
+  const Contryname = localStorage.getItem("country_name");
+  const [selectedCountry, setSelectedCountry] = useState({
+    id: countryId,
+    flag_image: flag,
+    country_name: Contryname,
+  });
 
   return (
     <div>
       <div className={Classes.Background}>
-        <Header countCartItems={cartCount} />
+        <Header
+          countCartItems={cartCount}
+          selectedCountry={selectedCountry}
+          setSelectedCountry={setSelectedCountry}
+        />
         <CheckOut
-          total={props.location.state.data.total}
+          // total={props.location.state.data.total}
           isLoad={loading}
           addressArray={address}
           address={addressId}
           radioChange={radioChangeHandler}
           adresChnge={adressChangeHanlder}
           proDet={props.location.state}
+          countCartItems={cartCount}
         />
 
         <div className={Classes.Features}>

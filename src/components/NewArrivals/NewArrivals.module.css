@@ -1,49 +1,74 @@
 .NewArrivalsMainText {
-    font-weight: 500;
-    font-size: 38px;
-    color: #0D1217;
-    font-family: 'PlayFairNormal' !important;
-
+  font-weight: 600;
+  font-size: 32px;
+  color: #0d1217;
+  /* font-family: "PlayFairNormal" !important; */
+  font-family: "Playfair Display", serif !important;
 }
-.setItems{
-    display: flex;
-    justify-content: space-between;
+.setItems {
+  /* display: flex;
+    justify-content: space-between; */
+  padding-left: 10px;
+}
+.NewArrivals {
+  margin-top: 20px;
 }
 
 .NewArrivalsSubText {
-    font-weight: 400;
-font-size: 18px;
+  font-weight: 400;
+  font-size: 16px;
 
-color: #757C81;
-margin-top: 20px;
-font-family: 'gilroyNormal' !important;
+  color: #757c81;
+  margin-top: 15px;
+  margin-bottom: 20px !important;
+  font-family: "gilroyNormal" !important;
 }
-.seeAll{
+.seeAll {
+  font-size: 16px;
+  font-weight: 600;
+  font-family: "gilroyNormal" !important;
+  color: #007481;
+  cursor: pointer;
+  text-align: center;
+}
+@media screen and (max-width: 767px) {
+  .NewArrivalsMainText {
+    font-size: 28px;
+  }
+
+  .NewArrivalsSubText {
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .NewArrivalsMainText {
+    font-size: 25px;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .NewArrivalsMainText {
+    font-size: 26px;
+    margin-bottom: 0px !important;
+  }
+}
+@media (min-width: 576px) and (max-width: 767px) {
+  .NewArrivalsMainText {
+    font-size: 26px;
+  }
+}
+@media (min-width: 300px) and (max-width: 575px) {
+  .NewArrivalsSubText {
+    text-align: center;
+    font-size: 15px;
+    margin: 13px 0px;
+  }
+  .NewArrivalsMainText {
+    text-align: center;
+    font-size: 22px;
+  }
+  .seeAll {
+    margin: 0px 0px;
+    text-align: center;
     font-size: 16px;
-    font-weight: 600;
-    font-family: 'gilroyNormal' !important;
-    color: #007481;
-    cursor: pointer;
-    margin-top: 67px;
-
-}
-@media screen and (max-width:767px) {
-    .NewArrivalsMainText {
-        font-size: 28px;
-    }
-    .seeAll{
-        font-size: 15px;
-        margin-top: 53px;
-    }
-    .NewArrivalsSubText{
-        font-size: 14px;
-    }
-}
-@media screen and (max-width:500px) {
-    .NewArrivalsMainText {
-        font-size: 25px;
-    }
-    .seeAll{
-        font-size: 13px;
-    }
+  }
 }

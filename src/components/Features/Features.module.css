@@ -1,90 +1,100 @@
 .FeaturesBg {
-    background-color: #FCFBF6;
+  background-color: #fcfbf6;
 }
 
 .FeaturesDetails {
-    padding: 30px;
-    border-right: 1px solid #F0EBD1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
+  padding: 30px;
+  border-right: 1px solid #f0ebd1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-
+.FeaturesmainText {
+  color: #0d1217;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  font-family: "lato";
+  margin-bottom: 10px !important;
+}
 .Security {
-    border: none;
+  border: none;
+  border-left: 1px solid #f0ebd1 !important;
 }
 
 .FeaturesMainText {
-    font-weight: 400;
-    font-size: 16px;
-    font-family: 'gilroyNormal' !important;
-    text-align: center;
+  font-weight: 600;
+  font-size: 16px;
+  font-family: "lato" !important;
+  text-align: center;
 }
 
 .FeaturesSubText {
-    font-weight: 400;
-    font-size: 13px;
-    color: #86898B;
-    font-family: 'gilroyNormal' !important;
-    text-align: center;
+  font-weight: 400;
+  font-size: 14px;
+  color: #86898b;
+  font-family: "lato" !important;
+  text-align: center;
 }
 
 .MarginFeatures {
-    padding: 20px;
-    margin: 0 70px 0 70px;
+  padding: 20px;
+  /* margin: 0 70px 0 70px; */
 }
 
-@media (max-width:640px) {
-    .MarginFeatures {
-        padding: 10px;
-        margin: 0 30px 0 30px;
-    }
+@media (max-width: 640px) {
+  .MarginFeatures {
+    padding: 10px;
+    margin: 0 0px 0 0px;
+  }
 
-    .FeaturesmainText {
-        font-size: 12px;
-        text-align: center;
-    }
+  .FeaturesmainText {
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 10px !important;
+    font-family: "InterNormal";
+  }
 
-    .FeaturesSubText {
-        font-size: 8px;
-        height: 30px;
-    }
+  .FeaturesSubText {
+    font-size: 14px;
+  }
 
-    .image {
-        width: 2px;
-    }
+  .image {
+    width: 2px;
+  }
 
-    .FeaturesDetails img {
-        width: 60px;
+  .FeaturesDetails img {
+    width: 60px;
+  }
 
-    }
+  .MoneyBack {
+    border-right: none;
+    border-top: none !important;
+    border-bottom: 1px solid #f0ebd1 !important;
+  }
 
-    .MoneyBack {
-        border-right: none;
-        border-top: none !important;
-    }
+  .FeaturesDetails {
+    padding: 5px;
+    border: none;
+  }
 
-    .FeaturesDetails {
-        padding: 5px;
-        border: none;
-    }
-
-    .Shipping {
-        border: none;
-    }
+  .Shipping {
+    border: none;
+    border-right: 1px solid #f0ebd1;
+    border-bottom: 1px solid #f0ebd1;
+  }
 }
 
-@media (min-width:200px) and (max-width:320px) {
-    .FeaturesDetails {
-        border: none;
+@media (min-width: 768px) and (max-width: 991px) {
+  .FeaturesDetails {
+    padding: 10px;
+  }
+}
 
-    }
-
-    .FeaturesSubText {
-        font-size: 7px;
-        height: 10px;
-        text-align: center;
-    }
+@media (min-width: 300px) and (max-width: 576px) {
+  .FeaturesBg {
+    /* display: none; */
+  }
 }

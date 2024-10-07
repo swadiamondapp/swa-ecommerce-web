@@ -1,49 +1,65 @@
-import React,{useEffect,useState} from 'react'
-import Header from '../../components/Header/Header'
-import Features from '../../components/Features/Features'
-import Footer from '../../components/Footer/Footer'
-import Rating from '../../components/Rating/Rating'
-import Classes from './RateAndReview.module.css'
+import React, { useEffect, useState } from "react";
+import Header from "../../components/HeaderNew/Header";
+import Features from "../../components/Features/Features";
+import Footer from "../../components/Footer/Footer";
+import Rating from "../../components/Rating/Rating";
+import Classes from "./RateAndReview.module.css";
 import axios from "axios";
-import * as Urls from '../../Urls'
+import * as Urls from "../../Urls";
+import SliderFeature from "../../components/ProductDetails/SliderFeature";
 
 function RateAndReview(props) {
-    const [cartCount,setCartCount] = useState('')
-    const token = localStorage.getItem('swaToken')
-    useEffect(()=>{
-        axios
-        .get(Urls.cart,{ headers: {"Authorization" : 'Token '+token} })
-        .then((response1) => {
-            if(response1.data.results.message === 'cart is empty'){
-              setCartCount('')
-            }
-            else{
-              setCartCount(response1.data.results.count)
-            }
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+  const [cartCount, setCartCount] = useState("");
+  const token = localStorage.getItem("swaToken");
+  console.log("props.location.", props.location.state);
+  const countryId = localStorage.getItem("id");
+  const flag = localStorage.getItem("flag_image");
+  const Contryname = localStorage.getItem("country_name");
+  const [selectedCountry, setSelectedCountry] = useState({
+    id: countryId,
+    flag_image: flag,
+    country_name: Contryname,
+  });
+  useEffect(() => {
+    axios
+      .get(`${Urls.cart}?country=${countryId}`, {
+        headers: { Authorization: "Token " + token },
+      })
+      .then((response1) => {
+        if (response1.data.results.message === "cart is empty") {
+          setCartCount("");
+        } else {
+          setCartCount(response1.data.results.count);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
-    },[])
-   
-    return (
-        <div>
-           
-         <div className={Classes.BgColour}>
-            <Header countCartItems={cartCount}/>
-           <div className={Classes.Margin}>
-                <Rating proid={props.location.state.data}/>
-                </div>
-                <div className={Classes.Features}>
-                <Features />
-                </div>
-            </div>
-            
-            <Footer />
-            
+  console.log("props.location.state", props.location.state);
+
+  return (
+    <div>
+      <div className={Classes.BgColour}>
+        <Header
+          countCartItems={cartCount}
+          selectedCountry={selectedCountry}
+          setSelectedCountry={setSelectedCountry}
+        />
+        <div className={Classes.Margin}>
+          {/* <Rating proid={props.location.state.data} /> */}
+          <Rating productDetails={props.location.state} />
         </div>
-    )
+        <div className={Classes.Features}>
+          <SliderFeature />
+          <Features />
+        </div>
+      </div>
+
+      <Footer />
+    </div>
+  );
 }
 
-export default RateAndReview
+export default RateAndReview;

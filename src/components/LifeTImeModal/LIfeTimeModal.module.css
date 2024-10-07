@@ -1,0 +1,393 @@
+.Container {
+  width: 100%;
+}
+.planContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+.titles {
+  padding-bottom: 15px;
+}
+.SubDetails {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+}
+.error {
+  color: #ff0000b3;
+  font-size: 14px;
+  margin-top: 8px;
+}
+.subDetialstexts {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+.labelText {
+  opacity: 0.6;
+  font-size: 14px;
+  font-weight: 400;
+}
+.textAmount {
+  font-size: 14px;
+}
+.greenColor {
+  color: rgba(48, 147, 58, 1);
+  font-size: 14px;
+}
+.line {
+  border-bottom: 1px solid #585f67;
+  opacity: 0.2;
+  width: 100%;
+  margin: 6px 0px 10px 0px;
+}
+.buttonllb {
+  background-color: rgba(0, 70, 77, 1);
+  color: #fff;
+  border-radius: 4px;
+  width: 100%;
+  border: none;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 8px 05px;
+}
+.note {
+}
+.noteTitle {
+  display: flex;
+  flex-direction: column;
+}
+.noteContent {
+  opacity: 0.8;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 5px;
+}
+.planSubTitle {
+  padding-bottom: 5px;
+  font-weight: 600;
+  font-size: 16px;
+}
+.LabelHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+/*SUCCESS MODAL START FROM HERE  */
+.AccountLabels {
+  display: flex;
+  flex-direction: column;
+  /* gap: 1px; */
+  margin-bottom: 15px;
+}
+.BranchAcc {
+  display: flex;
+  flex-direction: column;
+  /* gap: 1px; */
+  margin-bottom: 15px;
+}
+.BranchAcc label {
+  margin-bottom: 6px;
+}
+.BranchAcc input {
+  background: #f9f9f9;
+  border: 1px solid #e8e9ea;
+  padding: 8px 10px;
+  border-radius: 3px;
+  outline: none;
+}
+.BranchAcc input::placeholder {
+  color: #a3a7ab;
+  font-family: "gilroyNormal";
+  font-weight: 400;
+  font-size: 15px;
+}
+.AccountLabels label {
+  margin-bottom: 6px;
+}
+.AccountLabels input {
+  background: #f9f9f9;
+  border: 1px solid #e8e9ea;
+  padding: 8px 10px;
+  border-radius: 3px;
+  outline: none;
+}
+.CategoryList {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.CategoryListMain {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #a3a7ab;
+  margin-bottom: 8px;
+}
+
+input:checked + .CategoryListAmount + label {
+  font-weight: 600 !important;
+  /* color: #475057 !important; */
+  color: red !important;
+}
+.PriceTgs .nav-pills .nav-link {
+  color: #006e7f !important;
+}
+.FilterMobiles {
+  display: none;
+}
+.AccountLabels select {
+  background: #f9f9f9;
+  border: 1px solid #e8e9ea;
+  padding: 8px 10px;
+  border-radius: 3px;
+}
+.AddBtnACC button {
+  background: #00464d;
+  color: #fff;
+  width: 100%;
+  border: none;
+  outline: none;
+  font-family: lato;
+  font-weight: 600;
+  padding: 10px;
+  border-radius: 3px;
+  margin-top: 15px;
+}
+.AccountLabels input::placeholder {
+  color: #a3a7ab;
+  font-family: "gilroyNormal";
+  font-weight: 400;
+  font-size: 15px;
+}
+.BranchIfscParent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.LabelHead p {
+  color: #0d1217;
+  font-family: "PlayFairNormal";
+  font-size: 18px;
+  font-weight: 600;
+}
+.LabelHead {
+  margin-bottom: 15px;
+}
+.successModalContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+}
+.titlesuccesModal {
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+}
+
+/* styles.css or your CSS module */
+.activeTab {
+  background: #F7F6F2 !important;
+  font-weight: 900 !important;
+  color: black !important;
+  padding-left: 20px;
+  position: relative;
+}
+
+.inactiveTab {
+  background: transparent !important;
+  font-weight: 300 !important;
+  color: inherit !important;
+  padding-left: 20px;
+  position: relative;
+}
+
+.dot {
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  content: "•";
+  font-size: 12px;
+  color: black;
+}
+
+
+@media (min-width: 300px) and (max-width: 575px) {
+  .titles {
+    padding-bottom: 15px;
+  }
+  .planContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  .titles {
+    padding-bottom: 15px;
+  }
+  .SubDetails {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 5px;
+  }
+
+  .subDetialstexts {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+  }
+  .labelText {
+    opacity: 0.6;
+    font-size: 14px;
+  }
+  .textAmount {
+    font-size: 14px;
+  }
+  .greenColor {
+    color: rgba(48, 147, 58, 1);
+    font-size: 14px;
+  }
+  .line {
+    border-bottom: 1px solid #585f67;
+    opacity: 0.2;
+    width: 100%;
+  }
+  .buttonllb {
+    background-color: rgba(0, 70, 77, 1);
+    color: #fff;
+    border-radius: 4px;
+    width: 100%;
+    border: none;
+    font-size: 14px;
+    font-weight: 400;
+
+    /* padding:8px 05px */
+  }
+  .noteTitle {
+    display: flex;
+    flex-direction: column;
+  }
+  .noteContent {
+    opacity: 0.8;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 10px;
+  }
+  .planSubTitle {
+    padding-bottom: 5px;
+  }
+  .BranchIfscParent {
+    grid-template-columns: 1fr 1fr;
+  }
+  .FilterHeads {
+    position: fixed;
+    bottom: 0px;
+    background: #fff;
+    z-index: 99;
+    width: 100%;
+    left: 0%;
+  }
+  .FilterMobiles {
+    display: block;
+    padding: 15px 25px;
+    border-top: 1px solid #e8e9ea;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .FilterMobiles button {
+    color: #006e7f !important;
+    background: transparent;
+    border: none;
+    padding: 0px;
+    font-family: "gilroyNormal" !important;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .arrow1 {
+    width: 1px;
+    height: 24px;
+    background: #d1d3d5;
+  }
+  .ParentFilter {
+    display: none;
+  }
+  .PriceModal {
+    background: red;
+  }
+  .PriceTgs {
+    font-family: "gilroyNormal" !important;
+    border-bottom: 1px solid #e8e9ea;
+    padding-bottom: 15px;
+  }
+  .PriceTags1 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+  }
+  .PriceBtns button {
+    background: linear-gradient(to right, #978958 0%, #aea174 100%);
+    border: none;
+    outline: none;
+    padding: 10px 15px;
+    width: 100%;
+    border-radius: 20px;
+    color: #fff;
+    font-family: "gilroyNormal" !important;
+    margin-top: 15px;
+    /* margin-bottom: 90px; */
+  }
+  .PriceBtns2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  .ResetBtn {
+    color: #475057;
+    border: none;
+    outline: none;
+    padding: 10px 15px;
+    width: 100%;
+    border-radius: 20px;
+    font-family: "gilroyNormal" !important;
+    background: transparent;
+    /* margin-bottom: 90px; */
+  }
+  .ApplyBtn {
+    background: linear-gradient(to right, #978958 0%, #aea174 100%);
+    border: none;
+    outline: none;
+    padding: 10px 15px;
+    width: 100%;
+    border-radius: 20px;
+    color: #fff;
+    font-family: "gilroyNormal" !important;
+    /* margin-bottom: 90px; */
+  }
+  .b1e {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .b1e label {
+    display: grid;
+    grid-template-columns: 100px 50px;
+    margin-bottom: 0px;
+  }
+  .b1e span {
+    text-align: end;
+  }
+  .BranchAcc input {
+    width: 100%;
+  }
+}

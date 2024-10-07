@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import Modal from "react-bootstrap/Modal";
-import { BsPerson } from "react-icons/bs";
+import React, { useState, useEffect, useRef } from "react";
+// import Modal from "react-bootstrap/Modal";
+import { BsPerson, BsEye, BsEyeSlash } from "react-icons/bs";
 import Classes from "../Header/Header.module.css";
 import BlueLogo from "../../Assets/SwaBlue.png";
 import * as urls from "../../Urls";
@@ -9,10 +9,51 @@ import * as country from "../../countryList";
 import ReactFlagsSelect from "react-flags-select";
 import { useHistory } from "react-router-dom";
 import Success from "../../Assets/sucesLarge.png";
+import LoginToggle from "../Navbar/LoginToggle.js";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
+import logedimg from "../../Assets/loged.png";
+import { IoIosArrowDown } from "react-icons/io";
+import { Link, useLocation } from "react-router-dom";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 375,
+  height: "auto",
+  bgcolor: "background.paper",
+  border: "none",
+  boxShadow: 24,
+  borderRadius: "4px",
+  p: 2,
+  outline: "none",
+};
+
+const styleDesk = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%,-50%)",
+  width: 375,
+  height: "auto",
+  bgcolor: "background.paper",
+  border: "none",
+  boxShadow: 24,
+  p: 2,
+  outline: "none",
+};
 const LoginModal = (props) => {
+  const userDetailsRef = useRef(null);
+  const nameRef = useRef(null);
+  const [showUserDetails, setShowUserDetails] = useState(false);
   const [show, setShow] = useState(false);
   const [register, setRegister] = useState(false);
   const [login, setLogin] = useState(false);
+  const location = useLocation();
   const [logCond, setLogCond] = useState(null);
   const [forgot, setForgot] = useState(false);
   const [forgotPhoneNumber, setForgotPhoneNumber] = useState("");
@@ -33,36 +74,46 @@ const LoginModal = (props) => {
   const [forgotToken, setForgotToken] = useState("");
   const [forgotError, setForfotError] = useState("");
   const [createError, setCreateError] = useState("");
+  const [isSignpuLogin, setIsSignpuLogin] = useState(false);
+  const username = localStorage.getItem("name");
+  const [isDesk, setIsDesk] = useState(
+    window.innerWidth >= 300 && window.innerWidth <= 575
+  );
 
   const [error, setError] = useState("");
   const history = useHistory();
-  const loginHandler = () => {
-    const body = {
-      username: phoneNumber,
-      password: loginPassword,
-    };
-    axios
-      .post(urls.Login, body)
-      .then((response) => {
-        if (response.data.results.status_code === 200) {
-          localStorage.setItem("swaToken", response.data.results.token);
+  // const loginHandler = () => {
+  //   const body = {
+  //     username: phoneNumber,
+  //     password: loginPassword,
+  //   };
+  //   axios
+  //     .post(urls.Login, body)
+  //     .then((response) => {
+  //       if (response.data.results.status_code === 200) {
+  //         localStorage.setItem("swaToken", response.data.results.token);
+  //         localStorage.setItem("userName", response.data.results.data.name);
+  //         localStorage.setItem(
+  //           "phoneNumber",
+  //           response.data.results.data.phone_number
+  //         );
 
-          props.logAct(response.data.results.token);
-          handleClose();
-        } else if (response.data.results.status_code === 401) {
-          setLoginError("Incorrect username or password!");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-  useEffect(() => {
-    if (props.isLog) {
-      setShow(true);
-      setLogin(true);
-    }
-  }, [props.isLog]);
+  //         props.logAct(response.data.results.token);
+  //         handleClose();
+  //       } else if (response.data.results.status_code === 401) {
+  //         setLoginError("Incorrect username or password!");
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
+  // useEffect(() => {
+  //   if (props.isLog) {
+  //     setShow(true);
+  //     setLogin(true);
+  //   }
+  // }, [props.isLog]);
 
   const registerHandler = () => {
     let selObj = country.arrayCountryList.find(
@@ -80,6 +131,25 @@ const LoginModal = (props) => {
       .then((response1) => {
         if (response1.data.results.status_code === 200) {
           setError("");
+          const bodyLog = {
+            username: regPhoneNumber,
+            password: password,
+          };
+          axios
+            .post(urls.Login, bodyLog)
+            .then((response) => {
+              if (response.data.results.status_code === 200) {
+                localStorage.setItem("swaToken", response.data.results.token);
+                localStorage.setItem("name", response.data.results.data.name);
+                props.logAct(response.data.results.token);
+                handleClose();
+              } else if (response.data.results.status_code === 401) {
+                setLoginError("Incorrect username or password!");
+              }
+            })
+            .catch((error) => {
+              console.log(error);
+            });
           handleClose();
         } else console.log("registration failed");
       })
@@ -90,6 +160,18 @@ const LoginModal = (props) => {
       });
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesk(window.innerWidth >= 300 && window.innerWidth <= 575);
+    };
+    // Add event listener to listen for window resize
+    window.addEventListener("resize", handleResize);
+
+    // Remove event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [isDesk]);
   const sentOtpHandler = () => {
     let selObj = country.arrayCountryList.find(
       (item) => item.name === selected
@@ -146,7 +228,7 @@ const LoginModal = (props) => {
         }
       });
   };
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("9946787586");
   const [phoneNumberError, setPhoneNumberError] = useState("");
   const validatePhoneNumber = (number) => {
     const phoneRegex = /^\d{10}$/; // regex to match 10-digit phone number
@@ -176,6 +258,7 @@ const LoginModal = (props) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
+  const [showPassword, setShowPassword] = useState(true);
   const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/; // regex to match password criteria
   const validatePassword = () => {
     if (!passwordRegex.test(password)) {
@@ -212,7 +295,7 @@ const LoginModal = (props) => {
     }
   };
 
-  const [loginPassword, setLoginPassword] = useState("");
+  const [loginPassword, setLoginPassword] = useState("Theja@123");
   const [loginPasswordError, setLoginPasswordError] = useState("");
   const validateLoginPassword = () => {
     if (loginPassword.length < 8) {
@@ -234,11 +317,16 @@ const LoginModal = (props) => {
   };
   const handleClose = () => {
     props.close(false);
+    // props.cartClose();
     setLogin(false);
     setRegister(false);
     setVerifyOtp(false);
     setNewPassword(false);
-    setShow(false);
+    if (props.handleOpenLogin === "profile") {
+      return;
+    } else {
+      props.handleOpenLogin();
+    }
     setChangePas(false);
     setForgot(false);
     setVeifyForgot(false);
@@ -263,7 +351,7 @@ const LoginModal = (props) => {
     setConfNewPas("");
   };
   const handleShow = () => {
-    setShow(true);
+    props.handleOpenLogin();
     setSelected("IN");
     setRegPhoneNumber("");
   };
@@ -328,6 +416,21 @@ const LoginModal = (props) => {
     localStorage.removeItem("swaToken");
     history.push("/");
     setLogCond(false);
+  };
+  const handleLogOut = () => {
+    // Clear localStorage
+    localStorage.removeItem("swaToken");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("phoneNumber");
+    localStorage.removeItem("userProfile")
+    // localStorage.removeItem("defaultCountryFlag");
+    // localStorage.removeItem("id");
+
+    // Hide the LogedUserDetails div
+    setShowUserDetails(false);
+    // Redirect to home page or login page
+    history.push("/"); // Redirect to home page
+    setLogCond(false); // Close user details dropdown
   };
   const forgotHandlerShow = () => {
     setPhoneNumberError("");
@@ -419,375 +522,191 @@ const LoginModal = (props) => {
         });
     }
   };
+
+  const userName = localStorage.getItem("userName");
+  const phone = localStorage.getItem("phoneNumber");
+
+  const handleLogedUserClick = () => {
+    console.log("Before toggle, showUserDetails:", showUserDetails);
+    setShowUserDetails((prev) => !prev);
+    console.log("After toggle, showUserDetails:", showUserDetails);
+  };
+  useEffect(() => {
+    console.log("useEffect executed with showUserDetails:", showUserDetails);
+
+    const handleClickOutside = (event) => {
+      if (
+        showUserDetails &&
+        userDetailsRef.current &&
+        !userDetailsRef.current.contains(event.target) &&
+        !nameRef.current.contains(event.target)
+      ) {
+        setShowUserDetails(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      console.log("Cleanup useEffect with showUserDetails:", showUserDetails);
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showUserDetails]);
+
+  const handleSignupClick = () => {
+    props.handleOpenLogin();
+    setIsSignpuLogin(true);
+  };
+
   return (
     <>
-      <div className={Classes.LogList}>
+      {/* <div className={Classes.LogList}>
         <p variant="primary" onClick={loginClickHandler}>
           <BsPerson className={Classes.PersonIcon} color="#ffffff" size={30} />
         </p>
+
         <div
           className={Classes.LogListCont}
           style={{ display: logCond ? "block" : "none" }}
         >
-          <p className={Classes.LogItem} onClick={myOrderHandler}>
-            My Order
-          </p>
-          <p className={Classes.LogItem} onClick={logoutHandler}>
-            Logout
-          </p>
+          <div className={Classes.info_container}>
+            <p className={Classes.user_info_name}>{userName}</p>
+            <p className={Classes.user_info_phone}>{phone}</p>
+          </div>
+          <div className={Classes.detail_container}>
+            <p className={Classes.LogItem} onClick={myOrderHandler}>
+              My Order
+            </p>
+            <p className={Classes.LogItem} onClick={logoutHandler}>
+              Logout
+            </p>
+          </div>
         </div>
-      </div>
+      </div> */}
 
-      <Modal show={show} onHide={handleClose} animation={false}>
-        <Modal.Header closeButton></Modal.Header>
-        <Modal.Body>
-          {/* login */}
-          <div className={login ? [Classes.Block] : [Classes.None]}>
-            <div className={Classes.LoginLogo}>
-              <img src={BlueLogo} alt="" />
-            </div>
-            <p className={Classes.TextReg}>Login</p>
-
-            {loginError && <p className={Classes.Validation}>{loginError}</p>}
-            <p className={Classes.ContactDetails}>Phone Number</p>
-            <div className={Classes.NumFlex}>
-              <input
-                type="text"
-                className={Classes.Input}
-                value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
-                onBlur={(e) => validatePhoneNumber(e.target.value)}
-              ></input>
-            </div>
-            {phoneNumberError && (
-              <p className={Classes.Validation}>{phoneNumberError}</p>
-            )}
-            <p className={Classes.ContactDetails}>Password</p>
-            <input
-              type="password"
-              className={Classes.Input}
-              value={loginPassword}
-              onChange={(e) => setLoginPassword(e.target.value)}
-              onBlur={validateLoginPassword}
-            ></input>
-            {loginPasswordError && (
-              <p className={Classes.Validation}>{loginPasswordError}</p>
-            )}
-
-            <div className={Classes.Flex}>
-              <div>
-                <input className={Classes.CheckBox} type="checkbox" value="" />
-                <label className={Classes.CheckBoxLabel} htmlFor="ship">
-                  Keep me signed in{" "}
-                </label>
-              </div>
-              <p className={Classes.CheckBoxLabel} onClick={forgotHandlerShow}>
-                Forgot password?
-              </p>
-            </div>
-            <input
-              className={Classes.LoginButton}
-              type="submit"
-              onClick={loginHandler}
-              value="LOGIN"
+      <>
+        {userName ? (
+          <div
+            className={Classes.LogedUser}
+            style={{ cursor: "pointer" }}
+            ref={nameRef}
+            onClick={handleLogedUserClick}
+          >
+            <img
+              src={logedimg}
+              alt="logedimg"
+              className={Classes.headerElement}
             />
-            <div className={Classes.Flexmid}>
-              <p className={Classes.CheckBoxLabel}>not a member?</p>
-              <p className={Classes.Join} onClick={handleRegister}>
-                {" "}
-                Register now{" "}
-              </p>
-            </div>
+            <p className={Classes.headerElement}>{userName}</p>
+            <IoIosArrowDown className={Classes.headerElement} />
           </div>
-          {/* forgot password */}
-          <div className={forgot ? [Classes.Block] : [Classes.None]}>
-            <div className={Classes.LoginLogo}>
-              <img src={BlueLogo} alt="" />
-            </div>
-            <p className={Classes.TextReg}>Forgot Password</p>
-
-            {forgotError && <p className={Classes.Validation}>{forgotError}</p>}
-            <p className={Classes.ContactDetails}>Phone Number</p>
-            <div className={Classes.NumFlex}>
-              <input
-                type="text"
-                className={Classes.Input}
-                value={forgotPhoneNumber}
-                onChange={(e) => setForgotPhoneNumber(e.target.value)}
-                onBlur={(e) => validatePhoneNumber(e.target.value)}
-              ></input>
-            </div>
-            {phoneNumberError && (
-              <p className={Classes.Validation}>{phoneNumberError}</p>
-            )}
-
-            <input
-              className={Classes.LoginButton}
-              type="submit"
-              onClick={forgotHandler}
-              value="NEXT"
-            />
-            <div className={Classes.Flexmid}>
-              <p className={Classes.CheckBoxLabel}>not a member?</p>
-              <p className={Classes.Join} onClick={handleRegister}>
-                {" "}
-                Register now{" "}
-              </p>
-            </div>
-          </div>
-          {/* forgot otp verificatio */}
-          <div className={verifyForgotOtp ? [Classes.Block] : [Classes.None]}>
-            <div className={Classes.LoginLogo}>
-              <img src={BlueLogo} alt="" />
-            </div>
-            <div>
-              <p className={Classes.TextReg}>Forgot Password</p>
-              <div
-                className="errrMsg"
-                style={{ textAlign: "center", marginTop: "-20px" }}
-              >
-                {error}
-              </div>
-              <p className={Classes.ContactDetails}>OTP</p>
-              <input
-                type="text"
-                className={Classes.Input}
-                value={forgotOtp}
-                onChange={(e) => setForgotOtp(e.target.value)}
-              ></input>
-              {forgotOtpError && (
-                <p className={Classes.Validation}>{forgotOtpError}</p>
-              )}
-
-              <input
-                className={Classes.LoginButton}
-                type="submit"
-                value="verify"
-                onClick={fotOtpVerify}
-              />
-              <div className={Classes.Flexmid}>
-                <p className={Classes.CheckBoxLabel}>Not get OTP </p>
-                <p className={Classes.Join} onClick={forgotHandler}>
-                  Resend now{" "}
-                </p>
-              </div>
-            </div>
-          </div>
-          {/* change password */}
-          <div className={changePas ? [Classes.Block] : [Classes.None]}>
-            <div className={Classes.LoginLogo}>
-              <img src={BlueLogo} alt="" />
-            </div>
-            <p className={Classes.TextReg}>Change Password</p>
-
-            {chagePasError && (
-              <p className={Classes.Validation}>{chagePasError}</p>
-            )}
-            <p className={Classes.ContactDetails}>New Password</p>
-            <div className={Classes.NumFlex}>
-              <input
-                type="password"
-                className={Classes.Input}
-                value={newChangePas}
-                onChange={(e) => setNewChangPas(e.target.value)}
-              ></input>
-            </div>
-
-            <p className={Classes.ContactDetails}>Confirm Password</p>
-            <input
-              type="password"
-              className={Classes.Input}
-              value={confirMNewPas}
-              onChange={(e) => setConfNewPas(e.target.value)}
-            ></input>
-
-            <input
-              className={Classes.LoginButton}
-              type="submit"
-              onClick={changepasswordHandler}
-              value="SUBMIT"
-            />
-          </div>
-          {/* reset success */}
-          <div className={changeSuc ? [Classes.Block] : [Classes.None]}>
-            <div className={Classes.LoginLogo}>
-              <img src={BlueLogo} alt="" />
-            </div>
-            <p className={Classes.TextReg}>Change Password</p>
-            <div className="d-flex justify-content-center align-items-center">
-              <img src={Success} alt="success" width={130} height={130} />
-            </div>
-            <p
-              style={{
-                textAlign: "center",
-                paddingTop: "20px",
-                paddingBottom: "20px",
+        ) : (
+          <div className={Classes.LoginSignup} style={{ cursor: "pointer" }}>
+            <div
+              className={`${Classes.dLogin} ${Classes.headerElement}`}
+              onClick={() => {
+                props.handleOpenLogin();
+                setIsSignpuLogin(false);
+                props.setLoginText("Welcome Back");
               }}
             >
-              Your Password Has Been Updated Successfully
+              Login
+            </div>
+            <div className={Classes.LineArrow}></div>
+            <div
+              className={`${Classes.DSignup} ${Classes.headerElement}`}
+              onClick={handleSignupClick}
+            >
+              Sign up
+            </div>
+          </div>
+        )}
+      </>
+
+      {/* <div className={Classes.LoginSignup}>
+        <div className={Classes.dLogin} onClick={props.handleOpenLogin}>
+          Login
+        </div>
+        <div className={Classes.LineArrow}></div>
+        <div className={Classes.DSignup} onClick={props.handleOpenLogin}>
+          Sign up
+        </div>
+      </div>
+      <div onClick={handleLogedUserClick} className={Classes.LogedUser}>
+        <img src={logedimg} />
+        <p>{userName}</p>
+        <IoIosArrowDown />
+      </div> */}
+      {/* modal */}
+
+      {showUserDetails && (
+        <div ref={userDetailsRef} className={Classes.LogedUserDetails}>
+          <div className={Classes.Name_phoneLog}>
+            <p>{userName}</p>
+            <p className={Classes.Name_phoneLoged}>{phone}</p>
+          </div>
+          <div className={Classes.LogedDetails_list}>
+            <Link to="/profile" className={Classes.MobProfileLinks}>
+              <p style={{ fontSize: "16px" }}>Profile</p>
+            </Link>
+
+            <Link to="/my_orders" className={Classes.LogedDetails_Item}>
+              <p style={{ fontSize: "16px" }}>Order history</p>
+            </Link>
+
+            <Link to="/addaddress" className={Classes.LogedDetails_Item}>
+              <p style={{ fontSize: "16px" }}>Add Address</p>
+            </Link>
+            {/* <Link className={Classes.LogedDetails_Item}>
+              <p style={{ fontSize: "16px" }}>Track Order</p>
+            </Link> */}
+            <Link to="/rate&review" className={Classes.LogedDetails_Item}>
+              <p style={{ fontSize: "16px" }}>Write review</p>
+            </Link>
+            <Link to="/swaWallet" className={Classes.LogedDetails_Item}>
+              <p style={{ fontSize: "16px" }}>Swa wallet</p>
+            </Link>
+            <Link
+              to="/swaExchange"
+              style={{ fontSize: "16px" }}
+              className={Classes.LogedDetails_Item}
+            >
+              <p style={{ fontSize: "16px" }}>Swa exchange</p>
+            </Link>
+
+            <p
+              style={{ cursor: "pointer", width: "100%" }}
+              onClick={handleLogOut}
+              className={Classes.ListPTag}
+            >
+              Log Out
             </p>
-            <input
-              className={Classes.LoginButton}
-              type="submit"
-              onClick={handleModal}
-              value="LOGIN"
-            />
           </div>
-          {/* register phone number */}
-          <div className={register ? [Classes.Block] : [Classes.None]}>
-            <div className={Classes.LoginLogo}>
-              <img src={BlueLogo} alt="" />
-            </div>
+        </div>
+      )}
+
+      <Modal
+        open={props.isLog}
+        onClose={handleClose}
+        animation={false}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={isDesk ? style : styleDesk}>
+          <Typography>
             <div>
-              <p className={Classes.TextReg}>Register</p>
-              <div
-                className="errrMsg"
-                style={{ textAlign: "center", marginTop: "-20px" }}
-              >
-                {createError}
-              </div>
-              <p className={Classes.ContactDetails}>Phone Number</p>
-
-              <div className={Classes.FlexPhone}>
-                <ReactFlagsSelect
-                  selected={selected}
-                  countries={country.countryList}
-                  customLabels={country.countryCode}
-                  selectedSize={14}
-                  fullWidth={false}
-                  onSelect={(code) => setSelected(code)}
-                  onChange={(code) => {}}
-                  className={Classes.InputPhone}
-                />
-                <input
-                  type="text"
-                  className={Classes.regPhoneNumber}
-                  value={regPhoneNumber}
-                  onChange={(e) => setRegPhoneNumber(e.target.value)}
-                ></input>
-              </div>
-              {regPhoneNumberError && (
-                <p className={Classes.Validation}>{regPhoneNumberError}</p>
-              )}
-
-              {/* <p className={Classes.Validation}> Phone number already exist</p> */}
-              <input
-                className={Classes.LoginButton}
-                type="submit"
-                value="Get OTP"
-                onClick={validateRegPhoneNumber}
+              <LoginToggle
+                onClose={handleClose}
+                signupClick={handleSignupClick}
+                LoginSignupToggle={isSignpuLogin}
+                text={props.text}
+                loginText={props.loginText}
+                setShowSuccessModal={props.setShowSuccessModal}
+                setText={props.setText}
               />
-              <div className={Classes.Flexmid}>
-                <p className={Classes.CheckBoxLabel}>Already have account? </p>
-                <p className={Classes.Join} onClick={handleModal}>
-                  {" "}
-                  Login
-                </p>
-              </div>
             </div>
-          </div>
-          {/* otp verification */}
-          <div className={verifyOtp ? [Classes.Block] : [Classes.None]}>
-            <div className={Classes.LoginLogo}>
-              <img src={BlueLogo} alt="" />
-            </div>
-            <div>
-              <p className={Classes.TextReg}>Register</p>
-              <div
-                className="errrMsg"
-                style={{ textAlign: "center", marginTop: "-20px" }}
-              >
-                {error}
-              </div>
-              <p className={Classes.ContactDetails}>OTP</p>
-              <input
-                type="text"
-                className={Classes.Input}
-                value={otp}
-                onChange={(e) => setOtp(e.target.value)}
-              ></input>
-              {otpError && <p className={Classes.Validation}>{otpError}</p>}
-
-              <input
-                className={Classes.LoginButton}
-                type="submit"
-                value="verify"
-                onClick={validateOtp}
-              />
-              <div className={Classes.Flexmid}>
-                <p className={Classes.CheckBoxLabel}>Not get OTP </p>
-                <p className={Classes.Join} onClick={handleRegister}>
-                  Resend now{" "}
-                </p>
-              </div>
-            </div>
-          </div>
-          {/* set new account */}
-          <div className={newPassword ? [Classes.Block] : [Classes.None]}>
-            <div className={Classes.LoginLogo}>
-              <img src={BlueLogo} alt="" />
-            </div>
-            <div>
-              <p className={Classes.TextReg}>Register</p>
-              <div
-                className="errrMsg"
-                style={{ textAlign: "center", marginTop: "-10px" }}
-              >
-                {error}
-              </div>
-              <p className={Classes.ContactDetails}>Name</p>
-              <input
-                type="text"
-                className={Classes.Input}
-                onChange={(e) => setName(e.target.value)}
-                onBlur={validateName}
-              ></input>
-              {nameError && <p className={Classes.Validation}>{nameError}</p>}
-
-              <p className={Classes.ContactDetails}>Password</p>
-              <input
-                type="password"
-                className={Classes.Input}
-                onChange={(e) => setPassword(e.target.value)}
-                onBlur={validatePassword}
-              />
-              {passwordError && (
-                <p className={Classes.Validation}>{passwordError}</p>
-              )}
-
-              <p className={Classes.ContactDetails}>Confirm Password</p>
-              <input
-                type="password"
-                className={Classes.Input}
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                onBlur={validateConfirmPassword}
-              />
-              {confirmPasswordError && (
-                <p className={Classes.Validation}>{confirmPasswordError}</p>
-              )}
-
-              <div>
-                <input className={Classes.CheckBox} type="checkbox" value="" />
-                <label className={Classes.CheckBoxLabel} htmlFor="ship">
-                  Keep me signed in{" "}
-                </label>
-              </div>
-              <input
-                className={Classes.LoginButton}
-                type="submit"
-                value="Register"
-                onClick={registerHandler}
-              />
-              <div className={Classes.Flexmid}>
-                <p className={Classes.CheckBoxLabel}>Already have account? </p>
-                <p className={Classes.Join} onClick={handleModal}>
-                  Login{" "}
-                </p>
-              </div>
-            </div>
-          </div>
-        </Modal.Body>
+          </Typography>
+        </Box>
       </Modal>
     </>
   );

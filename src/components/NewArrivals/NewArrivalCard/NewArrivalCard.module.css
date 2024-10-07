@@ -1,154 +1,475 @@
 .ProductName {
-    font-weight: 400;
-    font-size: 20px;
-    color: #0D1217;
-    text-align: center;
-    font-family: 'gilroyNormal' !important;
+  font-weight: 400;
+  font-size: 20px;
+  color: #0d1217;
+  text-align: center;
+  font-family: "gilroyNormal" !important;
 }
-.Discount{
-    position: absolute;
-    top: 3%;
-    left: 70%;
-    padding: 7px;
-    height: 35px;
+.Discount {
+  position: absolute;
+  top: 3%;
+  left: 0%;
+  padding: 7px;
+  height: 35px;
 }
-.Number{
-    background: #189E02;
-    color: #FFFFFF;
-    padding: 5px;
-    font-size: 12px;
+.CheckDelvyDate {
+  display: none;
+}
+.HeartSymbol {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+}
+.Number {
+  background: #189e02;
+  color: #ffffff;
+  padding: 5px;
+  font-size: 12px;
 }
 .ProductId {
-    font-weight: 400;
-    font-size: 16px;
-    text-align: center;
-    color: #757C81;
-    line-height: .3;
+  font-weight: 400;
+  font-size: 16px;
+  text-align: center;
+  color: #757c81;
+  line-height: 0.3;
+}
+.Rupee {
+  font-size: 24px;
+  text-align: center;
+}
+
+.tryAtHome {
+  background: transparent;
+  border: 1px solid #00464d;
+  color: #00464d;
+  border-radius: 4px;
+  font-size: 14px;
+  padding: 10px 0px;
+  width: 100%;
+}
+.tryAtHome:hover {
+  /* color: #00b4bf; */
+  border: 1px solid #eeeeed;
+  background: #eeeeed;
+  color: #4e4035;
+}
+.buyNow {
+  background: #00464d;
+  border: 1px solid #00464d;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 14px;
+  padding: 10px 0px;
+  width: 100%;
+}
+.buyNow:hover {
+  /* background: #00b4bf; */
+  background: linear-gradient(360deg, #00353d 0%, #007885 100%);
+  /* border: 1px solid #00b4bf; */
 }
 
 .Price {
-    display: flex;
-    justify-content: space-between;
-    padding: 0 25px 0 25px;
+  display: flex;
+  gap: 10px;
 }
 
 .PriceNew {
-    font-weight: 700;
-    font-size: 18px;
-    margin-right: 10px;
+  font-weight: 700;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
 }
-
 .PriceOld {
-    text-decoration: line-through;
-    font-weight: 400;
-    font-size: 18px;
-    color: #B0B0B0;
-
+  text-decoration: line-through;
+  font-weight: 400;
+  font-size: 18px;
+  color: #b0b0b0;
 }
-
 .AddToCart {
-    background: #19242D;
-    border-radius: 4px;
-    width:70%;;
-    height: 48px;
-    text-align: center;
-    color: #FFFFFF;
-    border: none;
-    font-weight: 500;
-    font-size: 12px;
-    font-family: 'InterNormal' !important;
-
+  background: #19242d;
+  border-radius: 4px;
+  width: 70%;
+  height: 48px;
+  text-align: center;
+  color: #ffffff;
+  border: none;
+  font-weight: 500;
+  font-size: 12px;
+  font-family: "InterNormal" !important;
 }
-
+.cardTryatHomeBtn {
+  display: none;
+}
+.cardTryatHomeBtn button {
+  border: 1px solid #00464d;
+  background: transparent;
+  color: #00464d;
+  width: 100%;
+  padding: 5px;
+  border-radius: 4px;
+  font-family: "Lato";
+  font-weight: 500;
+  font-size: 14px;
+}
 .Heart {
-    background: #007481;
-    border-radius: 4px;
-    width: 20%;
-    height: 48px;
-    cursor: pointer;
-    padding: 13px;
-    margin-left: 5px;
+  background-color: rgb(195, 9, 9);
+  border-radius: 4px;
+  width: 20%;
+  height: 48px;
+  cursor: pointer;
+  padding: 13px;
+  margin-left: 5px;
 }
-.None{
+.None {
+  display: none;
+}
+.HeartOnClick {
+  border-radius: 4px;
+  width: 48px;
+  height: 48px;
+  padding: 13px;
+  margin-left: 5px;
+  background: #ffffff;
+  border: 1px solid #006e7f;
+}
+.Buttons {
+  /* display: none; */
+
+  /* justify-content: center; */
+}
+.ProductImage {
+  width: 100%;
+}
+
+.NewArrivals {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.NewArrivals:hover .HButton {
+  display: block;
+  opacity: 1;
+}
+.NewArrivalCard:hover {
+  transition: 0.4s ease-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 12px 26px 0px #00000014;
+}
+.ParentCardBoxes {
+  padding: 10px 8px 15px;
+}
+.CheckdeliveryNewtext {
+  color: rgb(0, 70, 77);
+  font-size: 14px;
+  font-family: "lato";
+  font-weight: 600;
+  padding-left: 6px;
+}
+.NewArrivalCard {
+  width: 100%;
+  position: relative;
+  /* margin-bottom: 30px; */
+  /* height: 385px; */
+  height: 372px;
+  padding: 10px 10px 0px 10px;
+  border-radius: 4px;
+}
+.NewArrivalCard img {
+  display: flex;
+  justify-content: center;
+}
+
+.HoverButton {
+  position: absolute;
+  bottom: -15%;
+  width: 100%;
+  transition: 0.8s ease;
+}
+.ButtonContainer {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+  transition: 0.8s ease-in;
+  background-color: transparent;
+}
+.HButton {
+  opacity: 0;
+  transition: 0.4s ease;
+  padding: 5px 10px;
+}
+.NewArrivalCardSub {
+  position: relative;
+}
+
+@media (max-width: 1200px) {
+  .ProductName {
+    font-size: 15px;
+  }
+  .Price {
+    padding: 0 15px 0 15px;
+  }
+  .NewArrivals .Buttons {
+    display: block;
+  }
+
+  .Heart {
+    width: 25%;
+    height: 40px;
+  }
+  .AddToCart {
+    height: 40px;
+  }
+  .HeartOnClick {
+    height: 40px;
+  }
+}
+@media screen and (max-width: 1165px) {
+  .Number {
+    background: #189e02;
+    color: #ffffff;
+    padding: 5px;
+    font-size: 10px;
+  }
+}
+/* @media screen and (max-width: 767px) {
+  .NewArrivals .Buttons {
+    display: block;
+  }
+  .HeartOnClick {
+    height: 40px;
+  }
+  .Price {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 5px;
+  }
+  .PriceNew {
+    font-size: 14px;
+  }
+  .ProductImage {
+    width: 100%;
+    height: 170px;
+    padding: 0px;
+  }
+  .Rupee {
+    font-size: 16px;
+  }
+
+  .PriceOld {
+    font-size: 14px;
+  }
+} */
+/* @media screen and (max-width: 379px) {
+  .AddToCart {
+    width: 60%;
+    font-size: 10px;
+  }
+  .Heart {
+    width: 30%;
+  }
+} */
+@media (min-width: 300px) and (max-width: 575px) {
+  .NewArrivals {
+    margin-bottom: 10px;
+    padding: 0px;
+  }
+  .buyNow {
     display: none;
-}
-.HeartOnClick{
-    border-radius: 4px;
-    width: 48px;
-    height: 48px;
-    padding: 13px;
-    margin-left: 5px;
-    background: #FFFFFF;
-    border: 1px solid #006E7F;
-}
-.Buttons{
-    display: none;
-   
-    /* justify-content: center; */
-}
-.ProductImage{
-    width: 200px ;
-    height: 200px;
-    
-}
-.NewArrivals{
+  }
+  .tryAtHome {
+    font-weight: 500;
+    width: 100%;
+  }
+  .NewArrivalCard:hover {
+    box-shadow: none;
+  }
+  .NewArrivalCard {
+    /* height: 305px;
+    margin-bottom: 20px;
+    padding: 3px; */
+    height: auto;
+    margin-bottom: 0px;
+    padding: 3px;
+  }
+  .CheckDelvyDate {
+    color: #00464d;
+    font-family: "Lato";
+    font-weight: 400;
+    display: block;
+    padding: 12px 0px;
+    padding-top: 0px;
+  }
+  .HButton {
+    opacity: 1;
+    display: block;
+    transition: 0.4s ease;
+    padding-bottom: 10px;
+    padding-top: 0px;
+  }
+  .HoverContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column-reverse;
+  }
+  .HoverButton {
+    position: static;
+    transition: 0.8s ease;
+    /* display: flex; */
+  }
+  .NewArrivalCardSub {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    border: 0.5px solid #e5e5e5;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .Price {
+    display: flex;
+    justify-content: left;
+    padding: 0px 10px 5px 10px;
+    gap: 10px;
     align-items: center;
-    cursor: pointer;
-
-}
-.NewArrivals:hover .Buttons{
-    display: block;
-    transition: 0.8s;
-}
-.NewArrivalCard{
-    height: 470px;
+    padding-left: 6px;
+  }
+  .PriceNew {
+    font-size: 15px;
+  }
+  .ProductImage {
     width: 100%;
-    position: relative;
+    padding: 0px;
+  }
+  .Rupee {
+    font-size: 16px;
+  }
+  .PriceOld {
+    font-size: 12px;
+  }
+  .Discount {
+    position: absolute;
+    top: 3%;
+    left: 0%;
+    padding: 0px;
+    height: 35px;
+  }
+  .CheckdeliveryNewtext {
+    font-size: 12px;
+  }
+  .cardTryatHomeBtn {
+    display: block;
+    padding: 0px 10px;
+  }
 }
 
-@media (max-width:1200px){
-    .ProductName{
-        font-size: 15px;
-    }
-    .Price{
-        padding: 0 15px 0 15px ;
-    }
-    .NewArrivals .Buttons{
-        display: block;
-    }
- 
-    .Heart {
-        width: 25%;
-        height: 40px;
-    }
-    .AddToCart{
-        height: 40px;
-    }
-    .HeartOnClick{
-        height: 40px;
-    }
+@media (min-width: 575px) and (max-width: 767px) {
+  .NewArrivals {
+    margin-bottom: 10px;
+  }
+  .buyNow {
+    display: none;
+  }
+  .tryAtHome {
+    font-weight: 500;
+    width: 100%;
+  }
+  .HButton {
+    opacity: 1;
+    display: block;
+    transition: 0.4s ease;
+    padding-bottom: 15px;
+  }
+  .HoverContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column-reverse;
+  }
+  .HoverButton {
+    position: static;
+    transition: 0.8s ease;
+    /* display: flex; */
+  }
+  .NewArrivalCardSub {
+    display: flex;
+    flex-direction: column;
+  }
+  .Price {
+    display: flex;
+    justify-content: center;
+    padding: 0px 18px;
+  }
+  .PriceNew {
+    font-size: 14px;
+  }
+  .ProductImage {
+    width: 100%;
+    height: 170px;
+    padding: 0px;
+  }
+  .Rupee {
+    font-size: 16px;
+  }
+  .PriceOld {
+    font-size: 14px;
+  }
 }
-@media screen and (max-width:1165px) {
-    .Number{
-        background: #189E02;
-        color: #FFFFFF;
-        padding: 5px;
-        font-size: 10px;
-    }
+@media (min-width: 768px) and (max-width: 1200px) {
+  .NewArrivals {
+    margin-bottom: 10px;
+  }
+  .buyNow {
+    display: none;
+  }
+  .tryAtHome {
+    font-weight: 500;
+    width: 100%;
+  }
+  .HButton {
+    opacity: 1;
+    display: block;
+    transition: 0.4s ease;
+    padding-bottom: 15px;
+  }
+  .HoverContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column-reverse;
+  }
+  .HoverButton {
+    position: static;
+    transition: 0.8s ease;
+    /* display: flex; */
+  }
+  .NewArrivalCardSub {
+    display: flex;
+    flex-direction: column;
+  }
+  .Price {
+    display: flex;
+    justify-content: center;
+    padding: 0px 18px;
+  }
+  .PriceNew {
+    font-size: 14px;
+  }
+  .ProductImage {
+    width: 100%;
+    height: 170px;
+    padding: 0px;
+  }
+  .Rupee {
+    font-size: 16px;
+  }
+  .PriceOld {
+    font-size: 14px;
+  }
 }
-@media screen and (max-width:767px) {
- 
-    .NewArrivals .Buttons{
-        display: block;
-    }
-    .HeartOnClick{
-        height: 40px;
-    }
-    .Price{
-        padding: 0 70px 0 70px;
-    }
-   
+
+@media (min-width: 1400px) and (max-width: 3000px) {
+  .NewArrivalCard {
+    height: 420px;
+  }
 }

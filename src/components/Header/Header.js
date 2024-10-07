@@ -14,11 +14,12 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { CgClose } from "react-icons/cg";
 import { HiShoppingBag } from "react-icons/hi";
 import ProductImage from "../../Assets/new1.png";
-import LoginModal from "../LoginModal/LoginModal";
+// import LoginModal from "../LoginModal/LoginModal";
 import { BsSearch } from "react-icons/bs";
 import { AiOutlineClose } from "react-icons/ai";
 import axios from "axios";
 import * as Urls from "../../Urls";
+import NewLoginModal from "../NewLoginModal/NewLoginModal";
 const Header = (props) => {
   const [show, setShow] = useState(false);
   const [catgSet, setCatgSet] = useState([]);
@@ -50,9 +51,8 @@ const Header = (props) => {
     }
   };
   const catSelHandler = (id) => {
-    if (history.location.pathname !== "/new_arrivel") {
-      history.push({ pathname: "/new_arrivel", state: { data: id } });
-    }
+    window.open("https://www.swa.co/category_search/" + id, "_self");
+    console.log("testk");
   };
   const moveToOrderHistory = () => {
     history.push("/track_order");
@@ -99,8 +99,15 @@ const Header = (props) => {
   const closeHanlder = () => {};
 
   const searchTitleHandler = (setItem) => {
+    console.log(history.location.pathname);
     if (setItem.type === "category") {
-      history.push({ pathname: "/new_arrivel", state: { data: setItem.id } });
+      if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
+        window.location.href =
+          "https://www.swa.co/category_search/" + setItem.id;
+        console.log("testk");
+      } else {
+        history.push({ pathname: "/new_arrivel", state: { data: setItem.id } });
+      }
     } else if (setItem.type === "product") {
       axios
         .get(Urls.productDet + setItem.id)
@@ -112,18 +119,32 @@ const Header = (props) => {
             product_name: response1.data.results.data.product_name,
             sku: response1.data.results.data.sku,
             thumbnail_image: response1.data.results.data.thumbnail_image,
-            total_price_final: response1.data.results.data.total_price_final,
-            discounted_final_price: response1.data.results.data.discount_price,
+            country_total_price:
+              response1.data.results.data.country_total_price,
+            country_discount_price: response1.data.results.data.discount_price,
             wishlist_id: response1.data.results.data.wishlist_id,
           };
-          history.push({
-            pathname:
-              "/products/" +
+          if (history.location.pathname.slice(0, 10) === "/products/") {
+            console.log("test");
+            window.location.href =
+              "https://www.swa.co/products/" +
               setItem.id +
               "/" +
-              response1.data.results.data.color_id,
-            state: { data: selData },
-          });
+              response1.data.results.data.color_id +
+              "/" +
+              response1.data.results.data.product_name;
+          } else {
+            history.push({
+              pathname:
+                "/products/" +
+                setItem.id +
+                "/" +
+                response1.data.results.data.color_id +
+                "/" +
+                response1.data.results.data.product_name,
+              state: { data: selData },
+            });
+          }
         })
         .catch((error) => {
           console.log(error);
@@ -163,17 +184,10 @@ const Header = (props) => {
             <img
               className={Classes.Logo}
               src={Logo}
-              alt=""
+              alt="Logo"
               onClick={setHomepageHandler}
             />
             <div className={Classes.SearchIcons}>
-              {/* <AiOutlineSearch className={Classes.SearchIcon}  size={30} />
-              <input
-                className={Classes.Searchbar}
-                type="text"
-                placeholder="Search for diamonds & more"
-              />
-             */}
               <div className={Classes.searchList}>
                 <input
                   className={Classes.searchbar}
@@ -213,10 +227,10 @@ const Header = (props) => {
                 className={Classes.Icon}
                 color="#FFFFFF"
                 size={25}
-                onClick={Notification}
+                // onClick={Notification}
               />
 
-              <LoginModal
+              <NewLoginModal
                 isLog={show}
                 logAct={props.loginHandler}
                 close={closeHanlder}
@@ -256,7 +270,7 @@ const Header = (props) => {
               <img
                 className={Classes.Logo}
                 src={Logo}
-                alt=""
+                alt="Logo"
                 onClick={setHomepageHandler}
               />
               <CgClose
@@ -269,14 +283,14 @@ const Header = (props) => {
 
             {catgSet.slice(0, 15).map((item, index) => {
               return (
-                <p
+                <div
                   className={Classes.Catogaries}
                   onClick={() => catSelHandler(item.id)}
                   style={{ color: "#ffff", cursor: "pointer" }}
                   key={index}
                 >
                   {item.category}{" "}
-                </p>
+                </div>
               );
             })}
 
@@ -313,7 +327,7 @@ const Header = (props) => {
             <div className="col-md-2">
               <img
                 src={ProductImage}
-                alt=""
+                alt="ProductImage"
                 className={Classes.NotifictionImage}
               />
             </div>
