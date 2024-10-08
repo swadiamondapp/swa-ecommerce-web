@@ -151,7 +151,7 @@ const whishlistPage = () => {
             <Wishlist> {wishlists} </Wishlist>
           </div>
         <div>
-          <SliderFeature />
+          {/* <SliderFeature /> */}
           <Features />
         </div>
         <Footer />
