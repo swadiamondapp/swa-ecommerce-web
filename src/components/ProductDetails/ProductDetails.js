@@ -142,7 +142,7 @@ const ProductDetails = (props) => {
 
   const customerPhotos = async () => {
     const response = await axios.get(
-      "https://swaecommain.swa.co/ecom/products/" + props.id + "/reviews/"
+      "https://Swaprdn.zinfog.com/ecom/products/" + props.id + "/reviews/"
     );
     if (response && response.data && response.data.results) {
       setReviews(response.data.results);
@@ -908,7 +908,7 @@ const ProductDetails = (props) => {
                   <RWebShare
                     data={{
                       text: "Swa Diamonds",
-url: `https://www.swa.co/jewellery?id=${props.productDetails.id}&color=${props.productDetails.color}&name=${props.productDetails.name}&alias=${props.alias}`
+url: `https://swaecomnew.zinfog.in/jewellery?id=${props.productDetails.id}&color=${props.productDetails.color}&name=${props.productDetails.name}&alias=${props.alias}`
                       title: "Swa Diamonds",
                     }}
                     onClick={() => console.log("shared successfully!")}

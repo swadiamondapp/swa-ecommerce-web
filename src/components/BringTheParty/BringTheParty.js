@@ -96,7 +96,7 @@ const BringTheParty = (props) => {
                       className={Classes.Image2}
                       src={adds[2] && adds[2].Ad_image}
                       // src={
-                      //   "https://swaecommain.swa.co/media/product/ads/banner3.png"
+                      //   "https://Swaprdn.zinfog.com/media/product/ads/banner3.png"
                       // }
                       alt="ad3"
                       onClick={() => advClicked(adds[2])}
