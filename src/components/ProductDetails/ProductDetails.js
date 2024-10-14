@@ -908,7 +908,7 @@ const ProductDetails = (props) => {
                   <RWebShare
                     data={{
                       text: "Swa Diamonds",
-url: `https://swaecomnew.zinfog.in/jewellery?id=${props.productDetails.id}&color=${props.productDetails.color}&name=${props.productDetails.name}&alias=${props.alias}`
+                      url: `https://swaecomnew.zinfog.in/jewellery?id=${props.productDetails.id}&color=${props.productDetails.color}&name=${props.productDetails.name}&alias=${props.alias}`,
                       title: "Swa Diamonds",
                     }}
                     onClick={() => console.log("shared successfully!")}
@@ -934,7 +934,7 @@ url: `https://swaecomnew.zinfog.in/jewellery?id=${props.productDetails.id}&color
 
                 <p
                   className={Classes.NewPrice}
-                  style={{ display: "flex", alignItems: "center", gap: "3px"}}
+                  style={{ display: "flex", alignItems: "center", gap: "3px" }}
                 >
                   {Contryname === "India" && (
                     <BiRupee className={Classes.Rupee} />
