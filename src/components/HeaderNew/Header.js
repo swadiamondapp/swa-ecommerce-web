@@ -171,7 +171,7 @@ const Header = (props) => {
   // };
   const cattSelHandler = (setItem) => {
     history.push({
-      pathname: "/new_arrivel",
+      pathname: `/${setItem.name}`,
       state: { data: setItem.id, product_category: setItem.name },
     });
   };
@@ -180,7 +180,7 @@ const Header = (props) => {
       window.location.href = "https://www.swa.co/tag_search/" + selItem.id;
     } else {
       history.push({
-        pathname: "/new_arrivel",
+        pathname: `/${selItem.name}`,
         state: {
           octnId: selItem.id,
           data: "occation",
