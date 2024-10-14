@@ -35,6 +35,7 @@ function CartDesign(props) {
     setTotal(props.amount - props.cartProAmnt);
     setAmountPay(props.amount - props.cartProAmnt);
   }, []);
+  console.log(total,"amountsoftrialCart")
   const handleSubmit = (event) => {
     event.preventDefault();
   };
@@ -47,6 +48,7 @@ function CartDesign(props) {
           total: total,
           updatedCartResponse: updatedCartResponse,
           totalSavedAmount: totally_saved,
+          promoCodeIds:promoId
         },
         name: "cart",
       },
@@ -137,6 +139,7 @@ function CartDesign(props) {
                 total: response.data.results.total_amount,
                 updatedCartResponse: response.data.results,
                 totalSavedAmount: totally_saved,
+                promoCodeIds:promoId,
               },
               name: "cart",
             },
@@ -211,7 +214,7 @@ function CartDesign(props) {
             <div className="col-md-8">
               <div className={Classes.Left}>{props.children}</div>
             </div>
-            <p className={Classes.OrderSummeryMob}>ORDER SUMMERY</p>
+            <p className={Classes.OrderSummeryMob}>ORDER SUMMARY</p>
             <div className="col-md-4">
               {/* shoping cart */}
               {props.activeCart === "shopping" && (
@@ -367,9 +370,13 @@ function CartDesign(props) {
                         <p className={Classes.TotalSmall}>
                           Total &nbsp;
                           <span>
-                            (
+                            {/* (
                             {props.tryCartcountResults &&
                               props.tryCartcountResults.item_count}{" "}
+                            Items) */}
+                            (
+                            {props.cartCount &&
+                              props.cartCount}{" "}
                             Items)
                           </span>
                         </p>
@@ -412,7 +419,7 @@ function CartDesign(props) {
                     <div className={Classes.BookappointmentTrails}>
                       <Link to="/tryathome">
                         {" "}
-                        <button>Book Appoinment</button>
+                        <button>Book Appointment</button>
                       </Link>
                     </div>
                   </div>

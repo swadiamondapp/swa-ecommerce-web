@@ -40,7 +40,7 @@ import closeimg from "../../Assets/closeModal.png";
 import time from "../../Assets/time.png";
 import d1 from "../../Assets/d1.png";
 import d2 from "../../Assets/d2.png";
-import locationsimg from "../../Assets/locations.png";
+import locationsimg from "../../Assets/locates.svg";
 // import { Carousel } from "primereact/carousel";
 import Slider from "react-slick";
 import { BsFillPlayFill } from "react-icons/bs";
@@ -49,6 +49,12 @@ import CircularProgress from "@mui/material/CircularProgress";
 import VideocallForm from "./VideocallForm";
 import { CgDollar } from "react-icons/cg";
 import LoginModal from "../LoginModal/LoginModal";
+import shippingTag from "../../Assets/shiptime.png";
+import freeDelivery3 from "../../Assets/freeDev3.png";
+import freeDelivery4 from "../../Assets/freeDev4.png";
+import freeDelivery5 from "../../Assets/freeDev5.png";
+import shippingTag1 from "../../Assets/shiptruck.png";
+import shippingtag2 from "../../Assets/shiptimetwo.png";
 
 const ProductDetails = (props) => {
   const location = useLocation();
@@ -136,7 +142,7 @@ const ProductDetails = (props) => {
 
   const customerPhotos = async () => {
     const response = await axios.get(
-      "https://swaprdnecomnew.zinfog.in/ecom/products/" + props.id + "/reviews/"
+      "https://swaecommain.swa.co/ecom/products/" + props.id + "/reviews/"
     );
     if (response && response.data && response.data.results) {
       setReviews(response.data.results);
@@ -553,8 +559,46 @@ const ProductDetails = (props) => {
       }
     });
   };
+  const getDeliveryDate = (deliveryDate) => {
+    const today = new Date();
+    const shippingTag24Hrs = "Delivery in 24 hrs";
+    const shippingTagNextDay = "Shipment in next day";
+    const shippingTag5Days = "Shipment in next 5 working days";
+
+    if (deliveryDate === shippingTag24Hrs) {
+      return shippingTag24Hrs; // Return the 24 hrs tag
+    } else if (deliveryDate === shippingTagNextDay) {
+      // Calculate the next day
+      today.setDate(today.getDate() + 1);
+    } else if (deliveryDate === shippingTag5Days) {
+      // Calculate 5 working days (skip weekends)
+      let workingDays = 5;
+      while (workingDays > 0) {
+        today.setDate(today.getDate() + 1);
+        if (today.getDay() !== 6 && today.getDay() !== 0) {
+          // Skip weekends (Saturday and Sunday)
+          workingDays--;
+        }
+      }
+
+      // Extract day and month for custom message
+      const day = today.getDate(); // Get the day of the month
+      const month = today.toLocaleString("default", { month: "long" }); // Get the full month name
+
+      // Return the custom message with the calculated date
+      return `Free delivery by ${day}th ${month}`;
+    } else {
+      return deliveryDate; // For any other delivery date
+    }
+
+    // Format the date for "Shipment in next day" or other cases
+    const options = { month: "short", day: "numeric", year: "numeric" };
+    return today.toLocaleDateString(undefined, options);
+  };
 
   console.log("imageUrls", imageUrls);
+  console.log(props.deliveryDate, "deliveryDate==>==>");
+  console.log(props.actualPrice, "props.actualPrice");
 
   return (
     <div>
@@ -864,7 +908,7 @@ const ProductDetails = (props) => {
                   <RWebShare
                     data={{
                       text: "Swa Diamonds",
-                      url: `https://swaecomnew.zinfog.in/jewellery?id=${props.productDetails.id}&color=${props.productDetails.color}&name=${props.productDetails.name}&alias=${props.alias}`,
+url: `https://www.swa.co/jewellery?id=${props.productDetails.id}&color=${props.productDetails.color}&name=${props.productDetails.name}&alias=${props.alias}`
                       title: "Swa Diamonds",
                     }}
                     onClick={() => console.log("shared successfully!")}
@@ -884,13 +928,13 @@ const ProductDetails = (props) => {
                   : null}
                 {/* {props.diamondWeight}gram) */}
               </p>
-              <p className={Classes.Code}>{props.sku}</p>
+              <p className={Classes.Code}>SKU : {props.sku}</p>
               <div className={`${Classes.Flex} ${Classes.MobDownAR}`}>
                 {/* <BiRupee size={25} /> */}
 
                 <p
                   className={Classes.NewPrice}
-                  style={{ display: "flex", alignItems: "center", gap: "3px" }}
+                  style={{ display: "flex", alignItems: "center", gap: "3px"}}
                 >
                   {Contryname === "India" && (
                     <BiRupee className={Classes.Rupee} />
@@ -902,26 +946,34 @@ const ProductDetails = (props) => {
                     <span style={{ paddingRight: "5px" }}>AED</span>
                   )}
                   {/* &#x20B9; {parseFloat(formattedCost).toFixed(0)} */}
-                  {result && result}
+                  {result === null || result === "NaN" ? "" : result}
                 </p>
-                {props.actualPrice && (
-                  <>
-                    {Contryname === "India" && (
-                      <BiRupee size={25} color="#B0B0B0" />
-                    )}
-                    {Contryname === "United States" && (
-                      <CgDollar size={25} color="#B0B0B0" />
-                    )}
-                    {Contryname === "United Arab Emirates" && (
-                      <span style={{ paddingRight: "5px", paddingLeft: "7px" }}>
-                        AED
-                      </span>
-                    )}
-                    <p className={Classes.OldPrice}>
-                      {numberWithCommas(parseInt(props.actualPrice).toFixed(0))}
-                    </p>
-                  </>
-                )}
+                {props.actualPrice &&
+                  (props.actualPrice === null ||
+                  isNaN(Number(props.actualPrice)) ? (
+                    ""
+                  ) : (
+                    <>
+                      {Contryname === "India" && (
+                        <BiRupee size={25} color="#B0B0B0" />
+                      )}
+                      {Contryname === "United States" && (
+                        <CgDollar size={25} color="#B0B0B0" />
+                      )}
+                      {Contryname === "United Arab Emirates" && (
+                        <span
+                          style={{ paddingRight: "5px", paddingLeft: "7px" }}
+                        >
+                          AED
+                        </span>
+                      )}
+                      <p className={Classes.OldPrice}>
+                        {numberWithCommas(
+                          parseInt(props.actualPrice, 10).toFixed(0)
+                        )}
+                      </p>
+                    </>
+                  ))}
               </div>
               {props.discount ? (
                 <p className={Classes.HurrayText}>
@@ -1014,14 +1066,14 @@ const ProductDetails = (props) => {
                     />
                   </button>{" "}
                   <button className={Classes.FindStores} onClick={Tryhome}>
-                    Try at Home
+                    Trial at Home
                   </button>
-                  <VideocallForm
-                    isOpen={isModalOpen}
-                    handleClose={handleCloseModal}
-                    productId={props.id}
-                  />
                 </div>
+                <VideocallForm
+                  isOpen={isModalOpen}
+                  handleClose={handleCloseModal}
+                  productId={props.id}
+                />
                 <p style={{ color: "#ff4545" }}>{props.errormsgtrycart}</p>
               </div>
               <Modal
@@ -1171,6 +1223,12 @@ const ProductDetails = (props) => {
                     type="number"
                     value={props.pinCode}
                     onChange={pinCodeChangeHandler}
+                    onInput={(e) => {
+                      if (e.target.value.length > 6) {
+                        e.target.value = e.target.value.slice(0, 6);
+                      }
+                    }}
+                    min="0"
                   />
                   <button
                     className={Classes.CheckButton}
@@ -1189,7 +1247,7 @@ const ProductDetails = (props) => {
                 <div style={{ color: "#ff000094" }}>{props.picodeError}</div>
                 <div style={{ color: "#ff000094" }}>{props.sizeError}</div>
                 <div style={{ color: "#ff000094" }}>{props.colorError}</div>
-                <div>
+                {/* <div>
                   {props.pincodeShow && (
                     <p
                       style={{
@@ -1201,9 +1259,112 @@ const ProductDetails = (props) => {
                       {props.deliveryDate}
                     </p>
                   )}{" "}
-                </div>
+                </div> */}
 
                 <div className="errrMsg">{pinCodeError}</div>
+
+                {props.deliveryDate && (
+                  <div className={Classes.shippingTag_one}>
+                    <div className={Classes.shippingTag_container}>
+                      <img
+                        src={
+                          props.deliveryDate ===
+                          "Shipment in next 5 working days"
+                            ? shippingTag1
+                            : props.deliveryDate === "Delivery in 24 hrs"
+                            ? shippingtag2
+                            : props.deliveryDate === "Shipment in next day"
+                            ? shippingTag
+                            : shippingtag2
+                        }
+                      />
+                      <p className={Classes.shippingTagtext}>
+                        {props.deliveryDate ===
+                        "Shipment in next 5 working days"
+                          ? "7 day shipping"
+                          : props.deliveryDate === "Delivery in 24 hrs"
+                          ? "24hr Delivery"
+                          : props.deliveryDate === "Shipment in next day"
+                          ? "Next day shipping"
+                          : shippingtag2}
+                      </p>
+                    </div>
+                  </div>
+                )}
+                <div className={Classes.deliveryListContainer}>
+                  {props.deliveryDate === "Shipment in next 5 working days" && (
+                    <div className={Classes.deliveryDetailsList}>
+                      <div className={Classes.freedevimageBack}>
+                        <img src={freeDelivery3} />
+                      </div>
+                      <div>
+                        <div>
+                          <p className={Classes.shippingTagtext_head}>
+                            {getDeliveryDate(props.deliveryDate)}
+                          </p>
+                        </div>
+                        <div>
+                          <p className={Classes.shippingTagtext_sub}>
+                            Order in next 4 HRS 23 mins
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  {/* <div className={Classes.deliveryDetailsList}>
+                    <div className={Classes.freedevimageBack}>
+                      <img src={freeDelivery4} />
+                    </div>
+                    <div>
+                      <div>
+                        <p className={Classes.shippingTagtext_head}>
+                          available at hilite mall (1km)
+                        </p>
+                      </div>
+                      <div>
+                        <p className={Classes.shippingTagtext_sub}>
+                          Also 3 other store Show more
+                        </p>
+                      </div>
+                    </div>
+                  </div> */}
+                  {props.deliveryDate && (
+                    <div className={Classes.deliveryDetailsList}>
+                      <div className={Classes.freedevimageBack}>
+                        <img src={freeDelivery5} />
+                      </div>
+                      <div>
+                        {props.deliveryDate === "Delivery in 24 hrs" ? (
+                          <>
+                            <div>
+                              <p className={Classes.shippingTagtext_head}>
+                                Free trial at home available
+                              </p>
+                            </div>
+                            <div>
+                              <p className={Classes.shippingTagtext_sub}>
+                                Try swa video call option
+                              </p>
+                            </div>
+                          </>
+                        ) : (
+                          <>
+                            <div>
+                              <p className={Classes.shippingTagtext_head}>
+                                Free trial at home not available
+                              </p>
+                            </div>
+                            <div>
+                              <p className={Classes.shippingTagtext_sub}>
+                                Try swa video call option
+                              </p>
+                            </div>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
                 {/* <div className={Classes.Flex}>
                 <img className={Classes.Stroke} src={Stroke} alt="" />
                 <p className={Classes.StrokeText}>Standard delivery between </p>
@@ -1262,7 +1423,7 @@ const ProductDetails = (props) => {
                         </div>
                         <div>
                           <p className={Classes.DHeadText}>
-                            Free try at home not available
+                            Free trial at home not available
                           </p>
                           <p className={Classes.Dheadtext1}>
                             Try swa video call option

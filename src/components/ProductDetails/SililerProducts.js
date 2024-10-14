@@ -44,7 +44,7 @@ const SililerProducts = (props) => {
     if (pincode) {
       setButtonLabels((prevLabels) => ({
         ...prevLabels,
-        [product.product_id]: "Delivery by 10th May",
+        [product.product_id]: "Shipment in next 5 working days",
       }));
     } else {
       setShowModal(true);
@@ -58,7 +58,7 @@ const SililerProducts = (props) => {
 
   const similarProduct = async () => {
     const response = await axios.get(
-      "https://swaprdnecomnew.zinfog.in/ecom/products/" +
+      "https://swaecommain.swa.co/ecom/products/" +
         props.productId +
         "?country=" +
         countryId
@@ -136,6 +136,8 @@ const SililerProducts = (props) => {
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
+ 
+  console.log("similarProducts",similarProducts)
 
   return (
     <div style={{ marginTop: "80px" }}>
@@ -208,7 +210,7 @@ const SililerProducts = (props) => {
                       <div className={Classes.MainBtns}>
                         <div className={Classes.ParentHoverBtns}>
                           <button className={Classes.tryBtn}>
-                            Try at Home
+                            Trial at Home
                           </button>
                           <button className={Classes.buynowbtn}>Buy now</button>
                         </div>

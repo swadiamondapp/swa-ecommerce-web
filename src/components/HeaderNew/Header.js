@@ -23,6 +23,7 @@ import USA from "../../Assets/flagUsa.svg";
 import SAU from "../../Assets/flagSAU.svg";
 import IND from "../../Assets/flagIND.svg";
 import UAE from "../../Assets/flagUAE.svg";
+import { MdEdit } from "react-icons/md";
 import { FaPen } from "react-icons/fa";
 
 const Header = (props) => {
@@ -58,10 +59,13 @@ const Header = (props) => {
   const userName = localStorage.getItem("userName");
   const [showModal, setShowModal] = useState(false);
   const pincode = localStorage.getItem("pincode");
+  const [country, setCountry] = useState();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const [showUserDetails, setShowUserDetails] = useState(false);
   const userDetailsRef = useRef(null);
-  console.log("Contryname", Contryname);
+  console.log("countryData", countryData);
 
   const handleShowModal = () => {
     setShowModal(true);
@@ -146,8 +150,7 @@ const Header = (props) => {
     // }
 
     if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
-      window.location.href =
-        "https://swaecomnew.zinfog.in/category_search/" + setItem.id;
+      window.location.href = "https://www.swa.co/category_search/" + setItem.id;
     } else {
       history.push({
         pathname: "/new_arrivel",
@@ -174,8 +177,7 @@ const Header = (props) => {
   };
   const tagSelHandler = (selItem) => {
     if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
-      window.location.href =
-        "https://swaecomnew.zinfog.in/tag_search/" + selItem.id;
+      window.location.href = "https://www.swa.co/tag_search/" + selItem.id;
     } else {
       history.push({
         pathname: `/${selItem.name}`,
@@ -216,8 +218,7 @@ const Header = (props) => {
 
       axios
         .get(
-          `${Urls.suggestion + e.target.value}&country=${
-            props.selectedCountry.id
+          `${Urls.suggestion + e.target.value}&country=${props.selectedCountry.id
           }`
         )
         .then((response1) => {
@@ -234,7 +235,7 @@ const Header = (props) => {
     if (setItem.type === "category") {
       if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
         window.location.href =
-          "https://swaecomnew.zinfog.in/category_search/" + setItem.id;
+          "https://www.swa.co/category_search/" + setItem.id;
       } else {
         history.push({ pathname: "/new_arrivel", state: { data: setItem.id } });
       }
@@ -257,7 +258,7 @@ const Header = (props) => {
           };
           if (history.location.pathname.slice(0, 10) === "/products/") {
             window.location.href =
-              "https://swaecomnew.zinfog.in/products/" +
+              "https://www.swa.co/products/" +
               setItem.id +
               "/" +
               response1.data.results.data.color_id +
@@ -281,7 +282,7 @@ const Header = (props) => {
         });
     }
   };
-  const closeHanlder = () => {};
+  const closeHanlder = () => { };
 
   const handleScroll = () => {
     if (window.scrollY > 100) {
@@ -309,56 +310,210 @@ const Header = (props) => {
   ];
   const countryFlag = localStorage.getItem("flag_image");
 
-  console.log("countryFlag", countryFlag);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get(Urls.getCountryFlags);
+  //       console.log("response.data.results.data", response.data.results.data);
+  //       // const filteredData = response.data.results.data.filter(
+  //       //   (country) => country.country_name === "United Arab Emirates"
+  //       // );
+  //       setCountryData(response.data.results.data);
 
+  //       // Extracting the ID of India
+  //       const indiaData = response.data.results.data.find(
+  //         (country) => country.country_name === "India"
+  //       );
+  //       console.log(indiaData,"indiaData---")
+  //       if (!CountryIds && !flag) {
+  //         props.setSelectedCountry({
+  //           ...props.selectedCountry,
+  //           flag_image: indiaData.flag_image,
+  //           id: indiaData.id,
+  //           country_name: indiaData.country_name,
+  //         });
+  //         localStorage.setItem("flag_image", indiaData.flag_image);
+  //         localStorage.setItem("id", indiaData.id);
+  //         localStorage.setItem("country_name", indiaData.country_name);
+  //       }
+  //       console.log("indiaData--->", indiaData);
+  //       const defaultCountryID = localStorage.getItem("id");
+  //       const defaultCountryFlag = localStorage.getItem("flag_image");
+  //       if (defaultCountryID && defaultCountryFlag) {
+  //         // Find the default country from the data using the ID
+  //         const defaultCountry = countryData.find(
+  //             (country) => country.id === parseInt(defaultCountryID)
+  //           );
+  //           if (defaultCountry) {
+  //               props.setSelectedCountry(defaultCountry);
+  //         }
+  //       }
+  //       console.log("filterCountry",filterCountry);
+  //       } catch (error) {
+  //         console.error("Error fetching country details:", error);
+  //       }
+  //     };
+
+  //     fetchData();
+  //   }, []);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get(Urls.getCountryFlags);
+  //       console.log("response.data.results.data", response.data.results.data);
+  //       setCountryData(response.data.results.data);
+
+  //       const geoResponse = await axios.get(`https://api.ipgeolocation.io/ipgeo?apiKey=61f94c2e11f248ecac2db57308e0ceca`);
+  //       const userCountryName = geoResponse.data.country_name;
+  //       // const userCountryName = "Oman";
+  //       console.log("User Country from IP:", userCountryName);
+  //       setCountry(userCountryName);
+
+  //       let selectedCountryData;
+
+  //       if (userCountryName === "India" || userCountryName === "United Arab Emirates") {
+  //         selectedCountryData = response.data.results.data.find(
+  //           (country) => country.country_name === userCountryName
+  //         );
+  //       } else {
+  //         selectedCountryData = response.data.results.data.find(
+  //           (country) => country.country_name === "United States"
+  //         );
+  //       }
+
+  //       if (selectedCountryData) {
+  //         console.log("Selected Country Data:", selectedCountryData);
+  //         if (!CountryIds && !flag) {
+  //           props.setSelectedCountry({
+  //             ...props.selectedCountry,
+  //             flag_image: selectedCountryData.flag_image,
+  //             id: selectedCountryData.id,
+  //             country_name: selectedCountryData.country_name,
+  //           });
+  //           localStorage.setItem("flag_image", selectedCountryData.flag_image);
+  //           localStorage.setItem("id", selectedCountryData.id);
+  //           localStorage.setItem("country_name", selectedCountryData.country_name);
+  //         }
+  //       }
+
+  //       const defaultCountryID = localStorage.getItem("id");
+  //       const defaultCountryFlag = localStorage.getItem("flag_image");
+  //       if (defaultCountryID && defaultCountryFlag) {
+  //         const defaultCountry = countryData.find(
+  //           (country) => country.id === parseInt(defaultCountryID)
+  //         );
+  //         if (defaultCountry) {
+  //           props.setSelectedCountry(defaultCountry);
+  //         }
+  //       }
+
+  //       setLoading(false);
+  //     } catch (error) {
+  //       console.error("Error fetching country details:", error);
+  //       setError("Failed to fetch country details");
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
+  const [isLoading, setIsLoading] = useState(false);
+  const [pinCode, setPinCode] = useState("");
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(Urls.getCountryFlags);
         console.log("response.data.results.data", response.data.results.data);
-        // const filteredData = response.data.results.data.filter(
-        //   (country) => country.country_name === "United Arab Emirates"
-        // );
         setCountryData(response.data.results.data);
+        const getLocation = async () => {
+          setIsLoading(true);
+          navigator.geolocation.getCurrentPosition(
+            async (pos) => {
+              const { latitude, longitude } = pos.coords;
+              let _url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
+              try {
+                const geoResponse = await axios.get(_url);
+                const userCountryName = geoResponse.data.address.country;
+                setCountry(userCountryName);
 
-        // Extracting the ID of India
-        const indiaData = response.data.results.data.find(
-          (country) => country.country_name === "India"
-        );
-        if (!CountryIds && !flag) {
-          props.setSelectedCountry({
-            ...props.selectedCountry,
-            flag_image: indiaData.flag_image,
-            id: indiaData.id,
-            country_name: indiaData.country_name,
-          });
-          localStorage.setItem("flag_image", indiaData.flag_image);
-          localStorage.setItem("id", indiaData.id);
-          localStorage.setItem("country_name", indiaData.country_name);
-        }
-        console.log("indiaData--->", indiaData);
-        const defaultCountryID = localStorage.getItem("id");
-        const defaultCountryFlag = localStorage.getItem("flag_image");
-        if (defaultCountryID && defaultCountryFlag) {
-          // Find the default country from the data using the ID
-          const defaultCountry = countryData.find(
-            (country) => country.id === parseInt(defaultCountryID)
+                let selectedCountryData;
+
+                if (
+                  userCountryName === "India" ||
+                  userCountryName === "United Arab Emirates"
+                ) {
+                  selectedCountryData = response.data.results.data.find(
+                    (country) => country.country_name === userCountryName
+                  );
+                } else {
+                  selectedCountryData = response.data.results.data.find(
+                    (country) => country.country_name === "United States"
+                  );
+                }
+
+                // Optionally set additional state or perform other actions with selectedCountryData
+                // setSelectedCountry(selectedCountryData);
+
+                if (selectedCountryData) {
+                  console.log("Selected Country Data:", selectedCountryData);
+                  if (!CountryIds && !flag) {
+                    props.setSelectedCountry({
+                      ...props.selectedCountry,
+                      flag_image: selectedCountryData.flag_image,
+                      id: selectedCountryData.id,
+                      country_name: selectedCountryData.country_name,
+                    });
+                    localStorage.setItem(
+                      "flag_image",
+                      selectedCountryData.flag_image
+                    );
+                    localStorage.setItem("id", selectedCountryData.id);
+                    localStorage.setItem(
+                      "country_name",
+                      selectedCountryData.country_name
+                    );
+                  }
+                }
+
+                const defaultCountryID = localStorage.getItem("id");
+                const defaultCountryFlag = localStorage.getItem("flag_image");
+                if (defaultCountryID && defaultCountryFlag) {
+                  const defaultCountry = countryData.find(
+                    (country) => country.id === parseInt(defaultCountryID)
+                  );
+                  if (defaultCountry) {
+                    props.setSelectedCountry(defaultCountry);
+                  }
+                }
+              } catch (error) {
+                console.log(error);
+              } finally {
+                setIsLoading(false);
+              }
+            },
+            (error) => {
+              console.error("Error getting geolocation:", error);
+              setIsLoading(false);
+            }
           );
-          if (defaultCountry) {
-            props.setSelectedCountry(defaultCountry);
-          }
-        }
+        };
+
+        // Call getLocation to set country based on user's location
+        getLocation();
       } catch (error) {
-        console.error("Error fetching country details:", error);
+        console.error("Error fetching country data:", error);
       }
     };
 
     fetchData();
   }, []);
 
-  console.log("countryData==>", countryData);
+  // console.log("country==>", country);
+  // console.log("countryData", countryData);
 
   const handleCountrySelect = (country) => {
+    debugger;
     if (!isHomePage) {
       history.push("/");
     }
@@ -513,7 +668,7 @@ const Header = (props) => {
           <div
             style={{ cursor: "pointer" }}
             className={Classes.CountryFlags}
-            onClick={handleOpenDropDown}
+            // onClick={handleOpenDropDown}
             ref={nameRef}
           >
             <div className={Classes.headerElement}>
@@ -529,38 +684,47 @@ const Header = (props) => {
             </div>
             {openDropDown && (
               <div className={Classes.CountryDropDowns} ref={dropdownRef}>
-                {countryData.map((country, index) => (
-                  <div className={Classes.CountryContainer} key={index}>
-                    <div
-                      className={Classes.contryelements}
-                      onClick={() => handleCountrySelect(country)}
-                    >
-                      <div>
-                        <img
-                          src={country.flag_image}
-                          alt={country.id}
-                          className={Classes.dropDownImages}
-                        />
-                      </div>
-                      <div>
-                        <span>
-                          {country.country_name === "United Arab Emirates"
-                            ? "UAE"
-                            : country.country_name === "Saudi Arabia"
-                            ? "KSA"
-                            : country.country_name === "India"
-                            ? "IND"
-                            : country.country_name === "United States"
-                            ? "USA"
-                            : country.country_name}
-                        </span>
+                {countryData
+                  .sort((a, b) =>
+                    a.country_name === "India"
+                      ? -1
+                      : b.country_name === "India"
+                        ? 1
+                        : 0
+                  ) // Sorts India to the top
+                  .map((country, index) => (
+                    <div className={Classes.CountryContainer} key={index}>
+                      <div
+                        className={Classes.contryelements}
+                        onClick={() => handleCountrySelect(country)}
+                      >
+                        <div>
+                          <img
+                            src={country.flag_image}
+                            alt={country.id}
+                            className={Classes.dropDownImages}
+                          />
+                        </div>
+                        <div>
+                          <span>
+                            {country.country_name === "United Arab Emirates"
+                              ? "UAE"
+                              : country.country_name === "Saudi Arabia"
+                                ? "KSA"
+                                : country.country_name === "India"
+                                  ? "IND"
+                                  : country.country_name === "United States"
+                                    ? "USA"
+                                    : country.country_name}
+                          </span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
               </div>
             )}
           </div>
+
           <CgHeart
             className={`${Classes.Icon} ${Classes.headerElement}`}
             color="#FFFFFF"
@@ -668,7 +832,7 @@ const Header = (props) => {
         <div
           className={`${mobileSearchBarClass} ${Classes.MobileSearchbarOthers}`}
         >
-          {isHomePage && (
+          {/* {isHomePage && (
             <div className={Classes.DiwaliOffers}>
               <div className="labelWrapper2" style={{ height: "20px" }}>
                 {props.headeroffer &&
@@ -679,6 +843,34 @@ const Header = (props) => {
                   ))}
               </div>
             </div>
+          )} */}
+          {isHomePage && (
+            <div className={Classes.mobCheckDelivery} onClick={handleShowModal}>
+              <p>CHECK DELIVERY</p>
+              {pincode ? null : (
+              <p>
+                Enter pincode <MdEdit />
+              </p>
+              )}
+              {pincode && (
+                <span
+                  className={Classes.EnterPinTitle}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    fontSize: "14px",
+                    color: "#007481",
+                  }}
+                >
+                  {pincode}{" "}
+                  <FaPen
+                    style={{ fontSize: "12px" }}
+                    onClick={handleShowModal}
+                  />
+                </span>
+              )}
+            </div>
           )}
 
           {isHome && (
@@ -687,7 +879,7 @@ const Header = (props) => {
                 style={{
                   position: "relative",
                   margin: "12px 0px",
-                  marginBottom: "5px",
+                  marginBottom: "0px",
                 }}
               >
                 <div

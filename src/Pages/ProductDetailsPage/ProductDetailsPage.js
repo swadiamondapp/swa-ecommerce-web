@@ -47,7 +47,7 @@ const ProductDetailsPage = (props) => {
   const [errormsgtrycart, setErrormsgtrycart] = useState();
 
   console.log("sizeError", sizeError);
-  console.log("colorError", colorError);
+  console.log("props.match.params.id", props.match.params.id);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -364,6 +364,7 @@ const ProductDetailsPage = (props) => {
     country_name: Contryname,
   });
 
+  console.log(prodDet.country_total_price,"prodDet")
   return (
     <div>
       <Header
@@ -376,18 +377,20 @@ const ProductDetailsPage = (props) => {
       />
 
       <ProductDetails
-        sku={"SKU : " + prodDet.sku}
+        sku={prodDet.sku && prodDet.sku === "undefined" ?  "" : prodDet.sku }
         offerPrice={
           prodDet.is_on_discount
             ? prodDet.country_discount_price
             : prodDet.country_total_price
         }
         actualPrice={
-          prodDet.is_on_discount ? prodDet.country_total_price : null
+          prodDet.is_on_discount ? prodDet.country_total_price : ""
         }
         discountVal={
           prodDet.is_on_discount
-            ? prodDet.country_total_price - prodDet.discount_price
+            ? prodDet.country_total_price > prodDet.discount_price
+              ? prodDet.country_total_price - prodDet.discount_price
+              : prodDet.discount_price - prodDet.country_total_price
             : null
         }
         discountPercentage={prodDet.discount_percentage}

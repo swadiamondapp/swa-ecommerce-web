@@ -74,8 +74,16 @@ const CheckDelivery = ({ props, show, handleClose, handleShow }) => {
   const [pinCodeError, setPinCodeError] = useState("");
   const [active, setActive] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  // const pinCodeChangeHandler = (e) => {
+  //   setPinCode(e.target.value);
+    
+  // };
   const pinCodeChangeHandler = (e) => {
-    setPinCode(e.target.value);
+    const value = e.target.value;
+    // Allow only numeric input
+    if (/^\d*$/.test(value)) {
+      setPinCode(value);
+    }
   };
   const availbilityCheck = () => {
     if (pinCode !== "") {
@@ -197,6 +205,7 @@ const CheckDelivery = ({ props, show, handleClose, handleShow }) => {
                   placeholder="*****"
                   value={pinCode}
                   onChange={pinCodeChangeHandler}
+                  maxLength={6}
                 />
                 <BsArrowRight
                   className={Classes.LocationIconarrow}

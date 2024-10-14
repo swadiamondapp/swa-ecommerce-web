@@ -13,6 +13,7 @@ import * as Urls from "../../Urls";
 import SuccessTick from "../../Assets/successTick.png";
 import Item from "antd/es/list/Item";
 import walletclose from "../../Assets/walletclose.png";
+import { Padding } from "@mui/icons-material";
 
 const style = {
   position: "absolute",
@@ -127,8 +128,35 @@ const TransferMoneyModal = (props) => {
         alert("An error occurred while submitting your request.");
       });
   };
+
+  const style = {
+    position: "absolute",
+    bottom: 0,
+    width: "96%",
+    height: "auto",
+    bgcolor: "background.paper",
+    boxShadow: 24,
+    p: 2,
+    outline: "none",
+    m:1,
+    borderRadius: "4px"
+  };
+  const styleDesk = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%,-50%)",
+    width: "400px",
+    height: "auto",
+    bgcolor: "background.paper",
+    boxShadow: 24,
+    p: 2,
+    outline: "none",
+    borderRadius: "4px"
+  };
+
   return (
-    <div>
+    <div className={Classes.bankDetailmodal}>
       <Modal
         open={props.open}
         onClose={props.handleClose}
@@ -137,7 +165,7 @@ const TransferMoneyModal = (props) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={isMobileView ? style : styleDesk} >
           <Typography>
             <div className={Classes.WalletContainer}>
               <h3>Bank Details</h3>

@@ -128,7 +128,13 @@ const TryAtHome = () => {
       },
     });
   };
-
+  const [itemCount, setItemCount] = useState(0);
+  useEffect(() => {
+    if (tryCartResults && tryCartResults.cart_item) {
+      setItemCount(tryCartResults.cart_item.length);
+    }
+  }, [tryCartResults]);
+  console.log(itemCount, "itemsTryCOunt");
   const handleProceedClick = () => {
     if (!selectedDate || !selectedTimeSlot) {
       setErrorMessage("Please select both a date and a time slot.");
@@ -143,23 +149,34 @@ const TryAtHome = () => {
       state: {
         selectedTimeSlot,
         selectedDate: selectedDate ? formatSelectedDate(selectedDate) : null,
+        tryAtHomeCount: itemCount,
       },
     });
   };
-
+  const now = new Date();
+  const currentDate = now.toISOString().split("T")[0]; // Get current date in "YYYY-MM-DD" format
+  const currentTime = now.getHours() * 60 + now.getMinutes();
+  const availableTimes = [
+    { time: "10:00 AM", minutes: 10 * 60 },
+    { time: "11:00 AM", minutes: 11 * 60 },
+    { time: "12:00 PM", minutes: 12 * 60 },
+    { time: "1:00 PM", minutes: 13 * 60 },
+    { time: "2:00 PM", minutes: 14 * 60 },
+    { time: "3:00 PM", minutes: 15 * 60 },
+  ];
   return (
     <div>
       <div className={Classes.mainContianerProfile}>
         <div className="container">
           <div className={Classes.TryAtHomeParent}>
-            <h3 className={Classes.TryAtHomeHead}>Try at Home</h3>
+            <h3 className={Classes.TryAtHomeHead}>Trial at Home</h3>
             <p className={Classes.TryathomePara}>
               Our representative will visit your home to show your liked jewels
               with your convenient time <br /> and date. so choose your date and
               time
             </p>
             <div className={Classes.T1parent}>
-              <div className={Classes.TryLeftsec}>
+              {/* <div className={Classes.TryLeftsec}>
                 <div className={Classes.TryatHomeCard}>
                   <h3 className={Classes.TryatHomeCardh3}>Try at Home</h3>
                   <div className={Classes.TryHomeDate}>
@@ -188,7 +205,7 @@ const TryAtHome = () => {
                                   : Classes.TryDesign1
                               }
                             >
-                              <p>1 Design</p>
+                              <p>{itemCount} Design</p>
                             </div>
                           </div>
                         );
@@ -220,6 +237,75 @@ const TryAtHome = () => {
                           {time}
                         </button>
                       ))}
+                    </div>
+                  </div>
+                </div>
+              </div> */}
+              <div className={Classes.TryLeftsec}>
+                <div className={Classes.TryatHomeCard}>
+                  <h3 className={Classes.TryatHomeCardh3}>Trial at Home</h3>
+                  <div className={Classes.TryHomeDate}>
+                    {dates.length > 0 ? (
+                      dates.map((dateString, index) => {
+                        const [day, date] = formatDate(dateString); // Assume formatDate returns [day, date]
+                        const formattedDateString = dateString
+                          .toISOString()
+                          .split("T")[0];
+                        const isToday = formattedDateString === currentDate;
+
+                        return (
+                          <div
+                            key={index}
+                            className={
+                              selectedDate === formattedDateString
+                                ? `${Classes.TryDate1} ${Classes.TryDateActive}`
+                                : Classes.TryDate1
+                            }
+                            onClick={() => handleDateClick(dateString)}
+                          >
+                            <p className={Classes.datetext}>{date}</p>
+                            <h3>{day}</h3>
+                            <div
+                              className={
+                                selectedDate === formattedDateString
+                                  ? `${Classes.TryDesign1} ${Classes.TryDesign1Active}`
+                                  : Classes.TryDesign1
+                              }
+                            >
+                              <p>{itemCount} Design</p>
+                            </div>
+                          </div>
+                        );
+                      })
+                    ) : (
+                      <p>No dates available</p>
+                    )}
+                  </div>
+                  <div className={Classes.SelectTimeSlot}>
+                    <h3>Select time slot</h3>
+                    <div className={Classes.TryTimeSlots}>
+                      {availableTimes.map(({ time, minutes }) => {
+                        // Only show future times for today's date or show all times for other dates
+                        if (
+                          selectedDate !== currentDate ||
+                          minutes > currentTime
+                        ) {
+                          return (
+                            <button
+                              key={time}
+                              className={
+                                selectedTimeSlot === time
+                                  ? Classes.TryTimeSlotsActive
+                                  : Classes.TryTimeSlotsDefault
+                              }
+                              onClick={() => handleTimeSlotClick(time)}
+                            >
+                              {time}
+                            </button>
+                          );
+                        }
+                        return null; // Hide the button for past times on today's date
+                      })}
                     </div>
                   </div>
                 </div>
