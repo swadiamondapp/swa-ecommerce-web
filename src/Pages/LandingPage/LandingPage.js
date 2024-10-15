@@ -235,16 +235,32 @@ const LandingPage = () => {
     console.log("Product ID:", productId);
     // Add additional logic to handle the product click
   };
+
+  // const prodDetHandler = (prodItem) => {
+  //   console.log("prodItem---->", prodItem);
+  //   history.push({
+  //     pathname:
+  //       "/products/" +
+  //       prodItem.product_id +
+  //       "/" +
+  //       prodItem.colour_id +
+  //       "/" +
+  //       prodItem.product_name,
+  //     state: { data: prodItem },
+  //   });
+  // };
+
   const prodDetHandler = (prodItem) => {
-    console.log("prodItem---->", prodItem);
+    sessionStorage.setItem(
+      "productDetails",
+      JSON.stringify({
+        id: prodItem.product_id,
+        color: prodItem.colour_id,
+        name: prodItem.product_name,
+      })
+    );
     history.push({
-      pathname:
-        "/products/" +
-        prodItem.product_id +
-        "/" +
-        prodItem.colour_id +
-        "/" +
-        prodItem.product_name,
+      pathname: "/jewellery/" + prodItem.alias,
       state: { data: prodItem },
     });
   };

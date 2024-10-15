@@ -14,7 +14,7 @@ import { useHistory } from "react-router-dom";
 import SliderFeature from "../../components/ProductDetails/SliderFeature";
 
 const ProductDetailsPage = (props) => {
-  const { id } = useParams();
+  const productDetails = JSON.parse(sessionStorage.getItem("productDetails"));
   const [prodDet, setProdDet] = useState([]);
   const [sizeChart, setSizeChart] = useState([]);
   const [colorChart, setColorChart] = useState([]);
@@ -46,20 +46,21 @@ const ProductDetailsPage = (props) => {
   const [sizeError, setSizeError] = useState("");
   const [errormsgtrycart, setErrormsgtrycart] = useState();
 
-  console.log("tokenanasmk", props.token);
   console.log("sizeError", sizeError);
   console.log("props.match.params.id", props.match.params.id);
 
   useEffect(() => {
     window.scrollTo(0, 0);
     console.log(props);
+    if (productDetails && productDetails.color) {
+      setClrId(productDetails.color);
+    }
     // setClrId(props.location.state.data.thumbnail_colour_id);
-    setClrId(props.match.params.color);
-    // setProduct_Id(props.match.params.id);
+    // setProduct_Id(id);
 
     if (
       localStorage.getItem("swaToken") === null &&
-      props.match.path === "/products/:id/:color/:name"
+      props.match.path === "/jewellery/:name"
     ) {
       console.log(JSON.parse(localStorage.getItem("recent")));
       let proArray = JSON.parse(localStorage.getItem("recent"));
@@ -90,9 +91,12 @@ const ProductDetailsPage = (props) => {
         localStorage.setItem("recent", JSON.stringify(newArray.slice(0, 5)));
       }
     } else {
-      const body = {
-        product_id: props.match.params.id,
-      };
+      let body = {};
+      if (productDetails && productDetails.id) {
+        body = {
+          product_id: productDetails.id,
+        };
+      }
       axios
         .post(Urls.addRecent, body, {
           headers: { Authorization: "Token " + token },
@@ -103,7 +107,10 @@ const ProductDetailsPage = (props) => {
         });
     }
     axios
-      .get(`${Urls.productDet + props.match.params.id}?country=${countryId}`)
+      .get(
+        `${Urls.productDet +
+          (productDetails && productDetails.id)}?country=${countryId}`
+      )
       .then((response1) => {
         setIsRestricted(response1.data.results.data.is_restricted);
         setProdDet(response1.data.results.data);
@@ -130,7 +137,9 @@ const ProductDetailsPage = (props) => {
         console.log(error);
       });
     axios
-      .get(Urls.productDet + props.match.params.id + "/reviews/")
+      .get(
+        Urls.productDet + (productDetails && productDetails.id) + "/reviews/"
+      )
       .then((response1) => {
         setReview(response1.data.results.data.slice(0, 1));
         setCount(response1.data.results.count);
@@ -158,7 +167,7 @@ const ProductDetailsPage = (props) => {
       .catch((error) => {
         console.log(error);
       });
-  }, [props.match.params.id]);
+  }, [productDetails && productDetails.id]);
   const buyProductHandler = () => {
     if (size === "") {
       setError("");
@@ -407,7 +416,7 @@ const ProductDetailsPage = (props) => {
         height={prodDet.height}
         colors={colorChart}
         thumbImg={thumImg}
-        id={props.match.params.id}
+        id={productDetails && productDetails.id}
         colorSelct={colorHandler}
         bagImg={imgSet}
         Video={video}
@@ -430,9 +439,17 @@ const ProductDetailsPage = (props) => {
         TryatHome={TryhomeHandler}
         errormsgtrycart={errormsgtrycart}
         clickedBuy={buyProductHandler}
+        productDetails={productDetails}
+        alias={
+          props.location.state &&
+          props.location.state.data &&
+          props.location.state.data.alias
+            ? props.location.state.data.alias
+            : productDetails.alias
+        }
       />
       <div className={Classes.RecentSearch}>
-        <SimilerProducts productId={props.match.params.id} />
+        <SimilerProducts productId={productDetails && productDetails.id} />
         {/* <RecentSearch>
         <NewArrivalCard ProductImage={New1} ProductName='Diamond ring' ProductId='SKU: 18037' PriceNew='27000' PriceOld='29500' />
           <NewArrivalCard ProductImage={New2} ProductName='Diamond ring' ProductId='SKU: 18037' PriceNew='27000' PriceOld='29500' />
