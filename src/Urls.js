@@ -1,5 +1,6 @@
 // // t server
 // export const server = "https://Swaprdn.zinfog.com/";
+// export const server = "https://swaprdnecomnew.zinfog.in/";
 //export const server = "https://swaecomindiamain.swa.co/";
 export const server = "https://swaecommain.swa.co/";
 //home page api
