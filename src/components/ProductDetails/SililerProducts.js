@@ -74,16 +74,14 @@ const SililerProducts = (props) => {
   };
 
   const prodDetHandler = (prodItem) => {
-    sessionStorage.setItem(
-      "productDetails",
-      JSON.stringify({
-        id: prodItem.product_id,
-        color: prodItem.colour_id,
-        name: prodItem.product_name,
-      })
-    );
     history.push({
-      pathname: "/jewellery/" + prodItem.alias,
+      pathname:
+        "/products/" +
+        prodItem.product_id +
+        "/" +
+        prodItem.thumbnail_colour_id +
+        "/" +
+        prodItem.product_name,
       state: { data: prodItem },
     });
   };
