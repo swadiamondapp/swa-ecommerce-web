@@ -350,13 +350,10 @@ const OrderHistorypage2 = (props) => {
     singleOrderData.order.shipment[0].status;
   console.log("statusCode--->", statusCode);
   const orderDate =
-    singleOrderData &&
-    singleOrderData.order &&
-    singleOrderData.order.promocode &&
-    singleOrderData.order.selected_data.ordered
+    singleOrderData.order && singleOrderData.order.track_order_details && singleOrderData.order.track_order_details && singleOrderData.order.track_order_details.order_confirmed
 
   const moneyDetail = singleOrderData && singleOrderData.order && singleOrderData.order.payment_data;
-  console.log(singleOrderData.order && singleOrderData.order.track_order_details && singleOrderData.order.track_order_details&& singleOrderData.order.track_order_details.order_type, "order---")
+  console.log(singleOrderData.order && singleOrderData.order.track_order_details && singleOrderData.order.track_order_details && singleOrderData.order.track_order_details.order_confirmed, "order---")
 
   return (
     <div>
@@ -551,7 +548,8 @@ const OrderHistorypage2 = (props) => {
                           <p>
                             Certification No :{" "}
                             <span style={{ color: "#0997E7" }}>
-                              {orderDet[0].docket_number}
+                              {/* {orderDet[0].docket_number} */}
+                              {singleOrderData && singleOrderData.order && singleOrderData.order.shipment[0].product_bag && singleOrderData.order.shipment[0].product_bag.certification_number}
                             </span>
                           </p>
                         </div>
@@ -607,23 +605,23 @@ const OrderHistorypage2 = (props) => {
                             </div>
                             <div className={Classes.leftStatus2}>
                               {singleOrderData.order && singleOrderData.order.track_order_details && singleOrderData.order.track_order_details && singleOrderData.order.track_order_details.order_type === "ecom" && (
-                              <>
-                              <div
-                                className={Classes.dotstatus1}
-                                style={{
-                                  background: singleOrderData.order && singleOrderData.order.track_order_details && singleOrderData.order.track_order_details && singleOrderData.order.track_order_details.shipped ? "#0eb533" : "#d9d9d9",
-                                  border: "none",
-                                }}
-                              ></div>
-                              <div
-                                className={Classes.dotstatusline1}
-                                style={{ background: singleOrderData.order && singleOrderData.order.track_order_details && singleOrderData.order.track_order_details && singleOrderData.order.track_order_details.shipped ? "#0eb533" : "#d9d9d9" }}
-                              ></div>
-                              </>
-                               )}
+                                <>
+                                  <div
+                                    className={Classes.dotstatus1}
+                                    style={{
+                                      background: singleOrderData.order && singleOrderData.order.track_order_details && singleOrderData.order.track_order_details && singleOrderData.order.track_order_details.shipped ? "#0eb533" : "#d9d9d9",
+                                      border: "none",
+                                    }}
+                                  ></div>
+                                  <div
+                                    className={Classes.dotstatusline1}
+                                    style={{ background: singleOrderData.order && singleOrderData.order.track_order_details && singleOrderData.order.track_order_details && singleOrderData.order.track_order_details.shipped ? "#0eb533" : "#d9d9d9" }}
+                                  ></div>
+                                </>
+                              )}
                             </div>
                             <div className={Classes.leftStatus2}>
-                              <div className={Classes.dotstatus1}></div>
+                              <div className={Classes.dotstatus1} style={{ background: singleOrderData.order && singleOrderData.order.track_order_details && singleOrderData.order.track_order_details && singleOrderData.order.track_order_details.delivery ? "#0eb533" : "#d9d9d9" }}></div>
                               {/* <div className={Classes.dotstatusline1}></div> */}
                             </div>
                             {/* <div className={Classes.leftStatus2}>
@@ -646,9 +644,9 @@ const OrderHistorypage2 = (props) => {
                                 >
                                   Shipped
                                 </p>
-                                <p style={{ color: "#A3A7AB" }}>
+                                {/* <p style={{ color: "#A3A7AB" }}>
                                   Expected by Friday 19th Oct
-                                </p>
+                                </p> */}
                               </div>
                             )}
                             {/* <div className={Classes.RightStausshow2}>
@@ -660,16 +658,16 @@ const OrderHistorypage2 = (props) => {
                               </p>
                               <p style={{ color: "#A3A7AB" }}></p>
                             </div> */}
-                            <div className={Classes.RightStausshow3} style={{position:"relative",top:"-20px"}}>
+                            <div className={Classes.RightStausshow3} style={{ position: "relative", top: "3px" }}>
                               <p
                                 style={{ color: "#A3A7AB" }}
                                 className={Classes.RsHead}
                               >
                                 Delivery
                               </p>
-                              <p style={{ color: "#A3A7AB" }}>
+                              {/* <p style={{ color: "#A3A7AB" }}>
                                   Expected by Friday 19th Oct
-                                </p>
+                                </p> */}
                             </div>
                           </div>
                         </div>
