@@ -142,7 +142,7 @@ const ProductDetails = (props) => {
 
   const customerPhotos = async () => {
     const response = await axios.get(
-      "https://swaecommain.swa.co/ecom/products/" + props.id + "/reviews/"
+      "https://swaprdnecomnew.zinfog.in/ecom/products/" + props.id + "/reviews/"
     );
     if (response && response.data && response.data.results) {
       setReviews(response.data.results);
@@ -909,7 +909,7 @@ const ProductDetails = (props) => {
                     data={{
                       text: "Swa Diamonds",
                       url: "https://swaecomnew.zinfog.in" + location.pathname,
-                      // url: "https://www.swa.co/" + location.pathname,
+                      // url: "https://swaecomnew.zinfog.in/" + location.pathname,
                       title: "Swa Diamonds",
                     }}
                     onClick={() => console.log("shared successfully!")}
@@ -935,7 +935,7 @@ const ProductDetails = (props) => {
 
                 <p
                   className={Classes.NewPrice}
-                  style={{ display: "flex", alignItems: "center", gap: "3px"}}
+                  style={{ display: "flex", alignItems: "center", gap: "3px" }}
                 >
                   {Contryname === "India" && (
                     <BiRupee className={Classes.Rupee} />
