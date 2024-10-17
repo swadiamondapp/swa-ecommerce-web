@@ -195,6 +195,8 @@
   width: 100%;
   transition: 0.8s ease-in;
   background-color: transparent;
+  position: relative;
+  top: -8px;
 }
 .HButton {
   opacity: 0;
@@ -470,6 +472,6 @@
 
 @media (min-width: 1400px) and (max-width: 3000px) {
   .NewArrivalCard {
-    height: 420px;
+    height: 393px;
   }
 }
