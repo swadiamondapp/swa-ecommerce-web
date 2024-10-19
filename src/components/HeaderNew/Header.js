@@ -14,6 +14,7 @@ import LoginModal from "../LoginModal/LoginModal";
 import axios from "axios";
 import * as Urls from "../../Urls";
 import { Carousel } from "antd";
+import outletlogo from "../../Assets/outletlogo.png";
 import { Link } from "react-router-dom";
 import CheckDelivery from "../CheckDelivery/CheckDelivery";
 import indiaimg from "../../Assets/india.png";
@@ -668,6 +669,11 @@ const Header = (props) => {
             handleClose={handleCloseModal}
             handleShow={handleShowModal}
           />
+          <div className={`${Classes.outletlogo} ${Classes.headerElement}`}>
+            <Link to="/outlet">
+              <img src={outletlogo} />
+            </Link>
+          </div>
           <div
             style={{ cursor: "pointer" }}
             className={Classes.CountryFlags}
@@ -747,7 +753,7 @@ const Header = (props) => {
                 setLoginText("Please Login");
               }}
             />
-            {userName && props.countCartItems && (
+            {userName && props.countCartItems > 0 && (
               <div className={Classes.ItemsNum}>{props.countCartItems}</div>
             )}
           </div>
