@@ -47,8 +47,9 @@ const TryAtHome = () => {
 
     fechTryAtHomeCart();
     const currentDate = new Date();
-    const tempDates = [currentDate];
-    for (let i = 1; i < 6; i++) {
+    currentDate.setDate(currentDate.getDate() + 1);
+    const tempDates = [];
+    for (let i = 0; i < 6; i++) {
       const nextDate = new Date();
       nextDate.setDate(currentDate.getDate() + i);
       tempDates.push(nextDate);
