@@ -311,7 +311,7 @@ const LoginToggle = (props) => {
           honorific_name: signUpData.honorific_name,
         };
         const response = await axios.post(Urls.register, body);
-if (
+        if (
           response &&
           response.data &&
           response.data.results &&
@@ -468,7 +468,7 @@ if (
           setGetOtpModal(false);
           setTimeout(() => {
             props.onClose();
-          }, 3000);
+          }, 500);
         } else if (response.data.results.status_code === 401) {
           console.log("Incorrect username or password!");
         }
@@ -522,6 +522,10 @@ if (
     try {
       const response = await axios.post(Urls.verifyOTP, body);
       if (response.data.results.status_code === 200) {
+        props.setShowSuccessModal(true);
+        setTimeout(() => {
+          props.setShowSuccessModal(false);
+        }, 3000);
         loginHandler();
       } else {
         setOtpError("Invalid otp");

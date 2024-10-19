@@ -39,7 +39,8 @@ const TryAtHomeInner = () => {
   const [appointment, setAppointment] = useState();
   const [appointmentId, setAppointmentId] = useState();
   const location = useLocation();
-  const { selectedTimeSlot, selectedDate,tryAtHomeCount } = location.state || {};
+  const { selectedTimeSlot, selectedDate, tryAtHomeCount } =
+    location.state || {};
   const savedTimeSlot = localStorage.getItem("selectedTimeSlot");
   const saveddate = localStorage.getItem("selectedDate");
 
@@ -240,7 +241,7 @@ const TryAtHomeInner = () => {
                 <div className={Classes.BookingHead}>
                   <h3 className={Classes.TryBookInner}>Booking Information</h3>
                   <p className={Classes.TryHomeEdits}>
-                    <Link to="/tryathome">
+                    <Link to="/trialathome">
                       <img src={edit} alt="edit" /> Edit
                     </Link>
                   </p>
@@ -255,7 +256,10 @@ const TryAtHomeInner = () => {
                     {selectedTimeSlot && selectedTimeSlot}
                   </div>
                 </div>
-                <p className={Classes.DesignFormPara}> {tryAtHomeCount} {tryAtHomeCount === 1 ? "DESIGN" : "DESIGNS"}</p>
+                <p className={Classes.DesignFormPara}>
+                  {" "}
+                  {tryAtHomeCount} {tryAtHomeCount === 1 ? "DESIGN" : "DESIGNS"}
+                </p>
               </div>
 
               <div className={Classes.BookingForm}>

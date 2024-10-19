@@ -31,7 +31,7 @@ const routes = [
   "/products/:id/:color/:name",
   "/payment",
   "/profile",
-  "/tryathome",
+  "/trialathome",
   "/tryathomeform",
   "/outlet",
 ];

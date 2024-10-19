@@ -322,11 +322,12 @@ const ProductDetailsPage = (props) => {
       })
       .then((response1) => {
         if (response1.data.results.status_code === 200) {
-          history.push("/tryathome");
+          history.push("/trialathome");
         } else if (
           response1.data.results.message === "Item already in try list"
         ) {
-          setErrormsgtrycart("Item already in try list");
+          // setErrormsgtrycart("Item already in try list");
+          history.push("/trialathome");
         } else if (response1.data.results.message === "size  required") {
           setErrormsgtrycart("size  required");
         }
@@ -355,7 +356,7 @@ const ProductDetailsPage = (props) => {
     country_name: Contryname,
   });
 
-  console.log(prodDet.country_total_price,"prodDet")
+  console.log(prodDet.country_total_price, "prodDet");
   return (
     <div>
       <Header
@@ -368,15 +369,13 @@ const ProductDetailsPage = (props) => {
       />
 
       <ProductDetails
-        sku={prodDet.sku && prodDet.sku === "undefined" ?  "" : prodDet.sku }
+        sku={prodDet.sku && prodDet.sku === "undefined" ? "" : prodDet.sku}
         offerPrice={
           prodDet.is_on_discount
             ? prodDet.country_discount_price
             : prodDet.country_total_price
         }
-        actualPrice={
-          prodDet.is_on_discount ? prodDet.country_total_price : ""
-        }
+        actualPrice={prodDet.is_on_discount ? prodDet.country_total_price : ""}
         discountVal={
           prodDet.is_on_discount
             ? prodDet.country_total_price > prodDet.discount_price
