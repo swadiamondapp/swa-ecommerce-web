@@ -34,6 +34,7 @@ const ProductDetailsPage = (props) => {
   const [isRestricted, setIsRestricted] = useState(false);
   const countryId = localStorage.getItem("id");
   const [deliveryDate, setDeliveryDate] = useState();
+  const [deliveryShopList,setDeliveryShopsList] = useState([])
   const [pincodeShow, setPincodeShow] = useState(false);
   const [pinCode, setPinCode] = useState("");
 
@@ -301,6 +302,7 @@ const ProductDetailsPage = (props) => {
         })
         .then((response1) => {
           setDeliveryDate(response1.data.results.message);
+          setDeliveryShopsList(response1.data.results.data)
           setPincodeShow(true); // Show the message after receiving the response
           console.log("dateresponse", response1.data.results);
         })
@@ -429,6 +431,7 @@ const ProductDetailsPage = (props) => {
         TryatHome={TryhomeHandler}
         errormsgtrycart={errormsgtrycart}
         clickedBuy={buyProductHandler}
+        deliveryShopList={deliveryShopList}
       />
       <div className={Classes.RecentSearch}>
         <SimilerProducts productId={props.match.params.id} />

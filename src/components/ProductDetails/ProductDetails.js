@@ -51,6 +51,7 @@ import { CgDollar } from "react-icons/cg";
 import LoginModal from "../LoginModal/LoginModal";
 import shippingTag from "../../Assets/shiptime.png";
 import freeDelivery3 from "../../Assets/freeDev3.png";
+import shopL from "../../Assets/shopsL.png";
 import freeDelivery4 from "../../Assets/freeDev4.png";
 import freeDelivery5 from "../../Assets/freeDev5.png";
 import shippingTag1 from "../../Assets/shiptruck.png";
@@ -599,6 +600,7 @@ const ProductDetails = (props) => {
   console.log("imageUrls", imageUrls);
   console.log(props.deliveryDate, "deliveryDate==>==>");
   console.log(props.actualPrice, "props.actualPrice");
+  console.log(props.deliveryShopList, "props.deliveryShopList");
 
   return (
     <div>
@@ -1365,6 +1367,38 @@ const ProductDetails = (props) => {
                       </div>
                     </div>
                   )}
+   {props.deliveryDate && Array.isArray(props.deliveryShopList) && props.deliveryShopList.length > 0 && (
+  <div className={Classes.deliveryDetailsList}>
+    <div className={Classes.freedevimageBack}>
+      <img src={shopL} alt="Free Delivery" />
+    </div>
+    <div>
+      <div>
+        <p className={Classes.shippingTagtext_head}>Available Shop</p>
+      </div>
+      <div>
+        {props.deliveryShopList.map((shop, index) => {
+          // Use a Set to collect unique shop names
+          const shopNames = new Set();
+
+          if (shop.delivery_in_24_hr && shop.delivery_in_24_hr.shop_name) {
+            shopNames.add(shop.delivery_in_24_hr.shop_name);
+          }
+          if (shop.delivery_in_next_day && shop.delivery_in_next_day.shop_name) {
+            shopNames.add(shop.delivery_in_next_day.shop_name);
+          }
+
+          // Convert the Set back to an array and render unique shop names
+          return Array.from(shopNames).map((name, subIndex) => (
+            <p key={`${index}-${subIndex}`} className={Classes.shippingTagtext_sub}>
+              {name}
+            </p>
+          ));
+        })}
+      </div>
+    </div>
+  </div>
+)}
                 </div>
                 {/* <div className={Classes.Flex}>
                 <img className={Classes.Stroke} src={Stroke} alt="" />
