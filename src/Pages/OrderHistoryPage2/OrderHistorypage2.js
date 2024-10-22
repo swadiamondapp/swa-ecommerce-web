@@ -524,7 +524,7 @@ const OrderHistorypage2 = (props) => {
                                   productDetails[0].color.size_name}{" "} */}
                                 {productDetails[0] &&
                                   productDetails[0].product.gross_weight}
-                                &nbsp; GM
+                                &nbsp; G
                               </p>
                               <p style={{ color: "#757C81" }}>
                                 {productDetails[0] &&
