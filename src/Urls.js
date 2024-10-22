@@ -108,3 +108,4 @@ export const bookappointment = server + "ecom/trialcartitems/";
 // check delivery date
 
 export const checkdeliveryDate = server + "ecom/check-delivery-date/";
+export const oulets = server + "ecom/outlet-details/";
