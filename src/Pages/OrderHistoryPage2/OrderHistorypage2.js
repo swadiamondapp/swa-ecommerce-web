@@ -103,6 +103,18 @@ const OrderHistorypage2 = (props) => {
     landMark: "",
   });
 
+  const handleClick = () => {
+    const hyperlink =
+      singleOrderData &&
+      singleOrderData.order &&
+      singleOrderData.order.shipment[0].product_bag &&
+      singleOrderData.order.shipment[0].product_bag.hyperlink;
+    if (hyperlink) {
+      // history.push(hyperlink);
+      window.location.href = hyperlink;
+    }
+  };
+
   const onChange = (key) => {
     console.log(key);
   };
@@ -798,7 +810,10 @@ const OrderHistorypage2 = (props) => {
                         <div className={Classes.crtn1}>
                           <p>
                             Certification No :{" "}
-                            <span style={{ color: "#0997E7" }}>
+                            <span
+                              style={{ color: "#0997E7", cursor: "pointer" }}
+                              onClick={handleClick}
+                            >
                               {/* {orderDet[0].docket_number} */}
                               {singleOrderData &&
                                 singleOrderData.order &&
