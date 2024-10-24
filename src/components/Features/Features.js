@@ -28,15 +28,16 @@ function Features() {
                 className={Classes.FeaturesSubText}
                 style={{ display: "flex", alignItems: "center", gap: "3px" }}
               >
-                On all orders{" "}
-                {Contryname === "India" && (
+                Every order ships free!
+                {/* On all orders{" "} */}
+                {/* {Contryname === "India" && (
                   <BiRupee className={Classes.Rupee} />
                 )}
                 {Contryname === "United States" && (
                   <CgDollar className={Classes.Rupee} />
                 )}
                 {Contryname === "United Arab Emirates" && <span>AED</span>}{" "}
-                2000...{" "}
+                2000...{" "} */}
               </p>
             </div>
             <div
@@ -71,7 +72,7 @@ function Features() {
                 LifetimeExchange & Buyback
               </p>
               <p className={Classes.FeaturesSubText}>
-                Exchange for current value or get cash
+                Get 95% Exchange value and cashback
               </p>
             </div>
           </div>
