@@ -970,7 +970,7 @@ input[type="number"] {
 }
 /* styles.css or your CSS module */
 .activeTab {
-  background: #F7F6F2 !important;
+  background: #f7f6f2 !important;
   font-weight: 900 !important;
   color: black !important;
   padding-left: 20px;
@@ -994,6 +994,6 @@ input[type="number"] {
   font-size: 12px;
   color: black;
 }
-.p-inputtext{
+.p-inputtext {
   padding: 0px !important;
 }

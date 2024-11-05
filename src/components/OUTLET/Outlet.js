@@ -14,6 +14,8 @@ import Button from "@mui/material/Button";
 import { IoClose } from "react-icons/io5";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import * as Urls from "../../../src/Urls";
+import axios from "axios";
 
 const style = {
   position: "absolute",
@@ -48,6 +50,9 @@ const Outlet = () => {
   const [isMobileView, setIsMobileView] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
   );
+  const [outlets, setOutlets] = useState([]);
+  const [loading, setLoading] = useState(false);
+  console.log("outlets11", outlets);
   useEffect(() => {
     const handleResize = () => {
       setIsMobileView(window.innerWidth >= 300 && window.innerWidth <= 575);
@@ -66,20 +71,40 @@ const Outlet = () => {
   const handleCloseSort = () => {
     setOpensort(false);
   };
-  const outlets = [
-    {
-      name: "Hilite mall - Calicut",
-    },
-    {
-      name: "Hilite mall - Calicut",
-    },
-    {
-      name: "Hilite mall - Calicut",
-    },
-    {
-      name: "Hilite mall - Calicut",
-    },
-  ];
+  // const outlets = [
+  //   {
+  //     name: "Hilite mall - Calicut",
+  //   },
+  //   {
+  //     name: "Hilite mall - Calicut",
+  //   },
+  //   {
+  //     name: "Hilite mall - Calicut",
+  //   },
+  //   {
+  //     name: "Hilite mall - Calicut",
+  //   },
+  // ];
+  useEffect(() => {
+    // API call for fetching outlets
+    const fetchOutlets = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get(`${Urls.oulets}`, {
+          //  headers: {
+          //    Authorization: "Token " + localStorage.getItem("token"), // Assuming token is stored in localStorage
+          //  },
+        });
+        setOutlets(response.data.data); // Adjust according to your API response structure
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching outlets:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchOutlets();
+  }, []);
   return (
     <div>
       <div className={Classes.mainContianerProfile}>
@@ -98,59 +123,62 @@ const Outlet = () => {
               </p>
             </div>
             <div className={Classes.OutletCardParent}>
-              {outlets.map((item) => (
-                <div className={Classes.OutletCard}>
-                  <div className={Classes.ParentSubOutlet}>
-                    <div className={Classes.LeftOutlets}>
-                      <div className={Classes.OutletImage}>
-                        <img src={outletimg} alt="outletimg" />
+              {outlets &&
+                outlets.map((item) => (
+                  <div className={Classes.OutletCard}>
+                    <div className={Classes.ParentSubOutlet}>
+                      <div className={Classes.LeftOutlets}>
+                        <div className={Classes.OutletImage}>
+                          <img src={outletimg} alt="outletimg" />
+                        </div>
+                        <div className={Classes.OutletDetails}>
+                          <h3>
+                            {item.name} - {item.location}
+                          </h3>
+                          <p className={Classes.RatingOutlets}>
+                            <img
+                              style={{ position: "relative", top: "-3px" }}
+                              src={starimg}
+                              alt="starimg"
+                            />{" "}
+                            <span>4.9 | 978 Goolge review</span>
+                          </p>
+                          <p>
+                            {item.address}
+                            <br />
+                            <span style={{ color: "#006C77" }}>
+                              {item.phone_number}
+                            </span>
+                          </p>
+                        </div>
                       </div>
-                      <div className={Classes.OutletDetails}>
-                        <h3>{item.name}</h3>
-                        <p className={Classes.RatingOutlets}>
-                          <img
-                            style={{ position: "relative", top: "-3px" }}
-                            src={starimg}
-                            alt="starimg"
-                          />{" "}
-                          <span>4.9 | 978 Goolge review</span>
-                        </p>
-                        <p>
-                          Door no 2/1149 G25& G26 <br /> Ground floor , HiLITE
-                          MALL <br />
-                          <span style={{ color: "#006C77" }}>
-                            090371 00550, 090371 00550
-                          </span>
-                        </p>
+                      <div className={Classes.RightOutlet}>
+                        <img src={locationimg} alt="locationimg" /> 6KM
                       </div>
                     </div>
-                    <div className={Classes.RightOutlet}>
-                      <img src={locationimg} alt="locationimg" /> 6KM
+                    <div className={Classes.OutletFooterCrad}>
+                      <div className={Classes.OutletFooter}>
+                        <div className={Classes.outletWatsapp}>
+                          <RiWhatsappFill size={20} />
+                        </div>
+                        <div className={Classes.outletWatsapp}>
+                          <IoMdCall size={20} />
+                        </div>
+                        <div className={Classes.OutletBookvist}>
+                          <button onClick={handleOpenSort}>Book a Vist</button>
+                        </div>
+                      </div>
+                      <p className={Classes.OutletFooters}>
+                        <img
+                          style={{ position: "relative", top: "-1px" }}
+                          src={timeimg}
+                          alt="timeimg"
+                        />{" "}
+                        WORKING HOURS : 10:00AM TO 10:00PM
+                      </p>
                     </div>
                   </div>
-                  <div className={Classes.OutletFooterCrad}>
-                    <div className={Classes.OutletFooter}>
-                      <div className={Classes.outletWatsapp}>
-                        <RiWhatsappFill size={20} />
-                      </div>
-                      <div className={Classes.outletWatsapp}>
-                        <IoMdCall size={20} />
-                      </div>
-                      <div className={Classes.OutletBookvist}>
-                        <button onClick={handleOpenSort}>Book a Vist</button>
-                      </div>
-                    </div>
-                    <p className={Classes.OutletFooters}>
-                      <img
-                        style={{ position: "relative", top: "-1px" }}
-                        src={timeimg}
-                        alt="timeimg"
-                      />{" "}
-                      WORKING HOURS : 10:00AM TO 10:00PM
-                    </p>
-                  </div>
-                </div>
-              ))}
+                ))}
             </div>
 
             {/* modal */}
