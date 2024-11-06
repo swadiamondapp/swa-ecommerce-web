@@ -27,10 +27,8 @@ import TransferMoneyModal from "../../components/WalletModal/TransferMoneyModal"
 import { TbLocationFilled } from "react-icons/tb";
 import { IoCall } from "react-icons/io5";
 import SliderFeature from "../../components/ProductDetails/SliderFeature";
-import { useLocation } from "react-router-dom";
 
 const OrderHistorypage2 = (props) => {
-  const location = useLocation();
   const history = useHistory();
   const countryId = localStorage.getItem("id");
   const flag = localStorage.getItem("flag_image");
@@ -103,24 +101,10 @@ const OrderHistorypage2 = (props) => {
     landMark: "",
   });
 
-  const handleClick = () => {
-    const hyperlink =
-      singleOrderData &&
-      singleOrderData.order &&
-      singleOrderData.order.shipment[0].product_bag &&
-      singleOrderData.order.shipment[0].product_bag.hyperlink;
-    if (hyperlink) {
-      // history.push(hyperlink);
-      window.location.href = hyperlink;
-    }
-  };
-
   const onChange = (key) => {
     console.log(key);
   };
-  const { data } = location.state || {};
-  const { saleBill } = data || {};
-  console.log(location, saleBill, "alskdjf===sdfdfd==>");
+
   // warnning
   console.log(paymentDetails, "paymentDetails");
   useEffect(() => {
@@ -349,7 +333,6 @@ const OrderHistorypage2 = (props) => {
       singleOrderData.order.shipment[0] &&
       singleOrderData.order.shipment[0].status
   );
-  console.log(singleOrderData, "singleooooo==>");
 
   console.log(
     "singleOrderData--->12",
@@ -438,14 +421,22 @@ const OrderHistorypage2 = (props) => {
             <div className={`container ${Classes.OrderMobCont2}`}>
               <div className={Classes.Main}>
                 {/* <h1 className={Classes.Title}>Shipment Details</h1> */}
-                {/* <h3 className={Classes.orderidh3}>
+                <h3 className={Classes.orderidh3}>
                   Order ID :{" "}
+                  {console.log(
+                    "checking",
+                    singleOrderData &&
+                      singleOrderData.order &&
+                      singleOrderData.order.shipment[0] &&
+                      singleOrderData.order.shipment[0].sale_bill_number
+                  )}
+                  {/* {singleOrderData &&
+                    singleOrderData.order &&
+                    singleOrderData.order.order_code} */}
                   {singleOrderData &&
                     singleOrderData.order &&
-                    singleOrderData.order.order_code}
-                </h3> */}
-                <h3 className={Classes.orderidh3}>
-                  {saleBill && <>Order ID: {saleBill}</>}
+                    singleOrderData.order.shipment[0] &&
+                    singleOrderData.order.shipment[0].sale_bill_number}
                 </h3>
                 {singleOrderData &&
                   singleOrderData.order &&
@@ -459,7 +450,7 @@ const OrderHistorypage2 = (props) => {
                         <div className={Classes.DeliveryDetails}>
                           <p>
                             <img src={deliveryimg} alt="deliveryimg" />
-                            Delivered on <span>26 may 2023</span>
+                            {/* Delivered on <span>26 may 2024</span> */}
                           </p>
                         </div>
                       ) : (
@@ -536,7 +527,7 @@ const OrderHistorypage2 = (props) => {
                                   productDetails[0].color.size_name}{" "} */}
                                 {productDetails[0] &&
                                   productDetails[0].product.gross_weight}
-                                &nbsp; G
+                                &nbsp; GM
                               </p>
                               <p style={{ color: "#757C81" }}>
                                 {productDetails[0] &&
@@ -810,10 +801,7 @@ const OrderHistorypage2 = (props) => {
                         <div className={Classes.crtn1}>
                           <p>
                             Certification No :{" "}
-                            <span
-                              style={{ color: "#0997E7", cursor: "pointer" }}
-                              onClick={handleClick}
-                            >
+                            <span style={{ color: "#0997E7" }}>
                               {/* {orderDet[0].docket_number} */}
                               {singleOrderData &&
                                 singleOrderData.order &&
