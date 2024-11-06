@@ -75,7 +75,7 @@ const TrialCart = (props) => {
           </div>
         </div>
       </div>
-      {/* <div className={Classes.RemoveMove}>
+      <div className={Classes.RemoveMove}>
         <div className={Classes.DummyWrap}>
           <IoCheckmarkCircleSharp fill="#005D67" />
           <p className={Classes.DummyGreen}>30 day money back</p>
@@ -105,48 +105,6 @@ const TrialCart = (props) => {
             </p>
           </div>
         </div>
-      </div> */}
-      <div className={Classes.RemoveMove}>
-      <div className={Classes.DummyWrap}>
-          <IoCheckmarkCircleSharp fill="#005D67" />
-          <p className={Classes.DummyGreen}>30 day money back</p>
-          <IoCheckmarkCircleSharp fill="#005D67" />
-          <p className={Classes.DummyGreen}>Lifetime exchange & buy back</p>
-        </div>
-        <div className={Classes.Revove12}>
-          <div className={Classes.Remove}>
-            <RiDeleteBin5Line
-              size={20}
-              onClick={props.remove}
-              style={{ cursor: "pointer" }}
-            />
-            <p
-              className={Classes.Delete}
-              onClick={props.remove}
-              style={{ cursor: "pointer" }}
-            >
-              Remove
-            </p>
-          </div>
-          <div
-            className={Classes.Remove}
-            style={{ borderLeft: "0.5px solid #E8E8E8" }}
-          >
-            <img
-              src={WishListTag}
-              alt="WishListTag"
-              style={{ width: "13px" }}
-            />
-            <p
-              className={Classes.Delete}
-              onClick={props.remove}
-              style={{ cursor: "pointer" }}
-            >
-              Move to WishList
-            </p>
-          </div>
-        </div>
-        
       </div>
 
       {/* trial cart design */}

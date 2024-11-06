@@ -35,8 +35,7 @@ header {
   grid-template-columns: 1fr 0.8fr 1fr;
   align-items: center;
   margin: 1rem 0rem;
-  width: 94%;
-  margin-left: 3%;
+  width: 100%;
 }
 .MobMainHead {
   background: #10212f;
@@ -69,16 +68,6 @@ header {
   margin: 15px;
   padding-top: 0px;
   margin-bottom: 0px;
-}
-
-.honor {
-  display: flex;
-  gap: 10px;
-}
-.honor label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
 }
 .ParentCards2 {
   display: flex;
@@ -582,7 +571,7 @@ header {
     border: 1px solid #ccc;
     font-size: 0.875rem;
     background-color: transparent;
-    padding: 5px 7px;
+    padding: 5px 6px;
     color: #2c3035;
     /* text-align: center; */
     font-family: "Poppins";
@@ -670,30 +659,6 @@ header {
     display: flex;
     flex-direction: column;
     gap: 10px;
-  }
-  header {
-    height: 70px;
-  }
-  .Parentcartitems {
-    display: grid;
-    grid-template-columns: 100px 100px;
-    width: 200px;
-    background: #e2e9e9;
-    padding: 3px;
-    align-items: center;
-    text-align: center;
-    border-radius: 8px;
-    color: #10212f;
-    font-weight: 500;
-    font-size: 12px;
-  }
-  .ActiveCarthead {
-    background: #fff;
-    color: #10212f;
-    text-align: center;
-    border-radius: 8px;
-    padding: 5px 10px;
-    font-weight: 600;
   }
 }
 

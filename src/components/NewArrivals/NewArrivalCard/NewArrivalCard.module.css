@@ -97,20 +97,6 @@
   font-size: 12px;
   font-family: "InterNormal" !important;
 }
-.cardTryatHomeBtn {
-  display: none;
-}
-.cardTryatHomeBtn button {
-  border: 1px solid #00464d;
-  background: transparent;
-  color: #00464d;
-  width: 100%;
-  padding: 5px;
-  border-radius: 4px;
-  font-family: "Lato";
-  font-weight: 500;
-  font-size: 14px;
-}
 .Heart {
   background-color: rgb(195, 9, 9);
   border-radius: 4px;
@@ -162,7 +148,7 @@
 }
 .CheckdeliveryNewtext {
   color: rgb(0, 70, 77);
-  font-size: 14px;
+  font-size: 15px;
   font-family: "lato";
   font-weight: 600;
   padding-left: 6px;
@@ -195,8 +181,6 @@
   width: 100%;
   transition: 0.8s ease-in;
   background-color: transparent;
-  position: relative;
-  top: -8px;
 }
 .HButton {
   opacity: 0;
@@ -333,13 +317,13 @@
   .Price {
     display: flex;
     justify-content: left;
-    padding: 0px 10px 5px 10px;
+    padding: 10px 10px;
     gap: 10px;
     align-items: center;
     padding-left: 6px;
   }
   .PriceNew {
-    font-size: 15px;
+    font-size: 13px;
   }
   .ProductImage {
     width: 100%;
@@ -359,11 +343,7 @@
     height: 35px;
   }
   .CheckdeliveryNewtext {
-    font-size: 12px;
-  }
-  .cardTryatHomeBtn {
-    display: block;
-    padding: 0px 10px;
+    font-size: 14px;
   }
 }
 
@@ -472,6 +452,6 @@
 
 @media (min-width: 1400px) and (max-width: 3000px) {
   .NewArrivalCard {
-    height: 393px;
+    height: 420px;
   }
 }

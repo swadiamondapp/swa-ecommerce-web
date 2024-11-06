@@ -422,7 +422,6 @@ const LoginModal = (props) => {
     localStorage.removeItem("swaToken");
     localStorage.removeItem("userName");
     localStorage.removeItem("phoneNumber");
-    localStorage.removeItem("userProfile")
     // localStorage.removeItem("defaultCountryFlag");
     // localStorage.removeItem("id");
 

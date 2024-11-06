@@ -425,11 +425,11 @@ function AddAddress(props) {
                               Delivery in 3-5 days
                             </p>
                           )}
-                          {errors.pincode && (
+                          {/* {errors.pincode && (
                             <span className={Classes.Error}>
                               {errors.pincode}
                             </span>
-                          )}
+                          )} */}
                         </div>
                         <div>
                           <label>City</label>

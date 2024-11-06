@@ -27,10 +27,8 @@ import TransferMoneyModal from "../../components/WalletModal/TransferMoneyModal"
 import { TbLocationFilled } from "react-icons/tb";
 import { IoCall } from "react-icons/io5";
 import SliderFeature from "../../components/ProductDetails/SliderFeature";
-import { useLocation } from "react-router-dom";
 
 const OrderHistorypage2 = (props) => {
-  const location = useLocation();
   const history = useHistory();
   const countryId = localStorage.getItem("id");
   const flag = localStorage.getItem("flag_image");
@@ -88,8 +86,7 @@ const OrderHistorypage2 = (props) => {
   const [lteLbbData, setLteLbbData] = useState([]);
   const [type, setType] = useState("");
   const [singleOrderData, setSingleOrderData] = useState([]);
-  const [paymentDetails, setPaymentDetails] = useState({});
-  const [error, setError] = useState("");
+  const [paymentDetails, setPaymentDetails] = useState([]);
   const [addressData, setAddressData] = useState({
     sEmail: "",
     sPhone: "",
@@ -103,26 +100,12 @@ const OrderHistorypage2 = (props) => {
     landMark: "",
   });
 
-  const handleClick = () => {
-    const hyperlink =
-      singleOrderData &&
-      singleOrderData.order &&
-      singleOrderData.order.shipment[0].product_bag &&
-      singleOrderData.order.shipment[0].product_bag.hyperlink;
-    if (hyperlink) {
-      // history.push(hyperlink);
-      window.location.href = hyperlink;
-    }
-  };
-
   const onChange = (key) => {
     console.log(key);
   };
-  const { data } = location.state || {};
-  const { saleBill } = data || {};
-  console.log(location, saleBill, "alskdjf===sdfdfd==>");
+
   // warnning
-  console.log(paymentDetails, "paymentDetails");
+
   useEffect(() => {
     // axios
     //   .get(Urls.myOrder + "/" + props.location.state.data.productId, {
@@ -205,11 +188,10 @@ const OrderHistorypage2 = (props) => {
             response.data.results.data.order &&
             response.data.results.data.order.shipment
         );
-        setPromoCode(singleOrderData && singleOrderData.order.promocode);
         setPaymentDetails(
-          singleOrderData &&
-            singleOrderData.order &&
-            singleOrderData.order.payment_data
+          response.data.results.data &&
+            response.data.results.data.order &&
+            response.data.results.data.order.payment_data
         );
       }
     } catch (error) {
@@ -298,7 +280,7 @@ const OrderHistorypage2 = (props) => {
     }
   };
 
-  const cancelProduct = async (reason, notes) => {
+  const cancelProduct = async () => {
     try {
       const body = {
         product_id: orderDet[0].product.product_id,
@@ -307,8 +289,8 @@ const OrderHistorypage2 = (props) => {
         total_amount: total,
         payment_mode: payMode,
         cancel_type: "final",
-        reason: reason ? reason.name : "No reason selected",
-        notes: notes || "No notes provided",
+        reason: "aaaaaaaaaaa",
+        notes: "sssssssssssssssssssssssssssssssssssssssssssssssssssssssss",
       };
       const response = await axios.post(
         `${Urls.CancelOrder}?country=${countryId}`,
@@ -329,27 +311,11 @@ const OrderHistorypage2 = (props) => {
       console.log(error);
     }
   };
-  function formatDate(dateString) {
-    const date = new Date(dateString);
-
-    const options = {
-      weekday: "short", // This will show "Mon" instead of "Monday"
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    };
-
-    return date.toLocaleDateString("en-US", options);
-  }
 
   console.log(
     "singleOrderData--->1233",
-    singleOrderData &&
-      singleOrderData.order &&
-      singleOrderData.order.shipment[0] &&
-      singleOrderData.order.shipment[0].status
+    singleOrderData && singleOrderData.order && singleOrderData.order
   );
-  console.log(singleOrderData, "singleooooo==>");
 
   console.log(
     "singleOrderData--->12",
@@ -359,29 +325,7 @@ const OrderHistorypage2 = (props) => {
       singleOrderData.data.order.address
   );
 
-  const statusCode =
-    singleOrderData &&
-    singleOrderData.order &&
-    singleOrderData.order.shipment[0] &&
-    singleOrderData.order.shipment[0].status;
-  console.log("statusCode--->", statusCode);
-  const orderDate =
-    singleOrderData.order &&
-    singleOrderData.order.track_order_details &&
-    singleOrderData.order.track_order_details &&
-    singleOrderData.order.track_order_details.order_confirmed;
-
-  const moneyDetail =
-    singleOrderData &&
-    singleOrderData.order &&
-    singleOrderData.order.payment_data;
-  console.log(
-    singleOrderData.order &&
-      singleOrderData.order.track_order_details &&
-      singleOrderData.order.track_order_details &&
-      singleOrderData.order.track_order_details.order_confirmed,
-    "order---"
-  );
+  console.log("paymentDetails--->", paymentDetails);
 
   return (
     <div>
@@ -424,13 +368,8 @@ const OrderHistorypage2 = (props) => {
         />
         <CancelProductModal
           open={cancelProductModal}
-          handleClose={() => {
-            setCancelProductModal(false);
-            setError("");
-          }}
+          handleClose={() => setCancelProductModal(false)}
           cancelProduct={cancelProduct}
-          error={error}
-          setError={setError}
         />
 
         <div>
@@ -438,40 +377,18 @@ const OrderHistorypage2 = (props) => {
             <div className={`container ${Classes.OrderMobCont2}`}>
               <div className={Classes.Main}>
                 {/* <h1 className={Classes.Title}>Shipment Details</h1> */}
-                {/* <h3 className={Classes.orderidh3}>
+                <h3 className={Classes.orderidh3}>
                   Order ID :{" "}
                   {singleOrderData &&
                     singleOrderData.order &&
                     singleOrderData.order.order_code}
-                </h3> */}
-                <h3 className={Classes.orderidh3}>
-                  {saleBill && <>Order ID: {saleBill}</>}
                 </h3>
-                {singleOrderData &&
-                  singleOrderData.order &&
-                  singleOrderData.order.shipment[0].cancel_order && (
-                    <>
-                      {(statusCode == 0 ||
-                        statusCode == 2 ||
-                        statusCode == 9) &&
-                      singleOrderData.order.shipment[0].cancel_order !==
-                        "Admin Approval pending" ? (
-                        <div className={Classes.DeliveryDetails}>
-                          <p>
-                            <img src={deliveryimg} alt="deliveryimg" />
-                            Delivered on <span>26 may 2023</span>
-                          </p>
-                        </div>
-                      ) : (
-                        <div className={Classes.DeliveryDetails}>
-                          <p>
-                            <img src={deliveryimg} alt="deliveryimg" />
-                            <span style={{ color: "red" }}>cancelled</span>
-                          </p>
-                        </div>
-                      )}
-                    </>
-                  )}
+                <div className={Classes.DeliveryDetails}>
+                  <p>
+                    <img src={deliveryimg} alt="deliveryimg" />
+                    Delivered on <span>26 may 2023</span>
+                  </p>
+                </div>
               </div>
               {/* new design */}
               <div className={Classes.parentCollaps5}>
@@ -523,37 +440,19 @@ const OrderHistorypage2 = (props) => {
                               <p style={{ color: "#757C81" }}>
                                 {productDetails[0] &&
                                   productDetails[0].product.carat}{" "}
-                                &nbsp;
-                                {productDetails[0] &&
-                                productDetails[0].color.colour_name
-                                  ? productDetails[0].color.colour_name
-                                      .charAt(0)
-                                      .toUpperCase() +
-                                    productDetails[0].color.colour_name.slice(1)
-                                  : ""}
-                                &nbsp;
+                                KT Yellow{" "}
                                 {/* {productDetails[0] &&
                                   productDetails[0].color.size_name}{" "} */}
                                 {productDetails[0] &&
-                                  productDetails[0].product.gross_weight}
-                                &nbsp; G
+                                  productDetails[0].product.gross_weight}{" "}
+                                GM
                               </p>
                               <p style={{ color: "#757C81" }}>
-                                {productDetails[0] &&
-                                productDetails[0].product.product_name
-                                  ? productDetails[0].product.product_name
-                                      .charAt(0)
-                                      .toUpperCase() +
-                                    productDetails[0].product.product_name
-                                      .slice(1)
-                                      .toLowerCase()
-                                  : ""}
-                                &nbsp;
+                                Diamond{" "}
                                 {productDetails[0] &&
                                   productDetails[0].product
                                     .diamond_weight_preview}{" "}
-                                {productDetails[0] &&
-                                  productDetails[0].product.carat}{" "}
+                                Carat SIIJ
                               </p>
                               <p style={{ color: "#303A42" }}>
                                 SKU{" "}
@@ -566,260 +465,11 @@ const OrderHistorypage2 = (props) => {
                             <p>Qty 1</p>
                           </div>
                         </div>
-                        {singleOrderData &&
-                          singleOrderData.order &&
-                          singleOrderData.order.shipment[0].product_bag && (
-                            <div
-                              className={Classes.bag_details_part}
-                              style={{
-                                display: "flex",
-                                marginLeft: "140px",
-                                marginTop: "10px",
-                                display: "flex",
-                                gap: "10px",
-                              }}
-                            >
-                              <div
-                                style={{
-                                  width: "100%",
-                                  display: "flex",
-                                  justifyContent: "space-between",
-                                  gap: "10px",
-                                }}
-                              >
-                                <span className={Classes.bag_details_span1}>
-                                  Barcode
-                                </span>
-                                <div
-                                  style={{
-                                    width: "50%",
-                                    display: "flex",
-                                    alignItems: "start",
-                                  }}
-                                >
-                                  <span className={Classes.bag_details_span2}>
-                                    {
-                                      singleOrderData.order.shipment[0]
-                                        .product_bag.barcode
-                                    }
-                                  </span>
-                                </div>
-                              </div>
-                              <div
-                                style={{
-                                  width: "100%",
-                                  display: "flex",
-                                  justifyContent: "space-between",
-                                }}
-                              >
-                                <span className={Classes.bag_details_span1}>
-                                  Gross Weight
-                                </span>
-                                <div
-                                  style={{
-                                    width: "50%",
-                                    display: "flex",
-                                    alignItems: "start",
-                                  }}
-                                >
-                                  <span className={Classes.bag_details_span2}>
-                                    {
-                                      singleOrderData.order.shipment[0]
-                                        .product_bag.gross_weight
-                                    }
-                                  </span>
-                                </div>
-                              </div>
-                              <div
-                                style={{
-                                  width: "100%",
-                                  display: "flex",
-                                  justifyContent: "space-between",
-                                }}
-                              >
-                                <span className={Classes.bag_details_span1}>
-                                  Diamond Weight
-                                </span>
-                                <div
-                                  style={{
-                                    width: "50%",
-                                    display: "flex",
-                                    alignItems: "start",
-                                  }}
-                                >
-                                  <span className={Classes.bag_details_span2}>
-                                    {
-                                      singleOrderData.order.shipment[0]
-                                        .product_bag.diamond_weight
-                                    }
-                                  </span>
-                                </div>
-                              </div>
-                              <div
-                                style={{
-                                  width: "100%",
-                                  display: "flex",
-                                  justifyContent: "space-between",
-                                }}
-                              >
-                                <span className={Classes.bag_details_span1}>
-                                  No of Diamonds
-                                </span>
-                                <div
-                                  style={{
-                                    width: "50%",
-                                    display: "flex",
-                                    alignItems: "start",
-                                  }}
-                                >
-                                  <span className={Classes.bag_details_span2}>
-                                    {
-                                      singleOrderData.order.shipment[0]
-                                        .product_bag.no_of_diamonds
-                                    }
-                                  </span>
-                                </div>
-                              </div>
-                              <div
-                                style={{
-                                  width: "100%",
-                                  display: "flex",
-                                  justifyContent: "space-between",
-                                }}
-                              >
-                                <span className={Classes.bag_details_span1}>
-                                  Net Metal
-                                </span>
-                                <div
-                                  style={{
-                                    width: "50%",
-                                    display: "flex",
-                                    alignItems: "start",
-                                  }}
-                                >
-                                  <span className={Classes.bag_details_span2}>
-                                    {
-                                      singleOrderData.order.shipment[0]
-                                        .product_bag.net_metal
-                                    }
-                                  </span>
-                                </div>
-                              </div>
-                              <div
-                                style={{
-                                  width: "100%",
-                                  display: "flex",
-                                  justifyContent: "space-between",
-                                }}
-                              >
-                                <span className={Classes.bag_details_span1}>
-                                  Diamond Type
-                                </span>
-                                <div
-                                  style={{
-                                    width: "50%",
-                                    display: "flex",
-                                    alignItems: "start",
-                                  }}
-                                >
-                                  <span className={Classes.bag_details_span2}>
-                                    {
-                                      singleOrderData.order.shipment[0]
-                                        .product_bag.diamond_type
-                                    }
-                                  </span>
-                                </div>
-                              </div>
-                              <div
-                                style={{
-                                  width: "100%",
-                                  display: "flex",
-                                  justifyContent: "space-between",
-                                }}
-                              >
-                                <span className={Classes.bag_details_span1}>
-                                  CLS Weight
-                                </span>
-                                <div
-                                  style={{
-                                    width: "50%",
-                                    display: "flex",
-                                    alignItems: "start",
-                                  }}
-                                >
-                                  <span className={Classes.bag_details_span2}>
-                                    {
-                                      singleOrderData.order.shipment[0]
-                                        .product_bag.cls_weight
-                                    }
-                                  </span>
-                                </div>
-                              </div>
-                              <div
-                                style={{
-                                  width: "100%",
-                                  display: "flex",
-                                  justifyContent: "space-between",
-                                }}
-                              >
-                                <span className={Classes.bag_details_span1}>
-                                  No.of colour stone
-                                </span>
-                                <div
-                                  style={{
-                                    width: "50%",
-                                    display: "flex",
-                                    alignItems: "start",
-                                  }}
-                                >
-                                  <span className={Classes.bag_details_span2}>
-                                    {
-                                      singleOrderData.order.shipment[0]
-                                        .product_bag.no_of_color_stone
-                                    }
-                                  </span>
-                                </div>
-                              </div>
-                              <div
-                                style={{
-                                  width: "100%",
-                                  display: "flex",
-                                  justifyContent: "space-between",
-                                }}
-                              >
-                                <span className={Classes.bag_details_span1}>
-                                  Metal Type / Color
-                                </span>
-                                <div
-                                  style={{
-                                    width: "50%",
-                                    display: "flex",
-                                    alignItems: "start",
-                                  }}
-                                >
-                                  <span className={Classes.bag_details_span2}>
-                                    {
-                                      singleOrderData.order.shipment[0]
-                                        .product_bag.metal_type_color
-                                    }
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          )}
                         <div className={Classes.crtn1}>
                           <p>
                             Certification No :{" "}
-                            <span
-                              style={{ color: "#0997E7", cursor: "pointer" }}
-                              onClick={handleClick}
-                            >
-                              {/* {orderDet[0].docket_number} */}
-                              {singleOrderData &&
-                                singleOrderData.order &&
-                                singleOrderData.order.shipment[0].product_bag &&
-                                singleOrderData.order.shipment[0].product_bag
-                                  .certification_number}
+                            <span style={{ color: "#0997E7" }}>
+                              {orderDet[0].docket_number}
                             </span>
                           </p>
                         </div>
@@ -828,49 +478,35 @@ const OrderHistorypage2 = (props) => {
                         <div className={Classes.parentPaymentItems}>
                           <div className={Classes.PaymentItems}>
                             <p>Item Subtotal</p>
-                            <p>{moneyDetail && moneyDetail.itemsubtotal}</p>
+                            <p>{paymentDetails.itemsubtotal}</p>
                           </div>
                           <div className={Classes.PaymentItems}>
                             <p>Shipping</p>
-                            <p>{moneyDetail && moneyDetail.shipping}</p>
+                            <p>{paymentDetails.shipping}</p>
                           </div>
                           <div className={Classes.PaymentItems}>
                             <p>Total</p>
-                            <p>
-                              {moneyDetail &&
-                              moneyDetail &&
-                              moneyDetail &&
-                              moneyDetail.total
-                                ? moneyDetail && moneyDetail.total
-                                : 0}
-                            </p>
+                            <p>{paymentDetails.total}</p>
                           </div>
                           <div className={Classes.PaymentItems}>
                             <p>Promo code</p>
                             <p style={{ color: "#000000" }}>
                               PAYDAY{" "}
-                              <span
-                                style={{
-                                  color:
-                                    promoCode === null ? "#FF0000" : "#30933A",
-                                }}
-                              >
-                                {promoCode === null ? "Not Applied" : "Applied"}
-                              </span>
+                              <span style={{ color: "#30933A" }}>Applied</span>
                             </p>
                           </div>
                           <div className={Classes.PaymentItems}>
                             <p>Coupon Discount</p>
                             <p style={{ color: "#000000" }}>
-                              {moneyDetail && moneyDetail.coupon_discount
-                                ? moneyDetail && moneyDetail.coupon_discount
+                              {paymentDetails.coupon_discount
+                                ? paymentDetails.coupon_discount
                                 : 0}
                             </p>
                           </div>
                           <div className={Classes.PaymentItems}>
                             <p style={{ color: "#000000" }}>Payable</p>
                             <p style={{ color: "#000000" }}>
-                              {moneyDetail && moneyDetail.payable}
+                              {paymentDetails.payable}
                             </p>
                           </div>
                         </div>
@@ -886,92 +522,45 @@ const OrderHistorypage2 = (props) => {
                               <div className={Classes.dotstatusline}></div>
                             </div>
                             <div className={Classes.leftStatus2}>
-                              {singleOrderData.order &&
-                                singleOrderData.order.track_order_details &&
-                                singleOrderData.order.track_order_details &&
-                                singleOrderData.order.track_order_details
-                                  .order_type === "ecom" && (
-                                  <>
-                                    <div
-                                      className={Classes.dotstatus1}
-                                      style={{
-                                        background:
-                                          singleOrderData.order &&
-                                          singleOrderData.order
-                                            .track_order_details &&
-                                          singleOrderData.order
-                                            .track_order_details &&
-                                          singleOrderData.order
-                                            .track_order_details.shipped
-                                            ? "#0eb533"
-                                            : "#d9d9d9",
-                                        border: "none",
-                                      }}
-                                    ></div>
-                                    <div
-                                      className={Classes.dotstatusline1}
-                                      style={{
-                                        background:
-                                          singleOrderData.order &&
-                                          singleOrderData.order
-                                            .track_order_details &&
-                                          singleOrderData.order
-                                            .track_order_details &&
-                                          singleOrderData.order
-                                            .track_order_details.shipped
-                                            ? "#0eb533"
-                                            : "#d9d9d9",
-                                      }}
-                                    ></div>
-                                  </>
-                                )}
-                            </div>
-                            <div className={Classes.leftStatus2}>
                               <div
                                 className={Classes.dotstatus1}
                                 style={{
-                                  background:
-                                    singleOrderData.order &&
-                                    singleOrderData.order.track_order_details &&
-                                    singleOrderData.order.track_order_details &&
-                                    singleOrderData.order.track_order_details
-                                      .delivery
-                                      ? "#0eb533"
-                                      : "#d9d9d9",
+                                  background: "#0eb533",
+                                  border: "none",
                                 }}
                               ></div>
-                              {/* <div className={Classes.dotstatusline1}></div> */}
+                              <div
+                                className={Classes.dotstatusline1}
+                                style={{ background: "#0eb533" }}
+                              ></div>
                             </div>
-                            {/* <div className={Classes.leftStatus2}>
+                            <div className={Classes.leftStatus2}>
                               <div className={Classes.dotstatus1}></div>
-                            </div> */}
+                              <div className={Classes.dotstatusline1}></div>
+                            </div>
+                            <div className={Classes.leftStatus2}>
+                              <div className={Classes.dotstatus1}></div>
+                            </div>
                           </div>
                           <div className={Classes.rightStatus1}>
                             <div className={Classes.RightStausshow}>
                               <p className={Classes.RsHead}>Order confirmed</p>
                               <p style={{ color: "#A3A7AB" }}>
-                                {formatDate(orderDate)}
+                                Tues 18 oct’2022 , 4:45 PM
                               </p>
                             </div>
-
-                            {singleOrderData.order &&
-                              singleOrderData.order.track_order_details &&
-                              singleOrderData.order.track_order_details &&
-                              singleOrderData.order.track_order_details
-                                .order_type === "ecom" && (
-                                <div className={Classes.RightStausshow}>
-                                  <p
-                                    style={{ color: "#A3A7AB" }}
-                                    className={Classes.RsHead}
-                                  >
-                                    Shipped
-                                  </p>
-                                  {/* <p style={{ color: "#A3A7AB" }}>
-                                  Expected by Friday 19th Oct
-                                </p> */}
-                                </div>
-                              )}
-                            {/* <div className={Classes.RightStausshow2}>
+                            <div className={Classes.RightStausshow}>
+                              <p
+                                style={{ color: "#A3A7AB" }}
+                                className={Classes.RsHead}
+                              >
+                                Shipped
+                              </p>
+                              <p style={{ color: "#A3A7AB" }}>
+                                Expected by Friday 19th Oct
+                              </p>
+                            </div>
+                            <div className={Classes.RightStausshow2}>
                               <p
                                 style={{ color: "#A3A7AB" }}
                                 className={Classes.RsHead}
@@ -979,20 +568,15 @@ const OrderHistorypage2 = (props) => {
                                 Out of delivery
                               </p>
                               <p style={{ color: "#A3A7AB" }}></p>
-                            </div> */}
-                            <div
-                              className={Classes.RightStausshow3}
-                              style={{ position: "relative", top: "3px" }}
-                            >
+                            </div>
+                            <div className={Classes.RightStausshow3}>
                               <p
                                 style={{ color: "#A3A7AB" }}
                                 className={Classes.RsHead}
                               >
                                 Delivery
                               </p>
-                              {/* <p style={{ color: "#A3A7AB" }}>
-                                  Expected by Friday 19th Oct
-                                </p> */}
+                              <p style={{ color: "#A3A7AB" }}></p>
                             </div>
                           </div>
                         </div>
@@ -1000,13 +584,10 @@ const OrderHistorypage2 = (props) => {
                     </Accordion>
                   </div>
                   <div className={Classes.TrackButtons}>
-                    {// singleOrderData &&
-                    //   singleOrderData.order &&
-                    //   singleOrderData.order.shipment &&
-                    //   singleOrderData.order.shipment[0].status
-                    statusCode == 4 &&
-                      singleOrderData.order.shipment[0].cancel_order !==
-                        "Admin Approval pending" && (
+                    {singleOrderData &&
+                      singleOrderData.order &&
+                      singleOrderData.order.shipment &&
+                      singleOrderData.order.shipment[0].status === 4 && (
                         <button
                           className={Classes.REButton}
                           onClick={() => fetchLteLbbDetails()}
@@ -1014,17 +595,10 @@ const OrderHistorypage2 = (props) => {
                           Return / Exchange
                         </button>
                       )}
-                    {/* {statusCode == 2 ||
-                      (statusCode == 0 && (
-                        // singleOrderData.order.shipment[0].cancel_order !==
-                        //   "Admin Approval pending"
-                        <div className={Classes.CancelProductButton}>
-                          <button onClick={() => setCancelProductModal(true)}>
-                            Cancel product
-                          </button>
-                        </div>
-                      ))} */}
-                    {(statusCode == 0 || statusCode == 2 || statusCode == 9) &&
+                    {singleOrderData &&
+                      singleOrderData.order &&
+                      singleOrderData.order.shipment &&
+                      singleOrderData.order.shipment[0].status === 2 &&
                       singleOrderData.order.shipment[0].cancel_order !==
                         "Admin Approval pending" && (
                         <div className={Classes.CancelProductButton}>
