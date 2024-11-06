@@ -58,8 +58,8 @@ const MobileNavbar = (props) => {
   const [showUserDetails, setShowUserDetails] = useState(false);
   const dropdownRef = useRef(null);
   const [countryData, setCountryData] = useState([]);
-  const flag = localStorage.getItem("defaultCountryFlag");
-  const CountryIds = localStorage.getItem("id");
+  const flag = localStorage.getItem("https://swaecomordermain.swa.co//media/country/flag/Flag_of_the_United_Arab_Emirates.svg.png");
+  const CountryIds = localStorage.getItem(3);
   const [showModal, setShowModal] = useState(false);
   const [text, setText] = useState("");
   const pincode = localStorage.getItem("pincode");
@@ -201,8 +201,7 @@ const MobileNavbar = (props) => {
   const searchTitleHandler = (setItem) => {
     if (setItem.type === "category") {
       if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
-        window.location.href =
-          "https://swaecomnew.zinfog.in/category_search/" + setItem.id;
+        window.location.href = "https://swa.co/category_search/" + setItem.id;
       } else {
         history.push({
           pathname: "/new_arrivel",
@@ -229,7 +228,7 @@ const MobileNavbar = (props) => {
           };
           if (history.location.pathname.slice(0, 10) === "/products/") {
             window.location.href =
-              "https://swaecomnew.zinfog.in/products/" +
+              "https://swa.co/products/" +
               setItem.id +
               "/" +
               response1.data.results.data.color_id +
@@ -260,8 +259,7 @@ const MobileNavbar = (props) => {
   };
   const tagSelHandler = (selItem) => {
     if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
-      window.location.href =
-        "https://swaecomnew.zinfog.in/tag_search/" + selItem.id;
+      window.location.href = "https://swa.co/tag_search/" + selItem.id;
     } else {
       history.push({
         pathname: "/new_arrivel",
@@ -331,8 +329,7 @@ const MobileNavbar = (props) => {
   };
   const cattSelHandler = (setItem) => {
     if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
-      window.location.href =
-        "https://swaecomnew.zinfog.in/category_search/" + setItem.id;
+      window.location.href = "https://swa.co/category_search/" + setItem.id;
     } else {
       history.push({
         pathname: "/new_arrivel",
@@ -357,13 +354,13 @@ const MobileNavbar = (props) => {
         if (!CountryIds && !flag) {
           props.setSelectedCountry({
             ...props.selectedCountry,
-            flag_image: indiaData.flag_image,
-            id: indiaData.id,
-            country_name: indiaData.country_name,
+            flag_image: "https://swaecomordermain.swa.co//media/country/flag/Flag_of_the_United_Arab_Emirates.svg.png",
+            id: 3,
+            country_name: "United Arab Emirates",
           });
-          localStorage.setItem("flag_image", indiaData.flag_image);
-          localStorage.setItem("id", indiaData.id);
-          localStorage.setItem("country_name", indiaData.country_name);
+          localStorage.setItem("flag_image", "https://swaecomordermain.swa.co//media/country/flag/Flag_of_the_United_Arab_Emirates.svg.png",);
+          localStorage.setItem("id", 3);
+          localStorage.setItem("country_name", "United Arab Emirates");
         }
         console.log("indiaData--->", indiaData);
         const defaultCountryID = localStorage.getItem("id");
@@ -985,7 +982,7 @@ const MobileNavbar = (props) => {
                             </AccordionTab>
                           )}
                         </Accordion>
-                        {token && (
+{userName && (
                           <div
                             style={{ marginBottom: "100px" }}
                             onClick={handleLogOut}

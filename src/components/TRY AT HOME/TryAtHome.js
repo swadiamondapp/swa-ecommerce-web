@@ -7,8 +7,8 @@ import tryimg from "../../Assets/try.png";
 import trycloseimg from "../../Assets/tryclose.png";
 import { Link } from "react-router-dom";
 import { useHistory, useLocation } from "react-router-dom";
-import { CgDollar } from "react-icons/cg";
 import { BiRupee } from "react-icons/bi";
+import { CgDollar } from "react-icons/cg";
 
 import adddesignimg from "../../Assets/adddesign.png";
 import axios from "axios";
@@ -23,7 +23,7 @@ const TryAtHome = () => {
   const history = useHistory();
   const location = useLocation();
   const [dates, setDates] = useState([]);
-  const [errorMessage, setErrorMessage] = useState("");
+const [errorMessage, setErrorMessage] = useState("");
   const Contryname = localStorage.getItem("country_name");
   // const dates = location.state;
   // const dates = (location.state && location.state.dates) || [];

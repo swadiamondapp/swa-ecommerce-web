@@ -56,6 +56,7 @@ import freeDelivery4 from "../../Assets/freeDev4.png";
 import freeDelivery5 from "../../Assets/freeDev5.png";
 import shippingTag1 from "../../Assets/shiptruck.png";
 import shippingtag2 from "../../Assets/shiptimetwo.png";
+import ReactImageMagnify from "react-image-magnify";
 
 const ProductDetails = (props) => {
   const location = useLocation();
@@ -87,6 +88,8 @@ const ProductDetails = (props) => {
   const Contryname = localStorage.getItem("country_name");
   const [loginModalVisible, setLoginModalVisible] = useState(false);
   const [modalshow, setModalShow] = useState(false);
+  const imageurls =
+    "https://imgmedia.lbb.in/media/2022/09/632846916e5fb64e9bd02f1a_1663583889764.jpg";
 
   const closeHanlder = () => {
     setModalShow(false);
@@ -143,7 +146,7 @@ const ProductDetails = (props) => {
 
   const customerPhotos = async () => {
     const response = await axios.get(
-      "https://swaprdnecomnew.zinfog.in/ecom/products/" + props.id + "/reviews/"
+      "https://swaecommain.swa.co/ecom/products/" + props.id + "/reviews/"
     );
     if (response && response.data && response.data.results) {
       setReviews(response.data.results);
@@ -660,7 +663,10 @@ const ProductDetails = (props) => {
                               <Slider {...settings} ref={largeSliderRef}>
                                 {imageUrls.map((item, index) => {
                                   return (
-                                    <div>
+                                    <div
+                                      className="imageMagnifiyer"
+                                      key={index}
+                                    >
                                       {props.discount &&
                                         props.discountPercentage && (
                                           <div className={Classes.Discount}>
@@ -670,11 +676,32 @@ const ProductDetails = (props) => {
                                             </p>
                                           </div>
                                         )}
-                                      <img
+                                      <ReactImageMagnify
+                                        {...{
+                                          smallImage: {
+                                            alt: `Slide ${index}`,
+                                            isFluidWidth: true,
+                                            src: item,
+                                          },
+                                          largeImage: {
+                                            src: item,
+                                            width: 1129,
+                                            height: 750,
+                                          },
+                                          enlargedImagePosition: "over",
+                                          enlargedImageStyle: {
+                                            position: "relative",
+                                            right: "100px",
+                                            zIndex: "999999",
+                                            top: "0%",
+                                          },
+                                        }}
+                                      />
+                                      {/* <img
                                         className={Classes.Mobsliderbig}
                                         src={item}
                                         alt={`Slide ${index}`}
-                                      />
+                                      /> */}
                                     </div>
                                   );
                                 })}
@@ -798,6 +825,20 @@ const ProductDetails = (props) => {
                       </Slider>
                     </div>
                     {/* inner slide */}
+                    {/* <ReactImageMagnify
+                      {...{
+                        smallImage: {
+                          alt: "Wristwatch by Ted Baker London",
+                          isFluidWidth: true,
+                          src: imageurls,
+                        },
+                        largeImage: {
+                          src: imageurls,
+                          width: 500,
+                          height: 500,
+                        },
+                      }}
+                    /> */}
 
                     {/* new inner slider */}
                   </div>
@@ -910,8 +951,8 @@ const ProductDetails = (props) => {
                   <RWebShare
                     data={{
                       text: "Swa Diamonds",
-                      url: "https://swaecomnew.zinfog.in" + location.pathname,
-                      // url: "https://swaecomnew.zinfog.in/" + location.pathname,
+url: "https://swa.co" + location.pathname,
+                      // url: "http://localhost:3000/" + location.pathname,
                       title: "Swa Diamonds",
                     }}
                     onClick={() => console.log("shared successfully!")}
