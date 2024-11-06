@@ -40,7 +40,7 @@ import closeimg from "../../Assets/closeModal.png";
 import time from "../../Assets/time.png";
 import d1 from "../../Assets/d1.png";
 import d2 from "../../Assets/d2.png";
-import locationsimg from "../../Assets/locations.png";
+import locationsimg from "../../Assets/locates.svg";
 // import { Carousel } from "primereact/carousel";
 import Slider from "react-slick";
 import { BsFillPlayFill } from "react-icons/bs";
@@ -49,6 +49,13 @@ import CircularProgress from "@mui/material/CircularProgress";
 import VideocallForm from "./VideocallForm";
 import { CgDollar } from "react-icons/cg";
 import LoginModal from "../LoginModal/LoginModal";
+import shippingTag from "../../Assets/shiptime.png";
+import freeDelivery3 from "../../Assets/freeDev3.png";
+import shopL from "../../Assets/shopsL.png";
+import freeDelivery4 from "../../Assets/freeDev4.png";
+import freeDelivery5 from "../../Assets/freeDev5.png";
+import shippingTag1 from "../../Assets/shiptruck.png";
+import shippingtag2 from "../../Assets/shiptimetwo.png";
 import ReactImageMagnify from "react-image-magnify";
 
 const ProductDetails = (props) => {
@@ -56,12 +63,12 @@ const ProductDetails = (props) => {
   const [show, setShow] = useState(false);
   const [addToWishList, setAddToWishList] = useState(false);
   const [wishId, setWishId] = useState("");
-  const [pinCode, setPinCode] = useState("");
-  const [pincodeShow, setPincodeShow] = useState(false);
+
   const [pinCodeError, setPinCodeError] = useState("");
   const [active, setActive] = useState(null);
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
+
   const token = localStorage.getItem("swaToken");
   const [reviewImages, setReviewImages] = useState([]);
   const [reviews, setReviews] = useState([]);
@@ -178,23 +185,24 @@ const ProductDetails = (props) => {
     console.log("index", index);
   };
   const pinCodeChangeHandler = (e) => {
-    setPinCode(e.target.value);
-    setPincodeShow(false);
+    props.setPinCode(e.target.value);
+    props.setPincodeShow(false);
   };
-  const availbilityCheck = () => {
-    if (pinCode !== "") {
-      axios
-        .get(Urls.pincodeCheck + pinCode)
-        .then((response1) => {
-          setActive(response1.data.IsSuccess);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } else {
-      setPinCodeError("Enter pin code");
-    }
-  };
+
+  // const availbilityCheck = () => {
+  //   if (pinCode !== "") {
+  //     axios
+  //       .get(Urls.pincodeCheck + pinCode)
+  //       .then((response1) => {
+  //         setActive(response1.data.IsSuccess);
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   } else {
+  //     setPinCodeError("Enter pin code");
+  //   }
+  // };
   const seAllHandler = () => {
     setShow(!show);
   };
@@ -546,7 +554,7 @@ const ProductDetails = (props) => {
       try {
         setIsLoading(true);
         const response = await axios.get(_url);
-        setPinCode(response.data.address.postcode);
+        props.setPinCode(response.data.address.postcode);
         localStorage.setItem("pincode", response.data.address.postcode);
       } catch (error) {
         console.log(error);
@@ -555,8 +563,47 @@ const ProductDetails = (props) => {
       }
     });
   };
+  const getDeliveryDate = (deliveryDate) => {
+    const today = new Date();
+    const shippingTag24Hrs = "Delivery in 24 hrs";
+    const shippingTagNextDay = "Shipment in next day";
+    const shippingTag5Days = "Shipment in next 5 working days";
+
+    if (deliveryDate === shippingTag24Hrs) {
+      return shippingTag24Hrs; // Return the 24 hrs tag
+    } else if (deliveryDate === shippingTagNextDay) {
+      // Calculate the next day
+      today.setDate(today.getDate() + 1);
+    } else if (deliveryDate === shippingTag5Days) {
+      // Calculate 5 working days (skip weekends)
+      let workingDays = 5;
+      while (workingDays > 0) {
+        today.setDate(today.getDate() + 1);
+        if (today.getDay() !== 6 && today.getDay() !== 0) {
+          // Skip weekends (Saturday and Sunday)
+          workingDays--;
+        }
+      }
+
+      // Extract day and month for custom message
+      const day = today.getDate(); // Get the day of the month
+      const month = today.toLocaleString("default", { month: "long" }); // Get the full month name
+
+      // Return the custom message with the calculated date
+      return `Free delivery by ${day}th ${month}`;
+    } else {
+      return deliveryDate; // For any other delivery date
+    }
+
+    // Format the date for "Shipment in next day" or other cases
+    const options = { month: "short", day: "numeric", year: "numeric" };
+    return today.toLocaleDateString(undefined, options);
+  };
 
   console.log("imageUrls", imageUrls);
+  console.log(props.deliveryDate, "deliveryDate==>==>");
+  console.log(props.actualPrice, "props.actualPrice");
+  console.log(props.deliveryShopList, "props.deliveryShopList");
 
   return (
     <div>
@@ -904,7 +951,7 @@ const ProductDetails = (props) => {
                   <RWebShare
                     data={{
                       text: "Swa Diamonds",
-                      url: "https://swa.co" + location.pathname,
+url: "https://swa.co" + location.pathname,
                       // url: "http://localhost:3000/" + location.pathname,
                       title: "Swa Diamonds",
                     }}
@@ -925,7 +972,7 @@ const ProductDetails = (props) => {
                   : null}
                 {/* {props.diamondWeight}gram) */}
               </p>
-              <p className={Classes.Code}>{props.sku}</p>
+              <p className={Classes.Code}>SKU : {props.sku}</p>
               <div className={`${Classes.Flex} ${Classes.MobDownAR}`}>
                 {/* <BiRupee size={25} /> */}
 
@@ -943,26 +990,34 @@ const ProductDetails = (props) => {
                     <span style={{ paddingRight: "5px" }}>AED</span>
                   )}
                   {/* &#x20B9; {parseFloat(formattedCost).toFixed(0)} */}
-                  {result && result}
+                  {result === null || result === "NaN" ? "" : result}
                 </p>
-                {props.actualPrice && (
-                  <>
-                    {Contryname === "India" && (
-                      <BiRupee size={25} color="#B0B0B0" />
-                    )}
-                    {Contryname === "United States" && (
-                      <CgDollar size={25} color="#B0B0B0" />
-                    )}
-                    {Contryname === "United Arab Emirates" && (
-                      <span style={{ paddingRight: "5px", paddingLeft: "7px" }}>
-                        AED
-                      </span>
-                    )}
-                    <p className={Classes.OldPrice}>
-                      {numberWithCommas(parseInt(props.actualPrice).toFixed(0))}
-                    </p>
-                  </>
-                )}
+                {props.actualPrice &&
+                  (props.actualPrice === null ||
+                  isNaN(Number(props.actualPrice)) ? (
+                    ""
+                  ) : (
+                    <>
+                      {Contryname === "India" && (
+                        <BiRupee size={25} color="#B0B0B0" />
+                      )}
+                      {Contryname === "United States" && (
+                        <CgDollar size={25} color="#B0B0B0" />
+                      )}
+                      {Contryname === "United Arab Emirates" && (
+                        <span
+                          style={{ paddingRight: "5px", paddingLeft: "7px" }}
+                        >
+                          AED
+                        </span>
+                      )}
+                      <p className={Classes.OldPrice}>
+                        {numberWithCommas(
+                          parseInt(props.actualPrice, 10).toFixed(0)
+                        )}
+                      </p>
+                    </>
+                  ))}
               </div>
               {props.discount ? (
                 <p className={Classes.HurrayText}>
@@ -1055,14 +1110,14 @@ const ProductDetails = (props) => {
                     />
                   </button>{" "}
                   <button className={Classes.FindStores} onClick={Tryhome}>
-                    Try at Home
+                    Trial at Home
                   </button>
-                  <VideocallForm
-                    isOpen={isModalOpen}
-                    handleClose={handleCloseModal}
-                    productId={props.id}
-                  />
                 </div>
+                <VideocallForm
+                  isOpen={isModalOpen}
+                  handleClose={handleCloseModal}
+                  productId={props.id}
+                />
                 <p style={{ color: "#ff4545" }}>{props.errormsgtrycart}</p>
               </div>
               <Modal
@@ -1210,12 +1265,19 @@ const ProductDetails = (props) => {
                   <input
                     className={Classes.PinCode}
                     type="number"
-                    value={pinCode}
+                    value={props.pinCode}
                     onChange={pinCodeChangeHandler}
+                    onInput={(e) => {
+                      if (e.target.value.length > 6) {
+                        e.target.value = e.target.value.slice(0, 6);
+                      }
+                    }}
+                    min="0"
                   />
                   <button
                     className={Classes.CheckButton}
-                    onClick={() => setPincodeShow(true)}
+                    // onClick={() => setPincodeShow(true)}
+                    onClick={props.checkDelivery}
                     // onClick={availbilityCheck}
                   >
                     CHECK
@@ -1226,8 +1288,11 @@ const ProductDetails = (props) => {
                   onClick={availbilityCheck}
                 /> */}
                 </div>
-                <div>
-                  {pincodeShow && (
+                <div style={{ color: "#ff000094" }}>{props.picodeError}</div>
+                <div style={{ color: "#ff000094" }}>{props.sizeError}</div>
+                <div style={{ color: "#ff000094" }}>{props.colorError}</div>
+                {/* <div>
+                  {props.pincodeShow && (
                     <p
                       style={{
                         paddingTop: "12px",
@@ -1235,12 +1300,164 @@ const ProductDetails = (props) => {
                         fontWeight: "600",
                       }}
                     >
-                      Delivery in 3-5 days
+                      {props.deliveryDate}
                     </p>
                   )}{" "}
-                </div>
+                </div> */}
 
                 <div className="errrMsg">{pinCodeError}</div>
+
+                {props.deliveryDate && (
+                  <div className={Classes.shippingTag_one}>
+                    <div className={Classes.shippingTag_container}>
+                      <img
+                        src={
+                          props.deliveryDate ===
+                          "Shipment in next 5 working days"
+                            ? shippingTag1
+                            : props.deliveryDate === "Delivery in 24 hrs"
+                            ? shippingtag2
+                            : props.deliveryDate === "Shipment in next day"
+                            ? shippingTag
+                            : shippingtag2
+                        }
+                      />
+                      <p className={Classes.shippingTagtext}>
+                        {props.deliveryDate ===
+                        "Shipment in next 5 working days"
+                          ? "7 day shipping"
+                          : props.deliveryDate === "Delivery in 24 hrs"
+                          ? "24hr Delivery"
+                          : props.deliveryDate === "Shipment in next day"
+                          ? "Next day shipping"
+                          : shippingtag2}
+                      </p>
+                    </div>
+                  </div>
+                )}
+                <div className={Classes.deliveryListContainer}>
+                  {props.deliveryDate === "Shipment in next 5 working days" && (
+                    <div className={Classes.deliveryDetailsList}>
+                      <div className={Classes.freedevimageBack}>
+                        <img src={freeDelivery3} />
+                      </div>
+                      <div>
+                        <div>
+                          <p className={Classes.shippingTagtext_head}>
+                            {getDeliveryDate(props.deliveryDate)}
+                          </p>
+                        </div>
+                        <div>
+                          <p className={Classes.shippingTagtext_sub}>
+                            Order in next 4 HRS 23 mins
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  {/* <div className={Classes.deliveryDetailsList}>
+                    <div className={Classes.freedevimageBack}>
+                      <img src={freeDelivery4} />
+                    </div>
+                    <div>
+                      <div>
+                        <p className={Classes.shippingTagtext_head}>
+                          available at hilite mall (1km)
+                        </p>
+                      </div>
+                      <div>
+                        <p className={Classes.shippingTagtext_sub}>
+                          Also 3 other store Show more
+                        </p>
+                      </div>
+                    </div>
+                  </div> */}
+                  {props.deliveryDate && (
+                    <div className={Classes.deliveryDetailsList}>
+                      <div className={Classes.freedevimageBack}>
+                        <img src={freeDelivery5} />
+                      </div>
+                      <div>
+                        {props.deliveryDate === "Delivery in 24 hrs" ? (
+                          <>
+                            <div>
+                              <p className={Classes.shippingTagtext_head}>
+                                Free trial at home available
+                              </p>
+                            </div>
+                            <div>
+                              <p className={Classes.shippingTagtext_sub}>
+                                Try swa video call option
+                              </p>
+                            </div>
+                          </>
+                        ) : (
+                          <>
+                            <div>
+                              <p className={Classes.shippingTagtext_head}>
+                                Free trial at home not available
+                              </p>
+                            </div>
+                            <div>
+                              <p className={Classes.shippingTagtext_sub}>
+                                Try swa video call option
+                              </p>
+                            </div>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                  {props.deliveryDate &&
+                    Array.isArray(props.deliveryShopList) &&
+                    props.deliveryShopList.length > 0 && (
+                      <div className={Classes.deliveryDetailsList}>
+                        <div className={Classes.freedevimageBack}>
+                          <img src={shopL} alt="Free Delivery" />
+                        </div>
+                        <div>
+                          <div>
+                            <p className={Classes.shippingTagtext_head}>
+                              Available Shop
+                            </p>
+                          </div>
+                          <div>
+                            {props.deliveryShopList.map((shop, index) => {
+                              // Use a Set to collect unique shop names
+                              const shopNames = new Set();
+
+                              if (
+                                shop.delivery_in_24_hr &&
+                                shop.delivery_in_24_hr.shop_name
+                              ) {
+                                shopNames.add(shop.delivery_in_24_hr.shop_name);
+                              }
+                              if (
+                                shop.delivery_in_next_day &&
+                                shop.delivery_in_next_day.shop_name
+                              ) {
+                                shopNames.add(
+                                  shop.delivery_in_next_day.shop_name
+                                );
+                              }
+
+                              // Convert the Set back to an array and render unique shop names
+                              return Array.from(shopNames).map(
+                                (name, subIndex) => (
+                                  <p
+                                    key={`${index}-${subIndex}`}
+                                    className={Classes.shippingTagtext_sub}
+                                  >
+                                    {name}
+                                  </p>
+                                )
+                              );
+                            })}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                </div>
                 {/* <div className={Classes.Flex}>
                 <img className={Classes.Stroke} src={Stroke} alt="" />
                 <p className={Classes.StrokeText}>Standard delivery between </p>
@@ -1299,7 +1516,7 @@ const ProductDetails = (props) => {
                         </div>
                         <div>
                           <p className={Classes.DHeadText}>
-                            Free try at home not available
+                            Free trial at home not available
                           </p>
                           <p className={Classes.Dheadtext1}>
                             Try swa video call option
@@ -1560,7 +1777,7 @@ const ProductDetails = (props) => {
                     {/* {props.gw > 0 ? (
                       <p className={Classes.Right}>{props.gw + " GM"}</p>
                     ) : null} */}
-                    <p className={Classes.Right}>{props.gw + " GM"}</p>
+                    <p className={Classes.Right}>{props.gw + " G"}</p>
 
                     {props.diamondTypw !== null && (
                       <p className={Classes.Right}>{props.diamondTypw}</p>

@@ -28,7 +28,7 @@ function Features() {
                 className={Classes.FeaturesSubText}
                 style={{ display: "flex", alignItems: "center", gap: "3px" }}
               >
-                On order over{" "}
+                On all orders{" "}
                 {Contryname === "India" && (
                   <BiRupee className={Classes.Rupee} />
                 )}
@@ -53,7 +53,7 @@ function Features() {
               <img src={PS2} className={Classes.Images} alt="PS2" />
               <p className={Classes.FeaturesmainText}>100% Refund</p>
               <p className={Classes.FeaturesSubText}>
-                Return with 30 days of delivery
+                Return with 15 days of delivery
               </p>
             </div>
             <div

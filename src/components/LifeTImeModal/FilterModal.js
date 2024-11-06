@@ -14,6 +14,7 @@ import sortimg from "../../Assets/sort.png";
 import filtermobimg from "../../Assets/filter.png";
 import axios from "axios";
 import * as Urls from "../../Urls";
+import { GoDotFill } from "react-icons/go";
 
 const style = {
   position: "absolute",
@@ -396,7 +397,7 @@ const FilterModal = (props) => {
                           name="sort"
                           onChange={() => sortChange("new")}
                         />
-                        <label>New arraivals</label>
+                        <label>New arrivals</label>
                       </div>
                       <div className={classes.PriceTags1}>
                         <input
@@ -479,10 +480,7 @@ const FilterModal = (props) => {
                 <Typography>
                   <div className={classes.Container}>
                     <div className={classes.PriceTgs}>
-                      <Tab.Container
-                        id="left-tabs-example"
-                        defaultActiveKey="first"
-                      >
+                      <Tab.Container id="left-tabs-example" defaultActiveKey="first">
                         <Row>
                           <Col
                             style={{
@@ -497,19 +495,26 @@ const FilterModal = (props) => {
                                   <Nav.Link
                                     eventKey={key}
                                     style={{
-                                      background: "transparent",
-                                      // color:
-                                      //   key === activeTab
-                                      //     ? "#006E7F"
-                                      //     : "#475057 !important",
+                                      background:"#F7F6F2",
+                                      fontWeight: activeTab === key ? "900 !important" : "300 !important",
+                                      color: activeTab === key ? "black !important" : "inherit !important",
+                                      paddingLeft: "20px",
+                                      position: "relative",
                                     }}
                                     onClick={() => setActiveTab(key)}
                                   >
+                                    <GoDotFill
+                                      style={{
+                                        marginRight:"10px",
+                                        fontSize: "16px",
+                                        color: activeTab === key ? "#006E7F" : "#F7F6F2", 
+                                      }}
+                                     />
                                     {key === "first"
                                       ? "Categories"
                                       : key === "second"
-                                      ? "Metal"
-                                      : "Occasion"}
+                                        ? "Metal"
+                                        : "Occasion"}
                                   </Nav.Link>
                                 </Nav.Item>
                               ))}
@@ -518,30 +523,18 @@ const FilterModal = (props) => {
                           <Col>
                             <Tab.Content>
                               <Tab.Pane eventKey="first">
-                                {" "}
                                 {categoryWise.map((item, index) => (
-                                  <div
-                                    key={index}
-                                    className={classes.CategoryListMain}
-                                  >
+                                  <div key={index} className={classes.CategoryListMain}>
                                     <div className={classes.CategoryList}>
                                       <div className={classes.b1e}>
                                         <input
                                           type="checkbox"
-                                          checked={selectedCategoryByid.includes(
-                                            item.id
-                                          )}
-                                          onChange={() =>
-                                            handleCheckboxByCategory(item.id)
-                                          }
+                                          checked={selectedCategoryByid.includes(item.id)}
+                                          onChange={() => handleCheckboxByCategory(item.id)}
                                         />
                                         <label>
-                                          {String(item.name)
-                                            .charAt(0)
-                                            .toUpperCase() +
-                                            String(item.name)
-                                              .slice(1)
-                                              .toLowerCase()}
+                                          {String(item.name).charAt(0).toUpperCase() +
+                                            String(item.name).slice(1).toLowerCase()}
                                           <span>{item.product_count}</span>
                                         </label>
                                       </div>
@@ -551,143 +544,48 @@ const FilterModal = (props) => {
                                     </div>
                                   </div>
                                 ))}
-                                {/* <div className={classes.CategoryListMain}>
-                                <div className={classes.CategoryList}>
-                                  <div className={classes.b1e}>
-                                    <input type="checkbox" />
-                                    <label>
-                                      Earrings <span>43423</span>
-                                    </label>
-                                  </div>
-                                </div>
-                              </div> */}
                               </Tab.Pane>
                               <Tab.Pane eventKey="second">
-                                {" "}
                                 {metalCategory.map((item, index) => (
-                                  <div
-                                    key={index}
-                                    className={classes.CategoryListMain}
-                                  >
-                                    <div
-                                      key={index}
-                                      className={classes.CategoryList}
-                                    >
-                                      <div key={index} className={classes.b1e}>
+                                  <div key={index} className={classes.CategoryListMain}>
+                                    <div className={classes.CategoryList}>
+                                      <div className={classes.b1e}>
                                         <input
                                           type="checkbox"
-                                          checked={selectedMetelId.includes(
-                                            item.id
-                                          )}
-                                          onChange={() =>
-                                            handleCheckboxByMetel(item.id)
-                                          }
+                                          checked={selectedMetelId.includes(item.id)}
+                                          onChange={() => handleCheckboxByMetel(item.id)}
                                         />
                                         <label>
                                           {String(item.metal_type)
                                             .charAt(0)
                                             .toUpperCase() +
-                                            String(item.metal_type)
-                                              .slice(1)
-                                              .toLowerCase()}{" "}
+                                            String(item.metal_type).slice(1).toLowerCase()}
                                           <span>{item.product_count}</span>
                                         </label>
                                       </div>
                                     </div>
                                   </div>
                                 ))}
-                                {/* <div className={classes.CategoryListMain}>
-                                <div className={classes.CategoryList}>
-                                  <div className={classes.b1e}>
-                                    <input type="checkbox" />
-                                    <label>
-                                      white gold <span>2365</span>
-                                    </label>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className={classes.CategoryListMain}>
-                                <div className={classes.CategoryList}>
-                                  <div className={classes.b1e}>
-                                    <input type="checkbox" />
-                                    <label>
-                                      rose gold <span>3365</span>
-                                    </label>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className={classes.CategoryListMain}>
-                                <div className={classes.CategoryList}>
-                                  <div className={classes.b1e}>
-                                    <input type="checkbox" />
-                                    <label>
-                                      platinum <span>2365</span>
-                                    </label>
-                                  </div>
-                                </div>
-                              </div> */}
                               </Tab.Pane>
                               <Tab.Pane eventKey="third">
-                                {" "}
                                 {occation.map((item, index) => (
-                                  <div
-                                    key={index}
-                                    className={classes.CategoryListMain}
-                                  >
+                                  <div key={index} className={classes.CategoryListMain}>
                                     <div className={classes.CategoryList}>
                                       <div className={classes.b1e}>
                                         <input
                                           type="checkbox"
-                                          checked={selectedOccationById.includes(
-                                            item.id
-                                          )}
-                                          onChange={() =>
-                                            handleCheckboxByOccation(item.id)
-                                          }
+                                          checked={selectedOccationById.includes(item.id)}
+                                          onChange={() => handleCheckboxByOccation(item.id)}
                                         />
                                         <label>
-                                          {String(item.name)
-                                            .charAt(0)
-                                            .toUpperCase() +
-                                            String(item.name)
-                                              .slice(1)
-                                              .toLowerCase()}{" "}
+                                          {String(item.name).charAt(0).toUpperCase() +
+                                            String(item.name).slice(1).toLowerCase()}{" "}
                                           <span>{item.product_count}</span>
                                         </label>
                                       </div>
                                     </div>
                                   </div>
                                 ))}
-                                {/* <div className={classes.CategoryListMain}>
-                                <div className={classes.CategoryList}>
-                                  <div className={classes.b1e}>
-                                    <input type="checkbox" />
-                                    <label>
-                                      wedding <span>2365</span>
-                                    </label>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className={classes.CategoryListMain}>
-                                <div className={classes.CategoryList}>
-                                  <div className={classes.b1e}>
-                                    <input type="checkbox" />
-                                    <label>
-                                      birthday <span>3365</span>
-                                    </label>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className={classes.CategoryListMain}>
-                                <div className={classes.CategoryList}>
-                                  <div className={classes.b1e}>
-                                    <input type="checkbox" />
-                                    <label>
-                                      engament <span>2365</span>
-                                    </label>
-                                  </div>
-                                </div>
-                              </div> */}
                               </Tab.Pane>
                             </Tab.Content>
                           </Col>
@@ -695,22 +593,17 @@ const FilterModal = (props) => {
                       </Tab.Container>
                     </div>
                     <div className={classes.PriceBtns2}>
-                      <button
-                        className={classes.ResetBtn}
-                        onClick={handleReset}
-                      >
+                      <button className={classes.ResetBtn} onClick={handleReset}>
                         CLEAR ALL
                       </button>
-                      <button
-                        className={classes.ApplyBtn}
-                        onClick={handleButtonClick}
-                      >
+                      <button className={classes.ApplyBtn} onClick={handleButtonClick}>
                         Apply
                       </button>
                     </div>
                   </div>
                 </Typography>
               </Box>
+
             </Modal>
           </div>
         </div>

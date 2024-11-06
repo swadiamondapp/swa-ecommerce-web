@@ -36,8 +36,9 @@ const NewArrivalPage = (props) => {
               className={`${Classes.Home} ${Classes.HomeNew}`}
               onClick={homePageHandler}
             >
-              HOME /
+              HOME
             </p>
+            <p style={{ color: "#00464D", fontWeight: "900" }}>/</p>
             <p className={Classes.NewArrival}>
               {props.categoryName || "NEW ARRIVALS"}
             </p>

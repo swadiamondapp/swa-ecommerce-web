@@ -3,7 +3,6 @@
 // export const server = "https://swaprdnecomnew.zinfog.in/";
 // export const server = "https://swaprdntest.zinfog.com/";
 export const server = "https://swaecommain.swa.co/";
-
 //home page api
 export const home = server + "ecom/home/";
 //add wishlist
@@ -59,7 +58,7 @@ export const updatePas = server + "api/update/";
 export const pincodeCheck = server + "ecom/pincode_check/?pincode=";
 
 // getContrey Details
-export const getCountryFlags = server + "/ecom/country-details/";
+export const getCountryFlags = server + "ecom/country-details/";
 
 //track
 export const track = server + "ecom/product-tracking/";
@@ -106,3 +105,7 @@ export const tryatcart = server + "ecom/trialcartitems/";
 export const tryatcartdelete = server + "ecom/trialcartitems";
 // book appointment
 export const bookappointment = server + "ecom/trialcartitems/";
+// check delivery date
+
+export const checkdeliveryDate = server + "ecom/check-delivery-date/";
+export const oulets = server + "ecom/outlet-details/";

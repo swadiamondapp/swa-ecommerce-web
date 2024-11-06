@@ -18,10 +18,12 @@ const NewArrivalCard = (props) => {
   const location = useLocation();
   const [addToWishList, setAddToWishList] = useState(false);
   const [onadd, setOnAdd] = useState(true);
-  const [wishId, setWishId] = useState("");
-  const [showModal, setShowModal] = useState(false);
+  const [wishId, setWishId] = useState([]);
+  const likes = props.prodet.wishlist_id;
+  console.log("likes", likes);
+
   const Contryname = localStorage.getItem("country_name");
-  const [buttonText, setButtonText] = useState("Check delivery date");
+
   const countryId = localStorage.getItem("id");
   const flag = localStorage.getItem("flag_image");
 
@@ -30,8 +32,12 @@ const NewArrivalCard = (props) => {
     if (props.wishAct !== null) {
       setWishId(props.wishAct);
       setAddToWishList(true);
+    } else {
+      setAddToWishList(false);
+      setWishId(""); // Clear wishId if there's no wishlist activity
     }
   }, [props.wishAct]);
+
   const Added = () => {
     const token = localStorage.getItem("swaToken");
     if (token !== null) {
@@ -57,22 +63,51 @@ const NewArrivalCard = (props) => {
     }
   };
   const Remove = () => {
-    if (token !== null) {
+    if (token !== null && likes) {
+      // Ensure wishId is not empty
       axios
-        .delete(`${Urls.wishlist + wishId}?country=${countryId}`, {
+        .delete(`${Urls.wishlist}${likes}?country=${countryId}`, {
           headers: { Authorization: "Token " + token },
         })
         .then((response1) => {
           setAddToWishList(false);
+          setWishId(""); // Clear wishId on removal
           props.Suces();
         })
         .catch((error) => {
           console.log(error);
         });
     } else {
-      toast("Please Login!");
+      if (!likes) {
+        console.log("No wishId to remove.");
+      } else {
+        toast("Please Login!");
+      }
     }
   };
+  console.log(wishId, "wishId");
+  console.log(addToWishList, "addToWishList");
+  // const Remove = () => {
+  //   if (token !== null) {
+  //     if (wishId !== "") {
+  //       axios
+  //         .delete(`${Urls.wishlist + wishId}?country=${countryId}`, {
+  //           headers: {
+  //             Authorization: "Token " + token,
+  //           },
+  //         })
+  //         .then((response1) => {
+  //           setAddToWishList(false);
+  //           props.deltWishList();
+  //         })
+  //         .catch((error) => {
+  //           console.log(error);
+  //         });
+  //     }
+  //   } else {
+  //     toast("Please Login!");
+  //   }
+  // };
   // const addToCart = () =>{
   //     history.push('/cart')
   // }
@@ -87,27 +122,20 @@ const NewArrivalCard = (props) => {
   }
   const result = numberWithCommas(formattedCost);
 
-  const handleShowModal = () => {
-    const pincode = true;
-    if (pincode) {
-      setButtonText("Delivery in 3-5 Days");
-    } else {
-      setShowModal(true);
-    }
-  };
+  console.log("props.productId", props.ProductId);
+  console.log("props.buttonText", props.buttonText);
 
-  const handleCloseModal = () => {
-    setShowModal(false);
-  };
+  // const handleCloseModal = () => {
+  //   setShowModal(false);
+  // };
 
   return (
     <React.Fragment>
       <div
-        className={` ${
-          location.pathname === "/new_arrivel"
-            ? "col-md-4 col-sm-6 col-lg-4 col-6"
-            : "col-md-4 col-sm-6 col-lg-3 col-6"
-        } ${Classes.NewArrivals}`}
+        className={` ${location.pathname === "/new_arrivel"
+          ? "col-md-4 col-sm-6 col-lg-4 col-6"
+          : "col-md-4 col-sm-6 col-lg-3 col-6"
+          } ${Classes.NewArrivals}`}
       >
         <ToastContainer />
         <div className={Classes.NewArrivalCard}>
@@ -117,14 +145,13 @@ const NewArrivalCard = (props) => {
                 <p className={Classes.Number}>{props.Discount}</p>
               </div>
             ) : null}
-
             <img
               onClick={props.clicked}
               src={props.ProductImage}
               className={Classes.ProductImage}
               alt="ProductImage"
             />
-
+            
             {/* <p className={Classes.ProductName}>{props.ProductName}</p> */}
             {/* <p className={Classes.ProductId}>{props.ProductId}</p> */}
             <div className={Classes.HoverContainer}>
@@ -173,18 +200,27 @@ const NewArrivalCard = (props) => {
                         numberWithCommas(props.PriceOld)}
                     </p>
                   </div>
-                  <div className={Classes.Checkcards} onClick={handleShowModal}>
-                    <p className={Classes.CheckdeliveryNewtext}>{buttonText}</p>
+                  <div
+                    className={Classes.Checkcards}
+                    onClick={() => props.onClick(props.ProductId)}
+                  >
+                    <p className={Classes.CheckdeliveryNewtext}>
+                      {props.buttonText}
+                    </p>
                   </div>
                   <CheckDelivery
-                    show={showModal}
-                    handleClose={handleCloseModal}
-                    handleShow={handleShowModal}
+                    show={props.showModal}
+                    handleClose={props.onclose}
+                    handleShow={() => props.onClick(props.ProductId)}
                   />
+                </div>
+                <div className={Classes.cardTryatHomeBtn}>
+                  <button>TRIAL AT HOME</button>
                 </div>
               </div>
             </div>
           </div>
+
           {/* <div className={onadd ? [Classes.Buttons] : [Classes.None]}>
             <button className={Classes.AddToCart} onClick={props.clicked}>
               try@home

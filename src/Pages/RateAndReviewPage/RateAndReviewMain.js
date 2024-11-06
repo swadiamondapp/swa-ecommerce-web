@@ -29,7 +29,7 @@ const RateAndReviewMain = () => {
           <RateReviewMain />
         </div>
         <div className={Classes.Features}>
-          <SliderFeature />
+          {/* <SliderFeature /> */}
           <Features />
         </div>
       </div>

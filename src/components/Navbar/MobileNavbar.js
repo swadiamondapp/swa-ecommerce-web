@@ -32,9 +32,12 @@ import { FaPen } from "react-icons/fa";
 import SAU from "../../Assets/flagSAU.svg";
 import IND from "../../Assets/flagIND.svg";
 import UAE from "../../Assets/flagUAE.svg";
+import backBtn from "../../Assets/backBtn.png";
 import CheckDelivery from "../CheckDelivery/CheckDelivery";
+import { useLocation } from "react-router-dom/cjs/react-router-dom";
 
 const MobileNavbar = (props) => {
+  const location = useLocation();
   const history = useHistory();
   const [isHamOpen, setIsHamOpen] = useState(false);
   const [open, setOpen] = useState(false);
@@ -60,6 +63,10 @@ const MobileNavbar = (props) => {
   const [showModal, setShowModal] = useState(false);
   const [text, setText] = useState("");
   const pincode = localStorage.getItem("pincode");
+
+  const handleBackClick = () => {
+    history.goBack();
+  };
 
   console.log("catgSet", text);
 
@@ -156,6 +163,8 @@ const MobileNavbar = (props) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  const isCartPage = location.pathname === "/cart";
 
   const handleClickOutside = (event) => {
     if (
@@ -409,13 +418,66 @@ const MobileNavbar = (props) => {
   const handleCloseModal = () => {
     setShowModal(false);
   };
+
+  const toggleCart = (cartType) => {
+    props.setActiveCart(cartType);
+    console.log("cart,,,,.", props.setActiveCart(cartType));
+  };
+
   return (
     <div className={Classes.NavContainer}>
       <div className={Classes.Navbar}>
         <header>
-          <div className={Classes.NavElements}>
-            <div className={Classes.LeftIcons}>
-              {/* <Hamburger
+          {isCartPage && (
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                gap: "34px",
+                alignItems: "center",
+              }}
+            >
+              <img
+                onClick={handleBackClick}
+                style={{ width: "20.54px", height: "20px" }}
+                src={backBtn}
+              />
+              <div>
+                <div className={Classes.Parentcartitems}>
+                  <div
+                    className={
+                      props.activeCart === "shopping"
+                        ? Classes.ActiveCarthead
+                        : ""
+                    }
+                    onClick={() => toggleCart("shopping")}
+                  >
+                    Shopping Cart
+                  </div>
+                  <div
+                    className={
+                      props.activeCart === "trial" ? Classes.ActiveCarthead : ""
+                    }
+                    onClick={() => toggleCart("trial")}
+                  >
+                    Trial Cart
+                  </div>
+                </div>
+                {/* <div className={Classes.CartContent}>
+                  {activeCart === "shopping" ? (
+                    <div>Shopping Cart Content</div>
+                  ) : (
+                    <div>Trial Cart Content</div>
+                  )}
+                </div> */}
+              </div>
+            </div>
+          )}
+          {!isCartPage && (
+            <>
+              <div className={Classes.NavElements}>
+                <div className={Classes.LeftIcons}>
+                  {/* <Hamburger
                 className={Classes.hamIcon}
                 color="#fff"
                 size={24}
@@ -430,14 +492,14 @@ const MobileNavbar = (props) => {
                   }
                 }}
               /> */}
-              <img
-                onClick={handleOpen}
-                src={menuimg}
-                alt="menuimg"
-                className={Classes.hamMenu}
-              />
-            </div>
-            {/* {isHomePage && (
+                  <img
+                    onClick={handleOpen}
+                    src={menuimg}
+                    alt="menuimg"
+                    className={Classes.hamMenu}
+                  />
+                </div>
+                {/* {isHomePage && (
               <div
                 className={Classes.Logo}
                 onClick={() => (window.location.href = "/")}
@@ -445,92 +507,96 @@ const MobileNavbar = (props) => {
                 <img className={Classes.mobileLogo} src={Logo} />
               </div>
             )} */}
-            <div
-              className={Classes.Logo}
-              onClick={() => (window.location.href = "/")}
-            >
-              <img className={Classes.mobileLogo} src={Logo} alt="Logo" />
-            </div>
-
-            <div>
-              <div
-                style={{
-                  cursor: "pointer",
-                  display: "flex",
-                  flexDirection: "column",
-                  position: "relative",
-                  top: "5px",
-                }}
-                className={`${Classes.DeliveryPin} ${Classes.headerElement}`}
-                // onClick={handleShowModal}
-              >
-                <span
-                  style={{ fontSize: "12px", color: "#fff" }}
-                  className={Classes.checkDeliveryTitle}
-                >
-                  {/* CHECK DELIVERY */}
-                </span>{" "}
-                {/* {pincode ? null : (
-                  <span
-                    onClick={handleShowModal}
-                    className={Classes.EnterPinTitle}
-                    style={{
-                      cursor: "pointer",
-                      color: "#00e5ed",
-                      fontSize: "12px",
-                    }}
+                {location.pathname !== "/new_arrivel" && (
+                  <div
+                    className={Classes.Logo}
+                    onClick={() => (window.location.href = "/")}
                   >
-                    Enter PinCode
-                  </span>
-                )} */}
-                {/* {pincode && (
-                  <span
-                    className={Classes.EnterPinTitle}
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "8px",
-                      fontSize: "14px",
-                      color: "#00e5ed",
-                    }}
-                  >
-                    {pincode}{" "}
-                    <FaPen
-                      style={{ fontSize: "12px" }}
-                      onClick={handleShowModal}
-                    />
-                  </span>
-                )} */}
-              </div>
-            </div>
-            <CheckDelivery
-              show={showModal}
-              handleClose={handleCloseModal}
-              handleShow={handleShowModal}
-            />
-          </div>
-          <div className={Classes.rightIcons}>
-            {isHomePage ? (
-              <div>
-                {/* <img src={indiaimg} /> */}
-                <div
-                  style={{ cursor: "pointer" }}
-                  className={Classes.CountryFlags}
-                  // onClick={handleOpenDropDown}
-                  ref={nameRef}
-                >
-                  <div className={Classes.headerElement}>
-                    <img
-                      src={
-                        props &&
-                        props.selectedCountry &&
-                        props.selectedCountry.flag_image
-                      }
-                      alt="Selected flag"
-                      className={Classes.selectedImage}
-                    />
+                    <img className={Classes.mobileLogo} src={Logo} alt="Logo" />
                   </div>
-                  {/* {openDropDown && (
+                )}
+
+                <div>
+                  {location.pathname !== "/" &&
+                    !location.pathname.startsWith("/products/") && (
+                      <div
+                        style={{
+                          cursor: "pointer",
+                          display: "flex",
+                          flexDirection: "column",
+                          position: "relative",
+                          top: "5px",
+                        }}
+                        className={`${Classes.DeliveryPin} ${Classes.headerElement}`}
+                      >
+                        <span
+                          style={{ fontSize: "12px", color: "#fff" }}
+                          className={Classes.checkDeliveryTitle}
+                        >
+                          CHECK DELIVERY
+                        </span>
+                        {pincode ? null : (
+                          <span
+                            onClick={handleShowModal}
+                            className={Classes.EnterPinTitle}
+                            style={{
+                              cursor: "pointer",
+                              color: "#00e5ed",
+                              fontSize: "12px",
+                            }}
+                          >
+                            Enter PinCode
+                          </span>
+                        )}
+                        {pincode && (
+                          <span
+                            className={Classes.EnterPinTitle}
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              gap: "8px",
+                              fontSize: "14px",
+                              color: "#00e5ed",
+                            }}
+                          >
+                            {pincode}{" "}
+                            <FaPen
+                              style={{ fontSize: "12px" }}
+                              onClick={handleShowModal}
+                            />
+                          </span>
+                        )}
+                      </div>
+                    )}
+                </div>
+                <CheckDelivery
+                  show={showModal}
+                  handleClose={handleCloseModal}
+                  handleShow={handleShowModal}
+                />
+              </div>
+              <div className={Classes.rightIcons}>
+                {isHomePage ? (
+                  <div>
+                    {/* <img src={indiaimg} /> */}
+                    <div
+                      style={{ cursor: "pointer" }}
+                      className={Classes.CountryFlags}
+                      // onClick={handleOpenDropDown}
+                      ref={nameRef}
+                    >
+                      <div className={Classes.headerElement}>
+                        <img
+                          src={
+                            props &&
+                            props.selectedCountry &&
+                            props.selectedCountry.flag_image
+                          }
+                          alt="Selected flag"
+                          className={Classes.selectedImage}
+                        />
+                      </div>
+                      {/* {openDropDown && (
                     <div className={Classes.CountryDropDowns} ref={dropdownRef}>
                       {countryData.map((country, index) => (
                         <div className={Classes.CountryContainer} key={index}>
@@ -563,37 +629,37 @@ const MobileNavbar = (props) => {
                       ))}
                     </div>
                   )} */}
+                    </div>
+                  </div>
+                ) : (
+                  <div onClick={() => props.setIsHome(!props.isHome)}>
+                    <GoSearch style={{ color: "#fff", fontSize: "25px" }} />
+                  </div>
+                )}
+                <div>
+                  <CgHeart
+                    className={Classes.Icon}
+                    color="#FFFFFF"
+                    size={25}
+                    onClick={() => {
+                      moveToWishList();
+                      setText("Please Login");
+                    }}
+                  />
+                </div>
+                <div>
+                  <IoCartOutline
+                    className={`${Classes.Icon} ${Classes.AddToCart}`}
+                    color="#FFFFFF"
+                    size={25}
+                    onClick={() => {
+                      moveTocart();
+                      setText("Please Login");
+                    }}
+                  />
                 </div>
               </div>
-            ) : (
-              <div onClick={() => props.setIsHome(!props.isHome)}>
-                <GoSearch style={{ color: "#fff", fontSize: "25px" }} />
-              </div>
-            )}
-            <div>
-              <CgHeart
-                className={Classes.Icon}
-                color="#FFFFFF"
-                size={25}
-                onClick={() => {
-                  moveToWishList();
-                  setText("Please Login");
-                }}
-              />
-            </div>
-            <div>
-              <IoCartOutline
-                className={`${Classes.Icon} ${Classes.AddToCart}`}
-                color="#FFFFFF"
-                size={25}
-                onClick={() => {
-                  moveTocart();
-                  setText("Please Login");
-                }}
-              />
-            </div>
-          </div>
-          {/* {showSearchBar && (
+              {/* {showSearchBar && (
             <div className={Classes.ParentSearchBar}>
               <div>
                 <BsArrowLeft
@@ -639,6 +705,8 @@ const MobileNavbar = (props) => {
               <p className={Classes.NoResult}>No Results Found</p>
             )}
           </div> */}
+            </>
+          )}
         </header>
         {/* {isHamOpen ? (
           <>
@@ -914,7 +982,7 @@ const MobileNavbar = (props) => {
                             </AccordionTab>
                           )}
                         </Accordion>
-                        {userName && (
+{userName && (
                           <div
                             style={{ marginBottom: "100px" }}
                             onClick={handleLogOut}

@@ -190,6 +190,34 @@ input:checked + .CategoryListAmount + label {
   text-align: center;
 }
 
+/* styles.css or your CSS module */
+.activeTab {
+  background: #F7F6F2 !important;
+  font-weight: 900 !important;
+  color: black !important;
+  padding-left: 20px;
+  position: relative;
+}
+
+.inactiveTab {
+  background: transparent !important;
+  font-weight: 300 !important;
+  color: inherit !important;
+  padding-left: 20px;
+  position: relative;
+}
+
+.dot {
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  content: "•";
+  font-size: 12px;
+  color: black;
+}
+
+
 @media (min-width: 300px) and (max-width: 575px) {
   .titles {
     padding-bottom: 15px;

@@ -293,9 +293,9 @@ function Footer() {
       </div>
       {/* mobile footer */}
       <div className={Classes.FooterMob}>
-        {/* <div className={Classes.LogoMobScreen}>
+        <div className={Classes.LogoMobScreen}>
           <img className={Classes.Logo} src={Logo} alt="" />
-        </div> */}
+        </div>
         <div className={Classes.ParentCollaps}>
           <Accordion
             multiple

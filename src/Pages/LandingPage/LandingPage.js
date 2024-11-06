@@ -53,6 +53,9 @@ const LandingPage = () => {
   const flag = "https://swaecomordermain.swa.co//media/country/flag/Flag_of_the_United_Arab_Emirates.svg.png";
   const Contryname = "United Arab Emirates";
   const [headeroffer, setHeaderoffer] = useState([]);
+  // const [buttonText, setButtonText] = useState("Check delivery date");
+  const [buttonTexts, setButtonTexts] = useState({});
+  const [showModal, setShowModal] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState({
     id: 3,
     flag_image: "https://swaecomordermain.swa.co//media/country/flag/Flag_of_the_United_Arab_Emirates.svg.png",
@@ -64,6 +67,10 @@ const LandingPage = () => {
   console.log("bannercarousel", banner);
   console.log("flag...?", flag);
   console.log("counts123", counts);
+  console.log("serachList11", serachList);
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
 
   const history = useHistory();
   const token = localStorage.getItem("swaToken");
@@ -193,6 +200,41 @@ const LandingPage = () => {
       state: { data: "filMin", price: price },
     });
   };
+
+  const handleShowModal = (productId) => {
+    console.log("productIddd", productId);
+    const pincode = localStorage.getItem("pincode");
+    if (pincode) {
+      const body = {
+        product_id: productId,
+        color_id: "",
+        size_id: "",
+        pincode: pincode,
+      };
+
+      axios
+        .post(Urls.checkdeliveryDate, body, {
+          headers: { Authorization: "Token " + token },
+        })
+        .then((response1) => {
+          // setButtonText(response1.data.results.message);
+          setButtonTexts((prevState) => ({
+            ...prevState,
+            [productId]: response1.data.results.message, // Update the specific product's button text
+          }));
+          console.log("dateresponse", response1.data.results);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      setShowModal(true);
+    }
+  };
+  const handleProductClick = (productId) => {
+    console.log("Product ID:", productId);
+    // Add additional logic to handle the product click
+  };
   const prodDetHandler = (prodItem) => {
     console.log("prodItem---->", prodItem);
     history.push({
@@ -217,7 +259,6 @@ const LandingPage = () => {
     );
   } else {
     newArriv = newArrival.map((item, index) => {
-      console.log("item.discount_percentage--->", item.discount_percentage);
       return (
         <NewArrivalCard
           ProductImage={item.thumbnail_image && item.thumbnail_image}
@@ -240,7 +281,11 @@ const LandingPage = () => {
           prodet={item}
           wishAct={item.wishlist_id}
           Suces={home}
+          onclose={handleCloseModal}
           clicked={() => prodDetHandler(item)}
+          onClick={() => handleShowModal(item.product_id)}
+          buttonText={buttonTexts[item.product_id] || "Check delivery date"}
+          showModal={showModal}
         />
       );
     });
@@ -278,6 +323,10 @@ const LandingPage = () => {
           wishAct={item.wishlist_id}
           Suces={home}
           prodet={item}
+          onclose={handleCloseModal}
+          onClick={() => handleShowModal(item.product_id)}
+          buttonText={buttonTexts[item.product_id] || "Check delivery date"}
+          showModal={showModal}
         />
       );
     });
@@ -327,6 +376,12 @@ const LandingPage = () => {
                 Suces={home}
                 wishAct={item && item.wishlist_id && item.wishlist_id}
                 prodet={item}
+                onclose={handleCloseModal}
+                onClick={() => handleShowModal(item.product_id)}
+                buttonText={
+                  buttonTexts[item.product_id] || "Check delivery date"
+                }
+                showModal={showModal}
               />
             );
           })}
@@ -383,6 +438,8 @@ const LandingPage = () => {
           </ShopOnBudget>
         </div>
       </div>
+      <SliderFeature />
+
       <div className="container newarrivalContainer">
         <NewArrivals counts={counts}>{newArriv}</NewArrivals>
       </div>
@@ -401,7 +458,6 @@ const LandingPage = () => {
         <DownloadOurAppImage />
         {/* <RecentSearch /> */}
       </div>
-      <SliderFeature />
 
       <Footer />
     </div>
