@@ -8,7 +8,7 @@ function OrderHistoryCard(props) {
   return (
     <div>
       {" "}
-      <div className="">
+      <div className={Classes.OutBox}>
         <div className="container">
           <div className="row">
             <div className={Classes.Background}>{props.children}</div>

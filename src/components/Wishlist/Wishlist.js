@@ -8,7 +8,7 @@ const Wishlist = (props) =>{
 
   }
   return (
-    <>
+    <div>
        <div className={Classes.Main} >
                 <h1 className={Classes.Title}>Wishlist</h1>
             </div>
@@ -23,7 +23,7 @@ const Wishlist = (props) =>{
                     </div>
                 </div>
             </div>
-    </>
+    </div>
   )
 }
 

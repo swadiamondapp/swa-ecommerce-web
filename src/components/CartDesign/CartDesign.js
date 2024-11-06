@@ -25,18 +25,16 @@ function CartDesign(props) {
   const [walletOpen, setWalletOpen] = useState(false);
   const [swaWallet, setSwaWallet] = useState(null);
   const [isApply, setIsApply] = useState(false);
-  const [walletValues, setWalletValues] = useState([]);
   const [swaExchangeWallet, setSwaExchangeWallet] = useState(null);
   const [updatedCartResponse, setUpdatedCartResponse] = useState([]);
   const history = useHistory();
   const token = localStorage.getItem("swaToken");
-  console.log("walletValuesab", walletValues.swa_wallet);
+  console.log("activeCartrishan", props.activeCart);
   let diff = 0;
   useEffect(() => {
     setTotal(props.amount - props.cartProAmnt);
     setAmountPay(props.amount - props.cartProAmnt);
   }, []);
-  console.log(total, "amountsoftrialCart");
   const handleSubmit = (event) => {
     event.preventDefault();
   };
@@ -49,7 +47,6 @@ function CartDesign(props) {
           total: total,
           updatedCartResponse: updatedCartResponse,
           totalSavedAmount: totally_saved,
-          promoCodeIds: promoId,
         },
         name: "cart",
       },
@@ -58,30 +55,6 @@ function CartDesign(props) {
 
   const promCodeChngeHandler = (e) => {
     setCode(e.target.value);
-  };
-  const getSwaWalletAmounts = async () => {
-    try {
-      const response = await axios.get(
-        `${Urls.getWalletAmounts}?country=${countryId}`,
-        {
-          headers: { Authorization: "Token " + token },
-        }
-      );
-      setWalletValues(response.data);
-      if (
-        response.data.swa_wallet === 0 &&
-        response.data.exchange_wallet === 0
-      ) {
-        // If both wallet balances are 0, directly update the cart and proceed to checkout
-        step2Handler();
-      } else if (isApply) {
-        step2Handler();
-      } else {
-        setWalletOpen(true);
-      }
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   const promoCodeHandler = () => {
@@ -164,7 +137,6 @@ function CartDesign(props) {
                 total: response.data.results.total_amount,
                 updatedCartResponse: response.data.results,
                 totalSavedAmount: totally_saved,
-                promoCodeIds: promoId,
               },
               name: "cart",
             },
@@ -212,7 +184,6 @@ function CartDesign(props) {
         setSwaExchangeWallet={setSwaExchangeWallet}
         step2Handler={step2Handler}
         setIsApply={setIsApply}
-        walletValues={walletValues}
       />
       <div className={`${Classes.Wrapper} container`}>
         <div className={`${Classes.Wrapper} container`}>
@@ -240,7 +211,7 @@ function CartDesign(props) {
             <div className="col-md-8">
               <div className={Classes.Left}>{props.children}</div>
             </div>
-            <p className={Classes.OrderSummeryMob}>ORDER SUMMARY</p>
+            <p className={Classes.OrderSummeryMob}>ORDER SUMMERY</p>
             <div className="col-md-4">
               {/* shoping cart */}
               {props.activeCart === "shopping" && (
@@ -282,6 +253,7 @@ function CartDesign(props) {
                           value={code}
                           onChange={promCodeChngeHandler}
                           name="name"
+                          placeholder=" SWAFRST"
                         />
                         <input
                           className={Classes.ApplyButton}
@@ -343,10 +315,12 @@ function CartDesign(props) {
                       className={Classes.PlaceOrderButton}
                       type="submit"
                       value="Place order"
-                      onClick={async () => {
-                        await getSwaWalletAmounts();
-
-                        // After fetching wallet values, check if both are 0
+                      onClick={() => {
+                        if (isApply) {
+                          step2Handler();
+                        } else {
+                          setWalletOpen(true);
+                        }
                       }}
                     />
                     {props.totalSavedAmount || diff ? (
@@ -393,11 +367,10 @@ function CartDesign(props) {
                         <p className={Classes.TotalSmall}>
                           Total &nbsp;
                           <span>
-                            {/* (
+                            (
                             {props.tryCartcountResults &&
                               props.tryCartcountResults.item_count}{" "}
-                            Items) */}
-                            ({props.cartCount && props.cartCount} Items)
+                            Items)
                           </span>
                         </p>
                       </div>
@@ -437,9 +410,9 @@ function CartDesign(props) {
                       </p>
                     </div>
                     <div className={Classes.BookappointmentTrails}>
-                      <Link to="/trialathome">
+                      <Link to="/tryathome">
                         {" "}
-                        <button>Book Appointment</button>
+                        <button>Book Appoinment</button>
                       </Link>
                     </div>
                   </div>

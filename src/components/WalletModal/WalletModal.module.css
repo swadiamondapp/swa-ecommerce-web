@@ -216,16 +216,9 @@
   height: 20px;
   width: 15px;
 }
-.ErrorMessage {
-  color: red;
-  font-size: 12px;
-
-}
 @media (min-width: 300px) and (max-width: 575px) {
   .CancelButton {
     justify-content: center;
-    flex-direction: column;
-    gap:12px
   }
   .CancelButton button {
     width: 100%;

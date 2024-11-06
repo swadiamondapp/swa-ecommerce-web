@@ -147,11 +147,13 @@ const whishlistPage = () => {
           selectedCountry={selectedCountry}
           setSelectedCountry={setSelectedCountry}
         />
+        <div className="container">
           <div className={Classes.Products}>
             <Wishlist> {wishlists} </Wishlist>
           </div>
-        <div>
-          {/* <SliderFeature /> */}
+        </div>
+        <div style={{ marginTop: "50px" }}>
+          <SliderFeature />
           <Features />
         </div>
         <Footer />

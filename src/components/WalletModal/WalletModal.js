@@ -39,16 +39,16 @@ const mobileStyle = {
 
 const WalletModal = (props) => {
   const token = localStorage.getItem("swaToken");
-  // const [walletValues, setWalletValues] = useState([]);
+  const [walletValues, setWalletValues] = useState([]);
   const countryId = localStorage.getItem("id");
   const Contryname = localStorage.getItem("country_name");
   const [isMobileView, setIsMobileView] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
   );
 
-  // useEffect(() => {
-  //   getSwaWalletAmounts();
-  // }, [props.open]);
+  useEffect(() => {
+    getSwaWalletAmounts();
+  }, [props.open]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -63,27 +63,27 @@ const WalletModal = (props) => {
     };
   }, [isMobileView]);
 
-  // const getSwaWalletAmounts = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       `${Urls.getWalletAmounts}?country=${countryId}`,
-  //       {
-  //         headers: { Authorization: "Token " + token },
-  //       }
-  //     );
-  //     setWalletValues(response.data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const getSwaWalletAmounts = async () => {
+    try {
+      const response = await axios.get(
+        `${Urls.getWalletAmounts}?country=${countryId}`,
+        {
+          headers: { Authorization: "Token " + token },
+        }
+      );
+      setWalletValues(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleWalletCheck = (e) => {
-    const value = e.target.checked ? props.walletValues.swa_wallet : null;
+    const value = e.target.checked ? walletValues.swa_wallet : null;
     props.setSwaWallet(value);
   };
 
   const handleExchangeWalletCheck = (e) => {
-    const value = e.target.checked ? props.walletValues.exchange_wallet : null;
+    const value = e.target.checked ? walletValues.exchange_wallet : null;
     props.setSwaExchangeWallet(value);
   };
 
@@ -109,7 +109,7 @@ const WalletModal = (props) => {
                 <div className={Classes.Content}>
                   <input
                     type="checkbox"
-                    value={props.walletValues.swa_wallet}
+                    value={walletValues.swa_wallet}
                     checked={props.swaWallet !== null}
                     onChange={handleWalletCheck}
                   />
@@ -126,14 +126,14 @@ const WalletModal = (props) => {
                   {Contryname === "United Arab Emirates" && (
                     <span style={{ paddingRight: "5px" }}>AED</span>
                   )}{" "}
-                  {props.walletValues.swa_wallet}
+                  {walletValues.swa_wallet}
                 </p>
               </div>
               <div className={Classes.WalletContentLines}>
                 <div className={Classes.Content}>
                   <input
                     type="checkbox"
-                    value={props.walletValues.exchange_wallet}
+                    value={walletValues.exchange_wallet}
                     checked={props.swaExchangeWallet !== null}
                     onChange={handleExchangeWalletCheck}
                   />
@@ -150,7 +150,7 @@ const WalletModal = (props) => {
                   {Contryname === "United Arab Emirates" && (
                     <span style={{ paddingRight: "5px" }}>AED</span>
                   )}{" "}
-                  {props.walletValues.exchange_wallet}
+                  {walletValues.exchange_wallet}
                 </p>
               </div>
             </div>

@@ -3,11 +3,10 @@ header a {
 }
 
 header {
-  background-color: #00464d;
+  background-color: #10212f;
 }
 .SubHeadNav {
-  background: #fcfbf6;
-  border-bottom: 1px solid #f5f1e0;
+  background: #10212f;
 }
 .NavLinksDesk {
   display: flex;
@@ -161,7 +160,7 @@ header {
 }
 .SlideImagedesk {
   width: 100% !important;
-  height: 100% !important;
+  height: 255px !important;
 }
 
 /* Add a margin to the last slide to create a gap */
@@ -231,15 +230,9 @@ header {
 }
 .NavLinksDesk p {
   padding-bottom: 10px;
-  color: #10212f;
-  font-family: "Lato";
-  font-weight: 600;
-  font-size: 12px;
 }
 .NavLinksDesk p:hover {
-  /* color: #4d9ea7; */
-  color: #10212f;
-
+  color: #4d9ea7;
   border-bottom: 5px solid #4d9ea7;
 }
 
@@ -284,25 +277,6 @@ header {
   flex-direction: column;
 
   outline: none;
-}
-.mobCheckDelivery {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0px 15px;
-  margin-top: 5px;
-}
-.mobCheckDelivery p:nth-child(2) {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-weight: 600;
-  color: #007481;
-}
-.mobCheckDelivery p:nth-child(1) {
-  color: #000000;
-  font-weight: 500;
-  font-size: 15px;
 }
 .ParentHoverBtns {
   display: flex;
@@ -362,7 +336,6 @@ header {
 .OffersInner {
   background: #f7f6f2;
   background: #f0f0f0;
-  background: #fbf8ef;
   margin: 5px 0px;
   box-shadow: 0px 2px 2px 0px #0000000d;
   width: 100%;
@@ -441,7 +414,7 @@ header {
 }
 .cartPage {
   display: grid;
-  grid-template-columns: 1fr 1.65fr;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
   margin-bottom: 15px;
 }
@@ -481,13 +454,10 @@ header {
   font-size: 16px;
   line-height: 20px;
   font-family: "gilroyNormal" !important;
-  border-bottom: 1px solid #eaeaea;
+  border-bottom: 1px solid #c4c4c4;
   padding-bottom: 10px;
   padding-top: 10px;
   cursor: pointer;
-}
-.SearchItem:hover {
-  background-color: rgba(0, 70, 77, 0.05);
 }
 .LogItem {
   color: #505050;
@@ -894,9 +864,6 @@ a {
   cursor: pointer;
   margin-left: 5px;
 }
-.outletlogo {
-  cursor: pointer;
-}
 .Background {
   background: rgba(0, 0, 0, 0.4);
   width: 100%;
@@ -1268,9 +1235,6 @@ a {
 }
 .logo img {
   cursor: pointer;
-  position: relative;
-  top: -6px;
-  max-width: 74px;
 }
 .logo img:hover {
   /* transform: scale(1.1);
@@ -1376,13 +1340,11 @@ a {
   }
   header {
     background-color: #10212f;
-    border: none;
-    background: #00464d;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* padding: 10px 20px; */
+    padding: 10px 20px;
   }
   .CatList {
     display: block;
@@ -1409,8 +1371,6 @@ a {
 
   header {
     background-color: #10212f;
-    border: none;
-    background: #00464d;
     width: 100%;
     display: flex;
     align-items: center;
@@ -1443,7 +1403,7 @@ a {
 
   .searchbar {
     width: 100%;
-    /* margin-bottom: 7px; */
+    margin-bottom: 7px;
   }
   .MobSliderCards {
     display: flex;

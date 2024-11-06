@@ -32,7 +32,6 @@ import TryAtHomePage from "./components/TRY AT HOME/TryAtHomePage";
 import TryAtHomeInnerPage from "./components/TRY AT HOME/TryAtHomeInnerPage";
 import GTM from "./components/GTM/GTM";
 import TrialCart from "./components/CartDesign/CartProducts/TrialCart";
-
 function App() {
   return (
     <Router>
@@ -72,7 +71,7 @@ function App() {
         />
         <Route path="/payment" component={PaymentPage} />
         <Route path="/profile" component={ProfilePage} />
-        <Route path="/trialathome" component={TryAtHomePage} />
+        <Route path="/tryathome" component={TryAtHomePage} />
         <Route path="/tryathomeform" component={TryAtHomeInnerPage} />
         <Route path="/outlet" component={OutletPage} />
       </Switch>

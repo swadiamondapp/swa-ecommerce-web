@@ -923,7 +923,7 @@ input[type="number"] {
     display: none;
   }
   .ParentSlide .slick-dots li {
-    width: 14px !important;
+    width: 40px !important;
   }
   .ProductdetialParentContainer {
     margin-top: 0px;
@@ -936,7 +936,7 @@ input[type="number"] {
   }
   .videoParentslider {
     width: 100% !important;
-    height: 373px !important;
+    height: 327px !important;
     object-fit: cover;
   }
   .landingrow {
@@ -975,39 +975,9 @@ input[type="number"] {
 /* .MainHead_CarouselCards__3NvGV .slick-track {
   width: 50% !important; 
 } */
-.modal {
-  top: 20% !important;
-}
-/* styles.css or your CSS module */
-.activeTab {
-  background: #f7f6f2 !important;
-  font-weight: 900 !important;
-  color: black !important;
-  padding-left: 20px;
-  position: relative;
-}
 
-.inactiveTab {
-  background: transparent !important;
-  font-weight: 300 !important;
-  color: inherit !important;
-  padding-left: 20px;
-  position: relative;
-}
-
-.dot {
-  position: absolute;
-  left: -10px;
-  top: 50%;
-  transform: translateY(-50%);
-  content: "•";
-  font-size: 12px;
-  color: black;
-}
-.p-inputtext {
-  padding: 0px !important;
-}
 @media (min-width: 1400px) and (max-width: 3000px) {
   .ParentSlide .slick-list {
     height: 504px;
   }
+}

@@ -51,7 +51,7 @@ const Header = (props) => {
     }
   };
   const catSelHandler = (id) => {
-window.open("https://swa.co/category_search/" + id, "_self");
+    window.open("https://swa.co/category_search/" + id, "_self");
     console.log("testk");
   };
   const moveToOrderHistory = () => {
@@ -103,7 +103,7 @@ window.open("https://swa.co/category_search/" + id, "_self");
     if (setItem.type === "category") {
       if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
         window.location.href =
-"https://swa.co/category_search/" + setItem.id;
+          "https://swa.co/category_search/" + setItem.id;
         console.log("testk");
       } else {
         history.push({ pathname: "/new_arrivel", state: { data: setItem.id } });

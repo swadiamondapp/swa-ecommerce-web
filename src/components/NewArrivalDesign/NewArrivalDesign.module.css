@@ -1,5 +1,5 @@
 .Title {
-  font-weight: 600;
+  font-weight: 500;
   font-size: 24px;
   font-family: "PlayFairNormal" !important;
 }
@@ -27,21 +27,19 @@
   font-weight: 400;
   font-size: 14px;
   font-family: "gilroyNormal" !important;
-  gap: 5px;
 }
 .Home {
   color: #00464d;
-  font-weight: 700;
+  font-weight: 400;
   font-size: 14px;
-  /* font-family: "gilroyNormal" !important; */
-  font-family: "Lato" !important;
+  font-family: "gilroyNormal" !important;
   cursor: pointer;
 }
 .NewArrival {
   color: #01b3c5;
-  font-weight: 700;
+  font-weight: 400;
   font-size: 14px;
-  font-family: "Lato" !important;
+  font-family: "gilroyNormal" !important;
 }
 .Filtered {
   display: flex;

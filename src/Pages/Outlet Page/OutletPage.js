@@ -8,9 +8,6 @@ import axios from "axios";
 import * as Urls from "../../Urls";
 
 const OutletPage = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
   const countryId = localStorage.getItem("id");
   const flag = localStorage.getItem("flag_image");
   const Contryname = localStorage.getItem("country_name");
