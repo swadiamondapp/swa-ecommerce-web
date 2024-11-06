@@ -28,9 +28,9 @@ import { MdEdit } from "react-icons/md";
 import { FaPen } from "react-icons/fa";
 
 const Header = (props) => {
-  const flag = "https://swaecomordermain.swa.co//media/country/flag/Flag_of_the_United_Arab_Emirates.svg.png";
-  const CountryIds = 3;
-  const Contryname = "United Arab Emirates";
+  const flag = localStorage.getItem("flag_image");
+  const CountryIds = localStorage.getItem("id");
+  const Contryname = localStorage.getItem("country_name");
   const location = useLocation();
   const [isHome, setIsHome] = useState(
     location.pathname === "/" ? true : false
@@ -75,13 +75,6 @@ const Header = (props) => {
   const handleCloseModal = () => {
     setShowModal(false);
   };
-
-  // useEffect(() => {
-  //   localStorage.setItem("id", 3);
-  //   localStorage.setItem("flag_image", "https://swaecomordermain.swa.co//media/country/flag/Flag_of_the_United_Arab_Emirates.svg.png");
-  //   localStorage.setItem("country_name", "United Arab Emirates");
-  // }, []);
-
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -158,8 +151,7 @@ const Header = (props) => {
     // }
 
     if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
-      window.location.href =
-        "https://swa.co/category_search/" + setItem.id;
+      window.location.href = "https://www.swa.co/category_search/" + setItem.id;
     } else {
       history.push({
         pathname: "/new_arrivel",
@@ -170,7 +162,7 @@ const Header = (props) => {
   // const cattSelHandler = (setItem) => {
   //   if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
   //     window.location.href =
-  //       "https://swa.co/category_search/" + setItem.id;
+  //       "http://swaecomnew.zinfog.in/category_search/" + setItem.id;
   //   } else {
   //     history.push({
   //       pathname: "/new_arrivel",
@@ -186,8 +178,7 @@ const Header = (props) => {
   };
   const tagSelHandler = (selItem) => {
     if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
-      window.location.href =
-        "https://swa.co/tag_search/" + selItem.id;
+      window.location.href = "https://www.swa.co/tag_search/" + selItem.id;
     } else {
       history.push({
         pathname: "/new_arrivel",
@@ -246,7 +237,7 @@ const Header = (props) => {
     if (setItem.type === "category") {
       if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
         window.location.href =
-          "https://swa.co/category_search/" + setItem.id;
+          "https://www.swa.co/category_search/" + setItem.id;
       } else {
         history.push({ pathname: "/new_arrivel", state: { data: setItem.id } });
       }
@@ -269,7 +260,7 @@ const Header = (props) => {
           };
           if (history.location.pathname.slice(0, 10) === "/products/") {
             window.location.href =
-              "https://swa.co/products/" +
+              "https://www.swa.co/products/" +
               setItem.id +
               "/" +
               response1.data.results.data.color_id +
@@ -436,33 +427,77 @@ const Header = (props) => {
       try {
         const response = await axios.get(Urls.getCountryFlags);
         console.log("response.data.results.data", response.data.results.data);
-const filteredData = response.data.results.data.filter(
-          (country) => country.country_name === "United Arab Emirates"
-        );
-        setCountryData(filteredData);
+        setCountryData(response.data.results.data);
+        const getLocation = async () => {
+          setIsLoading(true);
+          navigator.geolocation.getCurrentPosition(
+            async (pos) => {
+              const { latitude, longitude } = pos.coords;
+              let _url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
+              try {
+                const geoResponse = await axios.get(_url);
+                const userCountryName = geoResponse.data.address.country;
+                setCountry(userCountryName);
 
-        // Extracting the ID of India
-        const indiaData = response.data.results.data.find(
-          (country) => country.country_name === "United Arab Emirates"
-        );
-        if (!CountryIds && !flag) {
-          props.setSelectedCountry({
-            ...props.selectedCountry,
-            flag_image: "https://swaecomordermain.swa.co//media/country/flag/Flag_of_the_United_Arab_Emirates.svg.png",
-            id: 3,
-            country_name: "United Arab Emirates",
-          });
-          localStorage.setItem("flag_image", "https://swaecomordermain.swa.co//media/country/flag/Flag_of_the_United_Arab_Emirates.svg.png");
-          localStorage.setItem("id", 3);
-          localStorage.setItem("country_name", "United Arab Emirates");
-        }
-        console.log("indiaData--->", indiaData);
-        const defaultCountryID = 3;
-        const defaultCountryFlag = "https://swaecomordermain.swa.co//media/country/flag/Flag_of_the_United_Arab_Emirates.svg.png";
-        if (defaultCountryID && defaultCountryFlag) {
-          // Find the default country from the data using the ID
-          const defaultCountry = countryData.find(
-            (country) => country.id === parseInt(defaultCountryID)
+                let selectedCountryData;
+
+                if (
+                  userCountryName === "India" ||
+                  userCountryName === "United Arab Emirates"
+                ) {
+                  selectedCountryData = response.data.results.data.find(
+                    (country) => country.country_name === userCountryName
+                  );
+                } else {
+                  selectedCountryData = response.data.results.data.find(
+                    (country) => country.country_name === "United States"
+                  );
+                }
+
+                // Optionally set additional state or perform other actions with selectedCountryData
+                // setSelectedCountry(selectedCountryData);
+
+                if (selectedCountryData) {
+                  console.log("Selected Country Data:", selectedCountryData);
+                  if (!CountryIds && !flag) {
+                    props.setSelectedCountry({
+                      ...props.selectedCountry,
+                      flag_image: selectedCountryData.flag_image,
+                      id: selectedCountryData.id,
+                      country_name: selectedCountryData.country_name,
+                    });
+                    localStorage.setItem(
+                      "flag_image",
+                      selectedCountryData.flag_image
+                    );
+                    localStorage.setItem("id", selectedCountryData.id);
+                    localStorage.setItem(
+                      "country_name",
+                      selectedCountryData.country_name
+                    );
+                  }
+                }
+
+                const defaultCountryID = localStorage.getItem("id");
+                const defaultCountryFlag = localStorage.getItem("flag_image");
+                if (defaultCountryID && defaultCountryFlag) {
+                  const defaultCountry = countryData.find(
+                    (country) => country.id === parseInt(defaultCountryID)
+                  );
+                  if (defaultCountry) {
+                    props.setSelectedCountry(defaultCountry);
+                  }
+                }
+              } catch (error) {
+                console.log(error);
+              } finally {
+                setIsLoading(false);
+              }
+            },
+            (error) => {
+              console.error("Error getting geolocation:", error);
+              setIsLoading(false);
+            }
           );
         };
 
@@ -929,13 +964,13 @@ const filteredData = response.data.results.data.filter(
                             src={item.thumbnail}
                             alt="catg"
                           />
-
+ 
                           <p>{item.name.slice(0, 10)}</p>
                         </div>
                       </div>
                     );
                   })}
-
+ 
                   {tags.map((item, index) => {
                     return (
                       <div
@@ -950,7 +985,7 @@ const filteredData = response.data.results.data.filter(
                             src={item.thumbnail}
                             alt="tag"
                           />
-
+ 
                           <p>{item.name.slice(0, 10)}</p>
                         </div>
                       </div>

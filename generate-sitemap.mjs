@@ -36,7 +36,7 @@ const routes = [
   "/outlet",
 ];
 
-const baseUrl = "https://swaecom-seo.vercel.app";
+const baseUrl = "https://www.swa.co/";
 const lastmod = new Date().toISOString();
 
 const createUrlTag = (loc) => `
