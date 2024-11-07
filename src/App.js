@@ -72,7 +72,7 @@ function App() {
         />
         <Route path="/payment" component={PaymentPage} />
         <Route path="/profile" component={ProfilePage} />
-        <Route path="/tryathome" component={TryAtHomePage} />
+        <Route path="/trialathome" component={TryAtHomePage} />
         <Route path="/tryathomeform" component={TryAtHomeInnerPage} />
         <Route path="/outlet" component={OutletPage} />
       </Switch>

@@ -49,17 +49,17 @@ const LandingPage = () => {
   const [loading, setLoading] = useState(false);
   const [logToken, setLogToken] = useState("");
   const [tags, setTags] = useState([]);
-  const countryId = localStorage.getItem("id");
-  const flag = localStorage.getItem("flag_image");
-  const Contryname = localStorage.getItem("country_name");
+  const countryId = 3;
+  const flag = "https://swaecomordermain.swa.co//media/country/flag/Flag_of_the_United_Arab_Emirates.svg.png";
+  const Contryname = "United Arab Emirates";
   const [headeroffer, setHeaderoffer] = useState([]);
   // const [buttonText, setButtonText] = useState("Check delivery date");
   const [buttonTexts, setButtonTexts] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState({
-    id: countryId,
-    flag_image: flag,
-    country_name: Contryname,
+    id: 3,
+    flag_image: "https://swaecomordermain.swa.co//media/country/flag/Flag_of_the_United_Arab_Emirates.svg.png",
+    country_name: "United Arab Emirates",
   });
 
   console.log("mobBanner..01", mobBanner);
@@ -449,7 +449,9 @@ const LandingPage = () => {
       <div className="container newarrivalContainer">
         <TopDemanded counts={counts}>{topDemnd}</TopDemanded>
 
-        <Certificate video={"https://www.youtube.com/embed/s3PrxdvAihI"} />
+        <Certificate
+          video={"https://www.youtube.com/embed/s3PrxdvAihI?rel=0"}
+        />
 
         {searchList}
 

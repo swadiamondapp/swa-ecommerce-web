@@ -6,8 +6,8 @@ header {
   background-color: #00464d;
 }
 .SubHeadNav {
-  background: #FCFBF6;
-  border-bottom: 1px solid #F5F1E0
+  background: #fcfbf6;
+  border-bottom: 1px solid #f5f1e0;
 }
 .NavLinksDesk {
   display: flex;
@@ -231,11 +231,14 @@ header {
 }
 .NavLinksDesk p {
   padding-bottom: 10px;
-  color: #10212F;
+  color: #10212f;
+  font-family: "Lato";
+  font-weight: 600;
+  font-size: 12px;
 }
 .NavLinksDesk p:hover {
   /* color: #4d9ea7; */
-  color: #10212F;
+  color: #10212f;
 
   border-bottom: 5px solid #4d9ea7;
 }
@@ -891,6 +894,9 @@ a {
   cursor: pointer;
   margin-left: 5px;
 }
+.outletlogo {
+  cursor: pointer;
+}
 .Background {
   background: rgba(0, 0, 0, 0.4);
   width: 100%;
@@ -1100,7 +1106,7 @@ a {
   }
   .Offers p {
     color: #000000;
-    font-size: 12px;
+    font-size: 9px;
     margin-bottom: 0px !important;
   }
   .SearchMob {
@@ -1262,6 +1268,9 @@ a {
 }
 .logo img {
   cursor: pointer;
+  position: relative;
+  top: -6px;
+  max-width: 74px;
 }
 .logo img:hover {
   /* transform: scale(1.1);

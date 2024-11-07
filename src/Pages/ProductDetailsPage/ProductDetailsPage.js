@@ -34,6 +34,7 @@ const ProductDetailsPage = (props) => {
   const [isRestricted, setIsRestricted] = useState(false);
   const countryId = localStorage.getItem("id");
   const [deliveryDate, setDeliveryDate] = useState();
+  const [deliveryShopList,setDeliveryShopsList] = useState([])
   const [pincodeShow, setPincodeShow] = useState(false);
   const [pinCode, setPinCode] = useState("");
 
@@ -301,6 +302,7 @@ const ProductDetailsPage = (props) => {
         })
         .then((response1) => {
           setDeliveryDate(response1.data.results.message);
+          setDeliveryShopsList(response1.data.results.data)
           setPincodeShow(true); // Show the message after receiving the response
           console.log("dateresponse", response1.data.results);
         })
@@ -322,11 +324,12 @@ const ProductDetailsPage = (props) => {
       })
       .then((response1) => {
         if (response1.data.results.status_code === 200) {
-          history.push("/tryathome");
+          history.push("/trialathome");
         } else if (
           response1.data.results.message === "Item already in try list"
         ) {
-          setErrormsgtrycart("Item already in try list");
+          // setErrormsgtrycart("Item already in try list");
+          history.push("/trialathome");
         } else if (response1.data.results.message === "size  required") {
           setErrormsgtrycart("size  required");
         }
@@ -355,7 +358,7 @@ const ProductDetailsPage = (props) => {
     country_name: Contryname,
   });
 
-  console.log(prodDet.country_total_price,"prodDet")
+  console.log(prodDet.country_total_price, "prodDet");
   return (
     <div>
       <Header
@@ -368,15 +371,13 @@ const ProductDetailsPage = (props) => {
       />
 
       <ProductDetails
-        sku={prodDet.sku && prodDet.sku === "undefined" ?  "" : prodDet.sku }
+        sku={prodDet.sku && prodDet.sku === "undefined" ? "" : prodDet.sku}
         offerPrice={
           prodDet.is_on_discount
             ? prodDet.country_discount_price
             : prodDet.country_total_price
         }
-        actualPrice={
-          prodDet.is_on_discount ? prodDet.country_total_price : ""
-        }
+        actualPrice={prodDet.is_on_discount ? prodDet.country_total_price : ""}
         discountVal={
           prodDet.is_on_discount
             ? prodDet.country_total_price > prodDet.discount_price
@@ -430,6 +431,7 @@ const ProductDetailsPage = (props) => {
         TryatHome={TryhomeHandler}
         errormsgtrycart={errormsgtrycart}
         clickedBuy={buyProductHandler}
+        deliveryShopList={deliveryShopList}
       />
       <div className={Classes.RecentSearch}>
         <SimilerProducts productId={props.match.params.id} />

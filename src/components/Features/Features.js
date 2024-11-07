@@ -24,7 +24,7 @@ function Features() {
             >
               <img src={SH1} className={Classes.Images} alt="SH1" />
               <p className={Classes.FeaturesmainText}>Free shipping</p>
-              <p
+              {/* <p
                 className={Classes.FeaturesSubText}
                 style={{ display: "flex", alignItems: "center", gap: "3px" }}
               >
@@ -37,6 +37,12 @@ function Features() {
                 )}
                 {Contryname === "United Arab Emirates" && <span>AED</span>}{" "}
                 2000...{" "}
+              </p> */}
+              <p
+                className={Classes.FeaturesSubText}
+                style={{ display: "flex", alignItems: "center", gap: "3px" }}
+              >
+                All over UAE
               </p>
             </div>
             <div
@@ -47,7 +53,7 @@ function Features() {
               <img src={PS2} className={Classes.Images} alt="PS2" />
               <p className={Classes.FeaturesmainText}>100% Refund</p>
               <p className={Classes.FeaturesSubText}>
-                Return with 30 days of delivery
+                Return with 15 days of delivery
               </p>
             </div>
             <div

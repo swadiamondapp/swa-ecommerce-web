@@ -14,6 +14,7 @@ import LoginModal from "../LoginModal/LoginModal";
 import axios from "axios";
 import * as Urls from "../../Urls";
 import { Carousel } from "antd";
+import outletlogo from "../../Assets/outletlogo.png";
 import { Link } from "react-router-dom";
 import CheckDelivery from "../CheckDelivery/CheckDelivery";
 import indiaimg from "../../Assets/india.png";
@@ -27,9 +28,9 @@ import { MdEdit } from "react-icons/md";
 import { FaPen } from "react-icons/fa";
 
 const Header = (props) => {
-  const flag = localStorage.getItem("flag_image");
-  const CountryIds = localStorage.getItem("id");
-  const Contryname = localStorage.getItem("country_name");
+  const flag = "https://swaecomordermain.swa.co//media/country/flag/Flag_of_the_United_Arab_Emirates.svg.png";
+  const CountryIds = 3;
+  const Contryname = "United Arab Emirates";
   const location = useLocation();
   const [isHome, setIsHome] = useState(
     location.pathname === "/" ? true : false
@@ -74,6 +75,13 @@ const Header = (props) => {
   const handleCloseModal = () => {
     setShowModal(false);
   };
+
+  // useEffect(() => {
+  //   localStorage.setItem("id", 3);
+  //   localStorage.setItem("flag_image", "https://swaecomordermain.swa.co//media/country/flag/Flag_of_the_United_Arab_Emirates.svg.png");
+  //   localStorage.setItem("country_name", "United Arab Emirates");
+  // }, []);
+
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -150,7 +158,8 @@ const Header = (props) => {
     // }
 
     if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
-      window.location.href = "https://www.swa.co/category_search/" + setItem.id;
+      window.location.href =
+        "https://swa.co/category_search/" + setItem.id;
     } else {
       history.push({
         pathname: "/new_arrivel",
@@ -161,7 +170,7 @@ const Header = (props) => {
   // const cattSelHandler = (setItem) => {
   //   if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
   //     window.location.href =
-  //       "http://swaecomnew.zinfog.in/category_search/" + setItem.id;
+  //       "https://swa.co/category_search/" + setItem.id;
   //   } else {
   //     history.push({
   //       pathname: "/new_arrivel",
@@ -177,7 +186,8 @@ const Header = (props) => {
   };
   const tagSelHandler = (selItem) => {
     if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
-      window.location.href = "https://www.swa.co/tag_search/" + selItem.id;
+      window.location.href =
+        "https://swa.co/tag_search/" + selItem.id;
     } else {
       history.push({
         pathname: "/new_arrivel",
@@ -218,7 +228,8 @@ const Header = (props) => {
 
       axios
         .get(
-          `${Urls.suggestion + e.target.value}&country=${props.selectedCountry.id
+          `${Urls.suggestion + e.target.value}&country=${
+            props.selectedCountry.id
           }`
         )
         .then((response1) => {
@@ -235,7 +246,7 @@ const Header = (props) => {
     if (setItem.type === "category") {
       if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
         window.location.href =
-          "https://www.swa.co/category_search/" + setItem.id;
+          "https://swa.co/category_search/" + setItem.id;
       } else {
         history.push({ pathname: "/new_arrivel", state: { data: setItem.id } });
       }
@@ -258,7 +269,7 @@ const Header = (props) => {
           };
           if (history.location.pathname.slice(0, 10) === "/products/") {
             window.location.href =
-              "https://www.swa.co/products/" +
+              "https://swa.co/products/" +
               setItem.id +
               "/" +
               response1.data.results.data.color_id +
@@ -282,7 +293,7 @@ const Header = (props) => {
         });
     }
   };
-  const closeHanlder = () => { };
+  const closeHanlder = () => {};
 
   const handleScroll = () => {
     if (window.scrollY > 100) {
@@ -425,77 +436,33 @@ const Header = (props) => {
       try {
         const response = await axios.get(Urls.getCountryFlags);
         console.log("response.data.results.data", response.data.results.data);
-        setCountryData(response.data.results.data);
-        const getLocation = async () => {
-          setIsLoading(true);
-          navigator.geolocation.getCurrentPosition(
-            async (pos) => {
-              const { latitude, longitude } = pos.coords;
-              let _url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
-              try {
-                const geoResponse = await axios.get(_url);
-                const userCountryName = geoResponse.data.address.country;
-                setCountry(userCountryName);
+const filteredData = response.data.results.data.filter(
+          (country) => country.country_name === "United Arab Emirates"
+        );
+        setCountryData(filteredData);
 
-                let selectedCountryData;
-
-                if (
-                  userCountryName === "India" ||
-                  userCountryName === "United Arab Emirates"
-                ) {
-                  selectedCountryData = response.data.results.data.find(
-                    (country) => country.country_name === userCountryName
-                  );
-                } else {
-                  selectedCountryData = response.data.results.data.find(
-                    (country) => country.country_name === "United States"
-                  );
-                }
-
-                // Optionally set additional state or perform other actions with selectedCountryData
-                // setSelectedCountry(selectedCountryData);
-
-                if (selectedCountryData) {
-                  console.log("Selected Country Data:", selectedCountryData);
-                  if (!CountryIds && !flag) {
-                    props.setSelectedCountry({
-                      ...props.selectedCountry,
-                      flag_image: selectedCountryData.flag_image,
-                      id: selectedCountryData.id,
-                      country_name: selectedCountryData.country_name,
-                    });
-                    localStorage.setItem(
-                      "flag_image",
-                      selectedCountryData.flag_image
-                    );
-                    localStorage.setItem("id", selectedCountryData.id);
-                    localStorage.setItem(
-                      "country_name",
-                      selectedCountryData.country_name
-                    );
-                  }
-                }
-
-                const defaultCountryID = localStorage.getItem("id");
-                const defaultCountryFlag = localStorage.getItem("flag_image");
-                if (defaultCountryID && defaultCountryFlag) {
-                  const defaultCountry = countryData.find(
-                    (country) => country.id === parseInt(defaultCountryID)
-                  );
-                  if (defaultCountry) {
-                    props.setSelectedCountry(defaultCountry);
-                  }
-                }
-              } catch (error) {
-                console.log(error);
-              } finally {
-                setIsLoading(false);
-              }
-            },
-            (error) => {
-              console.error("Error getting geolocation:", error);
-              setIsLoading(false);
-            }
+        // Extracting the ID of India
+        const indiaData = response.data.results.data.find(
+          (country) => country.country_name === "United Arab Emirates"
+        );
+        if (!CountryIds && !flag) {
+          props.setSelectedCountry({
+            ...props.selectedCountry,
+            flag_image: "https://swaecomordermain.swa.co//media/country/flag/Flag_of_the_United_Arab_Emirates.svg.png",
+            id: 3,
+            country_name: "United Arab Emirates",
+          });
+          localStorage.setItem("flag_image", "https://swaecomordermain.swa.co//media/country/flag/Flag_of_the_United_Arab_Emirates.svg.png");
+          localStorage.setItem("id", 3);
+          localStorage.setItem("country_name", "United Arab Emirates");
+        }
+        console.log("indiaData--->", indiaData);
+        const defaultCountryID = 3;
+        const defaultCountryFlag = "https://swaecomordermain.swa.co//media/country/flag/Flag_of_the_United_Arab_Emirates.svg.png";
+        if (defaultCountryID && defaultCountryFlag) {
+          // Find the default country from the data using the ID
+          const defaultCountry = countryData.find(
+            (country) => country.id === parseInt(defaultCountryID)
           );
         };
 
@@ -665,6 +632,11 @@ const Header = (props) => {
             handleClose={handleCloseModal}
             handleShow={handleShowModal}
           />
+          <div className={`${Classes.outletlogo} ${Classes.headerElement}`}>
+            <Link to="/outlet">
+              <img src={outletlogo} />
+            </Link>
+          </div>
           <div
             style={{ cursor: "pointer" }}
             className={Classes.CountryFlags}
@@ -689,8 +661,8 @@ const Header = (props) => {
                     a.country_name === "India"
                       ? -1
                       : b.country_name === "India"
-                        ? 1
-                        : 0
+                      ? 1
+                      : 0
                   ) // Sorts India to the top
                   .map((country, index) => (
                     <div className={Classes.CountryContainer} key={index}>
@@ -710,12 +682,12 @@ const Header = (props) => {
                             {country.country_name === "United Arab Emirates"
                               ? "UAE"
                               : country.country_name === "Saudi Arabia"
-                                ? "KSA"
-                                : country.country_name === "India"
-                                  ? "IND"
-                                  : country.country_name === "United States"
-                                    ? "USA"
-                                    : country.country_name}
+                              ? "KSA"
+                              : country.country_name === "India"
+                              ? "IND"
+                              : country.country_name === "United States"
+                              ? "USA"
+                              : country.country_name}
                           </span>
                         </div>
                       </div>
@@ -744,7 +716,7 @@ const Header = (props) => {
                 setLoginText("Please Login");
               }}
             />
-            {userName && props.countCartItems && (
+            {userName && props.countCartItems > 0 && (
               <div className={Classes.ItemsNum}>{props.countCartItems}</div>
             )}
           </div>
@@ -848,9 +820,9 @@ const Header = (props) => {
             <div className={Classes.mobCheckDelivery} onClick={handleShowModal}>
               <p>CHECK DELIVERY</p>
               {pincode ? null : (
-              <p>
-                Enter pincode <MdEdit />
-              </p>
+                <p>
+                  Enter pincode <MdEdit />
+                </p>
               )}
               {pincode && (
                 <span
