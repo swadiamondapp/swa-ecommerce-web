@@ -28,7 +28,7 @@ function Features() {
                 className={Classes.FeaturesSubText}
                 style={{ display: "flex", alignItems: "center", gap: "3px" }}
               >
-                On order over{" "}
+                On all orders{" "}
                 {Contryname === "India" && (
                   <BiRupee className={Classes.Rupee} />
                 )}
