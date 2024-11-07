@@ -32,7 +32,6 @@ import TryAtHomePage from "./components/TRY AT HOME/TryAtHomePage";
 import TryAtHomeInnerPage from "./components/TRY AT HOME/TryAtHomeInnerPage";
 import GTM from "./components/GTM/GTM";
 import TrialCart from "./components/CartDesign/CartProducts/TrialCart";
-import UrlShare from "./Pages/UrlShare/UrlShare";
 
 function App() {
   return (
@@ -67,8 +66,11 @@ function App() {
         <Route path="/order_successful" component={OrderSuccessfulPage} exact />
         <Route path="/rate_review" component={RateAndReview} exact />
         <Route path="/rate&review" component={RateAndReviewMain} exact />
-        <Route path="/jewellery" component={UrlShare} exact />
-        <Route path="/jewellery/:name" component={ProductDetailsPage} exact />
+        <Route
+          path="/products/:id/:color/:name"
+          component={ProductDetailsPage}
+          exact
+        />
         <Route path="/payment" component={PaymentPage} />
         <Route path="/profile" component={ProfilePage} />
         <Route path="/tryathome" component={TryAtHomePage} />

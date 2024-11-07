@@ -140,7 +140,7 @@ const OrderHistoryPage = () => {
         <OrderHistory>{orderLists}</OrderHistory>
         <div className={Classes.Features}>
           <SliderFeature />
-          <Features />
+          {/* <Features /> */}
         </div>
       </div>
       <Footer />

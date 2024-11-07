@@ -276,7 +276,7 @@ const Cart = () => {
       cartLists = (
         <div className="container contBg">
           <div className=" d-flex justify-content-center align-items-center loader">
-            <div className="col-md-6">
+            <div className="col-md-6" style={{display:"flex",flexDirection:"column",alignItems:"center",gap:"10px"}}>
               <div className={Classes.cartEmpty}>
                 <img src={cartEmpty} alt="cartEmpty" />
               </div>
@@ -286,6 +286,7 @@ const Cart = () => {
                 surfing until you find your favorite ornaments. From wishlist to
                 the cart, We wish you ‘Happy Shopping’.{" "}
               </p>
+              <Link to="/"> <button className={Classes.btn_shopnow}>Shop Now</button></Link>
             </div>
           </div>
         </div>

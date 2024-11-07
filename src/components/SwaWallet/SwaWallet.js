@@ -7,6 +7,7 @@ import axios from "axios";
 import * as Urls from "../../Urls";
 import { BiRupee } from "react-icons/bi";
 import { CgDollar } from "react-icons/cg";
+import { FaPhoneAlt } from "react-icons/fa";
 
 const SwaWallet = () => {
   const [transferModalOpen, setTransferModalOpen] = useState(false);
@@ -96,10 +97,10 @@ const SwaWallet = () => {
 
                 <span>
                   {Contryname === "India" && (
-                    <BiRupee size={25}  />
+                    <BiRupee size={25} />
                   )}
                   {Contryname === "United States" && (
-                    <CgDollar size={25}  />
+                    <CgDollar size={25} />
                   )}
                   {Contryname === "United Arab Emirates" && (
                     <span
@@ -111,20 +112,20 @@ const SwaWallet = () => {
                   {walletValues ? walletValues.swa_wallet : null}</span>
               </div>
             </div>
-            { !isMobileView &&(
-            <div className={Classes.walletRight}>
-              <button
-                onClick={movetoBank}
-                disabled={!walletValues || walletValues.swa_wallet === 0}
-                className={
-                  !walletValues || walletValues.swa_wallet === 0
-                    ? Classes.disabledButton
-                    : ""
-                }
-              >
-                MOVE TO BANK
-              </button>
-            </div>
+            {!isMobileView && (
+              <div className={Classes.walletRight}>
+                <button
+                  onClick={movetoBank}
+                  disabled={!walletValues || walletValues.swa_wallet === 0}
+                  className={
+                    !walletValues || walletValues.swa_wallet === 0
+                      ? Classes.disabledButton
+                      : ""
+                  }
+                >
+                  MOVE TO BANK
+                </button>
+              </div>
             )}
 
             <TransferMoneyModal
@@ -154,10 +155,10 @@ const SwaWallet = () => {
               <br />
             </span>
           </div>
-          { isMobileView &&(
-            <div className={Classes.walletRight} style={{width:"100%"}}>
+          {isMobileView && (
+            <div className={Classes.walletRight} style={{ width: "100%" }}>
               <button
-              style={{width:"100%"}}
+                style={{ width: "100%" }}
                 onClick={movetoBank}
                 disabled={!walletValues || walletValues.swa_wallet === 0}
                 className={
@@ -169,7 +170,7 @@ const SwaWallet = () => {
                 MOVE TO BANK
               </button>
             </div>
-            )}
+          )}
         </div>
         {/* transfer bank details */}
         <div className={Classes.container} style={{ marginTop: "20px" }}>
@@ -178,9 +179,11 @@ const SwaWallet = () => {
               <h3>Transfered Bank details</h3>
               <p>Requested on : 23 April 24, 3:30AM</p>
             </div>
-            <div className={Classes.RightTransfercall}>
-              <p>Need Support : 1800 699 888</p>
-            </div>
+            {!isMobileView && (
+              <div className={Classes.RightTransfercall}>
+                <p style={{ fontWeight: "600" }}>Need Support : <FaPhoneAlt style={{fontSize:"14px",color: "black" }} /> 1800 699 888</p>
+              </div>
+            )}
           </div>
           {walletDetails.map((item) => (
             <div className={Classes.T1Parent}>
@@ -214,6 +217,11 @@ const SwaWallet = () => {
           ))}
         </div>
         {/* transfer bank details */}
+      {isMobileView && (
+        <div className={Classes.RightTransfercall} style={{marginLeft:"10%",marginTop:"14px"}}>
+          <p style={{ fontWeight: "600" }}>Need Support : <FaPhoneAlt style={{ color: "black" }} /> 1800 699 888</p>
+        </div>
+      )}
       </div>
     </div>
   );
