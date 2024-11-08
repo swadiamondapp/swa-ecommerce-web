@@ -66,7 +66,7 @@ function App() {
         <Route path="/rate_review" component={RateAndReview} exact />
         <Route path="/rate&review" component={RateAndReviewMain} exact />
         <Route
-          path="/products/:id/:color/:name"
+          path="/jewellery/:id/:color/:name"
           component={ProductDetailsPage}
           exact
         />

@@ -48,7 +48,7 @@ const TagSearch = (props) => {
   const prodDetHandler = (prodItem) => {
     history.push({
       pathname:
-        "/products/" +
+        "/jewellery/" +
         prodItem.product_id +
         "/" +
         prodItem.thumbnail_colour_id +

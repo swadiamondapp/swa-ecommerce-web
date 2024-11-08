@@ -63,7 +63,7 @@ const NewArrivalPage = (props) => {
   const prodDetHandler = (prodItem) => {
     history.push({
       pathname:
-        "/products/" +
+        "/jewellery/" +
         prodItem.product_id +
         "/" +
         prodItem.thumbnail_colour_id +
@@ -369,7 +369,6 @@ const NewArrivalPage = (props) => {
       </div>
     );
   } else {
-    
     const handleShowModal = (productId) => {
       console.log("productIddd", productId);
       const pincode = localStorage.getItem("pincode");
@@ -380,7 +379,7 @@ const NewArrivalPage = (props) => {
           size_id: "",
           pincode: pincode,
         };
-  
+
         axios
           .post(Urls.checkdeliveryDate, body, {
             headers: { Authorization: "Token " + token },
@@ -406,8 +405,7 @@ const NewArrivalPage = (props) => {
     };
 
     products = product.map((item, index) => {
-
-      console.log(item.sku,"item.sku")
+      console.log(item.sku, "item.sku");
       return (
         <NewArrivalCard
           ProductImage={item.thumbnail_image}
