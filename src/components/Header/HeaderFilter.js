@@ -112,7 +112,7 @@ const HeaderFilter = (props) => {
 
           history.push({
             pathname:
-              "/products/" +
+              "/jewellery/" +
               setItem.id +
               "/" +
               response1.data.results.data.color_id +

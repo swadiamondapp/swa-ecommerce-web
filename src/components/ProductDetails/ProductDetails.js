@@ -142,7 +142,7 @@ const ProductDetails = (props) => {
 
   const customerPhotos = async () => {
     const response = await axios.get(
-      "https://swaecommain.swa.co/ecom/products/" + props.id + "/reviews/"
+      "https://swaecommain.swa.co/ecom/jewellery/" + props.id + "/reviews/"
     );
     if (response && response.data && response.data.results) {
       setReviews(response.data.results);
@@ -935,7 +935,7 @@ const ProductDetails = (props) => {
 
                 <p
                   className={Classes.NewPrice}
-                  style={{ display: "flex", alignItems: "center", gap: "3px"}}
+                  style={{ display: "flex", alignItems: "center", gap: "3px" }}
                 >
                   {Contryname === "India" && (
                     <BiRupee className={Classes.Rupee} />

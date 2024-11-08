@@ -50,7 +50,7 @@ const CategorySearch = (props) => {
   const prodDetHandler = (prodItem) => {
     history.push({
       pathname:
-        "/products/" +
+        "/jewellery/" +
         prodItem.product_id +
         "/" +
         prodItem.thumbnail_colour_id +
@@ -293,7 +293,7 @@ const CategorySearch = (props) => {
   } else {
     products = product.map((item, index) => {
       categoryName = item.category.name;
-      console.log("ringssssssss",product)
+      console.log("ringssssssss", product);
       return (
         <NewArrivalCard
           ProductImage={item.thumbnail_image}

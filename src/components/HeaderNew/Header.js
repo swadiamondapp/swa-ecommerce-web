@@ -258,9 +258,9 @@ const Header = (props) => {
             discounted_final_price: response1.data.results.data.discount_price,
             wishlist_id: response1.data.results.data.wishlist_id,
           };
-          if (history.location.pathname.slice(0, 10) === "/products/") {
+          if (history.location.pathname.slice(0, 10) === "/jewellery/") {
             window.location.href =
-              "https://www.swa.co/products/" +
+              "https://www.swa.co/jewellery/" +
               setItem.id +
               "/" +
               response1.data.results.data.color_id +
@@ -269,7 +269,7 @@ const Header = (props) => {
           } else {
             history.push({
               pathname:
-                "/products/" +
+                "/jewellery/" +
                 setItem.id +
                 "/" +
                 response1.data.results.data.color_id +

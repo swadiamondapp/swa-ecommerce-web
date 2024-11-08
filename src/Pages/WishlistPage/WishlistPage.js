@@ -74,7 +74,7 @@ const whishlistPage = () => {
   const prodDetHandler = (prodId) => {
     history.push({
       pathname:
-        "/products/" +
+        "/jewellery/" +
         prodId.product_id +
         "/" +
         prodId.product.thumbnail_colour_id +
@@ -147,9 +147,9 @@ const whishlistPage = () => {
           selectedCountry={selectedCountry}
           setSelectedCountry={setSelectedCountry}
         />
-          <div className={Classes.Products}>
-            <Wishlist> {wishlists} </Wishlist>
-          </div>
+        <div className={Classes.Products}>
+          <Wishlist> {wishlists} </Wishlist>
+        </div>
         <div>
           {/* <SliderFeature /> */}
           <Features />

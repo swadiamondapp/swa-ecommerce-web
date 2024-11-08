@@ -239,7 +239,7 @@ const LandingPage = () => {
     console.log("prodItem---->", prodItem);
     history.push({
       pathname:
-        "/products/" +
+        "/jewellery/" +
         prodItem.product_id +
         "/" +
         prodItem.colour_id +

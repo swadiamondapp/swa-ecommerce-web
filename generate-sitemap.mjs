@@ -28,7 +28,7 @@ const routes = [
   "/order_successful",
   "/rate_review",
   "/rate&review",
-  "/products/:id/:color/:name",
+  "/jewellery/:id/:color/:name",
   "/payment",
   "/profile",
   "/tryathome",
