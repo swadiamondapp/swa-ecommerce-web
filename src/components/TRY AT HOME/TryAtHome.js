@@ -170,11 +170,14 @@ const TryAtHome = () => {
         <div className="container">
           <div className={Classes.TryAtHomeParent}>
             <h3 className={Classes.TryAtHomeHead}>Trial at Home</h3>
-            <p className={Classes.TryathomePara}>
-              Our representative will visit your home to show your liked jewels
-              with your convenient time <br /> and date. so choose your date and
-              time
-            </p>
+            <div className={Classes.trailathomeParent}>
+              <p className={Classes.TryathomePara}>
+                Our representative will visit your home to show your liked
+                jewels with your convenient time and date. so choose your date
+                and time
+              </p>
+              <p></p>
+            </div>
             <div className={Classes.T1parent}>
               {/* <div className={Classes.TryLeftsec}>
                 <div className={Classes.TryatHomeCard}>

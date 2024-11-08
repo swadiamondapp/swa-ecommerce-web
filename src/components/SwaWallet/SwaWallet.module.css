@@ -297,6 +297,10 @@
   gap: 5px;
   gap: 12px;
 }
+.trailathomeParent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
 .OutletFooterCrad {
   background: #fff;
   padding: 12px;
@@ -860,6 +864,7 @@
   align-items: end;
   border-bottom: 0.5px solid #e5e5e5;
   padding-bottom: 12px;
+  align-items: center;
 }
 .T1Parent {
   /* display: flex; */
@@ -1039,6 +1044,10 @@
     display: grid;
     grid-template-columns: 240px 230px;
   }
+  .trailathomeParent {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
 }
 @media (min-width: 300px) and (max-width: 567px) {
   .title {
@@ -1072,7 +1081,8 @@
   }
 
   .head {
-    padding-left: 0px;  }
+    padding-left: 0px;
+  }
   .head img {
     width: 35px;
   }
@@ -1090,7 +1100,7 @@
   }
   .texts {
     gap: 10px;
-      padding-left: 0px;
+    padding-left: 0px;
   }
   .ProfileCard {
     margin: 0px 0px;
@@ -1184,5 +1194,9 @@
     width: 60%;
     text-align: end;
     margin-top: 10px;
+  }
+  .trailathomeParent {
+    display: grid;
+    grid-template-columns: 1fr;
   }
 }
