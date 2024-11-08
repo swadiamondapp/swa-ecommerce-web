@@ -288,7 +288,7 @@ const Cart = () => {
               <div className={Classes.cartEmpty}>
                 <img src={cartEmpty} alt="cartEmpty" />
               </div>
-              <h3 className={Classes.cartListHead}>Your Cart page is empty</h3>
+              <h3 className={Classes.cartListHead}>Your Cart is empty</h3>
               <p className={Classes.cartPara}>
                 Currently, there are no items in the cart. Have no worries, Keep
                 surfing until you find your favorite ornaments. From wishlist to

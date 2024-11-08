@@ -277,6 +277,10 @@
   align-items: center;
   border-radius: 6px;
 }
+.trailathomeParent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
 .selectdateMText h3 {
   color: #0d1217;
   font-weight: 600;
@@ -860,6 +864,7 @@
   align-items: end;
   border-bottom: 0.5px solid #e5e5e5;
   padding-bottom: 12px;
+  align-items: center;
 }
 .T1Parent {
   /* display: flex; */
@@ -1039,6 +1044,10 @@
     display: grid;
     grid-template-columns: 240px 230px;
   }
+  .trailathomeParent {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
 }
 @media (min-width: 300px) and (max-width: 567px) {
   .title {
@@ -1072,7 +1081,8 @@
   }
 
   .head {
-    padding-left: 0px;  }
+    padding-left: 0px;
+  }
   .head img {
     width: 35px;
   }
@@ -1090,7 +1100,7 @@
   }
   .texts {
     gap: 10px;
-      padding-left: 0px;
+    padding-left: 0px;
   }
   .ProfileCard {
     margin: 0px 0px;
@@ -1114,6 +1124,10 @@
     grid-template-columns: 1fr;
   }
   .OutletCardParent {
+    grid-template-columns: 1fr;
+  }
+  .trailathomeParent {
+    display: grid;
     grid-template-columns: 1fr;
   }
   .OutletImage {

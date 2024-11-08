@@ -1453,6 +1453,13 @@ a {
     scrollbar-width: none; /* For Firefox */
     scrollbar-color: #fff !important;
     margin-bottom: 5px;
+    margin-top: 5px;
+  }
+  .mobCheckDelivery {
+    font-size: 15px;
+  }
+  .mobCheckDelivery p:nth-child(1) {
+    font-size: 14px;
   }
 
   .ParentMobSlider1 {
