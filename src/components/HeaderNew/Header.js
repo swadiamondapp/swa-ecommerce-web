@@ -14,6 +14,7 @@ import LoginModal from "../LoginModal/LoginModal";
 import axios from "axios";
 import * as Urls from "../../Urls";
 import { Carousel } from "antd";
+import outletlogo from "../../Assets/outletlogo.png";
 import { Link } from "react-router-dom";
 import CheckDelivery from "../CheckDelivery/CheckDelivery";
 import indiaimg from "../../Assets/india.png";
@@ -150,7 +151,8 @@ const Header = (props) => {
     // }
 
     if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
-      window.location.href = "https://www.swa.co/category_search/" + setItem.id;
+      window.location.href =
+        "https://swaecomnew.zinfog.in/category_search/" + setItem.id;
     } else {
       history.push({
         pathname: "/new_arrivel",
@@ -177,7 +179,8 @@ const Header = (props) => {
   };
   const tagSelHandler = (selItem) => {
     if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
-      window.location.href = "https://www.swa.co/tag_search/" + selItem.id;
+      window.location.href =
+        "https://swaecomnew.zinfog.in/tag_search/" + selItem.id;
     } else {
       history.push({
         pathname: "/new_arrivel",
@@ -218,7 +221,8 @@ const Header = (props) => {
 
       axios
         .get(
-          `${Urls.suggestion + e.target.value}&country=${props.selectedCountry.id
+          `${Urls.suggestion + e.target.value}&country=${
+            props.selectedCountry.id
           }`
         )
         .then((response1) => {
@@ -235,7 +239,7 @@ const Header = (props) => {
     if (setItem.type === "category") {
       if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
         window.location.href =
-          "https://www.swa.co/category_search/" + setItem.id;
+          "https://swaecomnew.zinfog.in/category_search/" + setItem.id;
       } else {
         history.push({ pathname: "/new_arrivel", state: { data: setItem.id } });
       }
@@ -258,7 +262,7 @@ const Header = (props) => {
           };
           if (history.location.pathname.slice(0, 10) === "/products/") {
             window.location.href =
-              "https://www.swa.co/products/" +
+              "https://swaecomnew.zinfog.in/products/" +
               setItem.id +
               "/" +
               response1.data.results.data.color_id +
@@ -282,7 +286,7 @@ const Header = (props) => {
         });
     }
   };
-  const closeHanlder = () => { };
+  const closeHanlder = () => {};
 
   const handleScroll = () => {
     if (window.scrollY > 100) {
@@ -665,6 +669,11 @@ const Header = (props) => {
             handleClose={handleCloseModal}
             handleShow={handleShowModal}
           />
+          <div className={`${Classes.outletlogo} ${Classes.headerElement}`}>
+            <Link to="/outlet">
+              <img src={outletlogo} />
+            </Link>
+          </div>
           <div
             style={{ cursor: "pointer" }}
             className={Classes.CountryFlags}
@@ -689,8 +698,8 @@ const Header = (props) => {
                     a.country_name === "India"
                       ? -1
                       : b.country_name === "India"
-                        ? 1
-                        : 0
+                      ? 1
+                      : 0
                   ) // Sorts India to the top
                   .map((country, index) => (
                     <div className={Classes.CountryContainer} key={index}>
@@ -710,12 +719,12 @@ const Header = (props) => {
                             {country.country_name === "United Arab Emirates"
                               ? "UAE"
                               : country.country_name === "Saudi Arabia"
-                                ? "KSA"
-                                : country.country_name === "India"
-                                  ? "IND"
-                                  : country.country_name === "United States"
-                                    ? "USA"
-                                    : country.country_name}
+                              ? "KSA"
+                              : country.country_name === "India"
+                              ? "IND"
+                              : country.country_name === "United States"
+                              ? "USA"
+                              : country.country_name}
                           </span>
                         </div>
                       </div>
@@ -744,7 +753,7 @@ const Header = (props) => {
                 setLoginText("Please Login");
               }}
             />
-            {userName && props.countCartItems && (
+            {userName && props.countCartItems > 0 && (
               <div className={Classes.ItemsNum}>{props.countCartItems}</div>
             )}
           </div>
@@ -848,9 +857,9 @@ const Header = (props) => {
             <div className={Classes.mobCheckDelivery} onClick={handleShowModal}>
               <p>CHECK DELIVERY</p>
               {pincode ? null : (
-              <p>
-                Enter pincode <MdEdit />
-              </p>
+                <p>
+                  Enter pincode <MdEdit />
+                </p>
               )}
               {pincode && (
                 <span

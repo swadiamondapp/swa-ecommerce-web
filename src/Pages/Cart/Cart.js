@@ -160,7 +160,7 @@ const Cart = () => {
       .then((response1) => {
         if (response1.data.results.status_code === 200) {
           fechTryAtHomeCart();
-          setShow(false)
+          setShow(false);
         } else if (
           response1.data.results.message === "Already Processed, Cannot delete"
         ) {
@@ -276,17 +276,28 @@ const Cart = () => {
       cartLists = (
         <div className="container contBg">
           <div className=" d-flex justify-content-center align-items-center loader">
-            <div className="col-md-6" style={{display:"flex",flexDirection:"column",alignItems:"center",gap:"10px"}}>
+            <div
+              className="col-md-6"
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "10px",
+              }}
+            >
               <div className={Classes.cartEmpty}>
                 <img src={cartEmpty} alt="cartEmpty" />
               </div>
-              <h3 className={Classes.cartListHead}>Your Cart page is empty</h3>
+              <h3 className={Classes.cartListHead}>Your Cart is empty</h3>
               <p className={Classes.cartPara}>
                 Currently, there are no items in the cart. Have no worries, Keep
                 surfing until you find your favorite ornaments. From wishlist to
                 the cart, We wish you ‘Happy Shopping’.{" "}
               </p>
-              <Link to="/"> <button className={Classes.btn_shopnow}>Shop Now</button></Link>
+              <Link to="/">
+                {" "}
+                <button className={Classes.btn_shopnow}>Shop Now</button>
+              </Link>
             </div>
           </div>
         </div>
@@ -329,11 +340,13 @@ const Cart = () => {
                     " KT " +
                     // item.description.colour_name +
                     " " +
-                    item.product.gross_weight +
-                    " GM "
+                    parseFloat(item.product.gross_weight).toFixed(3) +
+                    " G "
                   }
                   DiamondProperty={
-                    " Diamond " + item.product.diamond_weight + " Carat"
+                    " Diamond " +
+                    parseFloat(item.product.diamond_weight).toFixed(3) +
+                    " Carat"
                   }
                   Size={item.size}
                   color={item.color}
@@ -353,7 +366,15 @@ const Cart = () => {
       cartLists = (
         <div className="container contBg">
           <div className=" d-flex justify-content-center align-items-center loader">
-            <div className="col-md-6" style={{display:"flex",flexDirection:"column",alignItems:"center",gap:"10px"}}>
+            <div
+              className="col-md-6"
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "10px",
+              }}
+            >
               <div className={Classes.cartEmpty}>
                 <img src={cartEmpty} alt="cartEmpty" />
               </div>
@@ -363,7 +384,10 @@ const Cart = () => {
                 surfing until you find your favorite ornaments. From wishlist to
                 the cart, We wish you ‘Happy Shopping’.{" "}
               </p>
-             <Link to="/"> <button className={Classes.btn_shopnow}>Shop Now</button></Link>
+              <Link to="/">
+                {" "}
+                <button className={Classes.btn_shopnow}>Shop Now</button>
+              </Link>
             </div>
           </div>
         </div>
@@ -426,8 +450,16 @@ const Cart = () => {
           handleClose={handleCloseHandler}
           title="Move from bag"
           img={img}
-          movWish={activeCart === "shopping" ? () => movWishList(selId) : ()=>movWishListTrial(selId)}
-          remove={activeCart === "shopping" ? () => removeHandler(selId) : () => addDesigns(selId)}
+          movWish={
+            activeCart === "shopping"
+              ? () => movWishList(selId)
+              : () => movWishListTrial(selId)
+          }
+          remove={
+            activeCart === "shopping"
+              ? () => removeHandler(selId)
+              : () => addDesigns(selId)
+          }
           body="Are you sure that you want to move 
         this item from the cart?"
           shows={show}
