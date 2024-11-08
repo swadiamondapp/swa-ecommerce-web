@@ -191,7 +191,7 @@ function Rating(props) {
             <Modal.Title>
               <HiBadgeCheck
                 className={Classes.Check}
-                size={200}
+                size={150}
                 color="#30933A"
               />
             </Modal.Title>
