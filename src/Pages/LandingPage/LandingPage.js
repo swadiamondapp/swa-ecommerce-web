@@ -259,6 +259,7 @@ const LandingPage = () => {
     );
   } else {
     newArriv = newArrival.map((item, index) => {
+      console.log("landingitems", item);
       return (
         <NewArrivalCard
           ProductImage={item.thumbnail_image && item.thumbnail_image}

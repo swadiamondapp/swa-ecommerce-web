@@ -19,8 +19,9 @@ const NewArrivalCard = (props) => {
   const [addToWishList, setAddToWishList] = useState(false);
   const [onadd, setOnAdd] = useState(true);
   const [wishId, setWishId] = useState([]);
-  const likes = props.prodet.wishlist_id;
+  const likes = props.prodet.wishlist_id || props.wishId;
   console.log("likes", likes);
+  console.log("wishprodet", props.wishId);
 
   const Contryname = localStorage.getItem("country_name");
 

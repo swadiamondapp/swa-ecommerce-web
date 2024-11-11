@@ -20,6 +20,7 @@ const Payment = () => {
   const location = useLocation();
   const { data, name } = location.state;
   console.log(location, "adddressspaymentLoaca");
+  console.log(data, "dataqqqq");
   const { promoCodeIds } = data || {};
   const [promoId, setPromoId] = useState(promoCodeIds ? promoCodeIds : "");
   const [mode, setMode] = useState("");
@@ -770,7 +771,10 @@ const Payment = () => {
             <div className={Classes.Right}>
               <div className={Classes.TotalText}>
                 <div className={Classes.TotalItem}>
-                  <p className={Classes.TotalSmall} style={{fontSize:"16px"}}>
+                  <p
+                    className={Classes.TotalSmall}
+                    style={{ fontSize: "16px" }}
+                  >
                     Total &nbsp;<span>{data.totalItems} Items</span>
                   </p>
                 </div>

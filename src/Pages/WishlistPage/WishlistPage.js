@@ -108,6 +108,7 @@ const whishlistPage = () => {
     );
   } else {
     wishlists = wishList.map((item, index) => {
+      console.log("whishlistlikes", item.id);
       return (
         <NewArrivalCard
           ProductImage={item.product.thumbnail_image}
@@ -147,9 +148,9 @@ const whishlistPage = () => {
           selectedCountry={selectedCountry}
           setSelectedCountry={setSelectedCountry}
         />
-          <div className={Classes.Products}>
-            <Wishlist> {wishlists} </Wishlist>
-          </div>
+        <div className={Classes.Products}>
+          <Wishlist> {wishlists} </Wishlist>
+        </div>
         <div>
           {/* <SliderFeature /> */}
           <Features />
