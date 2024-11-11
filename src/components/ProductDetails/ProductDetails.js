@@ -228,7 +228,7 @@ const ProductDetails = (props) => {
     if (token !== null) {
       if (wishId !== "") {
         axios
-          .delete(`${Urls.wishlist + wishId}?country=${countryId}`, {
+          .delete(`${Urls.wishlist + wishId}/?country=${countryId}`, {
             headers: {
               Authorization: "Token " + token,
             },
@@ -1864,7 +1864,10 @@ const ProductDetails = (props) => {
                 </div>
               );
             })} */}
-            <div className={Classes.BorderBottom2}>
+            <div
+              className={Classes.BorderBottom2}
+              style={{ borderBottom: "none!important" }}
+            >
               <div className="container">
                 <div className={Classes.CustomersHeadReview}>
                   <p className={Classes.ProductDetailsHead}>
@@ -1975,13 +1978,18 @@ const ProductDetails = (props) => {
                           <div className={Classes.ReviewsDescription}>
                             <p>{item.review}</p>
                           </div>
-                          <div style={{ marginTop: "8px" }}>
-                            <img
-                              style={{ maxWidth: "60px", borderRadius: "5px" }}
-                              src={item.review_image}
-                              alt="review_image"
-                            />
-                          </div>
+                          {item.review_image && (
+                            <div style={{ marginTop: "8px" }}>
+                              <img
+                                style={{
+                                  maxWidth: "60px",
+                                  borderRadius: "5px",
+                                }}
+                                src={item.review_image}
+                                alt="review_image"
+                              />
+                            </div>
+                          )}
                         </div>
                       </div>
                     );

@@ -825,8 +825,9 @@
   -webkit-appearance: none;
   font-size: 16px;
   font-weight: 600;
-  width: 130px;
-  background: transparent url("../../Assets/arrow.png") no-repeat calc(100% - 10px) center;
+  width: 150px;
+  background: transparent url("../../Assets/arrow.png") no-repeat
+    calc(100% - 10px) center;
   border: 1px solid #006e7f;
   border-radius: 32px;
   padding: 13px 23px 13px 10px;
@@ -1229,5 +1230,4 @@
   .Language_vi::-webkit-scrollbar {
     display: none; /* Hides the scrollbar */
   }
-  
 }

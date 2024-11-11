@@ -76,7 +76,7 @@ const CheckDelivery = ({ props, show, handleClose, handleShow }) => {
   const [isLoading, setIsLoading] = useState(false);
   // const pinCodeChangeHandler = (e) => {
   //   setPinCode(e.target.value);
-    
+
   // };
   const pinCodeChangeHandler = (e) => {
     const value = e.target.value;
@@ -107,6 +107,13 @@ const CheckDelivery = ({ props, show, handleClose, handleShow }) => {
       setPinCodeError("Enter pin code");
     }
   };
+
+  const handleEnterKeyPress = (e) => {
+    if (e.key === "Enter") {
+      availbilityCheck();
+    }
+  };
+
   const pincode = localStorage.getItem("pincode");
   console.log("pincode1", pincode);
   console.log("pinCode", pinCode);
@@ -206,6 +213,7 @@ const CheckDelivery = ({ props, show, handleClose, handleShow }) => {
                   value={pinCode}
                   onChange={pinCodeChangeHandler}
                   maxLength={6}
+                  onKeyDown={handleEnterKeyPress}
                 />
                 <BsArrowRight
                   className={Classes.LocationIconarrow}
