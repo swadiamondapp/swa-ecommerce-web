@@ -517,7 +517,6 @@ const Header = (props) => {
   // console.log("countryData", countryData);
 
   const handleCountrySelect = (country) => {
-    debugger;
     if (!isHomePage) {
       history.push("/");
     }

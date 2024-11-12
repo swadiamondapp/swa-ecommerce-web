@@ -53,6 +53,9 @@ const Payment = () => {
   const handleChangeAddress = () => {
     setShowChangeAddress((prevState) => !prevState);
   };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   useEffect(() => {
     setLoading(true);

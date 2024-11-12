@@ -480,6 +480,11 @@ p {
   margin-left: 0.5rem;
 }
 
+.sizevalidation {
+  padding-left: 0px;
+  padding-top: 0px;
+}
+
 .card-body-cta {
   margin-top: 1rem;
   cursor: pointer;
@@ -938,6 +943,10 @@ input[type="number"] {
   .ParentSlide .slick-dots li button:before {
     font-size: 14px;
   }
+  .sizevalidation {
+    padding-left: 25px;
+    padding-top: 5px;
+  }
 }
 .hideSearchBar {
   display: none;
@@ -996,4 +1005,11 @@ input[type="number"] {
 }
 .p-inputtext {
   padding: 0px !important;
+}
+
+.modal.show .modal-dialog {
+  transform: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

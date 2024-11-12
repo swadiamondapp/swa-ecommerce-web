@@ -56,6 +56,7 @@ import freeDelivery4 from "../../Assets/freeDev4.png";
 import freeDelivery5 from "../../Assets/freeDev5.png";
 import shippingTag1 from "../../Assets/shiptruck.png";
 import shippingtag2 from "../../Assets/shiptimetwo.png";
+import LoginSuccessModal from "../LoginSuccesModal/LoginSuccessModal";
 
 const ProductDetails = (props) => {
   const location = useLocation();
@@ -87,6 +88,8 @@ const ProductDetails = (props) => {
   const Contryname = localStorage.getItem("country_name");
   const [loginModalVisible, setLoginModalVisible] = useState(false);
   const [modalshow, setModalShow] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [text, setText] = useState("");
 
   const closeHanlder = () => {
     setModalShow(false);
@@ -1077,7 +1080,9 @@ const ProductDetails = (props) => {
                   handleClose={handleCloseModal}
                   productId={props.id}
                 />
-                <p style={{ color: "#ff4545" }}>{props.errormsgtrycart}</p>
+                <p className="sizevalidation" style={{ color: "#ff4545" }}>
+                  {props.errormsgtrycart}
+                </p>
               </div>
               <Modal
                 open={showErrorModal}
@@ -1866,7 +1871,7 @@ const ProductDetails = (props) => {
             })} */}
             <div
               className={Classes.BorderBottom2}
-              style={{ borderBottom: "none!important" }}
+              style={{ borderBottom: "none" }}
             >
               <div className="container">
                 <div className={Classes.CustomersHeadReview}>
@@ -2043,11 +2048,21 @@ const ProductDetails = (props) => {
           </div>
         </div>
         {loginModalVisible && (
-          <LoginModal
-            isLog={modalshow}
-            close={closeHanlder}
-            handleOpenLogin={"profile"}
-          />
+          <>
+            <LoginModal
+              isLog={modalshow}
+              close={closeHanlder}
+              handleOpenLogin={"profile"}
+              setShowSuccessModal={setShowSuccessModal}
+              setText={setText}
+            />
+            <LoginSuccessModal
+              openSuccessModal={showSuccessModal}
+              close={() => setShowSuccessModal(false)}
+              state={showSuccessModal}
+              text={text}
+            />
+          </>
         )}
       </div>
     </div>

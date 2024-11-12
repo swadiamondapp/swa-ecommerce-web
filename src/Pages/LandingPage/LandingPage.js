@@ -72,6 +72,10 @@ const LandingPage = () => {
     setShowModal(false);
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const history = useHistory();
   const token = localStorage.getItem("swaToken");
   const home = () => {

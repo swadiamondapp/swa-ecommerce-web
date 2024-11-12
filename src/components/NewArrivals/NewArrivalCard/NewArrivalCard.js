@@ -217,7 +217,7 @@ const NewArrivalCard = (props) => {
                   />
                 </div>
                 <div className={Classes.cardTryatHomeBtn}>
-                  <button>TRIAL AT HOME</button>
+                  <button onClick={props.clicked}>BUY NOW</button>
                 </div>
               </div>
             </div>

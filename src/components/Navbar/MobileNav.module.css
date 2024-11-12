@@ -677,7 +677,7 @@ header {
   .Parentcartitems {
     display: grid;
     grid-template-columns: 100px 100px;
-    width: 200px;
+    width: 207px;
     background: #e2e9e9;
     padding: 3px;
     align-items: center;
@@ -686,6 +686,7 @@ header {
     color: #10212f;
     font-weight: 500;
     font-size: 12px;
+    margin-left: 8px;
   }
   .ActiveCarthead {
     background: #fff;
