@@ -92,7 +92,10 @@ const CheckDelivery = ({ props, show, handleClose, handleShow }) => {
         .then((response1) => {
           setActive(response1.data.IsSuccess);
           if (response1.data.IsSuccess === true) {
-            localStorage.setItem("pincode", response1.data.PincodeData[0].Area);
+            localStorage.setItem(
+              "pincode",
+              response1.data.PincodeData[0].Pincode
+            );
             handleClose();
             setPinCodeError("");
           } else {
