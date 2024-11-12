@@ -68,13 +68,14 @@ function CartDesign(props) {
         }
       );
       setWalletValues(response.data);
-      if (
-        response.data.swa_wallet === 0 &&
-        response.data.exchange_wallet === 0
-      ) {
-        // If both wallet balances are 0, directly update the cart and proceed to checkout
-        step2Handler();
-      } else if (isApply) {
+      // if (
+      //   response.data.swa_wallet === 0 &&
+      //   response.data.exchange_wallet === 0
+      // ) {
+      //   // If both wallet balances are 0, directly update the cart and proceed to checkout
+      //   step2Handler();
+      // }
+      if (isApply) {
         step2Handler();
       } else {
         setWalletOpen(true);

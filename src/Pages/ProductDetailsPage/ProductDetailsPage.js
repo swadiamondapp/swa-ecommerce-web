@@ -34,7 +34,7 @@ const ProductDetailsPage = (props) => {
   const [isRestricted, setIsRestricted] = useState(false);
   const countryId = localStorage.getItem("id");
   const [deliveryDate, setDeliveryDate] = useState();
-  const [deliveryShopList,setDeliveryShopsList] = useState([])
+  const [deliveryShopList, setDeliveryShopsList] = useState([]);
   const [pincodeShow, setPincodeShow] = useState(false);
   const [pinCode, setPinCode] = useState("");
 
@@ -282,12 +282,12 @@ const ProductDetailsPage = (props) => {
       setPicodeError("");
     }
 
-    // if (!size) {
-    //   setSizeError("Size is required");
-    //   hasError = true;
-    // } else {
-    //   setSizeError("");
-    // }
+    if (!size) {
+      setSizeError("Size is required");
+      hasError = true;
+    } else {
+      setSizeError("");
+    }
     if (!hasError && pinCode) {
       const body = {
         product_id: prodDet.id,
@@ -302,7 +302,7 @@ const ProductDetailsPage = (props) => {
         })
         .then((response1) => {
           setDeliveryDate(response1.data.results.message);
-          setDeliveryShopsList(response1.data.results.data)
+          setDeliveryShopsList(response1.data.results.data);
           setPincodeShow(true); // Show the message after receiving the response
           console.log("dateresponse", response1.data.results);
         })
