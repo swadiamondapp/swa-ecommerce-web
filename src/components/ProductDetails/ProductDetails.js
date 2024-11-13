@@ -935,63 +935,70 @@ const ProductDetails = (props) => {
                 {/* {props.diamondWeight}gram) */}
               </p>
               <p className={Classes.Code}>SKU : {props.sku}</p>
-              <div className={`${Classes.Flex} ${Classes.MobDownAR}`}>
-                {/* <BiRupee size={25} /> */}
+              <div className="productdetailPricesec">
+                <div className={`${Classes.Flex} ${Classes.MobDownAR}`}>
+                  {/* <BiRupee size={25} /> */}
 
-                <p
-                  className={Classes.NewPrice}
-                  style={{ display: "flex", alignItems: "center", gap: "3px" }}
-                >
-                  {Contryname === "India" && (
-                    <BiRupee className={Classes.Rupee} />
-                  )}
-                  {Contryname === "United States" && (
-                    <CgDollar className={Classes.Rupee} />
-                  )}
-                  {Contryname === "United Arab Emirates" && (
-                    <span style={{ paddingRight: "5px" }}>AED</span>
-                  )}
-                  {/* &#x20B9; {parseFloat(formattedCost).toFixed(0)} */}
-                  {result === null || result === "NaN" ? "" : result}
-                </p>
-                {props.actualPrice &&
-                  (props.actualPrice === null ||
-                  isNaN(Number(props.actualPrice)) ? (
-                    ""
-                  ) : (
-                    <>
-                      {Contryname === "India" && (
-                        <BiRupee size={25} color="#B0B0B0" />
-                      )}
-                      {Contryname === "United States" && (
-                        <CgDollar size={25} color="#B0B0B0" />
-                      )}
-                      {Contryname === "United Arab Emirates" && (
-                        <span
-                          style={{ paddingRight: "5px", paddingLeft: "7px" }}
-                        >
-                          AED
-                        </span>
-                      )}
-                      <p className={Classes.OldPrice}>
-                        {numberWithCommas(
-                          parseInt(props.actualPrice, 10).toFixed(0)
+                  <p
+                    className={Classes.NewPrice}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "3px",
+                    }}
+                  >
+                    {Contryname === "India" && (
+                      <BiRupee className={Classes.Rupee} />
+                    )}
+                    {Contryname === "United States" && (
+                      <CgDollar className={Classes.Rupee} />
+                    )}
+                    {Contryname === "United Arab Emirates" && (
+                      <span style={{ paddingRight: "5px" }}>AED</span>
+                    )}
+                    {/* &#x20B9; {parseFloat(formattedCost).toFixed(0)} */}
+                    {result === null || result === "NaN" ? "" : result}
+                  </p>
+                  {props.actualPrice &&
+                    (props.actualPrice === null ||
+                    isNaN(Number(props.actualPrice)) ? (
+                      ""
+                    ) : (
+                      <>
+                        {Contryname === "India" && (
+                          <BiRupee size={25} color="#B0B0B0" />
                         )}
-                      </p>
-                    </>
-                  ))}
+                        {Contryname === "United States" && (
+                          <CgDollar size={25} color="#B0B0B0" />
+                        )}
+                        {Contryname === "United Arab Emirates" && (
+                          <span
+                            style={{ paddingRight: "5px", paddingLeft: "7px" }}
+                          >
+                            AED
+                          </span>
+                        )}
+                        <p className={Classes.OldPrice}>
+                          {numberWithCommas(
+                            parseInt(props.actualPrice, 10).toFixed(0)
+                          )}
+                        </p>
+                      </>
+                    ))}
+                </div>
+                {props.discount ? (
+                  <p className={Classes.HurrayText}>
+                    Hurray! You have saved{" "}
+                    {Contryname === "India" && <BiRupee size={15} />}
+                    {Contryname === "United States" && <CgDollar size={15} />}
+                    {Contryname === "United Arab Emirates" && (
+                      <span style={{ paddingRight: "5px" }}>AED</span>
+                    )}{" "}
+                    {numberWithCommas(props.discountVal.toFixed(0))}
+                  </p>
+                ) : null}
               </div>
-              {props.discount ? (
-                <p className={Classes.HurrayText}>
-                  Hurray! You have saved{" "}
-                  {Contryname === "India" && <BiRupee size={15} />}
-                  {Contryname === "United States" && <CgDollar size={15} />}
-                  {Contryname === "United Arab Emirates" && (
-                    <span style={{ paddingRight: "5px" }}>AED</span>
-                  )}{" "}
-                  {numberWithCommas(props.discountVal.toFixed(0))}
-                </p>
-              ) : null}
+
               <p className={Classes.AvailableColours}>Customize this product</p>
               <div className={Classes.Flex}>
                 {props.colors.map((item, index) => {

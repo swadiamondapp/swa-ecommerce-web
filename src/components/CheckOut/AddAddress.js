@@ -376,7 +376,7 @@ function AddAddress(props) {
                         <input
                           className={Classes.PlaceInput}
                           type="text"
-                          placeholder="Jameel muhammed"
+                          // placeholder="Jameel muhammed"
                           value={addressData.fullName}
                           name="fullName"
                           onChange={handleChangeAddress}
@@ -392,7 +392,7 @@ function AddAddress(props) {
                         <input
                           className={Classes.PlaceInput}
                           type="text"
-                          placeholder="+91 98975656785"
+                          // placeholder="+91 98975656785"
                           value={addressData.mobile}
                           name="mobile"
                           onChange={handleChangeAddress}
@@ -409,7 +409,7 @@ function AddAddress(props) {
                           <input
                             className={Classes.PlaceInput}
                             type="text"
-                            placeholder="Pincode*"
+                            // placeholder="Pincode*"
                             value={addressData.pincode}
                             name="pincode"
                             onChange={handleChangeAddress}
@@ -436,7 +436,7 @@ function AddAddress(props) {
                           <input
                             className={Classes.PlaceInput}
                             type="text"
-                            placeholder="City*"
+                            // placeholder="City*"
                             value={addressData.city}
                             name="city"
                             onChange={handleChangeAddress}
@@ -473,7 +473,7 @@ function AddAddress(props) {
                         <input
                           className={Classes.PlaceInput}
                           type="text"
-                          placeholder="house number/ building name*"
+                          // placeholder="house number/ building name*"
                           value={addressData.hNumber_Bname}
                           name="hNumber_Bname"
                           onChange={handleChangeAddress}
@@ -489,7 +489,7 @@ function AddAddress(props) {
                         <input
                           className={Classes.PlaceInput}
                           type="text"
-                          placeholder="road name, area colony*"
+                          // placeholder="road name, area colony*"
                           value={addressData.streetColony}
                           name="streetColony"
                           onChange={handleChangeAddress}
@@ -506,7 +506,7 @@ function AddAddress(props) {
                       <input
                         className={Classes.PlaceInput}
                         type="text"
-                        placeholder="Near edu city"
+                        // placeholder="Near edu city"
                         value={addressData.landMark}
                         name="landMark"
                         onChange={handleChangeAddress}

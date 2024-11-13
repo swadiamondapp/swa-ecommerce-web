@@ -78,6 +78,9 @@ input::placeholder {
 :where(.css-dev-only-do-not-override-4fj727).ant-picker-focused {
   box-shadow: none !important;
 }
+.productdetailPricesec {
+  border: none;
+}
 :where(.css-dev-only-do-not-override-4fj727).ant-picker {
   border: none !important;
   background: transparent !important;
@@ -946,6 +949,15 @@ input[type="number"] {
   .sizevalidation {
     padding-left: 25px;
     padding-top: 5px;
+  }
+  .productdetailPricesec {
+    border-bottom: 0.75px solid #e6e5e5;
+  }
+  .ParentSlide {
+    height: 372px;
+  }
+  .ParentSlide .slick-slider {
+    height: 372px;
   }
 }
 .hideSearchBar {

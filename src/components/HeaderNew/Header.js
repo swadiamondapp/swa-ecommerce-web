@@ -1016,7 +1016,9 @@ const Header = (props) => {
                           alt="catg"
                         />
 
-                        <p>{item.name.slice(0, 10).toUpperCase()}</p>
+                        <p style={{ width: "85px", textAlign: "center" }}>
+                          {item.name.slice(0, 10).toUpperCase()}
+                        </p>
                       </div>
                     </div>
                   );

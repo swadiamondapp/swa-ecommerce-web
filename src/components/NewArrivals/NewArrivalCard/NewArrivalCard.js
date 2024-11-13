@@ -21,7 +21,7 @@ const NewArrivalCard = (props) => {
   const [wishId, setWishId] = useState([]);
   const likes = props.prodet.wishlist_id || props.wishId;
   console.log("likes", likes);
-  console.log("wishprodet", props.wishId);
+  console.log("wishprodet?", addToWishList);
 
   const Contryname = localStorage.getItem("country_name");
 
@@ -119,7 +119,7 @@ const NewArrivalCard = (props) => {
   let cost = props.PriceNew;
   let formattedCost = parseFloat(cost).toLocaleString();
   function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return x && x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
   const result = numberWithCommas(formattedCost);
 
