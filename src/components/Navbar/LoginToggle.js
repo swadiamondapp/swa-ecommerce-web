@@ -139,6 +139,7 @@ const LoginToggle = (props) => {
   const handleOtpModalOpen = () => setGetOtpModal(true);
   const handleOtpModalClose = () => setGetOtpModal(false);
   console.log(mobileNumber, "mobileNumber==>");
+
   const handleSignupModalClose = () => setSignupModal(false);
   const handleOpen = (event) => {
     // event.preventDefault(); // Prevent default form submission behavior
@@ -491,6 +492,7 @@ const LoginToggle = (props) => {
       }
       if (response.data.results.message === "Otp verified successfully!") {
         props.setText("Logged In");
+
         props.setShowSuccessModal(true);
         setTimeout(() => {
           props.setShowSuccessModal(false);
@@ -522,6 +524,7 @@ const LoginToggle = (props) => {
     try {
       const response = await axios.post(Urls.verifyOTP, body);
       if (response.data.results.status_code === 200) {
+        props.setText("Logged In");
         props.setShowSuccessModal(true);
         setTimeout(() => {
           props.setShowSuccessModal(false);

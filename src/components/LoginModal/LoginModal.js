@@ -114,6 +114,7 @@ const LoginModal = (props) => {
   //     setLogin(true);
   //   }
   // }, [props.isLog]);
+  console.log("props.textheader1", props.text);
 
   const registerHandler = () => {
     let selObj = country.arrayCountryList.find(
@@ -422,7 +423,7 @@ const LoginModal = (props) => {
     localStorage.removeItem("swaToken");
     localStorage.removeItem("userName");
     localStorage.removeItem("phoneNumber");
-    localStorage.removeItem("userProfile")
+    localStorage.removeItem("userProfile");
     // localStorage.removeItem("defaultCountryFlag");
     // localStorage.removeItem("id");
 

@@ -92,7 +92,7 @@
   background: #a79a6c;
   border: none;
   color: #fff;
-  padding: 10px 20px;
+  padding: 10px 15px;
   border-radius: 4px;
   font-size: 16px;
   font-family: "Lato", sans-serif;
@@ -978,7 +978,7 @@
   }
   .ParentHeadingD1 {
     margin-top: 90px;
-    z-index: 99999;
+
     position: relative;
   }
   .manpara {
@@ -1033,10 +1033,11 @@
     box-shadow: 0px -3px 3px 0px #0000001a;
   }
   .FindStoreParent {
-    justify-content: center;
-    /* margin-bottom: 15px; */
     margin-bottom: 0px;
-    gap: 18px;
+    display: grid;
+    grid-template-columns: 1fr 0.1fr 1fr;
+    margin-left: 24px;
+    margin-right: 24px;
   }
   .C1 {
     border-radius: 50px;

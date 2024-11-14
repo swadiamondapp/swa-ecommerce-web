@@ -45,6 +45,7 @@ function AddAddress(props) {
     hNumber_Bname: "",
     streetColony: "",
   });
+
   // const [showDeleteButtons, setShowDeleteButtons] = useState([]);
 
   // const handleToggleOptions = (index) => {
@@ -163,6 +164,7 @@ function AddAddress(props) {
   };
 
   const addAaddress = async () => {
+    window.scrollTo(0, 0);
     console.log("clicked,,,");
     if (validateForm()) return;
     const body = {
@@ -237,6 +239,10 @@ function AddAddress(props) {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div>

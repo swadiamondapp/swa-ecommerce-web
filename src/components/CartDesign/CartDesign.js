@@ -36,6 +36,9 @@ function CartDesign(props) {
     setTotal(props.amount - props.cartProAmnt);
     setAmountPay(props.amount - props.cartProAmnt);
   }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   console.log(total, "amountsoftrialCart");
   const handleSubmit = (event) => {
     event.preventDefault();

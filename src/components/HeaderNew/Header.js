@@ -67,6 +67,7 @@ const Header = (props) => {
   const [showUserDetails, setShowUserDetails] = useState(false);
   const userDetailsRef = useRef(null);
   console.log("countryData", countryData);
+  console.log("props.textheader2", text);
 
   const handleShowModal = () => {
     setShowModal(true);
@@ -815,7 +816,10 @@ const Header = (props) => {
       )}
 
       <div
-        className={Classes.searchListCont}
+        // className={Classes.searchListCont}
+        className={
+          isHomePage ? Classes.searchListCont : Classes.searchListscards
+        }
         style={{ display: searchShow ? "block" : "none" }}
       >
         {suggestionList.length !== 0 ? (

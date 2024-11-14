@@ -56,6 +56,9 @@ function CheckOut(props) {
   const countryId = localStorage.getItem("id");
 
   console.log("promoIdIII", total);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const [addressData, setAddressData] = useState({
     sEmail: "",

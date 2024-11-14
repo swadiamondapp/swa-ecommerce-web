@@ -37,6 +37,7 @@ const Profile = (props) => {
     mobile: phone,
     photo: null,
   });
+  console.log("formDataaa", formData);
 
   const [errors, setErrors] = useState({});
   const token = localStorage.getItem("swaToken");
@@ -176,6 +177,9 @@ const Profile = (props) => {
               setPreview(reader.result); // Update the image preview
             };
             reader.readAsDataURL(formData.photo); // Convert image to Base64
+          }
+          if (formData.fullName) {
+            localStorage.setItem("userName", formData.fullName);
           }
 
           // setTimeout(handleClose, 3000);

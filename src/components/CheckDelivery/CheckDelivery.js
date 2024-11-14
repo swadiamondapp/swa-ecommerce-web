@@ -74,6 +74,7 @@ const CheckDelivery = ({ props, show, handleClose, handleShow }) => {
   const [pinCodeError, setPinCodeError] = useState("");
   const [active, setActive] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [availabilityLoading, setAvailabilityLoading] = useState(false);
   // const pinCodeChangeHandler = (e) => {
   //   setPinCode(e.target.value);
 
@@ -87,17 +88,34 @@ const CheckDelivery = ({ props, show, handleClose, handleShow }) => {
   };
   const availbilityCheck = () => {
     if (pinCode !== "") {
+      setAvailabilityLoading(true);
       axios
         .get(Urls.pincodeCheck + pinCode)
         .then((response1) => {
           setActive(response1.data.IsSuccess);
+          console.log("pincoderesponse", response1.data);
+          // if (response1.data.IsSuccess === true) {
+          //   localStorage.setItem(
+          //     "pincode",
+          //     response1.data.PincodeData[0].Pincode
+          //   );
+          //   handleClose();
+          //   setPinCodeError("");
+          // } else {
+          //   setPinCodeError("Invalid pin code");
+          // }
           if (response1.data.IsSuccess === true) {
-            localStorage.setItem(
-              "pincode",
-              response1.data.PincodeData[0].Pincode
-            );
-            handleClose();
-            setPinCodeError("");
+            // Try accessing pincode in multiple ways
+            const receivedPincode =
+              response1.data.pincode || response1.data.Pincode || null;
+            if (receivedPincode) {
+              localStorage.setItem("pincode", receivedPincode);
+              handleClose();
+              setPinCodeError("");
+            } else {
+              console.log("Pincode not found in the response");
+              setPinCodeError("Pincode data unavailable");
+            }
           } else {
             setPinCodeError("Invalid pin code");
           }
@@ -105,9 +123,12 @@ const CheckDelivery = ({ props, show, handleClose, handleShow }) => {
 
         .catch((error) => {
           console.log(error);
+        })
+        .finally(() => {
+          setAvailabilityLoading(false); // Stop the spinner
         });
     } else {
-      setPinCodeError("Enter pin code");
+      setPinCodeError("Enter Pincode");
     }
   };
 
@@ -218,10 +239,24 @@ const CheckDelivery = ({ props, show, handleClose, handleShow }) => {
                   maxLength={6}
                   onKeyDown={handleEnterKeyPress}
                 />
-                <BsArrowRight
-                  className={Classes.LocationIconarrow}
-                  onClick={availbilityCheck}
-                />
+                {availabilityLoading ? (
+                  <Box sx={{ display: "flex", alignItems: "center" }}>
+                    <CircularProgress
+                      size={20}
+                      sx={{ color: "#000", ml: 1 }}
+                      style={{
+                        position: "absolute",
+                        right: "10px",
+                        top: "14px",
+                      }}
+                    />
+                  </Box>
+                ) : (
+                  <BsArrowRight
+                    className={Classes.LocationIconarrow}
+                    onClick={availbilityCheck}
+                  />
+                )}
               </div>
               <div className="" style={{ color: "#ff0000cc" }}>
                 {pinCodeError}
