@@ -119,10 +119,17 @@ const CheckDelivery = ({ props, show, handleClose, handleShow }) => {
           } else {
             setPinCodeError("Invalid pin code");
           }
+          if (response1.data.IsSuccess === "Pincode is not serviceable!") {
+            console.log("wwwww", response1.data);
+          }
         })
 
         .catch((error) => {
-          console.log(error);
+          console.log("error", error);
+          if (error.response.status === 401) {
+            console.log("Unauthorized - Please check your API credentials.");
+            setPinCodeError("Pincode data unavailable");
+          }
         })
         .finally(() => {
           setAvailabilityLoading(false); // Stop the spinner

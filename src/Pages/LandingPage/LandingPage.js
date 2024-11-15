@@ -289,7 +289,9 @@ const LandingPage = () => {
           onclose={handleCloseModal}
           clicked={() => prodDetHandler(item)}
           onClick={() => handleShowModal(item.product_id)}
-          buttonText={buttonTexts[item.product_id] || "Check delivery date"}
+          buttonText={
+            buttonTexts[item && item.product_id] || "Check delivery date"
+          }
           showModal={showModal}
         />
       );
@@ -330,7 +332,9 @@ const LandingPage = () => {
           prodet={item}
           onclose={handleCloseModal}
           onClick={() => handleShowModal(item.product_id)}
-          buttonText={buttonTexts[item.product_id] || "Check delivery date"}
+          buttonText={
+            buttonTexts[item && item.product_id] || "Check delivery date"
+          }
           showModal={showModal}
         />
       );
@@ -384,7 +388,7 @@ const LandingPage = () => {
                 onclose={handleCloseModal}
                 onClick={() => handleShowModal(item.product_id)}
                 buttonText={
-                  buttonTexts[item.product_id] || "Check delivery date"
+                  buttonTexts[item && item.product_id] || "Check delivery date"
                 }
                 showModal={showModal}
               />

@@ -369,7 +369,6 @@ const NewArrivalPage = (props) => {
       </div>
     );
   } else {
-    
     const handleShowModal = (productId) => {
       console.log("productIddd", productId);
       const pincode = localStorage.getItem("pincode");
@@ -380,7 +379,7 @@ const NewArrivalPage = (props) => {
           size_id: "",
           pincode: pincode,
         };
-  
+
         axios
           .post(Urls.checkdeliveryDate, body, {
             headers: { Authorization: "Token " + token },
@@ -406,8 +405,7 @@ const NewArrivalPage = (props) => {
     };
 
     products = product.map((item, index) => {
-
-      console.log(item.sku,"item.sku")
+      console.log(item.sku, "item.sku");
       return (
         <NewArrivalCard
           ProductImage={item.thumbnail_image}
@@ -429,7 +427,9 @@ const NewArrivalPage = (props) => {
           clicked={() => prodDetHandler(item)}
           wishAct={item.wishlist_id}
           prodet={item}
-          buttonText={buttonTexts[item.product_id] || "Check delivery date"}
+          buttonText={
+            buttonTexts[item && item.product_id] || "Check delivery date"
+          }
           onClick={() => handleShowModal(item.product_id)}
           showModal={showModal}
           onclose={handleCloseModal}
