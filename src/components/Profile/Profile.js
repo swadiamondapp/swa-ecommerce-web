@@ -40,6 +40,7 @@ const Profile = (props) => {
   console.log("formDataaa", formData);
 
   const [errors, setErrors] = useState({});
+  const [moberrors, setmobErrors] = useState("");
   const token = localStorage.getItem("swaToken");
   const [preview, setPreview] = useState(
     userProfileImage === "https://swaecommain.swa.co/media/default.png"
@@ -49,6 +50,8 @@ const Profile = (props) => {
   const [open, setOpen] = useState(false);
   const [loginModalVisible, setLoginModalVisible] = useState(false);
   const [show, setShow] = useState(false);
+
+  console.log("moberrors", moberrors);
 
   const [isMobileView, setIsMobileView] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
@@ -160,7 +163,7 @@ const Profile = (props) => {
           },
         });
         console.log("Form data is valid and submitted:", response.data);
-        if (response.data.status === 200) {
+        if (response.data.message === "updated successfully") {
           console.log("Form data is valid and submitted:", response.data);
           handleOpen();
           // Automatically close the modal after 5 seconds
@@ -205,6 +208,17 @@ const Profile = (props) => {
           // Show LoginModal if status is 200
 
           // setLoginModalVisible(true);
+        } else if (
+          response.data.errors.phone_number &&
+          response.data.errors.phone_number.includes(
+            "custom user with this phone number already exists."
+          )
+        ) {
+          console.log(
+            "Phone number already exists error:",
+            response.data.errors
+          );
+          setmobErrors("Phone number already exists");
         }
       } catch (err) {
         console.error("Error submitting the form:", err);
@@ -276,6 +290,7 @@ const Profile = (props) => {
                     <p className={Classes.error}>{errors.mobile}</p>
                   )}
                 </div>
+                {moberrors && <p className={Classes.error}>{moberrors}</p>}
               </div>
               <div className={Classes.ParentProfileBtn}>
                 <button type="submit" className={Classes.ProfileSaveChangeBtn}>

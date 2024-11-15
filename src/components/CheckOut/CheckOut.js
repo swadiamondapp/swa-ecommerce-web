@@ -940,11 +940,11 @@ function CheckOut(props) {
                     </div>
                     <p className={Classes.Heading}>Delivery Address</p>
                     <div className="Parant_Relative">
-                      <label>Full Name</label>
+                      <label>Full Name*</label>
                       <input
                         className={Classes.PlaceInput}
                         type="text"
-                        placeholder="Full name*"
+                        placeholder="Full name"
                         value={addressData.fullName}
                         name="fullName"
                         onChange={handleChangeAddress}
@@ -998,11 +998,11 @@ function CheckOut(props) {
                     </div>
 
                     <div className="Parant_Relative">
-                      <label>Country</label>
+                      <label>Country*</label>
                       <input
                         className={Classes.PlaceInput}
                         type="text"
-                        placeholder="country*"
+                        placeholder="country"
                         value={addressData.country}
                         name="country"
                         onChange={handleChangeAddress}
@@ -1016,11 +1016,11 @@ function CheckOut(props) {
 
                     <div className={Classes.ParentF1}>
                       <div className="Parant_Relative">
-                        <label>Mobile Number</label>
+                        <label>Alternate Number*</label>
                         <input
                           className={Classes.PlaceInput}
                           type="number"
-                          placeholder="Phone number*"
+                          placeholder="Phone number"
                           value={addressData.mobile}
                           name="mobile"
                           onChange={handleChangeAddress}
@@ -1059,11 +1059,11 @@ function CheckOut(props) {
                         )}
                       </div> */}
                       <div>
-                        <label>City</label>
+                        <label>City*</label>
                         <input
                           className={Classes.PlaceInput}
                           type="text"
-                          placeholder="City*"
+                          placeholder="City"
                           value={addressData.city}
                           name="city"
                           onChange={handleChangeAddress}
@@ -1095,11 +1095,11 @@ function CheckOut(props) {
 
                     <div className={Classes.ParentStreetColony}>
                       <div className={Classes.House1NN}>
-                        <label>House number / building name</label>
+                        <label>House number / building name*</label>
                         <input
                           className={Classes.PlaceInput}
                           type="text"
-                          placeholder="house number/ building name*"
+                          placeholder="house number/ building name"
                           value={addressData.hNumber_Bname}
                           name="hNumber_Bname"
                           onChange={handleChangeAddress}
@@ -1111,11 +1111,11 @@ function CheckOut(props) {
                         )}
                       </div>
                       <div className={Classes.ColonyForm}>
-                        <label>Street colony name</label>
+                        <label>Street colony name*</label>
                         <input
                           className={Classes.PlaceInput}
                           type="text"
-                          placeholder="road name, area colony*"
+                          placeholder="road name, area colony"
                           value={addressData.streetColony}
                           name="streetColony"
                           onChange={handleChangeAddress}

@@ -1478,7 +1478,7 @@ a {
 
   .searchbar {
     width: 100%;
-    /* margin-bottom: 7px; */
+    margin-bottom: 7px;
   }
   .MobSliderCards {
     display: flex;
@@ -1488,7 +1488,7 @@ a {
     scrollbar-width: none; /* For Firefox */
     scrollbar-color: #fff !important;
     margin-bottom: 5px;
-    margin-top: 5px;
+    /* margin-top: 5px; */
   }
   .mobCheckDelivery {
     font-size: 15px;
@@ -1525,7 +1525,7 @@ a {
 
   .searchListCont {
     display: block;
-    top: 27%;
+    top: 28%;
     width: 100%;
     left: 0;
     z-index: 999;

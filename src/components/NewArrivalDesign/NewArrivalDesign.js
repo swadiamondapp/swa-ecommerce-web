@@ -18,6 +18,7 @@ const NewArrivalPage = (props) => {
     props.deltLabel(index);
   };
   const lawtohigh = () => {};
+
   return (
     <div>
       <div className={Classes.ParentMain}>

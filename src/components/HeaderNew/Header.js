@@ -234,6 +234,10 @@ const Header = (props) => {
       setSearchShow(false);
     }
   };
+  useEffect(() => {
+    setSearchShow(false);
+  }, []);
+
   const searchTitleHandler = (setItem) => {
     if (setItem.type === "category") {
       if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
