@@ -19,7 +19,8 @@ const NewArrivalCard = (props) => {
   const [addToWishList, setAddToWishList] = useState(false);
   const [onadd, setOnAdd] = useState(true);
   const [wishId, setWishId] = useState([]);
-  const likes = props.prodet.wishlist_id || props.wishId;
+  const likes =
+    (props.prodet.wishlist_id && props.prodet.wishlist_id) || props.wishId;
   console.log("likes", likes);
   console.log("wishprodet?", addToWishList);
 
