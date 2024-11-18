@@ -61,14 +61,26 @@ const NewArrivalPage = (props) => {
   };
 
   const prodDetHandler = (prodItem) => {
+    // history.push({
+    //   pathname:
+    //     "/products/" +
+    //     prodItem.product_id +
+    //     "/" +
+    //     prodItem.thumbnail_colour_id +
+    //     "/" +
+    //     prodItem.product_name,
+    //   state: { data: prodItem },
+    // });
+    sessionStorage.setItem(
+      "productDetails",
+      JSON.stringify({
+        id: prodItem.product_id,
+        color: prodItem.colour_id,
+        name: prodItem.product_name,
+      })
+    );
     history.push({
-      pathname:
-        "/products/" +
-        prodItem.product_id +
-        "/" +
-        prodItem.thumbnail_colour_id +
-        "/" +
-        prodItem.product_name,
+      pathname: "/jewellery/" + prodItem.alias,
       state: { data: prodItem },
     });
   };
@@ -369,7 +381,6 @@ const NewArrivalPage = (props) => {
       </div>
     );
   } else {
-    
     const handleShowModal = (productId) => {
       console.log("productIddd", productId);
       const pincode = localStorage.getItem("pincode");
@@ -380,7 +391,7 @@ const NewArrivalPage = (props) => {
           size_id: "",
           pincode: pincode,
         };
-  
+
         axios
           .post(Urls.checkdeliveryDate, body, {
             headers: { Authorization: "Token " + token },
@@ -406,8 +417,7 @@ const NewArrivalPage = (props) => {
     };
 
     products = product.map((item, index) => {
-
-      console.log(item.sku,"item.sku")
+      console.log(item.sku, "item.sku");
       return (
         <NewArrivalCard
           ProductImage={item.thumbnail_image}

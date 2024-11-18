@@ -71,16 +71,28 @@ const whishlistPage = () => {
         console.log(error);
       });
   };
-  const prodDetHandler = (prodId) => {
+  const prodDetHandler = (prodItem) => {
+    // history.push({
+    //   pathname:
+    //     "/products/" +
+    //     prodId.product_id +
+    //     "/" +
+    //     prodId.product.thumbnail_colour_id +
+    //     "/" +
+    //     prodId.product.product_name,
+    //   state: { data: prodId },
+    // });
+    sessionStorage.setItem(
+      "productDetails",
+      JSON.stringify({
+        id: prodItem.product_id,
+        color: prodItem.colour_id,
+        name: prodItem.product_name,
+      })
+    );
     history.push({
-      pathname:
-        "/products/" +
-        prodId.product_id +
-        "/" +
-        prodId.product.thumbnail_colour_id +
-        "/" +
-        prodId.product.product_name,
-      state: { data: prodId },
+      pathname: "/jewellery/" + prodItem.alias,
+      state: { data: prodItem },
     });
     // history.push({pathname:'/product_det',state:{data:prodId,path:'wish'}})
   };
@@ -147,9 +159,9 @@ const whishlistPage = () => {
           selectedCountry={selectedCountry}
           setSelectedCountry={setSelectedCountry}
         />
-          <div className={Classes.Products}>
-            <Wishlist> {wishlists} </Wishlist>
-          </div>
+        <div className={Classes.Products}>
+          <Wishlist> {wishlists} </Wishlist>
+        </div>
         <div>
           <SliderFeature />
           <Features />
