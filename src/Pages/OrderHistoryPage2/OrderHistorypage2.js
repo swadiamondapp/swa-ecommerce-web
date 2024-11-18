@@ -27,6 +27,7 @@ import TransferMoneyModal from "../../components/WalletModal/TransferMoneyModal"
 import { TbLocationFilled } from "react-icons/tb";
 import { IoCall } from "react-icons/io5";
 import SliderFeature from "../../components/ProductDetails/SliderFeature";
+import { Modal, Box, Typography } from "@mui/material";
 import { useLocation } from "react-router-dom";
 
 const OrderHistorypage2 = (props) => {
@@ -89,6 +90,7 @@ const OrderHistorypage2 = (props) => {
   const [type, setType] = useState("");
   const [singleOrderData, setSingleOrderData] = useState([]);
   const [paymentDetails, setPaymentDetails] = useState({});
+  const [isModalOpen, setModalOpen] = useState(false);
   const [error, setError] = useState("");
   const [addressData, setAddressData] = useState({
     sEmail: "",
@@ -102,6 +104,17 @@ const OrderHistorypage2 = (props) => {
     streetColony: "",
     landMark: "",
   });
+  const modalStyles = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    bgcolor: "background.paper",
+    boxShadow: 24,
+    p: 4,
+    borderRadius: 2,
+    textAlign: "center",
+  };
 
   const handleClick = () => {
     const hyperlink =
@@ -347,9 +360,27 @@ const OrderHistorypage2 = (props) => {
     singleOrderData &&
       singleOrderData.order &&
       singleOrderData.order.shipment[0] &&
-      singleOrderData.order.shipment[0].status
+      singleOrderData.order.shipment[0].invoice
   );
-  console.log(singleOrderData, "singleooooo==>");
+
+  const invoiceLink =
+    singleOrderData &&
+    singleOrderData.order &&
+    singleOrderData.order.shipment[0] &&
+    singleOrderData.order.shipment[0].invoice;
+
+  console.log(invoiceLink, "invoiceLink");
+  const handleDownloadClick = () => {
+    if (invoiceLink) {
+      window.location.href = invoiceLink; // Redirect to invoice link
+    } else {
+      setModalOpen(true); // Open modal if invoice is unavailable
+      setTimeout(() => {
+        setModalOpen(false);
+      }, 5000);
+    }
+  };
+  const closeModal = () => setModalOpen(false);
 
   console.log(
     "singleOrderData--->12",
@@ -365,6 +396,12 @@ const OrderHistorypage2 = (props) => {
     singleOrderData.order.shipment[0] &&
     singleOrderData.order.shipment[0].status;
   console.log("statusCode--->", statusCode);
+  const cancelButtonTrack =
+    singleOrderData &&
+    singleOrderData.order &&
+    singleOrderData.order.shipment[0] &&
+    singleOrderData.order.shipment[0].cancel_button_track;
+  console.log("cancelButtonTrack--->", cancelButtonTrack);
   const orderDate =
     singleOrderData.order &&
     singleOrderData.order.track_order_details &&
@@ -431,6 +468,7 @@ const OrderHistorypage2 = (props) => {
           cancelProduct={cancelProduct}
           error={error}
           setError={setError}
+          cancelButtonTrack={cancelButtonTrack}
         />
 
         <div>
@@ -1004,45 +1042,72 @@ const OrderHistorypage2 = (props) => {
                     //   singleOrderData.order &&
                     //   singleOrderData.order.shipment &&
                     //   singleOrderData.order.shipment[0].status
-                    statusCode == 4 &&
+                    cancelButtonTrack == "Delivered" && (
+                      <button
+                        className={Classes.REButton}
+                        onClick={() => fetchLteLbbDetails()}
+                      >
+                        Return / Exchange
+                      </button>
+                    )}
+
+                    {/* {(statusCode == 0 || statusCode == 2 || statusCode == 9) &&
                       singleOrderData.order.shipment[0].cancel_order !==
                         "Admin Approval pending" && (
-                        <button
-                          className={Classes.REButton}
-                          onClick={() => fetchLteLbbDetails()}
-                        >
-                          Return / Exchange
+                        <div className={Classes.CancelProductButton}>
+                          <button onClick={() => setCancelProductModal(true)}>
+                            Cancel product
+                          </button>
+                        </div>
+                      )} */}
+                    {(cancelButtonTrack == "Ordered" ||
+                      cancelButtonTrack == "Shipped") && (
+                      <div className={Classes.CancelProductButton}>
+                        <button onClick={() => setCancelProductModal(true)}>
+                          Cancel product
                         </button>
-                      )}
-                    {/* {statusCode == 2 ||
-                      (statusCode == 0 && (
-                        // singleOrderData.order.shipment[0].cancel_order !==
-                        //   "Admin Approval pending"
-                        <div className={Classes.CancelProductButton}>
-                          <button onClick={() => setCancelProductModal(true)}>
-                            Cancel product
-                          </button>
-                        </div>
-                      ))} */}
-                    {(statusCode == 0 || statusCode == 2 || statusCode == 9) &&
-                      singleOrderData.order.shipment[0].cancel_order !==
-                        "Admin Approval pending" && (
-                        <div className={Classes.CancelProductButton}>
-                          <button onClick={() => setCancelProductModal(true)}>
-                            Cancel product
-                          </button>
-                        </div>
-                      )}
+                      </div>
+                    )}
                     <button
                       className={Classes.REButton2}
                       // onClick={() => setBuyBackOpen(true)}
                       // onClick={() => setSuccessModalOpen(true)}
+                      onClick={handleDownloadClick}
                     >
                       <IoMdDownload /> Download invoice
                     </button>
                   </div>
                 </div>
               </div>
+
+              {/* modal */}
+              <Modal
+                open={isModalOpen}
+                onClose={closeModal}
+                aria-labelledby="invoice-unavailable-title"
+                aria-describedby="invoice-unavailable-description"
+              >
+                <Box sx={modalStyles}>
+                  <Typography
+                    id="invoice-unavailable-title"
+                    variant="h6"
+                    mb={2}
+                  >
+                    Invoice Available in 24hr
+                  </Typography>
+                  <Typography
+                    id="invoice-unavailable-description"
+                    variant="body2"
+                    mb={3}
+                  >
+                    Please try again later.
+                  </Typography>
+                  {/* <Button variant="outlined" onClick={closeModal}>
+                    Close
+                  </Button> */}
+                </Box>
+              </Modal>
+              {/* modal */}
 
               {/* new design */}
 
