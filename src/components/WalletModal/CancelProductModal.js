@@ -36,8 +36,11 @@ const mobileStyle = {
 };
 
 const CancelProductModal = (props) => {
+  const [selectedReason, setSelectedReason] = useState(null);
+  const [notes, setNotes] = useState("");
   const token = localStorage.getItem("swaToken");
   const [selectedCity, setSelectedCity] = useState(null);
+  // const [error, setError] = useState("");
   const [isMobileView, setIsMobileView] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
   );
@@ -55,13 +58,23 @@ const CancelProductModal = (props) => {
     };
   }, [isMobileView]);
 
-  const cities = [
-    { name: "New York", code: "NY" },
-    { name: "Rome", code: "RM" },
-    { name: "London", code: "LDN" },
-    { name: "Istanbul", code: "IST" },
-    { name: "Paris", code: "PRS" },
+  const reasons = [
+    { name: "Ordered by Mistake", code: "ORDERED_BY_MISTAKE" },
+    { name: "Item No Longer Needed", code: "ITEM_NO_LONGER_NEEDED" },
+    { name: "Better Price Available", code: "BETTER_PRICE_AVAILABLE" },
+    { name: "Received as a Gift Elsewhere", code: "RECEIVED_AS_GIFT_ELSEWHERE" },
+    { name: "Changed Mind About Size or Style", code: "CHANGED_MIND_SIZE_OR_STYLE" },
+    { name: "Other", code: "OTHER" },
   ];
+
+  const handleCancel = () => {
+    if (!selectedReason) {
+      props.setError("Please select a reason for cancellation."); // Set error if reason is not selected
+      return;
+    }
+    props.setError(""); // Clear error if reason is selected
+    props.cancelProduct(selectedReason, notes);
+  };
 
   return (
     <div>
@@ -83,9 +96,9 @@ const CancelProductModal = (props) => {
               </div>
               <div className="dropContainer">
                 <Dropdown
-                  value={selectedCity}
-                  onChange={(e) => setSelectedCity(e.value)}
-                  options={cities}
+                  value={selectedReason}
+                  onChange={(e) => setSelectedReason(e.value)}
+                  options={reasons}
                   optionLabel="name"
                   placeholder="Select Reason"
                 />
@@ -95,9 +108,14 @@ const CancelProductModal = (props) => {
                 cols={50}
                 rows={8}
                 className={Classes.TextArea}
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
               ></textarea>
-              <div className={Classes.CancelButton}>
-                <button onClick={props.cancelProduct}>Cancel Product</button>
+              <div className={Classes.CancelButton} style={{ justifyContent: props.error ? 'space-between' : 'end' }}>
+                {props.error && (
+                  <div className={Classes.ErrorMessage}>{props.error}</div>
+                )}
+                <button onClick={handleCancel}>Cancel Product</button>
               </div>
             </div>
           </Typography>

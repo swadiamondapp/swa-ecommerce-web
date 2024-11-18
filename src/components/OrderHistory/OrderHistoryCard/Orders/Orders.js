@@ -17,11 +17,19 @@ function Orders(props) {
   const history = useHistory();
   const token = localStorage.getItem("swaToken");
 
-  console.log("props.Image?", props.Image);
   console.log("props.name?", props.productName);
 
+  const itemsDetail = props.Image;
+  const productViewHandler = (id, shipmentId) => {
+    history.push({
+      pathname: "/track_order",
+      state: { data: { productId: id, shipmentId: shipmentId } },
+    });
+  };
+
+  console.log("itemsDetail", itemsDetail);
   return (
-    <div className={Classes.RateContainer}>
+    <div className="">
       {/* <div className={Classes.Align}>
         <div>
           <div className={Classes.ProductDetails}>
@@ -60,74 +68,88 @@ function Orders(props) {
           </div>
         </div>
       </div> */}
-      {console.log("props.product_name", props.orderId)}
-      <div className={Classes.ProductName}>
-        <p>Order ID : {props.orderId}</p>
-      </div>
-      {console.log("shipment__status?", props.ShipmentStatus)}
-      <div className={Classes.BottomContainer}>
-        <div className={Classes.MobImgContainer}>
-          <div className={Classes.ImageContent}>
-            <img src={props.Image} alt="Image" style={{ maxWidth: "150px" }} />
-            <div className={Classes.TextWrapper}>
-              {/* <h3>{props.product_name}</h3> */}
-              <h3>{props.productName && props.productName}</h3>
-              <p className={Classes.DeliveryText}>
-                <TbTruckDelivery color="#30933A" size={20} /> Delivered on{" "}
-                <span className={Classes.GreenText}>
-                  {props.delivered_date}
-                </span>
-              </p>
-              <p className={Classes.Expected}>
-                Expected Delivery by{" "}
-                <span className={Classes.OverLined}>
-                  {props.expected_delivered_date}
-                </span>
-              </p>
+      {itemsDetail &&
+        itemsDetail.map((item) => (
+          <div className={Classes.myOrderParentTech}>
+            <div className={Classes.ProductName}>
+              <p>Order ID : {props.orderId}</p>
+            </div>
+
+            <div key={item.shipment_id} className={Classes.BottomContainer}>
+              <div className={Classes.MobImgContainer}>
+                <div className={Classes.ImageContent}>
+                  <img
+                    src={item.bag_image}
+                    alt="Product Image"
+                    style={{ maxWidth: "150px" }}
+                  />
+                  <div className={Classes.TextWrapper}>
+                    <h3>{item.product_name}</h3>
+                    <p className={Classes.DeliveryText}>
+                      <TbTruckDelivery color="#30933A" size={20} /> Delivered on{" "}
+                      <span className={Classes.GreenText}>
+                        {props.delivered_date}
+                      </span>
+                    </p>
+                    <p className={Classes.Expected}>
+                      Expected Delivery by{" "}
+                      <span className={Classes.OverLined}>
+                        {props.expected_delivered_date}
+                      </span>
+                    </p>
+                  </div>
+                </div>
+                <MdOutlineKeyboardArrowRight
+                  className={Classes.MobileRightArrow}
+                  fill="#006E7F"
+                  size={25}
+                  onClick={props.clicked}
+                />
+              </div>
+              <div className={Classes.RighSection}>
+                <div className={Classes.ViewButton}>
+                  <button
+                    // onClick={props.clicked}
+                    onClick={() =>
+                      productViewHandler(props.currentId, item.shipment_id)
+                    }
+                  >
+                    View Order details
+                  </button>
+                  <MdOutlineKeyboardArrowRight className={Classes.RightArrow} />
+                </div>
+                {props.ShipmentStatus === "4" && (
+                  <div className={Classes.RatingContainer}>
+                    <ReactStarRating
+                      numberOfStar={5}
+                      numberOfSelectedStar={props.rating}
+                      colorFilledStar="#F6C514"
+                      colorEmptyStar="#D1D3D5"
+                      starSize="25px"
+                      spaceBetweenStar="10px"
+                      disableOnSelect={false}
+                      // onSelectStar={rateChangeHandler}
+                    />
+                    <Link
+                      to={{
+                        pathname: "/rate_review",
+                        state: {
+                          product_image: item.bag_image, // Use item.bag_image here
+                          product_id: item.product_id,
+                          product_rating: props.rating,
+                          product_name: item.product_name,
+                        },
+                      }}
+                    >
+                      <p>Rate & Review</p>
+                    </Link>
+                    {console.log("shipment status", props.shipmentstatus)}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-          <MdOutlineKeyboardArrowRight
-            className={Classes.MobileRightArrow}
-            fill="#006E7F"
-            size={25}
-            onClick={props.clicked}
-          />
-        </div>
-        <div className={Classes.RighSection}>
-          <div className={Classes.ViewButton}>
-            <button onClick={props.clicked}>View Order details</button>
-            <MdOutlineKeyboardArrowRight className={Classes.RightArrow} />
-          </div>
-          {props.ShipmentStatus === "4" && (
-            <div className={Classes.RatingContainer}>
-              <ReactStarRating
-                numberOfStar={5}
-                numberOfSelectedStar={props.rating}
-                colorFilledStar="#F6C514"
-                colorEmptyStar="#D1D3D5"
-                starSize="25px"
-                spaceBetweenStar="10px"
-                disableOnSelect={false}
-                // onSelectStar={rateChangeHandler}
-              />
-              <Link
-                to={{
-                  pathname: "/rate_review",
-                  state: {
-                    product_image: props.Image,
-                    product_id: props.productId,
-                    product_rating: props.rating,
-                    product_name: props.productName,
-                  },
-                }}
-              >
-                <p>Rate & Review</p>
-              </Link>
-              {console.log("shipment status", props.shipmentstatus)}
-            </div>
-          )}
-        </div>
-      </div>
+        ))}
     </div>
   );
 }

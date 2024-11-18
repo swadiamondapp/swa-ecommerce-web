@@ -5,17 +5,20 @@ import Joi from "joi";
 import { Modal, Box } from "@mui/material";
 import Classes from "./ProductDetails.module.css";
 import videoimg from "../../../src/Assets/videosucces.png";
+import closebtn from "../../../src/Assets/closeModal.png";
 
 const VideocallForm = (props) => {
+  const CountryName = localStorage.getItem("country_name")
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
   const [errors, setErrors] = useState();
   const [videoData, setVideoData] = useState({
     productId: props.productId && props.productId,
-    phone: "",
+    phone: CountryName === "India" ? "+91" : CountryName === "United Arab Emirates" ? "+971" : CountryName === "United States" ? "+1" :"",
     email: "",
     language: "English",
     description: "",
   });
+
   console.log("props.productId>>", props.productId);
   const handleLanguageClick = (language) => {
     setVideoData({ ...videoData, language: language });
@@ -117,14 +120,14 @@ const VideocallForm = (props) => {
       const reposnse = await axios.post(Urls.videoCallPost, body);
       if (reposnse.data.status === 200) {
         setIsSuccessOpen(true);
-        props.handleClose();
         setVideoData({
-          productId: "",
-          phone: "",
+          productId: videoData.productId,
+          phone:  CountryName === "India" ? "+91" : CountryName === "United Arab Emirates" ? "+971" : CountryName === "United States" ? "+1" :"",
           email: "",
           language: "English",
           description: "",
         });
+        props.handleClose();
         setTimeout(() => {
           setIsSuccessOpen(false);
         }, 2000);
@@ -155,6 +158,9 @@ const VideocallForm = (props) => {
         aria-describedby="modal-description"
       >
         <Box sx={isDesk ? style : styleDesk}>
+          <div style={{display:"flex",alignItems:"end",width:"100%",justifyContent:"end"}}>
+          <img onClick={props.handleClose} src={closebtn} style={{width:"16px",height:"16px"}}/>
+          </div>
           <div style={{ overflow: "hidden" }}>
             <h3 className={Classes.vi_head}>Schedule your video call</h3>
             <p className={Classes.vi_paras}>
@@ -192,7 +198,7 @@ const VideocallForm = (props) => {
                 </div>
 
                 <div className={Classes.Prefered_languages}>
-                  <h3>Prefered Language</h3>
+                  <h3>Preferred Language</h3>
                   <div className={Classes.Language_vi}>
                     {languages.map((language) => (
                       <button
@@ -213,7 +219,7 @@ const VideocallForm = (props) => {
                 <div className={Classes.vi_message}>
                   <textarea
                     rows={3}
-                    placeholder="Let’s us know  if you have any preference in price, budget "
+                    placeholder="Let us know  if you have any preference in price, budget "
                     value={videoData.description}
                     name="description"
                     onChange={handleChangeVideoData}
@@ -260,7 +266,7 @@ const VideocallForm = (props) => {
                 fontWeight: "600",
               }}
             >
-              Thank you! our representative will call you <br /> in 30 imn to
+              Thank you! our representative will call you <br /> in 30 min to
               confirm your appointment
             </p>
           </div>

@@ -35,6 +35,8 @@ const NewArrivalPage = (props) => {
   const token = localStorage.getItem("swaToken");
   const countryId = localStorage.getItem("id");
   const productCategory = props.location.state.product_category || "";
+  const [buttonTexts, setButtonTexts] = useState({});
+  const [showModal, setShowModal] = useState(false);
   // const categoryName = props.location.state.categoryName
   const filter = (newArrive, currentPage) => {
     setLoading(true);
@@ -367,7 +369,45 @@ const NewArrivalPage = (props) => {
       </div>
     );
   } else {
+    
+    const handleShowModal = (productId) => {
+      console.log("productIddd", productId);
+      const pincode = localStorage.getItem("pincode");
+      if (pincode) {
+        const body = {
+          product_id: productId,
+          color_id: "",
+          size_id: "",
+          pincode: pincode,
+        };
+  
+        axios
+          .post(Urls.checkdeliveryDate, body, {
+            headers: { Authorization: "Token " + token },
+          })
+          .then((response1) => {
+            // setButtonText(response1.data.results.message);
+            setButtonTexts((prevState) => ({
+              ...prevState,
+              [productId]: response1.data.results.message, // Update the specific product's button text
+            }));
+            console.log("dateresponse", response1.data.results);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        setShowModal(true);
+      }
+    };
+
+    const handleCloseModal = () => {
+      setShowModal(false);
+    };
+
     products = product.map((item, index) => {
+
+      console.log(item.sku,"item.sku")
       return (
         <NewArrivalCard
           ProductImage={item.thumbnail_image}
@@ -389,6 +429,10 @@ const NewArrivalPage = (props) => {
           clicked={() => prodDetHandler(item)}
           wishAct={item.wishlist_id}
           prodet={item}
+          buttonText={buttonTexts[item.product_id] || "Check delivery date"}
+          onClick={() => handleShowModal(item.product_id)}
+          showModal={showModal}
+          onclose={handleCloseModal}
         />
       );
     });

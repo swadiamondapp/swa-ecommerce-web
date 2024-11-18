@@ -14,7 +14,7 @@ import { useHistory } from "react-router-dom";
 import SliderFeature from "../../components/ProductDetails/SliderFeature";
 
 const ProductDetailsPage = (props) => {
-  const { id } = useParams();
+  const productDetails = JSON.parse(sessionStorage.getItem("productDetails"));
   const [prodDet, setProdDet] = useState([]);
   const [sizeChart, setSizeChart] = useState([]);
   const [colorChart, setColorChart] = useState([]);
@@ -33,25 +33,34 @@ const ProductDetailsPage = (props) => {
   const [description, setDescription] = useState("");
   const [isRestricted, setIsRestricted] = useState(false);
   const countryId = localStorage.getItem("id");
+  const [deliveryDate, setDeliveryDate] = useState();
+  const [pincodeShow, setPincodeShow] = useState(false);
+  const [pinCode, setPinCode] = useState("");
 
   const [logAct, setLogAct] = useState(false);
   const token = localStorage.getItem("swaToken");
   const history = useHistory();
   console.log("isRestricted", isRestricted);
+  const [colorError, setColorError] = useState("");
+  const [picodeError, setPicodeError] = useState("");
+  const [sizeError, setSizeError] = useState("");
   const [errormsgtrycart, setErrormsgtrycart] = useState();
 
-  console.log("tokenanasmk", props.token);
+  console.log("sizeError", sizeError);
+  console.log("props.match.params.id", props.match.params.id);
 
   useEffect(() => {
     window.scrollTo(0, 0);
     console.log(props);
+    if (productDetails && productDetails.color) {
+      setClrId(productDetails.color);
+    }
     // setClrId(props.location.state.data.thumbnail_colour_id);
-    setClrId(props.match.params.color);
-    // setProduct_Id(props.match.params.id);
+    // setProduct_Id(id);
 
     if (
       localStorage.getItem("swaToken") === null &&
-      props.match.path === "/products/:id/:color/:name"
+      props.match.path === "/jewellery/:name"
     ) {
       console.log(JSON.parse(localStorage.getItem("recent")));
       let proArray = JSON.parse(localStorage.getItem("recent"));
@@ -82,9 +91,12 @@ const ProductDetailsPage = (props) => {
         localStorage.setItem("recent", JSON.stringify(newArray.slice(0, 5)));
       }
     } else {
-      const body = {
-        product_id: props.match.params.id,
-      };
+      let body = {};
+      if (productDetails && productDetails.id) {
+        body = {
+          product_id: productDetails.id,
+        };
+      }
       axios
         .post(Urls.addRecent, body, {
           headers: { Authorization: "Token " + token },
@@ -95,7 +107,10 @@ const ProductDetailsPage = (props) => {
         });
     }
     axios
-      .get(`${Urls.productDet + props.match.params.id}?country=${countryId}`)
+      .get(
+        `${Urls.productDet +
+          (productDetails && productDetails.id)}?country=${countryId}`
+      )
       .then((response1) => {
         setIsRestricted(response1.data.results.data.is_restricted);
         setProdDet(response1.data.results.data);
@@ -122,7 +137,9 @@ const ProductDetailsPage = (props) => {
         console.log(error);
       });
     axios
-      .get(Urls.productDet + props.match.params.id + "/reviews/")
+      .get(
+        Urls.productDet + (productDetails && productDetails.id) + "/reviews/"
+      )
       .then((response1) => {
         setReview(response1.data.results.data.slice(0, 1));
         setCount(response1.data.results.count);
@@ -150,7 +167,7 @@ const ProductDetailsPage = (props) => {
       .catch((error) => {
         console.log(error);
       });
-  }, [props.match.params.id]);
+  }, [productDetails && productDetails.id]);
   const buyProductHandler = () => {
     if (size === "") {
       setError("");
@@ -258,6 +275,49 @@ const ProductDetailsPage = (props) => {
     //   setError("Select Size");
     // }
   };
+  const checkAvailability = () => {
+    let hasError = false;
+
+    if (!clrId) {
+      setColorError("Color ID is required");
+      hasError = true;
+    } else {
+      setColorError("");
+    }
+    if (!pinCode) {
+      setPicodeError("Pincode is required");
+    } else {
+      setPicodeError("");
+    }
+
+    // if (!size) {
+    //   setSizeError("Size is required");
+    //   hasError = true;
+    // } else {
+    //   setSizeError("");
+    // }
+    if (!hasError && pinCode) {
+      const body = {
+        product_id: prodDet.id,
+        color_id: clrId,
+        size_id: size,
+        pincode: pinCode,
+      };
+
+      axios
+        .post(Urls.checkdeliveryDate, body, {
+          headers: { Authorization: "Token " + token },
+        })
+        .then((response1) => {
+          setDeliveryDate(response1.data.results.message);
+          setPincodeShow(true); // Show the message after receiving the response
+          console.log("dateresponse", response1.data.results);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
   const TryhomeHandler = () => {
     const token = localStorage.getItem("swaToken");
     const body = {
@@ -304,6 +364,7 @@ const ProductDetailsPage = (props) => {
     country_name: Contryname,
   });
 
+  console.log(prodDet.country_total_price,"prodDet")
   return (
     <div>
       <Header
@@ -316,18 +377,20 @@ const ProductDetailsPage = (props) => {
       />
 
       <ProductDetails
-        sku={"SKU : " + prodDet.sku}
+        sku={prodDet.sku && prodDet.sku === "undefined" ?  "" : prodDet.sku }
         offerPrice={
           prodDet.is_on_discount
             ? prodDet.country_discount_price
             : prodDet.country_total_price
         }
         actualPrice={
-          prodDet.is_on_discount ? prodDet.country_total_price : null
+          prodDet.is_on_discount ? prodDet.country_total_price : ""
         }
         discountVal={
           prodDet.is_on_discount
-            ? prodDet.country_total_price - prodDet.discount_price
+            ? prodDet.country_total_price > prodDet.discount_price
+              ? prodDet.country_total_price - prodDet.discount_price
+              : prodDet.discount_price - prodDet.country_total_price
             : null
         }
         discountPercentage={prodDet.discount_percentage}
@@ -353,7 +416,7 @@ const ProductDetailsPage = (props) => {
         height={prodDet.height}
         colors={colorChart}
         thumbImg={thumImg}
-        id={props.match.params.id}
+        id={productDetails && productDetails.id}
         colorSelct={colorHandler}
         bagImg={imgSet}
         Video={video}
@@ -364,12 +427,29 @@ const ProductDetailsPage = (props) => {
         all={allREv}
         avgR={prodDet.avg_rating}
         cartAdd={cartHandler}
+        checkDelivery={checkAvailability}
+        sizeError={sizeError}
+        colorError={colorError}
+        picodeError={picodeError}
+        pincodeShow={pincodeShow}
+        setPincodeShow={setPincodeShow}
+        deliveryDate={deliveryDate}
+        pinCode={pinCode}
+        setPinCode={setPinCode}
         TryatHome={TryhomeHandler}
         errormsgtrycart={errormsgtrycart}
         clickedBuy={buyProductHandler}
+        productDetails={productDetails}
+        alias={
+          props.location.state &&
+          props.location.state.data &&
+          props.location.state.data.alias
+            ? props.location.state.data.alias
+            : productDetails.alias
+        }
       />
       <div className={Classes.RecentSearch}>
-        <SimilerProducts productId={props.match.params.id} />
+        <SimilerProducts productId={productDetails && productDetails.id} />
         {/* <RecentSearch>
         <NewArrivalCard ProductImage={New1} ProductName='Diamond ring' ProductId='SKU: 18037' PriceNew='27000' PriceOld='29500' />
           <NewArrivalCard ProductImage={New2} ProductName='Diamond ring' ProductId='SKU: 18037' PriceNew='27000' PriceOld='29500' />

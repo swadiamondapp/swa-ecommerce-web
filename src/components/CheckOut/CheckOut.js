@@ -22,8 +22,12 @@ import Joi from "joi";
 import OtpModal from "../Navbar/OtpModal";
 
 function CheckOut(props) {
-  const localAddress = localStorage.getItem("Address");
   const location = useLocation();
+  console.log(location, "locationSTate");
+  const { state } = location;
+  const { data } = state || {};
+  const { promoCodeIds } = data || {};
+  const localAddress = localStorage.getItem("Address");
   const Contryname = localStorage.getItem("country_name");
   const [token, setToken] = useState(localStorage.getItem("swaToken"));
   const [show, setShow] = useState(false);
@@ -36,7 +40,7 @@ function CheckOut(props) {
   const [amountPay, setAmountPay] = useState("");
   const [total, setTotal] = useState("");
   const [voucherInput, setVoucherInput] = useState(false);
-  const [promoId, setPromoId] = useState("");
+  const [promoId, setPromoId] = useState(promoCodeIds ? promoCodeIds : "");
   const [mode, setMode] = useState("P");
   const [otpError, setOtpError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -51,12 +55,13 @@ function CheckOut(props) {
   const [timer, setTimer] = useState(60);
   const countryId = localStorage.getItem("id");
 
-  console.log("total...", total);
+  console.log("promoIdIII", total);
 
   const [addressData, setAddressData] = useState({
     sEmail: "",
     sPhone: "",
     fullName: "",
+    honorific_name: "",
     mobile: "",
     pincode: pincodes,
     city: "",
@@ -64,6 +69,7 @@ function CheckOut(props) {
     hNumber_Bname: "",
     streetColony: "",
     landMark: "",
+    country: "",
     id: "",
   });
 
@@ -113,12 +119,13 @@ function CheckOut(props) {
   var alphaExp = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
   const schema = Joi.object({
     sEmail: Joi.string()
-      .required()
-      .messages({
-        "string.empty": `Please enter your email address.`,
-        "string.email": `Please enter a valid email address.`,
-      })
-      .email({ tlds: { allow: false } }),
+    .email({ tlds: { allow: false } }) // This allows all TLDs
+    .required()
+    .messages({
+      "string.base": "cannot be empty",
+      "string.empty": "Please enter your email address.",
+      "string.email": "Please enter a valid email address.",
+    }),
     sPhone: Joi.string()
       .required()
       .pattern(/^[0-9]{10}$/)
@@ -152,6 +159,11 @@ function CheckOut(props) {
       .messages({
         "string.empty": `Please enter your city.`,
       }),
+    country: Joi.string()
+      .required()
+      .messages({
+        "string.empty": `Please enter your country.`,
+      }),
     // state: Joi.string()
     //   .required()
     //   .messages({
@@ -170,6 +182,14 @@ function CheckOut(props) {
     landMark: Joi.string()
       .allow("")
       .messages({ "string.empty": `` }),
+    honorific_name: Joi.string()
+      .valid("Mr", "Mrs", "Others")
+      .required()
+      .messages({
+        "any.only": `Honorific name must be one of Mr, Mrs, or Others`,
+        "any.required": `Honorific name is a required field`,
+        "string.empty": `honorific_name is not allowed to be empty`,
+      }),
   });
 
   const formRef = useRef(null);
@@ -202,6 +222,8 @@ function CheckOut(props) {
         return errors;
       }, {});
       setErrorMessage(validationErrors);
+      placeOrder();
+      console.log("paymentClicked");
     } else {
       // Form is valid, proceed with submission
       console.log("Form submitted:", addressData);
@@ -210,7 +232,7 @@ function CheckOut(props) {
       handleSignUp();
     }
   };
-
+console.log(props.proDet.name,"props.proDet.name")
   const placeOrder = () => {
     let cartBody;
     let buyBody;
@@ -420,6 +442,7 @@ function CheckOut(props) {
     });
   };
 
+
   const handleSignUp = async () => {
     if (token !== null) {
       // submitAddress(token);
@@ -428,6 +451,7 @@ function CheckOut(props) {
       try {
         const body = {
           name: addressData.fullName,
+          honorific_name: addressData.honorific_name,
           phone_code: "+91",
           phone_number: addressData.sPhone,
           email: addressData.sEmail,
@@ -435,14 +459,17 @@ function CheckOut(props) {
         };
         const response = await axios.post(Urls.register, body);
         if (response.data.results.status_code === 200) {
+          console.log(response.data.results,"registerConstole")
           setToken(response.data.results.data.token);
           setUserId(response.data.results.data.user.id);
           _userName = response.data.results.data.user.name;
           _userMob = response.data.results.data.user.phone_number;
           const _token = response.data.results.data.token;
           _userId = response.data.results.data.user.id;
+          sendOtpEmail();
           // _token && _userId && submitAddress(_token);
-          _token && _userId && locallySetAddress();
+          // _token && _userId && locallySetAddress();
+         
         } else {
           alert("Something went wrong");
         }
@@ -528,7 +555,7 @@ function CheckOut(props) {
       console.log(error);
     }
   };
-
+  console.log(addressData, "checkoutAddresssdata");
   const locallySetAddress = () => {
     if (
       addressData.fullName !== isNewaddress.fullName ||
@@ -549,6 +576,7 @@ function CheckOut(props) {
             total: total,
             totalItems: props.countCartItems ? props.countCartItems : 1,
             // addressId: response.data.data.id,
+            addressId: addressData.id,
             updatedCart: props.proDet.data.updatedCartResponse,
             token: token,
             name: _userName,
@@ -557,6 +585,7 @@ function CheckOut(props) {
             userId: _userId,
             totalSavedAmount: props.proDet.data.totalSavedAmount,
             addressData: addressData,
+            promoCodeIds: promoId,
           },
           name: location.state.name,
         },
@@ -573,13 +602,14 @@ function CheckOut(props) {
             updatedCart: props.proDet.data.updatedCartResponse,
             totalSavedAmount: props.proDet.data.totalSavedAmount,
             addressData: addressData,
+            promoCodeIds: promoId,
           },
           name: location.state.name,
         },
       });
     }
   };
-
+  console.log("checkoutttt===>", props.proDet.data.updatedCartResponse);
   const submitAddress = async (token) => {
     if (
       addressData.fullName !== isNewaddress.fullName ||
@@ -604,6 +634,7 @@ function CheckOut(props) {
           area: addressData.streetColony,
           landmark: addressData.landMark,
           type: "HOME",
+          country: addressData.country,
           // is_main: false,
         };
         const response = await axios.post(Urls.addAdress, body, {
@@ -625,6 +656,8 @@ function CheckOut(props) {
                 userId: _userId,
                 totalSavedAmount: props.proDet.data.totalSavedAmount,
                 addressData: addressData,
+                promoCodeIds: promoId,
+                
               },
               name: "cart",
             },
@@ -644,6 +677,7 @@ function CheckOut(props) {
             updatedCart: props.proDet.data.updatedCartResponse,
             totalSavedAmount: props.proDet.data.totalSavedAmount,
             addressData: addressData,
+            promoCodeIds: promoId,
           },
           name: "cart",
         },
@@ -664,9 +698,13 @@ function CheckOut(props) {
           setAddressData({
             ...addressData,
             sEmail: response.data.results.data.email,
-            sPhone: response.data.results.data.phone_number,
+            sPhone: response.data.results.data.phone_number.startsWith("0")
+              ? response.data.results.data.phone_number.substring(1)
+              : response.data.results.data.phone_number,
             fullName: response.data.results.data.name,
-            mobile: response.data.results.data.phone_number,
+            mobile: response.data.results.data.phone_number.startsWith("0")
+              ? response.data.results.data.phone_number.substring(1)
+              : response.data.results.data.phone_number,
             pincode: response.data.results.data.pincode,
             city: response.data.results.data.city,
             state: response.data.results.data.state,
@@ -698,7 +736,7 @@ function CheckOut(props) {
   const buyWithoutLogin = async (productId) => {
     try {
       const response = await axios.get(
-        `https://swaprdnecomnew.zinfog.in/ecom/buynow/?product_id=${productId}&promocode=`
+        `https://swaecommain.swa.co/ecom/buynow/?product_id=${productId}&promocode=`
       );
       if (response && response.data) {
         console.log("buy-->", response.data);
@@ -780,17 +818,36 @@ function CheckOut(props) {
     }
   }, [getOtpModal]);
 
+  // function formatIndianNumber(number) {
+  //   const numberString = number && number.toString();
+  //   const lastThreeDigits = numberString && numberString.slice(-3);
+  //   const otherDigits = numberString && numberString.slice(0, -3);
+
+  //   return (
+  //     otherDigits &&
+  //     otherDigits.replace(/\B(?=(\d{2})+(?!\d))/g, ",") +
+  //       (otherDigits ? "," : "") +
+  //       lastThreeDigits
+  //   );
+  // }
   function formatIndianNumber(number) {
     const numberString = number && number.toString();
-    const lastThreeDigits = numberString && numberString.slice(-3);
-    const otherDigits = numberString && numberString.slice(0, -3);
 
-    return (
-      otherDigits &&
+    if (!numberString) return "";
+
+    // Split the number into integer and decimal parts, discard the decimal part
+    const integerPart = numberString.split(".")[0];
+
+    const lastThreeDigits = integerPart.slice(-3);
+    const otherDigits = integerPart.slice(0, -3);
+
+    // Format the integer part in Indian format
+    const formattedNumber =
       otherDigits.replace(/\B(?=(\d{2})+(?!\d))/g, ",") +
-        (otherDigits ? "," : "") +
-        lastThreeDigits
-    );
+      (otherDigits ? "," : "") +
+      lastThreeDigits;
+
+    return formattedNumber;
   }
 
   function numberWithCommas(x) {
@@ -811,6 +868,7 @@ function CheckOut(props) {
         otpError={otpError}
         handelLoginForm={handleSubmit}
         mobileNumber={addressData.sPhone}
+        emailId={addressData.sEmail}
         // handleOtpForm={verifyOtp}
         handleOtpForm={verifyOtpEmail}
         setOtp={setOtp}
@@ -894,6 +952,64 @@ function CheckOut(props) {
                       {errorMessage.fullName && (
                         <div className={Classes.ErrorMessage}>
                           {errorMessage.fullName}
+                        </div>
+                      )}
+                    </div>
+
+                    <div>
+                      <div className={Classes.honor}>
+                        <label>
+                          <input
+                            type="radio"
+                            value="Mr"
+                            name="honorific_name"
+                            checked={addressData.honorific_name === "Mr"}
+                            onChange={handleChangeAddress}
+                          />
+                          Mr.
+                        </label>
+                        <label>
+                          <input
+                            type="radio"
+                            value="Mrs"
+                            name="honorific_name"
+                            checked={addressData.honorific_name === "Mrs"}
+                            onChange={handleChangeAddress}
+                          />
+                          Mrs.
+                        </label>
+                        <label>
+                          <input
+                            type="radio"
+                            value="Others"
+                            name="honorific_name"
+                            checked={addressData.honorific_name === "Others"}
+                            onChange={handleChangeAddress}
+                          />
+                          Others
+                        </label>
+                      </div>
+
+                      {errorMessage.honorific_name && (
+                        <div className={Classes.ErrorMessage}>
+                          {errorMessage.honorific_name}
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="Parant_Relative">
+                      <label>Country</label>
+                      <input
+                        className={Classes.PlaceInput}
+                        type="text"
+                        placeholder="country*"
+                        value={addressData.country}
+                        name="country"
+                        onChange={handleChangeAddress}
+                      />
+                      {errorMessage.country && (
+                        <div className={Classes.ErrorMessage}>
+                          {errorMessage.country}
                         </div>
                       )}
                     </div>
@@ -1048,14 +1164,24 @@ function CheckOut(props) {
                   </div>
                   <p className={Classes.Amount}>
                     {Contryname === "India" && (
-                      <BiRupee className={Classes.Rupee} />
+                      <>
+                        <BiRupee className={Classes.Rupee} />
+                        <span style={{ paddingRight: "5px" }}>
+                          {formatIndianNumber(total)}
+                        </span>
+                      </>
                     )}
                     {Contryname === "United States" && (
-                      <CgDollar className={Classes.Rupee} />
+                      <>
+                        <CgDollar className={Classes.Rupee} />
+                        <span style={{ paddingRight: "5px" }}>
+                          {formatIndianNumber(total)}
+                        </span>
+                      </>
                     )}
                     {Contryname === "United Arab Emirates" && (
                       <span style={{ paddingRight: "5px" }}>
-                        AED {formatIndianNumber(amountPay ? amountPay : total)}
+                        AED {formatIndianNumber(total)}
                       </span>
                     )}
 
@@ -1076,10 +1202,17 @@ function CheckOut(props) {
                         AED
                       </span>
                     )}
-                    <p className={Classes.AmountPayable}>
-                      {formatIndianNumber(amountPay ? amountPay : total)}
-                      {/* {location.state.data.pay} */}
-                    </p>
+                    {state.name === "buybody" ? (
+                      <p className={Classes.AmountPayable}>
+                        {formatIndianNumber(total)}
+                        {/* {location.state.data.pay} */}
+                      </p>
+                    ) : (
+                      <p className={Classes.AmountPayable}>
+                        {formatIndianNumber(amountPay)}
+                        {/* {location.state.data.pay} */}
+                      </p>
+                    )}
                   </div>
                 </div>
 

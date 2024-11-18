@@ -86,7 +86,8 @@ const OrderHistorypage2 = (props) => {
   const [lteLbbData, setLteLbbData] = useState([]);
   const [type, setType] = useState("");
   const [singleOrderData, setSingleOrderData] = useState([]);
-  const [paymentDetails, setPaymentDetails] = useState([]);
+  const [paymentDetails, setPaymentDetails] = useState({});
+  const [error, setError] = useState("");
   const [addressData, setAddressData] = useState({
     sEmail: "",
     sPhone: "",
@@ -105,7 +106,7 @@ const OrderHistorypage2 = (props) => {
   };
 
   // warnning
-
+console.log(paymentDetails,"paymentDetails")
   useEffect(() => {
     // axios
     //   .get(Urls.myOrder + "/" + props.location.state.data.productId, {
@@ -153,10 +154,10 @@ const OrderHistorypage2 = (props) => {
     try {
       const response = await axios.get(
         `${Urls.myOrder +
-          "/" +
-          props.location.state.data.productId +
-          "?shipment_id=" +
-          props.location.state.data.shipmentId}&country=${countryId}`,
+        "/" +
+        props.location.state.data.productId +
+        "?shipment_id=" +
+        props.location.state.data.shipmentId}&country=${countryId}`,
         {
           headers: {
             Authorization: "Token " + token,
@@ -185,13 +186,15 @@ const OrderHistorypage2 = (props) => {
           });
         setProductDetails(
           response.data.results.data &&
-            response.data.results.data.order &&
-            response.data.results.data.order.shipment
+          response.data.results.data.order &&
+          response.data.results.data.order.shipment
+        );
+        setPromoCode(
+          singleOrderData &&
+          singleOrderData.order.promocode
         );
         setPaymentDetails(
-          response.data.results.data &&
-            response.data.results.data.order &&
-            response.data.results.data.order.payment_data
+          singleOrderData &&  singleOrderData.order && singleOrderData.order.payment_data
         );
       }
     } catch (error) {
@@ -280,7 +283,7 @@ const OrderHistorypage2 = (props) => {
     }
   };
 
-  const cancelProduct = async () => {
+  const cancelProduct = async (reason, notes) => {
     try {
       const body = {
         product_id: orderDet[0].product.product_id,
@@ -289,8 +292,8 @@ const OrderHistorypage2 = (props) => {
         total_amount: total,
         payment_mode: payMode,
         cancel_type: "final",
-        reason: "aaaaaaaaaaa",
-        notes: "sssssssssssssssssssssssssssssssssssssssssssssssssssssssss",
+        reason: reason ? reason.name : "No reason selected",
+        notes: notes || "No notes provided",
       };
       const response = await axios.post(
         `${Urls.CancelOrder}?country=${countryId}`,
@@ -311,21 +314,49 @@ const OrderHistorypage2 = (props) => {
       console.log(error);
     }
   };
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+
+    const options = {
+weekday: "short",  // This will show "Mon" instead of "Monday"
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    };
+
+    return date.toLocaleDateString("en-US", options);
+  }
 
   console.log(
     "singleOrderData--->1233",
-    singleOrderData && singleOrderData.order && singleOrderData.order
+    singleOrderData &&
+    singleOrderData.order &&
+    singleOrderData.order.shipment[0] &&
+    singleOrderData.order.shipment[0].status
   );
 
   console.log(
     "singleOrderData--->12",
     singleOrderData &&
-      singleOrderData.data &&
-      singleOrderData.data.order &&
-      singleOrderData.data.order.address
+    singleOrderData.data &&
+    singleOrderData.data.order &&
+    singleOrderData.data.order.address
   );
 
-  console.log("paymentDetails--->", paymentDetails);
+  const statusCode =
+    singleOrderData &&
+    singleOrderData.order &&
+    singleOrderData.order.shipment[0] &&
+    singleOrderData.order.shipment[0].status;
+  console.log("statusCode--->", statusCode);
+  const orderDate =
+    singleOrderData &&
+    singleOrderData.order &&
+singleOrderData.order.promocode &&
+    singleOrderData.order.selected_data.ordered
+
+    const moneyDetail = singleOrderData &&  singleOrderData.order && singleOrderData.order.payment_data;
+  console.log(moneyDetail, "payMode---")
 
   return (
     <div>
@@ -368,8 +399,13 @@ const OrderHistorypage2 = (props) => {
         />
         <CancelProductModal
           open={cancelProductModal}
-          handleClose={() => setCancelProductModal(false)}
+          handleClose={() => {
+            setCancelProductModal(false);
+            setError("");
+          }}
           cancelProduct={cancelProduct}
+          error={error}
+          setError={setError}
         />
 
         <div>
@@ -383,12 +419,27 @@ const OrderHistorypage2 = (props) => {
                     singleOrderData.order &&
                     singleOrderData.order.order_code}
                 </h3>
-                <div className={Classes.DeliveryDetails}>
-                  <p>
-                    <img src={deliveryimg} alt="deliveryimg" />
-                    Delivered on <span>26 may 2023</span>
-                  </p>
-                </div>
+                {singleOrderData&& singleOrderData.order&& singleOrderData.order.shipment[0].cancel_order && (
+                  <>
+                {(statusCode == 0 || statusCode == 2 || statusCode == 9) &&
+singleOrderData.order.shipment[0].cancel_order !==
+                  "Admin Approval pending" ? (
+                  <div className={Classes.DeliveryDetails}>
+                    <p>
+                      <img src={deliveryimg} alt="deliveryimg" />
+                      Delivered on <span>26 may 2023</span>
+                    </p>
+                  </div>
+                ) : (
+                  <div className={Classes.DeliveryDetails}>
+                    <p>
+                      <img src={deliveryimg} alt="deliveryimg" />
+                      <span style={{ color: "red" }}>cancelled</span>
+                    </p>
+                  </div>
+                )}
+ </>
+              )}
               </div>
               {/* new design */}
               <div className={Classes.parentCollaps5}>
@@ -439,20 +490,38 @@ const OrderHistorypage2 = (props) => {
                               </p>
                               <p style={{ color: "#757C81" }}>
                                 {productDetails[0] &&
-                                  productDetails[0].product.carat}{" "}
-                                KT Yellow{" "}
+                                  productDetails[0].product.carat}{" "}&nbsp;
+                                {productDetails[0] &&
+                                productDetails[0].color.colour_name
+                                  ? productDetails[0].color.colour_name
+                                      .charAt(0)
+                                      .toUpperCase() +
+                                    productDetails[0].color.colour_name.slice(1)
+                                  : ""}
+                                &nbsp;
                                 {/* {productDetails[0] &&
                                   productDetails[0].color.size_name}{" "} */}
                                 {productDetails[0] &&
-                                  productDetails[0].product.gross_weight}{" "}
+                                  productDetails[0].product.gross_weight}&nbsp;
                                 GM
                               </p>
                               <p style={{ color: "#757C81" }}>
-                                Diamond{" "}
+                                {productDetails[0] &&
+                                productDetails[0].product.product_name
+                                  ? productDetails[0].product.product_name
+                                      .charAt(0)
+                                      .toUpperCase() +
+                                    productDetails[0].product.product_name
+                                      .slice(1)
+                                      .toLowerCase()
+                                  : ""}
+                                
+                                &nbsp;
                                 {productDetails[0] &&
                                   productDetails[0].product
                                     .diamond_weight_preview}{" "}
-                                Carat SIIJ
+                                {productDetails[0] &&
+                                  productDetails[0].product.carat}{" "}
                               </p>
                               <p style={{ color: "#303A42" }}>
                                 SKU{" "}
@@ -478,35 +547,37 @@ const OrderHistorypage2 = (props) => {
                         <div className={Classes.parentPaymentItems}>
                           <div className={Classes.PaymentItems}>
                             <p>Item Subtotal</p>
-                            <p>{paymentDetails.itemsubtotal}</p>
+                            <p>{moneyDetail && moneyDetail.itemsubtotal}</p>
                           </div>
                           <div className={Classes.PaymentItems}>
                             <p>Shipping</p>
-                            <p>{paymentDetails.shipping}</p>
+                            <p>{moneyDetail && moneyDetail.shipping}</p>
                           </div>
                           <div className={Classes.PaymentItems}>
                             <p>Total</p>
-                            <p>{paymentDetails.total}</p>
+                            <p>{moneyDetail && moneyDetail && moneyDetail && moneyDetail.total ? moneyDetail && moneyDetail.total : 0 }</p>
                           </div>
                           <div className={Classes.PaymentItems}>
                             <p>Promo code</p>
                             <p style={{ color: "#000000" }}>
                               PAYDAY{" "}
-                              <span style={{ color: "#30933A" }}>Applied</span>
+                              <span style={{ color: promoCode === null ? "#FF0000"  : "#30933A"}}>
+                              {promoCode === null ? "Not Applied" : "Applied"}
+                               </span>
                             </p>
                           </div>
                           <div className={Classes.PaymentItems}>
                             <p>Coupon Discount</p>
                             <p style={{ color: "#000000" }}>
-                              {paymentDetails.coupon_discount
-                                ? paymentDetails.coupon_discount
+                              {moneyDetail && moneyDetail.coupon_discount
+                                ? moneyDetail && moneyDetail.coupon_discount
                                 : 0}
                             </p>
                           </div>
                           <div className={Classes.PaymentItems}>
                             <p style={{ color: "#000000" }}>Payable</p>
                             <p style={{ color: "#000000" }}>
-                              {paymentDetails.payable}
+                              {moneyDetail && moneyDetail.payable}
                             </p>
                           </div>
                         </div>
@@ -518,20 +589,20 @@ const OrderHistorypage2 = (props) => {
                         <div className={Classes.ParentStatus}>
                           <div className={Classes.leftStatus1}>
                             <div className={Classes.leftStatus2}>
-                              <div className={Classes.dotstatus}></div>
+                              <div className={Classes.dotstatus} ></div>
                               <div className={Classes.dotstatusline}></div>
                             </div>
                             <div className={Classes.leftStatus2}>
                               <div
                                 className={Classes.dotstatus1}
                                 style={{
-                                  background: "#0eb533",
+                                  background: orderDate ? "#d9d9d9" : "#0eb533",
                                   border: "none",
                                 }}
                               ></div>
                               <div
                                 className={Classes.dotstatusline1}
-                                style={{ background: "#0eb533" }}
+style={{ background: orderDate ? "#d9d9d9" : "#0eb533" }}
                               ></div>
                             </div>
                             <div className={Classes.leftStatus2}>
@@ -546,7 +617,7 @@ const OrderHistorypage2 = (props) => {
                             <div className={Classes.RightStausshow}>
                               <p className={Classes.RsHead}>Order confirmed</p>
                               <p style={{ color: "#A3A7AB" }}>
-                                Tues 18 oct’2022 , 4:45 PM
+                                {formatDate(orderDate)}
                               </p>
                             </div>
                             <div className={Classes.RightStausshow}>
@@ -584,10 +655,13 @@ const OrderHistorypage2 = (props) => {
                     </Accordion>
                   </div>
                   <div className={Classes.TrackButtons}>
-                    {singleOrderData &&
-                      singleOrderData.order &&
-                      singleOrderData.order.shipment &&
-                      singleOrderData.order.shipment[0].status === 4 && (
+                    {// singleOrderData &&
+                      //   singleOrderData.order &&
+                      //   singleOrderData.order.shipment &&
+                      //   singleOrderData.order.shipment[0].status
+                      statusCode == 4 &&
+                      singleOrderData.order.shipment[0].cancel_order !==
+                      "Admin Approval pending" && (
                         <button
                           className={Classes.REButton}
                           onClick={() => fetchLteLbbDetails()}
@@ -595,12 +669,19 @@ const OrderHistorypage2 = (props) => {
                           Return / Exchange
                         </button>
                       )}
-                    {singleOrderData &&
-                      singleOrderData.order &&
-                      singleOrderData.order.shipment &&
-                      singleOrderData.order.shipment[0].status === 2 &&
+                    {/* {statusCode == 2 ||
+                      (statusCode == 0 && (
+                        // singleOrderData.order.shipment[0].cancel_order !==
+                        //   "Admin Approval pending"
+                        <div className={Classes.CancelProductButton}>
+                          <button onClick={() => setCancelProductModal(true)}>
+                            Cancel product
+                          </button>
+                        </div>
+                      ))} */}
+                    {(statusCode == 0 || statusCode == 2 || statusCode == 9) &&
                       singleOrderData.order.shipment[0].cancel_order !==
-                        "Admin Approval pending" && (
+                      "Admin Approval pending" && (
                         <div className={Classes.CancelProductButton}>
                           <button onClick={() => setCancelProductModal(true)}>
                             Cancel product
@@ -609,8 +690,8 @@ const OrderHistorypage2 = (props) => {
                       )}
                     <button
                       className={Classes.REButton2}
-                      // onClick={() => setBuyBackOpen(true)}
-                      // onClick={() => setSuccessModalOpen(true)}
+                    // onClick={() => setBuyBackOpen(true)}
+                    // onClick={() => setSuccessModalOpen(true)}
                     >
                       <IoMdDownload /> Download invoice
                     </button>

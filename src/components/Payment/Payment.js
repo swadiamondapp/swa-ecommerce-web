@@ -18,7 +18,10 @@ const Payment = () => {
   const Contryname = localStorage.getItem("country_name");
   const history = useHistory();
   const location = useLocation();
-  const [promoId, setPromoId] = useState("");
+  const { data, name } = location.state;
+  console.log(location, "adddressspaymentLoaca");
+  const { promoCodeIds } = data || {};
+  const [promoId, setPromoId] = useState(promoCodeIds ? promoCodeIds : "");
   const [mode, setMode] = useState("");
   const [amountPay, setAmountPay] = useState(100);
   const [showChangeAddress, setShowChangeAddress] = useState(false);
@@ -30,12 +33,13 @@ const Payment = () => {
   const pincodes = localStorage.getItem("pincode");
   const [isLoading, setIsLoading] = useState(false);
   const [pmethodError, setPmethodError] = useState("");
+  const [payButtonErrror, setPayButtonError] = useState("");
   const [addressData, setAddressData] = useState({
     sEmail: "",
     sPhone: "",
     fullName: "",
     mobile: "",
-    pincode: "",
+    pincode: pincodes ? pincodes : "",
     city: "",
     state: "kerala",
     hNumber_Bname: "",
@@ -43,7 +47,8 @@ const Payment = () => {
     landMark: "",
     id: "",
   });
-  const { data, name } = location.state;
+
+  console.log(promoCodeIds, "paymentPromoCodIDddd");
   const handleChangeAddress = () => {
     setShowChangeAddress((prevState) => !prevState);
   };
@@ -83,7 +88,7 @@ const Payment = () => {
     if (localAddress) {
       submitAddress();
     } else {
-      placeOrder();
+      placeOrder(data.addressId);
     }
   };
 
@@ -101,6 +106,7 @@ const Payment = () => {
         area: addressData.streetColony,
         landmark: addressData.landMark,
         type: "HOME",
+        country: addressData.country,
         // is_main: false,
       };
       const response = await axios.post(Urls.addAdress, body, {
@@ -186,7 +192,7 @@ const Payment = () => {
     //   });
     // }
   };
-
+  console.log(addressId, data.addressId, addressData.id, "adddressssssID");
   const placeOrder = (addressId) => {
     let cartBody;
     let buyBody;
@@ -194,7 +200,7 @@ const Payment = () => {
     if (promoId !== "") {
       cartBody = {
         promocode_id: promoId,
-        address_id: addressId ? addressId : data.addressId,
+        address_id: addressId,
         mode: p_Method,
         amount_to_pay: data.updatedCart
           ? data.updatedCart.amount_to_pay
@@ -211,7 +217,7 @@ const Payment = () => {
           color: data.buyBody.color,
           size: data.buyBody.size,
           promocode: "",
-          address_id: addressId ? addressId : data.addressId,
+          address_id: addressData ? addressData.id : addressId,
           mode: p_Method,
           user_id: data.userId,
         };
@@ -219,7 +225,7 @@ const Payment = () => {
     } else {
       cartBody = {
         promocode_id: 0,
-        address_id: addressId ? addressId : data.addressId,
+        address_id: addressId,
         mode: p_Method,
         amount_to_pay: data.updatedCart
           ? data.updatedCart.amount_to_pay
@@ -244,7 +250,7 @@ const Payment = () => {
           color: data.buyBody.color,
           size: data.buyBody.size,
           promocode: "",
-          address_id: addressId ? addressId : data.addressId,
+          address_id: addressId,
           mode: p_Method,
           user_id: data.userId,
         };
@@ -415,10 +421,13 @@ const Payment = () => {
             localStorage.setItem("userName", data.name);
             localStorage.setItem("phoneNumber", data.number);
             localStorage.removeItem("Address");
+
             history.push("/my_orders");
           } else if (response1.data.results.status_code === 200) {
             localStorage.removeItem("Address");
             history.push("/my_orders");
+          } else if (response1.data.results.status === 206) {
+            setPayButtonError(response1.data.results.message);
           }
         });
     }
@@ -598,9 +607,11 @@ const Payment = () => {
     //       });
     //   }
     // }
+
     console.log("buyBody-->", buyBody);
     console.log("cartBody--->", cartBody);
   };
+  console.log(payButtonErrror, "payButtonError");
 
   const handleMethodChange = (event) => {
     setMode(event.target.value);
@@ -612,6 +623,7 @@ const Payment = () => {
         headers: { Authorization: "Token " + _token },
       });
       if (response.data.results.status === 200) {
+        console.log(response.data.results.data, "addreeeeData");
         setAddressData({
           ...addressData,
           sEmail: response.data.results.data.email,
@@ -638,6 +650,7 @@ const Payment = () => {
       .then((response1) => {
         setAddress(response1.data.results.data);
         if (response1.data.results.data.length !== 0) {
+          console.log(response1, "responseAdddress===>");
           setAddressId(
             response1.data.results.data[response1.data.results.data.length - 1]
               .id
@@ -654,23 +667,42 @@ const Payment = () => {
     fetchAddress();
   };
 
+  // function formatIndianNumber(number) {
+  //   const numberString = number && number.toString();
+  //   const lastThreeDigits = numberString && numberString.slice(-3);
+  //   const otherDigits = numberString && numberString.slice(0, -3);
+
+  //   return (
+  //     otherDigits &&
+  //     otherDigits.replace(/\B(?=(\d{2})+(?!\d))/g, ",") +
+  //       (otherDigits ? "," : "") +
+  //       lastThreeDigits
+  //   );
+  // }
   function formatIndianNumber(number) {
     const numberString = number && number.toString();
-    const lastThreeDigits = numberString && numberString.slice(-3);
-    const otherDigits = numberString && numberString.slice(0, -3);
 
-    return (
-      otherDigits &&
+    if (!numberString) return "";
+
+    // Split the number into integer and decimal parts, discard decimal part
+    const integerPart = numberString.split(".")[0];
+
+    const lastThreeDigits = integerPart.slice(-3);
+    const otherDigits = integerPart.slice(0, -3);
+
+    // Format the integer part in Indian format
+    const formattedIntegerPart =
       otherDigits.replace(/\B(?=(\d{2})+(?!\d))/g, ",") +
-        (otherDigits ? "," : "") +
-        lastThreeDigits
-    );
+      (otherDigits ? "," : "") +
+      lastThreeDigits;
+
+    return formattedIntegerPart;
   }
 
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
-
+  console.log(data.pay, "datatoPaymob");
   return (
     <div>
       <div className={`${Classes.Wrapper} container`}>
@@ -738,7 +770,7 @@ const Payment = () => {
             <div className={Classes.Right}>
               <div className={Classes.TotalText}>
                 <div className={Classes.TotalItem}>
-                  <p className={Classes.TotalSmall}>
+                  <p className={Classes.TotalSmall} style={{fontSize:"16px"}}>
                     Total &nbsp;<span>{data.totalItems} Items</span>
                   </p>
                 </div>
@@ -767,18 +799,33 @@ const Payment = () => {
                   <p className={Classes.TotalSmall}>TOTAL PAYABLE</p>
                 </div>
 
-                <p className={Classes.Amount}>
-                  {Contryname === "India" && (
-                    <BiRupee className={Classes.Rupee} />
-                  )}
-                  {Contryname === "United States" && (
-                    <CgDollar className={Classes.Rupee} />
-                  )}
-                  {Contryname === "United Arab Emirates" && (
-                    <span style={{ paddingRight: "5px" }}>AED</span>
-                  )}{" "}
-                  {formatIndianNumber(data.pay)}
-                </p>
+                {location.state.name === "buybody" ? (
+                  <p className={Classes.Amount}>
+                    {Contryname === "India" && (
+                      <BiRupee className={Classes.Rupee} />
+                    )}
+                    {Contryname === "United States" && (
+                      <CgDollar className={Classes.Rupee} />
+                    )}
+                    {Contryname === "United Arab Emirates" && (
+                      <span style={{ paddingRight: "5px" }}>AED</span>
+                    )}{" "}
+                    {formatIndianNumber(data.total)}
+                  </p>
+                ) : (
+                  <p className={Classes.Amount}>
+                    {Contryname === "India" && (
+                      <BiRupee className={Classes.Rupee} />
+                    )}
+                    {Contryname === "United States" && (
+                      <CgDollar className={Classes.Rupee} />
+                    )}
+                    {Contryname === "United Arab Emirates" && (
+                      <span style={{ paddingRight: "5px" }}>AED</span>
+                    )}{" "}
+                    {formatIndianNumber(data.pay)}
+                  </p>
+                )}
               </div>
               <div
                 className={Classes.PayButton}
@@ -803,17 +850,35 @@ const Payment = () => {
                   </>
                 ) : (
                   <>
-                    Pay{" "}
-                    {Contryname === "India" && (
-                      <BiRupee className={Classes.Rupee} />
+                    {location.state.name === "buybody" ? (
+                      <>
+                        Pay{" "}
+                        {Contryname === "India" && (
+                          <BiRupee className={Classes.Rupee} />
+                        )}
+                        {Contryname === "United States" && (
+                          <CgDollar className={Classes.Rupee} />
+                        )}
+                        {Contryname === "United Arab Emirates" && (
+                          <span style={{ paddingRight: "5px" }}>AED</span>
+                        )}{" "}
+                        {formatIndianNumber(data.total)}
+                      </>
+                    ) : (
+                      <>
+                        Pay{" "}
+                        {Contryname === "India" && (
+                          <BiRupee className={Classes.Rupee} />
+                        )}
+                        {Contryname === "United States" && (
+                          <CgDollar className={Classes.Rupee} />
+                        )}
+                        {Contryname === "United Arab Emirates" && (
+                          <span style={{ paddingRight: "5px" }}>AED</span>
+                        )}{" "}
+                        {formatIndianNumber(data.pay)}
+                      </>
                     )}
-                    {Contryname === "United States" && (
-                      <CgDollar className={Classes.Rupee} />
-                    )}
-                    {Contryname === "United Arab Emirates" && (
-                      <span style={{ paddingRight: "5px" }}>AED</span>
-                    )}{" "}
-                    {formatIndianNumber(data.pay)}
                   </>
                 )}
               </div>
@@ -828,7 +893,9 @@ const Payment = () => {
                 </div>
               )}
             </div>
+            <div className={Classes.ErrorMessage}>{payButtonErrror}</div>
           </div>
+
           <div className={Classes.DeliverCard}>
             <div className={Classes.DeliverCardHeader}>
               <h4>{!showChangeAddress && "Deliver to"}</h4>
@@ -866,20 +933,58 @@ const Payment = () => {
           </div>
           <div
             className={Classes.PayButtonMobile}
+            // onClick={() => {
+            //   mode ? placeOrder() : alert("Please select a payment method");
+            //   // setPmethodError("Please select a payment method");
+            // }}
             onClick={() => {
-              mode ? placeOrder() : alert("Please select a payment method");
+              mode
+                ? handlePayButton()
+                : alert("Please select a payment method");
               // setPmethodError("Please select a payment method");
             }}
+            //     onClick={async () => {
+            //   if (data.buyBody) {
+            //     try {
+            //       await submitAddress();
+            //       placeOrder();
+            //     } catch (error) {
+            //       console.error("Error submitting address:", error);
+            //     }
+            //   } else {
+            //     alert("Please select a payment method");
+            //   }
+            // }}
           >
-            Pay{" "}
-            {Contryname === "India" && <BiRupee className={Classes.Rupee} />}
-            {Contryname === "United States" && (
-              <CgDollar className={Classes.Rupee} />
+            {location.state.name === "buybody" ? (
+              <>
+                Pay{" "}
+                {Contryname === "India" && (
+                  <BiRupee className={Classes.Rupee} />
+                )}
+                {Contryname === "United States" && (
+                  <CgDollar className={Classes.Rupee} />
+                )}
+                {Contryname === "United Arab Emirates" && (
+                  <span style={{ paddingRight: "5px" }}>AED</span>
+                )}{" "}
+                {formatIndianNumber(data.total)}
+              </>
+            ) : (
+              <>
+                Pay{" "}
+                {Contryname === "India" && (
+                  <BiRupee className={Classes.Rupee} />
+                )}
+                {Contryname === "United States" && (
+                  <CgDollar className={Classes.Rupee} />
+                )}
+                {Contryname === "United Arab Emirates" && (
+                  <span style={{ paddingRight: "5px" }}>AED</span>
+                )}{" "}
+                {formatIndianNumber(data.pay)}
+              </>
             )}
-            {Contryname === "United Arab Emirates" && (
-              <span style={{ paddingRight: "5px" }}>AED</span>
-            )}{" "}
-            {formatIndianNumber(data.pay)}
           </div>
         </div>
       </div>

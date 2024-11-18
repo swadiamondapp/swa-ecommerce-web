@@ -44,7 +44,7 @@
   border: 1px solid #00464d;
   padding: 10px 15px;
   border-radius: 4px;
-  font-family: "Lato", sans-serif;
+  font-family: "lato";
   background: #f6f5f0;
   border: none;
   color: #4e4035;
@@ -410,7 +410,7 @@
   color: #ffffff;
   font-weight: 500;
   font-size: 16px;
-  width: 56%;
+  width: 48%;
   padding: 10px 10px;
   /* margin-left: 8px; */
   border: none;
@@ -427,7 +427,7 @@
   color: #0d1217;
   margin-top: -5px;
   padding-left: 5px;
-  font-family: "gilroyNormal" !important;
+  font-family: "lato" !important;
 }
 
 .OldPrice {
@@ -457,12 +457,14 @@
   position: relative;
   width: 75px;
   height: 75px;
+  width: 92px;
+  height: 92px;
   border-radius: 2px;
 }
 .playbtn {
   position: absolute;
-  top: 20%;
-  left: 25%;
+  top: 25%;
+  left: 34%;
   color: #ffffffa8;
   font-size: 40px;
 }
@@ -547,7 +549,8 @@
   color: #ffffff;
   font-weight: 500;
   font-size: 12px;
-  background: linear-gradient(180deg, #978958 0%, #aea174 82.81%);
+  background: rgba(25, 36, 45, 1);
+  /* background: linear-gradient(180deg, #978958 0%, #aea174 82.81%); */
   border-radius: 2px;
   border: none;
   padding: 11px 25px;
@@ -820,18 +823,79 @@
   opacity: 0.8;
   background: transparent;
   -webkit-appearance: none;
-
-  font-size: 11px;
-  width: 120px;
-  background: transparent url("../../Assets/arrow.png") no-repeat 90px center;
+  font-size: 16px;
+  font-weight: 600;
+  width: 130px;
+  background: transparent url("../../Assets/arrow.png") no-repeat calc(100% - 10px) center;
   border: 1px solid #006e7f;
-  border-radius: 8px;
-  padding: 13px 23px 13px 23px;
+  border-radius: 32px;
+  padding: 13px 23px 13px 10px;
   margin-bottom: 10px;
   outline: none;
 }
 .Slider {
   display: none;
+}
+.shippingTag_container {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+  align-items: center;
+  /* width:100%; */
+  justify-content: center;
+  background: rgba(0, 110, 127, 0.1);
+  padding: 6px 40px;
+  border-radius: 4px;
+  min-width: 50%;
+}
+.shippingTag_one {
+  margin-bottom: 15px;
+  display: flex;
+}
+.shippingTag_one img {
+  width: 23px;
+  height: 23px;
+}
+.shippingTagtext {
+  font-size: 14px;
+  font-family: "LatoRegular";
+  color: rgba(0, 110, 127, 1);
+}
+.shippingTagtext_head {
+  font-family: "LatoRegular";
+  color: rgba(0, 110, 127, 1);
+  font-size: 16px;
+  font-weight: 600;
+}
+.shippingTagtext_sub {
+  color: rgba(48, 58, 66, 1);
+  font-size: 14px;
+}
+.deliveryDetailsList {
+  display: flex;
+  gap: 15px;
+  padding: 5px 20px 5px 0px;
+  margin-bottom: 12px;
+  align-items: center;
+}
+.deliveryListContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.freedevimageBack {
+  background: rgba(252, 251, 246, 1);
+  border-radius: 49px;
+  height: 65px;
+  width: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.freedevimageBack img {
+  padding: 10px;
+  width: 50px;
+  height: 50px;
 }
 @media screen and (max-width: 767px) {
   .Display {
@@ -908,7 +972,7 @@
     width: 350px;
   }
   .ParentHeadingD1 {
-    margin-top: 40px;
+    margin-top: 90px;
   }
   .manpara {
     padding-left: 8px;
@@ -963,7 +1027,8 @@
   }
   .FindStoreParent {
     justify-content: center;
-    margin-bottom: 15px;
+    /* margin-bottom: 15px; */
+    margin-bottom: 0px;
     gap: 18px;
   }
   .C1 {
@@ -1149,6 +1214,20 @@
   }
   .Mobsliderbig {
     width: 100% !important;
-    height: 327px !important;
+    height: 373px !important;
   }
+  .shippingTag_container {
+    width: 100%;
+  }
+  .rateStar8 {
+    bottom: 0%;
+  }
+  .Language_vi {
+    overflow-x: scroll;
+    padding-left: 10px;
+  }
+  .Language_vi::-webkit-scrollbar {
+    display: none; /* Hides the scrollbar */
+  }
+  
 }

@@ -55,6 +55,13 @@ const signUpSchema = Joi.object({
       "string.pattern.base": `Enter your email@gmail.com`,
       "any.required": `is a required field`,
     }),
+  honorific_name: Joi.string()
+    .valid("Mr", "Mrs", "Others")
+    .required()
+    .messages({
+      "any.only": `Honorific name must be one of Mr, Mrs, or Others`,
+      "any.required": `Honorific name is a required field`,
+    }),
 });
 
 const LoginToggle = (props) => {
@@ -65,10 +72,16 @@ const LoginToggle = (props) => {
   const [getOtpModal, setGetOtpModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [timer, setTimer] = useState(60);
+  const [AlreadyExistText, setAlreadyExistText] = useState("");
+  const [showRegisterSuccessModal, setShowRegisterSuccessModal] = useState(
+    false
+  );
+  const [text, setText] = useState("");
   const [signUpData, setSignUpData] = useState({
     username: "",
     mobile: "",
     email: "",
+    honorific_name: "",
   });
   const [mobileNumber, setMobileNumber] = useState("");
   const [otp, setOtp] = useState("");
@@ -78,6 +91,7 @@ const LoginToggle = (props) => {
   const [isDesk, setIsDesk] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
   );
+  const Contryname = localStorage.getItem("country_name");
 
   useEffect(() => {
     const handleResize = () => {
@@ -124,7 +138,7 @@ const LoginToggle = (props) => {
 
   const handleOtpModalOpen = () => setGetOtpModal(true);
   const handleOtpModalClose = () => setGetOtpModal(false);
-
+  console.log(mobileNumber, "mobileNumber==>");
   const handleSignupModalClose = () => setSignupModal(false);
   const handleOpen = (event) => {
     // event.preventDefault(); // Prevent default form submission behavior
@@ -164,11 +178,16 @@ const LoginToggle = (props) => {
     // // Open the modal
     setOpen(true);
   };
+  console.log(activeTab, "activeTab==>");
   const handleClose = () => setOpen(false);
 
   function handleCLick() {}
   const handleTabClick = (tab) => {
-    setActiveTab(tab);
+    if (Contryname === "India") {
+      setActiveTab(tab);
+    } else {
+      alert("Mobile login only available in India");
+    }
   };
   const style = {
     position: "absolute",
@@ -269,12 +288,16 @@ const LoginToggle = (props) => {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
+    // setEmailId(event.target);
+    if (name === "email") {
+      setEmailId(value);
+    }
     setSignUpData({
       ...signUpData,
       [name]: value,
     });
   };
-
+  console.log(props.setText, "setText==>");
   const handleSignUp = async (event) => {
     event.preventDefault();
     if (validateForm()) {
@@ -285,24 +308,45 @@ const LoginToggle = (props) => {
           phone_number: signUpData.mobile,
           email: signUpData.email,
           login_type: "NORMAL",
+          honorific_name: signUpData.honorific_name,
         };
         const response = await axios.post(Urls.register, body);
-        if (response.data.results.status_code === 200) {
+if (
+          response &&
+          response.data &&
+          response.data.results &&
+          response.data.results.status_code === 200
+        ) {
           localStorage.setItem("registerMobile", signUpData.mobile);
-
+          setText("Registered");
           // alert("Successfully Registered");
           props.setText("Registered");
           props.setShowSuccessModal(true);
-          handleLoginModalOpen();
+          setShowRegisterSuccessModal(true);
           setTimeout(() => {
             props.setShowSuccessModal(false);
+            setShowRegisterSuccessModal(false);
+            handleLoginModalOpen();
           }, 3000);
+
+          if (activeTab === "tab1") {
+            setEmailId("");
+          } else if (activeTab === "tab2") {
+            setMobileNumber("");
+          }
         }
       } catch (error) {
         if (
+          error.response &&
+          error.response.data &&
+          error.response.data.results &&
           error.response.data.results.message ===
-          "user with this email or phone number already exists!!!"
+            "user with this email or phone number already exists!!!"
         ) {
+          setAlreadyExistText("UserName already exist");
+          setTimeout(() => {
+            setAlreadyExistText([]);
+          }, 3500);
           sendOtp();
         }
       }
@@ -311,12 +355,13 @@ const LoginToggle = (props) => {
     }
   };
 
+  console.log("emailId...", emailId);
   const sendOtp = async () => {
     const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const body = {
       phone_code: "+91",
-      // phone: mobileNumber ? mobileNumber : signUpData.mobile,
-      phone: "",
+      phone: mobileNumber ? mobileNumber : signUpData.mobile,
+      // phone: "",
       email: signUpData.email,
       createuser: "False",
       forgotuser: "False",
@@ -338,7 +383,7 @@ const LoginToggle = (props) => {
     try {
       console.log("Api keri");
       const response = await axios.post(Urls.sentOtp, body);
-      console.log(response.data);
+      console.log(response.data, "ressoibse==otop");
       if (response.data[0] === "Otp send Successfully") {
         setIsSignup(false);
         handleOtpModalOpen();
@@ -411,8 +456,10 @@ const LoginToggle = (props) => {
       .post(urls.Login, body)
       .then((response) => {
         if (response.data.results.status_code === 200) {
+          console.log(response.data.results.data.image, "userProfile");
           localStorage.setItem("swaToken", response.data.results.token);
           localStorage.setItem("userName", response.data.results.data.name);
+          localStorage.setItem("userProfile", response.data.results.data.image);
           localStorage.setItem(
             "phoneNumber",
             response.data.results.data.phone_number
@@ -443,7 +490,6 @@ const LoginToggle = (props) => {
         loginHandler();
       }
       if (response.data.results.message === "Otp verified successfully!") {
-        debugger;
         props.setText("Logged In");
         props.setShowSuccessModal(true);
         setTimeout(() => {
@@ -462,6 +508,11 @@ const LoginToggle = (props) => {
     }
   };
   const verifyOtpEmail = async () => {
+    if (!otp) {
+      // Check if the OTP is empty
+      setOtpError("Please enter OTP");
+      return; // Exit the function early if OTP is empty
+    }
     const body = {
       email: emailId,
       phone: "",
@@ -575,6 +626,47 @@ const LoginToggle = (props) => {
                         />
                         <p className={Classes.ErrorText}>
                           {validationErrors.email && validationErrors.email}
+                        </p>
+                      </div>
+                      <div>
+                        <div className={Classes.honor}>
+                          <label>
+                            <input
+                              type="radio"
+                              value="Mr"
+                              name="honorific_name"
+                              checked={signUpData.honorific_name === "Mr"}
+                              onChange={handleInputChange}
+                            />
+                            Mr.
+                          </label>
+                          <label>
+                            <input
+                              type="radio"
+                              value="Mrs"
+                              name="honorific_name"
+                              checked={signUpData.honorific_name === "Mrs"}
+                              onChange={handleInputChange}
+                            />
+                            Mrs.
+                          </label>
+                          <label>
+                            <input
+                              type="radio"
+                              value="Others"
+                              name="honorific_name"
+                              checked={signUpData.honorific_name === "Others"}
+                              onChange={handleInputChange}
+                            />
+                            Others
+                          </label>
+                        </div>
+                        <p className={Classes.ErrorText}>
+                          {validationErrors.honorific_name &&
+                            validationErrors.honorific_name}
+                        </p>
+                        <p className={Classes.ErrorText}>
+                          {AlreadyExistText && AlreadyExistText}
                         </p>
                       </div>
                     </div>
@@ -726,10 +818,16 @@ const LoginToggle = (props) => {
                         <div
                           className={`Classes.tab-item ${activeTab === "tab1" &&
                             "active"}`}
-                          onClick={() => alert("Not Available this time..!")}
+                          onClick={() => handleTabClick("tab1")}
                         >
                           {activeTab === "tab1" ? (
-                            <div className={Classes.tabTitleOne}>
+                            <div
+                              className={Classes.tabTitleOne}
+                              style={{
+                                backgroundColor: "#FFF",
+                                borderRadius: "4px",
+                              }}
+                            >
                               {/* <span>Email</span> */}
                               <span>Phone number</span>
                             </div>
@@ -859,7 +957,7 @@ const LoginToggle = (props) => {
                   opacity: "0.3",
                 }}
               ></div>
-              <div className={Classes.orText}>Or login with</div>
+              <div className={Classes.orText}>OR</div>
               <div
                 style={{
                   borderBottom: "1px solid #585F67",
@@ -1070,6 +1168,12 @@ const LoginToggle = (props) => {
           Please register the form.
         </div>
       </Modal>
+      <LoginSuccessModal
+        openSuccessModal={showRegisterSuccessModal}
+        close={() => setShowRegisterSuccessModal(false)}
+        state={showRegisterSuccessModal}
+        text={text}
+      />
     </div>
   );
 };

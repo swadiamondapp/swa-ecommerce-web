@@ -20,6 +20,16 @@
 .Main1 {
   margin: 30px 0px 0 50px;
 }
+
+.honor {
+  display: flex;
+  gap: 10px;
+}
+.honor label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 .Home {
   color: #00464d;
   font-size: 14px;
@@ -384,10 +394,10 @@ label {
 }
 .TotalPayable {
   font-weight: 600;
-  font-size: 17px;
+  font-size: 16px;
   letter-spacing: 0.03em;
   color: #303a42;
-  font-family: "gilroyNormal" !important;
+  font-family: "lato" !important;
 }
 .HurrayText {
   color: #30933a;
@@ -718,14 +728,14 @@ label {
 }
 .TotalSmall {
   font-weight: 600;
-  font-size: 14px;
-  font-family: "gilroyNormal" !important;
+  font-size: 18px;
+  font-family: "lato" !important;
 }
 .Amount {
   font-weight: 600;
-  font-size: 14px;
+  font-size: 18px;
   margin-top: 15px;
-  font-family: "gilroyNormal" !important;
+  font-family: "lato" !important;
 }
 .TotalItem {
   display: flex;

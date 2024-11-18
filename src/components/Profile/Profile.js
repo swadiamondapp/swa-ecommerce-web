@@ -11,6 +11,7 @@ import axios from "axios";
 import * as urls from "../../Urls";
 import SuccessTick from "../../Assets/successTick.png";
 import LoginModal from "../LoginModal/LoginModal";
+import { useHistory } from "react-router-dom";
 
 const successM = {
   position: "absolute",
@@ -25,18 +26,21 @@ const successM = {
 };
 
 const Profile = (props) => {
+  const history = useHistory();
   const userName = localStorage.getItem("userName");
   const phone = localStorage.getItem("phoneNumber");
   const Email = localStorage.getItem("UserEmail");
+  const userProfileImage = localStorage.getItem("userProfile");
   const [formData, setFormData] = useState({
     fullName: userName,
     email: Email,
     mobile: phone,
     photo: null,
   });
+
   const [errors, setErrors] = useState({});
   const token = localStorage.getItem("swaToken");
-  const [preview, setPreview] = useState(defaultProfile);
+  const [preview, setPreview] = useState(userProfileImage === "https://swaprdnecomnew.zinfog.in/media/default.png" ? defaultProfile: userProfileImage);
   const [open, setOpen] = useState(false);
   const [loginModalVisible, setLoginModalVisible] = useState(false);
   const [show, setShow] = useState(false);
@@ -120,7 +124,7 @@ const Profile = (props) => {
       reader.readAsDataURL(file);
     }
   };
-
+  console.log(formData.photo, "proimage");
   const handleSubmit = async (e) => {
     e.preventDefault();
     const validationData = { ...formData };
@@ -155,14 +159,31 @@ const Profile = (props) => {
           console.log("Form data is valid and submitted:", response.data);
           handleOpen();
           // Automatically close the modal after 5 seconds
-          localStorage.removeItem("swaToken");
-          localStorage.removeItem("userName");
-          localStorage.removeItem("phoneNumber");
+
+          if (formData.email !== Email || formData.mobile !== phone) {
+            localStorage.removeItem("swaToken");
+            localStorage.removeItem("userName");
+            localStorage.removeItem("phoneNumber");
+          }
+          if (formData.photo) {
+            const reader = new FileReader();
+            reader.onload = () => {
+              localStorage.setItem("userProfile", reader.result);
+              setPreview(reader.result); // Update the image preview
+            };
+            reader.readAsDataURL(formData.photo); // Convert image to Base64
+          }
+
           // setTimeout(handleClose, 3000);
           setTimeout(() => {
             handleClose();
+
             setLoginModalVisible(true);
+
             setShow(true);
+            history.push({
+              pathname: "/",
+            });
           }, 5000);
 
           // Reset form after successful submission
@@ -186,6 +207,7 @@ const Profile = (props) => {
   const closeHanlder = () => {
     setShow(false);
   };
+  console.log( userProfileImage, preview, "userPhooo");
   return (
     <div>
       <div className={Classes.mainContianerProfile}>
@@ -193,7 +215,9 @@ const Profile = (props) => {
           <form onSubmit={handleSubmit}>
             <div className={Classes.ProfileCard}>
               <h3>Edit profile</h3>
-              <img src={preview} alt="preview" />
+            
+                <img src={preview} alt="preview" />
+           
               <p
                 className={Classes.UploadPhotoProfile}
                 onClick={() => document.getElementById("photoUpload").click()}
