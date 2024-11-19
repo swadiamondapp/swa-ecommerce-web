@@ -104,7 +104,10 @@ const CancelProductModal = (props) => {
                 />
               </div>
               {isShipped ? (
-                <div className={Classes.ShippedMessage}>
+                <div
+                  className={Classes.ShippedMessage}
+                  style={{ margin: "30px 0px" }}
+                >
                   <Typography variant="body2" color="textSecondary">
                     The product has been shipped. You can return it after
                     delivery.
