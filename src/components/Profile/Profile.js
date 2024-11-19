@@ -219,6 +219,13 @@ const Profile = (props) => {
             response.data.errors
           );
           setmobErrors("Phone number already exists");
+        } else if (
+          response.data.errors.email &&
+          response.data.errors.email.includes(
+            "custom user with this email already exists."
+          )
+        ) {
+          setmobErrors("Email already exists");
         }
       } catch (err) {
         console.error("Error submitting the form:", err);

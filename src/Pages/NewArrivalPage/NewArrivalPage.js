@@ -425,7 +425,7 @@ const NewArrivalPage = (props) => {
               : item.discount_percentage
           }
           clicked={() => prodDetHandler(item)}
-          wishAct={item.wishlist_id}
+          wishAct={item && item.wishlist_id}
           prodet={item}
           buttonText={
             buttonTexts[item && item.product_id] || "Check delivery date"

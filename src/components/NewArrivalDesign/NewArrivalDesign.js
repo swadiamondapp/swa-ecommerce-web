@@ -19,6 +19,8 @@ const NewArrivalPage = (props) => {
   };
   const lawtohigh = () => {};
 
+  console.log("props.categoryName", props.categoryName);
+
   return (
     <div>
       <div className={Classes.ParentMain}>

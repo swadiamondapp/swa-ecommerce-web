@@ -19,10 +19,6 @@ const NewArrivalCard = (props) => {
   const [addToWishList, setAddToWishList] = useState(false);
   const [onadd, setOnAdd] = useState(true);
   const [wishId, setWishId] = useState([]);
-  const likes =
-    (props.prodet.wishlist_id && props.prodet.wishlist_id) || props.wishId;
-  console.log("likes", likes);
-  console.log("wishprodet?", addToWishList);
 
   const Contryname = localStorage.getItem("country_name");
 
@@ -39,6 +35,26 @@ const NewArrivalCard = (props) => {
       setWishId(""); // Clear wishId if there's no wishlist activity
     }
   }, [props.wishAct]);
+
+  useEffect(() => {
+    if (props.prodet.wishlist_id) {
+      setWishId(props.prodet.wishlist_id);
+      setAddToWishList(true);
+    } else {
+      setAddToWishList(false);
+      setWishId(""); // Reset wishId
+    }
+  }, [props.prodet.wishlist_id]);
+
+  const likes =
+    (props.prodet.wishlist_id && props.prodet.wishlist_id) ||
+    (props.wishId && props.wishId);
+  console.log("likes", likes);
+  console.log("wishprodet?", addToWishList);
+  console.log("ww1", props.prodet.wishlist_id);
+  console.log("ww2", props.wishId);
+  console.log("ww3", wishId);
+  console.log("ww4", props.prodet);
 
   const Added = () => {
     const token = localStorage.getItem("swaToken");
