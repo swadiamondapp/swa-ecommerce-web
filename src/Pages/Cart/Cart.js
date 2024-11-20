@@ -337,11 +337,12 @@ const Cart = () => {
                   Property={
                     // item.description.carat +
                     item.product.metal_type +
-                    " KT " +
+                    // " KT " +
+                    " " +
                     // item.description.colour_name +
                     " " +
                     parseFloat(item.product.gross_weight).toFixed(3) +
-                    " G "
+                    " g "
                   }
                   DiamondProperty={
                     " Diamond " +

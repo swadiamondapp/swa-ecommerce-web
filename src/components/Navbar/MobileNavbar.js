@@ -212,7 +212,12 @@ const MobileNavbar = (props) => {
     } else if (setItem.type === "product") {
       axios
         .get(
-          `${Urls.productDet + setItem.id}&country=${props.selectedCountry.id}`
+          `${Urls.productDet + setItem.id}&country=${props.selectedCountry.id}`,
+          {
+            headers: {
+              Authorization: "Token " + token,
+            },
+          }
         )
         .then((response1) => {
           const selData = {

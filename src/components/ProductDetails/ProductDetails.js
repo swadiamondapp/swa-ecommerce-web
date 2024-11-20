@@ -62,6 +62,7 @@ const ProductDetails = (props) => {
   const location = useLocation();
   const [show, setShow] = useState(false);
   const [addToWishList, setAddToWishList] = useState(false);
+  const [wishlistIds, setWishlistIds] = useState();
   const [wishId, setWishId] = useState("");
 
   const [pinCodeError, setPinCodeError] = useState("");
@@ -118,6 +119,7 @@ const ProductDetails = (props) => {
     }
   };
   console.log("IsRestricted...?", props.IsRestricted);
+  console.log("wishlistIds", wishlistIds);
 
   useEffect(() => {
     if (token !== null) {
@@ -219,6 +221,7 @@ const ProductDetails = (props) => {
         })
         .then((response1) => {
           setAddToWishList(true);
+          setWishlistIds(response1.data.results.data.id);
         })
         .catch((error) => {
           console.log(error);
@@ -227,15 +230,21 @@ const ProductDetails = (props) => {
       toast("Please Login!");
     }
   };
+  console.log("props.idds", props.id);
+  console.log("props.wishId", wishId);
   const Remove = () => {
     if (token !== null) {
-      if (wishId !== "") {
+      if (wishId !== "" || wishlistIds !== "") {
+        console.log("wishlistIdsapi", wishlistIds);
         axios
-          .delete(`${Urls.wishlist + wishId}/?country=${countryId}`, {
-            headers: {
-              Authorization: "Token " + token,
-            },
-          })
+          .delete(
+            `${Urls.wishlist + wishId || wishlistIds}/?country=${countryId}`,
+            {
+              headers: {
+                Authorization: "Token " + token,
+              },
+            }
+          )
           .then((response1) => {
             setAddToWishList(false);
             props.deltWishList();

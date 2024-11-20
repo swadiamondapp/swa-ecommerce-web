@@ -188,7 +188,7 @@ function CartProducts(props) {
         </div>
         <div className={Classes.DummyWrap}>
           <IoCheckmarkCircleSharp fill="#005D67" />
-          <p className={Classes.DummyGreen}>30 day money back</p>
+          <p className={Classes.DummyGreen}>15 day money back</p>
           <IoCheckmarkCircleSharp fill="#005D67" />
           <p className={Classes.DummyGreen}>Lifetime exchange & buy back</p>
         </div>

@@ -107,9 +107,9 @@ const TrialCart = (props) => {
         </div>
       </div> */}
       <div className={Classes.RemoveMove}>
-      <div className={Classes.DummyWrap}>
+        <div className={Classes.DummyWrap}>
           <IoCheckmarkCircleSharp fill="#005D67" />
-          <p className={Classes.DummyGreen}>30 day money back</p>
+          <p className={Classes.DummyGreen}>15 day money back</p>
           <IoCheckmarkCircleSharp fill="#005D67" />
           <p className={Classes.DummyGreen}>Lifetime exchange & buy back</p>
         </div>
@@ -146,7 +146,6 @@ const TrialCart = (props) => {
             </p>
           </div>
         </div>
-        
       </div>
 
       {/* trial cart design */}
