@@ -566,6 +566,7 @@ const Header = (props) => {
         setShowSuccessModal={setShowSuccessModal}
         activeCart={props.activeCart}
         setActiveCart={props.setActiveCart}
+        setText={setText}
       >
         <div className={Classes.SearchIcons}>
           <div className={Classes.searchList}>

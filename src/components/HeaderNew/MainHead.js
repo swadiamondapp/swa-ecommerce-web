@@ -29,6 +29,7 @@ const MainHead = (props) => {
         setShowSuccessModal={props.setShowSuccessModal}
         activeCart={props.activeCart}
         setActiveCart={props.setActiveCart}
+        setText={props.setText}
       />
       <header className={Classes.headerNav}>
         <div className={`${"container"} ${Classes.ParentHeader}`}>

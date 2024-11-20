@@ -55,6 +55,7 @@ const NewArrivalCard = (props) => {
   console.log("ww2", props.wishId);
   console.log("ww3", wishId);
   console.log("ww4", props.prodet);
+  console.log("ww5", props.wishAct);
 
   const Added = () => {
     const token = localStorage.getItem("swaToken");

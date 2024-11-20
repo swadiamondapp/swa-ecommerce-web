@@ -733,6 +733,7 @@ const MobileNavbar = (props) => {
               onClose={() => setShow(false)}
               isSignpuMobile={isSignpuMobileOpen}
               setShowSuccessModal={props.setShowSuccessModal}
+              setText={props.setText}
             />
           </Typography>
         </Box>

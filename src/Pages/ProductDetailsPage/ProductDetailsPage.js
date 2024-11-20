@@ -282,10 +282,21 @@ const ProductDetailsPage = (props) => {
       setPicodeError("");
     }
 
-    if (!size) {
-      setSizeError("Size is required");
-      hasError = true;
+    // if (!size) {
+    //   setSizeError("Size is required");
+    //   hasError = true;
+    // } else {
+    //   setSizeError("");
+    // }
+    if (sizeChart.length > 0) {
+      if (!size) {
+        setSizeError("Size is required");
+        hasError = true;
+      } else {
+        setSizeError("");
+      }
     } else {
+      // If no size chart is present, reset the size error
       setSizeError("");
     }
     if (!hasError && pinCode) {
@@ -339,6 +350,7 @@ const ProductDetailsPage = (props) => {
       });
   };
   const sizeChangeHandler = (size) => {
+    console.log("anassiz", size);
     setSize(size);
   };
   const sizechangeModal = (size) => {
