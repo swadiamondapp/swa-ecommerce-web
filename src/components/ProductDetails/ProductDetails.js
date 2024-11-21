@@ -234,17 +234,16 @@ const ProductDetails = (props) => {
   console.log("props.wishId", wishId);
   const Remove = () => {
     if (token !== null) {
-      if (wishId !== "" || wishlistIds !== "") {
+      const idToUse = wishId || wishlistIds;
+      if (idToUse) {
         console.log("wishlistIdsapi", wishlistIds);
+        console.log("wishlistIdsapi2", wishId);
         axios
-          .delete(
-            `${Urls.wishlist + wishId || wishlistIds}/?country=${countryId}`,
-            {
-              headers: {
-                Authorization: "Token " + token,
-              },
-            }
-          )
+          .delete(`${Urls.wishlist + idToUse}/?country=${countryId}`, {
+            headers: {
+              Authorization: "Token " + token,
+            },
+          })
           .then((response1) => {
             setAddToWishList(false);
             props.deltWishList();

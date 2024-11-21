@@ -617,232 +617,267 @@ const OrderHistorypage2 = (props) => {
                                 gap: "10px",
                               }}
                             >
-                              <div
-                                style={{
-                                  width: "100%",
-                                  display: "flex",
-                                  justifyContent: "space-between",
-                                  gap: "10px",
-                                }}
-                              >
-                                <span className={Classes.bag_details_span1}>
-                                  Barcode
-                                </span>
+                              {singleOrderData.order.shipment[0].product_bag
+                                .barcode && (
                                 <div
                                   style={{
-                                    width: "50%",
+                                    width: "100%",
                                     display: "flex",
-                                    alignItems: "start",
+                                    justifyContent: "space-between",
+                                    gap: "10px",
                                   }}
                                 >
-                                  <span className={Classes.bag_details_span2}>
-                                    {
-                                      singleOrderData.order.shipment[0]
-                                        .product_bag.barcode
-                                    }
+                                  <span className={Classes.bag_details_span1}>
+                                    Barcode
                                   </span>
+                                  <div
+                                    style={{
+                                      width: "50%",
+                                      display: "flex",
+                                      alignItems: "start",
+                                    }}
+                                  >
+                                    <span className={Classes.bag_details_span2}>
+                                      {
+                                        singleOrderData.order.shipment[0]
+                                          .product_bag.barcode
+                                      }
+                                    </span>
+                                  </div>
                                 </div>
-                              </div>
-                              <div
-                                style={{
-                                  width: "100%",
-                                  display: "flex",
-                                  justifyContent: "space-between",
-                                }}
-                              >
-                                <span className={Classes.bag_details_span1}>
-                                  Gross Weight
-                                </span>
+                              )}
+
+                              {singleOrderData.order.shipment[0].product_bag
+                                .gross_weight && (
                                 <div
                                   style={{
-                                    width: "50%",
+                                    width: "100%",
                                     display: "flex",
-                                    alignItems: "start",
+                                    justifyContent: "space-between",
                                   }}
                                 >
-                                  <span className={Classes.bag_details_span2}>
-                                    {
-                                      singleOrderData.order.shipment[0]
-                                        .product_bag.gross_weight
-                                    }
+                                  <span className={Classes.bag_details_span1}>
+                                    Gross Weight
                                   </span>
+                                  <div
+                                    style={{
+                                      width: "50%",
+                                      display: "flex",
+                                      alignItems: "start",
+                                    }}
+                                  >
+                                    <span className={Classes.bag_details_span2}>
+                                      {
+                                        singleOrderData.order.shipment[0]
+                                          .product_bag.gross_weight
+                                      }
+                                    </span>
+                                  </div>
                                 </div>
-                              </div>
-                              <div
-                                style={{
-                                  width: "100%",
-                                  display: "flex",
-                                  justifyContent: "space-between",
-                                }}
-                              >
-                                <span className={Classes.bag_details_span1}>
-                                  Diamond Weight
-                                </span>
+                              )}
+
+                              {singleOrderData.order.shipment[0].product_bag
+                                .diamond_weight && (
                                 <div
                                   style={{
-                                    width: "50%",
+                                    width: "100%",
                                     display: "flex",
-                                    alignItems: "start",
+                                    justifyContent: "space-between",
                                   }}
                                 >
-                                  <span className={Classes.bag_details_span2}>
-                                    {
-                                      singleOrderData.order.shipment[0]
-                                        .product_bag.diamond_weight
-                                    }
+                                  <span className={Classes.bag_details_span1}>
+                                    Diamond Weight
                                   </span>
+                                  <div
+                                    style={{
+                                      width: "50%",
+                                      display: "flex",
+                                      alignItems: "start",
+                                    }}
+                                  >
+                                    <span className={Classes.bag_details_span2}>
+                                      {
+                                        singleOrderData.order.shipment[0]
+                                          .product_bag.diamond_weight
+                                      }
+                                    </span>
+                                  </div>
                                 </div>
-                              </div>
-                              <div
-                                style={{
-                                  width: "100%",
-                                  display: "flex",
-                                  justifyContent: "space-between",
-                                }}
-                              >
-                                <span className={Classes.bag_details_span1}>
-                                  No of Diamonds
-                                </span>
+                              )}
+
+                              {singleOrderData.order.shipment[0].product_bag
+                                .no_of_diamonds && (
                                 <div
                                   style={{
-                                    width: "50%",
+                                    width: "100%",
                                     display: "flex",
-                                    alignItems: "start",
+                                    justifyContent: "space-between",
                                   }}
                                 >
-                                  <span className={Classes.bag_details_span2}>
-                                    {
-                                      singleOrderData.order.shipment[0]
-                                        .product_bag.no_of_diamonds
-                                    }
+                                  <span className={Classes.bag_details_span1}>
+                                    No of Diamonds
                                   </span>
+                                  <div
+                                    style={{
+                                      width: "50%",
+                                      display: "flex",
+                                      alignItems: "start",
+                                    }}
+                                  >
+                                    <span className={Classes.bag_details_span2}>
+                                      {
+                                        singleOrderData.order.shipment[0]
+                                          .product_bag.no_of_diamonds
+                                      }
+                                    </span>
+                                  </div>
                                 </div>
-                              </div>
-                              <div
-                                style={{
-                                  width: "100%",
-                                  display: "flex",
-                                  justifyContent: "space-between",
-                                }}
-                              >
-                                <span className={Classes.bag_details_span1}>
-                                  Net Metal
-                                </span>
+                              )}
+
+                              {singleOrderData.order.shipment[0].product_bag
+                                .net_metal && (
                                 <div
                                   style={{
-                                    width: "50%",
+                                    width: "100%",
                                     display: "flex",
-                                    alignItems: "start",
+                                    justifyContent: "space-between",
                                   }}
                                 >
-                                  <span className={Classes.bag_details_span2}>
-                                    {
-                                      singleOrderData.order.shipment[0]
-                                        .product_bag.net_metal
-                                    }
+                                  <span className={Classes.bag_details_span1}>
+                                    Net Metal
                                   </span>
+                                  <div
+                                    style={{
+                                      width: "50%",
+                                      display: "flex",
+                                      alignItems: "start",
+                                    }}
+                                  >
+                                    <span className={Classes.bag_details_span2}>
+                                      {
+                                        singleOrderData.order.shipment[0]
+                                          .product_bag.net_metal
+                                      }
+                                    </span>
+                                  </div>
                                 </div>
-                              </div>
-                              <div
-                                style={{
-                                  width: "100%",
-                                  display: "flex",
-                                  justifyContent: "space-between",
-                                }}
-                              >
-                                <span className={Classes.bag_details_span1}>
-                                  Diamond Type
-                                </span>
+                              )}
+
+                              {singleOrderData.order.shipment[0].product_bag
+                                .diamond_type && (
                                 <div
                                   style={{
-                                    width: "50%",
+                                    width: "100%",
                                     display: "flex",
-                                    alignItems: "start",
+                                    justifyContent: "space-between",
                                   }}
                                 >
-                                  <span className={Classes.bag_details_span2}>
-                                    {
-                                      singleOrderData.order.shipment[0]
-                                        .product_bag.diamond_type
-                                    }
+                                  <span className={Classes.bag_details_span1}>
+                                    Diamond Type
                                   </span>
+                                  <div
+                                    style={{
+                                      width: "50%",
+                                      display: "flex",
+                                      alignItems: "start",
+                                    }}
+                                  >
+                                    <span className={Classes.bag_details_span2}>
+                                      {
+                                        singleOrderData.order.shipment[0]
+                                          .product_bag.diamond_type
+                                      }
+                                    </span>
+                                  </div>
                                 </div>
-                              </div>
-                              <div
-                                style={{
-                                  width: "100%",
-                                  display: "flex",
-                                  justifyContent: "space-between",
-                                }}
-                              >
-                                <span className={Classes.bag_details_span1}>
-                                  CLS Weight
-                                </span>
+                              )}
+
+                              {singleOrderData.order.shipment[0].product_bag
+                                .cls_weight && (
                                 <div
                                   style={{
-                                    width: "50%",
+                                    width: "100%",
                                     display: "flex",
-                                    alignItems: "start",
+                                    justifyContent: "space-between",
                                   }}
                                 >
-                                  <span className={Classes.bag_details_span2}>
-                                    {
-                                      singleOrderData.order.shipment[0]
-                                        .product_bag.cls_weight
-                                    }
+                                  <span className={Classes.bag_details_span1}>
+                                    CLS Weight
                                   </span>
+                                  <div
+                                    style={{
+                                      width: "50%",
+                                      display: "flex",
+                                      alignItems: "start",
+                                    }}
+                                  >
+                                    <span className={Classes.bag_details_span2}>
+                                      {
+                                        singleOrderData.order.shipment[0]
+                                          .product_bag.cls_weight
+                                      }
+                                    </span>
+                                  </div>
                                 </div>
-                              </div>
-                              <div
-                                style={{
-                                  width: "100%",
-                                  display: "flex",
-                                  justifyContent: "space-between",
-                                }}
-                              >
-                                <span className={Classes.bag_details_span1}>
-                                  No.of colour stone
-                                </span>
+                              )}
+
+                              {singleOrderData.order.shipment[0].product_bag
+                                .no_of_color_stone && (
                                 <div
                                   style={{
-                                    width: "50%",
+                                    width: "100%",
                                     display: "flex",
-                                    alignItems: "start",
+                                    justifyContent: "space-between",
                                   }}
                                 >
-                                  <span className={Classes.bag_details_span2}>
-                                    {
-                                      singleOrderData.order.shipment[0]
-                                        .product_bag.no_of_color_stone
-                                    }
+                                  <span className={Classes.bag_details_span1}>
+                                    No.of colour stone
                                   </span>
+                                  <div
+                                    style={{
+                                      width: "50%",
+                                      display: "flex",
+                                      alignItems: "start",
+                                    }}
+                                  >
+                                    <span className={Classes.bag_details_span2}>
+                                      {
+                                        singleOrderData.order.shipment[0]
+                                          .product_bag.no_of_color_stone
+                                      }
+                                    </span>
+                                  </div>
                                 </div>
-                              </div>
-                              <div
-                                style={{
-                                  width: "100%",
-                                  display: "flex",
-                                  justifyContent: "space-between",
-                                }}
-                              >
-                                <span className={Classes.bag_details_span1}>
-                                  Metal Type / Color
-                                </span>
+                              )}
+
+                              {singleOrderData.order.shipment[0].product_bag
+                                .metal_type_color && (
                                 <div
                                   style={{
-                                    width: "50%",
+                                    width: "100%",
                                     display: "flex",
-                                    alignItems: "start",
+                                    justifyContent: "space-between",
                                   }}
                                 >
-                                  <span className={Classes.bag_details_span2}>
-                                    {
-                                      singleOrderData.order.shipment[0]
-                                        .product_bag.metal_type_color
-                                    }
+                                  <span className={Classes.bag_details_span1}>
+                                    Metal Type / Color
                                   </span>
+                                  <div
+                                    style={{
+                                      width: "50%",
+                                      display: "flex",
+                                      alignItems: "start",
+                                    }}
+                                  >
+                                    <span className={Classes.bag_details_span2}>
+                                      {
+                                        singleOrderData.order.shipment[0]
+                                          .product_bag.metal_type_color
+                                      }
+                                    </span>
+                                  </div>
                                 </div>
-                              </div>
+                              )}
                             </div>
                           )}
                         <div className={Classes.crtn1}>

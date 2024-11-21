@@ -19,6 +19,7 @@ const NewArrivalCard = (props) => {
   const [addToWishList, setAddToWishList] = useState(false);
   const [onadd, setOnAdd] = useState(true);
   const [wishId, setWishId] = useState([]);
+  const [wishlistIds, setWishlistIds] = useState();
 
   const Contryname = localStorage.getItem("country_name");
 
@@ -71,7 +72,7 @@ const NewArrivalCard = (props) => {
         })
         .then((response1) => {
           setAddToWishList(true);
-
+          setWishlistIds(response1.data.results.data.id);
           props.Suces();
         })
         .catch((error) => {
@@ -82,26 +83,27 @@ const NewArrivalCard = (props) => {
     }
   };
   const Remove = () => {
-    if (token !== null && likes) {
+    if (token !== null) {
       // Ensure wishId is not empty
-      axios
-        .delete(`${Urls.wishlist}${likes}/?country=${countryId}`, {
-          headers: { Authorization: "Token " + token },
-        })
-        .then((response1) => {
-          setAddToWishList(false);
-          setWishId(""); // Clear wishId on removal
-          props.Suces();
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } else {
-      if (!likes) {
-        console.log("No wishId to remove.");
-      } else {
-        toast("Please Login!");
+      const idToUse = likes || wishlistIds;
+      if (idToUse) {
+        console.log("wishlistIdsapinew", wishlistIds);
+        console.log("wishlistIdsapinew2", likes);
+        axios
+          .delete(`${Urls.wishlist + idToUse}/?country=${countryId}`, {
+            headers: { Authorization: "Token " + token },
+          })
+          .then((response1) => {
+            setAddToWishList(false);
+            setWishId(""); // Clear wishId on removal
+            props.Suces();
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       }
+    } else {
+      toast("Please Login!");
     }
   };
   console.log(wishId, "wishId");

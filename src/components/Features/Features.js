@@ -72,7 +72,7 @@ function Features() {
                 LifetimeExchange & Buyback
               </p>
               <p className={Classes.FeaturesSubText}>
-                Get 95% Exchange value and cashback
+                Get 95% Exchange value and 90% cashback
               </p>
             </div>
           </div>
