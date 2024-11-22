@@ -370,16 +370,65 @@ const OrderHistorypage2 = (props) => {
     singleOrderData.order.shipment[0].invoice;
 
   console.log(invoiceLink, "invoiceLink");
+  // const handleDownloadClick = () => {
+  //   if (invoiceLink) {
+  //     window.location.href = invoiceLink; // Redirect to invoice link
+  //   } else {
+  //     setModalOpen(true); // Open modal if invoice is unavailable
+  //     setTimeout(() => {
+  //       setModalOpen(false);
+  //     }, 5000);
+  //   }
+  // };
   const handleDownloadClick = () => {
     if (invoiceLink) {
-      window.location.href = invoiceLink; // Redirect to invoice link
+      const corsProxy = "https://thingproxy.freeboard.io/fetch/"; // Alternative CORS proxy
+      const invoiceUrl = corsProxy + invoiceLink;
+
+      fetch(invoiceUrl, {
+        method: "GET",
+        mode: "cors",
+      })
+        .then((response) => {
+          if (!response.ok) {
+            console.error(
+              "Response status:",
+              response.status,
+              response.statusText
+            );
+            throw new Error("Error fetching the file");
+          }
+          return response.blob();
+        })
+        .then((blob) => {
+          const contentType = blob.type;
+          const fileExtension = contentType.split("/")[1].toLowerCase(); // Extract extension from mime type
+
+          const fileName = `Invoice.${fileExtension}`; // Use the correct file extension
+          const blobUrl = URL.createObjectURL(blob);
+
+          const link = document.createElement("a");
+          link.href = blobUrl;
+          link.download = fileName;
+          link.click();
+
+          URL.revokeObjectURL(blobUrl);
+        })
+        .catch((error) => {
+          console.error("Error downloading the file:", error);
+          alert(
+            "There was an error downloading the invoice. Please try again later."
+          );
+        });
     } else {
-      setModalOpen(true); // Open modal if invoice is unavailable
+      // Open modal if invoice is unavailable
+      setModalOpen(true);
       setTimeout(() => {
         setModalOpen(false);
       }, 5000);
     }
   };
+
   const closeModal = () => setModalOpen(false);
 
   console.log(

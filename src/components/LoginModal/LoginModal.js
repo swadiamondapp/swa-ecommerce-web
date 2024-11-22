@@ -641,7 +641,11 @@ const LoginModal = (props) => {
       {/* modal */}
 
       {showUserDetails && (
-        <div ref={userDetailsRef} className={Classes.LogedUserDetails}>
+        <div
+          ref={userDetailsRef}
+          className={Classes.LogedUserDetails}
+          style={{ userSelect: "none" }}
+        >
           <div className={Classes.Name_phoneLog}>
             <p>{userName}</p>
             <p className={Classes.Name_phoneLoged}>{phone}</p>

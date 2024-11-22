@@ -93,7 +93,7 @@ const Profile = (props) => {
       .required()
       .messages({
         "string.base": `"Email" should be a type of string`,
-        "string.empty": `"Email" must not be empty`,
+        "string.empty": `Email must not be empty`,
         "string.pattern.base": `"Email" must be  valid `,
         "any.required": `"Email" is a required field`,
       }),
@@ -103,7 +103,7 @@ const Profile = (props) => {
       .required()
       .messages({
         "string.base": `"Mobile Number" should be a type of string`,
-        "string.empty": `"Mobile Number" is required`,
+        "string.empty": `Mobile Number is required`,
         "string.pattern.base": `"Mobile Number" must be a 10-digit number`,
         "any.required": `"Mobile Number" is a required field`,
       }),
