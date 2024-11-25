@@ -921,7 +921,9 @@ const ProductDetails = (props) => {
                   <RWebShare
                     data={{
                       text: "Swa Diamonds",
-                      url: "https://swa.co/" + location.pathname,
+                      // url: "https://swa.co/" + location.pathname,
+                      url: `https://www.swa.co/jewellery?id=${props.productDetails.id}&color=${props.productDetails.color}&name=${props.productDetails.name}&alias=${props.alias}`,
+
                       // url: "https://www.swa.co/" + location.pathname,
                       title: "Swa Diamonds",
                     }}

@@ -173,7 +173,7 @@ const Header = (props) => {
   // };
   const cattSelHandler = (setItem) => {
     history.push({
-      pathname: "/new_arrivel",
+      pathname: "/category/new_arrivel",
       state: { data: setItem.id, product_category: setItem.name },
     });
   };
@@ -239,6 +239,7 @@ const Header = (props) => {
   }, []);
 
   const searchTitleHandler = (setItem) => {
+    console.log("search112", setItem);
     if (setItem.type === "category") {
       if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
         window.location.href =
@@ -257,6 +258,7 @@ const Header = (props) => {
           }
         )
         .then((response1) => {
+          console.log("whatres", response1);
           const selData = {
             product_id: setItem.id,
             colour_id: response1.data.results.data.color_id,
@@ -277,15 +279,27 @@ const Header = (props) => {
               "/" +
               response1.data.results.data.product_name;
           } else {
+            // history.push({
+            //   pathname:
+            //     "/products/" +
+            //     setItem.id +
+            //     "/" +
+            //     response1.data.results.data.color_id +
+            //     "/" +
+            //     response1.data.results.data.product_name,
+            //   state: { data: selData },
+            // });
+            sessionStorage.setItem(
+              "productDetails",
+              JSON.stringify({
+                id: setItem.id,
+                color: response1.data.results.data.color_id,
+                name: response1.data.results.data.product_name,
+              })
+            );
             history.push({
-              pathname:
-                "/products/" +
-                setItem.id +
-                "/" +
-                response1.data.results.data.color_id +
-                "/" +
-                response1.data.results.data.product_name,
-              state: { data: selData },
+              pathname: "/jewellery/" + response1.data.results.data.alias,
+              state: { data: setItem },
             });
           }
         })
