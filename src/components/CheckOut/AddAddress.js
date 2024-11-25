@@ -115,12 +115,12 @@ function AddAddress(props) {
           "string.empty": "please provide the necessary details",
         }),
       mobile: Joi.string()
-        .pattern(/^\d+$/)
+        .pattern(/^\d{10}$/)
         .required()
         .messages({
           "any.required": "Mobile number is required",
           "string.empty": "please provide the necessary details",
-          "string.pattern.base": "Mobile number should contain only digits",
+          "string.pattern.base": "Mobile number must be 10 digits",
         }),
       pincode: Joi.string()
         .pattern(/^\d{6}$/)

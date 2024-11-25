@@ -160,7 +160,7 @@ const NewArrivalCard = (props) => {
         } ${Classes.NewArrivals}`}
       >
         <ToastContainer />
-        <div className={Classes.NewArrivalCard}>
+        <div className={Classes.NewArrivalCard} style={{ userSelect: "none" }}>
           <div className={Classes.NewArrivalCardSub}>
             {props.Discount && props.isDiscount ? (
               <div className={Classes.Discount}>

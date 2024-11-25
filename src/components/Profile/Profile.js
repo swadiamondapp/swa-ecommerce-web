@@ -118,6 +118,14 @@ const Profile = (props) => {
     });
   };
 
+  // Store the initial data for comparison
+  const initialData = {
+    fullName: userName,
+    email: Email,
+    mobile: phone,
+    photo: null, // assuming the photo is initially null
+  };
+
   const handlePhotoUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -135,9 +143,24 @@ const Profile = (props) => {
   console.log(formData.photo, "proimage");
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Check if formData matches initialData
+    const isUnchanged =
+      formData.fullName === initialData.fullName &&
+      formData.email === initialData.email &&
+      formData.mobile === initialData.mobile &&
+      !formData.photo;
+
+    if (isUnchanged) {
+      alert("No changes were made.");
+      return;
+    }
+
     const validationData = { ...formData };
     if (!formData.photo) delete validationData.photo;
-    const { error } = schema.validate(validationData, { abortEarly: false });
+    const { error } = schema.validate(validationData, {
+      abortEarly: false,
+    });
     if (error) {
       const validationErrors = {};
       error.details.forEach((detail) => {
@@ -169,7 +192,7 @@ const Profile = (props) => {
           // Automatically close the modal after 5 seconds
 
           if (formData.email !== Email || formData.mobile !== phone) {
-            localStorage.removeItem("swaToken");
+            // localStorage.removeItem("swaToken");
             localStorage.removeItem("userName");
             localStorage.removeItem("phoneNumber");
           }
@@ -183,6 +206,12 @@ const Profile = (props) => {
           }
           if (formData.fullName) {
             localStorage.setItem("userName", formData.fullName);
+          }
+          if (formData.email) {
+            localStorage.setItem("UserEmail", formData.email);
+          }
+          if (formData.mobile) {
+            localStorage.setItem("phoneNumber", formData.mobile);
           }
 
           // setTimeout(handleClose, 3000);

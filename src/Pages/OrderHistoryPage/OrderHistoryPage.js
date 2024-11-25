@@ -27,6 +27,8 @@ const OrderHistoryPage = () => {
   });
   const history = useHistory();
 
+  console.log("orderListnew", orderList);
+
   const token = localStorage.getItem("swaToken");
   useEffect(() => {
     window.scrollTo(0, 0);
