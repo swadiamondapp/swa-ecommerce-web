@@ -173,7 +173,8 @@ const Header = (props) => {
   // };
   const cattSelHandler = (setItem) => {
     history.push({
-      pathname: "/category/new_arrivel",
+      // pathname: "/category/new_arrivel",
+      pathname: `/category/${setItem.name}`,
       state: { data: setItem.id, product_category: setItem.name },
     });
   };
