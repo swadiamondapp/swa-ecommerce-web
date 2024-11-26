@@ -105,9 +105,9 @@ const ProductDetailsPage = (props) => {
     }
     axios
       .get(`${Urls.productDet + props.match.params.id}?country=${countryId}`, {
-        headers: {
-          Authorization: "Token " + token,
-        },
+        // headers: {
+        //   Authorization: "Token " + token,
+        // },
       })
       .then((response1) => {
         setIsRestricted(response1.data.results.data.is_restricted);

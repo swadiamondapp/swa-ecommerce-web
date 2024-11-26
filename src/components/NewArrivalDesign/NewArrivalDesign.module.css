@@ -97,6 +97,9 @@
   -moz-appearance: none;
   padding-right: 30px; /* Adjust the padding to fit your image */
   cursor: pointer;
+  z-index: 1;
+  position: relative;
+  background: transparent;
 }
 
 .CustomSelectArrow {

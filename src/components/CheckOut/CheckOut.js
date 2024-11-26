@@ -926,7 +926,7 @@ function CheckOut(props) {
                           className={Classes.PlaceInput}
                           type="text"
                           placeholder="+91 98975656785"
-                          readOnly={isNewaddress.sPhone}
+                          // readOnly={isNewaddress.sPhone}
                           value={addressData.sPhone}
                           name="sPhone"
                           onChange={handleChangeAddress}

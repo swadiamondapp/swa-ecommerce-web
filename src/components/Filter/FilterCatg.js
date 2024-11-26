@@ -351,49 +351,53 @@ const FilterCatgs = (props) => {
             <div className={Classes.CategoryHead}>
               <p>Categories</p>
             </div>
-            {categoryWise.map((item, index) => (
-              <div className={Classes.CategoryListMain} key={index}>
-                <div className={Classes.CategoryList}>
-                  <input
-                    type="checkbox"
-                    onChange={() =>
-                      handleCheckboxByCategory(item.id, item.product_count)
-                    }
-                    checked={selectedCategoryIds.includes(item.id)}
-                  />
-                  <label>
-                    {item.name.charAt(0).toUpperCase() +
-                      item.name.slice(1).toLowerCase()}
-                  </label>
+            {categoryWise
+              .filter((item) => item.product_count > 0)
+              .map((item, index) => (
+                <div className={Classes.CategoryListMain} key={index}>
+                  <div className={Classes.CategoryList}>
+                    <input
+                      type="checkbox"
+                      onChange={() =>
+                        handleCheckboxByCategory(item.id, item.product_count)
+                      }
+                      checked={selectedCategoryIds.includes(item.id)}
+                    />
+                    <label>
+                      {item.name.charAt(0).toUpperCase() +
+                        item.name.slice(1).toLowerCase()}
+                    </label>
+                  </div>
+                  <div className={Classes.CategoryListAmount}>
+                    <label>{item.product_count}</label>
+                  </div>
                 </div>
-                <div className={Classes.CategoryListAmount}>
-                  <label>{item.product_count}</label>
-                </div>
-              </div>
-            ))}
+              ))}
           </div>
           <div className={Classes.CategoryMainHead}>
             <div className={Classes.CategoryHead}>
               <p>Metal</p>
             </div>
-            {metalCategory.map((item, index) => (
-              <div className={Classes.CategoryListMain} key={index}>
-                <div className={Classes.CategoryList}>
-                  <input
-                    onChange={() => handleCheckboxByMetal(item.id)}
-                    checked={selectedMetalIds.includes(item.id)}
-                    type="checkbox"
-                  />
-                  <label>
-                    {item.metal_type.charAt(0).toUpperCase() +
-                      item.metal_type.slice(1).toLowerCase()}
-                  </label>
+            {metalCategory
+              .filter((item) => item.product_count > 0)
+              .map((item, index) => (
+                <div className={Classes.CategoryListMain} key={index}>
+                  <div className={Classes.CategoryList}>
+                    <input
+                      onChange={() => handleCheckboxByMetal(item.id)}
+                      checked={selectedMetalIds.includes(item.id)}
+                      type="checkbox"
+                    />
+                    <label>
+                      {item.metal_type.charAt(0).toUpperCase() +
+                        item.metal_type.slice(1).toLowerCase()}
+                    </label>
+                  </div>
+                  <div className={Classes.CategoryListAmount}>
+                    <label>{item.product_count}</label>
+                  </div>
                 </div>
-                <div className={Classes.CategoryListAmount}>
-                  <label>{item.product_count}</label>
-                </div>
-              </div>
-            ))}
+              ))}
             {/* {colorSet.map((item, index) => {
             return (
               <div className={Classes.CategoryListMain} key={index}>
@@ -449,24 +453,26 @@ const FilterCatgs = (props) => {
             <div className={Classes.CategoryHead}>
               <p>Occasion</p>
             </div>
-            {occations.map((item, index) => (
-              <div className={Classes.CategoryListMain}>
-                <div className={Classes.CategoryList}>
-                  <input
-                    type="checkbox"
-                    onChange={() => handleCheckboxByOccation(item.id)}
-                    checked={selectedOccationIds.includes(item.id)}
-                  />
-                  <label>
-                    {item.name.charAt(0).toUpperCase() +
-                      item.name.slice(1).toLowerCase()}
-                  </label>
+            {occations
+              .filter((item) => item.product_count > 0)
+              .map((item, index) => (
+                <div className={Classes.CategoryListMain}>
+                  <div className={Classes.CategoryList}>
+                    <input
+                      type="checkbox"
+                      onChange={() => handleCheckboxByOccation(item.id)}
+                      checked={selectedOccationIds.includes(item.id)}
+                    />
+                    <label>
+                      {item.name.charAt(0).toUpperCase() +
+                        item.name.slice(1).toLowerCase()}
+                    </label>
+                  </div>
+                  <div className={Classes.CategoryListAmount}>
+                    <label>{item.product_count}</label>
+                  </div>
                 </div>
-                <div className={Classes.CategoryListAmount}>
-                  <label>{item.product_count}</label>
-                </div>
-              </div>
-            ))}
+              ))}
 
             {/* <div className={Classes.CategoryListMain}>
               <div className={Classes.CategoryList}>
