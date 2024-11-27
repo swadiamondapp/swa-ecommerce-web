@@ -682,6 +682,7 @@ const ProductDetails = (props) => {
                                           </div>
                                         )}
                                       <img
+                                        style={{ outline: "none" }}
                                         className={Classes.Mobsliderbig}
                                         src={item}
                                         alt={`Slide ${index}`}
