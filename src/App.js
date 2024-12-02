@@ -74,6 +74,11 @@ function App() {
         <Route path="/trialathome" component={TryAtHomePage} />
         <Route path="/tryathomeform" component={TryAtHomeInnerPage} />
         <Route path="/outlet" component={OutletPage} />
+        <Route
+          path="/jewellery/budget/:amount"
+          component={NewArrivalPage}
+          exact
+        />
       </Switch>
     </Router>
   );

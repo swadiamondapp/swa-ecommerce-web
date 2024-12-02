@@ -1029,7 +1029,8 @@ const Header = (props) => {
                     <div
                       className={Classes.Offers}
                       key={index}
-                      onClick={() => catSelHandler(item)}
+                      // onClick={() => catSelHandler(item)}
+                      onClick={() => cattSelHandler(item)}
                     >
                       <div className={Classes.OffersInner}>
                         <img

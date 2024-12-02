@@ -200,7 +200,8 @@ const LandingPage = () => {
   };
   const productMinHandler = (price) => {
     history.push({
-      pathname: "/new_arrivel",
+      // pathname: "/new_arrivel",
+      pathname: `/jewellery/budget/${price}`,
       state: { data: "filMin", price: price },
     });
   };
