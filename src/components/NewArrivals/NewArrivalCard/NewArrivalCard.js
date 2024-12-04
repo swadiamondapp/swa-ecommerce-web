@@ -151,15 +151,21 @@ const NewArrivalCard = (props) => {
   // };
 
   console.log("location.pathname", location.pathname);
+  const containerClass =
+    location.pathname.startsWith("/jewellery/budget") ||
+    location.pathname.startsWith("/category/")
+      ? "col-md-4 col-sm-6 col-lg-4 col-6"
+      : "col-md-4 col-sm-6 col-lg-3 col-6";
 
   return (
     <React.Fragment>
       <div
-        className={` ${
-          location.pathname.startsWith("/jewellery/budget")
-            ? "col-md-4 col-sm-6 col-lg-4 col-6"
-            : "col-md-4 col-sm-6 col-lg-3 col-6"
-        } ${Classes.NewArrivals}`}
+        // className={` ${
+        //   location.pathname.startsWith("/jewellery/budget")
+        //     ? "col-md-4 col-sm-6 col-lg-4 col-6"
+        //     : "col-md-4 col-sm-6 col-lg-3 col-6"
+        // } ${Classes.NewArrivals}`}
+        className={`${containerClass} ${Classes.NewArrivals}`}
       >
         <ToastContainer />
         <div className={Classes.NewArrivalCard} style={{ userSelect: "none" }}>

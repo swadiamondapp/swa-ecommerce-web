@@ -64,6 +64,7 @@ const ProductDetails = (props) => {
   const [addToWishList, setAddToWishList] = useState(false);
   const [wishlistIds, setWishlistIds] = useState();
   const [wishId, setWishId] = useState("");
+  const pincode = localStorage.getItem("pincode");
 
   const [pinCodeError, setPinCodeError] = useState("");
   const [active, setActive] = useState(null);
@@ -1247,7 +1248,7 @@ const ProductDetails = (props) => {
                   <input
                     className={Classes.PinCode}
                     type="number"
-                    value={props.pinCode}
+                    value={pincode ? pincode : props.pinCode}
                     onChange={pinCodeChangeHandler}
                     onInput={(e) => {
                       if (e.target.value.length > 6) {

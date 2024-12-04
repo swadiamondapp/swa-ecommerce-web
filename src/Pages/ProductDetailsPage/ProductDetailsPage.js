@@ -37,6 +37,7 @@ const ProductDetailsPage = (props) => {
   const [deliveryShopList, setDeliveryShopsList] = useState([]);
   const [pincodeShow, setPincodeShow] = useState(false);
   const [pinCode, setPinCode] = useState("");
+  const pincode = localStorage.getItem("pincode");
 
   const [logAct, setLogAct] = useState(false);
   const token = localStorage.getItem("swaToken");
@@ -291,7 +292,7 @@ const ProductDetailsPage = (props) => {
     } else {
       setColorError("");
     }
-    if (!pinCode) {
+    if (!pincode && !pinCode) {
       setPicodeError("Pincode is required");
     } else {
       setPicodeError("");
@@ -314,12 +315,12 @@ const ProductDetailsPage = (props) => {
       // If no size chart is present, reset the size error
       setSizeError("");
     }
-    if (!hasError && pinCode) {
+    if (!hasError && (pinCode || pincode)) {
       const body = {
         product_id: prodDet.id,
         color_id: clrId,
         size_id: size,
-        pincode: pinCode,
+        pincode: pinCode || pincode,
       };
 
       axios
