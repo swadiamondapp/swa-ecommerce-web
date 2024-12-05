@@ -5,13 +5,24 @@ import { useHistory } from "react-router-dom";
 import { BiRupee } from "react-icons/bi";
 import { CgDollar } from "react-icons/cg";
 import { states } from "../../countryList";
-
+import {
+  List,
+  ListItem,
+  CircularProgress,
+  Box,
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+  IconButton,
+} from "@mui/material";
+import Modal from "@mui/material/Modal";
+import CloseIcon from "@mui/icons-material/Close";
 import { useState } from "react";
 import { IoIosArrowUp } from "react-icons/io";
 import Warning from "../../Assets/Warning.png";
 import Succes from "../../Assets/success.png";
 import { AiOutlineHome } from "react-icons/ai";
-import { Radio, Space } from "antd";
+// import { Radio, Space } from "antd";
 import axios from "axios";
 import * as Urls from "../../Urls";
 import { FadeLoader } from "react-spinners";
@@ -54,7 +65,27 @@ function CheckOut(props) {
   const pincodes = localStorage.getItem("pincode");
   const [timer, setTimer] = useState(60);
   const countryId = localStorage.getItem("id");
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [addressList, setAddressList] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [selectedAddress, setSelectedAddress] = useState(null);
 
+  console.log("addressList", addressList);
+  console.log("selectedAddress", selectedAddress);
+
+  const staticCountries = [
+    { name: { common: "India" } },
+    { name: { common: "United States" } },
+    { name: { common: "Australia" } },
+    { name: { common: "Canada" } },
+    { name: { common: "United Kingdom" } },
+    { name: { common: "Germany" } },
+    { name: { common: "France" } },
+    { name: { common: "Japan" } },
+    { name: { common: "Brazil" } },
+    { name: { common: "South Africa" } },
+  ];
+  const [countriesList, setCountriesList] = useState(staticCountries);
   console.log("promoIdIII", total);
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -278,7 +309,9 @@ function CheckOut(props) {
                 };
                 axios
                   .post(Urls.paySuces, bodyPay, {
-                    headers: { Authorization: "Token " + token },
+                    headers: {
+                      Authorization: "Token " + token,
+                    },
                   })
                   .then((response2) => {
                     if (response2.data.success === true) {
@@ -340,7 +373,9 @@ function CheckOut(props) {
 
                 axios
                   .post(Urls.paySuces, bodyPay, {
-                    headers: { Authorization: "Token " + token },
+                    headers: {
+                      Authorization: "Token " + token,
+                    },
                   })
                   .then((response2) => {
                     if (response2.data.success === true) {
@@ -408,7 +443,9 @@ function CheckOut(props) {
 
       axios
         .post(`${Urls.promoCode}?country=${countryId}`, body, {
-          headers: { Authorization: "Token " + token },
+          headers: {
+            Authorization: "Token " + token,
+          },
         })
         .then((response1) => {
           if (response1.data.results.status_code === 404) {
@@ -639,7 +676,9 @@ function CheckOut(props) {
           // is_main: false,
         };
         const response = await axios.post(Urls.addAdress, body, {
-          headers: { Authorization: "Token " + token },
+          headers: {
+            Authorization: "Token " + token,
+          },
         });
         if (response.data && response.data.status === 200) {
           history.push({
@@ -692,7 +731,9 @@ function CheckOut(props) {
     } else {
       try {
         const response = await axios.get(Urls.defaultAddress, {
-          headers: { Authorization: "Token " + token },
+          headers: {
+            Authorization: "Token " + token,
+          },
         });
         if (response.data.results.status === 200) {
           setAddressData({
@@ -854,6 +895,72 @@ function CheckOut(props) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
+  const openModal = () => {
+    setIsModalVisible(true);
+    fetchAddressData();
+  };
+  const closeModal = () => {
+    setIsModalVisible(false);
+  };
+  const fetchAddressData = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get(Urls.address, {
+        headers: { Authorization: `Token ${token}` },
+      });
+      setAddressList(response.data.results.data || []);
+    } catch (error) {
+      console.error("Failed to fetch addresses:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleAddressSelect = async (address) => {
+    console.log("addressssssm", address);
+    setSelectedAddress(address.id);
+    // API Call to set the selected address as default (is_main: true)
+    try {
+      const response = await axios.post(
+        Urls.defaultAddress,
+        {
+          address_id: address.id, // Sending the address id
+          is_main: true, // Mark this address as the default (is_main: true)
+        },
+        {
+          headers: { Authorization: "Token " + token },
+        }
+      );
+      if (response.data.results.status === 200) {
+        setAddressData({
+          sEmail: address.email || "",
+          sPhone: address.phone_number || "",
+          fullName: address.name || "",
+          honorific_name: address.honorific_name || "",
+          mobile: address.phone_number || "",
+          pincode: address.pincode || "",
+          city: address.city || "",
+          state: address.state || "",
+          hNumber_Bname: address.house || "",
+          streetColony: address.area || "",
+          landMark: address.landmark || "",
+          country: address.country || "",
+        });
+        setIsModalVisible(false);
+      } else {
+        console.log("Error: ", response.data.results.message); // Handle error response
+      }
+    } catch (error) {
+      console.log(error); // Handle API errors
+    }
+  };
+  // Set the default selected address to the one with is_main: true
+  useEffect(() => {
+    const mainAddress = addressList.find((address) => address.is_main === true);
+    if (mainAddress) {
+      setSelectedAddress(mainAddress.id); // Set the main address as the default selected address
+    }
+  }, [addressList]);
   console.log("location.state.data----->123", location.state);
 
   return (
@@ -897,6 +1004,167 @@ function CheckOut(props) {
             <div className="col-md-8">
               <div className={Classes.Main}>
                 <div className={Classes.Left}>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "end",
+                    }}
+                  >
+                    <button
+                      onClick={openModal}
+                      style={{
+                        background: "#00464d",
+                        borderRadius: "4px",
+                        cursor: "pointer",
+                        padding: "8px 15px",
+                        color: "#fff",
+                        border: "none",
+                        fontWeight: "400",
+                      }}
+                    >
+                      Change Address
+                    </button>
+                  </div>
+                  {/* Address Modal */}
+                  <div className="addressModals">
+                    {/* MUI Modal */}
+                    <Modal
+                      open={isModalVisible}
+                      onClose={closeModal}
+                      aria-labelledby="address-modal-title"
+                      aria-describedby="address-modal-description"
+                    >
+                      <Box
+                        sx={{
+                          position: "absolute",
+                          top: "50%",
+                          left: "50%",
+                          transform: "translate(-50%, -50%)",
+                          width: 500, // Set width to 500px
+                          maxWidth: "90%", // Responsive width
+                          bgcolor: "background.paper",
+                          boxShadow: 24,
+                          p: 4,
+                          borderRadius: "8px",
+                          maxHeight: "80%",
+                          overflowY: "scroll",
+                        }}
+                      >
+                        <IconButton
+                          onClick={closeModal}
+                          sx={{
+                            position: "absolute",
+                            top: 8,
+                            right: 8,
+                          }}
+                        >
+                          <CloseIcon />
+                        </IconButton>
+
+                        <h2
+                          id="address-modal-title"
+                          style={{ fontSize: "18px" }}
+                        >
+                          Select Address
+                        </h2>
+
+                        {/* Loading Spinner */}
+                        {/* {loading ? (
+                          <CircularProgress />
+                        ) : addressList.length > 0 ? (
+                          <List>
+                            {addressList.map((item, index) => (
+                              <ListItem
+                                key={index}
+                                onClick={() => handleAddressSelect(item)}
+                                sx={{
+                                  cursor: "pointer",
+                                  marginBottom: "8px",
+                                  "&:hover": {
+                                    backgroundColor: "#f0f0f0",
+                                  },
+                                }}
+                              >
+                                <div>
+                                  <p>
+                                    {[
+                                      item.name,
+                                      item.phone_number,
+                                      item.email,
+                                      item.area,
+                                      item.streetColony,
+                                      item.city,
+                                      item.state,
+                                      item.country,
+                                      item.pincode,
+                                    ]
+                                      .filter(Boolean) 
+                                      .join(", ")}{" "}
+                                  
+                                  </p>
+                                </div>
+                              </ListItem>
+                            ))}
+                          </List>
+                        ) : (
+                          <p>No addresses found.</p>
+                        )} */}
+                        {loading ? (
+                          <CircularProgress />
+                        ) : addressList.length > 0 ? (
+                          <RadioGroup
+                            value={selectedAddress}
+                            onChange={(e) => setSelectedAddress(e.target.value)} // Update selected address
+                          >
+                            <List>
+                              {addressList.map((item) => (
+                                <ListItem
+                                  key={item.id}
+                                  sx={{
+                                    cursor: "pointer",
+                                    marginBottom: "8px",
+                                    "&:hover": {
+                                      backgroundColor: "#f0f0f0",
+                                    },
+                                  }}
+                                >
+                                  <FormControlLabel
+                                    value={item.id} // Use address id as the value for the radio button
+                                    control={<Radio />}
+                                    label={
+                                      <>
+                                        <p>{item.name}</p>
+                                        <p>
+                                          {[
+                                            item.phone_number,
+                                            item.email,
+                                            item.area,
+                                            item.streetColony,
+                                            item.city,
+                                            item.state,
+                                            item.country,
+                                            item.pincode,
+                                          ]
+                                            .filter(Boolean) // Exclude empty fields
+                                            .join(", ")}{" "}
+                                        </p>
+                                      </>
+                                    }
+                                    checked={selectedAddress === item.id}
+                                    onClick={() => handleAddressSelect(item)} // Call handleAddressSelect when an item is clicked
+                                  />
+                                </ListItem>
+                              ))}
+                            </List>
+                          </RadioGroup>
+                        ) : (
+                          <p>No addresses found.</p>
+                        )}
+                      </Box>
+                    </Modal>
+                  </div>
+
                   <form
                     ref={formRef}
                     autoComplete="off"
@@ -999,14 +1267,27 @@ function CheckOut(props) {
 
                     <div className="Parant_Relative">
                       <label>Country*</label>
-                      <input
+                      {/* <input
                         className={Classes.PlaceInput}
                         type="text"
                         placeholder="country"
                         value={addressData.country}
                         name="country"
                         onChange={handleChangeAddress}
-                      />
+                      /> */}
+                      <select
+                        className={Classes.PlaceInput}
+                        value={addressData.country}
+                        name="country"
+                        onChange={handleChangeAddress}
+                      >
+                        <option value="">Select Country</option>
+                        {countriesList.map((country, index) => (
+                          <option key={index} value={country.name.common}>
+                            {country.name.common}
+                          </option>
+                        ))}
+                      </select>
                       {errorMessage.country && (
                         <div className={Classes.ErrorMessage}>
                           {errorMessage.country}
@@ -1031,7 +1312,7 @@ function CheckOut(props) {
                           </div>
                         )} */}
                       </div>
-                      {/* <div className="Parant_Relative">
+                      <div className="Parant_Relative">
                         <label>Pincode</label>
                         <input
                           className={Classes.PlaceInput}
@@ -1057,7 +1338,7 @@ function CheckOut(props) {
                             {errorMessage.pincode}
                           </div>
                         )}
-                      </div> */}
+                      </div>
                       <div>
                         <label>City*</label>
                         <input
@@ -1166,7 +1447,11 @@ function CheckOut(props) {
                     {Contryname === "India" && (
                       <>
                         <BiRupee className={Classes.Rupee} />
-                        <span style={{ paddingRight: "5px" }}>
+                        <span
+                          style={{
+                            paddingRight: "5px",
+                          }}
+                        >
                           {formatIndianNumber(total)}
                         </span>
                       </>
@@ -1174,7 +1459,11 @@ function CheckOut(props) {
                     {Contryname === "United States" && (
                       <>
                         <CgDollar className={Classes.Rupee} />
-                        <span style={{ paddingRight: "5px" }}>
+                        <span
+                          style={{
+                            paddingRight: "5px",
+                          }}
+                        >
                           {formatIndianNumber(total)}
                         </span>
                       </>
@@ -1198,7 +1487,12 @@ function CheckOut(props) {
                       <CgDollar className={Classes.Rupee} size={20} />
                     )}
                     {Contryname === "United Arab Emirates" && (
-                      <span style={{ paddingRight: "5px", fontWeight: "600" }}>
+                      <span
+                        style={{
+                          paddingRight: "5px",
+                          fontWeight: "600",
+                        }}
+                      >
                         AED
                       </span>
                     )}

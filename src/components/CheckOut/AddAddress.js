@@ -36,6 +36,7 @@ function AddAddress(props) {
     hNumber_Bname: "",
     streetColony: "",
     landMark: "",
+    country: "",
   });
   const [errors, setErrors] = useState({
     fullName: "",
@@ -44,6 +45,7 @@ function AddAddress(props) {
     city: "",
     hNumber_Bname: "",
     streetColony: "",
+    country: "",
   });
 
   // const [showDeleteButtons, setShowDeleteButtons] = useState([]);
@@ -87,6 +89,19 @@ function AddAddress(props) {
       console.log(error);
     }
   };
+  const staticCountries = [
+    { name: { common: "India" } },
+    { name: { common: "United States" } },
+    { name: { common: "Australia" } },
+    { name: { common: "Canada" } },
+    { name: { common: "United Kingdom" } },
+    { name: { common: "Germany" } },
+    { name: { common: "France" } },
+    { name: { common: "Japan" } },
+    { name: { common: "Brazil" } },
+    { name: { common: "South Africa" } },
+  ];
+  const [countriesList, setCountriesList] = useState(staticCountries);
 
   useEffect(() => {
     const mainAddress = props.addressArray.find((address) => address.is_main);
@@ -137,6 +152,13 @@ function AddAddress(props) {
           "any.required": "City is required",
           "string.empty": "City must not be empty",
         }),
+      country: Joi.string()
+
+        .required()
+        .messages({
+          "any.required": "country is required",
+          "string.empty": "country must not be empty",
+        }),
       hNumber_Bname: Joi.string()
         .required()
         .messages({
@@ -175,6 +197,7 @@ function AddAddress(props) {
       state: addressData.state,
       city: addressData.city,
       house: addressData.hNumber_Bname,
+      country: addressData.country,
       area: addressData.streetColony,
       landmark: addressData.landMark,
       type: "HOME",
@@ -192,6 +215,7 @@ function AddAddress(props) {
           city: "",
           state: "kerala",
           hNumber_Bname: "",
+          country: "",
           streetColony: "",
           landMark: "",
         });
@@ -472,6 +496,26 @@ function AddAddress(props) {
                           <option value={"Ladakh"}>Ladakh</option>
                         </select>
                       </div>
+                    </div>
+                    <div className="Parant_Relative">
+                      <label>Country*</label>
+
+                      <select
+                        className={Classes.PlaceInput}
+                        value={addressData.country}
+                        name="country"
+                        onChange={handleChangeAddress}
+                      >
+                        <option value="">Select Country</option>
+                        {countriesList.map((country, index) => (
+                          <option key={index} value={country.name.common}>
+                            {country.name.common}
+                          </option>
+                        ))}
+                      </select>
+                      {errors.country && (
+                        <div className={Classes.Error}>{errors.country}</div>
+                      )}
                     </div>
                     <div className={Classes.ParentStreetColony}>
                       <div className={Classes.House1NN}>

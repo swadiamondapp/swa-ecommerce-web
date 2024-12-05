@@ -96,7 +96,8 @@ const Cart = () => {
     setShow(false);
   };
   const removeCartHandler = (selItem) => {
-    setSelProAmnt(selItem.items_total.toFixed(2));
+    console.log("selItemqw", selItem);
+    // setSelProAmnt(selItem.items_total.toFixed(2));
     setSelImg(selItem.thumbnail_image);
     setSelId(selItem.id);
     setProdctId(selItem.product.id);
@@ -105,27 +106,63 @@ const Cart = () => {
   const removeHandler = (selids) => {
     setLoading(true);
     setShow(false);
-    const index = cartList.findIndex((obj) => obj.id === selids);
+    // const index = cartList.findIndex((obj) => obj.id === selids);
+    // Use filter to create a new array excluding the removed item
+    const updatedCartList = cartList.filter((item) => item.id !== selids);
+
+    // Optimistically update the state
+    setCartList(updatedCartList);
+    console.log("cartListqqqqq", cartList);
+    setSelProAmnt(cartList && cartList[0].items_total);
     axios
       .delete(`${Urls.cart}${selids}/?country=${countryId}`, {
-        headers: { Authorization: "Token " + token },
+        headers: {
+          Authorization: "Token " + token,
+        },
       })
       .then((response1) => {
         setLoading(false);
 
-        let cartNewArray = [];
-        cartNewArray = [...cartList];
-        cartNewArray.splice(index, 1);
-        setCartList(cartNewArray);
+        // let cartNewArray = [];
+        // cartNewArray = [...cartList];
+        // cartNewArray.splice(index, 1);
+        // setCartList(cartNewArray);
         let count = cartItemsCount;
         count = count - 1;
         setCartItemsCount(count);
         if (count == 0) {
           setCartList([]);
         }
+        if (response1.data.results.status_code == 200) {
+          axios
+            .get(`${Urls.cart}?country=${countryId}`, {
+              headers: { Authorization: "Token " + token },
+            })
+            .then((response1) => {
+              setLoading(false);
+              console.log("response1--->", response1);
+              if (response1.data.results.messege === "cart is empty") {
+                setCartCount("");
+              } else {
+                setCartCount(response1.data.results.data.cartmaster.item_count);
+              }
+
+              setPageCount(response1.data.results.count / 20);
+              setCartList(response1.data.results.data.cart_item);
+              setAmountPay(response1.data.results.data.cartmaster.grand_total);
+              setCartItemsCount(response1.data.results.count);
+              console.log("111111,", response1.data.results.count);
+            })
+
+            .catch((error) => {
+              console.log(error);
+            });
+        }
       })
       .catch((error) => {
         console.log(error);
+        // Revert to the original state if the API call fails
+        setCartList([...cartList]);
       });
   };
   // new

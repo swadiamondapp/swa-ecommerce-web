@@ -431,6 +431,7 @@ const NewArrivalPage = (props) => {
           }
           PriceOld={item.is_on_discount ? item.country_total_price : null}
           key={index}
+          isDiscount={item.is_on_discount}
           Discount={
             item.discount_percentage !== null
               ? item.discount_percentage + "%OFF"

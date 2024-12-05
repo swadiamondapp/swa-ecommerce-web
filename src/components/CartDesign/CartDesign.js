@@ -35,7 +35,9 @@ function CartDesign(props) {
   useEffect(() => {
     setTotal(props.amount - props.cartProAmnt);
     setAmountPay(props.amount - props.cartProAmnt);
-  }, []);
+  }, [props.amount, props.cartProAmnt]);
+  console.log("amm1", props.amount);
+  console.log("amm2", props.cartProAmnt);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
