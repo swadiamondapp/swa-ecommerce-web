@@ -205,25 +205,25 @@ const ProductDetailsPage = (props) => {
     }
   };
   const colorHandler = (imgItem) => {
-    let clr = imgItem.colour_name;
+    let clr = imgItem && imgItem.colour_name;
 
-    if (imgItem.colour_name === "rose") {
+    if (imgItem && imgItem.colour_name === "rose") {
       clr = "rose";
       setThumbImg(newThumpSet.rose.thumbnail);
       setImgSet(newThumpSet.rose.multiple_images);
       setClrId(newThumpSet.rose.thumbnail_color_id);
-    } else if (imgItem.colour_name === "white") {
+    } else if (imgItem && imgItem.colour_name === "white") {
       clr = "white";
       setThumbImg(newThumpSet.white.thumbnail);
       setImgSet(newThumpSet.white.multiple_images);
       setClrId(newThumpSet.white.thumbnail_color_id);
-    } else if (imgItem.colour_name === "yellow") {
+    } else if (imgItem && imgItem.colour_name === "yellow") {
       clr = "yellow";
 
       setThumbImg(newThumpSet.yellow.thumbnail);
       setImgSet(newThumpSet.yellow.multiple_images);
       setClrId(newThumpSet.yellow.thumbnail_color_id);
-    } else if (imgItem.colour_name === "pt") {
+    } else if (imgItem && imgItem.colour_name === "pt") {
       clr = "pt";
       setThumbImg(newThumpSet.pt.thumbnail);
       setImgSet(newThumpSet.pt.multiple_images);

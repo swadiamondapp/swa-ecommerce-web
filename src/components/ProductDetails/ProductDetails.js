@@ -147,6 +147,14 @@ const ProductDetails = (props) => {
     customerPhotos();
   }, []);
 
+  useEffect(() => {
+    props.setPinCode(pincode);
+  }, [pincode]);
+
+  useEffect(() => {
+    props.colors !== undefined && props.colorSelct(props.colors[0]);
+  }, [props && props.colors]);
+
   const customerPhotos = async () => {
     const response = await axios.get(
       "https://swaecommain.swa.co/ecom/products/" + props.id + "/reviews/"
@@ -175,7 +183,9 @@ const ProductDetails = (props) => {
   const clickPurity = () => {
     setPurity(!purity);
   };
+
   const colorSelectHandler = (color) => {
+    console.log("color---->", color);
     props.colorSelct(color);
     setSelectedColor(color);
     console.log("color--->", color);
@@ -1248,7 +1258,7 @@ const ProductDetails = (props) => {
                   <input
                     className={Classes.PinCode}
                     type="number"
-                    value={pincode ? pincode : props.pinCode}
+                    value={props.pinCode}
                     onChange={pinCodeChangeHandler}
                     onInput={(e) => {
                       if (e.target.value.length > 6) {
@@ -1260,7 +1270,20 @@ const ProductDetails = (props) => {
                   <button
                     className={Classes.CheckButton}
                     // onClick={() => setPincodeShow(true)}
-                    onClick={props.checkDelivery}
+                    onClick={() => {
+                      if (props.sizeChart.length > 0) {
+                        if (!props.Size && !selectedSize) {
+                          setShowErrorModal(true);
+                          setTimeout(() => {
+                            setShowErrorModal(false);
+                          }, 78000);
+                        } else {
+                          props.checkDelivery();
+                        }
+                      } else {
+                        props.checkDelivery();
+                      }
+                    }}
                     // onClick={availbilityCheck}
                   >
                     CHECK

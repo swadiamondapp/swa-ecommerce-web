@@ -20,12 +20,14 @@ import { IoMdClose } from "react-icons/io";
 import home1 from "../../Assets/home1.png";
 import Joi from "joi";
 import { FaRegTrashAlt } from "react-icons/fa";
+import { Country, State, City } from "country-state-city";
 
 function AddAddress(props) {
   const token = localStorage.getItem("swaToken");
   const [showAddAddress, setShowAddAddress] = useState(true);
   const [showNewAddressForm, setShowNewAddressForm] = useState(false);
   const [selectedAddressId, setSelectedAddressId] = useState(null);
+  const [statesList, setStatesList] = useState([]);
   const pincodes = localStorage.getItem("pincode");
   const [addressData, setAddressData] = useState({
     fullName: "",
@@ -232,6 +234,16 @@ function AddAddress(props) {
 
   const handleChangeAddress = (event) => {
     const { name, value } = event.target;
+    if (name === "country") {
+      const selectedOption =
+        event &&
+        event.target &&
+        event.target.options[event.target.selectedIndex];
+      const isoCode =
+        selectedOption && selectedOption.getAttribute("data-isocode");
+      setStatesList(State && State.getStatesOfCountry(isoCode));
+    }
+    // console.log("event.target---->", isoCode);
     setAddressData({
       ...addressData,
       [name]: value,
@@ -242,6 +254,8 @@ function AddAddress(props) {
       [name]: "",
     });
   };
+
+  console.log("addressData--->", addressData);
 
   const handleAddressSelection = async (id) => {
     setSelectedAddressId(id);
@@ -266,6 +280,12 @@ function AddAddress(props) {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    // console.log(selectedCountry);
+    console.log("1234567890", Country && Country.getAllCountries());
+    // console.log(State?.getStatesOfCountry(selectedCountry?.isoCode));
   }, []);
 
   return (
@@ -477,45 +497,49 @@ function AddAddress(props) {
                         </div>
                       </div>
                       <div>
-                        <label>State</label>
-                        <select className={Classes.PlaceInput} name="state">
-                          {/* <option value="none" disabled hidden> */}
-                          <option value="none">Select state</option>
-                          <option value={"kerala"}>Kerala</option>
-                          <option value={"Karnataka"}>Karnataka</option>
-                          <option value={"TamilNadu"}>TamilNadu</option>
-                          <option value={"Delhi"}>Delhi</option>
-                          <option value={"Andhra Pradesh"}>
-                            Andhra Pradesh
-                          </option>
-                          <option value={"Assam"}>Assam</option>
-                          <option value={"Maharashtra"}>Maharashtra</option>
-                          <option value={"Uttar Pradesh"}>Uttar Pradesh</option>
-                          <option value={"Uttarakhand"}>Uttarakhand</option>
-                          <option value={"West Bengal"}>West Bengal</option>
-                          <option value={"Ladakh"}>Ladakh</option>
+                        <label>Country*</label>
+
+                        <select
+                          className={Classes.PlaceInput}
+                          value={addressData.country}
+                          name="country"
+                          onChange={handleChangeAddress}
+                        >
+                          <option value="">Select Country</option>
+                          {Country &&
+                            Country.getAllCountries() &&
+                            Country.getAllCountries().map((country, index) => (
+                              <option
+                                key={index}
+                                value={country.name}
+                                data-isocode={country.isoCode}
+                              >
+                                {country.name}
+                              </option>
+                            ))}
                         </select>
+                        {errors.country && (
+                          <div className={Classes.Error}>{errors.country}</div>
+                        )}
                       </div>
                     </div>
                     <div className="Parant_Relative">
-                      <label>Country*</label>
-
+                      <label>State</label>
                       <select
                         className={Classes.PlaceInput}
-                        value={addressData.country}
-                        name="country"
+                        name="state"
+                        value={addressData.state}
                         onChange={handleChangeAddress}
                       >
-                        <option value="">Select Country</option>
-                        {countriesList.map((country, index) => (
-                          <option key={index} value={country.name.common}>
-                            {country.name.common}
-                          </option>
-                        ))}
+                        {/* <option value="none" disabled hidden> */}
+                        <option value="none">Select state</option>
+                        {statesList &&
+                          statesList.map((state, index) => (
+                            <option key={index} value={state.name}>
+                              {state.name}
+                            </option>
+                          ))}
                       </select>
-                      {errors.country && (
-                        <div className={Classes.Error}>{errors.country}</div>
-                      )}
                     </div>
                     <div className={Classes.ParentStreetColony}>
                       <div className={Classes.House1NN}>
