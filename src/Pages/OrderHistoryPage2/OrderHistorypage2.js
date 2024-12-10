@@ -546,7 +546,7 @@ const OrderHistorypage2 = (props) => {
                         <div className={Classes.DeliveryDetails}>
                           <p>
                             <img src={deliveryimg} alt="deliveryimg" />
-                            Delivered on <span>26 may 2023</span>
+                            {/* Delivered on <span>26 may 2023</span> */}
                           </p>
                         </div>
                       ) : (

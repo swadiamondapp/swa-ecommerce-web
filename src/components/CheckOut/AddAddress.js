@@ -20,7 +20,7 @@ import { IoMdClose } from "react-icons/io";
 import home1 from "../../Assets/home1.png";
 import Joi from "joi";
 import { FaRegTrashAlt } from "react-icons/fa";
-import { Country, State, City } from "country-state-city";
+import { Country, State } from "country-state-city";
 
 function AddAddress(props) {
   const token = localStorage.getItem("swaToken");
@@ -280,12 +280,6 @@ function AddAddress(props) {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
-
-  useEffect(() => {
-    // console.log(selectedCountry);
-    console.log("1234567890", Country && Country.getAllCountries());
-    // console.log(State?.getStatesOfCountry(selectedCountry?.isoCode));
   }, []);
 
   return (

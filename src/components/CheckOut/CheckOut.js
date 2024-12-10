@@ -31,10 +31,10 @@ import * as Yup from "yup";
 import { Dropdown } from "primereact/dropdown";
 import Joi from "joi";
 import OtpModal from "../Navbar/OtpModal";
+import { Country, State } from "country-state-city";
 
 function CheckOut(props) {
   const location = useLocation();
-  console.log(location, "locationSTate");
   const { state } = location;
   const { data } = state || {};
   const { promoCodeIds } = data || {};
@@ -69,24 +69,8 @@ function CheckOut(props) {
   const [addressList, setAddressList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState(null);
+  const [statesList, setStatesList] = useState([]);
 
-  console.log("addressList", addressList);
-  console.log("selectedAddress", selectedAddress);
-
-  const staticCountries = [
-    { name: { common: "India" } },
-    { name: { common: "United States" } },
-    { name: { common: "Australia" } },
-    { name: { common: "Canada" } },
-    { name: { common: "United Kingdom" } },
-    { name: { common: "Germany" } },
-    { name: { common: "France" } },
-    { name: { common: "Japan" } },
-    { name: { common: "Brazil" } },
-    { name: { common: "South Africa" } },
-  ];
-  const [countriesList, setCountriesList] = useState(staticCountries);
-  console.log("promoIdIII", total);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -99,7 +83,7 @@ function CheckOut(props) {
     mobile: "",
     pincode: pincodes,
     city: "",
-    state: "kerala",
+    state: "",
     hNumber_Bname: "",
     streetColony: "",
     landMark: "",
@@ -114,7 +98,8 @@ function CheckOut(props) {
     mobile: "",
     pincode: "",
     city: "",
-    state: "kerala",
+    state: "",
+    country: "",
     hNumber_Bname: "",
     streetColony: "",
     landMark: "",
@@ -475,7 +460,22 @@ function CheckOut(props) {
   let _userName = "";
   let _userMob = "";
   const handleChangeAddress = (event) => {
+    // const { name, value } = event.target;
+    // setAddressData({
+    //   ...addressData,
+    //   [name]: value,
+    // });
     const { name, value } = event.target;
+    if (name === "country") {
+      const selectedOption =
+        event &&
+        event.target &&
+        event.target.options[event.target.selectedIndex];
+      const isoCode =
+        selectedOption && selectedOption.getAttribute("data-isocode");
+      setStatesList(State && State.getStatesOfCountry(isoCode));
+    }
+    // console.log("event.target---->", isoCode);
     setAddressData({
       ...addressData,
       [name]: value,
@@ -749,6 +749,7 @@ function CheckOut(props) {
             pincode: response.data.results.data.pincode,
             city: response.data.results.data.city,
             state: response.data.results.data.state,
+            country: response.data.results.data.country,
             hNumber_Bname: response.data.results.data.house,
             streetColony: response.data.results.data.area,
             landMark: response.data.results.data.landmark,
@@ -763,6 +764,7 @@ function CheckOut(props) {
             pincode: response.data.results.data.pincode,
             city: response.data.results.data.city,
             state: response.data.results.data.state,
+            country: response.data.results.data.country,
             hNumber_Bname: response.data.results.data.house,
             streetColony: response.data.results.data.area,
             landMark: response.data.results.data.landmark,
@@ -961,7 +963,8 @@ function CheckOut(props) {
       setSelectedAddress(mainAddress.id); // Set the main address as the default selected address
     }
   }, [addressList]);
-  console.log("location.state.data----->123", location.state);
+  
+  console.log("addressData--->", addressData)
 
   return (
     <div>
@@ -1267,14 +1270,6 @@ function CheckOut(props) {
 
                     <div className="Parant_Relative">
                       <label>Country*</label>
-                      {/* <input
-                        className={Classes.PlaceInput}
-                        type="text"
-                        placeholder="country"
-                        value={addressData.country}
-                        name="country"
-                        onChange={handleChangeAddress}
-                      /> */}
                       <select
                         className={Classes.PlaceInput}
                         value={addressData.country}
@@ -1282,11 +1277,46 @@ function CheckOut(props) {
                         onChange={handleChangeAddress}
                       >
                         <option value="">Select Country</option>
-                        {countriesList.map((country, index) => (
+                        {/* {countriesList.map((country, index) => (
                           <option key={index} value={country.name.common}>
                             {country.name.common}
                           </option>
-                        ))}
+                        ))} */}
+                        {Country &&
+                            Country.getAllCountries() &&
+                            Country.getAllCountries().map((country, index) => (
+                              <option
+                                key={index}
+                                value={country.name}
+                                data-isocode={country.isoCode}
+                              >
+                                {country.name}
+                              </option>
+                            ))}
+                      </select>
+                      {errorMessage.country && (
+                        <div className={Classes.ErrorMessage}>
+                          {errorMessage.country}
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="Parant_Relative">
+                      <label>State</label>
+                      <select
+                        className={Classes.PlaceInput}
+                        name="state"
+                        value={addressData.state}
+                        onChange={handleChangeAddress}
+                      >
+                        {/* <option value="none" disabled hidden> */}
+                        <option value="none">Select state</option>
+                        {statesList &&
+                          statesList.map((state, index) => (
+                            <option key={index} value={state.name}>
+                              {state.name}
+                            </option>
+                          ))}
                       </select>
                       {errorMessage.country && (
                         <div className={Classes.ErrorMessage}>
