@@ -72,6 +72,7 @@ function CartDesign(props) {
           headers: { Authorization: "Token " + token },
         }
       );
+      console.log("response.data---->56", response.data.exchange_wallet);
       setWalletValues(response.data);
       // if (
       //   response.data.swa_wallet === 0 &&
@@ -82,6 +83,15 @@ function CartDesign(props) {
       // }
       if (isApply) {
         step2Handler();
+      } else if (
+        response &&
+        response.data &&
+        response.data.exchange_wallet === 0 &&
+        response &&
+        response.data &&
+        response.data.swa_wallet === 0
+      ) {
+        updateCart(true);
       } else {
         setWalletOpen(true);
       }
@@ -204,6 +214,8 @@ function CartDesign(props) {
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
+
+  console.log("walletValues--->", walletValues);
 
   return (
     <div>
