@@ -150,7 +150,7 @@ const MobileNavbar = (props) => {
   console.log("isHamOpen===>", isHamOpen);
   const moveToWishList = () => {
     if (token !== null) {
-      history.push("/wish_list");
+      history.push("/wished/list");
     } else {
       setShow(true);
     }
@@ -164,7 +164,7 @@ const MobileNavbar = (props) => {
     };
   }, []);
 
-  const isCartPage = location.pathname === "/cart";
+  const isCartPage = location.pathname === "/shoping/cart";
 
   const handleClickOutside = (event) => {
     if (
@@ -200,12 +200,12 @@ const MobileNavbar = (props) => {
   };
   const searchTitleHandler = (setItem) => {
     if (setItem.type === "category") {
-      if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
+      if (history.location.pathname.slice(0, 12) === "/new/arrivals") {
         window.location.href =
           "https://www.swa.co/category_search/" + setItem.id;
       } else {
         history.push({
-          pathname: "/new_arrivel",
+          pathname: "/new/arrivals",
           state: { data: setItem.id },
         });
       }
@@ -259,16 +259,16 @@ const MobileNavbar = (props) => {
     }
   };
   const catSelHandler = (id) => {
-    if (history.location.pathname !== "/new_arrivel") {
-      history.push({ pathname: "/new_arrivel", state: { data: id } });
+    if (history.location.pathname !== "/new/arrivals") {
+      history.push({ pathname: "/new/arrivals", state: { data: id } });
     }
   };
   const tagSelHandler = (selItem) => {
-    if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
+    if (history.location.pathname.slice(0, 12) === "/new/arrivals") {
       window.location.href = "https://www.swa.co/tag_search/" + selItem.id;
     } else {
       history.push({
-        pathname: "/new_arrivel",
+        pathname: "/new/arrivals",
         state: {
           octnId: selItem.id,
           data: "occation",
@@ -321,7 +321,7 @@ const MobileNavbar = (props) => {
 
   const moveTocart = () => {
     if (token !== null) {
-      history.push("/cart");
+      history.push("/shoping/cart");
       // Handle cart click action
     } else {
       setShow(true); // Open login modal if user is not logged in
@@ -334,11 +334,11 @@ const MobileNavbar = (props) => {
     setIsSignpuMobileOpen(true);
   };
   const cattSelHandler = (setItem) => {
-    if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
+    if (history.location.pathname.slice(0, 12) === "/new/arrivals") {
       window.location.href = "https://www.swa.co/category_search/" + setItem.id;
     } else {
       history.push({
-        pathname: "/new_arrivel",
+        pathname: "/new/arrivals",
         state: { data: setItem.id, product_category: setItem.name },
       });
     }
@@ -513,7 +513,7 @@ const MobileNavbar = (props) => {
                 <img className={Classes.mobileLogo} src={Logo} />
               </div>
             )} */}
-                {location.pathname !== "/new_arrivel" && (
+                {location.pathname !== "/new/arrivals" && (
                   <div
                     className={Classes.Logo}
                     onClick={() => (window.location.href = "/")}
@@ -844,7 +844,7 @@ const MobileNavbar = (props) => {
                           </AccordionTab>
                           <AccordionTab
                             header="Policy"
-                            onClick={() => history.push("/privacy_policy")}
+                            onClick={() => history.push("/privacy/policy")}
                           >
                             <div className={Classes.ShippingDetialHead}></div>
                           </AccordionTab>
@@ -852,7 +852,7 @@ const MobileNavbar = (props) => {
                           {userName && (
                             <AccordionTab header="Account">
                               <div className={Classes.ShippingDetialHead}>
-                                <Link to="/profile" onClick={handleClose}>
+                                <Link to="/my/profile" onClick={handleClose}>
                                   <div className={Classes.LoggedDetailsList}>
                                     <p
                                       style={{
@@ -871,7 +871,7 @@ const MobileNavbar = (props) => {
                                     />
                                   </div>
                                 </Link>
-                                <Link to="/my_orders" onClick={handleClose}>
+                                <Link to="/my/orders" onClick={handleClose}>
                                   <div className={Classes.LoggedDetailsList}>
                                     <p
                                       style={{
@@ -890,7 +890,7 @@ const MobileNavbar = (props) => {
                                     />
                                   </div>
                                 </Link>
-                                <Link to="/wish_list" onClick={handleClose}>
+                                <Link to="/wished/list" onClick={handleClose}>
                                   <div className={Classes.LoggedDetailsList}>
                                     <p
                                       style={{
@@ -909,7 +909,7 @@ const MobileNavbar = (props) => {
                                     />
                                   </div>
                                 </Link>
-                                <Link to="/addaddress" onClick={handleClose}>
+                                <Link to="/add/address" onClick={handleClose}>
                                   <div className={Classes.LoggedDetailsList}>
                                     <p
                                       style={{
@@ -928,7 +928,7 @@ const MobileNavbar = (props) => {
                                     />
                                   </div>
                                 </Link>
-                                <Link to="/rate&review" onClick={handleClose}>
+                                <Link to="/rate&/review" onClick={handleClose}>
                                   <div className={Classes.LoggedDetailsList}>
                                     <p
                                       style={{
@@ -947,7 +947,7 @@ const MobileNavbar = (props) => {
                                     />
                                   </div>
                                 </Link>
-                                <Link to="/swaWallet" onClick={handleClose}>
+                                <Link to="/swa/wallet" onClick={handleClose}>
                                   <div className={Classes.LoggedDetailsList}>
                                     <p
                                       style={{
@@ -966,7 +966,7 @@ const MobileNavbar = (props) => {
                                     />
                                   </div>
                                 </Link>
-                                <Link to="/swaExchange" onClick={handleClose}>
+                                <Link to="/swa/exchange" onClick={handleClose}>
                                   <div className={Classes.LoggedDetailsList}>
                                     <p
                                       style={{
@@ -995,7 +995,7 @@ const MobileNavbar = (props) => {
                             onClick={handleLogOut}
                           >
                             <div className={Classes.LoggedDetailsList}>
-                              <Link to="/my_orders">
+                              <Link to="/my/orders">
                                 <p
                                   style={{
                                     fontSize: "16px",

@@ -61,7 +61,7 @@ const OrderHistoryPage = () => {
   }, []);
   const productViewHandler = (id, shipmentId) => {
     history.push({
-      pathname: "/track_order",
+      pathname: "/track/orders",
       state: { data: { productId: id, shipmentId: shipmentId } },
     });
   };

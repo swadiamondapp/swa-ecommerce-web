@@ -208,7 +208,7 @@ const Cart = () => {
       .catch((error) => {
         console.log(error);
       });
-    // history.push("/new_arrivel");
+    // history.push("/new/arrivals");
   };
   // new
   const movWishList = (selids) => {

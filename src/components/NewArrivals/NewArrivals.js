@@ -13,7 +13,7 @@ import WalletModal from "../WalletModal/WalletModal.js";
 function NewArrivals(props) {
   const history = useHistory();
   const seeAllHandler = (type) => {
-    history.push({ pathname: "/new_arrivel", state: { data: type } });
+    history.push({ pathname: "/new/arrivals", state: { data: type } });
   };
 
   return (

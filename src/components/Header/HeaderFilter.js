@@ -33,7 +33,7 @@ const HeaderFilter = (props) => {
 
   const moveToWishList = () => {
     if (token !== null) {
-      history.push("/wish_list");
+      history.push("/wished/list");
     } else {
       setShow(true);
     }
@@ -56,19 +56,19 @@ const HeaderFilter = (props) => {
     }
   };
   const catSelHandler = (id) => {
-    if (history.location.pathname !== "/new_arrivel") {
-      history.push({ pathname: "/new_arrivel", state: { data: id } });
+    if (history.location.pathname !== "/new/arrivals") {
+      history.push({ pathname: "/new/arrivals", state: { data: id } });
     }
   };
   const moveToOrderHistory = () => {
-    history.push("/track_order");
+    history.push("/track/orders");
   };
   const moveToOrderHistory2 = () => {
-    history.push("/my_orders");
+    history.push("/my/orders");
   };
   const moveTocart = () => {
     if (token !== null) {
-      history.push("/cart");
+      history.push("/shoping/cart");
     } else {
       setShow(true);
     }
@@ -86,12 +86,12 @@ const HeaderFilter = (props) => {
   const searchTitleHandler = (setItem) => {
     console.log(history.location.pathname);
     if (setItem.type === "category") {
-      if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
+      if (history.location.pathname.slice(0, 12) === "/new/arrivals") {
         window.location.href =
           "https://www.swa.co/category_search/" + setItem.id;
         console.log("testk");
       } else {
-        history.push({ pathname: "/new_arrivel", state: { data: setItem.id } });
+        history.push({ pathname: "/new/arrivals", state: { data: setItem.id } });
       }
     } else if (setItem.type === "product") {
       axios

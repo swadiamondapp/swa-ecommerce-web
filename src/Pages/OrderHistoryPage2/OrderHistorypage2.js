@@ -234,12 +234,12 @@ const OrderHistorypage2 = (props) => {
     history.pushState("/");
   };
   const orderHistory = () => {
-    history.push("/my_orders");
+    history.push("/my/orders");
   };
   const rateRevHandler = (proId) => {
     console.log(proId);
     history.push({
-      pathname: "/rate_review",
+      pathname: "/rate/review",
       state: { data: proId },
     });
   };
@@ -545,7 +545,7 @@ const OrderHistorypage2 = (props) => {
                         "Admin Approval pending" ? (
                         <div className={Classes.DeliveryDetails}>
                           <p>
-                            <img src={deliveryimg} alt="deliveryimg" />
+                            {/* <img src={deliveryimg} alt="deliveryimg" /> */}
                             {/* Delivered on <span>26 may 2023</span> */}
                           </p>
                         </div>

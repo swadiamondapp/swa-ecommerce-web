@@ -157,7 +157,7 @@ const Payment = () => {
     //     });
     //     if (response.data && response.data.status === 200) {
     //       history.push({
-    //         pathname: "/payment",
+    //         pathname: "/product/payment",
     //         state: {
     //           data: {
     //             pay: amountPay,
@@ -181,7 +181,7 @@ const Payment = () => {
     //   }
     // } else {
     //   history.push({
-    //     pathname: "/payment",
+    //     pathname: "/product/payment",
     //     state: {
     //       data: {
     //         pay: amountPay,
@@ -299,10 +299,10 @@ const Payment = () => {
                     localStorage.setItem("userName", data.name);
                     localStorage.setItem("phoneNumber", data.number);
                     localStorage.removeItem("Address");
-                    history.push("/my_orders");
+                    history.push("/my/orders");
                   } else if (response2.data.results.status_code === 200) {
                     localStorage.removeItem("Address");
-                    history.push("/my_orders");
+                    history.push("/my/orders");
                   }
                 })
                 .catch((error) => {
@@ -340,10 +340,10 @@ const Payment = () => {
             localStorage.setItem("userName", data.name);
             localStorage.setItem("phoneNumber", data.number);
             localStorage.removeItem("Address");
-            history.push("/my_orders");
+            history.push("/my/orders");
           } else if (response1.data.results.status_code === 200) {
             localStorage.removeItem("Address");
-            history.push("/my_orders");
+            history.push("/my/orders");
           }
         });
     } else if ((mode === "upi" || mode === "credit_card") && name === "cart") {
@@ -383,11 +383,11 @@ const Payment = () => {
                     localStorage.setItem("phoneNumber", data.number);
                     setIsLoading(false);
                     localStorage.removeItem("Address");
-                    history.push("/my_orders");
+                    history.push("/my/orders");
                   } else if (response1.data.results.status_code === 200) {
                     setIsLoading(false);
                     localStorage.removeItem("Address");
-                    history.push("/my_orders");
+                    history.push("/my/orders");
                   }
                 })
                 .catch((error) => {
@@ -426,10 +426,10 @@ const Payment = () => {
             localStorage.setItem("phoneNumber", data.number);
             localStorage.removeItem("Address");
 
-            history.push("/my_orders");
+            history.push("/my/orders");
           } else if (response1.data.results.status_code === 200) {
             localStorage.removeItem("Address");
-            history.push("/my_orders");
+            history.push("/my/orders");
           } else if (response1.data.results.status === 206) {
             setPayButtonError(response1.data.results.message);
           }
@@ -473,11 +473,11 @@ const Payment = () => {
     //                   localStorage.setItem("phoneNumber", data.number);
     //                   setIsLoading(false);
     //                   localStorage.removeItem("Address");
-    //                   history.push("/my_orders");
+    //                   history.push("/my/orders");
     //                 } else if (response1.data.results.status_code === 200) {
     //                   setIsLoading(false);
     //                   localStorage.removeItem("Address");
-    //                   history.push("/my_orders");
+    //                   history.push("/my/orders");
     //                 }
     //               })
     //               .catch((error) => {
@@ -515,10 +515,10 @@ const Payment = () => {
     //           localStorage.setItem("userName", data.name);
     //           localStorage.setItem("phoneNumber", data.number);
     //           localStorage.removeItem("Address");
-    //           history.push("/my_orders");
+    //           history.push("/my/orders");
     //         } else if (response1.data.results.status_code === 200) {
     //           localStorage.removeItem("Address");
-    //           history.push("/my_orders");
+    //           history.push("/my/orders");
     //         }
     //       });
     //   }
@@ -562,10 +562,10 @@ const Payment = () => {
     //                   localStorage.setItem("userName", data.name);
     //                   localStorage.setItem("phoneNumber", data.number);
     //                   localStorage.removeItem("Address");
-    //                   history.push("/my_orders");
+    //                   history.push("/my/orders");
     //                 } else if (response2.data.results.status_code === 200) {
     //                   localStorage.removeItem("Address");
-    //                   history.push("/my_orders");
+    //                   history.push("/my/orders");
     //                 }
     //               })
     //               .catch((error) => {
@@ -603,10 +603,10 @@ const Payment = () => {
     //           localStorage.setItem("userName", data.name);
     //           localStorage.setItem("phoneNumber", data.number);
     //           localStorage.removeItem("Address");
-    //           history.push("/my_orders");
+    //           history.push("/my/orders");
     //         } else if (response1.data.results.status_code === 200) {
     //           localStorage.removeItem("Address");
-    //           history.push("/my_orders");
+    //           history.push("/my/orders");
     //         }
     //       });
     //   }

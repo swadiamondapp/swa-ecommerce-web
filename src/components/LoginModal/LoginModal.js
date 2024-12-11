@@ -410,7 +410,7 @@ const LoginModal = (props) => {
     }
   };
   const myOrderHandler = () => {
-    history.push("/my_orders");
+    history.push("/my/orders");
     setLogCond(false);
   };
   const logoutHandler = () => {
@@ -651,28 +651,28 @@ const LoginModal = (props) => {
             <p className={Classes.Name_phoneLoged}>{phone}</p>
           </div>
           <div className={Classes.LogedDetails_list}>
-            <Link to="/profile" className={Classes.MobProfileLinks}>
+            <Link to="/my/profile" className={Classes.MobProfileLinks}>
               <p style={{ fontSize: "16px" }}>Profile</p>
             </Link>
 
-            <Link to="/my_orders" className={Classes.LogedDetails_Item}>
+            <Link to="/my/orders" className={Classes.LogedDetails_Item}>
               <p style={{ fontSize: "16px" }}>Order history</p>
             </Link>
 
-            <Link to="/addaddress" className={Classes.LogedDetails_Item}>
+            <Link to="/add/address" className={Classes.LogedDetails_Item}>
               <p style={{ fontSize: "16px" }}>Add Address</p>
             </Link>
             {/* <Link className={Classes.LogedDetails_Item}>
               <p style={{ fontSize: "16px" }}>Track Order</p>
             </Link> */}
-            <Link to="/rate&review" className={Classes.LogedDetails_Item}>
+            <Link to="/rate&/review" className={Classes.LogedDetails_Item}>
               <p style={{ fontSize: "16px" }}>Write review</p>
             </Link>
-            <Link to="/swaWallet" className={Classes.LogedDetails_Item}>
+            <Link to="/swa/wallet" className={Classes.LogedDetails_Item}>
               <p style={{ fontSize: "16px" }}>Swa wallet</p>
             </Link>
             <Link
-              to="/swaExchange"
+              to="/swa/exchange"
               style={{ fontSize: "16px" }}
               className={Classes.LogedDetails_Item}
             >

@@ -194,7 +194,7 @@ const ProductDetailsPage = (props) => {
 
       if (token !== null) {
         history.push({
-          pathname: "/checkout",
+          pathname: "/cart/checkout",
           state: { data: selProd, name: "buy" },
         });
       } else {
@@ -266,7 +266,7 @@ const ProductDetailsPage = (props) => {
             let count = cartCount;
             count = count + 1;
             setCartCount(count);
-            history.push("/cart");
+            history.push("/shoping/cart");
           }
         })
         .catch((error) => {
@@ -274,7 +274,7 @@ const ProductDetailsPage = (props) => {
         });
     } else {
       history.push({
-        pathname: "/checkout",
+        pathname: "/cart/checkout",
         state: { data: selProd, name: "buybody" },
       });
     }
@@ -351,12 +351,12 @@ const ProductDetailsPage = (props) => {
       })
       .then((response1) => {
         if (response1.data.results.status_code === 200) {
-          history.push("/trialathome");
+          history.push("/trial/athome");
         } else if (
           response1.data.results.message === "Item already in try list"
         ) {
           // setErrormsgtrycart("Item already in try list");
-          history.push("/trialathome");
+          history.push("/trial/athome");
         } else if (response1.data.results.message === "size  required") {
           setErrormsgtrycart("size  required");
         }
