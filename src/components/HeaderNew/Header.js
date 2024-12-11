@@ -55,8 +55,8 @@ const Header = (props) => {
   const mobileSearchBarClass = isHomePage
     ? Classes.MobileSearchBar
     : Classes.MobileSearchbarOthers;
-  const isCheckoutPage = window.location.pathname === "/checkout";
-  const isCartPage = window.location.pathname === "/cart";
+  const isCheckoutPage = window.location.pathname === "/cart/checkout";
+  const isCartPage = window.location.pathname === "/shoping/cart";
   const userName = localStorage.getItem("userName");
   const [showModal, setShowModal] = useState(false);
   const pincode = localStorage.getItem("pincode");
@@ -140,50 +140,50 @@ const Header = (props) => {
 
   const moveToWishList = () => {
     if (token !== null) {
-      history.push("/wish_list");
+      history.push("/wished/list");
     } else {
       setShow(true);
     }
   };
 
   const catSelHandler = (setItem) => {
-    // if (history.location.pathname !== "/new_arrivel") {
-    //   history.push({ pathname: "/new_arrivel", state: { data: id } });
+    // if (history.location.pathname !== "/new/arrivals") {
+    //   history.push({ pathname: "/new/arrivals", state: { data: id } });
     // }
 
-    if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
+    if (history.location.pathname.slice(0, 12) === "/new/arrivals") {
       window.location.href = "https://www.swa.co/category_search/" + setItem.id;
     } else {
       history.push({
-        pathname: "/new_arrivel",
+        pathname: "/new/arrivals",
         state: { data: setItem.id, product_category: setItem.name },
       });
     }
   };
   // const cattSelHandler = (setItem) => {
-  //   if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
+  //   if (history.location.pathname.slice(0, 12) === "/new/arrivals") {
   //     window.location.href =
   //       "http://swaecomnew.zinfog.in/category_search/" + setItem.id;
   //   } else {
   //     history.push({
-  //       pathname: "/new_arrivel",
+  //       pathname: "/new/arrivals",
   //       state: { data: setItem.id, product_category: setItem.name },
   //     });
   //   }
   // };
   const cattSelHandler = (setItem) => {
     history.push({
-      // pathname: "/category/new_arrivel",
-      pathname: `/category/${setItem.name}`,
+      // pathname: "/new/arrivals",
+      pathname: `/${setItem.name}`,
       state: { data: setItem.id, product_category: setItem.name },
     });
   };
   const tagSelHandler = (selItem) => {
-    if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
+    if (history.location.pathname.slice(0, 12) === "/new/arrivals") {
       window.location.href = "https://www.swa.co/tag_search/" + selItem.id;
     } else {
       history.push({
-        pathname: "/new_arrivel",
+        pathname: "/new/arrivals",
         state: {
           octnId: selItem.id,
           data: "occation",
@@ -193,14 +193,14 @@ const Header = (props) => {
     }
   };
   const moveToOrderHistory = () => {
-    history.push("/track_order");
+    history.push("/track/orders");
   };
   const moveToOrderHistory2 = () => {
-    history.push("/my_orders");
+    history.push("/my/orders");
   };
   const moveTocart = () => {
     if (token !== null) {
-      history.push("/cart");
+      history.push("/shoping/cart");
     } else {
       setShow(true);
     }
@@ -242,11 +242,11 @@ const Header = (props) => {
   const searchTitleHandler = (setItem) => {
     console.log("search112", setItem);
     if (setItem.type === "category") {
-      if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
+      if (history.location.pathname.slice(0, 12) === "/new/arrivals") {
         window.location.href =
           "https://www.swa.co/category_search/" + setItem.id;
       } else {
-        history.push({ pathname: "/new_arrivel", state: { data: setItem.id } });
+        history.push({ pathname: "/new/arrivals", state: { data: setItem.id } });
       }
     } else if (setItem.type === "product") {
       axios
@@ -693,7 +693,7 @@ const Header = (props) => {
             handleShow={handleShowModal}
           />
           <div className={`${Classes.outletlogo} ${Classes.headerElement}`}>
-            <Link to="/outlet">
+            <Link to="/product/outlets">
               <img src={outletlogo} />
             </Link>
           </div>

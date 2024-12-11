@@ -130,7 +130,7 @@ const NewArrivalCard = (props) => {
   //   }
   // };
   // const addToCart = () =>{
-  //     history.push('/cart')
+  //     history.push('/shoping/cart')
   // }
   // const ClickAddButton = () => {
   //     setOnAdd(false)
@@ -149,11 +149,11 @@ const NewArrivalCard = (props) => {
   // const handleCloseModal = () => {
   //   setShowModal(false);
   // };
-
-  console.log("location.pathname", location.pathname);
+  const isDynamicRoute = /^\/[^/]+$/.test(location.pathname);
+  console.log("isDynamicRoute", isDynamicRoute);
   const containerClass =
     location.pathname.startsWith("/jewellery/budget") ||
-    location.pathname.startsWith("/category/")
+    location.pathname.startsWith("/new/arrivals") || isDynamicRoute
       ? "col-md-4 col-sm-6 col-lg-4 col-6"
       : "col-md-4 col-sm-6 col-lg-3 col-6";
 

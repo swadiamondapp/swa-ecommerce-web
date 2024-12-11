@@ -22,7 +22,7 @@ function Orders(props) {
   const itemsDetail = props.Image;
   const productViewHandler = (id, shipmentId, salebill) => {
     history.push({
-      pathname: "/track_order",
+      pathname: "/track/orders",
       state: {
         data: { productId: id, shipmentId: shipmentId, saleBill: salebill },
       },
@@ -143,7 +143,7 @@ function Orders(props) {
                     />
                     <Link
                       to={{
-                        pathname: "/rate_review",
+                        pathname: "/rate/review",
                         state: {
                           product_image: item.bag_image, // Use item.bag_image here
                           product_id: item.product_id,

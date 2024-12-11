@@ -47,7 +47,7 @@ function CartDesign(props) {
   };
   const step2Handler = () => {
     history.push({
-      pathname: "/checkout",
+      pathname: "/cart/checkout",
       state: {
         data: {
           pay: amountPay,
@@ -170,7 +170,7 @@ function CartDesign(props) {
         setIsApply(true);
         if (value === true) {
           history.push({
-            pathname: "/checkout",
+            pathname: "/cart/checkout",
             state: {
               data: {
                 pay:
@@ -455,7 +455,7 @@ function CartDesign(props) {
                       </p>
                     </div>
                     <div className={Classes.BookappointmentTrails}>
-                      <Link to="/trialathome">
+                      <Link to="/trial/athome">
                         {" "}
                         <button>Book Appointment</button>
                       </Link>

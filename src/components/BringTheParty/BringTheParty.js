@@ -19,12 +19,12 @@ const BringTheParty = (props) => {
   const advClicked = (selAdv) => {
     if (selAdv.is_category === true) {
       history.push({
-        pathname: "/new_arrivel",
+        pathname: "/new/arrivals",
         state: { data: selAdv.type_id },
       });
     } else {
       history.push({
-        pathname: "/new_arrivel",
+        pathname: "/new/arrivals",
         state: { octnId: selAdv.type_id, data: "occation" },
       });
     }

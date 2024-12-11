@@ -102,7 +102,7 @@ const TryAtHome = () => {
       .catch((error) => {
         console.log(error);
       });
-    // history.push("/new_arrivel");
+    // history.push("/new/arrivals");
   };
   const handleTimeSlotClick = (timeSlot) => {
     setSelectedTimeSlot(timeSlot);
@@ -119,9 +119,9 @@ const TryAtHome = () => {
     setErrorMessage("");
   };
   const AddDesigns = () => {
-    // history.push("/new_arrivel");
+    // history.push("/new/arrivals");
     history.push({
-      pathname: "/new_arrivel",
+      pathname: "/new/arrivals",
       state: {
         octnId: "",
         data: "",
@@ -146,7 +146,7 @@ const TryAtHome = () => {
       return;
     }
     history.push({
-      pathname: "/tryathomeform",
+      pathname: "/tryathome/form",
       state: {
         selectedTimeSlot,
         selectedDate: selectedDate ? formatSelectedDate(selectedDate) : null,
@@ -453,7 +453,7 @@ const TryAtHome = () => {
                 <div className={Classes.Proceedbutns}>
                   {/* <Link
                     to={{
-                      pathname: "/tryathomeform",
+                      pathname: "/tryathome/form",
                       state: {
                         selectedTimeSlot,
                         

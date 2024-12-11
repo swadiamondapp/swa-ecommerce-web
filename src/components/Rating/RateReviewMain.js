@@ -142,7 +142,7 @@ const RateReviewMain = (props) => {
                         </div>
                         <Link
                           to={{
-                            pathname: "/rate_review",
+                            pathname: "/rate/review",
                             state: {
                               product_image: shipment.thumbnail_image,
                               product_id: shipment.product_id,

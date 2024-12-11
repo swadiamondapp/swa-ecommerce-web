@@ -300,7 +300,7 @@ function CheckOut(props) {
                   })
                   .then((response2) => {
                     if (response2.data.success === true) {
-                      history.push("/my_orders");
+                      history.push("/my/orders");
                     }
                   })
                   .catch((error) => {
@@ -323,7 +323,7 @@ function CheckOut(props) {
             pay.open();
           } else if (mode === "C") {
             if (response1.data.results.message === "successful") {
-              history.push("/my_orders");
+              history.push("/my/orders");
             }
           }
         })
@@ -364,7 +364,7 @@ function CheckOut(props) {
                   })
                   .then((response2) => {
                     if (response2.data.success === true) {
-                      history.push("/my_orders");
+                      history.push("/my/orders");
                     }
                   })
                   .catch((error) => {
@@ -387,7 +387,7 @@ function CheckOut(props) {
             pay.open();
           } else if (mode === "C") {
             if (response1.data.results.message === "successful") {
-              history.push("/my_orders");
+              history.push("/my/orders");
             }
           }
         })
@@ -607,7 +607,7 @@ function CheckOut(props) {
     ) {
       localStorage.setItem("Address", JSON.stringify(addressData));
       history.push({
-        pathname: "/payment",
+        pathname: "/product/payment",
         state: {
           data: {
             pay: amountPay,
@@ -630,7 +630,7 @@ function CheckOut(props) {
       });
     } else {
       history.push({
-        pathname: "/payment",
+        pathname: "/product/payment",
         state: {
           data: {
             pay: amountPay,
@@ -682,7 +682,7 @@ function CheckOut(props) {
         });
         if (response.data && response.data.status === 200) {
           history.push({
-            pathname: "/payment",
+            pathname: "/product/payment",
             state: {
               data: {
                 pay: amountPay,
@@ -707,7 +707,7 @@ function CheckOut(props) {
       }
     } else {
       history.push({
-        pathname: "/payment",
+        pathname: "/product/payment",
         state: {
           data: {
             pay: amountPay,

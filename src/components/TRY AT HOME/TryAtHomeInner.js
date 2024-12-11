@@ -241,7 +241,7 @@ const TryAtHomeInner = () => {
                 <div className={Classes.BookingHead}>
                   <h3 className={Classes.TryBookInner}>Booking Information</h3>
                   <p className={Classes.TryHomeEdits}>
-                    <Link to="/trialathome">
+                    <Link to="/trial/athome">
                       <img src={edit} alt="edit" /> Edit
                     </Link>
                   </p>

@@ -451,7 +451,7 @@ const NewArrivalPage = (props) => {
     });
   }
 
-  console.log("count--->", count);
+  console.log("count--->12", location.pathname);
   // const countryId = localStorage.getItem("id");
   const flag = localStorage.getItem("flag_image");
   const Contryname = localStorage.getItem("country_name");

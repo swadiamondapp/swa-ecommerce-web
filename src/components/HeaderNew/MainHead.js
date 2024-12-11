@@ -12,7 +12,7 @@ const MainHead = (props) => {
   const landingPageHandler = () => {
     window.location.href = "/";
   };
-  const isCartPage = location.pathname === "/cart";
+  const isCartPage = location.pathname === "/shoping/cart";
 
   const toggleCart = (cartType) => {
     props.setActiveCart(cartType);
