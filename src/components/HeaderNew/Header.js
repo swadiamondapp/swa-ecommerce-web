@@ -172,9 +172,10 @@ const Header = (props) => {
   //   }
   // };
   const cattSelHandler = (setItem) => {
+    const name = setItem.name.toLowerCase().replace(/\s+/g, "");
     history.push({
       // pathname: "/new/arrivals",
-      pathname: `/${setItem.name}`,
+      pathname: `/${name}`,
       state: { data: setItem.id, product_category: setItem.name },
     });
   };
