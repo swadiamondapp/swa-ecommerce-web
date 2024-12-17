@@ -67,7 +67,7 @@ function App() {
         <Route path="/order/successfull" component={OrderSuccessfulPage} exact />
         <Route path="/rate/review" component={RateAndReview} exact />
         <Route path="/rate&/review" component={RateAndReviewMain} exact />
-        <Route path="/jewellery" component={UrlShare} exact />
+        <Route path="/jewellery/share" component={UrlShare} exact />
         <Route path="/jewellery/:name" component={ProductDetailsPage} exact />
         <Route path="/product/payment" component={PaymentPage} />
         <Route path="/my/profile" component={ProfilePage} />

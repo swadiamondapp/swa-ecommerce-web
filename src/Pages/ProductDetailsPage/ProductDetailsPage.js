@@ -52,6 +52,19 @@ const ProductDetailsPage = (props) => {
   console.log("sizeError", sizeError);
 
   useEffect(() => {
+    document.title = prodDet.meta_description || "Detail page";
+    const metaDescription = document.createElement("meta");
+    metaDescription.name = "description";
+    metaDescription.content = "This is the about page of your website.";
+    document.head.appendChild(metaDescription);
+
+    // Cleanup the meta tag on unmount
+    return () => {
+      document.head.removeChild(metaDescription);
+    };
+  }, [prodDet]);
+
+  useEffect(() => {
     window.scrollTo(0, 0);
     console.log(props);
     if (productDetails && productDetails.color) {
@@ -120,6 +133,7 @@ const ProductDetailsPage = (props) => {
         }
       )
       .then((response1) => {
+        console.log("response1.data.results.data---->", response1.data.results.data)
         setIsRestricted(response1.data.results.data.is_restricted);
         setProdDet(response1.data.results.data);
         setSizeChart(response1.data.results.data.size_names);
