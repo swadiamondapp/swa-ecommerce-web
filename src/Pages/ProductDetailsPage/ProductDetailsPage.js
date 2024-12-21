@@ -52,10 +52,10 @@ const ProductDetailsPage = (props) => {
   console.log("sizeError", sizeError);
 
   useEffect(() => {
-    document.title = prodDet.meta_description || "Detail page";
+    document.title = prodDet.meta_title || "Detail page";
     const metaDescription = document.createElement("meta");
-    metaDescription.name = "description";
-    metaDescription.content = "This is the about page of your website.";
+    metaDescription.name = prodDet.meta_description;
+    metaDescription.content = "This is the product details page of your website.";
     document.head.appendChild(metaDescription);
 
     // Cleanup the meta tag on unmount
