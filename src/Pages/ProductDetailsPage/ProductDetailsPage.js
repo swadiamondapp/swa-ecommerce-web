@@ -14,7 +14,14 @@ import { useHistory } from "react-router-dom";
 import SliderFeature from "../../components/ProductDetails/SliderFeature";
 
 const ProductDetailsPage = (props) => {
-  const productDetails = JSON.parse(sessionStorage.getItem("productDetails"));
+  // const productDetails = JSON.parse(sessionStorage.getItem("productDetails"));
+  const token = localStorage.getItem("swaToken");
+  const pincode = localStorage.getItem("pincode");
+  const history = useHistory();
+  const { name } = useParams();
+  const [productDetails, setProductDetails] = useState(
+    JSON.parse(sessionStorage.getItem("productDetails"))
+  );
   const [prodDet, setProdDet] = useState([]);
   const [sizeChart, setSizeChart] = useState([]);
   const [colorChart, setColorChart] = useState([]);
@@ -37,12 +44,7 @@ const ProductDetailsPage = (props) => {
   const [deliveryShopList, setDeliveryShopsList] = useState([]);
   const [pincodeShow, setPincodeShow] = useState(false);
   const [pinCode, setPinCode] = useState("");
-  const pincode = localStorage.getItem("pincode");
-
   const [logAct, setLogAct] = useState(false);
-  const token = localStorage.getItem("swaToken");
-  const history = useHistory();
-  console.log("isRestricted", isRestricted);
   const [colorError, setColorError] = useState("");
   const [picodeError, setPicodeError] = useState("");
   const [sizeError, setSizeError] = useState("");
@@ -55,7 +57,8 @@ const ProductDetailsPage = (props) => {
     document.title = prodDet.meta_title || "Detail page";
     const metaDescription = document.createElement("meta");
     metaDescription.name = prodDet.meta_description;
-    metaDescription.content = "This is the product details page of your website.";
+    metaDescription.content =
+      "This is the product details page of swa diamonds website.";
     document.head.appendChild(metaDescription);
 
     // Cleanup the meta tag on unmount
@@ -66,129 +69,232 @@ const ProductDetailsPage = (props) => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    console.log(props);
-    if (productDetails && productDetails.color) {
-      setClrId(productDetails.color);
-    }
-    // setClrId(props.location.state.data.thumbnail_colour_id);
-    // setClrId(props.match.params.color);
-    // setProduct_Id(props.match.params.id);
-
     if (
-      localStorage.getItem("swaToken") === null &&
-      props.match.path === "/jewellery/:name"
+      props &&
+      props.location &&
+      props.location.state &&
+      props.location.state.data
     ) {
-      console.log(JSON.parse(localStorage.getItem("recent")));
-      let proArray = JSON.parse(localStorage.getItem("recent"));
-      const newProd =
-        props &&
-        props.location &&
-        props.location.state &&
-        props.location.state.data;
-      if (proArray && proArray.some((element) => element)) {
-        const found = proArray.find((element) => {
-          return (
-            element && element.product_id === newProd && newProd.product_id
-          );
-        });
-        if (!found) {
-          proArray.push(newProd);
-          let filterArray = proArray.slice(-4);
-          localStorage.setItem("recent", JSON.stringify(filterArray));
-        }
-      } else {
+      if (productDetails && productDetails.color) {
+        setClrId(productDetails.color);
+      }
+      // setClrId(props.location.state.data.thumbnail_colour_id);
+      // setClrId(props.match.params.color);
+      // setProduct_Id(props.match.params.id);
+
+      if (
+        localStorage.getItem("swaToken") === null &&
+        props.match.path === "/jewellery/:name"
+      ) {
+        console.log(JSON.parse(localStorage.getItem("recent")));
+        let proArray = JSON.parse(localStorage.getItem("recent"));
         const newProd =
           props &&
           props.location &&
           props.location.state &&
           props.location.state.data;
-        let newArray = [];
-        newArray.push(newProd);
-        localStorage.setItem("recent", JSON.stringify(newArray.slice(0, 5)));
-      }
-    } else {
-      let body = {};
-      if (productDetails && productDetails.id) {
-        body = {
-          product_id: productDetails.id,
-        };
+        if (proArray && proArray.some((element) => element)) {
+          const found = proArray.find((element) => {
+            return (
+              element && element.product_id === newProd && newProd.product_id
+            );
+          });
+          if (!found) {
+            proArray.push(newProd);
+            let filterArray = proArray.slice(-4);
+            localStorage.setItem("recent", JSON.stringify(filterArray));
+          }
+        } else {
+          const newProd =
+            props &&
+            props.location &&
+            props.location.state &&
+            props.location.state.data;
+          let newArray = [];
+          newArray.push(newProd);
+          localStorage.setItem("recent", JSON.stringify(newArray.slice(0, 5)));
+        }
+      } else {
+        let body = {};
+        if (productDetails && productDetails.id) {
+          body = {
+            product_id: productDetails.id,
+          };
+        }
+        axios
+          .post(Urls.addRecent, body, {
+            headers: { Authorization: "Token " + token },
+          })
+          .then((response1) => {})
+          .catch((error) => {
+            console.log(error);
+          });
       }
       axios
-        .post(Urls.addRecent, body, {
+        .get(
+          `${Urls.productDet +
+            (productDetails && productDetails.id)}?country=${countryId}`,
+          {
+            // headers: {
+            //   Authorization: "Token " + token,
+            // },
+          }
+        )
+        .then((response1) => {
+          console.log(
+            "response1.data.results.data---->",
+            response1.data.results.data
+          );
+          setIsRestricted(response1.data.results.data.is_restricted);
+          setProdDet(response1.data.results.data);
+          setSizeChart(response1.data.results.data.size_names);
+          setColorChart(response1.data.results.data.colors);
+          setThumbImg(
+            response1.data.results.data.image[
+              Object.keys(response1.data.results.data.image)[0]
+            ].thumbnail
+          );
+          setNewThumpSet(response1.data.results.data.image);
+          setImgSet(
+            response1.data.results.data.image[
+              Object.keys(response1.data.results.data.image)[0]
+            ].multiple_images
+          );
+          setVideo(
+            response1.data.results.data.video[
+              Object.keys(response1.data.results.data.video)[0]
+            ].multiple_videos
+          );
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      axios
+        .get(
+          Urls.productDet + (productDetails && productDetails.id) + "/reviews/"
+        )
+        .then((response1) => {
+          setReview(response1.data.results.data.slice(0, 1));
+          setCount(response1.data.results.count);
+          setAllRev(
+            response1.data.results.data.slice(
+              1,
+              response1.data.results.data.length
+            )
+          );
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      axios
+        .get(`${Urls.cart}?country=${countryId}`, {
           headers: { Authorization: "Token " + token },
         })
-        .then((response1) => {})
+        .then((response1) => {
+          if (response1.data.results.message === "cart is empty") {
+            setCartCount("");
+          } else {
+            setCartCount(response1.data.results.count);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      let productDetails = {};
+      axios
+        .get(`${Urls.detailsWithAlias}${name}`)
+        .then((response1) => {
+          if (response1.data.results.data) {
+            setProductDetails({
+              id: response1.data.results.data.id,
+              color: response1.data.results.data.color_id,
+              name: response1.data.results.data.color_id,
+            });
+            productDetails = {
+              id: response1.data.results.data.id,
+              color: response1.data.results.data.color_id,
+              name: response1.data.results.data.color_id,
+            };
+            console.log("response1.data.results--->", response1.data.results);
+            axios
+              .get(
+                `${Urls.productDet +
+                  (productDetails && productDetails.id)}?country=${countryId}`,
+                {
+                  // headers: {
+                  //   Authorization: "Token " + token,
+                  // },
+                }
+              )
+              .then((response1) => {
+                console.log(
+                  "response1.data.results.data---->",
+                  response1.data.results.data
+                );
+                setIsRestricted(response1.data.results.data.is_restricted);
+                setProdDet(response1.data.results.data);
+                setSizeChart(response1.data.results.data.size_names);
+                setColorChart(response1.data.results.data.colors);
+                setThumbImg(
+                  response1.data.results.data.image[
+                    Object.keys(response1.data.results.data.image)[0]
+                  ].thumbnail
+                );
+                setNewThumpSet(response1.data.results.data.image);
+                setImgSet(
+                  response1.data.results.data.image[
+                    Object.keys(response1.data.results.data.image)[0]
+                  ].multiple_images
+                );
+                setVideo(
+                  response1.data.results.data.video[
+                    Object.keys(response1.data.results.data.video)[0]
+                  ].multiple_videos
+                );
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+            axios
+              .get(
+                Urls.productDet +
+                  (productDetails && productDetails.id) +
+                  "/reviews/"
+              )
+              .then((response1) => {
+                setReview(response1.data.results.data.slice(0, 1));
+                setCount(response1.data.results.count);
+                setAllRev(
+                  response1.data.results.data.slice(
+                    1,
+                    response1.data.results.data.length
+                  )
+                );
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+            axios
+              .get(`${Urls.cart}?country=${countryId}`, {
+                headers: { Authorization: "Token " + token },
+              })
+              .then((response1) => {
+                if (response1.data.results.message === "cart is empty") {
+                  setCartCount("");
+                } else {
+                  setCartCount(response1.data.results.count);
+                }
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          }
+        })
         .catch((error) => {
           console.log(error);
         });
     }
-    axios
-      .get(
-        `${Urls.productDet +
-          (productDetails && productDetails.id)}?country=${countryId}`,
-        {
-          // headers: {
-          //   Authorization: "Token " + token,
-          // },
-        }
-      )
-      .then((response1) => {
-        console.log("response1.data.results.data---->", response1.data.results.data)
-        setIsRestricted(response1.data.results.data.is_restricted);
-        setProdDet(response1.data.results.data);
-        setSizeChart(response1.data.results.data.size_names);
-        setColorChart(response1.data.results.data.colors);
-        setThumbImg(
-          response1.data.results.data.image[
-            Object.keys(response1.data.results.data.image)[0]
-          ].thumbnail
-        );
-        setNewThumpSet(response1.data.results.data.image);
-        setImgSet(
-          response1.data.results.data.image[
-            Object.keys(response1.data.results.data.image)[0]
-          ].multiple_images
-        );
-        setVideo(
-          response1.data.results.data.video[
-            Object.keys(response1.data.results.data.video)[0]
-          ].multiple_videos
-        );
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    axios
-      .get(
-        Urls.productDet + (productDetails && productDetails.id) + "/reviews/"
-      )
-      .then((response1) => {
-        setReview(response1.data.results.data.slice(0, 1));
-        setCount(response1.data.results.count);
-        setAllRev(
-          response1.data.results.data.slice(
-            1,
-            response1.data.results.data.length
-          )
-        );
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    axios
-      .get(`${Urls.cart}?country=${countryId}`, {
-        headers: { Authorization: "Token " + token },
-      })
-      .then((response1) => {
-        if (response1.data.results.message === "cart is empty") {
-          setCartCount("");
-        } else {
-          setCartCount(response1.data.results.count);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   }, [productDetails && productDetails.id]);
   const buyProductHandler = () => {
     if (size === "") {
@@ -400,7 +506,7 @@ const ProductDetailsPage = (props) => {
     country_name: Contryname,
   });
 
-  console.log(prodDet.country_total_price, "prodDet");
+  console.log(productDetails, "prodDet");
   return (
     <div>
       <Header
@@ -480,7 +586,7 @@ const ProductDetailsPage = (props) => {
           props.location.state.data &&
           props.location.state.data.alias
             ? props.location.state.data.alias
-            : productDetails.alias
+            : productDetails && productDetails.alias
         }
       />
       <div className={Classes.RecentSearch}>
