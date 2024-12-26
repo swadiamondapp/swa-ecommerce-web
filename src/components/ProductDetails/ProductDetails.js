@@ -934,8 +934,8 @@ const ProductDetails = (props) => {
                     data={{
                       text: "Swa Diamonds",
                       // url: "https://swa.co/" + location.pathname,
-                      url: `https://www.swa.co/jewellery/share?id=${props.productDetails.id}&color=${props.productDetails.color}&name=${props.productDetails.name}&alias=${props.alias}`,
-
+                      // url: `https://www.swa.co/jewellery/share?id=${props.productDetails.id}&color=${props.productDetails.color}&name=${props.productDetails.name}&alias=${props.alias}`,
+                      url: `https://www.swa.co/jewellery/share?id=${props && props.productDetails && props.productDetails.id}&color=${props && props.productDetails && props.productDetails.color}&name=${props && props.productDetails && props.productDetails.name}&alias=${props && props.alias && props.alias}`,
                       // url: "https://www.swa.co/" + location.pathname,
                       title: "Swa Diamonds",
                     }}
