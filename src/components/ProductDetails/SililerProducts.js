@@ -58,7 +58,7 @@ const SililerProducts = (props) => {
 
   const similarProduct = async () => {
     const response = await axios.get(
-      "https://swaecommain.swa.co/ecom/products/" +
+      "https://swaprdnecomnew.zinfog.in/ecom/products/" +
         props.productId +
         "?country=" +
         countryId

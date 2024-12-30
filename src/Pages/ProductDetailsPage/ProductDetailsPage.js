@@ -67,235 +67,311 @@ const ProductDetailsPage = (props) => {
     };
   }, [prodDet]);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    if (
-      props &&
-      props.location &&
-      props.location.state &&
-      props.location.state.data
-    ) {
-      if (productDetails && productDetails.color) {
-        setClrId(productDetails.color);
-      }
-      // setClrId(props.location.state.data.thumbnail_colour_id);
-      // setClrId(props.match.params.color);
-      // setProduct_Id(props.match.params.id);
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  //   if (
+  //     props &&
+  //     props.location &&
+  //     props.location.state &&
+  //     props.location.state.data
+  //   ) {
+  //     if (productDetails && productDetails.color) {
+  //       setClrId(productDetails.color);
+  //     }
+  //     // setClrId(props.location.state.data.thumbnail_colour_id);
+  //     // setClrId(props.match.params.color);
+  //     // setProduct_Id(props.match.params.id);
 
-      if (
-        localStorage.getItem("swaToken") === null &&
-        props.match.path === "/jewellery/:name"
-      ) {
-        console.log(JSON.parse(localStorage.getItem("recent")));
-        let proArray = JSON.parse(localStorage.getItem("recent"));
-        const newProd =
-          props &&
-          props.location &&
-          props.location.state &&
-          props.location.state.data;
-        if (proArray && proArray.some((element) => element)) {
-          const found = proArray.find((element) => {
-            return (
-              element && element.product_id === newProd && newProd.product_id
-            );
-          });
-          if (!found) {
-            proArray.push(newProd);
-            let filterArray = proArray.slice(-4);
-            localStorage.setItem("recent", JSON.stringify(filterArray));
-          }
-        } else {
-          const newProd =
-            props &&
-            props.location &&
-            props.location.state &&
-            props.location.state.data;
-          let newArray = [];
-          newArray.push(newProd);
-          localStorage.setItem("recent", JSON.stringify(newArray.slice(0, 5)));
-        }
-      } else {
-        let body = {};
-        if (productDetails && productDetails.id) {
-          body = {
-            product_id: productDetails.id,
-          };
-        }
+  //     if (
+  //       localStorage.getItem("swaToken") === null &&
+  //       props.match.path === "/jewellery/:name"
+  //     ) {
+  //       console.log(JSON.parse(localStorage.getItem("recent")));
+  //       let proArray = JSON.parse(localStorage.getItem("recent"));
+  //       const newProd =
+  //         props &&
+  //         props.location &&
+  //         props.location.state &&
+  //         props.location.state.data;
+  //       if (proArray && proArray.some((element) => element)) {
+  //         const found = proArray.find((element) => {
+  //           return (
+  //             element && element.product_id === newProd && newProd.product_id
+  //           );
+  //         });
+  //         if (!found) {
+  //           proArray.push(newProd);
+  //           let filterArray = proArray.slice(-4);
+  //           localStorage.setItem("recent", JSON.stringify(filterArray));
+  //         }
+  //       } else {
+  //         const newProd =
+  //           props &&
+  //           props.location &&
+  //           props.location.state &&
+  //           props.location.state.data;
+  //         let newArray = [];
+  //         newArray.push(newProd);
+  //         localStorage.setItem("recent", JSON.stringify(newArray.slice(0, 5)));
+  //       }
+  //     } else {
+  //       let body = {};
+  //       if (productDetails && productDetails.id) {
+  //         body = {
+  //           product_id: productDetails.id,
+  //         };
+  //       }
+  //       axios
+  //         .post(Urls.addRecent, body, {
+  //           headers: { Authorization: "Token " + token },
+  //         })
+  //         .then((response1) => {})
+  //         .catch((error) => {
+  //           console.log(error);
+  //         });
+  //     }
+  //     axios
+  //       .get(
+  //         `${Urls.productDet +
+  //           (productDetails && productDetails.id)}?country=${countryId}`,
+  //         {
+  //           // headers: {
+  //           //   Authorization: "Token " + token,
+  //           // },
+  //         }
+  //       )
+  //       .then((response1) => {
+  //         console.log(
+  //           "response1.data.results.data---->",
+  //           response1.data.results.data
+  //         );
+  //         setIsRestricted(response1.data.results.data.is_restricted);
+  //         setProdDet(response1.data.results.data);
+  //         setSizeChart(response1.data.results.data.size_names);
+  //         setColorChart(response1.data.results.data.colors);
+  //         setThumbImg(
+  //           response1.data.results.data.image[
+  //             Object.keys(response1.data.results.data.image)[0]
+  //           ].thumbnail
+  //         );
+  //         setNewThumpSet(response1.data.results.data.image);
+  //         setImgSet(
+  //           response1.data.results.data.image[
+  //             Object.keys(response1.data.results.data.image)[0]
+  //           ].multiple_images
+  //         );
+  //         setVideo(
+  //           response1.data.results.data.video[
+  //             Object.keys(response1.data.results.data.video)[0]
+  //           ].multiple_videos
+  //         );
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //     axios
+  //       .get(
+  //         Urls.productDet + (productDetails && productDetails.id) + "/reviews/"
+  //       )
+  //       .then((response1) => {
+  //         setReview(response1.data.results.data.slice(0, 1));
+  //         setCount(response1.data.results.count);
+  //         setAllRev(
+  //           response1.data.results.data.slice(
+  //             1,
+  //             response1.data.results.data.length
+  //           )
+  //         );
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //     axios
+  //       .get(`${Urls.cart}?country=${countryId}`, {
+  //         headers: { Authorization: "Token " + token },
+  //       })
+  //       .then((response1) => {
+  //         if (response1.data.results.message === "cart is empty") {
+  //           setCartCount("");
+  //         } else {
+  //           setCartCount(response1.data.results.count);
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   } else {
+  //     let productDetails = {};
+  //     axios
+  //       .get(`${Urls.detailsWithAlias}${name}`)
+  //       .then((response1) => {
+  //         if (response1.data.results.data) {
+  //           setProductDetails({
+  //             id: response1.data.results.data.id,
+  //             color: response1.data.results.data.color_id,
+  //             name: response1.data.results.data.product_name,
+  //           });
+  //           productDetails = {
+  //             id: response1.data.results.data.id,
+  //             color: response1.data.results.data.color_id,
+  //             name: response1.data.results.data.product_name,
+  //           };
+  //           console.log("response1.data.results--->", response1.data.results);
+  //           axios
+  //             .get(
+  //               `${Urls.productDet +
+  //                 (productDetails && productDetails.id)}?country=${countryId}`,
+  //               {
+  //                 // headers: {
+  //                 //   Authorization: "Token " + token,
+  //                 // },
+  //               }
+  //             )
+  //             .then((response1) => {
+  //               console.log(
+  //                 "response1.data.results.data---->",
+  //                 response1.data.results.data
+  //               );
+  //               setIsRestricted(response1.data.results.data.is_restricted);
+  //               setProdDet(response1.data.results.data);
+  //               setSizeChart(response1.data.results.data.size_names);
+  //               setColorChart(response1.data.results.data.colors);
+  //               setThumbImg(
+  //                 response1.data.results.data.image[
+  //                   Object.keys(response1.data.results.data.image)[0]
+  //                 ].thumbnail
+  //               );
+  //               setNewThumpSet(response1.data.results.data.image);
+  //               setImgSet(
+  //                 response1.data.results.data.image[
+  //                   Object.keys(response1.data.results.data.image)[0]
+  //                 ].multiple_images
+  //               );
+  //               setVideo(
+  //                 response1.data.results.data.video[
+  //                   Object.keys(response1.data.results.data.video)[0]
+  //                 ].multiple_videos
+  //               );
+  //             })
+  //             .catch((error) => {
+  //               console.log(error);
+  //             });
+  //           axios
+  //             .get(
+  //               Urls.productDet +
+  //                 (productDetails && productDetails.id) +
+  //                 "/reviews/"
+  //             )
+  //             .then((response1) => {
+  //               setReview(response1.data.results.data.slice(0, 1));
+  //               setCount(response1.data.results.count);
+  //               setAllRev(
+  //                 response1.data.results.data.slice(
+  //                   1,
+  //                   response1.data.results.data.length
+  //                 )
+  //               );
+  //             })
+  //             .catch((error) => {
+  //               console.log(error);
+  //             });
+  //           axios
+  //             .get(`${Urls.cart}?country=${countryId}`, {
+  //               headers: { Authorization: "Token " + token },
+  //             })
+  //             .then((response1) => {
+  //               if (response1.data.results.message === "cart is empty") {
+  //                 setCartCount("");
+  //               } else {
+  //                 setCartCount(response1.data.results.count);
+  //               }
+  //             })
+  //             .catch((error) => {
+  //               console.log(error);
+  //             });
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   }
+  // }, [productDetails && productDetails.id, name]);
+  
+  const [fetchedName, setFetchedName] = useState(null); // To track the last fetched name
+
+  const fetchProductDetails = async (productName) => {
+    try {
+      const response = await axios.get(`${Urls.detailsWithAlias}${productName}`);
+      if (response.data.results.data) {
+        const details = {
+          id: response.data.results.data.id,
+          color: response.data.results.data.color_id,
+          name: response.data.results.data.product_name,
+        };
+        setProductDetails(details);
+        sessionStorage.setItem("productDetails", JSON.stringify(details));
+        return details;
+      }
+    } catch (error) {
+      console.error("Error fetching product details:", error);
+      return null;
+    }
+  };
+
+  useEffect(() => {
+    if (fetchedName === name) return; // Prevent re-fetching for the same name
+    window.scrollTo(0, 0);
+    const updateProductDetails = async () => {
+      let details = productDetails;
+
+      if (!productDetails || productDetails.name !== name) {
+        details = await fetchProductDetails(name);
+      }
+
+      if (details) {
+        setFetchedName(name); // Mark the current name as fetched
+        const { id } = details;
+
         axios
-          .post(Urls.addRecent, body, {
+          .get(`${Urls.productDet}${id}?country=${countryId}`)
+          .then((response) => {
+            const data = response.data.results.data;
+            setProdDet(data);
+            setIsRestricted(data.is_restricted);
+            setSizeChart(data.size_names);
+            setColorChart(data.colors);
+            setThumbImg(data.image[Object.keys(data.image)[0]].thumbnail);
+            setNewThumpSet(data.image);
+            setImgSet(data.image[Object.keys(data.image)[0]].multiple_images);
+            setVideo(data.video[Object.keys(data.video)[0]].multiple_videos);
+          })
+          .catch((error) => console.error("Error fetching product details:", error));
+
+        axios
+          .get(`${Urls.productDet}${id}/reviews/`)
+          .then((response) => {
+            const reviews = response.data.results.data;
+            setReview(reviews.slice(0, 1));
+            setCount(response.data.results.count);
+            setAllRev(reviews.slice(1));
+          })
+          .catch((error) => console.error("Error fetching reviews:", error));
+
+        axios
+          .get(`${Urls.cart}?country=${countryId}`, {
             headers: { Authorization: "Token " + token },
           })
-          .then((response1) => {})
-          .catch((error) => {
-            console.log(error);
-          });
+          .then((response) => {
+            const message = response.data.results.message;
+            setCartCount(message === "cart is empty" ? "" : response.data.results.count);
+          })
+          .catch((error) => console.error("Error fetching cart details:", error));
       }
-      axios
-        .get(
-          `${Urls.productDet +
-            (productDetails && productDetails.id)}?country=${countryId}`,
-          {
-            // headers: {
-            //   Authorization: "Token " + token,
-            // },
-          }
-        )
-        .then((response1) => {
-          console.log(
-            "response1.data.results.data---->",
-            response1.data.results.data
-          );
-          setIsRestricted(response1.data.results.data.is_restricted);
-          setProdDet(response1.data.results.data);
-          setSizeChart(response1.data.results.data.size_names);
-          setColorChart(response1.data.results.data.colors);
-          setThumbImg(
-            response1.data.results.data.image[
-              Object.keys(response1.data.results.data.image)[0]
-            ].thumbnail
-          );
-          setNewThumpSet(response1.data.results.data.image);
-          setImgSet(
-            response1.data.results.data.image[
-              Object.keys(response1.data.results.data.image)[0]
-            ].multiple_images
-          );
-          setVideo(
-            response1.data.results.data.video[
-              Object.keys(response1.data.results.data.video)[0]
-            ].multiple_videos
-          );
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      axios
-        .get(
-          Urls.productDet + (productDetails && productDetails.id) + "/reviews/"
-        )
-        .then((response1) => {
-          setReview(response1.data.results.data.slice(0, 1));
-          setCount(response1.data.results.count);
-          setAllRev(
-            response1.data.results.data.slice(
-              1,
-              response1.data.results.data.length
-            )
-          );
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      axios
-        .get(`${Urls.cart}?country=${countryId}`, {
-          headers: { Authorization: "Token " + token },
-        })
-        .then((response1) => {
-          if (response1.data.results.message === "cart is empty") {
-            setCartCount("");
-          } else {
-            setCartCount(response1.data.results.count);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } else {
-      let productDetails = {};
-      axios
-        .get(`${Urls.detailsWithAlias}${name}`)
-        .then((response1) => {
-          if (response1.data.results.data) {
-            setProductDetails({
-              id: response1.data.results.data.id,
-              color: response1.data.results.data.color_id,
-              name: response1.data.results.data.color_id,
-            });
-            productDetails = {
-              id: response1.data.results.data.id,
-              color: response1.data.results.data.color_id,
-              name: response1.data.results.data.color_id,
-            };
-            console.log("response1.data.results--->", response1.data.results);
-            axios
-              .get(
-                `${Urls.productDet +
-                  (productDetails && productDetails.id)}?country=${countryId}`,
-                {
-                  // headers: {
-                  //   Authorization: "Token " + token,
-                  // },
-                }
-              )
-              .then((response1) => {
-                console.log(
-                  "response1.data.results.data---->",
-                  response1.data.results.data
-                );
-                setIsRestricted(response1.data.results.data.is_restricted);
-                setProdDet(response1.data.results.data);
-                setSizeChart(response1.data.results.data.size_names);
-                setColorChart(response1.data.results.data.colors);
-                setThumbImg(
-                  response1.data.results.data.image[
-                    Object.keys(response1.data.results.data.image)[0]
-                  ].thumbnail
-                );
-                setNewThumpSet(response1.data.results.data.image);
-                setImgSet(
-                  response1.data.results.data.image[
-                    Object.keys(response1.data.results.data.image)[0]
-                  ].multiple_images
-                );
-                setVideo(
-                  response1.data.results.data.video[
-                    Object.keys(response1.data.results.data.video)[0]
-                  ].multiple_videos
-                );
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-            axios
-              .get(
-                Urls.productDet +
-                  (productDetails && productDetails.id) +
-                  "/reviews/"
-              )
-              .then((response1) => {
-                setReview(response1.data.results.data.slice(0, 1));
-                setCount(response1.data.results.count);
-                setAllRev(
-                  response1.data.results.data.slice(
-                    1,
-                    response1.data.results.data.length
-                  )
-                );
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-            axios
-              .get(`${Urls.cart}?country=${countryId}`, {
-                headers: { Authorization: "Token " + token },
-              })
-              .then((response1) => {
-                if (response1.data.results.message === "cart is empty") {
-                  setCartCount("");
-                } else {
-                  setCartCount(response1.data.results.count);
-                }
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  }, [productDetails && productDetails.id]);
+    };
+
+    updateProductDetails();
+  }, [name, productDetails, fetchedName]);
+
   const buyProductHandler = () => {
     if (size === "") {
       setError("");
@@ -496,7 +572,7 @@ const ProductDetailsPage = (props) => {
     setLogToken(logToken);
   };
 
-  console.log("errormsgtrycart-->", errormsgtrycart);
+  console.log("123456productDetails-->", productDetails);
   // const countryId = localStorage.getItem("id");
   const flag = localStorage.getItem("flag_image");
   const Contryname = localStorage.getItem("country_name");
