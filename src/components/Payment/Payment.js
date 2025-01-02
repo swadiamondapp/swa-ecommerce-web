@@ -19,8 +19,6 @@ const Payment = () => {
   const history = useHistory();
   const location = useLocation();
   const { data, name } = location.state;
-  console.log(location, "adddressspaymentLoaca");
-  console.log(data, "dataqqqq");
   const { promoCodeIds } = data || {};
   const [promoId, setPromoId] = useState(promoCodeIds ? promoCodeIds : "");
   const [mode, setMode] = useState("");
@@ -72,19 +70,6 @@ const Payment = () => {
   useEffect(() => {
     setLoading(true);
     fetchAddress();
-    // setTotal(props.location.state.data.total);
-    // axios
-    //   .get(Urls.cart, { headers: { Authorization: "Token " + token } })
-    //   .then((response1) => {
-    //     if (response1.data.results.message === "cart is empty") {
-    //       setCartCount("");
-    //     } else {
-    //       setCartCount(response1.data.results.count);
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
   }, [changeId]);
 
   const adressChangeHanlder = (id) => {
@@ -139,74 +124,6 @@ const Payment = () => {
     } catch (error) {
       console.log(error);
     }
-    // if (
-    //   addressData.fullName !== isNewaddress.fullName ||
-    //   addressData.city !== isNewaddress.city ||
-    //   addressData.hNumber_Bname !== isNewaddress.hNumber_Bname ||
-    //   addressData.landMark !== isNewaddress.landMark ||
-    //   addressData.mobile !== isNewaddress.mobile ||
-    //   addressData.pincode !== isNewaddress.pincode ||
-    //   addressData.state !== isNewaddress.state ||
-    //   addressData.streetColony !== isNewaddress.streetColony
-    // ) {
-    //   try {
-    //     const body = {
-    //       name: addressData.fullName,
-    //       phone_code: "+91",
-    //       phone_number: addressData.mobile,
-    //       email: addressData.sEmail,
-    //       pincode: addressData.pincode,
-    //       state: addressData.state,
-    //       city: addressData.city,
-    //       house: addressData.hNumber_Bname,
-    //       area: addressData.streetColony,
-    //       landmark: addressData.landMark,
-    //       type: "HOME",
-    //       // is_main: false,
-    //     };
-    //     const response = await axios.post(Urls.addAdress, body, {
-    //       headers: { Authorization: "Token " + token },
-    //     });
-    //     if (response.data && response.data.status === 200) {
-    //       history.push({
-    //         pathname: "/product/payment",
-    //         state: {
-    //           data: {
-    //             pay: amountPay,
-    //             total: total,
-    //             addressId: response.data.data.id,
-    //             updatedCart: props.proDet.data.updatedCartResponse,
-    //             token: token,
-    //             name: _userName,
-    //             number: _userMob,
-    //             buyBody: location.state.data,
-    //             userId: _userId,
-    //             totalSavedAmount: props.proDet.data.totalSavedAmount,
-    //             addressData: addressData,
-    //           },
-    //           name: "cart",
-    //         },
-    //       });
-    //     }
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // } else {
-    //   history.push({
-    //     pathname: "/product/payment",
-    //     state: {
-    //       data: {
-    //         pay: amountPay,
-    //         total: total,
-    //         addressId: addressData.id,
-    //         updatedCart: props.proDet.data.updatedCartResponse,
-    //         totalSavedAmount: props.proDet.data.totalSavedAmount,
-    //         addressData: addressData,
-    //       },
-    //       name: "cart",
-    //     },
-    //   });
-    // }
   };
   console.log(addressId, data.addressId, addressData.id, "adddressssssID");
   const placeOrder = (addressId) => {
@@ -283,8 +200,8 @@ const Payment = () => {
         .then((response1) => {
           var options = {
             //test_secret
-            key: "rzp_test_hbBeCNBjrqDq6P",
-            key_secret: "HwgmIdicOPlAeLkBdOJIMXiu",
+            key: "rzp_live_rKLs1hbpVT5npK",
+            key_secret: "td3G02g20iPqQzfz4b2NFSFN",
             // key: "rzp_live_rKLs1hbpVT5npK",
             // key_secret: "td3G02g20iPqQzfz4b2NFSFN",
             amount: amountPay * 100,
@@ -362,70 +279,6 @@ const Payment = () => {
     } else if ((mode === "upi" || mode === "credit_card") && name === "cart") {
       setIsLoading(true);
       console.log("online payment")
-      // axios
-      //   .post(`${Urls.checkout}?country=${countryId}`, cartBody, {
-      //     headers: { Authorization: "Token " + token },
-      //   })
-      //   .then((response1) => {
-      //     setIsLoading(false);
-      //     var options = {
-      //       key: "rzp_test_hbBeCNBjrqDq6P", // test Key
-      //       key_secret: "HwgmIdicOPlAeLkBdOJIMXiu",
-      //       // key: "rzp_live_rKLs1hbpVT5npK",
-      //       // key_secret: "td3G02g20iPqQzfz4b2NFSFN",
-      //       amount: amountPay * 100,
-      //       order_id: response1.data.results.data.razorpay_order_id,
-      //       currency: "INR",
-      //       name: "Swa Diamonds",
-      //       description: "for testing purpose",
-      //       handler: function(response) {
-      //         const bodyPay = {
-      //           razorpay_payment_id: response.razorpay_payment_id,
-      //           razorpay_order_id: response.razorpay_order_id,
-      //           razorpay_signature: response.razorpay_signature,
-      //           order_id: response1.data.results.data.order.id,
-      //         };
-      //         axios
-      //           .post(Urls.paySuces, bodyPay, {
-      //             headers: { Authorization: "Token " + token },
-      //           })
-      //           .then((response1) => {
-      //             console.log(response1);
-      //             if (response1.data.results.status_code === 200 && !token) {
-      //               localStorage.setItem("swaToken", data.token);
-      //               localStorage.setItem("userName", data.name);
-      //               localStorage.setItem("phoneNumber", data.number);
-      //               setIsLoading(false);
-      //               localStorage.removeItem("Address");
-      //               history.push("/my/orders");
-      //             } else if (response1.data.results.status_code === 200) {
-      //               setIsLoading(false);
-      //               localStorage.removeItem("Address");
-      //               history.push("/my/orders");
-      //             }
-      //           })
-      //           .catch((error) => {
-      //             console.log(error);
-      //           });
-      //       },
-      //       prefill: {
-      //         name: "",
-      //         email: "",
-      //         contact: "",
-      //       },
-      //       notes: {
-      //         address: "Razorpay Corporate office",
-      //       },
-      //       theme: {
-      //         color: "#007481",
-      //       },
-      //     };
-      //     var pay = new window.Razorpay(options);
-      //     pay.open();
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //   });
       axios
       .post(`${Urls.checkout}?country=${countryId}`, cartBody, {
         headers: { Authorization: "Token " + token },
@@ -439,7 +292,8 @@ const Payment = () => {
         }
 
         const options = {
-          key: "rzp_test_dhSb4IwB1nFP4t",
+          // key: "rzp_test_dhSb4IwB1nFP4t",
+          key: "rzp_live_rKLs1hbpVT5npK",
           amount: amountPay * 100,
           currency: "INR",
           name: "Swa Diamonds",
@@ -579,18 +433,6 @@ const Payment = () => {
     fetchAddress();
   };
 
-  // function formatIndianNumber(number) {
-  //   const numberString = number && number.toString();
-  //   const lastThreeDigits = numberString && numberString.slice(-3);
-  //   const otherDigits = numberString && numberString.slice(0, -3);
-
-  //   return (
-  //     otherDigits &&
-  //     otherDigits.replace(/\B(?=(\d{2})+(?!\d))/g, ",") +
-  //       (otherDigits ? "," : "") +
-  //       lastThreeDigits
-  //   );
-  // }
   function formatIndianNumber(number) {
     const numberString = number && number.toString();
 
@@ -858,18 +700,6 @@ const Payment = () => {
                 : alert("Please select a payment method");
               // setPmethodError("Please select a payment method");
             }}
-            //     onClick={async () => {
-            //   if (data.buyBody) {
-            //     try {
-            //       await submitAddress();
-            //       placeOrder();
-            //     } catch (error) {
-            //       console.error("Error submitting address:", error);
-            //     }
-            //   } else {
-            //     alert("Please select a payment method");
-            //   }
-            // }}
           >
             {location.state.name === "buybody" ? (
               <>

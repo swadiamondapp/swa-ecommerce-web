@@ -43,7 +43,7 @@ const Profile = (props) => {
   const [moberrors, setmobErrors] = useState("");
   const token = localStorage.getItem("swaToken");
   const [preview, setPreview] = useState(
-    userProfileImage === "https://swaprdnecomnew.zinfog.in/media/default.png"
+    userProfileImage === "https://swaecommain.swa.co/media/default.png"
       ? defaultProfile
       : userProfileImage
   );

@@ -2093,7 +2093,7 @@ export default CheckOut;
 //   const buyWithoutLogin = async (productId) => {
 //     try {
 //       const response = await axios.get(
-//         `https://swaprdnecomnew.zinfog.in/ecom/buynow/?product_id=${productId}&promocode=`
+//         `https://swaecommain.swa.co/ecom/buynow/?product_id=${productId}&promocode=`
 //       );
 //       if (response && response.data) {
 //         console.log("buy-->", response.data);

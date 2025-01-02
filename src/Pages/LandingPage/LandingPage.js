@@ -437,25 +437,25 @@ const LandingPage = () => {
               head={"Under  " + budjet[0].budget}
               sub={budjet[0].count + " styles"}
               backgroundImage={shop1}
-              clicked={() => productMinHandler(budjet[0].budget)}
+              clicked={() => budjet[0].count && productMinHandler(budjet[0].budget)}
             />
             <BudgetCard
               head={"Under  " + budjet[1].budget}
               sub={budjet[1].count + " styles"}
               backgroundImage={shop2}
-              clicked={() => productMinHandler(budjet[1].budget)}
+              clicked={() => budjet[1] && productMinHandler(budjet[1].budget)}
             />
             <BudgetCard
               head={"Under  " + budjet[2].budget}
               sub={budjet[2].count + " styles"}
               backgroundImage={shop3}
-              clicked={() => productMinHandler(budjet[2].budget)}
+              clicked={() => budjet[2] && productMinHandler(budjet[2].budget)}
             />
             <BudgetCard
               head={"Under  " + budjet[3].budget}
               sub={budjet[3].count + " styles"}
               backgroundImage={shop4}
-              clicked={() => productMinHandler(budjet[3].budget)}
+              clicked={() => budjet[3] && productMinHandler(budjet[3].budget)}
             />
           </ShopOnBudget>
         </div>

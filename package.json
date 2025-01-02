@@ -47,9 +47,9 @@
     "yup": "^1.1.1"
   },
   "scripts": {
-    "start": "react-scripts --openssl-legacy-provider start",
-    "build": "react-scripts --openssl-legacy-provider build",
-    "test": "react-scripts test",
+    "start": "react-scripts --max-old-space-size=4096 --openssl-legacy-provider start",
+    "build": "react-scripts --max-old-space-size=4096 --openssl-legacy-provider build",
+    "test": "react-scripts --max-old-space-size=4096 test",
     "eject": "react-scripts eject",
     "proxy": "http://localhost:3000",
     "generate-sitemap": "node --experimental-modules generate-sitemap.mjs"
