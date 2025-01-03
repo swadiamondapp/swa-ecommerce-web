@@ -247,7 +247,10 @@ const Header = (props) => {
         window.location.href =
           "https://www.swa.co/category_search/" + setItem.id;
       } else {
-        history.push({ pathname: "/new/arrivals", state: { data: setItem.id } });
+        history.push({
+          pathname: "/new/arrivals",
+          state: { data: setItem.id },
+        });
       }
     } else if (setItem.type === "product") {
       axios
@@ -309,6 +312,8 @@ const Header = (props) => {
           console.log(error);
         });
     }
+    setSearchKey(""); // Clear the search input field
+    setSearchShow(false); // Hide search list when an item is clicked
   };
   const closeHanlder = () => {};
 
