@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom/cjs/react-router-dom";
 import Header from "../../components/HeaderNew/Header";
+import { Helmet } from "react-helmet";
 import Footer from "../../components/Footer/Footer";
 import RecentSearch from "../../components/RecentSearch/RecentSearch";
 import Features from "../../components/Features/Features";
@@ -50,252 +51,26 @@ const ProductDetailsPage = (props) => {
   const [sizeError, setSizeError] = useState("");
   const [errormsgtrycart, setErrormsgtrycart] = useState();
 
-  console.log("tokenanasmk", props.token);
-  console.log("sizeError", sizeError);
-
   useEffect(() => {
-    document.title = prodDet.meta_title || "Detail page";
-    const metaDescription = document.createElement("meta");
-    metaDescription.name = prodDet.meta_description;
-    metaDescription.content =
-      "This is the product details page of swa diamonds website.";
-    document.head.appendChild(metaDescription);
-
-    // Cleanup the meta tag on unmount
-    return () => {
-      document.head.removeChild(metaDescription);
-    };
+    if (prodDet) {
+      // Set document title
+      document.title = prodDet.meta_title || "Detail Page";
+  
+      // Check if a meta description tag already exists
+      let metaDescription = document.querySelector("meta[name='description']");
+      if (!metaDescription) {
+        // Create a new meta tag if it doesn't exist
+        metaDescription = document.createElement("meta");
+        metaDescription.name = "description";
+        document.head.appendChild(metaDescription);
+      }
+  
+      // Update the content of the meta tag
+      metaDescription.content = prodDet.meta_description || "Default description for the product details page.";
+    }
+  
+    // Cleanup not needed for this approach since we're updating an existing meta tag
   }, [prodDet]);
-
-  // useEffect(() => {
-  //   window.scrollTo(0, 0);
-  //   if (
-  //     props &&
-  //     props.location &&
-  //     props.location.state &&
-  //     props.location.state.data
-  //   ) {
-  //     if (productDetails && productDetails.color) {
-  //       setClrId(productDetails.color);
-  //     }
-  //     // setClrId(props.location.state.data.thumbnail_colour_id);
-  //     // setClrId(props.match.params.color);
-  //     // setProduct_Id(props.match.params.id);
-
-  //     if (
-  //       localStorage.getItem("swaToken") === null &&
-  //       props.match.path === "/jewellery/:name"
-  //     ) {
-  //       console.log(JSON.parse(localStorage.getItem("recent")));
-  //       let proArray = JSON.parse(localStorage.getItem("recent"));
-  //       const newProd =
-  //         props &&
-  //         props.location &&
-  //         props.location.state &&
-  //         props.location.state.data;
-  //       if (proArray && proArray.some((element) => element)) {
-  //         const found = proArray.find((element) => {
-  //           return (
-  //             element && element.product_id === newProd && newProd.product_id
-  //           );
-  //         });
-  //         if (!found) {
-  //           proArray.push(newProd);
-  //           let filterArray = proArray.slice(-4);
-  //           localStorage.setItem("recent", JSON.stringify(filterArray));
-  //         }
-  //       } else {
-  //         const newProd =
-  //           props &&
-  //           props.location &&
-  //           props.location.state &&
-  //           props.location.state.data;
-  //         let newArray = [];
-  //         newArray.push(newProd);
-  //         localStorage.setItem("recent", JSON.stringify(newArray.slice(0, 5)));
-  //       }
-  //     } else {
-  //       let body = {};
-  //       if (productDetails && productDetails.id) {
-  //         body = {
-  //           product_id: productDetails.id,
-  //         };
-  //       }
-  //       axios
-  //         .post(Urls.addRecent, body, {
-  //           headers: { Authorization: "Token " + token },
-  //         })
-  //         .then((response1) => {})
-  //         .catch((error) => {
-  //           console.log(error);
-  //         });
-  //     }
-  //     axios
-  //       .get(
-  //         `${Urls.productDet +
-  //           (productDetails && productDetails.id)}?country=${countryId}`,
-  //         {
-  //           // headers: {
-  //           //   Authorization: "Token " + token,
-  //           // },
-  //         }
-  //       )
-  //       .then((response1) => {
-  //         console.log(
-  //           "response1.data.results.data---->",
-  //           response1.data.results.data
-  //         );
-  //         setIsRestricted(response1.data.results.data.is_restricted);
-  //         setProdDet(response1.data.results.data);
-  //         setSizeChart(response1.data.results.data.size_names);
-  //         setColorChart(response1.data.results.data.colors);
-  //         setThumbImg(
-  //           response1.data.results.data.image[
-  //             Object.keys(response1.data.results.data.image)[0]
-  //           ].thumbnail
-  //         );
-  //         setNewThumpSet(response1.data.results.data.image);
-  //         setImgSet(
-  //           response1.data.results.data.image[
-  //             Object.keys(response1.data.results.data.image)[0]
-  //           ].multiple_images
-  //         );
-  //         setVideo(
-  //           response1.data.results.data.video[
-  //             Object.keys(response1.data.results.data.video)[0]
-  //           ].multiple_videos
-  //         );
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //     axios
-  //       .get(
-  //         Urls.productDet + (productDetails && productDetails.id) + "/reviews/"
-  //       )
-  //       .then((response1) => {
-  //         setReview(response1.data.results.data.slice(0, 1));
-  //         setCount(response1.data.results.count);
-  //         setAllRev(
-  //           response1.data.results.data.slice(
-  //             1,
-  //             response1.data.results.data.length
-  //           )
-  //         );
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //     axios
-  //       .get(`${Urls.cart}?country=${countryId}`, {
-  //         headers: { Authorization: "Token " + token },
-  //       })
-  //       .then((response1) => {
-  //         if (response1.data.results.message === "cart is empty") {
-  //           setCartCount("");
-  //         } else {
-  //           setCartCount(response1.data.results.count);
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //   } else {
-  //     let productDetails = {};
-  //     axios
-  //       .get(`${Urls.detailsWithAlias}${name}`)
-  //       .then((response1) => {
-  //         if (response1.data.results.data) {
-  //           setProductDetails({
-  //             id: response1.data.results.data.id,
-  //             color: response1.data.results.data.color_id,
-  //             name: response1.data.results.data.product_name,
-  //           });
-  //           productDetails = {
-  //             id: response1.data.results.data.id,
-  //             color: response1.data.results.data.color_id,
-  //             name: response1.data.results.data.product_name,
-  //           };
-  //           console.log("response1.data.results--->", response1.data.results);
-  //           axios
-  //             .get(
-  //               `${Urls.productDet +
-  //                 (productDetails && productDetails.id)}?country=${countryId}`,
-  //               {
-  //                 // headers: {
-  //                 //   Authorization: "Token " + token,
-  //                 // },
-  //               }
-  //             )
-  //             .then((response1) => {
-  //               console.log(
-  //                 "response1.data.results.data---->",
-  //                 response1.data.results.data
-  //               );
-  //               setIsRestricted(response1.data.results.data.is_restricted);
-  //               setProdDet(response1.data.results.data);
-  //               setSizeChart(response1.data.results.data.size_names);
-  //               setColorChart(response1.data.results.data.colors);
-  //               setThumbImg(
-  //                 response1.data.results.data.image[
-  //                   Object.keys(response1.data.results.data.image)[0]
-  //                 ].thumbnail
-  //               );
-  //               setNewThumpSet(response1.data.results.data.image);
-  //               setImgSet(
-  //                 response1.data.results.data.image[
-  //                   Object.keys(response1.data.results.data.image)[0]
-  //                 ].multiple_images
-  //               );
-  //               setVideo(
-  //                 response1.data.results.data.video[
-  //                   Object.keys(response1.data.results.data.video)[0]
-  //                 ].multiple_videos
-  //               );
-  //             })
-  //             .catch((error) => {
-  //               console.log(error);
-  //             });
-  //           axios
-  //             .get(
-  //               Urls.productDet +
-  //                 (productDetails && productDetails.id) +
-  //                 "/reviews/"
-  //             )
-  //             .then((response1) => {
-  //               setReview(response1.data.results.data.slice(0, 1));
-  //               setCount(response1.data.results.count);
-  //               setAllRev(
-  //                 response1.data.results.data.slice(
-  //                   1,
-  //                   response1.data.results.data.length
-  //                 )
-  //               );
-  //             })
-  //             .catch((error) => {
-  //               console.log(error);
-  //             });
-  //           axios
-  //             .get(`${Urls.cart}?country=${countryId}`, {
-  //               headers: { Authorization: "Token " + token },
-  //             })
-  //             .then((response1) => {
-  //               if (response1.data.results.message === "cart is empty") {
-  //                 setCartCount("");
-  //               } else {
-  //                 setCartCount(response1.data.results.count);
-  //               }
-  //             })
-  //             .catch((error) => {
-  //               console.log(error);
-  //             });
-  //         }
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //   }
-  // }, [productDetails && productDetails.id, name]);
   
   const [fetchedName, setFetchedName] = useState(null); // To track the last fetched name
 
@@ -585,6 +360,9 @@ const ProductDetailsPage = (props) => {
   console.log(productDetails, "prodDet");
   return (
     <div>
+      <Helmet>
+          <meta name="description" content={prodDet.meta_description} />
+        </Helmet>
       <Header
         countCartItems={cartCount}
         selectedCountry={selectedCountry}
@@ -667,12 +445,6 @@ const ProductDetailsPage = (props) => {
       />
       <div className={Classes.RecentSearch}>
         <SimilerProducts productId={productDetails && productDetails.id} />
-        {/* <RecentSearch>
-        <NewArrivalCard ProductImage={New1} ProductName='Diamond ring' ProductId='SKU: 18037' PriceNew='27000' PriceOld='29500' />
-          <NewArrivalCard ProductImage={New2} ProductName='Diamond ring' ProductId='SKU: 18037' PriceNew='27000' PriceOld='29500' />
-          <NewArrivalCard ProductImage={New3} ProductName='Diamond ring' ProductId='SKU: 18037' PriceNew='27000' PriceOld='29500' />
-          <NewArrivalCard ProductImage={New4} ProductName='Diamond ring' ProductId='SKU: 18037' PriceNew='27000' PriceOld='29500' />
-        </RecentSearch> */}
       </div>
 
       <div className={Classes.Features}>
