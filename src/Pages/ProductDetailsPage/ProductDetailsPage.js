@@ -361,7 +361,6 @@ const ProductDetailsPage = (props) => {
   return (
     <div>
       <Helmet>
-          {/* <title>{product.name}</title> */}
           <meta name="description" content={prodDet.meta_description} />
         </Helmet>
       <Header
