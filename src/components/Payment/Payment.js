@@ -60,12 +60,11 @@ const Payment = () => {
     script.src = "https://checkout.razorpay.com/v1/checkout.js";
     script.async = true;
     document.body.appendChild(script);
-  
+
     return () => {
       document.body.removeChild(script);
     };
   }, []);
-  
 
   useEffect(() => {
     setLoading(true);
@@ -125,9 +124,8 @@ const Payment = () => {
       console.log(error);
     }
   };
-  console.log(addressId, data.addressId, addressData.id, "adddressssssID");
-  const placeOrder = (addressId) => {
-    console.log("mode-->", mode , "name-->", name)
+  const placeOrder = async (addressId) => {
+    console.log("mode-->", mode, "name-->", name);
     let cartBody;
     let buyBody;
     const p_Method = mode === "cash" ? "C" : "P";
@@ -190,7 +188,7 @@ const Payment = () => {
         };
       }
     }
-    if ((mode === "upi" || mode === "credit_card") && name === "buybody") {
+    if ((mode === "upi" || mode === "card") && name === "buybody") {
       axios
         .post(`${Urls.buyNow}?country=${countryId}`, buyBody, {
           headers: {
@@ -244,6 +242,32 @@ const Payment = () => {
               email: "",
               contact: "",
             },
+            config: {
+              display: {
+                blocks: {
+                  card: { name: "Pay with Card", instruments: [] },
+                  upi: { name: "Pay with UPI", instruments: [] },
+                  netbanking: { name: "Pay with Netbanking", instruments: [] },
+                  wallet: { name: "Pay with Wallet", instruments: [] },
+                },
+                sequence: [
+                  mode, // Prioritize the selected payment method
+                  ...["card", "upi", "netbanking", "wallet"].filter(
+                    (method) => method !== mode
+                  ), // Include remaining methods in order
+                ],
+                preferences: {
+                  show_default_blocks: false, // Show all payment methods
+                  default_block: mode, // Set the selected method as default
+                },
+              },
+            },
+            modal: {
+              ondismiss: function () {
+                console.warn("Payment modal closed by the user.");
+                setIsLoading(false);
+              },
+            },
             notes: {
               address: "Razorpay Corporate office",
             },
@@ -276,83 +300,104 @@ const Payment = () => {
             history.push("/my/orders");
           }
         });
-    } else if ((mode === "upi" || mode === "credit_card") && name === "cart") {
+    } else if ((mode === "upi" || mode === "card") && name === "cart") {
       setIsLoading(true);
-      console.log("online payment")
-      axios
-      .post(`${Urls.checkout}?country=${countryId}`, cartBody, {
-        headers: { Authorization: "Token " + token },
-      })
-      .then((response1) => {
+      try {
+        // Step 1: Create the order on the backend
+        const response1 = await axios.post(
+          `${Urls.checkout}?country=${countryId}`,
+          cartBody,
+          {
+            headers: { Authorization: `Token ${token}` },
+          }
+        );
+    
         const orderId = response1 && response1.data && response1.data.results && response1.data.results.data && response1.data.results.data.razorpay_order_id;
+    
         if (!orderId) {
           console.error("Order ID is missing in the response:", response1);
           alert("Failed to initiate payment. Please try again.");
           return;
         }
-
+    
+        // Step 2: Configure Razorpay options
         const options = {
-          // key: "rzp_test_dhSb4IwB1nFP4t",
-          key: "rzp_live_rKLs1hbpVT5npK",
-          amount: amountPay * 100,
+          key: "rzp_live_rKLs1hbpVT5npK", // Replace with your Razorpay key
+          amount: amountPay * 100, // Amount in paise
           currency: "INR",
           name: "Swa Diamonds",
           description: "for testing purpose",
           order_id: orderId,
-          handler: function (response) {
+          handler: async function (response) {
             const bodyPay = {
               razorpay_payment_id: response.razorpay_payment_id,
               razorpay_order_id: response.razorpay_order_id,
               razorpay_signature: response.razorpay_signature,
               order_id: response1.data.results.data.order.id,
             };
-
-            axios
-              .post(Urls.paySuces, bodyPay, {
-                headers: { Authorization: "Token " + token },
-              })
-              .then((response2) => {
-                if (response2.data.success === true) {
-                  localStorage.removeItem("Address");
-                  history.push("/my/orders");
-                } else {
-                  console.error("Unexpected status code:", response2.data.success);
-                  alert("Payment processed, but order update failed. Contact support.");
-                }
-              })
-              .catch((error) => {
-                console.error("Payment success API error:", error);
-                alert("Payment processed, but order confirmation failed. Contact support.");
+    
+            try {
+              // Step 3: Confirm the payment on the backend
+              const response2 = await axios.post(Urls.paySuces, bodyPay, {
+                headers: { Authorization: `Token ${token}` },
               });
+    
+              if (response2.data.success) {
+                localStorage.removeItem("Address");
+                history.push("/my/orders"); // Redirect to orders page
+              } else {
+                alert(
+                  "Payment processed, but order update failed. Contact support."
+                );
+              }
+            } catch (error) {
+              console.error("Payment success API error:", error);
+              alert(
+                "Payment processed, but order confirmation failed. Contact support."
+              );
+            }
           },
           prefill: {
-            name: "",
+            name: "", // Optionally prefill user details
             email: "",
             contact: "",
+          },
+          config: {
+            display: {
+              blocks: {
+                card: { name: "Pay with Card", instruments: [] },
+                upi: { name: "Pay with UPI", instruments: [] },
+                netbanking: { name: "Pay with Netbanking", instruments: [] },
+                wallet: { name: "Pay with Wallet", instruments: [] },
+              },
+              sequence: [
+                mode, // Prioritize the selected payment method
+                ...["card", "upi", "netbanking", "wallet"].filter(
+                  (method) => method !== mode
+                ), // Include remaining methods in order
+              ],
+              preferences: {
+                show_default_blocks: false, // Show all payment methods
+                default_block: mode, // Set the selected method as default
+              },
+            },
           },
           theme: { color: "#007481" },
           modal: {
             ondismiss: function () {
               console.warn("Payment modal closed by the user.");
-              alert("Payment was cancelled. Please try again.");
+              setIsLoading(false);
             },
           },
         };
-
-        if (!window.Razorpay) {
-          console.error("Razorpay script not loaded.");
-          alert("Payment gateway is not available. Please refresh the page.");
-          return;
-        }
-
-        const rzp = new window.Razorpay(options);
-        rzp.open();
-      })
-      .catch((error) => {
+    
+        // Step 4: Open Razorpay modal
+        const razorpay = new window.Razorpay(options);
+        razorpay.open();
+      } catch (error) {
         console.error("Checkout API error:", error);
-        alert("Failed to initiate payment. Please check your internet connection and try again.");
-      });
-
+        alert("Failed to initiate payment. Please try again.");
+      }
     } else if (mode === "cash" && name === "cart") {
       setIsLoading(true);
       axios
@@ -490,9 +535,9 @@ const Payment = () => {
             <div className={Classes.Pmethod}>
               <input
                 type="radio"
-                value="credit_card"
+                value="card"
                 style={{ cursor: "pointer" }}
-                checked={mode === "credit_card"}
+                checked={mode === "card"}
                 onChange={handleMethodChange}
               />
               <img src={mastercard} alt="Mastercard" />
