@@ -453,86 +453,168 @@ const Header = (props) => {
   // }, []);
   const [isLoading, setIsLoading] = useState(false);
   const [pinCode, setPinCode] = useState("");
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get(Urls.getCountryFlags);
+  //       console.log("response.data.results.data", response.data.results.data);
+  //       setCountryData(response.data.results.data);
+  //       const getLocation = async () => {
+  //         setIsLoading(true);
+
+  //         navigator.geolocation.getCurrentPosition(
+  //           async (pos) => {
+  //             const { latitude, longitude } = pos.coords;
+  //             let _url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
+  //             try {
+  //               const geoResponse = await axios.get(_url);
+  //               const userCountryName = geoResponse.data.address.country;
+  //               setCountry(userCountryName);
+  //               console.log("userCountryName", userCountryName);
+  //               debugger;
+  //               let selectedCountryData;
+
+  //               if (
+  //                 userCountryName === "India" ||
+  //                 userCountryName === "United Arab Emirates"
+  //               ) {
+  //                 selectedCountryData = response.data.results.data.find(
+  //                   (country) => country.country_name === userCountryName
+  //                 );
+  //               } else {
+  //                 selectedCountryData = response.data.results.data.find(
+  //                   (country) => country.country_name === "United States"
+  //                 );
+  //               }
+
+  //               // Optionally set additional state or perform other actions with selectedCountryData
+  //               // setSelectedCountry(selectedCountryData);
+
+  //               if (selectedCountryData) {
+  //                 console.log("Selected Country Data:", selectedCountryData);
+  //                 if (!CountryIds && !flag) {
+  //                   props.setSelectedCountry({
+  //                     ...props.selectedCountry,
+  //                     flag_image: selectedCountryData.flag_image,
+  //                     id: selectedCountryData.id,
+  //                     country_name: selectedCountryData.country_name,
+  //                   });
+  //                   localStorage.setItem(
+  //                     "flag_image",
+  //                     selectedCountryData.flag_image
+  //                   );
+  //                   localStorage.setItem("id", selectedCountryData.id);
+  //                   localStorage.setItem(
+  //                     "country_name",
+  //                     selectedCountryData.country_name
+  //                   );
+  //                 }
+  //               }
+
+  //               const defaultCountryID = localStorage.getItem("id");
+  //               const defaultCountryFlag = localStorage.getItem("flag_image");
+  //               if (defaultCountryID && defaultCountryFlag) {
+  //                 const defaultCountry = countryData.find(
+  //                   (country) => country.id === parseInt(defaultCountryID)
+  //                 );
+  //                 if (defaultCountry) {
+  //                   props.setSelectedCountry(defaultCountry);
+  //                 }
+  //               }
+  //             } catch (error) {
+  //               console.log(error);
+  //             } finally {
+  //               setIsLoading(false);
+  //             }
+  //           },
+  //           (error) => {
+  //             console.error("Error getting geolocation:", error);
+  //             setIsLoading(false);
+  //           }
+  //         );
+  //       };
+
+  //       // Call getLocation to set country based on user's location
+  //       getLocation();
+  //     } catch (error) {
+  //       console.error("Error fetching country data:", error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // Fetch country flags data
         const response = await axios.get(Urls.getCountryFlags);
         console.log("response.data.results.data", response.data.results.data);
         setCountryData(response.data.results.data);
+
+        // Fetch user country using ipinfo.io
         const getLocation = async () => {
           setIsLoading(true);
-          navigator.geolocation.getCurrentPosition(
-            async (pos) => {
-              const { latitude, longitude } = pos.coords;
-              let _url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
-              try {
-                const geoResponse = await axios.get(_url);
-                const userCountryName = geoResponse.data.address.country;
-                setCountry(userCountryName);
+          try {
+            const ipInfoResponse = await axios.get(
+              "https://ipinfo.io/json?token=6485fceda43031"
+            );
+            const userCountryName = ipInfoResponse.data.country; // Country code (e.g., "IN", "US")
 
-                let selectedCountryData;
+            setCountry(userCountryName);
+            console.log("User Country:", userCountryName);
 
-                if (
-                  userCountryName === "India" ||
-                  userCountryName === "United Arab Emirates"
-                ) {
-                  selectedCountryData = response.data.results.data.find(
-                    (country) => country.country_name === userCountryName
-                  );
-                } else {
-                  selectedCountryData = response.data.results.data.find(
-                    (country) => country.country_name === "United States"
-                  );
-                }
+            let selectedCountryData;
 
-                // Optionally set additional state or perform other actions with selectedCountryData
-                // setSelectedCountry(selectedCountryData);
-
-                if (selectedCountryData) {
-                  console.log("Selected Country Data:", selectedCountryData);
-                  if (!CountryIds && !flag) {
-                    props.setSelectedCountry({
-                      ...props.selectedCountry,
-                      flag_image: selectedCountryData.flag_image,
-                      id: selectedCountryData.id,
-                      country_name: selectedCountryData.country_name,
-                    });
-                    localStorage.setItem(
-                      "flag_image",
-                      selectedCountryData.flag_image
-                    );
-                    localStorage.setItem("id", selectedCountryData.id);
-                    localStorage.setItem(
-                      "country_name",
-                      selectedCountryData.country_name
-                    );
-                  }
-                }
-
-                const defaultCountryID = localStorage.getItem("id");
-                const defaultCountryFlag = localStorage.getItem("flag_image");
-                if (defaultCountryID && defaultCountryFlag) {
-                  const defaultCountry = countryData.find(
-                    (country) => country.id === parseInt(defaultCountryID)
-                  );
-                  if (defaultCountry) {
-                    props.setSelectedCountry(defaultCountry);
-                  }
-                }
-              } catch (error) {
-                console.log(error);
-              } finally {
-                setIsLoading(false);
-              }
-            },
-            (error) => {
-              console.error("Error getting geolocation:", error);
-              setIsLoading(false);
+            if (userCountryName === "IN" || userCountryName === "AE") {
+              selectedCountryData = response.data.results.data.find(
+                (country) => country.country_code === userCountryName
+              );
+            } else {
+              selectedCountryData = response.data.results.data.find(
+                (country) => country.country_code === "US"
+              );
             }
-          );
+
+            if (selectedCountryData) {
+              console.log("Selected Country Data:", selectedCountryData);
+              if (!props.selectedCountry.id) {
+                props.setSelectedCountry({
+                  ...props.selectedCountry,
+                  flag_image: selectedCountryData.flag_image,
+                  id: selectedCountryData.id,
+                  country_name: selectedCountryData.country_name,
+                });
+
+                localStorage.setItem(
+                  "flag_image",
+                  selectedCountryData.flag_image
+                );
+                localStorage.setItem("id", selectedCountryData.id);
+                localStorage.setItem(
+                  "country_name",
+                  selectedCountryData.country_name
+                );
+              }
+            }
+
+            // Set default country from localStorage
+            const defaultCountryID = localStorage.getItem("id");
+            const defaultCountryFlag = localStorage.getItem("flag_image");
+            if (defaultCountryID && defaultCountryFlag) {
+              const defaultCountry = countryData.find(
+                (country) => country.id === parseInt(defaultCountryID)
+              );
+              if (defaultCountry) {
+                props.setSelectedCountry(defaultCountry);
+              }
+            }
+          } catch (error) {
+            console.error("Error fetching country:", error);
+          } finally {
+            setIsLoading(false);
+          }
         };
 
-        // Call getLocation to set country based on user's location
         getLocation();
       } catch (error) {
         console.error("Error fetching country data:", error);

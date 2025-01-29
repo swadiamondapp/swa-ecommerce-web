@@ -273,6 +273,69 @@ const LoginToggle = (props) => {
     try {
       const response = await signInWithPopup(auth, googleAuthProvider);
       console.log("responsegoogle", response);
+
+      if (response && response.operationType === "signIn") {
+        const user = response && response.user;
+
+        const loginBody = {
+          username: user && user.email, // Use the Google user's email as the username
+        };
+
+        // Call Login API
+        axios
+          .post(urls.Login, loginBody)
+          .then((loginResponse) => {
+            console.log("Login API Response:", loginResponse);
+
+            if (
+              loginResponse &&
+              loginResponse.data.results.status_code === 200
+            ) {
+              // Successful login
+              localStorage.setItem(
+                "swaToken",
+                loginResponse.data.results.token
+              );
+              localStorage.setItem(
+                "userName",
+                loginResponse.data.results.data.name
+              );
+              localStorage.setItem(
+                "userProfile",
+                loginResponse.data.results.data.image
+              );
+              localStorage.setItem(
+                "phoneNumber",
+                loginResponse.data.results.data.phone_number
+              );
+              localStorage.setItem(
+                "UserEmail",
+                loginResponse.data.results.data.email
+              );
+
+              setGetOtpModal(false); // Close OTP modal
+              setTimeout(() => {
+                props.onClose(); // Close the main modal
+              }, 500);
+            } else if (
+              loginResponse &&
+              loginResponse.data.results.status_code === 401
+            ) {
+              // User not registered
+              console.log("User not registered. Attempting registration...");
+              attemptRegistration(user, loginBody); // Proceed with registration flow if user isn't registered
+            } else {
+              // Handle other error conditions
+              setValidationErrors({
+                otp: "Failed to login. Please try again.",
+              });
+            }
+          })
+          .catch((error) => {
+            console.error("Login API Error:", error);
+            // toast.error("Login failed. Please try again.", { autoClose: 3000 });
+          });
+      }
     } catch (error) {
       console.log(error);
     }
@@ -281,11 +344,162 @@ const LoginToggle = (props) => {
   const handleSignInWithFb = async () => {
     try {
       const response = await signInWithPopup(auth, facebookAuthProvider);
-      console.log("responsefacebook", response);
+      console.log("Facebook Sign-In Response:", response);
+
+      if (response && response.user) {
+        const user = response.user;
+
+        const loginBody = {
+          username: user && user.email,
+          login_type: "FACEBOOK", // Standardized login type
+        };
+
+        try {
+          // Call Login API
+          const loginResponse = await axios.post(urls.Login, loginBody);
+          console.log("Login API Response:", loginResponse);
+
+          const responseData = loginResponse && loginResponse.data.results;
+          if (
+            responseData &&
+            responseData.status_code === 200 &&
+            responseData.token
+          ) {
+            // Successful login: Store user details in localStorage
+            localStorage.setItem("swaToken", responseData.token);
+            localStorage.setItem("userName", responseData.data.name);
+            localStorage.setItem("userProfile", responseData.data.image);
+            localStorage.setItem("phoneNumber", responseData.data.phone_number);
+            localStorage.setItem("UserEmail", responseData.data.email);
+
+            setGetOtpModal(false); // Close OTP modal
+            setTimeout(() => {
+              props.onClose(); // Close the main modal
+            }, 500);
+          } else if (
+            responseData &&
+            responseData.status_code === 401 &&
+            ((responseData && responseData.message === "Invalid credentials") ||
+              (responseData && responseData.message === "Login failed"))
+          ) {
+            console.log("User not registered. Attempting registration...");
+            await attemptRegistration(user, loginBody);
+          } else {
+            setValidationErrors({
+              otp: "Failed to login. Please try again.",
+            });
+          }
+        } catch (loginError) {
+          console.error("Login API Error:", loginError);
+        }
+      }
     } catch (error) {
-      console.log(error);
+      console.error("Facebook Sign-In Error:", error);
     }
   };
+
+  const attemptRegistration = async (user, loginBody) => {
+    try {
+      // Prepare the registration data
+      const signUpData = {
+        name: user.displayName || user.email, // Use displayName or email as username
+        phone_code: "+91", // Assuming phone code is always India (+91), adjust if needed
+        phone_number: "", // You can leave this blank for Google users or provide a default
+        email: user.email, // Use the email from the Google user
+        login_type: "GOOGLE", // Google login type
+        honorific_name: "", // You can leave this empty or get this from the user, if needed
+      };
+
+      // Call the register API
+      const response = await axios.post(Urls.register, signUpData);
+
+      if (
+        response &&
+        response.data &&
+        response.data.results &&
+        response.data.results.status_code === 200
+      ) {
+        localStorage.setItem("registerMobile", signUpData.phone_number);
+        setText("Registered");
+        props.setText("Registered");
+        props.setShowSuccessModal(true);
+        setShowRegisterSuccessModal(true);
+        setTimeout(() => {
+          props.setShowSuccessModal(false);
+          setShowRegisterSuccessModal(false);
+          handleLoginModalOpen(); // Open login modal after registration
+        }, 3000);
+        // Call the login API after registration is successful
+        attemptLogin(loginBody); // Pass the loginBody to the login API function
+      } else {
+        console.log("Registration failed:", response.data.results.message);
+      }
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.results &&
+        error.response.data.results.message ===
+          "user with this email or phone number already exists!!!"
+      ) {
+        setAlreadyExistText("User already exists with this email!");
+        setTimeout(() => {
+          setAlreadyExistText(""); // Clear the already exists message
+        }, 3500);
+        sendOtp(); // Send OTP if the user already exists
+      } else {
+        console.error("Registration error:", error);
+      }
+    }
+  };
+
+  // Function to handle login after registration
+  const attemptLogin = async (loginBody) => {
+    try {
+      const loginResponse = await axios.post(urls.Login, loginBody);
+
+      console.log("Login API Response:", loginResponse);
+
+      if (loginResponse && loginResponse.data.results.status_code === 200) {
+        // Successful login
+        localStorage.setItem("swaToken", loginResponse.data.results.token);
+        localStorage.setItem("userName", loginResponse.data.results.data.name);
+        localStorage.setItem(
+          "userProfile",
+          loginResponse.data.results.data.image
+        );
+        localStorage.setItem(
+          "phoneNumber",
+          loginResponse.data.results.data.phone_number
+        );
+        localStorage.setItem(
+          "UserEmail",
+          loginResponse.data.results.data.email
+        );
+
+        setGetOtpModal(false); // Close OTP modal if open
+        setTimeout(() => {
+          props.onClose(); // Close the main modal after a brief delay
+        }, 500);
+      } else {
+        // Handle other error conditions
+        setValidationErrors({
+          otp: "Failed to login. Please try again.",
+        });
+      }
+    } catch (error) {
+      console.error("Login API Error:", error);
+    }
+  };
+
+  // const handleSignInWithFb = async () => {
+  //   try {
+  //     const response = await signInWithPopup(auth, facebookAuthProvider);
+  //     console.log("responsefacebook", response);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -369,7 +583,9 @@ const LoginToggle = (props) => {
     };
     const mobileNumberRegex = /^\d{10}$/;
     if (!mobileNumber && !signUpData.mobile) {
-      setValidationErrors({ mobileNumber: "Mobile number is required" });
+      setValidationErrors({
+        mobileNumber: "Mobile number is required",
+      });
       return false;
     }
 
@@ -377,7 +593,9 @@ const LoginToggle = (props) => {
       !mobileNumberRegex.test(mobileNumber) &&
       !mobileNumberRegex.test(signUpData.mobile)
     ) {
-      setValidationErrors({ mobileNumber: "Mobile number must be 10 digits" });
+      setValidationErrors({
+        mobileNumber: "Mobile number must be 10 digits",
+      });
       return false;
     }
     setIsLoading(true);
@@ -410,11 +628,15 @@ const LoginToggle = (props) => {
     const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     if (!emailId.trim()) {
-      setValidationErrors({ emailId: "Email must not be empty" });
+      setValidationErrors({
+        emailId: "Email must not be empty",
+      });
       return false;
     }
     if (!emailRegex.test(emailId)) {
-      setValidationErrors({ emailId: "Invalid email address" });
+      setValidationErrors({
+        emailId: "Invalid email address",
+      });
       return false;
     }
 
@@ -678,11 +900,17 @@ const LoginToggle = (props) => {
                       </div>
                     </div>
                   </div>
-                  <div style={{ textAlign: "center" }}>
+                  <div
+                    style={{
+                      textAlign: "center",
+                    }}
+                  >
                     <button
                       type="submit"
                       className={Classes.accept}
-                      style={{ marginTop: "15px" }}
+                      style={{
+                        marginTop: "15px",
+                      }}
                       onClick={handleSignUp}
                     >
                       SIGNUP
@@ -696,7 +924,9 @@ const LoginToggle = (props) => {
                       Already have account?
                     </span>
                     <span
-                      style={{ cursor: "pointer" }}
+                      style={{
+                        cursor: "pointer",
+                      }}
                       className={Classes.signupAnchor}
                       onClick={handleLoginModalOpen}
                     >
@@ -713,7 +943,12 @@ const LoginToggle = (props) => {
                   </div>
                 </div>
 
-                <div style={{ display: "flex", marginBottom: "0.5rem" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    marginBottom: "0.5rem",
+                  }}
+                >
                   <div className={Classes.line2}>
                     <div
                       style={{
@@ -734,7 +969,9 @@ const LoginToggle = (props) => {
                 <div className={Classes.flex}>
                   <div
                     className={Classes.SocialButtons}
-                    style={{ marginBottom: "1rem" }}
+                    style={{
+                      marginBottom: "1rem",
+                    }}
                   >
                     <div className={Classes.googleButton}>
                       <button
@@ -808,7 +1045,11 @@ const LoginToggle = (props) => {
                         >
                           {activeTab === "tab1" ? (
                             <div className={Classes.tabTitleOne}>
-                              <span style={{ fontWeight: "600" }}>
+                              <span
+                                style={{
+                                  fontWeight: "600",
+                                }}
+                              >
                                 {/* Phone Number */}
                                 Email
                               </span>
@@ -841,7 +1082,11 @@ const LoginToggle = (props) => {
                           ) : (
                             <div className={Classes.tabTitleOne}>
                               {/* <span style={{ fontWeight: "600" }}>Email</span> */}
-                              <span style={{ fontWeight: "600" }}>
+                              <span
+                                style={{
+                                  fontWeight: "600",
+                                }}
+                              >
                                 Phone number
                               </span>
                             </div>
@@ -914,7 +1159,9 @@ const LoginToggle = (props) => {
                             >
                               <CircularProgress
                                 size={20}
-                                sx={{ color: "#fff" }}
+                                sx={{
+                                  color: "#fff",
+                                }}
                               />
                             </Box>
                           </>
@@ -944,7 +1191,9 @@ const LoginToggle = (props) => {
                             >
                               <CircularProgress
                                 size={20}
-                                sx={{ color: "#fff" }}
+                                sx={{
+                                  color: "#fff",
+                                }}
                               />
                             </Box>
                           </>
@@ -996,7 +1245,9 @@ const LoginToggle = (props) => {
               </div>
               <div style={{ display: "flex" }}>
                 <button
-                  style={{ paddingBottom: "4px" }}
+                  style={{
+                    paddingBottom: "4px",
+                  }}
                   className={Classes.buttonSocial}
                 >
                   <img src={APPLE} alt="APPLE" /> Login with Apple
@@ -1119,7 +1370,10 @@ const LoginToggle = (props) => {
         </Typography> */}
                       <Typography
                         sx={{ p: 2 }}
-                        style={{ textAlign: "center", padding: "5px" }}
+                        style={{
+                          textAlign: "center",
+                          padding: "5px",
+                        }}
                       >
                         <div>
                           <span
