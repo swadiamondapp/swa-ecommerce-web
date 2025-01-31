@@ -422,7 +422,10 @@ const LandingPage = () => {
         headeroffer={headeroffer}
       />
       {loading ? (
-        <div className="d-flex justify-content-center align-items-center loader">
+        <div
+          className="d-flex justify-content-center align-items-center loader"
+          style={{ height: "640px" }}
+        >
           <FadeLoader color="#00464d" />
         </div>
       ) : (
@@ -437,7 +440,9 @@ const LandingPage = () => {
               head={"Under  " + budjet[0].budget}
               sub={budjet[0].count + " styles"}
               backgroundImage={shop1}
-              clicked={() => budjet[0].count && productMinHandler(budjet[0].budget)}
+              clicked={() =>
+                budjet[0].count && productMinHandler(budjet[0].budget)
+              }
             />
             <BudgetCard
               head={"Under  " + budjet[1].budget}

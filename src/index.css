@@ -1037,3 +1037,9 @@ input[type="number"] {
 .css-919eu4 {
   background-color: rgba(0, 0, 0, 5%) !important;
 }
+.slick-dots li button:before {
+  color: transparent !important;
+}
+.slick-dots li.slick-active button:before {
+  color: transparent !important;
+}
