@@ -570,6 +570,10 @@ const Header = (props) => {
               selectedCountryData = response.data.results.data.find(
                 (country) => country.country_name === "United Arab Emirates"
               );
+            } else if (userCountryName === "IN") {
+              selectedCountryData = response.data.results.data.find(
+                (country) => country.country_name === "India"
+              );
             } else if (userCountryName === "IN" || userCountryName === "AE") {
               selectedCountryData = response.data.results.data.find(
                 (country) => country.country_code === userCountryName
@@ -589,18 +593,24 @@ const Header = (props) => {
                   id: selectedCountryData.id,
                   country_name: selectedCountryData.country_name,
                 });
-
-                localStorage.setItem(
-                  "flag_image",
-                  selectedCountryData.flag_image
-                );
-                localStorage.setItem("id", selectedCountryData.id);
-                localStorage.setItem(
-                  "country_name",
-                  selectedCountryData.country_name
-                );
               }
+              localStorage.setItem(
+                "flag_image",
+                selectedCountryData.flag_image
+              );
+              localStorage.setItem("id", selectedCountryData.id);
+              localStorage.setItem(
+                "country_name",
+                selectedCountryData.country_name
+              );
             }
+
+            // setTimeout(() => {
+            //   console.log("Clearing localStorage...");
+            //   localStorage.removeItem("id");
+            //   localStorage.removeItem("flag_image");
+            //   localStorage.removeItem("country_name");
+            // }, 2000);
 
             // Set default country from localStorage
             const defaultCountryID = localStorage.getItem("id");
