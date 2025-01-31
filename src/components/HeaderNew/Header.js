@@ -551,6 +551,22 @@ const Header = (props) => {
         console.log("response.data.results.data", response.data.results.data);
         setCountryData(response.data.results.data);
 
+        // // Check if data exists in localStorage
+        // const flagImage = localStorage.getItem("flag_image");
+        // const countryName = localStorage.getItem("country_name");
+
+        if (flag && Contryname) {
+          // If data exists in localStorage, use it and skip the API call
+          console.log("Using data from localStorage");
+          props.setSelectedCountry({
+            ...props.selectedCountry,
+            flag_image: flag,
+            country_name: Contryname,
+          });
+          setIsLoading(false);
+          return; // Exit the function early
+        }
+
         // Fetch user country using ipinfo.io
         const getLocation = async () => {
           setIsLoading(true);
