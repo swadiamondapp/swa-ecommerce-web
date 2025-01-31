@@ -6,12 +6,14 @@ import { BiRupee } from "react-icons/bi";
 import { CgDollar } from "react-icons/cg";
 import Classes from "../CartDesign.module.css";
 import { IoCheckmarkCircleSharp } from "react-icons/io5";
+import useCanonicalTag from "../../../useCanonicalTag";
 
 const TrialCart = (props) => {
   const Contryname = localStorage.getItem("country_name");
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
+  useCanonicalTag();
   return (
     <div>
       {/* trial cart design */}

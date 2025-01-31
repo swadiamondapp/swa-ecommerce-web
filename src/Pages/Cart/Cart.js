@@ -18,6 +18,7 @@ import TrialCart from "../../components/CartDesign/CartProducts/TrialCart";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import useCanonicalTag from "../../useCanonicalTag";
 
 const Cart = () => {
   const [cartCount, setCartCount] = useState("");
@@ -43,6 +44,7 @@ const Cart = () => {
     flag_image: flag,
     country_name: Contryname,
   });
+  useCanonicalTag();
   console.log("activeCart", activeCart);
   console.log("cartList00000", cartList);
   console.log("cartItemsCount", cartItemsCount);

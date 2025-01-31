@@ -15,6 +15,7 @@ import FilterMobile from "../../components/Filter/FilterMobile";
 import Features from "../../components/Features/Features";
 import FilterModal from "../../components/LifeTImeModal/FilterModal";
 import SliderFeature from "../../components/ProductDetails/SliderFeature";
+import useCanonicalTag from "../../useCanonicalTag";
 
 const NewArrivalPage = (props) => {
   const [product, setProduct] = useState([]);
@@ -48,6 +49,7 @@ const NewArrivalPage = (props) => {
   const [buttonTexts, setButtonTexts] = useState({});
   const [showModal, setShowModal] = useState(false);
   // const categoryName = props.location.state.categoryName
+  useCanonicalTag();
 
   const formatPathname = (pathname) => {
     // Remove the leading slash
@@ -194,7 +196,7 @@ const NewArrivalPage = (props) => {
       }
     } else {
       let categories = [];
-      let categoryName = ""
+      let categoryName = "";
       function getCategoryIdByName(name) {
         const category = categories.find(
           (cat) => cat.name === name.toUpperCase()
@@ -204,16 +206,16 @@ const NewArrivalPage = (props) => {
       axios
         .get(`${Urls.home}?country=${countryId}`)
         .then((response) => {
-          console.log("7654", location.pathname)
+          console.log("7654", location.pathname);
           categories = response.data.results.data.categories;
-          categoryName = location && location.pathname && location.pathname.slice(1)
+          categoryName =
+            location && location.pathname && location.pathname.slice(1);
           const categoryId = getCategoryIdByName(categoryName);
           setCatSet(categoryId);
           setHead("Product List");
           setCategoryDetails({
             data: categoryId,
-            product_category:
-            categoryName.toUpperCase(),
+            product_category: categoryName.toUpperCase(),
           });
           filter("?category_ids=" + categoryId, 1);
         })

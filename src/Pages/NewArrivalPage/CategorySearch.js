@@ -11,6 +11,7 @@ import { useHistory } from "react-router-dom";
 import { FadeLoader } from "react-spinners";
 import ReactPaginate from "react-paginate";
 import Header from "../../components/HeaderNew/Header";
+import useCanonicalTag from "../../useCanonicalTag";
 
 const CategorySearch = (props) => {
   const [product, setProduct] = useState([]);
@@ -27,6 +28,7 @@ const CategorySearch = (props) => {
   const [labelSet, setLabelSet] = useState([]);
   const [num, setNum] = useState("");
   const countryId = localStorage.getItem("id");
+  useCanonicalTag();
 
   const history = useHistory();
   const token = localStorage.getItem("swaToken");

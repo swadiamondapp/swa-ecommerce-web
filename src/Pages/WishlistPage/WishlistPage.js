@@ -11,6 +11,7 @@ import { useHistory } from "react-router-dom";
 import { FadeLoader } from "react-spinners";
 import Features from "../../components/Features/Features";
 import SliderFeature from "../../components/ProductDetails/SliderFeature";
+import useCanonicalTag from "../../useCanonicalTag";
 
 const whishlistPage = () => {
   const history = useHistory();
@@ -25,6 +26,7 @@ const whishlistPage = () => {
     flag_image: flag,
     country_name: Contryname,
   });
+  useCanonicalTag();
   const [cartCount, setCartCount] = useState("");
   const wishListing = () => {
     setLoading(true);

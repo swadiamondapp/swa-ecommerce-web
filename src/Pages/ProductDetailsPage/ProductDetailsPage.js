@@ -13,6 +13,7 @@ import axios from "axios";
 import * as Urls from "../../Urls";
 import { useHistory } from "react-router-dom";
 import SliderFeature from "../../components/ProductDetails/SliderFeature";
+import useCanonicalTag from "../../useCanonicalTag";
 
 const ProductDetailsPage = (props) => {
   // const productDetails = JSON.parse(sessionStorage.getItem("productDetails"));
@@ -50,12 +51,13 @@ const ProductDetailsPage = (props) => {
   const [picodeError, setPicodeError] = useState("");
   const [sizeError, setSizeError] = useState("");
   const [errormsgtrycart, setErrormsgtrycart] = useState();
+  useCanonicalTag();
 
   useEffect(() => {
     if (prodDet) {
       // Set document title
       document.title = prodDet.meta_title || "Detail Page";
-  
+
       // Check if a meta description tag already exists
       let metaDescription = document.querySelector("meta[name='description']");
       if (!metaDescription) {
@@ -64,19 +66,78 @@ const ProductDetailsPage = (props) => {
         metaDescription.name = "description";
         document.head.appendChild(metaDescription);
       }
-  
+
       // Update the content of the meta tag
-      metaDescription.content = prodDet.meta_description || "Default description for the product details page.";
+      metaDescription.content =
+        prodDet.meta_description ||
+        "Default description for the product details page.";
+      // Update or create Open Graph meta tags
+      const ogTitle = document.querySelector("meta[property='og:title']");
+      const ogDescription = document.querySelector(
+        "meta[property='og:description']"
+      );
+      const ogImage = document.querySelector("meta[property='og:image']");
+
+      // Update or create og:title
+      if (!ogTitle) {
+        const newOgTitle = document.createElement("meta");
+        newOgTitle.setAttribute("property", "og:title");
+        document.head.appendChild(newOgTitle);
+      }
+      document.querySelector("meta[property='og:title']").content =
+        prodDet.meta_title || "SWA DIAMONDS";
+
+      // Update or create og:description
+      if (!ogDescription) {
+        const newOgDescription = document.createElement("meta");
+        newOgDescription.setAttribute("property", "og:description");
+        document.head.appendChild(newOgDescription);
+      }
+      document.querySelector("meta[property='og:description']").content =
+        prodDet.meta_description || "Swa diamonds diamond jewellery";
+
+      // Update or create og:image
+      if (!ogImage) {
+        const newOgImage = document.createElement("meta");
+        newOgImage.setAttribute("property", "og:image");
+        document.head.appendChild(newOgImage);
+      }
+      document.querySelector("meta[property='og:image']").content =
+        prodDet.image_url || "https://www.swa.co/";
     }
-  
+
+    // Cleanup function to remove dynamically added meta tags on component unmount
+    return () => {
+      document.title = "Default Title"; // Reset the document title
+      const metaDescription = document.querySelector(
+        "meta[name='description']"
+      );
+      if (metaDescription) {
+        metaDescription.content = "Default description";
+      }
+
+      // Remove Open Graph meta tags
+      const ogTitle = document.querySelector("meta[property='og:title']");
+      const ogDescription = document.querySelector(
+        "meta[property='og:description']"
+      );
+      const ogImage = document.querySelector("meta[property='og:image']");
+
+      if (ogTitle) ogTitle.remove();
+      if (ogDescription) ogDescription.remove();
+      if (ogImage) ogImage.remove();
+    };
+
     // Cleanup not needed for this approach since we're updating an existing meta tag
   }, [prodDet]);
-  
+
   const [fetchedName, setFetchedName] = useState(null); // To track the last fetched name
 
   const fetchProductDetails = async (productName) => {
     try {
-      const response = await axios.get(`${Urls.detailsWithAlias}${productName}`);
+      const response = await axios.get(
+        `${Urls.detailsWithAlias}${productName}`
+      );
       if (response.data.results.data) {
         const details = {
           id: response.data.results.data.id,
@@ -120,7 +181,9 @@ const ProductDetailsPage = (props) => {
             setImgSet(data.image[Object.keys(data.image)[0]].multiple_images);
             setVideo(data.video[Object.keys(data.video)[0]].multiple_videos);
           })
-          .catch((error) => console.error("Error fetching product details:", error));
+          .catch((error) =>
+            console.error("Error fetching product details:", error)
+          );
 
         axios
           .get(`${Urls.productDet}${id}/reviews/`)
@@ -138,9 +201,13 @@ const ProductDetailsPage = (props) => {
           })
           .then((response) => {
             const message = response.data.results.message;
-            setCartCount(message === "cart is empty" ? "" : response.data.results.count);
+            setCartCount(
+              message === "cart is empty" ? "" : response.data.results.count
+            );
           })
-          .catch((error) => console.error("Error fetching cart details:", error));
+          .catch((error) =>
+            console.error("Error fetching cart details:", error)
+          );
       }
     };
 
@@ -361,8 +428,8 @@ const ProductDetailsPage = (props) => {
   return (
     <div>
       <Helmet>
-          <meta name="description" content={prodDet.meta_description} />
-        </Helmet>
+        <meta name="description" content={prodDet.meta_description} />
+      </Helmet>
       <Header
         countCartItems={cartCount}
         selectedCountry={selectedCountry}

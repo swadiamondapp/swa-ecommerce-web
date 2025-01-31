@@ -7,6 +7,7 @@ import CheckOut from "../../components/CheckOut/CheckOut";
 import OtpModal from "../../components/Navbar/OtpModal";
 import axios from "axios";
 import * as Urls from "../../Urls";
+import useCanonicalTag from "../../useCanonicalTag";
 
 const CheckOutPage = (props) => {
   const token = localStorage.getItem("swaToken");
@@ -17,6 +18,7 @@ const CheckOutPage = (props) => {
   const [address, setAddress] = useState([]);
   const [changeId, setChangeId] = useState("");
   const [cartCount, setCartCount] = useState("");
+  useCanonicalTag();
 
   useEffect(() => {
     // console.log(props.location.state.data);

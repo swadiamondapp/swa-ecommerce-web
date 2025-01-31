@@ -29,6 +29,7 @@ import { IoCall } from "react-icons/io5";
 import SliderFeature from "../../components/ProductDetails/SliderFeature";
 import { Modal, Box, Typography } from "@mui/material";
 import { useLocation } from "react-router-dom";
+import useCanonicalTag from "../../useCanonicalTag";
 
 const OrderHistorypage2 = (props) => {
   const location = useLocation();
@@ -41,6 +42,7 @@ const OrderHistorypage2 = (props) => {
     flag_image: flag,
     country_name: Contryname,
   });
+  useCanonicalTag();
   const [orderDet, setOrderDet] = useState([
     {
       product: {

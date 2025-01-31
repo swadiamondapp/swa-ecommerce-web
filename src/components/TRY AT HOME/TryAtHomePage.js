@@ -3,6 +3,7 @@ import Header from "../HeaderNew/Header";
 import Features from "../Features/Features";
 import Footer from "../Footer/Footer";
 import TryAtHome from "./TryAtHome";
+import useCanonicalTag from "../../useCanonicalTag";
 
 const TryAtHomePage = () => {
   const countryId = localStorage.getItem("id");
@@ -13,6 +14,7 @@ const TryAtHomePage = () => {
     flag_image: flag,
     country_name: Contryname,
   });
+  useCanonicalTag();
   return (
     <div>
       <div>
