@@ -18,7 +18,6 @@ const CheckOutPage = (props) => {
   const [address, setAddress] = useState([]);
   const [changeId, setChangeId] = useState("");
   const [cartCount, setCartCount] = useState("");
-  useCanonicalTag();
 
   useEffect(() => {
     // console.log(props.location.state.data);

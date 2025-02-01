@@ -13,7 +13,7 @@ const TrialCart = (props) => {
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
-  useCanonicalTag();
+
   return (
     <div>
       {/* trial cart design */}
