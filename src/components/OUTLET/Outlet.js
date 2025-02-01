@@ -89,6 +89,8 @@ const Outlet = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [shopId, setShopId] = useState(null);
   const [successModalOpen, setSuccessModalOpen] = useState(false);
+  const [selectedOutlet, setSelectedOutlet] = useState(null);
+  const [errors, setErrors] = useState({});
   const now = new Date();
   const currentDate = now.toISOString().split("T")[0]; // Get current date in "YYYY-MM-DD" format
   const currentTime = now.getHours() * 60 + now.getMinutes();
@@ -118,9 +120,11 @@ const Outlet = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, [isMobileView]);
-  const handleOpenSort = (shopId) => {
+  const handleOpenSort = (outlet) => {
     setOpensort(true);
-    setShopId(shopId);
+    setShopId(outlet.id);
+    setSelectedOutlet(outlet);
+    setErrors({});
   };
   const handleCloseSort = () => {
     setOpensort(false);
@@ -130,6 +134,8 @@ const Outlet = () => {
     setPhoneNumber("");
     setSelectedDate(null);
     setSelectedTimeSlot(null);
+    setSelectedOutlet(null);
+    setErrors({});
   };
   // const outlets = [
   //   {
@@ -173,23 +179,36 @@ const Outlet = () => {
   const handleDateClick = (dateString) => {
     setSelectedDate(dateString);
     setSelectedTimeSlot(null); // Reset selected time slot when date changes
+    setErrors((prev) => ({ ...prev, selectedDate: "" }));
   };
 
   const handleTimeSlotClick = (time) => {
     setSelectedTimeSlot(time);
+    setErrors((prev) => ({ ...prev, selectedTimeSlot: "" }));
+  };
+  // Validate form inputs
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!name) newErrors.name = "Name is required.";
+    if (!email) {
+      newErrors.email = "Email is required.";
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      newErrors.email = "Invalid email address.";
+    }
+    if (!phoneNumber) {
+      newErrors.phoneNumber = "Phone number is required.";
+    } else if (!/^\d{10}$/.test(phoneNumber)) {
+      newErrors.phoneNumber = "Invalid phone number.";
+    }
+    if (!selectedDate) newErrors.selectedDate = "Please select a date.";
+    if (!selectedTimeSlot) newErrors.selectedTimeSlot = "Please select a time.";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0; // Return true if no errors
   };
   const handleBookVisit = async () => {
-    if (
-      !shopId ||
-      !name ||
-      !email ||
-      !phoneNumber ||
-      !selectedDate ||
-      !selectedTimeSlot
-    ) {
-      alert("Please fill all the fields and select a date and time.");
-      return;
-    }
+    if (!validateForm()) return; // Stop if validation fails
 
     const bookingData = {
       shop_id: shopId,
@@ -284,7 +303,10 @@ const Outlet = () => {
                           </h3>
                           <p className={Classes.RatingOutlets}>
                             <img
-                              style={{ position: "relative", top: "-3px" }}
+                              style={{
+                                position: "relative",
+                                top: "-3px",
+                              }}
                               src={starimg}
                               alt="starimg"
                             />{" "}
@@ -312,14 +334,17 @@ const Outlet = () => {
                           <IoMdCall size={20} />
                         </div>
                         <div className={Classes.OutletBookvist}>
-                          <button onClick={() => handleOpenSort(item.id)}>
+                          <button onClick={() => handleOpenSort(item)}>
                             Book a Vist
                           </button>
                         </div>
                       </div>
                       <p className={Classes.OutletFooters}>
                         <img
-                          style={{ position: "relative", top: "-1px" }}
+                          style={{
+                            position: "relative",
+                            top: "-1px",
+                          }}
                           src={timeimg}
                           alt="timeimg"
                         />{" "}
@@ -344,13 +369,13 @@ const Outlet = () => {
                       <div className={Classes.OutletModalHeader}>
                         <img src={outletimg} alt="outletimg" />
                         <div>
-                          <h3>Hilite mall - Calicut</h3>
-                          <p>
-                            Door no 2/1149 G25& G26 <br /> Ground floor , HiLITE
-                            MALL  
-                          </p>
+                          <h3>{selectedOutlet && selectedOutlet.name}</h3>
+                          <p>{selectedOutlet && selectedOutlet.address}</p>
                         </div>
-                        <div className={Classes.Modaloutletclose}>
+                        <div
+                          className={Classes.Modaloutletclose}
+                          onClick={handleCloseSort}
+                        >
                           <IoClose className={Classes.MOdalcloseiconOutlet} />
                         </div>
                       </div>
@@ -360,28 +385,73 @@ const Outlet = () => {
                           <label>Enter Name</label>
                           <input
                             type="text"
-                            placeholder="Arjun"
+                            placeholder="Enter Name"
                             value={name}
-                            onChange={(e) => setName(e.target.value)}
+                            onChange={(e) => {
+                              setName(e.target.value);
+                              setErrors((prev) => ({ ...prev, name: "" })); // Clear error message
+                            }}
                           />
+                          {errors.name && (
+                            <p
+                              style={{
+                                color: "red",
+                                fontSize: "14px",
+                                paddingBottom: "5px",
+                              }}
+                            >
+                              {errors.name}
+                            </p>
+                          )}
                         </div>
                         <div className={Classes.OutletMform}>
                           <label>Email</label>
                           <input
                             type="email"
-                            placeholder="Jameel"
+                            placeholder="Enter Email"
                             value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            onChange={(e) => {
+                              setEmail(e.target.value);
+                              setErrors((prev) => ({ ...prev, email: "" })); // Clear error message
+                            }}
                           />
+                          {errors.email && (
+                            <p
+                              style={{
+                                color: "red",
+                                fontSize: "14px",
+                                paddingBottom: "5px",
+                              }}
+                            >
+                              {errors.email}
+                            </p>
+                          )}
                         </div>
                         <div className={Classes.OutletMform}>
                           <label>Phone number</label>
                           <input
                             type="text"
-                            placeholder="+91 98975656785"
+                            placeholder="Enter Phone Number"
                             value={phoneNumber}
-                            onChange={(e) => setPhoneNumber(e.target.value)}
+                            onChange={(e) => {
+                              setPhoneNumber(e.target.value);
+                              setErrors((prev) => ({
+                                ...prev,
+                                phoneNumber: "",
+                              })); // Clear error message
+                            }}
                           />
+                          {errors.phoneNumber && (
+                            <p
+                              style={{
+                                color: "red",
+                                fontSize: "14px",
+                                paddingBottom: "5px",
+                              }}
+                            >
+                              {errors.phoneNumber}
+                            </p>
+                          )}
                         </div>
                       </div>
                       <div className={Classes.SelectDateModal}>
@@ -418,6 +488,17 @@ const Outlet = () => {
                             );
                           })}
                         </div>
+                        {errors.selectedDate && (
+                          <p
+                            style={{
+                              color: "red",
+                              fontSize: "14px",
+                              paddingBottom: "5px",
+                            }}
+                          >
+                            {errors.selectedDate}
+                          </p>
+                        )}
                       </div>
                       <div className={Classes.outletModalTime}>
                         <div className={Classes.selectdateMText}>
@@ -446,6 +527,17 @@ const Outlet = () => {
                             return null;
                           })}
                         </div>
+                        {errors.selectedTimeSlot && (
+                          <p
+                            style={{
+                              color: "red",
+                              fontSize: "14px",
+                              paddingBottom: "5px",
+                            }}
+                          >
+                            {errors.selectedTimeSlot}
+                          </p>
+                        )}
                       </div>
                       <div className={Classes.Bookvistbtns}>
                         <button onClick={handleBookVisit}>Book a Vist</button>
@@ -463,7 +555,7 @@ const Outlet = () => {
                   <Typography>
                     <div className={Classes.OutletModalsParent}>
                       <div className={Classes.OutletModalHeader}>
-                        <h3>Booking Successful!</h3>
+                        <h3>Booking Successful!</h3> <br />
                         <p>Your visit has been booked successfully.</p>
                       </div>
                     </div>
