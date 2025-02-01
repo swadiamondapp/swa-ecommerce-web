@@ -4,6 +4,7 @@ import Footer from "../../components/Footer/Footer";
 import TermsAndConditions from "../../components/TermsAndConditions/TermsAndConditions";
 import axios from "axios";
 import * as Urls from "../../Urls";
+import useCanonicalTag from "../../useCanonicalTag";
 
 function TermsAndConditionsPage() {
   const [cartCount, setCartCount] = useState("");
@@ -16,6 +17,7 @@ function TermsAndConditionsPage() {
     flag_image: flag,
     country_name: Contryname,
   });
+  useCanonicalTag();
   useEffect(() => {
     if (token !== null) {
       axios

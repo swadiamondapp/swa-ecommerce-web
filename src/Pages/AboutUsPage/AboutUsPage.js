@@ -6,6 +6,7 @@ import Header from "../../components/HeaderNew/Header";
 import Classes from "./AboutUsPage.module.css";
 import axios from "axios";
 import * as Urls from "../../Urls";
+import useCanonicalTag from "../../useCanonicalTag";
 function AboutUsPage() {
   const [cartCount, setCartCount] = useState("");
   const token = localStorage.getItem("swaToken");
@@ -17,6 +18,7 @@ function AboutUsPage() {
     flag_image: flag,
     country_name: Contryname,
   });
+  useCanonicalTag();
   useEffect(() => {
     if (token !== null) {
       axios

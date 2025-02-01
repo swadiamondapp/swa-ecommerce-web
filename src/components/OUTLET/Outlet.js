@@ -30,10 +30,38 @@ const style = {
   maxHeight: "100%",
   overflowY: "scroll",
 };
+const style2 = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  bgcolor: "background.paper",
+  border: "none",
+  boxShadow: 24,
+  borderRadius: "4px",
+  width: 450,
+  maxHeight: "100%",
+  overflowY: "scroll",
+};
 
 const mobileStyle = {
   position: "absolute",
   bottom: 0,
+  transition: "transform 0.3s ease-in-out",
+  bgcolor: "background.paper",
+  border: "none",
+  boxShadow: 24,
+  borderRadius: "4px",
+  p: 2,
+  overflow: "auto",
+  maxHeight: "78%",
+  width: "100%",
+};
+const mobileStyle2 = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
   transition: "transform 0.3s ease-in-out",
   bgcolor: "background.paper",
   border: "none",
@@ -52,6 +80,31 @@ const Outlet = () => {
   );
   const [outlets, setOutlets] = useState([]);
   const [loading, setLoading] = useState(false);
+  const countryId = localStorage.getItem("id");
+  const [dates, setDates] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [shopId, setShopId] = useState(null);
+  const [successModalOpen, setSuccessModalOpen] = useState(false);
+  const now = new Date();
+  const currentDate = now.toISOString().split("T")[0]; // Get current date in "YYYY-MM-DD" format
+  const currentTime = now.getHours() * 60 + now.getMinutes();
+  const availableTimes = [
+    { time: "10:00 AM", minutes: 10 * 60 },
+    { time: "11:00 AM", minutes: 11 * 60 },
+    { time: "12:00 PM", minutes: 12 * 60 },
+    { time: "1:00 PM", minutes: 13 * 60 },
+    { time: "2:00 PM", minutes: 14 * 60 },
+    { time: "3:00 PM", minutes: 15 * 60 },
+  ];
+
+  console.log("selectedTimeSlot", selectedTimeSlot);
+  console.log("selectedDate", selectedDate);
+  console.log("shopId", shopId);
+
   console.log("outlets11", outlets);
   useEffect(() => {
     const handleResize = () => {
@@ -65,11 +118,18 @@ const Outlet = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, [isMobileView]);
-  const handleOpenSort = () => {
+  const handleOpenSort = (shopId) => {
     setOpensort(true);
+    setShopId(shopId);
   };
   const handleCloseSort = () => {
     setOpensort(false);
+    // Clear all states when the modal is closed
+    setName("");
+    setEmail("");
+    setPhoneNumber("");
+    setSelectedDate(null);
+    setSelectedTimeSlot(null);
   };
   // const outlets = [
   //   {
@@ -85,17 +145,104 @@ const Outlet = () => {
   //     name: "Hilite mall - Calicut",
   //   },
   // ];
+  const handleCloseSuccessModal = () => {
+    setSuccessModalOpen(false);
+  };
+  useEffect(() => {
+    // Generate dates for the next 7 days
+    const generateDates = () => {
+      const datesArray = [];
+      for (let i = 0; i < 7; i++) {
+        const date = new Date();
+        date.setDate(now.getDate() + i);
+        datesArray.push(date.toISOString().split("T")[0]);
+      }
+      setDates(datesArray);
+    };
+
+    generateDates();
+  }, []);
+
+  const formatDate = (dateString) => {
+    const options = { weekday: "short", day: "2-digit" };
+    const date = new Date(dateString);
+    const formattedDate = date.toLocaleDateString("en-US", options).split(" ");
+    return [formattedDate[0], formattedDate[1]];
+  };
+
+  const handleDateClick = (dateString) => {
+    setSelectedDate(dateString);
+    setSelectedTimeSlot(null); // Reset selected time slot when date changes
+  };
+
+  const handleTimeSlotClick = (time) => {
+    setSelectedTimeSlot(time);
+  };
+  const handleBookVisit = async () => {
+    if (
+      !shopId ||
+      !name ||
+      !email ||
+      !phoneNumber ||
+      !selectedDate ||
+      !selectedTimeSlot
+    ) {
+      alert("Please fill all the fields and select a date and time.");
+      return;
+    }
+
+    const bookingData = {
+      shop_id: shopId,
+      name: name,
+      email: email,
+      phone_number: phoneNumber,
+      scheduled_date: selectedDate,
+      scheduled_time: selectedTimeSlot,
+    };
+
+    try {
+      const response = await axios.post(
+        "https://swaecommain.swa.co/ecom/book-a-visit/",
+        bookingData
+      );
+      if (response.status === 200) {
+        // alert("Booking successful!");
+        handleCloseSort();
+        // Show success modal
+        setSuccessModalOpen(true);
+
+        // Clear all states
+        setName("");
+        setEmail("");
+        setPhoneNumber("");
+        setSelectedDate(null);
+        setSelectedTimeSlot(null);
+
+        // Close the success modal and form modal after 3 seconds
+        setTimeout(() => {
+          setSuccessModalOpen(false);
+        }, 3000);
+      }
+    } catch (error) {
+      console.error("Error booking visit:", error);
+      alert("Failed to book visit. Please try again.");
+    }
+  };
   useEffect(() => {
     // API call for fetching outlets
     const fetchOutlets = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`${Urls.oulets}`, {
-          //  headers: {
-          //    Authorization: "Token " + localStorage.getItem("token"), // Assuming token is stored in localStorage
-          //  },
-        });
+        const response = await axios.get(
+          `${Urls.oulets}?country=${countryId}`,
+          {
+            //  headers: {
+            //    Authorization: "Token " + localStorage.getItem("token"), // Assuming token is stored in localStorage
+            //  },
+          }
+        );
         setOutlets(response.data.data); // Adjust according to your API response structure
+
         setLoading(false);
       } catch (error) {
         console.error("Error fetching outlets:", error);
@@ -165,7 +312,9 @@ const Outlet = () => {
                           <IoMdCall size={20} />
                         </div>
                         <div className={Classes.OutletBookvist}>
-                          <button onClick={handleOpenSort}>Book a Vist</button>
+                          <button onClick={() => handleOpenSort(item.id)}>
+                            Book a Vist
+                          </button>
                         </div>
                       </div>
                       <p className={Classes.OutletFooters}>
@@ -209,15 +358,30 @@ const Outlet = () => {
                         <h3>Basic Details</h3>
                         <div className={Classes.OutletMform}>
                           <label>Enter Name</label>
-                          <input type="" placeholder="Arjun" />
+                          <input
+                            type="text"
+                            placeholder="Arjun"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                          />
                         </div>
                         <div className={Classes.OutletMform}>
                           <label>Email</label>
-                          <input type="" placeholder="Jameel" />
+                          <input
+                            type="email"
+                            placeholder="Jameel"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                          />
                         </div>
                         <div className={Classes.OutletMform}>
                           <label>Phone number</label>
-                          <input type="" placeholder="+91 98975656785" />
+                          <input
+                            type="text"
+                            placeholder="+91 98975656785"
+                            value={phoneNumber}
+                            onChange={(e) => setPhoneNumber(e.target.value)}
+                          />
                         </div>
                       </div>
                       <div className={Classes.SelectDateModal}>
@@ -225,26 +389,34 @@ const Outlet = () => {
                           <h3>Select date</h3>
                         </div>
                         <div className={Classes.ParentDateModals}>
-                          <div className={Classes.DMdate1}>
-                            <p>MON</p>
-                            <p>02</p>
-                          </div>
-                          <div className={Classes.DMdate1}>
-                            <p>TUE</p>
-                            <p>03</p>
-                          </div>
-                          <div className={Classes.DMdate1}>
-                            <p>WED</p>
-                            <p>04</p>
-                          </div>
-                          <div className={Classes.DMdate1}>
-                            <p>THU</p>
-                            <p>05</p>
-                          </div>
-                          <div className={Classes.DMdate1}>
-                            <p>FRI</p>
-                            <p>06</p>
-                          </div>
+                          {dates.map((dateString, index) => {
+                            const [day, date] = formatDate(dateString);
+                            const formattedDateString = dateString;
+                            const isToday = formattedDateString === currentDate;
+
+                            return (
+                              <div
+                                key={index}
+                                className={
+                                  selectedDate === formattedDateString
+                                    ? `${Classes.TryDate1} ${Classes.TryDateActive}`
+                                    : Classes.TryDate1
+                                }
+                                onClick={() => handleDateClick(dateString)}
+                              >
+                                <p>{day}</p>
+                                <h3
+                                  style={{
+                                    fontWeight: "600",
+                                    fontSize: "20px",
+                                    padding: "3px 0px",
+                                  }}
+                                >
+                                  {date}
+                                </h3>
+                              </div>
+                            );
+                          })}
                         </div>
                       </div>
                       <div className={Classes.outletModalTime}>
@@ -252,16 +424,31 @@ const Outlet = () => {
                           <h3>Choose Time</h3>
                         </div>
                         <div className={Classes.outletModalTimesec}>
-                          <div className={Classes.Timesec}>10:OO AM</div>
-                          <div className={Classes.Timesec}>11:OO AM</div>
-                          <div className={Classes.Timesec}>12:OO AM</div>
-                          <div className={Classes.Timesec}>1:OO PM</div>
-                          <div className={Classes.Timesec}>2:OO PM</div>
-                          <div className={Classes.Timesec}>3:OO PM</div>
+                          {availableTimes.map(({ time, minutes }) => {
+                            if (
+                              selectedDate !== currentDate ||
+                              minutes > currentTime
+                            ) {
+                              return (
+                                <div
+                                  key={time}
+                                  className={
+                                    selectedTimeSlot === time
+                                      ? `${Classes.Timesec} ${Classes.TryTimeSlotsActive}`
+                                      : Classes.Timesec
+                                  }
+                                  onClick={() => handleTimeSlotClick(time)}
+                                >
+                                  {time}
+                                </div>
+                              );
+                            }
+                            return null;
+                          })}
                         </div>
                       </div>
                       <div className={Classes.Bookvistbtns}>
-                        <button>Book a Vist</button>
+                        <button onClick={handleBookVisit}>Book a Vist</button>
                       </div>
                     </div>
                   </Typography>
@@ -269,6 +456,21 @@ const Outlet = () => {
               </Modal>
             </div>
             {/* modal */}
+            {/* Success Modal */}
+            <div>
+              <Modal open={successModalOpen} onClose={handleCloseSuccessModal}>
+                <Box sx={isMobileView ? mobileStyle2 : style2}>
+                  <Typography>
+                    <div className={Classes.OutletModalsParent}>
+                      <div className={Classes.OutletModalHeader}>
+                        <h3>Booking Successful!</h3>
+                        <p>Your visit has been booked successfully.</p>
+                      </div>
+                    </div>
+                  </Typography>
+                </Box>
+              </Modal>
+            </div>
           </div>
         </div>
       </div>

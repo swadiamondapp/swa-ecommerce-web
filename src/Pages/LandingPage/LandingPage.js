@@ -25,6 +25,7 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { FadeLoader } from "react-spinners";
 import SliderFeature from "../../components/ProductDetails/SliderFeature";
+import useCanonicalTag from "../../useCanonicalTag";
 
 const LandingPage = () => {
   const [banner, setBanner] = useState([]);
@@ -61,6 +62,7 @@ const LandingPage = () => {
     flag_image: flag,
     country_name: Contryname,
   });
+  useCanonicalTag();
 
   console.log("mobBanner..01", mobBanner);
   console.log("budjet..02", budjet);

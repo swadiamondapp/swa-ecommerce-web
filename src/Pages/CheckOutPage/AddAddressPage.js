@@ -8,6 +8,7 @@ import axios from "axios";
 import * as Urls from "../../Urls";
 import AddAddress from "../../components/CheckOut/AddAddress";
 import SliderFeature from "../../components/ProductDetails/SliderFeature";
+import useCanonicalTag from "../../useCanonicalTag";
 
 const AddAddressPage = (props) => {
   const [total, setTotal] = useState("");
@@ -18,6 +19,7 @@ const AddAddressPage = (props) => {
   const [changeId, setChangeId] = useState("");
   const [cartCount, setCartCount] = useState("");
   const token = localStorage.getItem("swaToken");
+  useCanonicalTag();
   useEffect(() => {
     setLoading(true);
     fetchAddress();

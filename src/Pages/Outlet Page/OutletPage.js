@@ -6,6 +6,7 @@ import Features from "../../components/Features/Features";
 import Footer from "../../components/Footer/Footer";
 import axios from "axios";
 import * as Urls from "../../Urls";
+import useCanonicalTag from "../../useCanonicalTag";
 
 const OutletPage = () => {
   useEffect(() => {
@@ -21,6 +22,7 @@ const OutletPage = () => {
     flag_image: flag,
     country_name: Contryname,
   });
+  useCanonicalTag();
 
   useEffect(() => {
     axios

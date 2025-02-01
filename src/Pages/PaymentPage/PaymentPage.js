@@ -7,6 +7,7 @@ import Payment from "../../components/Payment/Payment";
 import SliderFeature from "../../components/ProductDetails/SliderFeature";
 import axios from "axios";
 import * as Urls from "../../Urls";
+import useCanonicalTag from "../../useCanonicalTag";
 
 const PaymentPage = (props) => {
   const countryId = localStorage.getItem("id");
@@ -19,6 +20,7 @@ const PaymentPage = (props) => {
     flag_image: flag,
     country_name: Contryname,
   });
+  useCanonicalTag();
 
   useEffect(() => {
     axios
