@@ -114,6 +114,7 @@ const LoginModal = (props) => {
   //     setLogin(true);
   //   }
   // }, [props.isLog]);
+  console.log("props.textheader1", props.text);
 
   const registerHandler = () => {
     let selObj = country.arrayCountryList.find(
@@ -409,7 +410,7 @@ const LoginModal = (props) => {
     }
   };
   const myOrderHandler = () => {
-    history.push("/my_orders");
+    history.push("/my/orders");
     setLogCond(false);
   };
   const logoutHandler = () => {
@@ -422,7 +423,7 @@ const LoginModal = (props) => {
     localStorage.removeItem("swaToken");
     localStorage.removeItem("userName");
     localStorage.removeItem("phoneNumber");
-    localStorage.removeItem("userProfile")
+    localStorage.removeItem("userProfile");
     // localStorage.removeItem("defaultCountryFlag");
     // localStorage.removeItem("id");
 
@@ -640,34 +641,38 @@ const LoginModal = (props) => {
       {/* modal */}
 
       {showUserDetails && (
-        <div ref={userDetailsRef} className={Classes.LogedUserDetails}>
+        <div
+          ref={userDetailsRef}
+          className={Classes.LogedUserDetails}
+          style={{ userSelect: "none" }}
+        >
           <div className={Classes.Name_phoneLog}>
             <p>{userName}</p>
             <p className={Classes.Name_phoneLoged}>{phone}</p>
           </div>
           <div className={Classes.LogedDetails_list}>
-            <Link to="/profile" className={Classes.MobProfileLinks}>
+            <Link to="/my/profile" className={Classes.MobProfileLinks}>
               <p style={{ fontSize: "16px" }}>Profile</p>
             </Link>
 
-            <Link to="/my_orders" className={Classes.LogedDetails_Item}>
+            <Link to="/my/orders" className={Classes.LogedDetails_Item}>
               <p style={{ fontSize: "16px" }}>Order history</p>
             </Link>
 
-            <Link to="/addaddress" className={Classes.LogedDetails_Item}>
+            <Link to="/add/address" className={Classes.LogedDetails_Item}>
               <p style={{ fontSize: "16px" }}>Add Address</p>
             </Link>
             {/* <Link className={Classes.LogedDetails_Item}>
               <p style={{ fontSize: "16px" }}>Track Order</p>
             </Link> */}
-            <Link to="/rate&review" className={Classes.LogedDetails_Item}>
+            <Link to="/rate&/review" className={Classes.LogedDetails_Item}>
               <p style={{ fontSize: "16px" }}>Write review</p>
             </Link>
-            <Link to="/swaWallet" className={Classes.LogedDetails_Item}>
+            <Link to="/swa/wallet" className={Classes.LogedDetails_Item}>
               <p style={{ fontSize: "16px" }}>Swa wallet</p>
             </Link>
             <Link
-              to="/swaExchange"
+              to="/swa/exchange"
               style={{ fontSize: "16px" }}
               className={Classes.LogedDetails_Item}
             >

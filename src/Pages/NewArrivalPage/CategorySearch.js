@@ -11,6 +11,7 @@ import { useHistory } from "react-router-dom";
 import { FadeLoader } from "react-spinners";
 import ReactPaginate from "react-paginate";
 import Header from "../../components/HeaderNew/Header";
+import useCanonicalTag from "../../useCanonicalTag";
 
 const CategorySearch = (props) => {
   const [product, setProduct] = useState([]);
@@ -27,6 +28,7 @@ const CategorySearch = (props) => {
   const [labelSet, setLabelSet] = useState([]);
   const [num, setNum] = useState("");
   const countryId = localStorage.getItem("id");
+  useCanonicalTag();
 
   const history = useHistory();
   const token = localStorage.getItem("swaToken");
@@ -48,14 +50,26 @@ const CategorySearch = (props) => {
   };
 
   const prodDetHandler = (prodItem) => {
+    // history.push({
+    //   pathname:
+    //     "/products/" +
+    //     prodItem.product_id +
+    //     "/" +
+    //     prodItem.thumbnail_colour_id +
+    //     "/" +
+    //     prodItem.product_name,
+    //   state: { data: prodItem },
+    // });
+    sessionStorage.setItem(
+      "productDetails",
+      JSON.stringify({
+        id: prodItem.product_id,
+        color: prodItem.colour_id,
+        name: prodItem.product_name,
+      })
+    );
     history.push({
-      pathname:
-        "/products/" +
-        prodItem.product_id +
-        "/" +
-        prodItem.thumbnail_colour_id +
-        "/" +
-        prodItem.product_name,
+      pathname: "/jewellery/" + prodItem.alias,
       state: { data: prodItem },
     });
   };
@@ -293,7 +307,7 @@ const CategorySearch = (props) => {
   } else {
     products = product.map((item, index) => {
       categoryName = item.category.name;
-      console.log("ringssssssss",product)
+      console.log("ringssssssss", product);
       return (
         <NewArrivalCard
           ProductImage={item.thumbnail_image}

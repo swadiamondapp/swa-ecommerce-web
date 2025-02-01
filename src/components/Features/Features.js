@@ -28,15 +28,16 @@ function Features() {
                 className={Classes.FeaturesSubText}
                 style={{ display: "flex", alignItems: "center", gap: "3px" }}
               >
-                On order over{" "}
-                {Contryname === "India" && (
+                Every order ships free!
+                {/* On all orders{" "} */}
+                {/* {Contryname === "India" && (
                   <BiRupee className={Classes.Rupee} />
                 )}
                 {Contryname === "United States" && (
                   <CgDollar className={Classes.Rupee} />
                 )}
                 {Contryname === "United Arab Emirates" && <span>AED</span>}{" "}
-                2000...{" "}
+                2000...{" "} */}
               </p>
             </div>
             <div
@@ -47,7 +48,7 @@ function Features() {
               <img src={PS2} className={Classes.Images} alt="PS2" />
               <p className={Classes.FeaturesmainText}>100% Refund</p>
               <p className={Classes.FeaturesSubText}>
-                Return with 30 days of delivery
+                Return with 15 days of delivery
               </p>
             </div>
             <div
@@ -71,7 +72,7 @@ function Features() {
                 LifetimeExchange & Buyback
               </p>
               <p className={Classes.FeaturesSubText}>
-                Exchange for current value or get cash
+                Get 95% Exchange value and 90% cashback
               </p>
             </div>
           </div>

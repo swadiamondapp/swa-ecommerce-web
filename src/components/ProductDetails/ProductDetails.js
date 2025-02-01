@@ -51,16 +51,20 @@ import { CgDollar } from "react-icons/cg";
 import LoginModal from "../LoginModal/LoginModal";
 import shippingTag from "../../Assets/shiptime.png";
 import freeDelivery3 from "../../Assets/freeDev3.png";
+import shopL from "../../Assets/shopsL.png";
 import freeDelivery4 from "../../Assets/freeDev4.png";
 import freeDelivery5 from "../../Assets/freeDev5.png";
 import shippingTag1 from "../../Assets/shiptruck.png";
 import shippingtag2 from "../../Assets/shiptimetwo.png";
+import LoginSuccessModal from "../LoginSuccesModal/LoginSuccessModal";
 
 const ProductDetails = (props) => {
   const location = useLocation();
   const [show, setShow] = useState(false);
   const [addToWishList, setAddToWishList] = useState(false);
+  const [wishlistIds, setWishlistIds] = useState();
   const [wishId, setWishId] = useState("");
+  const pincode = localStorage.getItem("pincode");
 
   const [pinCodeError, setPinCodeError] = useState("");
   const [active, setActive] = useState(null);
@@ -86,6 +90,8 @@ const ProductDetails = (props) => {
   const Contryname = localStorage.getItem("country_name");
   const [loginModalVisible, setLoginModalVisible] = useState(false);
   const [modalshow, setModalShow] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [text, setText] = useState("");
 
   const closeHanlder = () => {
     setModalShow(false);
@@ -114,6 +120,7 @@ const ProductDetails = (props) => {
     }
   };
   console.log("IsRestricted...?", props.IsRestricted);
+  console.log("wishlistIds", wishlistIds);
 
   useEffect(() => {
     if (token !== null) {
@@ -139,6 +146,14 @@ const ProductDetails = (props) => {
     }
     customerPhotos();
   }, []);
+
+  useEffect(() => {
+    props.setPinCode(pincode);
+  }, [pincode]);
+
+  useEffect(() => {
+    props.colors !== undefined && props.colorSelct(props.colors[0]);
+  }, [props && props.colors]);
 
   const customerPhotos = async () => {
     const response = await axios.get(
@@ -168,7 +183,9 @@ const ProductDetails = (props) => {
   const clickPurity = () => {
     setPurity(!purity);
   };
+
   const colorSelectHandler = (color) => {
+    console.log("color---->", color);
     props.colorSelct(color);
     setSelectedColor(color);
     console.log("color--->", color);
@@ -215,6 +232,7 @@ const ProductDetails = (props) => {
         })
         .then((response1) => {
           setAddToWishList(true);
+          setWishlistIds(response1.data.results.data.id);
         })
         .catch((error) => {
           console.log(error);
@@ -223,11 +241,16 @@ const ProductDetails = (props) => {
       toast("Please Login!");
     }
   };
+  console.log("props.idds", props.id);
+  console.log("props.wishId", wishId);
   const Remove = () => {
     if (token !== null) {
-      if (wishId !== "") {
+      const idToUse = wishId || wishlistIds;
+      if (idToUse) {
+        console.log("wishlistIdsapi", wishlistIds);
+        console.log("wishlistIdsapi2", wishId);
         axios
-          .delete(`${Urls.wishlist + wishId}?country=${countryId}`, {
+          .delete(`${Urls.wishlist + idToUse}/?country=${countryId}`, {
             headers: {
               Authorization: "Token " + token,
             },
@@ -599,6 +622,7 @@ const ProductDetails = (props) => {
   console.log("imageUrls", imageUrls);
   console.log(props.deliveryDate, "deliveryDate==>==>");
   console.log(props.actualPrice, "props.actualPrice");
+  console.log(props.deliveryShopList, "props.deliveryShopList");
 
   return (
     <div>
@@ -669,6 +693,7 @@ const ProductDetails = (props) => {
                                           </div>
                                         )}
                                       <img
+                                        style={{ outline: "none" }}
                                         className={Classes.Mobsliderbig}
                                         src={item}
                                         alt={`Slide ${index}`}
@@ -908,7 +933,9 @@ const ProductDetails = (props) => {
                   <RWebShare
                     data={{
                       text: "Swa Diamonds",
-                      url: "https://swaecomnew.zinfog.in" + location.pathname,
+                      // url: "https://swa.co/" + location.pathname,
+                      // url: `https://www.swa.co/jewellery/share?id=${props.productDetails.id}&color=${props.productDetails.color}&name=${props.productDetails.name}&alias=${props.alias}`,
+                      url: `https://www.swa.co/jewellery/share?id=${props && props.productDetails && props.productDetails.id}&color=${props && props.productDetails && props.productDetails.color}&name=${props && props.productDetails && props.productDetails.name}&alias=${props && props.alias && props.alias}`,
                       // url: "https://www.swa.co/" + location.pathname,
                       title: "Swa Diamonds",
                     }}
@@ -930,63 +957,70 @@ const ProductDetails = (props) => {
                 {/* {props.diamondWeight}gram) */}
               </p>
               <p className={Classes.Code}>SKU : {props.sku}</p>
-              <div className={`${Classes.Flex} ${Classes.MobDownAR}`}>
-                {/* <BiRupee size={25} /> */}
+              <div className="productdetailPricesec">
+                <div className={`${Classes.Flex} ${Classes.MobDownAR}`}>
+                  {/* <BiRupee size={25} /> */}
 
-                <p
-                  className={Classes.NewPrice}
-                  style={{ display: "flex", alignItems: "center", gap: "3px"}}
-                >
-                  {Contryname === "India" && (
-                    <BiRupee className={Classes.Rupee} />
-                  )}
-                  {Contryname === "United States" && (
-                    <CgDollar className={Classes.Rupee} />
-                  )}
-                  {Contryname === "United Arab Emirates" && (
-                    <span style={{ paddingRight: "5px" }}>AED</span>
-                  )}
-                  {/* &#x20B9; {parseFloat(formattedCost).toFixed(0)} */}
-                  {result === null || result === "NaN" ? "" : result}
-                </p>
-                {props.actualPrice &&
-                  (props.actualPrice === null ||
-                  isNaN(Number(props.actualPrice)) ? (
-                    ""
-                  ) : (
-                    <>
-                      {Contryname === "India" && (
-                        <BiRupee size={25} color="#B0B0B0" />
-                      )}
-                      {Contryname === "United States" && (
-                        <CgDollar size={25} color="#B0B0B0" />
-                      )}
-                      {Contryname === "United Arab Emirates" && (
-                        <span
-                          style={{ paddingRight: "5px", paddingLeft: "7px" }}
-                        >
-                          AED
-                        </span>
-                      )}
-                      <p className={Classes.OldPrice}>
-                        {numberWithCommas(
-                          parseInt(props.actualPrice, 10).toFixed(0)
+                  <p
+                    className={Classes.NewPrice}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "3px",
+                    }}
+                  >
+                    {Contryname === "India" && (
+                      <BiRupee className={Classes.Rupee} />
+                    )}
+                    {Contryname === "United States" && (
+                      <CgDollar className={Classes.Rupee} />
+                    )}
+                    {Contryname === "United Arab Emirates" && (
+                      <span style={{ paddingRight: "5px" }}>AED</span>
+                    )}
+                    {/* &#x20B9; {parseFloat(formattedCost).toFixed(0)} */}
+                    {result === null || result === "NaN" ? "" : result}
+                  </p>
+                  {props.actualPrice &&
+                    (props.actualPrice === null ||
+                    isNaN(Number(props.actualPrice)) ? (
+                      ""
+                    ) : (
+                      <>
+                        {Contryname === "India" && (
+                          <BiRupee size={25} color="#B0B0B0" />
                         )}
-                      </p>
-                    </>
-                  ))}
+                        {Contryname === "United States" && (
+                          <CgDollar size={25} color="#B0B0B0" />
+                        )}
+                        {Contryname === "United Arab Emirates" && (
+                          <span
+                            style={{ paddingRight: "5px", paddingLeft: "7px" }}
+                          >
+                            AED
+                          </span>
+                        )}
+                        <p className={Classes.OldPrice}>
+                          {numberWithCommas(
+                            parseInt(props.actualPrice, 10).toFixed(0)
+                          )}
+                        </p>
+                      </>
+                    ))}
+                </div>
+                {props.discount ? (
+                  <p className={Classes.HurrayText}>
+                    Hurray! You have saved{" "}
+                    {Contryname === "India" && <BiRupee size={15} />}
+                    {Contryname === "United States" && <CgDollar size={15} />}
+                    {Contryname === "United Arab Emirates" && (
+                      <span style={{ paddingRight: "5px" }}>AED</span>
+                    )}{" "}
+                    {numberWithCommas(props.discountVal.toFixed(0))}
+                  </p>
+                ) : null}
               </div>
-              {props.discount ? (
-                <p className={Classes.HurrayText}>
-                  Hurray! You have saved{" "}
-                  {Contryname === "India" && <BiRupee size={15} />}
-                  {Contryname === "United States" && <CgDollar size={15} />}
-                  {Contryname === "United Arab Emirates" && (
-                    <span style={{ paddingRight: "5px" }}>AED</span>
-                  )}{" "}
-                  {numberWithCommas(props.discountVal.toFixed(0))}
-                </p>
-              ) : null}
+
               <p className={Classes.AvailableColours}>Customize this product</p>
               <div className={Classes.Flex}>
                 {props.colors.map((item, index) => {
@@ -1075,7 +1109,9 @@ const ProductDetails = (props) => {
                   handleClose={handleCloseModal}
                   productId={props.id}
                 />
-                <p style={{ color: "#ff4545" }}>{props.errormsgtrycart}</p>
+                <p className="sizevalidation" style={{ color: "#ff4545" }}>
+                  {props.errormsgtrycart}
+                </p>
               </div>
               <Modal
                 open={showErrorModal}
@@ -1234,7 +1270,20 @@ const ProductDetails = (props) => {
                   <button
                     className={Classes.CheckButton}
                     // onClick={() => setPincodeShow(true)}
-                    onClick={props.checkDelivery}
+                    onClick={() => {
+                      if (props.sizeChart.length > 0) {
+                        if (!props.Size && !selectedSize) {
+                          setShowErrorModal(true);
+                          setTimeout(() => {
+                            setShowErrorModal(false);
+                          }, 78000);
+                        } else {
+                          props.checkDelivery();
+                        }
+                      } else {
+                        props.checkDelivery();
+                      }
+                    }}
                     // onClick={availbilityCheck}
                   >
                     CHECK
@@ -1365,6 +1414,55 @@ const ProductDetails = (props) => {
                       </div>
                     </div>
                   )}
+                  {props.deliveryDate &&
+                    Array.isArray(props.deliveryShopList) &&
+                    props.deliveryShopList.length > 0 && (
+                      <div className={Classes.deliveryDetailsList}>
+                        <div className={Classes.freedevimageBack}>
+                          <img src={shopL} alt="Free Delivery" />
+                        </div>
+                        <div>
+                          <div>
+                            <p className={Classes.shippingTagtext_head}>
+                              Available Shop
+                            </p>
+                          </div>
+                          <div>
+                            {props.deliveryShopList.map((shop, index) => {
+                              // Use a Set to collect unique shop names
+                              const shopNames = new Set();
+
+                              if (
+                                shop.delivery_in_24_hr &&
+                                shop.delivery_in_24_hr.shop_name
+                              ) {
+                                shopNames.add(shop.delivery_in_24_hr.shop_name);
+                              }
+                              if (
+                                shop.delivery_in_next_day &&
+                                shop.delivery_in_next_day.shop_name
+                              ) {
+                                shopNames.add(
+                                  shop.delivery_in_next_day.shop_name
+                                );
+                              }
+
+                              // Convert the Set back to an array and render unique shop names
+                              return Array.from(shopNames).map(
+                                (name, subIndex) => (
+                                  <p
+                                    key={`${index}-${subIndex}`}
+                                    className={Classes.shippingTagtext_sub}
+                                  >
+                                    {name}
+                                  </p>
+                                )
+                              );
+                            })}
+                          </div>
+                        </div>
+                      </div>
+                    )}
                 </div>
                 {/* <div className={Classes.Flex}>
                 <img className={Classes.Stroke} src={Stroke} alt="" />
@@ -1685,7 +1783,7 @@ const ProductDetails = (props) => {
                     {/* {props.gw > 0 ? (
                       <p className={Classes.Right}>{props.gw + " GM"}</p>
                     ) : null} */}
-                    <p className={Classes.Right}>{props.gw + " GM"}</p>
+                    <p className={Classes.Right}>{props.gw + " G"}</p>
 
                     {props.diamondTypw !== null && (
                       <p className={Classes.Right}>{props.diamondTypw}</p>
@@ -1813,7 +1911,10 @@ const ProductDetails = (props) => {
                 </div>
               );
             })} */}
-            <div className={Classes.BorderBottom2}>
+            <div
+              className={Classes.BorderBottom2}
+              style={{ borderBottom: "none" }}
+            >
               <div className="container">
                 <div className={Classes.CustomersHeadReview}>
                   <p className={Classes.ProductDetailsHead}>
@@ -1924,13 +2025,18 @@ const ProductDetails = (props) => {
                           <div className={Classes.ReviewsDescription}>
                             <p>{item.review}</p>
                           </div>
-                          <div style={{ marginTop: "8px" }}>
-                            <img
-                              style={{ maxWidth: "60px", borderRadius: "5px" }}
-                              src={item.review_image}
-                              alt="review_image"
-                            />
-                          </div>
+                          {item.review_image && (
+                            <div style={{ marginTop: "8px" }}>
+                              <img
+                                style={{
+                                  maxWidth: "60px",
+                                  borderRadius: "5px",
+                                }}
+                                src={item.review_image}
+                                alt="review_image"
+                              />
+                            </div>
+                          )}
                         </div>
                       </div>
                     );
@@ -1984,11 +2090,21 @@ const ProductDetails = (props) => {
           </div>
         </div>
         {loginModalVisible && (
-          <LoginModal
-            isLog={modalshow}
-            close={closeHanlder}
-            handleOpenLogin={"profile"}
-          />
+          <>
+            <LoginModal
+              isLog={modalshow}
+              close={closeHanlder}
+              handleOpenLogin={"profile"}
+              setShowSuccessModal={setShowSuccessModal}
+              setText={setText}
+            />
+            <LoginSuccessModal
+              openSuccessModal={showSuccessModal}
+              close={() => setShowSuccessModal(false)}
+              state={showSuccessModal}
+              text={text}
+            />
+          </>
         )}
       </div>
     </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom/cjs/react-router-dom";
 import Header from "../../components/HeaderNew/Header";
+import { Helmet } from "react-helmet";
 import Footer from "../../components/Footer/Footer";
 import RecentSearch from "../../components/RecentSearch/RecentSearch";
 import Features from "../../components/Features/Features";
@@ -12,9 +13,17 @@ import axios from "axios";
 import * as Urls from "../../Urls";
 import { useHistory } from "react-router-dom";
 import SliderFeature from "../../components/ProductDetails/SliderFeature";
+import useCanonicalTag from "../../useCanonicalTag";
 
 const ProductDetailsPage = (props) => {
-  const { id } = useParams();
+  // const productDetails = JSON.parse(sessionStorage.getItem("productDetails"));
+  const token = localStorage.getItem("swaToken");
+  const pincode = localStorage.getItem("pincode");
+  const history = useHistory();
+  const { name } = useParams();
+  const [productDetails, setProductDetails] = useState(
+    JSON.parse(sessionStorage.getItem("productDetails"))
+  );
   const [prodDet, setProdDet] = useState([]);
   const [sizeChart, setSizeChart] = useState([]);
   const [colorChart, setColorChart] = useState([]);
@@ -34,131 +43,177 @@ const ProductDetailsPage = (props) => {
   const [isRestricted, setIsRestricted] = useState(false);
   const countryId = localStorage.getItem("id");
   const [deliveryDate, setDeliveryDate] = useState();
+  const [deliveryShopList, setDeliveryShopsList] = useState([]);
   const [pincodeShow, setPincodeShow] = useState(false);
   const [pinCode, setPinCode] = useState("");
-
   const [logAct, setLogAct] = useState(false);
-  const token = localStorage.getItem("swaToken");
-  const history = useHistory();
-  console.log("isRestricted", isRestricted);
   const [colorError, setColorError] = useState("");
   const [picodeError, setPicodeError] = useState("");
   const [sizeError, setSizeError] = useState("");
   const [errormsgtrycart, setErrormsgtrycart] = useState();
-
-  console.log("tokenanasmk", props.token);
-  console.log("sizeError", sizeError);
-  console.log("props.match.params.id", props.match.params.id);
+  useCanonicalTag();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-    console.log(props);
-    // setClrId(props.location.state.data.thumbnail_colour_id);
-    setClrId(props.match.params.color);
-    // setProduct_Id(props.match.params.id);
+    if (prodDet) {
+      // Set document title
+      document.title = prodDet.meta_title || "Detail Page";
 
-    if (
-      localStorage.getItem("swaToken") === null &&
-      props.match.path === "/products/:id/:color/:name"
-    ) {
-      console.log(JSON.parse(localStorage.getItem("recent")));
-      let proArray = JSON.parse(localStorage.getItem("recent"));
-      const newProd =
-        props &&
-        props.location &&
-        props.location.state &&
-        props.location.state.data;
-      if (proArray && proArray.some((element) => element)) {
-        const found = proArray.find((element) => {
-          return (
-            element && element.product_id === newProd && newProd.product_id
-          );
-        });
-        if (!found) {
-          proArray.push(newProd);
-          let filterArray = proArray.slice(-4);
-          localStorage.setItem("recent", JSON.stringify(filterArray));
-        }
-      } else {
-        const newProd =
-          props &&
-          props.location &&
-          props.location.state &&
-          props.location.state.data;
-        let newArray = [];
-        newArray.push(newProd);
-        localStorage.setItem("recent", JSON.stringify(newArray.slice(0, 5)));
+      // Check if a meta description tag already exists
+      let metaDescription = document.querySelector("meta[name='description']");
+      if (!metaDescription) {
+        // Create a new meta tag if it doesn't exist
+        metaDescription = document.createElement("meta");
+        metaDescription.name = "description";
+        document.head.appendChild(metaDescription);
       }
-    } else {
-      const body = {
-        product_id: props.match.params.id,
-      };
-      axios
-        .post(Urls.addRecent, body, {
-          headers: { Authorization: "Token " + token },
-        })
-        .then((response1) => {})
-        .catch((error) => {
-          console.log(error);
-        });
+
+      // Update the content of the meta tag
+      metaDescription.content =
+        prodDet.meta_description ||
+        "Default description for the product details page.";
+      // Update or create Open Graph meta tags
+      const ogTitle = document.querySelector("meta[property='og:title']");
+      const ogDescription = document.querySelector(
+        "meta[property='og:description']"
+      );
+      const ogImage = document.querySelector("meta[property='og:image']");
+
+      // Update or create og:title
+      if (!ogTitle) {
+        const newOgTitle = document.createElement("meta");
+        newOgTitle.setAttribute("property", "og:title");
+        document.head.appendChild(newOgTitle);
+      }
+      document.querySelector("meta[property='og:title']").content =
+        prodDet.meta_title || "SWA DIAMONDS";
+
+      // Update or create og:description
+      if (!ogDescription) {
+        const newOgDescription = document.createElement("meta");
+        newOgDescription.setAttribute("property", "og:description");
+        document.head.appendChild(newOgDescription);
+      }
+      document.querySelector("meta[property='og:description']").content =
+        prodDet.meta_description || "Swa diamonds diamond jewellery";
+
+      // Update or create og:image
+      if (!ogImage) {
+        const newOgImage = document.createElement("meta");
+        newOgImage.setAttribute("property", "og:image");
+        document.head.appendChild(newOgImage);
+      }
+      document.querySelector("meta[property='og:image']").content =
+        prodDet.image_url || "https://www.swa.co/";
     }
-    axios
-      .get(`${Urls.productDet + props.match.params.id}?country=${countryId}`)
-      .then((response1) => {
-        setIsRestricted(response1.data.results.data.is_restricted);
-        setProdDet(response1.data.results.data);
-        setSizeChart(response1.data.results.data.size_names);
-        setColorChart(response1.data.results.data.colors);
-        setThumbImg(
-          response1.data.results.data.image[
-            Object.keys(response1.data.results.data.image)[0]
-          ].thumbnail
-        );
-        setNewThumpSet(response1.data.results.data.image);
-        setImgSet(
-          response1.data.results.data.image[
-            Object.keys(response1.data.results.data.image)[0]
-          ].multiple_images
-        );
-        setVideo(
-          response1.data.results.data.video[
-            Object.keys(response1.data.results.data.video)[0]
-          ].multiple_videos
-        );
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    axios
-      .get(Urls.productDet + props.match.params.id + "/reviews/")
-      .then((response1) => {
-        setReview(response1.data.results.data.slice(0, 1));
-        setCount(response1.data.results.count);
-        setAllRev(
-          response1.data.results.data.slice(
-            1,
-            response1.data.results.data.length
-          )
-        );
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    axios
-      .get(`${Urls.cart}?country=${countryId}`, {
-        headers: { Authorization: "Token " + token },
-      })
-      .then((response1) => {
-        if (response1.data.results.message === "cart is empty") {
-          setCartCount("");
-        } else {
-          setCartCount(response1.data.results.count);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [props.match.params.id]);
+
+    // Cleanup function to remove dynamically added meta tags on component unmount
+    return () => {
+      document.title = "Default Title"; // Reset the document title
+      const metaDescription = document.querySelector(
+        "meta[name='description']"
+      );
+      if (metaDescription) {
+        metaDescription.content = "Default description";
+      }
+
+      // Remove Open Graph meta tags
+      const ogTitle = document.querySelector("meta[property='og:title']");
+      const ogDescription = document.querySelector(
+        "meta[property='og:description']"
+      );
+      const ogImage = document.querySelector("meta[property='og:image']");
+
+      if (ogTitle) ogTitle.remove();
+      if (ogDescription) ogDescription.remove();
+      if (ogImage) ogImage.remove();
+    };
+
+    // Cleanup not needed for this approach since we're updating an existing meta tag
+  }, [prodDet]);
+
+  const [fetchedName, setFetchedName] = useState(null); // To track the last fetched name
+
+  const fetchProductDetails = async (productName) => {
+    try {
+      const response = await axios.get(
+        `${Urls.detailsWithAlias}${productName}`
+      );
+      if (response.data.results.data) {
+        const details = {
+          id: response.data.results.data.id,
+          color: response.data.results.data.color_id,
+          name: response.data.results.data.product_name,
+        };
+        setProductDetails(details);
+        sessionStorage.setItem("productDetails", JSON.stringify(details));
+        return details;
+      }
+    } catch (error) {
+      console.error("Error fetching product details:", error);
+      return null;
+    }
+  };
+
+  useEffect(() => {
+    if (fetchedName === name) return; // Prevent re-fetching for the same name
+    window.scrollTo(0, 0);
+    const updateProductDetails = async () => {
+      let details = productDetails;
+
+      if (!productDetails || productDetails.name !== name) {
+        details = await fetchProductDetails(name);
+      }
+
+      if (details) {
+        setFetchedName(name); // Mark the current name as fetched
+        const { id } = details;
+
+        axios
+          .get(`${Urls.productDet}${id}?country=${countryId}`)
+          .then((response) => {
+            const data = response.data.results.data;
+            setProdDet(data);
+            setIsRestricted(data.is_restricted);
+            setSizeChart(data.size_names);
+            setColorChart(data.colors);
+            setThumbImg(data.image[Object.keys(data.image)[0]].thumbnail);
+            setNewThumpSet(data.image);
+            setImgSet(data.image[Object.keys(data.image)[0]].multiple_images);
+            setVideo(data.video[Object.keys(data.video)[0]].multiple_videos);
+          })
+          .catch((error) =>
+            console.error("Error fetching product details:", error)
+          );
+
+        axios
+          .get(`${Urls.productDet}${id}/reviews/`)
+          .then((response) => {
+            const reviews = response.data.results.data;
+            setReview(reviews.slice(0, 1));
+            setCount(response.data.results.count);
+            setAllRev(reviews.slice(1));
+          })
+          .catch((error) => console.error("Error fetching reviews:", error));
+
+        axios
+          .get(`${Urls.cart}?country=${countryId}`, {
+            headers: { Authorization: "Token " + token },
+          })
+          .then((response) => {
+            const message = response.data.results.message;
+            setCartCount(
+              message === "cart is empty" ? "" : response.data.results.count
+            );
+          })
+          .catch((error) =>
+            console.error("Error fetching cart details:", error)
+          );
+      }
+    };
+
+    updateProductDetails();
+  }, [name, productDetails, fetchedName]);
+
   const buyProductHandler = () => {
     if (size === "") {
       setError("");
@@ -177,7 +232,7 @@ const ProductDetailsPage = (props) => {
 
       if (token !== null) {
         history.push({
-          pathname: "/checkout",
+          pathname: "/cart/checkout",
           state: { data: selProd, name: "buy" },
         });
       } else {
@@ -188,25 +243,25 @@ const ProductDetailsPage = (props) => {
     }
   };
   const colorHandler = (imgItem) => {
-    let clr = imgItem.colour_name;
+    let clr = imgItem && imgItem.colour_name;
 
-    if (imgItem.colour_name === "rose") {
+    if (imgItem && imgItem.colour_name === "rose") {
       clr = "rose";
       setThumbImg(newThumpSet.rose.thumbnail);
       setImgSet(newThumpSet.rose.multiple_images);
       setClrId(newThumpSet.rose.thumbnail_color_id);
-    } else if (imgItem.colour_name === "white") {
+    } else if (imgItem && imgItem.colour_name === "white") {
       clr = "white";
       setThumbImg(newThumpSet.white.thumbnail);
       setImgSet(newThumpSet.white.multiple_images);
       setClrId(newThumpSet.white.thumbnail_color_id);
-    } else if (imgItem.colour_name === "yellow") {
+    } else if (imgItem && imgItem.colour_name === "yellow") {
       clr = "yellow";
 
       setThumbImg(newThumpSet.yellow.thumbnail);
       setImgSet(newThumpSet.yellow.multiple_images);
       setClrId(newThumpSet.yellow.thumbnail_color_id);
-    } else if (imgItem.colour_name === "pt") {
+    } else if (imgItem && imgItem.colour_name === "pt") {
       clr = "pt";
       setThumbImg(newThumpSet.pt.thumbnail);
       setImgSet(newThumpSet.pt.multiple_images);
@@ -249,7 +304,7 @@ const ProductDetailsPage = (props) => {
             let count = cartCount;
             count = count + 1;
             setCartCount(count);
-            history.push("/cart");
+            history.push("/shoping/cart");
           }
         })
         .catch((error) => {
@@ -257,7 +312,7 @@ const ProductDetailsPage = (props) => {
         });
     } else {
       history.push({
-        pathname: "/checkout",
+        pathname: "/cart/checkout",
         state: { data: selProd, name: "buybody" },
       });
     }
@@ -275,7 +330,7 @@ const ProductDetailsPage = (props) => {
     } else {
       setColorError("");
     }
-    if (!pinCode) {
+    if (!pincode && !pinCode) {
       setPicodeError("Pincode is required");
     } else {
       setPicodeError("");
@@ -287,12 +342,23 @@ const ProductDetailsPage = (props) => {
     // } else {
     //   setSizeError("");
     // }
-    if (!hasError && pinCode) {
+    if (sizeChart.length > 0) {
+      if (!size) {
+        setSizeError("Size is required");
+        hasError = true;
+      } else {
+        setSizeError("");
+      }
+    } else {
+      // If no size chart is present, reset the size error
+      setSizeError("");
+    }
+    if (!hasError && (pinCode || pincode)) {
       const body = {
         product_id: prodDet.id,
         color_id: clrId,
         size_id: size,
-        pincode: pinCode,
+        pincode: pinCode || pincode,
       };
 
       axios
@@ -301,6 +367,7 @@ const ProductDetailsPage = (props) => {
         })
         .then((response1) => {
           setDeliveryDate(response1.data.results.message);
+          setDeliveryShopsList(response1.data.results.data);
           setPincodeShow(true); // Show the message after receiving the response
           console.log("dateresponse", response1.data.results);
         })
@@ -322,11 +389,12 @@ const ProductDetailsPage = (props) => {
       })
       .then((response1) => {
         if (response1.data.results.status_code === 200) {
-          history.push("/tryathome");
+          history.push("/trial/athome");
         } else if (
           response1.data.results.message === "Item already in try list"
         ) {
-          setErrormsgtrycart("Item already in try list");
+          // setErrormsgtrycart("Item already in try list");
+          history.push("/trial/athome");
         } else if (response1.data.results.message === "size  required") {
           setErrormsgtrycart("size  required");
         }
@@ -336,6 +404,7 @@ const ProductDetailsPage = (props) => {
       });
   };
   const sizeChangeHandler = (size) => {
+    console.log("anassiz", size);
     setSize(size);
   };
   const sizechangeModal = (size) => {
@@ -345,7 +414,7 @@ const ProductDetailsPage = (props) => {
     setLogToken(logToken);
   };
 
-  console.log("errormsgtrycart-->", errormsgtrycart);
+  console.log("123456productDetails-->", productDetails);
   // const countryId = localStorage.getItem("id");
   const flag = localStorage.getItem("flag_image");
   const Contryname = localStorage.getItem("country_name");
@@ -355,9 +424,12 @@ const ProductDetailsPage = (props) => {
     country_name: Contryname,
   });
 
-  console.log(prodDet.country_total_price,"prodDet")
+  console.log(productDetails, "prodDet");
   return (
     <div>
+      <Helmet>
+        <meta name="description" content={prodDet.meta_description} />
+      </Helmet>
       <Header
         countCartItems={cartCount}
         selectedCountry={selectedCountry}
@@ -368,15 +440,13 @@ const ProductDetailsPage = (props) => {
       />
 
       <ProductDetails
-        sku={prodDet.sku && prodDet.sku === "undefined" ?  "" : prodDet.sku }
+        sku={prodDet.sku && prodDet.sku === "undefined" ? "" : prodDet.sku}
         offerPrice={
           prodDet.is_on_discount
             ? prodDet.country_discount_price
             : prodDet.country_total_price
         }
-        actualPrice={
-          prodDet.is_on_discount ? prodDet.country_total_price : ""
-        }
+        actualPrice={prodDet.is_on_discount ? prodDet.country_total_price : ""}
         discountVal={
           prodDet.is_on_discount
             ? prodDet.country_total_price > prodDet.discount_price
@@ -407,7 +477,7 @@ const ProductDetailsPage = (props) => {
         height={prodDet.height}
         colors={colorChart}
         thumbImg={thumImg}
-        id={props.match.params.id}
+        id={productDetails && productDetails.id}
         colorSelct={colorHandler}
         bagImg={imgSet}
         Video={video}
@@ -430,15 +500,18 @@ const ProductDetailsPage = (props) => {
         TryatHome={TryhomeHandler}
         errormsgtrycart={errormsgtrycart}
         clickedBuy={buyProductHandler}
+        deliveryShopList={deliveryShopList}
+        productDetails={productDetails}
+        alias={
+          props.location.state &&
+          props.location.state.data &&
+          props.location.state.data.alias
+            ? props.location.state.data.alias
+            : productDetails && productDetails.alias
+        }
       />
       <div className={Classes.RecentSearch}>
-        <SimilerProducts productId={props.match.params.id} />
-        {/* <RecentSearch>
-        <NewArrivalCard ProductImage={New1} ProductName='Diamond ring' ProductId='SKU: 18037' PriceNew='27000' PriceOld='29500' />
-          <NewArrivalCard ProductImage={New2} ProductName='Diamond ring' ProductId='SKU: 18037' PriceNew='27000' PriceOld='29500' />
-          <NewArrivalCard ProductImage={New3} ProductName='Diamond ring' ProductId='SKU: 18037' PriceNew='27000' PriceOld='29500' />
-          <NewArrivalCard ProductImage={New4} ProductName='Diamond ring' ProductId='SKU: 18037' PriceNew='27000' PriceOld='29500' />
-        </RecentSearch> */}
+        <SimilerProducts productId={productDetails && productDetails.id} />
       </div>
 
       <div className={Classes.Features}>

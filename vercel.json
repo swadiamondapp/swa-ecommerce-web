@@ -1,0 +1,7 @@
+{
+  "rewrites": [
+    { "source": "/jewellery/(.*)", "destination": "/jewellery/[slug]" },
+    { "source": "/rings", "destination": "/rings" },
+    { "source": "/(.*)", "destination": "/" }
+  ]
+}

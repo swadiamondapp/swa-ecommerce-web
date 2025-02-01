@@ -78,6 +78,9 @@ input::placeholder {
 :where(.css-dev-only-do-not-override-4fj727).ant-picker-focused {
   box-shadow: none !important;
 }
+.productdetailPricesec {
+  border: none;
+}
 :where(.css-dev-only-do-not-override-4fj727).ant-picker {
   border: none !important;
   background: transparent !important;
@@ -478,6 +481,11 @@ p {
 .card-body-ether > span {
   font-weight: 600;
   margin-left: 0.5rem;
+}
+
+.sizevalidation {
+  padding-left: 0px;
+  padding-top: 0px;
 }
 
 .card-body-cta {
@@ -910,7 +918,8 @@ input[type="number"] {
     justify-content: center !important;
     position: relative;
     /* top: -68px; */
-    top: -18px;
+    top: 0px;
+    height: 30px;
   }
   .Innerslide {
     display: none;
@@ -937,6 +946,19 @@ input[type="number"] {
   }
   .ParentSlide .slick-dots li button:before {
     font-size: 14px;
+  }
+  .sizevalidation {
+    padding-left: 25px;
+    padding-top: 5px;
+  }
+  .productdetailPricesec {
+    border-bottom: 0.75px solid #e6e5e5;
+  }
+  .ParentSlide {
+    height: 372px;
+  }
+  .ParentSlide .slick-slider {
+    height: 372px;
   }
 }
 .hideSearchBar {
@@ -970,7 +992,7 @@ input[type="number"] {
 }
 /* styles.css or your CSS module */
 .activeTab {
-  background: #F7F6F2 !important;
+  background: #f7f6f2 !important;
   font-weight: 900 !important;
   color: black !important;
   padding-left: 20px;
@@ -994,6 +1016,30 @@ input[type="number"] {
   font-size: 12px;
   color: black;
 }
-.p-inputtext{
+.p-inputtext {
   padding: 0px !important;
+}
+
+.modal.show .modal-dialog {
+  transform: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.css-i9fmh8-MuiBackdrop-root-MuiModal-backdrop {
+  background-color: rgba(0, 0, 0, 5%) !important;
+}
+.css-1bxdgrj {
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px !important;
+}
+.css-919eu4 {
+  background-color: rgba(0, 0, 0, 5%) !important;
+}
+.slick-dots li button:before {
+  color: transparent !important;
+}
+.slick-dots li.slick-active button:before {
+  color: transparent !important;
 }

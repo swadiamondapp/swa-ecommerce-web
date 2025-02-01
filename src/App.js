@@ -32,6 +32,7 @@ import TryAtHomePage from "./components/TRY AT HOME/TryAtHomePage";
 import TryAtHomeInnerPage from "./components/TRY AT HOME/TryAtHomeInnerPage";
 import GTM from "./components/GTM/GTM";
 import TrialCart from "./components/CartDesign/CartProducts/TrialCart";
+import UrlShare from "./Pages/UrlShare/UrlShare";
 
 function App() {
   return (
@@ -39,42 +40,45 @@ function App() {
       <GTM />
       <Switch>
         <Route path="/" component={LandingPage} exact />
-        <Route path="/faq" component={FAQPage} exact />
-        <Route path="/wish_list" component={WhishlistPage} exact />
-        <Route path="/cart" component={Cart} exact />
-        <Route path="/trialcart" component={TrialCart} exact />
-        <Route path="/new_arrivel" component={NewArrivalPage} exact />
+        <Route path="/fa/questions" component={FAQPage} exact />
+        <Route path="/wished/list" component={WhishlistPage} exact />
+        <Route path="/shoping/cart" component={Cart} exact />
+        <Route path="/trial/cart" component={TrialCart} exact />
+        <Route path="/new/arrivals" component={NewArrivalPage} exact />
+        <Route path="/:category" component={NewArrivalPage} exact />
         <Route path="/category_search/:id" component={CategorySearch} />
         <Route path="/tag_search/:id" component={TagSearch} />
 
         <Route
-          path="/terms_condition"
+          path="/terms/condition"
           component={TermsAndConditionsPage}
           exact
         />
-        <Route path="/Return_policy_page" component={ReturnPolicyPage} exact />
-        <Route path="/privacy_policy" component={PrivacyPolicyPage} exact />
-        <Route path="/checkout" component={CheckOutPage} exact />
-        <Route path="/addaddress" component={AddAddressPage} exact />
-        <Route path="/swaWallet" component={SwaWalletBalance} />
-        <Route path="/swaExchange" component={SwaExchangBalance} />
-        <Route path="/place_order" component={CheckOutPage} exact />
-        <Route path="/my_orders" component={OrderHistoryPage} exact />
-        <Route path="/track_order" component={OrderHistorypage2} exact />
-        <Route path="/about_us" component={AboutUsPage} exact />
-        <Route path="/order_successful" component={OrderSuccessfulPage} exact />
-        <Route path="/rate_review" component={RateAndReview} exact />
-        <Route path="/rate&review" component={RateAndReviewMain} exact />
+        <Route path="/return/policy" component={ReturnPolicyPage} exact />
+        <Route path="/privacy/policy" component={PrivacyPolicyPage} exact />
+        <Route path="/cart/checkout" component={CheckOutPage} exact />
+        <Route path="/add/address" component={AddAddressPage} exact />
+        <Route path="/swa/wallet" component={SwaWalletBalance} />
+        <Route path="/swa/exchange" component={SwaExchangBalance} />
+        <Route path="/place/order" component={CheckOutPage} exact />
+        <Route path="/my/orders" component={OrderHistoryPage} exact />
+        <Route path="/track/orders" component={OrderHistorypage2} exact />
+        <Route path="/about/us" component={AboutUsPage} exact />
+        <Route path="/order/successfull" component={OrderSuccessfulPage} exact />
+        <Route path="/rate/review" component={RateAndReview} exact />
+        <Route path="/rate&/review" component={RateAndReviewMain} exact />
+        <Route path="/jewellery/share" component={UrlShare} exact />
+        <Route path="/jewellery/:name" component={ProductDetailsPage} exact />
+        <Route path="/product/payment" component={PaymentPage} />
+        <Route path="/my/profile" component={ProfilePage} />
+        <Route path="/trial/athome" component={TryAtHomePage} />
+        <Route path="/tryathome/form" component={TryAtHomeInnerPage} />
+        <Route path="/product/outlets" component={OutletPage} />
         <Route
-          path="/products/:id/:color/:name"
-          component={ProductDetailsPage}
+          path="/jewellery/budget/:amount"
+          component={NewArrivalPage}
           exact
         />
-        <Route path="/payment" component={PaymentPage} />
-        <Route path="/profile" component={ProfilePage} />
-        <Route path="/tryathome" component={TryAtHomePage} />
-        <Route path="/tryathomeform" component={TryAtHomeInnerPage} />
-        <Route path="/outlet" component={OutletPage} />
       </Switch>
     </Router>
   );

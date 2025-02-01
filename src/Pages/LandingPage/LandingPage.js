@@ -25,6 +25,7 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { FadeLoader } from "react-spinners";
 import SliderFeature from "../../components/ProductDetails/SliderFeature";
+import useCanonicalTag from "../../useCanonicalTag";
 
 const LandingPage = () => {
   const [banner, setBanner] = useState([]);
@@ -61,6 +62,7 @@ const LandingPage = () => {
     flag_image: flag,
     country_name: Contryname,
   });
+  useCanonicalTag();
 
   console.log("mobBanner..01", mobBanner);
   console.log("budjet..02", budjet);
@@ -71,6 +73,10 @@ const LandingPage = () => {
   const handleCloseModal = () => {
     setShowModal(false);
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const history = useHistory();
   const token = localStorage.getItem("swaToken");
@@ -196,7 +202,8 @@ const LandingPage = () => {
   };
   const productMinHandler = (price) => {
     history.push({
-      pathname: "/new_arrivel",
+      // pathname: "/new/arrivals",
+      pathname: `/jewellery/budget/${price}`,
       state: { data: "filMin", price: price },
     });
   };
@@ -236,15 +243,27 @@ const LandingPage = () => {
     // Add additional logic to handle the product click
   };
   const prodDetHandler = (prodItem) => {
-    console.log("prodItem---->", prodItem);
+    // console.log("prodItem---->", prodItem);
+    // history.push({
+    //   pathname:
+    //     "/products/" +
+    //     prodItem.product_id +
+    //     "/" +
+    //     prodItem.colour_id +
+    //     "/" +
+    //     prodItem.product_name,
+    //   state: { data: prodItem },
+    // });
+    sessionStorage.setItem(
+      "productDetails",
+      JSON.stringify({
+        id: prodItem.product_id,
+        color: prodItem.colour_id,
+        name: prodItem.product_name,
+      })
+    );
     history.push({
-      pathname:
-        "/products/" +
-        prodItem.product_id +
-        "/" +
-        prodItem.colour_id +
-        "/" +
-        prodItem.product_name,
+      pathname: "/jewellery/" + prodItem.alias,
       state: { data: prodItem },
     });
   };
@@ -259,6 +278,7 @@ const LandingPage = () => {
     );
   } else {
     newArriv = newArrival.map((item, index) => {
+      console.log("landingitems", item);
       return (
         <NewArrivalCard
           ProductImage={item.thumbnail_image && item.thumbnail_image}
@@ -284,7 +304,9 @@ const LandingPage = () => {
           onclose={handleCloseModal}
           clicked={() => prodDetHandler(item)}
           onClick={() => handleShowModal(item.product_id)}
-          buttonText={buttonTexts[item.product_id] || "Check delivery date"}
+          buttonText={
+            buttonTexts[item && item.product_id] || "Check delivery date"
+          }
           showModal={showModal}
         />
       );
@@ -325,7 +347,9 @@ const LandingPage = () => {
           prodet={item}
           onclose={handleCloseModal}
           onClick={() => handleShowModal(item.product_id)}
-          buttonText={buttonTexts[item.product_id] || "Check delivery date"}
+          buttonText={
+            buttonTexts[item && item.product_id] || "Check delivery date"
+          }
           showModal={showModal}
         />
       );
@@ -379,7 +403,7 @@ const LandingPage = () => {
                 onclose={handleCloseModal}
                 onClick={() => handleShowModal(item.product_id)}
                 buttonText={
-                  buttonTexts[item.product_id] || "Check delivery date"
+                  buttonTexts[item && item.product_id] || "Check delivery date"
                 }
                 showModal={showModal}
               />
@@ -400,7 +424,10 @@ const LandingPage = () => {
         headeroffer={headeroffer}
       />
       {loading ? (
-        <div className="d-flex justify-content-center align-items-center loader">
+        <div
+          className="d-flex justify-content-center align-items-center loader"
+          style={{ height: "640px" }}
+        >
           <FadeLoader color="#00464d" />
         </div>
       ) : (
@@ -415,25 +442,27 @@ const LandingPage = () => {
               head={"Under  " + budjet[0].budget}
               sub={budjet[0].count + " styles"}
               backgroundImage={shop1}
-              clicked={() => productMinHandler(budjet[0].budget)}
+              clicked={() =>
+                budjet[0].count && productMinHandler(budjet[0].budget)
+              }
             />
             <BudgetCard
               head={"Under  " + budjet[1].budget}
               sub={budjet[1].count + " styles"}
               backgroundImage={shop2}
-              clicked={() => productMinHandler(budjet[1].budget)}
+              clicked={() => budjet[1] && productMinHandler(budjet[1].budget)}
             />
             <BudgetCard
               head={"Under  " + budjet[2].budget}
               sub={budjet[2].count + " styles"}
               backgroundImage={shop3}
-              clicked={() => productMinHandler(budjet[2].budget)}
+              clicked={() => budjet[2] && productMinHandler(budjet[2].budget)}
             />
             <BudgetCard
               head={"Under  " + budjet[3].budget}
               sub={budjet[3].count + " styles"}
               backgroundImage={shop4}
-              clicked={() => productMinHandler(budjet[3].budget)}
+              clicked={() => budjet[3] && productMinHandler(budjet[3].budget)}
             />
           </ShopOnBudget>
         </div>

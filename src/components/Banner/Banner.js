@@ -11,12 +11,12 @@ const Banner = (props) => {
 
     if (selItem.is_category === true) {
       history.push({
-        pathname: "/new_arrivel",
+        pathname: "/new/arrivals",
         state: { data: selItem.type_id },
       });
     } else {
       history.push({
-        pathname: "/new_arrivel",
+        pathname: "/new/arrivals",
         state: { octnId: selItem.type_id, data: "occation" },
       });
     }

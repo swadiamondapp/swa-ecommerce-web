@@ -14,6 +14,7 @@ import LoginModal from "../LoginModal/LoginModal";
 import axios from "axios";
 import * as Urls from "../../Urls";
 import { Carousel } from "antd";
+import outletlogo from "../../Assets/outletlogo.png";
 import { Link } from "react-router-dom";
 import CheckDelivery from "../CheckDelivery/CheckDelivery";
 import indiaimg from "../../Assets/india.png";
@@ -54,8 +55,8 @@ const Header = (props) => {
   const mobileSearchBarClass = isHomePage
     ? Classes.MobileSearchBar
     : Classes.MobileSearchbarOthers;
-  const isCheckoutPage = window.location.pathname === "/checkout";
-  const isCartPage = window.location.pathname === "/cart";
+  const isCheckoutPage = window.location.pathname === "/cart/checkout";
+  const isCartPage = window.location.pathname === "/shoping/cart";
   const userName = localStorage.getItem("userName");
   const [showModal, setShowModal] = useState(false);
   const pincode = localStorage.getItem("pincode");
@@ -66,6 +67,7 @@ const Header = (props) => {
   const [showUserDetails, setShowUserDetails] = useState(false);
   const userDetailsRef = useRef(null);
   console.log("countryData", countryData);
+  console.log("props.textheader2", text);
 
   const handleShowModal = () => {
     setShowModal(true);
@@ -138,49 +140,51 @@ const Header = (props) => {
 
   const moveToWishList = () => {
     if (token !== null) {
-      history.push("/wish_list");
+      history.push("/wished/list");
     } else {
       setShow(true);
     }
   };
 
   const catSelHandler = (setItem) => {
-    // if (history.location.pathname !== "/new_arrivel") {
-    //   history.push({ pathname: "/new_arrivel", state: { data: id } });
+    // if (history.location.pathname !== "/new/arrivals") {
+    //   history.push({ pathname: "/new/arrivals", state: { data: id } });
     // }
 
-    if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
+    if (history.location.pathname.slice(0, 12) === "/new/arrivals") {
       window.location.href = "https://www.swa.co/category_search/" + setItem.id;
     } else {
       history.push({
-        pathname: "/new_arrivel",
+        pathname: "/new/arrivals",
         state: { data: setItem.id, product_category: setItem.name },
       });
     }
   };
   // const cattSelHandler = (setItem) => {
-  //   if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
+  //   if (history.location.pathname.slice(0, 12) === "/new/arrivals") {
   //     window.location.href =
   //       "http://swaecomnew.zinfog.in/category_search/" + setItem.id;
   //   } else {
   //     history.push({
-  //       pathname: "/new_arrivel",
+  //       pathname: "/new/arrivals",
   //       state: { data: setItem.id, product_category: setItem.name },
   //     });
   //   }
   // };
   const cattSelHandler = (setItem) => {
+    const name = setItem.name.toLowerCase().replace(/\s+/g, "");
     history.push({
-      pathname: "/new_arrivel",
+      // pathname: "/new/arrivals",
+      pathname: `/${name}`,
       state: { data: setItem.id, product_category: setItem.name },
     });
   };
   const tagSelHandler = (selItem) => {
-    if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
+    if (history.location.pathname.slice(0, 12) === "/new/arrivals") {
       window.location.href = "https://www.swa.co/tag_search/" + selItem.id;
     } else {
       history.push({
-        pathname: "/new_arrivel",
+        pathname: "/new/arrivals",
         state: {
           octnId: selItem.id,
           data: "occation",
@@ -190,14 +194,14 @@ const Header = (props) => {
     }
   };
   const moveToOrderHistory = () => {
-    history.push("/track_order");
+    history.push("/track/orders");
   };
   const moveToOrderHistory2 = () => {
-    history.push("/my_orders");
+    history.push("/my/orders");
   };
   const moveTocart = () => {
     if (token !== null) {
-      history.push("/cart");
+      history.push("/shoping/cart");
     } else {
       setShow(true);
     }
@@ -218,7 +222,8 @@ const Header = (props) => {
 
       axios
         .get(
-          `${Urls.suggestion + e.target.value}&country=${props.selectedCountry.id
+          `${Urls.suggestion + e.target.value}&country=${
+            props.selectedCountry.id
           }`
         )
         .then((response1) => {
@@ -231,20 +236,34 @@ const Header = (props) => {
       setSearchShow(false);
     }
   };
+  useEffect(() => {
+    setSearchShow(false);
+  }, []);
+
   const searchTitleHandler = (setItem) => {
+    console.log("search112", setItem);
     if (setItem.type === "category") {
-      if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
+      if (history.location.pathname.slice(0, 12) === "/new/arrivals") {
         window.location.href =
           "https://www.swa.co/category_search/" + setItem.id;
       } else {
-        history.push({ pathname: "/new_arrivel", state: { data: setItem.id } });
+        history.push({
+          pathname: "/new/arrivals",
+          state: { data: setItem.id },
+        });
       }
     } else if (setItem.type === "product") {
       axios
         .get(
-          `${Urls.productDet + setItem.id}?country=${props.selectedCountry.id}`
+          `${Urls.productDet + setItem.id}?country=${props.selectedCountry.id}`,
+          {
+            headers: {
+              Authorization: "Token " + token,
+            },
+          }
         )
         .then((response1) => {
+          console.log("whatres", response1);
           const selData = {
             product_id: setItem.id,
             colour_id: response1.data.results.data.color_id,
@@ -265,15 +284,27 @@ const Header = (props) => {
               "/" +
               response1.data.results.data.product_name;
           } else {
+            // history.push({
+            //   pathname:
+            //     "/products/" +
+            //     setItem.id +
+            //     "/" +
+            //     response1.data.results.data.color_id +
+            //     "/" +
+            //     response1.data.results.data.product_name,
+            //   state: { data: selData },
+            // });
+            sessionStorage.setItem(
+              "productDetails",
+              JSON.stringify({
+                id: setItem.id,
+                color: response1.data.results.data.color_id,
+                name: response1.data.results.data.product_name,
+              })
+            );
             history.push({
-              pathname:
-                "/products/" +
-                setItem.id +
-                "/" +
-                response1.data.results.data.color_id +
-                "/" +
-                response1.data.results.data.product_name,
-              state: { data: selData },
+              pathname: "/jewellery/" + response1.data.results.data.alias,
+              state: { data: setItem },
             });
           }
         })
@@ -281,8 +312,10 @@ const Header = (props) => {
           console.log(error);
         });
     }
+    setSearchKey(""); // Clear the search input field
+    setSearchShow(false); // Hide search list when an item is clicked
   };
-  const closeHanlder = () => { };
+  const closeHanlder = () => {};
 
   const handleScroll = () => {
     if (window.scrollY > 100) {
@@ -420,86 +453,199 @@ const Header = (props) => {
   // }, []);
   const [isLoading, setIsLoading] = useState(false);
   const [pinCode, setPinCode] = useState("");
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get(Urls.getCountryFlags);
+  //       console.log("response.data.results.data", response.data.results.data);
+  //       setCountryData(response.data.results.data);
+  //       const getLocation = async () => {
+  //         setIsLoading(true);
+
+  //         navigator.geolocation.getCurrentPosition(
+  //           async (pos) => {
+  //             const { latitude, longitude } = pos.coords;
+  //             let _url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
+  //             try {
+  //               const geoResponse = await axios.get(_url);
+  //               const userCountryName = geoResponse.data.address.country;
+  //               setCountry(userCountryName);
+  //               console.log("userCountryName", userCountryName);
+  //               debugger;
+  //               let selectedCountryData;
+
+  //               if (
+  //                 userCountryName === "India" ||
+  //                 userCountryName === "United Arab Emirates"
+  //               ) {
+  //                 selectedCountryData = response.data.results.data.find(
+  //                   (country) => country.country_name === userCountryName
+  //                 );
+  //               } else {
+  //                 selectedCountryData = response.data.results.data.find(
+  //                   (country) => country.country_name === "United States"
+  //                 );
+  //               }
+
+  //               // Optionally set additional state or perform other actions with selectedCountryData
+  //               // setSelectedCountry(selectedCountryData);
+
+  //               if (selectedCountryData) {
+  //                 console.log("Selected Country Data:", selectedCountryData);
+  //                 if (!CountryIds && !flag) {
+  //                   props.setSelectedCountry({
+  //                     ...props.selectedCountry,
+  //                     flag_image: selectedCountryData.flag_image,
+  //                     id: selectedCountryData.id,
+  //                     country_name: selectedCountryData.country_name,
+  //                   });
+  //                   localStorage.setItem(
+  //                     "flag_image",
+  //                     selectedCountryData.flag_image
+  //                   );
+  //                   localStorage.setItem("id", selectedCountryData.id);
+  //                   localStorage.setItem(
+  //                     "country_name",
+  //                     selectedCountryData.country_name
+  //                   );
+  //                 }
+  //               }
+
+  //               const defaultCountryID = localStorage.getItem("id");
+  //               const defaultCountryFlag = localStorage.getItem("flag_image");
+  //               if (defaultCountryID && defaultCountryFlag) {
+  //                 const defaultCountry = countryData.find(
+  //                   (country) => country.id === parseInt(defaultCountryID)
+  //                 );
+  //                 if (defaultCountry) {
+  //                   props.setSelectedCountry(defaultCountry);
+  //                 }
+  //               }
+  //             } catch (error) {
+  //               console.log(error);
+  //             } finally {
+  //               setIsLoading(false);
+  //             }
+  //           },
+  //           (error) => {
+  //             console.error("Error getting geolocation:", error);
+  //             setIsLoading(false);
+  //           }
+  //         );
+  //       };
+
+  //       // Call getLocation to set country based on user's location
+  //       getLocation();
+  //     } catch (error) {
+  //       console.error("Error fetching country data:", error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // Fetch country flags data
         const response = await axios.get(Urls.getCountryFlags);
         console.log("response.data.results.data", response.data.results.data);
         setCountryData(response.data.results.data);
+
+        // // Check if data exists in localStorage
+        // const flagImage = localStorage.getItem("flag_image");
+        // const countryName = localStorage.getItem("country_name");
+
+        if (flag && Contryname) {
+          // If data exists in localStorage, use it and skip the API call
+          console.log("Using data from localStorage");
+          props.setSelectedCountry({
+            ...props.selectedCountry,
+            flag_image: flag,
+            country_name: Contryname,
+          });
+          setIsLoading(false);
+          return; // Exit the function early
+        }
+
+        // Fetch user country using ipinfo.io
         const getLocation = async () => {
           setIsLoading(true);
-          navigator.geolocation.getCurrentPosition(
-            async (pos) => {
-              const { latitude, longitude } = pos.coords;
-              let _url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
-              try {
-                const geoResponse = await axios.get(_url);
-                const userCountryName = geoResponse.data.address.country;
-                setCountry(userCountryName);
+          try {
+            const ipInfoResponse = await axios.get(
+              "https://ipinfo.io/json?token=6485fceda43031"
+            );
+            const userCountryName = ipInfoResponse.data.country; // Country code (e.g., "IN", "US")
 
-                let selectedCountryData;
+            setCountry(userCountryName);
+            console.log("User Country:", userCountryName);
 
-                if (
-                  userCountryName === "India" ||
-                  userCountryName === "United Arab Emirates"
-                ) {
-                  selectedCountryData = response.data.results.data.find(
-                    (country) => country.country_name === userCountryName
-                  );
-                } else {
-                  selectedCountryData = response.data.results.data.find(
-                    (country) => country.country_name === "United States"
-                  );
-                }
+            let selectedCountryData;
 
-                // Optionally set additional state or perform other actions with selectedCountryData
-                // setSelectedCountry(selectedCountryData);
-
-                if (selectedCountryData) {
-                  console.log("Selected Country Data:", selectedCountryData);
-                  if (!CountryIds && !flag) {
-                    props.setSelectedCountry({
-                      ...props.selectedCountry,
-                      flag_image: selectedCountryData.flag_image,
-                      id: selectedCountryData.id,
-                      country_name: selectedCountryData.country_name,
-                    });
-                    localStorage.setItem(
-                      "flag_image",
-                      selectedCountryData.flag_image
-                    );
-                    localStorage.setItem("id", selectedCountryData.id);
-                    localStorage.setItem(
-                      "country_name",
-                      selectedCountryData.country_name
-                    );
-                  }
-                }
-
-                const defaultCountryID = localStorage.getItem("id");
-                const defaultCountryFlag = localStorage.getItem("flag_image");
-                if (defaultCountryID && defaultCountryFlag) {
-                  const defaultCountry = countryData.find(
-                    (country) => country.id === parseInt(defaultCountryID)
-                  );
-                  if (defaultCountry) {
-                    props.setSelectedCountry(defaultCountry);
-                  }
-                }
-              } catch (error) {
-                console.log(error);
-              } finally {
-                setIsLoading(false);
-              }
-            },
-            (error) => {
-              console.error("Error getting geolocation:", error);
-              setIsLoading(false);
+            if (userCountryName === "AE") {
+              // Force UAE flag for France users
+              selectedCountryData = response.data.results.data.find(
+                (country) => country.country_name === "United Arab Emirates"
+              );
+            } else if (userCountryName === "IN") {
+              selectedCountryData = response.data.results.data.find(
+                (country) => country.country_name === "India"
+              );
+            } else if (userCountryName === "IN" || userCountryName === "AE") {
+              selectedCountryData = response.data.results.data.find(
+                (country) => country.country_code === userCountryName
+              );
+            } else {
+              selectedCountryData = response.data.results.data.find(
+                (country) => country.country_code === "US"
+              );
             }
-          );
+
+            if (selectedCountryData) {
+              console.log("Selected Country Data:", selectedCountryData);
+              if (!props.selectedCountry.id) {
+                props.setSelectedCountry({
+                  ...props.selectedCountry,
+                  flag_image: selectedCountryData.flag_image,
+                  id: selectedCountryData.id,
+                  country_name: selectedCountryData.country_name,
+                });
+              }
+              localStorage.setItem(
+                "flag_image",
+                selectedCountryData.flag_image
+              );
+              localStorage.setItem("id", selectedCountryData.id);
+              localStorage.setItem(
+                "country_name",
+                selectedCountryData.country_name
+              );
+            }
+
+            // setTimeout(() => {
+            //   console.log("Clearing localStorage...");
+            //   localStorage.removeItem("id");
+            //   localStorage.removeItem("flag_image");
+            //   localStorage.removeItem("country_name");
+            // }, 2000);
+
+            // Set default country from localStorage
+            const defaultCountryID = localStorage.getItem("id");
+            const defaultCountryFlag = localStorage.getItem("flag_image");
+            if (defaultCountryID && defaultCountryFlag) {
+              const defaultCountry = countryData.find(
+                (country) => country.id === parseInt(defaultCountryID)
+              );
+              if (defaultCountry) {
+                props.setSelectedCountry(defaultCountry);
+              }
+            }
+          } catch (error) {
+            console.error("Error fetching country:", error);
+          } finally {
+            setIsLoading(false);
+          }
         };
 
-        // Call getLocation to set country based on user's location
         getLocation();
       } catch (error) {
         console.error("Error fetching country data:", error);
@@ -513,7 +659,6 @@ const Header = (props) => {
   // console.log("countryData", countryData);
 
   const handleCountrySelect = (country) => {
-    debugger;
     if (!isHomePage) {
       history.push("/");
     }
@@ -560,6 +705,7 @@ const Header = (props) => {
         setShowSuccessModal={setShowSuccessModal}
         activeCart={props.activeCart}
         setActiveCart={props.setActiveCart}
+        setText={setText}
       >
         <div className={Classes.SearchIcons}>
           <div className={Classes.searchList}>
@@ -665,6 +811,11 @@ const Header = (props) => {
             handleClose={handleCloseModal}
             handleShow={handleShowModal}
           />
+          <div className={`${Classes.outletlogo} ${Classes.headerElement}`}>
+            <Link to="/product/outlets">
+              <img src={outletlogo} />
+            </Link>
+          </div>
           <div
             style={{ cursor: "pointer" }}
             className={Classes.CountryFlags}
@@ -689,8 +840,8 @@ const Header = (props) => {
                     a.country_name === "India"
                       ? -1
                       : b.country_name === "India"
-                        ? 1
-                        : 0
+                      ? 1
+                      : 0
                   ) // Sorts India to the top
                   .map((country, index) => (
                     <div className={Classes.CountryContainer} key={index}>
@@ -710,12 +861,12 @@ const Header = (props) => {
                             {country.country_name === "United Arab Emirates"
                               ? "UAE"
                               : country.country_name === "Saudi Arabia"
-                                ? "KSA"
-                                : country.country_name === "India"
-                                  ? "IND"
-                                  : country.country_name === "United States"
-                                    ? "USA"
-                                    : country.country_name}
+                              ? "KSA"
+                              : country.country_name === "India"
+                              ? "IND"
+                              : country.country_name === "United States"
+                              ? "USA"
+                              : country.country_name}
                           </span>
                         </div>
                       </div>
@@ -744,7 +895,7 @@ const Header = (props) => {
                 setLoginText("Please Login");
               }}
             />
-            {userName && props.countCartItems && (
+            {userName && props.countCartItems > 0 && (
               <div className={Classes.ItemsNum}>{props.countCartItems}</div>
             )}
           </div>
@@ -809,7 +960,10 @@ const Header = (props) => {
       )}
 
       <div
-        className={Classes.searchListCont}
+        // className={Classes.searchListCont}
+        className={
+          isHomePage ? Classes.searchListCont : Classes.searchListscards
+        }
         style={{ display: searchShow ? "block" : "none" }}
       >
         {suggestionList.length !== 0 ? (
@@ -848,9 +1002,9 @@ const Header = (props) => {
             <div className={Classes.mobCheckDelivery} onClick={handleShowModal}>
               <p>CHECK DELIVERY</p>
               {pincode ? null : (
-              <p>
-                Enter pincode <MdEdit />
-              </p>
+                <p>
+                  Enter pincode <MdEdit />
+                </p>
               )}
               {pincode && (
                 <span
@@ -994,7 +1148,8 @@ const Header = (props) => {
                     <div
                       className={Classes.Offers}
                       key={index}
-                      onClick={() => catSelHandler(item)}
+                      // onClick={() => catSelHandler(item)}
+                      onClick={() => cattSelHandler(item)}
                     >
                       <div className={Classes.OffersInner}>
                         <img
@@ -1010,7 +1165,9 @@ const Header = (props) => {
                           alt="catg"
                         />
 
-                        <p>{item.name.slice(0, 10).toUpperCase()}</p>
+                        <p style={{ width: "85px", textAlign: "center" }}>
+                          {item.name.slice(0, 10).toUpperCase()}
+                        </p>
                       </div>
                     </div>
                   );

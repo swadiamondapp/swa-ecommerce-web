@@ -47,8 +47,9 @@ const TryAtHome = () => {
 
     fechTryAtHomeCart();
     const currentDate = new Date();
-    const tempDates = [currentDate];
-    for (let i = 1; i < 6; i++) {
+    currentDate.setDate(currentDate.getDate() + 1);
+    const tempDates = [];
+    for (let i = 0; i < 6; i++) {
       const nextDate = new Date();
       nextDate.setDate(currentDate.getDate() + i);
       tempDates.push(nextDate);
@@ -101,7 +102,7 @@ const TryAtHome = () => {
       .catch((error) => {
         console.log(error);
       });
-    // history.push("/new_arrivel");
+    // history.push("/new/arrivals");
   };
   const handleTimeSlotClick = (timeSlot) => {
     setSelectedTimeSlot(timeSlot);
@@ -118,9 +119,9 @@ const TryAtHome = () => {
     setErrorMessage("");
   };
   const AddDesigns = () => {
-    // history.push("/new_arrivel");
+    // history.push("/new/arrivals");
     history.push({
-      pathname: "/new_arrivel",
+      pathname: "/new/arrivals",
       state: {
         octnId: "",
         data: "",
@@ -145,7 +146,7 @@ const TryAtHome = () => {
       return;
     }
     history.push({
-      pathname: "/tryathomeform",
+      pathname: "/tryathome/form",
       state: {
         selectedTimeSlot,
         selectedDate: selectedDate ? formatSelectedDate(selectedDate) : null,
@@ -170,11 +171,14 @@ const TryAtHome = () => {
         <div className="container">
           <div className={Classes.TryAtHomeParent}>
             <h3 className={Classes.TryAtHomeHead}>Trial at Home</h3>
-            <p className={Classes.TryathomePara}>
-              Our representative will visit your home to show your liked jewels
-              with your convenient time <br /> and date. so choose your date and
-              time
-            </p>
+            <div className={Classes.trailathomeParent}>
+              <p className={Classes.TryathomePara}>
+                Our representative will visit your home to show your liked
+                jewels with your convenient time and date. so choose your date
+                and time
+              </p>
+              <p></p>
+            </div>
             <div className={Classes.T1parent}>
               {/* <div className={Classes.TryLeftsec}>
                 <div className={Classes.TryatHomeCard}>
@@ -449,7 +453,7 @@ const TryAtHome = () => {
                 <div className={Classes.Proceedbutns}>
                   {/* <Link
                     to={{
-                      pathname: "/tryathomeform",
+                      pathname: "/tryathome/form",
                       state: {
                         selectedTimeSlot,
                         

@@ -8,12 +8,19 @@ import videoimg from "../../../src/Assets/videosucces.png";
 import closebtn from "../../../src/Assets/closeModal.png";
 
 const VideocallForm = (props) => {
-  const CountryName = localStorage.getItem("country_name")
+  const CountryName = localStorage.getItem("country_name");
   const [isSuccessOpen, setIsSuccessOpen] = useState(false);
   const [errors, setErrors] = useState();
   const [videoData, setVideoData] = useState({
     productId: props.productId && props.productId,
-    phone: CountryName === "India" ? "+91" : CountryName === "United Arab Emirates" ? "+971" : CountryName === "United States" ? "+1" :"",
+    phone:
+      CountryName === "India"
+        ? "+91"
+        : CountryName === "United Arab Emirates"
+        ? "+971"
+        : CountryName === "United States"
+        ? "+1"
+        : "",
     email: "",
     language: "English",
     description: "",
@@ -122,7 +129,14 @@ const VideocallForm = (props) => {
         setIsSuccessOpen(true);
         setVideoData({
           productId: videoData.productId,
-          phone:  CountryName === "India" ? "+91" : CountryName === "United Arab Emirates" ? "+971" : CountryName === "United States" ? "+1" :"",
+          phone:
+            CountryName === "India"
+              ? "+91"
+              : CountryName === "United Arab Emirates"
+              ? "+971"
+              : CountryName === "United States"
+              ? "+1"
+              : "",
           email: "",
           language: "English",
           description: "",
@@ -158,8 +172,19 @@ const VideocallForm = (props) => {
         aria-describedby="modal-description"
       >
         <Box sx={isDesk ? style : styleDesk}>
-          <div style={{display:"flex",alignItems:"end",width:"100%",justifyContent:"end"}}>
-          <img onClick={props.handleClose} src={closebtn} style={{width:"16px",height:"16px"}}/>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "end",
+              width: "100%",
+              justifyContent: "end",
+            }}
+          >
+            <img
+              onClick={props.handleClose}
+              src={closebtn}
+              style={{ width: "16px", height: "16px" }}
+            />
           </div>
           <div style={{ overflow: "hidden" }}>
             <h3 className={Classes.vi_head}>Schedule your video call</h3>
@@ -219,7 +244,7 @@ const VideocallForm = (props) => {
                 <div className={Classes.vi_message}>
                   <textarea
                     rows={3}
-                    placeholder="Let us know  if you have any preference in price, budget "
+                    // placeholder="Let us know  if you have any preference in price, budget "
                     value={videoData.description}
                     name="description"
                     onChange={handleChangeVideoData}

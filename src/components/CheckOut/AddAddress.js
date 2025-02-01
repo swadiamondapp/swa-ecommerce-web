@@ -20,12 +20,14 @@ import { IoMdClose } from "react-icons/io";
 import home1 from "../../Assets/home1.png";
 import Joi from "joi";
 import { FaRegTrashAlt } from "react-icons/fa";
+import { Country, State } from "country-state-city";
 
 function AddAddress(props) {
   const token = localStorage.getItem("swaToken");
   const [showAddAddress, setShowAddAddress] = useState(true);
   const [showNewAddressForm, setShowNewAddressForm] = useState(false);
   const [selectedAddressId, setSelectedAddressId] = useState(null);
+  const [statesList, setStatesList] = useState([]);
   const pincodes = localStorage.getItem("pincode");
   const [addressData, setAddressData] = useState({
     fullName: "",
@@ -36,6 +38,7 @@ function AddAddress(props) {
     hNumber_Bname: "",
     streetColony: "",
     landMark: "",
+    country: "",
   });
   const [errors, setErrors] = useState({
     fullName: "",
@@ -44,7 +47,9 @@ function AddAddress(props) {
     city: "",
     hNumber_Bname: "",
     streetColony: "",
+    country: "",
   });
+
   // const [showDeleteButtons, setShowDeleteButtons] = useState([]);
 
   // const handleToggleOptions = (index) => {
@@ -86,6 +91,19 @@ function AddAddress(props) {
       console.log(error);
     }
   };
+  const staticCountries = [
+    { name: { common: "India" } },
+    { name: { common: "United States" } },
+    { name: { common: "Australia" } },
+    { name: { common: "Canada" } },
+    { name: { common: "United Kingdom" } },
+    { name: { common: "Germany" } },
+    { name: { common: "France" } },
+    { name: { common: "Japan" } },
+    { name: { common: "Brazil" } },
+    { name: { common: "South Africa" } },
+  ];
+  const [countriesList, setCountriesList] = useState(staticCountries);
 
   useEffect(() => {
     const mainAddress = props.addressArray.find((address) => address.is_main);
@@ -114,12 +132,12 @@ function AddAddress(props) {
           "string.empty": "please provide the necessary details",
         }),
       mobile: Joi.string()
-        .pattern(/^\d+$/)
+        .pattern(/^\d{10}$/)
         .required()
         .messages({
           "any.required": "Mobile number is required",
           "string.empty": "please provide the necessary details",
-          "string.pattern.base": "Mobile number should contain only digits",
+          "string.pattern.base": "Mobile number must be 10 digits",
         }),
       pincode: Joi.string()
         .pattern(/^\d{6}$/)
@@ -135,6 +153,13 @@ function AddAddress(props) {
         .messages({
           "any.required": "City is required",
           "string.empty": "City must not be empty",
+        }),
+      country: Joi.string()
+
+        .required()
+        .messages({
+          "any.required": "country is required",
+          "string.empty": "country must not be empty",
         }),
       hNumber_Bname: Joi.string()
         .required()
@@ -163,6 +188,7 @@ function AddAddress(props) {
   };
 
   const addAaddress = async () => {
+    window.scrollTo(0, 0);
     console.log("clicked,,,");
     if (validateForm()) return;
     const body = {
@@ -173,6 +199,7 @@ function AddAddress(props) {
       state: addressData.state,
       city: addressData.city,
       house: addressData.hNumber_Bname,
+      country: addressData.country,
       area: addressData.streetColony,
       landmark: addressData.landMark,
       type: "HOME",
@@ -190,6 +217,7 @@ function AddAddress(props) {
           city: "",
           state: "kerala",
           hNumber_Bname: "",
+          country: "",
           streetColony: "",
           landMark: "",
         });
@@ -206,6 +234,16 @@ function AddAddress(props) {
 
   const handleChangeAddress = (event) => {
     const { name, value } = event.target;
+    if (name === "country") {
+      const selectedOption =
+        event &&
+        event.target &&
+        event.target.options[event.target.selectedIndex];
+      const isoCode =
+        selectedOption && selectedOption.getAttribute("data-isocode");
+      setStatesList(State && State.getStatesOfCountry(isoCode));
+    }
+    // console.log("event.target---->", isoCode);
     setAddressData({
       ...addressData,
       [name]: value,
@@ -216,6 +254,8 @@ function AddAddress(props) {
       [name]: "",
     });
   };
+
+  console.log("addressData--->", addressData);
 
   const handleAddressSelection = async (id) => {
     setSelectedAddressId(id);
@@ -237,6 +277,10 @@ function AddAddress(props) {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div>
@@ -376,7 +420,7 @@ function AddAddress(props) {
                         <input
                           className={Classes.PlaceInput}
                           type="text"
-                          placeholder="Jameel muhammed"
+                          // placeholder="Jameel muhammed"
                           value={addressData.fullName}
                           name="fullName"
                           onChange={handleChangeAddress}
@@ -392,7 +436,7 @@ function AddAddress(props) {
                         <input
                           className={Classes.PlaceInput}
                           type="text"
-                          placeholder="+91 98975656785"
+                          // placeholder="+91 98975656785"
                           value={addressData.mobile}
                           name="mobile"
                           onChange={handleChangeAddress}
@@ -409,7 +453,7 @@ function AddAddress(props) {
                           <input
                             className={Classes.PlaceInput}
                             type="text"
-                            placeholder="Pincode*"
+                            // placeholder="Pincode*"
                             value={addressData.pincode}
                             name="pincode"
                             onChange={handleChangeAddress}
@@ -436,7 +480,7 @@ function AddAddress(props) {
                           <input
                             className={Classes.PlaceInput}
                             type="text"
-                            placeholder="City*"
+                            // placeholder="City*"
                             value={addressData.city}
                             name="city"
                             onChange={handleChangeAddress}
@@ -447,25 +491,49 @@ function AddAddress(props) {
                         </div>
                       </div>
                       <div>
-                        <label>State</label>
-                        <select className={Classes.PlaceInput} name="state">
-                          {/* <option value="none" disabled hidden> */}
-                          <option value="none">Select state</option>
-                          <option value={"kerala"}>Kerala</option>
-                          <option value={"Karnataka"}>Karnataka</option>
-                          <option value={"TamilNadu"}>TamilNadu</option>
-                          <option value={"Delhi"}>Delhi</option>
-                          <option value={"Andhra Pradesh"}>
-                            Andhra Pradesh
-                          </option>
-                          <option value={"Assam"}>Assam</option>
-                          <option value={"Maharashtra"}>Maharashtra</option>
-                          <option value={"Uttar Pradesh"}>Uttar Pradesh</option>
-                          <option value={"Uttarakhand"}>Uttarakhand</option>
-                          <option value={"West Bengal"}>West Bengal</option>
-                          <option value={"Ladakh"}>Ladakh</option>
+                        <label>Country*</label>
+
+                        <select
+                          className={Classes.PlaceInput}
+                          value={addressData.country}
+                          name="country"
+                          onChange={handleChangeAddress}
+                        >
+                          <option value="">Select Country</option>
+                          {Country &&
+                            Country.getAllCountries() &&
+                            Country.getAllCountries().map((country, index) => (
+                              <option
+                                key={index}
+                                value={country.name}
+                                data-isocode={country.isoCode}
+                              >
+                                {country.name}
+                              </option>
+                            ))}
                         </select>
+                        {errors.country && (
+                          <div className={Classes.Error}>{errors.country}</div>
+                        )}
                       </div>
+                    </div>
+                    <div className="Parant_Relative">
+                      <label>State</label>
+                      <select
+                        className={Classes.PlaceInput}
+                        name="state"
+                        value={addressData.state}
+                        onChange={handleChangeAddress}
+                      >
+                        {/* <option value="none" disabled hidden> */}
+                        <option value="none">Select state</option>
+                        {statesList &&
+                          statesList.map((state, index) => (
+                            <option key={index} value={state.name}>
+                              {state.name}
+                            </option>
+                          ))}
+                      </select>
                     </div>
                     <div className={Classes.ParentStreetColony}>
                       <div className={Classes.House1NN}>
@@ -473,7 +541,7 @@ function AddAddress(props) {
                         <input
                           className={Classes.PlaceInput}
                           type="text"
-                          placeholder="house number/ building name*"
+                          // placeholder="house number/ building name*"
                           value={addressData.hNumber_Bname}
                           name="hNumber_Bname"
                           onChange={handleChangeAddress}
@@ -489,7 +557,7 @@ function AddAddress(props) {
                         <input
                           className={Classes.PlaceInput}
                           type="text"
-                          placeholder="road name, area colony*"
+                          // placeholder="road name, area colony*"
                           value={addressData.streetColony}
                           name="streetColony"
                           onChange={handleChangeAddress}
@@ -506,7 +574,7 @@ function AddAddress(props) {
                       <input
                         className={Classes.PlaceInput}
                         type="text"
-                        placeholder="Near edu city"
+                        // placeholder="Near edu city"
                         value={addressData.landMark}
                         name="landMark"
                         onChange={handleChangeAddress}

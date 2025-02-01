@@ -62,8 +62,14 @@ const CancelProductModal = (props) => {
     { name: "Ordered by Mistake", code: "ORDERED_BY_MISTAKE" },
     { name: "Item No Longer Needed", code: "ITEM_NO_LONGER_NEEDED" },
     { name: "Better Price Available", code: "BETTER_PRICE_AVAILABLE" },
-    { name: "Received as a Gift Elsewhere", code: "RECEIVED_AS_GIFT_ELSEWHERE" },
-    { name: "Changed Mind About Size or Style", code: "CHANGED_MIND_SIZE_OR_STYLE" },
+    {
+      name: "Received as a Gift Elsewhere",
+      code: "RECEIVED_AS_GIFT_ELSEWHERE",
+    },
+    {
+      name: "Changed Mind About Size or Style",
+      code: "CHANGED_MIND_SIZE_OR_STYLE",
+    },
     { name: "Other", code: "OTHER" },
   ];
 
@@ -75,6 +81,9 @@ const CancelProductModal = (props) => {
     props.setError(""); // Clear error if reason is selected
     props.cancelProduct(selectedReason, notes);
   };
+
+  console.log("cancelButtonTrack1", props.cancelButtonTrack);
+  const isShipped = props.cancelButtonTrack == "Shipped";
 
   return (
     <div>
@@ -94,29 +103,48 @@ const CancelProductModal = (props) => {
                   onClick={props.handleClose}
                 />
               </div>
-              <div className="dropContainer">
-                <Dropdown
-                  value={selectedReason}
-                  onChange={(e) => setSelectedReason(e.value)}
-                  options={reasons}
-                  optionLabel="name"
-                  placeholder="Select Reason"
-                />
-              </div>
-              <textarea
-                placeholder="Any thing to tell us"
-                cols={50}
-                rows={8}
-                className={Classes.TextArea}
-                value={notes}
-                onChange={(e) => setNotes(e.target.value)}
-              ></textarea>
-              <div className={Classes.CancelButton} style={{ justifyContent: props.error ? 'space-between' : 'end' }}>
-                {props.error && (
-                  <div className={Classes.ErrorMessage}>{props.error}</div>
-                )}
-                <button onClick={handleCancel}>Cancel Product</button>
-              </div>
+              {isShipped ? (
+                <div
+                  className={Classes.ShippedMessage}
+                  style={{ margin: "30px 0px" }}
+                >
+                  <Typography variant="body2" color="textSecondary">
+                    The product has been shipped. You can return it after
+                    delivery.
+                  </Typography>
+                </div>
+              ) : (
+                <>
+                  <div className="dropContainer">
+                    <Dropdown
+                      value={selectedReason}
+                      onChange={(e) => setSelectedReason(e.value)}
+                      options={reasons}
+                      optionLabel="name"
+                      placeholder="Select Reason"
+                    />
+                  </div>
+                  <textarea
+                    placeholder="Any thing to tell us"
+                    cols={50}
+                    rows={8}
+                    className={Classes.TextArea}
+                    value={notes}
+                    onChange={(e) => setNotes(e.target.value)}
+                  ></textarea>
+                  <div
+                    className={Classes.CancelButton}
+                    style={{
+                      justifyContent: props.error ? "space-between" : "end",
+                    }}
+                  >
+                    {props.error && (
+                      <div className={Classes.ErrorMessage}>{props.error}</div>
+                    )}
+                    <button onClick={handleCancel}>Cancel Product</button>
+                  </div>
+                </>
+              )}
             </div>
           </Typography>
         </Box>

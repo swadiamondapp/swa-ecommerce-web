@@ -71,7 +71,9 @@ const FilterModal = (props) => {
   const [activeTab, setActiveTab] = useState("first");
   const [selectedSort, setSelectedSort] = useState("");
   const [selectedPopular, setSelectedPopular] = useState("");
+  const [loading, setLoading] = useState(false);
   const [selectedPriceRange, setSelectedPriceRange] = useState("");
+
   const countryId = localStorage.getItem("id");
   console.log(props.openSuccessModal);
   const [isMobileView, setIsMobileView] = useState(
@@ -230,9 +232,11 @@ const FilterModal = (props) => {
           ","
         )}&country=${countryId}`;
         try {
+          setLoading(true);
           const respons = await axios.get(urlF);
           props.setProduct(respons.data.results.data);
           handleCloseFilter();
+          setLoading(false);
         } catch (error) {
           console.error("Error fetching product category by category:", error);
         }
@@ -480,7 +484,10 @@ const FilterModal = (props) => {
                 <Typography>
                   <div className={classes.Container}>
                     <div className={classes.PriceTgs}>
-                      <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+                      <Tab.Container
+                        id="left-tabs-example"
+                        defaultActiveKey="first"
+                      >
                         <Row>
                           <Col
                             style={{
@@ -495,9 +502,15 @@ const FilterModal = (props) => {
                                   <Nav.Link
                                     eventKey={key}
                                     style={{
-                                      background:"#F7F6F2",
-                                      fontWeight: activeTab === key ? "900 !important" : "300 !important",
-                                      color: activeTab === key ? "black !important" : "inherit !important",
+                                      background: "#F7F6F2",
+                                      fontWeight:
+                                        activeTab === key
+                                          ? "900 !important"
+                                          : "300 !important",
+                                      color:
+                                        activeTab === key
+                                          ? "black !important"
+                                          : "inherit !important",
                                       paddingLeft: "20px",
                                       position: "relative",
                                     }}
@@ -505,16 +518,19 @@ const FilterModal = (props) => {
                                   >
                                     <GoDotFill
                                       style={{
-                                        marginRight:"10px",
+                                        marginRight: "10px",
                                         fontSize: "16px",
-                                        color: activeTab === key ? "#006E7F" : "#F7F6F2", 
+                                        color:
+                                          activeTab === key
+                                            ? "#006E7F"
+                                            : "#F7F6F2",
                                       }}
-                                     />
+                                    />
                                     {key === "first"
                                       ? "Categories"
                                       : key === "second"
-                                        ? "Metal"
-                                        : "Occasion"}
+                                      ? "Metal"
+                                      : "Occasion"}
                                   </Nav.Link>
                                 </Nav.Item>
                               ))}
@@ -524,17 +540,28 @@ const FilterModal = (props) => {
                             <Tab.Content>
                               <Tab.Pane eventKey="first">
                                 {categoryWise.map((item, index) => (
-                                  <div key={index} className={classes.CategoryListMain}>
+                                  <div
+                                    key={index}
+                                    className={classes.CategoryListMain}
+                                  >
                                     <div className={classes.CategoryList}>
                                       <div className={classes.b1e}>
                                         <input
                                           type="checkbox"
-                                          checked={selectedCategoryByid.includes(item.id)}
-                                          onChange={() => handleCheckboxByCategory(item.id)}
+                                          checked={selectedCategoryByid.includes(
+                                            item.id
+                                          )}
+                                          onChange={() =>
+                                            handleCheckboxByCategory(item.id)
+                                          }
                                         />
                                         <label>
-                                          {String(item.name).charAt(0).toUpperCase() +
-                                            String(item.name).slice(1).toLowerCase()}
+                                          {String(item.name)
+                                            .charAt(0)
+                                            .toUpperCase() +
+                                            String(item.name)
+                                              .slice(1)
+                                              .toLowerCase()}
                                           <span>{item.product_count}</span>
                                         </label>
                                       </div>
@@ -547,19 +574,28 @@ const FilterModal = (props) => {
                               </Tab.Pane>
                               <Tab.Pane eventKey="second">
                                 {metalCategory.map((item, index) => (
-                                  <div key={index} className={classes.CategoryListMain}>
+                                  <div
+                                    key={index}
+                                    className={classes.CategoryListMain}
+                                  >
                                     <div className={classes.CategoryList}>
                                       <div className={classes.b1e}>
                                         <input
                                           type="checkbox"
-                                          checked={selectedMetelId.includes(item.id)}
-                                          onChange={() => handleCheckboxByMetel(item.id)}
+                                          checked={selectedMetelId.includes(
+                                            item.id
+                                          )}
+                                          onChange={() =>
+                                            handleCheckboxByMetel(item.id)
+                                          }
                                         />
                                         <label>
                                           {String(item.metal_type)
                                             .charAt(0)
                                             .toUpperCase() +
-                                            String(item.metal_type).slice(1).toLowerCase()}
+                                            String(item.metal_type)
+                                              .slice(1)
+                                              .toLowerCase()}
                                           <span>{item.product_count}</span>
                                         </label>
                                       </div>
@@ -569,17 +605,28 @@ const FilterModal = (props) => {
                               </Tab.Pane>
                               <Tab.Pane eventKey="third">
                                 {occation.map((item, index) => (
-                                  <div key={index} className={classes.CategoryListMain}>
+                                  <div
+                                    key={index}
+                                    className={classes.CategoryListMain}
+                                  >
                                     <div className={classes.CategoryList}>
                                       <div className={classes.b1e}>
                                         <input
                                           type="checkbox"
-                                          checked={selectedOccationById.includes(item.id)}
-                                          onChange={() => handleCheckboxByOccation(item.id)}
+                                          checked={selectedOccationById.includes(
+                                            item.id
+                                          )}
+                                          onChange={() =>
+                                            handleCheckboxByOccation(item.id)
+                                          }
                                         />
                                         <label>
-                                          {String(item.name).charAt(0).toUpperCase() +
-                                            String(item.name).slice(1).toLowerCase()}{" "}
+                                          {String(item.name)
+                                            .charAt(0)
+                                            .toUpperCase() +
+                                            String(item.name)
+                                              .slice(1)
+                                              .toLowerCase()}{" "}
                                           <span>{item.product_count}</span>
                                         </label>
                                       </div>
@@ -593,17 +640,22 @@ const FilterModal = (props) => {
                       </Tab.Container>
                     </div>
                     <div className={classes.PriceBtns2}>
-                      <button className={classes.ResetBtn} onClick={handleReset}>
+                      <button
+                        className={classes.ResetBtn}
+                        onClick={handleReset}
+                      >
                         CLEAR ALL
                       </button>
-                      <button className={classes.ApplyBtn} onClick={handleButtonClick}>
+                      <button
+                        className={classes.ApplyBtn}
+                        onClick={handleButtonClick}
+                      >
                         Apply
                       </button>
                     </div>
                   </div>
                 </Typography>
               </Box>
-
             </Modal>
           </div>
         </div>

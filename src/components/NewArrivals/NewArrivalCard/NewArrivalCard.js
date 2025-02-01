@@ -19,8 +19,7 @@ const NewArrivalCard = (props) => {
   const [addToWishList, setAddToWishList] = useState(false);
   const [onadd, setOnAdd] = useState(true);
   const [wishId, setWishId] = useState([]);
-  const likes = props.prodet.wishlist_id;
-  console.log("likes", likes);
+  const [wishlistIds, setWishlistIds] = useState();
 
   const Contryname = localStorage.getItem("country_name");
 
@@ -38,6 +37,27 @@ const NewArrivalCard = (props) => {
     }
   }, [props.wishAct]);
 
+  useEffect(() => {
+    if (props.prodet.wishlist_id) {
+      setWishId(props.prodet.wishlist_id);
+      setAddToWishList(true);
+    } else {
+      setAddToWishList(false);
+      setWishId(""); // Reset wishId
+    }
+  }, [props.prodet.wishlist_id]);
+
+  const likes =
+    (props.prodet.wishlist_id && props.prodet.wishlist_id) ||
+    (props.wishId && props.wishId);
+  console.log("likes", likes);
+  console.log("wishprodet?", addToWishList);
+  console.log("ww1", props.prodet.wishlist_id);
+  console.log("ww2", props.wishId);
+  console.log("ww3", wishId);
+  console.log("ww4", props.prodet);
+  console.log("ww5", props.wishAct);
+
   const Added = () => {
     const token = localStorage.getItem("swaToken");
     if (token !== null) {
@@ -52,7 +72,7 @@ const NewArrivalCard = (props) => {
         })
         .then((response1) => {
           setAddToWishList(true);
-
+          setWishlistIds(response1.data.results.data.id);
           props.Suces();
         })
         .catch((error) => {
@@ -63,26 +83,27 @@ const NewArrivalCard = (props) => {
     }
   };
   const Remove = () => {
-    if (token !== null && likes) {
+    if (token !== null) {
       // Ensure wishId is not empty
-      axios
-        .delete(`${Urls.wishlist}${likes}?country=${countryId}`, {
-          headers: { Authorization: "Token " + token },
-        })
-        .then((response1) => {
-          setAddToWishList(false);
-          setWishId(""); // Clear wishId on removal
-          props.Suces();
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } else {
-      if (!likes) {
-        console.log("No wishId to remove.");
-      } else {
-        toast("Please Login!");
+      const idToUse = likes || wishlistIds;
+      if (idToUse) {
+        console.log("wishlistIdsapinew", wishlistIds);
+        console.log("wishlistIdsapinew2", likes);
+        axios
+          .delete(`${Urls.wishlist + idToUse}/?country=${countryId}`, {
+            headers: { Authorization: "Token " + token },
+          })
+          .then((response1) => {
+            setAddToWishList(false);
+            setWishId(""); // Clear wishId on removal
+            props.Suces();
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       }
+    } else {
+      toast("Please Login!");
     }
   };
   console.log(wishId, "wishId");
@@ -109,7 +130,7 @@ const NewArrivalCard = (props) => {
   //   }
   // };
   // const addToCart = () =>{
-  //     history.push('/cart')
+  //     history.push('/shoping/cart')
   // }
   // const ClickAddButton = () => {
   //     setOnAdd(false)
@@ -118,7 +139,7 @@ const NewArrivalCard = (props) => {
   let cost = props.PriceNew;
   let formattedCost = parseFloat(cost).toLocaleString();
   function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return x && x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
   const result = numberWithCommas(formattedCost);
 
@@ -128,17 +149,26 @@ const NewArrivalCard = (props) => {
   // const handleCloseModal = () => {
   //   setShowModal(false);
   // };
+  const isDynamicRoute = /^\/[^/]+$/.test(location.pathname);
+  console.log("isDynamicRoute", isDynamicRoute);
+  const containerClass =
+    location.pathname.startsWith("/jewellery/budget") ||
+    location.pathname.startsWith("/new/arrivals") || isDynamicRoute
+      ? "col-md-4 col-sm-6 col-lg-4 col-6"
+      : "col-md-4 col-sm-6 col-lg-3 col-6";
 
   return (
     <React.Fragment>
       <div
-        className={` ${location.pathname === "/new_arrivel"
-          ? "col-md-4 col-sm-6 col-lg-4 col-6"
-          : "col-md-4 col-sm-6 col-lg-3 col-6"
-          } ${Classes.NewArrivals}`}
+        // className={` ${
+        //   location.pathname.startsWith("/jewellery/budget")
+        //     ? "col-md-4 col-sm-6 col-lg-4 col-6"
+        //     : "col-md-4 col-sm-6 col-lg-3 col-6"
+        // } ${Classes.NewArrivals}`}
+        className={`${containerClass} ${Classes.NewArrivals}`}
       >
         <ToastContainer />
-        <div className={Classes.NewArrivalCard}>
+        <div className={Classes.NewArrivalCard} style={{ userSelect: "none" }}>
           <div className={Classes.NewArrivalCardSub}>
             {props.Discount && props.isDiscount ? (
               <div className={Classes.Discount}>
@@ -151,7 +181,7 @@ const NewArrivalCard = (props) => {
               className={Classes.ProductImage}
               alt="ProductImage"
             />
-            
+
             {/* <p className={Classes.ProductName}>{props.ProductName}</p> */}
             {/* <p className={Classes.ProductId}>{props.ProductId}</p> */}
             <div className={Classes.HoverContainer}>
@@ -215,7 +245,7 @@ const NewArrivalCard = (props) => {
                   />
                 </div>
                 <div className={Classes.cardTryatHomeBtn}>
-                  <button>TRIAL AT HOME</button>
+                  <button onClick={props.clicked}>BUY NOW</button>
                 </div>
               </div>
             </div>

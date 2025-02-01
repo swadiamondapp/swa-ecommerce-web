@@ -15,6 +15,7 @@ import FilterMobile from "../../components/Filter/FilterMobile";
 import Features from "../../components/Features/Features";
 import FilterModal from "../../components/LifeTImeModal/FilterModal";
 import SliderFeature from "../../components/ProductDetails/SliderFeature";
+import useCanonicalTag from "../../useCanonicalTag";
 
 const NewArrivalPage = (props) => {
   const [product, setProduct] = useState([]);
@@ -30,14 +31,48 @@ const NewArrivalPage = (props) => {
   const [labelSet, setLabelSet] = useState([]);
   const [num, setNum] = useState("");
   const [count, setCount] = useState("");
+  const [category, setCategory] = useState([]);
+  const [categoryDetails, setCategoryDetails] = useState({
+    data: "",
+    product_category: "",
+  });
   const history = useHistory();
   const location = useLocation();
   const token = localStorage.getItem("swaToken");
   const countryId = localStorage.getItem("id");
-  const productCategory = props.location.state.product_category || "";
+  const productCategory =
+    (props &&
+      props.location &&
+      props.location.state &&
+      props.location.state.product_category) ||
+    "";
   const [buttonTexts, setButtonTexts] = useState({});
   const [showModal, setShowModal] = useState(false);
   // const categoryName = props.location.state.categoryName
+  useCanonicalTag();
+
+  const formatPathname = (pathname) => {
+    // Remove the leading slash
+    const trimmedPath = pathname.replace(/^\//, "");
+
+    // Capitalize the first letter
+    return trimmedPath.charAt(0).toUpperCase() + trimmedPath.slice(1);
+  };
+
+  useEffect(() => {
+    document.title = formatPathname(location.pathname) || "Category page";
+    const metaDescription = document.createElement("meta");
+    metaDescription.name = "swa diamonds product category";
+    metaDescription.content =
+      "This is the product category page of swa diamonds website.";
+    document.head.appendChild(metaDescription);
+
+    // Cleanup the meta tag on unmount
+    return () => {
+      document.head.removeChild(metaDescription);
+    };
+  }, [location.pathname]);
+
   const filter = (newArrive, currentPage) => {
     setLoading(true);
     axios
@@ -61,14 +96,26 @@ const NewArrivalPage = (props) => {
   };
 
   const prodDetHandler = (prodItem) => {
+    // history.push({
+    //   pathname:
+    //     "/products/" +
+    //     prodItem.product_id +
+    //     "/" +
+    //     prodItem.thumbnail_colour_id +
+    //     "/" +
+    //     prodItem.product_name,
+    //   state: { data: prodItem },
+    // });
+    sessionStorage.setItem(
+      "productDetails",
+      JSON.stringify({
+        id: prodItem.product_id,
+        color: prodItem.colour_id,
+        name: prodItem.product_name,
+      })
+    );
     history.push({
-      pathname:
-        "/products/" +
-        prodItem.product_id +
-        "/" +
-        prodItem.thumbnail_colour_id +
-        "/" +
-        prodItem.product_name,
+      pathname: "/jewellery/" + prodItem.alias,
       state: { data: prodItem },
     });
   };
@@ -124,30 +171,59 @@ const NewArrivalPage = (props) => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    console.log(props.location.state.data);
-
-    if (props.location.state.data === "new") {
-      filter('?filter_type="new', 1);
-      setHead("New Arrivals");
-      cartsCount();
-    } else if (props.location.state.data === "top") {
-      filter('?filter_type="top', 1);
-      setHead("Top Demanded Items");
-      cartsCount();
-    } else if (props.location.state.data === "filMin") {
-      filter("?max_price=" + props.location.state.price, 1);
-      setHead("Under " + props.location.state.price);
-      cartsCount();
-    } else if (props.location.state.data === "occation") {
-      filter("?occasion_tag_ids=" + props.location.state.octnId, 1);
-      setHead("Product List");
-      setOccn(props.location.state.octnId);
-    } else if (props.location.state.data !== undefined) {
-      filter("?category_ids=" + props.location.state.data, 1);
-      setCatSet(props.location.state.data);
-      setHead("Product List");
+    // console.log(props.location.state.data);
+    if (props && props.location && props.location.state) {
+      if (props.location.state.data === "new") {
+        filter('?filter_type="new', 1);
+        setHead("New Arrivals");
+        cartsCount();
+      } else if (props.location.state.data === "top") {
+        filter('?filter_type="top', 1);
+        setHead("Top Demanded Items");
+        cartsCount();
+      } else if (props.location.state.data === "filMin") {
+        filter("?max_price=" + props.location.state.price, 1);
+        setHead("Under " + props.location.state.price);
+        cartsCount();
+      } else if (props.location.state.data === "occation") {
+        filter("?occasion_tag_ids=" + props.location.state.octnId, 1);
+        setHead("Product List");
+        setOccn(props.location.state.octnId);
+      } else if (props.location.state.data !== undefined) {
+        filter("?category_ids=" + props.location.state.data, 1);
+        setCatSet(props.location.state.data);
+        setHead("Product List");
+      }
+    } else {
+      let categories = [];
+      let categoryName = "";
+      function getCategoryIdByName(name) {
+        const category = categories.find(
+          (cat) => cat.name === name.toUpperCase()
+        );
+        return category ? category.id : null;
+      }
+      axios
+        .get(`${Urls.home}?country=${countryId}`)
+        .then((response) => {
+          console.log("7654", location.pathname);
+          categories = response.data.results.data.categories;
+          categoryName =
+            location && location.pathname && location.pathname.slice(1);
+          const categoryId = getCategoryIdByName(categoryName);
+          setCatSet(categoryId);
+          setHead("Product List");
+          setCategoryDetails({
+            data: categoryId,
+            product_category: categoryName.toUpperCase(),
+          });
+          filter("?category_ids=" + categoryId, 1);
+        })
+        .catch((error) => {
+          console.error("Error fetching home data:", error);
+        });
     }
-  }, [props.location.state.data]);
+  }, [props && props.location && props.location.state]);
   const filterCatHandler = (filtSet) => {
     let delimiter = ", ";
     let catSet = "";
@@ -262,6 +338,8 @@ const NewArrivalPage = (props) => {
     arrayDlt.splice(indx, 1);
     setLabelSet(arrayDlt);
   };
+
+  console.log("categoryDetails23----->", category);
   const cartAddHandler = (product) => {
     const body = {
       product_id: product.product_id,
@@ -369,7 +447,6 @@ const NewArrivalPage = (props) => {
       </div>
     );
   } else {
-    
     const handleShowModal = (productId) => {
       console.log("productIddd", productId);
       const pincode = localStorage.getItem("pincode");
@@ -380,7 +457,7 @@ const NewArrivalPage = (props) => {
           size_id: "",
           pincode: pincode,
         };
-  
+
         axios
           .post(Urls.checkdeliveryDate, body, {
             headers: { Authorization: "Token " + token },
@@ -406,8 +483,7 @@ const NewArrivalPage = (props) => {
     };
 
     products = product.map((item, index) => {
-
-      console.log(item.sku,"item.sku")
+      console.log(item.sku, "item.sku");
       return (
         <NewArrivalCard
           ProductImage={item.thumbnail_image}
@@ -421,15 +497,18 @@ const NewArrivalPage = (props) => {
           }
           PriceOld={item.is_on_discount ? item.country_total_price : null}
           key={index}
+          isDiscount={item.is_on_discount}
           Discount={
             item.discount_percentage !== null
               ? item.discount_percentage + "%OFF"
               : item.discount_percentage
           }
           clicked={() => prodDetHandler(item)}
-          wishAct={item.wishlist_id}
+          wishAct={item && item.wishlist_id}
           prodet={item}
-          buttonText={buttonTexts[item.product_id] || "Check delivery date"}
+          buttonText={
+            buttonTexts[item && item.product_id] || "Check delivery date"
+          }
           onClick={() => handleShowModal(item.product_id)}
           showModal={showModal}
           onclose={handleCloseModal}
@@ -438,7 +517,6 @@ const NewArrivalPage = (props) => {
     });
   }
 
-  console.log("count--->", count);
   // const countryId = localStorage.getItem("id");
   const flag = localStorage.getItem("flag_image");
   const Contryname = localStorage.getItem("country_name");
@@ -464,7 +542,11 @@ const NewArrivalPage = (props) => {
                 filterColr={filtColorHandler}
                 filterOctn={filtOcctnHandler}
                 filterMetal={filterMetalHanlder}
-                filterSearch={props.location.state}
+                filterSearch={
+                  props && props.location && props.location.state
+                    ? props.location.state
+                    : categoryDetails && categoryDetails
+                }
                 setProduct={setProduct}
                 setCount={setCount}
               />
@@ -477,7 +559,11 @@ const NewArrivalPage = (props) => {
                   deltLabel={deltLbel}
                   sortHandler={sortsHHandler}
                   count={count}
-                  categoryName={productCategory}
+                  categoryName={
+                    productCategory
+                      ? productCategory
+                      : categoryDetails && categoryDetails.product_category
+                  }
                 >
                   {/* <ReactPaginate
                     breakLabel="..."
@@ -534,7 +620,11 @@ const NewArrivalPage = (props) => {
                   sortHandler={sortsHHandler2}
                   sortHandlerPrice={sortsHHandlerPrice}
                   count={count}
-                  categoryName={productCategory}
+                  categoryName={
+                    productCategory
+                      ? productCategory
+                      : categoryDetails && categoryDetails.product_category
+                  }
                   setProduct={setProduct}
                 >
                   {" "}

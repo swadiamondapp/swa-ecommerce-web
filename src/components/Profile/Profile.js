@@ -37,13 +37,21 @@ const Profile = (props) => {
     mobile: phone,
     photo: null,
   });
+  console.log("formDataaa", formData);
 
   const [errors, setErrors] = useState({});
+  const [moberrors, setmobErrors] = useState("");
   const token = localStorage.getItem("swaToken");
-  const [preview, setPreview] = useState(userProfileImage === "https://swaprdnecomnew.zinfog.in/media/default.png" ? defaultProfile: userProfileImage);
+  const [preview, setPreview] = useState(
+    userProfileImage === "https://swaecommain.swa.co/media/default.png"
+      ? defaultProfile
+      : userProfileImage
+  );
   const [open, setOpen] = useState(false);
   const [loginModalVisible, setLoginModalVisible] = useState(false);
   const [show, setShow] = useState(false);
+
+  console.log("moberrors", moberrors);
 
   const [isMobileView, setIsMobileView] = useState(
     window.innerWidth >= 300 && window.innerWidth <= 575
@@ -85,7 +93,7 @@ const Profile = (props) => {
       .required()
       .messages({
         "string.base": `"Email" should be a type of string`,
-        "string.empty": `"Email" must not be empty`,
+        "string.empty": `Email must not be empty`,
         "string.pattern.base": `"Email" must be  valid `,
         "any.required": `"Email" is a required field`,
       }),
@@ -95,7 +103,7 @@ const Profile = (props) => {
       .required()
       .messages({
         "string.base": `"Mobile Number" should be a type of string`,
-        "string.empty": `"Mobile Number" is required`,
+        "string.empty": `Mobile Number is required`,
         "string.pattern.base": `"Mobile Number" must be a 10-digit number`,
         "any.required": `"Mobile Number" is a required field`,
       }),
@@ -108,6 +116,14 @@ const Profile = (props) => {
       ...formData,
       [name]: value,
     });
+  };
+
+  // Store the initial data for comparison
+  const initialData = {
+    fullName: userName,
+    email: Email,
+    mobile: phone,
+    photo: null, // assuming the photo is initially null
   };
 
   const handlePhotoUpload = (e) => {
@@ -127,9 +143,24 @@ const Profile = (props) => {
   console.log(formData.photo, "proimage");
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Check if formData matches initialData
+    const isUnchanged =
+      formData.fullName === initialData.fullName &&
+      formData.email === initialData.email &&
+      formData.mobile === initialData.mobile &&
+      !formData.photo;
+
+    if (isUnchanged) {
+      alert("No changes were made.");
+      return;
+    }
+
     const validationData = { ...formData };
     if (!formData.photo) delete validationData.photo;
-    const { error } = schema.validate(validationData, { abortEarly: false });
+    const { error } = schema.validate(validationData, {
+      abortEarly: false,
+    });
     if (error) {
       const validationErrors = {};
       error.details.forEach((detail) => {
@@ -155,13 +186,13 @@ const Profile = (props) => {
           },
         });
         console.log("Form data is valid and submitted:", response.data);
-        if (response.data.status === 200) {
+        if (response.data.message === "updated successfully") {
           console.log("Form data is valid and submitted:", response.data);
           handleOpen();
           // Automatically close the modal after 5 seconds
 
           if (formData.email !== Email || formData.mobile !== phone) {
-            localStorage.removeItem("swaToken");
+            // localStorage.removeItem("swaToken");
             localStorage.removeItem("userName");
             localStorage.removeItem("phoneNumber");
           }
@@ -172,6 +203,15 @@ const Profile = (props) => {
               setPreview(reader.result); // Update the image preview
             };
             reader.readAsDataURL(formData.photo); // Convert image to Base64
+          }
+          if (formData.fullName) {
+            localStorage.setItem("userName", formData.fullName);
+          }
+          if (formData.email) {
+            localStorage.setItem("UserEmail", formData.email);
+          }
+          if (formData.mobile) {
+            localStorage.setItem("phoneNumber", formData.mobile);
           }
 
           // setTimeout(handleClose, 3000);
@@ -197,6 +237,24 @@ const Profile = (props) => {
           // Show LoginModal if status is 200
 
           // setLoginModalVisible(true);
+        } else if (
+          response.data.errors.phone_number &&
+          response.data.errors.phone_number.includes(
+            "custom user with this phone number already exists."
+          )
+        ) {
+          console.log(
+            "Phone number already exists error:",
+            response.data.errors
+          );
+          setmobErrors("Phone number already exists");
+        } else if (
+          response.data.errors.email &&
+          response.data.errors.email.includes(
+            "custom user with this email already exists."
+          )
+        ) {
+          setmobErrors("Email already exists");
         }
       } catch (err) {
         console.error("Error submitting the form:", err);
@@ -207,7 +265,7 @@ const Profile = (props) => {
   const closeHanlder = () => {
     setShow(false);
   };
-  console.log( userProfileImage, preview, "userPhooo");
+  console.log(userProfileImage, preview, "userPhooo");
   return (
     <div>
       <div className={Classes.mainContianerProfile}>
@@ -215,9 +273,9 @@ const Profile = (props) => {
           <form onSubmit={handleSubmit}>
             <div className={Classes.ProfileCard}>
               <h3>Edit profile</h3>
-            
-                <img src={preview} alt="preview" />
-           
+
+              <img src={preview} alt="preview" />
+
               <p
                 className={Classes.UploadPhotoProfile}
                 onClick={() => document.getElementById("photoUpload").click()}
@@ -268,6 +326,7 @@ const Profile = (props) => {
                     <p className={Classes.error}>{errors.mobile}</p>
                   )}
                 </div>
+                {moberrors && <p className={Classes.error}>{moberrors}</p>}
               </div>
               <div className={Classes.ParentProfileBtn}>
                 <button type="submit" className={Classes.ProfileSaveChangeBtn}>

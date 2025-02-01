@@ -49,16 +49,16 @@ function Footer() {
     history.push("about_us");
   };
   const catSelHandler = (id) => {
-    history.push({ pathname: "/new_arrivel", state: { data: id } });
-    // if (history.location.pathname !== "/new_arrivel") {
+    history.push({ pathname: "/new/arrivals", state: { data: id } });
+    // if (history.location.pathname !== "/new/arrivals") {
     //   console.log("id------->", id);
-    //   history.push({ pathname: "/new_arrivel", state: { data: id } });
+    //   history.push({ pathname: "/new/arrivals", state: { data: id } });
     // }
   };
   const occationSelHandler = (id) => {
-    if (history.location.pathname !== "/new_arrivel") {
+    if (history.location.pathname !== "/new/arrivals") {
       history.push({
-        pathname: "/new_arrivel",
+        pathname: "/new/arrivals",
         state: { data: "occation", octnId: id },
       });
     }
@@ -105,7 +105,7 @@ function Footer() {
                   <div className="col-md-4">
                     <h1 className={Classes.Title}>General info</h1>
                     <div className={Classes.Links}>
-                      <Link to="/faq">
+                      <Link to="/fa/questions">
                         <p className={Classes.Links}>FAQ</p>
                       </Link>
                       {/* <Link to="">
@@ -119,16 +119,16 @@ function Footer() {
                       >
                         About us
                       </p>
-                      <Link to="/privacy_policy">
+                      <Link to="/privacy/policy">
                         <p className={Classes.Links}>Privacy policy</p>
                       </Link>
-                      <Link to="/Return_policy_page">
+                      <Link to="/return/policy">
                         <p className={Classes.Links}>Return policy</p>
                       </Link>
-                      <Link to="/terms_condition">
+                      <Link to="/terms/condition">
                         <p className={Classes.Links}>Terms & conditions</p>
                       </Link>
-                      <Link to="/outlet">
+                      <Link to="/product/outlets">
                         <p className={Classes.Links}>Outlets</p>
                       </Link>
                     </div>
@@ -321,13 +321,13 @@ function Footer() {
 
             <AccordionTab header="Policies">
               <div className={Classes.PolicyLinks}>
-                <Link to="/privacy_policy">
+                <Link to="/privacy/policy">
                   <p className={Classes.Links}>Privacy policy</p>
                 </Link>
-                <Link to="/Return_policy_page">
+                <Link to="/return/policy">
                   <p className={Classes.Links}>Return policy</p>
                 </Link>
-                <Link to="/terms_condition">
+                <Link to="/terms/condition">
                   <p className={Classes.Links}>Terms & conditions</p>
                 </Link>
               </div>
@@ -350,7 +350,7 @@ function Footer() {
             </AccordionTab>
             <AccordionTab header="Quick links">
               <p className="m-0">
-                <Link to="/faq">
+                <Link to="/fa/questions">
                   <p className={Classes.Links}>Faq</p>
                 </Link>
                 <div className={Classes.MobQuicklinks}>

@@ -70,7 +70,7 @@ function Rating(props) {
           setShow(true);
           setTimeout(() => {
             setShow(false);
-            history.push("/my_orders");
+            history.push("/my/orders");
           }, 2000);
         })
         .catch((error) => {
@@ -191,7 +191,7 @@ function Rating(props) {
             <Modal.Title>
               <HiBadgeCheck
                 className={Classes.Check}
-                size={200}
+                size={150}
                 color="#30933A"
               />
             </Modal.Title>

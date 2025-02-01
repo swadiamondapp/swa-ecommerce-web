@@ -7,6 +7,7 @@ import CheckOut from "../../components/CheckOut/CheckOut";
 import OtpModal from "../../components/Navbar/OtpModal";
 import axios from "axios";
 import * as Urls from "../../Urls";
+import useCanonicalTag from "../../useCanonicalTag";
 
 const CheckOutPage = (props) => {
   const token = localStorage.getItem("swaToken");

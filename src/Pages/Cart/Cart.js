@@ -43,6 +43,7 @@ const Cart = () => {
     flag_image: flag,
     country_name: Contryname,
   });
+
   console.log("activeCart", activeCart);
   console.log("cartList00000", cartList);
   console.log("cartItemsCount", cartItemsCount);
@@ -96,7 +97,8 @@ const Cart = () => {
     setShow(false);
   };
   const removeCartHandler = (selItem) => {
-    setSelProAmnt(selItem.items_total.toFixed(2));
+    console.log("selItemqw", selItem);
+    // setSelProAmnt(selItem.items_total.toFixed(2));
     setSelImg(selItem.thumbnail_image);
     setSelId(selItem.id);
     setProdctId(selItem.product.id);
@@ -105,27 +107,63 @@ const Cart = () => {
   const removeHandler = (selids) => {
     setLoading(true);
     setShow(false);
-    const index = cartList.findIndex((obj) => obj.id === selids);
+    // const index = cartList.findIndex((obj) => obj.id === selids);
+    // Use filter to create a new array excluding the removed item
+    const updatedCartList = cartList.filter((item) => item.id !== selids);
+
+    // Optimistically update the state
+    setCartList(updatedCartList);
+    console.log("cartListqqqqq", cartList);
+    setSelProAmnt(cartList && cartList[0].items_total);
     axios
       .delete(`${Urls.cart}${selids}/?country=${countryId}`, {
-        headers: { Authorization: "Token " + token },
+        headers: {
+          Authorization: "Token " + token,
+        },
       })
       .then((response1) => {
         setLoading(false);
 
-        let cartNewArray = [];
-        cartNewArray = [...cartList];
-        cartNewArray.splice(index, 1);
-        setCartList(cartNewArray);
+        // let cartNewArray = [];
+        // cartNewArray = [...cartList];
+        // cartNewArray.splice(index, 1);
+        // setCartList(cartNewArray);
         let count = cartItemsCount;
         count = count - 1;
         setCartItemsCount(count);
         if (count == 0) {
           setCartList([]);
         }
+        if (response1.data.results.status_code == 200) {
+          axios
+            .get(`${Urls.cart}?country=${countryId}`, {
+              headers: { Authorization: "Token " + token },
+            })
+            .then((response1) => {
+              setLoading(false);
+              console.log("response1--->", response1);
+              if (response1.data.results.messege === "cart is empty") {
+                setCartCount("");
+              } else {
+                setCartCount(response1.data.results.data.cartmaster.item_count);
+              }
+
+              setPageCount(response1.data.results.count / 20);
+              setCartList(response1.data.results.data.cart_item);
+              setAmountPay(response1.data.results.data.cartmaster.grand_total);
+              setCartItemsCount(response1.data.results.count);
+              console.log("111111,", response1.data.results.count);
+            })
+
+            .catch((error) => {
+              console.log(error);
+            });
+        }
       })
       .catch((error) => {
         console.log(error);
+        // Revert to the original state if the API call fails
+        setCartList([...cartList]);
       });
   };
   // new
@@ -160,7 +198,7 @@ const Cart = () => {
       .then((response1) => {
         if (response1.data.results.status_code === 200) {
           fechTryAtHomeCart();
-          setShow(false)
+          setShow(false);
         } else if (
           response1.data.results.message === "Already Processed, Cannot delete"
         ) {
@@ -171,7 +209,7 @@ const Cart = () => {
       .catch((error) => {
         console.log(error);
       });
-    // history.push("/new_arrivel");
+    // history.push("/new/arrivals");
   };
   // new
   const movWishList = (selids) => {
@@ -276,17 +314,28 @@ const Cart = () => {
       cartLists = (
         <div className="container contBg">
           <div className=" d-flex justify-content-center align-items-center loader">
-            <div className="col-md-6" style={{display:"flex",flexDirection:"column",alignItems:"center",gap:"10px"}}>
+<div
+              className="col-md-6"
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "10px",
+              }}
+            >
               <div className={Classes.cartEmpty}>
                 <img src={cartEmpty} alt="cartEmpty" />
               </div>
-              <h3 className={Classes.cartListHead}>Your Cart page is empty</h3>
+              <h3 className={Classes.cartListHead}>Your Cart is empty</h3>
               <p className={Classes.cartPara}>
                 Currently, there are no items in the cart. Have no worries, Keep
                 surfing until you find your favorite ornaments. From wishlist to
                 the cart, We wish you ‘Happy Shopping’.{" "}
               </p>
-              <Link to="/"> <button className={Classes.btn_shopnow}>Shop Now</button></Link>
+ <Link to="/">
+                {" "}
+                <button className={Classes.btn_shopnow}>Shop Now</button>
+              </Link>
             </div>
           </div>
         </div>
@@ -326,14 +375,17 @@ const Cart = () => {
                   Property={
                     // item.description.carat +
                     item.product.metal_type +
-                    " KT " +
+                    // " KT " +
+                    " " +
                     // item.description.colour_name +
                     " " +
-                    item.product.gross_weight +
-                    " GM "
+                    parseFloat(item.product.gross_weight).toFixed(3) +
+                    " g "
                   }
                   DiamondProperty={
-                    " Diamond " + item.product.diamond_weight + " Carat"
+                    " Diamond " +
+                    parseFloat(item.product.diamond_weight).toFixed(3) +
+                    " Carat"
                   }
                   Size={item.size}
                   color={item.color}
@@ -353,7 +405,15 @@ const Cart = () => {
       cartLists = (
         <div className="container contBg">
           <div className=" d-flex justify-content-center align-items-center loader">
-            <div className="col-md-6" style={{display:"flex",flexDirection:"column",alignItems:"center",gap:"10px"}}>
+            <div
+              className="col-md-6"
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: "10px",
+              }}
+            >
               <div className={Classes.cartEmpty}>
                 <img src={cartEmpty} alt="cartEmpty" />
               </div>
@@ -363,7 +423,10 @@ const Cart = () => {
                 surfing until you find your favorite ornaments. From wishlist to
                 the cart, We wish you ‘Happy Shopping’.{" "}
               </p>
-             <Link to="/"> <button className={Classes.btn_shopnow}>Shop Now</button></Link>
+              <Link to="/">
+                {" "}
+                <button className={Classes.btn_shopnow}>Shop Now</button>
+              </Link>
             </div>
           </div>
         </div>
@@ -426,8 +489,16 @@ const Cart = () => {
           handleClose={handleCloseHandler}
           title="Move from bag"
           img={img}
-          movWish={activeCart === "shopping" ? () => movWishList(selId) : ()=>movWishListTrial(selId)}
-          remove={activeCart === "shopping" ? () => removeHandler(selId) : () => addDesigns(selId)}
+          movWish={
+            activeCart === "shopping"
+              ? () => movWishList(selId)
+              : () => movWishListTrial(selId)
+          }
+          remove={
+            activeCart === "shopping"
+              ? () => removeHandler(selId)
+              : () => addDesigns(selId)
+          }
           body="Are you sure that you want to move 
         this item from the cart?"
           shows={show}

@@ -11,6 +11,7 @@ import { useHistory } from "react-router-dom";
 import { FadeLoader } from "react-spinners";
 import ReactPaginate from "react-paginate";
 import Header from "../../components/HeaderNew/Header";
+import useCanonicalTag from "../../useCanonicalTag";
 const TagSearch = (props) => {
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -44,16 +45,29 @@ const TagSearch = (props) => {
         console.log(error);
       });
   };
+  useCanonicalTag();
 
   const prodDetHandler = (prodItem) => {
+    // history.push({
+    //   pathname:
+    //     "/products/" +
+    //     prodItem.product_id +
+    //     "/" +
+    //     prodItem.thumbnail_colour_id +
+    //     "/" +
+    //     prodItem.product_name,
+    //   state: { data: prodItem },
+    // });
+    sessionStorage.setItem(
+      "productDetails",
+      JSON.stringify({
+        id: prodItem.product_id,
+        color: prodItem.colour_id,
+        name: prodItem.product_name,
+      })
+    );
     history.push({
-      pathname:
-        "/products/" +
-        prodItem.product_id +
-        "/" +
-        prodItem.thumbnail_colour_id +
-        "/" +
-        prodItem.product_name,
+      pathname: "/jewellery/" + prodItem.alias,
       state: { data: prodItem },
     });
   };

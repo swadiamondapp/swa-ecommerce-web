@@ -1,5 +1,6 @@
 // // t server
 // export const server = "https://Swaprdn.zinfog.com/";
+// export const server = "https://swaecommain.swa.co/";
 //export const server = "https://swaecomindiamain.swa.co/";
 export const server = "https://swaecommain.swa.co/";
 //home page api
@@ -107,3 +108,5 @@ export const bookappointment = server + "ecom/trialcartitems/";
 // check delivery date
 
 export const checkdeliveryDate = server + "ecom/check-delivery-date/";
+export const oulets = server + "ecom/outlet-details/";
+export const detailsWithAlias = server + "ecom/alias-product/?alias=";

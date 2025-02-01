@@ -4,6 +4,7 @@ import Footer from "../../components/Footer/Footer";
 import PrivacyPolicy from "../../components/PrivacyPolicy/PrivacyPolicy";
 import axios from "axios";
 import * as Urls from "../../Urls";
+import useCanonicalTag from "../../useCanonicalTag";
 function PrivacyPolicyPage() {
   const [cartCount, setCartCount] = useState("");
   const token = localStorage.getItem("swaToken");
@@ -15,6 +16,7 @@ function PrivacyPolicyPage() {
     flag_image: flag,
     country_name: Contryname,
   });
+  useCanonicalTag();
   useEffect(() => {
     if (token !== null) {
       axios

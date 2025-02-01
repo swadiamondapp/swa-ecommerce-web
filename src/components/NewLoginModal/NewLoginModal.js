@@ -347,7 +347,7 @@ const LoginModal = (props) => {
     }
   };
   const myOrderHandler = () => {
-    history.push("/my_orders");
+    history.push("/my/orders");
     setLogCond(false);
   };
   const logoutHandler = () => {

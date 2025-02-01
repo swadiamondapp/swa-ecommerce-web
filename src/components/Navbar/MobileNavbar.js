@@ -37,7 +37,7 @@ import CheckDelivery from "../CheckDelivery/CheckDelivery";
 import { useLocation } from "react-router-dom/cjs/react-router-dom";
 
 const MobileNavbar = (props) => {
-  const location = useLocation()
+  const location = useLocation();
   const history = useHistory();
   const [isHamOpen, setIsHamOpen] = useState(false);
   const [open, setOpen] = useState(false);
@@ -65,7 +65,7 @@ const MobileNavbar = (props) => {
   const pincode = localStorage.getItem("pincode");
 
   const handleBackClick = () => {
-    history.goBack(); 
+    history.goBack();
   };
 
   console.log("catgSet", text);
@@ -150,7 +150,7 @@ const MobileNavbar = (props) => {
   console.log("isHamOpen===>", isHamOpen);
   const moveToWishList = () => {
     if (token !== null) {
-      history.push("/wish_list");
+      history.push("/wished/list");
     } else {
       setShow(true);
     }
@@ -164,7 +164,7 @@ const MobileNavbar = (props) => {
     };
   }, []);
 
-  const isCartPage = location.pathname === "/cart";
+  const isCartPage = location.pathname === "/shoping/cart";
 
   const handleClickOutside = (event) => {
     if (
@@ -200,19 +200,24 @@ const MobileNavbar = (props) => {
   };
   const searchTitleHandler = (setItem) => {
     if (setItem.type === "category") {
-      if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
+      if (history.location.pathname.slice(0, 12) === "/new/arrivals") {
         window.location.href =
           "https://www.swa.co/category_search/" + setItem.id;
       } else {
         history.push({
-          pathname: "/new_arrivel",
+          pathname: "/new/arrivals",
           state: { data: setItem.id },
         });
       }
     } else if (setItem.type === "product") {
       axios
         .get(
-          `${Urls.productDet + setItem.id}&country=${props.selectedCountry.id}`
+          `${Urls.productDet + setItem.id}&country=${props.selectedCountry.id}`,
+          {
+            headers: {
+              Authorization: "Token " + token,
+            },
+          }
         )
         .then((response1) => {
           const selData = {
@@ -254,17 +259,16 @@ const MobileNavbar = (props) => {
     }
   };
   const catSelHandler = (id) => {
-    if (history.location.pathname !== "/new_arrivel") {
-      history.push({ pathname: "/new_arrivel", state: { data: id } });
+    if (history.location.pathname !== "/new/arrivals") {
+      history.push({ pathname: "/new/arrivals", state: { data: id } });
     }
   };
   const tagSelHandler = (selItem) => {
-    if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
-      window.location.href =
-        "https://www.swa.co/tag_search/" + selItem.id;
+    if (history.location.pathname.slice(0, 12) === "/new/arrivals") {
+      window.location.href = "https://www.swa.co/tag_search/" + selItem.id;
     } else {
       history.push({
-        pathname: "/new_arrivel",
+        pathname: "/new/arrivals",
         state: {
           octnId: selItem.id,
           data: "occation",
@@ -317,7 +321,7 @@ const MobileNavbar = (props) => {
 
   const moveTocart = () => {
     if (token !== null) {
-      history.push("/cart");
+      history.push("/shoping/cart");
       // Handle cart click action
     } else {
       setShow(true); // Open login modal if user is not logged in
@@ -330,12 +334,11 @@ const MobileNavbar = (props) => {
     setIsSignpuMobileOpen(true);
   };
   const cattSelHandler = (setItem) => {
-    if (history.location.pathname.slice(0, 12) === "/new_arrivel") {
-      window.location.href =
-        "https://www.swa.co/category_search/" + setItem.id;
+    if (history.location.pathname.slice(0, 12) === "/new/arrivals") {
+      window.location.href = "https://www.swa.co/category_search/" + setItem.id;
     } else {
       history.push({
-        pathname: "/new_arrivel",
+        pathname: "/new/arrivals",
         state: { data: setItem.id, product_category: setItem.name },
       });
     }
@@ -427,15 +430,24 @@ const MobileNavbar = (props) => {
     console.log("cart,,,,.", props.setActiveCart(cartType));
   };
 
-
   return (
     <div className={Classes.NavContainer}>
       <div className={Classes.Navbar}>
         <header>
-          
-        {isCartPage && (
-          <div style={{width:"100%",display:"flex",gap:"34px",alignItems:"center"}}>
-            <img onClick={handleBackClick} style={{width:"20.54px",height:"20px"}} src={backBtn}/>
+          {isCartPage && (
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                gap: "34px",
+                alignItems: "center",
+              }}
+            >
+              <img
+                onClick={handleBackClick}
+                style={{ width: "20.54px", height: "20px" }}
+                src={backBtn}
+              />
               <div>
                 <div className={Classes.Parentcartitems}>
                   <div
@@ -465,13 +477,13 @@ const MobileNavbar = (props) => {
                   )}
                 </div> */}
               </div>
-              </div>
-            )}
+            </div>
+          )}
           {!isCartPage && (
             <>
-          <div className={Classes.NavElements}>
-            <div className={Classes.LeftIcons}>
-              {/* <Hamburger
+              <div className={Classes.NavElements}>
+                <div className={Classes.LeftIcons}>
+                  {/* <Hamburger
                 className={Classes.hamIcon}
                 color="#fff"
                 size={24}
@@ -486,14 +498,14 @@ const MobileNavbar = (props) => {
                   }
                 }}
               /> */}
-              <img
-                onClick={handleOpen}
-                src={menuimg}
-                alt="menuimg"
-                className={Classes.hamMenu}
-              />
-            </div>
-            {/* {isHomePage && (
+                  <img
+                    onClick={handleOpen}
+                    src={menuimg}
+                    alt="menuimg"
+                    className={Classes.hamMenu}
+                  />
+                </div>
+                {/* {isHomePage && (
               <div
                 className={Classes.Logo}
                 onClick={() => (window.location.href = "/")}
@@ -501,97 +513,96 @@ const MobileNavbar = (props) => {
                 <img className={Classes.mobileLogo} src={Logo} />
               </div>
             )} */}
-            {location.pathname !== "/new_arrivel" && (
-              <div
-                className={Classes.Logo}
-                onClick={() => (window.location.href = "/")}
-              >
-                <img className={Classes.mobileLogo} src={Logo} alt="Logo" />
-              </div>
-            )}
-
-            <div>
-              {location.pathname !== "/" &&
-                !location.pathname.startsWith("/products/") && (
+                {location.pathname !== "/new/arrivals" && (
                   <div
-                    style={{
-                      cursor: "pointer",
-                      display: "flex",
-                      flexDirection: "column",
-                      position: "relative",
-                      top: "5px",
-                    }}
-                    className={`${Classes.DeliveryPin} ${Classes.headerElement}`}
+                    className={Classes.Logo}
+                    onClick={() => (window.location.href = "/")}
                   >
-                    <span
-                      style={{ fontSize: "12px", color: "#fff" }}
-                      className={Classes.checkDeliveryTitle}
-                    >
-                      CHECK DELIVERY
-                    </span>
-                    {pincode ? null : (
-                      <span
-                        onClick={handleShowModal}
-                        className={Classes.EnterPinTitle}
-                        style={{
-                          cursor: "pointer",
-                          color: "#00e5ed",
-                          fontSize: "12px",
-                        }}
-                      >
-                        Enter PinCode
-                      </span>
-                    )}
-                    {pincode && (
-                      <span
-                        className={Classes.EnterPinTitle}
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "8px",
-                          fontSize: "14px",
-                          color: "#00e5ed",
-                        }}
-                      >
-                        {pincode}{" "}
-                        <FaPen
-                          style={{ fontSize: "12px" }}
-                          onClick={handleShowModal}
-                        />
-                      </span>
-                    )}
+                    <img className={Classes.mobileLogo} src={Logo} alt="Logo" />
                   </div>
                 )}
 
-            </div>
-            <CheckDelivery
-              show={showModal}
-              handleClose={handleCloseModal}
-              handleShow={handleShowModal}
-            />
-          </div>
-          <div className={Classes.rightIcons}>
-            {isHomePage ? (
-              <div>
-                {/* <img src={indiaimg} /> */}
-                <div
-                  style={{ cursor: "pointer" }}
-                  className={Classes.CountryFlags}
-                  // onClick={handleOpenDropDown}
-                  ref={nameRef}
-                >
-                  <div className={Classes.headerElement}>
-                    <img
-                      src={
-                        props &&
-                        props.selectedCountry &&
-                        props.selectedCountry.flag_image
-                      }
-                      alt="Selected flag"
-                      className={Classes.selectedImage}
-                    />
-                  </div>
-                  {/* {openDropDown && (
+                <div>
+                  {location.pathname !== "/" &&
+                    !location.pathname.startsWith("/products/") && (
+                      <div
+                        style={{
+                          cursor: "pointer",
+                          display: "flex",
+                          flexDirection: "column",
+                          position: "relative",
+                          top: "5px",
+                        }}
+                        className={`${Classes.DeliveryPin} ${Classes.headerElement}`}
+                      >
+                        <span
+                          style={{ fontSize: "12px", color: "#fff" }}
+                          className={Classes.checkDeliveryTitle}
+                        >
+                          CHECK DELIVERY
+                        </span>
+                        {pincode ? null : (
+                          <span
+                            onClick={handleShowModal}
+                            className={Classes.EnterPinTitle}
+                            style={{
+                              cursor: "pointer",
+                              color: "#00e5ed",
+                              fontSize: "12px",
+                            }}
+                          >
+                            Enter PinCode
+                          </span>
+                        )}
+                        {pincode && (
+                          <span
+                            className={Classes.EnterPinTitle}
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              gap: "8px",
+                              fontSize: "14px",
+                              color: "#00e5ed",
+                            }}
+                          >
+                            {pincode}{" "}
+                            <FaPen
+                              style={{ fontSize: "12px" }}
+                              onClick={handleShowModal}
+                            />
+                          </span>
+                        )}
+                      </div>
+                    )}
+                </div>
+                <CheckDelivery
+                  show={showModal}
+                  handleClose={handleCloseModal}
+                  handleShow={handleShowModal}
+                />
+              </div>
+              <div className={Classes.rightIcons}>
+                {isHomePage ? (
+                  <div>
+                    {/* <img src={indiaimg} /> */}
+                    <div
+                      style={{ cursor: "pointer" }}
+                      className={Classes.CountryFlags}
+                      // onClick={handleOpenDropDown}
+                      ref={nameRef}
+                    >
+                      <div className={Classes.headerElement}>
+                        <img
+                          src={
+                            props &&
+                            props.selectedCountry &&
+                            props.selectedCountry.flag_image
+                          }
+                          alt="Selected flag"
+                          className={Classes.selectedImage}
+                        />
+                      </div>
+                      {/* {openDropDown && (
                     <div className={Classes.CountryDropDowns} ref={dropdownRef}>
                       {countryData.map((country, index) => (
                         <div className={Classes.CountryContainer} key={index}>
@@ -624,37 +635,37 @@ const MobileNavbar = (props) => {
                       ))}
                     </div>
                   )} */}
+                    </div>
+                  </div>
+                ) : (
+                  <div onClick={() => props.setIsHome(!props.isHome)}>
+                    <GoSearch style={{ color: "#fff", fontSize: "25px" }} />
+                  </div>
+                )}
+                <div>
+                  <CgHeart
+                    className={Classes.Icon}
+                    color="#FFFFFF"
+                    size={25}
+                    onClick={() => {
+                      moveToWishList();
+                      setText("Please Login");
+                    }}
+                  />
+                </div>
+                <div>
+                  <IoCartOutline
+                    className={`${Classes.Icon} ${Classes.AddToCart}`}
+                    color="#FFFFFF"
+                    size={25}
+                    onClick={() => {
+                      moveTocart();
+                      setText("Please Login");
+                    }}
+                  />
                 </div>
               </div>
-            ) : (
-              <div onClick={() => props.setIsHome(!props.isHome)}>
-                <GoSearch style={{ color: "#fff", fontSize: "25px" }} />
-              </div>
-            )}
-            <div>
-              <CgHeart
-                className={Classes.Icon}
-                color="#FFFFFF"
-                size={25}
-                onClick={() => {
-                  moveToWishList();
-                  setText("Please Login");
-                }}
-              />
-            </div>
-            <div>
-              <IoCartOutline
-                className={`${Classes.Icon} ${Classes.AddToCart}`}
-                color="#FFFFFF"
-                size={25}
-                onClick={() => {
-                  moveTocart();
-                  setText("Please Login");
-                }}
-              />
-            </div>
-          </div>
-          {/* {showSearchBar && (
+              {/* {showSearchBar && (
             <div className={Classes.ParentSearchBar}>
               <div>
                 <BsArrowLeft
@@ -700,7 +711,7 @@ const MobileNavbar = (props) => {
               <p className={Classes.NoResult}>No Results Found</p>
             )}
           </div> */}
-          </>
+            </>
           )}
         </header>
         {/* {isHamOpen ? (
@@ -727,6 +738,7 @@ const MobileNavbar = (props) => {
               onClose={() => setShow(false)}
               isSignpuMobile={isSignpuMobileOpen}
               setShowSuccessModal={props.setShowSuccessModal}
+              setText={props.setText}
             />
           </Typography>
         </Box>
@@ -832,7 +844,7 @@ const MobileNavbar = (props) => {
                           </AccordionTab>
                           <AccordionTab
                             header="Policy"
-                            onClick={() => history.push("/privacy_policy")}
+                            onClick={() => history.push("/privacy/policy")}
                           >
                             <div className={Classes.ShippingDetialHead}></div>
                           </AccordionTab>
@@ -840,7 +852,7 @@ const MobileNavbar = (props) => {
                           {userName && (
                             <AccordionTab header="Account">
                               <div className={Classes.ShippingDetialHead}>
-                                <Link to="/profile" onClick={handleClose}>
+                                <Link to="/my/profile" onClick={handleClose}>
                                   <div className={Classes.LoggedDetailsList}>
                                     <p
                                       style={{
@@ -859,7 +871,7 @@ const MobileNavbar = (props) => {
                                     />
                                   </div>
                                 </Link>
-                                <Link to="/my_orders" onClick={handleClose}>
+                                <Link to="/my/orders" onClick={handleClose}>
                                   <div className={Classes.LoggedDetailsList}>
                                     <p
                                       style={{
@@ -878,7 +890,7 @@ const MobileNavbar = (props) => {
                                     />
                                   </div>
                                 </Link>
-                                <Link to="/wish_list" onClick={handleClose}>
+                                <Link to="/wished/list" onClick={handleClose}>
                                   <div className={Classes.LoggedDetailsList}>
                                     <p
                                       style={{
@@ -897,7 +909,7 @@ const MobileNavbar = (props) => {
                                     />
                                   </div>
                                 </Link>
-                                <Link to="/addaddress" onClick={handleClose}>
+                                <Link to="/add/address" onClick={handleClose}>
                                   <div className={Classes.LoggedDetailsList}>
                                     <p
                                       style={{
@@ -916,7 +928,7 @@ const MobileNavbar = (props) => {
                                     />
                                   </div>
                                 </Link>
-                                <Link to="/rate&review" onClick={handleClose}>
+                                <Link to="/rate&/review" onClick={handleClose}>
                                   <div className={Classes.LoggedDetailsList}>
                                     <p
                                       style={{
@@ -935,7 +947,7 @@ const MobileNavbar = (props) => {
                                     />
                                   </div>
                                 </Link>
-                                <Link to="/swaWallet" onClick={handleClose}>
+                                <Link to="/swa/wallet" onClick={handleClose}>
                                   <div className={Classes.LoggedDetailsList}>
                                     <p
                                       style={{
@@ -954,7 +966,7 @@ const MobileNavbar = (props) => {
                                     />
                                   </div>
                                 </Link>
-                                <Link to="/swaExchange" onClick={handleClose}>
+                                <Link to="/swa/exchange" onClick={handleClose}>
                                   <div className={Classes.LoggedDetailsList}>
                                     <p
                                       style={{
@@ -983,7 +995,7 @@ const MobileNavbar = (props) => {
                             onClick={handleLogOut}
                           >
                             <div className={Classes.LoggedDetailsList}>
-                              <Link to="/my_orders">
+                              <Link to="/my/orders">
                                 <p
                                   style={{
                                     fontSize: "16px",

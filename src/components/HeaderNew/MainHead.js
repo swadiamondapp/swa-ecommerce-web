@@ -12,7 +12,7 @@ const MainHead = (props) => {
   const landingPageHandler = () => {
     window.location.href = "/";
   };
-  const isCartPage = location.pathname === "/cart";
+  const isCartPage = location.pathname === "/shoping/cart";
 
   const toggleCart = (cartType) => {
     props.setActiveCart(cartType);
@@ -29,6 +29,7 @@ const MainHead = (props) => {
         setShowSuccessModal={props.setShowSuccessModal}
         activeCart={props.activeCart}
         setActiveCart={props.setActiveCart}
+        setText={props.setText}
       />
       <header className={Classes.headerNav}>
         <div className={`${"container"} ${Classes.ParentHeader}`}>

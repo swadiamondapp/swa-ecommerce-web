@@ -6,8 +6,12 @@ import Features from "../../components/Features/Features";
 import Footer from "../../components/Footer/Footer";
 import axios from "axios";
 import * as Urls from "../../Urls";
+import useCanonicalTag from "../../useCanonicalTag";
 
 const OutletPage = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const countryId = localStorage.getItem("id");
   const flag = localStorage.getItem("flag_image");
   const Contryname = localStorage.getItem("country_name");
@@ -18,6 +22,7 @@ const OutletPage = () => {
     flag_image: flag,
     country_name: Contryname,
   });
+  useCanonicalTag();
 
   useEffect(() => {
     axios

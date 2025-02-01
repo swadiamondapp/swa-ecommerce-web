@@ -5,13 +5,24 @@ import { useHistory } from "react-router-dom";
 import { BiRupee } from "react-icons/bi";
 import { CgDollar } from "react-icons/cg";
 import { states } from "../../countryList";
-
+import {
+  List,
+  ListItem,
+  CircularProgress,
+  Box,
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+  IconButton,
+} from "@mui/material";
+import Modal from "@mui/material/Modal";
+import CloseIcon from "@mui/icons-material/Close";
 import { useState } from "react";
 import { IoIosArrowUp } from "react-icons/io";
 import Warning from "../../Assets/Warning.png";
 import Succes from "../../Assets/success.png";
 import { AiOutlineHome } from "react-icons/ai";
-import { Radio, Space } from "antd";
+// import { Radio, Space } from "antd";
 import axios from "axios";
 import * as Urls from "../../Urls";
 import { FadeLoader } from "react-spinners";
@@ -20,10 +31,10 @@ import * as Yup from "yup";
 import { Dropdown } from "primereact/dropdown";
 import Joi from "joi";
 import OtpModal from "../Navbar/OtpModal";
+import { Country, State } from "country-state-city";
 
 function CheckOut(props) {
   const location = useLocation();
-  console.log(location, "locationSTate");
   const { state } = location;
   const { data } = state || {};
   const { promoCodeIds } = data || {};
@@ -54,8 +65,15 @@ function CheckOut(props) {
   const pincodes = localStorage.getItem("pincode");
   const [timer, setTimer] = useState(60);
   const countryId = localStorage.getItem("id");
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [addressList, setAddressList] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [selectedAddress, setSelectedAddress] = useState(null);
+  const [statesList, setStatesList] = useState([]);
 
-  console.log("promoIdIII", total);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const [addressData, setAddressData] = useState({
     sEmail: "",
@@ -65,7 +83,7 @@ function CheckOut(props) {
     mobile: "",
     pincode: pincodes,
     city: "",
-    state: "kerala",
+    state: "",
     hNumber_Bname: "",
     streetColony: "",
     landMark: "",
@@ -80,7 +98,8 @@ function CheckOut(props) {
     mobile: "",
     pincode: "",
     city: "",
-    state: "kerala",
+    state: "",
+    country: "",
     hNumber_Bname: "",
     streetColony: "",
     landMark: "",
@@ -119,13 +138,13 @@ function CheckOut(props) {
   var alphaExp = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
   const schema = Joi.object({
     sEmail: Joi.string()
-    .email({ tlds: { allow: false } }) // This allows all TLDs
-    .required()
-    .messages({
-      "string.base": "cannot be empty",
-      "string.empty": "Please enter your email address.",
-      "string.email": "Please enter a valid email address.",
-    }),
+      .email({ tlds: { allow: false } }) // This allows all TLDs
+      .required()
+      .messages({
+        "string.base": "cannot be empty",
+        "string.empty": "Please enter your email address.",
+        "string.email": "Please enter a valid email address.",
+      }),
     sPhone: Joi.string()
       .required()
       .pattern(/^[0-9]{10}$/)
@@ -222,8 +241,7 @@ function CheckOut(props) {
         return errors;
       }, {});
       setErrorMessage(validationErrors);
-      placeOrder();
-      console.log("paymentClicked");
+      locallySetAddress()
     } else {
       // Form is valid, proceed with submission
       console.log("Form submitted:", addressData);
@@ -232,7 +250,7 @@ function CheckOut(props) {
       handleSignUp();
     }
   };
-console.log(props.proDet.name,"props.proDet.name")
+  console.log(props.proDet.name, "props.proDet.name");
   const placeOrder = () => {
     let cartBody;
     let buyBody;
@@ -275,11 +293,13 @@ console.log(props.proDet.name,"props.proDet.name")
                 };
                 axios
                   .post(Urls.paySuces, bodyPay, {
-                    headers: { Authorization: "Token " + token },
+                    headers: {
+                      Authorization: "Token " + token,
+                    },
                   })
                   .then((response2) => {
                     if (response2.data.success === true) {
-                      history.push("/my_orders");
+                      history.push("/my/orders");
                     }
                   })
                   .catch((error) => {
@@ -302,7 +322,7 @@ console.log(props.proDet.name,"props.proDet.name")
             pay.open();
           } else if (mode === "C") {
             if (response1.data.results.message === "successful") {
-              history.push("/my_orders");
+              history.push("/my/orders");
             }
           }
         })
@@ -337,11 +357,13 @@ console.log(props.proDet.name,"props.proDet.name")
 
                 axios
                   .post(Urls.paySuces, bodyPay, {
-                    headers: { Authorization: "Token " + token },
+                    headers: {
+                      Authorization: "Token " + token,
+                    },
                   })
                   .then((response2) => {
                     if (response2.data.success === true) {
-                      history.push("/my_orders");
+                      history.push("/my/orders");
                     }
                   })
                   .catch((error) => {
@@ -364,7 +386,7 @@ console.log(props.proDet.name,"props.proDet.name")
             pay.open();
           } else if (mode === "C") {
             if (response1.data.results.message === "successful") {
-              history.push("/my_orders");
+              history.push("/my/orders");
             }
           }
         })
@@ -374,74 +396,31 @@ console.log(props.proDet.name,"props.proDet.name")
     }
   };
 
-  const showVoucherInput = () => {
-    setVoucherInput(!voucherInput);
-  };
-  const showHandler = () => {
-    setShow(true);
-  };
-  const promCodeChngeHandler = (e) => {
-    setCode(e.target.value);
-  };
-  const promoCodeHandler = () => {
-    if (code.length === 0) {
-      setErrorVald("Enter Voucher Code");
-      setError("");
-      setErrorImg(null);
-    } else {
-      setErrorVald("");
-      let body;
-      if (props.proDet.name === "cart") {
-        body = {
-          promocode: code,
-          original_amount: null,
-        };
-      } else {
-        body = {
-          promocode: code,
-          original_amount: total,
-        };
-      }
-
-      axios
-        .post(`${Urls.promoCode}?country=${countryId}`, body, {
-          headers: { Authorization: "Token " + token },
-        })
-        .then((response1) => {
-          if (response1.data.results.status_code === 404) {
-            setError("Invalid coupon code");
-            setErrorImg(Warning);
-            setClr("#EB4925");
-          } else if (response1.data.results.status_code === 200) {
-            setError("Voucher code applied");
-            setErrorImg(Succes);
-            setClr("#07B018");
-            setPromoId(response1.data.results.data.promocode_id);
-            setAmountPay(response1.data.results.data.promo_applied_amount);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  };
-  const formShowHandler = () => {
-    setFormShow(true);
-  };
-  const methodChange = (e) => {
-    setMode(e.target.value);
-  };
   let _userId = "";
   let _userName = "";
   let _userMob = "";
   const handleChangeAddress = (event) => {
+    // const { name, value } = event.target;
+    // setAddressData({
+    //   ...addressData,
+    //   [name]: value,
+    // });
     const { name, value } = event.target;
+    if (name === "country") {
+      const selectedOption =
+        event &&
+        event.target &&
+        event.target.options[event.target.selectedIndex];
+      const isoCode =
+        selectedOption && selectedOption.getAttribute("data-isocode");
+      setStatesList(State && State.getStatesOfCountry(isoCode));
+    }
+    // console.log("event.target---->", isoCode);
     setAddressData({
       ...addressData,
       [name]: value,
     });
   };
-
 
   const handleSignUp = async () => {
     if (token !== null) {
@@ -459,7 +438,7 @@ console.log(props.proDet.name,"props.proDet.name")
         };
         const response = await axios.post(Urls.register, body);
         if (response.data.results.status_code === 200) {
-          console.log(response.data.results,"registerConstole")
+          console.log(response.data.results, "registerConstole");
           setToken(response.data.results.data.token);
           setUserId(response.data.results.data.user.id);
           _userName = response.data.results.data.user.name;
@@ -469,7 +448,6 @@ console.log(props.proDet.name,"props.proDet.name")
           sendOtpEmail();
           // _token && _userId && submitAddress(_token);
           // _token && _userId && locallySetAddress();
-         
         } else {
           alert("Something went wrong");
         }
@@ -484,30 +462,6 @@ console.log(props.proDet.name,"props.proDet.name")
       }
     }
   };
-
-  // const sendOtp = async () => {
-  //   const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  //   const body = {
-  //     phone_code: "+91",
-  //     phone: addressData.sPhone,
-  //     email: "",
-  //     createuser: "False",
-  //     forgotuser: "False",
-  //   };
-  //   const mobileNumberRegex = /^\d{10}$/;
-
-  //   setIsLoading(true);
-  //   try {
-  //     const response = await axios.post(Urls.sentOtp, body);
-  //     if (response.data[0] === "Otp send Successfully") {
-  //       setGetOtpModal(true);
-  //       setTimer(60);
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  //   setIsLoading(false);
-  // };
 
   const sendOtpEmail = async () => {
     const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -569,7 +523,7 @@ console.log(props.proDet.name,"props.proDet.name")
     ) {
       localStorage.setItem("Address", JSON.stringify(addressData));
       history.push({
-        pathname: "/payment",
+        pathname: "/product/payment",
         state: {
           data: {
             pay: amountPay,
@@ -592,7 +546,7 @@ console.log(props.proDet.name,"props.proDet.name")
       });
     } else {
       history.push({
-        pathname: "/payment",
+        pathname: "/product/payment",
         state: {
           data: {
             pay: amountPay,
@@ -609,81 +563,6 @@ console.log(props.proDet.name,"props.proDet.name")
       });
     }
   };
-  console.log("checkoutttt===>", props.proDet.data.updatedCartResponse);
-  const submitAddress = async (token) => {
-    if (
-      addressData.fullName !== isNewaddress.fullName ||
-      addressData.city !== isNewaddress.city ||
-      addressData.hNumber_Bname !== isNewaddress.hNumber_Bname ||
-      addressData.landMark !== isNewaddress.landMark ||
-      addressData.mobile !== isNewaddress.mobile ||
-      addressData.pincode !== isNewaddress.pincode ||
-      addressData.state !== isNewaddress.state ||
-      addressData.streetColony !== isNewaddress.streetColony
-    ) {
-      try {
-        const body = {
-          name: addressData.fullName,
-          phone_code: "+91",
-          phone_number: addressData.mobile,
-          email: addressData.sEmail,
-          pincode: addressData.pincode,
-          state: addressData.state,
-          city: addressData.city,
-          house: addressData.hNumber_Bname,
-          area: addressData.streetColony,
-          landmark: addressData.landMark,
-          type: "HOME",
-          country: addressData.country,
-          // is_main: false,
-        };
-        const response = await axios.post(Urls.addAdress, body, {
-          headers: { Authorization: "Token " + token },
-        });
-        if (response.data && response.data.status === 200) {
-          history.push({
-            pathname: "/payment",
-            state: {
-              data: {
-                pay: amountPay,
-                total: total,
-                addressId: response.data.data.id,
-                updatedCart: props.proDet.data.updatedCartResponse,
-                token: token,
-                name: _userName,
-                number: _userMob,
-                buyBody: location.state.data,
-                userId: _userId,
-                totalSavedAmount: props.proDet.data.totalSavedAmount,
-                addressData: addressData,
-                promoCodeIds: promoId,
-                
-              },
-              name: "cart",
-            },
-          });
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      history.push({
-        pathname: "/payment",
-        state: {
-          data: {
-            pay: amountPay,
-            total: total,
-            addressId: addressData.id,
-            updatedCart: props.proDet.data.updatedCartResponse,
-            totalSavedAmount: props.proDet.data.totalSavedAmount,
-            addressData: addressData,
-            promoCodeIds: promoId,
-          },
-          name: "cart",
-        },
-      });
-    }
-  };
 
   const getDefaultAddress = async () => {
     if (localAddress) {
@@ -692,7 +571,9 @@ console.log(props.proDet.name,"props.proDet.name")
     } else {
       try {
         const response = await axios.get(Urls.defaultAddress, {
-          headers: { Authorization: "Token " + token },
+          headers: {
+            Authorization: "Token " + token,
+          },
         });
         if (response.data.results.status === 200) {
           setAddressData({
@@ -708,6 +589,7 @@ console.log(props.proDet.name,"props.proDet.name")
             pincode: response.data.results.data.pincode,
             city: response.data.results.data.city,
             state: response.data.results.data.state,
+            country: response.data.results.data.country,
             hNumber_Bname: response.data.results.data.house,
             streetColony: response.data.results.data.area,
             landMark: response.data.results.data.landmark,
@@ -722,6 +604,7 @@ console.log(props.proDet.name,"props.proDet.name")
             pincode: response.data.results.data.pincode,
             city: response.data.results.data.city,
             state: response.data.results.data.state,
+            country: response.data.results.data.country,
             hNumber_Bname: response.data.results.data.house,
             streetColony: response.data.results.data.area,
             landMark: response.data.results.data.landmark,
@@ -730,21 +613,6 @@ console.log(props.proDet.name,"props.proDet.name")
       } catch (error) {
         console.log(error);
       }
-    }
-  };
-
-  const buyWithoutLogin = async (productId) => {
-    try {
-      const response = await axios.get(
-        `https://swaecommain.swa.co/ecom/buynow/?product_id=${productId}&promocode=`
-      );
-      if (response && response.data) {
-        console.log("buy-->", response.data);
-      }
-      setTotal(response.data.total);
-      setAmountPay(response.data.payable_amount);
-    } catch (error) {
-      console.log(error);
     }
   };
 
@@ -779,29 +647,6 @@ console.log(props.proDet.name,"props.proDet.name")
       });
   };
 
-  // dont remove
-  // const verifyOtp = async (e) => {
-  //   e.preventDefault();
-  //   const body = {
-  //     phone: addressData.sPhone,
-  //     phone_code: "+91",
-  //     otp: otp,
-  //   };
-  //   try {
-  //     const response = await axios.post(Urls.verifyOTP, body);
-  //     if (response.data.results.status_code === 200) {
-  //       loginHandler();
-  //     }
-  //     if (response.data.results.message === "Otp verified successfully!") {
-  //       console.log("Otp verified successfully!");
-  //     } else {
-  //       setOtpError("Invalid otp");
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   useEffect(() => {
     let countdown;
     if (getOtpModal && timer > 0) {
@@ -818,18 +663,6 @@ console.log(props.proDet.name,"props.proDet.name")
     }
   }, [getOtpModal]);
 
-  // function formatIndianNumber(number) {
-  //   const numberString = number && number.toString();
-  //   const lastThreeDigits = numberString && numberString.slice(-3);
-  //   const otherDigits = numberString && numberString.slice(0, -3);
-
-  //   return (
-  //     otherDigits &&
-  //     otherDigits.replace(/\B(?=(\d{2})+(?!\d))/g, ",") +
-  //       (otherDigits ? "," : "") +
-  //       lastThreeDigits
-  //   );
-  // }
   function formatIndianNumber(number) {
     const numberString = number && number.toString();
 
@@ -854,7 +687,74 @@ console.log(props.proDet.name,"props.proDet.name")
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
-  console.log("location.state.data----->123", location.state);
+  const openModal = () => {
+    setIsModalVisible(true);
+    fetchAddressData();
+  };
+  const closeModal = () => {
+    setIsModalVisible(false);
+  };
+  const fetchAddressData = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get(Urls.address, {
+        headers: { Authorization: `Token ${token}` },
+      });
+      setAddressList(response.data.results.data || []);
+    } catch (error) {
+      console.error("Failed to fetch addresses:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleAddressSelect = async (address) => {
+    console.log("addressssssm", address);
+    setSelectedAddress(address.id);
+    // API Call to set the selected address as default (is_main: true)
+    try {
+      const response = await axios.post(
+        Urls.defaultAddress,
+        {
+          address_id: address.id, // Sending the address id
+          is_main: true, // Mark this address as the default (is_main: true)
+        },
+        {
+          headers: { Authorization: "Token " + token },
+        }
+      );
+      if (response.data.results.status === 200) {
+        setAddressData({
+          sEmail: address.email || "",
+          sPhone: address.phone_number || "",
+          fullName: address.name || "",
+          honorific_name: address.honorific_name || "",
+          mobile: address.phone_number || "",
+          pincode: address.pincode || "",
+          city: address.city || "",
+          state: address.state || "",
+          hNumber_Bname: address.house || "",
+          streetColony: address.area || "",
+          landMark: address.landmark || "",
+          country: address.country || "",
+        });
+        setIsModalVisible(false);
+      } else {
+        console.log("Error: ", response.data.results.message); // Handle error response
+      }
+    } catch (error) {
+      console.log(error); // Handle API errors
+    }
+  };
+  // Set the default selected address to the one with is_main: true
+  useEffect(() => {
+    const mainAddress = addressList.find((address) => address.is_main === true);
+    if (mainAddress) {
+      setSelectedAddress(mainAddress.id); // Set the main address as the default selected address
+    }
+  }, [addressList]);
+  
+  console.log("addressData--->", addressData)
 
   return (
     <div>
@@ -897,6 +797,167 @@ console.log(props.proDet.name,"props.proDet.name")
             <div className="col-md-8">
               <div className={Classes.Main}>
                 <div className={Classes.Left}>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "end",
+                    }}
+                  >
+                    <button
+                      onClick={openModal}
+                      style={{
+                        background: "#00464d",
+                        borderRadius: "4px",
+                        cursor: "pointer",
+                        padding: "8px 15px",
+                        color: "#fff",
+                        border: "none",
+                        fontWeight: "400",
+                      }}
+                    >
+                      Change Address
+                    </button>
+                  </div>
+                  {/* Address Modal */}
+                  <div className="addressModals">
+                    {/* MUI Modal */}
+                    <Modal
+                      open={isModalVisible}
+                      onClose={closeModal}
+                      aria-labelledby="address-modal-title"
+                      aria-describedby="address-modal-description"
+                    >
+                      <Box
+                        sx={{
+                          position: "absolute",
+                          top: "50%",
+                          left: "50%",
+                          transform: "translate(-50%, -50%)",
+                          width: 500, // Set width to 500px
+                          maxWidth: "90%", // Responsive width
+                          bgcolor: "background.paper",
+                          boxShadow: 24,
+                          p: 4,
+                          borderRadius: "8px",
+                          maxHeight: "80%",
+                          overflowY: "scroll",
+                        }}
+                      >
+                        <IconButton
+                          onClick={closeModal}
+                          sx={{
+                            position: "absolute",
+                            top: 8,
+                            right: 8,
+                          }}
+                        >
+                          <CloseIcon />
+                        </IconButton>
+
+                        <h2
+                          id="address-modal-title"
+                          style={{ fontSize: "18px" }}
+                        >
+                          Select Address
+                        </h2>
+
+                        {/* Loading Spinner */}
+                        {/* {loading ? (
+                          <CircularProgress />
+                        ) : addressList.length > 0 ? (
+                          <List>
+                            {addressList.map((item, index) => (
+                              <ListItem
+                                key={index}
+                                onClick={() => handleAddressSelect(item)}
+                                sx={{
+                                  cursor: "pointer",
+                                  marginBottom: "8px",
+                                  "&:hover": {
+                                    backgroundColor: "#f0f0f0",
+                                  },
+                                }}
+                              >
+                                <div>
+                                  <p>
+                                    {[
+                                      item.name,
+                                      item.phone_number,
+                                      item.email,
+                                      item.area,
+                                      item.streetColony,
+                                      item.city,
+                                      item.state,
+                                      item.country,
+                                      item.pincode,
+                                    ]
+                                      .filter(Boolean) 
+                                      .join(", ")}{" "}
+                                  
+                                  </p>
+                                </div>
+                              </ListItem>
+                            ))}
+                          </List>
+                        ) : (
+                          <p>No addresses found.</p>
+                        )} */}
+                        {loading ? (
+                          <CircularProgress />
+                        ) : addressList.length > 0 ? (
+                          <RadioGroup
+                            value={selectedAddress}
+                            onChange={(e) => setSelectedAddress(e.target.value)} // Update selected address
+                          >
+                            <List>
+                              {addressList.map((item) => (
+                                <ListItem
+                                  key={item.id}
+                                  sx={{
+                                    cursor: "pointer",
+                                    marginBottom: "8px",
+                                    "&:hover": {
+                                      backgroundColor: "#f0f0f0",
+                                    },
+                                  }}
+                                >
+                                  <FormControlLabel
+                                    value={item.id} // Use address id as the value for the radio button
+                                    control={<Radio />}
+                                    label={
+                                      <>
+                                        <p>{item.name}</p>
+                                        <p>
+                                          {[
+                                            item.phone_number,
+                                            item.email,
+                                            item.area,
+                                            item.streetColony,
+                                            item.city,
+                                            item.state,
+                                            item.country,
+                                            item.pincode,
+                                          ]
+                                            .filter(Boolean) // Exclude empty fields
+                                            .join(", ")}{" "}
+                                        </p>
+                                      </>
+                                    }
+                                    checked={selectedAddress === item.id}
+                                    onClick={() => handleAddressSelect(item)} // Call handleAddressSelect when an item is clicked
+                                  />
+                                </ListItem>
+                              ))}
+                            </List>
+                          </RadioGroup>
+                        ) : (
+                          <p>No addresses found.</p>
+                        )}
+                      </Box>
+                    </Modal>
+                  </div>
+
                   <form
                     ref={formRef}
                     autoComplete="off"
@@ -926,7 +987,7 @@ console.log(props.proDet.name,"props.proDet.name")
                           className={Classes.PlaceInput}
                           type="text"
                           placeholder="+91 98975656785"
-                          readOnly={isNewaddress.sPhone}
+                          // readOnly={isNewaddress.sPhone}
                           value={addressData.sPhone}
                           name="sPhone"
                           onChange={handleChangeAddress}
@@ -940,11 +1001,11 @@ console.log(props.proDet.name,"props.proDet.name")
                     </div>
                     <p className={Classes.Heading}>Delivery Address</p>
                     <div className="Parant_Relative">
-                      <label>Full Name</label>
+                      <label>Full Name*</label>
                       <input
                         className={Classes.PlaceInput}
                         type="text"
-                        placeholder="Full name*"
+                        placeholder="Full name"
                         value={addressData.fullName}
                         name="fullName"
                         onChange={handleChangeAddress}
@@ -998,15 +1059,55 @@ console.log(props.proDet.name,"props.proDet.name")
                     </div>
 
                     <div className="Parant_Relative">
-                      <label>Country</label>
-                      <input
+                      <label>Country*</label>
+                      <select
                         className={Classes.PlaceInput}
-                        type="text"
-                        placeholder="country*"
                         value={addressData.country}
                         name="country"
                         onChange={handleChangeAddress}
-                      />
+                      >
+                        <option value="">Select Country</option>
+                        {/* {countriesList.map((country, index) => (
+                          <option key={index} value={country.name.common}>
+                            {country.name.common}
+                          </option>
+                        ))} */}
+                        {Country &&
+                            Country.getAllCountries() &&
+                            Country.getAllCountries().map((country, index) => (
+                              <option
+                                key={index}
+                                value={country.name}
+                                data-isocode={country.isoCode}
+                              >
+                                {country.name}
+                              </option>
+                            ))}
+                      </select>
+                      {errorMessage.country && (
+                        <div className={Classes.ErrorMessage}>
+                          {errorMessage.country}
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="Parant_Relative">
+                      <label>State</label>
+                      <select
+                        className={Classes.PlaceInput}
+                        name="state"
+                        value={addressData.state}
+                        onChange={handleChangeAddress}
+                      >
+                        {/* <option value="none" disabled hidden> */}
+                        <option value="none">Select state</option>
+                        {statesList &&
+                          statesList.map((state, index) => (
+                            <option key={index} value={state.name}>
+                              {state.name}
+                            </option>
+                          ))}
+                      </select>
                       {errorMessage.country && (
                         <div className={Classes.ErrorMessage}>
                           {errorMessage.country}
@@ -1016,22 +1117,22 @@ console.log(props.proDet.name,"props.proDet.name")
 
                     <div className={Classes.ParentF1}>
                       <div className="Parant_Relative">
-                        <label>Mobile Number</label>
+                        <label>Alternate Number*</label>
                         <input
                           className={Classes.PlaceInput}
                           type="number"
-                          placeholder="Phone number*"
+                          placeholder="Phone number"
                           value={addressData.mobile}
                           name="mobile"
                           onChange={handleChangeAddress}
                         />
-                        {errorMessage.mobile && (
+                        {/* {errorMessage.mobile && (
                           <div className={Classes.ErrorMessage}>
                             {errorMessage.mobile}
                           </div>
-                        )}
+                        )} */}
                       </div>
-                      {/* <div className="Parant_Relative">
+                      <div className="Parant_Relative">
                         <label>Pincode</label>
                         <input
                           className={Classes.PlaceInput}
@@ -1057,13 +1158,13 @@ console.log(props.proDet.name,"props.proDet.name")
                             {errorMessage.pincode}
                           </div>
                         )}
-                      </div> */}
+                      </div>
                       <div>
-                        <label>City</label>
+                        <label>City*</label>
                         <input
                           className={Classes.PlaceInput}
                           type="text"
-                          placeholder="City*"
+                          placeholder="City"
                           value={addressData.city}
                           name="city"
                           onChange={handleChangeAddress}
@@ -1095,11 +1196,11 @@ console.log(props.proDet.name,"props.proDet.name")
 
                     <div className={Classes.ParentStreetColony}>
                       <div className={Classes.House1NN}>
-                        <label>House number / building name</label>
+                        <label>House number / building name*</label>
                         <input
                           className={Classes.PlaceInput}
                           type="text"
-                          placeholder="house number/ building name*"
+                          placeholder="house number/ building name"
                           value={addressData.hNumber_Bname}
                           name="hNumber_Bname"
                           onChange={handleChangeAddress}
@@ -1111,11 +1212,11 @@ console.log(props.proDet.name,"props.proDet.name")
                         )}
                       </div>
                       <div className={Classes.ColonyForm}>
-                        <label>Street colony name</label>
+                        <label>Street colony name*</label>
                         <input
                           className={Classes.PlaceInput}
                           type="text"
-                          placeholder="road name, area colony*"
+                          placeholder="road name, area colony"
                           value={addressData.streetColony}
                           name="streetColony"
                           onChange={handleChangeAddress}
@@ -1166,7 +1267,11 @@ console.log(props.proDet.name,"props.proDet.name")
                     {Contryname === "India" && (
                       <>
                         <BiRupee className={Classes.Rupee} />
-                        <span style={{ paddingRight: "5px" }}>
+                        <span
+                          style={{
+                            paddingRight: "5px",
+                          }}
+                        >
                           {formatIndianNumber(total)}
                         </span>
                       </>
@@ -1174,7 +1279,11 @@ console.log(props.proDet.name,"props.proDet.name")
                     {Contryname === "United States" && (
                       <>
                         <CgDollar className={Classes.Rupee} />
-                        <span style={{ paddingRight: "5px" }}>
+                        <span
+                          style={{
+                            paddingRight: "5px",
+                          }}
+                        >
                           {formatIndianNumber(total)}
                         </span>
                       </>
@@ -1198,7 +1307,12 @@ console.log(props.proDet.name,"props.proDet.name")
                       <CgDollar className={Classes.Rupee} size={20} />
                     )}
                     {Contryname === "United Arab Emirates" && (
-                      <span style={{ paddingRight: "5px", fontWeight: "600" }}>
+                      <span
+                        style={{
+                          paddingRight: "5px",
+                          fontWeight: "600",
+                        }}
+                      >
                         AED
                       </span>
                     )}
@@ -1240,3 +1354,1246 @@ console.log(props.proDet.name,"props.proDet.name")
 }
 
 export default CheckOut;
+
+// import React, { useEffect, useRef } from "react";
+// import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
+// import Classes from "./CheckOut.module.css";
+// import { useHistory } from "react-router-dom";
+// import { BiRupee } from "react-icons/bi";
+// import { CgDollar } from "react-icons/cg";
+// import { states } from "../../countryList";
+
+// import { useState } from "react";
+// import { IoIosArrowUp } from "react-icons/io";
+// import Warning from "../../Assets/Warning.png";
+// import Succes from "../../Assets/success.png";
+// import { AiOutlineHome } from "react-icons/ai";
+// import { Radio, Space } from "antd";
+// import axios from "axios";
+// import * as Urls from "../../Urls";
+// import { FadeLoader } from "react-spinners";
+// import { useFormik } from "formik";
+// import * as Yup from "yup";
+// import { Dropdown } from "primereact/dropdown";
+// import Joi from "joi";
+// import OtpModal from "../Navbar/OtpModal";
+
+// function CheckOut(props) {
+//   const location = useLocation();
+//   console.log(location, "locationSTate");
+//   const { state } = location;
+//   const { data } = state || {};
+//   const { promoCodeIds } = data || {};
+//   const localAddress = localStorage.getItem("Address");
+//   const Contryname = localStorage.getItem("country_name");
+//   const [token, setToken] = useState(localStorage.getItem("swaToken"));
+//   const [show, setShow] = useState(false);
+//   const [code, setCode] = useState("");
+//   const [error, setError] = useState("");
+//   const [clr, setClr] = useState("");
+//   const [errorVald, setErrorVald] = useState("");
+//   const [errorImg, setErrorImg] = useState(null);
+//   const history = useHistory();
+//   const [amountPay, setAmountPay] = useState("");
+//   const [total, setTotal] = useState("");
+//   const [voucherInput, setVoucherInput] = useState(false);
+//   const [promoId, setPromoId] = useState(promoCodeIds ? promoCodeIds : "");
+//   const [mode, setMode] = useState("P");
+//   const [otpError, setOtpError] = useState("");
+//   const [isLoading, setIsLoading] = useState(false);
+//   const [selectedCity, setSelectedCity] = useState(null);
+//   const [userId, setUserId] = useState("");
+//   const [userMob, setUserMob] = useState("");
+//   const [userName, setUserName] = useState("");
+//   const [errorMessage, setErrorMessage] = useState({});
+//   const [getOtpModal, setGetOtpModal] = useState(false);
+//   const [otp, setOtp] = useState(123456);
+//   const pincodes = localStorage.getItem("pincode");
+//   const [timer, setTimer] = useState(60);
+//   const countryId = localStorage.getItem("id");
+
+//   console.log("promoIdIII", total);
+//   useEffect(() => {
+//     window.scrollTo(0, 0);
+//   }, []);
+
+//   const [addressData, setAddressData] = useState({
+//     sEmail: "",
+//     sPhone: "",
+//     fullName: "",
+//     honorific_name: "",
+//     mobile: "",
+//     pincode: pincodes,
+//     city: "",
+//     state: "kerala",
+//     hNumber_Bname: "",
+//     streetColony: "",
+//     landMark: "",
+//     country: "",
+//     id: "",
+//   });
+
+//   const [isNewaddress, setIsNewAddress] = useState({
+//     sEmail: "",
+//     sPhone: "",
+//     fullName: "",
+//     mobile: "",
+//     pincode: "",
+//     city: "",
+//     state: "kerala",
+//     hNumber_Bname: "",
+//     streetColony: "",
+//     landMark: "",
+//   });
+//   const [isDesk, setIsDesk] = useState(
+//     window.innerWidth >= 300 && window.innerWidth <= 575
+//   );
+
+//   const customTabOtpModalStyle = {
+//     position: "absolute",
+//     width: "90%",
+//     height: "auto",
+//     left: "50%",
+//     top: "50%",
+//     transform: "translate(-50%,-50%)",
+//     bgcolor: "background.paper",
+//     border: "1px solid #000",
+//     boxShadow: 24,
+//     p: 1,
+//     outline: "none",
+//   };
+//   const customDestOtpModalStyle = {
+//     position: "absolute",
+//     width: "30%",
+//     height: "auto",
+//     left: "50%",
+//     top: "50%",
+//     transform: "translate(-50%,-50%)",
+//     bgcolor: "background.paper",
+//     border: "1px solid #000",
+//     boxShadow: 24,
+//     p: 2,
+//     outline: "none",
+//   };
+//   const [formShow, setFormShow] = useState(false);
+//   var alphaExp = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
+//   const schema = Joi.object({
+//     sEmail: Joi.string()
+//       .email({ tlds: { allow: false } }) // This allows all TLDs
+//       .required()
+//       .messages({
+//         "string.base": "cannot be empty",
+//         "string.empty": "Please enter your email address.",
+//         "string.email": "Please enter a valid email address.",
+//       }),
+//     sPhone: Joi.string()
+//       .required()
+//       .pattern(/^[0-9]{10}$/)
+//       .messages({
+//         "string.empty": "Please enter your mobile number.",
+//         "string.pattern.base": "Please enter a valid 10-digit mobile number.",
+//       }),
+//     fullName: Joi.string()
+//       .required()
+//       .messages({
+//         "string.empty": `Please enter your full name.`,
+//       }),
+//     mobile: Joi.string()
+//       .required()
+//       .pattern(/^[0-9]{10}$/)
+//       .messages({
+//         "string.empty": "Please enter your mobile number.",
+//         "string.pattern.base": "Please enter a valid 10-digit mobile number.",
+//       }),
+//     // pincode: Joi.string()
+//     //   .required()
+//     //   .max(6)
+//     //   .min(6)
+//     //   .messages({
+//     //     "string.empty": `Please enter your pincode.`,
+//     //     "string.max": "Pincode must be exactly 6 digits.",
+//     //     "string.min": "Pincode must be exactly 6 digits.",
+//     //   }),
+//     city: Joi.string()
+//       .required()
+//       .messages({
+//         "string.empty": `Please enter your city.`,
+//       }),
+//     country: Joi.string()
+//       .required()
+//       .messages({
+//         "string.empty": `Please enter your country.`,
+//       }),
+//     // state: Joi.string()
+//     //   .required()
+//     //   .messages({
+//     //     "string.empty": `State is a required field`,
+//     //   }),
+//     hNumber_Bname: Joi.string()
+//       .required()
+//       .messages({
+//         "string.empty": `Please enter your house number/building name.`,
+//       }),
+//     streetColony: Joi.string()
+//       .required()
+//       .messages({
+//         "string.empty": `Please enter your street/colony name.`,
+//       }),
+//     landMark: Joi.string()
+//       .allow("")
+//       .messages({ "string.empty": `` }),
+//     honorific_name: Joi.string()
+//       .valid("Mr", "Mrs", "Others")
+//       .required()
+//       .messages({
+//         "any.only": `Honorific name must be one of Mr, Mrs, or Others`,
+//         "any.required": `Honorific name is a required field`,
+//         "string.empty": `honorific_name is not allowed to be empty`,
+//       }),
+//   });
+
+//   const formRef = useRef(null);
+
+//   // useEffect(() => {
+//   //   buyWithoutLogin(location.state.data.product_id);
+//   // }, [location.state.data]);
+
+//   useEffect(() => {
+//     getDefaultAddress();
+//     if (props && props.proDet && props.proDet.data) {
+//       setTotal(props.proDet.data.total);
+//       setAmountPay(props.proDet.data.pay);
+//     }
+//   }, [location.state.data]);
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+
+//     // Validate form data using Joi schema
+//     const { error } = schema.validate(addressData, {
+//       abortEarly: false,
+//       allowUnknown: true,
+//     });
+
+//     if (error) {
+//       // Form is invalid, display validation errors
+//       const validationErrors = error.details.reduce((errors, err) => {
+//         errors[err.path[0]] = err.message;
+//         return errors;
+//       }, {});
+//       setErrorMessage(validationErrors);
+//       placeOrder();
+//       console.log("paymentClicked");
+//     } else {
+//       // Form is valid, proceed with submission
+//       console.log("Form submitted:", addressData);
+//       // Clear errors
+//       setErrorMessage({});
+//       handleSignUp();
+//     }
+//   };
+//   console.log(props.proDet.name, "props.proDet.name");
+//   const placeOrder = () => {
+//     let cartBody;
+//     let buyBody;
+//     if (promoId !== "") {
+//       cartBody = {
+//         promocode_id: promoId,
+//         address_id: props.address,
+//         mode: mode,
+//       };
+//     } else {
+//       cartBody = {
+//         promocode_id: 0,
+//         address_id: props.address,
+//         mode: mode,
+//       };
+//     }
+//     if (props.proDet.name === "cart") {
+//       axios
+//         .post(Urls.checkout, cartBody, {
+//           headers: { Authorization: "Token " + token },
+//         })
+//         .then((response1) => {
+//           if (mode === "P") {
+//             var options = {
+//               key: "rzp_test_hbBeCNBjrqDq6P", // test Key
+//               key_secret: "HwgmIdicOPlAeLkBdOJIMXiu",
+//               key: "rzp_live_rKLs1hbpVT5npK",
+//               key_secret: "td3G02g20iPqQzfz4b2NFSFN",
+//               amount: amountPay * 100,
+//               order_id: response1.data.results.data.razorpay_order_id,
+//               currency: "INR",
+//               name: "Swa Diamonds",
+//               description: "for testing purpose",
+//               handler: function(response) {
+//                 const bodyPay = {
+//                   razorpay_payment_id: response.razorpay_payment_id,
+//                   razorpay_order_id: response.razorpay_order_id,
+//                   razorpay_signature: response.razorpay_signature,
+//                   order_id: response1.data.results.data.order.id,
+//                 };
+//                 axios
+//                   .post(Urls.paySuces, bodyPay, {
+//                     headers: { Authorization: "Token " + token },
+//                   })
+//                   .then((response2) => {
+//                     if (response2.data.success === true) {
+//                       history.push("/my_orders");
+//                     }
+//                   })
+//                   .catch((error) => {
+//                     console.log(error);
+//                   });
+//               },
+//               prefill: {
+//                 name: "",
+//                 email: "",
+//                 contact: "",
+//               },
+//               notes: {
+//                 address: "Razorpay Corporate office",
+//               },
+//               theme: {
+//                 color: "#007481",
+//               },
+//             };
+//             var pay = new window.Razorpay(options);
+//             pay.open();
+//           } else if (mode === "C") {
+//             if (response1.data.results.message === "successful") {
+//               history.push("/my_orders");
+//             }
+//           }
+//         })
+//         .catch((error) => {
+//           console.log(error);
+//         });
+//     } else if (props.proDet.name === "buy") {
+//       axios
+//         .post(Urls.buyNow, buyBody, {
+//           headers: { Authorization: "Token " + token },
+//         })
+//         .then((response1) => {
+//           if (mode === "P") {
+//             var options = {
+//               //test_secret
+//               // key: "rzp_test_hbBeCNBjrqDq6P",
+//               // key_secret: "HwgmIdicOPlAeLkBdOJIMXiu",
+//               key: "rzp_live_rKLs1hbpVT5npK",
+//               key_secret: "td3G02g20iPqQzfz4b2NFSFN",
+//               amount: amountPay * 100,
+//               order_id: response1.data.results.data.razorpay_order_id,
+//               currency: "INR",
+//               name: "Swa Diamonds",
+//               description: "for testing purpose",
+//               handler: function(response) {
+//                 const bodyPay = {
+//                   razorpay_payment_id: response.razorpay_payment_id,
+//                   razorpay_order_id: response.razorpay_order_id,
+//                   razorpay_signature: response.razorpay_signature,
+//                   order_id: response1.data.results.data.order.id,
+//                 };
+
+//                 axios
+//                   .post(Urls.paySuces, bodyPay, {
+//                     headers: { Authorization: "Token " + token },
+//                   })
+//                   .then((response2) => {
+//                     if (response2.data.success === true) {
+//                       history.push("/my_orders");
+//                     }
+//                   })
+//                   .catch((error) => {
+//                     console.log(error);
+//                   });
+//               },
+//               prefill: {
+//                 name: "",
+//                 email: "",
+//                 contact: "",
+//               },
+//               notes: {
+//                 address: "Razorpay Corporate office",
+//               },
+//               theme: {
+//                 color: "#007481",
+//               },
+//             };
+//             var pay = new window.Razorpay(options);
+//             pay.open();
+//           } else if (mode === "C") {
+//             if (response1.data.results.message === "successful") {
+//               history.push("/my_orders");
+//             }
+//           }
+//         })
+//         .catch((error) => {
+//           console.log(error);
+//         });
+//     }
+//   };
+
+//   const showVoucherInput = () => {
+//     setVoucherInput(!voucherInput);
+//   };
+//   const showHandler = () => {
+//     setShow(true);
+//   };
+//   const promCodeChngeHandler = (e) => {
+//     setCode(e.target.value);
+//   };
+//   const promoCodeHandler = () => {
+//     if (code.length === 0) {
+//       setErrorVald("Enter Voucher Code");
+//       setError("");
+//       setErrorImg(null);
+//     } else {
+//       setErrorVald("");
+//       let body;
+//       if (props.proDet.name === "cart") {
+//         body = {
+//           promocode: code,
+//           original_amount: null,
+//         };
+//       } else {
+//         body = {
+//           promocode: code,
+//           original_amount: total,
+//         };
+//       }
+
+//       axios
+//         .post(`${Urls.promoCode}?country=${countryId}`, body, {
+//           headers: { Authorization: "Token " + token },
+//         })
+//         .then((response1) => {
+//           if (response1.data.results.status_code === 404) {
+//             setError("Invalid coupon code");
+//             setErrorImg(Warning);
+//             setClr("#EB4925");
+//           } else if (response1.data.results.status_code === 200) {
+//             setError("Voucher code applied");
+//             setErrorImg(Succes);
+//             setClr("#07B018");
+//             setPromoId(response1.data.results.data.promocode_id);
+//             setAmountPay(response1.data.results.data.promo_applied_amount);
+//           }
+//         })
+//         .catch((error) => {
+//           console.log(error);
+//         });
+//     }
+//   };
+//   const formShowHandler = () => {
+//     setFormShow(true);
+//   };
+//   const methodChange = (e) => {
+//     setMode(e.target.value);
+//   };
+//   let _userId = "";
+//   let _userName = "";
+//   let _userMob = "";
+//   const handleChangeAddress = (event) => {
+//     const { name, value } = event.target;
+//     setAddressData({
+//       ...addressData,
+//       [name]: value,
+//     });
+//   };
+
+//   const handleSignUp = async () => {
+//     if (token !== null) {
+//       // submitAddress(token);
+//       locallySetAddress();
+//     } else {
+//       try {
+//         const body = {
+//           name: addressData.fullName,
+//           honorific_name: addressData.honorific_name,
+//           phone_code: "+91",
+//           phone_number: addressData.sPhone,
+//           email: addressData.sEmail,
+//           login_type: "NORMAL",
+//         };
+//         const response = await axios.post(Urls.register, body);
+//         if (response.data.results.status_code === 200) {
+//           console.log(response.data.results, "registerConstole");
+//           setToken(response.data.results.data.token);
+//           setUserId(response.data.results.data.user.id);
+//           _userName = response.data.results.data.user.name;
+//           _userMob = response.data.results.data.user.phone_number;
+//           const _token = response.data.results.data.token;
+//           _userId = response.data.results.data.user.id;
+//           sendOtpEmail();
+//           // _token && _userId && submitAddress(_token);
+//           // _token && _userId && locallySetAddress();
+//         } else {
+//           alert("Something went wrong");
+//         }
+//       } catch (error) {
+//         if (
+//           error.response.data.results.message ===
+//           "user with this email or phone number already exists!!!"
+//         ) {
+//           // sendOtp();
+//           sendOtpEmail();
+//         }
+//       }
+//     }
+//   };
+
+//   // const sendOtp = async () => {
+//   //   const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+//   //   const body = {
+//   //     phone_code: "+91",
+//   //     phone: addressData.sPhone,
+//   //     email: "",
+//   //     createuser: "False",
+//   //     forgotuser: "False",
+//   //   };
+//   //   const mobileNumberRegex = /^\d{10}$/;
+
+//   //   setIsLoading(true);
+//   //   try {
+//   //     const response = await axios.post(Urls.sentOtp, body);
+//   //     if (response.data[0] === "Otp send Successfully") {
+//   //       setGetOtpModal(true);
+//   //       setTimer(60);
+//   //     }
+//   //   } catch (error) {
+//   //     console.log(error);
+//   //   }
+//   //   setIsLoading(false);
+//   // };
+
+//   const sendOtpEmail = async () => {
+//     const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+//     try {
+//       const body = {
+//         phone_code: "",
+//         phone: "",
+//         email: addressData.sEmail,
+//         createuser: "False",
+//         forgotuser: "False",
+//       };
+//       setIsLoading(true);
+//       const response = await axios.post(Urls.sentOtp, body);
+//       if (response.data[0] === "Otp send Successfully") {
+//         setGetOtpModal(true);
+//         setTimer(60);
+//       }
+//     } catch (error) {
+//       // Log any errors that occur during the process
+//       console.log(error);
+//     }
+//     setIsLoading(false);
+//   };
+
+//   const verifyOtpEmail = async (e) => {
+//     e.preventDefault();
+//     const body = {
+//       email: addressData.sEmail,
+//       phone: "",
+//       phone_code: "",
+//       otp: otp,
+//     };
+//     try {
+//       const response = await axios.post(Urls.verifyOTP, body);
+//       if (response.data.results.status_code === 200) {
+//         loginHandler();
+//       }
+//       if (response.data.results.message === "Otp verified successfully!") {
+//         console.log("Otp verified successfully!");
+//       } else {
+//         setOtpError("Invalid otp");
+//       }
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+//   console.log(addressData, "checkoutAddresssdata");
+//   const locallySetAddress = () => {
+//     if (
+//       addressData.fullName !== isNewaddress.fullName ||
+//       addressData.city !== isNewaddress.city ||
+//       addressData.hNumber_Bname !== isNewaddress.hNumber_Bname ||
+//       addressData.landMark !== isNewaddress.landMark ||
+//       addressData.mobile !== isNewaddress.mobile ||
+//       addressData.pincode !== isNewaddress.pincode ||
+//       addressData.state !== isNewaddress.state ||
+//       addressData.streetColony !== isNewaddress.streetColony
+//     ) {
+//       localStorage.setItem("Address", JSON.stringify(addressData));
+//       history.push({
+//         pathname: "/product/payment",
+//         state: {
+//           data: {
+//             pay: amountPay,
+//             total: total,
+//             totalItems: props.countCartItems ? props.countCartItems : 1,
+//             // addressId: response.data.data.id,
+//             addressId: addressData.id,
+//             updatedCart: props.proDet.data.updatedCartResponse,
+//             token: token,
+//             name: _userName,
+//             number: _userMob,
+//             buyBody: location.state.data,
+//             userId: _userId,
+//             totalSavedAmount: props.proDet.data.totalSavedAmount,
+//             addressData: addressData,
+//             promoCodeIds: promoId,
+//           },
+//           name: location.state.name,
+//         },
+//       });
+//     } else {
+//       history.push({
+//         pathname: "/product/payment",
+//         state: {
+//           data: {
+//             pay: amountPay,
+//             total: total,
+//             totalItems: props.countCartItems ? props.countCartItems : 1,
+//             addressId: addressData.id,
+//             updatedCart: props.proDet.data.updatedCartResponse,
+//             totalSavedAmount: props.proDet.data.totalSavedAmount,
+//             addressData: addressData,
+//             promoCodeIds: promoId,
+//           },
+//           name: location.state.name,
+//         },
+//       });
+//     }
+//   };
+//   console.log("checkoutttt===>", props.proDet.data.updatedCartResponse);
+//   const submitAddress = async (token) => {
+//     if (
+//       addressData.fullName !== isNewaddress.fullName ||
+//       addressData.city !== isNewaddress.city ||
+//       addressData.hNumber_Bname !== isNewaddress.hNumber_Bname ||
+//       addressData.landMark !== isNewaddress.landMark ||
+//       addressData.mobile !== isNewaddress.mobile ||
+//       addressData.pincode !== isNewaddress.pincode ||
+//       addressData.state !== isNewaddress.state ||
+//       addressData.streetColony !== isNewaddress.streetColony
+//     ) {
+//       try {
+//         const body = {
+//           name: addressData.fullName,
+//           phone_code: "+91",
+//           phone_number: addressData.mobile,
+//           email: addressData.sEmail,
+//           pincode: addressData.pincode,
+//           state: addressData.state,
+//           city: addressData.city,
+//           house: addressData.hNumber_Bname,
+//           area: addressData.streetColony,
+//           landmark: addressData.landMark,
+//           type: "HOME",
+//           country: addressData.country,
+//           // is_main: false,
+//         };
+//         const response = await axios.post(Urls.addAdress, body, {
+//           headers: { Authorization: "Token " + token },
+//         });
+//         if (response.data && response.data.status === 200) {
+//           history.push({
+//             pathname: "/product/payment",
+//             state: {
+//               data: {
+//                 pay: amountPay,
+//                 total: total,
+//                 addressId: response.data.data.id,
+//                 updatedCart: props.proDet.data.updatedCartResponse,
+//                 token: token,
+//                 name: _userName,
+//                 number: _userMob,
+//                 buyBody: location.state.data,
+//                 userId: _userId,
+//                 totalSavedAmount: props.proDet.data.totalSavedAmount,
+//                 addressData: addressData,
+//                 promoCodeIds: promoId,
+//               },
+//               name: "cart",
+//             },
+//           });
+//         }
+//       } catch (error) {
+//         console.log(error);
+//       }
+//     } else {
+//       history.push({
+//         pathname: "/product/payment",
+//         state: {
+//           data: {
+//             pay: amountPay,
+//             total: total,
+//             addressId: addressData.id,
+//             updatedCart: props.proDet.data.updatedCartResponse,
+//             totalSavedAmount: props.proDet.data.totalSavedAmount,
+//             addressData: addressData,
+//             promoCodeIds: promoId,
+//           },
+//           name: "cart",
+//         },
+//       });
+//     }
+//   };
+
+//   const getDefaultAddress = async () => {
+//     if (localAddress) {
+//       setAddressData(JSON.parse(localAddress));
+//       // setIsNewAddress(JSON.parse(localAddress));
+//     } else {
+//       try {
+//         const response = await axios.get(Urls.defaultAddress, {
+//           headers: { Authorization: "Token " + token },
+//         });
+//         if (response.data.results.status === 200) {
+//           setAddressData({
+//             ...addressData,
+//             sEmail: response.data.results.data.email,
+//             sPhone: response.data.results.data.phone_number.startsWith("0")
+//               ? response.data.results.data.phone_number.substring(1)
+//               : response.data.results.data.phone_number,
+//             fullName: response.data.results.data.name,
+//             mobile: response.data.results.data.phone_number.startsWith("0")
+//               ? response.data.results.data.phone_number.substring(1)
+//               : response.data.results.data.phone_number,
+//             pincode: response.data.results.data.pincode,
+//             city: response.data.results.data.city,
+//             state: response.data.results.data.state,
+//             hNumber_Bname: response.data.results.data.house,
+//             streetColony: response.data.results.data.area,
+//             landMark: response.data.results.data.landmark,
+//             id: response.data.results.data.id,
+//           });
+//           setIsNewAddress({
+//             ...isNewaddress,
+//             sEmail: response.data.results.data.email,
+//             sPhone: response.data.results.data.phone_number,
+//             fullName: response.data.results.data.name,
+//             mobile: response.data.results.data.phone_number,
+//             pincode: response.data.results.data.pincode,
+//             city: response.data.results.data.city,
+//             state: response.data.results.data.state,
+//             hNumber_Bname: response.data.results.data.house,
+//             streetColony: response.data.results.data.area,
+//             landMark: response.data.results.data.landmark,
+//           });
+//         }
+//       } catch (error) {
+//         console.log(error);
+//       }
+//     }
+//   };
+
+//   const buyWithoutLogin = async (productId) => {
+//     try {
+//       const response = await axios.get(
+//         `https://swaecommain.swa.co/ecom/buynow/?product_id=${productId}&promocode=`
+//       );
+//       if (response && response.data) {
+//         console.log("buy-->", response.data);
+//       }
+//       setTotal(response.data.total);
+//       setAmountPay(response.data.payable_amount);
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   };
+
+//   const loginHandler = () => {
+//     const body = {
+//       // username: addressData.sPhone,
+//       username: addressData.sEmail,
+//     };
+//     axios
+//       .post(Urls.Login, body)
+//       .then((response) => {
+//         if (response.data.results.status_code === 200) {
+//           let __token = response.data.results.token;
+//           localStorage.setItem("swaToken", response.data.results.token);
+//           localStorage.setItem("userName", response.data.results.data.name);
+//           localStorage.setItem(
+//             "phoneNumber",
+//             response.data.results.data.phone_number
+//           );
+//           localStorage.setItem("UserEmail", response.data.results.data.email);
+//           _userId = response.data.results.data.id;
+//           setUserId(response.data.results.data.id);
+//           setGetOtpModal(false);
+//           // submitAddress(__token);
+//           locallySetAddress();
+//         } else if (response.data.results.status_code === 401) {
+//           console.log("Incorrect username or password!");
+//         }
+//       })
+//       .catch((error) => {
+//         console.log(error);
+//       });
+//   };
+
+//   // dont remove
+//   // const verifyOtp = async (e) => {
+//   //   e.preventDefault();
+//   //   const body = {
+//   //     phone: addressData.sPhone,
+//   //     phone_code: "+91",
+//   //     otp: otp,
+//   //   };
+//   //   try {
+//   //     const response = await axios.post(Urls.verifyOTP, body);
+//   //     if (response.data.results.status_code === 200) {
+//   //       loginHandler();
+//   //     }
+//   //     if (response.data.results.message === "Otp verified successfully!") {
+//   //       console.log("Otp verified successfully!");
+//   //     } else {
+//   //       setOtpError("Invalid otp");
+//   //     }
+//   //   } catch (error) {
+//   //     console.log(error);
+//   //   }
+//   // };
+
+//   useEffect(() => {
+//     let countdown;
+//     if (getOtpModal && timer > 0) {
+//       countdown = setTimeout(() => {
+//         setTimer(timer - 1);
+//       }, 1000);
+//     }
+//     return () => clearTimeout(countdown);
+//   }, [timer, getOtpModal]);
+
+//   useEffect(() => {
+//     if (getOtpModal) {
+//       setTimer(60); // Reset timer to 60 seconds when the modal is opened
+//     }
+//   }, [getOtpModal]);
+
+//   // function formatIndianNumber(number) {
+//   //   const numberString = number && number.toString();
+//   //   const lastThreeDigits = numberString && numberString.slice(-3);
+//   //   const otherDigits = numberString && numberString.slice(0, -3);
+
+//   //   return (
+//   //     otherDigits &&
+//   //     otherDigits.replace(/\B(?=(\d{2})+(?!\d))/g, ",") +
+//   //       (otherDigits ? "," : "") +
+//   //       lastThreeDigits
+//   //   );
+//   // }
+//   function formatIndianNumber(number) {
+//     const numberString = number && number.toString();
+
+//     if (!numberString) return "";
+
+//     // Split the number into integer and decimal parts, discard the decimal part
+//     const integerPart = numberString.split(".")[0];
+
+//     const lastThreeDigits = integerPart.slice(-3);
+//     const otherDigits = integerPart.slice(0, -3);
+
+//     // Format the integer part in Indian format
+//     const formattedNumber =
+//       otherDigits.replace(/\B(?=(\d{2})+(?!\d))/g, ",") +
+//       (otherDigits ? "," : "") +
+//       lastThreeDigits;
+
+//     return formattedNumber;
+//   }
+
+//   function numberWithCommas(x) {
+//     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+//   }
+
+//   console.log("location.state.data----->123", location.state);
+
+//   return (
+//     <div>
+//       <OtpModal
+//         getOtpModal={getOtpModal}
+//         handleOtpModalClose={() => setGetOtpModal(false)}
+//         isDesk={isDesk}
+//         customTabOtpModalStyle={customTabOtpModalStyle}
+//         customDestOtpModalStyle={customDestOtpModalStyle}
+//         timer={timer}
+//         otpError={otpError}
+//         handelLoginForm={handleSubmit}
+//         mobileNumber={addressData.sPhone}
+//         emailId={addressData.sEmail}
+//         // handleOtpForm={verifyOtp}
+//         handleOtpForm={verifyOtpEmail}
+//         setOtp={setOtp}
+//       />
+//       <div className={`container ${Classes.MobCheck1}`}>
+//         <div className={`container ${Classes.MobCheck1}`}>
+//           <div className={Classes.Main1}>
+//             <div>
+//               <h1 className={Classes.Title}>Your details</h1>
+//               <div className={Classes.SubText}>
+//                 <p className={`${Classes.Home} ${Classes.HomeNew}`}>
+//                   HOME /&nbsp;
+//                 </p>
+//                 <p className={`${Classes.Home} ${Classes.HomeNew}`}>
+//                   CART /&nbsp;
+//                 </p>
+//                 <p className={Classes.NewArrival}>CHECKOUT</p>
+//               </div>
+//             </div>
+//             <div className={Classes.Steps2}>
+//               STEP 2 <span style={{ color: "#949494" }}> / 3</span>{" "}
+//             </div>
+//           </div>
+
+//           <div className="row">
+//             <div className="col-md-8">
+//               <div className={Classes.Main}>
+//                 <div className={Classes.Left}>
+//                   <form
+//                     ref={formRef}
+//                     autoComplete="off"
+//                     onSubmit={(e) => e.preventDefault()}
+//                   >
+//                     <div className={Classes.EmailMobileNew}>
+//                       <div className="Parant_Relative">
+//                         <label>Email</label>
+//                         <input
+//                           className={Classes.PlaceInput}
+//                           type="text"
+//                           placeholder="Sample@gmail.com"
+//                           value={addressData.sEmail}
+//                           readOnly={isNewaddress.sEmail}
+//                           name="sEmail"
+//                           onChange={handleChangeAddress}
+//                         />
+//                         {errorMessage.sEmail && (
+//                           <div className={Classes.ErrorMessage}>
+//                             {errorMessage.sEmail}
+//                           </div>
+//                         )}
+//                       </div>
+//                       <div className="Parant_Relative">
+//                         <label>Mobile number</label>
+//                         <input
+//                           className={Classes.PlaceInput}
+//                           type="text"
+//                           placeholder="+91 98975656785"
+//                           // readOnly={isNewaddress.sPhone}
+//                           value={addressData.sPhone}
+//                           name="sPhone"
+//                           onChange={handleChangeAddress}
+//                         />
+//                         {errorMessage.sPhone && (
+//                           <div className={Classes.ErrorMessage}>
+//                             {errorMessage.sPhone}
+//                           </div>
+//                         )}
+//                       </div>
+//                     </div>
+//                     <p className={Classes.Heading}>Delivery Address</p>
+//                     <div className="Parant_Relative">
+//                       <label>Full Name*</label>
+//                       <input
+//                         className={Classes.PlaceInput}
+//                         type="text"
+//                         placeholder="Full name"
+//                         value={addressData.fullName}
+//                         name="fullName"
+//                         onChange={handleChangeAddress}
+//                       />
+//                       {errorMessage.fullName && (
+//                         <div className={Classes.ErrorMessage}>
+//                           {errorMessage.fullName}
+//                         </div>
+//                       )}
+//                     </div>
+
+//                     <div>
+//                       <div className={Classes.honor}>
+//                         <label>
+//                           <input
+//                             type="radio"
+//                             value="Mr"
+//                             name="honorific_name"
+//                             checked={addressData.honorific_name === "Mr"}
+//                             onChange={handleChangeAddress}
+//                           />
+//                           Mr.
+//                         </label>
+//                         <label>
+//                           <input
+//                             type="radio"
+//                             value="Mrs"
+//                             name="honorific_name"
+//                             checked={addressData.honorific_name === "Mrs"}
+//                             onChange={handleChangeAddress}
+//                           />
+//                           Mrs.
+//                         </label>
+//                         <label>
+//                           <input
+//                             type="radio"
+//                             value="Others"
+//                             name="honorific_name"
+//                             checked={addressData.honorific_name === "Others"}
+//                             onChange={handleChangeAddress}
+//                           />
+//                           Others
+//                         </label>
+//                       </div>
+
+//                       {errorMessage.honorific_name && (
+//                         <div className={Classes.ErrorMessage}>
+//                           {errorMessage.honorific_name}
+//                         </div>
+//                       )}
+//                     </div>
+
+//                     <div className="Parant_Relative">
+//                       <label>Country*</label>
+//                       <input
+//                         className={Classes.PlaceInput}
+//                         type="text"
+//                         placeholder="country"
+//                         value={addressData.country}
+//                         name="country"
+//                         onChange={handleChangeAddress}
+//                       />
+//                       {errorMessage.country && (
+//                         <div className={Classes.ErrorMessage}>
+//                           {errorMessage.country}
+//                         </div>
+//                       )}
+//                     </div>
+
+//                     <div className={Classes.ParentF1}>
+//                       <div className="Parant_Relative">
+//                         <label>Alternate Number*</label>
+//                         <input
+//                           className={Classes.PlaceInput}
+//                           type="number"
+//                           placeholder="Phone number"
+//                           value={addressData.mobile}
+//                           name="mobile"
+//                           onChange={handleChangeAddress}
+//                         />
+//                         {errorMessage.mobile && (
+//                           <div className={Classes.ErrorMessage}>
+//                             {errorMessage.mobile}
+//                           </div>
+//                         )}
+//                       </div>
+//                       {/* <div className="Parant_Relative">
+//                         <label>Pincode</label>
+//                         <input
+//                           className={Classes.PlaceInput}
+//                           type="text"
+//                           placeholder="Pincode*"
+//                           value={addressData.pincode}
+//                           name="pincode"
+//                           onChange={handleChangeAddress}
+//                         />
+//                         {pincodes && (
+//                           <p
+//                             style={{
+//                               color: "#006e7f",
+//                               fontWeight: "500",
+//                               fontSize: "14px",
+//                             }}
+//                           >
+//                             Delivery in 3-5 days
+//                           </p>
+//                         )}
+//                         {errorMessage.pincode && (
+//                           <div className={Classes.ErrorMessage}>
+//                             {errorMessage.pincode}
+//                           </div>
+//                         )}
+//                       </div> */}
+//                       <div>
+//                         <label>City*</label>
+//                         <input
+//                           className={Classes.PlaceInput}
+//                           type="text"
+//                           placeholder="City"
+//                           value={addressData.city}
+//                           name="city"
+//                           onChange={handleChangeAddress}
+//                         />
+
+//                         {errorMessage.city && (
+//                           <div className={Classes.ErrorMessage}>
+//                             {errorMessage.city}
+//                           </div>
+//                         )}
+//                       </div>
+//                     </div>
+
+//                     {/* <div style={{ marginBottom: "15px" }}>
+//                       <label>State</label>
+//                       <Dropdown
+//                         value={selectedCity}
+//                         onChange={(e) => setSelectedCity(e.value)}
+//                         options={states}
+//                         optionLabel="name"
+//                         placeholder="Select a state"
+//                       />
+//                       {errorMessage.state && (
+//                         <div className={Classes.ErrorMessage}>
+//                           {errorMessage.state}
+//                         </div>
+//                       )}
+//                     </div> */}
+
+//                     <div className={Classes.ParentStreetColony}>
+//                       <div className={Classes.House1NN}>
+//                         <label>House number / building name*</label>
+//                         <input
+//                           className={Classes.PlaceInput}
+//                           type="text"
+//                           placeholder="house number/ building name"
+//                           value={addressData.hNumber_Bname}
+//                           name="hNumber_Bname"
+//                           onChange={handleChangeAddress}
+//                         />
+//                         {errorMessage.hNumber_Bname && (
+//                           <div className={Classes.ErrorMessage}>
+//                             {errorMessage.hNumber_Bname}
+//                           </div>
+//                         )}
+//                       </div>
+//                       <div className={Classes.ColonyForm}>
+//                         <label>Street colony name*</label>
+//                         <input
+//                           className={Classes.PlaceInput}
+//                           type="text"
+//                           placeholder="road name, area colony"
+//                           value={addressData.streetColony}
+//                           name="streetColony"
+//                           onChange={handleChangeAddress}
+//                         />
+//                         {errorMessage.streetColony && (
+//                           <div className={Classes.ErrorMessage}>
+//                             {errorMessage.streetColony}
+//                           </div>
+//                         )}
+//                       </div>
+//                     </div>
+//                     <div>
+//                       <label>Land mark ( optional )</label>
+//                       <input
+//                         className={Classes.PlaceInput}
+//                         type="text"
+//                         placeholder="Landmark"
+//                         value={addressData.landMark}
+//                         name="landMark"
+//                         onChange={handleChangeAddress}
+//                       />
+//                       {errorMessage.landMark && (
+//                         <div className={Classes.ErrorMessage}>
+//                           {errorMessage.landMark}
+//                         </div>
+//                       )}
+//                     </div>
+//                     <div className={Classes.Save}></div>
+//                   </form>
+//                 </div>
+//               </div>
+//             </div>
+//             <div className="col-md-4">
+//               <p className={Classes.Order1P}>ORDER SUMMARY</p>
+//               <div className={Classes.Right}>
+//                 <p className={Classes.OrderSummery}>ORDER SUMMARY</p>
+//                 <div className={Classes.TotalText}>
+//                   <div className={Classes.TotalItem}>
+//                     <p className={Classes.TotalSmall}>
+//                       Total &nbsp;
+//                       <span>
+//                         ({props.countCartItems ? props.countCartItems : 1}{" "}
+//                         Items)
+//                       </span>
+//                     </p>
+//                   </div>
+//                   <p className={Classes.Amount}>
+//                     {Contryname === "India" && (
+//                       <>
+//                         <BiRupee className={Classes.Rupee} />
+//                         <span style={{ paddingRight: "5px" }}>
+//                           {formatIndianNumber(total)}
+//                         </span>
+//                       </>
+//                     )}
+//                     {Contryname === "United States" && (
+//                       <>
+//                         <CgDollar className={Classes.Rupee} />
+//                         <span style={{ paddingRight: "5px" }}>
+//                           {formatIndianNumber(total)}
+//                         </span>
+//                       </>
+//                     )}
+//                     {Contryname === "United Arab Emirates" && (
+//                       <span style={{ paddingRight: "5px" }}>
+//                         AED {formatIndianNumber(total)}
+//                       </span>
+//                     )}
+
+//                     {/* {location.state.data.total} */}
+//                   </p>
+//                 </div>
+//                 <div className={Classes.TotalItemBorder}>
+//                   <p className={Classes.TotalPayable}>Total Payable</p>
+//                   <div className={Classes.TotalItems}>
+//                     {Contryname === "India" && (
+//                       <BiRupee className={Classes.Rupee} size={20} />
+//                     )}
+//                     {Contryname === "United States" && (
+//                       <CgDollar className={Classes.Rupee} size={20} />
+//                     )}
+//                     {Contryname === "United Arab Emirates" && (
+//                       <span style={{ paddingRight: "5px", fontWeight: "600" }}>
+//                         AED
+//                       </span>
+//                     )}
+//                     {state.name === "buybody" ? (
+//                       <p className={Classes.AmountPayable}>
+//                         {formatIndianNumber(total)}
+//                         {/* {location.state.data.pay} */}
+//                       </p>
+//                     ) : (
+//                       <p className={Classes.AmountPayable}>
+//                         {formatIndianNumber(amountPay)}
+//                         {/* {location.state.data.pay} */}
+//                       </p>
+//                     )}
+//                   </div>
+//                 </div>
+
+//                 <div
+//                   className={Classes.PlaceOrderButton}
+//                   // onClick={placeOrder}
+//                   onClick={handleSubmit}
+//                 >
+//                   Proceed to payment
+//                 </div>
+//                 {props.proDet.data.totalSavedAmount ? (
+//                   <p className={Classes.HurrayText}>
+//                     You saved{" "}
+//                     {numberWithCommas(props.proDet.data.totalSavedAmount)}
+//                     &nbsp;hurray!..
+//                   </p>
+//                 ) : null}
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default CheckOut;

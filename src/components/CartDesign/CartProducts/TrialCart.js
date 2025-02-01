@@ -6,12 +6,14 @@ import { BiRupee } from "react-icons/bi";
 import { CgDollar } from "react-icons/cg";
 import Classes from "../CartDesign.module.css";
 import { IoCheckmarkCircleSharp } from "react-icons/io5";
+import useCanonicalTag from "../../../useCanonicalTag";
 
 const TrialCart = (props) => {
   const Contryname = localStorage.getItem("country_name");
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
+
   return (
     <div>
       {/* trial cart design */}
@@ -107,9 +109,9 @@ const TrialCart = (props) => {
         </div>
       </div> */}
       <div className={Classes.RemoveMove}>
-      <div className={Classes.DummyWrap}>
+        <div className={Classes.DummyWrap}>
           <IoCheckmarkCircleSharp fill="#005D67" />
-          <p className={Classes.DummyGreen}>30 day money back</p>
+          <p className={Classes.DummyGreen}>15 day money back</p>
           <IoCheckmarkCircleSharp fill="#005D67" />
           <p className={Classes.DummyGreen}>Lifetime exchange & buy back</p>
         </div>
@@ -146,7 +148,6 @@ const TrialCart = (props) => {
             </p>
           </div>
         </div>
-        
       </div>
 
       {/* trial cart design */}

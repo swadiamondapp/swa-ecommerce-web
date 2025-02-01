@@ -294,6 +294,28 @@
   outline: none;
   cursor: pointer;
 }
+
+.bag_details_part{
+  /* background-color: red; */
+  height: auto;
+  width: 318px;
+  display: flex;
+  flex-direction: column;
+  gap:"5px"
+}
+.bag_details_span1{
+  font-size: 16px;
+  font-weight: 400;
+  font-family: "Lato", sans-serif;
+  color: #757C81;
+}
+.bag_details_span2{
+  font-size: 16px;
+  font-weight: 400;
+  font-family: "Lato", sans-serif;
+  color: #232323;
+}
+
 @media (min-width: 300px) and (max-width: 575px) {
   .Main {
     margin: 30px 20px 0px;

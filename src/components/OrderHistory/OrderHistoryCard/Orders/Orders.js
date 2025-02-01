@@ -20,10 +20,12 @@ function Orders(props) {
   console.log("props.name?", props.productName);
 
   const itemsDetail = props.Image;
-  const productViewHandler = (id, shipmentId) => {
+  const productViewHandler = (id, shipmentId, salebill) => {
     history.push({
-      pathname: "/track_order",
-      state: { data: { productId: id, shipmentId: shipmentId } },
+      pathname: "/track/orders",
+      state: {
+        data: { productId: id, shipmentId: shipmentId, saleBill: salebill },
+      },
     });
   };
 
@@ -85,18 +87,23 @@ function Orders(props) {
                   />
                   <div className={Classes.TextWrapper}>
                     <h3>{item.product_name}</h3>
-                    <p className={Classes.DeliveryText}>
-                      <TbTruckDelivery color="#30933A" size={20} /> Delivered on{" "}
-                      <span className={Classes.GreenText}>
-                        {props.delivered_date}
-                      </span>
-                    </p>
-                    <p className={Classes.Expected}>
-                      Expected Delivery by{" "}
-                      <span className={Classes.OverLined}>
-                        {props.expected_delivered_date}
-                      </span>
-                    </p>
+                    {props.delivered_date && (
+                      <>
+                        <p className={Classes.DeliveryText}>
+                          <TbTruckDelivery color="#30933A" size={20} />{" "}
+                          Delivered on{" "}
+                          <span className={Classes.GreenText}>
+                            {props.delivered_date}
+                          </span>
+                        </p>
+                        <p className={Classes.Expected}>
+                          Expected Delivery by{" "}
+                          <span className={Classes.OverLined}>
+                            {props.expected_delivered_date}
+                          </span>
+                        </p>
+                      </>
+                    )}
                   </div>
                 </div>
                 <MdOutlineKeyboardArrowRight
@@ -111,7 +118,11 @@ function Orders(props) {
                   <button
                     // onClick={props.clicked}
                     onClick={() =>
-                      productViewHandler(props.currentId, item.shipment_id)
+                      productViewHandler(
+                        props.currentId,
+                        item.shipment_id,
+                        item.sale_bill_number
+                      )
                     }
                   >
                     View Order details
@@ -132,7 +143,7 @@ function Orders(props) {
                     />
                     <Link
                       to={{
-                        pathname: "/rate_review",
+                        pathname: "/rate/review",
                         state: {
                           product_image: item.bag_image, // Use item.bag_image here
                           product_id: item.product_id,

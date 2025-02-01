@@ -38,6 +38,7 @@ const LoginSuccessModal = (props) => {
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  console.log("props.textanasmk", props.text);
 
   return (
     <div>

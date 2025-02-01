@@ -11,6 +11,7 @@ import { useHistory } from "react-router-dom";
 import { FadeLoader } from "react-spinners";
 import Features from "../../components/Features/Features";
 import SliderFeature from "../../components/ProductDetails/SliderFeature";
+import useCanonicalTag from "../../useCanonicalTag";
 
 const whishlistPage = () => {
   const history = useHistory();
@@ -25,6 +26,7 @@ const whishlistPage = () => {
     flag_image: flag,
     country_name: Contryname,
   });
+  useCanonicalTag();
   const [cartCount, setCartCount] = useState("");
   const wishListing = () => {
     setLoading(true);
@@ -71,16 +73,28 @@ const whishlistPage = () => {
         console.log(error);
       });
   };
-  const prodDetHandler = (prodId) => {
+  const prodDetHandler = (prodItem) => {
+    // history.push({
+    //   pathname:
+    //     "/products/" +
+    //     prodId.product_id +
+    //     "/" +
+    //     prodId.product.thumbnail_colour_id +
+    //     "/" +
+    //     prodId.product.product_name,
+    //   state: { data: prodId },
+    // });
+    sessionStorage.setItem(
+      "productDetails",
+      JSON.stringify({
+        id: prodItem.product_id,
+        color: prodItem.colour_id,
+        name: prodItem.product_name,
+      })
+    );
     history.push({
-      pathname:
-        "/products/" +
-        prodId.product_id +
-        "/" +
-        prodId.product.thumbnail_colour_id +
-        "/" +
-        prodId.product.product_name,
-      state: { data: prodId },
+      pathname: "/jewellery/" + prodItem.alias,
+      state: { data: prodItem },
     });
     // history.push({pathname:'/product_det',state:{data:prodId,path:'wish'}})
   };
@@ -108,6 +122,7 @@ const whishlistPage = () => {
     );
   } else {
     wishlists = wishList.map((item, index) => {
+      console.log("whishlistlikes", item.id);
       return (
         <NewArrivalCard
           ProductImage={item.product.thumbnail_image}
@@ -147,9 +162,9 @@ const whishlistPage = () => {
           selectedCountry={selectedCountry}
           setSelectedCountry={setSelectedCountry}
         />
-          <div className={Classes.Products}>
-            <Wishlist> {wishlists} </Wishlist>
-          </div>
+        <div className={Classes.Products}>
+          <Wishlist> {wishlists} </Wishlist>
+        </div>
         <div>
           {/* <SliderFeature /> */}
           <Features />

@@ -19,7 +19,6 @@ const Payment = () => {
   const history = useHistory();
   const location = useLocation();
   const { data, name } = location.state;
-  console.log(location, "adddressspaymentLoaca");
   const { promoCodeIds } = data || {};
   const [promoId, setPromoId] = useState(promoCodeIds ? promoCodeIds : "");
   const [mode, setMode] = useState("");
@@ -52,23 +51,24 @@ const Payment = () => {
   const handleChangeAddress = () => {
     setShowChangeAddress((prevState) => !prevState);
   };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
 
   useEffect(() => {
     setLoading(true);
     fetchAddress();
-    // setTotal(props.location.state.data.total);
-    // axios
-    //   .get(Urls.cart, { headers: { Authorization: "Token " + token } })
-    //   .then((response1) => {
-    //     if (response1.data.results.message === "cart is empty") {
-    //       setCartCount("");
-    //     } else {
-    //       setCartCount(response1.data.results.count);
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
   }, [changeId]);
 
   const adressChangeHanlder = (id) => {
@@ -123,77 +123,9 @@ const Payment = () => {
     } catch (error) {
       console.log(error);
     }
-    // if (
-    //   addressData.fullName !== isNewaddress.fullName ||
-    //   addressData.city !== isNewaddress.city ||
-    //   addressData.hNumber_Bname !== isNewaddress.hNumber_Bname ||
-    //   addressData.landMark !== isNewaddress.landMark ||
-    //   addressData.mobile !== isNewaddress.mobile ||
-    //   addressData.pincode !== isNewaddress.pincode ||
-    //   addressData.state !== isNewaddress.state ||
-    //   addressData.streetColony !== isNewaddress.streetColony
-    // ) {
-    //   try {
-    //     const body = {
-    //       name: addressData.fullName,
-    //       phone_code: "+91",
-    //       phone_number: addressData.mobile,
-    //       email: addressData.sEmail,
-    //       pincode: addressData.pincode,
-    //       state: addressData.state,
-    //       city: addressData.city,
-    //       house: addressData.hNumber_Bname,
-    //       area: addressData.streetColony,
-    //       landmark: addressData.landMark,
-    //       type: "HOME",
-    //       // is_main: false,
-    //     };
-    //     const response = await axios.post(Urls.addAdress, body, {
-    //       headers: { Authorization: "Token " + token },
-    //     });
-    //     if (response.data && response.data.status === 200) {
-    //       history.push({
-    //         pathname: "/payment",
-    //         state: {
-    //           data: {
-    //             pay: amountPay,
-    //             total: total,
-    //             addressId: response.data.data.id,
-    //             updatedCart: props.proDet.data.updatedCartResponse,
-    //             token: token,
-    //             name: _userName,
-    //             number: _userMob,
-    //             buyBody: location.state.data,
-    //             userId: _userId,
-    //             totalSavedAmount: props.proDet.data.totalSavedAmount,
-    //             addressData: addressData,
-    //           },
-    //           name: "cart",
-    //         },
-    //       });
-    //     }
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // } else {
-    //   history.push({
-    //     pathname: "/payment",
-    //     state: {
-    //       data: {
-    //         pay: amountPay,
-    //         total: total,
-    //         addressId: addressData.id,
-    //         updatedCart: props.proDet.data.updatedCartResponse,
-    //         totalSavedAmount: props.proDet.data.totalSavedAmount,
-    //         addressData: addressData,
-    //       },
-    //       name: "cart",
-    //     },
-    //   });
-    // }
   };
-  console.log(addressId, data.addressId, addressData.id, "adddressssssID");
-  const placeOrder = (addressId) => {
+  const placeOrder = async (addressId) => {
+    console.log("mode-->", mode, "name-->", name);
     let cartBody;
     let buyBody;
     const p_Method = mode === "cash" ? "C" : "P";
@@ -256,7 +188,7 @@ const Payment = () => {
         };
       }
     }
-    if ((mode === "upi" || mode === "credit_card") && name === "buybody") {
+    if ((mode === "upi" || mode === "card") && name === "buybody") {
       axios
         .post(`${Urls.buyNow}?country=${countryId}`, buyBody, {
           headers: {
@@ -266,8 +198,8 @@ const Payment = () => {
         .then((response1) => {
           var options = {
             //test_secret
-            key: "rzp_test_hbBeCNBjrqDq6P",
-            key_secret: "HwgmIdicOPlAeLkBdOJIMXiu",
+            key: "rzp_live_rKLs1hbpVT5npK",
+            key_secret: "td3G02g20iPqQzfz4b2NFSFN",
             // key: "rzp_live_rKLs1hbpVT5npK",
             // key_secret: "td3G02g20iPqQzfz4b2NFSFN",
             amount: amountPay * 100,
@@ -295,10 +227,10 @@ const Payment = () => {
                     localStorage.setItem("userName", data.name);
                     localStorage.setItem("phoneNumber", data.number);
                     localStorage.removeItem("Address");
-                    history.push("/my_orders");
+                    history.push("/my/orders");
                   } else if (response2.data.results.status_code === 200) {
                     localStorage.removeItem("Address");
-                    history.push("/my_orders");
+                    history.push("/my/orders");
                   }
                 })
                 .catch((error) => {
@@ -309,6 +241,32 @@ const Payment = () => {
               name: "",
               email: "",
               contact: "",
+            },
+            config: {
+              display: {
+                blocks: {
+                  card: { name: "Pay with Card", instruments: [] },
+                  upi: { name: "Pay with UPI", instruments: [] },
+                  netbanking: { name: "Pay with Netbanking", instruments: [] },
+                  wallet: { name: "Pay with Wallet", instruments: [] },
+                },
+                sequence: [
+                  mode, // Prioritize the selected payment method
+                  ...["card", "upi", "netbanking", "wallet"].filter(
+                    (method) => method !== mode
+                  ), // Include remaining methods in order
+                ],
+                preferences: {
+                  show_default_blocks: false, // Show all payment methods
+                  default_block: mode, // Set the selected method as default
+                },
+              },
+            },
+            modal: {
+              ondismiss: function () {
+                console.warn("Payment modal closed by the user.");
+                setIsLoading(false);
+              },
             },
             notes: {
               address: "Razorpay Corporate office",
@@ -336,78 +294,110 @@ const Payment = () => {
             localStorage.setItem("userName", data.name);
             localStorage.setItem("phoneNumber", data.number);
             localStorage.removeItem("Address");
-            history.push("/my_orders");
+            history.push("/my/orders");
           } else if (response1.data.results.status_code === 200) {
             localStorage.removeItem("Address");
-            history.push("/my_orders");
+            history.push("/my/orders");
           }
         });
-    } else if ((mode === "upi" || mode === "credit_card") && name === "cart") {
+    } else if ((mode === "upi" || mode === "card") && name === "cart") {
       setIsLoading(true);
-      axios
-        .post(`${Urls.checkout}?country=${countryId}`, cartBody, {
-          headers: { Authorization: "Token " + token },
-        })
-        .then((response1) => {
-          setIsLoading(false);
-          var options = {
-            key: "rzp_test_hbBeCNBjrqDq6P", // test Key
-            key_secret: "HwgmIdicOPlAeLkBdOJIMXiu",
-            // key: "rzp_live_rKLs1hbpVT5npK",
-            // key_secret: "td3G02g20iPqQzfz4b2NFSFN",
-            amount: amountPay * 100,
-            order_id: response1.data.results.data.razorpay_order_id,
-            currency: "INR",
-            name: "Swa Diamonds",
-            description: "for testing purpose",
-            handler: function(response) {
-              const bodyPay = {
-                razorpay_payment_id: response.razorpay_payment_id,
-                razorpay_order_id: response.razorpay_order_id,
-                razorpay_signature: response.razorpay_signature,
-                order_id: response1.data.results.data.order.id,
-              };
-              axios
-                .post(Urls.paySuces, bodyPay, {
-                  headers: { Authorization: "Token " + token },
-                })
-                .then((response1) => {
-                  console.log(response1);
-                  if (response1.data.results.status_code === 200 && !token) {
-                    localStorage.setItem("swaToken", data.token);
-                    localStorage.setItem("userName", data.name);
-                    localStorage.setItem("phoneNumber", data.number);
-                    setIsLoading(false);
-                    localStorage.removeItem("Address");
-                    history.push("/my_orders");
-                  } else if (response1.data.results.status_code === 200) {
-                    setIsLoading(false);
-                    localStorage.removeItem("Address");
-                    history.push("/my_orders");
-                  }
-                })
-                .catch((error) => {
-                  console.log(error);
-                });
+      try {
+        // Step 1: Create the order on the backend
+        const response1 = await axios.post(
+          `${Urls.checkout}?country=${countryId}`,
+          cartBody,
+          {
+            headers: { Authorization: `Token ${token}` },
+          }
+        );
+    
+        const orderId = response1 && response1.data && response1.data.results && response1.data.results.data && response1.data.results.data.razorpay_order_id;
+    
+        if (!orderId) {
+          console.error("Order ID is missing in the response:", response1);
+          alert("Failed to initiate payment. Please try again.");
+          return;
+        }
+    
+        // Step 2: Configure Razorpay options
+        const options = {
+          key: "rzp_live_rKLs1hbpVT5npK", // Replace with your Razorpay key
+          amount: amountPay * 100, // Amount in paise
+          currency: "INR",
+          name: "Swa Diamonds",
+          description: "for testing purpose",
+          order_id: orderId,
+          handler: async function (response) {
+            const bodyPay = {
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_signature: response.razorpay_signature,
+              order_id: response1.data.results.data.order.id,
+            };
+    
+            try {
+              // Step 3: Confirm the payment on the backend
+              const response2 = await axios.post(Urls.paySuces, bodyPay, {
+                headers: { Authorization: `Token ${token}` },
+              });
+    
+              if (response2.data.success) {
+                localStorage.removeItem("Address");
+                history.push("/my/orders"); // Redirect to orders page
+              } else {
+                alert(
+                  "Payment processed, but order update failed. Contact support."
+                );
+              }
+            } catch (error) {
+              console.error("Payment success API error:", error);
+              alert(
+                "Payment processed, but order confirmation failed. Contact support."
+              );
+            }
+          },
+          prefill: {
+            name: "", // Optionally prefill user details
+            email: "",
+            contact: "",
+          },
+          config: {
+            display: {
+              blocks: {
+                card: { name: "Pay with Card", instruments: [] },
+                upi: { name: "Pay with UPI", instruments: [] },
+                netbanking: { name: "Pay with Netbanking", instruments: [] },
+                wallet: { name: "Pay with Wallet", instruments: [] },
+              },
+              sequence: [
+                mode, // Prioritize the selected payment method
+                ...["card", "upi", "netbanking", "wallet"].filter(
+                  (method) => method !== mode
+                ), // Include remaining methods in order
+              ],
+              preferences: {
+                show_default_blocks: false, // Show all payment methods
+                default_block: mode, // Set the selected method as default
+              },
             },
-            prefill: {
-              name: "",
-              email: "",
-              contact: "",
+          },
+          theme: { color: "#007481" },
+          modal: {
+            ondismiss: function () {
+              console.warn("Payment modal closed by the user.");
+              setIsLoading(false);
             },
-            notes: {
-              address: "Razorpay Corporate office",
-            },
-            theme: {
-              color: "#007481",
-            },
-          };
-          var pay = new window.Razorpay(options);
-          pay.open();
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+          },
+        };
+    
+        // Step 4: Open Razorpay modal
+        const razorpay = new window.Razorpay(options);
+        razorpay.open();
+      } catch (error) {
+        console.error("Checkout API error:", error);
+        alert("Failed to initiate payment. Please try again.");
+      }
     } else if (mode === "cash" && name === "cart") {
       setIsLoading(true);
       axios
@@ -422,194 +412,15 @@ const Payment = () => {
             localStorage.setItem("phoneNumber", data.number);
             localStorage.removeItem("Address");
 
-            history.push("/my_orders");
+            history.push("/my/orders");
           } else if (response1.data.results.status_code === 200) {
             localStorage.removeItem("Address");
-            history.push("/my_orders");
+            history.push("/my/orders");
           } else if (response1.data.results.status === 206) {
             setPayButtonError(response1.data.results.message);
           }
         });
     }
-    // if (token) {
-    //   if (mode === "upi" || mode === "credit_card") {
-    //     setIsLoading(true);
-    //     axios
-    //       .post(Urls.checkout, cartBody, {
-    //         headers: { Authorization: "Token " + _userToken },
-    //       })
-    //       .then((response1) => {
-    //         setIsLoading(false);
-    //         var options = {
-    //           key: "rzp_test_hbBeCNBjrqDq6P", // test Key
-    //           key_secret: "HwgmIdicOPlAeLkBdOJIMXiu",
-    //           // key: "rzp_live_rKLs1hbpVT5npK",
-    //           // key_secret: "td3G02g20iPqQzfz4b2NFSFN",
-    //           amount: amountPay * 100,
-    //           order_id: response1.data.results.data.razorpay_order_id,
-    //           currency: "INR",
-    //           name: "Swa Diamonds",
-    //           description: "for testing purpose",
-    //           handler: function(response) {
-    //             const bodyPay = {
-    //               razorpay_payment_id: response.razorpay_payment_id,
-    //               razorpay_order_id: response.razorpay_order_id,
-    //               razorpay_signature: response.razorpay_signature,
-    //               order_id: response1.data.results.data.order.id,
-    //             };
-    //             axios
-    //               .post(Urls.paySuces, bodyPay, {
-    //                 headers: { Authorization: "Token " + token },
-    //               })
-    //               .then((response1) => {
-    //                 console.log(response1);
-    //                 if (response1.data.results.status_code === 200 && !token) {
-    //                   localStorage.setItem("swaToken", data.token);
-    //                   localStorage.setItem("userName", data.name);
-    //                   localStorage.setItem("phoneNumber", data.number);
-    //                   setIsLoading(false);
-    //                   localStorage.removeItem("Address");
-    //                   history.push("/my_orders");
-    //                 } else if (response1.data.results.status_code === 200) {
-    //                   setIsLoading(false);
-    //                   localStorage.removeItem("Address");
-    //                   history.push("/my_orders");
-    //                 }
-    //               })
-    //               .catch((error) => {
-    //                 console.log(error);
-    //               });
-    //           },
-    //           prefill: {
-    //             name: "",
-    //             email: "",
-    //             contact: "",
-    //           },
-    //           notes: {
-    //             address: "Razorpay Corporate office",
-    //           },
-    //           theme: {
-    //             color: "#007481",
-    //           },
-    //         };
-    //         var pay = new window.Razorpay(options);
-    //         pay.open();
-    //       })
-    //       .catch((error) => {
-    //         console.log(error);
-    //       });
-    //   } else if (mode === "cash") {
-    //     setIsLoading(true);
-    //     axios
-    //       .post(Urls.checkout, cartBody, {
-    //         headers: { Authorization: "Token " + _userToken },
-    //       })
-    //       .then((response1) => {
-    //         setIsLoading(false);
-    //         if (response1.data.results.status_code === 200 && !token) {
-    //           localStorage.setItem("swaToken", data.token);
-    //           localStorage.setItem("userName", data.name);
-    //           localStorage.setItem("phoneNumber", data.number);
-    //           localStorage.removeItem("Address");
-    //           history.push("/my_orders");
-    //         } else if (response1.data.results.status_code === 200) {
-    //           localStorage.removeItem("Address");
-    //           history.push("/my_orders");
-    //         }
-    //       });
-    //   }
-    // } else {
-    //   if (mode === "upi" || mode === "credit_card") {
-    //     axios
-    //       .post(Urls.buyNow, buyBody, {
-    //         headers: {
-    //           Authorization: "Token " + _userToken,
-    //         },
-    //       })
-    //       .then((response1) => {
-    //         var options = {
-    //           //test_secret
-    //           key: "rzp_test_hbBeCNBjrqDq6P",
-    //           key_secret: "HwgmIdicOPlAeLkBdOJIMXiu",
-    //           // key: "rzp_live_rKLs1hbpVT5npK",
-    //           // key_secret: "td3G02g20iPqQzfz4b2NFSFN",
-    //           amount: amountPay * 100,
-    //           order_id: response1.data.results.data.razorpay_order_id,
-    //           currency: "INR",
-    //           name: "Swa Diamonds",
-    //           description: "for testing purpose",
-    //           handler: function(response) {
-    //             const bodyPay = {
-    //               razorpay_payment_id: response.razorpay_payment_id,
-    //               razorpay_order_id: response.razorpay_order_id,
-    //               razorpay_signature: response.razorpay_signature,
-    //               order_id: response1.data.results.data.order.id,
-    //             };
-
-    //             axios
-    //               .post(Urls.paySuces, bodyPay, {
-    //                 headers: {
-    //                   Authorization: "Token " + token,
-    //                 },
-    //               })
-    //               .then((response2) => {
-    //                 if (response2.data.results.status_code === 200 && !token) {
-    //                   localStorage.setItem("swaToken", data.token);
-    //                   localStorage.setItem("userName", data.name);
-    //                   localStorage.setItem("phoneNumber", data.number);
-    //                   localStorage.removeItem("Address");
-    //                   history.push("/my_orders");
-    //                 } else if (response2.data.results.status_code === 200) {
-    //                   localStorage.removeItem("Address");
-    //                   history.push("/my_orders");
-    //                 }
-    //               })
-    //               .catch((error) => {
-    //                 console.log(error);
-    //               });
-    //           },
-    //           prefill: {
-    //             name: "",
-    //             email: "",
-    //             contact: "",
-    //           },
-    //           notes: {
-    //             address: "Razorpay Corporate office",
-    //           },
-    //           theme: {
-    //             color: "#007481",
-    //           },
-    //         };
-    //         var pay = new window.Razorpay(options);
-    //         pay.open();
-    //       })
-    //       .catch((error) => {
-    //         console.log(error);
-    //       });
-    //   } else if (mode === "cash") {
-    //     axios
-    //       .post(Urls.buyNow, buyBody, {
-    //         headers: {
-    //           Authorization: "Token " + _userToken,
-    //         },
-    //       })
-    //       .then((response1) => {
-    //         if (response1.data.results.status_code === 200 && !token) {
-    //           localStorage.setItem("swaToken", data.token);
-    //           localStorage.setItem("userName", data.name);
-    //           localStorage.setItem("phoneNumber", data.number);
-    //           localStorage.removeItem("Address");
-    //           history.push("/my_orders");
-    //         } else if (response1.data.results.status_code === 200) {
-    //           localStorage.removeItem("Address");
-    //           history.push("/my_orders");
-    //         }
-    //       });
-    //   }
-    // }
-
-    console.log("buyBody-->", buyBody);
-    console.log("cartBody--->", cartBody);
   };
   console.log(payButtonErrror, "payButtonError");
 
@@ -667,18 +478,6 @@ const Payment = () => {
     fetchAddress();
   };
 
-  // function formatIndianNumber(number) {
-  //   const numberString = number && number.toString();
-  //   const lastThreeDigits = numberString && numberString.slice(-3);
-  //   const otherDigits = numberString && numberString.slice(0, -3);
-
-  //   return (
-  //     otherDigits &&
-  //     otherDigits.replace(/\B(?=(\d{2})+(?!\d))/g, ",") +
-  //       (otherDigits ? "," : "") +
-  //       lastThreeDigits
-  //   );
-  // }
   function formatIndianNumber(number) {
     const numberString = number && number.toString();
 
@@ -733,12 +532,12 @@ const Payment = () => {
           <div className={Classes.PaymentMethod}>
             <h4>Payment Method</h4>
             <p>Choose your payment method</p>
-            {/* <div className={Classes.Pmethod}>
+            <div className={Classes.Pmethod}>
               <input
                 type="radio"
-                value="credit_card"
+                value="card"
                 style={{ cursor: "pointer" }}
-                checked={mode === "credit_card"}
+                checked={mode === "card"}
                 onChange={handleMethodChange}
               />
               <img src={mastercard} alt="Mastercard" />
@@ -754,7 +553,7 @@ const Payment = () => {
               />
               <img src={phonepay} alt="Phonepay" />
               UPI
-            </div> */}
+            </div>
             <div className={Classes.Pmethod}>
               <input
                 type="radio"
@@ -770,7 +569,10 @@ const Payment = () => {
             <div className={Classes.Right}>
               <div className={Classes.TotalText}>
                 <div className={Classes.TotalItem}>
-                  <p className={Classes.TotalSmall} style={{fontSize:"16px"}}>
+                  <p
+                    className={Classes.TotalSmall}
+                    style={{ fontSize: "16px" }}
+                  >
                     Total &nbsp;<span>{data.totalItems} Items</span>
                   </p>
                 </div>
@@ -943,18 +745,6 @@ const Payment = () => {
                 : alert("Please select a payment method");
               // setPmethodError("Please select a payment method");
             }}
-            //     onClick={async () => {
-            //   if (data.buyBody) {
-            //     try {
-            //       await submitAddress();
-            //       placeOrder();
-            //     } catch (error) {
-            //       console.error("Error submitting address:", error);
-            //     }
-            //   } else {
-            //     alert("Please select a payment method");
-            //   }
-            // }}
           >
             {location.state.name === "buybody" ? (
               <>

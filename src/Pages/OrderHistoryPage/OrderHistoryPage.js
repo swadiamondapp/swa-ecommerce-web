@@ -12,6 +12,7 @@ import * as Urls from "../../Urls";
 import { FadeLoader } from "react-spinners";
 import { useHistory } from "react-router-dom";
 import SliderFeature from "../../components/ProductDetails/SliderFeature";
+import useCanonicalTag from "../../useCanonicalTag";
 
 const OrderHistoryPage = () => {
   const countryId = localStorage.getItem("id");
@@ -26,6 +27,9 @@ const OrderHistoryPage = () => {
     country_name: Contryname,
   });
   const history = useHistory();
+  useCanonicalTag();
+
+  console.log("orderListnew", orderList);
 
   const token = localStorage.getItem("swaToken");
   useEffect(() => {
@@ -59,7 +63,7 @@ const OrderHistoryPage = () => {
   }, []);
   const productViewHandler = (id, shipmentId) => {
     history.push({
-      pathname: "/track_order",
+      pathname: "/track/orders",
       state: { data: { productId: id, shipmentId: shipmentId } },
     });
   };

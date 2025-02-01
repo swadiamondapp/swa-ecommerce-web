@@ -18,6 +18,9 @@ const NewArrivalPage = (props) => {
     props.deltLabel(index);
   };
   const lawtohigh = () => {};
+
+  console.log("props.categoryName", props.categoryName);
+
   return (
     <div>
       <div className={Classes.ParentMain}>

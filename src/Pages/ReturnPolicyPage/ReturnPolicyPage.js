@@ -4,6 +4,7 @@ import Footer from "../../components/Footer/Footer";
 import ReturnPolicy from "../../components/ReturnPolicy/ReturnPolicy";
 import axios from "axios";
 import * as Urls from "../../Urls";
+import useCanonicalTag from "../../useCanonicalTag";
 
 function ReturnPolicyPage() {
   const [cartCount, setCartCount] = useState("");
@@ -16,6 +17,7 @@ function ReturnPolicyPage() {
     flag_image: flag,
     country_name: Contryname,
   });
+  useCanonicalTag();
   useEffect(() => {
     if (token !== null) {
       axios
