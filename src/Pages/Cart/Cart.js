@@ -314,7 +314,7 @@ const Cart = () => {
       cartLists = (
         <div className="container contBg">
           <div className=" d-flex justify-content-center align-items-center loader">
-            <div
+<div
               className="col-md-6"
               style={{
                 display: "flex",
@@ -332,7 +332,7 @@ const Cart = () => {
                 surfing until you find your favorite ornaments. From wishlist to
                 the cart, We wish you ‘Happy Shopping’.{" "}
               </p>
-              <Link to="/">
+ <Link to="/">
                 {" "}
                 <button className={Classes.btn_shopnow}>Shop Now</button>
               </Link>
