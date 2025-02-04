@@ -1,2 +1,4 @@
 node_modules/
 .ngrok
+.next
+next-env.d.ts

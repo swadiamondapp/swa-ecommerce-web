@@ -22,6 +22,7 @@
     "joi": "^17.12.2",
     "jquery": "^3.7.1",
     "moment": "^2.29.4",
+    "next": "^15.1.6",
     "primereact": "^10.4.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.6.0",
@@ -48,12 +49,9 @@
     "yup": "^1.1.1"
   },
   "scripts": {
-    "start": "react-scripts --max-old-space-size=4096 --openssl-legacy-provider start",
-    "build": "react-scripts --max-old-space-size=4096 --openssl-legacy-provider build",
-    "test": "react-scripts --max-old-space-size=4096 test",
-    "eject": "react-scripts eject",
-    "proxy": "http://localhost:3000",
-    "generate-sitemap": "node --experimental-modules generate-sitemap.mjs"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "npx serve@latest ./build"
   },
   "eslintConfig": {
     "extends": [
