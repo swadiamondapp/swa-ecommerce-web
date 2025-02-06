@@ -47,7 +47,7 @@ const BringTheParty = (props) => {
               <div className={`container ${Classes.MobBringtheparty}`}>
                 <div className="row">
                   {adds.map((item, index) => (
-                    <>
+                    <React.Fragment key={index}>
                       {item.Ad_image && (
                         <div
                           className={`col-md-12 ${Classes.MobBringtheparty}`}
@@ -76,7 +76,7 @@ const BringTheParty = (props) => {
                           />
                         </div>
                       )}
-                    </>
+                    </React.Fragment>
                   ))}
 
                   {/* <div

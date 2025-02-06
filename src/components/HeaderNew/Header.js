@@ -813,7 +813,7 @@ const Header = (props) => {
           />
           <div className={`${Classes.outletlogo} ${Classes.headerElement}`}>
             <Link to="/product/outlets">
-              <img src={outletlogo} />
+              <img src={outletlogo.src} />
             </Link>
           </div>
           <div

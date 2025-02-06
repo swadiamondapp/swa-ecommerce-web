@@ -31,7 +31,7 @@ const MainHead = (props) => {
         setActiveCart={props.setActiveCart}
         setText={props.setText}
       />
-      <header className={Classes.headerNav}>
+      <header className={`${Classes.headerNav} ${Classes.header}`}>
         <div className={`${"container"} ${Classes.ParentHeader}`}>
           <div
             className={`${Classes.SwaHead} ${
@@ -43,14 +43,14 @@ const MainHead = (props) => {
               className={`${Classes.logo} ${Classes.headerElement}`}
               onClick={landingPageHandler}
             >
-              <img src={Logo} alt="logo" />
+              <img src={Logo.src} alt="logo" />
             </div>
             <div
               id="brand"
               className={Classes.swaMob}
               onClick={landingPageHandler}
             >
-              <img src={swaMob} alt="logo" />
+              <img src={swaMob.src} alt="logo" />
             </div>
             {isCartPage && (
               <div>

@@ -809,6 +809,7 @@ const MobileNavbar = (props) => {
                             <div className={Classes.ShippingDetialHead}>
                               {category.map((category, index) => (
                                 <div
+                                key={index}
                                   className={Classes.ParentCards1}
                                   onClick={() => cattSelHandler(category)}
                                   style={{

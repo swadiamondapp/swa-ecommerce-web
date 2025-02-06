@@ -236,13 +236,12 @@
   position: relative;
 }
 
-a {
+.link {
   color: #ffffff;
   font-family: "gilroyNormal" !important;
   font-weight: 400 !important;
   font-size: 12px !important;
   text-decoration: none !important;
-  /* margin: 0 10px 0 10px; */
 }
 
 .Searchbar::placeholder {
@@ -661,15 +660,9 @@ a {
     background-size: 13px;
   }
 
-  ::-webkit-input-placeholder {
-    margin-top: -2px;
-    font-size: 10px;
-    padding-left: 30px;
-  }
-
-  a {
+  /* a {
     font-size: 5px;
-  }
+  } */
 
   .Logo {
     height: 35px;

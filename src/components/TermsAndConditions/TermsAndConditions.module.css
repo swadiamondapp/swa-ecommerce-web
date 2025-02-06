@@ -56,9 +56,9 @@
     padding:10px 0px
     
 }
-ul ul {
-    list-style-type:disc; /* or any other desired list-style-type */
-  }
+/* ul ul {
+    list-style-type:disc; 
+  } */
 
 
 @media (min-width: 300px) and (max-width: 575px) {

@@ -965,7 +965,7 @@ function CheckOut(props) {
                   >
                     <div className={Classes.EmailMobileNew}>
                       <div className="Parant_Relative">
-                        <label>Email</label>
+                        <label className="label">Email</label>
                         <input
                           className={Classes.PlaceInput}
                           type="text"
@@ -982,7 +982,7 @@ function CheckOut(props) {
                         )}
                       </div>
                       <div className="Parant_Relative">
-                        <label>Mobile number</label>
+                        <label className="label">Mobile number</label>
                         <input
                           className={Classes.PlaceInput}
                           type="text"
@@ -1001,7 +1001,7 @@ function CheckOut(props) {
                     </div>
                     <p className={Classes.Heading}>Delivery Address</p>
                     <div className="Parant_Relative">
-                      <label>Full Name*</label>
+                      <label className="label">Full Name*</label>
                       <input
                         className={Classes.PlaceInput}
                         type="text"
@@ -1019,7 +1019,7 @@ function CheckOut(props) {
 
                     <div>
                       <div className={Classes.honor}>
-                        <label>
+                        <label className="label">
                           <input
                             type="radio"
                             value="Mr"
@@ -1029,7 +1029,7 @@ function CheckOut(props) {
                           />
                           Mr.
                         </label>
-                        <label>
+                        <label className="label">
                           <input
                             type="radio"
                             value="Mrs"
@@ -1039,7 +1039,7 @@ function CheckOut(props) {
                           />
                           Mrs.
                         </label>
-                        <label>
+                        <label className="label">
                           <input
                             type="radio"
                             value="Others"
@@ -1059,7 +1059,7 @@ function CheckOut(props) {
                     </div>
 
                     <div className="Parant_Relative">
-                      <label>Country*</label>
+                      <label className="label">Country*</label>
                       <select
                         className={Classes.PlaceInput}
                         value={addressData.country}
@@ -1092,7 +1092,7 @@ function CheckOut(props) {
                     </div>
 
                     <div className="Parant_Relative">
-                      <label>State</label>
+                      <label className="label">State</label>
                       <select
                         className={Classes.PlaceInput}
                         name="state"
@@ -1117,7 +1117,7 @@ function CheckOut(props) {
 
                     <div className={Classes.ParentF1}>
                       <div className="Parant_Relative">
-                        <label>Alternate Number*</label>
+                        <label className="label">Alternate Number*</label>
                         <input
                           className={Classes.PlaceInput}
                           type="number"
@@ -1133,7 +1133,7 @@ function CheckOut(props) {
                         )} */}
                       </div>
                       <div className="Parant_Relative">
-                        <label>Pincode</label>
+                        <label className="label">Pincode</label>
                         <input
                           className={Classes.PlaceInput}
                           type="text"
@@ -1160,7 +1160,7 @@ function CheckOut(props) {
                         )}
                       </div>
                       <div>
-                        <label>City*</label>
+                        <label className="label">City*</label>
                         <input
                           className={Classes.PlaceInput}
                           type="text"
@@ -1179,7 +1179,7 @@ function CheckOut(props) {
                     </div>
 
                     {/* <div style={{ marginBottom: "15px" }}>
-                      <label>State</label>
+                      <label className="label">State</label>
                       <Dropdown
                         value={selectedCity}
                         onChange={(e) => setSelectedCity(e.value)}
@@ -1196,7 +1196,7 @@ function CheckOut(props) {
 
                     <div className={Classes.ParentStreetColony}>
                       <div className={Classes.House1NN}>
-                        <label>House number / building name*</label>
+                        <label className="label">House number / building name*</label>
                         <input
                           className={Classes.PlaceInput}
                           type="text"
@@ -1212,7 +1212,7 @@ function CheckOut(props) {
                         )}
                       </div>
                       <div className={Classes.ColonyForm}>
-                        <label>Street colony name*</label>
+                        <label className="label">Street colony name*</label>
                         <input
                           className={Classes.PlaceInput}
                           type="text"
@@ -1229,7 +1229,7 @@ function CheckOut(props) {
                       </div>
                     </div>
                     <div>
-                      <label>Land mark ( optional )</label>
+                      <label className="label">Land mark ( optional )</label>
                       <input
                         className={Classes.PlaceInput}
                         type="text"
@@ -2261,7 +2261,7 @@ export default CheckOut;
 //                   >
 //                     <div className={Classes.EmailMobileNew}>
 //                       <div className="Parant_Relative">
-//                         <label>Email</label>
+//                         <label className="label">Email</label>
 //                         <input
 //                           className={Classes.PlaceInput}
 //                           type="text"
@@ -2278,7 +2278,7 @@ export default CheckOut;
 //                         )}
 //                       </div>
 //                       <div className="Parant_Relative">
-//                         <label>Mobile number</label>
+//                         <label className="label">Mobile number</label>
 //                         <input
 //                           className={Classes.PlaceInput}
 //                           type="text"
@@ -2297,7 +2297,7 @@ export default CheckOut;
 //                     </div>
 //                     <p className={Classes.Heading}>Delivery Address</p>
 //                     <div className="Parant_Relative">
-//                       <label>Full Name*</label>
+//                       <label className="label">Full Name*</label>
 //                       <input
 //                         className={Classes.PlaceInput}
 //                         type="text"
@@ -2315,7 +2315,7 @@ export default CheckOut;
 
 //                     <div>
 //                       <div className={Classes.honor}>
-//                         <label>
+//                         <label className="label">
 //                           <input
 //                             type="radio"
 //                             value="Mr"
@@ -2325,7 +2325,7 @@ export default CheckOut;
 //                           />
 //                           Mr.
 //                         </label>
-//                         <label>
+//                         <label className="label">
 //                           <input
 //                             type="radio"
 //                             value="Mrs"
@@ -2335,7 +2335,7 @@ export default CheckOut;
 //                           />
 //                           Mrs.
 //                         </label>
-//                         <label>
+//                         <label className="label">
 //                           <input
 //                             type="radio"
 //                             value="Others"
@@ -2355,7 +2355,7 @@ export default CheckOut;
 //                     </div>
 
 //                     <div className="Parant_Relative">
-//                       <label>Country*</label>
+//                       <label className="label">Country*</label>
 //                       <input
 //                         className={Classes.PlaceInput}
 //                         type="text"
@@ -2373,7 +2373,7 @@ export default CheckOut;
 
 //                     <div className={Classes.ParentF1}>
 //                       <div className="Parant_Relative">
-//                         <label>Alternate Number*</label>
+//                         <label className="label">Alternate Number*</label>
 //                         <input
 //                           className={Classes.PlaceInput}
 //                           type="number"
@@ -2389,7 +2389,7 @@ export default CheckOut;
 //                         )}
 //                       </div>
 //                       {/* <div className="Parant_Relative">
-//                         <label>Pincode</label>
+//                         <label className="label">Pincode</label>
 //                         <input
 //                           className={Classes.PlaceInput}
 //                           type="text"
@@ -2416,7 +2416,7 @@ export default CheckOut;
 //                         )}
 //                       </div> */}
 //                       <div>
-//                         <label>City*</label>
+//                         <label className="label">City*</label>
 //                         <input
 //                           className={Classes.PlaceInput}
 //                           type="text"
@@ -2435,7 +2435,7 @@ export default CheckOut;
 //                     </div>
 
 //                     {/* <div style={{ marginBottom: "15px" }}>
-//                       <label>State</label>
+//                       <label className="label">State</label>
 //                       <Dropdown
 //                         value={selectedCity}
 //                         onChange={(e) => setSelectedCity(e.value)}
@@ -2452,7 +2452,7 @@ export default CheckOut;
 
 //                     <div className={Classes.ParentStreetColony}>
 //                       <div className={Classes.House1NN}>
-//                         <label>House number / building name*</label>
+//                         <label className="label">House number / building name*</label>
 //                         <input
 //                           className={Classes.PlaceInput}
 //                           type="text"
@@ -2468,7 +2468,7 @@ export default CheckOut;
 //                         )}
 //                       </div>
 //                       <div className={Classes.ColonyForm}>
-//                         <label>Street colony name*</label>
+//                         <label className="label">Street colony name*</label>
 //                         <input
 //                           className={Classes.PlaceInput}
 //                           type="text"
@@ -2485,7 +2485,7 @@ export default CheckOut;
 //                       </div>
 //                     </div>
 //                     <div>
-//                       <label>Land mark ( optional )</label>
+//                       <label className="label">Land mark ( optional )</label>
 //                       <input
 //                         className={Classes.PlaceInput}
 //                         type="text"

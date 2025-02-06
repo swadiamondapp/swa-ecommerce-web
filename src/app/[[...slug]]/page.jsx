@@ -1,9 +1,12 @@
-import { ClientOnly } from './client'
- 
+import { ClientOnly } from "./client";
+
 export function generateStaticParams() {
-  return [{ slug: [''] }]
+  return [
+    { slug: [] },
+    { slug: ["fa", "questions"] },
+  ];
 }
- 
-export default function Page() {
-  return <ClientOnly />
+
+export default function Page({ params }) {
+  return <ClientOnly />;
 }

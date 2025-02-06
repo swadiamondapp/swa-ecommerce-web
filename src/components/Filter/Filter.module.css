@@ -67,19 +67,20 @@
   font-family: "gilroyNormal" !important;
 }
 
-input[type="checkbox"] {
-  accent-color: #006e7f !important;
-}
-input[type="radio"] {
+.checkbox-input {
   accent-color: #006e7f !important;
 }
 
-input:checked + label {
+.radio-input {
+  accent-color: #006e7f !important;
+}
+
+.input:checked + label {
   font-weight: bold !important;
   color: #475057 !important;
 }
 
-input:checked + label + .number {
+.input:checked + label + .number {
   font-weight: bold !important;
   color: #475057 !important;
 }

@@ -1,10 +1,12 @@
-header a {
+.header a {
   text-decoration: none;
 }
 
-header {
+.header {
   background-color: #00464d;
+  padding: 10px 20px;
 }
+
 .SubHeadNav {
   background: #fcfbf6;
   border-bottom: 1px solid #f5f1e0;
@@ -258,21 +260,21 @@ header {
   overflow-x: scroll;
 } */
 /* width */
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 1px;
   height: 10px;
-}
+} */
 
 /* Track */
-::-webkit-scrollbar-track {
+/* ::-webkit-scrollbar-track {
   border-radius: 10px;
-}
+} */
 
 /* Handle */
-::-webkit-scrollbar-thumb {
+/* ::-webkit-scrollbar-thumb {
   background: rgb(228, 228, 228);
   border-radius: 10px;
-}
+} */
 
 .Offers {
   /* margin: 0px 10px; */
@@ -656,13 +658,12 @@ header {
   position: relative;
 }
 
-a {
+.link {
   color: #ffffff !important;
   font-family: "gilroyNormal" !important;
   font-weight: 400 !important;
   font-size: 12px !important;
   text-decoration: none !important;
-  /* margin: 0 10px 0 10px; */
 }
 
 .Searchbar::placeholder {
@@ -1074,15 +1075,9 @@ a {
     background-size: 13px;
   }
 
-  ::-webkit-input-placeholder {
-    margin-top: -2px;
-    font-size: 10px;
-    padding-left: 30px;
-  }
-
-  a {
+  /* a {
     font-size: 5px;
-  }
+  } */
 
   .Logo {
     height: 35px;
@@ -1410,7 +1405,7 @@ a {
     width: 100%;
     left: 0;
   }
-  header {
+  .header {
     background-color: #10212f;
     border: none;
     background: #00464d;
@@ -1418,7 +1413,6 @@ a {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* padding: 10px 20px; */
   }
   .CatList {
     display: block;
@@ -1443,7 +1437,7 @@ a {
   .headerNav {
   }
 
-  header {
+  .header {
     background-color: #10212f;
     border: none;
     background: #00464d;

@@ -62,7 +62,7 @@ const LandingPage = () => {
     flag_image: flag,
     country_name: Contryname,
   });
-  useCanonicalTag();
+  // useCanonicalTag();
 
   console.log("mobBanner..01", mobBanner);
   console.log("budjet..02", budjet);
@@ -483,7 +483,6 @@ const LandingPage = () => {
         {searchList}
 
         <DownloadOurAppImage />
-        {/* <RecentSearch /> */}
       </div>
 
       <Footer />

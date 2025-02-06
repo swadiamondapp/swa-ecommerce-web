@@ -90,7 +90,7 @@ function Footer() {
         <div className="container">
           <div className="row">
             <div className="col-md-3">
-              <img className={Classes.Logo} src={Logo} alt="Logo" />
+              <img className={Classes.Logo} src={Logo.src} alt="Logo" />
               <p className={Classes.LogoText}>
                 Concept of SWA Diamonds came into being from CAPESTONE Ventures
                 Pvt Ltd, a leading name in wholesale diamond jewellers market,
@@ -272,17 +272,17 @@ function Footer() {
               </p>
               <div className={Classes.Icons}>
                 <img
-                  src={Facebook}
+                  src={Facebook.src}
                   alt="Facebook"
                   onClick={redirectToFacebook}
                 />
                 <img
-                  src={LinkedIn}
+                  src={LinkedIn.src}
                   alt="LinkedIn"
                   onClick={redirectToLinkedIn}
                 />
                 <img
-                  src={Instagram}
+                  src={Instagram.src}
                   alt="Instagram"
                   onClick={redirectToInstagram}
                 />
@@ -294,7 +294,7 @@ function Footer() {
       {/* mobile footer */}
       <div className={Classes.FooterMob}>
         <div className={Classes.LogoMobScreen}>
-          <img className={Classes.Logo} src={Logo} alt="" />
+          <img className={Classes.Logo} src={Logo.src} alt="" />
         </div>
         <div className={Classes.ParentCollaps}>
           <Accordion
@@ -501,10 +501,10 @@ function Footer() {
               Follow us on
             </p>
             <div className={Classes.Icons}>
-              <img src={Facebook} alt="Facebook" onClick={redirectToFacebook} />
-              <img src={LinkedIn} alt="LinkedIn" onClick={redirectToLinkedIn} />
+              <img src={Facebook.src} alt="Facebook" onClick={redirectToFacebook} />
+              <img src={LinkedIn.src} alt="LinkedIn" onClick={redirectToLinkedIn} />
               <img
-                src={Instagram}
+                src={Instagram.src}
                 alt="Instagram"
                 onClick={redirectToInstagram}
               />
@@ -519,34 +519,34 @@ function Footer() {
               <div className={Classes.FooterIconimg1}>
                 <img
                   className={Classes.FooterIcons}
-                  src={Image1}
+                  src={Image1.src}
                   alt="Image1"
                 />
                 <img
                   className={Classes.FooterIcons}
-                  src={Image2}
+                  src={Image2.src}
                   alt="Image2"
                 />
                 <img
                   className={Classes.FooterIcons}
-                  src={Image3}
+                  src={Image3.src}
                   alt="Image3"
                 />
               </div>
               <div className={Classes.FooterIconimg1}>
                 <img
                   className={Classes.FooterIcons}
-                  src={Image4}
+                  src={Image4.src}
                   alt="Image4"
                 />
                 <img
                   className={Classes.FooterIcons}
-                  src={Image5}
+                  src={Image5.src}
                   alt="Image5"
                 />
                 <img
                   className={Classes.FooterIcons}
-                  src={Image6}
+                  src={Image6.src}
                   alt="Image6"
                 />
               </div>
@@ -575,12 +575,12 @@ function Footer() {
               </p>
             </div>
             <div className={`${"col-md-4"} ${Classes.FootIconImg}`}>
-              <img className={Classes.FooterIcons} src={Image1} alt="Image1" />
-              <img className={Classes.FooterIcons} src={Image2} alt="Image2" />
-              <img className={Classes.FooterIcons} src={Image3} alt="Image3" />
-              <img className={Classes.FooterIcons} src={Image4} alt="Image4" />
-              <img className={Classes.FooterIcons} src={Image6} alt="Image6" />
-              <img className={Classes.FooterIcons} src={Image5} alt="Image5" />
+              <img className={Classes.FooterIcons} src={Image1.src} alt="Image1" />
+              <img className={Classes.FooterIcons} src={Image2.src} alt="Image2" />
+              <img className={Classes.FooterIcons} src={Image3.src} alt="Image3" />
+              <img className={Classes.FooterIcons} src={Image4.src} alt="Image4" />
+              <img className={Classes.FooterIcons} src={Image6.src} alt="Image6" />
+              <img className={Classes.FooterIcons} src={Image5.src} alt="Image5" />
             </div>
             <div className="col-md-4">
               <p className={Classes.FooterDownTextR}>
