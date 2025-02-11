@@ -581,7 +581,14 @@ const Header = (props) => {
 
             let selectedCountryData;
 
-            if (userCountryName === "AE") {
+            if (
+              userCountryName === "AE" ||
+              userCountryName === "SA" ||
+              userCountryName === "OM" ||
+              userCountryName === "KW" ||
+              userCountryName === "BH" ||
+              userCountryName === "QA"
+            ) {
               // Force UAE flag for France users
               selectedCountryData = response.data.results.data.find(
                 (country) => country.country_name === "United Arab Emirates"
