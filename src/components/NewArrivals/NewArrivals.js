@@ -1,3 +1,5 @@
+'use client';
+
 import React from "react";
 import Classes from "./NewArrivals.module.css";
 import { useHistory } from "react-router-dom";

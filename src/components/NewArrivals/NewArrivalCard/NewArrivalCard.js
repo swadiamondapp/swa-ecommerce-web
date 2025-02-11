@@ -1,3 +1,4 @@
+'use client';
 import React from "react";
 import Classes from "../NewArrivalCard/NewArrivalCard.module.css";
 import { ToastContainer, toast } from "react-toastify";

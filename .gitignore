@@ -3,3 +3,5 @@ node_modules/
 .next
 build/
 next-env.d.ts
+**/.DS_Store
+.env
