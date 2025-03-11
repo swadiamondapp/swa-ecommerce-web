@@ -241,7 +241,8 @@ function CheckOut(props) {
         return errors;
       }, {});
       setErrorMessage(validationErrors);
-      locallySetAddress()
+      // locallySetAddress();
+      placeOrder();
     } else {
       // Form is valid, proceed with submission
       console.log("Form submitted:", addressData);
@@ -753,8 +754,8 @@ function CheckOut(props) {
       setSelectedAddress(mainAddress.id); // Set the main address as the default selected address
     }
   }, [addressList]);
-  
-  console.log("addressData--->", addressData)
+
+  console.log("addressData--->", addressData);
 
   return (
     <div>
@@ -1073,16 +1074,16 @@ function CheckOut(props) {
                           </option>
                         ))} */}
                         {Country &&
-                            Country.getAllCountries() &&
-                            Country.getAllCountries().map((country, index) => (
-                              <option
-                                key={index}
-                                value={country.name}
-                                data-isocode={country.isoCode}
-                              >
-                                {country.name}
-                              </option>
-                            ))}
+                          Country.getAllCountries() &&
+                          Country.getAllCountries().map((country, index) => (
+                            <option
+                              key={index}
+                              value={country.name}
+                              data-isocode={country.isoCode}
+                            >
+                              {country.name}
+                            </option>
+                          ))}
                       </select>
                       {errorMessage.country && (
                         <div className={Classes.ErrorMessage}>
