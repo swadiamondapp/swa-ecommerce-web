@@ -174,11 +174,11 @@ const NewArrivalPage = (props) => {
     // console.log(props.location.state.data);
     if (props && props.location && props.location.state) {
       if (props.location.state.data === "new") {
-        filter('?filter_type="new', 1);
+        filter("?filter_type=new", 1);
         setHead("New Arrivals");
         cartsCount();
       } else if (props.location.state.data === "top") {
-        filter('?filter_type="top', 1);
+        filter("?filter_type=top", 1);
         setHead("Top Demanded Items");
         cartsCount();
       } else if (props.location.state.data === "filMin") {
