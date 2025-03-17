@@ -1,0 +1,45 @@
+.ShopOnBudgetMainText {
+  color: #0d1217;
+  font-weight: 600;
+  font-size: 32px;
+  font-family: var(--font-playfair), serif;
+}
+.ShopOnBudgetMainText h1 {
+  color: #0d1217;
+  font-size: 32px;
+  margin-bottom: 15px;
+  font-family: var(--font-playfair) !important;
+}
+.ShopOnBudgetText {
+  text-align: center;
+  padding-top: 48px;
+  padding-bottom: 30px;
+}
+.ShopOnBudgetSubText {
+  font-weight: 400;
+  font-size: 16px;
+  color: #757c81;
+  font-family: var(--font-gilroy) !important;
+}
+@media (max-width: 640px) {
+  .ShopOnBudgetSubText {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .ShopOnBudgetMainText h1 {
+    font-size: 26px;
+  }
+}
+@media (min-width: 576px) and (max-width: 767px) {
+  .ShopOnBudgetMainText h1 {
+    font-size: 26px;
+  }
+}
+@media (min-width: 300px) and (max-width: 575px) {
+  .ShopOnBudgetMainText h1 {
+    margin-bottom: 12px;
+    font-size: 22px;
+  }
+}

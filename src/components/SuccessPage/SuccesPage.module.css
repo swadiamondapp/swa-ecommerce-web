@@ -1,0 +1,15 @@
+.titlesuccesModal {
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    color:#fff;
+
+}
+.successModalContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap:15px
+   
+}

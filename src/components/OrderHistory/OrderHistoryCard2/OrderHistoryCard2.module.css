@@ -1,0 +1,113 @@
+.ant-steps-icon-dot{
+    background-color: #0EB533 !important;
+}
+.ProductName{
+    font-weight: 600;
+font-size: 18px;
+color: #0D1217;
+font-family: 'gilroyNormal' !important;
+}
+.ProductQty{
+    font-weight: 600;
+font-size: 18px;
+color: #0D1217;
+font-family: 'gilroyNormal' !important;
+margin-top: 40px;
+text-align: right;
+
+}
+.OutBox{
+    background: #FFFFFF;
+    cursor: pointer;
+    border: 0.5px solid #E6E6E6;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+    margin: 0 50px 0 50px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+.ProductDetails{
+    display: flex;
+    justify-content: space-between;
+}
+.PriceDetails{
+    display: flex;
+    margin-top: 40px;
+}
+.RupeeIcon{
+    margin-top: 2px;
+}
+.ProductImage{
+    width: 100%;
+    padding: 20px;
+}
+.ProductProperty{
+    font-weight: 400;
+font-size: 14px;
+color: #757C81;
+font-family: 'gilroyNormal' !important;
+line-height: .4;
+}
+.Price{
+    font-weight: 700;
+font-size: 16px;
+color: #0D1217;
+}
+.OrderIdText{
+    font-weight: 400;
+font-size: 14px;
+color: #757C81;
+width: 100%;
+/* border-right: 0.5px solid #E8E9EA ; */
+padding: 20px 20px 0 20px;
+/* margin-top: 25px; */
+}
+.DownText{
+border-top: 0.5px solid #E8E9EA;
+height: 50px;
+
+}
+.Rating{
+    display: flex;
+    justify-content: right;
+    padding:20px 0 0 20px;
+    font-weight: 600;
+font-size: 13px;
+color: #0997E7;;
+}
+.ProductDetailsText{
+    margin-top: 40px;
+}
+.TrackYourOrder {
+    font-weight: 600;
+    font-size: 16px;
+    font-family: 'gilroyNormal' !important;
+    margin-top: 20px;
+}
+.qty{
+    font-family: 'gilroyNormal' !important;
+font-size: 16px;
+color: #4F4F4F;
+padding-top: 40px;
+
+}
+
+.Border{
+border-bottom:  0.5px solid #E8E9EA !important;
+margin: 0 15px 0 15px;
+}
+.OrderedTime{
+    font-weight: 400;
+font-size: 11px;
+color: #757C81;
+width: 100%;
+/* border-right: 0.5px solid #E8E9EA ; */
+padding: 20px;
+margin-top: 25px;
+}
+.TrackOrder{
+    margin-top: 20px;
+}
+.Star{
+    margin-right: 8px;
+}

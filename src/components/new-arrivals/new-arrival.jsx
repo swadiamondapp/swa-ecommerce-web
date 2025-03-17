@@ -1,0 +1,650 @@
+"use client";
+
+import React, { useState, useEffect } from "react";
+import NewArrivalCard from "../../components/NewArrivals/NewArrivalCard/NewArrivalCard";
+import NewArrivalDesign from "../NewArrivalDesign/NewArrivalDesign";
+import DownloadOurAppImage from "../../components/DownloadOurAppImage/DownloadOurAppImage";
+import Filter from "../filter/filter-category";
+import Classes from "./NewArrivalPage.module.css";
+import * as Urls from "../../Urls";
+import axios from "axios";
+import { useHistory, useLocation } from "react-router-dom";
+import { FadeLoader } from "react-spinners";
+import ReactPaginate from "react-paginate";
+import Header from "../../components/HeaderNew/Header";
+import FilterMobile from "../filter/filter-mobile";
+import Features from "../Features/Features";
+import FilterModal from "../../components/LifeTImeModal/FilterModal";
+import SliderFeature from "../../components/ProductDetails/SliderFeature";
+// import useCanonicalTag from "../../useCanonicalTag";
+
+const NewArrivalPage = (props) => {
+  const [product, setProduct] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [catgSet, setCatSet] = useState("");
+  const [color, setColor] = useState("");
+  const [head, setHead] = useState("");
+  const [occn, setOccn] = useState("");
+  const [pageCount, setPageCount] = useState("");
+  const [metal, setMetal] = useState("");
+  const [sort, setSort] = useState("");
+  const [cartCount, setCartCount] = useState("");
+  const [labelSet, setLabelSet] = useState([]);
+  const [num, setNum] = useState("");
+  const [count, setCount] = useState("");
+  const [category, setCategory] = useState([]);
+  const [categoryDetails, setCategoryDetails] = useState({
+    data: "",
+    product_category: "",
+  });
+  const history = useHistory();
+  const location = useLocation();
+  // const token = localStorage.getItem("swaToken");
+  // const countryId = localStorage.getItem("id");
+  const [token, setToken] = useState(null);
+  const [countryId, setCountryId] = useState(null);
+  useEffect(() => {
+    const token = localStorage.getItem("swaToken");
+    const countryId = localStorage.getItem("id");
+    setToken(token);
+    setCountryId(countryId);
+  }, []);
+  const productCategory =
+    (props &&
+      props.location &&
+      props.location.state &&
+      props.location.state.product_category) ||
+    "";
+  const [buttonTexts, setButtonTexts] = useState({});
+  const [showModal, setShowModal] = useState(false);
+
+  // useCanonicalTag();
+
+  const formatPathname = (pathname) => {
+    // Remove the leading slash
+    const trimmedPath = pathname.replace(/^\//, "");
+
+    // Capitalize the first letter
+    return trimmedPath.charAt(0).toUpperCase() + trimmedPath.slice(1);
+  };
+
+  useEffect(() => {
+    document.title = formatPathname(location.pathname) || "Category page";
+    const metaDescription = document.createElement("meta");
+    metaDescription.name = "swa diamonds product category";
+    metaDescription.content =
+      "This is the product category page of swa diamonds website.";
+    document.head.appendChild(metaDescription);
+
+    // Cleanup the meta tag on unmount
+    return () => {
+      document.head.removeChild(metaDescription);
+    };
+  }, [location.pathname]);
+
+  const filter = (newArrive, currentPage) => {
+    setLoading(true);
+    axios
+      .get(
+        `${Urls.productList + newArrive}&country=${countryId}`,
+        token && {
+          headers: { Authorization: "Token " + token },
+        }
+      )
+      .then((response1) => {
+        setLoading(false);
+        // const productList = [...response1.data.results.data]
+        // const sortedProducts = [...productList].sort((a, b) => a.country_total_price - b.country_total_price);
+        setProduct(response1.data.results.data);
+        setCount(response1.data.results.count);
+        setPageCount(Math.ceil(response1.data.results.count / 20));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  // const prodDetHandler = (prodItem) => {
+  //   sessionStorage.setItem(
+  //     "productDetails",
+  //     JSON.stringify({
+  //       id: prodItem.product_id,
+  //       color: prodItem.colour_id,
+  //       name: prodItem.product_name,
+  //     })
+  //   );
+  //   history.push({
+  //     pathname: "/jewellery/" + prodItem.alias,
+  //     state: { data: prodItem },
+  //   });
+  // };
+
+  // const handlePageClick = (data) => {
+  //   setNum(data.selected);
+  //   window?.scrollTo(0, 0);
+
+  //   if (
+  //     occn.length !== 0 ||
+  //     color.length !== 0 ||
+  //     catgSet.length !== 0 ||
+  //     metal.length !== 0 ||
+  //     sort.length !== 0
+  //   ) {
+  //     console.log("test");
+  //     filter(
+  //       "?occasion_tag_ids=" +
+  //         occn +
+  //         "&color_ids=" +
+  //         color +
+  //         "&category_ids=" +
+  //         catgSet +
+  //         "&metal_type=" +
+  //         metal +
+  //         "&sort=" +
+  //         sort,
+  //       data.selected + 1
+  //     );
+  //   } else if (props.location.state.data === "new") {
+  //     filter('?filter_type="new&sort=' + sort, data.selected + 1);
+  //   } else if (props.location.state.data === "top") {
+  //     filter('?filter_type="top&sort=' + sort, data.selected + 1);
+  //   } else if (props.location.state.data === "filMin") {
+  //     filter("?max_price=" + props.location.state.price, data.selected + 1);
+  //   }
+  // };
+
+  // const cartsCount = () => {
+  //   axios
+  //     .get(`${Urls.cart}?country=${countryId}`, {
+  //       headers: { Authorization: "Token " + token },
+  //     })
+  //     .then((response1) => {
+  //       if (response1.data.results.message === "cart is empty") {
+  //         setCartCount("");
+  //       } else {
+  //         setCartCount(response1.data.results.count);
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
+
+  // useEffect(() => {
+  //   window?.scrollTo(0, 0);
+  //   if (props && props.location && props.location.state) {
+  //     if (props.location.state.data === "new") {
+  //       filter('?filter_type="new', 1);
+  //       setHead("New Arrivals");
+  //       cartsCount();
+  //     } else if (props.location.state.data === "top") {
+  //       filter('?filter_type="top', 1);
+  //       setHead("Top Demanded Items");
+  //       cartsCount();
+  //     } else if (props.location.state.data === "filMin") {
+  //       filter("?max_price=" + props.location.state.price, 1);
+  //       setHead("Under " + props.location.state.price);
+  //       cartsCount();
+  //     } else if (props.location.state.data === "occation") {
+  //       filter("?occasion_tag_ids=" + props.location.state.octnId, 1);
+  //       setHead("Product List");
+  //       setOccn(props.location.state.octnId);
+  //     } else if (props.location.state.data !== undefined) {
+  //       filter("?category_ids=" + props.location.state.data, 1);
+  //       setCatSet(props.location.state.data);
+  //       setHead("Product List");
+  //     }
+  //   } else {
+  //     let categories = [];
+  //     let categoryName = "";
+  //     function getCategoryIdByName(name) {
+  //       const category = categories.find(
+  //         (cat) => cat.name === name.toUpperCase()
+  //       );
+  //       return category ? category.id : null;
+  //     }
+  //     axios
+  //       .get(`${Urls.home}?country=${countryId}`)
+  //       .then((response) => {
+  //         console.log("7654", location.pathname);
+  //         categories = response.data.results.data.categories;
+  //         categoryName =
+  //           location && location.pathname && location.pathname.slice(1);
+  //         const categoryId = getCategoryIdByName(categoryName);
+  //         setCatSet(categoryId);
+  //         setHead("Product List");
+  //         setCategoryDetails({
+  //           data: categoryId,
+  //           product_category: categoryName.toUpperCase(),
+  //         });
+  //         filter("?category_ids=" + categoryId, 1);
+  //       })
+  //       .catch((error) => {
+  //         console.error("Error fetching home data:", error);
+  //       });
+  //   }
+  // }, [props && props.location && props.location.state]);
+
+  const filterCatHandler = (filtSet) => {
+    let delimiter = ", ";
+    let catSet = "";
+    let catLabel = [];
+    for (let i = 0; i < filtSet.length; i++) {
+      catSet += filtSet[i].id;
+      catLabel.push(filtSet[i].label);
+      if (i < filtSet.length - 1) {
+        catSet += delimiter;
+      }
+      setCatSet(catSet);
+    }
+    setLabelSet(catLabel);
+
+    filter(
+      "?occasion_tag_ids=" +
+        occn +
+        "&color_ids=" +
+        color +
+        "&category_ids=" +
+        catSet +
+        "&metal_type=" +
+        metal +
+        "&sort=" +
+        sort,
+      1
+    );
+  };
+
+  const filtColorHandler = (colSets) => {
+    let delimiter = ", ";
+    let colSet = "";
+    let colLabel = [];
+    for (let i = 0; i < colSets.length; i++) {
+      colSet += colSets[i].id;
+      colLabel.push(colSets[i].label);
+      if (i < colSets.length - 1) {
+        colSet += delimiter;
+      }
+      setColor(colSet);
+    }
+    setLabelSet(colLabel);
+    filter(
+      "?occasion_tag_ids=" +
+        occn +
+        "&color_ids=" +
+        colSet +
+        "&category_ids=" +
+        catgSet +
+        "&metal_type=" +
+        metal +
+        "&sort=" +
+        sort,
+      1
+    );
+  };
+
+  const filtOcctnHandler = (octnsTag) => {
+    let delimiter = ", ";
+    let octnSet = "";
+    let occnLabel = [];
+    for (let i = 0; i < octnsTag.length; i++) {
+      octnSet += octnsTag[i].id;
+      occnLabel.push(octnsTag[i].label);
+      if (i < octnsTag.length - 1) {
+        octnSet += delimiter;
+      }
+      setOccn(octnSet);
+    }
+    setLabelSet(occnLabel);
+    filter(
+      "?occasion_tag_ids=" +
+        octnSet +
+        "&color_ids=" +
+        color +
+        "&category_ids=" +
+        catgSet +
+        "&metal_type=" +
+        metal +
+        "&sort=" +
+        sort,
+      1
+    );
+  };
+
+  const filterMetalHanlder = (metalTag) => {
+    let delimiter = ", ";
+    let metalSet = "";
+    let metaLabel = [];
+    for (let i = 0; i < metalTag.length; i++) {
+      metalSet += metalTag[i].id;
+      metaLabel.push(metalTag[i].label);
+      if (i < metalTag.length - 1) {
+        metalSet += delimiter;
+      }
+      setMetal(metalSet);
+    }
+    setLabelSet(metalSet);
+    filter(
+      "?occasion_tag_ids=" +
+        occn +
+        "&color_ids=" +
+        color +
+        "&category_ids=" +
+        catgSet +
+        "&metal_type=" +
+        metalSet +
+        "&sort=" +
+        sort,
+      1
+    );
+  };
+
+  const deltLbel = (indx) => {
+    let arrayDlt = [...labelSet];
+    arrayDlt.splice(indx, 1);
+    setLabelSet(arrayDlt);
+  };
+
+  // console.log("categoryDetails23----->", category);
+  // const cartAddHandler = (product) => {
+  //   const body = {
+  //     product_id: product.product_id,
+  //     color_id: product.colour_id,
+  //     size_id: 1,
+  //     quantity: 1,
+  //   };
+
+  //   axios
+  //     .post(`${Urls.cart}?country=${countryId}`, body, {
+  //       headers: { Authorization: "Token " + token },
+  //     })
+  //     .then((response1) => {
+  //       if (response1.data.results.message === "item added") {
+  //         let count = cartCount;
+  //         count = count + 1;
+  //         setCartCount(count);
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
+  const sortsHHandler = (e) => {
+    // console.log("......?", e.target.value);
+    setSort(e.target.value);
+    filter(
+      "?occasion_tag_ids=" +
+        occn +
+        "&color_ids=" +
+        color +
+        "&category_ids=" +
+        catgSet +
+        "&metal_type=" +
+        metal +
+        "&sort=" +
+        e.target.value +
+        "&filter_type=" +
+        e.target.value,
+      1
+    );
+    // setLoading(true);
+    // axios
+    //   .get(Urls.productList + "?sort=" + e.target.value)
+    //   .then((response1) => {
+    //     setLoading(false);
+    //     setProduct(response1.data.results.data);
+    //     setPageCount(Math.ceil(response1.data.results.count / 20));
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
+  };
+  // mobile sort
+  const sortsHHandler2 = (selectedSort, selectedPopular) => {
+    console.log("......?", selectedPopular);
+    // setSort(selectedSort);
+    filter(
+      "?occasion_tag_ids=" +
+        occn +
+        "&color_ids=" +
+        color +
+        "&category_ids=" +
+        catgSet +
+        "&metal_type=" +
+        metal +
+        "&sort=" +
+        selectedSort +
+        "&filter_type=" +
+        selectedPopular,
+      1
+    );
+  };
+  // price filter modal
+  const sortsHHandlerPrice = (selectedPriceRange) => {
+    // setSort(selectedSort);
+    filter(
+      "?occasion_tag_ids=" +
+        occn +
+        "&color_ids=" +
+        color +
+        "&category_ids=" +
+        catgSet +
+        "&metal_type=" +
+        metal +
+        "&price_range=" +
+        selectedPriceRange,
+
+      1
+    );
+  };
+
+  let products;
+  if (loading) {
+    products = (
+      <div className="d-flex justify-content-center align-items-center loader">
+        {" "}
+        <FadeLoader color="#00464d" />
+      </div>
+    );
+  } else if (product.length === 0) {
+    products = (
+      <div className="d-flex justify-content-center align-items-center loader">
+        No data found
+      </div>
+    );
+  } else {
+    const handleShowModal = (productId) => {
+      console.log("productIddd", productId);
+      const pincode = localStorage.getItem("pincode");
+      if (pincode) {
+        const body = {
+          product_id: productId,
+          color_id: "",
+          size_id: "",
+          pincode: pincode,
+        };
+
+        axios
+          .post(Urls.checkdeliveryDate, body, {
+            headers: { Authorization: "Token " + token },
+          })
+          .then((response1) => {
+            // setButtonText(response1.data.results.message);
+            setButtonTexts((prevState) => ({
+              ...prevState,
+              [productId]: response1.data.results.message, // Update the specific product's button text
+            }));
+            console.log("dateresponse", response1.data.results);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        setShowModal(true);
+      }
+    };
+
+    const handleCloseModal = () => {
+      setShowModal(false);
+    };
+
+    products = product.map((item, index) => {
+      console.log(item.sku, "item.sku");
+      return (
+        <NewArrivalCard
+          ProductImage={item.thumbnail_image}
+          ProductName={item.product_name}
+          ProductId={"SKU:" + item.sku}
+          cartSddHandler={() => prodDetHandler(item)}
+          PriceNew={
+            item.is_on_discount
+              ? item.country_discount_price
+              : item.country_total_price
+          }
+          PriceOld={item.is_on_discount ? item.country_total_price : null}
+          key={index}
+          isDiscount={item.is_on_discount}
+          Discount={
+            item.discount_percentage !== null
+              ? item.discount_percentage + "%OFF"
+              : item.discount_percentage
+          }
+          clicked={() => prodDetHandler(item)}
+          wishAct={item && item.wishlist_id}
+          prodet={item}
+          buttonText={
+            buttonTexts[item && item.product_id] || "Check delivery date"
+          }
+          onClick={() => handleShowModal(item.product_id)}
+          showModal={showModal}
+          onclose={handleCloseModal}
+        />
+      );
+    });
+  }
+
+  // const countryId = localStorage.getItem("id");
+  const flag = localStorage.getItem("flag_image");
+  const Contryname = localStorage.getItem("country_name");
+  const [selectedCountry, setSelectedCountry] = useState({
+    id: countryId,
+    flag_image: flag,
+    country_name: Contryname,
+  });
+
+  return (
+    <div>
+      <div className={Classes.Page}>
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-3 col-sm-4">
+              <Filter
+                filterCatg={filterCatHandler}
+                filterColr={filtColorHandler}
+                filterOctn={filtOcctnHandler}
+                filterMetal={filterMetalHanlder}
+                filterSearch={
+                  props && props.location && props.location.state
+                    ? props.location.state
+                    : categoryDetails && categoryDetails
+                }
+                setProduct={setProduct}
+                setCount={setCount}
+              />
+            </div>
+            <div className="col-lg-9 col-sm-8">
+              <div className={Classes.Products}>
+                <NewArrivalDesign
+                  head={head}
+                  labArry={labelSet}
+                  deltLabel={deltLbel}
+                  sortHandler={sortsHHandler}
+                  count={count}
+                  categoryName={
+                    productCategory
+                      ? productCategory
+                      : categoryDetails && categoryDetails.product_category
+                  }
+                >
+                  {/* <ReactPaginate
+                    breakLabel="..."
+                    nextLabel="Next >"
+                    onPageChange={handlePageClick}
+                    marginPagesDisplayed={1}
+                    pageRangeDisplayed={2}
+                    forcePage={num}
+                    pageCount={pageCount}
+                    previousLabel="<  Prev"
+                    renderOnZeroPageCount={null}
+                    containerClassName={
+                      "pagination justify-content-start pageout"
+                    }
+                    pageClassName={"page-item"}
+                    pageLinkClassName={"page-link"}
+                    previousClassName={"page-item"}
+                    previousLinkClassName={"page-link"}
+                    nextClassName={"page-item"}
+                    nextLinkClassName={"page-link"}
+                    breakClassName={"page-item"}
+                    breakLinkClassName={"page-link"}
+                    activeClassName={"active"}
+                  /> */}
+
+                  {products}
+                </NewArrivalDesign>
+                {/* <ReactPaginate
+                  breakLabel="..."
+                  nextLabel="Next >"
+                  onPageChange={handlePageClick}
+                  marginPagesDisplayed={1}
+                  pageRangeDisplayed={2}
+                  forcePage={num}
+                  pageCount={pageCount}
+                  previousLabel="<  Prev"
+                  renderOnZeroPageCount={null}
+                  containerClassName={"pagination justify-content-end pageout"}
+                  pageClassName={"page-item"}
+                  pageLinkClassName={"page-link"}
+                  previousClassName={"page-item"}
+                  previousLinkClassName={"page-link"}
+                  nextClassName={"page-item"}
+                  nextLinkClassName={"page-link"}
+                  breakClassName={"page-item"}
+                  breakLinkClassName={"page-link"}
+                  activeClassName={"active"}
+                /> */}
+                {/* <FilterMobile /> */}
+                <FilterModal
+                  head={head}
+                  labArry={labelSet}
+                  deltLabel={deltLbel}
+                  sortHandler={sortsHHandler2}
+                  sortHandlerPrice={sortsHHandlerPrice}
+                  count={count}
+                  categoryName={
+                    productCategory
+                      ? productCategory
+                      : categoryDetails && categoryDetails.product_category
+                  }
+                  setProduct={setProduct}
+                >
+                  {" "}
+                  {products}
+                </FilterModal>
+              </div>
+
+              <div className={Classes.DownloadOurAppImage}>
+                <div className={Classes.NewArrivalsPage}>
+                  <DownloadOurAppImage />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* <SliderFeature />
+        <Features /> */}
+      </div>
+    </div>
+  );
+};
+
+export default NewArrivalPage;

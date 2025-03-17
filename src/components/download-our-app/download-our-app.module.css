@@ -1,0 +1,222 @@
+.ImageContainer {
+  position: relative;
+  background-image: url(/Assets/downBg.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 289px;
+  margin-top: 0px;
+  margin-bottom: 40px;
+  margin-top: 30px;
+}
+.ImageContainerMob {
+  position: relative;
+  background-image: url(/Assets/footerB.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  min-height: 260px;
+  margin-top: 0px;
+  padding: 20px;
+  margin-bottom: 15px;
+}
+
+.Image {
+  display: block;
+  margin: auto;
+  width: 100%;
+}
+.ImageContainer p {
+  color: rgba(4, 26, 37, 0.6);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 25px;
+  padding-left: 18%;
+  font-family: var(--font-gilroy);
+  margin-bottom: 20px !important;
+}
+.Web {
+  display: block;
+}
+.Mob {
+  display: none;
+}
+.AppLink {
+  padding-left: 18%;
+}
+.Head {
+  font-weight: 700;
+  font-size: 32px;
+  /* line-height: 53px; */
+  color: #041a25;
+  padding-left: 18%;
+  padding-top: 4%;
+  padding-bottom: 4px;
+}
+/* .AppStore {
+    position: absolute;
+    z-index: 2;
+    left: 23%;
+    transform: translateX(-50%);
+    top: 60%;
+  }
+   */
+.Gplay {
+  margin-left: 30px;
+}
+
+@media screen and (max-width: 969px) {
+  .Head {
+    padding-top: 13%;
+    font-size: 25px;
+    padding-bottom: 0px;
+  }
+
+  .ImageContainer p {
+    color: rgba(4, 26, 37, 0.6);
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 22px;
+    padding-left: 18%;
+  }
+}
+@media screen and (max-width: 1165px) {
+}
+@media screen and (max-width: 734px) {
+  .Image {
+    margin-top: 0;
+  }
+  .ImageContainer {
+    position: relative;
+    background-image: url(/Assets/downBg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 280px;
+    margin-top: 35px;
+  }
+  .Mob {
+    display: block;
+  }
+  .Head {
+    font-size: 27px;
+    padding-left: 10%;
+  }
+  .Web {
+    display: none;
+  }
+  .ImageContainer p {
+    color: rgba(4, 26, 37, 0.6);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    padding-left: 10%;
+  }
+  .ImageContainerMob p {
+    color: rgba(4, 26, 37, 0.6);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    padding-left: 6%;
+  }
+
+  .AppLink {
+    padding-left: 5%;
+  }
+}
+@media screen and (max-width: 370px) {
+  .Image {
+    margin-top: 0;
+  }
+  .ImageContainer {
+    position: relative;
+    background-image: url(/Assets/downBg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 280px;
+    margin-top: 35px;
+  }
+  .Head {
+    font-size: 27px;
+    padding-left: 5%;
+  }
+  .ImageContainer p {
+    color: rgba(4, 26, 37, 0.6);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    padding-left: 5%;
+  }
+  .AppLink {
+    padding-left: 5%;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1023px) {
+  .ImageContainer {
+    min-height: 240px;
+    background-size: cover;
+  }
+  .Head {
+    padding-top: 3%;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .ImageContainer {
+    min-height: 220px;
+    background-size: cover;
+  }
+  .Head {
+    padding-top: 6%;
+    font-size: 22px;
+  }
+}
+@media (min-width: 576px) and (max-width: 767px) {
+  .ImageContainerMob {
+    min-height: 770px;
+  }
+  .AppLink {
+    padding-left: 0px;
+    position: absolute;
+    bottom: 15%;
+    left: 22%;
+  }
+  .Head {
+    font-size: 26px;
+    padding-left: 0%;
+    text-align: center;
+    padding-top: 5%;
+  }
+}
+@media (min-width: 300px) and (max-width: 575px) {
+  .Head {
+    font-size: 20px;
+    padding-left: 6%;
+    padding-top: 4%;
+    text-align: center;
+  }
+  .ImageContainerMob p {
+    padding-left: 0px;
+    font-size: 15px;
+    text-align: center;
+    color: #041a2599;
+    font-family: var(--font-lato);
+    font-weight: 400;
+    padding: 0px 31px;
+  }
+  .AppLink {
+    padding-left: 0px;
+    position: absolute;
+    bottom: 10%;
+    display: flex;
+    flex-direction: column;
+    grid-gap: 25px;
+    gap: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .Gplay {
+    margin-left: 0px;
+  }
+}

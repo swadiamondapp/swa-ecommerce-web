@@ -1,0 +1,28 @@
+.SlideImage {
+  height: auto;
+  width: 100%;
+
+  cursor: pointer;
+}
+.web {
+  display: block;
+}
+.mob {
+  display: none;
+}
+/* .carousel-indicators{
+    opacity: 0 !important;
+} */
+@media screen and (max-width: 767px) {
+  .SlideImage {
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .web {
+    display: none;
+  }
+  .mob {
+    display: block;
+  }
+}

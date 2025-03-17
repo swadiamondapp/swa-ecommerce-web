@@ -1,0 +1,237 @@
+.WalletContainer h3 {
+  font-family: var(--font-lato);
+  font-weight: 500;
+  font-size: 20px;
+  color: #0d1217;
+  margin-bottom: 0px;
+  padding: 15px;
+  border-bottom: 0.5px solid #e5e5e5;
+}
+.walletheading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #0d1217;
+  font-family: var(--font-lato);
+  font-weight: 500;
+}
+.rightmodal2 button {
+  color: #006e7f;
+  border: 1px solid #006e7f;
+  background-color: rgba(0, 110, 127, 0.05);
+  padding: 6px 15px;
+  border-radius: 32px;
+  font-family: var(--font-lato);
+  font-weight: 700;
+}
+.Enteramountwallet input {
+  background: #f9f9f9;
+  border: 0.5px solid #e8e9ea;
+  padding: 10px;
+  border-radius: 4px;
+}
+.Enteramountwallet input::placeholder {
+  font-size: 16px;
+}
+.fullwalletamount {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+.Enteramountwallet {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+.successModalContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+}
+.requestWidrw button {
+  width: 100%;
+  background: #00464d;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.parentbankwallet {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.ContentLines {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 30px 0px 15px;
+}
+.WalletContentLines {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 30px 15px 15px;
+}
+.Phone {
+  padding: 0px 50px 15px;
+  opacity: 30% !important;
+}
+.Content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.Word {
+  font-family: var(--font-lato);
+  font-weight: 400;
+  font-size: 16px;
+}
+/* .AmountCheckContainer {
+  padding: 0px 10px 10px 10px;
+} */
+.BorderLine {
+  border: 0.5px solid #e5e5e5;
+}
+.Amount {
+  font-family: var(--font-lato);
+  font-weight: 700;
+  font-size: 18px;
+}
+.ButtonContainer {
+  display: flex;
+  grid-gap: 30px;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+}
+.Cancel {
+  text-align: center;
+  font-family: var(--font-inter);
+  color: #19242d;
+  border: 1px solid #19242d;
+  font-weight: 500;
+  font-size: 12px;
+  border-radius: 4px;
+  padding: 10px 15px;
+  width: 100%;
+  cursor: pointer;
+}
+.Apply {
+  text-align: center;
+  background: #19242d;
+  color: #ffffff;
+  font-family: var(--font-inter);
+  font-weight: 500;
+  font-size: 12px;
+  border-radius: 4px;
+  padding: 10px 25px;
+  width: 100%;
+  cursor: pointer;
+}
+.ConfirmButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: #00464d;
+  color: #ffffff;
+  padding: 10px 20px;
+  margin: 25px 15px 15px;
+  border-radius: 4px;
+  font-family: var(--font-lato);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16.8px;
+}
+.Bank {
+  width: 25px;
+  height: 25px;
+  fill: #0464d5;
+}
+.Plus {
+  width: 20px;
+  height: 20px;
+  color: #0464d5;
+}
+.CancelModalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.CancelModalHeader h3 {
+  font-family: var(--font-lato);
+  margin-bottom: 0px;
+  font-weight: 700;
+  font-size: 19px;
+  line-height: 21.6px;
+  color: #0d1217;
+}
+
+.Close {
+  fill: #000000;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+
+.TextArea {
+  width: 100%;
+  border-radius: 4px;
+  margin-top: 10px;
+  border: 1px solid #e8e9ea;
+  background: #f9f9f9;
+  border: 1px solid #e8e9ea;
+  outline: none;
+  padding: 10px;
+}
+
+.CancelButton {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  border-radius: 4px;
+  padding-top: 10px;
+}
+.CancelButton button {
+  border: none;
+  background: #00464d;
+  color: #ffff;
+  font-family: var(--font-inter);
+  font-weight: 500;
+  font-size: 12px;
+  padding: 10px 20px;
+  border-radius: 4px;
+}
+.Border {
+  border-bottom: 0.5px solid #e5e5e5;
+  padding-top: 25px;
+}
+.Plus {
+  fill: #0464d5;
+  height: 20px;
+  width: 15px;
+}
+.ErrorMessage {
+  color: red;
+  font-size: 12px;
+
+}
+@media (min-width: 300px) and (max-width: 575px) {
+  .CancelButton {
+    justify-content: center;
+    flex-direction: column;
+    gap:12px
+  }
+  .CancelButton button {
+    width: 100%;
+  }
+  .TextArea::placeholder {
+    font-size: 14px;
+    padding-left: 0px;
+  }
+}

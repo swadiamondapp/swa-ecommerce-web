@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.swa.co
+
+# Sitemaps
+Sitemap: https://www.swa.co/sitemap.xml

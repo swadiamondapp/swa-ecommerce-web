@@ -1,0 +1,27 @@
+.Title {
+  font-weight: 600;
+  font-size: 24px;
+  font-family: var(--font-playfair) !important;
+}
+.Main {
+  display: flex;
+}
+.SubText {
+  display: flex;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: var(--font-gilroy) !important;
+}
+.Home {
+  color: #00464d;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: var(--font-gilroy) !important;
+  cursor: pointer;
+}
+.Wishlist {
+  color: #01b3c5;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: var(--font-gilroy) !important;
+}

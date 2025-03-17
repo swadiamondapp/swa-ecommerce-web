@@ -1,0 +1,90 @@
+.Title {
+  font-weight: 500;
+  font-size: 24px;
+  font-family: var(--font-playfair) !important;
+}
+.Main {
+  display: flex;
+  margin-top: 30px;
+}
+.SubText {
+  display: flex;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: var(--font-gilroy) !important;
+  border-bottom: 0.5px solid #e8e9ea;
+  padding-bottom: 30px;
+}
+.Home {
+  color: #00464d;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: var(--font-gilroy) !important;
+}
+.PrivacyPolicy {
+  color: #01b3c5;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: var(--font-gilroy) !important;
+}
+.Para13Privacy {
+  margin-bottom: 50px !important;
+}
+.Description p {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 32px;
+  color: #757c81;
+  margin-top: 10px;
+  font-family: var(--font-gilroy) !important;
+}
+.AgreeAccept {
+  text-align: center;
+  margin: 20px 0px;
+}
+.BtnAgreeAccept {
+  background: #00464d;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 3px;
+  outline: none;
+  font-family: var(--font-gilroy) !important;
+  cursor: pointer;
+}
+.Description2 {
+  font-weight: 600;
+  margin-bottom: 80px;
+}
+.Content {
+  padding: 30px 0px;
+  padding-bottom: 0px;
+}
+.subHeading {
+  color: #006e7f;
+  font-weight: 600;
+  font-size: 15px;
+  font-family: var(--font-gilroy) !important;
+  margin: 15px 0px;
+  margin-top: 35px;
+}
+.Highlighted {
+  font-family: var(--font-gilroy-italic) !important;
+  color: #006e7f;
+  font-weight: 600;
+  font-size: 14px;
+}
+@media screen and (max-width: 500px) {
+  .Content {
+    padding: 10px;
+  }
+  .SubText {
+    padding-bottom: 10px;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 575px) {
+  .MobS1n {
+    padding-left: 10px;
+  }
+}

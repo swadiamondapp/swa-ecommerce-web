@@ -1,0 +1,69 @@
+.Title {
+  font-weight: 500;
+  font-size: 24px;
+  font-family: var(--font-playfair) !important;
+}
+.Main {
+  display: flex;
+  margin-top: 30px;
+}
+.SubText {
+  display: flex;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: var(--font-gilroy) !important;
+  padding-bottom: 30px;
+  border-bottom: 0.5px solid #e8e9ea;
+}
+.ParentReturnPolicy {
+  margin: 0px 50px;
+}
+.Home {
+  color: #00464d;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: var(--font-gilroy) !important;
+}
+.ReturnPolicy {
+  color: #01b3c5;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: var(--font-gilroy) !important;
+}
+.Description {
+  font-weight: 900;
+  font-size: 14px;
+  line-height: 32px;
+  color: #757c81;
+  margin-top: 25px;
+  font-family: var(--font-gilroy) !important;
+}
+.Description2 {
+  font-weight: 600;
+  margin: 30px 0px;
+  margin-bottom: 80px;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .ParentReturnPolicy {
+    margin: 0px 0px;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+  .ParentReturnPolicy {
+    margin: 0px 0px;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 575px) {
+  .ParentReturnPolicy {
+    margin: 0px 0px;
+  }
+  .HaedParentRturn1 {
+    padding-left: 10px;
+  }
+  .Title {
+    font-size: 22px;
+  }
+}
