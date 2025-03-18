@@ -157,7 +157,7 @@ const TryAtHome = () => {
       data: "",
       product_category: "",
     });
-    router.push("/new/arrivals");
+    router.push("/new-arrivals");
   };
 
   useEffect(() => {

@@ -4,15 +4,21 @@ import React from "react";
 import Classes from "./banner.module.css";
 import { Carousel } from "antd";
 import { useRouter } from "next/navigation";
+import { useData } from "@/providers/data-provider";
 
 const Banner = (props) => {
   const router = useRouter();
+  const { categories, tags } = useData();
 
   const carouselHandler = (selItem) => {
     if (selItem.is_category === true) {
-      router.push(`/new/arrivals?type=${selItem.type_id}`);
+      const category = categories.find(
+        (category) => category.id == selItem.type_id
+      );
+      router.push(`/${category.name.toLowerCase()}`);
     } else {
-      router.push(`/new/arrivals?octnId=${selItem.type_id}&data=occation`);
+      const tag = tags.find((tag) => tag.id == selItem.type_id);
+      router.push(`/${tag.name.toLowerCase()}`);
     }
   };
 

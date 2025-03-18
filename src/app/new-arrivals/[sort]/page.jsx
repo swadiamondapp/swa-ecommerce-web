@@ -3,21 +3,20 @@ import FilterProvider from "@/providers/filter-provider";
 import ProductListSection from "@/components/product-list-section/product-list-section";
 import Feature from "@/components/features/features";
 
-async function CategoryPage({ params, searchParams }) {
+async function CategoryPage({ params }) {
   
-  const category = (await params).category
-  const { data } = await searchParams;
+  const sort = (await params).sort
 
   return (
     <div className="sm:bg-zinc-100">
       <div className="container">
-        <FilterProvider category={category} sort={data}>
+        <FilterProvider sort={sort}>
           <div className="row">
             <div className="col-lg-3 col-sm-4">
               <FilterCatgs />
             </div>
             <div className="col-lg-9 col-sm-8">
-              <ProductListSection category={category} />
+              <ProductListSection />
             </div>
           </div>
         </FilterProvider>
