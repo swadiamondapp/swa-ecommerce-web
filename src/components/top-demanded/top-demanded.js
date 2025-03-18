@@ -66,7 +66,7 @@ function TopDemanded() {
           </div>
         </div>
       </div>
-      <Link href="/new/arrivals?data=top" className="no-underline">
+      <Link href="/new-arrivals/top" className="no-underline">
         <p className={Classes.seeAllTopDemand}>See all</p>
       </Link>
     </div>

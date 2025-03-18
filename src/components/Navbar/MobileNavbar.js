@@ -184,16 +184,7 @@ const MobileNavbar = (props) => {
     }
   };
   const tagSelHandler = (selItem) => {
-    if (pathname.startsWith("/new/arrivals")) {
-      window.location.href = `https://www.swa.co/tag_search/${selItem.id}`;
-    } else {
-      setOctnState({
-        octnId: selItem.id,
-        data: "occation",
-        product_category: selItem.name,
-      });
-      router.push("/new/arrivals");
-    }
+    router.push(`/${selItem.name.toLowerCase()}`);
   };
 
   const moveTocart = () => {
@@ -306,7 +297,7 @@ const MobileNavbar = (props) => {
                     height="20"
                   />
                 </div>
-                {pathname !== "/new/arrivals" && (
+                {pathname !== "/new-arrivals" && (
                   <div
                     className={Classes.Logo}
                     onClick={() => router.push("/")}

@@ -5,9 +5,11 @@ import Classes from "./bring-the-party.module.css";
 import { DataContext } from "@/providers/data-provider";
 import Link from "next/link";
 import Image from "next/image";
+import { useData } from "@/providers/data-provider";
 
 function BringTheParty() {
   const { add } = useContext(DataContext);
+  const { categories, tags } = useData();
 
   return (
     <div className="container bringthepartpage">
@@ -21,8 +23,12 @@ function BringTheParty() {
                     <Link
                       href={
                         item.is_category
-                          ? `/new/arrivals/?data=${item.type_id}`
-                          : `/new/arrivals/?data=occation&octnId=${item.type_id}`
+                          ? `/${categories.find(
+                              (category) => category.id == item.type_id
+                            ).name.toLowerCase()} `
+                          : `/${tags.find(
+                              (tag) => tag.id == item.type_id
+                            ).name.toLowerCase()}`
                       }
                       key={index}
                     >

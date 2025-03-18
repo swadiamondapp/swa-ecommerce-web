@@ -75,7 +75,7 @@ export default function NewArrivals() {
           </div>
         </div>
       </div>
-      <Link href="/new/arrivals?data=new" className="text-decoration-none">
+      <Link href="/new-arrivals/new" className="text-decoration-none">
         <p className={Classes.seeAll}>See all</p>
       </Link>
     </div>
