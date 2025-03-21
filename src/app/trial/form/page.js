@@ -56,11 +56,9 @@ const TryAtHomeInner = () => {
   console.log("savedTimeSlot>", savedTimeSlot);
 
   const schema = Joi.object({
-    fullName: Joi.string()
-      .required()
-      .messages({
-        "string.empty": `"Full Name" is required`,
-      }),
+    fullName: Joi.string().required().messages({
+      "string.empty": `"Full Name" is required`,
+    }),
     mobile: Joi.string()
       .regex(/^[6-9]\d{9}$/)
       .required()
@@ -82,29 +80,19 @@ const TryAtHomeInner = () => {
         "string.pattern.base": `"Pincode" must be a 6-digit number`,
         "string.empty": `"Pincode" is required`,
       }),
-    state: Joi.string()
-      .required()
-      .messages({
-        "string.empty": `"State" is required`,
-      }),
-    city: Joi.string()
-      .required()
-      .messages({
-        "string.empty": `"City" is required`,
-      }),
-    hNumber_Bname: Joi.string()
-      .required()
-      .messages({
-        "string.empty": `"House number / building name" is required`,
-      }),
-    streetColony: Joi.string()
-      .required()
-      .messages({
-        "string.empty": `"Street colony name" is required`,
-      }),
-    landMark: Joi.string()
-      .allow("")
-      .optional(),
+    state: Joi.string().required().messages({
+      "string.empty": `"State" is required`,
+    }),
+    city: Joi.string().required().messages({
+      "string.empty": `"City" is required`,
+    }),
+    hNumber_Bname: Joi.string().required().messages({
+      "string.empty": `"House number / building name" is required`,
+    }),
+    streetColony: Joi.string().required().messages({
+      "string.empty": `"Street colony name" is required`,
+    }),
+    landMark: Joi.string().allow("").optional(),
   });
 
   const handleChange = (event) => {
@@ -135,6 +123,8 @@ const TryAtHomeInner = () => {
       if (response.data.results.status === 200) {
         const data = response.data.results.data;
         // setDefaultdata(response.data.results.data);
+        console.log("data99999999999999999", data);
+
         setAddressData({
           fullName: data.name || "",
           mobile: data.phone_number || "",

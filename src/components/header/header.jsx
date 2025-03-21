@@ -396,6 +396,7 @@ function Header() {
             top: 0,
             zIndex: 1000,
             width: "100%",
+            height: "42px",
           }}
         >
           <div className="container" style={{ padding: "0px" }}>
