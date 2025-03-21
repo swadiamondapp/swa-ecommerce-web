@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import Classes from "@/components/SwaWallet/SwaWallet.module.css";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import axios from "axios";
 import * as Urls from "@/utils/urls";
@@ -31,9 +30,6 @@ const TryAtHomeInner = () => {
   const [date, setDate] = useState(null);
   const [time, setTime] = useState(null);
   const router = useRouter();
-  // const token = localStorage.getItem("swaToken");
-  // const countryId = localStorage.getItem("id");
-  const [appointment, setAppointment] = useState();
   const [appointmentId, setAppointmentId] = useState();
   const pathname = usePathname();
   const { trialState } = useTrial();
@@ -43,7 +39,6 @@ const TryAtHomeInner = () => {
   const { token } = useAuth();
   const [countryId, setCountryId] = useState(null);
   const [savedTimeSlot, setSavedTimeSlot] = useState(null);
-  const [defaultdata, setDefaultdata] = useState();
   const [addressData, setAddressData] = useState({
     fullName: "",
     mobile: "",
@@ -61,9 +56,11 @@ const TryAtHomeInner = () => {
   console.log("savedTimeSlot>", savedTimeSlot);
 
   const schema = Joi.object({
-    fullName: Joi.string().required().messages({
-      "string.empty": `"Full Name" is required`,
-    }),
+    fullName: Joi.string()
+      .required()
+      .messages({
+        "string.empty": `"Full Name" is required`,
+      }),
     mobile: Joi.string()
       .regex(/^[6-9]\d{9}$/)
       .required()
@@ -85,19 +82,29 @@ const TryAtHomeInner = () => {
         "string.pattern.base": `"Pincode" must be a 6-digit number`,
         "string.empty": `"Pincode" is required`,
       }),
-    state: Joi.string().required().messages({
-      "string.empty": `"State" is required`,
-    }),
-    city: Joi.string().required().messages({
-      "string.empty": `"City" is required`,
-    }),
-    hNumber_Bname: Joi.string().required().messages({
-      "string.empty": `"House number / building name" is required`,
-    }),
-    streetColony: Joi.string().required().messages({
-      "string.empty": `"Street colony name" is required`,
-    }),
-    landMark: Joi.string().allow("").optional(),
+    state: Joi.string()
+      .required()
+      .messages({
+        "string.empty": `"State" is required`,
+      }),
+    city: Joi.string()
+      .required()
+      .messages({
+        "string.empty": `"City" is required`,
+      }),
+    hNumber_Bname: Joi.string()
+      .required()
+      .messages({
+        "string.empty": `"House number / building name" is required`,
+      }),
+    streetColony: Joi.string()
+      .required()
+      .messages({
+        "string.empty": `"Street colony name" is required`,
+      }),
+    landMark: Joi.string()
+      .allow("")
+      .optional(),
   });
 
   const handleChange = (event) => {

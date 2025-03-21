@@ -10,15 +10,16 @@ import Joi from "joi";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { Country, State } from "country-state-city";
 import Image from "next/image";
+import { useAuth } from "@/providers/auth-provider";
 
 function AddAddress(props) {
   // const token = localStorage.getItem("swaToken");
   const [pincodes, setPincodes] = useState("");
-  const [token, setToken] = useState("");
   const [showAddAddress, setShowAddAddress] = useState(true);
   const [showNewAddressForm, setShowNewAddressForm] = useState(false);
   const [selectedAddressId, setSelectedAddressId] = useState(null);
   const [statesList, setStatesList] = useState([]);
+  const { token } = useAuth();
   // const pincodes = localStorage.getItem("pincode");
   const [addressData, setAddressData] = useState({
     fullName: "",
@@ -34,37 +35,15 @@ function AddAddress(props) {
   const [errors, setErrors] = useState({
     fullName: "",
     mobile: "",
-    // pincode: "",
+    pincode: "",
     city: "",
     hNumber_Bname: "",
     streetColony: "",
     country: "",
   });
 
-  // const [showDeleteButtons, setShowDeleteButtons] = useState([]);
-
-  // const handleToggleOptions = (index) => {
-  //   const newShowDeleteButtons = [...showDeleteButtons];
-  //   newShowDeleteButtons[index] = !newShowDeleteButtons[index];
-  //   setShowDeleteButtons(newShowDeleteButtons);
-  // };
-
-  // const handleDeleteAddress = async (id) => {
-  //   try {
-  //     const response = await axios.delete(Urls.addAdress + id + "/", {
-  //       headers: { Authorization: "Token " + token },
-  //     });
-  //     if (response.data.results.status_code === 200) {
-  //       setShowDeleteButtons(false);
-  //       props.fetchAddress();
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   const [openDeleteIndex, setOpenDeleteIndex] = useState(-1);
-  console.log("ggggggggggggggggggggggggg");
+  console.log("addressDataaaaaa0000000000", addressData);
 
   const handleToggleOptions = (index) => {
     setOpenDeleteIndex((prevIndex) => (prevIndex === index ? -1 : index));
@@ -83,22 +62,20 @@ function AddAddress(props) {
       console.log(error);
     }
   };
-  const staticCountries = [
-    { name: { common: "India" } },
-    { name: { common: "United States" } },
-    { name: { common: "Australia" } },
-    { name: { common: "Canada" } },
-    { name: { common: "United Kingdom" } },
-    { name: { common: "Germany" } },
-    { name: { common: "France" } },
-    { name: { common: "Japan" } },
-    { name: { common: "Brazil" } },
-    { name: { common: "South Africa" } },
-  ];
-  const [countriesList, setCountriesList] = useState(staticCountries);
+  // const staticCountries = [
+  //   { name: { common: "India" } },
+  //   { name: { common: "United States" } },
+  //   { name: { common: "Australia" } },
+  //   { name: { common: "Canada" } },
+  //   { name: { common: "United Kingdom" } },
+  //   { name: { common: "Germany" } },
+  //   { name: { common: "France" } },
+  //   { name: { common: "Japan" } },
+  //   { name: { common: "Brazil" } },
+  //   { name: { common: "South Africa" } },
+  // ];
+  // const [countriesList, setCountriesList] = useState(staticCountries);
   useEffect(() => {
-    const token = localStorage.getItem("swaToken");
-    setToken(token);
     const pincodes = localStorage.getItem("pincode");
     setPincodes(pincodes);
   });
@@ -163,6 +140,10 @@ function AddAddress(props) {
       streetColony: Joi.string().required().messages({
         "any.required": "Street / Colony is required",
         "string.empty": "Street / please provide the necessary details",
+      }),
+      landMark: Joi.string().allow("").optional(),
+      state: Joi.string().required().messages({
+        "string.empty": `"State" is required`,
       }),
     });
 
@@ -302,49 +283,6 @@ function AddAddress(props) {
             }
           >
             <div className={Classes.leftAddres11}>
-              {/* {props.addressArray.map((item, index) => (
-                <div className={Classes.LocationHead} key={index}>
-                  <div className={Classes.FirstLocationHead1}>
-                    <input
-                      type="radio"
-                      name="addressSelection"
-                      checked={selectedAddressId === item.id}
-                      onChange={() => handleAddressSelection(item.id)}
-                    />
-                    <div className={Classes.AddressHead15}>
-                      <p className={Classes.Headh31}>{item.name}</p>
-
-                      <p className={Classes.Para31}>
-                        {item.house} (house) {item.city}, {item.area},{" "}
-                        {item.landmark}, {item.state}, {item.pincode}
-                        <span className={Classes.HeadAddressDesc1}>
-                          phone number: {item.phone_number}
-                        </span>
-                      </p>
-
-                      <p className={Classes.HeadAddressDesc}>
-                        phone number: {item.phone_number}
-                      </p>
-                    </div>
-                  </div>
-                  <div
-                    className={Classes.Delete}
-                    style={{
-                      display: showDeleteButtons[index] ? "block" : "none",
-                    }}
-                  >
-                    <FaRegTrashAlt
-                      onClick={() => handleDeleteAddress(item.id)}
-                    />
-                  </div>
-                  <div
-                    className={Classes.secondDots}
-                    onClick={() => handleToggleOptions(index)}
-                  >
-                    <BsThreeDotsVertical />
-                  </div>
-                </div>
-              ))} */}
               {props.addressArray.map((item, index) => (
                 <div className={Classes.LocationHead} key={index}>
                   <div className={Classes.FirstLocationHead1}>
@@ -453,7 +391,7 @@ function AddAddress(props) {
                           <input
                             className={Classes.PlaceInput}
                             type="text"
-                            // placeholder="Pincode*"
+                            placeholder="Pincode*"
                             value={addressData.pincode || ""}
                             name="pincode"
                             onChange={handleChangeAddress}
@@ -480,7 +418,7 @@ function AddAddress(props) {
                           <input
                             className={Classes.PlaceInput}
                             type="text"
-                            // placeholder="City*"
+                            placeholder="City*"
                             value={addressData.city || ""}
                             name="city"
                             onChange={handleChangeAddress}
@@ -541,7 +479,7 @@ function AddAddress(props) {
                         <input
                           className={Classes.PlaceInput || ""}
                           type="text"
-                          // placeholder="house number/ building name*"
+                          placeholder="house number/ building name*"
                           value={addressData.hNumber_Bname}
                           name="hNumber_Bname"
                           onChange={handleChangeAddress}
@@ -557,7 +495,7 @@ function AddAddress(props) {
                         <input
                           className={Classes.PlaceInput}
                           type="text"
-                          // placeholder="road name, area colony*"
+                          placeholder="road name, area colony*"
                           value={addressData.streetColony || ""}
                           name="streetColony"
                           onChange={handleChangeAddress}
@@ -574,7 +512,7 @@ function AddAddress(props) {
                       <input
                         className={Classes.PlaceInput}
                         type="text"
-                        // placeholder="Near edu city"
+                        placeholder="Near edu city"
                         value={addressData.landMark || ""}
                         name="landMark"
                         onChange={handleChangeAddress}

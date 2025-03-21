@@ -182,21 +182,9 @@ function AddAddress(props) {
   console.log("hhhh");
 
   const addAaddress = async () => {
-    // if (!validateForm()) return;
-    console.log("llllll");
-    // debugger;
-    const { error } = schema.validate(addressData, { abortEarly: false });
-    if (error) {
-      console.log("clicked,,,", error);
-      const newErrors = {};
-      error.details.forEach((item) => {
-        newErrors[item.path[0]] = item.message;
-      });
-      setErrors(newErrors);
-      return;
-    }
-
-    window?.scrollTo(0, 0);
+    window.scrollTo(0, 0);
+    console.log("clicked,,,");
+    if (validateForm()) return;
     const body = {
       name: addressData.fullName,
       phone_code: "+91",
@@ -216,11 +204,6 @@ function AddAddress(props) {
       });
       if (response.data.status === 200) {
         handleAddressSelection(response.data.data.id);
-        console.log(
-          "addressDataggggggggggggggggggg--->",
-          response.data.data.id
-        );
-
         setAddressData({
           fullName: "",
           mobile: "",
