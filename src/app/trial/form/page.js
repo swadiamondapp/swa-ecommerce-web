@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import Classes from "@/components/SwaWallet/SwaWallet.module.css";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import axios from "axios";
 import * as Urls from "@/utils/urls";
@@ -31,9 +30,6 @@ const TryAtHomeInner = () => {
   const [date, setDate] = useState(null);
   const [time, setTime] = useState(null);
   const router = useRouter();
-  // const token = localStorage.getItem("swaToken");
-  // const countryId = localStorage.getItem("id");
-  const [appointment, setAppointment] = useState();
   const [appointmentId, setAppointmentId] = useState();
   const pathname = usePathname();
   const { trialState } = useTrial();
@@ -43,7 +39,6 @@ const TryAtHomeInner = () => {
   const { token } = useAuth();
   const [countryId, setCountryId] = useState(null);
   const [savedTimeSlot, setSavedTimeSlot] = useState(null);
-  const [defaultdata, setDefaultdata] = useState();
   const [addressData, setAddressData] = useState({
     fullName: "",
     mobile: "",
@@ -128,6 +123,8 @@ const TryAtHomeInner = () => {
       if (response.data.results.status === 200) {
         const data = response.data.results.data;
         // setDefaultdata(response.data.results.data);
+        console.log("data99999999999999999", data);
+
         setAddressData({
           fullName: data.name || "",
           mobile: data.phone_number || "",

@@ -200,7 +200,10 @@ const ProductDetails = (props) => {
       response.data.results &&
       response.data.results.status === 200
     ) {
-      setReviewImages(response.data.results.data);
+      const reviewImages = response.data.results.data.filter(
+        (item) => item.review_image_url !== null
+      );
+      setReviewImages(reviewImages);
     }
   };
 
@@ -243,8 +246,7 @@ const ProductDetails = (props) => {
   const Added = () => {
     if (token !== null) {
       const body = {
-        product_id: props.prodet.product_id,
-        colour_id: props.prodet.colour_id,
+        product_id: props.id,
       };
       axios
         .post(`${Urls.wishlist}?country=${countryId}`, body, {
@@ -300,8 +302,8 @@ const ProductDetails = (props) => {
   };
 
   const renderedReviews = showAllReviews
-    ? reviewImages
-    : reviewImages.slice(0, 3);
+    ? reviews.data ?? []
+    : (reviews.data ?? []).slice(0, 3);
 
   console.log("renderedReviews", renderedReviews);
 
@@ -1968,11 +1970,12 @@ const ProductDetails = (props) => {
                           {item.review_image && (
                             <div className="mt-2">
                               <img
-                                className="max-w-[60px] rounded-[5px]"
+                                style={{
+                                  maxWidth: "30px",
+                                  borderRadius: "5px",
+                                }}
                                 src={item.review_image}
                                 alt="review_image"
-                                width={60}
-                                height={60}
                               />
                             </div>
                           )}

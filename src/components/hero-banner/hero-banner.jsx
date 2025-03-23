@@ -14,12 +14,20 @@ function HeroBanner() {
       {loading ? (
         <div
           className="d-flex justify-content-center align-items-center loader"
-          style={{ height: "640px" }}
+          style={{
+            width: "100%",
+            aspectRatio: "16/5",
+            backgroundColor: "#f0f0f0",
+          }}
         >
           <FadeLoader color="#00464d" />
         </div>
       ) : (
-        <Banner banners={banner ?? []} tags={tags ?? []} mob={mobBanner ?? []} />
+        <Banner
+          banners={banner ?? []}
+          tags={tags ?? []}
+          mob={mobBanner ?? []}
+        />
       )}
     </>
   );

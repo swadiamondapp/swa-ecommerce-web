@@ -929,48 +929,6 @@ function CheckOut(props) {
                       <h2 id="address-modal-title" style={{ fontSize: "18px" }}>
                         Select Address
                       </h2>
-
-                      {/* Loading Spinner */}
-                      {/* {loading ? (
-                          <CircularProgress />
-                        ) : addressList.length > 0 ? (
-                          <List>
-                            {addressList.map((item, index) => (
-                              <ListItem
-                                key={index}
-                                onClick={() => handleAddressSelect(item)}
-                                sx={{
-                                  cursor: "pointer",
-                                  marginBottom: "8px",
-                                  "&:hover": {
-                                    backgroundColor: "#f0f0f0",
-                                  },
-                                }}
-                              >
-                                <div>
-                                  <p>
-                                    {[
-                                      item.name,
-                                      item.phone_number,
-                                      item.email,
-                                      item.area,
-                                      item.streetColony,
-                                      item.city,
-                                      item.state,
-                                      item.country,
-                                      item.pincode,
-                                    ]
-                                      .filter(Boolean)
-                                      .join(", ")}{" "}
-
-                                  </p>
-                                </div>
-                              </ListItem>
-                            ))}
-                          </List>
-                        ) : (
-                          <p>No addresses found.</p>
-                        )} */}
                       {loading ? (
                         <CircularProgress />
                       ) : addressList.length > 0 ? (
@@ -991,7 +949,7 @@ function CheckOut(props) {
                                 }}
                               >
                                 <FormControlLabel
-                                  value={item.id} // Use address id as the value for the radio button
+                                  value={item.id}
                                   control={<Radio />}
                                   label={
                                     <>
