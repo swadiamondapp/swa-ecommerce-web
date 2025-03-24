@@ -11,7 +11,6 @@ async function Footer() {
   const fetchCategories = async () => {
     const response = await fetch(filter + "?category=&tag=");
     const data = await response.json();
-    console.log("data---------7777--------", data);
 
     return data.results.data;
   };
