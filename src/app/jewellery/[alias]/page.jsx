@@ -118,6 +118,11 @@ async function ProductDetailsPage({ params }) {
     "@context": "https://schema.org",
     "@type": "Product",
     name: productDetails.product_name,
+    alternateName: `${productDetails.product_name} In Gold (${productDetails.gross_weight} gram)${
+      productDetails.diamond_weight > 0
+        ? ` with Diamonds (${productDetails.diamond_weight} Carat)`
+        : ""
+    }`,
     description: productDetails.description,
     sku: productDetails.sku,
     brand: {
