@@ -4,15 +4,15 @@ import Features from "@/components/features/features";
 import ProductDetails from "@/components/product-details/productDetails";
 
 export const generateMetadata = async ({ params }) => {
-  const productAlias = (await params).alias
+  const productAlias = (await params).alias;
   const response = await fetch(
     `https://swaecommain.swa.co/ecom/alias-product/?alias=${productAlias}`,
     {
       headers: {
-        'Content-Type': 'application/json'
-      }
+        "Content-Type": "application/json",
+      },
     }
-  )
+  );
   const productDetails = (await response.json()).results.data;
 
   return {
@@ -22,142 +22,160 @@ export const generateMetadata = async ({ params }) => {
       title: productDetails.meta_title,
       description: productDetails.meta_description,
       url: "https://www.swa.co/jewellery/" + productDetails.alias,
-      images: [productDetails.image_url]
+      images: [productDetails.image_url],
     },
     twitter: {
       card: "summary_large_image",
       title: productDetails.meta_title,
       description: productDetails.meta_description,
-      images: [productDetails.image_url]
+      images: [productDetails.image_url],
     },
     other: {
-      'application/ld+json': JSON.stringify({
+      "application/ld+json": JSON.stringify({
         "@context": "https://schema.org",
         "@type": "Product",
         name: productDetails.product_name,
+        alternateName: `${productDetails.product_name} In Gold (${productDetails.gross_weight} gram)${
+          productDetails.diamond_weight > 0
+            ? ` with Diamonds (${productDetails.diamond_weight} Carat)`
+            : ""
+        }`,
         description: productDetails.description,
         sku: productDetails.sku,
         brand: {
           "@type": "Brand",
-          name: "SWA"
+          name: "SWA",
         },
-        image: Object.values(productDetails.image).map(color => color.thumbnail),
+        image: Object.values(productDetails.image).map(
+          (color) => color.thumbnail
+        ),
         offers: {
           "@type": "Offer",
-          price: productDetails.is_on_discount 
-            ? productDetails.country_discount_price 
+          price: productDetails.is_on_discount
+            ? productDetails.country_discount_price
             : productDetails.country_total_price,
           priceCurrency: "INR",
           availability: "https://schema.org/InStock",
-          url: `https://www.swa.co/jewellery/${productDetails.alias}`
+          url: `https://www.swa.co/jewellery/${productDetails.alias}`,
         },
         category: productDetails.category.name,
         material: "Diamond",
         additionalProperty: [
           {
             "@type": "PropertyValue",
-            "name": "Diamond Clarity",
-            "value": productDetails.diamond_clarity
+            name: "Diamond Clarity",
+            value: productDetails.diamond_clarity,
           },
           {
             "@type": "PropertyValue",
-            "name": "Diamond Weight",
-            "value": `${productDetails.diamond_weight} ct`
+            name: "Diamond Weight",
+            value: `${productDetails.diamond_weight} ct`,
           },
           {
             "@type": "PropertyValue",
-            "name": "Diamond Count",
-            "value": productDetails.diamond_count
+            name: "Diamond Count",
+            value: productDetails.diamond_count,
           },
           {
             "@type": "PropertyValue",
-            "name": "Gross Weight",
-            "value": `${productDetails.gross_weight} g`
+            name: "Gross Weight",
+            value: `${productDetails.gross_weight} g`,
           },
           {
             "@type": "PropertyValue",
-            "name": "Dimensions",
-            "value": `${productDetails.length}mm x ${productDetails.width}mm x ${productDetails.height}mm`
-          }
+            name: "Dimensions",
+            value: `${productDetails.length}mm x ${productDetails.width}mm x ${productDetails.height}mm`,
+          },
         ],
-        aggregateRating: productDetails.reviews_count > 0 ? {
-          "@type": "AggregateRating",
-          ratingValue: productDetails.avg_rating,
-          reviewCount: productDetails.reviews_count
-        } : undefined
-      })
-    }
-  }
-}
+        aggregateRating:
+          productDetails.reviews_count > 0
+            ? {
+                "@type": "AggregateRating",
+                ratingValue: productDetails.avg_rating,
+                reviewCount: productDetails.reviews_count,
+              }
+            : undefined,
+      }),
+    },
+  };
+};
 
 async function ProductDetailsPage({ params }) {
-  const productAlias = (await params).alias
+  const productAlias = (await params).alias;
 
   const productDetails = await fetch(
     `https://swaecommain.swa.co/ecom/alias-product/?alias=${productAlias}`,
     {
       headers: {
-        'Content-Type': 'application/json'
-      }
+        "Content-Type": "application/json",
+      },
     }
   )
-  .then((res) => res.json())
-  .then((data) => data.results.data);
+    .then((res) => res.json())
+    .then((data) => data.results.data);
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
     name: productDetails.product_name,
+    alternateName: `${productDetails.product_name} In Gold (${productDetails.gross_weight} gram)${
+      productDetails.diamond_weight > 0
+        ? ` with Diamonds (${productDetails.diamond_weight} Carat)`
+        : ""
+    }`,
     description: productDetails.description,
     sku: productDetails.sku,
     brand: {
       "@type": "Brand",
-      name: "SWA"
+      name: "SWA",
     },
-    image: Object.values(productDetails.image).map(color => color.thumbnail),
+    image: Object.values(productDetails.image).map((color) => color.thumbnail),
     offers: {
       "@type": "Offer",
-      price: productDetails.is_on_discount 
-        ? productDetails.country_discount_price 
+      price: productDetails.is_on_discount
+        ? productDetails.country_discount_price
         : productDetails.country_total_price,
       priceCurrency: "INR",
       availability: "https://schema.org/InStock",
-      url: `https://www.swa.co/jewellery/${productDetails.alias}`
+      url: `https://www.swa.co/jewellery/${productDetails.alias}`,
     },
     category: productDetails.category.name,
     material: "Diamond",
     additionalProperty: [
       {
         "@type": "PropertyValue",
-        "name": "Diamond Clarity",
-        "value": productDetails.diamond_clarity
+        name: "Diamond Clarity",
+        value: productDetails.diamond_clarity,
       },
       {
         "@type": "PropertyValue",
-        "name": "Diamond Weight",
-        "value": `${productDetails.diamond_weight} ct`
+        name: "Diamond Weight",
+        value: `${productDetails.diamond_weight} ct`,
       },
       {
         "@type": "PropertyValue",
-        "name": "Diamond Count",
-        "value": productDetails.diamond_count
+        name: "Diamond Count",
+        value: productDetails.diamond_count,
       },
       {
         "@type": "PropertyValue",
-        "name": "Gross Weight",
-        "value": `${productDetails.gross_weight} g`
+        name: "Gross Weight",
+        value: `${productDetails.gross_weight} g`,
       },
       {
         "@type": "PropertyValue",
-        "name": "Dimensions",
-        "value": `${productDetails.length}mm x ${productDetails.width}mm x ${productDetails.height}mm`
-      }
+        name: "Dimensions",
+        value: `${productDetails.length}mm x ${productDetails.width}mm x ${productDetails.height}mm`,
+      },
     ],
-    aggregateRating: productDetails.reviews_count > 0 ? {
-      "@type": "AggregateRating",
-      ratingValue: productDetails.avg_rating,
-      reviewCount: productDetails.reviews_count
-    } : undefined
+    aggregateRating:
+      productDetails.reviews_count > 0
+        ? {
+            "@type": "AggregateRating",
+            ratingValue: productDetails.avg_rating,
+            reviewCount: productDetails.reviews_count,
+          }
+        : undefined,
   };
 
   return (
@@ -167,18 +185,28 @@ async function ProductDetailsPage({ params }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <ProductDetails
-        sku={productDetails.sku && productDetails.sku === "undefined" ? "" : productDetails.sku}
+        sku={
+          productDetails.sku && productDetails.sku === "undefined"
+            ? ""
+            : productDetails.sku
+        }
         offerPrice={
           productDetails.is_on_discount
             ? productDetails.country_discount_price
             : productDetails.country_total_price
         }
-        actualPrice={productDetails.is_on_discount ? productDetails.country_total_price : ""}
+        actualPrice={
+          productDetails.is_on_discount
+            ? productDetails.country_total_price
+            : ""
+        }
         discountVal={
           productDetails.is_on_discount
             ? productDetails.country_total_price > productDetails.discount_price
-              ? productDetails.country_total_price - productDetails.discount_price
-              : productDetails.discount_price - productDetails.country_total_price
+              ? productDetails.country_total_price -
+                productDetails.discount_price
+              : productDetails.discount_price -
+                productDetails.country_total_price
             : null
         }
         discountPercentage={productDetails.discount_percentage}
@@ -203,11 +231,19 @@ async function ProductDetailsPage({ params }) {
         width={productDetails.width}
         height={productDetails.height}
         colors={productDetails.colors}
-        thumbImg={productDetails.image[Object.keys(productDetails.image)[0]].thumbnail}
+        thumbImg={
+          productDetails.image[Object.keys(productDetails.image)[0]].thumbnail
+        }
         id={productDetails && productDetails.id}
         // colorSelct={colorHandler}
-        bagImg={productDetails.image[Object.keys(productDetails.image)[0]].multiple_images}
-        Video={productDetails.video[Object.keys(productDetails.video)[0]].multiple_videos}
+        bagImg={
+          productDetails.image[Object.keys(productDetails.image)[0]]
+            .multiple_images
+        }
+        Video={
+          productDetails.video[Object.keys(productDetails.video)[0]]
+            .multiple_videos
+        }
         // bagImgSelect={thumpnailSelHanlder}
         count={productDetails.reviews_count + " Reviews"}
         // review={review}
@@ -240,6 +276,6 @@ async function ProductDetailsPage({ params }) {
       </div>
     </>
   );
-};
+}
 
 export default ProductDetailsPage;
