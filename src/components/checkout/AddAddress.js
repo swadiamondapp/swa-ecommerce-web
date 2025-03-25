@@ -30,7 +30,7 @@ function AddAddress(props) {
     hNumber_Bname: "",
     streetColony: "",
     landMark: "",
-    country: "",
+    country: "India",
   });
   const [errors, setErrors] = useState({
     fullName: "",

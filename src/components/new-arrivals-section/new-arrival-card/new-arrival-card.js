@@ -223,7 +223,7 @@ const NewArrivalCard = (props) => {
             </div>
           </div>
           <p className={Classes.HeartSymbol}>
-            {props.prodet.wishlist_id || addToWishList ? (
+            {(props.prodet.wishlist_id || addToWishList) && token ? (
               <FaHeart
                 style={{ fontSize: "25px", color: "#F91919" }}
                 className={Classes.Heart1}

@@ -302,7 +302,7 @@ const ProductDetails = (props) => {
   };
 
   const renderedReviews = showAllReviews
-    ? reviews.data ?? []
+    ? (reviews.data ?? [])
     : (reviews.data ?? []).slice(0, 3);
 
   console.log("renderedReviews", renderedReviews);
@@ -952,9 +952,11 @@ const ProductDetails = (props) => {
                       }}
                     />
                   </button>{" "}
-                  <button className={Classes.FindStores} onClick={Tryhome}>
-                    Trial at Home
-                  </button>
+                  {countryName === "India" && (
+                    <button className={Classes.FindStores} onClick={Tryhome}>
+                      Trial at Home
+                    </button>
+                  )}
                 </div>
                 <VideocallForm
                   isOpen={isModalOpen}
