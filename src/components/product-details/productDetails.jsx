@@ -481,7 +481,7 @@ const ProductDetails = (props) => {
     setImageLoading(false);
   };
 
-  console.log("props.thumpImg,", props.thumbImg);
+  console.log("props.offerPrice,", props.offerPrice);
   let cost = props.offerPrice;
   let formattedCost = parseFloat(cost).toLocaleString();
   function numberWithCommas(x) {

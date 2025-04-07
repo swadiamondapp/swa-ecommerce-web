@@ -2,18 +2,23 @@ import Classes from "../productdetail.module.css";
 import SimilarProducts from "@/components/product-details/similarProducts";
 import Features from "@/components/features/features";
 import ProductDetails from "@/components/product-details/productDetails";
+import { cookies } from "next/headers";
 
 export const generateMetadata = async ({ params }) => {
   const productAlias = (await params).alias;
+  const cookieStore = cookies();
+  const countryId = cookieStore.get('countryId')?.value || '91'; 
   const response = await fetch(
-    `https://swaecommain.swa.co/ecom/alias-product/?alias=${productAlias}`,
+    `https://swaecommain.swa.co/ecom/alias-product/?alias=${productAlias}&country=${countryId}`,
     {
       headers: {
         "Content-Type": "application/json",
       },
+    
     }
   );
   const productDetails = (await response.json()).results.data;
+  console.log("productDetails",productDetails)
 
   return {
     title: productDetails.meta_title,
@@ -102,14 +107,16 @@ export const generateMetadata = async ({ params }) => {
 
 async function ProductDetailsPage({ params }) {
   const productAlias = (await params).alias;
-
+  const cookieStore = cookies();
+  const countryId = cookieStore.get('countryId')?.value || '91'; 
   const productDetails = await fetch(
-    `https://swaecommain.swa.co/ecom/alias-product/?alias=${productAlias}`,
+    `https://swaecommain.swa.co/ecom/alias-product/?alias=${productAlias}&country=${countryId}`,
     {
       headers: {
         "Content-Type": "application/json",
-      },
+      }, 
     }
+   
   )
     .then((res) => res.json())
     .then((data) => data.results.data);
