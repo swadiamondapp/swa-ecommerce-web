@@ -231,7 +231,6 @@ const LoginToggle = (props) => {
   const handleSignInWithGoogle = async () => {
     try {
       const response = await signInWithPopup(auth, googleAuthProvider);
-      console.log("Google Sign-In Response:", response);
 
       if (response && response.user) {
         const user = response.user;
@@ -242,7 +241,6 @@ const LoginToggle = (props) => {
 
         // Call Login API
         const loginResponse = await axios.post(Urls.Login, loginBody);
-        console.log("Login API Response:", loginResponse);
 
         if (loginResponse && loginResponse.data.results.status_code === 200) {
           // Successful login
@@ -263,7 +261,6 @@ const LoginToggle = (props) => {
           loginResponse.data.results.status_code === 401
         ) {
           // User not registered
-          console.log("User not registered. Attempting registration...");
           await attemptRegistration(user, loginBody);
         } else {
           setValidationErrors({ otp: "Failed to login. Please try again." });
@@ -283,7 +280,6 @@ const LoginToggle = (props) => {
   const handleSignInWithFb = async () => {
     try {
       const response = await signInWithPopup(auth, facebookAuthProvider);
-      console.log("Facebook Sign-In Response:", response);
 
       if (response && response.user) {
         const user = response.user;
@@ -294,7 +290,6 @@ const LoginToggle = (props) => {
 
         // Call Login API
         const loginResponse = await axios.post(Urls.Login, loginBody);
-        console.log("Login API Response:", loginResponse);
 
         if (loginResponse && loginResponse.data.results.status_code === 200) {
           // Successful login
@@ -392,8 +387,6 @@ const LoginToggle = (props) => {
     try {
       user;
       const loginResponse = await axios.post(Urls.Login, loginBody);
-
-      console.log("Login API Response:", loginResponse);
 
       if (loginResponse && loginResponse.data.results.status_code === 200) {
         setAuth(loginResponse.data.results.token, {
@@ -496,7 +489,6 @@ const LoginToggle = (props) => {
     }
   };
 
-  console.log("emailId...", emailId);
   const sendOtp = async () => {
     const emailRegex =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -643,7 +635,6 @@ const LoginToggle = (props) => {
           props.setShowSuccessModal(false);
         }, 3000);
       } else {
-        console.log("else entered");
         setOtpError("Invalid otp");
         // setValidationErrors({
         //   mobileNumber:
@@ -651,7 +642,6 @@ const LoginToggle = (props) => {
         // });
       }
     } catch (error) {
-      console.log("anas", error);
     }
   };
   const verifyOtpEmail = async () => {
@@ -719,7 +709,6 @@ const LoginToggle = (props) => {
     }
   }, [getOtpModal]);
 
-  console.log("mobileNumber-->", mobileNumber);
 
   return (
     <div className={Classes.loginToffle}>

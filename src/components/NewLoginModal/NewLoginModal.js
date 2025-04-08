@@ -129,7 +129,6 @@ const LoginModal = (props) => {
     axios
       .post(urls.sentOtp, body)
       .then((response2) => {
-        console.log(response2);
         if (response2.data.user_exists === true) {
           setCreateError("This phone number is already registerd");
         } else if (response2.data[0] === "Otp send Successfully") {

@@ -52,8 +52,6 @@ const TryAtHomeInner = () => {
   });
   const [openSuccessModal, setOpenSuccessModal] = useState(false);
   const [errors, setErrors] = useState({});
-  console.log("selectedDate>", selectedDate);
-  console.log("savedTimeSlot>", savedTimeSlot);
 
   const schema = Joi.object({
     fullName: Joi.string()
@@ -181,7 +179,6 @@ const TryAtHomeInner = () => {
       const response = await axios.post(Urls.addAdress, body, {
         headers: { Authorization: "Token " + token },
       });
-      console.log("1234", response.data.status);
       if (response.data.status === 200) {
         BookAppointment(response.data.data.id);
       }
@@ -199,8 +196,6 @@ const TryAtHomeInner = () => {
   };
 
   const BookAppointment = async (bookid) => {
-    console.log("appointmentId", appointmentId);
-
     try {
       const formattedDate = formatDate(selectedDate);
       const body = {

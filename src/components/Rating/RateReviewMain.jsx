@@ -71,10 +71,6 @@ const RateReviewMain = (props) => {
         console.log(error);
       });
   }, []);
-
-  console.log("orderDet...1", orderShipments);
-  console.log("orderDet...2", orderDetails);
-  console.log("productDetails...2", productDetails);
   return (
     <div>
       <div className={`container ${Classes.MainCont}`}>
@@ -151,7 +147,6 @@ const RateReviewMain = (props) => {
                             },
                           }}
                         >
-                          {console.log("....pp", shipment.thumbnail_image)}
                           <p className={Classes.RateReviewText}>
                             {" "}
                             Rate & review

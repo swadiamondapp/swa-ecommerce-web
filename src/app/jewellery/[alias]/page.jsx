@@ -9,7 +9,7 @@ export const generateMetadata = async ({ params }) => {
   const cookieStore = await cookies();
   
   const countryId = cookieStore.get('countryId')?.value; 
-  console.log("cookieStore",cookieStore);
+
   
   const response = await fetch(
     `https://swaecommain.swa.co/ecom/alias-product/?alias=${productAlias}&country=${countryId}`,
@@ -21,7 +21,7 @@ export const generateMetadata = async ({ params }) => {
     }
   );
   const productDetails = (await response.json()).results.data;
-  console.log("productDetails",productDetails)
+ 
 
   return {
     title: productDetails.meta_title,
@@ -112,7 +112,7 @@ async function ProductDetailsPage({ params }) {
   const productAlias = (await params).alias;
   const cookieStore = await cookies();
   const countryId = cookieStore.get('countryId')?.value; 
-  console.log("countryId 1111111111",cookieStore.get('countryId'));
+
   
   const productDetails = await fetch(
     `https://swaecommain.swa.co/ecom/alias-product/?alias=${productAlias}&country=${countryId}`,

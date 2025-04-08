@@ -91,8 +91,6 @@ const ProductDetails = (props) => {
   const closeHanlder = () => {
     setModalShow(false);
   };
-
-  console.log("index2", currentSlideIndex);
   const handleOpenModal = () => {
     setModalOpen(true);
   };
@@ -271,8 +269,6 @@ const ProductDetails = (props) => {
     if (token !== null) {
       const idToUse = wishId || wishlistIds;
       if (idToUse) {
-        console.log("wishlistIdsapi", wishlistIds);
-        console.log("wishlistIdsapi2", wishId);
         axios
           .delete(`${Urls.wishlist + idToUse}/?country=${countryId}`, {
             headers: {
@@ -305,8 +301,6 @@ const ProductDetails = (props) => {
     ? (reviews.data ?? [])
     : (reviews.data ?? []).slice(0, 3);
 
-  console.log("renderedReviews", renderedReviews);
-
   const addToCartHandler = () => {
     if (props.IsRestricted === true) {
       // Show restriction modal for 5 seconds
@@ -334,7 +328,7 @@ const ProductDetails = (props) => {
     // props.sizeChange(e.target.value);
     const selectedId = e.target.value;
     setSelectedSize(selectedId);
-    console.log("selectedId0===>", selectedId);
+   
 
     // Find the corresponding checkbox and check it
     const radioButton = document.querySelector(
@@ -346,11 +340,11 @@ const ProductDetails = (props) => {
   };
 
   const handleCheckboxChange = (event) => {
-    console.log("event.target.value--->", event.target.value);
+  
     const selectedId = event.target.value;
     props.selectedSize(selectedId);
     setSelectedSize(selectedId);
-    console.log("selectedId", selectedId);
+
 
     // Find the corresponding option in the select box and select it
     const selectBox = document.querySelector("select");
@@ -374,8 +368,7 @@ const ProductDetails = (props) => {
       colour_id: clrId,
       size_id: selectedSize,
     };
-    console.log("body", body);
-    console.log("token", token);
+ 
 
     if (token !== null) {
       axios
@@ -447,7 +440,7 @@ const ProductDetails = (props) => {
           setDeliveryDate(response1.data.results.message);
           setDeliveryShopsList(response1.data.results.data);
           // setPincodeShow(true); // Show the message after receiving the response
-          console.log("dateresponse", response1.data.results);
+       
         })
         .catch((error) => {
           console.log(error);
@@ -481,16 +474,15 @@ const ProductDetails = (props) => {
     setImageLoading(false);
   };
 
-  console.log("props.offerPrice,", props.offerPrice);
+
   let cost = props.offerPrice;
   let formattedCost = parseFloat(cost).toLocaleString();
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
-  console.log(cost, "clg===>");
-  console.log(formattedCost, "frc====clg===>");
+  
   const result = numberWithCommas(formattedCost);
-  console.log(result, "res===>");
+
 
   const handleThumbnailClick = (index) => {
     setCurrentSlideIndex(index);
@@ -526,9 +518,6 @@ const ProductDetails = (props) => {
       videoUrls.push(url);
     }
   });
-
-  console.log("videoUrls", videoUrls);
-  console.log("imageUrls", imageUrls);
 
   var settings = {
     dots: true,

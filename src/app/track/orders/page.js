@@ -70,7 +70,7 @@ const OrderHistorypage2 = (props) => {
   const [singleOrderData, setSingleOrderData] = useState([]);
   const { setOrderData, orderData } = useOrder();
   const [countryId, setCountryId] = useState("");
-  console.log("orderData-------", orderData);
+
 
   const [paymentDetails, setPaymentDetails] = useState({});
   const [isModalOpen, setModalOpen] = useState(false);
@@ -117,7 +117,6 @@ const OrderHistorypage2 = (props) => {
   // const { saleBill } = data || {};
   useEffect(() => {
     const storedCountryId = localStorage.getItem("id");
-    console.log("countryId----", storedCountryId);
     if (storedCountryId) {
       setCountryId(storedCountryId);
     }
@@ -197,7 +196,6 @@ const OrderHistorypage2 = (props) => {
   };
 
   const fetchLteLbbDetails = async () => {
-    console.log("gggggggggggggggg---", fetchLteLbbDetails);
 
     try {
       const body = {
@@ -322,18 +320,6 @@ const OrderHistorypage2 = (props) => {
     singleOrderData.order &&
     singleOrderData.order.shipment[0] &&
     singleOrderData.order.shipment[0].invoice;
-
-  console.log(invoiceLink, "invoiceLink");
-  // const handleDownloadClick = () => {
-  //   if (invoiceLink) {
-  //     window.location.href = invoiceLink; // Redirect to invoice link
-  //   } else {
-  //     setModalOpen(true); // Open modal if invoice is unavailable
-  //     setTimeout(() => {
-  //       setModalOpen(false);
-  //     }, 5000);
-  //   }
-  // };
   const handleDownloadClick = () => {
     if (invoiceLink) {
       const corsProxy = "https://thingproxy.freeboard.io/fetch/"; // Alternative CORS proxy
@@ -384,27 +370,16 @@ const OrderHistorypage2 = (props) => {
   };
 
   const closeModal = () => setModalOpen(false);
-
-  console.log(
-    "singleOrderData--->12",
-    singleOrderData &&
-      singleOrderData.data &&
-      singleOrderData.data.order &&
-      singleOrderData.data.order.address
-  );
-
   const statusCode =
     singleOrderData &&
     singleOrderData.order &&
     singleOrderData.order.shipment[0] &&
     singleOrderData.order.shipment[0].status;
-  console.log("statusCode--->", statusCode);
   const cancelButtonTrack =
     singleOrderData &&
     singleOrderData.order &&
     singleOrderData.order.shipment[0] &&
     singleOrderData.order.shipment[0].cancel_button_track;
-  console.log("cancelButtonTrack--->", cancelButtonTrack);
   const orderDate =
     singleOrderData.order &&
     singleOrderData.order.track_order_details &&
@@ -415,13 +390,7 @@ const OrderHistorypage2 = (props) => {
     singleOrderData &&
     singleOrderData.order &&
     singleOrderData.order.payment_data;
-  console.log(
-    singleOrderData.order &&
-      singleOrderData.order.track_order_details &&
-      singleOrderData.order.track_order_details &&
-      singleOrderData.order.track_order_details.order_confirmed,
-    "order---"
-  );
+
 
   return (
     <div>

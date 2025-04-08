@@ -46,18 +46,15 @@ function CartDesign(props) {
     const Contryname = localStorage.getItem("country_name");
     setContryname(Contryname);
   }, []);
-  console.log("walletValuesab", walletValues.swa_wallet);
+ 
   let diff = 0;
   useEffect(() => {
     setTotal(props.amount - props.cartProAmnt);
     setAmountPay(props.amount - props.cartProAmnt);
   }, [props.amount, props.cartProAmnt]);
-  console.log("amm1", props.amount);
-  console.log("amm2", props.cartProAmnt);
   useEffect(() => {
     window?.scrollTo(0, 0);
   }, []);
-  console.log(total, "amountsoftrialCart");
   const handleSubmit = (event) => {
     event.preventDefault();
   };
@@ -88,7 +85,6 @@ function CartDesign(props) {
           headers: { Authorization: "Token " + token },
         }
       );
-      console.log("response.data---->56", response.data.exchange_wallet);
       setWalletValues(response.data);
       // if (
       //   response.data.swa_wallet === 0 &&
@@ -209,10 +205,6 @@ function CartDesign(props) {
 
   diff = total - amountPay;
   let totally_saved = props.totalSavedAmount + diff;
-
-  console.log(amountPay, "amountPay");
-  console.log(total, "total");
-
   function formatIndianNumber(number) {
     const numberString = number && number.toString().split(".")[0];
     const lastThreeDigits = numberString && numberString.slice(-3);
@@ -229,8 +221,6 @@ function CartDesign(props) {
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
-
-  console.log("walletValues--->", walletValues);
 
   return (
     <div>

@@ -142,8 +142,6 @@ const MobileNavbar = (props) => {
   };
 
   const { isMobile } = useWindowResize();
-
-  console.log("isHamOpen===>", isHamOpen);
   const moveToWishList = () => {
     if (token !== null) {
       router.push("/wish-list");
@@ -237,7 +235,6 @@ const MobileNavbar = (props) => {
 
   const toggleCart = (cartType) => {
     props.setActiveCart(cartType);
-    console.log("cart,,,,.", props.setActiveCart(cartType));
   };
 
   return (
