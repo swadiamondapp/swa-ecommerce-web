@@ -3,6 +3,8 @@
 import axios from "axios";
 import { createContext, useState, useEffect, useContext } from "react";
 import { useCountries } from "@/hooks/useCountries";
+import Cookies from "js-cookie";
+
 
 export const CountryContext = createContext();
 
@@ -15,6 +17,7 @@ const CountryProvider = ({ children }) => {
 
   useEffect(() => {
     if (countryId) {
+      Cookies.set("countryId", countryId, { path: "/", expires: 30 }); 
       return;
     }
     if (countries && countries.length > 0) {
@@ -35,16 +38,18 @@ const CountryProvider = ({ children }) => {
     localStorage.setItem("id", country.id);
     localStorage.setItem("flag_image", country.flag_image);
     localStorage.setItem("country_name", country.country_name);
-  };
 
+    Cookies.set("countryId", country.id, { path: "/", expires: 30 }); 
+  };
+ 
   const getLocation = async () => {
     setIsLoading(true);
     try {
       const ipInfoResponse = await axios.get(
         "https://ipinfo.io/json?token=6485fceda43031"
       );
-      // const userCountryName = ipInfoResponse.data.country; // Country code (e.g., "IN", "US")
-      const userCountryName = 'AE'
+      const userCountryName = ipInfoResponse.data.country; // Country code (e.g., "IN", "US")
+      // const userCountryName = 'AE'
       let selectedCountryData;
 
       if (userCountryName === "AE") {
@@ -79,6 +84,7 @@ const CountryProvider = ({ children }) => {
           localStorage.setItem("id", countryIndia.id);
           localStorage.setItem("flag_image", countryIndia.flag_image);
           localStorage.setItem("country_name", countryIndia.country_name);
+          Cookies.set("countryId", countryIndia.id, { path: "/", expires: 30 });
         }
       }
     } catch (error) {
