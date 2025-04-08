@@ -13,10 +13,6 @@ const UrlShare = () => {
   useEffect(() => {
     prodDetHandler();
   }, [queryParams]);
-  console.log("prductId", productId);
-  console.log("productColor", productColor);
-  console.log("productName", productName);
-  console.log("productAlias", productAlias);
 
   const prodDetHandler = () => {
     localStorage.setItem(

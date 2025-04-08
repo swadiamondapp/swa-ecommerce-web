@@ -67,7 +67,6 @@ const CancelProductModal = (props) => {
     props.cancelProduct(selectedReason, notes);
   };
 
-  console.log("cancelButtonTrack1", props.cancelButtonTrack);
   const isShipped = props.cancelButtonTrack == "Shipped";
 
   return (

@@ -32,7 +32,6 @@ function CheckOut(props) {
   const { setAuth } = useAuth();
   const { paymentData, setPaymentData, setOtherPaymentData } = useAddress();
   const { checkoutData } = useCheckout();
-  console.log("checkoutData", checkoutData);
   const { promoCodeIds } = checkoutData?.data || {};
   const { token } = useAuth();
   const [show, setShow] = useState(false);
@@ -260,8 +259,6 @@ function CheckOut(props) {
       setErrorMessage(validationErrors);
       return;
     }
-
-    console.log("Form submitted:", addressData);
     setErrorMessage({});
     handleSignUp();
   };
@@ -429,8 +426,6 @@ function CheckOut(props) {
         selectedOption && selectedOption.getAttribute("data-isocode");
       setStatesList(State && State?.getStatesOfCountry(isoCode));
     }
-    console.log("triggeredd 2");
-    // console.log("event.target---->", isoCode);
     setAddress({
       ...addressData,
       [name]: value,
@@ -453,7 +448,6 @@ function CheckOut(props) {
         };
         const response = await axios.post(Urls.register, body);
         if (response.data.results.status_code === 200) {
-          console.log(response.data.results, "registerConstole");
           setToken(response.data.results.data.token);
           setUserId(response.data.results.data.user.id);
           _userName = response.data.results.data.user.name;
@@ -517,7 +511,6 @@ function CheckOut(props) {
         loginHandler();
       }
       if (response.data.results.message === "Otp verified successfully!") {
-        console.log("Otp verified successfully!");
       } else {
         setOtpError("Invalid otp");
       }
@@ -525,9 +518,6 @@ function CheckOut(props) {
       console.log(error);
     }
   };
-  console.log("checkoutAddresssdata", addressData);
-
-  console.log("props.proDet ?????", props.proDet);
 
   const locallySetAddress = () => {
     if (
@@ -635,9 +625,7 @@ function CheckOut(props) {
     // });
   };
   const getDefaultAddress = async () => {
-    console.log("triggeredd 1");
     if (localAddress) {
-      console.log("triggeredd 3", JSON.parse(localAddress));
       setAddress(JSON.parse(localAddress));
       // setIsNewAddress(JSON.parse(localAddress));
     } else {
@@ -711,7 +699,6 @@ function CheckOut(props) {
           // submitAddress(__token);
           locallySetAddress();
         } else if (response.data.results.status_code === 401) {
-          console.log("Incorrect username or password!");
         }
       })
       .catch((error) => {
@@ -781,7 +768,6 @@ function CheckOut(props) {
   };
 
   const handleAddressSelect = async (address) => {
-    console.log("addressssssm", address);
     setSelectedAddress(address.id);
     // API Call to set the selected address as default (is_main: true)
     try {
@@ -825,8 +811,6 @@ function CheckOut(props) {
       setSelectedAddress(mainAddress.id); // Set the main address as the default selected address
     }
   }, [addressList]);
-
-  console.log("addressData--->", addressData);
 
   return (
     <div>

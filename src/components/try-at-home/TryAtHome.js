@@ -87,7 +87,7 @@ const TryAtHome = () => {
         headers: { Authorization: `Token ${token}` },
       })
       .then((response1) => {
-        console.log("response1--->", response1);
+        
 
         if (response1.data.results.status === 200) {
           setTryCartResults(response1.data.results.data);

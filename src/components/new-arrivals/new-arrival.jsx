@@ -343,31 +343,6 @@ const NewArrivalPage = (props) => {
     arrayDlt.splice(indx, 1);
     setLabelSet(arrayDlt);
   };
-
-  // console.log("categoryDetails23----->", category);
-  // const cartAddHandler = (product) => {
-  //   const body = {
-  //     product_id: product.product_id,
-  //     color_id: product.colour_id,
-  //     size_id: 1,
-  //     quantity: 1,
-  //   };
-
-  //   axios
-  //     .post(`${Urls.cart}?country=${countryId}`, body, {
-  //       headers: { Authorization: "Token " + token },
-  //     })
-  //     .then((response1) => {
-  //       if (response1.data.results.message === "item added") {
-  //         let count = cartCount;
-  //         count = count + 1;
-  //         setCartCount(count);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
   const sortsHHandler = (e) => {
     // console.log("......?", e.target.value);
     setSort(e.target.value);
@@ -400,7 +375,6 @@ const NewArrivalPage = (props) => {
   };
   // mobile sort
   const sortsHHandler2 = (selectedSort, selectedPopular) => {
-    console.log("......?", selectedPopular);
     // setSort(selectedSort);
     filter(
       "?occasion_tag_ids=" +
@@ -453,7 +427,6 @@ const NewArrivalPage = (props) => {
     );
   } else {
     const handleShowModal = (productId) => {
-      console.log("productIddd", productId);
       const pincode = localStorage.getItem("pincode");
       if (pincode) {
         const body = {
@@ -473,7 +446,6 @@ const NewArrivalPage = (props) => {
               ...prevState,
               [productId]: response1.data.results.message, // Update the specific product's button text
             }));
-            console.log("dateresponse", response1.data.results);
           })
           .catch((error) => {
             console.log(error);
@@ -488,7 +460,6 @@ const NewArrivalPage = (props) => {
     };
 
     products = product.map((item, index) => {
-      console.log(item.sku, "item.sku");
       return (
         <NewArrivalCard
           ProductImage={item.thumbnail_image}

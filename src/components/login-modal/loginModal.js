@@ -185,7 +185,7 @@ const LoginModal = (props) => {
     axios
       .post(urls.sentOtp, body)
       .then((response2) => {
-        console.log(response2);
+    
         if (response2.data.user_exists === true) {
           setCreateError("This phone number is already registerd");
         } else if (response2.data[0] === "Otp send Successfully") {
@@ -213,7 +213,7 @@ const LoginModal = (props) => {
     axios
       .post(urls.verifyOTP, body)
       .then((response3) => {
-        console.log(response3);
+      
         if (response3.data.results.status_code === 200) {
           setError("");
           handleNewPassword();
@@ -222,7 +222,6 @@ const LoginModal = (props) => {
         }
       })
       .catch((error) => {
-        console.log(error.response.data.results);
         if (error.response.data.results.status_code === 400) {
           setError(error.response.data.results.message);
         }
@@ -521,14 +520,11 @@ const LoginModal = (props) => {
     setPhone(phone);
   });
 
-  const handleLogedUserClick = () => {
-    console.log("Before toggle, showUserDetails:", showUserDetails);
+  const handleLogedUserClick = () => { 
     setShowUserDetails((prev) => !prev);
-    console.log("After toggle, showUserDetails:", showUserDetails);
+ 
   };
   useEffect(() => {
-    console.log("useEffect executed with showUserDetails:", showUserDetails);
-
     const handleClickOutside = (event) => {
       if (
         showUserDetails &&
@@ -543,7 +539,6 @@ const LoginModal = (props) => {
     document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
-      console.log("Cleanup useEffect with showUserDetails:", showUserDetails);
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [showUserDetails]);

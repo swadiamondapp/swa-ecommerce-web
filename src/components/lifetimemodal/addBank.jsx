@@ -54,7 +54,6 @@ const AddBank = (props) => {
   const [open, setOpen] = useState(false);
   const [selectedCity, setSelectedCity] = useState(null);
   const [errors, setErrors] = useState({});
-  console.log(props.openSuccessModal);
   const isMobileView = useIsMobile();
 
   const [bankDatas, setBankDatas] = useState({
@@ -125,7 +124,6 @@ const AddBank = (props) => {
       const response = await axios.post(Urls.addBankAccount, body, {
         headers: { Authorization: "Token " + token },
       });
-      console.log("Bankresponse", response);
       if (response.status === 200) {
         setSuccessModalOpen(true);
         setBankDatas({

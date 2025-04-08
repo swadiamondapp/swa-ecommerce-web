@@ -95,12 +95,6 @@ const Outlet = () => {
     { time: "2:00 PM", minutes: 14 * 60 },
     { time: "3:00 PM", minutes: 15 * 60 },
   ];
-
-  console.log("selectedTimeSlot", selectedTimeSlot);
-  console.log("selectedDate", selectedDate);
-  console.log("shopId", shopId);
-
-  console.log("outlets11", outlets);
   useEffect(() => {
     const handleResize = () => {
       setIsMobileView(window?.innerWidth >= 300 && window?.innerWidth <= 575);

@@ -42,7 +42,6 @@ function AddAddress(props) {
     country: "",
   });
   const [openDeleteIndex, setOpenDeleteIndex] = useState(-1);
-
   const handleToggleOptions = (index) => {
     setOpenDeleteIndex((prevIndex) => (prevIndex === index ? -1 : index));
   };
@@ -63,7 +62,6 @@ function AddAddress(props) {
 
   useEffect(() => {
     const mainAddress = props.addressArray.find((address) => address.is_main);
-    console.log(mainAddress);
     if (mainAddress) {
       setSelectedAddressId(mainAddress.id);
     }
@@ -138,8 +136,7 @@ function AddAddress(props) {
   };
 
   const addAaddress = async () => {
-    window.scrollTo(0, 0);
-    console.log("clicked,,,");
+    window?.scrollTo(0, 0);
     if (validateForm()) return;
     const body = {
       name: addressData.fullName,
@@ -201,8 +198,6 @@ function AddAddress(props) {
       [name]: "",
     });
   };
-
-  console.log("addressData--->", addressData);
 
   const handleAddressSelection = async (id) => {
     setSelectedAddressId(id);
