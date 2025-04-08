@@ -151,7 +151,7 @@ const ProductDetailsPage = (props) => {
       const response = await axios.get(
         `${Urls.detailsWithAlias}${productName}`
       );
-      console.log("response0000000000", response);
+   
 
       if (response.data.results.data) {
         const details = {
@@ -159,7 +159,6 @@ const ProductDetailsPage = (props) => {
           color: response.data.results.data.color_id,
           name: response.data.results.data.product_name,
         };
-        console.log("detailsuuuuuuuuuuuuuuuuuuuu", details);
 
         setProductDetails(details);
         localStorage.setItem("productDetails", JSON.stringify(details));
@@ -176,7 +175,6 @@ const ProductDetailsPage = (props) => {
     window?.scrollTo(0, 0);
     const updateProductDetails = async () => {
       let details = productDetails;
-      console.log("details >>>>>>>>:::::::::::", details);
 
       if (!productDetails || productDetails.name !== productId) {
         details = await fetchProductDetails(productId);
@@ -185,12 +183,11 @@ const ProductDetailsPage = (props) => {
       if (details) {
         setFetchedName(productId); // Mark the current name as fetched
         const { id } = details;
-        console.log(" <<<<<<<< id >>>>>>> ", details.id);
+      
         axios
           .get(`${Urls.productDet}${id}?country=${countryId}`)
           .then((response) => {
             const data = response.data.results.data;
-            console.log("data >>>>>>>>", data);
             setProdDet(data);
             setIsRestricted(data.is_restricted);
             setSizeChart(data.size_names);
@@ -401,7 +398,6 @@ const ProductDetailsPage = (props) => {
           setDeliveryDate(response1.data.results.message);
           setDeliveryShopsList(response1.data.results.data);
           setPincodeShow(true); // Show the message after receiving the response
-          console.log("dateresponse", response1.data.results);
         })
         .catch((error) => {
           console.log(error);
@@ -438,7 +434,6 @@ const ProductDetailsPage = (props) => {
   };
 
   const sizeChangeHandler = (size) => {
-    console.log("anassiz", size);
     setSize(size);
   };
 
@@ -450,7 +445,6 @@ const ProductDetailsPage = (props) => {
     setLogToken(logToken);
   };
 
-  console.log("123456productDetails-->", productDetails);
   // const countryId = localStorage.getItem("id");
   const flag = localStorage.getItem("flag_image");
   const Contryname = localStorage.getItem("country_name");
@@ -459,8 +453,6 @@ const ProductDetailsPage = (props) => {
     flag_image: flag,
     country_name: Contryname,
   });
-
-  console.log(productDetails, "prodDet");
   return (
     <div>
       <Head>

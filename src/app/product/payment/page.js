@@ -26,10 +26,6 @@ const Payment = () => {
   }, [otherpaymentData]);
 
   const data = otherpaymentData?.data;
-  console.log("otherpaymentData", otherpaymentData);
-  console.log("paymentData6666666666666666", paymentData);
-
-  console.log("checkoutData", checkoutData);
   const name = checkoutData?.name;
   const { setAuth, token } = useAuth();
   const [localAddress, setLocalAddress] = useState(null);
@@ -116,7 +112,6 @@ const Payment = () => {
 
   useEffect(() => {
     if (data) {
-      console.log("hbgvfdxszxdcfvgbhnjmjnhbgvfcd", data);
       setAddressData(data?.addressData || {});
     }
   }, [data]);
@@ -162,7 +157,6 @@ const Payment = () => {
     }
   };
   const placeOrder = async (addressId) => {
-    console.log("mode-->", mode, "name-->", name);
     let cartBody;
     let buyBody;
     const p_Method = mode === "cash" ? "C" : "P";
@@ -474,8 +468,6 @@ const Payment = () => {
     }
   };
 
-  console.log(payButtonErrror, "payButtonError");
-
   const handleMethodChange = (event) => {
     setMode(event.target.value);
   };
@@ -486,7 +478,6 @@ const Payment = () => {
         headers: { Authorization: "Token " + _token },
       });
       if (response.data.results.status === 200) {
-        console.log(response.data.results.data, "addreeeeData");
         setAddressData({
           ...addressData,
           sEmail: response.data.results.data.email,
@@ -513,7 +504,6 @@ const Payment = () => {
       .then((response1) => {
         setAddress(response1.data.results.data);
         if (response1.data.results.data.length !== 0) {
-          console.log(response1, "responseAdddress===>");
           setAddressId(
             response1.data.results.data[response1.data.results.data.length - 1]
               .id
@@ -774,7 +764,6 @@ const Payment = () => {
                 )}
               </div>
             </div>
-            {console.log("showChangeAddress", showChangeAddress)}
             {showChangeAddress ? (
               <>
                 <AddAddress

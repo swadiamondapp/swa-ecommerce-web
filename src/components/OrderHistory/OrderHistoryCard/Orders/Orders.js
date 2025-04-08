@@ -12,7 +12,7 @@ function Orders(props) {
   const [showReview, setShowReview] = useState();
   const router = useRouter();
   const { setOrderData, setReviewData } = useOrder();
-  console.log("props.name?", props.productName);
+
 
   const itemsDetail = props.Image;
   const productViewHandler = (id, shipmentId, salebill) => {
@@ -27,7 +27,6 @@ function Orders(props) {
       product_name: item.product_name,
     });
   };
-  console.log("itemsDetail", itemsDetail);
   return (
     <div className="">
       {itemsDetail &&
@@ -107,7 +106,6 @@ function Orders(props) {
                     >
                       <p>Rate & Review</p>
                     </Link>
-                    {console.log("shipment status", props.shipmentstatus)}
                   </div>
                 )}
               </div>

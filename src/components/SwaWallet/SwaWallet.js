@@ -31,7 +31,6 @@ const SwaWallet = () => {
       })
       .then((response1) => {
         setBanklists(response1.data.results.Bank_Details);
-        console.log("banklists", response1.data.results.Bank_Details);
       })
       .catch((error) => {
         console.log(error);
@@ -202,7 +201,7 @@ const SwaWallet = () => {
               <div className={Classes.T1Rightsec}>
                 <p style={{ color: "#86898B" }}>WITHDRAW AMOUNT</p>
                 <h3>
-                  ₹ {console.log("itemsanas", item)}
+                  ₹ 
                   {item && item.withdrawal_amount}
                 </h3>
               </div>

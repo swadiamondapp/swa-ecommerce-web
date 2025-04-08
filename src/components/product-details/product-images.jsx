@@ -130,7 +130,6 @@ const ProductImages = ({
               {!videoSection && (
                 <>
                   <div className={Classes.ImageWishList}>
-                    {console.log("thumpImg", thumbImg)}
                     {imageLoading && !thumbImg && (
                       <div className="card">
                         <div className="card-image">

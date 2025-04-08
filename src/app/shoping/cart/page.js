@@ -66,7 +66,6 @@ const Cart = () => {
   };
 
   const removeCartHandler = (selItem) => {
-    console.log("selItemqw", selItem);
     if (
       selItem.thumbnail_image &&
       typeof selItem.thumbnail_image === "string"
@@ -90,7 +89,6 @@ const Cart = () => {
 
     // Optimistically update the state
     setCartList(updatedCartList);
-    console.log("cartListqqqqq", cartList);
     setSelProAmnt(cartList && cartList[0].items_total);
     axios
       .delete(`${Urls.cart}${selids}/?country=${countryId}`, {
@@ -154,7 +152,6 @@ const Cart = () => {
   };
 
   const addDesigns = (cartid) => {
-    console.log("idcart", cartid);
     axios
       .delete(`${Urls.tryatcartdelete}/${cartid}/?country=${countryId}`, {
         headers: { Authorization: "Token " + token },
@@ -168,7 +165,6 @@ const Cart = () => {
         ) {
           toast("Already Processed, Cannot delete");
         }
-        console.log("...delete>", response1.data.results.message);
       })
       .catch((error) => {
         console.log(error);

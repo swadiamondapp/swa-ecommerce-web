@@ -102,7 +102,7 @@ function AddAddress(props) {
 
   useEffect(() => {
     const mainAddress = props.addressArray.find((address) => address.is_main);
-    console.log(mainAddress);
+   
     if (mainAddress) {
       setSelectedAddressId(mainAddress.id);
     }
@@ -179,11 +179,11 @@ function AddAddress(props) {
   // };
 
   // debugger;
-  console.log("hhhh");
+ 
 
   const addAaddress = async () => {
     window.scrollTo(0, 0);
-    console.log("clicked,,,");
+  
     if (validateForm()) return;
     const body = {
       name: addressData.fullName,
@@ -219,7 +219,7 @@ function AddAddress(props) {
         setShowNewAddressForm(false);
       } else {
         // Handle other response statuses if necessary
-        console.log("API request failed:", response.data);
+      
       }
     } catch (error) {
       console.log(error);
@@ -249,11 +249,11 @@ function AddAddress(props) {
     });
   };
 
-  console.log("addressData--->", addressData);
+ 
 
   const handleAddressSelection = async (id) => {
     setSelectedAddressId(id);
-    console.log("addressData--->", id);
+  
 
     try {
       const response = await axios.post(
@@ -279,7 +279,7 @@ function AddAddress(props) {
   }, []);
 
   useEffect(() => {
-    console.log("=================================================");
+  
   });
 
   return (

@@ -53,7 +53,6 @@ const TransferMoneyModal = (props) => {
   // const countryId = localStorage.getItem("id");
   const { token } = useAuth();
   const { countryId } = useCountry();
-  console.log("walletValues```", props.walletAmount);
   const isMobileView = useIsMobile();
   
   const handleClose = () => {

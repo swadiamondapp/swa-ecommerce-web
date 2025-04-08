@@ -24,7 +24,6 @@ export default function NewArrivals() {
       </div>
     );
   }
-  console.log("newArriveltttttttttttttttt", newArrivel);
 
   return (
     <div className="container newarrivalContainer">
@@ -43,7 +42,6 @@ export default function NewArrivals() {
         <div className="container">
           <div className="row landingrow">
             {newArrivel.map((item, index) => {
-              console.log("landingitems", item);
               return (
                 <NewArrivalCard
                   ProductImage={item.thumbnail_image && item.thumbnail_image}

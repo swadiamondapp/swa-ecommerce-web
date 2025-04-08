@@ -86,7 +86,6 @@ const LIfeTImeModal = (props) => {
   const handleClose = () => {
     setOpen(false);
   };
-  console.log("lteLbbData===>", props.lteLbbData);
   return (
     <div>
       <Modal open={props.open} onClose={props.handleClose}>

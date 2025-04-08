@@ -90,11 +90,9 @@ function Header() {
   };
 
   const searchTitleHandler = (setItem) => {
-    console.log("setItem", setItem);
-    if (setItem.type === "category") {
+     if (setItem.type === "category") {
       router.push(`/${setItem.name.toLowerCase().replace(/\s+/g, "")}`);
     } else if (setItem.type === "product") {
-      console.log("token in search", token);
 
       axios
         .get(`${productDet + setItem.id}?country=${countryId}`, {
