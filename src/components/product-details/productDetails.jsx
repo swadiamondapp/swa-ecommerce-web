@@ -298,7 +298,7 @@ const ProductDetails = (props) => {
   };
 
   const renderedReviews = showAllReviews
-    ? (reviews.data ?? [])
+    ? reviews.data ?? []
     : (reviews.data ?? []).slice(0, 3);
 
   const addToCartHandler = () => {
@@ -328,7 +328,6 @@ const ProductDetails = (props) => {
     // props.sizeChange(e.target.value);
     const selectedId = e.target.value;
     setSelectedSize(selectedId);
-   
 
     // Find the corresponding checkbox and check it
     const radioButton = document.querySelector(
@@ -340,11 +339,9 @@ const ProductDetails = (props) => {
   };
 
   const handleCheckboxChange = (event) => {
-  
     const selectedId = event.target.value;
     props.selectedSize(selectedId);
     setSelectedSize(selectedId);
-
 
     // Find the corresponding option in the select box and select it
     const selectBox = document.querySelector("select");
@@ -368,7 +365,6 @@ const ProductDetails = (props) => {
       colour_id: clrId,
       size_id: selectedSize,
     };
- 
 
     if (token !== null) {
       axios
@@ -440,7 +436,6 @@ const ProductDetails = (props) => {
           setDeliveryDate(response1.data.results.message);
           setDeliveryShopsList(response1.data.results.data);
           // setPincodeShow(true); // Show the message after receiving the response
-       
         })
         .catch((error) => {
           console.log(error);
@@ -474,15 +469,13 @@ const ProductDetails = (props) => {
     setImageLoading(false);
   };
 
-
   let cost = props.offerPrice;
   let formattedCost = parseFloat(cost).toLocaleString();
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
-  
-  const result = numberWithCommas(formattedCost);
 
+  const result = numberWithCommas(formattedCost);
 
   const handleThumbnailClick = (index) => {
     setCurrentSlideIndex(index);
@@ -759,8 +752,8 @@ const ProductDetails = (props) => {
                     data={{
                       text: "Swa Diamonds",
                       // url: "https://swa.co/" + location.pathname,
-                      // url: `https://www.swa.co/jewellery/share?id=${props.productDetails.id}&color=${props.productDetails.color}&name=${props.productDetails.name}&alias=${props.alias}`,
-                      url: `https://www.swa.co/jewellery/share?id=${
+                      // url: `https://www.swadiamonds.com/jewellery/share?id=${props.productDetails.id}&color=${props.productDetails.color}&name=${props.productDetails.name}&alias=${props.alias}`,
+                      url: `https://www.swadiamonds.com/jewellery/share?id=${
                         props && props.productDetails && props.productDetails.id
                       }&color=${
                         props &&
@@ -771,7 +764,7 @@ const ProductDetails = (props) => {
                         props.productDetails &&
                         props.productDetails.name
                       }&alias=${props && props.alias && props.alias}`,
-                      // url: "https://www.swa.co/" + location.pathname,
+                      // url: "https://www.swadiamonds.com/" + location.pathname,
                       title: "Swa Diamonds",
                     }}
                     onClick={() => console.log("shared successfully!")}
@@ -1181,20 +1174,20 @@ const ProductDetails = (props) => {
                           deliveryDate === "Shipment in next 5 working days"
                             ? shippingTag1
                             : deliveryDate === "Delivery in 24 hrs"
-                              ? shippingtag2
-                              : deliveryDate === "Shipment in next day"
-                                ? shippingTag
-                                : shippingtag2
+                            ? shippingtag2
+                            : deliveryDate === "Shipment in next day"
+                            ? shippingTag
+                            : shippingtag2
                         }
                       />
                       <div className={Classes.shippingTagtext}>
                         {deliveryDate === "Shipment in next 5 working days"
                           ? "7 day shipping"
                           : deliveryDate === "Delivery in 24 hrs"
-                            ? "24hr Delivery"
-                            : deliveryDate === "Shipment in next day"
-                              ? "Next day shipping"
-                              : shippingtag2}
+                          ? "24hr Delivery"
+                          : deliveryDate === "Shipment in next day"
+                          ? "Next day shipping"
+                          : shippingtag2}
                       </div>
                     </div>
                   </div>
