@@ -1,0 +1,32 @@
+name: Deploy React App to Apache    
+
+on:
+  push:
+    branches:
+      - DEMO-staging-nextjs-live
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code 
+      uses: actions/checkout@v4 
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20' 
+
+    - name: Set up SSH
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H 139.59.56.103 >> ~/.ssh/known_hosts
+
+    - name: Deploy to Server
+      run: |
+        ssh -o StrictHostKeyChecking=no root@139.59.56.103 'bash /opt/projects/react/react_project/DEMO/Test_swaecom_project/deploy.sh'
+      env:
+        NODE_ENV: production
