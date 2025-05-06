@@ -1,0 +1,263 @@
+.Logo {
+  margin-top: 30px;
+}
+.Footer {
+  height: 100%;
+  background: #007481;
+
+  width: 100%;
+  padding: 40px 40px 70px 40px;
+}
+.uae {
+  margin: 15px 0px;
+}
+.uae p {
+  color: #fff;
+  font-weight: 600;
+}
+.india {
+  margin-bottom: 15px;
+}
+.india p {
+  color: #fff;
+  font-weight: 600;
+}
+.FooterMob {
+  height: 100%;
+  background: #007481;
+
+  width: 100%;
+  padding: 40px 40px 70px 40px;
+}
+.FooterMob {
+  display: none;
+}
+.FooterDownMob {
+  display: none;
+}
+.FootIconImg {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  justify-content: center;
+}
+
+.LogoText {
+  font-weight: 400;
+  margin-top: 25px;
+  font-size: 15px;
+  font-family: var(--font-gilroy) !important;
+  color: #ffffff;
+  text-align: left;
+}
+.ParentCollaps {
+  margin-top: 20px;
+}
+.MobQuicklinks {
+  margin-top: 12px;
+}
+.Title {
+  margin-bottom: 30px !important;
+  margin-top: 30px;
+  font-weight: 600;
+  font-family: var(--font-gilroy) !important;
+  font-size: 18px;
+  color: #ffffff;
+}
+.Links {
+  color: #ffffff;
+  font-weight: 200;
+  font-size: 15px;
+  font-family: var(--font-gilroy) !important;
+  margin-bottom: 9px !important;
+  text-decoration: none;
+}
+.PolicyLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.Link {
+  margin-top: 80px;
+  text-decoration: none;
+}
+
+.a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.Icons {
+  margin-top: -25px;
+  margin-left: 10px;
+}
+.Icons img {
+  margin: 7px;
+  max-width: 42px;
+  cursor: pointer;
+}
+.FooterDownTextR a {
+  text-decoration: none;
+  color: inherit;
+  font-size: 14px !important;
+}
+.FooterDown {
+  background: #005d67;
+  /* height: 100%; */
+  padding: 15px;
+}
+.FooterDownMob {
+  background: #005d67;
+  /* height: 100%; */
+  padding: 15px;
+}
+.FooterIcons {
+  max-width: 56px;
+  max-height: 20px;
+}
+.Address {
+  /* display: flex;
+  gap: 15px;
+  margin-bottom: 10px; */
+  display: grid;
+  grid-template-columns: 45px 1fr;
+}
+.AddressText {
+  /* margin-left: 15px; */
+}
+.FooterDownText {
+  color: #ffffff;
+  font-family: var(--font-gilroy) !important;
+
+  font-size: 14px;
+}
+.FooterDownTextR {
+  color: #ffffff;
+  font-family: var(--font-gilroy) !important;
+
+  font-size: 14px;
+  text-align: right;
+}
+@media screen and (max-width: 767px) {
+  .Icons img {
+    width: 25px;
+  }
+  .FooterDownText {
+    text-align: center;
+  }
+  .FooterDownTextR {
+    text-align: center;
+  }
+  .FootIconImg {
+    display: flex;
+    justify-content: center;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .Icons img {
+    width: 35px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .FooterIcons {
+    max-width: 42px;
+  }
+  .FooterDownTextR {
+    font-size: 13px;
+    text-align: right;
+  }
+  .FootIconImg {
+    gap: 10px;
+  }
+  .FooterDownText {
+    font-size: 13px;
+    text-align: left;
+  }
+  .Links {
+    font-size: 14px;
+  }
+  .LogoText {
+    font-size: 14px;
+  }
+}
+@media (min-width: 576px) and (max-width: 767px) {
+  .Title {
+    padding-left: 0px !important;
+  }
+  .Link {
+    margin-top: 0px;
+  }
+}
+@media (min-width: 300px) and (max-width: 575px) {
+  .FooterMob {
+    display: block;
+  }
+  .FooterDownMob {
+    display: block;
+  }
+  .Footer {
+    padding: 40px 40px 50px 20px;
+  }
+  .FooterMob {
+    padding: 40px 20px 50px 20px;
+  }
+  .Link {
+    margin-top: 0px;
+  }
+  .PolicyLinks {
+  }
+
+  .Title {
+    padding-left: 0px !important;
+    margin-bottom: 15px !important;
+  }
+  .FooterDown {
+    display: none;
+  }
+  .Footer {
+    display: none;
+  }
+  .SwaParentInfoMob {
+    margin-top: 25px;
+    text-align: center;
+  }
+  .Address {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .AddressText {
+    margin-left: 0px;
+  }
+  .Icons {
+    margin: 0px;
+    margin-top: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .Icons {
+    margin: 0px !important;
+  }
+  .FooterIcons {
+    max-width: 65px;
+  }
+  .FootIconImg {
+    flex-direction: column;
+    margin-bottom: 15px;
+  }
+  .FooterIconimg1 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .FooterDownText {
+    margin-bottom: 10px !important;
+  }
+  .FooterMob {
+    padding: 15px 20px 20px 20px;
+  }
+}

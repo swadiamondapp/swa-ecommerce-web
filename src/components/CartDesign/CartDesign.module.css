@@ -1,0 +1,593 @@
+.Title {
+  font-weight: 600;
+  font-size: 24px;
+  margin-bottom: 0px;
+  font-family: var(--font-playfair) !important;
+}
+
+.Main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 20px;
+  align-items: center;
+}
+
+.Main1 {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  margin-top: 20px;
+  align-items: center;
+}
+
+.Title {
+  font-weight: 600;
+  font-size: 24px;
+  font-family: var(--font-playfair) !important;
+}
+
+.SubText {
+  display: flex;
+
+  font-size: 14px;
+  font-family: var(--font-gilroy) !important;
+}
+
+.Steps2 {
+  font-family: var(--font-lato);
+  color: #0d1217 !important;
+  font-weight: 600;
+}
+
+.Main p {
+  color: #01b3c5;
+  font-family: var(--font-lato);
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.Number {
+  font-weight: 400;
+  font-size: 16px;
+  margin-left: 10px;
+  color: #757c81;
+  font-family: var(--font-gilroy) !important;
+  line-height: 30px;
+}
+
+.SubText {
+  font-family: var(--font-lato);
+  font-size: 24px;
+  font-weight: 600;
+  color: #0d1217;
+}
+
+.Home {
+  color: #00464d;
+  font-size: 14px;
+  font-family: var(--font-gilroy) !important;
+  font-weight: 500;
+}
+
+.NewArrival {
+  color: #01b3c5;
+  font-size: 14px;
+  font-family: var(--font-gilroy) !important;
+  font-weight: 500;
+}
+
+.CartItems {
+  /* margin: 20px; */
+  /* border: 1px solid black; */
+  padding: 14px;
+  background: #ffffff;
+  border: 0.5px solid #e8e8e8;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.Total {
+  border: 1px solid black;
+  height: 480px;
+}
+.Products {
+  border-radius: 2px;
+  /* margin-top: 22px; */
+}
+
+.ProductImage {
+  /* padding: 16px 16px 16px 0; */
+  display: flex;
+  justify-content: center;
+  width: 80%;
+  height: auto;
+}
+
+.ProductDetails {
+  font-weight: 600;
+  font-size: 18px;
+  margin-top: 20px;
+  color: #0d1217;
+  font-family: var(--font-gilroy) !important;
+}
+
+.ProductDetails p {
+  margin-bottom: 3px;
+}
+
+.Price {
+  display: flex;
+  font-size: 14px;
+}
+
+.PriceNew {
+  font-weight: 700;
+  margin-right: 5px;
+  font-size: 16px;
+  display: flex;
+}
+
+.PriceOld {
+  text-decoration: line-through;
+  margin-left: 5px;
+  font-weight: 300;
+  font-size: 16px;
+  color: #b0b0b0;
+  margin-bottom: 0px;
+}
+
+.SizeQty {
+  display: flex;
+  /* margin-top: 20px; */
+}
+
+.SizeText {
+  font-weight: 400;
+  font-size: 14px;
+  color: #757c81;
+  font-family: var(--font-gilroy) !important;
+  margin-top: 18px;
+}
+
+.SizeNum {
+  font-weight: 600;
+  font-size: 14px;
+  font-family: var(--font-gilroy) !important;
+  padding: 2px 5px 0 5px;
+  margin-top: 16px;
+}
+
+.DropDown {
+  margin-left: 15px;
+  margin-top: 10px;
+}
+
+.Quantity option {
+  border: 1px solid #00464d;
+  border-radius: 10px;
+}
+.SavedMoney {
+  font-weight: 600;
+  font-size: 14px;
+  margin-top: 3px;
+  color: #30933a;
+  font-family: var(--font-gilroy) !important;
+}
+.Rupee {
+  margin-bottom: 5px;
+}
+.Quantity {
+  font-size: 14px;
+  color: #303a42;
+  line-height: 16.48px;
+  font-weight: 400;
+}
+
+.ProductProperty {
+  font-weight: 400;
+  font-size: 14px;
+  color: #757c81;
+  line-height: 16.5px;
+  font-family: var(--font-gilroy) !important;
+  margin-top: 12px;
+}
+.Apply {
+  color: #0997e7;
+  font-size: 15px;
+  font-family: var(--font-gilroy) !important;
+  font-weight: 600;
+  cursor: pointer;
+}
+.Voucher {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+  margin-bottom: 10px;
+}
+.Delivery {
+  display: flex;
+  /* border-bottom: 0.5px solid #e8e9ea; */
+  margin-left: 12px;
+  margin-top: 15px;
+}
+
+.OverViewColor {
+  height: 15px;
+  width: 15px;
+}
+
+.DeliveryExpected {
+  font-weight: 400;
+  font-size: 12px;
+  color: #454647;
+  font-family: var(--font-gilroy) !important;
+  margin-left: 10px;
+}
+
+.RemoveMove {
+  background: #ffffff;
+  display: grid;
+  margin-bottom: 20px;
+  grid-template-columns: 1fr 1fr;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+}
+.RemoveMove1 {
+  background: #ffffff;
+  display: grid;
+  margin-bottom: 20px;
+  grid-template-columns: 1fr 1fr 1fr;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+}
+.Revove12 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.Remove {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0;
+  color: #5e666c;
+  padding-left: 20px;
+  margin: 0px;
+}
+
+.Delete {
+  font-weight: 400;
+  font-family: var(--font-gilroy) !important;
+  font-size: 14px;
+  margin-bottom: 0px;
+  padding: 20px 0px;
+}
+
+.Right {
+  background: #ffffff;
+  border: 0.5px solid #e8e8e8;
+  box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+  /* margin-top: 20px; */
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.TotalText {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0px;
+}
+
+.OrderSummery {
+  font-weight: 600;
+  font-size: 14px;
+  color: #5e666c;
+  padding-top: 20px;
+  font-family: var(--font-gilroy) !important;
+}
+
+.NumOfItem {
+  font-weight: 400;
+  font-size: 18px;
+  color: black;
+  font-family: var(--font-lato) !important;
+}
+.TotalSmall {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  font-size: 18px;
+  font-family: var(--font-lato) !important;
+}
+.Amount {
+  font-weight: 600;
+  font-size: 18px;
+  font-family: var(--font-lato) !important;
+  display: flex;
+}
+.TotalItem {
+  display: flex;
+  justify-content: space-between;
+}
+.TotalItemBorder {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  border-bottom: 0.5px solid #e8e9ea;
+}
+
+.TotalItems {
+  display: flex;
+}
+.TotalPayable {
+  font-weight: 600;
+  font-size: 17px;
+  letter-spacing: 0.03em;
+  color: #303a42;
+  font-family: var(--font-gilroy) !important;
+}
+.HurrayText {
+  color: #30933a;
+  font-weight: 600;
+  font-size: 14px;
+  margin-top: 10px;
+  text-align: center;
+}
+.AmountPayable {
+  font-weight: 700;
+  font-size: 17px;
+  color: #303a42;
+}
+.Input {
+  background: #f9f9f9;
+  border: 1px solid #e8e9ea;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 18px;
+  color: black;
+  font-family: var(--font-lato) !important;
+  width: 100%;
+  height: 50px;
+  /* margin-right: 5px;*/
+}
+.SubmitContainer {
+  display: flex;
+  gap: 5px;
+}
+.ApplyButton {
+  background: linear-gradient(180deg, #978958 0%, #aea174 82.81%);
+  border-radius: 2px;
+  padding: 12px 35px;
+  border: none;
+  border-radius: 2px;
+  color: #ffffff;
+  margin-left: 5px;
+}
+.ServiceCharge {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px dashed #e8e9ea;
+  padding-bottom: 12px;
+}
+.BookappointmentTrails button {
+  background: #00464d;
+  color: #fff;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  font-size: 14px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+.Trialpayable {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px 0px;
+  border-bottom: 0.5px solid #e8e9ea8a;
+  padding-bottom: 15px;
+  margin-top: 15px;
+}
+.Rupee {
+  margin-top: 4px;
+}
+.BiRupee {
+  padding-top: 1px;
+  padding-bottom: 2px;
+}
+.PlaceOrderButton {
+  background: #00464d;
+  border-radius: 4px;
+  padding: 10px 0 10px 0;
+  font-weight: 600;
+  width: 100%;
+  font-size: 14px;
+  color: #ffffff;
+  margin-top: 15px;
+}
+
+.PlaceOrderButtonMobile {
+  display: none;
+}
+.ValidationText {
+  font-weight: 400;
+  font-size: 14px;
+  color: #eb4925;
+  margin-left: 5px;
+  margin-top: -3px;
+}
+.Warning {
+  height: 15px;
+}
+.Validation {
+  display: flex;
+  /* margin-top: 10px; */
+  margin-bottom: 10px;
+}
+.OverView {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+.OverView p {
+  margin-bottom: 0px;
+}
+.OverViewKey {
+  font-weight: 600;
+  font-size: 14px;
+  color: #232323;
+  font-family: var(--font-gilroy) !important;
+}
+.OverViewValue {
+  font-weight: 400;
+  font-size: 14px;
+  color: #757c81;
+  font-family: var(--font-gilroy) !important;
+}
+.DummyWrap {
+  display: flex;
+  align-items: center;
+  background: #fcfbf6;
+  gap: 10px;
+  padding-left: 20px;
+}
+.DummyGreen {
+  font-size: 14px;
+  font-weight: 400;
+  color: #005d67;
+  font-family: var(--font-lato) !important;
+  margin-bottom: 0px;
+}
+.OverViewMobile {
+  display: none;
+}
+.OrderSummeryMob {
+  display: none;
+}
+.SubText span {
+  color: #949494;
+}
+
+@media screen and (max-width: 758px) {
+  .Right {
+    margin-bottom: 20px;
+  }
+  .Main1 {
+    margin: 15px 0px 15px 23px;
+    grid-template-columns: 3fr 1fr;
+  }
+}
+@media screen and (max-width: 575px) {
+  .CartItems {
+    margin: 0px;
+    border: none;
+  }
+  .Main {
+    display: flex;
+    padding: 10px 15px 0px;
+    margin: 0px;
+    justify-content: space-between;
+  }
+  .SubText {
+    font-size: 18px;
+  }
+  .Title {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 575px) {
+  .Main1 {
+    margin: 15px 0px 10px 23px;
+    grid-template-columns: 3fr 1fr;
+  }
+  .Wrapper {
+    padding: 0px !important;
+    overflow-x: hidden;
+  }
+  .SavedMoney {
+    font-size: 10px;
+  }
+  .ProductProperty {
+    margin-right: 47px;
+  }
+  .ProductProperty span {
+    display: none;
+  }
+  .OverView {
+    display: none;
+  }
+  .OverViewMobile {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 0px;
+    border-top: 0.5px solid #e8e9ea;
+    border-bottom: 0.5px solid #e8e9ea;
+    margin-top: 15px;
+  }
+  .ProductDetails {
+    margin-top: 0px;
+  }
+  .Delivery {
+    margin-left: 0px;
+    margin-top: 25px;
+  }
+  .RemoveMove {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .Remove {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0;
+    color: #5e666c;
+    margin: 0px;
+    justify-content: center;
+  }
+  .DummyWrap {
+    padding: 15px;
+    justify-content: center;
+  }
+  .DummyGreen {
+    font-size: 12px;
+  }
+  .CartItems {
+    border: none;
+    padding: 14px 14px 0px;
+  }
+  .OrderSummery {
+    display: none;
+  }
+  .OrderSummeryMob {
+    display: block;
+    font-family: var(--font-lato);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: 0.02em;
+    padding: 0px 20px 17px 25px !important;
+    color: #5e666c;
+  }
+  .PlaceOrderButton {
+    display: none;
+  }
+  .PlaceOrderButtonMobile {
+    display: block;
+    background: #00464d;
+    border-radius: 4px;
+    padding: 10px 0 10px 0;
+    font-weight: 600;
+    width: 100%;
+    font-size: 14px;
+    color: #ffffff;
+    margin-top: 15px;
+  }
+  .BtnPlaceOrderMobile {
+    padding: 0px 15px 15px 15px;
+  }
+}

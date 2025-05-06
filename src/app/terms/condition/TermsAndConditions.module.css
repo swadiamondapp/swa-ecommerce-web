@@ -1,0 +1,103 @@
+.Title {
+  font-weight: 600;
+  font-size: 24px;
+  font-family: var(--font-playfair) !important;
+}
+
+.Main {
+  display: flex;
+  margin-top: 30px;
+}
+
+.SubText {
+  display: flex;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: var(--font-gilroy) !important;
+  border-bottom: 0.5px solid #e8e9ea;
+  padding-bottom: 35px;
+}
+.Content {
+}
+
+.Home {
+  color: #00464d;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: var(--font-gilroy) !important;
+}
+
+.PrivacyPolicy {
+  color: #01b3c5;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: var(--font-gilroy) !important;
+}
+
+.Description {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 32px;
+  color: #757c81;
+  margin-top: 25px;
+  font-family: var(--font-gilroy) !important;
+}
+
+.SubHeading {
+  font-weight: 600;
+  font-size: 18px;
+  color: #007481;
+  font-family: var(--font-gilroy) !important;
+  padding: 10px 0px;
+}
+/* ul ul {
+    list-style-type:disc; 
+  } */
+
+@media (min-width: 300px) and (max-width: 575px) {
+  .Main {
+    display: flex;
+    margin-top: 20px;
+  }
+  .Title {
+    font-weight: 600;
+    font-size: 20px;
+    font-family: "PlayFairNormal" !important;
+    padding-bottom: 5px;
+  }
+  .Home {
+    color: #00464d;
+    font-weight: 400;
+    font-size: 14px;
+    font-family: var(--font-gilroy) !important;
+  }
+  .ulForDesk {
+  }
+  .PrivacyPolicy {
+    color: #01b3c5;
+    font-weight: 400;
+    font-size: 14px;
+    font-family: var(--font-gilroy) !important;
+  }
+  .temsContainer {
+    padding: 0px 0px;
+  }
+  .Description {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    color: #757c81;
+    margin: 8px 0px;
+    font-family: var(--font-gilroy) !important;
+  }
+  .SubHeading {
+    font-weight: 600;
+    font-size: 13px;
+    color: #007481;
+    font-family: var(--font-gilroy) !important;
+    padding: 0px 0px;
+  }
+  .SubText {
+    padding-bottom: 10px;
+  }
+}

@@ -1,0 +1,829 @@
+.line {
+  width: 20px;
+  height: 2px;
+  margin: 4px;
+  background: #ffffff;
+  border-radius: 5px;
+  display: none;
+  /* transition: all 0.3s linear; */
+}
+.NoBorder {
+  border: none !important;
+}
+
+.info_container {
+  background: #fcfbf6;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  padding: 10px 40px;
+}
+
+.user_info_name {
+  color: #0d1217;
+  font-family: var(--font-gilroy) !important;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-bottom: 0px;
+}
+
+.user_info_phone {
+  color: #0d1217;
+  font-family: var(--font-gilroy) !important;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 0px;
+}
+
+.detail_container {
+  padding: 10px 40px;
+}
+/* .SearchIcon {
+    display: none;
+  } */
+.searchbar {
+  border-radius: 32px;
+  position: relative;
+  background: #f4f4f4;
+}
+.searchList {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+.LogList {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+.LogListCont {
+  display: none;
+  position: absolute;
+  background-color: #f4f4f4;
+  border-radius: 5px;
+  /* width: 100px; */
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  /* padding: 12px 16px; */
+  z-index: 1;
+  /* max-height: 700px; */
+}
+.searchListCont {
+  display: none;
+  position: absolute;
+  background-color: #f4f4f4;
+  border-radius: 5px;
+  width: 100%;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  padding: 12px 16px;
+  z-index: 1;
+  max-height: 700px;
+  overflow-y: scroll;
+}
+/* .searchList:hover .searchListCont{
+    display: block;
+  } */
+
+.SearchItem {
+  color: #505050;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  font-family: var(--font-gilroy) !important;
+  border-bottom: 1px solid #eaeaea;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  cursor: pointer;
+}
+.SearchItem:hover {
+  background-color: rgba(0, 70, 77, 0.05);
+}
+.LogItem {
+  color: #505050;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  font-family: var(--font-gilroy) !important;
+
+  padding-bottom: 10px;
+  padding-top: 10px;
+  cursor: pointer;
+}
+.NoResult {
+  color: #505050;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  font-family: var(--font-gilroy) !important;
+
+  padding-bottom: 20px;
+  cursor: pointer;
+}
+.searchIcon {
+  position: absolute;
+  top: 50%;
+  right: 10px; /* Adjust this value to position the icon as desired */
+  transform: translateY(-50%);
+  pointer-events: none;
+  cursor: pointer;
+  cursor: pointer !important;
+}
+.searchList::placeholder {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #9c9c9c;
+  font-family: var(--font-gilroy) !important;
+}
+
+.Header_top {
+  background-color: #00464d;
+  height: 33px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.05);
+  text-align: left;
+  width: 100%;
+  position: relative;
+}
+.Header_topFilter {
+  background-color: #00464d;
+  height: 33px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.05);
+  text-align: left;
+  width: 100%;
+  position: relative;
+}
+
+.HeaderTop_Text {
+  display: flex;
+  padding: 5px;
+  justify-content: space-between;
+}
+
+.Top {
+  display: flex;
+  margin-top: 5px;
+}
+
+.Phone {
+  padding-right: 50px;
+  color: #ffffff;
+  font-weight: 400;
+  font-size: 11px;
+  font-family: var(--font-gilroy) !important;
+}
+
+.Mail {
+  color: #ffffff;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 14px;
+  font-family: var(--font-gilroy) !important;
+}
+
+.Time {
+  font-weight: 400;
+  font-size: 10px;
+  color: #ffffff;
+  font-family: var(--font-gilroy) !important;
+  margin-top: 5px;
+}
+
+.Header_down {
+  background-color: #10212f;
+  height: 140px;
+  padding: 10px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.Header_downFilter {
+  background-color: #10212f;
+  height: 97px;
+
+  display: flex;
+  align-items: flex-start;
+}
+
+.Logo {
+  display: flex;
+  align-items: flex-start;
+  cursor: pointer;
+  height: 80%;
+  margin: 13px 0 13px 0;
+}
+
+.AddToCart {
+  margin-right: 0px;
+}
+.ItemsNum {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  color: #ffffff;
+  background-color: #00464d;
+  top: -10px;
+  right: -1px;
+  text-align: center;
+  font-size: 10px;
+  /* padding-left: 4px; */
+  padding-top: 4px !important;
+  font-weight: 700;
+}
+.CartItemNum {
+  position: relative;
+}
+
+/* a {
+  color: #ffffff;
+  font-family: var(--font-gilroy) !important;
+  font-weight: 400 !important;
+  font-size: 12px !important;
+  text-decoration: none !important;
+} */
+
+.Searchbar::placeholder {
+  /* padding: 10px; */
+  font-size: 14px;
+  text-align: left !important;
+
+  font-family: var(--font-gilroy) !important;
+}
+
+.Logo_Search {
+  display: flex;
+  justify-content: space-between;
+}
+
+.SearchIcons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.Icon {
+  margin: 0 10px 0 10px;
+  cursor: pointer;
+}
+
+.Navbar {
+  list-style: none;
+  display: flex;
+  max-width: 100%;
+
+  padding-left: 0;
+  font-family: var(--font-gilroy) !important;
+}
+
+.DrawerLogin {
+  display: none;
+}
+
+.DrawerLogin p {
+  padding-left: 20px;
+}
+
+.NavBarMobile {
+  position: fixed;
+  top: 0vh;
+  left: 0;
+  padding-left: 0;
+  height: 100%;
+  width: 67%;
+  background: #fcfbf6;
+  transform: translateX(0%);
+  display: flex;
+  flex-direction: column;
+  color: #0d1217;
+  align-items: flex-start;
+  text-align: center;
+  transition: all 1s ease;
+  overflow-y: scroll;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: var(--font-gilroy) !important;
+}
+
+.DrawerShortCuts {
+  display: none;
+}
+
+.DrawerTop {
+  display: none;
+  height: 80px;
+  background: #10212f;
+  position: relative;
+}
+
+.DrawerTop img {
+  margin: 10px;
+}
+
+.DrawerClose {
+  margin: 10px;
+}
+
+.DrawerFooter {
+  height: 100%;
+  background: #00464d;
+  width: 100%;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: var(--font-gilroy) !important;
+  display: none;
+}
+.NotificationOpen {
+  width: 30%;
+  background: #ffffff;
+  box-shadow: 0px 28px 208px rgba(0, 0, 0, 0.08),
+    0px 8.44118px 62.7059px rgba(0, 0, 0, 0.0521271),
+    0px 3.50603px 26.0448px rgba(0, 0, 0, 0.04),
+    0px 1.26806px 9.4199px rgba(0, 0, 0, 0.0278729);
+  border-radius: 8px;
+  position: absolute;
+  right: 5%;
+  padding: 0 15px 10px 15px;
+}
+.NoNotification {
+  display: none;
+}
+.Heading {
+  display: flex;
+  justify-content: space-between;
+  padding: 25px 25px 25px 25px;
+}
+.Notification {
+  font-weight: 500;
+  color: #0d1217;
+  font-family: var(--font-playfair) !important;
+  font-size: 20px;
+}
+.NotificationTime {
+  color: #757c81;
+  font-weight: 400;
+  font-size: 12px;
+  font-family: var(--font-gilroy) !important;
+}
+.MarkReaded {
+  font-weight: 400;
+  font-size: 13px;
+  color: #01b3c5;
+  font-family: var(--font-gilroy) !important;
+}
+.NotificationDetails {
+  display: flex;
+  /* justify-content: space-between; */
+  border-bottom: 1px solid #e7e7e7;
+  margin: 0 20px;
+}
+.NotificationText {
+  font-weight: 400;
+  font-size: 13px;
+  color: #0d1217;
+  width: 100%;
+  font-family: var(--font-gilroy) !important;
+}
+.NotifictionImage {
+  width: 45px;
+  height: 45px;
+}
+.LoginOpen {
+  background: linear-gradient(180deg, #ffffff 0%, #ffffff 100%);
+  border: 1px solid #eeeeee;
+  backdrop-filter: blur(15px);
+  border-radius: 16px;
+  width: 507px;
+  height: 567px;
+  position: absolute;
+  top: 5%;
+  left: 30%;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+}
+.None {
+  display: none;
+}
+.LoginLogo {
+  display: flex;
+  justify-content: center;
+}
+.NoLogin {
+  display: none;
+}
+.BackModal {
+  background-color: #0d1217;
+  opacity: 0.5;
+}
+.ContactDetails {
+  color: #585f67;
+  font-weight: 400;
+  font-size: 12px;
+  margin-bottom: 5px;
+  font-family: var(--font-gilroy) !important;
+}
+.Input {
+  border-bottom: 1px solid #e2e4e5 !important;
+  border: none;
+  margin-bottom: 20px;
+  width: 100%;
+}
+.Input:focus {
+  outline: none;
+}
+.Flex {
+  display: flex;
+  margin: 15px;
+  justify-content: space-between;
+}
+.FlexCheck {
+  display: flex;
+  justify-content: space-between;
+}
+.TextReg {
+  text-align: center;
+  font-weight: 600;
+  font-size: 20px;
+  margin: 15px 0 35px 0;
+  font-family: var(--font-gilroy) !important;
+}
+.CheckBox {
+  margin-bottom: 15px;
+}
+.CheckBoxLabel {
+  color: #666666;
+  font-weight: 400;
+  font-size: 14px;
+  margin-left: 15px;
+  font-family: var(--font-gilroy) !important;
+  cursor: pointer;
+}
+.LoginButton {
+  background: #a49667;
+  border-radius: 42px;
+  border: 1px;
+  width: 100%;
+  padding: 15px 25px 15px 25px;
+  color: #fafafa;
+
+  font-family: var(--font-gilroy) !important;
+}
+
+.Validation {
+  color: #eb3d25;
+  font-family: var(--font-gilroy) !important;
+  font-size: 14px;
+}
+.Flexmid {
+  display: flex;
+  margin-top: 20px;
+  justify-content: center;
+}
+.Join {
+  text-decoration: underline;
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+.Background {
+  background: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  overflow-y: hidden;
+}
+.NumFlex {
+  display: flex;
+}
+.regPhoneNumber {
+  border-bottom: 1px solid #e2e4e5 !important;
+  border: none;
+  margin-top: 10px;
+  margin-left: 10px;
+  width: 100%;
+  height: 30px;
+  font-size: 14px;
+  padding-bottom: 10px;
+}
+.Catogaries {
+  font-size: 12px;
+  color: #ffffff !important;
+  text-align: start;
+  font-family: var(--font-gilroy) !important;
+  font-weight: 400;
+  margin-right: 40px;
+  display: block;
+  z-index: 1;
+}
+
+.regPhoneNumber:focus {
+  outline: none;
+}
+.FlexPhone {
+  display: flex;
+}
+.InputPhone {
+  margin-bottom: 20px;
+}
+
+.CountryCode {
+  position: absolute;
+  top: 50%;
+  left: 40px;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: #333;
+}
+.LoginSignup {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-family: var(--font-gilroy);
+  gap: 15px;
+}
+.LogedDetails_list p {
+  color: #0d1217;
+  padding: 10px 20px;
+  font-family: var(--font-gilroy) !important;
+  width: 100%;
+}
+.ListPTag:hover {
+  background-color: #fcfbf6;
+}
+.LogedDetails_Item :hover {
+  background-color: #fcfbf6;
+}
+.Name_phoneLoged {
+  font-weight: 500 !important;
+}
+.Name_phoneLog {
+  background: #fcfbf6;
+  padding: 15px 20px;
+}
+.Name_phoneLog p {
+  font-family: var(--font-gilroy) !important;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+.LogedUserDetails {
+  box-shadow: 0px 28px 208px 0px #00000014;
+  background: #fff;
+  position: absolute;
+  right: 9.5%;
+  top: 18%;
+  border-radius: 8px;
+  z-index: 999;
+  overflow: hidden;
+  width: 230px;
+}
+.LogedUser {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  gap: 8px;
+  font-family: var(--font-gilroy);
+}
+.LineArrow {
+  width: 1px;
+  height: 20px;
+  background: #fff;
+  opacity: 0.3;
+}
+.headerElement:hover {
+  transform: scale(1) translateY(-2px); /* Scale up and slightly move upwards */
+  transition: transform 0.3s ease; /* Add smooth transition effect */
+}
+
+@media (max-width: 1200px) {
+  .Icon {
+    width: 20px !important;
+  }
+  .PersonIcon {
+    width: 20px !important;
+  }
+
+  .Catogaries {
+    margin: 10px 5px 5px 10px;
+    padding: 20px;
+    border-bottom: 1px solid #f0ebd1;
+    width: 100%;
+    font-size: 16px;
+    color: #0d1217 !important;
+    text-align: start;
+    font-family: var(--font-gilroy) !important;
+  }
+
+  .DrawerLogin {
+    background: #eeeeee;
+    width: 100%;
+    display: flex;
+    font-weight: 900;
+    padding: 25px;
+    color: #0d1217;
+    font-family: var(--font-gilroy) !important;
+  }
+
+  .DrawerShortCuts {
+    width: 100%;
+    display: flex;
+    font-weight: 900;
+    padding: 25px;
+    color: #0d1217;
+    font-family: var(--font-gilroy) !important;
+    border-bottom: 1px solid #0d121721;
+    margin-top: -5px;
+  }
+
+  .DrawerTop {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px;
+  }
+
+  .DrawerWishList {
+    display: block;
+  }
+
+  .line {
+    display: block;
+  }
+
+  .Searchbar {
+    width: 180px;
+    height: 30px;
+    background-position: 10px;
+    background-size: 13px;
+  }
+
+  /* ::-webkit-input-placeholder {
+    margin-top: -2px;
+    font-size: 10px;
+    padding-left: 30px;
+  } */
+
+  /* a {
+    font-size: 5px;
+  } */
+
+  .Logo {
+    height: 35px;
+  }
+
+  .Account {
+    display: none !important;
+  }
+
+  .Header_down {
+    height: 70px;
+  }
+
+  .Navbar {
+    display: none !important;
+  }
+  .searchbar {
+    display: none;
+  }
+
+  .SearchIcons {
+    display: flex;
+    align-items: center;
+  }
+  .DrawerFooter {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .Navbar {
+    display: none !important;
+  }
+
+  .Header_top {
+    height: 26px;
+  }
+
+  .Searchbar {
+    display: none !important;
+  }
+
+  /* .SearchIcon {
+      display: inline-block;
+      align-items: center;
+    } */
+
+  .Icon {
+    width: 20px !important;
+  }
+
+  .NotificationOpen {
+    width: 80%;
+  }
+  .Account {
+    display: none !important;
+  }
+
+  .Time {
+    font-size: 8px;
+  }
+
+  .Mail {
+    font-size: 8px;
+  }
+
+  .Phone {
+    font-size: 8px;
+  }
+
+  .TopIcon {
+    width: 15px !important;
+  }
+  .Heading {
+    flex-direction: column;
+  }
+  .MarkReaded {
+    font-size: 11px;
+  }
+  .line {
+    width: 15px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .Top {
+    display: none;
+  }
+
+  .Time {
+    font-size: 6px;
+  }
+  .CheckBoxLabel {
+    font-size: 11px;
+  }
+  .Join {
+    font-size: 11px;
+  }
+  .Header_top {
+    height: 20px;
+  }
+
+  .HeaderTop_Text {
+    padding: 5px;
+    display: flex;
+    justify-content: right;
+  }
+
+  .Logo {
+    height: 30px;
+  }
+
+  .SearchIcons {
+    display: flex;
+    align-items: center;
+  }
+
+  .line {
+    display: block;
+  }
+
+  .Account {
+    display: none !important;
+  }
+
+  .SearchIcons {
+    display: flex;
+    align-items: center;
+  }
+
+  .Header_down {
+    align-items: center;
+  }
+  .NotificationDetails {
+    flex-direction: column;
+  }
+  .NotifictionImage {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+  }
+  .Notification {
+    font-size: 16px;
+  }
+}
+
+.Password::placeholder {
+  font-family: var(--font-gilroy);
+  font-size: 16px;
+  line-height: 28px;
+  color: #9d9d9d;
+}
+
+@media (min-width: 300px) and (max-width: 567px) {
+  .Flex {
+    margin: 15px 0px;
+  }
+}

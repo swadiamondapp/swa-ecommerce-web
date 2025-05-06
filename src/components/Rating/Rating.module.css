@@ -1,0 +1,315 @@
+.Title {
+  font-weight: 600;
+  font-size: 24px;
+  font-family: var(--font-playfair);
+}
+
+.Main {
+  display: flex;
+}
+
+.SubText {
+  display: flex;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: var(--font-gilroy);
+  /* border-bottom: 1px solid #E8E8E8; */
+}
+.RateReviewParent {
+  margin: 0px 50px;
+}
+.RateAndReviewCard {
+  box-shadow: 0px 2px 2px 0px #0000000d;
+  background: #fff;
+  padding: 20px;
+  border-radius: 3px;
+  margin-bottom: 15px;
+}
+.LeftCardView1 {
+  display: flex;
+  gap: 20px;
+}
+.OrderIdReview p {
+  color: #000;
+  font-family: "lato";
+  font-weight: 500;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #e5e5e5;
+}
+.CardView1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+.productNames3 {
+  color: #0d1217;
+  font-family: "lato";
+  font-weight: 600;
+  margin-bottom: 10px !important;
+}
+.pDesc3 {
+  color: #454647;
+  font-family: "lato";
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 5px !important;
+}
+.pDesc4 {
+  color: #454647;
+  font-family: "lato";
+  font-weight: 400;
+}
+.pDesc4 span {
+  text-decoration: line-through;
+}
+.RateReviewText {
+  color: #0997e7;
+  font-family: "lato";
+  font-size: 16px;
+}
+.RightCardView1 {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding-top: 12px;
+}
+.ParentMainReview_Rate {
+  margin-top: 30px;
+}
+.Home {
+  color: #00464d;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: var(--font-gilroy);
+}
+
+.Wishlist {
+  color: #01b3c5;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: var(--font-gilroy);
+}
+
+.Flex {
+  display: flex;
+}
+
+.ReviewProduct {
+}
+
+.ProductImage {
+  max-width: 100px;
+}
+.ParentCardImageText {
+  box-shadow: 0px 2px 2px 0px #0000000d;
+  background: #fff;
+  border-radius: 3px;
+  display: flex;
+  gap: 10px;
+  font-family: "lato";
+  margin-bottom: 15px;
+  padding: 15px;
+  margin-top: 20px;
+}
+
+.ProductName {
+  color: #0d1217;
+  font-family: var(--font-lato);
+  font-weight: 600;
+  margin-bottom: 5px !important;
+}
+
+.RatingText {
+  font-weight: 600;
+  color: #0d1217;
+  font-size: 16px;
+  font-family: var(--font-gilroy);
+  padding: 15px 30px 0 0px;
+}
+
+.RatingStar {
+  display: flex;
+  border-bottom: 0.5px solid #e8e9ea;
+  align-items: center;
+}
+.Star {
+  margin: 0 5px 0 5px;
+}
+.ReviewPart {
+  background: #ffffff;
+  border: 0.5px solid #e6e6e6;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  padding: 20px;
+}
+.Input {
+  width: 100%;
+  height: 150px;
+  background: #f9f9f9;
+  border: 1px solid #e8e9ea;
+  border-radius: 4px;
+  padding: 20px;
+  outline: none;
+}
+.Input::placeholder {
+  color: #a7a7a7;
+  font-family: "lato";
+}
+.ReviewText {
+  font-weight: 600;
+  color: #0d1217;
+  font-family: var(--font-gilroy);
+  font-size: 16px;
+}
+.ReviewText1 {
+  font-weight: 600;
+  color: #0d1217;
+  font-family: var(--font-gilroy);
+  font-size: 16px;
+  margin: 30px 0px !important;
+  margin-top: 10px !important;
+}
+
+.ReviewB1 {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border-bottom: 1px solid #e8e9ea;
+  padding-bottom: 5px;
+}
+.Review {
+  padding: 10px 0px 20px 0px;
+}
+.Button {
+  background: #19242d;
+  border-radius: 4px;
+  color: #ffffff;
+  padding: 10px 25px;
+  border: none;
+  background: #00464d;
+}
+.Submit {
+  text-align: end;
+  margin-top: 10px;
+}
+.Check {
+}
+.Thanks {
+  font-family: var(--font-gilroy);
+  text-align: center;
+
+  font-weight: 400;
+  font-size: 16px;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .CardView1 {
+    flex-direction: column;
+    align-items: baseline;
+  }
+  .RightCardView1 {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+  .CardView1 {
+    flex-direction: column;
+    align-items: baseline;
+  }
+  .RightCardView1 {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .ReviewB1 {
+    gap: 0px;
+    justify-content: space-between;
+  }
+  .MobReview1 {
+    padding: 0px !important;
+  }
+  .HeadMainMob2 {
+    padding-left: 20px;
+  }
+  .Input::placeholder {
+    font-size: 16px;
+    text-align: left;
+    padding: 15px;
+    padding-top: 0px;
+    padding-left: 0px;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 575px) {
+  .CardView1 {
+    flex-direction: column;
+    align-items: baseline;
+  }
+  .RightCardView1 {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .RateReviewParent {
+    margin: 0px 0px;
+  }
+  .MainCont {
+    padding: 0px !important;
+    background-color: #f1f5f9;
+  }
+  .ProductImgReview img {
+    max-width: 80px;
+  }
+  .RateReviewHeading {
+    padding-left: 20px;
+  }
+  .Title {
+    font-size: 20px;
+  }
+  .RateAndReviewCard {
+    padding: 15px;
+  }
+  .ReviewB1 {
+    gap: 0px;
+    justify-content: space-between;
+  }
+  .MobReview1 {
+    padding: 0px !important;
+  }
+  .HeadMainMob2 {
+    padding-left: 20px;
+  }
+  .Input::placeholder {
+    font-size: 16px;
+    text-align: left;
+    padding: 15px;
+    padding-top: 0px;
+    padding-left: 0px;
+  }
+  .SubText {
+    display: none;
+  }
+  .Review {
+    padding-bottom: 0px;
+  }
+  .ParentCardImageText {
+    margin-bottom: 0px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+  .ReviewPart {
+    padding-top: 8px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border: none;
+  }
+  .ReviewB1 {
+    border-top: 0.5px solid #e8e9ea;
+  }
+  .Title {
+    margin-bottom: 0px;
+  }
+}

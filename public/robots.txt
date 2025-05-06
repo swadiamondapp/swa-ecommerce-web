@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://swa-ecom-demo-project.vercel.app
+
+# Sitemaps
+Sitemap: https://swa-ecom-demo-project.vercel.app/sitemap.xml

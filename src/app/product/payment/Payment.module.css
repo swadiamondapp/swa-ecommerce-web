@@ -1,0 +1,323 @@
+.Title {
+  font-weight: 600;
+  font-size: 24px;
+  font-family: var(--font-lato);
+}
+
+.Main {
+  display: flex;
+  gap: 490px;
+  align-items: center;
+  margin-top: 20px;
+  margin: 30px 0px 0 50px;
+}
+.deliverypay {
+  text-align: center;
+  color: #000;
+  font-family: "lato";
+  font-weight: 700;
+  margin-top: 10px;
+}
+.Home {
+  color: #00464d;
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
+  font-weight: 500;
+}
+.NewArrival {
+  color: #01b3c5;
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
+  font-weight: 500;
+}
+.SubText {
+  display: flex;
+
+  font-size: 14px;
+  font-family: "gilroyNormal" !important;
+}
+
+.PaymentCards {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  margin-left: 50px;
+  padding-bottom: 100px;
+  gap: 25px;
+}
+.PaymentCards h4 {
+  font-family: var(--font-lato);
+  font-weight: 500;
+  font-size: 20px;
+  color: #0d1217;
+  margin-bottom: 0px;
+}
+.PaymentMethod {
+  border-radius: 4px;
+  border: 0.5px solid #e8e8e8;
+  padding: 20px;
+  background: linear-gradient(0deg, #ffffff, #ffffff);
+  box-shadow: 0px 2px 2px 0px #0000000d;
+}
+
+.PaymentMethod p {
+  color: #8c9296;
+  font-family: var(--font-lato);
+  font-weight: 400;
+  font-size: 16px;
+  padding-bottom: 20px;
+}
+
+.Pmethod {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  border-top: 0.75px solid #e8e9ea;
+  padding: 10px 0px;
+}
+.DeliverCard {
+  border-radius: 4px;
+  border: 0.5px solid #e8e8e8;
+  padding: 20px;
+  background: linear-gradient(0deg, #ffffff, #ffffff);
+  box-shadow: 0px 2px 2px 0px #0000000d;
+  /* overflow-y: scroll; */
+}
+
+.DeliverCardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.Changebtn {
+  text-align: center;
+  border-radius: 32px;
+  border: 1px solid #006e7f;
+  padding: 2px 10px;
+  color: #006e7f;
+  background: #006e7f0d;
+  cursor: pointer;
+}
+.TotalCard {
+  box-shadow: 0px 2px 2px 0px #0000000d;
+  background: linear-gradient(0deg, #ffffff, #ffffff);
+}
+.AmountSaved {
+  color: #30933a;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: "gilroyNormal" !important;
+}
+.Right {
+  background: #ffffff;
+  /* border: 0.5px solid #e8e8e8; */
+  /* box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.08); */
+  /* border-radius: 4px; */
+  /* margin-top: 20px; */
+  padding: 20px 20px 10px 20px;
+}
+
+.TotalText {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dashed #e8e9ea;
+  padding-bottom: 15px;
+}
+
+.OrderSummery {
+  font-weight: 600;
+  font-size: 14px;
+  color: #5e666c;
+  padding-top: 20px;
+  font-family: "gilroyNormal" !important;
+}
+
+.NumOfItem {
+  font-weight: 400;
+  font-size: 14px;
+  color: #5e666c;
+  font-family: "gilroyNormal" !important;
+}
+.TotalSmall {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  font-size: 18px;
+  font-family: "gilroyNormal" !important;
+}
+.Amount {
+  font-weight: 600;
+  font-size: 16px;
+  font-family: var(--font-lato);
+}
+.TotalItem {
+  display: flex;
+  justify-content: space-between;
+}
+.TotalItemBorder {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  border-bottom: 0.5px solid #e8e9ea;
+}
+
+.TotalItems {
+  display: flex;
+}
+.TotalPayable {
+  font-weight: 600;
+  font-size: 17px;
+  letter-spacing: 0.03em;
+  color: #303a42;
+  font-family: "gilroyNormal" !important;
+}
+.HurrayText {
+  text-align: center;
+  color: #30933a;
+  font-weight: 600;
+  font-size: 14px;
+  margin-top: 10px;
+}
+.AmountPayable {
+  font-weight: 700;
+  font-size: 17px;
+  color: #303a42;
+}
+.Input {
+  background: #f9f9f9;
+  border: 1px solid #e8e9ea;
+  border-radius: 4px;
+  font-weight: 400;
+  font-size: 16px;
+  color: #1e1e1e;
+  font-family: "gilroyNormal" !important;
+  width: 60%;
+  height: 50px;
+  /* margin-right: 5px;*/
+}
+.Name {
+  color: #475057;
+  font-family: var(--font-lato);
+  font-size: 17px;
+  font-weight: 500;
+  margin-top: 15px;
+  padding-bottom: 12px;
+}
+.SubAddress {
+  color: #475057;
+  font-family: var(--font-lato);
+  font-size: 14px;
+  font-weight: 500;
+}
+.Phone {
+  margin-top: 15px !important;
+}
+
+.PayButton {
+  background: #00464d;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 4px;
+  padding: 10px;
+  margin: 18px 10px;
+  font-family: var(--font-inter);
+  text-align: center;
+  cursor: pointer;
+}
+.Step .Title {
+  font-family: var(--font-lato);
+  font-size: 20px;
+  font-weight: 600;
+}
+.PayButtonMobile {
+  display: none;
+}
+.MobileRightArrow {
+  display: none;
+}
+.Title span {
+  /* color: #949494; */
+}
+.Rupee {
+  margin-top: 4px;
+}
+.BiRupee {
+  padding-top: 1px;
+  padding-bottom: 2px;
+}
+
+@media (min-width: 300px) and (max-width: 575px) {
+  .Wrapper {
+    padding: 0px;
+  }
+  .PaymentCards {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .SubText {
+    display: none;
+  }
+  .Main {
+    gap: 0px;
+    justify-content: space-between;
+    margin: 17px 20px 10px 20px;
+  }
+  .PaymentCards {
+    margin: 0px;
+  }
+  .Title {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .Step h1 {
+    font-family: var(--font-lato) !important;
+    font-size: 16px;
+  }
+  .PaymentCards {
+    padding-bottom: 0px;
+  }
+  .PayButton {
+    display: none;
+  }
+  .PayButtonMobile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #00464d;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 0px 10px 10px;
+    font-family: "InterNormal";
+    text-align: center;
+  }
+  .MobileRightArrow {
+    display: block;
+  }
+  .Right {
+    background: #ffffff;
+    /* border: 0.5px solid #e8e8e8; */
+    /* box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.08); */
+    /* border-radius: 4px; */
+    /* margin-top: 20px; */
+    padding: 18px 10px 5px 10px;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-evenly;
+    height: 100%;
+    flex-direction: column;
+  }
+}
+.ErrorMessage {
+  color: red;
+  font-size: 12px;
+  margin: 0px 20px 25px 20px;
+  /* width:100%; */
+  text-align: center;
+  /* position: absolute; */
+}

@@ -1,0 +1,1204 @@
+.mainContianer {
+  background: #eeeeee;
+  border-radius: 4px;
+  box-shadow: 0px 2px 2px 0px #0000000d;
+  padding: 20px;
+}
+.mainContianerProfile {
+  background: #eeeeee;
+  background: #f6f6f6;
+  border-radius: 4px;
+  box-shadow: 0px 2px 2px 0px #0000000d;
+  padding: 30px 20px;
+}
+.TryRightsec img {
+  width: 100%;
+  height: 330px;
+}
+.BookingInformation {
+  box-shadow: 0px 2px 2px 0px #0000000d;
+  background: #fff;
+  padding: 15px;
+  border-radius: 4px;
+  border: 0.5px solid #e8e8e8;
+  margin-bottom: 20px;
+}
+.BookingForm {
+  box-shadow: 0px 2px 2px 0px #0000000d;
+  background: #fff;
+  padding: 15px;
+  border-radius: 4px;
+  border: 0.5px solid #e8e8e8;
+  margin-bottom: 20px;
+  font-family: var(--font-lato);
+}
+.BookingHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+.BookEmailNumber {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+.Bookemail {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.Bookemail input {
+  width: 100%;
+  background: #e8e9ea;
+  border: 0.5px solid #f9f9f9;
+  border-radius: 4px;
+  padding: 10px;
+  outline: none;
+  margin-bottom: 10px;
+}
+.BookingName input::placeholder {
+  color: #a3a7ab;
+}
+.BookingName input {
+  background: #e8e9ea;
+  border: 0.5px solid #f9f9f9;
+  border-radius: 4px;
+  padding: 10px;
+  outline: none;
+  margin-bottom: 10px;
+  width: 100%;
+}
+.TryYourAddress {
+  color: #0d1217;
+  font-weight: 600;
+  font-size: 20px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+.BookingState {
+  display: flex;
+  flex-direction: column;
+}
+.Datepickes {
+  background: #f1f5f9;
+  color: #00464d;
+  font-family: "Lato";
+  font-weight: 600;
+  padding: 10px 15px;
+  border-radius: 4px;
+  position: relative;
+  padding-left: 0px;
+  width: 35%;
+  padding-right: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.OutletCard {
+  box-shadow: 0px 2px 2px 0px #0000000d;
+  border: 0.5px solid #e8e8e8;
+  border-radius: 8px;
+}
+.outleth3 {
+  color: #0d1217;
+  font-family: var(--font-playfair-display);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.OutletSearch {
+  position: relative;
+  margin-bottom: 10px;
+}
+.Outletsearchicon {
+  position: absolute;
+  top: 25%;
+  left: 6.5%;
+  width: 18px;
+}
+.OutletSearch input {
+  box-shadow: 0px 2px 4px 0px #0000001a inset;
+  border: 0.5px solid #ededed;
+  padding: 12px 0px 12px 50px;
+  width: 330px;
+  border-radius: 32px;
+  outline: none;
+}
+.OutletSearch input::placeholder {
+  color: #9c9c9c;
+  font-family: var(--font-lato);
+  font-weight: 500;
+}
+.Outletpincode {
+  color: #007481;
+  font-family: var(--font-lato);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+.RatingOutlets {
+  background: #f4f0dd;
+  display: flex;
+  align-items: center;
+  grid-gap: 3px;
+  gap: 5px;
+  color: #475057;
+  font-weight: 500;
+  padding: 4px 6px;
+  font-size: 13px !important;
+  border-radius: 4px;
+  margin-bottom: 10px !important;
+  display: inline-block;
+}
+.OutletFooter {
+  display: grid;
+  grid-template-columns: 1fr 1fr 4fr;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.ParentSubOutlet {
+  background-color: rgb(209 209 209 / 40%);
+  background-color: rgba(239, 239, 239, 0.4);
+  padding: 10px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  /* gap: 20px; */
+  gap: 2px;
+}
+.RightOutlet {
+  display: flex;
+  align-items: baseline;
+}
+.OutletModalsParent {
+  font-family: var(--font-lato);
+}
+.OutletModalHeader p {
+  color: #475057;
+  font-weight: 400;
+}
+.OutletModalHeader h3 {
+  color: #00464d;
+  font-weight: 600;
+  font-size: 18px;
+}
+.OutletModalHeader {
+  position: relative;
+  display: flex;
+  gap: 20px;
+  padding: 25px;
+  background: #efefef66;
+  border: 0.5px solid #e8e8e8;
+}
+.Modaloutletclose {
+  position: absolute;
+  top: 16%;
+  right: 6%;
+}
+.BasicDetailsOutlet {
+  padding: 25px;
+}
+.BasicDetailsOutlet h3 {
+  color: #0d1217;
+  font-weight: 600;
+  font-size: 18px;
+}
+.OutletMform {
+  display: flex;
+  flex-direction: column;
+}
+.OutletMform input {
+  background: #f9f9f9;
+  border: 0.5px solid #e8e9ea;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  outline: none;
+}
+.SelectDateModal {
+  padding: 0px 25px 25px 25px;
+}
+.DMdate1 p:nth-child(1) {
+  color: #006e7f;
+  font-weight: 400;
+  font-size: 14px;
+}
+.DMdate1 p:nth-child(2) {
+  color: #004655;
+  font-weight: 800;
+  font-size: 30px;
+}
+.ParentDateModals {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 10px;
+}
+.outletModalTime {
+  padding: 0px 25px 25px 25px;
+}
+.Timesec {
+  border: 1px solid #006e7f;
+  background: #f1f5f9;
+  border-radius: 32px;
+  padding: 8px 12px;
+  color: #004655;
+  font-weight: 600;
+}
+.Bookvistbtns {
+  padding: 25px;
+}
+.Bookvistbtns button {
+  background: #19242d;
+  color: #fff;
+  font-weight: 500;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.outletModalTimesec {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 12px;
+}
+.DMdate1 {
+  background: #f1f5f9;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 6px;
+}
+.trailathomeParent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.selectdateMText h3 {
+  color: #0d1217;
+  font-weight: 600;
+  font-size: 18px;
+}
+.OutletMform input::placeholder {
+  color: #a3a7ab;
+  font-weight: 500;
+  font-size: 14px;
+}
+.MOdalcloseiconOutlet {
+  color: #aaaaaa;
+  font-size: 22px;
+  cursor: pointer;
+}
+.LeftOutlets {
+  display: flex;
+  gap: 5px;
+  gap: 12px;
+}
+.OutletFooterCrad {
+  background: #fff;
+  padding: 12px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+.OutletImage img {
+  max-width: 80px;
+}
+.OutletCardParent {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  margin-top: 20px;
+  font-family: var(--font-lato);
+}
+.OutletDetails h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #00464d;
+  margin-bottom: 5px;
+}
+.OutletBookvist button {
+  background: #19242d;
+  color: #fff;
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  font-weight: 500;
+  border: none;
+  outline: none;
+}
+.OutletFooters {
+  color: #00464d;
+  font-weight: 600;
+  font-family: var(--font-lato);
+  font-size: 13px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.outletWatsapp {
+  border: 2px solid #19242d;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 0px;
+}
+.OutletDetails p {
+  font-size: 14px;
+  color: #475057;
+  font-weight: 400;
+}
+.OutletHead {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.CalendarIcon {
+  position: absolute;
+  top: 50%;
+  left: 22px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+.BookingState select {
+  border: 0.5px solid #e8e9ea;
+  padding: 10px;
+  border-radius: 4px;
+  outline: none;
+}
+.BookpincodeCity {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 10px;
+  gap: 20px;
+}
+.BookCity {
+  display: flex;
+  flex-direction: column;
+}
+.BookPincodee {
+  display: flex;
+  flex-direction: column;
+}
+.PincodeCitys {
+  display: grid;
+  grid-template-columns: 121px 121px;
+  gap: 10px;
+}
+.BookingHouse {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.BookingHouse input {
+  width: 100%;
+  background: #e8e9ea;
+  border: 0.5px solid #f9f9f9;
+  border-radius: 4px;
+  padding: 10px;
+  outline: none;
+  margin-bottom: 10px;
+}
+.BookPincodee input {
+  width: 100%;
+  background: #e8e9ea;
+  border: 0.5px solid #f9f9f9;
+  border-radius: 4px;
+  padding: 10px;
+  outline: none;
+  margin-bottom: 10px;
+}
+.BookPincodee input::placeholder {
+  color: #a3a7ab;
+}
+.BookCity input::placeholder {
+  color: #a3a7ab;
+}
+.BookCity input {
+  width: 100%;
+  background: #e8e9ea;
+  border: 0.5px solid #f9f9f9;
+  border-radius: 4px;
+  padding: 10px;
+  outline: none;
+  margin-bottom: 10px;
+}
+.Landmarck input {
+  width: 100%;
+  background: #e8e9ea;
+  border: 0.5px solid #f9f9f9;
+  border-radius: 4px;
+  padding: 10px;
+  outline: none;
+  margin-bottom: 10px;
+}
+
+.Landmarck input::placeholder {
+  color: #a3a7ab;
+}
+.BookAppoinmentbtn button {
+  background: #19242d;
+  color: #fff;
+  font-weight: 500;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  margin-top: 20px;
+}
+.BookingHouse input::placeholder {
+  color: #a3a7ab;
+}
+.BookingStreet input::placeholder {
+  color: #a3a7ab;
+}
+.BookingStreet input {
+  width: 100%;
+  background: #e8e9ea;
+  border: 0.5px solid #f9f9f9;
+  border-radius: 4px;
+  padding: 10px;
+  outline: none;
+  margin-bottom: 10px;
+}
+.HouseStreet {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.BookingStreet {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.Landmarck {
+  display: flex;
+  flex-direction: column;
+}
+.DesignFormPara {
+  color: #00464d;
+  font-family: var(--font-lato);
+  font-weight: 400;
+  font-size: 14px;
+}
+.BookingName {
+  display: flex;
+  flex-direction: column;
+}
+.TryHomeEdits {
+  color: #0464d5;
+  font-family: var(--font-lato);
+  font-weight: 600;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.TryBookInner {
+  color: #0d1217;
+  font-family: var(--font-lato);
+  font-weight: 600;
+  font-size: 20px;
+  margin-bottom: 0px;
+}
+.TryHomeEdits img {
+  max-width: 16px;
+}
+.BookDateTime {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+.BookingParentForm {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.CardCartItemsUpload {
+  position: relative;
+}
+.Tryclosebtns {
+  position: absolute;
+  top: -6%;
+  max-width: 22px;
+  right: 0%;
+  cursor: pointer;
+}
+.ProfileCard img {
+  width: 77px;
+  height: 77px;
+  border-radius: 50px;
+}
+.YourTrialCartItems {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 20px;
+  margin-top: 15px;
+}
+.LeftYourTrialCartItems h3 {
+  color: #0d1217;
+  font-family: var(--font-lato);
+  font-weight: 600;
+  font-size: 20px;
+}
+.TryathomePara {
+  color: #000000;
+  font-family: var(--font-lato);
+  font-weight: 500;
+}
+.TryAtHomeHead {
+  font-family: var(--font-playfair-display);
+  color: #0d1217;
+  font-weight: 600;
+}
+.LeftYourTrialCartItems {
+  background: #fff;
+  box-shadow: 0px 2px 2px 0px #0000000d;
+  padding: 20px;
+  border-radius: 8px;
+  border: 0.5px solid #e8e8e8;
+}
+.ParentCardItems {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 10px;
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+.error {
+  color: #ff0000b5;
+  font-size: 14px;
+}
+.CardCartItems {
+  background: #f1f5f9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 110px;
+  padding: 10px;
+  color: #006e7f;
+  font-weight: 600;
+  font-family: var(--font-lato);
+  font-size: 14px;
+  gap: 8px;
+  border-radius: 4px;
+}
+.CardCartItems img {
+  max-width: 25px;
+}
+.Proceedbutns {
+  margin-top: 15px;
+}
+.Proceedbutns button {
+  background: #19242d;
+  color: #fff;
+  font-family: var(--font-lato);
+  font-weight: 500;
+  padding: 12px 15px;
+  border-radius: 4px;
+  border: none;
+}
+.T1parent {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 20px;
+  margin-top: 20px;
+}
+.TryatHomeCardh3 {
+  color: #0d1217;
+  font-family: var(--font-lato);
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-size: 20px;
+  margin-bottom: 25px;
+}
+.TryatHomeCard {
+  box-shadow: 0px 2px 2px 0px #0000000d;
+  background: #fff;
+  border-radius: 8px;
+  border: 0.5px solid #e8e8e8;
+  padding: 20px;
+}
+.TryHomeDate {
+  display: grid;
+  grid-template-columns: repeat(6, 75px);
+  gap: 15px;
+  padding-bottom: 25px;
+  border-bottom: 0.5px solid #e5e5e5;
+}
+.SelectTimeSlot {
+  margin-top: 20px;
+}
+.TryTimeSlots {
+  margin-top: 15px;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+/* 
+.TryTimeSlots button {
+  background: #f1f5f9;
+  border: 0.5px solid #006e7f;
+  color: #004655;
+  font-family: "lato";
+  font-weight: 600;
+  font-size: 14px;
+  padding: 7px 10px;
+  border-radius: 32px;
+}
+.TryTimeSlotsActive {
+  background: #006e7f;
+  color: "f1f5f9";
+} */
+.TryTimeSlotsDefault {
+  background: #f1f5f9;
+  border: 0.5px solid #006e7f;
+  color: #004655;
+  font-family: var(--font-lato);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 7px 10px;
+  border-radius: 32px;
+}
+
+.TryTimeSlotsActive {
+  background: #006e7f;
+  color: #f1f5f9;
+  font-family: var(--font-lato);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 7px 10px;
+  border-radius: 32px;
+  border: 0.5px solid #006e7f;
+  outline: none;
+}
+
+.SelectTimeSlot h3 {
+  color: #0d1217;
+  font-size: 20px;
+  font-family: var(--font-lato);
+  font-weight: 600;
+}
+.datetext {
+  font-family: var(--font-lato);
+  color: #006e7f;
+  font-size: 13px;
+  padding-top: 5px;
+}
+.TryDate1 h3 {
+  font-family: var(--font-lato);
+  margin-bottom: 0px;
+  padding-bottom: 3px;
+  font-size: 26px;
+  font-weight: 800;
+  color: #004655;
+}
+.ProceedAmountT {
+  font-size: 14px;
+  font-family: var(--font-lato);
+  font-weight: 600;
+  margin: 10px 0px;
+  display: flex;
+  align-items: center;
+}
+.ProceedAmountT span {
+  color: rgba(0, 0, 0, 0.7);
+  font-weight: 400;
+}
+.TryDate1 {
+  background: #f1f5f9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 4px;
+}
+.TryDesign1 {
+  background: #006e7f;
+  background-color: rgba(0, 110, 127, 0.1);
+  color: #006e7f;
+  width: 100%;
+  text-align: center;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.TryDesign1 p {
+  padding: 5px;
+  font-size: 14px;
+  font-family: var(--font-lato);
+  font-weight: 400;
+  font-size: 13px;
+}
+.TryDateActive {
+  background: #fff;
+  border: 0.5px solid #006e7f;
+}
+
+.TryDesign1Active {
+  background: #006e7f;
+  color: #fff;
+}
+.ProfileCard {
+  box-shadow: 0px 2px 2px 0px #0000000d;
+  background: #fff;
+  margin: 0px 350px;
+  border: 0.5px solid #e8e8e8;
+  padding: 25px;
+  border-radius: 4px;
+  font-family: var(--font-lato);
+}
+.ProfileForms label {
+  color: #585f67;
+  font-weight: 500;
+}
+.ProfileForms input {
+  background: #f9f9f9;
+  border: 0.5px solid #e8e9ea;
+  padding: 10px;
+  border-radius: 4px;
+  outline: none;
+  width: 100%;
+}
+.ParentProfileBtn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.ProfileCard h3 {
+  color: #000000;
+  font-weight: 500;
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+.ProfileCard img {
+  margin-bottom: 10px;
+}
+.UploadPhotoProfile {
+  color: #0464d5;
+  font-weight: 500;
+}
+.ProfileNames {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+.ProfileMails {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+.ProfileMobile {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+.VerifyProfilebtn {
+  display: flex;
+  gap: 10px;
+}
+.ProfileForms {
+  margin-top: 15px;
+  margin-bottom: 30px;
+}
+.VerifyProfilebtn button {
+  background: #00464d;
+  color: #fff;
+  border: none;
+  padding: 0px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.ProfileSaveChangeBtn {
+  width: 100%;
+  color: #fff;
+  /* border: 0.5px solid #19242D; */
+  background: #19242d;
+  font-weight: 500;
+  font-family: var(--font-lato);
+  padding: 10px;
+  border-radius: 4px;
+  outline: none;
+}
+.ProfileCancelbtn {
+  width: 100%;
+  color: #19242d;
+  border: 0.5px solid #19242d;
+  background: transparent;
+  font-weight: 500;
+  font-family: var(--font-lato);
+  padding: 10px;
+  border-radius: 4px;
+  outline: none;
+}
+.title {
+  padding: 0px 20px 10px 45px;
+  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+  text-align: left;
+  font-family: var(--font-lato);
+}
+.swaWalletBalanceContainer {
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+}
+.ParentTransfer1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  border-bottom: 0.5px solid #e5e5e5;
+  padding-bottom: 12px;
+  align-items: center;
+}
+.T1Parent {
+  /* display: flex; */
+  grid-gap: 10px;
+  /* gap: 70px; */
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 300px 400px;
+}
+.disabledButton {
+  background-color: #94a3b8 !important;
+  cursor: not-allowed !important;
+}
+.T1Leftsec {
+  color: #475057;
+}
+.T1Rightsec h3 {
+  color: #000000;
+  font-weight: 700;
+  font-size: 27px;
+}
+.LeftTransferfund h3 {
+  color: #000;
+  font-size: 18px;
+  font-family: var(--font-lato);
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+.LeftTransferfund p {
+  color: #475057;
+  font-size: 15px;
+}
+.T1Rightsec {
+  border-left: 0.5px solid #e5e5e5;
+  padding-left: 40px;
+}
+.walletRight {
+  width: 100%;
+  text-align: end;
+}
+.walletLeft {
+  width: 100%;
+}
+.walletRight button {
+  background: #00464d;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-top: 13px;
+}
+.walletTitle {
+  padding-left: 30px;
+  color: #86898b;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+  text-align: left;
+  font-family: var(--font-lato);
+}
+.head {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  padding-left: 30px;
+}
+.head img {
+  width: 30px;
+}
+.container {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 4px;
+}
+.head span {
+  color: #000000;
+  font-weight: 800;
+  font-size: 30px;
+  padding-left: 10px;
+}
+.texts {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-left: 30px;
+}
+.texts p {
+  color: black;
+  font-family: var(--font-lato);
+}
+.texts span {
+  color: #7a8288;
+  font-size: 14px;
+}
+@media (min-width: 1025px) and (max-width: 1200px) {
+  .ProfileCard {
+    margin: 0px 250px;
+  }
+  .ParentCardItems {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+  .OutletCardParent {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (min-width: 992px) and (max-width: 1024px) {
+  .ProfileCard {
+    margin: 0px 150px;
+  }
+  .ParentCardItems {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+  .BookingParentForm {
+    grid-template-columns: 1.5fr 1fr;
+  }
+  .OutletCardParent {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .ProfileCard {
+    margin: 0px 100px;
+  }
+  .T1parent {
+    grid-template-columns: 1fr;
+  }
+  .YourTrialCartItems {
+    grid-template-columns: 1fr;
+  }
+  .BookingParentForm {
+    grid-template-columns: 2.5fr 1fr;
+  }
+  .OutletCardParent {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (min-width: 568px) and (max-width: 767px) {
+  .ProfileCard {
+    margin: 0px 0px;
+  }
+  .BookingParentForm {
+    grid-template-columns: 1fr;
+  }
+  .BookpincodeCity {
+    grid-template-columns: 1fr;
+  }
+  .Datepickes {
+    width: 50%;
+  }
+  .BookEmailNumber {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .BookpincodeCity {
+    gap: 10px;
+  }
+  .PincodeCitys {
+    grid-template-columns: 1fr 1fr;
+  }
+  .HouseStreet {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .OutletCardParent {
+    grid-template-columns: 1fr;
+  }
+  .T1Parent {
+    /* display: flex; */
+    grid-gap: 10px;
+    /* gap: 70px; */
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 240px 230px;
+  }
+  .trailathomeParent {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}
+@media (min-width: 300px) and (max-width: 567px) {
+  .title {
+    display: none;
+  }
+  .HouseStreet {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .PincodeCitys {
+    grid-template-columns: 1fr 1fr;
+  }
+  .BookEmailNumber {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .BookpincodeCity {
+    gap: 10px;
+  }
+  .Datepickes {
+    width: 50%;
+  }
+  .TryBookInner {
+    font-size: 18px;
+  }
+  .BookingParentForm {
+    grid-template-columns: 1fr;
+  }
+  .BookpincodeCity {
+    grid-template-columns: 1fr;
+  }
+
+  .head {
+    padding-left: 0px;
+  }
+  .head img {
+    width: 35px;
+  }
+  .walletTitle {
+    margin-bottom: 5px;
+    font-size: 14px;
+    padding-left: 0px;
+  }
+  .head span {
+    color: #000000;
+    font-weight: 600;
+    font-size: 25px;
+    padding-left: 6px;
+    font-family: var(--font-lato);
+  }
+  .texts {
+    gap: 10px;
+    padding-left: 0px;
+  }
+  .ProfileCard {
+    margin: 0px 0px;
+  }
+  .T1parent {
+    grid-template-columns: 1fr;
+  }
+  .TryHomeDate {
+    grid-template-columns: 1fr 1fr;
+  }
+  .TryathomePara {
+    font-size: 15px;
+  }
+  .TryRightsec {
+    display: none;
+  }
+  .ParentCardItems {
+    grid-template-columns: 1fr 1fr;
+  }
+  .YourTrialCartItems {
+    grid-template-columns: 1fr;
+  }
+  .OutletCardParent {
+    grid-template-columns: 1fr;
+  }
+  .trailathomeParent {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .OutletImage {
+    max-width: 60px;
+  }
+  .OutletDetails h3 {
+    font-size: 15px;
+  }
+  .RatingOutlets {
+    font-size: 12px !important;
+  }
+  .RightOutlet {
+    font-size: 14px;
+  }
+  .RightOutlet img {
+    max-width: 12px;
+  }
+  .LeftOutlets {
+    gap: 10px;
+  }
+  .ParentSubOutlet {
+    gap: 0px;
+  }
+  .OutletDetails p {
+    font-size: 13px;
+  }
+  .OutletImage img {
+    max-width: 61px !important;
+  }
+  .OutletModalHeader img {
+    max-height: 75px;
+  }
+  .OutletModalHeader h3 {
+    font-size: 16px;
+  }
+  .OutletModalHeader {
+    font-size: 13px;
+  }
+  .BasicDetailsOutlet {
+    padding: 25px 0px 25px 0px;
+  }
+  .SelectDateModal {
+    padding: 0px 0px 25px 0px;
+  }
+  .outletModalTime {
+    padding: 0px 0px 25px 0px;
+  }
+  .Bookvistbtns {
+    padding: 0px 0px 25px 0px;
+  }
+  .T1Parent {
+    grid-template-columns: 1fr;
+  }
+  .T1Rightsec {
+    border: none;
+    padding-left: 0px;
+    border-bottom: 0.5px solid #e5e5e5;
+    padding-bottom: 10px;
+  }
+  .swaWalletBalanceContainer {
+    /* background-color: #aa1111 !important; */
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: start;
+  }
+  .walletRight {
+    width: 60%;
+    text-align: end;
+    margin-top: 10px;
+  }
+}

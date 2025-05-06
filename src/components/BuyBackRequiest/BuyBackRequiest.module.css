@@ -1,0 +1,200 @@
+.BuyBackContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.Pin {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: flex-end;
+}
+.dropDown {
+  width: 100%;
+}
+
+/* .dropDown .MuiAutocomplete-input {
+  padding:2px 2px !important
+}
+.dropDown .MuiOutlinedInput-root {
+  width: 100%;
+  background-color:rgba(232, 233, 234, 1) ;
+  padding:4px 5px;
+  border: none;
+}
+.dropDown .Mui-focused .MuiOutlinedInput-notchedOutline {
+  background-color: green;
+} */
+
+.Location {
+  display: flex;
+
+  gap: 1.5rem;
+}
+
+.Title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.labelStyle {
+  color: black;
+  font-family: "gilroyNormal";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.25rem;
+  opacity: 0.9;
+  margin-bottom: 5px;
+}
+
+.alllInputFeilds {
+  width: 100%;
+  border: 1px solid lightgray;
+  font-family: "gilroyNormal";
+  font-size: 14px;
+  border-radius: 4px;
+  padding: 8px 12px;
+  background-color: #F9F9F9;
+  border: 1px solid #e8e9ea;
+}
+.alllInputFeilds:focus {
+  width: 100%;
+  border: 1px solid lightgray;
+  font-family: "gilroyNormal";
+  font-size: 14px;
+  border-radius: 4px;
+  padding: 8px 12px;
+  background-color: #F9F9F9;
+  border: 1px solid #e8e9ea;
+  box-shadow: 1px 4px 4px 0px rgba(0, 70, 77, 0.1) inset;
+}
+.alllInputFeilds ::placeholder {
+  opacity: 0.9;
+  font-size: 14px;
+}
+.alllInputFeilds:focus-visible {
+  border: 1px solid #026F7F;
+  /* Green border color for focus-visible state */
+  outline: none; /* Optionally, remove the default outline */
+}
+
+/* .textField .MuiOutlinedInput-root {
+  width: 100%;
+  background-color:rgba(232, 233, 234, 1) ;
+  padding:12px 0px 12px 0px;
+  border:none;
+  padding-right:15px;
+
+}
+.textField .Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: green;
+}
+.textField .MuiAutocomplete-input {
+  padding:4px 4px 4px 5px;
+} */
+
+.halfInput {
+  width: 50%;
+}
+.quatorInput {
+  width: 50%;
+}
+.confirmButtonContianer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 4px;
+}
+.confirmButton {
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  background-color: rgba(0, 70, 77, 1);
+  padding: 8px 10px;
+  margin: 5px 0px;
+  font-size: 14px;
+  font-weight: 400;
+}
+.dropDown .css-1h51icj-MuiAutocomplete-root .MuiOutlinedInput-root {
+  padding: 7px !important;
+}
+
+.autocompleteInput {
+  padding: 4px 4px 4px 5px;
+}
+
+@media (min-width: 300px) and (max-width: 575px) {
+  
+  .BuyBackContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .Pin {
+    display: flex;
+    gap: 4px;
+    flex-direction: column;
+  }
+  .Title {
+    margin: 5px 0px;
+  }
+  .Location {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .quatorInput {
+    width: 50%;
+  }
+  .halfInput {
+    width: 100%;
+  }
+  .confirmButtonContianer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+  }
+  .buttonsWIdth {
+    width: 100%;
+  }
+  .confirmButton {
+    width: 100%;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    background-color: rgba(0, 70, 77, 1);
+    padding: 10px 15px;
+    /* margin:10px 0px; */
+    font-size: 14px;
+  }
+  .labelStyle {
+    color: black;
+    font-family: "gilroyNormal";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.25rem;
+    opacity: 0.9;
+    margin-bottom: 5px;
+  }
+  .alllInputFeilds {
+    width: 100%;
+    border: 1px solid lightgray;
+    font-family: "gilroyNormal";
+    font-size: 14px;
+    border-radius: 4px;
+    padding: 10px 5px;
+    background-color: #F9F9F9;
+    border: 2px solid #e8e9ea;
+    /* box-shadow: 1px 4px 4px 0px rgba(0, 70, 77, 0.1) inset; */
+  }
+  .alllInputFeilds:focus-visible {
+    border: 2px solid green;
+    /* Green border color for focus-visible state */
+    outline: none; /* Optionally, remove the default outline */
+  }
+  .dropDown .css-1h51icj-MuiAutocomplete-root .MuiOutlinedInput-root {
+    padding: 7px !important;
+  }
+}
