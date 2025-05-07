@@ -116,7 +116,7 @@ const ProductDetailsPage = (props) => {
         document.head.appendChild(newOgImage);
       }
       document.querySelector("meta[property='og:image']").content =
-        prodDet.image_url || "https://www.swa.co/";
+        prodDet.image_url || "https://www.swadiamonds.com/";
     }
 
     // Cleanup function to remove dynamically added meta tags on component unmount
@@ -151,7 +151,6 @@ const ProductDetailsPage = (props) => {
       const response = await axios.get(
         `${Urls.detailsWithAlias}${productName}`
       );
-   
 
       if (response.data.results.data) {
         const details = {
@@ -183,7 +182,7 @@ const ProductDetailsPage = (props) => {
       if (details) {
         setFetchedName(productId); // Mark the current name as fetched
         const { id } = details;
-      
+
         axios
           .get(`${Urls.productDet}${id}?country=${countryId}`)
           .then((response) => {

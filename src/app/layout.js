@@ -49,11 +49,11 @@ export const metadata = {
   openGraph: {
     title: "Swa Diamonds",
     description: "Swa Diamonds is the best place to buy diamonds",
-    url: "https://www.swa.co",
+    url: "https://www.swadiamonds.com",
     siteName: "Swa Diamonds",
     images: [
       {
-        url: "https://www.swa.co/og-image.jpg",
+        url: "https://www.swadiamonds.com/og-image.jpg",
         width: 1200,
         height: 630,
       },
@@ -64,7 +64,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Swa Diamonds",
     description: "Swa Diamonds is the best place to buy diamonds",
-    images: ["https://www.swa.co/twitter-image.jpg"],
+    images: ["https://www.swadiamonds.com/twitter-image.jpg"],
   },
 };
 

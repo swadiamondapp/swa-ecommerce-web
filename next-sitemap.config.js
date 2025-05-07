@@ -1,4 +1,4 @@
 module.exports = {
-  siteUrl: "https://www.swa.co",
+  siteUrl: "https://www.swadiamonds.com",
   generateRobotsTxt: true,
 };

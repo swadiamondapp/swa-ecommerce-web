@@ -7,21 +7,18 @@ import { cookies } from "next/headers";
 export const generateMetadata = async ({ params }) => {
   const productAlias = (await params).alias;
   const cookieStore = await cookies();
-  
-  const countryId = cookieStore.get('countryId')?.value; 
 
-  
+  const countryId = cookieStore.get("countryId")?.value;
+
   const response = await fetch(
     `https://swaecommain.swa.co/ecom/alias-product/?alias=${productAlias}&country=${countryId}`,
     {
       headers: {
         "Content-Type": "application/json",
       },
-    
     }
   );
   const productDetails = (await response.json()).results.data;
- 
 
   return {
     title: productDetails.meta_title,
@@ -29,7 +26,7 @@ export const generateMetadata = async ({ params }) => {
     openGraph: {
       title: productDetails.meta_title,
       description: productDetails.meta_description,
-      url: "https://www.swa.co/jewellery/" + productDetails.alias,
+      url: "https://www.swadiamonds.com/jewellery/" + productDetails.alias,
       images: [productDetails.image_url],
     },
     twitter: {
@@ -43,7 +40,9 @@ export const generateMetadata = async ({ params }) => {
         "@context": "https://schema.org",
         "@type": "Product",
         name: productDetails.product_name,
-        alternateName: `${productDetails.product_name} In Gold (${productDetails.gross_weight} gram)${
+        alternateName: `${productDetails.product_name} In Gold (${
+          productDetails.gross_weight
+        } gram)${
           productDetails.diamond_weight > 0
             ? ` with Diamonds (${productDetails.diamond_weight} Carat)`
             : ""
@@ -64,7 +63,7 @@ export const generateMetadata = async ({ params }) => {
             : productDetails.country_total_price,
           priceCurrency: "INR",
           availability: "https://schema.org/InStock",
-          url: `https://www.swa.co/jewellery/${productDetails.alias}`,
+          url: `https://www.swadiamonds.com/jewellery/${productDetails.alias}`,
         },
         category: productDetails.category.name,
         material: "Diamond",
@@ -111,17 +110,15 @@ export const generateMetadata = async ({ params }) => {
 async function ProductDetailsPage({ params }) {
   const productAlias = (await params).alias;
   const cookieStore = await cookies();
-  const countryId = cookieStore.get('countryId')?.value; 
+  const countryId = cookieStore.get("countryId")?.value;
 
-  
   const productDetails = await fetch(
     `https://swaecommain.swa.co/ecom/alias-product/?alias=${productAlias}&country=${countryId}`,
     {
       headers: {
         "Content-Type": "application/json",
-      }, 
+      },
     }
-   
   )
     .then((res) => res.json())
     .then((data) => data.results.data);
@@ -130,7 +127,9 @@ async function ProductDetailsPage({ params }) {
     "@context": "https://schema.org",
     "@type": "Product",
     name: productDetails.product_name,
-    alternateName: `${productDetails.product_name} In Gold (${productDetails.gross_weight} gram)${
+    alternateName: `${productDetails.product_name} In Gold (${
+      productDetails.gross_weight
+    } gram)${
       productDetails.diamond_weight > 0
         ? ` with Diamonds (${productDetails.diamond_weight} Carat)`
         : ""
@@ -149,7 +148,7 @@ async function ProductDetailsPage({ params }) {
         : productDetails.country_total_price,
       priceCurrency: "INR",
       availability: "https://schema.org/InStock",
-      url: `https://www.swa.co/jewellery/${productDetails.alias}`,
+      url: `https://www.swadiamonds.com/jewellery/${productDetails.alias}`,
     },
     category: productDetails.category.name,
     material: "Diamond",

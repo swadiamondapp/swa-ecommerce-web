@@ -2,10 +2,9 @@
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
-
 const useCanonicalTag = () => {
   const pathname = usePathname();
-  const baseUrl = "https://www.swa.co"; // Your base URL
+  const baseUrl = "https://www.swadiamonds.com"; // Your base URL
 
   useEffect(() => {
     // Create or update the canonical tag
