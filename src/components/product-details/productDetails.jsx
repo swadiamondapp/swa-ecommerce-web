@@ -1479,7 +1479,7 @@ const ProductDetails = (props) => {
                     width={30}
                     height={30}
                   />
-                  <div className={Classes.PdH1}>15 SIJJ Diamond</div>
+                  <div className={Classes.PdH1}>VVS/EF Diamond</div>
                   <div
                     style={{
                       color: "#7A8288",
