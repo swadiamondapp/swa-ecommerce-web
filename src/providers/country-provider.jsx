@@ -48,8 +48,8 @@ const CountryProvider = ({ children }) => {
       const ipInfoResponse = await axios.get(
         "https://ipinfo.io/json?token=6485fceda43031"
       );
-      const userCountryName = ipInfoResponse.data.country; 
-      // const userCountryName = 'AE'
+      // const userCountryName = ipInfoResponse.data.country; 
+      const userCountryName = 'AE'
       let selectedCountryData;
 
       if (userCountryName === "AE") {

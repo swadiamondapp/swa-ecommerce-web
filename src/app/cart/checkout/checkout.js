@@ -185,13 +185,13 @@ function CheckOut(props) {
     fullName: Joi.string().required().messages({
       "string.empty": `Please enter your full name.`,
     }),
-    mobile: Joi.string()
-      .required()
-      .pattern(/^[0-9]{10}$/)
-      .messages({
-        "string.empty": "Please enter your mobile number.",
-        "string.pattern.base": "Please enter a valid 10-digit mobile number.",
-      }),
+    // mobile: Joi.string()
+    //   .required()
+    //   .pattern(/^[0-9]{10}$/)
+    //   .messages({
+    //     "string.empty": "Please enter your mobile number.",
+    //     "string.pattern.base": "Please enter a valid 10-digit mobile number.",
+    //   }),
     // pincode: Joi.string()
     //   .required()
     //   .max(6)
@@ -1011,23 +1011,6 @@ function CheckOut(props) {
                   </div>
                   <p className={Classes.Heading}>Delivery Address</p>
                   <div className="Parant_Relative">
-                    <label className="label">Full Name*</label>
-                    <input
-                      className={Classes.PlaceInput}
-                      type="text"
-                      placeholder="Full name"
-                      value={addressData.fullName || ""}
-                      name="fullName"
-                      onChange={handleChangeAddress}
-                    />
-                    {errorMessage.fullName && (
-                      <div className={Classes.ErrorMessage}>
-                        {errorMessage.fullName}
-                      </div>
-                    )}
-                  </div>
-
-                  <div>
                     <div className={Classes.honor}>
                       <label className="label">
                         <input
@@ -1064,6 +1047,22 @@ function CheckOut(props) {
                     {errorMessage.honorific_name && (
                       <div className={Classes.ErrorMessage}>
                         {errorMessage.honorific_name}
+                      </div>
+                    )}
+                  </div>
+                  <div className="Parant_Relative">
+                    <label className="label">Full Name*</label>
+                    <input
+                      className={Classes.PlaceInput}
+                      type="text"
+                      placeholder="Full name"
+                      value={addressData.fullName || ""}
+                      name="fullName"
+                      onChange={handleChangeAddress}
+                    />
+                    {errorMessage.fullName && (
+                      <div className={Classes.ErrorMessage}>
+                        {errorMessage.fullName}
                       </div>
                     )}
                   </div>
@@ -1127,7 +1126,7 @@ function CheckOut(props) {
 
                   <div className={Classes.ParentF1}>
                     <div className="Parant_Relative">
-                      <label className="label">Alternate Number*</label>
+                      <label className="label">Alternate Number(optional)</label>
                       <input
                         className={Classes.PlaceInput}
                         type="number"

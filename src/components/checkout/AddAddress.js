@@ -59,7 +59,28 @@ function AddAddress(props) {
       console.log(error);
     }
   };
+  const staticCountries = [
+    { name: "India", isoCode: "IN" },
+    { name: "United Arab Emirates", isoCode: "AE" },
+  ];
 
+  // const staticCountries = [
+  //   { name: { common: "India" } },
+  //   { name: { common: "United States" } },
+  //   { name: { common: "Australia" } },
+  //   { name: { common: "Canada" } },
+  //   { name: { common: "United Kingdom" } },
+  //   { name: { common: "Germany" } },
+  //   { name: { common: "France" } },
+  //   { name: { common: "Japan" } },
+  //   { name: { common: "Brazil" } },
+  //   { name: { common: "South Africa" } },
+  // ];
+  // const [countriesList, setCountriesList] = useState(staticCountries);
+  useEffect(() => {
+    const pincodes = localStorage.getItem("pincode");
+    setPincodes(pincodes);
+  });
   useEffect(() => {
     const mainAddress = props.addressArray.find((address) => address.is_main);
     if (mainAddress) {
@@ -180,15 +201,23 @@ function AddAddress(props) {
 
   const handleChangeAddress = (event) => {
     const { name, value } = event.target;
+    // if (name === "country") {
+    //   const selectedOption =
+    //     event &&
+    //     event.target &&
+    //     event.target.options[event.target.selectedIndex];
+    //   const isoCode =
+    //     selectedOption && selectedOption.getAttribute("data-isocode");
+    //   setStatesList(State.getAllStates && State.getStatesOfCountry(isoCode));
+    // }
     if (name === "country") {
       const selectedOption =
-        event &&
-        event.target &&
         event.target.options[event.target.selectedIndex];
-      const isoCode =
-        selectedOption && selectedOption.getAttribute("data-isocode");
-      setStatesList(State && State.getStatesOfCountry(isoCode));
+      const isoCode = selectedOption.getAttribute("data-isocode");
+      const states = State.getStatesOfCountry(isoCode);
+      setStatesList(states || []);
     }
+    
     setAddressData({
       ...addressData,
       [name]: value,
@@ -403,19 +432,35 @@ function AddAddress(props) {
                           name="country"
                           onChange={handleChangeAddress}
                         >
-                          <option value="">Select Country</option>
-                          {Country &&
-                            Country.getAllCountries() &&
-                            Country.getAllCountries().map((country, index) => (
-                              <option
-                                key={index}
-                                value={country.name}
-                                data-isocode={country.isoCode}
-                              >
-                                {country.name}
-                              </option>
-                            ))}
+                          <option value="Select Country">Select Country</option>
+                          {staticCountries.map((country) => (
+                            <option
+                            key={country.isoCode}
+                              value={country.name}
+                              data-isocode={country.isoCode}
+                            >
+                              {country.name}
+                            </option>
+                          ))}
                         </select>
+                       {/* <select
+                          className={Classes.PlaceCountry}
+                          value={addressData.country}
+                          name="country"
+                          onChange={handleChangeAddress}
+                        >
+                          <option value="">Select Country</option>
+                          {staticCountries.map((country) => (
+                            <option
+                              key={index}
+                              value={country.name}
+                              data-isocode={country.isoCode}
+                            >
+                              {country.name}
+                            </option>
+                          ))}
+                        </select> */}
+
                         {errors.country && (
                           <div className={Classes.Error}>{errors.country}</div>
                         )}
