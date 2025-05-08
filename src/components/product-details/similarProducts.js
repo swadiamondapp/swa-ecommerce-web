@@ -1,20 +1,25 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 import Classes from "../header/main-header.module.css";
 import SimilarProductsList from "./similar-products-list";
-import { cookies } from "next/headers";
 
-async function SimilarProducts({ productId }) {
-  const countryId = (await cookies()).get("countryId") || "2";
+function SimilarProducts({ productId }) {
+  const [similarProducts, setSimilarProducts] = useState([]);
 
-  const similarProducts = await fetch(
-    "https://swaecommain.swa.co/ecom/products/" +
-      productId +
-      "?country=" +
-      countryId
-  )
-    .then((res) => res.json())
-    .then((data) => data.results.similar_data);
+  useEffect(() => {
+    const countryId = Cookies.get("countryId") || "2";
+    fetch(
+      `https://swaecommain.swa.co/ecom/products/${productId}?country=${countryId}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setSimilarProducts(data.results.similar_data);
+      });
+  }, [productId]);
 
-  if (!similarProducts) return null;
+  if (!similarProducts.length) return null;
 
   return (
     <div style={{ marginTop: "80px" }}>

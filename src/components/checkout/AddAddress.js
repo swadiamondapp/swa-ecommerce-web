@@ -18,9 +18,11 @@ function AddAddress(props) {
   const [selectedAddressId, setSelectedAddressId] = useState(null);
   const [statesList, setStatesList] = useState([]);
   const [pincode, setPincode] = useState("");
+
   useEffect(() => {
     setPincode(localStorage.getItem("pincode"));
   }, []);
+
   const [addressData, setAddressData] = useState({
     fullName: "",
     mobile: "",
@@ -77,10 +79,7 @@ function AddAddress(props) {
   //   { name: { common: "South Africa" } },
   // ];
   // const [countriesList, setCountriesList] = useState(staticCountries);
-  useEffect(() => {
-    const pincodes = localStorage.getItem("pincode");
-    setPincodes(pincodes);
-  });
+
   useEffect(() => {
     const mainAddress = props.addressArray.find((address) => address.is_main);
     if (mainAddress) {
@@ -185,7 +184,7 @@ function AddAddress(props) {
           city: "",
           state: "kerala",
           hNumber_Bname: "",
-          country: "",
+          country: "India",
           streetColony: "",
           landMark: "",
         });
@@ -432,7 +431,7 @@ function AddAddress(props) {
                           name="country"
                           onChange={handleChangeAddress}
                         >
-                          <option value="Select Country">Select Country</option>
+                          {/* <option value="Select Country">Select Country</option> */}
                           {staticCountries.map((country) => (
                             <option
                             key={country.isoCode}
