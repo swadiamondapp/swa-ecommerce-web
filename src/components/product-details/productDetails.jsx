@@ -1455,7 +1455,7 @@ const ProductDetails = (props) => {
                     width={30}
                     height={30}
                   />
-                  <div className={Classes.PdH1}>18kt Rose gold</div>
+                  <div className={Classes.PdH1}>18kt {selectedColor?.colour_name} gold</div>
                   <div
                     style={{
                       color: "#7A8288",
