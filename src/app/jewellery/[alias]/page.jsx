@@ -23,10 +23,13 @@ export const generateMetadata = async ({ params }) => {
   return {
     title: productDetails.meta_title,
     description: productDetails.meta_description,
+    alternates: {
+      canonical: `https://www.swadiamonds.com/jewellery/${productDetails.alias}/`,
+    },
     openGraph: {
       title: productDetails.meta_title,
       description: productDetails.meta_description,
-      url: "https://www.swadiamonds.com/jewellery/" + productDetails.alias,
+      url: `https://www.swadiamonds.com/jewellery/${productDetails.alias}/`,
       images: [productDetails.image_url],
     },
     twitter: {

@@ -44,11 +44,19 @@ const gilroy = localFont({
 });
 
 export const metadata = {
-  title: "Swa Diamonds",
-  description: "Swa Diamonds is the best place to buy diamonds",
+  title: "Swa Diamonds - The wholesale diamond dealers &amp; jewellers",
+  description: "A top-rated diamond jewellery in kerala, diamond dealers and wholesalers in Kerala, south India and best diamond jewellery provides whole sale price in India, diamond wholesale price in kerala.",
+  keywords: [
+    "diamond dealers in Kerala",
+    "diamond jewellery in kerala",
+    "diamond wholesale price in kerala",
+  ],
+  alternates: {
+    canonical: "https://www.swadiamonds.com/",
+  },
   openGraph: {
-    title: "Swa Diamonds",
-    description: "Swa Diamonds is the best place to buy diamonds",
+    title: "Swa Diamonds - The wholesale diamond dealers &amp; jewellers",
+    description: "A top-rated diamond jewellery in kerala, diamond dealers and wholesalers in Kerala, south India and best diamond jewellery provides whole sale price in India, diamond wholesale price in kerala.",
     url: "https://www.swadiamonds.com",
     siteName: "Swa Diamonds",
     images: [
@@ -62,8 +70,8 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Swa Diamonds",
-    description: "Swa Diamonds is the best place to buy diamonds",
+    title: "Swa Diamonds - The wholesale diamond dealers &amp; jewellers",
+    description: "A top-rated diamond jewellery in kerala, diamond dealers and wholesalers in Kerala, south India and best diamond jewellery provides whole sale price in India, diamond wholesale price in kerala.",
     images: ["https://www.swadiamonds.com/twitter-image.jpg"],
   },
 };
