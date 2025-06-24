@@ -3,7 +3,6 @@ import SimilarProducts from "@/components/product-details/similarProducts";
 import Features from "@/components/features/features";
 import ProductDetails from "@/components/product-details/productDetails";
 import { cookies } from "next/headers";
-import { server } from "@/utils/urls";
 
 export const generateMetadata = async ({ params }) => {
   const productAlias = (await params).alias;
@@ -12,7 +11,7 @@ export const generateMetadata = async ({ params }) => {
   const countryId = cookieStore.get("countryId")?.value;
 
   const response = await fetch(
-    `${server}ecom/alias-product/?alias=${productAlias}&country=${countryId}`,
+    `https://swaecommain.swa.co/ecom/alias-product/?alias=${productAlias}&country=${countryId}`,
     {
       headers: {
         "Content-Type": "application/json",
@@ -117,7 +116,7 @@ async function ProductDetailsPage({ params }) {
   const countryId = cookieStore.get("countryId")?.value;
 
   const productDetails = await fetch(
-    `${server}ecom/alias-product/?alias=${productAlias}&country=${countryId}`,
+    `https://swaecommain.swa.co/ecom/alias-product/?alias=${productAlias}&country=${countryId}`,
     {
       headers: {
         "Content-Type": "application/json",

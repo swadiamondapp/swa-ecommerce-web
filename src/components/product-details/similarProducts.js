@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import Classes from "../header/main-header.module.css";
 import SimilarProductsList from "./similar-products-list";
-import * as Urls from "@/utils/urls";
 
 function SimilarProducts({ productId }) {
   const [similarProducts, setSimilarProducts] = useState([]);
@@ -12,7 +11,7 @@ function SimilarProducts({ productId }) {
   useEffect(() => {
     const countryId = Cookies.get("countryId") || "2";
     fetch(
-      `${Urls.server}ecom/products/${productId}?country=${countryId}`
+      `https://swaecommain.swa.co/ecom/products/${productId}?country=${countryId}`
     )
       .then((res) => res.json())
       .then((data) => {

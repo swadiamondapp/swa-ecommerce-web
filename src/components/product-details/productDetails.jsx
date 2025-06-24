@@ -187,7 +187,7 @@ const ProductDetails = (props) => {
 
   const customerPhotos = async () => {
     const response = await axios.get(
-      `${Urls.server}ecom/products/${props.id}/reviews/`
+      "https://swaecommain.swa.co/ecom/products/" + props.id + "/reviews/"
     );
     if (response && response.data && response.data.results) {
       setReviews(response.data.results);
