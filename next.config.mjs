@@ -7,6 +7,7 @@ const nextConfig = {
       },
       { hostname: "swaecomordermain.swa.co" },
       { hostname: "swaordernewtest.zinfog.in" },
+      { hostname: "swadiamonds.com" },
     ],
     unoptimized: true,
   },
