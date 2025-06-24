@@ -1,5 +1,6 @@
 import { Lato, Playfair_Display } from "next/font/google";
 import localFont from "next/font/local";
+import Script from "next/script";
 import "./globals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import CountryProvider from "@/providers/country-provider";
@@ -79,6 +80,20 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="no-scrollbar">
+      <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-8XNJ195QEF"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-8XNJ195QEF');
+          `}
+        </Script>
+      </head>
       <body
         className={`${lato.variable} ${gilroy.variable} ${playfair.variable} no-scrollbar`}
         // className={`${lato.variable} ${gilroy.variable} ${playfair.variable} antialiased`}
