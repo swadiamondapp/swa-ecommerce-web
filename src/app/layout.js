@@ -45,7 +45,7 @@ const gilroy = localFont({
 });
 
 export const metadata = {
-  title: "Swa Diamonds - The wholesale diamond dealers &amp; jewellers",
+  title: "Swa diamonds- Buy Natural Diamond Jewellery Online",
   description: "Swa Diamonds is a top-rated multinational diamond jewellery brand in India and the UAE, offering certified natural diamonds at wholesale prices. With 350+ stores across Kerala, South India, and a growing presence pan India",
   keywords: [
     "diamond dealers in Kerala",
@@ -56,7 +56,7 @@ export const metadata = {
     canonical: "https://www.swadiamonds.com/",
   },
   openGraph: {
-    title: "Swa Diamonds - The wholesale diamond dealers &amp; jewellers",
+    title: "Swa diamonds- Buy Natural Diamond Jewellery Online",
     description: "Swa Diamonds is a top-rated multinational diamond jewellery brand in India and the UAE, offering certified natural diamonds at wholesale prices. With 350+ stores across Kerala, South India, and a growing presence pan India",
     url: "https://www.swadiamonds.com",
     siteName: "Swa Diamonds",
@@ -71,8 +71,8 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Swa Diamonds - The wholesale diamond dealers &amp; jewellers",
-    description: "A top-rated diamond jewellery in kerala, diamond dealers and wholesalers in Kerala, south India and best diamond jewellery provides whole sale price in India, diamond wholesale price in kerala.",
+    title: "Swa diamonds- Buy Natural Diamond Jewellery Online",
+    description: "Swa Diamonds is a top-rated multinational diamond jewellery brand in India and the UAE, offering certified natural diamonds at wholesale prices. With 350+ stores across Kerala, South India, and a growing presence pan India",
     images: ["https://www.swadiamonds.com/twitter-image.jpg"],
   },
 };
