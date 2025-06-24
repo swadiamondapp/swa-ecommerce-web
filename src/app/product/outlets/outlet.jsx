@@ -192,7 +192,7 @@ const Outlet = () => {
 
     try {
       const response = await axios.post(
-        "https://swaecommain.swa.co/ecom/book-a-visit/",
+        `${Urls.server}ecom/book-a-visit/`,
         bookingData
       );
       if (response.status === 200) {
