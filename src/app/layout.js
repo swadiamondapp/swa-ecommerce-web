@@ -45,7 +45,7 @@ const gilroy = localFont({
 });
 
 export const metadata = {
-  title: "Swa Diamonds - The wholesale diamond dealers &amp; jewellers",
+  title: "Swa diamonds- Buy Natural Diamond Jewellery Online",
   description: "A top-rated diamond jewellery in kerala, diamond dealers and wholesalers in Kerala, south India and best diamond jewellery provides whole sale price in India, diamond wholesale price in kerala.",
   keywords: [
     "diamond dealers in Kerala",
