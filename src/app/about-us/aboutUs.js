@@ -43,10 +43,7 @@ function AboutUs() {
               Our mission, SWA diamonds believes every woman desires a diamond
               and we take it as a privilege to give the best quality diamond at
               an affordable price range so that they get what they aspire for.
-              The company's efforts is to make it available through exclusive
-              SWA outlets in tier one cities and SWA shop in shop outlets in
-              tier two and tier three cities of India so that diamonds reach the
-              women in rural India too.
+              
             </p>
             <div className={Classes.subHeading}>Brand Stroy</div>
             <p>
@@ -57,10 +54,7 @@ function AboutUs() {
               inner light to life. Swa is an expression of the radiant self. Swa
               is the beginning of all of creation. The words Swagath, Swara,
               Swatantra, Swayam, Swapna, Swabhiman, Swarga, Swantham, Swaroopam,
-              Swakaryam, Swasthi, Swad all start with Swa. Like the pollen
-              grains that are beautiful, dainty, central to a flower and
-              integral to growth – Swa is the initiator of the journey of the
-              self. The self has multiple dimensions and Swa captures the
+              Swakaryam, Swasthi, Swad all start with Swa.The self has multiple dimensions and Swa captures the
               versatile and diverse aspects of an individual (with its multiple
               diamond design). The crux of the Swa story is that ‘it all starts
               with the self’.
