@@ -100,7 +100,7 @@ const ProductDetailsPage = (props) => {
         document.head.appendChild(newOgTitle);
       }
       document.querySelector("meta[property='og:title']").content =
-        prodDet.meta_title || "SWA DIAMONDS";
+        "ddddddddd" || "SWA DIAMONDS";
 
       // Update or create og:description
       if (!ogDescription) {
