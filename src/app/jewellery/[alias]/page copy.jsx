@@ -118,7 +118,7 @@ const ProductDetailsPage = (props) => {
         document.head.appendChild(newOgImage);
       }
       document.querySelector("meta[property='og:image']").content =
-        prodDet.image_url || "https://www.swadiamonds.com/";
+        prodDet.og_image || "https://www.swadiamonds.com/";
     }
 
     // Cleanup function to remove dynamically added meta tags on component unmount
