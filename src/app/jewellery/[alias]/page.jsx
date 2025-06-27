@@ -29,7 +29,6 @@ export const generateMetadata = async ({ params }) => {
     },
     openGraph: {
       title: productDetails.meta_title,
-      t: productDetails.meta_title,
       description: productDetails.meta_description,
       url: `https://www.swadiamonds.com/jewellery/${productDetails.alias}/`,
       images: [productDetails.og_image],
