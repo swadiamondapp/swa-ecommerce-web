@@ -10,7 +10,7 @@ module.exports = {
 
     try {
       // 🔹 Fetch products from Django API
-      const productRes = await axios.get('https://api.swadiamonds.com/api/products/'); // Replace with your actual API
+      const productRes = await axios.get('https://swaecommain.swadiamonds.com/ecom/products/'); // Replace with your actual API
       const products = productRes.data;
 
       products.forEach((product) => {
