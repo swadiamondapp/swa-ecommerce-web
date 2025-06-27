@@ -39,9 +39,9 @@ module.exports = {
       console.log("✅ Products fetched:", products.length);
 
       products.forEach((prod) => {
-        if (prod.slug) {
+        if (prod.alias) {
           paths.push({
-            loc: `/product/${prod.slug}`, // adjust if your route is different
+            loc: `/jewellery/${prod.alias}`,
             changefreq: "weekly",
             priority: 0.8,
             lastmod: new Date().toISOString(),
