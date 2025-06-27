@@ -31,7 +31,7 @@ export const generateMetadata = async ({ params }) => {
       title: productDetails.meta_title,
       description: productDetails.meta_description,
       url: `https://www.swadiamonds.com/jewellery/${productDetails.alias}/`,
-      images: [productDetails.image_url],
+      images: [productDetails.og_image],
     },
     twitter: {
       card: "summary_large_image",
