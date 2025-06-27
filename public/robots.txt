@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://www.swadiamonds.com
+#Host: https://www.swadiamonds.com
 
 # Sitemaps
 Sitemap: https://www.swadiamonds.com/sitemap.xml
