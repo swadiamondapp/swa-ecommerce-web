@@ -28,10 +28,10 @@ export const generateMetadata = async ({ params }) => {
       canonical: `https://www.swadiamonds.com/jewellery/${productDetails.alias}/`,
     },
     openGraph: {
-      title: productDetails.meta_title,
-      description: productDetails.meta_description,
+      title: productDetails.og_title,
+      description: productDetails.og_description,
       url: `https://www.swadiamonds.com/jewellery/${productDetails.alias}/`,
-      images: [productDetails.image_url],
+      images: [productDetails.og_image],
     },
     twitter: {
       card: "summary_large_image",

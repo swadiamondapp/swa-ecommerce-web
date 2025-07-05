@@ -46,7 +46,7 @@ const gilroy = localFont({
 
 export const metadata = {
   title: "Swa diamonds- Buy Natural Diamond Jewellery Online",
-  description: "Swa Diamonds is a top-rated multinational diamond jewellery brand in India and the UAE, offering certified natural diamonds at wholesale prices. With 350+ stores across Kerala, South India, and a growing presence pan India",
+  description: "Swa Diamonds is a top-rated multinational diamond jewellery brand in India and the UAE, offering certified natural diamonds at wholesale prices. With 350+ stores across Kerala, South India, and a growing presence pan India.",
   keywords: [
     "diamond dealers in Kerala",
     "diamond jewellery in kerala",
