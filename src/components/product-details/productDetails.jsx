@@ -1671,7 +1671,9 @@ const ProductDetails = (props) => {
                     {/* {props.gw > 0 ? (
                       <div className={Classes.Left}>Gross Weight</div>
                     ) : null} */}
-                    <div className={Classes.Left}>Gross Weight</div>
+                    {countryName !== "United Arab Emirates" && (
+                      <div className={Classes.Left}>Gross Weight</div>
+                    )}
 
                     {props.diamondTypw !== null && (
                       <div className={Classes.Left}>Diamond Type</div>
@@ -1679,12 +1681,16 @@ const ProductDetails = (props) => {
                     {/* {props.diamondWeight > 0 ? (
                       <div className={Classes.Left}>Diamond Weight</div>
                     ) : null} */}
-                    <div className={Classes.Left}>Diamond Weight</div>
+                    {countryName !== "United Arab Emirates" && (
+                      <div className={Classes.Left}>Diamond Weight</div>
+                    )}
 
                     {/* {props.diamondCount > 0 ? (
                       <div className={Classes.Left}>Diamond Count</div>
                     ) : null} */}
-                    <div className={Classes.Left}>Diamond Count</div>
+                    {countryName !== "United Arab Emirates" && (
+                      <div className={Classes.Left}>Diamond Count</div>
+                    )}
                     {/* {props.otherStoneW > 0 ? (
                       <div className={Classes.Left}>Other stone weight</div>
                     ) : null} */}
@@ -1705,7 +1711,9 @@ const ProductDetails = (props) => {
                     {/* {props.gw > 0 ? (
                       <p className={Classes.Right}>{props.gw + " GM"}</p>
                     ) : null} */}
-                    <p className={Classes.Right}>{props.gw + " G"}</p>
+                    {countryName !== "United Arab Emirates" && (
+                      <p className={Classes.Right}>{props.gw + " G"}</p>
+                    )}
 
                     {props.diamondTypw !== null && (
                       <div className={Classes.Right}>{props.diamondTypw}</div>
@@ -1715,16 +1723,20 @@ const ProductDetails = (props) => {
                         {props.diamondWeight + " Carat"}
                       </p>
                     ) : null} */}
-                    <div className={Classes.Right}>
-                      {props.diamondWeight + " Carat"}
-                    </div>
+                    {countryName !== "United Arab Emirates" && (
+                      <div className={Classes.Right}>
+                        {props.diamondWeight + " Carat"}
+                      </div>
+                    )}
 
                     {/* <p className={Classes.Right}>{props.diamondCount}</p> */}
 
                     {/* {props.diamondCount > 0 ? (
                       <p className={Classes.Right}>{props.diamondCount}</p>
                     ) : null} */}
-                    <div className={Classes.Right}>{props.diamondCount}</div>
+                    {countryName !== "United Arab Emirates" && (
+                      <div className={Classes.Right}>{props.diamondCount}</div>
+                    )}
                     {/* {props.otherStoneW > 0 ? (
                       <p className={Classes.Right}>{props.otherStoneW}</p>
                     ) : null} */}
