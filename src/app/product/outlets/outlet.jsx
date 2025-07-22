@@ -83,6 +83,7 @@ const Outlet = () => {
   const [shopId, setShopId] = useState(null);
   const [successModalOpen, setSuccessModalOpen] = useState(false);
   const [selectedOutlet, setSelectedOutlet] = useState(null);
+  const [searchText, setSearchText] = useState("");
   const [errors, setErrors] = useState({});
   const now = new Date();
   const currentDate = now.toISOString().split("T")[0]; // Get current date in "YYYY-MM-DD" format
@@ -242,6 +243,25 @@ const Outlet = () => {
 
     fetchOutlets();
   }, []);
+  const handleSearch = async (query) => {
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        `${Urls.outlets}?country=${countryId}&search_key=${encodeURIComponent(
+          query
+        )}`
+      );
+      setOutlets(response.data.data);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error searching outlets:", error);
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
+    handleSearch(""); // load all on mount
+  }, [countryId]);
+
   return (
     <div>
       <div className={Classes.mainContianerProfile}>
@@ -250,7 +270,15 @@ const Outlet = () => {
             <div className={Classes.OutletHead}>
               <h3 className={Classes.outleth3}>Outlet</h3>
               <div className={Classes.OutletSearch}>
-                <input type="" placeholder="Search location" />
+                <input
+                  type="text"
+                  placeholder="Search location"
+                  value={searchText}
+                  onChange={(e) => {
+                    setSearchText(e.target.value);
+                    handleSearch(e.target.value);
+                  }}
+                />
                 <BsSearch size={22} className={Classes.Outletsearchicon} />
               </div>
 
@@ -265,25 +293,36 @@ const Outlet = () => {
               </p>
             </div>
             <div className={Classes.OutletCardParent}>
-              {outlets &&
+              {outlets && outlets.length > 0 ? (
                 outlets.map((item) => (
                   <div
                     key={item.id || item.name}
                     className={Classes.OutletCard + " relative pb-24"}
                   >
-                    <div className={Classes.ParentSubOutlet + " flex justify-between"}>
+                    <div
+                      className={
+                        Classes.ParentSubOutlet + " flex justify-between"
+                      }
+                    >
                       <div className={Classes.LeftOutlets}>
                         <div className={Classes.OutletImage}>
                           <Image
-                            src={`/Assets/outlet.png`}
+                            // src={`/Assets/outlet.png`}
+                            src={item.image ? item.image : "/Assets/outlet.png"}
                             alt="outletimg"
                             height={100}
                             width={100}
+                            style={{ objectFit: "cover", borderRadius: "4px" }}
                           />
                         </div>
-                        <div className={Classes.OutletDetails + " flex flex-col items-start"}>
+                        <div
+                          className={
+                            Classes.OutletDetails + " flex flex-col items-start"
+                          }
+                        >
                           <h3 className="font-lato font-semibold">
-                            {item.name} - {item.location}
+                            {item.outlet_name}
+                            {/* - {item.location} */}
                           </h3>
                           <p
                             className={Classes.RatingOutlets}
@@ -291,6 +330,13 @@ const Outlet = () => {
                               display: "flex",
                               alignItems: "center",
                               gap: "5px",
+                              cursor: item.review_url ? "pointer" : "default",
+                              color: item.review_url ? "#006C77" : "inherit",
+                            }}
+                            onClick={() => {
+                              if (item.review_url) {
+                                window.open(item.review_url, "_blank");
+                              }
                             }}
                           >
                             <Image
@@ -299,7 +345,9 @@ const Outlet = () => {
                               height={16}
                               width={15}
                             />
-                            <span className="font-lato">4.9 | 978 Google reviews</span>
+                            <span className="font-lato">
+                              4.9 | Google reviews
+                            </span>
                           </p>
 
                           <p>
@@ -311,7 +359,12 @@ const Outlet = () => {
                           </p>
                         </div>
                       </div>
-                      <div className={Classes.RightOutlet + " flex justify-end gap-1 min-w-[48px]"}>
+                      <div
+                        className={
+                          Classes.RightOutlet +
+                          " flex justify-end gap-1 min-w-[48px]"
+                        }
+                      >
                         <Image
                           src={`/Assets/locationimgs.png`}
                           alt="locationimg"
@@ -321,12 +374,30 @@ const Outlet = () => {
                         6KM
                       </div>
                     </div>
-                    <div className={Classes.OutletFooterCrad + " absolute bottom-0 left-0 right-0"}>
+                    <div
+                      className={
+                        Classes.OutletFooterCrad +
+                        " absolute bottom-0 left-0 right-0"
+                      }
+                    >
                       <div className={Classes.OutletFooter}>
-                        <div className={Classes.outletWatsapp} onClick={() => window.open(`https://wa.me/${item.phone_number}`, '_blank')}>
+                        <div
+                          className={Classes.outletWatsapp}
+                          onClick={() =>
+                            window.open(
+                              `https://wa.me/${item.phone_number}`,
+                              "_blank"
+                            )
+                          }
+                        >
                           <RiWhatsappFill size={20} />
                         </div>
-                        <div className={Classes.outletWatsapp} onClick={() => window.open(`tel:${item.phone_number}`, '_blank')}>
+                        <div
+                          className={Classes.outletWatsapp}
+                          onClick={() =>
+                            window.open(`tel:${item.phone_number}`, "_blank")
+                          }
+                        >
                           <IoMdCall size={20} />
                         </div>
                         <div className={Classes.OutletBookvist}>
@@ -350,7 +421,12 @@ const Outlet = () => {
                       </p>
                     </div>
                   </div>
-                ))}
+                ))
+              ) : (
+                <p style={{ textAlign: "center", marginTop: "20px" }}>
+                  No outlets found.
+                </p>
+              )}
             </div>
 
             {/* modal */}
