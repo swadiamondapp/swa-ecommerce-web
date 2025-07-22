@@ -66,9 +66,24 @@ function TopDemanded() {
           </div>
         </div>
       </div>
-      <Link href="/new-arrivals/top" className="no-underline">
+      {/* <Link href="/new-arrivals/top" className="no-underline">
         <p className={Classes.seeAllTopDemand}>See all</p>
-      </Link>
+      </Link> */}
+      <p
+        className={Classes.seeAllTopDemand}
+        // onClick={() => {
+        //   sessionStorage.setItem("categoryName", "Top Demanded");
+        //   router.push("/new-arrivals/top");
+        // }}
+        onClick={() => {
+          if (typeof window !== "undefined") {
+            sessionStorage.setItem("categoryName", "Top Demanded");
+            router.push("/new-arrivals/top");
+          }
+        }}
+      >
+        See all
+      </p>
     </div>
   );
 }
