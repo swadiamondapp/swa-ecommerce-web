@@ -29,7 +29,14 @@ import { useRouter } from "next/navigation";
 import LoginSuccessModal from "../loginSuccessModal/loginsuccessmodal";
 import LoginModal from "../login-modal/loginModal";
 import Image from "next/image";
-import { Modal } from "@mui/material";
+import {
+  Modal,
+  Typography,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  Button,
+} from "@mui/material";
 import { useAuth } from "@/providers/auth-provider";
 import ProductImages from "./product-images";
 import { useCountry } from "@/providers/country-provider";
@@ -85,6 +92,8 @@ const ProductDetails = (props) => {
   const [cartCount, setCartCount] = useState("");
   const [sizeError, setSizeError] = useState("");
   const [size, setSize] = useState("");
+  const [isEnquiryModalVisible, setIsEnquiryModalVisible] = useState(false);
+  const [selectedBranch, setSelectedBranch] = useState(null);
 
   const { setCheckoutData } = useCheckout();
 
@@ -97,6 +106,70 @@ const ProductDetails = (props) => {
 
   const handleCloseModal = () => {
     setModalOpen(false);
+  };
+
+  const modalStyle = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "90%",
+    maxWidth: 500,
+    bgcolor: "background.paper",
+    borderRadius: 2,
+    boxShadow: 24,
+    p: 4,
+  };
+  const branches = [
+    {
+      label: "Burjuman Mall - Kingston",
+      phone: "+971543996659",
+      displayPhone: "+971 54 399 6659",
+      address:
+        "Burjuman Mall, Box 8022 - Ground Floor, Unit No.: BJC/G/0015A - Khalid Bin Al Waleed Rd - Bur Dubai - Dubai",
+    },
+    {
+      label: "Dalma Mall - Linto",
+      phone: "+971509894345",
+      displayPhone: "+971 50 989 4345",
+      address:
+        "Box 91122 - Unit No. GR 118, Ground Floor - Al Wazn St - Abu Dhabi Industrial City - ICAD I - Abu Dhabi",
+    },
+    {
+      label: "Mushriff Mall - Jijil",
+      phone: "+971506624914",
+      displayPhone: "+971 50 662 4914",
+      address:
+        "Mushrif Mall, First Floor - Unit No: 139 - 25th st Airport Road - Al Mushrif - Abu Dhabi",
+    },
+  ];
+
+  const handleEnquiryClick = () => {
+    setIsEnquiryModalVisible(true);
+  };
+  const handleModalClose = () => {
+    setIsEnquiryModalOpen(false);
+    setSelectedBranch("");
+  };
+
+  const handleDone = () => {
+    if (!selectedBranch) {
+      message.warning("Please select a branch.");
+      return;
+    }
+
+    const branch = branches.find((b) => b.label === selectedBranch);
+    const productUrl = window.location.href;
+    const messageText = `Hello, I'm interested in this product: ${productUrl}`;
+    const whatsappUrl = `https://wa.me/${
+      branch.phone
+    }?text=${encodeURIComponent(messageText)}`;
+
+    window.open(whatsappUrl, "_blank");
+
+    // Reset
+    setIsEnquiryModalVisible(false);
+    setSelectedBranch(null);
   };
 
   const cartHandler = () => {
@@ -790,55 +863,61 @@ const ProductDetails = (props) => {
               <div className="productdetailPricesec">
                 <div className={`${Classes.Flex} ${Classes.MobDownAR}`}>
                   {/* <BiRupee size={25} /> */}
-
-                  <div
-                    className={Classes.NewPrice}
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "3px",
-                    }}
-                  >
-                    {countryName === "India" && (
-                      <BiRupee className={Classes.Rupee} />
-                    )}
-                    {countryName === "United States" && (
-                      <CgDollar className={Classes.Rupee} />
-                    )}
-                    {countryName === "United Arab Emirates" && (
-                      <span style={{ paddingRight: "5px" }}>AED</span>
-                    )}
-                    {/* &#x20B9; {parseFloat(formattedCost).toFixed(0)} */}
-                    {result === null || result === "NaN" ? "" : result}
-                  </div>
-                  {props.actualPrice &&
-                    (props.actualPrice === null ||
-                    isNaN(Number(props.actualPrice)) ? (
-                      ""
-                    ) : (
-                      <>
+                  {countryName !== "United Arab Emirates" && (
+                    <>
+                      <div
+                        className={Classes.NewPrice}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "3px",
+                        }}
+                      >
                         {countryName === "India" && (
-                          <BiRupee size={25} color="#B0B0B0" />
+                          <BiRupee className={Classes.Rupee} />
                         )}
                         {countryName === "United States" && (
-                          <CgDollar size={25} color="#B0B0B0" />
+                          <CgDollar className={Classes.Rupee} />
                         )}
                         {countryName === "United Arab Emirates" && (
-                          <span
-                            style={{ paddingRight: "5px", paddingLeft: "7px" }}
-                          >
-                            AED
-                          </span>
+                          <span style={{ paddingRight: "5px" }}>AED</span>
                         )}
-                        <div className={Classes.OldPrice}>
-                          {numberWithCommas(
-                            parseInt(props.actualPrice, 10).toFixed(0)
-                          )}
-                        </div>
-                      </>
-                    ))}
+                        {/* &#x20B9; {parseFloat(formattedCost).toFixed(0)} */}
+                        {result === null || result === "NaN" ? "" : result}
+                      </div>
+                      {props.actualPrice &&
+                        (props.actualPrice === null ||
+                        isNaN(Number(props.actualPrice)) ? (
+                          ""
+                        ) : (
+                          <>
+                            {countryName === "India" && (
+                              <BiRupee size={25} color="#B0B0B0" />
+                            )}
+                            {countryName === "United States" && (
+                              <CgDollar size={25} color="#B0B0B0" />
+                            )}
+                            {countryName === "United Arab Emirates" && (
+                              <span
+                                style={{
+                                  paddingRight: "5px",
+                                  paddingLeft: "7px",
+                                }}
+                              >
+                                AED
+                              </span>
+                            )}
+                            <div className={Classes.OldPrice}>
+                              {numberWithCommas(
+                                parseInt(props.actualPrice, 10).toFixed(0)
+                              )}
+                            </div>
+                          </>
+                        ))}
+                    </>
+                  )}
                 </div>
-                {props.discount ? (
+                {props.discount && countryName !== "United Arab Emirates" ? (
                   <div className={Classes.HurrayText}>
                     Hurray! You have saved{" "}
                     {countryName === "India" && <BiRupee size={15} />}
@@ -899,47 +978,114 @@ const ProductDetails = (props) => {
               onClick={props.clickedBuy}
             /> */}
               <div className={Classes.MobileFixedBtn}>
-                <div className={Classes.MobBtnView}>
-                  <button
-                    className={Classes.BuyNow}
-                    // onClick={props.clickedBuy}
-                    onClick={addToCartHandler}
-                    type="submit"
-                  >
-                    Buy Now
-                  </button>
-                  {/* <button type="submit" onClick={addToCartHandler}>
-                    add to cart
-                  </button> */}
-                </div>
+                {countryName === "United Arab Emirates" ? (
+                  <>
+                    <button
+                      className={Classes.BuyNow}
+                      type="button"
+                      onClick={handleEnquiryClick}
+                    >
+                      Enquire
+                    </button>
+                    <Modal
+                      open={isEnquiryModalOpen}
+                      onClose={handleModalClose}
+                      aria-labelledby="enquiry-modal-title"
+                    >
+                      <Box sx={modalStyle}>
+                        <Typography
+                          id="enquiry-modal-title"
+                          variant="h6"
+                          gutterBottom
+                        >
+                          Select a Branch
+                        </Typography>
+                        <RadioGroup
+                          value={selectedBranch}
+                          onChange={(e) => setSelectedBranch(e.target.value)}
+                        >
+                          {branches.map((branch) => (
+                            <FormControlLabel
+                              key={branch.label}
+                              value={branch.label}
+                              control={<Radio />}
+                              label={
+                                <Box>
+                                  <Typography variant="subtitle1">
+                                    {branch.label}
+                                  </Typography>
+                                  <Typography
+                                    variant="body2"
+                                    color="text.secondary"
+                                  >
+                                    📍 {branch.address}
+                                    <br />
+                                    📞 {branch.displayPhone}
+                                  </Typography>
+                                </Box>
+                              }
+                            />
+                          ))}
+                        </RadioGroup>
+                        <Box mt={2} display="flex" justifyContent="flex-end">
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={handleDone}
+                            disabled={!selectedBranch}
+                          >
+                            Done
+                          </Button>
+                        </Box>
+                      </Box>
+                    </Modal>
+                  </>
+                ) : (
+                  <div className={Classes.MobBtnView}>
+                    <button
+                      className={Classes.BuyNow}
+                      // onClick={props.clickedBuy}
+                      onClick={addToCartHandler}
+                      type="submit"
+                    >
+                      Buy Now
+                    </button>
+                    {/* <button type="submit" onClick={addToCartHandler}>
+    add to cart
+  </button> */}
+                  </div>
+                )}
+
                 {/* {showErrorModal && (
                   <div className={Classes.ErrorModal}>
                     <p>Select size is required</p>
                   </div>
                 )} */}
 
-                <div className={Classes.FindStoreParent}>
-                  <button className={Classes.TryHome}>Find at store</button>
-                  <button
-                    className={Classes.VideoCall}
-                    onClick={handleOpenModal}
-                  >
-                    <Image
-                      src={`/Assets/video.png`}
-                      alt="Call"
-                      width={44}
-                      height={44}
-                      style={{
-                        maxWidth: "44px",
-                      }}
-                    />
-                  </button>{" "}
-                  {countryName === "India" && (
-                    <button className={Classes.FindStores} onClick={Tryhome}>
-                      Trial at Home
-                    </button>
-                  )}
-                </div>
+                {countryName !== "United Arab Emirates" && (
+                  <div className={Classes.FindStoreParent}>
+                    <button className={Classes.TryHome}>Find at store</button>
+                    <button
+                      className={Classes.VideoCall}
+                      onClick={handleOpenModal}
+                    >
+                      <Image
+                        src={`/Assets/video.png`}
+                        alt="Call"
+                        width={44}
+                        height={44}
+                        style={{
+                          maxWidth: "44px",
+                        }}
+                      />
+                    </button>{" "}
+                    {countryName === "India" && (
+                      <button className={Classes.FindStores} onClick={Tryhome}>
+                        Trial at Home
+                      </button>
+                    )}
+                  </div>
+                )}
                 <VideocallForm
                   isOpen={isModalOpen}
                   handleClose={handleCloseModal}
@@ -1455,7 +1601,9 @@ const ProductDetails = (props) => {
                     width={30}
                     height={30}
                   />
-                  <div className={Classes.PdH1}>18kt {selectedColor?.colour_name} gold</div>
+                  <div className={Classes.PdH1}>
+                    18kt {selectedColor?.colour_name} gold
+                  </div>
                   <div
                     style={{
                       color: "#7A8288",

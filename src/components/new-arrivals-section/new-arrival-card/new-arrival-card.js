@@ -34,15 +34,17 @@ const NewArrivalCard = (props) => {
     location.pathname === "/" || location.pathname.startsWith("/wish-list")
       ? "col-md-4 col-sm-6 col-lg-3 col-6"
       : location.pathname.startsWith("/jewellery/budget") ||
-          location.pathname.startsWith("/new-arrivals") ||
-          isDynamicRoute
-        ? "col-md-4 col-sm-6 col-lg-4 col-6"
-        : "col-md-4 col-sm-6 col-lg-4 col-6";
+        location.pathname.startsWith("/new-arrivals") ||
+        isDynamicRoute
+      ? "col-md-4 col-sm-6 col-lg-4 col-6"
+      : "col-md-4 col-sm-6 col-lg-4 col-6";
 
   useEffect(() => {
     const pincode = localStorage.getItem("pincode");
     setPincode(pincode);
   }, []);
+
+  console.log("countryNameanas", countryName);
 
   useEffect(() => {
     if (props.wishAct !== null) {
@@ -171,26 +173,28 @@ const NewArrivalCard = (props) => {
             <div className={Classes.HoverContainer}>
               <div>
                 <div className={Classes.ParentCardBoxes}>
-                  <div className={Classes.Price}>
-                    <p className={Classes.PriceNew}>
-                      <CurrencySymbol
-                        country={countryName}
-                        className={Classes.Rupee}
-                      />
-                      {result}
-                    </p>
-                    <p className={Classes.PriceOld}>
-                      {props.PriceOld !== null && (
+                  {countryName !== "United Arab Emirates" && (
+                    <div className={Classes.Price}>
+                      <p className={Classes.PriceNew}>
                         <CurrencySymbol
                           country={countryName}
                           className={Classes.Rupee}
-                          color="#B0B0B0"
                         />
-                      )}
-                      {props.PriceOld !== null &&
-                        numberWithCommas(props.PriceOld)}
-                    </p>
-                  </div>
+                        {result}
+                      </p>
+                      <p className={Classes.PriceOld}>
+                        {props.PriceOld !== null && (
+                          <CurrencySymbol
+                            country={countryName}
+                            className={Classes.Rupee}
+                            color="#B0B0B0"
+                          />
+                        )}
+                        {props.PriceOld !== null &&
+                          numberWithCommas(props.PriceOld)}
+                      </p>
+                    </div>
+                  )}
                   <div
                     className={Classes.Checkcards}
                     onClick={() => handleShowModal(props.prodet.product_id)}
