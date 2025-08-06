@@ -294,134 +294,142 @@ const Outlet = () => {
             </div>
             <div className={Classes.OutletCardParent}>
               {outlets && outlets.length > 0 ? (
-                outlets.map((item) => (
-                  <div
-                    key={item.id || item.name}
-                    className={Classes.OutletCard + " relative pb-24"}
-                  >
+                outlets
+                  .filter((item) => item.name !== "Demo Shopkeepers")
+                  .map((item) => (
                     <div
-                      className={
-                        Classes.ParentSubOutlet + " flex justify-between"
-                      }
+                      key={item.id || item.name}
+                      className={Classes.OutletCard + " relative pb-24"}
                     >
-                      <div className={Classes.LeftOutlets}>
-                        <div className={Classes.OutletImage}>
-                          <Image
-                            // src={`/Assets/outlet.png`}
-                            src={item.image ? item.image : "/Assets/outlet.png"}
-                            alt="outletimg"
-                            height={100}
-                            width={100}
-                            style={{ objectFit: "cover", borderRadius: "4px" }}
-                          />
+                      <div
+                        className={
+                          Classes.ParentSubOutlet + " flex justify-between"
+                        }
+                      >
+                        <div className={Classes.LeftOutlets}>
+                          <div className={Classes.OutletImage}>
+                            <Image
+                              // src={`/Assets/outlet.png`}
+                              src={
+                                item.image ? item.image : "/Assets/outlet.png"
+                              }
+                              alt="outletimg"
+                              height={100}
+                              width={100}
+                              style={{
+                                objectFit: "cover",
+                                borderRadius: "4px",
+                              }}
+                            />
+                          </div>
+                          <div
+                            className={
+                              Classes.OutletDetails +
+                              " flex flex-col items-start"
+                            }
+                          >
+                            <h3 className="font-lato font-semibold">
+                              {item.outlet_name}
+                              {/* - {item.location} */}
+                            </h3>
+                            <p
+                              className={Classes.RatingOutlets}
+                              style={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "5px",
+                                cursor: item.review_url ? "pointer" : "default",
+                                color: item.review_url ? "#006C77" : "inherit",
+                              }}
+                              onClick={() => {
+                                if (item.review_url) {
+                                  window.open(item.review_url, "_blank");
+                                }
+                              }}
+                            >
+                              <Image
+                                src={`/Assets/Star.png`}
+                                alt="starimg"
+                                height={16}
+                                width={15}
+                              />
+                              <span className="font-lato">
+                                4.9 | Google reviews
+                              </span>
+                            </p>
+
+                            <p>
+                              {item.address}
+                              <br />
+                              <span style={{ color: "#006C77" }}>
+                                {item.phone_number}
+                              </span>
+                            </p>
+                          </div>
                         </div>
                         <div
                           className={
-                            Classes.OutletDetails + " flex flex-col items-start"
+                            Classes.RightOutlet +
+                            " flex justify-end gap-1 min-w-[48px]"
                           }
                         >
-                          <h3 className="font-lato font-semibold">
-                            {item.outlet_name}
-                            {/* - {item.location} */}
-                          </h3>
-                          <p
-                            className={Classes.RatingOutlets}
-                            style={{
-                              display: "flex",
-                              alignItems: "center",
-                              gap: "5px",
-                              cursor: item.review_url ? "pointer" : "default",
-                              color: item.review_url ? "#006C77" : "inherit",
-                            }}
-                            onClick={() => {
-                              if (item.review_url) {
-                                window.open(item.review_url, "_blank");
-                              }
-                            }}
-                          >
-                            <Image
-                              src={`/Assets/Star.png`}
-                              alt="starimg"
-                              height={16}
-                              width={15}
-                            />
-                            <span className="font-lato">
-                              4.9 | Google reviews
-                            </span>
-                          </p>
-
-                          <p>
-                            {item.address}
-                            <br />
-                            <span style={{ color: "#006C77" }}>
-                              {item.phone_number}
-                            </span>
-                          </p>
+                          <Image
+                            src={`/Assets/locationimgs.png`}
+                            alt="locationimg"
+                            height={14}
+                            width={14}
+                          />
+                          6KM
                         </div>
                       </div>
                       <div
                         className={
-                          Classes.RightOutlet +
-                          " flex justify-end gap-1 min-w-[48px]"
+                          Classes.OutletFooterCrad +
+                          " absolute bottom-0 left-0 right-0"
                         }
                       >
-                        <Image
-                          src={`/Assets/locationimgs.png`}
-                          alt="locationimg"
-                          height={14}
-                          width={14}
-                        />
-                        6KM
+                        <div className={Classes.OutletFooter}>
+                          <div
+                            className={Classes.outletWatsapp}
+                            onClick={() =>
+                              window.open(
+                                `https://wa.me/${item.phone_number}`,
+                                "_blank"
+                              )
+                            }
+                          >
+                            <RiWhatsappFill size={20} />
+                          </div>
+                          <div
+                            className={Classes.outletWatsapp}
+                            onClick={() =>
+                              window.open(`tel:${item.phone_number}`, "_blank")
+                            }
+                          >
+                            <IoMdCall size={20} />
+                          </div>
+                          <div className={Classes.OutletBookvist}>
+                            <button onClick={() => handleOpenSort(item)}>
+                              Book a Vist
+                            </button>
+                          </div>
+                        </div>
+                        <p className={Classes.OutletFooters}>
+                          <Image
+                            style={{
+                              position: "relative",
+                              top: "-1px",
+                            }}
+                            src={`/Assets/times.png`}
+                            alt="timeimg"
+                            height={15}
+                            width={15}
+                          />
+                          WORKING HOURS : 10:00AM TO 10:00PM
+                        </p>
                       </div>
                     </div>
-                    <div
-                      className={
-                        Classes.OutletFooterCrad +
-                        " absolute bottom-0 left-0 right-0"
-                      }
-                    >
-                      <div className={Classes.OutletFooter}>
-                        <div
-                          className={Classes.outletWatsapp}
-                          onClick={() =>
-                            window.open(
-                              `https://wa.me/${item.phone_number}`,
-                              "_blank"
-                            )
-                          }
-                        >
-                          <RiWhatsappFill size={20} />
-                        </div>
-                        <div
-                          className={Classes.outletWatsapp}
-                          onClick={() =>
-                            window.open(`tel:${item.phone_number}`, "_blank")
-                          }
-                        >
-                          <IoMdCall size={20} />
-                        </div>
-                        <div className={Classes.OutletBookvist}>
-                          <button onClick={() => handleOpenSort(item)}>
-                            Book a Vist
-                          </button>
-                        </div>
-                      </div>
-                      <p className={Classes.OutletFooters}>
-                        <Image
-                          style={{
-                            position: "relative",
-                            top: "-1px",
-                          }}
-                          src={`/Assets/times.png`}
-                          alt="timeimg"
-                          height={15}
-                          width={15}
-                        />
-                        WORKING HOURS : 10:00AM TO 10:00PM
-                      </p>
-                    </div>
-                  </div>
-                ))
+                  ))
               ) : (
                 <p style={{ textAlign: "center", marginTop: "20px" }}>
                   No outlets found.
