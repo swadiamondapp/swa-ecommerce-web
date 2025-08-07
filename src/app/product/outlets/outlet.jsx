@@ -85,6 +85,11 @@ const Outlet = () => {
   const [selectedOutlet, setSelectedOutlet] = useState(null);
   const [searchText, setSearchText] = useState("");
   const [errors, setErrors] = useState({});
+  const [userLocation, setUserLocation] = useState({
+    latitude: null,
+    longitude: null,
+  });
+
   const now = new Date();
   const currentDate = now.toISOString().split("T")[0]; // Get current date in "YYYY-MM-DD" format
   const currentTime = now.getHours() * 60 + now.getMinutes();
@@ -96,6 +101,36 @@ const Outlet = () => {
     { time: "2:00 PM", minutes: 14 * 60 },
     { time: "3:00 PM", minutes: 15 * 60 },
   ];
+  const [enhancedOutlets, setEnhancedOutlets] = useState([]);
+
+  useEffect(() => {
+    const getLocation = () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            setUserLocation({
+              latitude: pos.coords.latitude,
+              longitude: pos.coords.longitude,
+            });
+          },
+          async (error) => {
+            console.warn("Geolocation failed. Fallback to IP:", error.message);
+            const res = await fetch("https://ipapi.co/json/");
+            const data = await res.json();
+            setUserLocation({
+              latitude: data.latitude,
+              longitude: data.longitude,
+            });
+          }
+        );
+      }
+    };
+
+    getLocation();
+  }, []);
+
+  console.log("userLocation", userLocation);
+
   useEffect(() => {
     const handleResize = () => {
       setIsMobileView(window?.innerWidth >= 300 && window?.innerWidth <= 575);
@@ -262,6 +297,83 @@ const Outlet = () => {
     handleSearch(""); // load all on mount
   }, [countryId]);
 
+  const calculateDistance = (lat1, lon1, lat2, lon2) => {
+    if (!lat1 || !lon1 || !lat2 || !lon2) return null;
+
+    const toRad = (value) => (value * Math.PI) / 180;
+    const R = 6371; // km
+    const dLat = toRad(lat2 - lat1);
+    const dLon = toRad(lon2 - lon1);
+
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(toRad(lat1)) *
+        Math.cos(toRad(lat2)) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
+
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c;
+
+    return distance.toFixed(1); // One decimal place
+  };
+
+  useEffect(() => {
+    if (!userLocation || outlets.length === 0) return;
+
+    const parseCoordinate = (coord) => {
+      if (!coord) return null;
+      const value = parseFloat(coord);
+      if (coord.includes("S") || coord.includes("W")) return -value;
+      return value;
+    };
+
+    const calculateDistance = (lat1, lon1, lat2, lon2) => {
+      if (
+        lat1 == null ||
+        lon1 == null ||
+        lat2 == null ||
+        lon2 == null ||
+        isNaN(lat1) ||
+        isNaN(lon1) ||
+        isNaN(lat2) ||
+        isNaN(lon2)
+      )
+        return null;
+
+      const toRad = (value) => (value * Math.PI) / 180;
+
+      const R = 6371; // Radius of Earth in KM
+      const dLat = toRad(lat2 - lat1);
+      const dLon = toRad(lon2 - lon1);
+      const a =
+        Math.sin(dLat / 2) ** 2 +
+        Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) ** 2;
+
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      return parseFloat((R * c).toFixed(2)); // Distance in KM
+    };
+
+    const newOutlets = outlets.map((outlet) => {
+      const lat = parseCoordinate(outlet.latitude);
+      const lon = parseCoordinate(outlet.longitude);
+
+      const distance = calculateDistance(
+        userLocation.latitude,
+        userLocation.longitude,
+        lat,
+        lon
+      );
+
+      return {
+        ...outlet,
+        distance,
+      };
+    });
+
+    setEnhancedOutlets(newOutlets);
+  }, [userLocation, outlets]);
+
   return (
     <div>
       <div className={Classes.mainContianerProfile}>
@@ -293,8 +405,8 @@ const Outlet = () => {
               </p>
             </div>
             <div className={Classes.OutletCardParent}>
-              {outlets && outlets.length > 0 ? (
-                outlets
+              {enhancedOutlets && enhancedOutlets.length > 0 ? (
+                enhancedOutlets
                   .filter((item) => item.name !== "Demo Shopkeepers")
                   .map((item) => (
                     <div
@@ -379,7 +491,9 @@ const Outlet = () => {
                             height={14}
                             width={14}
                           />
-                          6KM
+                          {typeof item.distance === "number"
+                            ? `${item.distance} KM`
+                            : "Distance N/A"}
                         </div>
                       </div>
                       <div
