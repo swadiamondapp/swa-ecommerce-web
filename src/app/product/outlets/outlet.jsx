@@ -134,14 +134,19 @@ const Outlet = () => {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           (pos) => {
-            console.log("Geolocation success:", pos.coords);
+            console.log("✅ Geolocation success:", pos.coords);
             setUserLocation({
               latitude: pos.coords.latitude,
               longitude: pos.coords.longitude,
             });
           },
           (error) => {
-            console.warn("Geolocation failed:", error.message);
+            console.warn("❌ Geolocation failed:", error.message);
+          },
+          {
+            enableHighAccuracy: true,
+            timeout: 10000,
+            maximumAge: 0,
           }
         );
       }
