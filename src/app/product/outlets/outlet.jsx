@@ -103,24 +103,45 @@ const Outlet = () => {
   ];
   const [enhancedOutlets, setEnhancedOutlets] = useState([]);
 
+  // useEffect(() => {
+  //   const getLocation = () => {
+  //     if (navigator.geolocation) {
+  //       navigator.geolocation.getCurrentPosition(
+  //         (pos) => {
+  //           setUserLocation({
+  //             latitude: pos.coords.latitude,
+  //             longitude: pos.coords.longitude,
+  //           });
+  //         },
+  //         async (error) => {
+  //           console.warn("Geolocation failed. Fallback to IP:", error.message);
+  //           const res = await fetch("https://ipapi.co/json/");
+  //           const data = await res.json();
+  //           setUserLocation({
+  //             latitude: data.latitude,
+  //             longitude: data.longitude,
+  //           });
+  //         }
+  //       );
+  //     }
+  //   };
+
+  //   getLocation();
+  // }, []);
+
   useEffect(() => {
     const getLocation = () => {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           (pos) => {
+            console.log("Geolocation success:", pos.coords);
             setUserLocation({
               latitude: pos.coords.latitude,
               longitude: pos.coords.longitude,
             });
           },
-          async (error) => {
-            console.warn("Geolocation failed. Fallback to IP:", error.message);
-            const res = await fetch("https://ipapi.co/json/");
-            const data = await res.json();
-            setUserLocation({
-              latitude: data.latitude,
-              longitude: data.longitude,
-            });
+          (error) => {
+            console.warn("Geolocation failed:", error.message);
           }
         );
       }
