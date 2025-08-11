@@ -90,10 +90,9 @@ function Header() {
   };
 
   const searchTitleHandler = (setItem) => {
-     if (setItem.type === "category") {
+    if (setItem.type === "category") {
       router.push(`/${setItem.name.toLowerCase().replace(/\s+/g, "")}`);
     } else if (setItem.type === "product") {
-
       axios
         .get(`${productDet + setItem.id}?country=${countryId}`, {
           // headers: {
@@ -122,6 +121,8 @@ function Header() {
     const pincode = localStorage.getItem("pincode");
     setPincode(pincode);
   }, []);
+
+  console.log("countryId", countryId);
 
   useEffect(() => {
     if (countryData) {
@@ -304,8 +305,8 @@ function Header() {
                     a.country_name === "India"
                       ? -1
                       : b.country_name === "India"
-                        ? 1
-                        : 0
+                      ? 1
+                      : 0
                   ) // Sorts India to the top
                   .map((country, index) => (
                     <div className={Classes.CountryContainer} key={index}>
@@ -325,12 +326,12 @@ function Header() {
                             {country.country_name === "United Arab Emirates"
                               ? "UAE"
                               : country.country_name === "Saudi Arabia"
-                                ? "KSA"
-                                : country.country_name === "India"
-                                  ? "IND"
-                                  : country.country_name === "United States"
-                                    ? "USA"
-                                    : country.country_name}
+                              ? "KSA"
+                              : country.country_name === "India"
+                              ? "IND"
+                              : country.country_name === "United States"
+                              ? "USA"
+                              : country.country_name}
                           </span>
                         </div>
                       </div>
