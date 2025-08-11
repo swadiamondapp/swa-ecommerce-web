@@ -988,7 +988,8 @@ const ProductDetails = (props) => {
                       Enquire
                     </button>
                     <Modal
-                      open={isEnquiryModalOpen}
+                      // open={isEnquiryModalOpen}
+                      open={isEnquiryModalVisible}
                       onClose={handleModalClose}
                       aria-labelledby="enquiry-modal-title"
                     >
