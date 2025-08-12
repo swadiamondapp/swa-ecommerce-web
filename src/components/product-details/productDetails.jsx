@@ -853,11 +853,20 @@ const ProductDetails = (props) => {
                 </div>
               </div>
               <div className={Classes.SubText}>
-                {props.name} In Gold ({props.gw} gram)
+                {/* {props.name} In Gold ({props.gw} gram)
                 {props.diamondWeight > 0
                   ? ` with Diamonds ( ${props.diamondWeight} Carat)`
-                  : null}
-                {/* {props.diamondWeight}gram) */}
+                  : null} */}
+                {props.name} In Gold
+                {countryName !== "United Arab Emirates" && (
+                  <>
+                    {" "}
+                    ({props.gw} gram)
+                    {props.diamondWeight > 0
+                      ? ` with Diamonds (${props.diamondWeight} Carat)`
+                      : null}
+                  </>
+                )}
               </div>
               <div className={Classes.Code}>SKU : {props.sku}</div>
               <div className="productdetailPricesec">
@@ -1605,20 +1614,24 @@ const ProductDetails = (props) => {
                   <div className={Classes.PdH1}>
                     18kt {selectedColor?.colour_name} gold
                   </div>
-                  <div
-                    style={{
-                      color: "#7A8288",
-                    }}
-                  >
-                    Net weight
-                  </div>
-                  <div
-                    style={{
-                      color: "#00464d",
-                    }}
-                  >
-                    {props.gw}
-                  </div>
+                  {countryName !== "United Arab Emirates" && (
+                    <>
+                      <div
+                        style={{
+                          color: "#7A8288",
+                        }}
+                      >
+                        Net weight
+                      </div>
+                      <div
+                        style={{
+                          color: "#00464d",
+                        }}
+                      >
+                        {props.gw}
+                      </div>
+                    </>
+                  )}
                 </div>
                 <div className={Classes.ArrowlineMob}></div>
                 <div className={Classes.RightMobCard1}>
@@ -1630,20 +1643,24 @@ const ProductDetails = (props) => {
                   />
                   {/* <div className={Classes.PdH1}>15 SIJJ Diamond</div> */}
                   <div className={Classes.PdH1}>VVS/EF Diamond</div>
-                  <div
-                    style={{
-                      color: "#7A8288",
-                    }}
-                  >
-                    Diamond weight
-                  </div>
-                  <div
-                    style={{
-                      color: "#00464d",
-                    }}
-                  >
-                    {props.diamondWeight}
-                  </div>
+                  {countryName !== "United Arab Emirates" && (
+                    <>
+                      <div
+                        style={{
+                          color: "#7A8288",
+                        }}
+                      >
+                        Diamond weight
+                      </div>
+                      <div
+                        style={{
+                          color: "#00464d",
+                        }}
+                      >
+                        {props.diamondWeight}
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
               <div className={Classes.ProductDetailsMobCard2}>
