@@ -348,7 +348,9 @@
   border: 1px solid #00b4bf;
 }
 .MainBtns {
-  display: none;
+  /* display: none; */
+  opacity: 0;
+  transition: 0.4s ease;
 }
 .Offers:hover {
   transition: 0.4s ease-out;
@@ -357,6 +359,8 @@
 }
 .Offers:hover .MainBtns {
   display: block;
+  opacity: 1;
+  transition: 0.4s ease;
 }
 .checkDate {
   color: #00464d !important;
@@ -764,8 +768,7 @@
 .NotificationOpen {
   width: 30%;
   background: #ffffff;
-  box-shadow:
-    0px 28px 208px rgba(0, 0, 0, 0.08),
+  box-shadow: 0px 28px 208px rgba(0, 0, 0, 0.08),
     0px 8.44118px 62.7059px rgba(0, 0, 0, 0.0521271),
     0px 3.50603px 26.0448px rgba(0, 0, 0, 0.04),
     0px 1.26806px 9.4199px rgba(0, 0, 0, 0.0278729);
@@ -1486,6 +1489,8 @@
   }
   .MainBtns {
     display: block;
+    opacity: 1;
+    transition: 0.4s ease;
   }
 
   .searchbar {
@@ -1613,3 +1618,10 @@
     display: none;
   }
 } */
+
+@media (min-width: 1400px) and (max-width: 3000px) {
+  .similerCards {
+    /* height: 393px; */
+    height: fit-content !important;
+  }
+}

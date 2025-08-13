@@ -134,18 +134,20 @@ function SimilarProductsList({ products }) {
         alt={`catg-${index}`}
       />
 
-      <div className={Classes.PriceContainer}>
-        <PriceDisplay
-          price={item.discount_price || item.country_total_price}
-          className={Classes.SimilerProductPrices}
-        />
-        {item.discount_price && (
+      {countryName !== "United Arab Emirates" && (
+        <div className={Classes.PriceContainer}>
           <PriceDisplay
-            price={item.country_total_price}
-            className={Classes.SimilerProductDiscount}
+            price={item.discount_price || item.country_total_price}
+            className={Classes.SimilerProductPrices}
           />
-        )}
-      </div>
+          {item.discount_price && (
+            <PriceDisplay
+              price={item.country_total_price}
+              className={Classes.SimilerProductDiscount}
+            />
+          )}
+        </div>
+      )}
 
       <div>
         <p

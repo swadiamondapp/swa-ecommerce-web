@@ -85,6 +85,11 @@ const Outlet = () => {
   const [selectedOutlet, setSelectedOutlet] = useState(null);
   const [searchText, setSearchText] = useState("");
   const [errors, setErrors] = useState({});
+  const [userLocation, setUserLocation] = useState({
+    latitude: null,
+    longitude: null,
+  });
+
   const now = new Date();
   const currentDate = now.toISOString().split("T")[0]; // Get current date in "YYYY-MM-DD" format
   const currentTime = now.getHours() * 60 + now.getMinutes();
@@ -96,6 +101,62 @@ const Outlet = () => {
     { time: "2:00 PM", minutes: 14 * 60 },
     { time: "3:00 PM", minutes: 15 * 60 },
   ];
+  const [enhancedOutlets, setEnhancedOutlets] = useState([]);
+
+  useEffect(() => {
+    const getLocation = () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            setUserLocation({
+              latitude: pos.coords.latitude,
+              longitude: pos.coords.longitude,
+            });
+          },
+          async (error) => {
+            console.warn("Geolocation failed. Fallback to IP:", error.message);
+            const res = await fetch("https://ipapi.co/json/");
+            const data = await res.json();
+            setUserLocation({
+              latitude: data.latitude,
+              longitude: data.longitude,
+            });
+          }
+        );
+      }
+    };
+
+    getLocation();
+  }, []);
+
+  // useEffect(() => {
+  //   const getLocation = () => {
+  //     if (navigator.geolocation) {
+  //       navigator.geolocation.getCurrentPosition(
+  //         (pos) => {
+  //           console.log("✅ Geolocation success:", pos.coords);
+  //           setUserLocation({
+  //             latitude: pos.coords.latitude,
+  //             longitude: pos.coords.longitude,
+  //           });
+  //         },
+  //         (error) => {
+  //           console.warn("❌ Geolocation failed:", error.message);
+  //         },
+  //         {
+  //           enableHighAccuracy: true,
+  //           timeout: 10000,
+  //           maximumAge: 0,
+  //         }
+  //       );
+  //     }
+  //   };
+
+  //   getLocation();
+  // }, []);
+
+  console.log("userLocation", userLocation);
+
   useEffect(() => {
     const handleResize = () => {
       setIsMobileView(window?.innerWidth >= 300 && window?.innerWidth <= 575);
@@ -262,6 +323,83 @@ const Outlet = () => {
     handleSearch(""); // load all on mount
   }, [countryId]);
 
+  const calculateDistance = (lat1, lon1, lat2, lon2) => {
+    if (!lat1 || !lon1 || !lat2 || !lon2) return null;
+
+    const toRad = (value) => (value * Math.PI) / 180;
+    const R = 6371; // km
+    const dLat = toRad(lat2 - lat1);
+    const dLon = toRad(lon2 - lon1);
+
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(toRad(lat1)) *
+        Math.cos(toRad(lat2)) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
+
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c;
+
+    return distance.toFixed(1); // One decimal place
+  };
+
+  useEffect(() => {
+    if (!userLocation || outlets.length === 0) return;
+
+    const parseCoordinate = (coord) => {
+      if (!coord) return null;
+      const value = parseFloat(coord);
+      if (coord.includes("S") || coord.includes("W")) return -value;
+      return value;
+    };
+
+    const calculateDistance = (lat1, lon1, lat2, lon2) => {
+      if (
+        lat1 == null ||
+        lon1 == null ||
+        lat2 == null ||
+        lon2 == null ||
+        isNaN(lat1) ||
+        isNaN(lon1) ||
+        isNaN(lat2) ||
+        isNaN(lon2)
+      )
+        return null;
+
+      const toRad = (value) => (value * Math.PI) / 180;
+
+      const R = 6371; // Radius of Earth in KM
+      const dLat = toRad(lat2 - lat1);
+      const dLon = toRad(lon2 - lon1);
+      const a =
+        Math.sin(dLat / 2) ** 2 +
+        Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) ** 2;
+
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      return parseFloat((R * c).toFixed(2)); // Distance in KM
+    };
+
+    const newOutlets = outlets.map((outlet) => {
+      const lat = parseCoordinate(outlet.latitude);
+      const lon = parseCoordinate(outlet.longitude);
+
+      const distance = calculateDistance(
+        userLocation.latitude,
+        userLocation.longitude,
+        lat,
+        lon
+      );
+
+      return {
+        ...outlet,
+        distance,
+      };
+    });
+
+    setEnhancedOutlets(newOutlets);
+  }, [userLocation, outlets]);
+
   return (
     <div>
       <div className={Classes.mainContianerProfile}>
@@ -293,135 +431,145 @@ const Outlet = () => {
               </p>
             </div>
             <div className={Classes.OutletCardParent}>
-              {outlets && outlets.length > 0 ? (
-                outlets.map((item) => (
-                  <div
-                    key={item.id || item.name}
-                    className={Classes.OutletCard + " relative pb-24"}
-                  >
+              {enhancedOutlets && enhancedOutlets.length > 0 ? (
+                enhancedOutlets
+                  .filter((item) => item.name !== "Demo Shopkeepers")
+                  .map((item) => (
                     <div
-                      className={
-                        Classes.ParentSubOutlet + " flex justify-between"
-                      }
+                      key={item.id || item.name}
+                      className={Classes.OutletCard + " relative pb-24"}
                     >
-                      <div className={Classes.LeftOutlets}>
-                        <div className={Classes.OutletImage}>
-                          <Image
-                            // src={`/Assets/outlet.png`}
-                            src={item.image ? item.image : "/Assets/outlet.png"}
-                            alt="outletimg"
-                            height={100}
-                            width={100}
-                            style={{ objectFit: "cover", borderRadius: "4px" }}
-                          />
+                      <div
+                        className={
+                          Classes.ParentSubOutlet + " flex justify-between"
+                        }
+                      >
+                        <div className={Classes.LeftOutlets}>
+                          <div className={Classes.OutletImage}>
+                            <Image
+                              // src={`/Assets/outlet.png`}
+                              src={
+                                item.image ? item.image : "/Assets/outlet.png"
+                              }
+                              alt="outletimg"
+                              height={100}
+                              width={100}
+                              style={{
+                                objectFit: "cover",
+                                borderRadius: "4px",
+                              }}
+                            />
+                          </div>
+                          <div
+                            className={
+                              Classes.OutletDetails +
+                              " flex flex-col items-start"
+                            }
+                          >
+                            <h3 className="font-lato font-semibold">
+                              {item.outlet_name}
+                              {/* - {item.location} */}
+                            </h3>
+                            <p
+                              className={Classes.RatingOutlets}
+                              style={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "5px",
+                                cursor: item.review_url ? "pointer" : "default",
+                                color: item.review_url ? "#006C77" : "inherit",
+                              }}
+                              onClick={() => {
+                                if (item.review_url) {
+                                  window.open(item.review_url, "_blank");
+                                }
+                              }}
+                            >
+                              <Image
+                                src={`/Assets/Star.png`}
+                                alt="starimg"
+                                height={16}
+                                width={15}
+                              />
+                              <span className="font-lato">
+                                4.9 | Google reviews
+                              </span>
+                            </p>
+
+                            <p>
+                              {item.address}
+                              <br />
+                              <span style={{ color: "#006C77" }}>
+                                {item.phone_number}
+                              </span>
+                            </p>
+                          </div>
                         </div>
                         <div
                           className={
-                            Classes.OutletDetails + " flex flex-col items-start"
+                            Classes.RightOutlet +
+                            " flex justify-end gap-1 min-w-[48px]"
                           }
                         >
-                          <h3 className="font-lato font-semibold">
-                            {item.outlet_name}
-                            {/* - {item.location} */}
-                          </h3>
-                          <p
-                            className={Classes.RatingOutlets}
-                            style={{
-                              display: "flex",
-                              alignItems: "center",
-                              gap: "5px",
-                              cursor: item.review_url ? "pointer" : "default",
-                              color: item.review_url ? "#006C77" : "inherit",
-                            }}
-                            onClick={() => {
-                              if (item.review_url) {
-                                window.open(item.review_url, "_blank");
-                              }
-                            }}
-                          >
-                            <Image
-                              src={`/Assets/Star.png`}
-                              alt="starimg"
-                              height={16}
-                              width={15}
-                            />
-                            <span className="font-lato">
-                              4.9 | Google reviews
-                            </span>
-                          </p>
-
-                          <p>
-                            {item.address}
-                            <br />
-                            <span style={{ color: "#006C77" }}>
-                              {item.phone_number}
-                            </span>
-                          </p>
+                          <Image
+                            src={`/Assets/locationimgs.png`}
+                            alt="locationimg"
+                            height={14}
+                            width={14}
+                          />
+                          {typeof item.distance === "number"
+                            ? `${item.distance} KM`
+                            : "Distance N/A"}
                         </div>
                       </div>
                       <div
                         className={
-                          Classes.RightOutlet +
-                          " flex justify-end gap-1 min-w-[48px]"
+                          Classes.OutletFooterCrad +
+                          " absolute bottom-0 left-0 right-0"
                         }
                       >
-                        <Image
-                          src={`/Assets/locationimgs.png`}
-                          alt="locationimg"
-                          height={14}
-                          width={14}
-                        />
-                        6KM
+                        <div className={Classes.OutletFooter}>
+                          <div
+                            className={Classes.outletWatsapp}
+                            onClick={() =>
+                              window.open(
+                                `https://wa.me/${item.phone_number}`,
+                                "_blank"
+                              )
+                            }
+                          >
+                            <RiWhatsappFill size={20} />
+                          </div>
+                          <div
+                            className={Classes.outletWatsapp}
+                            onClick={() =>
+                              window.open(`tel:${item.phone_number}`, "_blank")
+                            }
+                          >
+                            <IoMdCall size={20} />
+                          </div>
+                          <div className={Classes.OutletBookvist}>
+                            <button onClick={() => handleOpenSort(item)}>
+                              Book a Vist
+                            </button>
+                          </div>
+                        </div>
+                        <p className={Classes.OutletFooters}>
+                          <Image
+                            style={{
+                              position: "relative",
+                              top: "-1px",
+                            }}
+                            src={`/Assets/times.png`}
+                            alt="timeimg"
+                            height={15}
+                            width={15}
+                          />
+                          WORKING HOURS : 10:00AM TO 10:00PM
+                        </p>
                       </div>
                     </div>
-                    <div
-                      className={
-                        Classes.OutletFooterCrad +
-                        " absolute bottom-0 left-0 right-0"
-                      }
-                    >
-                      <div className={Classes.OutletFooter}>
-                        <div
-                          className={Classes.outletWatsapp}
-                          onClick={() =>
-                            window.open(
-                              `https://wa.me/${item.phone_number}`,
-                              "_blank"
-                            )
-                          }
-                        >
-                          <RiWhatsappFill size={20} />
-                        </div>
-                        <div
-                          className={Classes.outletWatsapp}
-                          onClick={() =>
-                            window.open(`tel:${item.phone_number}`, "_blank")
-                          }
-                        >
-                          <IoMdCall size={20} />
-                        </div>
-                        <div className={Classes.OutletBookvist}>
-                          <button onClick={() => handleOpenSort(item)}>
-                            Book a Vist
-                          </button>
-                        </div>
-                      </div>
-                      <p className={Classes.OutletFooters}>
-                        <Image
-                          style={{
-                            position: "relative",
-                            top: "-1px",
-                          }}
-                          src={`/Assets/times.png`}
-                          alt="timeimg"
-                          height={15}
-                          width={15}
-                        />
-                        WORKING HOURS : 10:00AM TO 10:00PM
-                      </p>
-                    </div>
-                  </div>
-                ))
+                  ))
               ) : (
                 <p style={{ textAlign: "center", marginTop: "20px" }}>
                   No outlets found.
