@@ -17,6 +17,7 @@ const NewArrivalPage = (props) => {
       }
     }
   }, []);
+
   console.log("1113", props);
   console.log("11131", categoryName);
   return (
