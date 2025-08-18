@@ -38,6 +38,7 @@ export default function ProductListSection({ category }) {
   }, [filter]);
 
   const appFilter = (filterParams) => {
+    window.scrollTo(0, 0);
     setIsLoading(true);
     axios
       .get(
