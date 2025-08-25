@@ -46,7 +46,8 @@ const gilroy = localFont({
 
 export const metadata = {
   title: "Swa diamonds- Buy Natural Diamond Jewellery Online",
-  description: "Swa Diamonds is a top-rated multinational diamond jewellery brand in India and the UAE, offering certified natural diamonds at wholesale prices. With 350+ stores across Kerala, South India, and a growing presence pan India.",
+  description:
+    "Swa Diamonds is a top-rated multinational diamond jewellery brand in India and the UAE, offering certified natural diamonds at wholesale prices. With 350+ stores across Kerala, South India, and a growing presence pan India.",
   keywords: [
     "diamond dealers in Kerala",
     "diamond jewellery in kerala",
@@ -57,7 +58,8 @@ export const metadata = {
   },
   openGraph: {
     title: "Swa diamonds- Buy Natural Diamond Jewellery Online",
-    description: "Swa Diamonds is a top-rated multinational diamond jewellery brand in India and the UAE, offering certified natural diamonds at wholesale prices. With 350+ stores across Kerala, South India, and a growing presence pan India",
+    description:
+      "Swa Diamonds is a top-rated multinational diamond jewellery brand in India and the UAE, offering certified natural diamonds at wholesale prices. With 350+ stores across Kerala, South India, and a growing presence pan India",
     url: "https://www.swadiamonds.com",
     siteName: "Swa Diamonds",
     images: [
@@ -72,7 +74,8 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Swa diamonds- Buy Natural Diamond Jewellery Online",
-    description: "Swa Diamonds is a top-rated multinational diamond jewellery brand in India and the UAE, offering certified natural diamonds at wholesale prices. With 350+ stores across Kerala, South India, and a growing presence pan India",
+    description:
+      "Swa Diamonds is a top-rated multinational diamond jewellery brand in India and the UAE, offering certified natural diamonds at wholesale prices. With 350+ stores across Kerala, South India, and a growing presence pan India",
     images: ["https://www.swadiamonds.com/twitter-image.jpg"],
   },
 };
@@ -81,7 +84,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="no-scrollbar">
       <head>
-        <Script
+        {/* <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-8XNJ195QEF"
           strategy="afterInteractive"
         />
@@ -91,6 +94,18 @@ export default function RootLayout({ children }) {
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'G-8XNJ195QEF');
+          `}
+        </Script> */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-DEZ9FMDN04"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-DEZ9FMDN04');
           `}
         </Script>
       </head>
