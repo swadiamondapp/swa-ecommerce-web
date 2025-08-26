@@ -1,21 +1,22 @@
-// app/api/vlog-proxy/route.js
-import fetch from "node-fetch";
+import { NextResponse } from 'next/server';
 
-export async function GET(req) {
-  const targetUrl = "https://swavlog.zinfog.in/";
-
+export async function GET() {
+  const targetUrl = 'https://swavlog.zinfog.in/';
+  
   try {
-    const response = await fetch(targetUrl);
-    const html = await response.text();
+    let response = await fetch(targetUrl, {
+      headers: { 'User-Agent': 'Mozilla/5.0' },
+    });
+    let html = await response.text();
 
-    return new Response(html, {
-      status: 200,
-      headers: {
-        "Content-Type": "text/html",
-      },
+    // Rewrite relative URLs to absolute
+    html = html.replace(/href="\//g, 'href="https://swavlog.zinfog.in/');
+    html = html.replace(/src="\//g, 'src="https://swavlog.zinfog.in/');
+
+    return new NextResponse(html, {
+      headers: { 'Content-Type': 'text/html' },
     });
   } catch (error) {
-    console.error(error);
-    return new Response("Error fetching blog content", { status: 500 });
+    return NextResponse.json({ error: 'Failed to fetch content' }, { status: 500 });
   }
 }
