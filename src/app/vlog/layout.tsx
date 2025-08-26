@@ -1,5 +1,8 @@
-// app/vlog/layout.tsx
-export default function VlogLayout({ children }: { children: React.ReactNode }) {
-  // Return children without wrapping it in your main layout
+export default function VlogLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  // This overrides your main layout so NO header/footer
   return <>{children}</>;
 }
