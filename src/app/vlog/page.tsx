@@ -1,3 +1,5 @@
+
+//src/app/vlog/page.tsx
 'use client';
 
 export default function VlogPage() {
