@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 export async function GET() {
   const targetUrl = 'https://swavlog.zinfog.in/';
   
-  try {
+  try { 
     let response = await fetch(targetUrl, {
       headers: { 'User-Agent': 'Mozilla/5.0' },
     });
