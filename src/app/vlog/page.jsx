@@ -1,12 +1,15 @@
-'use client';
+"use client";
+import { useEffect, useState } from "react";
 
 export default function VlogPage() {
-  return (
-    <iframe
-      src="https://swavlog.zinfog.in/"
-      className="w-full min-h-screen border-0"
-      style={{ height: '100vh' }}
-      title="SWA Diamonds Blog"
-    />
-  );
+  const [html, setHtml] = useState("");
+
+  useEffect(() => {
+    fetch("/api/vlog-proxy")
+      .then((res) => res.text())
+      .then((data) => setHtml(data))
+      .catch((err) => console.error(err));
+  }, []);
+
+  return <div dangerouslySetInnerHTML={{ __html: html }} />;
 }
