@@ -1,3 +1,4 @@
+//src/app/vlog/layout.tsx
 export default function VlogLayout({
   children,
 }: {
