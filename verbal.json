@@ -1,0 +1,6 @@
+// vercel.json
+{
+  "rewrites": [
+    { "source": "/vlogs", "destination": "https://swavlog.zinfog.in/" }
+  ]
+}
