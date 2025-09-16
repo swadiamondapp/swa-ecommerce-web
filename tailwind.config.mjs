@@ -1,3 +1,25 @@
+// /** @type {import('tailwindcss').Config} */
+// export default {
+//   content: [
+//     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+//     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+//     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+//   ],
+//   theme: {
+//     extend: {
+//       colors: {
+//         background: "var(--background)",
+//         foreground: "var(--foreground)",
+//       },
+//       fontFamily: {
+//         gilroy: ['var(--font-gilroy)'],
+//         playfair: ['var(--font-playfair)'],
+//         lato: ['var(--font-lato)'],
+//       },
+//     },
+//   },
+//   plugins: [],
+// };
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -15,6 +37,9 @@ export default {
         gilroy: ['var(--font-gilroy)'],
         playfair: ['var(--font-playfair)'],
         lato: ['var(--font-lato)'],
+      },
+      maxWidth: {
+        'container': '1616.82px', // ✅ custom container width
       },
     },
   },

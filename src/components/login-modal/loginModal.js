@@ -577,15 +577,9 @@ const LoginModal = (props) => {
               props.setLoginText("Welcome Back");
             }}
           >
-            <span className={Classes.loginsignuptitle}>Login</span>
+             <Image src="/try/avatar.svg" width={15} height={20} alt="avatar" />
           </div>
-          <div className={Classes.LineArrow}></div>
-          <div
-            className={`${Classes.DSignup} ${Classes.headerElement}`}
-            onClick={handleSignupClick}
-          >
-            <span className={Classes.loginsignuptitle}>SignUp</span>
-          </div>
+
         </div>
       )}
 

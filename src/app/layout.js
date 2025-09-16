@@ -12,9 +12,10 @@ import { AddressProvider } from "@/providers/address-provider";
 import { CheckoutProvider } from "@/providers/checkout-provider";
 import { OrderProvider } from "@/providers/order-provider";
 import { CartProvider } from "@/providers/cart-provider";
-import Header from "@/components/header/header";
+// import Header from "@/components/header/header";
 import { TrialProvider } from "@/providers/trial-provider";
 import { TrackOrderProvider } from "@/providers/trackorder-provider";
+import Header from "@/components/tryHeader/page";
 
 const lato = Lato({
   weight: ["400", "700"],
