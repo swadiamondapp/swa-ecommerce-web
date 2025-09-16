@@ -584,6 +584,7 @@ function Header() {
   //   );
 
   return (
+    <>
     <div className=" max-w-container mx-auto grid grid-cols-3 items-center w-full h-[90px px-6">
       {/* Left Section */}
       <div className="flex items-center space-x-1">
@@ -752,6 +753,79 @@ function Header() {
         </div>
       </div>
     </div>
+    <>
+     {!isCartPage && (
+          <div
+          className=" bg-white absolute top-[87px] left-1/2 -translate-x-1/2 z-10 h-[59.67px] w-[856px]  mx-auto flex items-center px-10 rounded-full shadow-sm"
+            // className={Classes.SubHeadNav}
+            // style={{
+            //   position: isSticky ? "fixed" : "static",
+            //   top: 0,
+            //   zIndex: 1000,
+            //   width: "100%",
+            //   height: "42px",
+            // }}
+          >
+            {/* <div className="container" style={{ padding: "0px" }}>
+              <div className="flex items-center justify-between  flex-wrap text-sm text-black">
+                {categories?.map((category, index) => (
+                  <div key={index}>
+                    <Link
+                      href={`/${category.name.toLowerCase().replace(/\s+/g, "")}`}
+                      className="text-black"
+                    >
+                      <p>{category.name.toUpperCase()}</p>
+                    </Link>
+                  </div>
+                ))}
+                {tags?.map((tag, index) => (
+                  <div key={index}>
+                    <Link
+                      href={`/${tag.name.toLowerCase().replace(/\s+/g, "")}`}
+                      className="text-black"
+                      >
+                      <p>{tag.name.toUpperCase()}</p>
+                    </Link>
+                  </div>
+                ))}
+              </div>
+            </div> */}
+            <div className="container pt-2 px-0 ">
+  <div className="flex items-center justify-between flex-wrap text-sm text-black">
+    {categories?.map((category, index) => (
+      <div key={index} className="flex justify-center">
+        <Link
+          href={`/${category.name.toLowerCase().replace(/\s+/g, "")}`}
+          className="group relative inline-block text-black"
+        >
+          <p className="pb-2 text-center">{category.name.toUpperCase()}</p>
+          {/* underline div */}
+          <div className="absolute left-1/2 -translate-x-1/2 -bottom-3 h-[4px] w-20 bg-[#4d9ea7] rounded-t-md scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+        </Link>
+      </div>
+    ))}
+
+    {tags?.map((tag, index) => (
+      <div key={index} className="flex justify-center">
+        <Link
+          href={`/${tag.name.toLowerCase().replace(/\s+/g, "")}`}
+          className="group relative inline-block text-black"
+        >
+          <p className="pb-2 text-center">{tag.name.toUpperCase()}</p>
+          {/* underline div */}
+          <div className="absolute left-1/2 -translate-x-1/2 bottom-0 h-[4px] w-6 bg-[#4d9ea7] rounded-t-md scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+        </Link>
+      </div>
+    ))}
+  </div>
+</div>
+
+
+          </div>
+          
+        )}
+    </>
+    </>
   );
 }
 

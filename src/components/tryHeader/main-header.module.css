@@ -233,7 +233,7 @@
   color: #757c81 !important;
   text-align: center;
 }
-.NavLinksDesk p {
+/* .NavLinksDesk p {
   padding-bottom: 10px;
   color: #10212f;
   font-family: var(--font-lato);
@@ -241,11 +241,16 @@
   font-size: 12px;
 }
 .NavLinksDesk p:hover {
-  /* color: #4d9ea7; */
+  
   color: #10212f;
+  
 
   border-bottom: 5px solid #4d9ea7;
-}
+  
+} */
+
+
+
 
 .Offers:hover .ParentAddToCartCard2 {
   display: block;
