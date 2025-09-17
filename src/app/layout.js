@@ -17,6 +17,8 @@ import { TrialProvider } from "@/providers/trial-provider";
 import { TrackOrderProvider } from "@/providers/trackorder-provider";
 import Header from "@/components/tryHeader/page";
 import Hero from "@/components/tryHero/page";
+import Collection from "@/components/trycollection/page";
+import Favcollection from "@/components/tryfavcollection/page";
 
 const lato = Lato({
   weight: ["400", "700"],
@@ -112,6 +114,8 @@ export default function RootLayout({ children }) {
                           <TrackOrderProvider>
                             <Header />
                             <Hero />
+                            <Collection />
+                            <Favcollection />
                             {children}
                           </TrackOrderProvider>
                         </TrialProvider>
