@@ -78,11 +78,24 @@ const Favcollection = () => {
             <p className="text-[20px] text-[#918676] pt-[9.66px]">
                 TRENDY COLLECTIONS
             </p>
-            <p>
+            <p className="pt-[5.54px]">
                 Its design draws inspiration from <br /> the pink oyster mushroom, a symbol of <br /> immortality and longevity, and it 
 
             </p>
         </div>
+
+           <img
+            src="/try/Line.svg"
+           
+            alt="arrow"
+            className=" absolute top-[296.76px] right-[71.41px] pb-[24.24px]"
+          />
+
+          <div className="absolute text-end top-[894.58px] left-[1363.29px] w-[245.13px] h-[84px]">
+            <p className="text-[20px] font-extrabold">
+              WE HAVE STYLE AT <br /> YOUR AFFORDABLE <br /> BUDGET
+            </p>
+          </div>
       </div>
     </div>
   );
