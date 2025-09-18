@@ -43,6 +43,7 @@ export default function NewArrivals() {
           <div className="row landingrow">
             {newArrivel.map((item, index) => {
               return (
+               
                 <NewArrivalCard
                   ProductImage={item.thumbnail_image && item.thumbnail_image}
                   ProductName={item.product_name}

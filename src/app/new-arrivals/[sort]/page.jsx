@@ -13,6 +13,7 @@ async function CategoryPage({ params }) {
         <FilterProvider sort={sort}>
           <div className="row">
             <div className="col-lg-3 col-sm-4">
+
               <FilterCatgs />
             </div>
             <div className="col-lg-9 col-sm-8">

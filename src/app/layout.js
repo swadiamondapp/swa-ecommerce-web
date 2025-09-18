@@ -21,6 +21,8 @@ import Collection from "@/components/trycollection/page";
 import Favcollection from "@/components/tryfavcollection/page";
 import StoreComp from "@/components/trystore/page";
 import SwaPromise from "@/components/tryswapromise/page";
+import Newcollection from "@/components/trynewcollection/page";
+import TopSellingCollection from "@/components/trytopsellingcollection/page";
 
 const lato = Lato({
   weight: ["400", "700"],
@@ -48,6 +50,16 @@ const gilroy = localFont({
     },
   ],
   variable: "--font-gilroy",
+});
+const britishCastilla = localFont({
+  src: [
+    {
+      path: "../../public/fonts/British_Castilla.otf", // your .otf file
+      weight: "400", // set the actual weight (if unknown, use 400)
+      style: "normal", // change to "italic" if needed
+    },
+  ],
+  variable: "--font-britishCastilla",
 });
 
 export const metadata = {
@@ -101,7 +113,7 @@ export default function RootLayout({ children }) {
         </Script>
       </head>
       <body
-        className={`${lato.variable} ${gilroy.variable} ${playfair.variable} no-scrollbar`}
+        className={`${lato.variable} ${gilroy.variable} ${playfair.variable}  ${britishCastilla.variable} no-scrollbar`}
         // className={`${lato.variable} ${gilroy.variable} ${playfair.variable} antialiased`}
       >
         <QueryProvider>
@@ -120,6 +132,8 @@ export default function RootLayout({ children }) {
                             <Favcollection />
                             <StoreComp />
                             <SwaPromise />
+                            <Newcollection />
+                            <TopSellingCollection/>
                             {children}
                           </TrackOrderProvider>
                         </TrialProvider>

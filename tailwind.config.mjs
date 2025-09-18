@@ -63,6 +63,8 @@ export default {
         gilroy: ["var(--font-gilroy)"],
         playfair: ["var(--font-playfair)"],
         lato: ["var(--font-lato)"],
+       british: ["var(--font-britishCastilla)"],
+
       },
       maxWidth: {
         container: "1616.82px", // ✅ custom container width

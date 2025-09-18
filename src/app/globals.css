@@ -7,6 +7,14 @@
   --foreground: #171717;
 }
 
+@font-face {
+  font-family: "BritishCastilla";
+  src: url("/fonts/BritishCastilla.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
