@@ -23,6 +23,7 @@ import StoreComp from "@/components/trystore/page";
 import SwaPromise from "@/components/tryswapromise/page";
 import Newcollection from "@/components/trynewcollection/page";
 import TopSellingCollection from "@/components/trytopsellingcollection/page";
+import Ringcomponet from "@/components/tryringcomponet/page";
 
 const lato = Lato({
   weight: ["400", "700"],
@@ -134,6 +135,7 @@ export default function RootLayout({ children }) {
                             <SwaPromise />
                             <Newcollection />
                             <TopSellingCollection/>
+                            <Ringcomponet />
                             {children}
                           </TrackOrderProvider>
                         </TrialProvider>

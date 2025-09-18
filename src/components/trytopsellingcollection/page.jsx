@@ -24,6 +24,25 @@ const TopSellingCollection = () => {
 
         </div>
      </div>
+  <div className="space-y-[32px] absolute top-[172.48px] left-[143.41px]">
+  <p className="text-[#918676] text-[20px] leading-[24px] font-[400] tracking-[0.04rem] ">
+    BRAND AMBASSADOR
+  </p>
+<div className=" w-[454.48px] h-[108.36px] flex items-center justify-center">
+  <p className="text-[56px] leading-none font-[400] font-british">
+    Preity Zinta
+  </p>
+</div>
+
+
+  <p className="text-[16px] leading-[24px] font-[400] italic ">
+    Its design draws inspiration from the pink oyster <br />
+    mushroom, a symbol of immortality and longevity, <br />
+    and it features 41 unique mushroom-shaped <br />
+    petals adorned with diamonds The ring weighs
+  </p>
+</div>
+
 
 
 
