@@ -16,14 +16,7 @@ import { CartProvider } from "@/providers/cart-provider";
 import { TrialProvider } from "@/providers/trial-provider";
 import { TrackOrderProvider } from "@/providers/trackorder-provider";
 import Header from "@/components/tryHeader/page";
-import Hero from "@/components/tryHero/page";
-import Collection from "@/components/trycollection/page";
-import Favcollection from "@/components/tryfavcollection/page";
-import StoreComp from "@/components/trystore/page";
-import SwaPromise from "@/components/tryswapromise/page";
-import Newcollection from "@/components/trynewcollection/page";
-import TopSellingCollection from "@/components/trytopsellingcollection/page";
-import Ringcomponet from "@/components/tryringcomponet/page";
+
 
 const lato = Lato({
   weight: ["400", "700"],
@@ -128,14 +121,7 @@ export default function RootLayout({ children }) {
                         <TrialProvider>
                           <TrackOrderProvider>
                             <Header />
-                            <Hero />
-                            <Collection />
-                            <Favcollection />
-                            <StoreComp />
-                            <SwaPromise />
-                            <Newcollection />
-                            <TopSellingCollection/>
-                            <Ringcomponet />
+                          
                             {children}
                           </TrackOrderProvider>
                         </TrialProvider>

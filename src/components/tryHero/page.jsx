@@ -235,8 +235,8 @@ const Hero = () => {
         </button>
       </div>
 
-      <div className=' w-[514px] h-[195px]  z-50 flex flex-row justify-between items-center p-2 rounded-xl shadow-md absolute top-[667px] right-0'>
-        <div>
+      <div className=' w-[514px] h-[195px]  z-50 flex flex-row justify-between items-center p-2 pl-4 rounded-xl shadow-md absolute top-[667px] right-0 bg-white/40'>
+        <div className='pl-4'>
           <p className='text-[15px] pb-2'>
           Discover the artistry of SWA <br /> Diamonds as natural rough stones <br /> are transformed into sparkling <br /> masterpieces through precision <br /> cutting and polishing.
         </p>
@@ -252,6 +252,7 @@ const Hero = () => {
             src="/try/diaVedio.mp4"
             autoPlay
             loop
+            
             muted
             playsInline
             className="w-full h-full object-cover"

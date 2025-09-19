@@ -6,19 +6,42 @@ import BringTheParty from "@/components/bring-the-party/bring-the-party";
 import TopDemanded from "@/components/top-demanded/top-demanded";
 import Certificate from "@/components/certificate/certificate";
 import DownloadOurAppImage from "@/components/download-our-app/download-our-app";
+import Hero from "@/components/tryHero/page";
+import Collection from "@/components/trycollection/page";
+import Favcollection from "@/components/tryfavcollection/page";
+import StoreComp from "@/components/trystore/page";
+import SwaPromise from "@/components/tryswapromise/page";
+import Newcollection from "@/components/trynewcollection/page";
+import TopSellingCollection from "@/components/trytopsellingcollection/page";
+import Ringcomponet from "@/components/tryringcomponet/page";
+import Worldrec from "@/components/tryworldrecord/page";
+import Galxypendant from "@/components/trygalaxypendent/page";
+import Limelight from "@/components/trylimrlight/page";
+import TFooter from "@/components/tryfooter/page";
 
 export default async function Home() {
   return (
     <div className="flex flex-col gap-2">
-      
-      <HeroBanner />
+      {/* <HeroBanner />
       <Features />
       <ShopOnBudget />
       <NewArrivals />
       <BringTheParty />
       <TopDemanded />
       <Certificate />
-      <DownloadOurAppImage />
+      <DownloadOurAppImage /> */}
+      <Hero />
+      <Collection />
+      <Favcollection />
+      <StoreComp />
+      <SwaPromise />
+      <Newcollection />
+      <TopSellingCollection />
+      <Ringcomponet />
+      <Worldrec />
+      <Galxypendant />
+      <Limelight />
+      <TFooter />
     </div>
   );
 }
