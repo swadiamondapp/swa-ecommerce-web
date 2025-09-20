@@ -121,6 +121,7 @@ export default function RootLayout({ children }) {
                         <TrialProvider>
                           <TrackOrderProvider>
                             <Header />
+                            
                           
                             {children}
                           </TrackOrderProvider>

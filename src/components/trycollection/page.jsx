@@ -9,7 +9,7 @@ const Collection = () => {
         <Image src="/try/collectionbottomProp.svg" width={242.31} height={213.13} alt="collectionbottomProp"  className="absolute top-[461.9px] -left-[152.26px]" />
      
 
-       <div className="flex w-[1330px] h-[662px] flex-col absolute top-[24px] bottom-[24px] left-[143.41] ">
+       <div className="flex w-[1330px] h-[662px] flex-col mx-auto  justify-center items-center absolute top-[24px] bottom-[24px] left-[143.41px] ">
       
 
       <div className="flex w-[1330px] h-[331px]  justify-around items-center">
