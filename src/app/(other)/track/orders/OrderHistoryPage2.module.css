@@ -204,7 +204,7 @@
 }
 .SearchBar {
   width: 45%;
-  background-image: url(../../../../public/Assets/searchIcon.png);
+  background-image: url(../../../../../public/Assets/searchIcon.png);
   background-repeat: no-repeat;
   background-position: 20px;
   background-size: 15px;

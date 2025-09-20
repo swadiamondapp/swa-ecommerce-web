@@ -159,7 +159,7 @@
 
   background: transparent;
   -webkit-appearance: none;
-  background: transparent url("../../../../public/Assets/arrow.png") no-repeat
+  background: transparent url("../../../../../public/Assets/arrow.png") no-repeat
     96% center;
   color: #a3a7ab;
 }

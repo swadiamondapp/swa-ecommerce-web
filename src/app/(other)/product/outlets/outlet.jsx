@@ -10,7 +10,7 @@ import Modal from "@mui/material/Modal";
 import * as Urls from "@/utils/urls";
 import axios from "axios";
 import Image from "next/image";
-import locations from "../../../../public/Assets/locations.png";
+import locations from "../../../../../public/Assets/locations.png";
 import { useCountry } from "@/providers/country-provider";
 const style = {
   position: "absolute",

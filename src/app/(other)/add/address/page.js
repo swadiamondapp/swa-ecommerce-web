@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Classes from "../../../app/cart/checkout/CheckOutPage.module.css";
+import Classes from "@/app/(other)/cart/checkout/CheckOutPage.module.css";
 import axios from "axios";
 import * as Urls from "@/utils/urls";
 import AddAddress from "@/components/checkout/AddAddress";
