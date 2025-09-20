@@ -18,6 +18,7 @@ import Worldrec from "@/components/tryworldrecord/page";
 import Galxypendant from "@/components/trygalaxypendent/page";
 import Limelight from "@/components/trylimrlight/page";
 import TFooter from "@/components/tryfooter/page";
+  
 
 export default async function Home() {
   return (
@@ -31,7 +32,7 @@ export default async function Home() {
       <Certificate />
       <DownloadOurAppImage /> */}
       <Hero />
-      <Collection />
+      {/* <Collection />
       <Favcollection />
       <StoreComp />
       <SwaPromise />
@@ -41,7 +42,7 @@ export default async function Home() {
       <Worldrec />
       <Galxypendant />
       <Limelight />
-      <TFooter />
+      <TFooter /> */}
     </div>
   );
 }

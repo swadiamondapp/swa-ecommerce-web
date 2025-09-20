@@ -6,7 +6,7 @@ import axios from "axios";
 import * as Urls from "@/utils/urls";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
-import AddAddress from "@/app/cart/checkout/AddAddress";
+import AddAddress from "@/app/(other)/cart/checkout/AddAddress";
 import Classes from "./Payment.module.css";
 import { useCheckout } from "@/providers/checkout-provider";
 import Image from "next/image";

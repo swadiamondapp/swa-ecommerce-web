@@ -2,7 +2,7 @@ import { Lato, Playfair_Display } from "next/font/google";
 import localFont from "next/font/local";
 import Script from "next/script";
 import "./globals.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+//import "bootstrap/dist/css/bootstrap.min.css";
 import CountryProvider from "@/providers/country-provider";
 import AuthProvider from "@/providers/auth-provider";
 import DataProvider from "@/providers/data-provider";
@@ -16,7 +16,6 @@ import { CartProvider } from "@/providers/cart-provider";
 import { TrialProvider } from "@/providers/trial-provider";
 import { TrackOrderProvider } from "@/providers/trackorder-provider";
 import Header from "@/components/tryHeader/page";
-
 
 const lato = Lato({
   weight: ["400", "700"],
@@ -58,7 +57,8 @@ const britishCastilla = localFont({
 
 export const metadata = {
   title: "Swa diamonds- Buy Natural Diamond Jewellery Online",
-  description: "Swa Diamonds is a top-rated multinational diamond jewellery brand in India and the UAE, offering certified natural diamonds at wholesale prices. With 350+ stores across Kerala, South India, and a growing presence pan India.",
+  description:
+    "Swa Diamonds is a top-rated multinational diamond jewellery brand in India and the UAE, offering certified natural diamonds at wholesale prices. With 350+ stores across Kerala, South India, and a growing presence pan India.",
   keywords: [
     "diamond dealers in Kerala",
     "diamond jewellery in kerala",
@@ -69,7 +69,8 @@ export const metadata = {
   },
   openGraph: {
     title: "Swa diamonds- Buy Natural Diamond Jewellery Online",
-    description: "Swa Diamonds is a top-rated multinational diamond jewellery brand in India and the UAE, offering certified natural diamonds at wholesale prices. With 350+ stores across Kerala, South India, and a growing presence pan India",
+    description:
+      "Swa Diamonds is a top-rated multinational diamond jewellery brand in India and the UAE, offering certified natural diamonds at wholesale prices. With 350+ stores across Kerala, South India, and a growing presence pan India",
     url: "https://www.swadiamonds.com",
     siteName: "Swa Diamonds",
     images: [
@@ -84,7 +85,8 @@ export const metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Swa diamonds- Buy Natural Diamond Jewellery Online",
-    description: "Swa Diamonds is a top-rated multinational diamond jewellery brand in India and the UAE, offering certified natural diamonds at wholesale prices. With 350+ stores across Kerala, South India, and a growing presence pan India",
+    description:
+      "Swa Diamonds is a top-rated multinational diamond jewellery brand in India and the UAE, offering certified natural diamonds at wholesale prices. With 350+ stores across Kerala, South India, and a growing presence pan India",
     images: ["https://www.swadiamonds.com/twitter-image.jpg"],
   },
 };
@@ -107,7 +109,7 @@ export default function RootLayout({ children }) {
         </Script>
       </head>
       <body
-        className={`${lato.variable} ${gilroy.variable} ${playfair.variable}  ${britishCastilla.variable} no-scrollbar`}
+        className={`${lato.variable} ${gilroy.variable} ${playfair.variable}  ${britishCastilla.variable} no-scrollbar bg-white text-black`}
         // className={`${lato.variable} ${gilroy.variable} ${playfair.variable} antialiased`}
       >
         <QueryProvider>
@@ -120,9 +122,6 @@ export default function RootLayout({ children }) {
                       <CartProvider>
                         <TrialProvider>
                           <TrackOrderProvider>
-                            <Header />
-                            
-                          
                             {children}
                           </TrackOrderProvider>
                         </TrialProvider>

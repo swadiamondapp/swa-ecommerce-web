@@ -406,7 +406,7 @@ p {
 }
 .ParentSlide .slick-dots {
   bottom: -95px !important;
-  text-align: left !important;
+  text-align: left ;
   width: 429px !important;
   height: 72px;
   overflow: scroll !important;

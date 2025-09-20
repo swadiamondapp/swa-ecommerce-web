@@ -7,7 +7,7 @@ import Classes from "./CheckOutPage.module.css";
 import CheckOut from "../cart/[CheckOut]/page";
 import axios from "axios";
 import * as Urls from "@/utils/urls";
-import AddAddress from "@/app/cart/checkout/AddAddress";
+import AddAddress from "@/app/(other)/cart/checkout/AddAddress";
 import useCanonicalTag from "@/useCanonicalTag";
 
 const AddAddressPage = (props) => {
