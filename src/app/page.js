@@ -32,7 +32,7 @@ export default async function Home() {
       <Certificate />
       <DownloadOurAppImage /> */}
       <Hero />
-      {/* <Collection />
+      <Collection />
       <Favcollection />
       <StoreComp />
       <SwaPromise />
@@ -42,7 +42,7 @@ export default async function Home() {
       <Worldrec />
       <Galxypendant />
       <Limelight />
-      <TFooter /> */}
+      {/* <TFooter /> */}
     </div>
   );
 }

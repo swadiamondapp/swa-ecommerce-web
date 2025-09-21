@@ -16,6 +16,7 @@ import { CartProvider } from "@/providers/cart-provider";
 import { TrialProvider } from "@/providers/trial-provider";
 import { TrackOrderProvider } from "@/providers/trackorder-provider";
 import Header from "@/components/tryHeader/page";
+import TFooter from "@/components/tryfooter/page";
 
 const lato = Lato({
   weight: ["400", "700"],
@@ -122,12 +123,14 @@ export default function RootLayout({ children }) {
                       <CartProvider>
                         <TrialProvider>
                           <TrackOrderProvider>
+                            <Header />
                             {children}
+                            <TFooter />
                           </TrackOrderProvider>
                         </TrialProvider>
                       </CartProvider>
                     </OrderProvider>
-                    <Footer />
+                    {/* <Footer /> */}
                   </CheckoutProvider>
                 </AddressProvider>
               </DataProvider>
