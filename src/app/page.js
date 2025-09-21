@@ -42,7 +42,7 @@ export default async function Home() {
       <Worldrec />
       <Galxypendant />
       <Limelight />
-      {/* <TFooter /> */}
+      <TFooter />
     </div>
   );
 }
