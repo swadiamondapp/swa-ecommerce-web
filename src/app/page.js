@@ -35,8 +35,8 @@ export default async function Home() {
       <Collection />
       <Favcollection />
       <StoreComp />
-      {/* <SwaPromise /> */}
-      {/* <Newcollection /> */}
+      <SwaPromise />
+      <Newcollection />
       {/* <TopSellingCollection /> */}
       {/* <Ringcomponet /> */}
       {/* <Worldrec /> */}
