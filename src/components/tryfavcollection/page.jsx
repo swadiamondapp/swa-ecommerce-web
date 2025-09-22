@@ -25,7 +25,7 @@ const Favcollection = () => {
         </div>
         <Image
           src="/try/downArrow.svg"
-          className="absolute  -bottom-1 z-10 left-1/2 transform -translate-x-1/2 w-[2rem] h-[3.37rem] md:w-[3.5rem] md:h-[6rem] lg:w-[5.31rem] lg:h-[8.93rem]"
+          className="absolute  bottom-0 z-10 left-1/2 transform -translate-x-1/2 w-[2rem] h-[3.37rem] md:w-[3.5rem] md:h-[6rem] lg:w-[5.31rem] lg:h-[8.93rem]"
           width={85.14}
           height={143.57}
         />
@@ -37,7 +37,7 @@ const Favcollection = () => {
           height={875.171875}
         />
 
-        <div className="absolute text-center flex flex-col items-center left-1/2 transform -translate-x-1/2 lg:block lg:text-left top-[1.687rem] w-[20.125rem] md:w-[24rem] lg:top-[8.4rem] lg:left-[12.51rem] md:top-[3.9rem] sm:top-[8.4rem] ">
+        <div className="absolute text-center flex flex-col items-center left-1/2 transform -translate-x-1/2 lg:block lg:text-left top-[1.687rem] w-[20.125rem] md:w-[24rem] lg:top-[8.4rem] lg:left-[12.51rem] md:top-[3.9rem] sm:top-[6.4rem] ">
           <p className="font-playfair text-[2rem] pb-[1.33rem] lg:text-[3.5rem] lg:pb-[1.33rem] md:text-[3.5rem] md:pb-[1.33rem] sm:text-[2rem] sm:pb-[1.33rem]">
             Preity Zinta <br /> Fav Collections
           </p>
