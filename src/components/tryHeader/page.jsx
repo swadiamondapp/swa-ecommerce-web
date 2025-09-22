@@ -23,6 +23,7 @@ import { suggestion, productDet } from "@/utils/urls";
 import { useData } from "@/providers/data-provider";
 import { useCart } from "@/providers/cart-provider";
 import { MdEdit } from "react-icons/md";
+import { func } from "joi";
 
 function Header() {
   const router = useRouter();
@@ -172,659 +173,220 @@ function Header() {
     router.push(`/${item.name.toLowerCase().replace(/\s+/g, "-")}`);
   };
 
-  //   return (
-  //     <>
-  //       {isHomePage && <TopHeader />}
-  //       <MainHeader
-  //         setIsHome={setIsHome}
-  //         isHome={isHome}
-  //         selectedCountry={selectedCountry}
-  //         setSelectedCountry={setSelectedCountry}
-  //         showSearchBar={showSearchBar}
-  //         setShowSearchBar={setShowSearchBar}
-  //       >
-  //         <div className={Classes.SearchIcons}>
-  //           <div className={Classes.searchList}>
-  //             <div
-  //               className="labelWrapper"
-  //               style={{
-  //                 display: searchKey.length === 0 ? "block" : "none",
-  //                 pointerEvents: "none",
-  //               }}
-  //             >
-  //               <span>diamond jewellery</span>
-  //               <span>gold jewellery</span>
-  //               <span>platinum jewellery</span>
-  //               <span>gemstone jewellery</span>
-  //             </div>
-  //             <input
-  //               style={{
-  //                 background: "#F8F8F8",
-  //                 borderRadius: "32px",
-  //                 position: "relative",
-  //               }}
-  //               className={`${Classes.searchbar} font-gilroy`}
-  //               type="text"
-  //               value={searchKey || ""}
-  //               onChange={searchKeyHanlder}
-  //               placeholder="Search for "
-  //             />
-  //             <BsSearch
-  //               size={22}
-  //               className={Classes.searchIcon}
-  //               style={{ display: searchShow ? "none" : "block" }}
-  //             />
-  //             <div className={Classes.searchListCont}>
-  //               {suggestionList.length !== 0 ? (
-  //                 suggestionList.map((item, index) => {
-  //                   return (
-  //                     <p
-  //                       className={Classes.SearchItem}
-  //                       key={index}
-  //                       onClick={() => searchTitleHandler(item)}
-  //                     >
-  //                       {item.name}
-  //                     </p>
-  //                   );
-  //                 })
-  //               ) : (
-  //                 <p className={Classes.NoResult}>No Results Found</p>
-  //               )}
-  //             </div>
-  //           </div>
-  //           <div className={Classes.SearchMob}>
-  //             <input
-  //               type="text"
-  //               value={searchKey || ""}
-  //               onChange={searchKeyHanlder}
-  //               className={Classes.SerachLine}
-  //             />
-  //             <BsSearch className={Classes.Icons} color="#FFFFFF" size={18} />
-  //           </div>
-  //           <div className={Classes.LogList}>
-  //             <div
-  //               style={{ cursor: "pointer" }}
-  //               className={`${Classes.DeliveryPin} ${Classes.headerElement}`}
-  //               onClick={handleShowModal}
-  //             >
-  //               <span className={Classes.checkDeliveryTitle}>CHECK DELIVERY</span>
-  //               {pincode ? null : (
-  //                 <span
-  //                   onClick={handleShowModal}
-  //                   className={Classes.EnterPinTitle}
-  //                   style={{ cursor: "pointer" }}
-  //                 >
-  //                   Enter PinCode
-  //                 </span>
-  //               )}
-  //               {pincode && (
-  //                 <span
-  //                   className={Classes.EnterPinTitle}
-  //                   style={{ display: "flex", alignItems: "center", gap: "8px" }}
-  //                 >
-  //                   {pincode} <FaPen onClick={handleShowModal} />
-  //                 </span>
-  //               )}
-  //             </div>
-  //           </div>
-  //           <CheckDelivery
-  //             show={showModal}
-  //             handleClose={handleCloseModal}
-  //             handleShow={handleShowModal}
-  //           />
-  //           <div className={`${Classes.outletlogo} ${Classes.headerElement}`}>
-  //             <Link href="/product/outlets">
-  //               <Image
-  //                 src={`/Assets/outletlogo.png`}
-  //                 width={24}
-  //                 height={24}
-  //                 alt="outlet logo"
-  //               />
-  //             </Link>
-  //           </div>
-  //           <div
-  //             style={{ cursor: "pointer" }}
-  //             className={Classes.CountryFlags}
-  //             ref={nameRef}
-  //           >
-  //             <div className={Classes.headerElement}>
-  //               {selectedCountry?.flag_image ? (
-  //                 <img
-  //                   src={selectedCountry && selectedCountry.flag_image}
-  //                   alt="Selected flag"
-  //                   className={Classes.selectedImage}
-  //                 />
-  //               ) : (
-  //                 <div className="bg-teal-700 w-[30px] h-[30px] rounded-full" />
-  //               )}
-  //             </div>
-  //             {openDropDown && (
-  //               <div className={Classes.CountryDropDowns} ref={dropdownRef}>
-  //                 {countryData
-  //                   .sort((a, b) =>
-  //                     a.country_name === "India"
-  //                       ? -1
-  //                       : b.country_name === "India"
-  //                       ? 1
-  //                       : 0
-  //                   ) // Sorts India to the top
-  //                   .map((country, index) => (
-  //                     <div className={Classes.CountryContainer} key={index}>
-  //                       <div
-  //                         className={Classes.contryelements}
-  //                         onClick={() => handleCountrySelect(country)}
-  //                       >
-  //                         <div>
-  //                           <Image
-  //                             src={country.flag_image}
-  //                             alt={country.id}
-  //                             className={Classes.dropDownImages}
-  //                           />
-  //                         </div>
-  //                         <div>
-  //                           <span>
-  //                             {country.country_name === "United Arab Emirates"
-  //                               ? "UAE"
-  //                               : country.country_name === "Saudi Arabia"
-  //                               ? "KSA"
-  //                               : country.country_name === "India"
-  //                               ? "IND"
-  //                               : country.country_name === "United States"
-  //                               ? "USA"
-  //                               : country.country_name}
-  //                           </span>
-  //                         </div>
-  //                       </div>
-  //                     </div>
-  //                   ))}
-  //               </div>
-  //             )}
-  //           </div>
-
-  //           <CgHeart
-  //             className={`${Classes.Icon} ${Classes.headerElement}`}
-  //             color="#FFFFFF"
-  //             size={25}
-  //             onClick={() => {
-  //               moveToWishList();
-  //               setLoginText("Please Login");
-  //             }}
-  //           />
-  //           <div className={Classes.CartItemNum}>
-  //             <IoCartOutline
-  //               className={`${Classes.Icon} ${Classes.AddToCart} ${Classes.headerElement}`}
-  //               color="#FFFFFF"
-  //               size={25}
-  //               onClick={() => {
-  //                 moveTocart();
-  //                 setLoginText("Please Login");
-  //               }}
-  //             />
-  //             {cartItemsCount > 0 && token && (
-  //               <div className={Classes.ItemsNum}>{cartItemsCount}</div>
-  //             )}
-  //           </div>
-
-  //           <LoginSuccessModal
-  //             openSuccessModal={showSuccessModal}
-  //             close={() => setShowSuccessModal(false)}
-  //             state={showSuccessModal}
-  //             text={text}
-  //           />
-  //           <LoginModal
-  //             className={Classes.loginUser}
-  //             isLog={show}
-  //             handleOpenLogin={() => setShow(!show)}
-  //             // logAct={props.loginHandler}
-  //             // cartClose={cateclose}
-  //             close={handleCloseModal}
-  //             style={{ marginTop: "0px" }}
-  //             setLoginText={setLoginText}
-  //             text={loginText}
-  //             setShowSuccessModal={setShowSuccessModal}
-  //             setText={setText}
-  //           />
-  //         </div>
-  //       </MainHeader>
-
-  //       {!isCartPage && (
-  //         <div
-  //           className={Classes.SubHeadNav}
-  //           style={{
-  //             position: isSticky ? "fixed" : "static",
-  //             top: 0,
-  //             zIndex: 1000,
-  //             width: "100%",
-  //             height: "42px",
-  //           }}
-  //         >
-  //           <div className="container" style={{ padding: "0px" }}>
-  //             <div className={Classes.NavLinksDesk}>
-  //               {categories?.map((category, index) => (
-  //                 <div key={index}>
-  //                   <Link
-  //                     href={`/${category.name.toLowerCase().replace(/\s+/g, "")}`}
-  //                     style={{ color: "#ffff", cursor: "pointer" }}
-  //                   >
-  //                     <p>{category.name.toUpperCase()}</p>
-  //                   </Link>
-  //                 </div>
-  //               ))}
-  //               {tags?.map((tag, index) => (
-  //                 <div key={index}>
-  //                   <Link
-  //                     href={`/${tag.name.toLowerCase().replace(/\s+/g, "")}`}
-  //                     style={{ color: "#ffff", cursor: "pointer" }}
-  //                   >
-  //                     <p>{tag.name.toUpperCase()}</p>
-  //                   </Link>
-  //                 </div>
-  //               ))}
-  //             </div>
-  //           </div>
-  //         </div>
-  //       )}
-
-  //       <div
-  //         className={
-  //           isHomePage ? Classes.searchListCont : Classes.searchListscards
-  //         }
-  //         style={{ display: searchShow ? "block" : "none", zIndex: 500 }}
-  //       >
-  //         {suggestionList.length !== 0 ? (
-  //           suggestionList.map((item, index) => {
-  //             return (
-  //               <p
-  //                 className={Classes.SearchItem}
-  //                 key={index}
-  //                 onClick={() => searchTitleHandler(item)}
-  //               >
-  //                 {item.name}
-  //               </p>
-  //             );
-  //           })
-  //         ) : (
-  //           <p className={Classes.NoResult}>No Results Found</p>
-  //         )}
-  //       </div>
-
-  //       {!isCheckoutPage && !isCartPage && (
-  //         <div
-  //           className={`${mobileSearchBarClass} ${Classes.MobileSearchbarOthers}`}
-  //         >
-  //           {isHomePage && (
-  //             <div className={Classes.mobCheckDelivery} onClick={handleShowModal}>
-  //               <p>CHECK DELIVERY</p>
-  //               {pincode ? null : (
-  //                 <p>
-  //                   Enter pincode <MdEdit />
-  //                 </p>
-  //               )}
-  //               {pincode && (
-  //                 <span
-  //                   className={Classes.EnterPinTitle}
-  //                   style={{
-  //                     display: "flex",
-  //                     alignItems: "center",
-  //                     gap: "8px",
-  //                     fontSize: "14px",
-  //                     color: "#007481",
-  //                   }}
-  //                 >
-  //                   {pincode}{" "}
-  //                   <FaPen
-  //                     style={{ fontSize: "12px" }}
-  //                     onClick={handleShowModal}
-  //                   />
-  //                 </span>
-  //               )}
-  //             </div>
-  //           )}
-
-  //           {(isHomePage || showSearchBar) && (
-  //             <div className="container">
-  //               <div
-  //                 style={{
-  //                   position: "relative",
-  //                   margin: "12px 0px",
-  //                   marginBottom: "0px",
-  //                 }}
-  //               >
-  //                 <div
-  //                   className="labelWrapper"
-  //                   style={{ display: searchKey.length === 0 ? "block" : "none" }}
-  //                 >
-  //                   <span>diamond jewellery</span>
-  //                   <span>gold jewellery</span>
-  //                   <span>platinum jewellery</span>
-  //                   <span>gemstone jewellery</span>
-  //                 </div>
-  //                 <input
-  //                   style={{ width: "100%" }}
-  //                   type=""
-  //                   className={Classes.searchbar}
-  //                   placeholder="Search for"
-  //                   value={searchKey}
-  //                   onChange={searchKeyHanlder}
-  //                 />
-  //                 <BsSearch
-  //                   size={22}
-  //                   className={Classes.searchIcon}
-  //                   style={{ display: searchShow ? "none" : "block" }}
-  //                 />
-  //               </div>
-  //             </div>
-  //           )}
-  //         </div>
-  //       )}
-
-  //       {isHomePage && (
-  //         <div className={Classes.CatList}>
-  //           <div className="container" style={{ padding: "0px" }}>
-  //             <div className={Classes.ParentMobSlider1}>
-  //               <div className={Classes.MobSliderCards}>
-  //                 {categories?.map((item, index) => {
-  //                   return (
-  //                     <div
-  //                       className={Classes.Offers}
-  //                       key={index}
-  //                       onClick={() => cattSelHandler(item)}
-  //                     >
-  //                       <div className={Classes.OffersInner}>
-  //                         <img
-  //                           style={{
-  //                             width: "70px",
-  //                             height: "50px",
-  //                             borderTopLeftRadius: "5px",
-  //                             borderTopRightRadius: "5px",
-  //                             marginRight: "0px",
-  //                           }}
-  //                           className={Classes.SlideImage}
-  //                           src={item.thumbnail}
-  //                           alt="catg"
-  //                         />
-
-  //                         <p style={{ width: "85px", textAlign: "center" }}>
-  //                           {item.name.slice(0, 10).toUpperCase()}
-  //                         </p>
-  //                       </div>
-  //                     </div>
-  //                   );
-  //                 })}
-
-  //                 {tags?.map((item, index) => {
-  //                   return (
-  //                     <div
-  //                       className={Classes.Offers}
-  //                       key={index}
-  //                       onClick={() => tagSelHandler(item)}
-  //                     >
-  //                       <div className={Classes.OffersInner}>
-  //                         <img
-  //                           style={{
-  //                             width: "70px",
-  //                             height: "50px",
-  //                             borderTopLeftRadius: "5px",
-  //                             borderTopRightRadius: "5px",
-  //                           }}
-  //                           src={item.thumbnail}
-  //                           alt="tag"
-  //                         />
-  //                         <p>{item.name.slice(0, 10)}</p>
-  //                       </div>
-  //                     </div>
-  //                   );
-  //                 })}
-  //               </div>
-  //             </div>
-  //           </div>
-  //         </div>
-  //       )}
-  //     </>
-  //   );
-
   return (
     <>
-    <div className=" max-w-container mx-auto grid grid-cols-3 items-center w-full h-[90px px-6">
-      {/* Left Section */}
-      <div className="flex items-center space-x-1">
-        {/* <Image src="/try/indiaflag.svg" width={24} height={24} alt="country" /> */}
-        <div
-          style={{ cursor: "pointer" }}
-          className={Classes.CountryFlags}
-          ref={nameRef}
-        >
-          <div className={Classes.headerElement}>
-            {selectedCountry?.flag_image ? (
-              <Image
-                src={selectedCountry?.flag_image}
-                alt="Selected flag"
-                className="w-[24px] h-[24px] object-cover rounded-full"
-                width={24}
-                height={24}
-              />
-            ) : (
-              <div className="bg-teal-700 w-[30px] h-[30px] rounded-full" />
-            )}
-          </div>
-          {openDropDown && (
-            <div className={Classes.CountryDropDowns} ref={dropdownRef}>
-              {countryData
-                .sort((a, b) =>
-                  a.country_name === "India"
-                    ? -1
-                    : b.country_name === "India"
-                    ? 1
-                    : 0
-                ) // Sorts India to the top
-                .map((country, index) => (
-                  <div className={Classes.CountryContainer} key={index}>
-                    <div
-                      className={Classes.contryelements}
-                      onClick={() => handleCountrySelect(country)}
-                    >
-                      <div>
-                        <Image
-                          src={country.flag_image}
-                          alt={country.id}
-                          width={24}
-                          height={24}
-                        />
-                      </div>
-                      <div>
-                        <span>
-                          {country.country_name === "United Arab Emirates"
-                            ? "UAE"
-                            : country.country_name === "Saudi Arabia"
-                            ? "KSA"
-                            : country.country_name === "India"
-                            ? "IND"
-                            : country.country_name === "United States"
-                            ? "USA"
-                            : country.country_name}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-            </div>
-          )}
+      <div className="max-w-container mx-auto grid grid-cols-3 items-center w-full h-[90px px-6 flex items-center justify-between border-b border-gray-200 md:border-none py-4 md:py-2">
+        <div className="flex md:hidden items-center space-x-1">
+          <Image src="/try/menu.svg" width={24} height={24} alt="menu" />
         </div>
-
-        <p className="text-black">Country</p>
-        <div className="relative p-4">
-          <Image
-            src="/try/search.svg"
-            width={20}
-            height={20}
-            alt="search"
-            className="absolute left-8 top-1/2 transform -translate-y-1/2"
-          />
-          <input
-            type="text"
-            placeholder="Search"
-            value={searchKey || ""}
-            onChange={searchKeyHanlder}
-            className="pl-10 pr-2 py-1 text-black placeholder-black outline-none border-0 rounded"
-          />
-
-          {searchShow && (
-            <div
-              className="absolute top-16 left-5 bg-white shadow-md rounded w-60 z-50 
-                  max-h-[200px] overflow-y-auto"
-            >
-              {suggestionList.length > 0 ? (
-                suggestionList.map((item, index) => (
-                  <p
-                    key={index}
-                    onClick={() => searchTitleHandler(item)}
-                    className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
-                  >
-                    {item.name}
-                  </p>
-                ))
+        {/* Left Section */}
+        <div className="hidden md:flex items-center space-x-1">
+          {/* <Image src="/try/indiaflag.svg" width={24} height={24} alt="country" /> */}
+          <div
+            style={{ cursor: "pointer" }}
+            className={Classes.CountryFlags}
+            ref={nameRef}
+          >
+            <div className={Classes.headerElement}>
+              {selectedCountry?.flag_image ? (
+                <Image
+                  src={selectedCountry?.flag_image}
+                  alt="Selected flag"
+                  className="w-[24px] h-[24px] object-cover rounded-full"
+                  width={24}
+                  height={24}
+                />
               ) : (
-                <p className="px-3 py-2 text-gray-400">No Results Found</p>
+                <div className="bg-teal-700 w-[30px] h-[30px] rounded-full" />
               )}
             </div>
-          )}
-        </div>
-      </div>
+            {openDropDown && (
+              <div className={Classes.CountryDropDowns} ref={dropdownRef}>
+                {countryData
+                  .sort((a, b) =>
+                    a.country_name === "India"
+                      ? -1
+                      : b.country_name === "India"
+                      ? 1
+                      : 0
+                  ) // Sorts India to the top
+                  .map((country, index) => (
+                    <div className={Classes.CountryContainer} key={index}>
+                      <div
+                        className={Classes.contryelements}
+                        onClick={() => handleCountrySelect(country)}
+                      >
+                        <div>
+                          <Image
+                            src={country.flag_image}
+                            alt={country.id}
+                            width={24}
+                            height={24}
+                          />
+                        </div>
+                        <div>
+                          <span>
+                            {country.country_name === "United Arab Emirates"
+                              ? "UAE"
+                              : country.country_name === "Saudi Arabia"
+                              ? "KSA"
+                              : country.country_name === "India"
+                              ? "IND"
+                              : country.country_name === "United States"
+                              ? "USA"
+                              : country.country_name}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            )}
+          </div>
 
-      {/* Center Logo */}
-      <div className="flex justify-center">
-        <Link href="/">
-          <Image src="/try/logo.svg" width={76.66} height={62.84} alt="logo" />
-        </Link>
-      </div>
-
-      {/* Right Section */}
-      <div className="flex items-center justify-end ">
-        <div className="flex items-center  justify-between space-x-6">
-          <button
-            onClick={() => {
-              moveToWishList();
-              setLoginText("Please Login");
-              console.log("likeeeeee");
-            }}
-          >
-            <Image src="/try/like.svg" width={22.76} height={20} alt="Like" />
-          </button>
-          <button
-            onClick={() => {
-              moveTocart();
-              setLoginText("Please Login");
-            }}
-          >
+          <p className="text-black">Country</p>
+          <div className="relative p-4">
             <Image
-              src="/try/shopingCart.svg"
-              width={19.51}
+              src="/try/search.svg"
+              width={20}
               height={20}
-              alt="shopping cart"
+              alt="search"
+              className="absolute left-8 top-1/2 transform -translate-y-1/2"
             />
-          </button>
-          {/* <button onClick={() => {
+            <input
+              type="text"
+              placeholder="Search"
+              value={searchKey || ""}
+              onChange={searchKeyHanlder}
+              className="pl-10 pr-2 py-1 text-black placeholder-black outline-none border-0 rounded"
+            />
+
+            {searchShow && (
+              <div
+                className="absolute top-16 left-5 bg-white shadow-md rounded w-60 z-50 
+                  max-h-[200px] overflow-y-auto"
+              >
+                {suggestionList.length > 0 ? (
+                  suggestionList.map((item, index) => (
+                    <p
+                      key={index}
+                      onClick={() => searchTitleHandler(item)}
+                      className="px-3 py-2 hover:bg-gray-100 cursor-pointer"
+                    >
+                      {item.name}
+                    </p>
+                  ))
+                ) : (
+                  <p className="px-3 py-2 text-gray-400">No Results Found</p>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Center Logo */}
+        <div className="flex justify-center">
+          <Link href="/" className="w-14 h-16 flex items-center justify-center">
+            <img src="/try/logo.svg" alt="logo" />
+          </Link>
+        </div>
+
+        {/* Right Section */}
+        <div className="flex items-center justify-end ">
+          <div className="flex items-center  justify-between space-x-6">
+            <button
+              onClick={() => {
+                moveToWishList();
+                setLoginText("Please Login");
+                console.log("likeeeeee");
+              }}
+            >
+              <Image src="/try/like.svg" width={22.76} height={20} alt="Like" />
+            </button>
+            <button
+              onClick={() => {
+                moveTocart();
+                setLoginText("Please Login");
+              }}
+            >
+              <Image
+                src="/try/shopingCart.svg"
+                width={19.51}
+                height={20}
+                alt="shopping cart"
+              />
+            </button>
+            {/* <button onClick={() => {
                  
                 
                 }}>
           <Image src="/try/avatar.svg" width={15} height={20} alt="avatar" />
         </button> */}
-        </div>
-        <div className="space-x-6">
-          <LoginSuccessModal
-            openSuccessModal={showSuccessModal}
-            close={() => setShowSuccessModal(false)}
-            state={showSuccessModal}
-            text={text}
-          />
-          <LoginModal
-            className={Classes.loginUser}
-            isLog={show}
-            handleOpenLogin={() => setShow(!show)}
-            // logAct={props.loginHandler}
-            // cartClose={cateclose}
-            close={handleCloseModal}
-            style={{ marginTop: "0px" }}
-            setLoginText={setLoginText}
-            text={loginText}
-            setShowSuccessModal={setShowSuccessModal}
-            setText={setText}
-          />
-        </div>
-      </div>
-    </div>
-    <>
-     {!isCartPage && (
-          <div
-          className=" bg-white absolute top-[87px] left-1/2 -translate-x-1/2 z-10 h-[59.67px] w-[856px]  mx-auto flex items-center px-10 rounded-full shadow-sm"
-            // className={Classes.SubHeadNav}
-            // style={{
-            //   position: isSticky ? "fixed" : "static",
-            //   top: 0,
-            //   zIndex: 1000,
-            //   width: "100%",
-            //   height: "42px",
-            // }}
-          >
-            {/* <div className="container" style={{ padding: "0px" }}>
-              <div className="flex items-center justify-between  flex-wrap text-sm text-black">
-                {categories?.map((category, index) => (
-                  <div key={index}>
-                    <Link
-                      href={`/${category.name.toLowerCase().replace(/\s+/g, "")}`}
-                      className="text-black"
-                    >
-                      <p>{category.name.toUpperCase()}</p>
-                    </Link>
-                  </div>
-                ))}
-                {tags?.map((tag, index) => (
-                  <div key={index}>
-                    <Link
-                      href={`/${tag.name.toLowerCase().replace(/\s+/g, "")}`}
-                      className="text-black"
-                      >
-                      <p>{tag.name.toUpperCase()}</p>
-                    </Link>
-                  </div>
-                ))}
-              </div>
-            </div> */}
-            <div className="container pt-2 px-0 ">
-  <div className="flex items-center justify-between flex-wrap text-sm text-black">
-    {categories?.map((category, index) => (
-      <div key={index} className="flex justify-center">
-        <Link
-          href={`/${category.name.toLowerCase().replace(/\s+/g, "")}`}
-          className="group relative inline-block text-black"
-        >
-          <p className="pb-2 text-center">{category.name.toUpperCase()}</p>
-          {/* underline div */}
-          <div className="absolute left-1/2 -translate-x-1/2 -bottom-3 h-[4px] w-20 bg-[#4d9ea7] rounded-t-md scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
-        </Link>
-      </div>
-    ))}
-
-    {tags?.map((tag, index) => (
-      <div key={index} className="flex justify-center">
-        <Link
-          href={`/${tag.name.toLowerCase().replace(/\s+/g, "")}`}
-          className="group relative inline-block text-black"
-        >
-          <p className="pb-2 text-center">{tag.name.toUpperCase()}</p>
-          {/* underline div */}
-          <div className="absolute left-1/2 -translate-x-1/2 bottom-0 h-[4px] w-6 bg-[#4d9ea7] rounded-t-md scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
-        </Link>
-      </div>
-    ))}
-  </div>
-</div>
-
-
           </div>
-          
-        )}
+          <div className="space-x-6">
+            <LoginSuccessModal
+              openSuccessModal={showSuccessModal}
+              close={() => setShowSuccessModal(false)}
+              state={showSuccessModal}
+              text={text}
+            />
+            <LoginModal
+              className={Classes.loginUser}
+              isLog={show}
+              handleOpenLogin={() => setShow(!show)}
+              // logAct={props.loginHandler}
+              // cartClose={cateclose}
+              close={handleCloseModal}
+              style={{ marginTop: "0px" }}
+              setLoginText={setLoginText}
+              text={loginText}
+              setShowSuccessModal={setShowSuccessModal}
+              setText={setText}
+            />
+          </div>
+        </div>
+      </div>
+      <CategoriesNavbar categories={categories} tags={tags} isCartPage={isCartPage} />
     </>
+  );
+}
+
+function CategoriesNavbar({ categories, tags, isCartPage }) {
+  return (
+    <>
+      {!isCartPage && (
+        <div className="hidden md:flex bg-white absolute top-[87px] left-1/2 -translate-x-1/2 z-10 h-[59.67px] w-[856px]  mx-auto  items-center px-10 rounded-full shadow-sm">
+          <div className="container pt-2 px-0 ">
+            <div className="flex items-center justify-between flex-wrap text-sm text-black">
+              {categories?.map((category, index) => (
+                <div key={index} className="flex justify-center">
+                  <Link
+                    href={`/${category.name.toLowerCase().replace(/\s+/g, "")}`}
+                    className="group relative inline-block text-black"
+                  >
+                    <p className="pb-2 text-center">
+                      {category.name.toUpperCase()}
+                    </p>
+                    <div className="absolute left-1/2 -translate-x-1/2 -bottom-3 h-[4px] w-20 bg-[#4d9ea7] rounded-t-md scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+                  </Link>
+                </div>
+              ))}
+
+              {tags?.map((tag, index) => (
+                <div key={index} className="flex justify-center">
+                  <Link
+                    href={`/${tag.name.toLowerCase().replace(/\s+/g, "")}`}
+                    className="group relative inline-block text-black"
+                  >
+                    <p className="pb-2 text-center">{tag.name.toUpperCase()}</p>
+                    <div className="absolute left-1/2 -translate-x-1/2 bottom-0 h-[4px] w-6 bg-[#4d9ea7] rounded-t-md scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }

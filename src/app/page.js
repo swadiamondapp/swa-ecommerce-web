@@ -32,17 +32,16 @@ export default async function Home() {
       <Certificate />
       <DownloadOurAppImage /> */}
       <Hero />
-       <Collection />
+      <Collection />
       <Favcollection />
       <StoreComp />
-      <SwaPromise />
-      <Newcollection />
-      <TopSellingCollection />
-      <Ringcomponet />
-      <Worldrec />
-      <Galxypendant />
-      <Limelight />
-      <TFooter />
+      {/* <SwaPromise /> */}
+      {/* <Newcollection /> */}
+      {/* <TopSellingCollection /> */}
+      {/* <Ringcomponet /> */}
+      {/* <Worldrec /> */}
+      {/* <Galxypendant /> */}
+      {/* <Limelight /> */}
     </div>
   );
 }

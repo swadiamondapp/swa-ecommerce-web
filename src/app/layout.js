@@ -123,14 +123,13 @@ export default function RootLayout({ children }) {
                       <CartProvider>
                         <TrialProvider>
                           <TrackOrderProvider>
-                            {/* <Header /> */}
+                            <Header />
                             {children}
                             {/* <TFooter /> */}
                           </TrackOrderProvider>
                         </TrialProvider>
                       </CartProvider>
                     </OrderProvider>
-                   {/* <Footer />  */}
                   </CheckoutProvider>
                 </AddressProvider>
               </DataProvider>

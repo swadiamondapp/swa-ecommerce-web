@@ -49,7 +49,7 @@ const Favcollection = () => {
             className="hidden lg:block top-0 left-0 pb-[1.52rem] lg:pb-[1.52rem] md:pb-[1.52rem] sm:pb-[1.52rem]"
           />
 
-          <p className="pb-[1.55rem] lg:pb-[1.55rem] md:pb-[1.55rem] sm:pb-[1.55rem] md:max-w-[23.60rem] max-w-[20rem] text-[0.75rem]">
+          <p className="pb-[1.55rem] lg:pb-[1.55rem] md:pb-[1.55rem] sm:pb-[1.55rem] md:max-w-[23.60rem] max-w-[20rem] text-[0.75rem] sm:text-sm">
             Its design draws inspiration from the pink oyster mushroom, a symbol
             of immortality and longevity, and it features 41 unique
             mushroom-shaped petals adorned with diamonds The ring weighs
