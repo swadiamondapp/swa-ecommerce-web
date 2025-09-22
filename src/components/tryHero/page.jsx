@@ -180,69 +180,72 @@ import Link from "next/link";
 
 const Hero = () => {
   return (
-    <div className="relative w-full lg:h-[61.875rem]   h-[50rem] overflow-hidden">
+    <div className="relative w-full lg:h-[61.875rem] h-[50rem] overflow-hidden">
       {/* Container wrapper - responsive max width */}
       <div className="relative max-w-[101rem] mx-auto h-full">
-        {/* Background animated blobs - converted to relative units */}
-        <div className="absolute lg:top-[2.5rem] lg:left-[2.5rem] lg:w-[37.5rem] lg:h-[37.5rem] top-[1.5rem] left-[1.5rem] w-[20rem] h-[20rem] rounded-full bg-cyan-200/60 blur-3xl animate-float"></div>
-        <div className="absolute lg:right-0 lg:top-[5rem] lg:w-[43.75rem] lg:h-[43.75rem] right-0 top-[2rem] w-[25rem] h-[25rem] rounded-full bg-cyan-200/60 blur-3xl animate-float delay-1000"></div>
-        <div className="absolute lg:bottom-0 lg:left-[33.33%] lg:w-[50rem] lg:h-[50rem] bottom-0 left-[25%] w-[30rem] h-[30rem] rounded-full bg-cyan-200/60 blur-3xl animate-float delay-2000"></div>
+        {/* Background animated blobs - converted to percentage units */}
+        <div className="absolute lg:top-[4%] lg:left-[2.5%] lg:w-[37%] lg:h-[60%] top-[3%] left-[3%] w-[40%] h-[40%] rounded-full bg-cyan-200/60 blur-3xl animate-float"></div>
+        <div className="absolute lg:right-0 lg:top-[8%] lg:w-[43%] lg:h-[70%] right-0 top-[4%] w-[50%] h-[50%] rounded-full bg-cyan-200/60 blur-3xl animate-float delay-1000"></div>
+        <div className="absolute lg:bottom-0 lg:left-[33%] lg:w-[49%] lg:h-[80%] bottom-0 left-[25%] w-[60%] h-[60%] rounded-full bg-cyan-200/60 blur-3xl animate-float delay-2000"></div>
 
-        {/* Exclusive Craftsmanship Text - responsive positioning */}
+        {/* Exclusive Craftsmanship Text - percentage positioning */}
         <p
-          className="absolute lg:text-[1.5rem] lg:w-[28.19rem] lg:h-[1.84rem] lg:top-[8.86rem] lg:left-[36.43rem] 
-                      sm:text-[0.875rem] sm:leading-6 sm:tracking-[0.08em] sm:font-medium sm:text-center sm:top-[1.23rem]
-                      text-[1.2rem] w-[20rem] h-[1.5rem] top-[4rem] left-1/2 transform -translate-x-1/2 lg:transform-none 
+          className="absolute lg:text-[1.5rem] lg:w-[38%] lg:h-[3%] lg:top-[14.3%] lg:left-1/2  lg:transform lg:-translate-x-1/2
+                      sm:text-[0.875rem] sm:leading-6 sm:tracking-[0.08em] sm:font-medium sm:text-center sm:top-[2.5%]
+                      text-[1.2rem] w-[80%] h-[3%] top-[8%] left-[10%]  
                       flex items-center justify-center font-medium text-[#918676] font-inter"
         >
           #EXCLUSIVE CRAFTSMANSHIP
         </p>
-        {/* Hero Girl Image - responsive positioning */}
+
+        {/* Hero Girl Image - percentage positioning */}
         <Image
           src="/try/girlHero.svg"
           className="absolute 
-             lg:left-[37.21rem] lg:top-[12.92rem] lg:w-[35.23rem] lg:h-[55.32rem] lg:transform-none
-             sm:w-[27.03rem] sm:h-[30.74rem] sm:top-[19.91rem] sm:pt-5
-             md:left-1/2 md:-translate-x-1/2 md:top-[19.9rem] md:h-[30.74rem] md:w-[27.03rem]
-             left-1/2 bottom-0 -translate-x-1/2 w-[20rem] h-auto opacity-100"
+             lg:left-[37%] lg:top-[20.9%] lg:w-[35%] lg:h-[89%] lg:transform-none
+             sm:w-[54%] sm:h-[61%] sm:top-[39.8%] sm:pt-5
+             md:left-[26.5%] md:top-[39.8%] md:h-[61%] md:w-[54%]
+             left-[22%] -bottom-2 w-[70%] h-[62%] opacity-100"
           width={563}
           height={885}
           alt="Hero Girl"
         />
 
-        {/* AS REAL Image - responsive positioning */}
+        {/* AS REAL Image - percentage positioning */}
         <Image
           src="/try/as_real.svg"
-          className="absolute hidden  lg:flex lg:left-[1.44rem] lg:top-[16.00rem]  left-[1rem] top-[8rem] lg:w-[36rem] lg:h-[17.625rem] w-[18rem] h-auto"
+          className="absolute hidden lg:flex lg:left-[1.4%] lg:top-[25.9%] left-[2%] top-[16%] lg:w-[35.6%] lg:h-[28.5%] w-[36%] h-auto"
           width={576}
           height={282}
           alt="As Real"
         />
 
-        {/* YOU Image - responsive positioning */}
+        {/* YOU Image - percentage positioning */}
         <Image
           src="/try/YOU.svg"
-          className="absolute hidden lg:flex lg:left-[62.65rem] lg:top-[20rem] right-[1rem] top-[8rem] lg:w-[12.56rem] lg:h-[17.625rem] w-[8rem] h-auto"
+          className="absolute hidden lg:flex lg:left-[62%] lg:top-[32.3%] right-[2%] top-[16%] lg:w-[12.4%] lg:h-[28.5%] w-[16%] h-auto"
           width={201}
           height={282}
           alt="You"
         />
-        <p className="absolute top-[7.4rem] left-1/2 transform -translate-x-1/2  lg:hidden z-30 font-british font-normal text-[2.625rem] leading-[100%] tracking-[0.01em] text-center uppercase whitespace-nowrap">
+
+        <p className="absolute top-[14.8%] left-[10%] right-[10%] lg:hidden z-30 font-british font-normal text-[2.625rem] leading-[100%] tracking-[0.01em] text-center uppercase whitespace-nowrap">
           A<span className="lowercase">s real AS you</span>
         </p>
-        {/* Star Image - responsive positioning */}
+
+        {/* Star Image - percentage positioning */}
         <Image
           src="/try/star.svg"
           width={116.83}
           height={102.76}
-          className="absolute lg:top-[12.92rem] lg:left-[76.62rem] lg:w-[7.3rem] lg:h-[6.42rem] 
-                     sm:w-[4.59rem] sm:h-[4.04rem] sm:top-[6.88rem] sm:right-[1.41rem] sm:rounded-[0.44rem]
-                     right-[0.5rem] top-[6rem] w-[4rem] h-auto opacity-100"
+          className="absolute lg:top-[20.9%] lg:left-[75.8%] lg:w-[7.2%] lg:h-[10.4%] 
+                     sm:w-[9.2%] sm:h-[8%] sm:top-[13.8%] sm:right-[2.8%] sm:rounded-[0.44rem]
+                     right-[1%] top-[12%] w-[8%] h-auto opacity-100"
           alt="star"
         />
 
-        {/* CTA Section - responsive positioning and sizing */}
-        <div className="left-1/2 -translate-x-1/2   lg:w-[19.83rem] lg:h-[9.2rem] w-[16rem] absolute space-y-3 lg:top-[32.06rem] lg:left-[10.91rem] top-[12.4rem] flex items-center flex-col lg:items-start z-10">
+        {/* CTA Section - percentage positioning and sizing */}
+        <div className="left-[25%] lg:w-[19.6%] lg:h-[14.9%] w-[55%] absolute space-y-3 lg:top-[53.8%] lg:left-[1.8%] top-[24.8%] flex items-center flex-col lg:items-start z-10">
           <Image
             src="/try/Rectangle.svg"
             width={88.89}
@@ -250,7 +253,7 @@ const Hero = () => {
             alt="decoration"
             className="lg:w-[5.56rem] lg:h-[0.25rem] w-[4rem] h-[0.2rem]"
           />
-          <p className="text-[1rem]  text-center lg:text-left  lg:text-[1.25rem]  leading-relaxed">
+          <p className="text-[1rem] text-center lg:text-left lg:text-[1.25rem] leading-relaxed">
             Check our natural <br />
             diamond jewellery collection
           </p>
@@ -267,8 +270,8 @@ const Hero = () => {
           </button>
         </div>
 
-        {/* Video Card - responsive positioning and sizing */}
-        <div className="hidden  lg:w-[32.125rem] lg:h-[12.19rem] w-[20rem] h-[10rem] z-50 lg:flex flex-row justify-between items-center lg:p-2 lg:pl-4 p-2 rounded-xl shadow-md absolute lg:top-[41.69rem] lg:right-0 bottom-[1rem] right-[1rem] bg-white/40 backdrop-blur-sm">
+        {/* Video Card - percentage positioning and sizing */}
+        <div className="hidden lg:w-[31.8%] lg:h-[19.7%] w-[50%] h-[20%] z-50 lg:flex flex-row justify-between items-center lg:p-2 lg:pl-4 p-2 rounded-xl shadow-md absolute lg:top-[67.4%] lg:right-0 bottom-[2%] right-[2%] bg-white/40 backdrop-blur-sm">
           <div className="lg:pl-4 pl-2 flex-1">
             <p className="lg:text-[0.94rem] text-[0.8rem] pb-2 leading-relaxed">
               Discover the artistry of SWA <br />
@@ -284,7 +287,7 @@ const Hero = () => {
               SEE VIDEO
             </a>
           </div>
-          <div className="lg:w-[13.23rem] lg:h-[11.04rem] w-[8rem] h-[7rem] overflow-hidden rounded-lg flex-shrink-0">
+          <div className="lg:w-[41.3%] lg:h-[90%] w-[40%] h-[70%] overflow-hidden rounded-lg flex-shrink-0">
             <video
               src="/try/diaVedio.mp4"
               autoPlay

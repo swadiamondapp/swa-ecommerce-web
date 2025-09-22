@@ -130,7 +130,7 @@ export default function RootLayout({ children }) {
                         </TrialProvider>
                       </CartProvider>
                     </OrderProvider>
-                    <Footer />
+                   {/* <Footer />  */}
                   </CheckoutProvider>
                 </AddressProvider>
               </DataProvider>
