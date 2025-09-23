@@ -88,9 +88,10 @@ const StoreComp = () => {
               <p className="text-[14.4px] font-medium mb-2">
                 Store across india
               </p>
-              <p className="text-[12.8px]">
-                Opening soon @ <span className="font-semibold">Dubai</span><span className="w-[58.4px] h-[4px] bg-[#017480]"></span>
-              </p>
+              <p className="text-[12.8px] flex flex-row">
+                Opening soon @ <span className="font-semibold">Dubai</span>
+                    <span className="block w-[69.34px] h-[4.18px] bg-[#017480] ml-2 mt-2 align-middle"></span>
+                    </p>
             </div>
         </div>
       </div>
