@@ -5,7 +5,7 @@ const StoreComp = () => {
   return (
     <div className="w-full bg-[#002D31] overflow-hidden relative">
       {/* Mobile Layout */}
-      <div className="md:hidden w-full relative flex flex-col">
+      <div className="lg:hidden w-full relative flex flex-col">
         <div className="relative z-10 flex flex-col h-full px-4">
           <div className="flex flex-col items-center text-center pt-8 pb-4">
             <p className="text-[#918676] font-normal text-sm leading-[24px] tracking-[0.08em] mb-4">
@@ -57,7 +57,7 @@ const StoreComp = () => {
       </div>
 
       {/* Desktop Layout */}
-      <div className="max-w-container hidden md:grid grid-cols-2 w-full py-20 mx-auto z-0">
+      <div className="max-w-container hidden lg:grid grid-cols-2 w-full py-20 mx-auto z-0">
         <div className="flex flex-col items-start justify-center pl-4 md:pl-16 z-20">
           <h1 className="text-[#F8F4E9] font-playfair font-medium text-6xl mb-8">
             Find nearest <br /> swa diamond store <br /> near you
@@ -96,7 +96,7 @@ const StoreComp = () => {
         </div>
       </div>
 
-      <div className="hidden md:block absolute bottom-20 right-0 w-[40%] h-[350px] bg-[#004247]"></div>
+      <div className="hidden lg:block absolute bottom-20 right-0 w-[40%] h-[350px] bg-[#004247]"></div>
     </div>
   );
 };

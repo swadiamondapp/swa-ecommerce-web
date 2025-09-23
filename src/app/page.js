@@ -22,21 +22,13 @@ import TFooter from "@/components/tryfooter/page";
 
 export default async function Home() {
   return (
-    <div className="flex flex-col ">
-      {/* <HeroBanner />
-      <Features />
-      <ShopOnBudget />
-      <NewArrivals />
-      <BringTheParty />
-      <TopDemanded />
-      <Certificate />
-      <DownloadOurAppImage /> */}
+    <div className="flex flex-col">
       <Hero />
       <Collection />
       <Favcollection />
       <StoreComp />
       <SwaPromise /> 
-      <Newcollection />
+      {/* <Newcollection /> */}
       <TopSellingCollection />
       <Ringcomponet />
       <Worldrec />
