@@ -1,26 +1,49 @@
+
+
+
 import React from "react";
 import Image from "next/image";
 
 const Ringcomponet = () => {
   return (
     <>
-      <div className="w-full h-[540px] bg-[#F5FFFD]">
-        <div className="max-w-container mx-auto h-full relative">
-          <div className="absolute top-[101.68px] left-[143.41px]">
-            <p className="text-[56px] font-medium font-playfair">
-              Queen elizabath <br />
-              coral Ring
-            </p>
-            <p className="text-[20px] leading-[32px]">
-              With timeless charm and radiant grace, Preity <br />{" "}
-              Zinta embodies the spirit of our jewellery — where <br /> every
-              diamond tells a story,
-            </p>
+      <div className="w-full lg:h-[540px] h-[670px]  bg-[#F5FFFD]">
+        <div className="max-w-container mx-auto h-full flex flex-row justify-around items-center">
 
-            <div className="pt-[56.18px] flex flex-row">
-              <button className="flex items-center gap-2 bg-[#002D31] text-white h-[56px] px-[20.88px] rounded-lg  mr-7 ">
-                ADD TO CART
-                <Image
+          <div>
+          <div className="text-center lg:text-left">
+            <p className="lg:text-[56px] text-[32px] font-medium font-playfair">
+               Queen elizabath <br />
+               coral Ring
+             </p>
+             <p className="lg:text-[20px] text-[16px] leading-[32px]">
+               With timeless charm and radiant grace, Preity <br />{" "}
+               Zinta embodies the spirit of our jewellery — where <br /> every
+               diamond tells a story,
+             </p>
+          </div>
+           <div className="relative  lg:hidden flex justify-center w-full "  >
+              <div className=" ">
+                 <Image
+            src="/try/queenring.svg"
+            width={403.64}
+            height={394.51}
+            className=" mx-auto  lg:w-[403.64px] lg:h-[394.51px] w-[270.5px] h-[264.46px] "
+            alt="ring"
+          />
+              </div>
+           <Image
+            src="/try/ringshadow.svg"
+            width={222.02}
+            height={23.79}
+            className="absolute top-[9rem] left-[5rem] "
+            alt="shadow"
+          />
+             </div>
+          <div className="pt-[56.18px] flex flg:lex-row  flex-col-reverse items-center ">
+               <button className="flex items-center gap-2 bg-[#002D31] text-white h-[56px] lg:px-[20.88px]  px-[35px] rounded-lg  lg:mr-7 ">
+                 ADD TO CART
+                 <Image
                   src="/try/kartwhite.svg"
                   width={24}
                   height={24}
@@ -32,39 +55,65 @@ const Ringcomponet = () => {
                 ₹ 75000
               </p>
             </div>
-          </div>
-          <Image
+             </div>
+             <div className="relative hidden lg:block">
+               <Image
             src="/try/queenring.svg"
             width={403.64}
             height={394.51}
-            className="absolute top-[72.74px] left-[1012.59px]"
+            className="mr-[5rem]"
             alt="ring"
           />
            <Image
             src="/try/ringshadow.svg"
             width={222.02}
             height={23.79}
-            className="absolute top-[353.71px] left-[1100.74px]"
+            className="absolute top-[18rem] left-[5rem] "
             alt="shadow"
           />
+             </div>
+
+
+       
         </div>
       </div>
-      <div className="w-full h-[540px] bg-[#FFFFFF]">
-        <div className="max-w-container mx-auto h-full relative">
-          <div className="absolute top-[103.38px] left-[820.41px]">
-            <p className="text-[56px] font-medium font-playfair">
-              Dalia Rose <br />luxuriea ring
-            </p>
-            <p className="text-[20px] leading-[32px]">
-              With timeless charm and radiant grace, Preity <br />{" "}
-              Zinta embodies the spirit of our jewellery — where <br /> every
-              diamond tells a story,
-            </p>
-
-            <div className="pt-[56.18px] flex flex-row">
-              <button className="flex items-center gap-2 bg-[#002D31] text-white h-[56px] px-[20.88px] rounded-lg  mr-7 ">
-                ADD TO CART
-                <Image
+      <div className="w-full lg:h-[540px] h-[670px] bg-[#FFFFFF]">
+        <div className="max-w-container mx-auto h-full flex flex-row-reverse justify-around items-center">
+         
+    
+       <div>
+          <div className="text-center lg:text-left">
+            <p className="lg:text-[56px] text-[32px] font-medium font-playfair">
+               Dalia Rose <br /> luxuriea ring
+             </p>
+             <p className="lg:text-[20px] text-[16px] leading-[32px]">
+               With timeless charm and radiant grace, Preity <br />{" "}
+               Zinta embodies the spirit of our jewellery — where <br /> every
+               diamond tells a story,
+             </p>
+          </div>
+           <div className="relative  lg:hidden flex justify-center w-full "  >
+              <div className=" ">
+                 <Image
+            src="/try/rosering.svg"
+            width={403.64}
+            height={394.51}
+            className=" mx-auto  lg:w-[403.64px] lg:h-[394.51px] w-[270.5px] h-[264.46px] "
+            alt="ring"
+          />
+              </div>
+           <Image
+            src="/try/ringshadow.svg"
+            width={222.02}
+            height={23.79}
+            className="absolute top-[9rem] left-[5rem] "
+            alt="shadow"
+          />
+             </div>
+            <div className="pt-[56.18px] flex flg:lex-row  flex-col-reverse items-center ">
+               <button className="flex items-center gap-2 bg-[#002D31] text-white h-[56px] lg:px-[20.88px]  px-[35px] rounded-lg  lg:mr-7 ">
+                 ADD TO CART
+                 <Image
                   src="/try/kartwhite.svg"
                   width={24}
                   height={24}
@@ -76,21 +125,25 @@ const Ringcomponet = () => {
                 ₹ 75000
               </p>
             </div>
-          </div>
-          <Image
+             </div>
+             <div className="relative hidden lg:block">
+               <Image
             src="/try/rosering.svg"
-            width={403}
-            height={360.64}
-            className="absolute top-[89.29px] left-[145.48px]"
+            width={403.64}
+            height={394.51}
+            className="mr-[5rem]"
             alt="ring"
           />
-            <Image
+           <Image
             src="/try/ringshadow.svg"
             width={222.02}
             height={23.79}
-            className="absolute top-[332.2px] left-[255.41px]"
+            className="absolute top-[18rem] left-[5rem] "
             alt="shadow"
           />
+             </div>
+
+  
 
         </div>
       </div>
