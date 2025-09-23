@@ -56,7 +56,7 @@ const SwaPromise = () => {
       <div className="max-w-container h-full mx-auto justify-between px-4 gap-10 items-center md:items-stretch flex flex-col-reverse md:flex-row">
         <div className="flex flex-col justify-center relative">
           <div className="hidden md:block text-start">
-            <p className="text-[56px] font-playfair font-[500]">swa promise</p>
+            <p className="text-[56px] font-playfair font-[500] min-w-[430px]">swa promise</p>
             <p className="text-[20px] mt-3 font-[400] text-[#334155] leading-[32px]">
               With timeless charm and radiant grace, Preity <br />
               Zinta embodies the spirit of our jewellery — where <br /> every
