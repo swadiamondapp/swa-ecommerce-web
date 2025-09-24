@@ -76,7 +76,7 @@ const Newcollection = () => {
             <p className="text-[#918676] text-[20px] font-[400] leading-[24px] tracking-[0.08em]">
               FIND YOUR NEW COLLECTION
             </p>
-            <p className="text-[56px] font-[500] font-playfair ">New Arrival</p>
+            <p className="md:text-[56px] text-[40px] font-[500] font-playfair ">New Arrival</p>
           </div>
 
 
@@ -121,9 +121,9 @@ const Newcollection = () => {
 
 
 <div className="max-sm:overflow-x-auto max-sm:overflow-y-visible lg:w-full flex max-sm:w-full max-sm:h-fit">
-  <div className="lg:ml-9 lg:mr-3 h-fit w-full flex flex-row justify-between md:ml-0 md:mr-0 sm:ml-0 sm:mr-0 ml-2 mr-2 lg:mt-[4rem] mt-[2rem] lg:mb-0 mb-[2rem] z-20 max-md:justify-start max-md:gap-4 max-sm:w-fit sm:max-md:gap-2">
+  <div className="lg:ml-9 lg:mr-3 h-fit w-full flex flex-row justify-between md:ml-0 md:mr-0 sm:ml-0 sm:mr-0 ml-2 mr-2 lg:mt-[4rem] mt-[2rem] lg:mb-0 mb-[2rem] z-20 max-md:justify-start max-md:gap-4 max-sm:w-fit sm:max-md:gap-2 gap-2">
     {data.map((data) => (
-      <div key={data.id} className="lg:mx-2 max-md:w-[188px] max-md:h-[340px] max-md:flex-shrink-0 max-sm:flex-shrink-0 max-sm:w-[200px] px-1 lg:flex-1 lg:min-w-0 sm:max-md:w-[140px] sm:max-md:px-0.5">
+      <div key={data.id} className="lg:mx-2 max-md:w-[188px] max-md:h-[340px] max-md:flex-shrink-0 max-sm:flex-shrink-0 max-sm:w-[180px] px-1 lg:flex-1 lg:min-w-0 sm:max-md:w-[140px] sm:max-md:px-0.5">
         <div className="lg:w-full lg:aspect-[4/5] max-md:w-[180px] max-md:h-[220px] max-sm:w-[160px] max-sm:h-[200px] sm:max-md:w-[130px] sm:max-md:h-[160px] bg-[#FAF6F2] z-10 flex justify-center items-center relative">
           <img src={data.src} alt="" />
           <img src="/try/like.svg" className="top-2 right-2 absolute sm:max-md:top-1 sm:max-md:right-1 sm:max-md:w-4 sm:max-md:h-4" alt="" />

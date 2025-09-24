@@ -9,7 +9,7 @@ const Ringcomponet = () => {
 
           <div>
           <div className="text-center lg:text-left">
-            <p className="lg:text-[56px] text-[32px] font-medium font-playfair">
+            <p className="lg:text-[56px] text-[32px] font-medium leading-[63px] font-playfair pb-3">
                Queen elizabath <br />
                coral Ring
              </p>
@@ -78,7 +78,7 @@ const Ringcomponet = () => {
          
        <div>
           <div className="text-center lg:text-left">
-            <p className="lg:text-[56px] text-[32px] font-medium font-playfair">
+            <p className="lg:text-[56px] text-[32px] leading-[63px] font-medium font-playfair pb-3">
                Dalia Rose <br /> luxuriea ring
              </p>
              <p className="lg:text-[20px] text-[16px] leading-[32px] text-[#334155]">

@@ -103,7 +103,7 @@ const Galxypendant = () => {
           {/* Right Text */}
           <div className="flex-1 h-full flex justify-center items-center">
             <div>
-              <p className="sm:text-[56px] text-[32px] font-medium font-playfair">
+              <p className="sm:text-[56px] text-[32px] leading-[63px] pb-3 font-medium font-playfair">
                 Galaxy collection <br /> pendant
               </p>
               <p className="sm:text-[20px] text-[16px] leading-[32px] text-[#334155]">
@@ -145,7 +145,7 @@ const Galxypendant = () => {
           {/* Right Text */}
           <div className="flex-1 h-full flex justify-center items-center">
             <div>
-              <p className="sm:text-[56px] text-[32px] font-medium font-playfair">
+              <p className="sm:text-[56px] leading-[63px] pb-3 text-[32px] font-medium font-playfair">
                 Galaxy collection <br /> pendant
               </p>
               <p className="sm:text-[20px] text-[16px] leading-[32px] text-[#334155]">
