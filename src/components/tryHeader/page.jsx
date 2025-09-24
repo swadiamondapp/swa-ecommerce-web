@@ -996,22 +996,22 @@ function Header() {
               className="flex-col hidden md:flex"
               onClick={handleShowModal}
             >
-              <span className="text-black font-inter font-normal text-[14px] leading-[100%] tracking-[0] align-middle uppercase">
+              <div className="text-black font-inter font-normal text-sm align-middle uppercase">
                 CHECK DELIVERY
-              </span>
+              </div>
 
               {pincode ? null : (
-                <span
+                <div
                   onClick={handleShowModal}
-                  className="font-inter font-medium text-[13px] text-[#017480] leading-[100%] tracking-[0] align-middle uppercase"
+                  className="font-inter font-medium text-sm text-[#017480] align-middle"
                   style={{ cursor: "pointer" }}
                 >
                   Enter PinCode
-                </span>
+                </div>
               )}
               {pincode && (
                 <span
-                  className="font-inter font-medium text-[14px] text-[#017480] leading-[100%] tracking-[0] align-middle uppercase"
+                  className="font-inter font-medium text-[14px] text-[#017480] align-middle uppercase"
                   style={{ display: "flex", alignItems: "center", gap: "8px" }}
                 >
                   {pincode} <FaPen onClick={handleShowModal} />
