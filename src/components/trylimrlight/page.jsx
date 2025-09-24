@@ -177,7 +177,7 @@ const Limelight = () => {
           </h2>
 
           {/* Horizontal line as span */}
-          <span className="block w-full h-[1px] bg-gray-300 m sm:hidden"></span>
+          <span className="lg:block w-full h-[1px] bg-gray-300  sm:hidden"></span>
 
           {/* Mobile image */}
           <Image
