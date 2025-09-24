@@ -178,36 +178,42 @@ const articles = [
 
 const Limelight = () => {
   return (
-    <div className='w-full h-fit bg-white'>
-        <div className= 'max-w-container mx-auto px-4 h-full flex flex-row-reverse lg:justify-between justify-center items-center'>
-          <Image src="/try/limelightring.svg" className='lg:block hidden' width={653} height={647.94}/>
-         <div className="space-y-[16px] sm:space-y-[24px] w-full max-w-[350px] sm:max-w-[653px] text-left">
-          <h2 className="text-[32px] sm:text-[56px] font-playfair mb-4 sm:mb-8">In the Limelight</h2> 
-               <Image src="/try/Horizontalline.svg" className='pb-[16px] sm:pb-[24.78px] w-full' width={923} height={885}/>
-                         <Image src="/try/limelightring.svg" className='pt-2 pb-2 sm:pt-3 sm:pb-3 lg:hidden block w-full max-w-[300px] sm:max-w-[653px] mx-auto sm:mx-0' width={653} height={647.94}/>
-         {articles.map((article, idx) => (
-          <div
-            className="w-full"
-            key={idx}
-          >
-            <h3 className="text-[18px] sm:text-[24px] leading-[24px] sm:leading-[32px] font-bold">
-              {article.title}
-            </h3>
-            <p className="text-[14px] sm:text-[16px] leading-[20px] sm:leading-[24px] font-[400]">
-              {article.description}
-            </p>
-            <p className="text-[14px] sm:text-[16px] leading-[24px] sm:leading-[32px] mt-2 sm:mt-3 pb-[2px]">
-              {article.date} | {article.time}
-            </p>
-            <Image src="/try/Horizontalline.svg" className='pt-[16px] sm:pt-[24px] w-full' width={923} height={885}/>
-      
-          </div>
-          ))}
-       </div>
-
-            
-        </div>
+<div className='w-full h-fit bg-white'>
+  <div className='max-w-container mx-auto px-4 lg:h-[906px] h-fit  flex flex-row-reverse justify-center items-center  '>
+    {/* Image sticks to right side */}
+    <div className='lg:block hidden flex-shrink-0 mt-[9.5rem]' >
+      <Image src="/try/limelightring.svg" width={653} height={647.94}/>
     </div>
+    
+    {/* Content takes remaining width */}
+    <div className="space-y-[16px] sm:space-y-[24px] flex-1 lg:mr-8 text-left  mt-[3rem] lg:block md:flex md:flex-col md:items-center md:justify-center">
+      <h2 className="text-[32px] sm:text-[56px] font-playfair md:mb-0 sm:mb-8">In the Limelight</h2> 
+      
+      {/* Horizontal line as span */}
+      <span className='block w-full h-[1px] bg-gray-300 m sm:hidden'></span>
+      
+      {/* Mobile image */}
+      <Image src="/try/limelightring.svg" className='pt-2 pb-2 sm:pt-3 sm:pb-3 lg:hidden block w-full max-w-[300px] sm:max-w-[653px] mx-auto sm:mx-0' width={653} height={647.94}/>
+      
+      {articles.map((article, idx) => (
+        <div className="w-full md:flex md:flex-col md:items-center md:justify-center lg:block" key={idx}>
+          <h3 className="text-[18px] sm:text-[24px] leading-[24px] sm:leading-[32px] font-bold pb-4">
+            {article.title}
+          </h3>
+          <p className="text-[14px] sm:text-[16px] leading-[20px] sm:leading-[24px] font-[400] max-w-[653px]">
+            {article.description}
+          </p>
+          <p className="text-[14px] sm:text-[16px] leading-[24px] sm:leading-[32px] mt-2 sm:mt-3 pb-[2px]">
+            {article.date} | {article.time}
+          </p>
+          
+          {/* Horizontal line as span */}
+          <span className='block w-full h-[1px] bg-gray-300 mt-[16px] sm:mt-[24px]'></span>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>
   )
 }
 

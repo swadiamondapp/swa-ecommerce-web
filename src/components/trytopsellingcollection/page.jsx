@@ -41,19 +41,19 @@ const TopSellingCollection = () => {
           <div className="flex flex-row justify-between md:w-[590px] sm:w-[340px] w-[290px]  h-[160.65px]">
             <Image
               src="/try/favRing2.svg"
-              className="w-[88.1px] h-[80px] md:w-[176.92] md:h-[160.65]"
+              className="w-[88.1px] h-[80px] md:w-[176.92px] md:h-[160.65px]"
               width={176.92}
               height={160.65}
             />
             <Image
               src="/try/favRing.svg"
-              className="w-[88.1px] h-[80px] md:w-[176.92] md:h-[160.65]"
+              className="w-[88.1px] h-[80px] md:w-[176.92px] md:h-[160.65px]"
               width={176.92}
               height={160.65}
             />
             <Image
               src="/try/newchain.svg"
-              className="w-[88.1px] h-[80px] md:w-[176.92] md:h-[160.65]"
+              className="w-[88.1px] h-[80px] md:w-[176.92px] md:h-[160.65px]"
               width={176.92}
               height={160.65}
             />

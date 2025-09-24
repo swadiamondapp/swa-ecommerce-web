@@ -106,7 +106,7 @@ const Galxypendant = () => {
               <p className="sm:text-[56px] text-[32px] font-medium font-playfair">
                 Galaxy collection <br /> pendant
               </p>
-              <p className="sm:text-[20px] text-[16px] leading-[32px]">
+              <p className="sm:text-[20px] text-[16px] leading-[32px] text-[#334155]">
                 With timeless charm and radiant grace, Preity <br />
                 Zinta embodies the spirit of our jewellery — where <br /> every
                 diamond tells a story,
@@ -119,7 +119,7 @@ const Galxypendant = () => {
                 >
                   VIEW MORE
                   <Image
-                    src="/try/rightarrowblack.svg"
+                    src="/try/greenrightarrow.svg"
                     width={24}
                     height={24}
                     alt="arrow"
@@ -148,7 +148,7 @@ const Galxypendant = () => {
               <p className="sm:text-[56px] text-[32px] font-medium font-playfair">
                 Galaxy collection <br /> pendant
               </p>
-              <p className="sm:text-[20px] text-[16px] leading-[32px]">
+              <p className="sm:text-[20px] text-[16px] leading-[32px] text-[#334155]">
                 With timeless charm and radiant grace, Preity <br />
                 Zinta embodies the spirit of our jewellery — where <br /> every
                 diamond tells a story,
@@ -161,7 +161,7 @@ const Galxypendant = () => {
                 >
                   VIEW MORE
                   <Image
-                    src="/try/rightarrowblack.svg"
+                    src="/try/greenrightarrow.svg"
                     width={24}
                     height={24}
                     alt="arrow"
