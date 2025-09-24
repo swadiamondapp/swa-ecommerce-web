@@ -70,7 +70,7 @@ const SwaPromise = () => {
           />
         </div>
 
-        <div className="grid lg:grid-cols-4 grid-cols-3 gap-2 lg:gap-8 text-[#334155] py-4 lg:py-20 max-w-[750px]">
+        <div className="grid lg:grid-cols-4 grid-cols-3 gap-2 lg:gap-8 text-[#334155] py-4 lg:py-20 max-w-[750px] ">
           {data.map((item, index) => (
             <div className="text-center flex flex-col items-center" key={index}>
               <div className="w-[90px] h-[90px] lg:w-[160px] lg:h-[160px] bg-white rounded-full mb-2 flex items-center justify-center">
@@ -86,6 +86,34 @@ const SwaPromise = () => {
             </div>
           ))}
         </div>
+
+{/* 
+
+
+        <div className="flex flex-wrap justify-center gap-2 lg:gap-8 text-[#334155] py-4 lg:py-20 max-w-[750px]">
+  {data.map((item, index) => (
+    <div className="text-center flex flex-col items-center w-[calc(33.333%-0.5rem)] lg:w-[calc(25%-1.5rem)]" key={index}>
+      <div className="w-[90px] h-[90px] lg:w-[160px] lg:h-[160px] bg-white rounded-full mb-2 flex items-center justify-center">
+        <img
+          src={item.image}
+          alt={item.title}
+          className="w-[40px] lg:w-[64px] h-[40px] lg:h-[64px]"
+        />
+      </div>
+      <p className="text-[0.75rem] lg:text-[14px] font-[400] leading-[20px]">
+        {item.title}
+      </p>
+    </div>
+  ))}
+</div> */}
+ 
+ 
+ 
+ 
+ 
+
+
+
 
         <div className="block lg:hidden text-center mt-4">
           <p className="text-4xl font-playfair">Swa promise</p>

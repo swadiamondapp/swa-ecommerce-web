@@ -63,7 +63,7 @@ const Worldrec = () => {
   return (
     <div className="relative w-full lg:h-[778px] h-[666px]">
       {/* Background Video */}
-      {/* <video
+      <video
     src="/try/worldrecvedio.mp4"
     autoPlay
     loop
@@ -71,7 +71,7 @@ const Worldrec = () => {
     muted
     playsInline
     className="w-full h-full object-cover"
-  /> */}
+  />
 
       {/* Black overlay */}
       <div className="absolute inset-0 z-10 bg-black/70" />

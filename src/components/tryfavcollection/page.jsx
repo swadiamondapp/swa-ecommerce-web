@@ -3,9 +3,10 @@ import Image from "next/image";
 
 const Favcollection = () => {
   return (
-    <div className="w-full h-[43rem] bg-[#F8F4E9] lg:h-[67.5rem] md:h-[67.5rem] sm:h-[43rem] ">
-      <div className="max-w-container mx-auto h-full relative ">
-        <div className="hidden lg:flex w-[23.61rem]  z-10 h-[10.04rem] justify-between left-[0.53rem] top-[50.89rem] absolute lg:w-[23.61rem] lg:h-[10.04rem] lg:left-[0.53rem] lg:top-[50.89rem] md:w-[23.61rem] md:h-[10.04rem] md:left-[0.53rem] md:top-[50.89rem] sm:w-[23.61rem] sm:h-[10.04rem] sm:left-[0.53rem] sm:top-[50.89rem]">
+    <div className="w-full h-[43rem]  bg-[#F8F4E9] lg:h-[67.5rem] md:h-[67.5rem] sm:h-[43rem] ">
+     <div className="mx-auto h-full relative lg:max-w-[min(1616.82px,calc(100%-2.5rem))]">
+        <div className=" w-full blip bg-yellow-200 mx-5">
+          <div className="hidden lg:flex w-[23.61rem]  z-10 h-[10.04rem] justify-between left-[0.53rem] top-[50.89rem] absolute lg:w-[23.61rem] lg:h-[10.04rem] lg:left-[0.53rem] lg:top-[50.89rem] md:w-[23.61rem] md:h-[10.04rem] md:left-[0.53rem] md:top-[50.89rem] sm:w-[23.61rem] sm:h-[10.04rem] sm:left-[0.53rem] sm:top-[50.89rem]">
           <div>
             <Image
               src="/try/favRing2.svg"
@@ -118,6 +119,9 @@ const Favcollection = () => {
           className="hidden lg:block  absolute top-[18.55rem] right-[4.46rem] pb-[1.52rem] lg:top-[18.55rem] lg:right-[4.46rem] lg:pb-[1.52rem] md:top-[18.55rem] md:right-[4.46rem] md:pb-[1.52rem] sm:top-[18.55rem] sm:right-[4.46rem] sm:pb-[1.52rem]"
         />
 
+
+        </div>
+        
         {/* <div className="hidden lg:block absolute lg:top-[9.13rem] lg:right-[0.53rem] text-end  w-[15.32rem] h-[5.25rem]  lg:w-[15.32rem] lg:h-[5.25rem] md:top-[55.91rem] md:left-[85.21rem] md:w-[15.32rem] md:h-[5.25rem] sm:top-[55.91rem] sm:left-[85.21rem] sm:w-[15.32rem] sm:h-[5.25rem]">
             <p className="text-[1.25rem] font-extrabold lg:text-[1.25rem] md:text-[1.25rem] sm:text-[1.25rem]">
               WE HAVE STYLE AT <br /> YOUR AFFORDABLE <br /> BUDGET

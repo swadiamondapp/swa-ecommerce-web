@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const TopSellingCollection = () => {
   return (
-    <div className="w-full lg:h-[1080px] bg-[#F8F4E9]  md:h-[1080px] sm:h-[890px] h-[849px]">
+    <div className="w-full lg:h-[1080px] bg-[#F8F4E9]  md:h-[900px] sm:h-[890px] h-[849px] block">
          <Image
         src="/try/ambasedorbaner.svg"
         className="w-screen lg:h-[412.54px] md:h-[300px] sm:h[250px] h-[170px] object-cover  hidden md:block"
