@@ -13,7 +13,7 @@ const Ringcomponet = () => {
                Queen elizabath <br />
                coral Ring
              </p>
-             <p className="lg:text-[20px] text-[16px] leading-[32px]">
+             <p className="lg:text-[20px] text-[16px] leading-[32px] text-[#334155]">
                With timeless charm and radiant grace, Preity <br />{" "}
                Zinta embodies the spirit of our jewellery — where <br /> every
                diamond tells a story,
@@ -81,7 +81,7 @@ const Ringcomponet = () => {
             <p className="lg:text-[56px] text-[32px] font-medium font-playfair">
                Dalia Rose <br /> luxuriea ring
              </p>
-             <p className="lg:text-[20px] text-[16px] leading-[32px]">
+             <p className="lg:text-[20px] text-[16px] leading-[32px] text-[#334155]">
                With timeless charm and radiant grace, Preity <br />{" "}
                Zinta embodies the spirit of our jewellery — where <br /> every
                diamond tells a story,
