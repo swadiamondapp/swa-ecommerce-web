@@ -860,7 +860,7 @@ function Header() {
 
   
 
-      <div className={`max-w-container mx-auto grid grid-cols-3 items-center w-full ${showMobileSearch ? 'h-auto' : 'h-[90px]'} px-6 flex items-center justify-between border-b border-gray-200 md:border-none py-4 md:py-2`}>
+      <div className={`max-w-container mx-auto grid grid-cols-3 items-center w-full ${showMobileSearch ? 'h-auto' : 'h-[90px]'} px-6 flex items-center justify-between border-b  mt-0 border-gray-200 md:border-none  md:py-2`}>
         <div className="flex md:hidden items-center space-x-1">
           <button onClick={handleSidebarToggle}>
             <Image src="/try/menu.svg" width={24} height={24} alt="menu" />

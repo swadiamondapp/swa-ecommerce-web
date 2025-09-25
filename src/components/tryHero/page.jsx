@@ -32,6 +32,7 @@ const Hero = () => {
              left-[22%] -bottom-2 w-[70%] h-[62%] opacity-100"
           width={563}
           height={885}
+          priority
           alt="Hero Girl"
         />
 
