@@ -96,13 +96,13 @@ const Hero = () => {
         </div>
 
         {/* Video Card - percentage positioning and sizing */}
-        <div className="hidden lg:w-[31.8%] lg:h-[19.7%] w-[50%] h-[20%] z-50 lg:flex flex-row justify-between items-center lg:p-2 lg:pl-4 p-2 rounded-xl shadow-md absolute lg:top-[67.4%] lg:right-0 bottom-[2%] right-[2%] bg-white/40 backdrop-blur-sm">
+        <div className="hidden lg:w-[31.8%] lg:h-[19.7%] w-[50%] h-[20%] z-50 lg:flex flex-row justify-between items-center lg:p-2 lg:px-4 p-2 rounded-xl shadow-md absolute lg:top-[67.4%] lg:right-4 xl:right-0 bottom-[2%] right-[2%] bg-white/40 backdrop-blur-sm">
           <div className="lg:pl-4 pl-2 flex-1">
-            <p className="lg:text-[0.94rem] text-[0.8rem] pb-2 leading-relaxed">
-              Discover the artistry of SWA <br />
-              Diamonds as natural rough stones <br />
-              are transformed into sparkling <br />
-              masterpieces through precision <br />
+            <p className="lg:text-[0.94rem] text-sm pb-2 leading-relaxed max-w-[240px]">
+              Discover the artistry of SWA 
+              Diamonds as natural rough stones
+              are transformed into sparkling
+              masterpieces through precision
               cutting and polishing.
             </p>
             <a
