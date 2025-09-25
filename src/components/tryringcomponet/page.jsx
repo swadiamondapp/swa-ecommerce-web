@@ -9,11 +9,11 @@ const Ringcomponet = () => {
 
           <div>
           <div className="text-center lg:text-left">
-            <p className="lg:text-[56px] text-[32px] font-medium leading-[63px] font-playfair pb-3">
+            <p className="lg:text-[56px] text-[32px] font-medium md:leading-[63px] leading-[40px] font-playfair pb-3">
                Queen elizabath <br />
                coral Ring
              </p>
-             <p className="lg:text-[20px] text-[16px] leading-[32px] text-[#334155]">
+             <p className="lg:text-[20px] text-[16px] md:leading-[32px] leading-[25px] text-[#334155]">
                With timeless charm and radiant grace, Preity <br />{" "}
                Zinta embodies the spirit of our jewellery — where <br /> every
                diamond tells a story,
@@ -78,10 +78,10 @@ const Ringcomponet = () => {
          
        <div>
           <div className="text-center lg:text-left">
-            <p className="lg:text-[56px] text-[32px] leading-[63px] font-medium font-playfair pb-3">
+            <p className="lg:text-[56px] text-[32px] md:leading-[63px] leading-[40px] font-medium font-playfair pb-3 ">
                Dalia Rose <br /> luxuriea ring
              </p>
-             <p className="lg:text-[20px] text-[16px] leading-[32px] text-[#334155]">
+             <p className="lg:text-[20px] text-[16px] md:leading-[32px] leading-[25px] text-[#334155]">
                With timeless charm and radiant grace, Preity <br />{" "}
                Zinta embodies the spirit of our jewellery — where <br /> every
                diamond tells a story,
