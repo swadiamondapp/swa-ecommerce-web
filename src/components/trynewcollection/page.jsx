@@ -73,10 +73,10 @@ const Newcollection = () => {
 
         <div className=" flex flex-col items-center justify-center lg:items-start lg:justify-start   w-full h-full mt-0">
           <div className="h-fit mt-2 lg:mt-[12rem] lg:ml-9 ml-0 text-center lg:text-left">
-            <p className="text-[#918676] text-[20px] font-[400] leading-[24px] tracking-[0.08em]">
+            <p className="text-[#918676] text-sm font-[400] leading-[24px] tracking-[0.08em]">
               FIND YOUR NEW COLLECTION
             </p>
-            <p className="md:text-[56px] text-[40px] font-[500] font-playfair ">New Arrival</p>
+            <p className="md:text-[56px] text-[2rem] font-[500] font-playfair ">New Arrival</p>
           </div>
 
 
