@@ -66,4 +66,7 @@
   .Title {
     font-size: 22px;
   }
+  .mobile-screen-ul {
+    padding-left: 16px !important;
+  }
 }
