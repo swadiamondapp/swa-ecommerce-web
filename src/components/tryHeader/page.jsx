@@ -1048,7 +1048,7 @@ function Header() {
                 alt="shopping cart"
               />
               {cartItemsCount > 0 && token && (
-    <div className="text-black absolute -top-3 -right-4 z-10 bg-white/10 shadow-md  w-5 h-5 flex items-center justify-center ">{cartItemsCount}</div>
+    <div className="text-white rounded-full absolute -top-3 -right-4 z-10 bg-red-500 shadow-md  w-5 h-5 flex items-center justify-center text-xs ">{cartItemsCount}</div>
   )}
             </button>
           </div>
