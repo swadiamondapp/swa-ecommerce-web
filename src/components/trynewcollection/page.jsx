@@ -34,13 +34,13 @@ const Newcollection = () => {
 
     axios
       .get(
-        `${Urls.productList}?filter_type="new&country=${countryId}`,
+        `${Urls.home}?country=${countryId}`,
         config
       )
       .then((response) => {
         setLoading(false);
-        if (response.data?.results?.data) {
-          setProducts(response.data.results.data.slice(0, 4));
+        if (response.data?.results?.data?.new_arrival) {
+          setProducts(response.data.results.data.new_arrival.slice(0, 4));
         }
       })
       .catch((error) => {
