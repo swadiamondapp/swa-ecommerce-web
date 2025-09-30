@@ -515,6 +515,7 @@ function Header() {
   const [mobileSearchKey, setMobileSearchKey] = useState("");
   const [mobileSuggestionList, setMobileSuggestionList] = useState([]);
   const [mobileSearchShow, setMobileSearchShow] = useState(false);
+ 
 
   const handleShowModal = () => {
     const pincode = localStorage.getItem("pincode");
@@ -1126,34 +1127,31 @@ function Header() {
 }
 
 function CategoriesNavbar({ categories, tags, isCartPage }) {
+  const fixed_tags = [
+    { id: 1, name: "RINGS" },
+    { id: 2, name: "EARRINGS" },
+    { id: 3, name: "BANGLES" },
+    { id: 4, name: "BRACELETS" },
+    { id: 5, name: "NECKLACES" },
+    { id: 6, name: "NOSE PINS" },
+    { id: 7, name: "PENDANTS" },
+    { id: 8, name: "CHARMS" }
+  ];
+
   return (
     <>
       {!isCartPage && (
         <div className="hidden md:flex bg-white absolute top-[98px] left-1/2 -translate-x-1/2 z-10 h-[59.67px] lg:w-[856px] md:w-[768px] mx-auto items-center px-10 rounded-full shadow-sm">
           <div className="container pt-2 px-0">
             <div className="flex items-center justify-between flex-wrap text-sm text-black">
-              {categories?.map((category, index) => (
-                <div key={index} className="flex justify-center">
-                  <Link
-                    href={`/${category.name.toLowerCase().replace(/\s+/g, "")}`}
-                    className="group relative inline-block text-black"
-                  >
-                    <p className="pb-2 text-center">
-                      {category.name.toUpperCase()}
-                    </p>
-                    <div className="absolute left-1/2 -translate-x-1/2 -bottom-3 h-[4px] w-20 bg-[#4d9ea7] rounded-t-md scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
-                  </Link>
-                </div>
-              ))}
-
-              {tags?.map((tag, index) => (
-                <div key={index} className="flex justify-center">
+              {fixed_tags?.map((tag, index) => (
+                <div key={tag.id} className="flex justify-center">
                   <Link
                     href={`/${tag.name.toLowerCase().replace(/\s+/g, "")}`}
                     className="group relative inline-block text-black"
                   >
-                    <p className="pb-2 text-center">{tag.name.toUpperCase()}</p>
-                    <div className="absolute left-1/2 -translate-x-1/2 bottom-0 h-[4px] w-6 bg-[#4d9ea7] rounded-t-md scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+                    <p className="pb-2 text-center">{tag.name}</p>
+                    <div className="absolute left-1/2 -translate-x-1/2 -bottom-3 h-[4px] w-20 bg-[#4d9ea7] rounded-t-md scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
                   </Link>
                 </div>
               ))}
