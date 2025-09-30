@@ -552,23 +552,23 @@ const LoginModal = (props) => {
     <>
       {user ? (
         <div
-          className={Classes.LogedUser}
+          className="flex  items-center pl-1"
           style={{ cursor: "pointer" }}
           ref={nameRef}
           onClick={handleLogedUserClick}
         >
           <Image
-            src={`/Assets/loged.png`}
-            alt="logedimg"
-            className={Classes.headerElement}
-            width={30}
-            height={30}
+            src={`/try/avatar.svg`}
+            alt="avatar"
+            className="mr-3"
+            width={16}
+            height={16}
           />
-          <p className={Classes.headerElement}>{user.userName}</p>
-          <IoIosArrowDown className={Classes.headerElement} />
+          <p className="text-black">{user.userName}</p>
+          <IoIosArrowDown className="text-black" />
         </div>
       ) : (
-        <div className={Classes.LoginSignup} style={{ cursor: "pointer" }}>
+        <div className="ml-4" style={{ cursor: "pointer" }}>
           <div
             className={`${Classes.dLogin} ${Classes.headerElement}`}
             onClick={() => {
@@ -586,7 +586,7 @@ const LoginModal = (props) => {
       {user && showUserDetails && (
         <div
           ref={userDetailsRef}
-          className={Classes.LogedUserDetails}
+          className="absolute top-20 bg-white rounded-md shadow-md"
           style={{ userSelect: "none" }}
         >
           <div className={Classes.Name_phoneLog}>

@@ -976,7 +976,7 @@ function Header() {
         </div>
 
         {/* Right Section */}
-        <div className="flex items-center justify-end">
+        <div className="flex items-center justify-end ">
           <div className="flex items-center justify-between space-x-6">
             
             <button
@@ -1034,6 +1034,7 @@ function Header() {
               <Image src="/try/like.svg" width={22.76} height={20} alt="Like" />
             </button>
             <button
+            className="relative"
               onClick={() => {
                 moveTocart();
                 setLoginText("Please Login");
@@ -1045,9 +1046,12 @@ function Header() {
                 height={20}
                 alt="shopping cart"
               />
+              {cartItemsCount > 0 && token && (
+    <div className="text-black absolute -top-3 -right-4 z-10 bg-white/10 shadow-md  w-5 h-5 flex items-center justify-center ">{cartItemsCount}</div>
+  )}
             </button>
           </div>
-          <div className="space-x-6 hidden md:block">
+          <div className="space-x-6 hidden md:block text-black">
             <LoginSuccessModal
               openSuccessModal={showSuccessModal}
               close={() => setShowSuccessModal(false)}
