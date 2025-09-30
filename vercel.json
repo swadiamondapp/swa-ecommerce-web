@@ -1,6 +1,7 @@
 
 {
   "rewrites": [
+
     { "source": "/blog", "destination": "https://swavlog.zinfog.in/" }
   ]
 } 

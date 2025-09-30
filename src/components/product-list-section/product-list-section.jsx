@@ -12,6 +12,11 @@ import axios from "axios";
 import { useAuth } from "@/providers/auth-provider";
 import FilterModal from "@/components/lifetimemodal/filtermodal";
 
+// Disable scroll restoration
+if (typeof window !== "undefined" && "scrollRestoration" in window.history) {
+  window.history.scrollRestoration = "manual";
+}
+
 export default function ProductListSection({ category }) {
   const { filter, setFilter, isLoading: isFilterLoading } = useFilter();
   const { token } = useAuth();
@@ -37,7 +42,13 @@ export default function ProductListSection({ category }) {
     }
   }, [filter]);
 
+  useEffect(() => {
+    // Always scroll to top when the component mounts
+    window.scrollTo(0, 0);
+  }, []);
+
   const appFilter = (filterParams) => {
+    window.scrollTo(0, 0);
     setIsLoading(true);
     axios
       .get(
