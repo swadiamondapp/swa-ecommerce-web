@@ -182,6 +182,7 @@
 
 import React from "react";
 import Image from "next/image";
+import "./page.css";
 
 const Collection = () => {
   return (
@@ -213,7 +214,7 @@ const Collection = () => {
              sm:top-[28.86875rem] sm:-left-[9.51625rem]" 
 />       
      
-      <div className="w-full overflow-x-auto md:overflow-x-visible lg:w-full lg:max-w-[83.125rem] lg:h-[41.53rem] lg:mx-auto lg:pt-6 lg:px-4">
+      <div className="collection-container">
    
         <div className="flex w-[31.5rem] mx-auto h-[11rem] justify-around items-center md:w-full lg:w-full lg:max-w-[83.125rem] lg:mx-auto md:h-[20.6875rem]">
           <div className="w-[6.75rem] h-[8.56rem] text-center md:w-[10rem] md:h-[12.6875rem] lg:w-[18%] lg:h-[17.6875rem] lg:flex-shrink-0">

@@ -680,7 +680,7 @@ function Header() {
 
 {/* Left Sidebar */}
 <div className={`fixed left-0 top-0 h-full w-80 bg-white z-50 transform transition-transform duration-300 ease-in-out ${showSidebar ? 'translate-x-0' : '-translate-x-full'} md:hidden overflow-y-auto`}>
-  <div className="p-4">
+  <div className="p-[1rem]">
     <div className="flex justify-between items-center mb-6">
       <h2 className="text-lg font-semibold">Menu</h2>
       <button 
@@ -933,7 +933,7 @@ function Header() {
           </div>
 
           <p className="text-black">Country</p>
-          <div className="relative p-4">
+          <div className="relative p-[1rem]">
             <Image
               src="/try/search.svg"
               width={20}

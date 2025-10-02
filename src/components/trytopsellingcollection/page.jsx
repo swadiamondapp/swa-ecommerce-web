@@ -34,7 +34,7 @@ const TopSellingCollection = () => {
           height={802.97}
         />
 
-        <div className="top-[20.41px] lg:-top-[280px] md:-top-[280px] absolute lg:left-[8.41px] w-fit  lg:block  left-1/2 -translate-x-1/2 transform lg:translate-x-0 text-center lg:text-left">
+        <div className="top-[20.41px] lg:-top-[280px] md:-top-[280px] absolute lg:left-[8.41px] w-fit  lg:block  left-1/2 -translate-x-1/2 transform lg:translate-x-0 text-center text-lg-start lg:text-left">
           <p className="text-white text-[18px] font-extralight leading-[24px] tracking-[8%] pb-[28.21px]">
             TOP SELLING COLLECTION
           </p>
@@ -64,7 +64,7 @@ const TopSellingCollection = () => {
              lg:top-[172.48px] lg:left-[343.41px] 
              w-full max-w-[454px] 
              left-1/2 -translate-x-1/2 transform 
-             md:text-center sm:text-center text-center 
+             md:text-center sm:text-center text-center text-lg-start
              md:top-[4rem] lg:text-left">
   <p className="text-[#918676] lg:text-[20px] md:text-[30px] leading-[24px] font-[400] tracking-[0.04rem] pt-2 md:pt-0 text-[14px] sm:text-[18px] ">
     BRAND AMBASSADOR

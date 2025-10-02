@@ -1,0 +1,25 @@
+/* Collection component styles */
+.collection-container {
+  width: 100%;
+  overflow-x: auto !important;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+@media (min-width: 768px) {
+  .collection-container {
+    overflow-x: visible !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .collection-container {
+    width: 100%;
+    max-width: 83.125rem;
+    height: 41.53rem;
+    margin: 0 auto;
+    padding-top: 1.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
