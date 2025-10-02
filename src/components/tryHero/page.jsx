@@ -78,7 +78,7 @@ const Hero = () => {
             alt="decoration"
             className="lg:w-[5.56rem] lg:h-[0.25rem] w-[4rem] h-[0.2rem]"
           />
-          <p className="text-[1rem] text-center lg:text-left lg:text-[1.25rem] leading-relaxed">
+          <p className="text-[1rem] text-center text-lg-start lg:text-left lg:text-[1.25rem] leading-relaxed">
             Check our natural <br />
             diamond jewellery collection
           </p>
