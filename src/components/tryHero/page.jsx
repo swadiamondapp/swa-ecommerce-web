@@ -24,7 +24,7 @@ const Hero = () => {
 
         {/* Hero Girl Image - percentage positioning */}
         <Image
-          src="/try/girlHero.svg"
+          src="/try/herogirl.webp"
           className="absolute 
              lg:left-[37%] lg:top-[20.9%] lg:w-[35%] lg:h-[89%] lg:transform-none
              sm:w-[54%] sm:h-[61%] sm:top-[39.8%] sm:pt-5

@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import { alt } from "joi";
 
 const Favcollection = () => {
   return (
@@ -13,6 +14,7 @@ const Favcollection = () => {
               className=""
               width={176.92}
               height={160.65}
+              alt="ring"
             />
           </div>
           <div>
@@ -21,6 +23,8 @@ const Favcollection = () => {
               className=""
               width={176.92}
               height={160.65}
+              alt="ring"
+  
             />
           </div>
         </div>
@@ -29,6 +33,7 @@ const Favcollection = () => {
           className="absolute  bottom-0 z-10 left-1/2 transform -translate-x-1/2 w-[20%] h-[3.37rem] md:w-[3.5rem] md:h-[6rem] lg:w-[5.31rem] lg:h-[8.93rem]"
           width={85.14}
           height={143.57}
+          alt="arrow"
         />
 
  <Image
@@ -36,6 +41,7 @@ const Favcollection = () => {
   className="absolute bottom-0 left-1/2 transform -translate-x-1/2 lg:pl-8 w-[20rem] h-[19.34rem] sm:w-[20rem] sm:h-[19.34rem] md:w-[40rem] md:h-[40rem] lg:w-[55%] lg:max-h-[81.3%] lg:h-auto"
   width={853.7556762695312}
   height={875.171875}
+  alt="fav collection girl"
 />
 
         <div className="absolute text-center text-md-start flex flex-col items-center left-1/2 transform -translate-x-1/2 lg:block lg:text-left top-[1.687rem] w-[20.125rem] md:w-[24rem] lg:top-[8.4rem] lg:left-[12.51rem] md:top-[3.9rem] sm:top-[6.4rem] ">
@@ -46,7 +52,7 @@ const Favcollection = () => {
             src="/try/Rectangle.svg"
             width={88.89}
             height={4}
-            alt="arrow"
+            alt="rectangle"
             className="hidden lg:block top-0 left-0 pb-[1.52rem] lg:pb-[1.52rem] md:pb-[1.52rem] sm:pb-[1.52rem]"
           />
 
@@ -89,7 +95,7 @@ const Favcollection = () => {
             src="/try/Rectangle.svg"
             width={88.89}
             height={4}
-            alt="arrow"
+            alt="rectangle"
             className="absolute top-0 right-0 pb-[1.52rem]"
           />
           <p className="text-[1.25rem] text-[#918676] pt-[0.6rem]">
@@ -103,7 +109,7 @@ const Favcollection = () => {
 
         <img
           src="/try/Line.svg"
-          alt="arrow"
+          alt="line"
           className="hidden lg:block absolute top-[18.55rem] right-[4.46rem]"
         />
 
@@ -115,7 +121,7 @@ const Favcollection = () => {
 
         <img
           src="/try/Line.svg"
-          alt="arrow"
+          alt="line"
           className="hidden lg:block  absolute top-[18.55rem] right-[4.46rem] pb-[1.52rem] lg:top-[18.55rem] lg:right-[4.46rem] lg:pb-[1.52rem] md:top-[18.55rem] md:right-[4.46rem] md:pb-[1.52rem] sm:top-[18.55rem] sm:right-[4.46rem] sm:pb-[1.52rem]"
         />
 

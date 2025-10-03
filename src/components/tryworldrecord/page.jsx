@@ -64,7 +64,7 @@ const Worldrec = () => {
     <div className="relative w-full lg:h-[778px] h-[666px]">
       {/* Background Video */}
       <video
-    src="/try/worldrecvedio.mp4"
+    src="/try/worldrecvedio.webm"
     autoPlay
     loop
     
@@ -110,10 +110,10 @@ const Worldrec = () => {
             </div>
 
             <div className="text-center text-[#F8F4E9] mt-[11rem] md:mt-[9rem]  lg:mt-[12rem] ">
-              <p className="lg:text-[56px] md:text-[56px] text-[32px] font-[500] font-playfair mb-3">
+              <p className="lg:text-[56px] md:text-[56px] text-[32px] font-[500] font-playfair mb-[0.75rem]">
                 Guinness world record
               </p>
-              <p className="p-3 lg:block hidden text-[16px]">
+              <p className="p-[0.75rem] lg:block hidden text-[16px]">
                 Its design draws inspiration from the pink oyster mushroom, a
                 symbol of immortality and longevity, and it features 41 <br />{" "}
                 unique mushroom-shaped petals adorned with diamonds The ring
