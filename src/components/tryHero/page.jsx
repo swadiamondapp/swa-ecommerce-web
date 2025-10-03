@@ -26,7 +26,7 @@ const Hero = () => {
         <Image
           src="/try/herogirl.webp"
           className="absolute  z-10
-             lg:left-1/2 lg:-translate-x-1/2 lg:top-[29.9%] lg:w-[26rem] lg:h-[70%]
+             lg:left-1/2 lg:-translate-x-1/2 lg:top-[15%] lg:w-[613px] lg:h-[885px]
              sm:left-1/2 sm:-translate-x-1/2 sm:w-[22rem] sm:h-[61%] sm:top-[39.8%] sm:pt-5
              md:left-1/2 md:-translate-x-1/2 md:top-[39.8%] md:h-[61%] md:w-[22rem]
              left-1/2 -translate-x-1/2 -bottom-2 w-[20rem] h-[57%] opacity-100"
@@ -48,7 +48,7 @@ const Hero = () => {
         {/* YOU Image - percentage positioning */}
         <Image
           src="/try/YOU.svg"
-          className="absolute hidden lg:flex lg:left-[62%] lg:top-[32.3%] right-[2%] top-[16%] lg:w-[12.4%] lg:h-[28.5%] w-[16%] h-auto"
+          className="absolute hidden lg:flex lg:left-[64%] lg:top-[32.3%] right-[2%] top-[16%] lg:w-[12.4%] lg:h-[28.5%] w-[16%] h-auto"
           width={201}
           height={282}
           alt="You"
