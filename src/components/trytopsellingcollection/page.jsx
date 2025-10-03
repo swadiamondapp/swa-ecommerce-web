@@ -23,18 +23,18 @@ const TopSellingCollection = () => {
       />
      </div>
         <Image
-          src="/try/ambasedor.svg"
+          src="/try/ambasadorgirl.webp"
           className="absolute bottom-0 z-10
-             w-[400px] h-[350px]   /* default (xs) */
-             sm:w-[570px] sm:h-[495px]
-             md:w-[670px] md:h-[595px]
+             w-[320px] h-[420px]   /* default (xs) */
+             sm:w-[350px] sm:h-[495px]
+             md:w-[450px] md:h-[510px]
 
              left-1/2 -translate-x-1/2 transform  /* center on xs–md */
-             lg:left-auto lg:translate-x-0 lg:right-16 lg:transform-none 
-             lg:w-[876.46px] lg:h-[802.97px]"
+             lg:left-auto lg:translate-x-0 lg:right-24 lg:transform-none 
+             lg:w-[600.46px] lg:h-[792.97px]"
              alt="ambasedor girl"
-          width={876.46}
-          height={802.97}
+          width={652}
+          height={832.97}
         />
 
         <div className="top-[20.41px] lg:-top-[280px] md:-top-[280px] absolute lg:left-[8.41px] w-fit  lg:block  left-1/2 -translate-x-1/2 transform lg:translate-x-0 text-center text-lg-start lg:text-left">

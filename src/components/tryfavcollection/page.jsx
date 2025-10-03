@@ -37,10 +37,10 @@ const Favcollection = () => {
         />
 
  <Image
-  src="/try/favcollectiongirl.svg"
-  className="absolute bottom-0 left-1/2 transform -translate-x-1/2 lg:pl-8 w-[20rem] h-[19.34rem] sm:w-[20rem] sm:h-[19.34rem] md:w-[40rem] md:h-[40rem] lg:w-[55%] lg:max-h-[81.3%] lg:h-auto"
-  width={853.7556762695312}
-  height={875.171875}
+  src="/try/favgirl.webp"
+  className="absolute bottom-0 left-1/2 transform -translate-x-1/2 lg:pl-8 w-[20rem] h-[23.34rem] sm:w-[20rem] sm:h-[19.34rem] md:w-[40rem] md:h-[40rem] lg:w-[55%] lg:max-h-[95.3%] lg:h-auto"
+  width={788}
+  height={976}
   alt="fav collection girl"
 />
 

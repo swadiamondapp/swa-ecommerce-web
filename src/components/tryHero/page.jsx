@@ -25,11 +25,11 @@ const Hero = () => {
         {/* Hero Girl Image - percentage positioning */}
         <Image
           src="/try/herogirl.webp"
-          className="absolute 
-             lg:left-[37%] lg:top-[20.9%] lg:w-[35%] lg:h-[89%] lg:transform-none
-             sm:w-[54%] sm:h-[61%] sm:top-[39.8%] sm:pt-5
-             md:left-[26.5%] md:top-[39.8%] md:h-[61%] md:w-[54%]
-             left-[22%] -bottom-2 w-[70%] h-[62%] opacity-100"
+          className="absolute  z-10
+             lg:left-1/2 lg:-translate-x-1/2 lg:top-[15.9%] lg:w-[35%] lg:h-[89%]
+             sm:left-1/2 sm:-translate-x-1/2 sm:w-[55%] sm:h-[61%] sm:top-[39.8%] sm:pt-5
+             md:left-1/2 md:-translate-x-1/2 md:top-[39.8%] md:h-[61%] md:w-[22rem]
+             left-1/2 -translate-x-1/2 -bottom-2 w-[20rem] h-[57%] opacity-100"
           width={563}
           height={885}
           priority
