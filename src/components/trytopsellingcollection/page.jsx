@@ -9,6 +9,7 @@ const TopSellingCollection = () => {
         className="w-screen lg:h-[412.54px] md:h-[300px] sm:h[250px] h-[170px] object-cover  hidden md:block"
         width={1920}
         height={412.54}
+        alt="banner"
       /> 
 
       <div className="max-w-container mx-auto lg:h-[667.46px] bg-[#F8F4E9] sm:h-full relative md:h-full h-full">
@@ -18,20 +19,22 @@ const TopSellingCollection = () => {
         className="w-screen lg:h-[412.54px] md:h-[300px] sm:h[250px] h-[170px] object-cover  md:hidden"
         width={1920}
         height={412.54}
+        alt="banner"
       />
      </div>
         <Image
-          src="/try/ambasedor.svg"
+          src="/try/ambasadorgirl.webp"
           className="absolute bottom-0 z-10
-             w-[400px] h-[350px]   /* default (xs) */
-             sm:w-[570px] sm:h-[495px]
-             md:w-[670px] md:h-[595px]
+             w-[320px] h-[420px]   /* default (xs) */
+             sm:w-[350px] sm:h-[495px]
+             md:w-[450px] md:h-[510px]
 
              left-1/2 -translate-x-1/2 transform  /* center on xs–md */
-             lg:left-auto lg:translate-x-0 lg:right-16 lg:transform-none 
-             lg:w-[876.46px] lg:h-[802.97px]"
-          width={876.46}
-          height={802.97}
+             lg:left-auto lg:translate-x-0 lg:right-24 lg:transform-none 
+             lg:w-[600.46px] lg:h-[792.97px]"
+             alt="ambasedor girl"
+          width={652}
+          height={832.97}
         />
 
         <div className="top-[20.41px] lg:-top-[280px] md:-top-[280px] absolute lg:left-[8.41px] w-fit  lg:block  left-1/2 -translate-x-1/2 transform lg:translate-x-0 text-center text-lg-start lg:text-left">
@@ -44,18 +47,21 @@ const TopSellingCollection = () => {
               className="w-[88.1px] h-[80px] md:w-[176.92px] md:h-[160.65px]"
               width={176.92}
               height={160.65}
+              alt="ring"
             />
             <Image
               src="/try/favRing.svg"
               className="w-[88.1px] h-[80px] md:w-[176.92px] md:h-[160.65px]"
               width={176.92}
               height={160.65}
+              alt="ring"
             />
             <Image
               src="/try/newchain.svg"
               className="w-[88.1px] h-[80px] md:w-[176.92px] md:h-[160.65px]"
               width={176.92}
               height={160.65}
+              alt="chain"
             />
           </div>
         </div>

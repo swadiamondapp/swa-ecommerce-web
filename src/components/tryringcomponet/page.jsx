@@ -8,7 +8,7 @@ const Ringcomponet = () => {
         <div className="max-w-container mx-auto h-full flex flex-row justify-around items-center md:items-end lg:items-center pb-10">
 
           <div>
-          <div className="text-center lg:text-left">
+          <div className="text-center text-md-start lg:text-left">
             <p className="lg:text-[56px] text-[32px] font-medium md:leading-[63px] leading-[40px] font-playfair pb-3">
                Queen elizabath <br />
                coral Ring
@@ -77,7 +77,7 @@ const Ringcomponet = () => {
         <div className="max-w-container mx-auto h-full flex flex-row-reverse justify-around items-center">
          
        <div>
-          <div className="text-center lg:text-left">
+          <div className="text-center text-md-start lg:text-left">
             <p className="lg:text-[56px] text-[32px] md:leading-[63px] leading-[40px] font-medium font-playfair pb-3 ">
                Dalia Rose <br /> luxuriea ring
              </p>

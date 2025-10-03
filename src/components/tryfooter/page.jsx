@@ -14,9 +14,9 @@ const SubscribeNewsletter = () => {
           <input
             type="email"
             placeholder="EMAIL*"
-            className="w-full max-w-[500px] px-8 py-4 bg-white text-black text-sm font-medium placeholder-gray-500 border-0 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+            className="w-full max-w-[500px] px-[2rem] py-[1rem] bg-white text-black text-sm font-medium placeholder-gray-500 border-0 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
           />
-          <button className="px-6 py-4 bg-[#017480] text-white font-semibold rounded-md justify-center transition-colors duration-200 flex items-center gap-2">
+          <button className="px-[1.5rem] py-[1rem] bg-[#017480] text-white font-semibold rounded-md justify-center transition-colors duration-200 flex items-center gap-2">
             SUBSCRIBE
             <Image
               src="/try/arrowwhite.svg"
@@ -259,7 +259,7 @@ const CompanyInfo = () => {
           />
         </div>
         <div className="max-w-4xl">
-          <p className="text-[12px] lg:max-w-[700px] text-gray-400 leading-relaxed text-start lg:text-center">
+          <p className="text-[12px] lg:max-w-[700px] text-gray-400 leading-relaxed md:text-left  lg:text-center">
             Concept of SWA Diamonds came into being from CAPESTONE Ventures
             Pvt Ltd, a leading name in wholesale diamond jewellers market,
             that does business with prominent retail jewellers. Many retail

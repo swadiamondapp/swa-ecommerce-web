@@ -70,7 +70,7 @@ const SwaPromise = () => {
           />
         </div>
 
-        <div className="grid lg:grid-cols-4 grid-cols-3 gap-2 lg:gap-8 text-[#334155] py-4 lg:py-20 max-w-[750px] ">
+        <div className="grid lg:grid-cols-4 grid-cols-3 gap-2 lg:gap-8 text-[#334155] py-[1rem] lg:py-[5rem] max-w-[750px] ">
           {data.map((item, index) => (
             <div className="text-center flex flex-col items-center" key={index}>
               <div className="w-[90px] h-[90px] lg:w-[160px] lg:h-[160px] bg-white rounded-full mb-2 flex items-center justify-center">
