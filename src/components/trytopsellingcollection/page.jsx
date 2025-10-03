@@ -25,13 +25,13 @@ const TopSellingCollection = () => {
         <Image
           src="/try/ambasadorgirl.webp"
           className="absolute bottom-0 z-10
-             w-[250px] h-[420px]   /* default (xs) */
-             sm:w-[280px] sm:h-[410px]
-             md:w-[320px] md:h-[510px]
+             w-[310px] h-[460px]   /* default (xs) */
+             sm:w-[340px] sm:h-[460px]
+             md:w-[390px] md:h-[550px]
 
              left-1/2 -translate-x-1/2 transform  /* center on xs–md */
              lg:left-auto lg:translate-x-0 lg:right-24 lg:transform-none 
-             lg:w-[450.46px] lg:h-[792.97px]"
+             lg:w-[652px] lg:h-[832.97px]"
              alt="ambasedor girl"
           width={652}
           height={832.97}
