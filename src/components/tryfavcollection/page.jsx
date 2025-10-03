@@ -38,13 +38,13 @@ const Favcollection = () => {
 
  <Image
   src="/try/favgirl.webp"
-  className="absolute bottom-0 left-1/2 transform -translate-x-1/2 lg:pl-8 w-[20rem] h-[23.34rem] sm:w-[20rem] sm:h-[19.34rem] md:w-[40rem] md:h-[40rem] lg:w-[55%] lg:max-h-[95.3%] lg:h-auto"
+  className="absolute bottom-0 left-1/2 transform -translate-x-1/2 lg:pl-8 w-[17rem] h-[23.34rem] sm:w-[17rem] sm:h-[21.34rem] md:w-[30rem] md:h-[40rem] lg:w-[55%] lg:max-h-[95.3%] lg:h-auto"
   width={788}
   height={976}
   alt="fav collection girl"
 />
 
-        <div className="absolute text-center text-md-start flex flex-col items-center left-1/2 transform -translate-x-1/2 lg:block lg:text-left top-[1.687rem] w-[20.125rem] md:w-[24rem] lg:top-[8.4rem] lg:left-[12.51rem] md:top-[3.9rem] sm:top-[6.4rem] ">
+        <div className="absolute text-center text-md-start flex flex-col items-center left-1/2 transform -translate-x-1/2 lg:block lg:text-left top-[1.687rem] w-[20.125rem] md:w-[24rem] lg:top-[8.4rem] lg:left-[12.51rem] md:top-[3.9rem] sm:top-[2.4rem] ">
           <p className="font-playfair text-[2rem] pb-3 lg:text-[3.5rem] lg:pb-[1.33rem] md:text-[3.5rem] md:pb-[1.33rem] sm:text-[2rem] sm:pb-[1.33rem]">
             Preity Zinta <br /> Fav Collections
           </p>

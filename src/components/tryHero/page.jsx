@@ -26,8 +26,8 @@ const Hero = () => {
         <Image
           src="/try/herogirl.webp"
           className="absolute  z-10
-             lg:left-1/2 lg:-translate-x-1/2 lg:top-[15.9%] lg:w-[35%] lg:h-[89%]
-             sm:left-1/2 sm:-translate-x-1/2 sm:w-[55%] sm:h-[61%] sm:top-[39.8%] sm:pt-5
+             lg:left-1/2 lg:-translate-x-1/2 lg:top-[29.9%] lg:w-[26rem] lg:h-[70%]
+             sm:left-1/2 sm:-translate-x-1/2 sm:w-[22rem] sm:h-[61%] sm:top-[39.8%] sm:pt-5
              md:left-1/2 md:-translate-x-1/2 md:top-[39.8%] md:h-[61%] md:w-[22rem]
              left-1/2 -translate-x-1/2 -bottom-2 w-[20rem] h-[57%] opacity-100"
           width={563}
