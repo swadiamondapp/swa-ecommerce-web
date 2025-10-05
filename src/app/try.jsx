@@ -13,6 +13,7 @@ import * as Urls from "../../../Urls";
 import { IoCartOutline } from "react-icons/io5";
 import { useEffect } from "react";
 import CheckDelivery from "../../CheckDelivery/CheckDelivery";
+
 const NewArrivalCard = (props) => {
   const history = useHistory();
   const location = useLocation();

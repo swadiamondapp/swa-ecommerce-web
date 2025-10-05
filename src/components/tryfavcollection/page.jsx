@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { alt } from "joi";
+import Link from "next/link";
 
 const Favcollection = () => {
   return (
@@ -37,7 +37,7 @@ const Favcollection = () => {
 
           <Image
             src="/try/favgirl.webp"
-            className="absolute bottom-0 left-1/2 transform -translate-x-1/2 lg:pl-8 w-[17rem] h-[23.34rem] sm:w-[17rem] sm:h-[21.34rem] md:w-[30rem] md:h-[40rem] lg:w-[55%] lg:max-h-[95.3%] lg:h-auto"
+            className="absolute bottom-0 left-1/2 transform -translate-x-1/2 lg:pl-8 w-[17rem] sm:w-[17rem] md:w-[30rem] lg:w-[55%]"
             width={788}
             height={976}
             alt="fav collection girl"
@@ -61,15 +61,16 @@ const Favcollection = () => {
               mushroom-shaped petals adorned with diamonds The ring weighs
             </p>
             <div className="w-fit">
-              <button className="flex items-center gap-2 bg-[#002D31] text-white px-6 py-3 rounded-lg lg:px-6 lg:py-3 md:px-6 md:py-3 sm:px-6 sm:py-3">
-                VIEW COLLECTIONS
+              <Link href="/rings" className="group flex items-center gap-2 bg-[#002D31] hover:bg-[#003A3F] transition-colors text-white px-6 py-3 rounded-lg lg:px-6 lg:py-3 md:px-6 md:py-3 sm:px-6 sm:py-3">
+                <span>VIEW COLLECTIONS</span>
                 <Image
                   src="/try/favButtonarrow.svg"
                   width={24}
                   height={24}
                   alt="arrow"
+                  className="transition-transform duration-300 ease-in-out group-hover:translate-x-1"
                 />
-              </button>
+              </Link>
             </div>
           </div>
 
