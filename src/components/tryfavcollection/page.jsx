@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { alt } from "joi";
+import Link from "next/link";
 
 const Favcollection = () => {
   return (
@@ -61,15 +61,15 @@ const Favcollection = () => {
               mushroom-shaped petals adorned with diamonds The ring weighs
             </p>
             <div className="w-fit">
-              <button className="flex items-center gap-2 bg-[#002D31] text-white px-6 py-3 rounded-lg lg:px-6 lg:py-3 md:px-6 md:py-3 sm:px-6 sm:py-3">
-                VIEW COLLECTIONS
+              <Link href="/rings" className="flex items-center gap-2 bg-[#002D31] hover:bg-[#003A3F] transition-colors text-white px-6 py-3 rounded-lg lg:px-6 lg:py-3 md:px-6 md:py-3 sm:px-6 sm:py-3">
+                <span>VIEW COLLECTIONS</span>
                 <Image
                   src="/try/favButtonarrow.svg"
                   width={24}
                   height={24}
                   alt="arrow"
                 />
-              </button>
+              </Link>
             </div>
           </div>
 
