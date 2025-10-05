@@ -27,9 +27,9 @@ const StoreComp = () => {
           </div>
           <div className="bg-[#004247] pt-4 mt-12">
             <div className="text-center text-[#F8F4E9] pb-8 relative z-20">
-              <p className="text-[28.8px] font-bold leading-tight mb-2">70+</p>
+              <p className="text-[28.8px] font-bold leading-tight mb-2">400+</p>
               <p className="text-[14.4px] font-medium mb-2">
-                Store across india
+                Store across India and UAE
               </p>
               <div className="flex items-center justify-center gap-2 mb-2 mt-2">
                 <span className="w-[58.4px] h-[4px] bg-[#017480]"></span>
@@ -84,9 +84,9 @@ const StoreComp = () => {
             }}
           />
           <div className="text-[#F8F4E9] pl-8 mt-20 relative z-20">
-              <p className="text-[28.8px] font-bold leading-tight mb-2">70+</p>
+              <p className="text-[28.8px] font-bold leading-tight mb-2">400+</p>
               <p className="text-[14.4px] font-medium mb-2">
-                Store across india
+                Store across India and UAE
               </p>
               <p className="text-[12.8px] flex flex-row">
                 Opening soon @ <span className="font-semibold">Dubai</span>
