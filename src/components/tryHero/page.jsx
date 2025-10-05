@@ -25,11 +25,11 @@ const Hero = () => {
         {/* Hero Girl Image - percentage positioning */}
         <Image
           src="/try/herogirl.webp"
-          className="absolute  z-10
+          className="absolute z-10
              lg:left-1/2 lg:-translate-x-1/2 lg:top-[15%] lg:w-[613px] lg:h-[885px]
-             sm:left-1/2 sm:-translate-x-1/2 sm:w-[22rem] sm:h-[61%] sm:top-[39.8%] sm:pt-5
-             md:left-1/2 md:-translate-x-1/2 md:top-[39.8%] md:h-[61%] md:w-[22rem]
-             left-1/2 -translate-x-1/2 -bottom-2 w-[20rem] h-[57%] opacity-100"
+             sm:left-1/2 sm:-translate-x-1/2 sm:w-[22rem] sm:top-[39.8%] sm:pt-5
+             md:left-1/2 md:-translate-x-1/2 md:top-[39.8%] md:w-[22rem]
+             left-1/2 -translate-x-1/2 -bottom-2 w-[20rem] opacity-100"
           width={563}
           height={885}
           priority
@@ -83,7 +83,7 @@ const Hero = () => {
             diamond jewellery collection
           </p>
 
-          <button className="flex items-center gap-2 bg-[#002D31] text-white lg:px-6 lg:py-4 px-4 py-3 rounded-lg hover:bg-[#003A3F] transition-colors">
+          <Link href="/rings" className="flex items-center gap-2 bg-[#002D31] text-white lg:px-6 lg:py-4 px-4 py-3 rounded-lg hover:bg-[#003A3F] transition-colors">
             <span className="lg:text-base text-sm">Explore collections</span>
             <Image
               src="/try/RightARRow.svg"
@@ -92,7 +92,7 @@ const Hero = () => {
               alt="arrow"
               className="lg:w-6 lg:h-6 w-5 h-5"
             />
-          </button>
+          </Link>
         </div>
 
         {/* Video Card - percentage positioning and sizing */}
