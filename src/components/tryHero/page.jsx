@@ -83,14 +83,14 @@ const Hero = () => {
             diamond jewellery collection
           </p>
 
-          <Link href="/rings" className="flex items-center gap-2 bg-[#002D31] text-white lg:px-6 lg:py-4 px-4 py-3 rounded-lg hover:bg-[#003A3F] transition-colors">
+          <Link href="/rings" className="group flex items-center gap-2 bg-[#002D31] text-white lg:px-6 lg:py-4 px-4 py-3 rounded-lg hover:bg-[#003A3F] transition-colors">
             <span className="lg:text-base text-sm">Explore collections</span>
             <Image
               src="/try/RightARRow.svg"
               width={24}
               height={24}
               alt="arrow"
-              className="lg:w-6 lg:h-6 w-5 h-5"
+              className="lg:w-6 lg:h-6 w-5 h-5 transition-transform duration-300 ease-in-out group-hover:translate-x-1 group-hover:rotate-45"
             />
           </Link>
         </div>
