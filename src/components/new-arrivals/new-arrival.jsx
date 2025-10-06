@@ -455,6 +455,23 @@ const NewArrivalPage = (props) => {
       }
     };
 
+    let pageTitle = "All Products";
+
+    console.log("labelSet", labelSet);
+
+    // if multiple categories are selected
+    if (labelSet.length > 1) {
+      pageTitle = "Filtered Products";
+    }
+    // if single category is selected
+    else if (labelSet.length === 1) {
+      pageTitle = labelSet[0];
+    }
+    // if no filter is applied → show all products
+    else if (labelSet.length === 0) {
+      pageTitle = "All Products";
+    }
+
     const handleCloseModal = () => {
       setShowModal(false);
     };
@@ -591,11 +608,12 @@ const NewArrivalPage = (props) => {
                   sortHandler={sortsHHandler2}
                   sortHandlerPrice={sortsHHandlerPrice}
                   count={count}
-                  categoryName={
-                    productCategory
-                      ? productCategory
-                      : categoryDetails && categoryDetails.product_category
-                  }
+                  // categoryName={
+                  //   productCategory
+                  //     ? productCategory
+                  //     : categoryDetails && categoryDetails.product_category
+                  // }
+                  categoryName={pageTitle}
                   setProduct={setProduct}
                 >
                   {" "}

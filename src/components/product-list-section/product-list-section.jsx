@@ -5,7 +5,7 @@ import Classes from "./product-list.module.css";
 import NewArrivalDesign from "@/components/NewArrivalDesign/NewArrivalDesign";
 import DownloadOurAppImage from "@/components/download-our-app/download-our-app";
 import { useCountry } from "@/providers/country-provider";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import ProductList from "./product-list";
 import { productList } from "@/utils/urls";
 import axios from "axios";
@@ -74,17 +74,35 @@ export default function ProductListSection({ category }) {
     });
   };
 
+  const pageTitle = useMemo(() => {
+    const selectedLabels = filter?.selectedCategoryLabels || [];
+
+    if (selectedLabels.length > 1) {
+      return "Filtered Products"; // multiple selected
+    }
+    if (selectedLabels.length === 1) {
+      return selectedLabels[0]; // only one selected
+    }
+    // No filter applied → show All Products
+    if (!filter?.selectedCategories?.length) return "All Products";
+
+    return products[0]?.category?.name || "All Products"; // none selected
+  }, [filter, products]);
+
+  console.log("productsanas", products[0]?.category?.name);
+
   return (
     <>
       <div className={Classes.Products}>
         <NewArrivalDesign
           sortHandler={sortHandler}
           count={count}
-          categoryName={
-            category
-              ? category.charAt(0).toUpperCase() + category.slice(1)
-              : "New Arrivals"
-          }
+          // categoryName={
+          //   category
+          //     ? category.charAt(0).toUpperCase() + category.slice(1)
+          //     : "New Arrivals"
+          // }
+          categoryName={pageTitle}
         >
           <ProductList
             category={category}

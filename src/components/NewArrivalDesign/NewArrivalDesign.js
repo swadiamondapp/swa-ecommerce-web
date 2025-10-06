@@ -11,6 +11,7 @@ const NewArrivalPage = (props) => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const storedCategory = sessionStorage.getItem("categoryName");
+      console.log("storedCategory", storedCategory);
       if (storedCategory) {
         setCategoryName(storedCategory);
         sessionStorage.removeItem("categoryName"); // optional: clear after using
@@ -20,6 +21,7 @@ const NewArrivalPage = (props) => {
 
   console.log("1113", props);
   console.log("11131", categoryName);
+  console.log("111311", props.categoryName);
   return (
     <div>
       <div className={Classes.ParentMain}>
@@ -27,9 +29,10 @@ const NewArrivalPage = (props) => {
           <div className={Classes.Main}>
             <h1 className={Classes.Title}>
               {/* {props.categoryName?.toUpperCase() || "NEW ARRIVALS"} */}
-              {categoryName
+              {/* {categoryName
                 ? categoryName.toUpperCase()
-                : props.categoryName?.toUpperCase() || "NEW ARRIVALS"}
+                : props.categoryName?.toUpperCase() || "NEW ARRIVALS"} */}
+              {props.categoryName?.toUpperCase() || "NEW ARRIVALS"}
             </h1>
             <div className={Classes.Found}>
               {props.count}&nbsp;&nbsp;products found

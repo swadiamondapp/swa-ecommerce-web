@@ -41,16 +41,65 @@ const FilterCatgs = () => {
   };
 
   // Handler functions for each filter type
+  // const handleCheckboxByOccation = (id) => {
+  //   handleCheckboxToggle(id, "selectedOccations");
+  // };
+  // Handler functions for each filter type
   const handleCheckboxByOccation = (id) => {
-    handleCheckboxToggle(id, "selectedOccations");
+    const isSelected = filter.selectedOccations?.includes(id);
+    const updatedIds = isSelected
+      ? filter.selectedOccations.filter((item) => item !== id)
+      : [...(filter.selectedOccations || []), id];
+
+    const updatedLabels = occations
+      .filter((occ) => updatedIds.includes(occ.id))
+      .map((occ) => occ.name);
+
+    setFilter({
+      ...filter,
+      selectedOccations: updatedIds,
+      selectedOccationLabels: updatedLabels, // store names for pageTitle
+    });
   };
 
+  // const handleCheckboxByMetal = (id) => {
+  //   handleCheckboxToggle(id, "selectedMetalTypes");
+  // };
   const handleCheckboxByMetal = (id) => {
-    handleCheckboxToggle(id, "selectedMetalTypes");
+    const isSelected = filter.selectedMetalTypes?.includes(id);
+    const updatedIds = isSelected
+      ? filter.selectedMetalTypes.filter((item) => item !== id)
+      : [...(filter.selectedMetalTypes || []), id];
+
+    const updatedLabels = metalTypes
+      .filter((metal) => updatedIds.includes(metal.id))
+      .map((metal) => metal.metal_type);
+
+    setFilter({
+      ...filter,
+      selectedMetalTypes: updatedIds,
+      selectedMetalLabels: updatedLabels, // store names for pageTitle
+    });
   };
 
+  // const handleCheckboxByCategory = (id) => {
+  //   handleCheckboxToggle(id, "selectedCategories");
+  // };
   const handleCheckboxByCategory = (id) => {
-    handleCheckboxToggle(id, "selectedCategories");
+    const isSelected = filter.selectedCategories?.includes(id);
+    const updatedIds = isSelected
+      ? filter.selectedCategories.filter((item) => item !== id)
+      : [...(filter.selectedCategories || []), id];
+
+    const updatedLabels = categories
+      .filter((cat) => updatedIds.includes(cat.id))
+      .map((cat) => cat.name);
+
+    setFilter({
+      ...filter,
+      selectedCategories: updatedIds,
+      selectedCategoryLabels: updatedLabels, // store names for pageTitle
+    });
   };
 
   return (

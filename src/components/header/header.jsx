@@ -400,7 +400,7 @@ function Header() {
         >
           <div className="container" style={{ padding: "0px" }}>
             <div className={Classes.NavLinksDesk}>
-              {categories?.map((category, index) => (
+              {/* {categories?.map((category, index) => (
                 <div key={index}>
                   <Link
                     href={`/${category.name.toLowerCase().replace(/\s+/g, "")}`}
@@ -409,7 +409,28 @@ function Header() {
                     <p>{category.name.toUpperCase()}</p>
                   </Link>
                 </div>
-              ))}
+              ))} */}
+              {categories?.map((category, index) => {
+                const categoryPath = `/${category.name
+                  .toLowerCase()
+                  .replace(/\s+/g, "")}`;
+                const isActive = pathname === categoryPath;
+
+                return (
+                  <div
+                    key={index}
+                    style={{
+                      borderBottom: isActive ? "5px solid #4d9ea7" : "none",
+                      color: isActive ? "#10212f" : "#fff",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <Link href={categoryPath}>
+                      <p>{category.name.toUpperCase()}</p>
+                    </Link>
+                  </div>
+                );
+              })}
               {tags?.map((tag, index) => (
                 <div key={index}>
                   <Link
