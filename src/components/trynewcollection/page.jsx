@@ -151,6 +151,9 @@ const Newcollection = () => {
           height={790.28}
           alt="model"
         />
+                    <Image src="/try/decorenewcollection.svg" className='absolute right-0 top-0 lg:block hidden' width={390.36} height={473.22}/>
+
+
 
         <div className="flex flex-col items-center justify-center lg:items-start lg:justify-start w-full h-full mt-0">
           <div className="h-fit mt-[0.5rem] lg:mt-[12rem] lg:ml-[2.25rem] ml-0 text-center lg:text-left">

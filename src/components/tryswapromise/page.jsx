@@ -4,14 +4,30 @@ import Image from "next/image";
 const SwaPromise = () => {
   const data = [
     {
-      title: "200+ store",
-      description: "200+ store",
-      image: "/try/storelogo.svg",
+      title: "Personalized video consultation",
+      description: "Personalized video consultation",
+      image: "/try/vedioconsultaion.svg",
     },
-    {
-      title: "Life time exchange & buy back",
-      description: "Life time exchange & buy back",
-      image: "/try/exchange.svg",
+   {
+      title: "Try at home service",
+      description: "Try at home service",
+      image: "/try/home.svg",
+    },
+      {
+      title: "BIS Hallmark, IGI, GIA",
+      description: "BIS Hallmark, IGI, GIA",
+      image: "/try/Bis.svg",
+    },
+     {
+      title: "90% value on cash back ",
+      description: "90% value on cash back ",
+      image: "/try/Vector.svg",
+    },
+
+      {
+      title: "100% Refund Return with 7 days of delivery",
+      description: "100% Refund Return with 7 days of delivery",
+      image: "/try/refund.svg",
     },
 
     {
@@ -21,34 +37,22 @@ const SwaPromise = () => {
     },
 
     {
-      title: "30 Day money back",
-      description: "30 Day money back",
-      image: "/try/moneyBack.svg",
+      title: "Certified natural diamonds only",
+      description: "Certified natural diamonds only",
+      image: "/try/Group 1321314094.svg",
     },
 
     {
-      title: "Personalized video consultation",
-      description: "Personalized video consultation",
-      image: "/try/vedioconsultaion.svg",
+      title: "95% Value on exchange",
+      description: "95% Value on exchange",
+      image: "/try/Group.svg",
     },
 
-    {
-      title: "Try at home service",
-      description: "Try at home service",
-      image: "/try/home.svg",
-    },
+   
 
-    {
-      title: "BIS Hallmark, IGI, GIA",
-      description: "BIS Hallmark, IGI, GIA",
-      image: "/try/Bis.svg",
-    },
+  
 
-    {
-      title: "100% Refund Return with 30 days of delivery",
-      description: "100% Refund Return with 30 days of delivery",
-      image: "/try/refund.svg",
-    },
+  
   ];
 
   return (
@@ -73,7 +77,7 @@ const SwaPromise = () => {
         <div className="grid lg:grid-cols-4 grid-cols-3 gap-2 lg:gap-8 text-[#334155] py-[1rem] lg:py-[5rem] max-w-[750px] ">
           {data.map((item, index) => (
             <div className="text-center flex flex-col items-center" key={index}>
-              <div className="w-[90px] h-[90px] lg:w-[160px] lg:h-[160px] bg-white rounded-full mb-2 flex items-center justify-center">
+              <div className="w-[90px] h-[90px] lg:w-[140px] lg:h-[140px] bg-white rounded-full mb-2 flex items-center justify-center">
                 <img
                   src={item.image}
                   alt={item.title}
