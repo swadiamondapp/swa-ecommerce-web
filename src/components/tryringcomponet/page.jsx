@@ -37,8 +37,8 @@ const Ringcomponet = () => {
             alt="shadow"
           />
              </div>
-          <div className="pt-[56.18px] flex lg:flex-row flex-col-reverse items-center">
-               <button className="flex items-center gap-2 bg-[#002D31] text-white h-[56px] lg:px-[20.88px] px-[35px] rounded-lg lg:mr-7">
+          <div className="pt-[56.18px] lg:pt-[26.18px] flex lg:flex-row flex-col-reverse items-center">
+               {/* <button className="flex items-center gap-2 bg-[#002D31] text-white h-[56px] lg:px-[20.88px] px-[35px] rounded-lg lg:mr-7">
                  ADD TO CART
                  <Image
                   src="/try/kartwhite.svg"
@@ -46,7 +46,7 @@ const Ringcomponet = () => {
                   height={24}
                   alt="cart"
                 />
-              </button>
+              </button> */}
 
               <p className="text-[32px] leading-[40px] font-semibold py-2">
                 ₹ 75000
@@ -105,8 +105,8 @@ const Ringcomponet = () => {
             alt="shadow"
           />
              </div>
-            <div className="pt-[56.18px] flex lg:flex-row flex-col-reverse items-center">
-               <button className="flex items-center gap-2 bg-[#002D31] text-white h-[56px] lg:px-[20.88px] px-[35px] rounded-lg lg:mr-7">
+            <div className="pt-[56.18px] lg:pt-[26.18px] flex lg:flex-row flex-col-reverse items-center">
+               {/* <button className="flex items-center gap-2 bg-[#002D31] text-white h-[56px] lg:px-[20.88px] px-[35px] rounded-lg lg:mr-7">
                  ADD TO CART
                  <Image
                   src="/try/kartwhite.svg"
@@ -114,7 +114,7 @@ const Ringcomponet = () => {
                   height={24}
                   alt="cart"
                 />
-              </button>
+              </button> */}
 
               <p className="text-[32px] leading-[40px] font-semibold py-2">
                 ₹ 75000

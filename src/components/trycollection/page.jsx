@@ -13,7 +13,7 @@ const Collection = () => {
           height={272.61}
           alt="collectiontopProp"
           className="hidden lg:block absolute z-10 
-             lg:-top-[10%] lg:left-[93%] 
+             lg:-top-[8%] lg:left-[90%] 
              lg:w-[16.1%] lg:h-[61.2%] 
              md:top-[1.12rem] md:left-[90.23125rem] 
              sm:top-[1.12rem] sm:left-[90.23125rem]"
@@ -25,7 +25,7 @@ const Collection = () => {
           height={213.13}
           alt="collectionbottomProp"
           className="hidden lg:block absolute 
-             lg:top-[62.8%] lg:-left-[7%] 
+             lg:top-[52.8%] lg:-left-[3%] 
              lg:w-[12.6%] lg:h-[47.8%] 
              md:top-[28.86875rem] md:-left-[9.51625rem] 
              sm:top-[28.86875rem] sm:-left-[9.51625rem]"
@@ -39,7 +39,7 @@ const Collection = () => {
             >
               <div className="w-[5rem] h-[5rem] md:w-[180px] md:h-[180px] lg:w-[12rem] lg:h-[12rem] rounded-full overflow-hidden flex-shrink-0">
                 <Image
-                  src="/try/ring.svg"
+                  src="/try/Ellipse 7.webp"
                   width={108}
                   height={108}
                   alt="RING"
@@ -56,7 +56,7 @@ const Collection = () => {
             >
               <div className="w-[5rem] h-[5rem] md:w-[180px] md:h-[180px] lg:w-[12rem] lg:h-[12rem] rounded-full overflow-hidden flex-shrink-0">
                 <Image
-                  src="/try/earRing.svg"
+                  src="/try/Ellipse 7_2.webp"
                   width={108}
                   height={108}
                   alt="EARRINGS"
@@ -73,7 +73,7 @@ const Collection = () => {
             >
               <div className="w-[5rem] h-[5rem] md:w-[180px] md:h-[180px] lg:w-[12rem] lg:h-[12rem] rounded-full overflow-hidden flex-shrink-0">
                 <Image
-                  src="/try/bangle.svg"
+                  src="/try/Ellipse 7_3.webp"
                   width={108}
                   height={108}
                   alt="BANGLES"
@@ -90,7 +90,7 @@ const Collection = () => {
             >
               <div className="w-[5rem] h-[5rem] md:w-[180px] md:h-[180px] lg:w-[12rem] lg:h-[12rem] rounded-full overflow-hidden flex-shrink-0">
                 <Image
-                  src="/try/bracelet.svg"
+                  src="/try/Ellipse 7_4.webp"
                   width={108}
                   height={108}
                   alt="BRACELETS"
@@ -110,7 +110,7 @@ const Collection = () => {
             >
               <div className="w-[5rem] h-[5rem] md:w-[180px] md:h-[180px] lg:w-[12rem] lg:h-[12rem] rounded-full overflow-hidden flex-shrink-0">
                 <Image
-                  src="/try/chain.svg"
+                  src="/try/Ellipse 7_5.webp"
                   width={108}
                   height={108}
                   alt="NECKLACES"
@@ -127,11 +127,11 @@ const Collection = () => {
             >
               <div className="w-[5rem] h-[5rem] md:w-[180px] md:h-[180px] lg:w-[12rem] lg:h-[12rem] rounded-full overflow-hidden flex-shrink-0">
                 <Image
-                  src="/try/nosepin.svg"
+                  src="/try/Ellipse 7_6.webp"
                   width={108}
                   height={108}
                   alt="NOSE PINS"
-                  className="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-110"
+                  className="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-125"
                 />
               </div>
               <p className="text-[0.75rem] mb-0 mt-[0.5rem] pb-0 text-[#334155] md:text-[1.125rem] md:mt-[0.75rem] lg:text-[1.125rem] lg:mt-[0.75rem]">
@@ -144,7 +144,7 @@ const Collection = () => {
             >
               <div className="w-[5rem] h-[5rem] md:w-[180px] md:h-[180px] lg:w-[12rem] lg:h-[12rem] rounded-full overflow-hidden flex-shrink-0">
                 <Image
-                  src="/try/pendent.svg"
+                  src="/try/Ellipse 7_7.webp"
                   width={108}
                   height={108}
                   alt="PENDANTS"
@@ -161,7 +161,7 @@ const Collection = () => {
             >
               <div className="w-[5rem] h-[5rem] md:w-[180px] md:h-[180px] lg:w-[12rem] lg:h-[12rem] rounded-full overflow-hidden flex-shrink-0">
                 <Image
-                  src="/try/charms.svg"
+                  src="/try/Ellipse 7_8.webp"
                   width={108}
                   height={108}
                   alt="CHARMS"
