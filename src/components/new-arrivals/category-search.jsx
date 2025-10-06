@@ -340,6 +340,23 @@ const CategorySearch = (props) => {
     });
   }
 
+  let pageTitle = "All Products";
+
+  console.log("labelSet", labelSet);
+
+  // if multiple categories are selected
+  if (labelSet.length > 1) {
+    pageTitle = "Filtered Products";
+  }
+  // if single category is selected
+  else if (labelSet.length === 1) {
+    pageTitle = labelSet[0];
+  }
+  // if no filter is applied → show all products
+  else if (labelSet.length === 0) {
+    pageTitle = "All Products";
+  }
+
   // const countryId = localStorage.getItem("id");
   const flag = localStorage.getItem("flag_image");
   const Contryname = localStorage.getItem("country_name");
@@ -377,7 +394,8 @@ const CategorySearch = (props) => {
                   deltLabel={deltLbel}
                   sortHandler={sortsHHandler}
                   count={count}
-                  categoryName={categoryName}
+                  // categoryName={categoryName}
+                  categoryName={pageTitle}
                 >
                   {products}
                 </NewArrivalDesign>

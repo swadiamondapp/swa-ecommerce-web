@@ -234,7 +234,8 @@
   text-align: center;
 }
 .NavLinksDesk p {
-  padding-bottom: 10px;
+  /* padding-bottom: 10px; */
+  padding-bottom: 0px;
   color: #10212f;
   font-family: var(--font-lato);
   font-weight: 600;
