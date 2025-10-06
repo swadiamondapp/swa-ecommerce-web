@@ -59,9 +59,9 @@ const SwaPromise = () => {
     <div className="w-full bg-[#F8F4E9]">
       <div className="max-w-container h-full mx-auto justify-between px-4 gap-10 items-center lg:items-stretch flex flex-col-reverse lg:flex-row">
         <div className="flex flex-col justify-center relative">
-          <div className="hidden lg:block text-start">
+          <div className="hidden lg:block text-start lg:mb-[4rem]">
             <p className="text-[56px] font-playfair font-[500] min-w-[430px]">swa promise</p>
-            <p className="text-[20px] mt-3 font-[400] text-[#334155] leading-[32px]">
+            <p className="text-[20px] mt-[.5rem] font-[400] text-[#334155] leading-[32px]">
               With timeless charm and radiant grace, Preity <br />
               Zinta embodies the spirit of our jewellery — where <br /> every
               diamond tells a story,
