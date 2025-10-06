@@ -79,7 +79,7 @@ const Hero = () => {
   alt="Hero Girl"
 />
         {/* CTA Section - percentage positioning and sizing */}
-        <div className=" pt-[.25rem] sm:pt-0 left-[25%] lg:w-[19.6%] lg:h-[14.9%] w-[55%] sm:absolute space-y-2 lg:top-[58%] lg:left-[4%] top-[24.8%] flex items-center flex-col lg:items-start z-10">
+        <div className=" pt-[.25rem] sm:pt-0 left-[25%] lg:w-[19.6%] lg:h-[14.9%] w-[60%] sm:absolute space-y-2 lg:top-[58%] lg:left-[4%] top-[24.8%] flex items-center flex-col lg:items-start z-10">
           <Image
             src="/try/Rectangle.svg"
             width={88.89}
