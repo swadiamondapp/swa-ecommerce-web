@@ -71,7 +71,7 @@ const GeneralInfo = () => {
       links: [
         {
           title: "Faq",
-          link: "/faq",
+          link: "/fa/questions",
         },
         {
           title: "Contact Us",
@@ -83,19 +83,19 @@ const GeneralInfo = () => {
         },
         {
           title: "Privacy Policy",
-          link: "/privacy-policy",
+          link: "/privacy/policy",
         },
         {
           title: "Return Policy",
-          link: "/return-policy",
+          link: "/return/policy",
         },
         {
           title: "Terms & Conditions",
-          link: "/terms-and-conditions",
+          link: "/terms/condition",
         },
         {
           title: "Outlets",
-          link: "/outlets",
+          link: "/product/outlets",
         },
       ],
     },
@@ -116,11 +116,11 @@ const GeneralInfo = () => {
         },
         {
           title: "Bangle",
-          link: "/bangle",
+          link: "/bangles",
         },
         {
           title: "Bracelet",
-          link: "/bracelet",
+          link: "/bracelets",
         },
         {
           title: "Platinum",
@@ -132,7 +132,7 @@ const GeneralInfo = () => {
         },
         {
           title: "Pendant",
-          link: "/pendant",
+          link: "/pendants",
         },
         {
           title: "Rings",
@@ -140,7 +140,7 @@ const GeneralInfo = () => {
         },
         {
           title: "Nose Pin",
-          link: "/nose-pin",
+          link: "/nosepins",
         },
         {
           title: "Couple band",
@@ -148,7 +148,7 @@ const GeneralInfo = () => {
         },
         {
           title: "Nacklace",
-          link: "/nacklace",
+          link: "/necklaces",
         },
         {
           title: "Navaratna",
