@@ -151,7 +151,7 @@ const Newcollection = () => {
           height={790.28}
           alt="model"
         />
-                    <Image src="/try/decorenewcollection.svg" className='absolute right-0 top-0 lg:block hidden' width={390.36} height={473.22}/>
+                    <Image src="/try/decorenewcollection.svg" className='absolute right-0 top-0 lg:block hidden' alt="decore image" width={390.36} height={473.22}/>
 
 
 
