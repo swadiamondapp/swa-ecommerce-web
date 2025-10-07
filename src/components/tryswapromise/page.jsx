@@ -3,50 +3,49 @@ import Image from "next/image";
 
 const SwaPromise = () => {
   const data = [
+     {
+      title: "Certified natural diamonds only",
+      description: "Certified natural diamonds only",
+      image: "/try/Group 1321314094.svg",
+    },
+
+     {
+      title: "BIS Hallmark, IGI, GIA",
+      description: "BIS Hallmark, IGI, GIA",
+      image: "/try/Bis.svg",
+    },
     {
-      title: "Personalized video consultation",
-      description: "Personalized video consultation",
-      image: "/try/vedioconsultaion.svg",
+      title: "95% Value on exchange",
+      description: "95% Value on exchange",
+      image: "/try/Group.svg",
+    },
+      {
+      title: "90% value on cash back ",
+      description: "90% value on cash back ",
+      image: "/try/Vector.svg",
+    },
+     {
+      title: "Free shipping",
+      description: "Free shipping",
+      image: "/try/delivery.svg",
+    },
+       {
+      title: "100% Refund Return with 7 days of delivery",
+      description: "100% Refund Return with 7 days of delivery",
+      image: "/try/refund.svg",
     },
    {
       title: "Try at home service",
       description: "Try at home service",
       image: "/try/home.svg",
     },
-      {
-      title: "BIS Hallmark, IGI, GIA",
-      description: "BIS Hallmark, IGI, GIA",
-      image: "/try/Bis.svg",
-    },
      {
-      title: "90% value on cash back ",
-      description: "90% value on cash back ",
-      image: "/try/Vector.svg",
+      title: "Life time repair warranty",
+      description: "Life time repair warranty",
+      image: "/try/vedioconsultaion.svg",
     },
 
-      {
-      title: "100% Refund Return with 7 days of delivery",
-      description: "100% Refund Return with 7 days of delivery",
-      image: "/try/refund.svg",
-    },
-
-    {
-      title: "Free shipping",
-      description: "Free shipping",
-      image: "/try/delivery.svg",
-    },
-
-    {
-      title: "Certified natural diamonds only",
-      description: "Certified natural diamonds only",
-      image: "/try/Group 1321314094.svg",
-    },
-
-    {
-      title: "95% Value on exchange",
-      description: "95% Value on exchange",
-      image: "/try/Group.svg",
-    },
+    
 
    
 

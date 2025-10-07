@@ -169,8 +169,9 @@ const GeneralInfo = () => {
       ],
     },
     {
-      title: "Contact Us",
+      title: "INDIA Contact info",
       content: (
+        <>
         <div className="space-y-4">
           <div className="flex items-start gap-3">
             <Image
@@ -209,8 +210,49 @@ const GeneralInfo = () => {
             </div>
           </div>
         </div>
+        <div className="space-y-4 pt-[1rem]">
+          <h3 className="text-sm font-semibold tracking-wider mb-6 text-gray-300 uppercase">UAE Contact info</h3>
+          <div className="flex items-start gap-3">
+            
+            <Image
+              src="/try/location.svg"
+              className="pt-1"
+              width={16}
+              height={16}
+              alt="location"
+            />
+            <div className="text-sm leading-6 text-gray-300">
+              Mushrif Mall, First Floor, Unit No: 139, 25th st, Airport Road, Al Mushrif, Abu Dhabi
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <Image
+              src="/try/phone.svg"
+              width={16}
+              height={16}
+              alt="phone"
+            />
+            <div className="text-sm leading-6 text-gray-300">
+              Toll Free Number : 02565-9545
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <Image
+              src="/try/mail.svg"
+              width={19}
+              height={16}
+              alt="email"
+            />
+            <div className="text-sm leading-6 text-gray-300">
+              info@swadiamonds.com
+            </div>
+          </div>
+        </div>
+        </>
       )
+      
     }
+    
   ];
 
   return (

@@ -71,27 +71,22 @@ const TopSellingCollection = () => {
              left-1/2 -translate-x-1/2 transform 
              md:text-center sm:text-center text-center text-lg-start
              md:top-[4rem] lg:text-left">
-  <p className="text-[#918676] lg:text-[20px] md:text-[30px] leading-[24px] font-[400] tracking-[0.04rem] pt-2 md:pt-0 text-[14px] sm:text-[18px] ">
+  <p className="text-[#918676] lg:text-[20px] md:text-[30px] leading-[24px] font-[400] tracking-[0.04rem] pt-[.5rem] md:pt-0 text-[14px] sm:text-[18px] md:pb-[1.25rem] ">
     BRAND AMBASSADOR
   </p>
 
-  <div className="w-full max-w-[454px] h-auto flex items-center justify-center">
-    <p className="sm:text-[56px] text-[32px] leading-none font-[400] font-british">
-      Preity Zinta
+  <div className=" w-full h-auto flex items-center justify-center">
+    <p className="sm:text-[48px] sm:w-[510px] w-[400px] text-[32px] md:text-[48px] leading-none font-[400] font-british">
+      Preity G Zinta
     </p>
   </div>
 
-  <p className="sm:text-[16px] text-[14px] px-4 sm:px-0 leading-[24px] font-[400] italic lg:hidden">
-    Its design draws inspiration from the pink oyster mushroom, a symbol
-    of immortality and longevity, and it features 41 unique
-    mushroom-shaped petals adorned with diamonds The ring weighs
+  <p className="sm:text-[16px] text-[14px] px-4 sm:px-0 leading-[24px] sm:pt-[1rem] pt-[.5rem] font-[400] italic lg:hidden ">
+Introducing our new SWA Diamonds Brand Ambassador for India, Preity G Zinta. A timeless icon of grace and charisma, Preity embodies the spirit of SWA Diamonds — radiating brilliance, confidence, and elegance. Her enduring charm and inspiring presence reflect the brand’s vision of modern sophistication rooted in authenticity.
   </p>
 
-  <p className="text-[16px] leading-[24px] font-[400] italic hidden lg:block ">
-    Its design draws inspiration from the pink oyster <br />
-    mushroom, a symbol of immortality and longevity, <br />
-    and it features 41 unique mushroom-shaped <br />
-    petals adorned with diamonds The ring weighs
+  <p className="text-[16px] leading-[24px] font-[400] italic hidden lg:block  lg:pt-[1.25rem]">
+    Introducing our new SWA Diamonds Brand Ambassador for India, Preity G Zinta. A timeless icon of grace and charisma, Preity embodies the spirit of SWA Diamonds — radiating brilliance, confidence, and elegance. Her enduring charm and inspiring presence reflect the brand’s vision of modern sophistication rooted in authenticity.
   </p>
 </div>
 

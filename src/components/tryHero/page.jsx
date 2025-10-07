@@ -14,12 +14,12 @@ const Hero = () => {
 
         {/* Exclusive Craftsmanship Text - percentage positioning */}
         <p
-          className="absolute lg:text-[1.25rem] lg:w-[38%] lg:h-[3%] lg:top-[14%] lg:left-1/2 lg:transform lg:-translate-x-1/2
+          className="absolute lg:text-[1.25rem] lg:w-[38%] lg:h-[3%] lg:top-[13%] lg:left-1/2 lg:transform lg:-translate-x-1/2
                       sm:text-[0.875rem] sm:leading-6 sm:tracking-[0.08em] sm:font-medium sm:text-center sm:top-[2.5%]
                       text-[1.2rem] w-[80%] h-[3%] top-[3%] left-[10%]  
                       flex items-center justify-center font-medium text-[#918676] font-inter"
         >
-          #EXCLUSIVE CRAFTSMANSHIP
+          #NATURAL DIAMONDS
         </p>
 
         
@@ -79,7 +79,7 @@ const Hero = () => {
   alt="Hero Girl"
 />
         {/* CTA Section - percentage positioning and sizing */}
-        <div className=" pt-[.25rem] sm:pt-0 left-[25%] lg:w-[19.6%] lg:h-[14.9%] w-[55%] sm:absolute space-y-2 lg:top-[58%] lg:left-[4%] top-[24.8%] flex items-center flex-col lg:items-start z-10">
+        <div className=" pt-[.25rem] sm:pt-0 left-[25%] lg:w-[19.6%] lg:h-[14.9%] w-[60%] sm:absolute space-y-2 lg:top-[58%] lg:left-[4%] top-[24.8%] flex items-center flex-col lg:items-start z-10">
           <Image
             src="/try/Rectangle.svg"
             width={88.89}
