@@ -36,7 +36,7 @@ const StoreComp = () => {
                 <span className="w-[58.4px] h-[4px] bg-[#017480]"></span>
               </div>
               <p className="text-[12.8px]">
-                Opening soon @ <span className="font-semibold">Dubai</span>
+                Opening soon @ <span className="font-semibold">GURUGRAM</span>
               </p>
             </div>
 
@@ -90,7 +90,7 @@ const StoreComp = () => {
                 Store across India and UAE
               </p>
               <p className="text-[12.8px] flex flex-row">
-                Opening soon @ <span className="font-semibold">Dubai</span>
+                Opening soon @ <span className="font-semibold">GURUGRAM</span>
                     <span className="block w-[69.34px] h-[4.18px] bg-[#017480] ml-2 mt-2 align-middle"></span>
                     </p>
             </div>
