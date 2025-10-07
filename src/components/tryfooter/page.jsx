@@ -210,7 +210,7 @@ const GeneralInfo = () => {
             </div>
           </div>
         </div>
-        <div className="space-y-4 pt-[1rem]">
+        <div className="space-y-4 pt-[2rem]">
           <h3 className="text-sm font-semibold tracking-wider mb-6 text-gray-300 uppercase">UAE Contact info</h3>
           <div className="flex items-start gap-3">
             

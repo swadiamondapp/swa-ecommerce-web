@@ -133,19 +133,21 @@ const articles = [
   {
     title: "The Enduring Allure of the Round Cut: History, Significance, and Modern Appeal",
     description:"Tracing its origins back to the early diamond cuts of the Middle Ages, the round cut has undergone significant evolution. With the advent of advanced cutting techniques and the Tolkowsky’s ideal cut in 1919, the round cut was transformed, achieving unparalleled brilliance and fire.",
-
+    link:"https://swavlog.zinfog.in/the-enduring-allure-of-the-round-cut-history-significance-and-modern-appeal/",
     date: "23.05.25",
     time: "08:20 pm",
   },
   {
     title: "Anatomy of a Ring: Every Part of an Engagement Ring Explained",
     description:"Tracing its origins back to the early diamond cuts of the Middle Ages, the round cut has undergone significant evolution. With the advent of advanced cutting techniques and the Tolkowsky’s ideal cut in 1919, the round cut was transformed, achieving unparalleled brilliance and fire.",
+    link:"https://swavlog.zinfog.in/anatomy-of-a-ring-every-part-of-an-engagement-ring-explained/",
     date: "23.05.25",
     time: "08:20 pm",
   },
   {
     title: "Finding Your Forever: Classic Engagement Rings",
     description:"Tracing its origins back to the early diamond cuts of the Middle Ages, the round cut has undergone significant evolution. With the advent of advanced cutting techniques and the Tolkowsky’s ideal cut in 1919, the round cut was transformed, achieving unparalleled brilliance and fire.",
+    link:"https://swavlog.zinfog.in/2025-trending-nose-rings-what-to-look-for/",
     date: "23.05.25",
     time: "08:20 pm",
   },
@@ -191,9 +193,10 @@ const Limelight = () => {
               className="w-full md:flex md:flex-col md:items-center md:justify-center lg:block"
               key={idx}
             >
+              <a href={article.link}>
               <h3 className="text-[18px] sm:text-[24px] leading-[24px] sm:leading-[32px] font-bold pb-[1rem]">
                 {article.title}
-              </h3>
+              </h3></a>
               <p className="text-[14px] sm:text-[16px] leading-[20px] sm:leading-[24px] font-[400] max-w-[653px]">
                 {article.description}
               </p>

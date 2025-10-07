@@ -82,11 +82,11 @@ const TopSellingCollection = () => {
   </div>
 
   <p className="sm:text-[16px] text-[14px] px-4 sm:px-0 leading-[24px] sm:pt-[1rem] pt-[.5rem] font-[400] italic lg:hidden ">
-Introducing our new SWA Diamonds Brand Ambassador for India, Preity G Zinta. A timeless icon of grace and charisma, Preity embodies the spirit of SWA Diamonds — radiating brilliance, confidence, and elegance. Her enduring charm and inspiring presence reflect the brand’s vision of modern sophistication rooted in authenticity.
+We are proud to welcome Bollywood star Preity G Zinta as the new Brand Ambassador for SWA Diamonds. A timeless icon of grace, trust, and charisma, Preity perfectly captures the spirit of SWA Diamonds — radiating brilliance, confidence, and elegance. Her enduring stardom and authentic charm embody our vision of modern sophistication with a touch of Bollywood glamour.
   </p>
 
   <p className="text-[16px] leading-[24px] font-[400] italic hidden lg:block  lg:pt-[1.25rem]">
-    Introducing our new SWA Diamonds Brand Ambassador for India, Preity G Zinta. A timeless icon of grace and charisma, Preity embodies the spirit of SWA Diamonds — radiating brilliance, confidence, and elegance. Her enduring charm and inspiring presence reflect the brand’s vision of modern sophistication rooted in authenticity.
+We are proud to welcome Bollywood star Preity G Zinta as the new Brand Ambassador for SWA Diamonds. A timeless icon of grace, trust, and charisma, Preity perfectly captures the spirit of SWA Diamonds — radiating brilliance, confidence, and elegance. Her enduring stardom and authentic charm embody our vision of modern sophistication with a touch of Bollywood glamour.
   </p>
 </div>
 

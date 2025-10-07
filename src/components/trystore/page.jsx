@@ -13,7 +13,7 @@ const StoreComp = () => {
               FIND AT STORE
             </p>
             <h1 className="text-[#F8F4E9] font-playfair font-medium text-3xl leading-[48px] text-center mb-4 max-w-[400px]">
-              Find the nearest swa diamond store
+              Find the nearest swa diamonds store
             </h1>
             <Link href="product/outlets" className="group flex items-center justify-center gap-2 border border-[#F8F4E9] bg-transparent text-[#F8F4E9] px-4 py-2 rounded-lg">
               CHECK NEAREST STORE
@@ -61,7 +61,7 @@ const StoreComp = () => {
       <div className="max-w-container hidden lg:grid grid-cols-2 w-full py-20 mx-auto z-0">
         <div className="flex flex-col items-start justify-center pl-4 md:pl-16 z-20">
           <h1 className="text-[#F8F4E9] font-playfair font-medium text-6xl mb-8">
-            Find nearest <br /> swa diamond store <br /> near you
+            Find nearest <br /> swa diamonds store
           </h1>
           <Link href="product/outlets" className="group flex items-center justify-center gap-2 border border-[#F8F4E9] bg-transparent text-[#F8F4E9] px-4 py-4 rounded-lg">
             CHECK NEAREST STORE
