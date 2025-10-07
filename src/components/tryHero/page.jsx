@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Hero = () => {
   return (
-    <div className="relative  lg:h-[calc(100vh-90px)] h-[44.7rem] sm:h-[50rem] lg:max-h-[990px] overflow-hidden">
+    <div className="relative min-h-[45.75rem]  lg:h-[calc(100vh-90px)] h-[44.7rem] sm:h-[50rem] lg:max-h-[990px] overflow-hidden">
       {/* Container wrapper - responsive max width */}
       <div className="relative max-w-[101rem] mx-auto h-full">
         {/* Background animated blobs - converted to percentage units */}
