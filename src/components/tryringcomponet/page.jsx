@@ -22,20 +22,14 @@ const Ringcomponet = () => {
            <div className="relative lg:hidden flex justify-center w-full">
               <div>
                  <Image
-            src="/try/queenring.svg"
+            src="/try/silverring.png"
             width={403.64}
             height={394.51}
             className="mx-auto lg:w-[403.64px] lg:h-[394.51px] w-[270.5px] h-[264.46px]"
             alt="ring"
           />
               </div>
-           <Image
-            src="/try/ringshadow.svg"
-            width={222.02}
-            height={23.79}
-            className="absolute top-[9rem] left-[5rem]"
-            alt="shadow"
-          />
+           
              </div>
           <div className="pt-[56.18px] lg:pt-[26.18px] flex lg:flex-row flex-col-reverse items-center">
                {/* <button className="flex items-center gap-2 bg-[#002D31] text-white h-[56px] lg:px-[20.88px] px-[35px] rounded-lg lg:mr-7">
@@ -55,19 +49,13 @@ const Ringcomponet = () => {
              </div>
              <div className="relative hidden lg:block">
                <Image
-            src="/try/queenring.svg"
-            width={403.64}
-            height={394.51}
+            src="/try/silverring.png"
+            width={600}
+            height={600}
             className="mr-[5rem]"
             alt="ring"
           />
-           <Image
-            src="/try/ringshadow.svg"
-            width={222.02}
-            height={23.79}
-            className="absolute top-[18rem] left-[5rem]"
-            alt="shadow"
-          />
+          
              </div>
 
         </div>
@@ -90,20 +78,14 @@ const Ringcomponet = () => {
            <div className="relative lg:hidden flex justify-center w-full">
               <div>
                  <Image
-            src="/try/rosering.svg"
+            src="/try/rosering.png"
             width={403.64}
             height={394.51}
             className="mx-auto lg:w-[403.64px] lg:h-[394.51px] w-[270.5px] h-[264.46px]"
             alt="ring"
           />
               </div>
-           <Image
-            src="/try/ringshadow.svg"
-            width={222.02}
-            height={23.79}
-            className="absolute top-[9rem] left-[5rem]"
-            alt="shadow"
-          />
+          
              </div>
             <div className="pt-[56.18px] lg:pt-[26.18px] flex lg:flex-row flex-col-reverse items-center">
                {/* <button className="flex items-center gap-2 bg-[#002D31] text-white h-[56px] lg:px-[20.88px] px-[35px] rounded-lg lg:mr-7">
@@ -123,18 +105,11 @@ const Ringcomponet = () => {
              </div>
              <div className="relative hidden lg:block">
                <Image
-            src="/try/rosering.svg"
-            width={403.64}
-            height={394.51}
+            src="/try/rosering.png"
+            width={600}
+            height={600}
             className="mr-[5rem]"
             alt="ring"
-          />
-           <Image
-            src="/try/ringshadow.svg"
-            width={222.02}
-            height={23.79}
-            className="absolute top-[18rem] left-[5rem]"
-            alt="shadow"
           />
              </div>
 
