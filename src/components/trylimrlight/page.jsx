@@ -131,23 +131,21 @@ import Image from "next/image";
 
 const articles = [
   {
-    title: "3 simple tips to care for and store your jewllwey",
-    description:
-      "Jewellery is more than just an accessory — it's an investment, a memory, and often a symbol of love. Whether it's a sparkling diamond ring, a gold chain, or a pair of delicate earrings, proper care can keep your jewellery looking new for years.",
+    title: "The Enduring Allure of the Round Cut: History, Significance, and Modern Appeal",
+    description:"Tracing its origins back to the early diamond cuts of the Middle Ages, the round cut has undergone significant evolution. With the advent of advanced cutting techniques and the Tolkowsky’s ideal cut in 1919, the round cut was transformed, achieving unparalleled brilliance and fire.",
+
     date: "23.05.25",
     time: "08:20 pm",
   },
   {
-    title: "How to choose the right ring for weddings",
-    description:
-      "Jewellery is more than just an accessory — it's an investment, a memory, and often a symbol of love. Whether it's a sparkling diamond ring, a gold chain, or a pair of delicate earrings, proper care can keep your jewellery looking new for years.",
+    title: "Anatomy of a Ring: Every Part of an Engagement Ring Explained",
+    description:"Tracing its origins back to the early diamond cuts of the Middle Ages, the round cut has undergone significant evolution. With the advent of advanced cutting techniques and the Tolkowsky’s ideal cut in 1919, the round cut was transformed, achieving unparalleled brilliance and fire.",
     date: "23.05.25",
     time: "08:20 pm",
   },
   {
-    title: "3 simple tips to care for and store your jewllwey",
-    description:
-      "Jewellery is more than just an accessory — it's an investment, a memory, and often a symbol of love. Whether it's a sparkling diamond ring, a gold chain, or a pair of delicate earrings, proper care can keep your jewellery looking new for years.",
+    title: "Finding Your Forever: Classic Engagement Rings",
+    description:"Tracing its origins back to the early diamond cuts of the Middle Ages, the round cut has undergone significant evolution. With the advent of advanced cutting techniques and the Tolkowsky’s ideal cut in 1919, the round cut was transformed, achieving unparalleled brilliance and fire.",
     date: "23.05.25",
     time: "08:20 pm",
   },
@@ -161,7 +159,7 @@ const Limelight = () => {
         <div className=" hidden flex-shrink-0 mt-[7.5rem] lg:flex flex-col items-end">
           <div className="mb-[1.25rem] mr-[.25rem]">
             <a
-              href="/"
+              href="/blog"
               className=" underline underline-offset-4 !underline h-[30px] text-[#017480] text-[18px] leading-[24px] tracking-[0.06em] hover:text-[#2c2c2c] transition underline underline-offset-4"
             >
               SEE ALL
