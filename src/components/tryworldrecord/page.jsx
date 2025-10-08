@@ -61,7 +61,7 @@ import Image from "next/image";
 
 const Worldrec = () => {
   return (
-    <div className="relative w-full lg:h-[778px] h-[666px]">
+    <div className="relative w-full lg:h-[778px] sm:h-[666px] h-[850px]">
       {/* Background Video */}
       <video
     src="/try/worldrecvedio.webm"
@@ -86,7 +86,7 @@ const Worldrec = () => {
             alt="ring"
             className="
     absolute 
-    top-[4rem] left-1/2 -translate-x-1/2    /* xs–md center */
+    top-[2.8rem] left-1/2 -translate-x-1/2    /* xs–md center */
     lg:top-[2rem] md:top-[.85rem] lg:right-0 lg:left-auto lg:translate-x-0 /* reset on lg */
   "
           />
@@ -97,7 +97,7 @@ const Worldrec = () => {
               width={1058}
               height={737}
               alt="ring"
-              className=" lg:hidden lg:w-[1058px] lg:h-[737px] md:w-[390px] md:h-[290px] w-[288px] h-[200.65px] mt-[2rem] lg:mt-0"
+              className=" lg:hidden lg:w-[1058px] lg:h-[737px] md:w-[390px] md:h-[290px] w-[288px] h-[200.65px] mt-[2rem] "
             />
             <div className="lg:block  hidden relative lg:w-[1058px] lg:h-[737px] w-[288px] h-[200.65px] overflow-hidden">
               <Image
@@ -105,7 +105,7 @@ const Worldrec = () => {
                 width={1058}
                 height={737}
                 alt="ring"
-                className="mt-[3.3rem]" // now it will crop instead of pushing page
+                className="mt-[3rem]" // now it will crop instead of pushing page
               />
             </div>
 
@@ -113,16 +113,13 @@ const Worldrec = () => {
               <p className="lg:text-[56px] md:text-[56px] text-[32px] font-[500] font-playfair mb-[0.75rem]">
                 Guinness world record
               </p>
-              <p className="p-[0.75rem] lg:block hidden text-[16px]">
-                Its design draws inspiration from the pink oyster mushroom, a
-                symbol of immortality and longevity, and it features 41 <br />{" "}
-                unique mushroom-shaped petals adorned with diamonds The ring
-                weighs
+              <p className="p-[0.75rem] pb-0 lg:block hidden text-[16px] max-w-[1300px]">
+                Inspired by the pink oyster mushrooms, “The touch of Ami” is a ring encrusted with 24,679 alluring conflict-free natural diamonds. The mushrooms were once reserved for royals an object of utmost value representing immortality, longevity, and royalty. The literal meaning of the word Ami is “Immortality.” Hence, pointing out that this magnificent piece of art will give the wearer a touch of immortality and power with a contemporary edge that is appealing to the tenants of the modern era.
+
+               
               </p>
-              <p className="text-[16px] md:text-[22px] lg:hidden">
-                With timeless charm and radiant grace, Preity <br />{" "}
-                Zinta embodies the spirit of our jewellery — <br /> where every
-                diamond tells a story,
+              <p className="text-[16px] md:text-[18px] px-[20px] lg:hidden">
+              Inspired by the pink oyster mushrooms, “The touch of Ami” is a ring encrusted with 24,679 alluring conflict-free natural diamonds. The mushrooms were once reserved for royals an object of utmost value representing immortality, longevity, and royalty. The literal meaning of the word Ami is “Immortality.” Hence, pointing out that this magnificent piece of art will give the wearer a touch of immortality and power with a contemporary edge that is appealing to the tenants of the modern era.
               </p>
             </div>
           </div>
