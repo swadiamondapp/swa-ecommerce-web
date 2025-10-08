@@ -10,14 +10,13 @@ const Ringcomponet = () => {
 
           <div>
           <div className="text-center text-md-start lg:text-left">
-            <Link href="/jewellery/onifa-blossom-ladies-diamond-ring"><p className="lg:text-[56px] text-[32px] font-medium md:leading-[63px] leading-[40px] font-playfair pb-3">
-               Queen elizabath <br />
-               coral Ring
+            <Link href="/jewellery/onifa-blossom-ladies-diamond-ring"><p className="text-black lg:text-[56px] text-[32px] font-medium md:leading-[63px] leading-[40px] font-playfair pb-3">
+               Fleur Trio <br /> Diamond Ring
              </p></Link>
              <p className="lg:text-[20px] text-[16px] md:leading-[32px] leading-[25px] text-[#334155]">
-               With timeless charm and radiant grace, Preity <br />{" "}
-               Zinta embodies the spirit of our jewellery — where <br /> every
-               diamond tells a story,
+              A graceful blend of simplicity and charm, this <br />
+              ring features three delicate diamond-studded floral motifs <br />
+              symbolizing elegance, love, and harmony.
              </p>
           </div>
            <div className="relative lg:hidden flex justify-center w-full">
@@ -68,13 +67,15 @@ const Ringcomponet = () => {
        <div>
           <div className="text-center text-md-start lg:text-left">
             <Link href="/jewellery/Diamond%20RingDFYK">
-            <p className="lg:text-[56px] text-[32px] md:leading-[63px] leading-[40px] font-medium font-playfair pb-3 ">
-               Dalia Rose <br /> luxuriea ring
+            <p className="lg:text-[56px] text-[32px] md:leading-[63px] leading-[40px] font-medium font-playfair pb-3  text-black">
+               Velisse Aurelia <br /> Diamond Ring
+
+
              </p></Link>
              <p className="lg:text-[20px] text-[16px] md:leading-[32px] leading-[25px] text-[#334155]">
-               With timeless charm and radiant grace, Preity <br />{" "}
-               Zinta embodies the spirit of our jewellery — where <br /> every
-               diamond tells a story,
+              A symbol of elegance and strength, this dual-band <br />
+              ring features a diamond-studded “V” that radiates golden grace. <br />
+               Inspired by the name Aurelia, it reflects timeless beauty.
              </p>
           </div>
            <div className="relative lg:hidden flex justify-center w-full">
