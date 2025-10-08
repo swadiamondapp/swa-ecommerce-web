@@ -93,7 +93,7 @@ const Galxypendant = () => {
           {/* Left Image */}
           <div className="relative flex-1 h-full">
             <Image
-              src="/try/galaxypendant.svg"
+              src="/try/galaxychain.jpeg"
               alt="Galaxy Pendant"
               fill
               className="object-cover"
@@ -104,17 +104,18 @@ const Galxypendant = () => {
           <div className="flex-1 h-full flex justify-center items-center">
             <div>
               <p className="sm:text-[56px] text-[32px] md:leading-[63px] leading-[40px] pb-3 font-medium font-playfair">
-                Galaxy collection <br /> pendant
+                Infinity Collection  <br /> pendant
               </p>
               <p className="sm:text-[20px] text-[16px] md:leading-[32px] leading-[25px] text-[#334155]">
-                With timeless charm and radiant grace, Preity <br />
-                Zinta embodies the spirit of our jewellery — where <br /> every
-                diamond tells a story,
+                With timeless elegance and infinite brilliance, <br />
+                the Infinity Collection celebrates the beauty of endless connections. <br />
+                 Each pendant is a symbol of love that knows no bounds — <br />
+                 where every diamond reflects your story.
               </p>
 
               <div className="pt-[20px]">
                 <a
-                  href="/"
+                  href="/jewellery/infinita-eternal-diamond-necklace"
                   className="flex flex-row items-center gap-2 w-[168px] underline underline-offset-4 h-[30px] text-[#017480] text-[18px] leading-[24px] tracking-[0.06em] hover:text-[#2c2c2c] transition"
                 >
                   VIEW MORE
@@ -135,7 +136,7 @@ const Galxypendant = () => {
           {/* Left Image */}
           <div className="relative flex-1 h-full">
             <Image
-              src="/try/galaxyhand.svg"
+              src="/try/galaxyring.jpeg"
               alt="Galaxy Hand"
               fill
               className="object-cover"
@@ -146,17 +147,19 @@ const Galxypendant = () => {
           <div className="flex-1 h-full flex justify-center items-center">
             <div>
               <p className="sm:text-[56px] md:leading-[63px] leading-[40px] pb-3 text-[32px] font-medium font-playfair">
-                Galaxy collection <br /> pendant
+                Galaxy Collection <br /> Ring
               </p>
               <p className="sm:text-[20px] text-[16px] md:leading-[32px] leading-[25px] text-[#334155]">
-                With timeless charm and radiant grace, Preity <br />
-                Zinta embodies the spirit of our jewellery — where <br /> every
-                diamond tells a story,
+                With radiant allure and timeless artistry, <br /> 
+                the Galaxy Collection Ring captures the elegance of the cosmos <br />
+                in every curve. Designed to shimmer with celestial brilliance, it reflects <br />
+                the infinite beauty that lies within every woman.
+               
               </p>
 
               <div className="pt-[20px]">
                 <a
-                  href="/"
+                  href="/rings"
                   className="flex flex-row items-center gap-2 w-[168px] underline underline-offset-4 h-[30px] text-[#017480] text-[18px] leading-[24px] tracking-[0.06em] hover:text-[#2c2c2c] transition"
                 >
                   VIEW MORE

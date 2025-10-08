@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const StoreComp = () => {
   return (
@@ -12,30 +13,30 @@ const StoreComp = () => {
               FIND AT STORE
             </p>
             <h1 className="text-[#F8F4E9] font-playfair font-medium text-3xl leading-[48px] text-center mb-4 max-w-[400px]">
-              Find the nearest swa diamond store
+              Find the nearest swa diamonds store
             </h1>
-            <button className="flex items-center justify-center gap-2 border border-[#F8F4E9] bg-transparent text-[#F8F4E9] px-4 py-2 rounded-lg">
+            <Link href="product/outlets" className="group flex items-center justify-center gap-2 border border-[#F8F4E9] bg-transparent text-[#F8F4E9] px-4 py-2 rounded-lg">
               CHECK NEAREST STORE
               <Image
                 src="/try/storeArrow.svg"
                 width={24}
                 height={24}
                 alt="arrow"
-                className="w-6 h-6"
+                className="w-6 h-6 transition-transform duration-300 ease-in-out group-hover:translate-x-1"
               />
-            </button>
+            </Link>
           </div>
           <div className="bg-[#004247] pt-4 mt-12">
             <div className="text-center text-[#F8F4E9] pb-8 relative z-20">
-              <p className="text-[28.8px] font-bold leading-tight mb-2">70+</p>
+              <p className="text-[28.8px] font-bold leading-tight mb-2">400+</p>
               <p className="text-[14.4px] font-medium mb-2">
-                Store across india
+                Store across India and UAE
               </p>
               <div className="flex items-center justify-center gap-2 mb-2 mt-2">
                 <span className="w-[58.4px] h-[4px] bg-[#017480]"></span>
               </div>
               <p className="text-[12.8px]">
-                Opening soon @ <span className="font-semibold">Dubai</span>
+                Opening soon @ <span className="font-semibold">GURUGRAM</span>
               </p>
             </div>
 
@@ -60,18 +61,18 @@ const StoreComp = () => {
       <div className="max-w-container hidden lg:grid grid-cols-2 w-full py-20 mx-auto z-0">
         <div className="flex flex-col items-start justify-center pl-4 md:pl-16 z-20">
           <h1 className="text-[#F8F4E9] font-playfair font-medium text-6xl mb-8">
-            Find nearest <br /> swa diamond store <br /> near you
+            Find nearest <br /> swa diamonds store
           </h1>
-          <button className="flex items-center justify-center gap-2 border border-[#F8F4E9] bg-transparent text-[#F8F4E9] px-4 py-4 rounded-lg">
+          <Link href="product/outlets" className="group flex items-center justify-center gap-2 border border-[#F8F4E9] bg-transparent text-[#F8F4E9] px-4 py-4 rounded-lg">
             CHECK NEAREST STORE
             <Image
               src="/try/storeArrow.svg"
               width={24}
               height={24}
               alt="arrow"
-              className="w-6 h-6"
+              className="w-6 h-6 transition-transform duration-300 ease-in-out group-hover:translate-x-1"
             />
-          </button>
+          </Link>
         </div>
         <div className="flex items-center justify-center z-20">
           <img
@@ -84,12 +85,12 @@ const StoreComp = () => {
             }}
           />
           <div className="text-[#F8F4E9] pl-8 mt-20 relative z-20">
-              <p className="text-[28.8px] font-bold leading-tight mb-2">70+</p>
+              <p className="text-[28.8px] font-bold leading-tight mb-2">400+</p>
               <p className="text-[14.4px] font-medium mb-2">
-                Store across india
+                Store across India and UAE
               </p>
               <p className="text-[12.8px] flex flex-row">
-                Opening soon @ <span className="font-semibold">Dubai</span>
+                Opening soon @ <span className="font-semibold">GURUGRAM</span>
                     <span className="block w-[69.34px] h-[4.18px] bg-[#017480] ml-2 mt-2 align-middle"></span>
                     </p>
             </div>

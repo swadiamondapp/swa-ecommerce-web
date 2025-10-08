@@ -45,6 +45,7 @@ const gilroy = localFont({
   ],
   variable: "--font-gilroy",
 });
+
 const britishCastilla = localFont({
   src: [
     {
@@ -54,6 +55,17 @@ const britishCastilla = localFont({
     },
   ],
   variable: "--font-britishCastilla",
+});
+
+const BrittanySign = localFont({
+  src: [
+    {
+      path: "../../public/fonts/BrittanySignature.ttf", // your .otf file
+      weight: "400", // set the actual weight (if unknown, use 400)
+      style: "normal", // change to "italic" if needed
+    },
+  ],
+  variable: "--font-BrittanySign",
 });
 
 export const metadata = {
@@ -108,8 +120,8 @@ export default function RootLayout({ children }) {
             gtag('config', 'G-8XNJ195QEF');
           `}
         </Script>
-        
- {/* GTM Script */}
+
+        {/* GTM Script */}
         <Script
           id="gtm-script"
           strategy="afterInteractive"
@@ -120,14 +132,13 @@ export default function RootLayout({ children }) {
               'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
               })(window,document,'script','dataLayer','GTM-WJSBX9Z');`,
           }}
-        /> 
-       
+        />
       </head>
       <body
-        className={`${lato.variable} ${gilroy.variable} ${playfair.variable}  ${britishCastilla.variable} no-scrollbar bg-white text-black`}
+        className={`${lato.variable} ${gilroy.variable} ${playfair.variable}  ${britishCastilla.variable}  ${BrittanySign.variable} no-scrollbar bg-white text-black`}
         // className={`${lato.variable} ${gilroy.variable} ${playfair.variable} antialiased`}
       >
-         {/* GTM noscript fallback */}
+        {/* GTM noscript fallback */}
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-WJSBX9Z"

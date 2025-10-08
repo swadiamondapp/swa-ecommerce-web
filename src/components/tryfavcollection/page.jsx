@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { alt } from "joi";
+import Link from "next/link";
 
 const Favcollection = () => {
   return (
@@ -10,8 +10,8 @@ const Favcollection = () => {
           <div className="hidden lg:flex w-[23.61rem]  z-10 h-[10.04rem] justify-between left-[0.53rem] top-[50.89rem] absolute lg:w-[23.61rem] lg:h-[10.04rem] lg:left-[0.53rem] lg:top-[50.89rem] md:w-[23.61rem] md:h-[10.04rem] md:left-[0.53rem] md:top-[50.89rem] sm:w-[23.61rem] sm:h-[10.04rem] sm:left-[0.53rem] sm:top-[50.89rem]">
             <div>
               <Image
-                src="/try/favRing2.svg"
-                className=""
+                src="/try/ring copy.jpg"
+                className="rounded-xl"
                 width={176.92}
                 height={160.65}
                 alt="ring"
@@ -19,8 +19,8 @@ const Favcollection = () => {
             </div>
             <div>
               <Image
-                src="/try/favRing.svg"
-                className=""
+                src="/try/necklace copy.jpg"
+                className="rounded-xl"
                 width={176.92}
                 height={160.65}
                 alt="ring"
@@ -37,7 +37,7 @@ const Favcollection = () => {
 
           <Image
             src="/try/favgirl.webp"
-            className="absolute bottom-0 left-1/2 transform -translate-x-1/2 lg:pl-8 w-[17rem] h-[23.34rem] sm:w-[17rem] sm:h-[21.34rem] md:w-[30rem] md:h-[40rem] lg:w-[55%] lg:max-h-[95.3%] lg:h-auto"
+            className="absolute bottom-0 left-1/2 transform -translate-x-1/2 lg:pl-8 w-[17rem] sm:w-[17rem] md:w-[30rem] lg:w-[55%]"
             width={788}
             height={976}
             alt="fav collection girl"
@@ -61,15 +61,16 @@ const Favcollection = () => {
               mushroom-shaped petals adorned with diamonds The ring weighs
             </p>
             <div className="w-fit">
-              <button className="flex items-center gap-2 bg-[#002D31] text-white px-6 py-3 rounded-lg lg:px-6 lg:py-3 md:px-6 md:py-3 sm:px-6 sm:py-3">
-                VIEW COLLECTIONS
+              <Link href="/rings" className="group flex items-center gap-2 bg-[#002D31] hover:bg-[#003A3F] transition-colors text-white px-6 py-3 rounded-lg lg:px-6 lg:py-3 md:px-6 md:py-3 sm:px-6 sm:py-3">
+                <span>VIEW COLLECTIONS</span>
                 <Image
                   src="/try/favButtonarrow.svg"
                   width={24}
                   height={24}
                   alt="arrow"
+                  className="transition-transform duration-300 ease-in-out group-hover:translate-x-1"
                 />
-              </button>
+              </Link>
             </div>
           </div>
 

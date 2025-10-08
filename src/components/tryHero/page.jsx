@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Hero = () => {
   return (
-    <div className="relative w-full lg:h-[61.875rem] h-[50rem] overflow-hidden">
+    <div className="relative min-h-[45.75rem]  lg:h-[calc(100vh-90px)] h-[44.7rem] sm:h-[50rem] max-h-[790px] overflow-hidden">
       {/* Container wrapper - responsive max width */}
       <div className="relative max-w-[101rem] mx-auto h-full">
         {/* Background animated blobs - converted to percentage units */}
@@ -14,32 +14,23 @@ const Hero = () => {
 
         {/* Exclusive Craftsmanship Text - percentage positioning */}
         <p
-          className="absolute lg:text-[1.5rem] lg:w-[38%] lg:h-[3%] lg:top-[14.3%] lg:left-1/2 lg:transform lg:-translate-x-1/2
+          className="absolute lg:text-[1.25rem] lg:w-[38%] lg:h-[3%] lg:top-[13%] lg:left-1/2 lg:transform lg:-translate-x-1/2
                       sm:text-[0.875rem] sm:leading-6 sm:tracking-[0.08em] sm:font-medium sm:text-center sm:top-[2.5%]
-                      text-[1.2rem] w-[80%] h-[3%] top-[8%] left-[10%]  
+                      text-[1.2rem] w-[80%] h-[3%] top-[3%] left-[10%]  
                       flex items-center justify-center font-medium text-[#918676] font-inter"
         >
-          #EXCLUSIVE CRAFTSMANSHIP
+          #NATURAL DIAMONDS
         </p>
 
-        {/* Hero Girl Image - percentage positioning */}
-        <Image
-          src="/try/herogirl.webp"
-          className="absolute  z-10
-             lg:left-1/2 lg:-translate-x-1/2 lg:top-[15%] lg:w-[613px] lg:h-[885px]
-             sm:left-1/2 sm:-translate-x-1/2 sm:w-[22rem] sm:h-[61%] sm:top-[39.8%] sm:pt-5
-             md:left-1/2 md:-translate-x-1/2 md:top-[39.8%] md:h-[61%] md:w-[22rem]
-             left-1/2 -translate-x-1/2 -bottom-2 w-[20rem] h-[57%] opacity-100"
-          width={563}
-          height={885}
-          priority
-          alt="Hero Girl"
-        />
+        
+         <p className="absolute top-[10%] left-1/2 -translate-x-1/2 lg:hidden z-30 font-british font-normal text-[2.625rem] leading-[100%] tracking-[0.01em] text-center uppercase whitespace-nowrap">
+          A<span className="lowercase">s real AS you</span>
+        </p>
 
         {/* AS REAL Image - percentage positioning */}
         <Image
           src="/try/as_real.svg"
-          className="absolute hidden lg:flex lg:left-[1.4%] lg:top-[25.9%] left-[2%] top-[16%] lg:w-[35.6%] lg:h-[28.5%] w-[36%] h-auto"
+          className="absolute hidden lg:flex lg:left-[3.4%] lg:top-[28%] left-[4%] top-[16%] lg:w-[32%] lg:h-auto w-[36%] h-auto"
           width={576}
           height={282}
           alt="As Real"
@@ -48,71 +39,94 @@ const Hero = () => {
         {/* YOU Image - percentage positioning */}
         <Image
           src="/try/YOU.svg"
-          className="absolute hidden lg:flex lg:left-[64%] lg:top-[32.3%] right-[2%] top-[16%] lg:w-[12.4%] lg:h-[28.5%] w-[16%] h-auto"
+          className="absolute hidden lg:flex lg:left-[64%] lg:top-[34%] right-[2%] top-[16%] lg:w-[11%] lg:h-auto w-[16%] h-auto"
           width={201}
           height={282}
           alt="You"
         />
 
-        <p className="absolute top-[14.8%] left-1/2 -translate-x-1/2 lg:hidden z-30 font-british font-normal text-[2.625rem] leading-[100%] tracking-[0.01em] text-center uppercase whitespace-nowrap">
-          A<span className="lowercase">s real AS you</span>
-        </p>
+       
 
         {/* Star Image - percentage positioning */}
         <Image
           src="/try/star.svg"
           width={116.83}
           height={102.76}
-          className="absolute lg:top-[20.9%] lg:left-[75.8%] lg:w-[7.2%] lg:h-[10.4%] 
+          className="absolute lg:top-[16%] lg:left-[75.8%] lg:w-[6.5%] lg:h-auto 
                      sm:w-[9.2%] sm:h-[8%] sm:top-[13.8%] sm:right-[2.8%] sm:rounded-[0.44rem]
                      right-[1%] top-[12%] w-[8%] h-auto opacity-100"
           alt="star"
         />
 
+
+        <div className="flex flex-col items-center pt-[9rem] sm:pt-0 sm:block">
+
+       
+        {/* Hero Girl Image - percentage positioning */}
+   <Image
+  src="/try/herogirl.webp"
+  className="sm:absolute z-10 ml-[18rem] sm:ml-0
+    left-1/2 -translate-x-1/2 bottom-0 
+    w-[20rem] sm:w-[22rem] lg:w-[28%] lg:max-w-[500px] h-auto
+    opacity-100
+    [mask-image:linear-gradient(to_top,transparent,black_40%)]
+    [-webkit-mask-image:linear-gradient(to_top,transparent,black_40%)]
+    sm:[mask-image:none]
+    sm:[-webkit-mask-image:none]"
+  width={563}
+  height={885}
+  priority
+  alt="Hero Girl"
+/>
         {/* CTA Section - percentage positioning and sizing */}
-        <div className="left-[25%] lg:w-[19.6%] lg:h-[14.9%] w-[55%] absolute space-y-3 lg:top-[53.8%] lg:left-[1.8%] top-[24.8%] flex items-center flex-col lg:items-start z-10">
+        <div className=" pt-[.25rem] sm:pt-0 left-[25%] lg:w-[19.6%] lg:h-[14.9%] w-[60%] sm:absolute space-y-2 lg:top-[58%] lg:left-[4%] top-[24.8%] flex items-center flex-col lg:items-start z-10">
           <Image
             src="/try/Rectangle.svg"
             width={88.89}
             height={4}
             alt="decoration"
-            className="lg:w-[5.56rem] lg:h-[0.25rem] w-[4rem] h-[0.2rem]"
+            className="lg:w-[4.5rem] lg:h-[0.25rem] w-[4rem] h-[0.2rem]"
           />
-          <p className="text-[1rem] text-center text-md-start lg:text-left lg:text-[1.25rem] leading-relaxed">
+          <p className="text-[1rem] text-center text-md-start lg:text-left lg:text-[1.1rem] leading-relaxed">
             Check our natural <br />
             diamond jewellery collection
           </p>
 
-          <button className="flex items-center gap-2 bg-[#002D31] text-white lg:px-6 lg:py-4 px-4 py-3 rounded-lg hover:bg-[#003A3F] transition-colors">
-            <span className="lg:text-base text-sm">Explore collections</span>
+          <Link
+            href="/rings"
+            className="group flex items-center gap-2 bg-[#002D31] text-white lg:px-[1.25rem] lg:py-[.75rem] px-[1rem] py-[.75rem] rounded-lg hover:bg-[#003A3F] transition-colors"
+          >
+            <span className="lg:text-[0.95rem] text-sm">
+              Explore collections
+            </span>
             <Image
               src="/try/RightARRow.svg"
               width={24}
               height={24}
               alt="arrow"
-              className="lg:w-6 lg:h-6 w-5 h-5"
+              className="lg:w-5 lg:h-5 w-5 h-5 transition-transform duration-300 ease-in-out group-hover:translate-x-1 group-hover:rotate-45"
             />
-          </button>
+          </Link>
         </div>
+         </div>
 
         {/* Video Card - percentage positioning and sizing */}
-        <div className="hidden lg:w-[31.8%] lg:h-[19.7%] w-[50%] h-[20%] z-50 lg:flex flex-row justify-between items-center lg:p-2 lg:px-4 p-2 rounded-xl shadow-md absolute lg:top-[67.4%] lg:right-4 xl:right-0 bottom-[2%] right-[2%] bg-white/40 backdrop-blur-sm">
-          <div className="lg:pl-4 pl-2 flex-1">
-            <p className="lg:text-[0.94rem] text-sm pb-2 leading-relaxed max-w-[240px]">
-              Discover the artistry of SWA 
-              Diamonds as natural rough stones
-              are transformed into sparkling
-              masterpieces through precision
-              cutting and polishing.
+        <div className="hidden lg:w-[32rem] lg:h-[11rem] w-[20rem] h-[10rem] z-50 lg:flex flex-row justify-between items-center p-[1rem] lg:px-[1.25rem] lg:py-[1rem] rounded-xl shadow-md absolute lg:top-[67.4%] lg:right-[1rem] xl:right-[0rem] bottom-[2%] right-[2%] bg-white/40 backdrop-blur-sm">
+          <div className="pl-[1rem] flex-1">
+            <p className="lg:text-[0.94rem] text-[0.875rem] pb-[0.5rem] leading-relaxed max-w-[15rem]">
+              Discover the artistry of SWA Diamonds as natural rough stones are
+              transformed into sparkling masterpieces through precision cutting
+              and polishing.
             </p>
             <a
               href="/"
-              className="text-[#017480] hover:text-[#015A63] transition-colors underline underline-offset-4 lg:text-sm text-xs font-medium"
+              className="text-[#017480] hover:text-[#015A63] transition-colors underline underline-offset-4 lg:text-[0.875rem] text-[0.75rem] font-medium"
             >
               SEE VIDEO
             </a>
           </div>
-          <div className="lg:w-[41.3%] lg:h-[90%] w-[40%] h-[70%] overflow-hidden rounded-lg flex-shrink-0">
+
+          <div className="lg:w-[13rem] lg:h-[9.5rem] w-[8rem] h-[7rem] overflow-hidden rounded-lg flex-shrink-0">
             <video
               src="/try/diaVedio.mp4"
               autoPlay

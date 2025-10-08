@@ -42,22 +42,22 @@ const TopSellingCollection = () => {
           </p>
           <div className="flex flex-row justify-between md:w-[590px] sm:w-[340px] w-[290px]  h-[160.65px]">
             <Image
-              src="/try/favRing2.svg"
-              className="w-[88.1px] h-[80px] md:w-[176.92px] md:h-[160.65px]"
+              src="/try/ring copy.jpg"
+              className="w-[88.1px] h-[80px] md:w-[176.92px] md:h-[160.65px] rounded-xl"
               width={176.92}
               height={160.65}
               alt="ring"
             />
             <Image
-              src="/try/favRing.svg"
-              className="w-[88.1px] h-[80px] md:w-[176.92px] md:h-[160.65px]"
+              src="/try/bracelet copy.jpg"
+              className="w-[88.1px] h-[80px] md:w-[176.92px] md:h-[160.65px] rounded-xl"
               width={176.92}
               height={160.65}
               alt="ring"
             />
             <Image
-              src="/try/newchain.svg"
-              className="w-[88.1px] h-[80px] md:w-[176.92px] md:h-[160.65px]"
+              src="/try/necklace copy.jpg"
+              className="w-[88.1px] h-[80px] md:w-[176.92px] md:h-[160.65px] rounded-xl"
               width={176.92}
               height={160.65}
               alt="chain"
@@ -71,27 +71,22 @@ const TopSellingCollection = () => {
              left-1/2 -translate-x-1/2 transform 
              md:text-center sm:text-center text-center text-lg-start
              md:top-[4rem] lg:text-left">
-  <p className="text-[#918676] lg:text-[20px] md:text-[30px] leading-[24px] font-[400] tracking-[0.04rem] pt-2 md:pt-0 text-[14px] sm:text-[18px] ">
+  <p className="text-[#918676] lg:text-[20px] md:text-[30px] leading-[24px] font-[400] tracking-[0.04rem] pt-[.5rem] md:pt-0 text-[14px] sm:text-[18px] md:pb-[1.25rem] ">
     BRAND AMBASSADOR
   </p>
 
-  <div className="w-full max-w-[454px] h-auto flex items-center justify-center">
-    <p className="sm:text-[56px] text-[32px] leading-none font-[400] font-british">
-      Preity Zinta
+  <div className=" w-full h-auto flex items-center justify-center">
+    <p className="sm:text-[48px] sm:w-[510px] w-[400px] text-[32px] md:text-[48px] lg:text-[60px] leading-none font-[400] font-BrittanySign">
+      Preity G. zinta
     </p>
   </div>
 
-  <p className="sm:text-[16px] text-[14px] px-4 sm:px-0 leading-[24px] font-[400] italic lg:hidden">
-    Its design draws inspiration from the pink oyster mushroom, a symbol
-    of immortality and longevity, and it features 41 unique
-    mushroom-shaped petals adorned with diamonds The ring weighs
+  <p className="sm:text-[16px] text-[14px] px-4 sm:px-0 leading-[24px] sm:pt-[1rem] pt-[.5rem] font-[400] italic lg:hidden ">
+We are proud to welcome Bollywood star Preity G Zinta as the new Brand Ambassador for SWA Diamonds. A timeless icon of grace, trust, and charisma, Preity perfectly captures the spirit of SWA Diamonds — radiating brilliance, confidence, and elegance. Her enduring stardom and authentic charm embody our vision of modern sophistication with a touch of Bollywood glamour.
   </p>
 
-  <p className="text-[16px] leading-[24px] font-[400] italic hidden lg:block ">
-    Its design draws inspiration from the pink oyster <br />
-    mushroom, a symbol of immortality and longevity, <br />
-    and it features 41 unique mushroom-shaped <br />
-    petals adorned with diamonds The ring weighs
+  <p className="text-[16px] leading-[24px] font-[400] italic hidden lg:block  lg:pt-[1.25rem]">
+We are proud to welcome Bollywood star Preity G Zinta as the new Brand Ambassador for SWA Diamonds. A timeless icon of grace, trust, and charisma, Preity perfectly captures the spirit of SWA Diamonds — radiating brilliance, confidence, and elegance. Her enduring stardom and authentic charm embody our vision of modern sophistication with a touch of Bollywood glamour.
   </p>
 </div>
 
