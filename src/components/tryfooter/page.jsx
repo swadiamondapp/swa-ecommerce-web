@@ -169,7 +169,7 @@ const GeneralInfo = () => {
       ],
     },
     {
-      title: "INDIA Contact info",
+      title: "Contact info",
       content: (
         <>
         <div className="space-y-4">
@@ -182,9 +182,10 @@ const GeneralInfo = () => {
               alt="location"
             />
             <div className="text-sm leading-6 text-gray-300">
-              Ground Floor, 7/688E, Al Wahad, Chenguvaty,
-              <br />
-              Kerala, 676501
+              FIRST FLOOR,PLOT NO. F11,12, SUB PLOT NO.15, C-4, 
+              GEETA APPARELS PVT LTD WESTERN INDUSTRIAL CO-OP ESTATE LTD,<br />
+               MIDC MAROL, CENTRAL ROAD, OPP SEEPZ, ANDHERI EAST, Mumbai, <br />
+                Maharashtra, 400093
             </div>
           </div>
           <div className="flex items-center gap-3">
