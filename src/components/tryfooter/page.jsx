@@ -7,7 +7,7 @@ const SubscribeNewsletter = () => {
     <div className="border-b border-gray-800 py-8 lg:py-10">
       <div className="max-w-6xl mx-auto px-4 text-center flex flex-col items-center">
         <h2 className="text-2xl sm:text-4xl max-w-[200px] sm:max-w-full text-white font-playfair mb-8 tracking-wide">
-          Subscribe to our news letter
+          Customisation Enquiry
         </h2>
 
         <div className="flex flex-row gap-2 sm:gap-4 w-full justify-stretch sm:justify-center">
@@ -17,7 +17,7 @@ const SubscribeNewsletter = () => {
             className="w-full max-w-[500px] px-[2rem] py-[1rem] bg-white text-black text-sm font-medium placeholder-gray-500 border-0 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
           />
           <button className="px-[1.5rem] py-[1rem] bg-[#017480] text-white font-semibold rounded-md justify-center transition-colors duration-200 flex items-center gap-2">
-            SUBSCRIBE
+            Enquire <span className="hidden sm:inline-block">Now</span>
             <Image
               src="/try/arrowwhite.svg"
               width={20}

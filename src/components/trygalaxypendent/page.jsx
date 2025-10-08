@@ -102,16 +102,23 @@ const Galxypendant = () => {
 
           {/* Right Text */}
           <div className="flex-1 h-full flex justify-center items-center">
-            <div>
+            <div className="px-[.75rem] sm:p-0">
               <p className="sm:text-[56px] text-[32px] md:leading-[63px] leading-[40px] pb-3 font-medium font-playfair">
                 Infinity Collection  <br /> pendant
               </p>
-              <p className="sm:text-[20px] text-[16px] md:leading-[32px] leading-[25px] text-[#334155]">
+              <p className="sm:text-[20px] text-[15px] md:leading-[32px] leading-[25px] text-[#334155] sm:block hidden">
                 With timeless elegance and infinite brilliance, <br />
                 the Infinity Collection celebrates the beauty of endless connections. <br />
                  Each pendant is a symbol of love that knows no bounds — <br />
                  where every diamond reflects your story.
               </p>
+              <p className="sm:text-[20px] text-[15px] md:leading-[32px] leading-[25px] text-[#334155] sm:hidden block">
+                With timeless elegance and infinite brilliance, 
+                the Infinity Collection celebrates the beauty of endless connections. 
+                 Each pendant is a symbol of love that knows no bounds — 
+                 where every diamond reflects your story.
+              </p>
+
 
               <div className="pt-[20px]">
                 <a
@@ -143,16 +150,23 @@ const Galxypendant = () => {
             />
           </div>
 
-          {/* Right Text */}
+          {/* left Text */}
           <div className="flex-1 h-full flex justify-center items-center">
-            <div>
+            <div className="px-[.75rem] sm:p-0">
               <p className="sm:text-[56px] md:leading-[63px] leading-[40px] pb-3 text-[32px] font-medium font-playfair">
                 Galaxy Collection <br /> Ring
               </p>
-              <p className="sm:text-[20px] text-[16px] md:leading-[32px] leading-[25px] text-[#334155]">
+              <p className="sm:text-[20px] text-[16px] md:leading-[32px] leading-[25px] text-[#334155] sm:block hidden">
                 With radiant allure and timeless artistry, <br /> 
                 the Galaxy Collection Ring captures the elegance of the cosmos <br />
                 in every curve. Designed to shimmer with celestial brilliance, it reflects <br />
+                the infinite beauty that lies within every woman.
+               
+              </p>
+              <p className="sm:text-[20px] text-[16px] md:leading-[32px] leading-[25px] text-[#334155] sm:hidden block">
+                With radiant allure and timeless artistry,
+                the Galaxy Collection Ring captures the elegance of the cosmos
+                in every curve. Designed to shimmer with celestial brilliance, it reflects
                 the infinite beauty that lies within every woman.
                
               </p>

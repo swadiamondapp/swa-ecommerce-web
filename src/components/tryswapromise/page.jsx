@@ -66,29 +66,89 @@ const SwaPromise = () => {
               diamond tells a story,
             </p>
           </div>
-          <img
+          {/* <img
             src="/try/diaRing.svg"
             className="w-[200px] lg:w-[337.94px] h-[120px] lg:h-[203.12px] static lg:absolute bottom-0 z-100"
             alt="ring"
-          />
+          /> */}
         </div>
 
-        <div className="grid lg:grid-cols-4 grid-cols-3 gap-2 lg:gap-8 text-[#334155] py-[1rem] lg:py-[5rem] max-w-[750px] ">
-          {data.map((item, index) => (
-            <div className="text-center flex flex-col items-center" key={index}>
-              <div className="w-[90px] h-[90px] lg:w-[140px] lg:h-[140px] bg-white rounded-full mb-2 flex items-center justify-center">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="w-[40px] lg:w-[64px] h-[40px] lg:h-[64px]"
-                />
-              </div>
-              <p className="text-[0.75rem] lg:text-[14px] font-[400] leading-[20px]">
-                {item.title}
-              </p>
-            </div>
-          ))}
+        <div className="text-[#334155] py-[1rem] lg:py-[5rem] max-w-[750px]">
+  {/* Mobile: Hexagon Layout */}
+  <div className="md:hidden flex flex-col items-center gap-6">
+    {/* First row: 3 items */}
+    <div className="flex justify-center sm:gap-[2rem] gap-[.85rem]">
+      {data.slice(0, 3).map((item, index) => (
+        <div className="text-center flex flex-col items-center w-[100px]" key={index}>
+          <div className="w-[90px] h-[90px] md:w-[100px] md:h-[100px] bg-white rounded-full mb-[.5rem] flex items-center justify-center">
+            <img
+              src={item.image}
+              alt={item.title}
+              className="w-[36px] h-[36px] md:w-[48px] md:h-[48px]"
+            />
+          </div>
+          <p className="text-[0.75rem] md:text-[0.875rem] font-[400] leading-[16px] md:leading-[18px]">
+            {item.title}
+          </p>
         </div>
+      ))}
+    </div>
+    
+    {/* Second row: 3 items with more spacing */}
+    <div className="flex justify-center sm:gap-[3rem] gap-[2.3rem]">
+      {data.slice(3, 6).map((item, index) => (
+        <div className="text-center flex flex-col items-center w-[100px]" key={index + 3}>
+          <div className="w-[90px] h-[90px] md:w-[100px] md:h-[100px] bg-white rounded-full mb-2 flex items-center justify-center">
+            <img
+              src={item.image}
+              alt={item.title}
+              className="w-[36px] h-[36px] md:w-[48px] md:h-[48px]"
+            />
+          </div>
+          <p className="text-[0.75rem] md:text-[0.875rem] font-[400] leading-[16px] md:leading-[18px]">
+            {item.title}
+          </p>
+        </div>
+      ))}
+    </div>
+    
+    {/* Third row: 2 items centered */}
+    <div className="flex justify-center sm:gap-[4rem] gap-[2.4rem]">
+      {data.slice(6, 8).map((item, index) => (
+        <div className="text-center flex flex-col items-center w-[100px]" key={index + 6}>
+          <div className="w-[90px] h-[90px] md:w-[100px] md:h-[100px] bg-white rounded-full mb-2 flex items-center justify-center">
+            <img
+              src={item.image}
+              alt={item.title}
+              className="w-[36px] h-[36px] md:w-[48px] md:h-[48px]"
+            />
+          </div>
+          <p className="text-[0.75rem] md:text-[0.875rem] font-[400] leading-[16px] md:leading-[18px]">
+            {item.title}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  {/* Desktop: Grid Layout */}
+  <div className="hidden md:grid md:grid-cols-4 gap-8">
+    {data.map((item, index) => (
+      <div className="text-center flex flex-col items-center" key={index}>
+        <div className="w-[140px] h-[140px] bg-white rounded-full mb-2 flex items-center justify-center">
+          <img
+            src={item.image}
+            alt={item.title}
+            className="w-[64px] h-[64px]"
+          />
+        </div>
+        <p className="text-[14px] font-[400] leading-[20px]">
+          {item.title}
+        </p>
+      </div>
+    ))}
+  </div>
+</div>
 
 {/* 
 
