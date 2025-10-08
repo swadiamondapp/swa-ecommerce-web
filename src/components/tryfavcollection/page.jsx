@@ -10,8 +10,8 @@ const Favcollection = () => {
           <div className="hidden lg:flex w-[23.61rem]  z-10 h-[10.04rem] justify-between left-[0.53rem] top-[50.89rem] absolute lg:w-[23.61rem] lg:h-[10.04rem] lg:left-[0.53rem] lg:top-[50.89rem] md:w-[23.61rem] md:h-[10.04rem] md:left-[0.53rem] md:top-[50.89rem] sm:w-[23.61rem] sm:h-[10.04rem] sm:left-[0.53rem] sm:top-[50.89rem]">
             <div>
               <Image
-                src="/try/favRing2.svg"
-                className=""
+                src="/try/ring copy.jpg"
+                className="rounded-xl"
                 width={176.92}
                 height={160.65}
                 alt="ring"
@@ -19,8 +19,8 @@ const Favcollection = () => {
             </div>
             <div>
               <Image
-                src="/try/favRing.svg"
-                className=""
+                src="/try/necklace copy.jpg"
+                className="rounded-xl"
                 width={176.92}
                 height={160.65}
                 alt="ring"
