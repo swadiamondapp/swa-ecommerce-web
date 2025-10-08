@@ -38,8 +38,8 @@ const Features = () => {
       image: "/try/shipping.svg",
     },
     {
-      title: "100% Refund",
-      image: "/try/refund100.svg",
+      title: "CERTIFIED NATURAL DIAMONDS",
+      image: "/try/diafooter.svg",
     },
     {
       title: "100% Certified jewellery",
