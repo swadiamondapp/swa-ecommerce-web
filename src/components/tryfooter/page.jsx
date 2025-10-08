@@ -173,6 +173,7 @@ const GeneralInfo = () => {
       content: (
         <>
         <div className="space-y-4">
+          <h3 className="text-sm font-semibold tracking-wider mb-6 text-gray-300 uppercase">INDIA Contact info</h3>
           <div className="flex items-start gap-3">
             <Image
               src="/try/location.svg"
@@ -262,9 +263,10 @@ const GeneralInfo = () => {
       <div className="hidden lg:grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto px-6">
         {data.map((section, index) => (
           <div key={index} className={`text-white py-6 border-l ${index === 0 ? 'border-l-0' : 'border-l pl-6'} border-gray-800`}>
-            <h3 className="text-sm font-semibold tracking-wider mb-6 text-gray-300 uppercase">
+            {section.title !== "Contact info" && <h3 className="text-sm font-semibold tracking-wider mb-6 text-gray-300 uppercase">
               {section.title}
             </h3>
+            }
             {section.links ? (
               <ul className={section.title === "Quick Links" ? "grid grid-cols-2 gap-x-8 gap-y-2" : "space-y-2"}>
                 {section.links.map((link, linkIndex) => (
