@@ -259,7 +259,7 @@ const GeneralInfo = () => {
 
   return (
     <div className="py-6 lg:py-0">
-      <AccordionSection data={data} />
+      <AccordionSection data={data}  />
       <div className="hidden lg:grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto px-6">
         {data.map((section, index) => (
           <div key={index} className={`text-white py-6 border-l ${index === 0 ? 'border-l-0' : 'border-l pl-6'} border-gray-800`}>
