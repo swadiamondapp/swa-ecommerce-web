@@ -194,7 +194,7 @@ const Limelight = () => {
               key={idx}
             >
               <a href={article.link}>
-              <h3 className="text-[18px] sm:text-[24px] leading-[24px] sm:leading-[32px] font-bold pb-[1rem]">
+              <h3 className=" text-black text-[18px] sm:text-[24px] leading-[24px] sm:leading-[32px] font-bold pb-[1rem]">
                 {article.title}
               </h3></a>
               <p className="text-[14px] sm:text-[16px] leading-[20px] sm:leading-[24px] font-[400] max-w-[653px]">
