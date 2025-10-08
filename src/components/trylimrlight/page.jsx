@@ -167,7 +167,7 @@ const Limelight = () => {
               SEE ALL
             </a>
           </div>
-          <Image src="/try/limelightring.svg" width={653} height={647.94} alt="limelight ring "/>
+          <Image src="/try/limelight.jpeg" width={653} height={647.94} alt="limelight ring "/>
         </div>
 
         {/* Content takes remaining width */}

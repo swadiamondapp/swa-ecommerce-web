@@ -9,10 +9,10 @@ const Ringcomponet = () => {
 
           <div>
           <div className="text-center text-md-start lg:text-left">
-            <p className="lg:text-[56px] text-[32px] font-medium md:leading-[63px] leading-[40px] font-playfair pb-3">
+            <a href="/jewellery/onifa-blossom-ladies-diamond-ring"><p className="lg:text-[56px] text-[32px] font-medium md:leading-[63px] leading-[40px] font-playfair pb-3">
                Queen elizabath <br />
                coral Ring
-             </p>
+             </p></a>
              <p className="lg:text-[20px] text-[16px] md:leading-[32px] leading-[25px] text-[#334155]">
                With timeless charm and radiant grace, Preity <br />{" "}
                Zinta embodies the spirit of our jewellery — where <br /> every
@@ -66,9 +66,10 @@ const Ringcomponet = () => {
          
        <div>
           <div className="text-center text-md-start lg:text-left">
+            <a href="/jewellery/Diamond%20RingDFYK">
             <p className="lg:text-[56px] text-[32px] md:leading-[63px] leading-[40px] font-medium font-playfair pb-3 ">
                Dalia Rose <br /> luxuriea ring
-             </p>
+             </p></a>
              <p className="lg:text-[20px] text-[16px] md:leading-[32px] leading-[25px] text-[#334155]">
                With timeless charm and radiant grace, Preity <br />{" "}
                Zinta embodies the spirit of our jewellery — where <br /> every
