@@ -42,22 +42,22 @@ const TopSellingCollection = () => {
           </p>
           <div className="flex flex-row justify-between md:w-[590px] sm:w-[340px] w-[290px]  h-[160.65px]">
             <Image
-              src="/try/favRing2.svg"
-              className="w-[88.1px] h-[80px] md:w-[176.92px] md:h-[160.65px]"
+              src="/try/ring copy.jpg"
+              className="w-[88.1px] h-[80px] md:w-[176.92px] md:h-[160.65px] rounded-xl"
               width={176.92}
               height={160.65}
               alt="ring"
             />
             <Image
-              src="/try/favRing.svg"
-              className="w-[88.1px] h-[80px] md:w-[176.92px] md:h-[160.65px]"
+              src="/try/bracelet copy.jpg"
+              className="w-[88.1px] h-[80px] md:w-[176.92px] md:h-[160.65px] rounded-xl"
               width={176.92}
               height={160.65}
               alt="ring"
             />
             <Image
-              src="/try/newchain.svg"
-              className="w-[88.1px] h-[80px] md:w-[176.92px] md:h-[160.65px]"
+              src="/try/necklace copy.jpg"
+              className="w-[88.1px] h-[80px] md:w-[176.92px] md:h-[160.65px] rounded-xl"
               width={176.92}
               height={160.65}
               alt="chain"

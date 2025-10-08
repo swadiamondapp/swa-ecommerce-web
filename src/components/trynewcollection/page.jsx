@@ -145,7 +145,7 @@ const Newcollection = () => {
       <ToastContainer position="top-right" autoClose={3000} />
       <div className="max-w-container mx-auto h-full bg-white flex flex-row items-center relative">
         <Image
-          src="/try/newarrivalgirl.webp"
+          src="/try/Swa_Web Banner_Left Image Holder_1.jpg"
           className="hidden lg:block"
           width={512}
           height={790.28}
