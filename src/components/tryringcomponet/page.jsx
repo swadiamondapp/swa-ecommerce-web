@@ -13,7 +13,7 @@ const Ringcomponet = () => {
             <Link href="/jewellery/onifa-blossom-ladies-diamond-ring"><p className="text-black lg:text-[56px] text-[32px] font-medium md:leading-[63px] leading-[40px] font-playfair pb-3">
                Fleur Trio <br /> Diamond Ring
              </p></Link>
-             <p className="lg:text-[20px] text-[16px] md:leading-[32px] leading-[25px] text-[#334155]">
+             <p className="lg:text-[20px] sm:text-[16px] text-[14px]  md:leading-[32px] leading-[25px] text-[#334155]">
               A graceful blend of simplicity and charm, this <br />
               ring features three delicate diamond-studded floral motifs <br />
               symbolizing elegance, love, and harmony.
@@ -37,7 +37,7 @@ const Ringcomponet = () => {
                  <Image
                   src="/try/kartwhite.svg"
                   width={24}
-                  height={24}
+                  height={24}SUBSCRIBE
                   alt="cart"
                 />
               </button> */}
@@ -72,7 +72,7 @@ const Ringcomponet = () => {
 
 
              </p></Link>
-             <p className="lg:text-[20px] text-[16px] md:leading-[32px] leading-[25px] text-[#334155]">
+             <p className="lg:text-[20px] sm:text-[16px] text-[13.5px]  md:leading-[32px] leading-[25px] text-[#334155]">
               A symbol of elegance and strength, this dual-band <br />
               ring features a diamond-studded “V” that radiates golden grace. <br />
                Inspired by the name Aurelia, it reflects timeless beauty.

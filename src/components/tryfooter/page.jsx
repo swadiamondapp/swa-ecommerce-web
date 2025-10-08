@@ -7,7 +7,7 @@ const SubscribeNewsletter = () => {
     <div className="border-b border-gray-800 py-8 lg:py-10">
       <div className="max-w-6xl mx-auto px-4 text-center flex flex-col items-center">
         <h2 className="text-2xl sm:text-4xl max-w-[200px] sm:max-w-full text-white font-playfair mb-8 tracking-wide">
-          Subscribe to our news letter
+          Customisation Enquiry
         </h2>
 
         <div className="flex flex-row gap-2 sm:gap-4 w-full justify-stretch sm:justify-center">
@@ -17,7 +17,7 @@ const SubscribeNewsletter = () => {
             className="w-full max-w-[500px] px-[2rem] py-[1rem] bg-white text-black text-sm font-medium placeholder-gray-500 border-0 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
           />
           <button className="px-[1.5rem] py-[1rem] bg-[#017480] text-white font-semibold rounded-md justify-center transition-colors duration-200 flex items-center gap-2">
-            SUBSCRIBE
+            Enquire <span className="hidden sm:inline-block">Now</span>
             <Image
               src="/try/arrowwhite.svg"
               width={20}
@@ -169,10 +169,11 @@ const GeneralInfo = () => {
       ],
     },
     {
-      title: "INDIA Contact info",
+      title: "Contact info",
       content: (
         <>
         <div className="space-y-4">
+          <h3 className="text-sm font-semibold tracking-wider mb-6 text-gray-300 uppercase">INDIA Contact info</h3>
           <div className="flex items-start gap-3">
             <Image
               src="/try/location.svg"
@@ -182,9 +183,10 @@ const GeneralInfo = () => {
               alt="location"
             />
             <div className="text-sm leading-6 text-gray-300">
-              Ground Floor, 7/688E, Al Wahad, Chenguvaty,
-              <br />
-              Kerala, 676501
+              FIRST FLOOR,PLOT NO. F11,12, SUB PLOT NO.15, C-4, 
+              GEETA APPARELS PVT LTD WESTERN INDUSTRIAL CO-OP ESTATE LTD,<br />
+               MIDC MAROL, CENTRAL ROAD, OPP SEEPZ, ANDHERI EAST, Mumbai, <br />
+                Maharashtra, 400093
             </div>
           </div>
           <div className="flex items-center gap-3">
@@ -261,9 +263,10 @@ const GeneralInfo = () => {
       <div className="hidden lg:grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto px-6">
         {data.map((section, index) => (
           <div key={index} className={`text-white py-6 border-l ${index === 0 ? 'border-l-0' : 'border-l pl-6'} border-gray-800`}>
-            <h3 className="text-sm font-semibold tracking-wider mb-6 text-gray-300 uppercase">
+            {section.title !== "Contact info" && <h3 className="text-sm font-semibold tracking-wider mb-6 text-gray-300 uppercase">
               {section.title}
             </h3>
+            }
             {section.links ? (
               <ul className={section.title === "Quick Links" ? "grid grid-cols-2 gap-x-8 gap-y-2" : "space-y-2"}>
                 {section.links.map((link, linkIndex) => (
@@ -291,7 +294,7 @@ const CompanyInfo = () => {
   return (
     <div className="py-4 border-t-0 lg:border-t border-gray-800">
       <div className="max-w-6xl mx-auto px-4 pb-14 lg:pb-4 text-center flex flex-col items-start lg:items-center">
-        <div className="mb-4 flex justify-center">
+        <div className="mb-4 flex justify-center w-full">
           <Image
             src="/try/logowhite.svg"
             width={96.58}
@@ -300,8 +303,8 @@ const CompanyInfo = () => {
             alt="SWA Diamonds Logo"
           />
         </div>
-        <div className="max-w-4xl">
-          <p className="text-[12px] lg:max-w-[700px] text-gray-400 leading-relaxed md:text-left  lg:text-center">
+        <div className="w-full flex justify-center">
+          <p className="text-[12px] text-center lg:max-w-[700px] text-gray-400 leading-relaxed   lg:text-center">
             Concept of SWA Diamonds came into being from CAPESTONE Ventures
             Pvt Ltd, a leading name in wholesale diamond jewellers market,
             that does business with prominent retail jewellers. Many retail
