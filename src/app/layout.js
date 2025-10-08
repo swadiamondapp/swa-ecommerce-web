@@ -45,6 +45,7 @@ const gilroy = localFont({
   ],
   variable: "--font-gilroy",
 });
+
 const britishCastilla = localFont({
   src: [
     {
@@ -54,6 +55,17 @@ const britishCastilla = localFont({
     },
   ],
   variable: "--font-britishCastilla",
+});
+
+const BrittanySign = localFont({
+  src: [
+    {
+      path: "../../public/fonts/BrittanySignature.ttf", // your .otf file
+      weight: "400", // set the actual weight (if unknown, use 400)
+      style: "normal", // change to "italic" if needed
+    },
+  ],
+  variable: "--font-BrittanySign",
 });
 
 export const metadata = {
@@ -123,7 +135,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body
-        className={`${lato.variable} ${gilroy.variable} ${playfair.variable}  ${britishCastilla.variable} no-scrollbar bg-white text-black`}
+        className={`${lato.variable} ${gilroy.variable} ${playfair.variable}  ${britishCastilla.variable}  ${BrittanySign.variable} no-scrollbar bg-white text-black`}
         // className={`${lato.variable} ${gilroy.variable} ${playfair.variable} antialiased`}
       >
         {/* GTM noscript fallback */}

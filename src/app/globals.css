@@ -13,6 +13,14 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: "BrittanySign";
+  src: url("/fonts/BrittanySignature.ttf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+ 
+}
+
 
 
 @media (prefers-color-scheme: dark) {
