@@ -292,7 +292,7 @@ const CompanyInfo = () => {
   return (
     <div className="py-4 border-t-0 lg:border-t border-gray-800">
       <div className="max-w-6xl mx-auto px-4 pb-14 lg:pb-4 text-center flex flex-col items-start lg:items-center">
-        <div className="mb-4 flex justify-center">
+        <div className="mb-4 flex justify-center w-full">
           <Image
             src="/try/logowhite.svg"
             width={96.58}
@@ -301,8 +301,8 @@ const CompanyInfo = () => {
             alt="SWA Diamonds Logo"
           />
         </div>
-        <div className="max-w-4xl">
-          <p className="text-[12px] lg:max-w-[700px] text-gray-400 leading-relaxed md:text-left  lg:text-center">
+        <div className="w-full flex justify-center">
+          <p className="text-[12px] text-center lg:max-w-[700px] text-gray-400 leading-relaxed   lg:text-center">
             Concept of SWA Diamonds came into being from CAPESTONE Ventures
             Pvt Ltd, a leading name in wholesale diamond jewellers market,
             that does business with prominent retail jewellers. Many retail
