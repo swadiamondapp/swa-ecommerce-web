@@ -77,7 +77,7 @@ const TopSellingCollection = () => {
 
   <div className=" w-full h-auto flex items-center justify-center">
     <p className="sm:text-[48px] sm:w-[510px] w-[400px] text-[32px] md:text-[48px] lg:text-[60px] leading-none font-[400] font-BrittanySign">
-      Preity G. Zinta
+      Preity G. zinta
     </p>
   </div>
 
