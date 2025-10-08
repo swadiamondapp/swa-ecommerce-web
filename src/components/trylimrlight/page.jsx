@@ -181,7 +181,7 @@ const Limelight = () => {
 
           {/* Mobile image */}
           <Image
-            src="/try/limelightring.svg"
+            src="/try/limelight.jpeg"
             alt="limelight ring"
             className="pt-[0.5rem] pb-[0.5rem] sm:pt-[0.75rem] sm:pb-[0.75rem] lg:hidden block w-full max-w-[300px] sm:max-w-[653px] mx-auto sm:mx-0"
             width={653}

@@ -72,6 +72,7 @@ export default {
         playfair: ["var(--font-playfair)"],
         lato: ["var(--font-lato)"],
        british: ["var(--font-britishCastilla)"],
+       BrittanySign: ["var(--font-BrittanySign)"],
 
       },
       maxWidth: {
