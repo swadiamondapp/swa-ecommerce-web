@@ -81,7 +81,7 @@ const TopSellingCollection = () => {
     </p>
   </div>
 
-  <p className="sm:text-[16px] text-[14px] px-4 sm:px-0 leading-[24px] sm:pt-[1rem] pt-[.5rem] font-[400] italic lg:hidden ">
+  <p className="sm:text-[16px] text-[11px] px-4 sm:px-0 leading-[24px] sm:pt-[1rem] pt-[.5rem] font-[400] italic lg:hidden ">
 We are proud to welcome Bollywood star Preity G Zinta as the new Brand Ambassador for SWA Diamonds. A timeless icon of grace, trust, and charisma, Preity perfectly captures the spirit of SWA Diamonds — radiating brilliance, confidence, and elegance. Her enduring stardom and authentic charm embody our vision of modern sophistication with a touch of Bollywood glamour.
   </p>
 

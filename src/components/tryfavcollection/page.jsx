@@ -37,7 +37,7 @@ const Favcollection = () => {
 
           <Image
             src="/try/favgirl.webp"
-            className="absolute bottom-0 left-1/2 transform -translate-x-1/2 lg:pl-8 w-[17rem] sm:w-[17rem] md:w-[30rem] lg:w-[55%]"
+            className="absolute bottom-0 left-1/2 transform -translate-x-1/2 lg:pl-8 w-[19.8rem] h-auto sm:w-[17rem] md:w-[30rem] lg:w-[55%]"
             width={788}
             height={976}
             alt="fav collection girl"
