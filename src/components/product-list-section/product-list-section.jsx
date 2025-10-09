@@ -66,6 +66,7 @@ export default function ProductListSection({ category }) {
   return (
     <>
       <div className={Classes.Products}>
+    
         <NewArrivalDesign
           sortHandler={sortHandler}
           count={count}
@@ -80,6 +81,7 @@ export default function ProductListSection({ category }) {
             products={products}
             isLoading={isLoading || isFilterLoading}
           />
+        
         </NewArrivalDesign>
         <FilterModal />
       </div>
