@@ -104,7 +104,7 @@ const Worldrec = () => {
                 width={1058}
                 height={737}
                 alt="ring"
-                className="mt-[3rem]"
+                className="mt-[5rem]"
               />
             </div>
 

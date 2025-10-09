@@ -173,7 +173,7 @@ const Limelight = () => {
         {/* Content takes remaining width */}
         <div className="space-y-[16px] sm:space-y-[24px] flex-1 lg:mr-8 text-left  mt-[3rem] lg:block md:flex md:flex-col md:items-center md:justify-center">
           <h2 className="text-[32px] sm:text-[56px] font-playfair md:mb-0 sm:mb-[2rem]">
-            In the Limelight
+            In the Spotlight
           </h2>
 
           {/* Horizontal line as span */}
