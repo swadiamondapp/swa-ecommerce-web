@@ -230,12 +230,14 @@ const Newcollection = () => {
                             />
                           ))}
                         </div> */}
-                        <p className="text-lg font-semibold text-gray-900 sm:max-md:text-sm pt-[.5rem]">
-                          {countryId === "2" ? "₹" : "AED"}{" "}
-                          {product.is_on_discount
-                            ? product.country_discount_price
-                            : product.country_total_price}
-                        </p>
+                        {countryId === "2" && 
+                          <p className="text-lg font-semibold text-gray-900 sm:max-md:text-sm pt-[.5rem]">
+                            {countryId === "2" ? "₹" : "AED"}{" "}
+                            {product.is_on_discount
+                              ? product.country_discount_price
+                              : product.country_total_price}
+                          </p>
+                        }
                       </Link>
                     );
                   })
