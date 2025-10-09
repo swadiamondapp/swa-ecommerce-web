@@ -219,7 +219,7 @@ const Newcollection = () => {
                         <p className="font-inter text-[#918676] font-normal text-[14px] leading-[100%] tracking-[4%] align-middle uppercase pt-1 pb-1 sm:max-md:text-[10px] sm:max-md:pt-0.5 sm:max-md:pb-0.5">
                           SKU: {product.sku}
                         </p>
-                        <div className="flex gap-2 mb-4 pt-2 pb-1 sm:max-md:gap-1 sm:max-md:mb-2 sm:max-md:pt-1 sm:max-md:pb-0.5">
+                        {/* <div className="flex gap-2 mb-4 pt-2 pb-1 sm:max-md:gap-1 sm:max-md:mb-2 sm:max-md:pt-1 sm:max-md:pb-0.5">
                           {colors.map((color) => (
                             <div
                               key={color.id}
@@ -228,8 +228,8 @@ const Newcollection = () => {
                               title={color.name}
                             />
                           ))}
-                        </div>
-                        <p className="text-lg font-semibold text-gray-900 sm:max-md:text-sm">
+                        </div> */}
+                        <p className="text-lg font-semibold text-gray-900 sm:max-md:text-sm pt-[.5rem]">
                           ₹{" "}
                           {product.is_on_discount
                             ? product.country_discount_price
