@@ -37,6 +37,7 @@ export default function ProductList({ products, isLoading }) {
       {products.map((item, index) => {
         console.log(item.sku, "item.sku");
         return (
+        <>
           <NewArrivalCard
             ProductImage={item.thumbnail_image}
             ProductName={item.product_name}
@@ -59,6 +60,7 @@ export default function ProductList({ products, isLoading }) {
             wishAct={item && item.wishlist_id}
             prodet={item}
           />
+          </>
         );
       })}
     </>

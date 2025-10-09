@@ -1,8 +1,18 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+
+
 const Ringcomponet = () => {
+    const [countryId, setCountryId] = useState(null);
+  
+ useEffect(() => {
+    const storedCountryId = localStorage.getItem("id");
+    setCountryId(storedCountryId);
+  }, []);
   return (
     <>
     <Link  href="/rings" >
@@ -42,8 +52,8 @@ const Ringcomponet = () => {
                   alt="cart"
                 />
               </button> */}
-
-              <p className="text-[32px] leading-[40px] font-semibold py-2 text-black">
+       
+              <p className={countryId === "2"?"text-[32px] leading-[40px] font-semibold py-2 text-black":"hidden"}>
                 ₹ 21,500
               </p>
             </div>
@@ -102,7 +112,7 @@ const Ringcomponet = () => {
                 />
               </button> */}
 
-              <p className="text-[32px] leading-[40px] font-semibold py-2 text-black">
+              <p className={countryId === "2"?"text-[32px] leading-[40px] font-semibold py-2 text-black":"hidden"}>
                 ₹ 24,300
               </p>
             </div>
