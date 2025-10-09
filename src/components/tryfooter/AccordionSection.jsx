@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 
-const AccordionItem = ({ title, children, isOpen, onToggle }) => {
+const AccordionItem = ({ title, children, isOpen, onToggle, isContactInfo }) => {
   return (
     <div className="px-4">
       <button
@@ -30,10 +30,16 @@ const AccordionItem = ({ title, children, isOpen, onToggle }) => {
       </button>
       <div
         className={`overflow-hidden transition-all duration-300 ease-in-out ${
-          isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+          isOpen 
+            ? isContactInfo 
+              ? "max-h-[70vh] opacity-100" 
+              : "max-h-[800px] opacity-100" 
+            : "max-h-0 opacity-0"
         }`}
       >
-        <div className="px-4 pb-4">{children}</div>
+        <div className={`px-4 pb-4 ${isContactInfo && isOpen ? "overflow-y-auto max-h-[65vh]" : ""}`}>
+          {children}
+        </div>
       </div>
       <div className="border-b border-white"></div>
     </div>
@@ -58,12 +64,13 @@ const AccordionSection = ({ data }) => {
           title={section.title}
           isOpen={openAccordions[index]}
           onToggle={() => toggleAccordion(index)}
+          isContactInfo={section.title === "Contact info"}
         >
           {section.links ? (
             <ul className={section.title === "Quick Links" ? "grid grid-cols-2 gap-x-4 gap-y-2" : "space-y-2"}>
               {section.links.map((link, linkIndex) => (
                 <li key={linkIndex}>
-                  <a
+                  <a 
                     href={link.link}
                     className="text-gray-400 hover:text-white text-sm transition-colors block py-1"
                   >
