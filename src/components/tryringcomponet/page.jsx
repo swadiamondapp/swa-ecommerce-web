@@ -11,9 +11,9 @@ const Ringcomponet = () => {
 
           <div>
           <div className="text-center text-md-start lg:text-left">
-            <Link href="/jewellery/onifa-blossom-ladies-diamond-ring"><p className="text-black lg:text-[56px] text-[32px] font-medium md:leading-[63px] leading-[40px] font-playfair pb-3">
+            <p className="text-black lg:text-[56px] text-[32px] font-medium md:leading-[63px] leading-[40px] font-playfair pb-3">
                Fleur Trio <br /> Diamond Ring
-             </p></Link>
+             </p>
              <p className="lg:text-[20px] sm:text-[16px] text-[14px]  md:leading-[32px] leading-[25px] text-[#334155]">
               A graceful blend of simplicity and charm, this <br />
               ring features three delicate diamond-studded floral motifs <br />
@@ -68,12 +68,11 @@ const Ringcomponet = () => {
          
        <div>
           <div className="text-center text-md-start lg:text-left">
-            <Link href="/jewellery/Diamond%20RingDFYK">
             <p className="lg:text-[56px] text-[32px] md:leading-[63px] leading-[40px] font-medium font-playfair pb-3  text-black">
                Velisse Aurelia <br /> Diamond Ring
 
 
-             </p></Link>
+             </p>
              <p className="lg:text-[20px] sm:text-[16px] text-[13.5px]  md:leading-[32px] leading-[25px] text-[#334155]">
               A symbol of elegance and strength, this dual-band <br />
               ring features a diamond-studded “V” that radiates golden grace. <br />
