@@ -5,7 +5,8 @@ import Link from "next/link";
 const Ringcomponet = () => {
   return (
     <>
-      <div className="w-full lg:h-[540px] md:h-[1010px] h-[670px] bg-[#F5FFFD]">
+    <Link  href="/rings" >
+      <div className="w-full lg:h-[540px] md:h-[1010px] h-[670px] bg-[#F5FFFD] " >
         <div className="max-w-container mx-auto h-full flex flex-row justify-around items-center md:items-end lg:items-center pb-10">
 
           <div>
@@ -42,7 +43,7 @@ const Ringcomponet = () => {
                 />
               </button> */}
 
-              <p className="text-[32px] leading-[40px] font-semibold py-2">
+              <p className="text-[32px] leading-[40px] font-semibold py-2 text-black">
                 ₹ 21,500
               </p>
             </div>
@@ -60,7 +61,8 @@ const Ringcomponet = () => {
 
         </div>
       </div>
-      
+    </Link>
+     <Link  href="/rings" >
       <div className="w-full lg:h-[540px] md:h-[720px] h-[670px]">
         <div className="max-w-container mx-auto h-full flex flex-row-reverse justify-around items-center">
          
@@ -101,7 +103,7 @@ const Ringcomponet = () => {
                 />
               </button> */}
 
-              <p className="text-[32px] leading-[40px] font-semibold py-2">
+              <p className="text-[32px] leading-[40px] font-semibold py-2 text-black">
                 ₹ 24,300
               </p>
             </div>
@@ -118,6 +120,7 @@ const Ringcomponet = () => {
 
         </div>
       </div>
+      </Link>
     </>
   );
 };

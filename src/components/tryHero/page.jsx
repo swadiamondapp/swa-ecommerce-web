@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Hero = () => {
   return (
-    <div className="relative min-h-[45.75rem]  lg:h-[calc(100vh-90px)] h-[44.7rem] sm:h-[50rem] max-h-[790px] overflow-hidden">
+    <div className="relative min-h-[45.75rem]  lg:h-[calc(100vh-90px)] h-[44.7rem] sm:h-[50rem] lg:max-h-[790px] md:h-[850px] overflow-hidden">
       {/* Container wrapper - responsive max width */}
       <div className="relative max-w-[101rem] mx-auto h-full">
         {/* Background animated blobs - converted to percentage units */}
@@ -23,7 +23,7 @@ const Hero = () => {
         </p>
 
         
-         <p className="absolute top-[10%] left-1/2 -translate-x-1/2 lg:hidden z-30 font-british font-normal text-[2.625rem] leading-[100%] tracking-[0.01em] text-center uppercase whitespace-nowrap">
+         <p className="absolute top-[11%] md:top-[13%] left-1/2 -translate-x-1/2 lg:hidden z-30 font-british font-normal text-[2.625rem] leading-[100%] tracking-[0.01em] text-center uppercase whitespace-nowrap">
           A<span className="lowercase">s real AS you</span>
         </p>
 
