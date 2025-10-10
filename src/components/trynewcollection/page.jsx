@@ -11,6 +11,7 @@ import axios from "axios";
 import * as Urls from "@/utils/urls";
 
 const Newcollection = () => {
+  
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [token, setToken] = useState(null);
@@ -229,12 +230,14 @@ const Newcollection = () => {
                             />
                           ))}
                         </div> */}
-                        <p className="text-lg font-semibold text-gray-900 sm:max-md:text-sm pt-[.5rem]">
-                          ₹{" "}
-                          {product.is_on_discount
-                            ? product.country_discount_price
-                            : product.country_total_price}
-                        </p>
+                        {countryId === "2" && 
+                          <p className="text-lg font-semibold text-gray-900 sm:max-md:text-sm pt-[.5rem]">
+                            {countryId === "2" ? "₹" : "AED"}{" "}
+                            {product.is_on_discount
+                              ? product.country_discount_price
+                              : product.country_total_price}
+                          </p>
+                        }
                       </Link>
                     );
                   })
