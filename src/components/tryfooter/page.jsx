@@ -38,7 +38,7 @@ const Features = () => {
       image: "/try/shipping.svg",
     },
     {
-      title: "CERTIFIED NATURAL DIAMONDS",
+      title: "Certified natural diamonds",
       image: "/try/diafooter.svg",
     },
     {
