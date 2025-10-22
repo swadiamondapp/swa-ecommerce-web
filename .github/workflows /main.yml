@@ -29,25 +29,22 @@ jobs:
     - name: Install Dependencies
       run: npm ci --legacy-peer-deps
 
-    # Step 5: Build React/Next.js App
+    # Step 5: Build Next.js App (Static Export)
     - name: Build App
-      env:
-        APP_FRAMEWORK: react
       run: |
-        chmod +x ./build-script.sh
-        ./build-script.sh
-
-
+        npm run build
+        npx next export
     
-    # Step 6: Zip the build output
+    # Step 6: Zip exported build
     - name: Zip build folder
       run: |
-        if [ -d dist ]; then
-          zip -r build.zip dist
+        if [ -d out ]; then
+          zip -r build.zip out
         else
-          echo "❌ dist folder not found. Build failed."
+          echo "❌ out folder not found. Build failed."
           exit 1
         fi
+
 
 
     # Step 7: Set up SSH
