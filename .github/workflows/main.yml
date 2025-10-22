@@ -29,13 +29,11 @@ jobs:
     - name: Install Dependencies
       run: npm ci --legacy-peer-deps
 
-    # Step 5: Build Next.js App (Static Export)
+    # Step 5: Build Next.js App
     - name: Build App
-      run: |
-        npm run build
-        npx next export
+      run: npm run build
     
-    # Step 6: Zip exported build
+    # Step 6: Zip the output folder
     - name: Zip build folder
       run: |
         if [ -d out ]; then
