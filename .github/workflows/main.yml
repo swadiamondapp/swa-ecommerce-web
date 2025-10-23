@@ -29,20 +29,20 @@ jobs:
       - name: Install Dependencies
         run: npm ci --legacy-peer-deps
 
-      # Step 5: Build Next.js App (SSR mode)
+      # Step 5: Build and Export Next.js App (static)
       - name: Build App
         run: |
-          chmod +x build-script.sh
-          APP_FRAMEWORK=next ./build-script.sh
+          npm run build
+          npx next export
+          mv out dist
 
-
-      # Step 6: Zip build output (for SSR)
+      # Step 6: Zip the static build folder
       - name: Zip build output
         run: |
-          if [ -d .next ]; then
-            zip -r build.zip .next package.json next.config.mjs public
+          if [ -d dist ]; then
+            zip -r build.zip dist
           else
-            echo "❌ .next folder not found. Build failed."
+            echo "❌ dist folder not found. Build failed."
             exit 1
           fi
 
