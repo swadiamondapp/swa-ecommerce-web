@@ -40,7 +40,7 @@ jobs:
       - name: Zip build output
         run: |
           if [ -d .next ]; then
-            zip -r build.zip .next package.json next.config.js public
+            zip -r build.zip .next package.json next.config.mjs public
           else
             echo "❌ .next folder not found. Build failed."
             exit 1
