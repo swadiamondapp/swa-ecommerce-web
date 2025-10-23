@@ -31,7 +31,10 @@ jobs:
 
       # Step 5: Build Next.js App (SSR mode)
       - name: Build App
-        run: npm run build
+        run: |
+          chmod +x build-script.sh
+          APP_FRAMEWORK=next ./build-script.sh
+
 
       # Step 6: Zip build output (for SSR)
       - name: Zip build output
