@@ -977,7 +977,7 @@ function Header() {
         </div>
 
         {/* Right Section */}
-        <div className="flex items-center justify-end bg-red-600 ">
+        <div className="flex items-center justify-end">
           <div className="flex items-center justify-between space-x-6">
             
             <button
