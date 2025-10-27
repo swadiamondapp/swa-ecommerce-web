@@ -679,7 +679,7 @@ function Header() {
 )}
 
 {/* Left Sidebar */}
-<div className={`fixed left-0 top-0 h-full w-80 bg-white z-50 transform transition-transform duration-300 ease-in-out ${showSidebar ? 'translate-x-0' : '-translate-x-full'} md:hidden overflow-y-auto`}>
+<div className={`fixed left-0 top-0 h-full w-80 bg-white z-[9900] transform transition-transform duration-300 ease-in-out ${showSidebar ? 'translate-x-0' : '-translate-x-full'} md:hidden overflow-y-auto`}>
   <div className="p-[1rem]">
     <div className="flex justify-between items-center mb-6">
       <h2 className="text-lg font-semibold">Menu</h2>
@@ -1076,7 +1076,7 @@ function Header() {
 
       {/* Mobile Search Bar */}
       {showMobileSearch && (
-        <div className="w-full px-6 py-4 md:hidden border-b border-gray-200 absolute top-[90px] left-0 right-0 bg-white z-30">
+        <div className="w-full px-6 py-4 md:hidden border-b border-gray-200 absolute top-[90px] left-0 right-0 bg-white z-[500]">
           <div className="relative">
             <Image
               src="/try/search.svg"
