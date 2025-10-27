@@ -73,11 +73,11 @@ const SwaPromise = () => {
           /> */}
         </div>
 
-        <div className="text-[#334155] py-[1rem] lg:py-[5rem] max-w-[750px]">
+        <div className="text-[#334155] py-[1rem] lg:py-[5rem] w-full">
   {/* Mobile: Hexagon Layout */}
-  <div className="md:hidden flex flex-col items-center gap-6">
+  <div className="md:hidden flex flex-col items-center gap-6 w-full">
     {/* First row: 3 items */}
-    <div className="flex justify-center sm:gap-[2rem] gap-[.85rem]">
+    <div className="flex justify-around sm:gap-[2rem] w-full">
       {data.slice(0, 3).map((item, index) => (
         <div className="text-center flex flex-col items-center w-[100px]" key={index}>
           <div className="w-[90px] h-[90px] md:w-[100px] md:h-[100px] bg-white rounded-full mb-[.5rem] flex items-center justify-center">
@@ -95,7 +95,7 @@ const SwaPromise = () => {
     </div>
     
     {/* Second row: 3 items with more spacing */}
-    <div className="flex justify-center sm:gap-[3rem] gap-[2.3rem]">
+    <div className="flex justify-between w-full">
       {data.slice(3, 6).map((item, index) => (
         <div className="text-center flex flex-col items-center w-[100px]" key={index + 3}>
           <div className="w-[90px] h-[90px] md:w-[100px] md:h-[100px] bg-white rounded-full mb-2 flex items-center justify-center">
@@ -113,7 +113,7 @@ const SwaPromise = () => {
     </div>
     
     {/* Third row: 2 items centered */}
-    <div className="flex justify-center sm:gap-[4rem] gap-[2.4rem]">
+    <div className="flex justify-around w-full">
       {data.slice(6, 8).map((item, index) => (
         <div className="text-center flex flex-col items-center w-[100px]" key={index + 6}>
           <div className="w-[90px] h-[90px] md:w-[100px] md:h-[100px] bg-white rounded-full mb-2 flex items-center justify-center">

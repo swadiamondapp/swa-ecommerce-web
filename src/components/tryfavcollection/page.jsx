@@ -43,7 +43,7 @@ const Favcollection = () => {
             alt="fav collection girl"
           />
 
-          <div className="absolute text-center text-md-start flex flex-col items-center left-1/2 transform -translate-x-1/2 lg:block lg:text-left top-[1.687rem] w-[20.125rem] md:w-[24rem] lg:top-[8.4rem] lg:left-[12.51rem] md:top-[3.9rem] sm:top-[2.4rem] ">
+          <div className="absolute text-center text-md-start flex flex-col items-center left-1/2 transform -translate-x-1/2 lg:block lg:text-left top-[1.687rem] w-[20rem] md:w-[24rem] lg:top-[8.4rem] lg:left-[12.51rem] md:top-[3.9rem] sm:top-[2.4rem] ">
             <p className="font-playfair text-[2rem] pb-3 lg:text-[3.5rem] lg:pb-[1.33rem] md:text-[3.5rem] md:pb-[1.33rem] sm:text-[2rem] sm:pb-[1.33rem]">
               Preity Zinta <br /> Fav Collections
             </p>
@@ -55,7 +55,7 @@ const Favcollection = () => {
               className="hidden lg:block top-0 left-0 pb-[1.52rem] lg:pb-[1.52rem] md:pb-[1.52rem] sm:pb-[1.52rem]"
             />
 
-            <p className="pb-[1.55rem] lg:pb-[1.55rem] md:pb-[1.55rem] sm:pb-[1.55rem] md:max-w-[23.60rem] max-w-[20rem] text-[0.75rem] sm:text-sm">
+            <p className="pb-[1.55rem] lg:pb-[1.55rem] md:pb-[1.55rem] sm:pb-[1.55rem] md:max-w-[23.60rem] max-w-[19.1rem] text-[0.75rem] sm:text-sm">
               Its design draws inspiration from the pink oyster mushroom, a
               symbol of immortality and longevity, and it features 41 unique
               mushroom-shaped petals adorned with diamonds The ring weighs
