@@ -142,7 +142,7 @@ const Newcollection = () => {
   ];
 
   return (
-    <div className="w-full lg:h-[1080px] h-[640px] bg-white">
+    <div className="w-full lg:h-[1080px] md:h-[620px]  bg-white">
       <ToastContainer position="top-right" autoClose={3000} />
       <div className="max-w-container mx-auto h-full bg-white flex flex-row items-center relative">
         <Image
@@ -171,8 +171,8 @@ const Newcollection = () => {
               <p className="text-gray-500">Loading...</p>
             </div>
           ) : (
-            <div className="max-sm:overflow-x-auto max-sm:overflow-y-visible lg:w-full flex max-sm:w-full max-sm:h-fit">
-              <div className="lg:ml-[2.25rem] lg:mr-[0.75rem] h-fit w-full flex flex-row justify-between md:ml-0 md:mr-0 sm:ml-0 sm:mr-0 ml-[0.5rem] mr-[0.5rem] lg:mt-[4rem] mt-[2rem] lg:mb-0 mb-[2rem] z-20 max-md:justify-start max-md:gap-4 max-sm:w-fit sm:max-md:gap-2 gap-2">
+            <div className="max-sm:overflow-x-auto overflow-y-hidden lg:w-full flex max-sm:w-full max-sm:h-fit">
+              <div className="  lg:ml-[2.25rem] lg:mr-[0.75rem] h-[290px] lg:h-[390px] md:h-[295px] sm:h-[210px] w-full flex flex-row justify-between md:ml-0 md:mr-0 sm:ml-0 sm:mr-0 ml-[0.5rem] mr-[0.5rem] lg:mt-[4rem] mt-[2rem] lg:mb-0 mb-[2rem] z-20 max-md:justify-start max-md:gap-4 max-sm:w-fit sm:max-md:gap-2 gap-2">
                 {products.length > 0 ? (
                   products.map((product) => {
                     const isInWishlist = wishlistStatus[product.product_id]?.isInWishlist || false;
@@ -181,9 +181,9 @@ const Newcollection = () => {
                       <Link
                         key={product.product_id}
                         href={`/jewellery/${product.alias}`}
-                        className="lg:mx-2 max-md:w-[188px] max-md:h-[340px] max-md:flex-shrink-0 max-sm:flex-shrink-0 max-sm:w-[180px] px-[0.25rem] lg:flex-1 lg:min-w-0 sm:max-md:w-[140px] sm:max-md:px-[0.125rem]"
+                        className="md:px-[2rem] lg:px-0  lg:mx-2 max-md:w-[188px] max-md:h-[340px] max-md:flex-shrink-0 max-sm:flex-shrink-0 max-sm:w-[180px] px-[0.25rem] lg:flex-1 lg:min-w-0 sm:max-md:w-[140px] sm:max-md:px-[0.125rem]"
                       >
-                        <div className="lg:w-full lg:aspect-[4/5] max-md:w-[180px] max-md:h-[220px] max-sm:w-[160px] max-sm:h-[200px] sm:max-md:w-[130px] sm:max-md:h-[160px] bg-[#FAF6F2] z-10 flex justify-center items-center relative">
+                        <div className="lg:w-full lg:aspect-[4/5] max-md:w-[180px] max-md:h-[220px]  max-sm:w-[160px] max-sm:h-[200px] sm:max-md:w-[130px] sm:max-md:h-[160px] bg-[#FAF6F2] z-10 flex justify-center items-center relative">
                           <img
                             src={product.thumbnail_image || "/try/newArrivaltry.png"}
                             alt={product.product_name}
@@ -213,23 +213,13 @@ const Newcollection = () => {
                             )}
                           </button>
                         </div>
-                        
+                        <div className="">
                         <p  className=" text-black font-inter font-semibold text-[16px] leading-[100%] tracking-[4%] align-middle uppercase pt-2 pb-1 sm:max-md:text-[12px] sm:max-md:pt-1 sm:max-md:pb-0.5">
                           {product.product_name}
                         </p>
                         <p className="font-inter text-[#918676] font-normal text-[14px] leading-[100%] tracking-[4%] align-middle uppercase pt-1 pb-1 sm:max-md:text-[10px] sm:max-md:pt-0.5 sm:max-md:pb-0.5">
                           SKU: {product.sku}
                         </p>
-                        {/* <div className="flex gap-2 mb-4 pt-2 pb-1 sm:max-md:gap-1 sm:max-md:mb-2 sm:max-md:pt-1 sm:max-md:pb-0.5">
-                          {colors.map((color) => (
-                            <div
-                              key={color.id}
-                              className="w-6 h-6 rounded-full border-2 border-gray-200 sm:max-md:w-4 sm:max-md:h-4 sm:max-md:border"
-                              style={{ backgroundColor: color.color }}
-                              title={color.name}
-                            />
-                          ))}
-                        </div> */}
                         {countryId === "2" && 
                           <p className="text-lg font-semibold text-gray-900 sm:max-md:text-sm pt-[.5rem]">
                             {countryId === "2" ? "₹" : "AED"}{" "}
@@ -238,6 +228,7 @@ const Newcollection = () => {
                               : product.country_total_price}
                           </p>
                         }
+                        </div>
                       </Link>
                     );
                   })
@@ -250,7 +241,7 @@ const Newcollection = () => {
             </div>
           )}
 
-          <div className="lg:ml-[2.25rem] ml-0 mt-[4rem] flex justify-center lg:justify-start w-full lg:w-auto">
+           <div className="lg:ml-[2.25rem] ml-0  lg:mt-[4rem] md:mt-[2rem] mb-[1rem] flex justify-center lg:justify-start w-full lg:w-auto">
             <Link
               href="/new-arrivals"
               className="flex flex-row items-center gap-2 w-[168px] h-[30px] text-[#000000] text-[18px] leading-[24px] tracking-[0.06em] hover:text-[#2c2c2c] transition underline underline-offset-4"
@@ -264,6 +255,7 @@ const Newcollection = () => {
               />
             </Link>
           </div>
+
         </div>
       </div>
     </div>
@@ -271,3 +263,57 @@ const Newcollection = () => {
 };
 
 export default Newcollection;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//////////////////////////////////////////////////
+
+
+
+
+

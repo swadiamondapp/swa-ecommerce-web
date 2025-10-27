@@ -1,8 +1,12 @@
-import React from "react";
+"use client"
+import React,{useState,useEffect} from "react";
 import Image from "next/image";
 import AccordionSection from "./AccordionSection";
 
 const SubscribeNewsletter = () => {
+
+
+
   return (
     <div className="border-b border-gray-800 py-8 lg:py-10">
       <div className="max-w-6xl mx-auto px-4 text-center flex flex-col items-center">
@@ -65,6 +69,13 @@ const Features = () => {
 };
 
 const GeneralInfo = () => {
+
+  const [countryId, setCountryId] = useState(null);
+  useEffect(() => {
+    const storedCountryId = localStorage.getItem("id");
+    setCountryId(storedCountryId);
+  }, []);
+
   const data = [
     {
       title: "General Info",
@@ -172,8 +183,9 @@ const GeneralInfo = () => {
       title: "Contact info",
       content: (
         <>
+        {countryId === "2"&&
         <div className="space-y-4">
-          <h3 className="text-sm font-semibold tracking-wider mb-6 text-gray-300 uppercase">INDIA Contact info</h3>
+          {/* <h3 className="text-sm font-semibold tracking-wider mb-6 text-gray-300 uppercase">INDIA Contact info</h3> */}
           <div className="flex items-start gap-3">
             <Image
               src="/try/location.svg"
@@ -212,19 +224,57 @@ const GeneralInfo = () => {
             </div>
           </div>
         </div>
+        }
+         {countryId === "3"&&
         <div className="space-y-4 pt-[2rem]">
-          <h3 className="text-sm font-semibold tracking-wider mb-6 text-gray-300 uppercase">UAE Contact info</h3>
+          {/* <h3 className="text-sm font-semibold tracking-wider mb-6 text-gray-300 uppercase">UAE Contact info</h3> */}
           <div className="flex items-start gap-3">
             
-            <Image
+            {/* <Image
               src="/try/location.svg"
               className="pt-1"
               width={16}
               height={16}
               alt="location"
-            />
+            /> */}
             <div className="text-sm leading-6 text-gray-300">
-              Mushrif Mall, First Floor, Unit No: 139, 25th st, Airport Road, Al Mushrif, Abu Dhabi
+              
+    {/* Mushrif Mall, Abu Dhabi – Unit 139, First Floor – 02 565 9545 */}
+  
+           
+ <ul className="space-y-2">
+  <li className="flex items-start gap-2">
+    <Image
+      src="/try/location.svg"
+      className="pt-1 flex-shrink-0"
+      width={16}
+      height={16}
+      alt="location"
+    />
+    <span>Mushrif Mall, Abu Dhabi – Unit 139, First Floor – 02 565 9545</span>
+  </li>
+  <li className="flex items-start gap-2">
+    <Image
+      src="/try/location.svg"
+      className="pt-1 flex-shrink-0"
+      width={16}
+      height={16}
+      alt="location"
+    />
+    <span>Dalma Mall, Abu Dhabi – Unit 118, Ground Floor – 02 585 2517</span>
+  </li>
+  <li className="flex items-start gap-2">
+    <Image
+      src="/try/location.svg"
+      className="pt-1 flex-shrink-0"
+      width={16}
+      height={16}
+      alt="location"
+    />
+    <span>BurJuman Mall, Dubai – Unit 0015A, Ground Floor – 04 254 8843</span>
+  </li>
+</ul>
+
             </div>
           </div>
           <div className="flex items-center gap-3">
@@ -235,7 +285,7 @@ const GeneralInfo = () => {
               alt="phone"
             />
             <div className="text-sm leading-6 text-gray-300">
-              Toll Free Number : 02565-9545
+              Toll Free Number : 02565-9545 
             </div>
           </div>
           <div className="flex items-center gap-3">
@@ -250,6 +300,7 @@ const GeneralInfo = () => {
             </div>
           </div>
         </div>
+    }
         </>
       )
       
@@ -257,13 +308,14 @@ const GeneralInfo = () => {
     
   ];
 
+
   return (
     <div className="py-6 lg:py-0">
       <AccordionSection data={data}  />
       <div className="hidden lg:grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto px-6">
         {data.map((section, index) => (
           <div key={index} className={`text-white py-6 border-l ${index === 0 ? 'border-l-0' : 'border-l pl-6'} border-gray-800`}>
-            {section.title !== "Contact info" && <h3 className="text-sm font-semibold tracking-wider mb-6 text-gray-300 uppercase">
+            { <h3 className="text-sm font-semibold tracking-wider mb-6 text-gray-300 uppercase">
               {section.title}
             </h3>
             }

@@ -1076,7 +1076,7 @@ function Header() {
 
       {/* Mobile Search Bar */}
       {showMobileSearch && (
-        <div className="w-full px-6 py-4 md:hidden border-b border-gray-200 absolute top-[90px] left-0 right-0 bg-white z-50">
+        <div className="w-full px-6 py-4 md:hidden border-b border-gray-200 absolute top-[90px] left-0 right-0 bg-white z-30">
           <div className="relative">
             <Image
               src="/try/search.svg"
