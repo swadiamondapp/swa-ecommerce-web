@@ -950,7 +950,7 @@ function Header() {
             />
 
             {searchShow && (
-              <div className="absolute top-16 left-5 bg-white shadow-md rounded w-60 z-50 max-h-[200px] overflow-y-auto">
+              <div className="absolute top-16 left-5 bg-white shadow-md rounded w-60 z-[101] max-h-[200px] overflow-y-auto">
                 {suggestionList.length > 0 ? (
                   suggestionList.map((item, index) => (
                     <p
