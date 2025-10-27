@@ -1663,57 +1663,67 @@ const ProductDetails = (props) => {
                   )}
                 </div>
               </div>
-              <div className={Classes.ProductDetailsMobCard2}>
-                <div className={Classes.MobCard2Head}>
-                  <Image
-                    src={`/Assets/PD3.png`}
-                    alt="PD3"
-                    width={30}
-                    height={30}
-                  />
-                  <p className={Classes.PdM2}>Product details</p>
-                </div>
-                <div className={Classes.ProductMob3Rows}>
-                  <div className={Classes.MobFirstCard}>
-                    <div
-                      style={{
-                        color: "#7A8288",
-                        fontSize: "15px",
-                      }}
-                    >
-                      Product height
+              {props.height ||
+                props.width ||
+                (props.length > 0 && (
+                  <div className={Classes.ProductDetailsMobCard2}>
+                    <div className={Classes.MobCard2Head}>
+                      <Image
+                        src={`/Assets/PD3.png`}
+                        alt="PD3"
+                        width={30}
+                        height={30}
+                      />
+                      <p className={Classes.PdM2}>Product details</p>
                     </div>
-                    <div>
-                      {productDetails.height}
-                      {props.height + " mm"}
+                    <div className={Classes.ProductMob3Rows}>
+                      {props.height > 0 && (
+                        <div className={Classes.MobFirstCard}>
+                          <div
+                            style={{
+                              color: "#7A8288",
+                              fontSize: "15px",
+                            }}
+                          >
+                            Product height
+                          </div>
+                          <div>
+                            {productDetails.height}
+                            {props.height + " mm"}
+                          </div>
+                        </div>
+                      )}
+                      <div className={Classes.DummyLineArrow}></div>
+                      {props.length > 0 && (
+                        <div className={Classes.MobFirstCard}>
+                          <div
+                            style={{
+                              color: "#7A8288",
+                              fontSize: "15px",
+                            }}
+                          >
+                            Product length
+                          </div>
+                          <div>{props.length + " mm"}</div>
+                        </div>
+                      )}
+                      <div className={Classes.DummyLineArrow}></div>
+                      {props.width > 0 && (
+                        <div className={Classes.MobFirstCard}>
+                          <div
+                            style={{
+                              color: "#7A8288",
+                              fontSize: "15px",
+                            }}
+                          >
+                            Product width
+                          </div>
+                          <div>{props.width + " mm"}</div>
+                        </div>
+                      )}
                     </div>
                   </div>
-                  <div className={Classes.DummyLineArrow}></div>
-                  <div className={Classes.MobFirstCard}>
-                    <div
-                      style={{
-                        color: "#7A8288",
-                        fontSize: "15px",
-                      }}
-                    >
-                      Product length
-                    </div>
-                    <div>{props.length + " mm"}</div>
-                  </div>
-                  <div className={Classes.DummyLineArrow}></div>
-                  <div className={Classes.MobFirstCard}>
-                    <div
-                      style={{
-                        color: "#7A8288",
-                        fontSize: "15px",
-                      }}
-                    >
-                      Product width
-                    </div>
-                    <div>{props.width + " mm"}</div>
-                  </div>
-                </div>
-              </div>
+                ))}
             </div>
             <div className={Classes.ParentOtherStoneMob}>
               <div className={Classes.OtherstoneHeadMob}>
@@ -1867,9 +1877,15 @@ const ProductDetails = (props) => {
                     ) : null} */}
                     <div className={Classes.Left}>Other Stone Count</div>
 
-                    <div className={Classes.Left}>Product Length</div>
-                    <div className={Classes.Left}>Product Width</div>
-                    <div className={Classes.Left}>Product Height</div>
+                    {props.length > 0 && (
+                      <div className={Classes.Left}>Product Length</div>
+                    )}
+                    {props.width > 0 && (
+                      <div className={Classes.Left}>Product Width</div>
+                    )}
+                    {props.height > 0 && (
+                      <div className={Classes.Left}>Product Height</div>
+                    )}
                   </div>
                   <div className="col-md-8 col-6">
                     <div className={Classes.Right}>{props.sku}</div>
@@ -1913,9 +1929,19 @@ const ProductDetails = (props) => {
                     ) : null} */}
                     <div className={Classes.Right}>{props.otherStoneC}</div>
 
-                    <div className={Classes.Right}>{props.length + " mm"}</div>
-                    <div className={Classes.Right}>{props.width + " mm"}</div>
-                    <div className={Classes.Right}>{props.height + " mm"}</div>
+                    {props.length > 0 && (
+                      <div className={Classes.Right}>
+                        {props.length + " mm"}
+                      </div>
+                    )}
+                    {props.width > 0 && (
+                      <div className={Classes.Right}>{props.width + " mm"}</div>
+                    )}
+                    {props.height > 0 && (
+                      <div className={Classes.Right}>
+                        {props.height + " mm"}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
