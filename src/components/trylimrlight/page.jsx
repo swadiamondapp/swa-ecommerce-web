@@ -83,7 +83,7 @@ const Limelight = () => {
           ))}
             <div className="pb-[1.25rem] lg:hidden w-full flex justify-center">
             <a
-              href="/"
+              href="/blog"
               className=" underline underline-offset-4 !underline h-[30px] text-[#017480] text-[18px] leading-[24px] tracking-[0.06em] hover:text-[#2c2c2c] transition underline underline-offset-4"
             >
               SEE ALL
