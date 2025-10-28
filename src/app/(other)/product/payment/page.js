@@ -117,6 +117,7 @@ const Payment = () => {
   }, [data]);
 
   const handlePayButton = () => {
+    if (isLoading) return;
     if (localAddress) {
       submitAddress();
     } else {
@@ -687,6 +688,7 @@ const Payment = () => {
               </div>
               <div
                 className={`${Classes.PayButton} flex justify-center items-center gap-1`}
+                disabled={isLoading}
                 onClick={() => {
                   mode
                     ? handlePayButton()

@@ -23,7 +23,7 @@ const Hero = () => {
         </p>
 
         
-         <p className="absolute top-[11%] md:top-[13%] left-1/2 -translate-x-1/2 lg:hidden z-30 font-british font-normal text-[2.625rem] leading-[100%] tracking-[0.01em] text-center uppercase whitespace-nowrap">
+         <p className="absolute top-[11%] md:top-[13%] left-1/2 -translate-x-1/2 lg:hidden z-30 font-british font-normal text-[2.3rem] sm:text-[2.625rem] leading-[100%] tracking-[0.01em] text-center uppercase whitespace-nowrap">
           A<span className="lowercase">s real AS you</span>
         </p>
 
