@@ -86,6 +86,7 @@ const LoginToggle = (props) => {
   const [otp, setOtp] = useState("");
   const [otpError, setOtpError] = useState("");
   const [emailId, setEmailId] = useState("");
+  const [username, setUsername] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isDesk, setIsDesk] = useState(false);
   // const Contryname = localStorage.getItem("country_name");
@@ -422,6 +423,9 @@ const LoginToggle = (props) => {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
+    if (name === "username") {
+      setUsername(value);
+    }
     // setEmailId(event.target);
     if (name === "email") {
       setEmailId(value);
@@ -431,7 +435,7 @@ const LoginToggle = (props) => {
       [name]: value,
     });
   };
-  console.log(props.setText, "setText==>");
+
   const handleSignUp = async (event) => {
     event.preventDefault();
     if (validateForm()) {
@@ -644,6 +648,7 @@ const LoginToggle = (props) => {
     } catch (error) {
     }
   };
+
   const verifyOtpEmail = async () => {
     if (!otp) {
       // Check if the OTP is empty
@@ -672,18 +677,35 @@ const LoginToggle = (props) => {
       console.log(error);
     }
   };
+
   const handleSubmitButtons = (e) => {
     e.preventDefault();
     handleSignUp();
   };
+
   const handelLoginForm = (e) => {
     e.preventDefault();
-    if (activeTab === "tab1") {
-      sendOtp();
-    } else if (activeTab === "tab2") {
+    if (!username) {
+      setValidationErrors({
+        username: "Email or Phone Number is required",
+      });
+    }
+    // check if the username is a valid email or phone number
+    let emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let mobileNumberRegex = /^\d{10}$/;
+    if (emailRegex.test(username)) {
+      setEmailId(username);
       sendOtpEmail();
+    } else if (mobileNumberRegex.test(username)) {
+      setMobileNumber(username);
+      sendOtp();
+    } else {
+      setValidationErrors({
+        username: "Invalid email or phone number",
+      });
     }
   };
+
   const handleOtpForm = (e) => {
     e.preventDefault();
     if (activeTab === "tab1") {
@@ -711,7 +733,7 @@ const LoginToggle = (props) => {
 
 
   return (
-    <div className={Classes.loginToffle}>
+    <div className={`${Classes.loginToffle} py-4`}>
       <div className={Classes.Wrapper}>
         {isSignup ? (
           <>
@@ -948,89 +970,15 @@ const LoginToggle = (props) => {
                       )}
                     </div>
                     <div className={Classes.signupTitleText}>
-                      {activeTab === "tab1" ? (
-                        <>
-                          <p className={Classes.titlep}>
-                            Please enter your Phone Number we will
-                            <br />
-                            send you OTP
-                          </p>
-                        </>
-                      ) : (
-                        <>
-                          <p className={Classes.titlep}>
-                            Please enter your Email we will
-                            <br />
-                            send you OTP
-                          </p>
-                        </>
-                      )}
+                      <p className={Classes.titlep}>
+                        Please enter your Email or Phone Number we will
+                        <br />
+                        send you OTP
+                      </p>
                     </div>
                   </div>
-                  <div className={Classes.TabButton}>
-                    <div className={Classes.tabHeader}>
-                      <div className={Classes.active} style={customTabtwo}>
-                        <div
-                          className={`Classes.tab-item ${
-                            activeTab === "tab2" && "active"
-                          }`}
-                          onClick={() => handleTabClick("tab2")}
-                        >
-                          {activeTab === "tab1" ? (
-                            <div className={Classes.tabTitleOne}>
-                              <span
-                                style={{
-                                  fontWeight: "600",
-                                }}
-                              >
-                                {/* Phone Number */}
-                                Email
-                              </span>
-                            </div>
-                          ) : (
-                            <div className={Classes.tabTitleOne}>
-                              {/* <span>Phone Number</span> */}
-                              <span>Email</span>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                      <div className={Classes.active}>
-                        <div
-                          className={`Classes.tab-item ${
-                            activeTab === "tab1" && "active"
-                          }`}
-                          onClick={() => handleTabClick("tab1")}
-                        >
-                          {activeTab === "tab1" ? (
-                            <div
-                              className={Classes.tabTitleOne}
-                              style={{
-                                backgroundColor: "#FFF",
-                                borderRadius: "4px",
-                              }}
-                            >
-                              {/* <span>Email</span> */}
-                              <span>Phone number</span>
-                            </div>
-                          ) : (
-                            <div className={Classes.tabTitleOne}>
-                              {/* <span style={{ fontWeight: "600" }}>Email</span> */}
-                              <span
-                                style={{
-                                  fontWeight: "600",
-                                }}
-                              >
-                                Phone number
-                              </span>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className={Classes.tabContent}>
-                    {activeTab === "tab1" && (
+                  <div className={`${Classes.tabContent} mt-6`}>
+                    {/* {activeTab === "tab1" && (
                       <div>
                         <div className={Classes.loginFormInput}>
                           <label className={Classes.labelStyle}>
@@ -1049,26 +997,20 @@ const LoginToggle = (props) => {
                           </p>
                         </div>
                       </div>
-                    )}
-                    {activeTab === "tab2" && (
-                      <div>
-                        <div>
-                          <label className={Classes.labelStyle}>Email</label>
-                          <input
-                            type="email"
-                            placeholder="Enter Email address"
-                            className={Classes.allInputTextStyle}
-                            value={emailId || ""}
-                            onChange={(e) => setEmailId(e.target.value)}
-                          />
-                          <p className={Classes.ErrorText}>
-                            {validationErrors.emailId &&
-                              validationErrors.emailId}
-                          </p>
-                        </div>
-                      </div>
-                    )}
-                    {/* Add more content for additional tabs */}
+                    )} */}
+                      <label className={Classes.labelStyle} htmlFor="email">Email or Phone Number</label>
+                      <input
+                        name="username"
+                        type="text"
+                        placeholder="Enter Email or Phone Number"
+                        className={Classes.allInputTextStyle}
+                        value={username || ""}
+                        onChange={(e) => setUsername(e.target.value)}
+                      />
+                      <p className={Classes.ErrorText}>
+                        {validationErrors.username &&
+                          validationErrors.username}
+                      </p>
                   </div>
                 </div>
                 <div>
@@ -1140,73 +1082,7 @@ const LoginToggle = (props) => {
                 </div>
               </div>
             </form>
-            <div className={Classes.line}>
-              <div
-                style={{
-                  borderBottom: "1px solid #585F67",
-                  opacity: "0.3",
-                }}
-              ></div>
-              <div className={Classes.orText}>OR</div>
-              <div
-                style={{
-                  borderBottom: "1px solid #585F67",
-                  opacity: "0.3",
-                }}
-              ></div>
-            </div>
-            <div className={Classes.flex}>
-              <div
-                className={Classes.SocialButtons}
-                style={{ marginBottom: "1rem" }}
-              >
-                <div className={Classes.googleButton}>
-                  <button
-                    className={`${Classes.buttonSocial} flex items-center`}
-                    onClick={handleSignInWithGoogle}
-                  >
-                    <Image
-                      src={`/Assets/google.png`}
-                      alt="GOOGLE"
-                      width={20}
-                      height={20}
-                    />{" "}
-                    Login with Google
-                  </button>
-                </div>
-                <div className={Classes.facebookButton}>
-                  <button
-                    className={`${Classes.buttonSocial} flex items-center`}
-                    onClick={handleSignInWithFb}
-                  >
-                    <Image
-                      src={`/Assets/fb.png`}
-                      alt="FB"
-                      width={20}
-                      height={20}
-                    />{" "}
-                    Login with facebook
-                  </button>
-                </div>
-              </div>
-              <div style={{ display: "flex" }}>
-                <button
-                  style={{
-                    paddingBottom: "4px",
-                  }}
-                  className={`${Classes.buttonSocial} flex items-center`}
-                >
-                  <Image
-                    src={`/Assets/apple.png`}
-                    alt="APPLE"
-                    width={20}
-                    height={20}
-                  />{" "}
-                  Login with Apple
-                </button>
-              </div>
-            </div>
-            <div className={Classes.Signup} style={{ paddingTop: "10px" }}>
+            <div className={`${Classes.Signup} mt-6`}>
               <span className={Classes.bottomText}>Don’t have an account?</span>
               <span
                 className={Classes.signupAnchor}
