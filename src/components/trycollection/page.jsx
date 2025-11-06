@@ -1,9 +1,24 @@
-import React from "react";
+// "use client";
+// import React, { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import "./page.css";
+import { LuChevronRight } from "react-icons/lu";
+
 
 const Collection = () => {
+  // let containerRef = useRef(null);
+
+  // const handleScrollRight = () => {
+  //   if (containerRef.current) {
+  //     //smooth scroll
+  //     containerRef.current.scrollTo({
+  //       left: containerRef.current.scrollWidth,
+  //       behavior: "smooth"
+  //     });
+  //   }
+  // };
+
   return (
     <div className="w-full lg:h-[44.56rem] md:h-[44.56rem] h-[22.875rem] bg-[#FEFDFB] ">
       <div className="lg:max-w-[84.20%] mx-auto h-full  relative">
@@ -30,6 +45,10 @@ const Collection = () => {
              md:top-[28.86875rem] md:-left-[9.51625rem] 
              sm:top-[28.86875rem] sm:-left-[9.51625rem]"
         />
+
+        <div className="sm:hidden absolute bottom-0 right-0 w-10 lg:h-[44.56rem] md:h-[44.56rem] h-[22.875rem] bg-gradient-to-l from-[#e8e3d7] to-transparent flex items-center justify-center z-40">
+          <LuChevronRight className="text-[#002D31] text-3xl" />
+        </div>
 
         <div className="collection-container">
           <div className="flex w-[31.5rem] mx-auto h-[11rem] justify-around items-center md:w-full lg:w-full lg:max-w-[83.125rem] lg:mx-auto md:h-[20.6875rem]">
