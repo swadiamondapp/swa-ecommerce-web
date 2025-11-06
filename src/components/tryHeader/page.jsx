@@ -1144,13 +1144,13 @@ function CategoriesNavbar({ categories, tags, isCartPage }) {
         <div className="hidden md:flex bg-white absolute top-[98px] left-1/2 -translate-x-1/2 z-10 h-[59.67px] lg:w-[856px] md:w-[768px] mx-auto items-center px-10 rounded-full shadow-sm">
           <div className="container pt-2 px-0">
             <div className="flex items-center justify-between flex-wrap text-sm text-black">
-              {fixed_tags?.map((tag, index) => (
-                <div key={tag.id} className="flex justify-center">
+              {categories?.map((category, index) => (
+                <div key={category.id} className="flex justify-center">
                   <Link
-                    href={`/${tag.name.toLowerCase().replace(/\s+/g, "")}`}
+                    href={`/${category.name.toLowerCase().replace(/\s+/g, "")}`}
                     className="group relative inline-block text-black"
                   >
-                    <p className="pb-2 text-center">{tag.name}</p>
+                    <p className="pb-2 text-center">{category.name}</p>
                     <div className="absolute left-1/2 -translate-x-1/2 -bottom-3 h-[4px] w-20 bg-[#4d9ea7] rounded-t-md scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
                   </Link>
                 </div>
