@@ -841,7 +841,7 @@ const LoginToggle = (props) => {
                   >
                     <button
                       type="submit"
-                      className={Classes.accept}
+                      className={`${Classes.accept} !h-[56px]`}
                       style={{
                         marginTop: "15px",
                       }}
@@ -874,80 +874,6 @@ const LoginToggle = (props) => {
                     }}
                   >
                     <PrivacyModal />
-                  </div>
-                </div>
-
-                <div
-                  style={{
-                    display: "flex",
-                    marginBottom: "0.5rem",
-                  }}
-                >
-                  <div className={Classes.line2}>
-                    <div
-                      style={{
-                        borderBottom: "1px solid #585F67",
-                        opacity: "0.3",
-                      }}
-                    ></div>
-                    <div className={Classes.orText}>Or</div>
-                    <div
-                      style={{
-                        borderBottom: "1px solid #585F67",
-                        opacity: "0.3",
-                      }}
-                    ></div>
-                  </div>
-                </div>
-
-                <div className={Classes.flex}>
-                  <div
-                    className={Classes.SocialButtons}
-                    style={{
-                      marginBottom: "1rem",
-                    }}
-                  >
-                    <div className={Classes.googleButton}>
-                      <button
-                        className={`${Classes.buttonSocial} flex items-center`}
-                        onClick={handleSignInWithGoogle}
-                      >
-                        <Image
-                          src={`/Assets/google.png`}
-                          alt="GOOGLE"
-                          width={25}
-                          height={25}
-                        />{" "}
-                        Sign Up with Google
-                      </button>
-                    </div>
-                    <div className={Classes.facebookButton}>
-                      <button
-                        className={`${Classes.buttonSocial} flex items-center`}
-                        onClick={handleSignInWithFb}
-                      >
-                        <Image
-                          src={`/Assets/fb.png`}
-                          alt="FB"
-                          width={25}
-                          height={25}
-                        />{" "}
-                        Login with facebook
-                      </button>
-                    </div>
-                  </div>
-                  <div style={{ display: "flex" }}>
-                    <button
-                      className={`${Classes.buttonSocial} flex items-center`}
-                    >
-                      <Image
-                        src={`/Assets/apple.png`}
-                        alt="APPLE"
-                        width={25}
-                        height={25}
-                      />{" "}
-                      Login with Apple
-                    </button>
                   </div>
                 </div>
               </div>
