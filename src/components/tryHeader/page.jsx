@@ -861,21 +861,21 @@ function Header() {
 
   
 
-      <div className={`max-w-container mx-auto grid grid-cols-3 items-center w-full ${showMobileSearch ? 'h-[90px]' : 'h-[90px]'} px-6 flex items-center justify-between border-b  mt-0 border-gray-200 md:border-none  md:py-2`}>
-        <div className="flex md:hidden items-center space-x-1">
+      <div className={`max-w-container mx-auto grid grid-cols-7 items-center w-full ${showMobileSearch ? 'h-[90px]' : 'h-[90px]'} px-6 flex items-center justify-between border-b  mt-0 border-gray-200 md:border-none  md:py-2`}>
+        <div className="flex md:hidden items-center space-x-1 col-span-3">
           <button onClick={handleSidebarToggle}>
             <Image src="/try/menu.svg" width={24} height={24} alt="menu" />
           </button>
         </div>
 
         {/* Left Section - Desktop */}
-        <div className="hidden md:flex items-center space-x-1">
+        <div className="hidden md:flex items-center space-x-1 col-span-3">
           <div
             style={{ cursor: "pointer" }}
             className={Classes.CountryFlags}
             ref={nameRef}
           >
-            <div className={Classes.headerElement}>
+            <div className={`${Classes.headerElement} min-w-[24px] min-h-[24px]`}>
               {selectedCountry?.flag_image ? (
                 <Image
                   src={selectedCountry?.flag_image}
@@ -977,7 +977,7 @@ function Header() {
         </div>
 
         {/* Right Section */}
-        <div className="flex items-center justify-end">
+        <div className="flex items-center justify-end col-span-3">
           <div className="flex items-center justify-between space-x-6">
             
             <button
