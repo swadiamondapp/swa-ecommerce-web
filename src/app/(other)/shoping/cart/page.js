@@ -448,9 +448,9 @@ const Cart = () => {
   }
 
   return (
-    <div className={Classes.Background}>
+    <div className="bg-zinc-100">
       <ToastContainer />
-      <div className={`${Classes.Background} py-3`}>
+      <div className="py-3">
         <ConformModal
           handleClose={handleCloseHandler}
           title="Move from bag"

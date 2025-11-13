@@ -1052,7 +1052,7 @@ function Header() {
   )}
             </button>
           </div>
-          <div className="space-x-6 hidden md:block text-black">
+          <div className="space-x-6 hidden md:block text-black relative">
             <LoginSuccessModal
               openSuccessModal={showSuccessModal}
               close={() => setShowSuccessModal(false)}

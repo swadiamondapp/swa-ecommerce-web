@@ -587,7 +587,7 @@ const LoginModal = (props) => {
       {user && showUserDetails && (
         <div
           ref={userDetailsRef}
-          className="absolute top-20 bg-white rounded-md shadow-md z-10 w-[150px] right-0"
+          className="absolute top-12 bg-white rounded-md shadow-md z-20 w-[150px] right-0"
           style={{ userSelect: "none" }}
         >
           <div className={Classes.Name_phoneLog}>
