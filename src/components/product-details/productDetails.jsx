@@ -87,13 +87,17 @@ const ProductDetails = (props) => {
   const [colorChart, setColorChart] = useState(props.colors || []);
   const [video, setVideo] = useState(props.video || []);
   const [allRev, setAllRev] = useState([]);
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(false);
   const [fetchedName, setFetchedName] = useState(null);
   const [cartCount, setCartCount] = useState("");
   const [sizeError, setSizeError] = useState("");
   const [size, setSize] = useState("");
   const [isEnquiryModalVisible, setIsEnquiryModalVisible] = useState(false);
   const [selectedBranch, setSelectedBranch] = useState(null);
+  const [sizering, setSizering] = useState(false);
+
+ 
+
 
   const { setCheckoutData } = useCheckout();
 
@@ -424,12 +428,18 @@ const ProductDetails = (props) => {
   };
 
   const Tryhome = () => {
+   
     if (token) {
       tryhomeHandler();
     } else {
       setLoginModalVisible(true);
       setModalShow(true);
     }
+   
+     if(selectedSize==0){
+     setSizering(true);
+     }
+  
   };
 
   const tryhomeHandler = () => {
@@ -787,7 +797,7 @@ const ProductDetails = (props) => {
             handleReviewClicked={handleReviewClicked}
           />
 
-          <div className="col-md-6" style={{ padding: "0px", zIndex: "100" }}>
+          <div className="col-md-6" style={{ padding: "0px", zIndex: "1" }}>
             <div className="container">
               <div className={Classes.ParentHeadingD1}>
                 <div className={Classes.NewArrivals}>{props.name}</div>
@@ -1089,13 +1099,22 @@ const ProductDetails = (props) => {
                         }}
                       />
                     </button>{" "}
+                    <div className="flex flex-col relative">
                     {countryName === "India" && (
                       <button className={Classes.FindStores} onClick={Tryhome}>
                         Trial at Home
                       </button>
+                      
                     )}
+
+                    {sizering&&(
+                     <p className="text-[13px] text-[#FF0000E6] mt-12 absolute ">Size is Required</p>
+                    )}
+                
+                    </div>
                   </div>
                 )}
+                 
                 <VideocallForm
                   isOpen={isModalOpen}
                   handleClose={handleCloseModal}
