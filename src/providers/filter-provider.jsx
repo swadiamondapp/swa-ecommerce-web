@@ -18,6 +18,8 @@ const FilterProvider = ({ children, category, sort, budget }) => {
   const [occations, setOccations] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const [filterTitle, setFilterTitle] = useState(null);
+
   const [filter, setFilter] = useState(
     sort || budget
       ? {
@@ -30,6 +32,16 @@ const FilterProvider = ({ children, category, sort, budget }) => {
       : undefined
   );
 
+  useEffect(() => {
+    if (!filter || !categories) return;
+    if (filter?.selectedCategories?.length === 1) {
+      const selectedCategoryId = filter.selectedCategories[0];
+      setFilterTitle(categories.filter((item) => item.id === selectedCategoryId)[0].name);
+    }  else {
+      setFilterTitle("Filtered Products");
+    }
+  }, [filter, categories]);
+  
   useEffect(() => {
     axios
       .get(`${metalCategoryUrl}?country=${countryId}`)
@@ -100,6 +112,7 @@ const FilterProvider = ({ children, category, sort, budget }) => {
         occations,
         filter,
         isLoading,
+        filterTitle,
         setFilter,
       }}
     >

@@ -15,7 +15,7 @@ import FilterModal from "@/components/lifetimemodal/filtermodal";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
 export default function ProductListSection({ category }) {
-  const { filter, setFilter, isLoading: isFilterLoading } = useFilter();
+  const { filter, setFilter, isLoading: isFilterLoading, filterTitle } = useFilter();
   const { token } = useAuth();
   const { countryId } = useCountry();
   const observerTarget = useRef(null);
@@ -119,9 +119,11 @@ export default function ProductListSection({ category }) {
           sortHandler={sortHandler}
           count={count}
           categoryName={
-            category
-              ? category.charAt(0).toUpperCase() + category.slice(1)
-              : "New Arrivals"
+            filterTitle
+              ? filterTitle
+              : category
+                ? category.charAt(0).toUpperCase() + category.slice(1)
+                : "New Arrivals"
           }
         >
           <ProductList
