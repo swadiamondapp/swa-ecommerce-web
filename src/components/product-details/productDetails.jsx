@@ -94,10 +94,6 @@ const ProductDetails = (props) => {
   const [size, setSize] = useState("");
   const [isEnquiryModalVisible, setIsEnquiryModalVisible] = useState(false);
   const [selectedBranch, setSelectedBranch] = useState(null);
-  const [sizering, setSizering] = useState(false);
-
- 
-
 
   const { setCheckoutData } = useCheckout();
 
@@ -428,18 +424,17 @@ const ProductDetails = (props) => {
   };
 
   const Tryhome = () => {
-   
+    setSizeError("");
+    if (!selectedSize || selectedSize === "") {
+      setSizeError("Size is required");
+      return;
+    }
     if (token) {
       tryhomeHandler();
     } else {
       setLoginModalVisible(true);
       setModalShow(true);
     }
-   
-     if(selectedSize==0){
-     setSizering(true);
-     }
-  
   };
 
   const tryhomeHandler = () => {
@@ -462,7 +457,9 @@ const ProductDetails = (props) => {
           ) {
             router.push("/trial/athome");
           } else if (response1.data.results.message === "size  required") {
-            setErrormsgtrycart("size  required");
+            setSizeError("size  required");
+          } else {
+            setSizeError(response1.data.results.message);
           }
         })
         .catch((error) => {
@@ -1099,22 +1096,25 @@ const ProductDetails = (props) => {
                         }}
                       />
                     </button>{" "}
-                    <div className="flex flex-col relative">
-                    {countryName === "India" && (
-                      <button className={Classes.FindStores} onClick={Tryhome}>
-                        Trial at Home
-                      </button>
-                      
-                    )}
+                    <div className="flex flex-col relative h-8">
+                      {countryName === "India" && (
+                        <button
+                          className={`${Classes.FindStores} w-[7.8rem]`}
+                          onClick={Tryhome}
+                        >
+                          Trial at Home
+                        </button>
+                      )}
 
-                    {sizering&&(
-                     <p className="text-[13px] text-[#FF0000E6] mt-12 absolute ">Size is Required</p>
-                    )}
-                
+                      {sizeError && (
+                        <p className="text-[13px] text-[#FF0000E6]">
+                          {sizeError}
+                        </p>
+                      )}
                     </div>
                   </div>
                 )}
-                 
+
                 <VideocallForm
                   isOpen={isModalOpen}
                   handleClose={handleCloseModal}
