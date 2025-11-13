@@ -4,6 +4,8 @@ import { BiRupee } from "react-icons/bi";
 import { CgDollar } from "react-icons/cg";
 import axios from "axios";
 import * as Urls from "@/utils/urls";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import AddAddress from "@/app/(other)/cart/checkout/AddAddress";
@@ -262,9 +264,11 @@ const Payment = () => {
                       userEmail: data.email, // Ensure this data is available
                     });
                     localStorage.removeItem("Address");
+                    toast.success("Order placed successfully");
                     router.push("/my/orders");
                   } else if (response2.data.results.status_code === 200) {
                     localStorage.removeItem("Address");
+                    toast.success("Order placed successfully");
                     router.push("/my/orders");
                   }
                 })
@@ -332,9 +336,11 @@ const Payment = () => {
               userEmail: data.email, // Ensure this data is available
             });
             localStorage.removeItem("Address");
+            toast.success("Order placed successfully");
             history.push("/my/orders");
           } else if (response1.data.results.status_code === 200) {
             localStorage.removeItem("Address");
+            toast.success("Order placed successfully");
             history.push("/my/orders");
           }
         });
@@ -457,10 +463,11 @@ const Payment = () => {
               userEmail: data.email, // Ensure this data is available
             });
             localStorage.removeItem("Address");
-
+            toast.success("Order placed successfully");            
             history.push("/my/orders");
           } else if (response1.data.results.status_code === 200) {
             localStorage.removeItem("Address");
+            toast.success("Order placed successfully");
             router.push("/my/orders");
           } else if (response1.data.results.status === 206) {
             setPayButtonError(response1.data.results.message);
@@ -550,6 +557,7 @@ const Payment = () => {
 
   return (
     <div>
+      <ToastContainer />
       <div className={`${Classes.Wrapper} container`}>
         <div>
           <div className={Classes.Main}>
