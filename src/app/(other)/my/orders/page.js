@@ -12,9 +12,11 @@ import { useOrder } from "@/providers/order-provider";
 import { useCountry } from "@/providers/country-provider";
 import { useAuth } from "@/providers/auth-provider";
 import Feature from "@/components/features/features";
+import { useCart } from "@/providers/cart-provider";
 
 const OrderHistoryPage = () => {
   const { countryId } = useCountry();
+  const { fetchCart } = useCart();
   const [orderList, setOrderList] = useState([]);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -25,6 +27,12 @@ const OrderHistoryPage = () => {
   useEffect(() => {
     window?.scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    if (token) {
+      fetchCart();
+    }
+  }, [token]);
 
   useEffect(() => {
     if (token && countryId) {

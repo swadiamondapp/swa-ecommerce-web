@@ -207,13 +207,14 @@
   padding: 5px 0px 0px 0px;
 }
 .LoginButton {
+  height: 56px;
   background-color: #00464d;
   width: 100%;
-  height: 2.45456rem;
   color: #fff;
   margin-bottom: 0rem;
   border-radius: 8px;
   border: none;
+  font-size: 18px;
 }
 .mobileLogo {
   max-width: 42px;
@@ -387,6 +388,7 @@
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+    margin-bottom: 16px;
   }
   .titlep {
     color: #0d1217;
@@ -630,8 +632,8 @@
   .labelStyle {
     color: black;
     font-family: var(--font-gilroy);
-    font-size: 14px;
-    font-style: normal;
+    font-size: 15px;
+    font-style: medium;
     font-weight: 500;
     line-height: 1.25rem;
   }
@@ -723,10 +725,11 @@
   .LoginButton {
     background-color: #00464d;
     width: 100%;
-    height: 3rem;
+    height: 56px;
     color: #fff;
     border-radius: 8px;
     border: none;
+    font-size: 18px;
   }
 
   .title {
@@ -741,7 +744,8 @@
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-    font-size: 2rem;
+    font-size: 32px;
+    margin-bottom: 16px;
   }
   .titlep {
     color: #0d1217;
@@ -838,13 +842,14 @@
     color: black;
     font-family: var(--font-gilroy);
     font-size: 16px;
-    font-style: normal;
+    font-style: medium;
     font-weight: 500;
     line-height: 1.25rem;
   }
   .allInputTextStyle {
     width: 100%;
-    border: 1px solid rgb(5, 5, 5);
+    height: 56px;
+    border: 1px solid rgba(193, 203, 205, 1);
     font-family: var(--font-poppins);
     font-size: 18px;
     font-weight: 400;
@@ -884,10 +889,10 @@
   .LoginButton {
     background-color: #00464d;
     width: 100%;
-    height: 3rem;
+    height: 56px;
     color: #fff;
     margin: 0.5rem 0rem;
-    font-size: 16px;
+    font-size: 18px;
     border-radius: 8px;
     border: none;
   }
@@ -933,6 +938,7 @@
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+    margin-bottom: 16px;
   }
   .titlep {
     color: #0d1217;
@@ -1089,10 +1095,11 @@
     color: #0d1217;
     text-align: center;
     font-family: var(--font-playfair);
-    font-size: 23px;
+    font-size: 32px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+    margin-bottom: 16px;
   }
   .titlep {
     color: #0d1217;
@@ -1172,10 +1179,11 @@
   .LoginButton {
     background-color: #00464d;
     width: 100%;
-    height: 2.45456rem;
+    height: 56px;
     color: #fff;
     border-radius: 8px;
     border: none;
+    font-size: 18px;
   }
   .SignupTextWrapper {
     display: flex;
@@ -1342,19 +1350,20 @@
     color: black;
     font-family: var(--font-gilroy);
     font-size: 12px;
-    font-style: normal;
+    font-style: medium;
     font-weight: 500;
     line-height: 1.25rem;
   }
   .allInputTextStyle {
     width: 100%;
-    border: 1px solid rgb(5, 5, 5);
+    height: 56px;
+    border: 1px solid rgba(193, 203, 205, 1); 
     font-family: var(--font-poppins);
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 400;
     outline: none;
-    border-radius: 5px;
-    padding: 8px 10px;
+    border-radius: 8px;
+    padding: 16px 16px;
   }
   .allInputTextStyle ::placeholder {
     opacity: 0.5;

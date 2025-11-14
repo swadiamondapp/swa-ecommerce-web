@@ -38,19 +38,19 @@ const SubscribeNewsletter = () => {
 const Features = () => {
   const data = [
     {
-      title: "Free shipping",
+      title: "FREE SHIPPING",
       image: "/try/shipping.svg",
     },
     {
-      title: "Certified natural diamonds",
+      title: "CERTIFIED NATURAL DIAMONDS",
       image: "/try/diafooter.svg",
     },
     {
-      title: "100% Certified jewellery",
+      title: "100% CERTIFIED JEWELRY",
       image: "/try/certified.svg",
     },
     {
-      title: "Lifetime Exchange & Buyback",
+      title: "95% VALUE ON EXCHANGE",
       image: "/try/lifetime.svg",
     },
   ];
