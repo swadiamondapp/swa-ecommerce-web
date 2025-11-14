@@ -94,7 +94,7 @@ const Hero = () => {
 
           <Link
             href="/rings"
-            className="group flex items-center gap-2 bg-[#002D31] text-white lg:px-[1.25rem] lg:py-[.75rem] px-[1rem] py-[.75rem] rounded-lg hover:bg-[#003A3F] transition-colors"
+            className="group explore_collection_clicks flex items-center gap-2 bg-[#002D31] text-white lg:px-[1.25rem] lg:py-[.75rem] px-[1rem] py-[.75rem] rounded-lg hover:bg-[#003A3F] transition-colors"
           >
             <span className="lg:text-[0.95rem] text-sm">
               Explore collections
