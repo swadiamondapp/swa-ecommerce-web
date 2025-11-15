@@ -89,7 +89,7 @@ const CheckOutPage = () => {
 
   return (
     <div>
-      <div className={`${Classes.Background} pt-2 pb-4`}>
+      <div className={`pt-2 pb-4`}>
         <CheckOut
           total={paymentData}
           isLoad={loading}

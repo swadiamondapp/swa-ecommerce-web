@@ -24,8 +24,8 @@ const style = {
   bgcolor: "background.paper",
   border: "none",
   boxShadow: 24,
-  borderRadius: "4px",
-  p: 2,
+  borderRadius: "16px",
+  padding: "24px",
   outline: "none",
 };
 
@@ -39,7 +39,8 @@ const styleDesk = {
   bgcolor: "background.paper",
   border: "none",
   boxShadow: 24,
-  p: 2,
+  borderRadius: "16px",
+  padding: "24px",
   outline: "none",
 };
 
@@ -586,7 +587,7 @@ const LoginModal = (props) => {
       {user && showUserDetails && (
         <div
           ref={userDetailsRef}
-          className="absolute top-20 bg-white rounded-md shadow-md z-10"
+          className="absolute top-12 bg-white rounded-md shadow-md z-20 w-[150px] right-0"
           style={{ userSelect: "none" }}
         >
           <div className={Classes.Name_phoneLog}>
@@ -639,19 +640,15 @@ const LoginModal = (props) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={isDesk ? style : styleDesk}>
-          <div>
-            <div>
-              <LoginToggle
-                onClose={handleClose}
-                signupClick={handleSignupClick}
-                LoginSignupToggle={isSignpuLogin}
-                text={props.text}
-                loginText={props.loginText}
-                setShowSuccessModal={props.setShowSuccessModal}
-                setText={props.setText}
-              />
-            </div>
-          </div>
+          <LoginToggle
+            onClose={handleClose}
+            signupClick={handleSignupClick}
+            LoginSignupToggle={isSignpuLogin}
+            text={props.text}
+            loginText={props.loginText}
+            setShowSuccessModal={props.setShowSuccessModal}
+            setText={props.setText}
+          />
         </Box>
       </Modal>
     </>

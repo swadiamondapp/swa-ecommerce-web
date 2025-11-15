@@ -87,7 +87,7 @@ const ProductDetails = (props) => {
   const [colorChart, setColorChart] = useState(props.colors || []);
   const [video, setVideo] = useState(props.video || []);
   const [allRev, setAllRev] = useState([]);
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(false);
   const [fetchedName, setFetchedName] = useState(null);
   const [cartCount, setCartCount] = useState("");
   const [sizeError, setSizeError] = useState("");
@@ -424,6 +424,11 @@ const ProductDetails = (props) => {
   };
 
   const Tryhome = () => {
+    setSizeError("");
+    if (!selectedSize || selectedSize === "") {
+      setSizeError("Size is required");
+      return;
+    }
     if (token) {
       tryhomeHandler();
     } else {
@@ -452,7 +457,9 @@ const ProductDetails = (props) => {
           ) {
             router.push("/trial/athome");
           } else if (response1.data.results.message === "size  required") {
-            setErrormsgtrycart("size  required");
+            setSizeError("size  required");
+          } else {
+            setSizeError(response1.data.results.message);
           }
         })
         .catch((error) => {
@@ -787,7 +794,7 @@ const ProductDetails = (props) => {
             handleReviewClicked={handleReviewClicked}
           />
 
-          <div className="col-md-6" style={{ padding: "0px", zIndex: "100" }}>
+          <div className="col-md-6" style={{ padding: "0px", zIndex: "1" }}>
             <div className="container">
               <div className={Classes.ParentHeadingD1}>
                 <div className={Classes.NewArrivals}>{props.name}</div>
@@ -1089,13 +1096,25 @@ const ProductDetails = (props) => {
                         }}
                       />
                     </button>{" "}
-                    {countryName === "India" && (
-                      <button className={Classes.FindStores} onClick={Tryhome}>
-                        Trial at Home
-                      </button>
-                    )}
+                    <div className="flex flex-col relative h-8">
+                      {countryName === "India" && (
+                        <button
+                          className={`${Classes.FindStores} w-[7.8rem]`}
+                          onClick={Tryhome}
+                        >
+                          Trial at Home
+                        </button>
+                      )}
+
+                      {sizeError && (
+                        <p className="text-[13px] text-[#FF0000E6]">
+                          {sizeError}
+                        </p>
+                      )}
+                    </div>
                   </div>
                 )}
+
                 <VideocallForm
                   isOpen={isModalOpen}
                   handleClose={handleCloseModal}
