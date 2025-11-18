@@ -1,8 +1,8 @@
-import React from "react";
-import AboutUs from "./aboutUs";
+import React from "react"
+import AboutUsPage from "./about-Us";
 
 function About() {
-  return <AboutUs />;
+  return <AboutUsPage/>;
 }
 
 export default About;
