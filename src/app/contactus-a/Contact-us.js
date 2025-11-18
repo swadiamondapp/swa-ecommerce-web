@@ -47,53 +47,56 @@ function Contactus() {
   ];
   return (
     <>
+      
       <div
-        className={`${inter.className} min-h-screen w-full md:pl-20 pl-2 pr-2 md:pr-0 flex  md:justify-between md:flex-row flex-col bg-zinc-100`}
+        className={`${inter.className} min-h-screen w-full bg-zinc-100  md:pl-20 flex flex-col md:flex-row justify-between`}
       >
-        <div className="flex flex-col px-5 mt-20">
-          <div className="flex flex-col gap-3 justify-center items-center md:items-start pb-5 text-lg-start">
-            <span className="text-[16px] font-[400px] text-[#918676]">
+        {/* LEFT SIDE */}
+        <div className="flex flex-col px-5 mt-20 w-full">
+          <div className="flex flex-col gap-3 justify-center items-center md:items-start pb-5">
+            <span className="text-sm font-normal text-[#918676]">
               CONTACT US
             </span>
-            <p className="font-playfair font-[500px] text-[32px] leading-[100%]">
+            <p className="font-playfair font-semibold text-3xl leading-tight">
               Get in touch with us
             </p>
-            <div className="flex sm:flex-row gap-6 flex-col ">
-              <div className="flex gap-4">
-                <img src="/Assets/phone2.svg"></img>
-                <span>Toll free number : 1234567890</span>
+
+            <div className="flex flex-col sm:flex-row gap-6 mt-4">
+              <div className="flex items-center gap-4">
+                <img src="/Assets/phone2.svg" alt="Phone icon" />
+                <span className="text-base">Toll free number: 1234567890</span>
               </div>
-              <div className="flex gap-4">
-                <img src="/Assets/mail1.svg" alt="mailbox"></img>
-                <span>info@swadiamonds.com</span>
+              <div className="flex items-center gap-4">
+                <img src="/Assets/mail1.svg" alt="Email icon" />
+                <span className="text-base">info@swadiamonds.com</span>
               </div>
             </div>
 
-            <div className="h-12 md:w-[500px]  w-full flex items-center gap-2 px-4 text- border rounded-3xl bg-white">
+            <div className="h-12 w-full md:w-[500px] flex items-center gap-2 px-4 border rounded-3xl bg-white mt-6">
               <Search size={13} />
               <input
-                className="outline-none text-[15px] text-[#334155] placeholder:text-[#334155] w-full"
+                className="outline-none text-sm text-[#334155] placeholder:text-[#334155] w-full"
                 type="text"
-                placeholder="Search near outlet"
+                placeholder="Search nearby outlet"
               />
             </div>
           </div>
+
+         
           <div className="flex flex-col gap-4 py-2">
             {location.map((item, index) => (
               <div
                 key={index}
-                className="bg-white w-full lg:w-[800px] rounded-2xl shadow-sm p-5 flex flex-col gap-2"
+                className="bg-white rounded-2xl shadow-sm p-5 flex flex-col gap-2"
               >
-                <h1 className="text-[#155658] font-semibold text-[16px] leading-[24px]">
+                <h2 className="text-[#155658] font-semibold text-base">
                   {item.title}
-                </h1>
-
-                <p className="text-[#334155] font-[400px] text-[16px] leading-[24px] sm:w-[317px] w-full">
+                </h2>
+                <p className="text-[#334155] font-normal text-base sm:w-[317px] w-full">
                   {item.description}
                 </p>
-
-                <div className="flex text-[#155658] font-semibold text-[16px] leading-[24px] gap-2">
-                 <img src="/Assets/phone1.svg" alt="phone1"></img>
+                <div className="flex items-center gap-2 text-[#155658] font-semibold text-base">
+                  <img src="/Assets/phone1.svg" alt="Phone icon" />
                   <p>{item.phone}</p>
                 </div>
               </div>
@@ -102,17 +105,17 @@ function Contactus() {
         </div>
 
         {/* RIGHT SIDE */}
-        <div className="flex-1 min-h-screen relative ">
-          <div className="absolute inset-0">
+        <div className="relative lg:w-[70%] w-full min-h-screen">
+          <div className=" h-full">
             <Image
               src="/Assets/ringgirl.svg"
-              alt="Hand ring"
+              alt="Hand with ring"
               fill
               className="object-cover"
             />
           </div>
 
-          <div className="absolute top-48 lg:left-16 md:left-10 left-20 bg-white w-[355px] flex flex-col gap-2 p-5 z-1 rounded-2xl ">
+          <div className="absolute top-48 lg:left-20 md:left-10 left-20 bg-white w-[355px] lg:w-[350px] sm:w-full md:w-[300px]  flex flex-col gap-2 p-5 z-1 rounded-2xl ">
             <p className="font-playfair font-[500px] text-[32px] leading-[100%]">
               Let's Talk
             </p>
@@ -154,7 +157,6 @@ function Contactus() {
           </div>
         </div>
       </div>
-      <Swapromise />
     </>
   );
 }
