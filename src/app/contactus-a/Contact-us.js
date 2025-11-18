@@ -58,18 +58,18 @@ function Contactus() {
             <p className="font-playfair font-[500px] text-[32px] leading-[100%]">
               Get in touch with us
             </p>
-            <div className="flex sm:flex-row gap-2 flex-col ">
-              <div className="flex gap-2">
-                <Phone className="fill black" />
-                <span>Toll free number:1234567890</span>
+            <div className="flex sm:flex-row gap-6 flex-col ">
+              <div className="flex gap-4">
+                <img src="/Assets/phone2.svg"></img>
+                <span>Toll free number : 1234567890</span>
               </div>
-              <div className="flex gap-2">
-                <Mail />
+              <div className="flex gap-4">
+                <img src="/Assets/mail1.svg" alt="mailbox"></img>
                 <span>info@swadiamonds.com</span>
               </div>
             </div>
 
-            <div className="h-10 w-[350px] flex items-center gap-2 px-4 text- border rounded-3xl bg-white">
+            <div className="h-12 md:w-[500px]  w-full flex items-center gap-2 px-4 text- border rounded-3xl bg-white">
               <Search size={13} />
               <input
                 className="outline-none text-[15px] text-[#334155] placeholder:text-[#334155] w-full"
@@ -82,7 +82,7 @@ function Contactus() {
             {location.map((item, index) => (
               <div
                 key={index}
-                className="bg-white w-full md:w-[800px] rounded-2xl shadow-sm p-5 flex flex-col gap-2"
+                className="bg-white w-full lg:w-[800px] rounded-2xl shadow-sm p-5 flex flex-col gap-2"
               >
                 <h1 className="text-[#155658] font-semibold text-[16px] leading-[24px]">
                   {item.title}
@@ -93,7 +93,7 @@ function Contactus() {
                 </p>
 
                 <div className="flex text-[#155658] font-semibold text-[16px] leading-[24px] gap-2">
-                  <Phone />
+                 <img src="/Assets/phone1.svg" alt="phone1"></img>
                   <p>{item.phone}</p>
                 </div>
               </div>
@@ -112,7 +112,7 @@ function Contactus() {
             />
           </div>
 
-          <div className="absolute top-48 right-20 bg-white w-[355px] flex flex-col gap-2 p-5 z-1 rounded-2xl">
+          <div className="absolute top-48 lg:left-16 md:left-10 left-20 bg-white w-[355px] flex flex-col gap-2 p-5 z-1 rounded-2xl ">
             <p className="font-playfair font-[500px] text-[32px] leading-[100%]">
               Let's Talk
             </p>
@@ -147,8 +147,9 @@ function Contactus() {
               </div>
             </div>
 
-            <button className="bg-[#002D31] h-10 w-full rounded-lg text-white text-[16px] flex justify-center items-center mt-2">
-              SUBMIT <ArrowRight />
+            <button className="bg-[#002D31] h-10 w-full rounded-lg text-white text-[16px] flex justify-center items-center mt-2 gap-2">
+              SUBMIT
+              <img src="/Assets/arrows.svg" alt="arrows"></img>
             </button>
           </div>
         </div>
