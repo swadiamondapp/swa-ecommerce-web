@@ -20,7 +20,7 @@ async function CategoryPage({ params }) {
           </div>
         </FilterProvider>
       </div>
-      <Feature />
+      {/* <Feature /> */}
     </div>
   );
 }

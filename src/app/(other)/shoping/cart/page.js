@@ -471,7 +471,7 @@ const Cart = () => {
         />
         {cartLists}
       </div>
-      <Features />
+      {/* <Features /> */}
     </div>
   );
 };
