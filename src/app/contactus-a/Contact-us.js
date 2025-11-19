@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
-import { Phone, Mail, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+
 import Swapromise from "../(other)/about-us/aboutcompo/Swapromise";
 
 import { Inter } from "next/font/google";
@@ -13,22 +13,22 @@ const inter = Inter({
 function Contactus() {
   const location = [
     {
-      title: "LULU MALL",
+      title: "LULU MALL HYDERABAD",
       description:
         "Lower Ground Floor, Unit No. LG 08, LuLu Mall, JNTU- Hitech City Road, Kukatpally, Hyderabad, Medchal, Malkajgiri, Telangana, 500072",
-      phone: "234567345",
+      phone: "79 9434 3002",
     },
     {
-      title: "LULU MALL",
+      title: "LULU MALL HYDERABAD",
       description:
         "Lower Ground Floor, Unit No. LG 08, LuLu Mall, JNTU- Hitech City Road, Kukatpally, Hyderabad, Medchal, Malkajgiri, Telangana, 500072",
-      phone: "234567345",
+      phone: "79 9434 3002",
     },
     {
-      title: "LULU MALL",
+      title: "LULU MALL HYDERABAD",
       description:
         "Lower Ground Floor, Unit No. LG 08, LuLu Mall, JNTU- Hitech City Road, Kukatpally, Hyderabad, Medchal, Malkajgiri, Telangana, 500072",
-      phone: "234567345",
+      phone: "79 9434 3002",
     },
   ];
   const Signup = [
@@ -42,14 +42,14 @@ function Contactus() {
     },
     {
       labals: "Phone Number",
-      place: "1234567890",
+      place: "79 9434 3002",
     },
   ];
   return (
     <>
       
       <div
-        className={`${inter.className} min-h-screen w-full bg-zinc-100  md:pl-20 flex flex-col md:flex-row justify-between`}
+        className={`${inter.className} min-h-screen w-full bg-zinc-100 md:pl-20 flex flex-col md:flex-row justify-between`}
       >
         {/* LEFT SIDE */}
         <div className="flex flex-col px-5 mt-20 w-full">
@@ -61,10 +61,10 @@ function Contactus() {
               Get in touch with us
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-6 mt-4">
-              <div className="flex items-center gap-4">
+            <div className="flex flex-col lg:flex-row gap-6 mt-4 items-center">
+              <div className="flex items-center gap-4 ">
                 <img src="/Assets/phone2.svg" alt="Phone icon" />
-                <span className="text-base">Toll free number: 1234567890</span>
+                <span className="text-base">Toll free number: 1800 257 8600</span>
               </div>
               <div className="flex items-center gap-4">
                 <img src="/Assets/mail1.svg" alt="Email icon" />
@@ -105,8 +105,10 @@ function Contactus() {
         </div>
 
         {/* RIGHT SIDE */}
-        <div className="relative lg:w-[70%] w-full min-h-screen">
-          <div className=" h-full">
+        
+        <div className="relative w-[70%] min-h-screen left-24 md:left-0">
+         
+          <div className="h-full">
             <Image
               src="/Assets/ringgirl.svg"
               alt="Hand with ring"
@@ -114,14 +116,16 @@ function Contactus() {
               className="object-cover"
             />
           </div>
+          
+        
 
-          <div className="absolute top-48 lg:left-20 md:left-10 left-20 bg-white w-[355px] lg:w-[350px] sm:w-full md:w-[300px]  flex flex-col gap-2 p-5 z-1 rounded-2xl ">
+          <div className="absolute md:top-48 top-32 lg:left-20 md:left-10 left-10 bg-white w-[355px] lg:w-[350px]  flex flex-col gap-2 p-5 z-1 rounded-2xl md:hidden lg:block ">
             <p className="font-playfair font-[500px] text-[32px] leading-[100%]">
               Let's Talk
             </p>
 
             {Signup.map((items, index) => (
-              <div key={index} className="flex flex-col w-full">
+              <div key={index} className="flex flex-col w-full gap-1 mt-3">
                 <label className="text-[#334155] text-[15px] leading-[20px] font-[500px] ">
                   {items.labals}
                 </label>
@@ -157,6 +161,7 @@ function Contactus() {
           </div>
         </div>
       </div>
+      <Swapromise/>
     </>
   );
 }
