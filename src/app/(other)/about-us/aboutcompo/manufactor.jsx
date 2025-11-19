@@ -21,7 +21,7 @@ function Manufactor() {
         <div className="block lg:hidden text-center mt-4">
           <p className="text-4xl font-playfair">Manufacturing Unit</p>
           
-           <p className="sm:text-[16px] text-[13px] px-2 sm:px-0 leading-[24px] sm:pt-[1rem] pt-[.5rem] font-[400] ">
+           <p className="sm:text-[16px] text-[13px] px-2 sm:px-0 leading-[24px] sm:pt-[1rem] pt-[.5rem] font-[400]">
               Concept of SWA Diamonds came into being from CAPESTONE Ventures Pvt
             Ltd, a leading name in wholesale diamond jewellers market, that does
             business with prominent retail jewellers. Many retail jewellers who

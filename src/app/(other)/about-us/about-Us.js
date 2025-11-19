@@ -5,7 +5,6 @@ import React from "react";
 import { Inter } from "next/font/google";
 import Image from "next/image";
 import VisionMission from "./aboutcompo/vision";
-import OurJourney from "./aboutcompo/ourJourney";
 import Swapromise from "./aboutcompo/Swapromise";
 import Queen from "./aboutcompo/Queen";
 import BrandZinda from "./aboutcompo/brandZinda";
@@ -143,7 +142,7 @@ function AboutUsPage() {
         </div>
       </div>
       <VisionMission />
-      <OurJourney />
+      {/* <OurJourney /> */}
       <Swapromise />
       <Queen />
 
