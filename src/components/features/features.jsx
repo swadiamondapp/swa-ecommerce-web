@@ -6,7 +6,7 @@ import Classes from "./features.module.css";
 
 function Features() {
   return (
-    <div className={Classes.FeaturesBg}>
+    <div className={`${Classes.FeaturesBg} hidden`}>
       <div className="container">
         <div className={Classes.MarginFeatures}>
           <div className="row shipping_cards">
