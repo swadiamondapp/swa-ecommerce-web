@@ -16,7 +16,7 @@ const inter = Inter({
 function AboutUsPage() {
   return (
     <div className={`${inter.className}` }>
-      <div className="container min-h-screen ">
+      <div className="container ">
         <div className="flex lg:flex-row lg:mt-10 lg:gap-16 flex-col h-full ">
           <div className="w-full mt-10 leading-[32px] ">
             <h1 className="text-[16px] font-[400px] text-[#918676] hidden lg:block">

@@ -4,7 +4,7 @@ import Image from "next/image";
 function BrandZinda() {
   return (
     <div>
-      <div className="w-full lg:h-[800px] bg-[#F8F4E9]  md:h-[900px] sm:h-[780px] h-[750px] block">
+      <div className="w-full lg:h-[600px] bg-[#F8F4E9]  md:h-[900px] sm:h-[780px] h-[750px] block">
         <div className="max-w-container mx-auto lg:h-[667.46px] bg-[#F8F4E9] sm:h-full relative md:h-full h-full">
           <Image
             src="/try/1000538381.png"
@@ -60,6 +60,7 @@ function BrandZinda() {
       </div>
 
       <div className="w-full ">
+        <div className="max-w-container mx-auto">
         <Image
           src="/try/Rectangle 687.svg"
           alt="rectangle"
@@ -67,6 +68,7 @@ function BrandZinda() {
           width={1800}
           className=""
         />
+        </div>
       </div>
     </div>
   );

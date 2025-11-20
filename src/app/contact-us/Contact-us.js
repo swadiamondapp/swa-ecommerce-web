@@ -151,7 +151,7 @@ function Contactus() {
           </div>
         </div>
       </div>
-      <Swapromise className="bg-white" />
+      <Swapromise />
     </>
   );
 }
