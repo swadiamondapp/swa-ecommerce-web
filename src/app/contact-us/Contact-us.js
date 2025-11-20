@@ -47,13 +47,12 @@ function Contactus() {
   ];
   return (
     <>
-      
       <div
-        className={`${inter.className} min-h-screen w-full bg-zinc-100 md:pl-20 flex flex-col md:flex-row justify-between`}
+        className={`${inter.className} min-h-screen w-full bg-zinc-100 pl-4 lg:pl-20 flex flex-col md:flex-row justify-between`}
       >
         {/* LEFT SIDE */}
-        <div className="flex flex-col px-5 mt-20 w-full">
-          <div className="flex flex-col gap-3 justify-center items-center md:items-start pb-5">
+        <div className="flex flex-col p-5 mt-20 w-full">
+          <div className="flex flex-col gap-2 justify-center items-center md:items-start pb-5">
             <span className="text-sm font-normal text-[#918676]">
               CONTACT US
             </span>
@@ -61,10 +60,12 @@ function Contactus() {
               Get in touch with us
             </p>
 
-            <div className="flex flex-col lg:flex-row gap-6 mt-4 items-center">
+            <div className="flex flex-col lg:flex-row gap-6 mt-4 items-start lg:items-center">
               <div className="flex items-center gap-4 ">
                 <img src="/Assets/phone2.svg" alt="Phone icon" />
-                <span className="text-base">Toll free number : 1800 257 8600</span>
+                <span className="text-base">
+                  Toll free number : 1800 257 8600
+                </span>
               </div>
               <div className="flex items-center gap-4">
                 <img src="/Assets/mail1.svg" alt="Email icon" />
@@ -72,7 +73,7 @@ function Contactus() {
               </div>
             </div>
 
-            <div className="h-12 w-full md:w-[500px] flex items-center gap-2 px-4 border rounded-3xl bg-white mt-6">
+            <div className="h-12 w-full sm:w-[355px] md:w-[350px] lg:w-[500px] flex items-center gap-2 px-4 border rounded-3xl bg-white mt-6">
               <Search size={13} />
               <input
                 className="outline-none text-sm text-[#334155] placeholder:text-[#334155] w-full"
@@ -82,7 +83,6 @@ function Contactus() {
             </div>
           </div>
 
-         
           <div className="flex flex-col gap-4 py-2">
             {location.map((item, index) => (
               <div
@@ -105,21 +105,11 @@ function Contactus() {
         </div>
 
         {/* RIGHT SIDE */}
-        
-<div className="relative w-full min-h-screen md:w-[70%] md:left-0">
-       
-          <div className="h-full">
-            <Image
-              src="/Assets/ringgirl.svg"
-              alt="Hand with ring"
-              fill
-              className="object-cover"
-            />
-          </div>
-          
-        
 
-          <div className="absolute md:top-48 top-16 lg:left-20 md:left-10  bg-white left-10 sm:w-[355px] lg:w-[350px]  flex flex-col gap-2 p-5 z-1 rounded-2xl  ">
+        <div
+          className="relative w-full min-h-screen md:w-[70%] md:left-0 flex justify-center items-center bg-slate-400 bg-[url('/Assets/ringgirl.svg')] bg-cover bg-right bg-no-repeat p-4"
+        >
+          <div className="bg-white sm:w-[355px] lg:w-[350px] flex flex-col gap-2 p-5 z-1 rounded-2xl">
             <p className="font-playfair font-[500px] text-[32px] leading-[100%]">
               Let's Talk
             </p>
@@ -161,7 +151,7 @@ function Contactus() {
           </div>
         </div>
       </div>
-      <Swapromise className="bg-white"/>
+      <Swapromise className="bg-white" />
     </>
   );
 }
