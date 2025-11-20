@@ -47,7 +47,6 @@ function Contactus() {
   ];
   return (
     <>
-      
       <div
         className={`${inter.className} min-h-screen w-full bg-zinc-100 md:pl-20 flex flex-col md:flex-row justify-between`}
       >
@@ -64,7 +63,9 @@ function Contactus() {
             <div className="flex flex-col lg:flex-row gap-6 mt-4 items-center">
               <div className="flex items-center gap-4 ">
                 <img src="/Assets/phone2.svg" alt="Phone icon" />
-                <span className="text-base">Toll free number : 1800 257 8600</span>
+                <span className="text-base">
+                  Toll free number : 1800 257 8600
+                </span>
               </div>
               <div className="flex items-center gap-4">
                 <img src="/Assets/mail1.svg" alt="Email icon" />
@@ -82,7 +83,6 @@ function Contactus() {
             </div>
           </div>
 
-         
           <div className="flex flex-col gap-4 py-2">
             {location.map((item, index) => (
               <div
@@ -105,9 +105,8 @@ function Contactus() {
         </div>
 
         {/* RIGHT SIDE */}
-        
-<div className="relative w-full min-h-screen md:w-[70%] md:left-0">
-       
+
+        <div className="relative w-full min-h-screen md:w-[70%] md:left-0">
           <div className="h-full">
             <Image
               src="/Assets/ringgirl.svg"
@@ -116,8 +115,6 @@ function Contactus() {
               className="object-cover"
             />
           </div>
-          
-        
 
           <div className="absolute md:top-48 top-16 lg:left-20 md:left-10  bg-white left-10 sm:w-[355px] lg:w-[350px]  flex flex-col gap-2 p-5 z-1 rounded-2xl  ">
             <p className="font-playfair font-[500px] text-[32px] leading-[100%]">
@@ -161,7 +158,7 @@ function Contactus() {
           </div>
         </div>
       </div>
-      <Swapromise className="bg-white"/>
+      <Swapromise />
     </>
   );
 }

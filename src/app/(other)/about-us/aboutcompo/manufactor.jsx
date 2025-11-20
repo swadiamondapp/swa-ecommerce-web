@@ -3,8 +3,8 @@ import Image from "next/image";
 
 function Manufactor() {
   return (
-    <div className="w-full bg-white min-h-screen">
-      <div className="flex lg:flex-row flex-col w-full min-h-screen items-center md:px-20 gap-20 justify-center py-10 gap-">
+    <div className="w-full bg-white ">
+      <div className="container mx-auto flex lg:flex-row flex-col items-center md:px-20 gap-20 justify-center py-10 gap-">
         {/* LEFT SIDE */}
         <div className="hidden lg:block text-start lg:mb-[4rem] min-w-[430px]">
           <p className="text-[56px] font-playfair font-[500] ">
@@ -30,7 +30,7 @@ function Manufactor() {
             </p>
         </div>
         {/* RIGHT SIDE */}
-        <div className="flex justify-center items-center w-full">
+        <div className="flex justify-center items-center w-full ">
           <Image
             src="/try/Blueprint.svg"
             alt="blueprint"
