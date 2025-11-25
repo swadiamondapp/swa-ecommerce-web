@@ -17,7 +17,6 @@ import Ringcomponet from "@/components/tryringcomponet/page";
 import Worldrec from "@/components/tryworldrecord/page";
 import Galxypendant from "@/components/trygalaxypendent/page";
 import Limelight from "@/components/trylimrlight/page";
-import TFooter from "@/components/tryfooter/page";
   
 
 export default async function Home() {

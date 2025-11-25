@@ -733,7 +733,7 @@ const LoginToggle = (props) => {
 
 
   return (
-    <div className={`${Classes.loginToffle} py-4`}>
+    <div className={`${Classes.loginToffle}`}>
       <div className={Classes.Wrapper}>
         {isSignup ? (
           <>
