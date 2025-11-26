@@ -30,23 +30,26 @@ jobs:
     - name: Install Dependencies
       run: npm install --legacy-peer-deps
 
-    # STEP 5: Build & Export Next.js
-    - name: Build & Export App
+    # 🚫 STEP 5: REMOVE `export` mode to avoid build failures
+    - name: Disable static export
       run: |
-        npm run build
-        npx next export
+        sed -i 's/output: \?\(\"export\"\|{[^}]*export:[^}]*}\)//g' next.config.js || true
 
-    # STEP 6: Zip build output (out folder)
+    # STEP 6: Build Next.js App (SSR mode)
+    - name: Build App
+      run: npm run build
+
+    # STEP 7: Zip .next build folder
     - name: Zip build folder
       run: |
-        if [ -d out ]; then
-          zip -r build.zip out
+        if [ -d .next ]; then
+          zip -r build.zip .next public package.json next.config.js
         else
-          echo "❌ out folder not found. Build failed."
+          echo "❌ .next folder not found. Build failed."
           exit 1
         fi
 
-    # STEP 7: Setup SSH
+    # STEP 8: Setup SSH
     - name: Setup SSH
       run: |
         mkdir -p ~/.ssh
@@ -54,15 +57,10 @@ jobs:
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan -H 138.68.84.10 >> ~/.ssh/known_hosts
 
-    # STEP 8: Upload build.zip
+    # STEP 9: Upload build.zip
     - name: Upload Build
       run: scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa build.zip root@138.68.84.10:/tmp/build.zip
 
-    # STEP 9: Run server script to deploy
+    # STEP 10: Run server script to deploy
     - name: Deploy to Server
       run: ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa root@138.68.84.10 "bash /opt/projects/auto_deploy/deploy.sh app-swadiamonds"
-
-
-
-
-
