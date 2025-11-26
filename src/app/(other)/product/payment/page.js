@@ -120,6 +120,7 @@ const Payment = () => {
 
   const handlePayButton = () => {
     if (isLoading) return;
+    setIsLoading(true);
     if (localAddress) {
       submitAddress();
     } else {
@@ -157,6 +158,8 @@ const Payment = () => {
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
   const placeOrder = async (addressId) => {
