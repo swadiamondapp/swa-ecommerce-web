@@ -1,4 +1,4 @@
-name: Deploy Next.js App to Apache
+name: Deploy Next.js Static App to Apache
 
 on:
   push:
@@ -25,19 +25,24 @@ jobs:
     - name: Install Dependencies
       run: npm install --legacy-peer-deps
 
-    # ⛔ Removed STEP 5 — no editing next.config.js
-
-    - name: Build App
-      run: npm run build
-
-    - name: Zip build folder
+    - name: Build Next.js
       run: |
-        if [ -d .next ]; then
-          zip -r build.zip .next public package.json next.config.js
-        else
-          echo "❌ .next folder not found. Build failed."
+        npm run build
+        npm run export
+
+    - name: Verify Export Folder
+      run: |
+        if [ ! -d out ]; then
+          echo "❌ Export failed: out/ folder missing!"
           exit 1
         fi
+        echo "✔ out/ directory found"
+
+    - name: Zip Static Build
+      run: |
+        cd out
+        zip -r ../build.zip .
+        cd ..
 
     - name: Setup SSH
       run: |
