@@ -3,43 +3,33 @@ name: Deploy Next.js App to Apache
 on:
   push:
     branches:
-      - CI/CD-DEPLOY   # change branch if needed
+      - CI/CD-DEPLOY
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-
-    # STEP 1: Checkout repo
     - name: Checkout Code
       uses: actions/checkout@v4
 
-    # STEP 2: Setup Node.js
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
         node-version: '22'
         cache: 'npm'
 
-    # STEP 3: Force Correct NPM
     - name: Install Correct NPM
       run: npm install -g npm@10
 
-    # STEP 4: Install Dependencies
     - name: Install Dependencies
       run: npm install --legacy-peer-deps
 
-    # 🚫 STEP 5: REMOVE `export` mode to avoid build failures
-    - name: Disable static export
-      run: |
-        sed -i 's/output: \?\(\"export\"\|{[^}]*export:[^}]*}\)//g' next.config.js || true
+    # ⛔ Removed STEP 5 — no editing next.config.js
 
-    # STEP 6: Build Next.js App (SSR mode)
     - name: Build App
       run: npm run build
 
-    # STEP 7: Zip .next build folder
     - name: Zip build folder
       run: |
         if [ -d .next ]; then
@@ -49,7 +39,6 @@ jobs:
           exit 1
         fi
 
-    # STEP 8: Setup SSH
     - name: Setup SSH
       run: |
         mkdir -p ~/.ssh
@@ -57,10 +46,8 @@ jobs:
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan -H 138.68.84.10 >> ~/.ssh/known_hosts
 
-    # STEP 9: Upload build.zip
     - name: Upload Build
       run: scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa build.zip root@138.68.84.10:/tmp/build.zip
 
-    # STEP 10: Run server script to deploy
     - name: Deploy to Server
       run: ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa root@138.68.84.10 "bash /opt/projects/auto_deploy/deploy.sh app-swadiamonds"
