@@ -18,17 +18,23 @@ jobs:
       with:
         node-version: 18
 
-    # FIX: npm ci → npm install --legacy-peer-deps
     - name: Install dependencies (ignore peer conflicts)
       run: npm install --legacy-peer-deps
 
+    # 1️⃣ Build Next.js
     - name: Build project (SSR)
       run: npm run build
 
+    # 2️⃣ Generate Sitemap (after build)
+    - name: Generate Sitemap
+      run: npx next-sitemap
+
+    # 3️⃣ Zip build + public (includes sitemap)
     - name: Zip build folder
       run: |
         zip -r build.zip .next public package.json next.config.js
 
+    # 4️⃣ Upload build.zip to server
     - name: Upload build to server
       uses: appleboy/scp-action@master
       with:
@@ -38,6 +44,7 @@ jobs:
         source: "build.zip"
         target: "/tmp/build.zip"
 
+    # 5️⃣ SSH → deploy script
     - name: SSH and run deploy.sh
       uses: appleboy/ssh-action@master
       with:
@@ -46,4 +53,4 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY_LIVE_SWA }}
         script: |
           chmod +x /opt/projects/auto_deploy/deploy.sh
-          /opt/projects/auto_deploy/deploy.sh app-swadiamonds
+          /opt/projects/auto_deploy/deploy.sh app-swadiamonds COMPLETE
