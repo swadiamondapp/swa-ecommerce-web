@@ -1,6 +1,6 @@
 name: Deploy Next.js App  
 
-on: 
+on:  
   push: 
     branches: [CI/CD-DEPLOY]
   workflow_dispatch:
