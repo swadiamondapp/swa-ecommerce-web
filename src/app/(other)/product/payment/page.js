@@ -158,11 +158,12 @@ const Payment = () => {
       }
     } catch (error) {
       console.log(error);
-    } finally {
       setIsLoading(false);
     }
   };
+
   const placeOrder = async (addressId) => {
+    setIsLoading(true);
     let cartBody;
     let buyBody;
     const p_Method = mode === "cash" ? "C" : "P";
@@ -457,7 +458,6 @@ const Payment = () => {
           headers: { Authorization: "Token " + token },
         })
         .then((response1) => {
-          setIsLoading(false);
           if (response1.data.results.status_code === 200 && !token) {
             setAuth(data.token, {
               userName: data.name,
@@ -473,8 +473,16 @@ const Payment = () => {
             toast.success("Order placed successfully");
             router.push("/my/orders");
           } else if (response1.data.results.status === 206) {
+            setIsLoading(false);
             setPayButtonError(response1.data.results.message);
+          } else {
+            setIsLoading(false);
+            toast.error("Failed to place order. Please try again.");
           }
+        }).catch((error) => {
+          console.log(error);
+          setIsLoading(false);
+          toast.error("Failed to place order. Please try again.");
         });
     }
   };
