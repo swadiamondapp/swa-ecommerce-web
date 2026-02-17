@@ -35,9 +35,9 @@ const StoreComp = () => {
               <div className="flex items-center justify-center gap-2 mb-2 mt-2">
                 <span className="w-[58.4px] h-[4px] bg-[#017480]"></span>
               </div>
-              <p className="text-[12.8px]">
+              {/* <p className="text-[12.8px]">
                 Opening soon @ <span className="font-semibold">GURUGRAM</span>
-              </p>
+              </p> */}
             </div>
 
             <div className="flex-1 flex items-center justify-center relative">
@@ -89,10 +89,10 @@ const StoreComp = () => {
               <p className="text-[14.4px] font-medium mb-2">
                 Store across India and UAE
               </p>
-              <p className="text-[12.8px] flex flex-row">
+              {/* <p className="text-[12.8px] flex flex-row">
                 Opening soon @ <span className="font-semibold">GURUGRAM</span>
                     <span className="block w-[69.34px] h-[4.18px] bg-[#017480] ml-2 mt-2 align-middle"></span>
-                    </p>
+                    </p> */}
             </div>
         </div>
       </div>
