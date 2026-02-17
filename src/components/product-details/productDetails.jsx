@@ -43,6 +43,16 @@ import { useCountry } from "@/providers/country-provider";
 import ScrollToTop from "@/components/scroll-to-top";
 import { useCheckout } from "@/providers/checkout-provider";
 
+function buildProductShareUrl({ alias, productDetails, selectedColor }) {
+  debugger;
+  const id = productDetails?.id;
+  let url = `https://www.swadiamonds.com/jewellery/${alias || ""}?id=${id || ""}`;
+  const color = selectedColor?.colour_name;
+  if (color && color !== "undefined")
+    url += `&color=${encodeURIComponent(color)}`;
+  return url;
+}
+
 const ProductDetails = (props) => {
   const router = useRouter();
   const { token } = useAuth();
@@ -830,21 +840,12 @@ const ProductDetails = (props) => {
                   )}
                   <RWebShare
                     data={{
-                      text: "Swa Diamonds",
-                      // url: "https://swa.co/" + location.pathname,
-                      // url: `https://www.swadiamonds.com/jewellery/share?id=${props.productDetails.id}&color=${props.productDetails.color}&name=${props.productDetails.name}&alias=${props.alias}`,
-                      url: `https://www.swadiamonds.com/jewellery/share?id=${
-                        props && props.productDetails && props.productDetails.id
-                      }&color=${
-                        props &&
-                        props.productDetails &&
-                        props.productDetails.color
-                      }&name=${
-                        props &&
-                        props.productDetails &&
-                        props.productDetails.name
-                      }&alias=${props && props.alias && props.alias}`,
-                      // url: "https://www.swadiamonds.com/" + location.pathname,
+                      // text: props?.productDetails?.name || "Swa Diamonds",
+                      url: buildProductShareUrl({
+                        alias: props?.alias,
+                        productDetails: props?.productDetails,
+                        selectedColor: selectedColor,
+                      }),
                       title: "Swa Diamonds",
                     }}
                     onClick={() => console.log("shared successfully!")}
