@@ -56,6 +56,25 @@ function buildProductShareUrl({ alias, productDetails, selectedColor }) {
 const ProductDetails = (props) => {
   const router = useRouter();
   const { token } = useAuth();
+
+  const initialColor = (() => {
+    const colors = props.colors || [];
+    if (props.colorParam) {
+      const matched = colors.find(
+        (c) =>
+          c.colour_name?.toLowerCase() === props.colorParam.toLowerCase()
+      );
+      if (matched) return matched;
+    }
+    return colors[0] || null;
+  })();
+
+  const initialColorKey =
+    initialColor?.colour_name &&
+    props.image[initialColor.colour_name]
+      ? initialColor.colour_name
+      : Object.keys(props.image)[0];
+
   const [show, setShow] = useState(false);
   const [addToWishList, setAddToWishList] = useState(false);
   const [wishlistIds, setWishlistIds] = useState();
@@ -74,7 +93,7 @@ const ProductDetails = (props) => {
   const [imageLoading, setImageLoading] = useState(true);
   const [isModalOpen, setModalOpen] = useState(false);
   const [showRestrictionModal, setShowRestrictionModal] = useState(false);
-  const [selectedColor, setSelectedColor] = useState("");
+  const [selectedColor, setSelectedColor] = useState(initialColor || "");
   const [currentSlideIndex, setCurrentSlideIndex] = useState(6);
   const { countryName, countryId } = useCountry();
   const [loginModalVisible, setLoginModalVisible] = useState(false);
@@ -82,13 +101,13 @@ const ProductDetails = (props) => {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [text, setText] = useState("");
   const [thumbImg, setThumbImg] = useState(
-    props.image[Object.keys(props.image)[0]].thumbnail
+    props.image[initialColorKey].thumbnail
   );
   const [newThumpSet, setNewThumpSet] = useState(props.image);
   const [imgSet, setImgSet] = useState(
-    props.image[Object.keys(props.image)[0]].multiple_images
+    props.image[initialColorKey].multiple_images
   );
-  const [clrId, setClrId] = useState("");
+  const [clrId, setClrId] = useState(initialColor?.id || "");
   const [colorError, setColorError] = useState("");
   const [picodeError, setPicodeError] = useState("");
   const [deliveryDate, setDeliveryDate] = useState();
@@ -236,14 +255,6 @@ const ProductDetails = (props) => {
   }, []);
 
   useEffect(() => {
-    colorChart.map((item, index) => {
-      if (index === 0) {
-        setClrId(item.id);
-        setSelectedColor(item);
-      }
-    });
-
-    // setPincode(localStorage.getItem("pincode"));
     if (token !== null) {
       axios
         .get(`${Urls.productDet + props.id}?country=${countryId}`, {
