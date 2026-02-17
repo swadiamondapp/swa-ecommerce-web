@@ -183,7 +183,7 @@ const Newcollection = () => {
                         href={`/jewellery/${product.alias}`}
                         className="md:px-[2rem] lg:px-0  lg:mx-2 max-md:w-[188px] max-md:h-[340px] max-md:flex-shrink-0 max-sm:flex-shrink-0 max-sm:w-[180px] px-[0.25rem] lg:flex-1 lg:min-w-0 sm:max-md:w-[140px] sm:max-md:px-[0.125rem]"
                       >
-                        <div className="lg:w-full lg:aspect-[4/5] max-md:w-[180px] max-md:h-[220px]  max-sm:w-[160px] max-sm:h-[200px] sm:max-md:w-[130px] sm:max-md:h-[160px] bg-[#FAF6F2] z-10 flex justify-center items-center relative">
+                        <div className="lg:w-full aspect-square max-md:w-[180px] max-sm:w-[160px] sm:max-md:w-[130px] bg-[#FAF6F2] z-10 flex justify-center items-center relative">
                           <img
                             src={product.thumbnail_image || "/try/newArrivaltry.png"}
                             alt={product.product_name}
