@@ -111,8 +111,9 @@ export const generateMetadata = async ({ params }) => {
   };
 };
 
-async function ProductDetailsPage({ params }) {
+async function ProductDetailsPage({ params, searchParams }) {
   const productAlias = (await params).alias;
+  const { color: colorParam } = await searchParams;
   const cookieStore = await cookies();
   const countryId = cookieStore.get("countryId")?.value;
 
@@ -282,6 +283,7 @@ async function ProductDetailsPage({ params }) {
         image={productDetails.image}
         productDetails={productDetails}
         alias={productDetails && productDetails.alias}
+        colorParam={colorParam}
       />
       <div className={Classes.RecentSearch}>
         <SimilarProducts productId={productDetails.id} />
