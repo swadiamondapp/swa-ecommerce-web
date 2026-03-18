@@ -133,7 +133,7 @@ const Payment = () => {
       const body = {
         name: addressData.fullName,
         phone_code: "+91",
-        phone_number: addressData.mobile,
+        phone_number: addressData.mobile || addressData.sPhone,
         email: addressData.sEmail,
         pincode: addressData.pincode,
         state: addressData.state,
@@ -804,7 +804,7 @@ const Payment = () => {
                 <p className={Classes.SubAddress}>{addressData.streetColony}</p>
                 <p className={Classes.SubAddress}>{addressData.state}</p>
                 <p className={Classes.SubAddress} style={{ marginTop: "15px" }}>
-                  Phone number:{addressData.mobile}
+                  Phone number:{addressData.mobile || addressData.sPhone}
                 </p>
               </>
             )}
