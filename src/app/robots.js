@@ -2,7 +2,8 @@ export default function robots() {
   return {
     rules: {
       userAgent: "*",
-      disallow: "/maintenance/",
+      allow: "/",
     },
+    sitemap: "https://swadiamonds-test.zinfog.in/sitemap.xml",
   };
 }
