@@ -2,12 +2,11 @@ import { NextResponse } from "next/server";
 
 export function middleware(request) {
 
-  // ===== MAINTENANCE MODE =====
   const maintenanceMode = true;
 
   const pathname = request.nextUrl.pathname;
 
-  // Allow maintenance page + next assets
+  // allow maintenance page + assets
   if (
     pathname.startsWith("/maintenance") ||
     pathname.startsWith("/_next") ||
@@ -16,7 +15,7 @@ export function middleware(request) {
     return NextResponse.next();
   }
 
-  // ===== BLOG REWRITE =====
+  // BLOG REWRITE
   if (pathname.startsWith("/blog")) {
     const newPath = pathname.replace("/blog", "");
 
@@ -25,12 +24,27 @@ export function middleware(request) {
     );
   }
 
-  // ===== REDIRECT TO MAINTENANCE =====
+  // SEO SAFE MAINTENANCE MODE
   if (maintenanceMode) {
-    return NextResponse.redirect(
-      new URL("/maintenance", request.url),
-      302
+
+    const response = NextResponse.rewrite(
+      new URL("/maintenance", request.url)
     );
+
+    response.headers.set(
+      "X-Robots-Tag",
+      "noindex, nofollow"
+    );
+
+    response.headers.set(
+      "Retry-After",
+      "3600"
+    );
+
+    return new Response(response.body, {
+      status: 503,
+      headers: response.headers,
+    });
   }
 
   return NextResponse.next();
