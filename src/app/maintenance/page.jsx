@@ -1,7 +1,7 @@
 export const metadata = {
   title: "Site Under Maintenance | SWA Diamonds",
   description: "SWA Diamonds website is currently under maintenance.",
-  robots: {
+  robots: { 
     index: false,
     follow: false,
   },
