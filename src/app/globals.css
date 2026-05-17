@@ -1,146 +1,261 @@
-.maintenance-page{
-    font-family:'Poppins',sans-serif;
-    background:#000;
-    overflow:hidden;
-    color:#fff;
-    height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    position:relative;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
 
-.maintenance-page::before{
-    content:'';
-    position:absolute;
-    width:700px;
-    height:700px;
-    background:radial-gradient(circle,#d4af37 0%,transparent 70%);
-    opacity:.15;
-    top:-200px;
-    right:-150px;
-    animation:rotateGlow 20s linear infinite;
+body{
+  font-family:'Poppins',sans-serif;
 }
 
-@keyframes rotateGlow{
-    from{
-        transform:rotate(0deg);
-    }
-    to{
-        transform:rotate(360deg);
-    }
+/* Main Background */
+
+.maintenance-wrapper{
+  width:100%;
+  height:100vh;
+  background:
+    radial-gradient(circle at top left,#2a1b00 0%,transparent 30%),
+    radial-gradient(circle at bottom right,#3d2b00 0%,transparent 30%),
+    #000;
+  overflow:hidden;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
 }
 
-.diamond{
-    position:absolute;
-    width:12px;
-    height:12px;
-    background:#d4af37;
-    transform:rotate(45deg);
-    opacity:.3;
-    animation:float 8s infinite linear;
+/* Glow */
+
+.bg-glow{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(100px);
+  opacity:.25;
 }
 
-.diamond:nth-child(1){
-    left:10%;
-    top:20%;
+.glow1{
+  width:350px;
+  height:350px;
+  background:#d4af37;
+  top:-100px;
+  left:-100px;
+  animation:moveGlow 10s infinite alternate;
 }
 
-.diamond:nth-child(2){
-    left:80%;
-    top:10%;
+.glow2{
+  width:300px;
+  height:300px;
+  background:#b8860b;
+  bottom:-100px;
+  right:-100px;
+  animation:moveGlow 12s infinite alternate;
 }
 
-.diamond:nth-child(3){
-    left:20%;
-    top:80%;
+@keyframes moveGlow{
+  from{
+    transform:translateY(0) translateX(0);
+  }
+  to{
+    transform:translateY(30px) translateX(30px);
+  }
 }
 
-.diamond:nth-child(4){
-    left:90%;
-    top:70%;
+/* Floating Elements */
+
+.floating{
+  position:absolute;
+  width:14px;
+  height:14px;
+  background:#d4af37;
+  transform:rotate(45deg);
+  opacity:.4;
+  animation:float 8s linear infinite;
+}
+
+.floating1{
+  top:15%;
+  left:12%;
+}
+
+.floating2{
+  top:75%;
+  left:20%;
+  animation-duration:10s;
+}
+
+.floating3{
+  top:20%;
+  right:18%;
+  animation-duration:9s;
+}
+
+.floating4{
+  bottom:15%;
+  right:12%;
+  animation-duration:7s;
 }
 
 @keyframes float{
-    0%{
-        transform:translateY(0) rotate(45deg);
-    }
-    50%{
-        transform:translateY(-30px) rotate(225deg);
-    }
-    100%{
-        transform:translateY(0) rotate(405deg);
-    }
+  0%{
+    transform:translateY(0) rotate(45deg);
+  }
+  50%{
+    transform:translateY(-30px) rotate(225deg);
+  }
+  100%{
+    transform:translateY(0) rotate(405deg);
+  }
 }
 
-.container{
-    position:relative;
-    z-index:2;
-    text-align:center;
-    width:90%;
-    max-width:700px;
-    padding:60px 40px;
-    background:rgba(255,255,255,0.05);
-    backdrop-filter:blur(12px);
-    border:1px solid rgba(255,255,255,0.1);
-    border-radius:25px;
-    box-shadow:0 0 40px rgba(212,175,55,0.15);
+/* Card */
+
+.maintenance-card{
+  position:relative;
+  z-index:10;
+  width:100%;
+  max-width:750px;
+  text-align:center;
+  padding:70px 50px;
+  border-radius:30px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.1);
+  backdrop-filter:blur(18px);
+  box-shadow:
+    0 0 40px rgba(212,175,55,0.15),
+    inset 0 0 30px rgba(255,255,255,0.03);
 }
 
-.logo{
-    font-size:42px;
-    font-weight:700;
-    letter-spacing:4px;
-    color:#d4af37;
-    margin-bottom:10px;
+/* Logo */
+
+.diamond-logo{
+  font-size:70px;
+  color:#d4af37;
+  margin-bottom:15px;
+  animation:pulse 2s infinite;
 }
 
-.logo span{
-    color:#fff;
+@keyframes pulse{
+  0%{
+    transform:scale(1);
+  }
+  50%{
+    transform:scale(1.08);
+  }
+  100%{
+    transform:scale(1);
+  }
 }
 
-h1{
-    font-size:48px;
-    margin-top:20px;
-    margin-bottom:15px;
-    font-weight:700;
+/* Brand */
+
+.brand-name{
+  color:#d4af37;
+  font-size:20px;
+  letter-spacing:6px;
+  font-weight:600;
+  margin-bottom:25px;
 }
 
-p{
-    font-size:17px;
-    color:#ccc;
-    line-height:1.8;
-    margin-bottom:35px;
+/* Title */
+
+.title{
+  font-size:52px;
+  line-height:1.2;
+  font-weight:700;
+  color:#fff;
+  margin-bottom:25px;
 }
 
-.btn{
-    display:inline-block;
-    margin-top:30px;
-    padding:14px 35px;
-    border-radius:50px;
-    background:#d4af37;
-    color:#000;
-    text-decoration:none;
-    font-weight:600;
-    transition:.3s;
+/* Description */
+
+.description{
+  font-size:18px;
+  color:#cfcfcf;
+  line-height:1.9;
+  max-width:600px;
+  margin:auto;
 }
 
-.btn:hover{
-    transform:scale(1.05);
+/* Loader */
+
+.luxury-loader{
+  margin-top:40px;
+  display:flex;
+  justify-content:center;
+  gap:12px;
 }
+
+.luxury-loader span{
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  background:#d4af37;
+  animation:bounce 1.4s infinite ease-in-out;
+}
+
+.luxury-loader span:nth-child(2){
+  animation-delay:.2s;
+}
+
+.luxury-loader span:nth-child(3){
+  animation-delay:.4s;
+}
+
+@keyframes bounce{
+  0%,80%,100%{
+    transform:scale(0);
+    opacity:.5;
+  }
+  40%{
+    transform:scale(1);
+    opacity:1;
+  }
+}
+
+/* Contact */
+
+.contact-box{
+  margin-top:45px;
+}
+
+.contact-box p{
+  color:#aaa;
+  margin-bottom:12px;
+}
+
+.contact-box a{
+  color:#d4af37;
+  text-decoration:none;
+  font-size:18px;
+  font-weight:500;
+}
+
+/* Mobile */
 
 @media(max-width:768px){
 
-    h1{
-        font-size:34px;
-    }
+  .maintenance-card{
+    padding:50px 25px;
+  }
 
-    .logo{
-        font-size:32px;
-    }
+  .title{
+    font-size:34px;
+  }
 
-    .container{
-        padding:40px 25px;
-    }
+  .description{
+    font-size:16px;
+  }
+
+  .diamond-logo{
+    font-size:55px;
+  }
+
+  .brand-name{
+    font-size:16px;
+    letter-spacing:4px;
+  }
 
 }
