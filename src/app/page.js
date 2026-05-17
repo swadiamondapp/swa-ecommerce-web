@@ -95,7 +95,7 @@ export default function Home() {
             href="mailto:info@swadiamonds.com"
             className="text-yellow-400 text-lg hover:text-yellow-300 transition"
           >
-            info@swadiamonds.com
+           support@swadiamonds.com
           </a>
 
         </div>
