@@ -6,22 +6,27 @@ export function middleware(request) {
 
   const pathname = request.nextUrl.pathname;
 
-  // allow maintenance page + assets
-  if (
-    pathname.startsWith("/maintenance") ||
-    pathname.startsWith("/_next") ||
-    pathname.startsWith("/favicon.ico")
-  ) {
-    return NextResponse.next();
-  }
-
-  // BLOG REWRITE
+  // BLOG REWRITE FIRST
   if (pathname.startsWith("/blog")) {
+
     const newPath = pathname.replace("/blog", "");
 
     return NextResponse.rewrite(
       `https://swavlog.zinfog.in${newPath}`
     );
+  }
+
+  // ALLOW IMPORTANT FILES
+  if (
+    pathname.startsWith("/maintenance") ||
+    pathname.startsWith("/_next") ||
+    pathname.startsWith("/favicon.ico") ||
+    pathname.startsWith("/images") ||
+    pathname.startsWith("/fonts") ||
+    pathname === "/robots.txt" ||
+    pathname === "/sitemap.xml"
+  ) {
+    return NextResponse.next();
   }
 
   // SEO SAFE MAINTENANCE MODE
