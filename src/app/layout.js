@@ -3,6 +3,23 @@ import localFont from "next/font/local";
 import Script from "next/script";
 import "./globals.css";
 
+import CountryProvider from "@/providers/country-provider";
+import AuthProvider from "@/providers/auth-provider";
+import DataProvider from "@/providers/data-provider";
+import QueryProvider from "@/providers/query-provider";
+import { AddressProvider } from "@/providers/address-provider";
+import { CheckoutProvider } from "@/providers/checkout-provider";
+import { OrderProvider } from "@/providers/order-provider";
+import { CartProvider } from "@/providers/cart-provider";
+import { TrialProvider } from "@/providers/trial-provider";
+import { TrackOrderProvider } from "@/providers/trackorder-provider";
+
+/* REMOVE TEMPORARILY */
+/* 
+import Header from "@/components/tryHeader/page";
+import TFooter from "@/components/tryfooter/page";
+*/
+
 const lato = Lato({
   weight: ["400", "700"],
   variable: "--font-lato",
@@ -54,13 +71,21 @@ const BrittanySign = localFont({
 });
 
 export const metadata = {
-  title: "SWA Diamonds - Maintenance",
-  description: "Website under maintenance",
+  title: "SWA Diamonds | Website Under Maintenance",
+
+  description:
+    "SWA Diamonds website is temporarily under maintenance. We’ll be back shortly with an enhanced luxury jewellery shopping experience.",
+
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="no-scrollbar">
+
       <head>
 
         {/* Google Analytics */}
@@ -84,8 +109,32 @@ export default function RootLayout({ children }) {
         className={`${lato.variable} ${gilroy.variable} ${playfair.variable} ${britishCastilla.variable} ${BrittanySign.variable} no-scrollbar bg-black text-white`}
       >
 
-        {/* Maintenance Page Only */}
-        {children}
+        <QueryProvider>
+          <AuthProvider>
+            <CountryProvider>
+              <DataProvider>
+                <AddressProvider>
+                  <CheckoutProvider>
+                    <OrderProvider>
+                      <CartProvider>
+                        <TrialProvider>
+                          <TrackOrderProvider>
+
+                            {/* HEADER REMOVED */}
+                            {/* FOOTER REMOVED */}
+
+                            {children}
+
+                          </TrackOrderProvider>
+                        </TrialProvider>
+                      </CartProvider>
+                    </OrderProvider>
+                  </CheckoutProvider>
+                </AddressProvider>
+              </DataProvider>
+            </CountryProvider>
+          </AuthProvider>
+        </QueryProvider>
 
       </body>
     </html>
