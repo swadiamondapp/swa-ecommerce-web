@@ -5,6 +5,9 @@ export const metadata = {
     index: false,
     follow: false,
   },
+  alternates: {
+    canonical: "https://swadiamonds.com",
+  },
 };
 
 export default function MaintenancePage() {
