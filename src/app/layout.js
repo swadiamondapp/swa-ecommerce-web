@@ -77,6 +77,9 @@ export const metadata = {
     "diamond jewellery in kerala",
     "diamond wholesale price in kerala",
   ],
+  verification: {
+    google: "sN_CDa_Ja59PRk9mbY2yp6mfaqSA-p7gE0wHTkw3O6w",
+  },
   alternates: {
     canonical: "https://www.swadiamonds.com/",
   },
