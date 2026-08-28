@@ -12,37 +12,47 @@ function Contactus() {
   return (
     <>
       <div
-        className={`${inter.className} min-h-screen w-full bg-zinc-100 pl-4 lg:pl-20 flex flex-col md:flex-row justify-between`}
+        className={`${inter.className} relative w-full bg-zinc-100 md:h-[70vh] md:max-h-[560px]`}
       >
-        {/* LEFT SIDE */}
-        <div className="flex flex-col p-5 mt-20 w-full">
-          <div className="flex flex-col gap-2 justify-center items-center md:items-start pb-5">
-            <span className="text-sm font-normal text-[#918676]">
+        <div className="max-w-container mx-auto px-4 flex items-center h-full pt-28 pb-12">
+          <div className="flex flex-col gap-3 items-start text-left">
+            <span className="text-sm font-normal tracking-wide text-[#918676]">
               CONTACT US
             </span>
-            <p className="font-playfair font-semibold text-3xl leading-tight">
+            <p className="font-playfair font-semibold text-3xl md:text-4xl leading-tight">
               Get in touch with us
             </p>
 
-            <div className="flex flex-col lg:flex-row gap-6 mt-4 items-start lg:items-center">
-              <div className="flex items-center gap-4 ">
-                <img src="/Assets/phone2.svg" alt="Phone icon" />
+            <div className="flex flex-col gap-4 mt-6">
+              <a
+                href="tel:18002578600"
+                className="flex items-center gap-4 text-[#334155]"
+              >
+                <img
+                  src="/Assets/phone2.svg"
+                  alt=""
+                  className="h-6 w-6 shrink-0"
+                />
                 <span className="text-base">
                   Toll free number : 1800 257 8600
                 </span>
-              </div>
-              <div className="flex items-center gap-4">
-                <img src="/Assets/mail1.svg" alt="Email icon" />
+              </a>
+              <a
+                href="mailto:info@swadiamonds.com"
+                className="flex items-center gap-4 text-[#334155]"
+              >
+                <img
+                  src="/Assets/mail1.svg"
+                  alt=""
+                  className="h-6 w-6 shrink-0"
+                />
                 <span className="text-base">info@swadiamonds.com</span>
-              </div>
+              </a>
             </div>
           </div>
         </div>
 
-        {/* RIGHT SIDE */}
-        <div
-          className="relative w-full min-h-screen md:w-[70%] md:left-0 bg-slate-400 bg-[url('/Assets/ringgirl.svg')] bg-cover bg-right bg-no-repeat p-4"
-        />
+        <div className="relative w-full h-[280px] md:absolute md:inset-y-0 md:right-0 md:w-[40%] md:h-full bg-slate-400 bg-[url('/Assets/ringgirl.svg')] bg-cover bg-center bg-no-repeat" />
       </div>
       <Swapromise />
     </>
