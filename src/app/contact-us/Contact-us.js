@@ -12,10 +12,10 @@ function Contactus() {
   return (
     <>
       <div
-        className={`${inter.className} relative w-full bg-zinc-100 md:h-[70vh] md:max-h-[560px]`}
+        className={`${inter.className} relative w-full bg-zinc-100 flex flex-col md:h-[70vh] md:max-h-[560px]`}
       >
-        <div className="max-w-container mx-auto px-4 flex items-center h-full pt-28 pb-12">
-          <div className="flex flex-col gap-3 items-start text-left">
+        <div className="max-w-container mx-auto px-4 flex flex-1 items-center justify-center md:justify-start w-full pt-16 pb-8 md:h-full md:pt-20 md:pb-12">
+          <div className="flex flex-col gap-3 items-center text-center md:items-start md:text-left">
             <span className="text-sm font-normal tracking-wide text-[#918676]">
               CONTACT US
             </span>
@@ -23,7 +23,7 @@ function Contactus() {
               Get in touch with us
             </p>
 
-            <div className="flex flex-col gap-4 mt-6">
+            <div className="flex flex-col gap-5 mt-4 mb-12">
               <a
                 href="tel:18002578600"
                 className="flex items-center gap-4 text-[#334155]"
