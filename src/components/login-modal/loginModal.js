@@ -545,39 +545,39 @@ const LoginModal = (props) => {
 
   return (
     <>
-      {user ? (
-        <div
-          className="flex  items-center pl-1"
-          style={{ cursor: "pointer" }}
-          ref={nameRef}
-          onClick={handleLogedUserClick}
-        >
-          <Image
-            src={`/try/avatar.svg`}
-            alt="avatar"
-            className="mr-3"
-            width={16}
-            height={16}
-          />
-          <p className="text-black">{user.userName}</p>
-          <IoIosArrowDown className="text-black" />
-        </div>
-      ) : (
-        <div className="ml-4" style={{ cursor: "pointer" }}>
+      {!props.modalOnly &&
+        (user ? (
           <div
-            className={`${Classes.dLogin} ${Classes.headerElement}`}
-            onClick={() => {
-              props.handleOpenLogin();
-              props.setLoginText("Welcome Back");
-            }}
+            className="flex  items-center pl-1"
+            style={{ cursor: "pointer" }}
+            ref={nameRef}
+            onClick={handleLogedUserClick}
           >
-             <Image src="/try/avatar.svg" width={15} height={20} alt="avatar" />
+            <Image
+              src={`/try/avatar.svg`}
+              alt="avatar"
+              className="mr-3"
+              width={16}
+              height={16}
+            />
+            <p className="text-black">{user.userName}</p>
+            <IoIosArrowDown className="text-black" />
           </div>
+        ) : (
+          <div className="ml-4" style={{ cursor: "pointer" }}>
+            <div
+              className={`${Classes.dLogin} ${Classes.headerElement}`}
+              onClick={() => {
+                props.handleOpenLogin();
+                props.setLoginText("Welcome Back");
+              }}
+            >
+              <Image src="/try/avatar.svg" width={15} height={20} alt="avatar" />
+            </div>
+          </div>
+        ))}
 
-        </div>
-      )}
-
-      {user && showUserDetails && (
+      {!props.modalOnly && user && showUserDetails && (
         <div
           ref={userDetailsRef}
           className="absolute top-12 bg-white rounded-md shadow-md z-20 w-[150px] right-0"

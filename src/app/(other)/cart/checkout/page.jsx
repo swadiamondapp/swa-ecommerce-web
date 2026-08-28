@@ -24,6 +24,7 @@ const CheckOutPage = () => {
   const [cartCount, setCartCount] = useState("");
   const { paymentData } = useAddress();
   const { checkoutData } = useCheckout();
+  const [canAccess, setCanAccess] = useState(false);
 
   useEffect(() => {
     const handleBeforeUnload = (e) => {
@@ -37,16 +38,22 @@ const CheckOutPage = () => {
   }, []);
 
   useEffect(() => {
-    if (!checkoutData) {
-      if (token) {
-        router.push("/shoping/cart");
-      } else {
-        router.push("/");
-      }
+    const storedToken = localStorage.getItem("swaToken");
+    if (!storedToken) {
+      router.replace("/");
+      return;
     }
-  }, [checkoutData]);
+    if (!checkoutData) {
+      router.replace("/shoping/cart");
+      return;
+    }
+    setCanAccess(true);
+  }, [checkoutData, router]);
 
   useEffect(() => {
+    if (!token) {
+      return;
+    }
     setLoading(true);
     axios
       .get(Urls.address, { headers: { Authorization: "Token " + token } })
@@ -77,7 +84,7 @@ const CheckOutPage = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, [changeId]);
+  }, [changeId, token, countryId]);
 
   const adressChangeHanlder = (id) => {
     setChangeId(id);
@@ -86,6 +93,10 @@ const CheckOutPage = () => {
   const radioChangeHandler = (e) => {
     setAddressId(e.target.value);
   };
+
+  if (!canAccess) {
+    return null;
+  }
 
   return (
     <div>
