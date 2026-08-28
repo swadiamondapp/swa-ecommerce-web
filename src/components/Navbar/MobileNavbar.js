@@ -55,7 +55,6 @@ const MobileNavbar = (props) => {
   const userDetailsRef = useRef(null);
   const [suggestionList, setSuggesionList] = useState([]);
   const [searchKey, setSearchKey] = useState("");
-  const [isSignpuMobileOpen, setIsSignpuMobileOpen] = useState(false);
   const [openDropDown, setOpenDropDown] = useState(false);
   const nameRef = useRef(null);
   const [showUserDetails, setShowUserDetails] = useState(false);
@@ -193,11 +192,6 @@ const MobileNavbar = (props) => {
     }
   };
 
-  const handleSignupClick = () => {
-    setOpen(false);
-    setShow(true);
-    setIsSignpuMobileOpen(true);
-  };
 
   const cattSelHandler = (setItem) => {
     router.push(`/${setItem.name.toLowerCase().replace(/\s+/g, "-")}`);
@@ -429,7 +423,6 @@ const MobileNavbar = (props) => {
             <LoginToggle
               loginText={text}
               onClose={() => setShow(false)}
-              isSignpuMobile={isSignpuMobileOpen}
               setShowSuccessModal={props.setShowSuccessModal}
               setText={props.setText}
             />
@@ -461,14 +454,11 @@ const MobileNavbar = (props) => {
                           onClick={() => {
                             setOpen(false);
                             setShow(true);
-                            setIsSignpuMobileOpen(false);
                             setText("Welcome Back");
                           }}
                         >
                           Login
                         </p>
-                        <p className={Classes.BorderLineMob}></p>
-                        <p onClick={handleSignupClick}>Sign up</p>
                       </div>
                     )}
                   </div>

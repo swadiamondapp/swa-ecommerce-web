@@ -72,7 +72,6 @@ const LoginModal = (props) => {
   const [forgotToken, setForgotToken] = useState("");
   const [forgotError, setForfotError] = useState("");
   const [createError, setCreateError] = useState("");
-  const [isSignpuLogin, setIsSignpuLogin] = useState(false);
   const [username, setUsername] = useState(null);
   const [isDesk, setIsDesk] = useState(false);
 
@@ -544,47 +543,41 @@ const LoginModal = (props) => {
     };
   }, [showUserDetails]);
 
-  const handleSignupClick = () => {
-    props.handleOpenLogin();
-    setIsSignpuLogin(true);
-  };
-
   return (
     <>
-      {user ? (
-        <div
-          className="flex  items-center pl-1"
-          style={{ cursor: "pointer" }}
-          ref={nameRef}
-          onClick={handleLogedUserClick}
-        >
-          <Image
-            src={`/try/avatar.svg`}
-            alt="avatar"
-            className="mr-3"
-            width={16}
-            height={16}
-          />
-          <p className="text-black">{user.userName}</p>
-          <IoIosArrowDown className="text-black" />
-        </div>
-      ) : (
-        <div className="ml-4" style={{ cursor: "pointer" }}>
+      {!props.modalOnly &&
+        (user ? (
           <div
-            className={`${Classes.dLogin} ${Classes.headerElement}`}
-            onClick={() => {
-              props.handleOpenLogin();
-              setIsSignpuLogin(false);
-              props.setLoginText("Welcome Back");
-            }}
+            className="flex  items-center pl-1"
+            style={{ cursor: "pointer" }}
+            ref={nameRef}
+            onClick={handleLogedUserClick}
           >
-             <Image src="/try/avatar.svg" width={15} height={20} alt="avatar" />
+            <Image
+              src={`/try/avatar.svg`}
+              alt="avatar"
+              className="mr-3"
+              width={16}
+              height={16}
+            />
+            <p className="text-black">{user.userName}</p>
+            <IoIosArrowDown className="text-black" />
           </div>
+        ) : (
+          <div className="ml-4" style={{ cursor: "pointer" }}>
+            <div
+              className={`${Classes.dLogin} ${Classes.headerElement}`}
+              onClick={() => {
+                props.handleOpenLogin();
+                props.setLoginText("Welcome Back");
+              }}
+            >
+              <Image src="/try/avatar.svg" width={15} height={20} alt="avatar" />
+            </div>
+          </div>
+        ))}
 
-        </div>
-      )}
-
-      {user && showUserDetails && (
+      {!props.modalOnly && user && showUserDetails && (
         <div
           ref={userDetailsRef}
           className="absolute top-12 bg-white rounded-md shadow-md z-20 w-[150px] right-0"
@@ -642,8 +635,6 @@ const LoginModal = (props) => {
         <Box sx={isDesk ? style : styleDesk}>
           <LoginToggle
             onClose={handleClose}
-            signupClick={handleSignupClick}
-            LoginSignupToggle={isSignpuLogin}
             text={props.text}
             loginText={props.loginText}
             setShowSuccessModal={props.setShowSuccessModal}
