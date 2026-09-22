@@ -41,6 +41,7 @@ import { useAuth } from "@/providers/auth-provider";
 import ProductImages from "./product-images";
 import { useCountry } from "@/providers/country-provider";
 import ScrollToTop from "@/components/scroll-to-top";
+import { useCheckout } from "@/providers/checkout-provider";
 
 function buildProductShareUrl({ alias, productDetails, selectedColor }) {
   debugger;
@@ -123,14 +124,10 @@ const ProductDetails = (props) => {
   const [isEnquiryModalVisible, setIsEnquiryModalVisible] = useState(false);
   const [selectedBranch, setSelectedBranch] = useState(null);
 
+  const { setCheckoutData } = useCheckout();
+
   const closeHanlder = () => {
     setModalShow(false);
-    setLoginModalVisible(false);
-  };
-
-  const openLoginModal = () => {
-    setLoginModalVisible(true);
-    setModalShow(true);
   };
   const handleOpenModal = () => {
     setModalOpen(true);
@@ -205,12 +202,25 @@ const ProductDetails = (props) => {
   };
 
   const cartHandler = () => {
-    const productDetails = props.productDetails;
+    let productDetails = props.productDetails;
+    let total;
+    if (productDetails.is_on_discount) {
+      total = productDetails.discount_price;
+    } else {
+      total = productDetails.country_total_price;
+    }
     const body = {
       product_id: productDetails.id,
       color_id: clrId,
       size_id: selectedSize,
       quantity: 1,
+    };
+
+    const selProd = {
+      product_id: productDetails.id,
+      color: clrId,
+      size: selectedSize,
+      total: total,
     };
 
     if (token !== null) {
@@ -230,7 +240,12 @@ const ProductDetails = (props) => {
           console.log(error);
         });
     } else {
-      openLoginModal();
+      const checkoutData = {
+        data: selProd, // Selected products
+        name: "buybody",
+      };
+      setCheckoutData(checkoutData);
+      router.push(`/cart/checkout`);
     }
   };
 
@@ -438,7 +453,8 @@ const ProductDetails = (props) => {
     if (token) {
       tryhomeHandler();
     } else {
-      openLoginModal();
+      setLoginModalVisible(true);
+      setModalShow(true);
     }
   };
 
@@ -2243,9 +2259,6 @@ const ProductDetails = (props) => {
               handleOpenLogin={"profile"}
               setShowSuccessModal={setShowSuccessModal}
               setText={setText}
-              setLoginText={() => {}}
-              loginText="Please Login"
-              modalOnly
             />
             <LoginSuccessModal
               openSuccessModal={showSuccessModal}
