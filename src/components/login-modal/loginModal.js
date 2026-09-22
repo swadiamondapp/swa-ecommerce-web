@@ -72,6 +72,7 @@ const LoginModal = (props) => {
   const [forgotToken, setForgotToken] = useState("");
   const [forgotError, setForfotError] = useState("");
   const [createError, setCreateError] = useState("");
+  const [isSignpuLogin, setIsSignpuLogin] = useState(false);
   const [username, setUsername] = useState(null);
   const [isDesk, setIsDesk] = useState(false);
 
@@ -543,6 +544,11 @@ const LoginModal = (props) => {
     };
   }, [showUserDetails]);
 
+  const handleSignupClick = () => {
+    props.handleOpenLogin();
+    setIsSignpuLogin(true);
+  };
+
   return (
     <>
       {user ? (
@@ -568,6 +574,7 @@ const LoginModal = (props) => {
             className={`${Classes.dLogin} ${Classes.headerElement}`}
             onClick={() => {
               props.handleOpenLogin();
+              setIsSignpuLogin(false);
               props.setLoginText("Welcome Back");
             }}
           >
@@ -635,6 +642,8 @@ const LoginModal = (props) => {
         <Box sx={isDesk ? style : styleDesk}>
           <LoginToggle
             onClose={handleClose}
+            signupClick={handleSignupClick}
+            LoginSignupToggle={isSignpuLogin}
             text={props.text}
             loginText={props.loginText}
             setShowSuccessModal={props.setShowSuccessModal}
